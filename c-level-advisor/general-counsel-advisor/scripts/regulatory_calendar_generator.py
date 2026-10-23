@@ -25,13 +25,13 @@ Input schema:
           "jurisdiction": "EU",
           "item_type": "effective_date",      # filing|notification_window|renewal|effective_date|audit|internal_deadline
           "title": "High-risk AI obligations apply",
-          "date": "2026-08-02",
+          "date": "2027-12-02",
           "owner": "GC + CAIO",
           "action_required": "Complete conformity assessment for in-scope systems",
           "criticality": "high",              # low|medium|high|critical
           "recurring": false,
           "recurrence_months": 0,
-          "notes": "Annex III high-risk obligations effective"
+          "notes": "Annex III high-risk obligations effective (moved from 2026-08-02 by Reg. 2026/1744)"
       }
   ]
 }

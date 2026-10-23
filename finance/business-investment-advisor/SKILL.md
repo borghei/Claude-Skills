@@ -141,3 +141,23 @@ See `references/investment-frameworks.md` for detailed frameworks including:
 | Medium | 10-20% | 10-30% | 24-48 months |
 | High | 20-40% | 30-50% | 36-60 months |
 | Very High | 40%+ | > 50% | 48+ months |
+
+## Scope & Limitations
+
+**In Scope:**
+- Screening and ranking investment opportunities with `investment_screener.py` on a weighted composite score (return, risk, growth, efficiency, payback), with filters for minimum ROI, maximum payback, risk level, sector and amount
+- Portfolio diversification and concentration analysis with `portfolio_analyzer.py` against a conservative, moderate or aggressive risk profile
+- Due diligence checklists from `due_diligence_checklist.py` by company type (SaaS, e-commerce, marketplace, hardware, general), stage and check size, plus a weighted DD score from a score file
+- Frameworks in `references/investment-frameworks.md`: scoring method, risk assessment matrix, diversification guidelines and DD phases
+
+**Out of Scope:**
+- DCF valuation, ratio analysis and financial statement modelling (see `finance/financial-analyst/`)
+- SaaS metric calculation such as MRR, churn, LTV and CAC (see `finance/saas-metrics-coach/`)
+- M&A deal process and integration planning (see `c-level-advisor/ma-playbook/`)
+- Legal review of term sheets and investment documents (see `c-level-advisor/general-counsel-advisor/`)
+- Pricing of public securities, trade execution and tax treatment
+
+**Important Caveats:**
+- The tools score only what is entered in the JSON. Expected ROI, risk level, payback and current holding values are manual inputs, and the tools fetch no market or company data.
+- Composite weights, score bands and the risk level definitions are fixed heuristics. They rank options consistently but do not estimate the real probability of loss.
+- The output is decision support, not investment, legal or tax advice. A generated DD checklist does not show that diligence was done.

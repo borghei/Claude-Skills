@@ -36,6 +36,7 @@ Audit `.pptx` files using the standard library only — no `python-pptx` require
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope & Limitations](#scope--limitations)
 
 ---
 
@@ -146,6 +147,27 @@ python scripts/pptx_auditor.py deck.pptx --json
 - **Speaker notes are documentation.** Slides without notes leave readers (post-meeting) guessing what the talk track was.
 - **Delete hidden slides before sending.** Hidden slides are often older versions left for "just in case" — they survive forever and leak narrative context.
 - **Animations are timing risk.** Every animation is a place where the live demo can desync from the speaker.
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Read-only audit of `.pptx` files with `scripts/pptx_auditor.py`, which parses OOXML with `zipfile` and `xml.etree` and needs no third-party package
+- Slide and hidden-slide counts, speaker-notes coverage, words per slide with the densest slides, image and embedded-media count, animation timing nodes, and theme name
+- Three workflows: pre-meeting review, board or investor deck audit, and pre-conference talk check
+- A deck density rubric with words-per-slide targets by deck purpose, plus a handoff checklist
+
+**Out of Scope:**
+- Creating, editing or restyling slides; the tool only reads
+- Building a board deck's narrative and content (see `c-level-advisor/board-deck-builder/`)
+- Reviewing a pitch deck's story for investors (see `personal-productivity/pitch-deck-reviewer/`)
+- Producing slides from markdown (see `markdown-html/md-slides/`)
+
+**Important Caveats:**
+- The auditor does not render slides. Layout, overlap, contrast, font use and brand compliance are not checked.
+- Word counts and animation counts measure density, not quality. The thresholds in the workflows, such as 50 words per slide, are rules of thumb; the rubric sets different targets by deck purpose.
+- It counts embedded media but cannot confirm that video or audio plays; the talk workflow says to test playback locally.
 
 ---
 

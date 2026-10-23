@@ -480,6 +480,7 @@ Audit `.xlsx` files using the standard library only — no `openpyxl` required. 
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope &amp; Limitations](#scope--limitations)
 
 ---
 
@@ -595,6 +596,27 @@ python scripts/xlsx_auditor.py model.xlsx --json
 - **Avoid external links across handoffs.** A formula referencing `&#x27;C:\Users\you\Desktop\old-model.xlsx&#x27;` is the workbook equivalent of leaving your laptop name in the document author field.
 - **Name your inputs.** Cells like `Inputs!B7` mean nothing. Named ranges like `WACC` and `RevenueGrowth` survive structural changes.
 - **One model, one purpose.** Workbooks that calculate, present, and serve as a database of records always end up broken.
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Read-only audit of `.xlsx` files with `scripts/xlsx_auditor.py`, which parses OOXML with `zipfile` and `xml.etree` and needs no `openpyxl`
+- Per-sheet name, hidden status, cell count, formula count and formula density, plus named ranges, external link references, data validation rule count and file size
+- Three workflows: pre-send audit, financial model review, and workbook handoff check
+- A financial model audit guide covering structure, formula and value layers, common error categories and defensive model structure
+
+**Out of Scope:**
+- Calculating or checking formula results; the tool counts formulas but does not evaluate them
+- Editing workbooks, fixing links or removing hidden sheets; the tool only reads
+- Building or reviewing the financial analysis itself (see `finance/financial-analyst/`)
+- Analysing the data held in the workbook (see `data-analytics/data-analyst/`)
+
+**Important Caveats:**
+- A clean audit says nothing about whether the numbers are right. The guide&#x27;s spot-checks and reconciliation still need a person.
+- The tool does not extract full cell values, so it cannot find hardcoded numbers inside formula ranges or wrong inputs.
+- Formula-density bands (under 10 percent, 10 to 70 percent, over 70 percent) are a heuristic for where to look first, not a classification of the sheet.
 
 ---
 
@@ -668,6 +690,7 @@ Audit `.xlsx` files using the standard library only — no `openpyxl` required. 
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope &amp; Limitations](#scope--limitations)
 
 ---
 
@@ -783,6 +806,27 @@ python scripts/xlsx_auditor.py model.xlsx --json
 - **Avoid external links across handoffs.** A formula referencing `&#x27;C:\Users\you\Desktop\old-model.xlsx&#x27;` is the workbook equivalent of leaving your laptop name in the document author field.
 - **Name your inputs.** Cells like `Inputs!B7` mean nothing. Named ranges like `WACC` and `RevenueGrowth` survive structural changes.
 - **One model, one purpose.** Workbooks that calculate, present, and serve as a database of records always end up broken.
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Read-only audit of `.xlsx` files with `scripts/xlsx_auditor.py`, which parses OOXML with `zipfile` and `xml.etree` and needs no `openpyxl`
+- Per-sheet name, hidden status, cell count, formula count and formula density, plus named ranges, external link references, data validation rule count and file size
+- Three workflows: pre-send audit, financial model review, and workbook handoff check
+- A financial model audit guide covering structure, formula and value layers, common error categories and defensive model structure
+
+**Out of Scope:**
+- Calculating or checking formula results; the tool counts formulas but does not evaluate them
+- Editing workbooks, fixing links or removing hidden sheets; the tool only reads
+- Building or reviewing the financial analysis itself (see `finance/financial-analyst/`)
+- Analysing the data held in the workbook (see `data-analytics/data-analyst/`)
+
+**Important Caveats:**
+- A clean audit says nothing about whether the numbers are right. The guide&#x27;s spot-checks and reconciliation still need a person.
+- The tool does not extract full cell values, so it cannot find hardcoded numbers inside formula ranges or wrong inputs.
+- Formula-density bands (under 10 percent, 10 to 70 percent, over 70 percent) are a heuristic for where to look first, not a classification of the sheet.
 
 ---
 
@@ -884,7 +928,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 Outputs: sheet count and names, hidden-sheet count, cell count per sheet, formula count per sheet, external link count, named range count, data validation rule count.
 
 ---
-  <h2>Related Skills in Documents</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Docx Toolkit</h3><p>Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pdf-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pdf Toolkit</h3><p>Audit PDF files for metadata leakage, page count, encryption, JavaScript, embedded files, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pptx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pptx Toolkit</h3><p>Audit PowerPoint (.pptx) decks for slide count, text density, embedded images and fonts, hidden...</p></a></div>
+  <h2>Related Skills in Documents</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Docx Toolkit</h3><p>Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pdf-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pdf Toolkit</h3><p>Audit PDF files for metadata leakage, page count, encryption, JavaScript, embedded files, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pptx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pptx Toolkit</h3><p>Audit PowerPoint (.pptx) decks for slide count, text density, embedded images and fonts, hidden...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/documents/xlsx-toolkit/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

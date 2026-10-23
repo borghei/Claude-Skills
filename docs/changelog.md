@@ -8,6 +8,13 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.13.7** (October 2026)
+
+- EU AI Act high-risk deadlines updated to the Digital Omnibus: 2 December 2027 (Annex III) and 2 August 2028 (Annex I); transparency stays at 2 August 2026
+- Reference files and examples match what each tool really does
+- Scope & Limitations in 63 more skills
+- New social preview card and two-line README badges
+
 **v4.13.6** (October 2026)
 
 - Every skill has a Clarify First section, now written as rules with reasons instead of checkboxes and commands

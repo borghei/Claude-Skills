@@ -128,3 +128,23 @@ See `references/ab-testing-guide.md` for comprehensive methodology covering:
 | Conversion Rate | 2-5% relative | 5-15% relative | > 15% relative |
 | Revenue per User | 1-3% | 3-8% | > 8% |
 | Engagement Rate | 3-5% | 5-10% | > 10% |
+
+## Scope & Limitations
+
+**In Scope:**
+- Sample size and duration estimates for conversion-rate tests with `sample_size_calculator.py`, using the two-proportion z-test formula with configurable alpha, power, one- or two-sided testing, allocation and variant count
+- Test plan generation from a JSON config (hypothesis, primary and secondary metrics, variants, traffic split) with `test_designer.py`
+- Results analysis with `results_analyzer.py`: two-proportion z-test, p-value, confidence interval and Cohen's h effect size, with optional Bayesian analysis and batch mode for reviewing several tests
+- A methodology guide covering statistical foundations, common pitfalls such as peeking and multiple comparisons, and sequential and Bayesian approaches
+
+**Out of Scope:**
+- Running the experiment, assigning traffic or serving variants; the skill does not connect to any testing platform
+- Event tracking and instrumentation that produces the visitor and conversion counts (see `marketing/analytics-tracking/`)
+- Continuous metrics such as revenue per user, regression and other statistical methods beyond proportion tests (see `data-analytics/statistical-analyst/`)
+- Deciding what to test on a page or form (see `business-growth/page-cro/` and `business-growth/form-cro/`)
+
+**Important Caveats:**
+- The tools model binary conversion metrics only. Visitor and conversion counts are entered by hand in JSON.
+- `results_analyzer.py` compares two variants (control and treatment). For A/B/n tests it does not compare every arm, and `sample_size_calculator.py` does not adjust alpha for multiple variants.
+- The tools do not check for sample ratio mismatch, segment effects, novelty effects or peeking. The reference guide explains these, but you have to check for them yourself.
+- The effect-size table is a rough guide. Your own baseline and MDE should drive the plan.

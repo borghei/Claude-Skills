@@ -184,6 +184,27 @@ More in [references/anti-patterns.md](references/anti-patterns.md).
 
 Both: Python 3.8+ standard library only, `--format text|json`, deterministic.
 
+## Scope & Limitations
+
+**In Scope:**
+- Paid placements next to AI answers: ChatGPT Ads, Google ads in AI Overviews and AI Mode, and ads in Microsoft Copilot
+- Test planning with `scripts/conversational_ad_planner.py`: platform eligibility, placement mix, holdout design, KPI targets, readiness checks, and blockers for underpowered arms
+- Copy linting with `scripts/answer_adjacent_copy_linter.py`: length, unsubstantiated claims, assistant-endorsement wording, restricted categories, CTA, URL and UTM, price, testimonial and AI-media checks
+- Measurement with server-side conversions, UTMs and geo or time-based holdouts, plus a test-plan template
+
+**Out of Scope:**
+- Earning organic citations in AI answers (see `marketing/aeo/` and `marketing/ai-seo/`)
+- Labelling AI-generated creative beyond a lint warning (see `marketing/ai-content-disclosure/`)
+- Classic search, social and display campaigns (see `marketing/paid-ads/`)
+- Perplexity ads, whose current availability is unverified and which the planner excludes
+- Buying media, uploading ads or reading platform reports; the tools have no platform API access
+
+**Important Caveats:**
+- Platform facts are as of September 2026 and these products change monthly. Eligibility, excluded categories, markets and copy lengths need re-checking on the linked platform pages before budget is committed.
+- Google and Microsoft give no placement-level reporting for AI surfaces, so a holdout measures the campaign change that made you eligible, not the AI placement alone.
+- The planner's power check uses your budget and target CPA with a default of 50 conversions per arm. It estimates readability; it does not guarantee a significant result.
+- The linter's category and claim checks use deliberately conservative patterns. A clean lint is not approval under platform ad policies or advertising law.
+
 ## References
 
 - [platform-specs.md](references/platform-specs.md) — ChatGPT Ads, Google AI Overviews / AI Mode, Microsoft Copilot, Perplexity status, GA4 AI Assistant channel; official links

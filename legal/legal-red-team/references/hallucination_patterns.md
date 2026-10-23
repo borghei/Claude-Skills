@@ -89,7 +89,7 @@ Training data contains multiple draft versions, proposals, and commentary that d
 
 | AI-Generated Claim | Actual Reality | Error |
 |-------------------|---------------|-------|
-| "The AI Act applies from August 1, 2026" | Phased application: prohibited practices Feb 2025, high-risk Aug 2026, other provisions Aug 2027 | Oversimplified; missed phased timeline |
+| "The AI Act applies from August 1, 2026" | Phased application: prohibited practices Feb 2025, GPAI Aug 2025, transparency Aug 2026, high-risk Dec 2027 (Annex III) and Aug 2028 (Annex I) after the 2026 Digital Omnibus | Oversimplified; missed phased timeline |
 | "GDPR entered into force on May 25, 2018" | Entered into force May 24, 2016; became applicable May 25, 2018 | Confused entry-into-force with application date |
 | "NIS2 transposition deadline is October 2024" | Transposition deadline is October 17, 2024 | Imprecise (missing day) |
 | "DORA applies from January 2025" | DORA applies from January 17, 2025 | Imprecise (missing day) |

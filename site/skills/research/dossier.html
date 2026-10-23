@@ -632,6 +632,26 @@ articles citing the same press release ≠ 2 independent sources.
 - **No update mechanism.** Stale dossier on important subject = bad decisions.
 - **Adversarial language about subject.** Bias erodes credibility.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Dossier outlines tailored to subject type (company, person, market) and purpose (deal-prep, due diligence, briefing, market entry) with `dossier_outline_generator.py`
+- Source triangulation checks with `source_triangulation_validator.py`: single-source claims, low-reliability sources and sources that are not independent
+- Fact, inference and speculation labelling with `fact_inference_separator.py`, flagging unsupported inferences and over-confident speculation
+- The ten-part dossier hierarchy and source rating with an adapted Admiralty Code
+
+**Out of Scope:**
+- Collecting the information. The skill structures and checks research the user gathers.
+- Academic literature search (see `research/litreview/`)
+- Legal due diligence and legal risk opinions (see `c-level-advisor/general-counsel-advisor/`)
+- Competitor teardowns for positioning and sales use (see `business-growth/competitive-teardown/`)
+
+**Important Caveats:**
+- The tools do not search the web or any database. Claims, sources, reliability codes and independence links are all entered by the user.
+- Source independence is only as accurate as the `independent_from` links supplied. Two articles that repeat one press release count as independent unless the user marks them.
+- Classification of statements uses the declared category, the evidence attached and wording patterns. It is a check, not a verification of the facts.
+- A dossier is a snapshot. Facts about companies, people and markets go stale and need a set review date.
+
 ## References
 
 - `references/dossier-frameworks-and-structure.md` — outline patterns per subject type
@@ -643,7 +663,7 @@ articles citing the same press release ≠ 2 independent sources.
 - `research/litreview` — academic literature search
 - `c-level-advisor/ceo-advisor` — strategic briefing patterns
 - `c-level-advisor/general-counsel-advisor` — legal due diligence overlap
-- `marketing/competitive-teardown` — competitive intel angle
+- `business-growth/competitive-teardown` — competitive intel angle
 - `business-growth/customer-success-manager` — account research patterns
 
 ---
@@ -860,6 +880,26 @@ articles citing the same press release ≠ 2 independent sources.
 - **No update mechanism.** Stale dossier on important subject = bad decisions.
 - **Adversarial language about subject.** Bias erodes credibility.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Dossier outlines tailored to subject type (company, person, market) and purpose (deal-prep, due diligence, briefing, market entry) with `dossier_outline_generator.py`
+- Source triangulation checks with `source_triangulation_validator.py`: single-source claims, low-reliability sources and sources that are not independent
+- Fact, inference and speculation labelling with `fact_inference_separator.py`, flagging unsupported inferences and over-confident speculation
+- The ten-part dossier hierarchy and source rating with an adapted Admiralty Code
+
+**Out of Scope:**
+- Collecting the information. The skill structures and checks research the user gathers.
+- Academic literature search (see `research/litreview/`)
+- Legal due diligence and legal risk opinions (see `c-level-advisor/general-counsel-advisor/`)
+- Competitor teardowns for positioning and sales use (see `business-growth/competitive-teardown/`)
+
+**Important Caveats:**
+- The tools do not search the web or any database. Claims, sources, reliability codes and independence links are all entered by the user.
+- Source independence is only as accurate as the `independent_from` links supplied. Two articles that repeat one press release count as independent unless the user marks them.
+- Classification of statements uses the declared category, the evidence attached and wording patterns. It is a check, not a verification of the facts.
+- A dossier is a snapshot. Facts about companies, people and markets go stale and need a set review date.
+
 ## References
 
 - `references/dossier-frameworks-and-structure.md` — outline patterns per subject type
@@ -871,7 +911,7 @@ articles citing the same press release ≠ 2 independent sources.
 - `research/litreview` — academic literature search
 - `c-level-advisor/ceo-advisor` — strategic briefing patterns
 - `c-level-advisor/general-counsel-advisor` — legal due diligence overlap
-- `marketing/competitive-teardown` — competitive intel angle
+- `business-growth/competitive-teardown` — competitive intel angle
 - `business-growth/customer-success-manager` — account research patterns
 
 ---

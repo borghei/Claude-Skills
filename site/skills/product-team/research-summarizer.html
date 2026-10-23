@@ -627,6 +627,25 @@ and report negative evidence.
 - **Mixing facts and interpretations.** Be clear which is which.
 - **Skipping methodology.** Readers need to evaluate the trust level.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Organizing raw research items into theme clusters with `research_synthesis_organizer.py`, with frequency, segment cross-cuts and quality flags such as single-session themes
+- Scoring proposed insights on confidence, specificity, bias risk and decision impact with `insight_quality_scorer.py`, with a keep, refine or demote call
+- Generating a findings brief (one-pager, extended memo and quote bank) with `findings_brief_generator.py`
+- The observation, pattern, insight, recommendation ladder, qualitative sample-size heuristics and a catalog of common research biases
+
+**Out of Scope:**
+- Designing the study, recruiting and writing interview guides (see `product-team/ux-researcher-designer/` and `research-ops/product-research/`)
+- Quantitative product data analysis (see `product-team/product-analytics/`)
+- Statistical testing of survey results (see `data-analytics/statistical-analyst/`)
+- Transcribing recordings
+
+**Important Caveats:**
+- The tools do not read transcripts or free text for meaning. Themes come from tags the user assigns to each item, so the clustering is only as good as the tagging.
+- Insight scores are heuristics built from the evidence counts and segment coverage entered. They do not replace a second coder or a check against the raw data.
+- The sample-size table gives rough ranges for qualitative work. It is not a statistical power calculation.
+
 ## References
 
 - `references/research-synthesis-frameworks.md` — affinity, thematic analysis, frameworks
@@ -848,6 +867,25 @@ and report negative evidence.
 - **Brief that&#x27;s longer than needed.** Briefer = better-read.
 - **Mixing facts and interpretations.** Be clear which is which.
 - **Skipping methodology.** Readers need to evaluate the trust level.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Organizing raw research items into theme clusters with `research_synthesis_organizer.py`, with frequency, segment cross-cuts and quality flags such as single-session themes
+- Scoring proposed insights on confidence, specificity, bias risk and decision impact with `insight_quality_scorer.py`, with a keep, refine or demote call
+- Generating a findings brief (one-pager, extended memo and quote bank) with `findings_brief_generator.py`
+- The observation, pattern, insight, recommendation ladder, qualitative sample-size heuristics and a catalog of common research biases
+
+**Out of Scope:**
+- Designing the study, recruiting and writing interview guides (see `product-team/ux-researcher-designer/` and `research-ops/product-research/`)
+- Quantitative product data analysis (see `product-team/product-analytics/`)
+- Statistical testing of survey results (see `data-analytics/statistical-analyst/`)
+- Transcribing recordings
+
+**Important Caveats:**
+- The tools do not read transcripts or free text for meaning. Themes come from tags the user assigns to each item, so the clustering is only as good as the tagging.
+- Insight scores are heuristics built from the evidence counts and segment coverage entered. They do not replace a second coder or a check against the raw data.
+- The sample-size table gives rough ranges for qualitative work. It is not a statistical power calculation.
 
 ## References
 

@@ -176,7 +176,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 9",
         "title": "Risk Management System",
         "weight": 12,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "process_established": {
                 "label": "Continuous iterative risk management process established",
@@ -219,7 +219,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 10",
         "title": "Data and Data Governance",
         "weight": 11,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "design_choices_documented": {
                 "label": "Data collection design choices documented",
@@ -267,7 +267,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 11",
         "title": "Technical Documentation",
         "weight": 10,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "system_description": {
                 "label": "General system description and intended purpose documented",
@@ -320,7 +320,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 12",
         "title": "Record-Keeping / Automatic Logging",
         "weight": 7,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "automatic_logging": {
                 "label": "Automatic event logging implemented",
@@ -358,7 +358,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 13",
         "title": "Transparency and Information to Deployers",
         "weight": 9,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "instructions_provided": {
                 "label": "Instructions for use provided with the system",
@@ -426,7 +426,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 14",
         "title": "Human Oversight",
         "weight": 10,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "oversight_level_defined": {
                 "label": "Oversight level defined (in-the-loop / on-the-loop / in-command)",
@@ -464,7 +464,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 15",
         "title": "Accuracy, Robustness, and Cybersecurity",
         "weight": 9,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "accuracy_levels_achieved": {
                 "label": "Appropriate accuracy levels achieved and declared",
@@ -512,7 +512,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 17",
         "title": "Quality Management System",
         "weight": 8,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "compliance_strategy": {
                 "label": "Regulatory compliance strategy defined",
@@ -585,7 +585,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 43",
         "title": "Conformity Assessment",
         "weight": 8,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "path_determined": {
                 "label": "Assessment path determined (internal control vs third-party)",
@@ -613,7 +613,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 48",
         "title": "CE Marking",
         "weight": 4,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "marking_affixed": {
                 "label": "CE marking affixed visibly, legibly, and indelibly",
@@ -636,7 +636,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 49",
         "title": "EU Database Registration",
         "weight": 5,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "provider_registered": {
                 "label": "Provider registered in EU database",
@@ -669,7 +669,7 @@ PROVIDER_OBLIGATION_SECTIONS = {
         "article": "Art. 72",
         "title": "Post-Market Monitoring",
         "weight": 7,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "system_established": {
                 "label": "Post-market monitoring system established",
@@ -710,7 +710,7 @@ DEPLOYER_OBLIGATION_SECTION = {
         "article": "Art. 26",
         "title": "Deployer Obligations",
         "weight": 10,
-        "deadline": "2 Aug 2026",
+        "deadline": "2 Dec 2027 (Annex III) / 2 Aug 2028 (Annex I products)",
         "fields": {
             "use_per_instructions": {
                 "label": "System used according to provider's instructions",

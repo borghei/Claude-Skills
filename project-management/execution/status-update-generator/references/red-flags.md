@@ -153,8 +153,8 @@ Scan every weekly status update before it goes to a sponsor, VP, or steering com
 **Bad example:**
 > "Highlights: 14 of 22 stories complete. (Generated from `jira-export.json` last refreshed 5 days ago.)"
 **Good example:**
-> "Status generator validates input freshness: rejects any Jira / Linear export > 24 hours old unless `--allow-stale` flag is set explicitly. CI job refreshes export every Friday morning 09:00."
-**How to catch it.** Add a freshness check to `status_generator.py` -- timestamp the data, refuse if > 24 hours.
+> "The export is refreshed every Friday at 09:00, and the PM checks its timestamp before generating. Anything older than 24 hours is re-exported first, and the update states when the data was pulled."
+**How to catch it.** `status_generator.py` reports whatever the input file says and does not check its age. Look at the export's timestamp before running it; if it is older than a day, re-export.
 
 ---
 
@@ -176,7 +176,7 @@ Scan every weekly status update before it goes to a sponsor, VP, or steering com
 ## Related Reading
 
 - `SKILL.md` -- the SBNR + 6-pager + traffic-light pattern
-- `scripts/status_generator.py --help` -- the generator with freshness checks
+- `scripts/status_generator.py --help` -- the generator (it does not check how old the input is)
 - Sibling skill: `execution/dependency-map/` -- track cross-team blockers
 - Sibling skill: `execution/cycle-time-analyzer/` -- numbers to put in Highlights
 - Sibling skill: `execution/roadmap-communication/` -- audience segmentation patterns

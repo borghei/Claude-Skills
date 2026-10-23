@@ -105,6 +105,27 @@ python scripts/market_segment_classifier.py description.txt --json
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- Segment classification across transaction, listings, financing, management, services, and data and infrastructure, with regulatory and business-model notes per segment, from `market_segment_classifier.py`
+- Brokerage and MLS strategy: becoming a broker, partnering or staying outside the transaction, and MLS access through RESO Web API, IDX, VOW and broker reciprocity
+- Regulatory exposure orientation for state licensing, RESPA Section 8 and fair housing
+- The residential versus commercial decision and a segment assessment template
+
+**Out of Scope:**
+- State licensing applications, RESPA structuring or fair-housing legal review (engage real-estate counsel)
+- Mortgage lending and money-movement licensing in depth (see `vertical-advisors/fintech-advisor/`)
+- Two-sided marketplace mechanics such as liquidity and take rate (see `vertical-advisors/marketplace-advisor/`)
+- Property valuation models or MLS data integration code
+
+**Important Caveats:**
+- The classifier matches keywords in your description. It can miss a segment or flag one that does not apply, so read its output against the references.
+- The output is a framework, not legal advice, as the disclaimer above states. Rules on licensing, agency, escrow and disclosure differ by state.
+- Commission structures and MLS access rules face ongoing antitrust scrutiny, so check current MLS and state rules before launch.
+
+---
+
 ## Reference Guides
 
 - **`references/proptech_segments.md`** — Segments overview, regulatory exposure per segment, business model patterns

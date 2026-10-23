@@ -663,6 +663,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- ISO 42001:2023 audit-prep sprints for Stage 1, Stage 2, surveillance and internal audits (4-week and 8-week plans)
+- Readiness scoring per clause (4-10) and Annex A area, with a sprint-length recommendation, from `aims_readiness_score.py`
+- AI Impact Assessment completeness checks per Annex A.5 from `ai_impact_assessment_checker.py`
+- Evidence punch lists for AI inventory, policy and governance, lifecycle, data governance and third-party AI, plus an internal audit playbook
+
+**Out of Scope:**
+- Building an AIMS from scratch as a multi-quarter program (see `ra-qm-team/iso42001-ai-management/`)
+- EU AI Act readiness and conformity (see `ra-qm-team/audit-prep/ai-act-readiness/` and `ra-qm-team/eu-ai-act-specialist/`)
+- Running several frameworks in one program (see `ra-qm-team/audit-prep/compliance-readiness/`)
+- Acting as the certification body or issuing a certificate
+
+**Important Caveats:**
+- The readiness score adds fixed weights for each control you mark as true in YAML. It measures what you claim, not whether the control works in practice.
+- The AIIA checker tests whether sections are filled in, not whether the impact analysis is sound.
+- A high score does not predict the certification decision. Only an accredited certification body can recommend certification.
+
+---
+
 ## References
 
 - [iso42001-aims-readiness-checklist.md](references/iso42001-aims-readiness-checklist.md) — punch list per clause + Annex A
@@ -922,6 +943,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- ISO 42001:2023 audit-prep sprints for Stage 1, Stage 2, surveillance and internal audits (4-week and 8-week plans)
+- Readiness scoring per clause (4-10) and Annex A area, with a sprint-length recommendation, from `aims_readiness_score.py`
+- AI Impact Assessment completeness checks per Annex A.5 from `ai_impact_assessment_checker.py`
+- Evidence punch lists for AI inventory, policy and governance, lifecycle, data governance and third-party AI, plus an internal audit playbook
+
+**Out of Scope:**
+- Building an AIMS from scratch as a multi-quarter program (see `ra-qm-team/iso42001-ai-management/`)
+- EU AI Act readiness and conformity (see `ra-qm-team/audit-prep/ai-act-readiness/` and `ra-qm-team/eu-ai-act-specialist/`)
+- Running several frameworks in one program (see `ra-qm-team/audit-prep/compliance-readiness/`)
+- Acting as the certification body or issuing a certificate
+
+**Important Caveats:**
+- The readiness score adds fixed weights for each control you mark as true in YAML. It measures what you claim, not whether the control works in practice.
+- The AIIA checker tests whether sections are filled in, not whether the impact analysis is sound.
+- A high score does not predict the certification decision. Only an accredited certification body can recommend certification.
+
+---
+
 ## References
 
 - [iso42001-aims-readiness-checklist.md](references/iso42001-aims-readiness-checklist.md) — punch list per clause + Annex A
@@ -1028,7 +1070,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 4. **Execute sprint** per [references/iso42001-aims-readiness-checklist.md](references/iso42001-aims-readiness-checklist.md)
 
 ---
-  <h2>Related Skills in Compliance</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/ai-act-readiness.html" class="skill-card" style="text-decoration:none"><h3>Ai Act Readiness</h3><p>EU AI Act readiness assessment and sprint playbook. Use when preparing for the Aug 2026...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/compliance-readiness.html" class="skill-card" style="text-decoration:none"><h3>Compliance Readiness</h3><p>Cross-framework compliance readiness orchestrator. Use when preparing for multi-framework...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/fda-qsr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Fda Qsr Audit Prep</h3><p>FDA Quality System Regulation (21 CFR 820 / QMSR) audit-prep playbook for medical devices. Use...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/gdpr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Gdpr Audit Prep</h3><p>GDPR audit-prep playbook: sprint to prepare for a supervisory authority inquiry, DPA audit, or...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/soc2-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Soc2 Audit Prep</h3><p>SOC 2 audit-prep playbook: the 4/8/12-week sprint to audit-ready for a Type I or Type II...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/capa-officer.html" class="skill-card" style="text-decoration:none"><h3>Capa Officer</h3><p>CAPA system management for medical device QMS, covering root cause analysis, corrective action...</p></a></div>
+  <h2>Related Skills in Compliance</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/ai-act-readiness.html" class="skill-card" style="text-decoration:none"><h3>Ai Act Readiness</h3><p>EU AI Act readiness assessment and sprint playbook. Use when preparing for the high-risk AI...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/compliance-readiness.html" class="skill-card" style="text-decoration:none"><h3>Compliance Readiness</h3><p>Cross-framework compliance readiness orchestrator. Use when preparing for multi-framework...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/fda-qsr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Fda Qsr Audit Prep</h3><p>FDA Quality System Regulation (21 CFR 820 / QMSR) audit-prep playbook for medical devices. Use...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/gdpr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Gdpr Audit Prep</h3><p>GDPR audit-prep playbook: sprint to prepare for a supervisory authority inquiry, DPA audit, or...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/soc2-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Soc2 Audit Prep</h3><p>SOC 2 audit-prep playbook: the 4/8/12-week sprint to audit-ready for a Type I or Type II...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/capa-officer.html" class="skill-card" style="text-decoration:none"><h3>Capa Officer</h3><p>CAPA system management for medical device QMS, covering root cause analysis, corrective action...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/ra-qm-team/audit-prep/aims-audit/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

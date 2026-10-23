@@ -159,6 +159,27 @@ playbook from `references/ai-risk-and-governance.md`.
 - **Buying eight LLM platforms.** Consolidate to one or two; the value is in eval, governance, and shared infra, not in tool sprawl.
 - **Forgetting that 70% of "AI" cost is data + people.** Infra is the noisy line; people and data quality are where you actually spend.
 
+## Scope & Limitations
+
+**In Scope:**
+- AI strategy, operating-model design (centralized, federated, hub-and-spoke) and build-vs-buy-vs-partner guidance
+- AI maturity scoring (0-100) across strategy, data, MLOps, governance and people with `ai_maturity_assessor.py`
+- AI budget allocation across initiatives on a strategic-fit, value, confidence and risk model with `ai_investment_planner.py`
+- A seeded AI risk register mapped to NIST AI RMF, ISO 42001 or the EU AI Act with `ai_risk_register_generator.py`
+- AI org design, hiring sequence and the AI section of a board update
+
+**Out of Scope:**
+- Full ISO 42001 AIMS implementation (see `ra-qm-team/iso42001-ai-management/`)
+- EU AI Act conformity assessment for high-risk systems (see `ra-qm-team/eu-ai-act-specialist/` and `ra-qm-team/audit-prep/ai-act-readiness/`)
+- AI security controls such as prompt-injection or model-theft defenses (see `c-level-advisor/ciso-advisor/`)
+- Building, training or deploying models (see `engineering/senior-ml-engineer/`)
+
+**Important Caveats:**
+- All three tools score only the JSON you supply. Missing keys score 0 for that dimension, and the Annex III category is an input the tool does not determine for you.
+- The scores, weights and risk catalog are fixed heuristics. They structure a discussion; they are not a benchmark against peer companies.
+- A seeded risk register is a starting point. Owners, likelihood and treatment still need review by your governance committee and legal or compliance partners.
+- The output is not legal advice. EU AI Act obligations and guidance change over time, so check current texts before relying on a classification.
+
 ## References
 
 - `references/ai-strategy-framework.md` — strategy themes, operating models, prioritization heuristics

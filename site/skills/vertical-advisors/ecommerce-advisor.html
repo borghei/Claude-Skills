@@ -544,6 +544,27 @@ python scripts/ecom_unit_economics_calculator.py model.json --json
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Per-order unit economics for one channel: gross margin, contribution margin after acquisition cost, CAC payback and break-even repeat rate from `ecom_unit_economics_calculator.py`
+- Fulfillment model choice across self-fulfilled DTC, 3PL, Amazon FBA, dropship and retail
+- Channel mix and sequencing across DTC site, Amazon, wholesale, retail and marketplaces, with each channel modeled separately
+- Decisions on cutting cost, raising price, changing channel mix or dropping a SKU
+
+**Out of Scope:**
+- Running paid acquisition campaigns (see `marketing/paid-ads/`)
+- PCI DSS scoping for card payments (see `ra-qm-team/pci-dss-specialist/`)
+- Company-level financial models, cash runway and fundraising (see `c-level-advisor/cfo-advisor/`)
+- Inventory planning, demand forecasting or store setup on Shopify or Amazon
+
+**Important Caveats:**
+- The calculator takes one channel per JSON file and uses only the figures you enter. It does not pull data from a store, marketplace or ad account.
+- It models per-order and first-year repeat economics. Working capital tied up in inventory is not modeled, although the skill flags it as the main cash-flow risk.
+- Benchmarks such as a CAC payback under 6 months are rules of thumb. Fee levels on marketplaces and payment processors change, so update your inputs when they do.
+
+---
+
 ## Reference Guides
 
 - **`references/fulfillment_models.md`** — DTC self, 3PL, FBA, dropship, retail — when each fits
@@ -692,6 +713,27 @@ python scripts/ecom_unit_economics_calculator.py model.json --json
 - Contribution margin (after marginal CAC)
 - CAC payback period (months)
 - Break-even repeat rate
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Per-order unit economics for one channel: gross margin, contribution margin after acquisition cost, CAC payback and break-even repeat rate from `ecom_unit_economics_calculator.py`
+- Fulfillment model choice across self-fulfilled DTC, 3PL, Amazon FBA, dropship and retail
+- Channel mix and sequencing across DTC site, Amazon, wholesale, retail and marketplaces, with each channel modeled separately
+- Decisions on cutting cost, raising price, changing channel mix or dropping a SKU
+
+**Out of Scope:**
+- Running paid acquisition campaigns (see `marketing/paid-ads/`)
+- PCI DSS scoping for card payments (see `ra-qm-team/pci-dss-specialist/`)
+- Company-level financial models, cash runway and fundraising (see `c-level-advisor/cfo-advisor/`)
+- Inventory planning, demand forecasting or store setup on Shopify or Amazon
+
+**Important Caveats:**
+- The calculator takes one channel per JSON file and uses only the figures you enter. It does not pull data from a store, marketplace or ad account.
+- It models per-order and first-year repeat economics. Working capital tied up in inventory is not modeled, although the skill flags it as the main cash-flow risk.
+- Benchmarks such as a CAC payback under 6 months are rules of thumb. Fee levels on marketplaces and payment processors change, so update your inputs when they do.
 
 ---
 

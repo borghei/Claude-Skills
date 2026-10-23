@@ -211,6 +211,27 @@ Not all scenarios need full QA coverage. Apply:
 - **No performance scenarios for performance-sensitive features.** Surprise at scale.
 - **Skipping concurrent for collaborative features.** Race conditions ship.
 
+## Scope & Limitations
+
+**In Scope:**
+- Test scenarios across seven categories: happy path, edge, error, empty state, concurrent, accessibility and security, plus performance, localization and cross-platform where they apply
+- Scenario counts per category by feature type: form, browse, real-time, upload, payment and bulk
+- Risk-weighted selection and a default split between manual and automated testing per scenario type
+- A coverage audit that flags under-covered categories for the feature type (`test_scenario_generator.py`)
+- Test-plan audits and post-incident scenario gap analysis
+
+**Out of Scope:**
+- Writing the PRD or acceptance criteria the scenarios come from (see `project-management/execution/create-prd/` and `project-management/execution/wwas/`)
+- Implementing automated tests (see `engineering/senior-qa/` and `engineering/playwright-pro/`)
+- A full WCAG accessibility audit (see `engineering/a11y-audit/`)
+- Security testing and penetration work (see `engineering/security-audit/`)
+
+**Important Caveats:**
+- Despite its name, `test_scenario_generator.py` does not write scenarios. It audits a hand-written JSON list and counts scenarios per category.
+- The tool checks coverage by count, not scenario quality. A category can pass with weak scenarios.
+- The per-category counts are starting defaults. The team adjusts them for the risk profile of the feature.
+- The team decides which scenarios to automate and which edge cases matter enough to test.
+
 ## References
 
 - `references/scenario-categories.md` — deep on the 7+ categories with examples

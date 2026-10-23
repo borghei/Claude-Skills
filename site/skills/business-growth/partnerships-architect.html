@@ -785,6 +785,30 @@ All scripts: stdlib only, argparse CLI, JSON or markdown output.
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Partnership type selection with the decision tree: distribution, embed, better-together, market presence and strategic goals
+- Six-dimension partner evaluation (strategic fit, economic potential, credibility, mutual commitment, operational fit, exit-ability) with green, yellow and red bands via `scripts/partner_evaluation_scorer.py`
+- Partner program design with tiers, benefits, requirements, channel manager headcount and enablement plan via `scripts/partner_program_designer.py`
+- 3-year partnership ROI with P&amp;L, payback period and sensitivity analysis via `scripts/partnership_roi_modeler.py`
+- Deal structures per partnership type and a partner portfolio audit workflow
+
+**Out of Scope:**
+- Per-deal partner margin and channel TCO (see `business-growth/channel-economics/`)
+- Per-deal approval of partner-mediated deals (see `business-growth/deal-desk/`)
+- Writing partner, OEM or reseller agreements (see `business-growth/contract-and-proposal-writer/`)
+- Customer referral and affiliate program mechanics such as viral loops and incentives (see `business-growth/referral-program/`)
+- Finding or researching candidate partners; the skill evaluates partners you already have data on
+
+**Important Caveats:**
+- The scorer applies fixed rules to yes/no and numeric fields in the partner YAML. Some operational-fit fields count as met when they are left out, so a sparse spec can score higher than it should.
+- ROI output is a model built on your revenue and cost estimates, not a forecast. The sensitivity analysis shows how much it moves when those estimates change.
+- The score bands (25 and above, 18 to 24, below 18) structure the decision; they do not make it.
+- Deal structures and terms such as exclusivity or source-code escrow are business guidance, not legal advice. The partner contract needs legal review.
+
+---
+
 ## References
 
 - [partnership-types.md](references/partnership-types.md) — 5 partnership types in depth + economic structure + when each works
@@ -1164,6 +1188,30 @@ Ask about the two or three inputs that matter most for this request, not the who
 | `scripts/partner_program_designer.py` | Org spec YAML | Recommended program structure: tiers, benefits, requirements, headcount needed |
 
 All scripts: stdlib only, argparse CLI, JSON or markdown output.
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Partnership type selection with the decision tree: distribution, embed, better-together, market presence and strategic goals
+- Six-dimension partner evaluation (strategic fit, economic potential, credibility, mutual commitment, operational fit, exit-ability) with green, yellow and red bands via `scripts/partner_evaluation_scorer.py`
+- Partner program design with tiers, benefits, requirements, channel manager headcount and enablement plan via `scripts/partner_program_designer.py`
+- 3-year partnership ROI with P&amp;L, payback period and sensitivity analysis via `scripts/partnership_roi_modeler.py`
+- Deal structures per partnership type and a partner portfolio audit workflow
+
+**Out of Scope:**
+- Per-deal partner margin and channel TCO (see `business-growth/channel-economics/`)
+- Per-deal approval of partner-mediated deals (see `business-growth/deal-desk/`)
+- Writing partner, OEM or reseller agreements (see `business-growth/contract-and-proposal-writer/`)
+- Customer referral and affiliate program mechanics such as viral loops and incentives (see `business-growth/referral-program/`)
+- Finding or researching candidate partners; the skill evaluates partners you already have data on
+
+**Important Caveats:**
+- The scorer applies fixed rules to yes/no and numeric fields in the partner YAML. Some operational-fit fields count as met when they are left out, so a sparse spec can score higher than it should.
+- ROI output is a model built on your revenue and cost estimates, not a forecast. The sensitivity analysis shows how much it moves when those estimates change.
+- The score bands (25 and above, 18 to 24, below 18) structure the decision; they do not make it.
+- Deal structures and terms such as exclusivity or source-code escrow are business guidance, not legal advice. The partner contract needs legal review.
 
 ---
 

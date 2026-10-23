@@ -235,6 +235,26 @@ Spend the minimum to learn the most.
 - **One huge outcome.** Decompose to team-level.
 - **All opportunities equally important.** Prioritize explicitly.
 
+## Scope & Limitations
+
+**In Scope:**
+- Building an Opportunity Solution Tree (Teresa Torres) from one outcome through opportunities and solutions to assumption tests
+- The opportunity-versus-solution test, opportunity sizing and the rule of 3+ solutions per opportunity
+- Value, usability, feasibility and viability assumptions per solution, with an assumption test ladder from interview to production A/B test
+- A tree audit for outcome quality, opportunities written as solutions, single-solution branches, missing tests and stale trees (`ost_validator.py`)
+- Mapping an existing roadmap onto the tree to find orphan solutions and gaps
+
+**Out of Scope:**
+- Running interviews or synthesizing them into opportunities (see `project-management/discovery/customer-interview-script/` and `project-management/discovery/interview-synthesis/`)
+- Designing the experiments in detail (see `project-management/discovery/brainstorm-experiments/`)
+- Defining the company-level North Star (see `project-management/execution/north-star-metric/`)
+- Building prototypes for assumption tests (see `project-management/discovery/ai-prototyping/`)
+
+**Important Caveats:**
+- `ost_validator.py` reads a hand-built JSON tree. Flags such as `is_customer_phrased` and `has_evidence` are self-reported, so the tool checks structure, not the quality of the evidence.
+- Opportunity scoring (impact, frequency, strategic fit) is an estimate the team makes. The tool does not compute it from data.
+- The tree goes stale without weekly updates. The validator warns when `last_updated` is more than 14 days old.
+
 ## References
 
 - `references/ost-fundamentals.md` — Teresa Torres framework deep

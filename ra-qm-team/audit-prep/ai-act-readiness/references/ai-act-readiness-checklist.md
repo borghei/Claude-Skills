@@ -222,7 +222,7 @@ For high-risk systems before placing on market:
 | Question | Answer |
 |----------|--------|
 | First step? | Classify the system (Annex III check) |
-| When is the deadline? | High-risk: Aug 2026; GPAI: Aug 2025 |
+| When is the deadline? | High-risk: 2 Dec 2027 (Annex III), 2 Aug 2028 (Annex I); transparency: 2 Aug 2026; GPAI: 2 Aug 2025 |
 | Notified body required? | For biometric ID; voluntary for most others (use internal control) |
 | What's most overlooked? | Article 4 AI literacy training; Article 50 user disclosure |
 | Risk management timing? | Continuous; not one-time |

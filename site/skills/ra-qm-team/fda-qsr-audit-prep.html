@@ -612,6 +612,27 @@ See [references/483-warning-letter-prevention.md](references/483-warning-letter-
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- FDA inspection prep under 21 CFR 820 (QSR) and the ISO 13485-harmonized QMSR, with 2-week and 8-week sprints and a reactive 483 or Warning Letter track
+- Readiness scoring per Subpart, with an overall score and sprint recommendation, from `qsr_readiness_score.py`
+- Design History File completeness checks per 21 CFR 820.30 from `dhf_completeness_checker.py`
+- Inspection-week front room and back room operations, common 483 triggers and response patterns
+
+**Out of Scope:**
+- Building or maintaining a QMS, or preparing 510(k) and PMA submissions (see `ra-qm-team/fda-consultant-specialist/`)
+- ISO 13485 QMS implementation (see `ra-qm-team/quality-manager-qms-iso13485/`)
+- ISO 14971 risk management files (see `ra-qm-team/risk-management-specialist/`)
+- Running the CAPA process itself (see `ra-qm-team/capa-officer/`)
+
+**Important Caveats:**
+- Both tools read YAML you fill in. They score what you report and check that DHF sections exist; they do not judge the quality of design controls or records.
+- A high score does not predict the inspection outcome. The output is not regulatory or legal advice, and a Warning Letter calls for outside FDA counsel, as the skill already notes.
+- QMSR dates and requirements are stated as of when the skill was written. Check current FDA guidance before relying on them.
+
+---
+
 ## References
 
 - [fda-qsr-pre-inspection-checklist.md](references/fda-qsr-pre-inspection-checklist.md) — full pre-inspection punch list per subpart
@@ -822,6 +843,27 @@ See [references/483-warning-letter-prevention.md](references/483-warning-letter-
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- FDA inspection prep under 21 CFR 820 (QSR) and the ISO 13485-harmonized QMSR, with 2-week and 8-week sprints and a reactive 483 or Warning Letter track
+- Readiness scoring per Subpart, with an overall score and sprint recommendation, from `qsr_readiness_score.py`
+- Design History File completeness checks per 21 CFR 820.30 from `dhf_completeness_checker.py`
+- Inspection-week front room and back room operations, common 483 triggers and response patterns
+
+**Out of Scope:**
+- Building or maintaining a QMS, or preparing 510(k) and PMA submissions (see `ra-qm-team/fda-consultant-specialist/`)
+- ISO 13485 QMS implementation (see `ra-qm-team/quality-manager-qms-iso13485/`)
+- ISO 14971 risk management files (see `ra-qm-team/risk-management-specialist/`)
+- Running the CAPA process itself (see `ra-qm-team/capa-officer/`)
+
+**Important Caveats:**
+- Both tools read YAML you fill in. They score what you report and check that DHF sections exist; they do not judge the quality of design controls or records.
+- A high score does not predict the inspection outcome. The output is not regulatory or legal advice, and a Warning Letter calls for outside FDA counsel, as the skill already notes.
+- QMSR dates and requirements are stated as of when the skill was written. Check current FDA guidance before relying on them.
+
+---
+
 ## References
 
 - [fda-qsr-pre-inspection-checklist.md](references/fda-qsr-pre-inspection-checklist.md) — full pre-inspection punch list per subpart
@@ -930,7 +972,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 4. **Execute sprint** per [references/fda-qsr-pre-inspection-checklist.md](references/fda-qsr-pre-inspection-checklist.md)
 
 ---
-  <h2>Related Skills in Compliance</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/ai-act-readiness.html" class="skill-card" style="text-decoration:none"><h3>Ai Act Readiness</h3><p>EU AI Act readiness assessment and sprint playbook. Use when preparing for the Aug 2026...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/aims-audit.html" class="skill-card" style="text-decoration:none"><h3>Aims Audit</h3><p>ISO 42001 AI Management System (AIMS) audit-prep playbook. Use when an ISO 42001 certification...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/compliance-readiness.html" class="skill-card" style="text-decoration:none"><h3>Compliance Readiness</h3><p>Cross-framework compliance readiness orchestrator. Use when preparing for multi-framework...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/gdpr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Gdpr Audit Prep</h3><p>GDPR audit-prep playbook: sprint to prepare for a supervisory authority inquiry, DPA audit, or...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/soc2-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Soc2 Audit Prep</h3><p>SOC 2 audit-prep playbook: the 4/8/12-week sprint to audit-ready for a Type I or Type II...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/capa-officer.html" class="skill-card" style="text-decoration:none"><h3>Capa Officer</h3><p>CAPA system management for medical device QMS, covering root cause analysis, corrective action...</p></a></div>
+  <h2>Related Skills in Compliance</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/ai-act-readiness.html" class="skill-card" style="text-decoration:none"><h3>Ai Act Readiness</h3><p>EU AI Act readiness assessment and sprint playbook. Use when preparing for the high-risk AI...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/aims-audit.html" class="skill-card" style="text-decoration:none"><h3>Aims Audit</h3><p>ISO 42001 AI Management System (AIMS) audit-prep playbook. Use when an ISO 42001 certification...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/compliance-readiness.html" class="skill-card" style="text-decoration:none"><h3>Compliance Readiness</h3><p>Cross-framework compliance readiness orchestrator. Use when preparing for multi-framework...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/gdpr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Gdpr Audit Prep</h3><p>GDPR audit-prep playbook: sprint to prepare for a supervisory authority inquiry, DPA audit, or...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/soc2-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Soc2 Audit Prep</h3><p>SOC 2 audit-prep playbook: the 4/8/12-week sprint to audit-ready for a Type I or Type II...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/capa-officer.html" class="skill-card" style="text-decoration:none"><h3>Capa Officer</h3><p>CAPA system management for medical device QMS, covering root cause analysis, corrective action...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/ra-qm-team/audit-prep/fda-qsr-audit-prep/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

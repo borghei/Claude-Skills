@@ -202,3 +202,22 @@ delivery even when every estimate is correct.
 | `assets/sample_team.json` | Seven-person roster covering ramping hires, part-time, and multiple disciplines |
 | `assets/sample_commitments.json` | Nine commitments against the capacity produced by `capacity_model.py` on the sample roster |
 | `assets/sample_scenarios.json` | Four-quarter demand curve with hire, contract, and defer scenarios |
+
+## Scope & Limitations
+
+**In Scope:**
+- Effective capacity from a team roster with `scripts/capacity_model.py`: booked PTO, on-call, meeting and overhead load, and new-hire ramp by seniority, reported per person and per discipline
+- The cut line with `scripts/commitment_gap.py`: estimates inflated by confidence band, filled in priority order against capacity minus an unplanned-work buffer, with committed items above the line flagged
+- Hire, contract and defer scenario comparison over a multi-quarter horizon with `scripts/scenario_compare.py`, including cost per delivered hour
+- Decision frameworks for gross-to-effective conversion, gap-closing levers, estimation inflation and utilisation bands, plus a quarterly capacity plan template
+
+**Out of Scope:**
+- Sprint-level planning and story selection (see `project-management/execution/sprint-plan/`)
+- Recruiting, sourcing and running the hiring process (see `hr-operations/talent-acquisition/`)
+- Budgeting and financial forecasting beyond the cost of staffing scenarios (see `finance/financial-analyst/`)
+- Deciding which roadmap items matter most; the skill takes priorities as input (see `project-management/execution/prioritization-frameworks/`)
+
+**Important Caveats:**
+- All inputs are JSON files you prepare. The scripts do not read calendars, HR systems or issue trackers, so PTO, meeting load and estimates are only as good as what you enter.
+- Ramp curves, confidence multipliers, the 20% default buffer and the effective-hours benchmarks are planning defaults. Recalibrate them against your own actuals after two quarters, as the skill recommends.
+- Scenario costs depend on the salary and contractor rates you supply. The output is a planning comparison, not a budget or an offer.

@@ -209,3 +209,25 @@ underpowered studies get written up as "no difference."
 | `assets/sample_contingency.json` | 3x4 contingency table for chi-square |
 | `assets/sample_session_times.json` | Right-skewed time-on-task data for Mann-Whitney |
 | `assets/experiment_design_template.md` | Pre-registration template: question, primary metric, decision threshold, sizing, stopping rule, deviations log |
+
+## Scope & Limitations
+
+**In Scope:**
+- Test selection from question type, outcome type, group structure and distribution, with load-bearing assumptions and a fallback per test (`test_selector.py`)
+- Sample size per group for a stated baseline and minimum effect at a chosen alpha and power
+- Running two-proportion z, Welch's t, chi-square of independence and Mann-Whitney U with effect sizes, confidence intervals and a Bonferroni-adjusted threshold (`run_test.py`)
+- Auditing someone else's statistical claim: unit of measurement, comparison count, re-running from raw counts, reading null results through the interval
+- A pre-registration template for question, primary metric, decision threshold, sizing and stopping rule
+
+**Out of Scope:**
+- Running McNemar, paired t, ANOVA, Kruskal-Wallis, Poisson rate ratio, correlation or interrupted time series; the selector recommends these but marks them as not runnable here
+- Setting up and instrumenting the experiment itself (see `product-team/ab-test-setup/` and `marketing/ab-test-setup/`)
+- Cleaning, joining or querying raw data (see `data-analytics/data-analyst/`)
+- Predictive modelling and machine learning (see `data-analytics/data-scientist/`)
+- Sequential and always-valid testing; the references describe these methods but no tool implements them
+
+**Important Caveats:**
+- The tools read hand-prepared JSON files. They do not connect to analytics platforms or event tables.
+- The distributions are implemented in the standard library rather than scipy. `stats_core.py --selftest` checks them against published reference values and should pass before any result is trusted.
+- The tools do not detect clustering. If units repeat across rows, the data must be aggregated to the unit of assignment first, or every result is invalid.
+- The decision threshold, the primary metric and the size of the comparison family are inputs the team supplies. The output is only as honest as those choices.

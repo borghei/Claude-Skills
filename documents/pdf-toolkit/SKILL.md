@@ -36,6 +36,7 @@ Audit `.pdf` files for metadata, page count, encryption status, embedded JavaScr
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope & Limitations](#scope--limitations)
 
 ---
 
@@ -153,6 +154,27 @@ python scripts/pdf_auditor.py document.pdf --json
 - **Scrub document properties at the source.** In Word: File → Inspect Document → Document Inspector. In Pages: File → Properties. Then export to PDF.
 - **Don't trust filenames.** A file named `Public-Report.pdf` can carry private metadata indistinguishable to the human eye.
 - **Use PDF/A for archival.** PDF/A removes JavaScript and external dependencies, making documents safe for long-term archive.
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Read-only audit of `.pdf` files with `scripts/pdf_auditor.py`, using standard-library parsing with no `pypdf` or `pdfplumber`
+- PDF version, page count, file size, Info dictionary and XMP metadata, encryption status, and JavaScript and embedded-file indicators
+- Three workflows: pre-handoff metadata audit, inbound security triage, and bulk audit of an outbound set with JSON output
+- A handoff guide covering leakage patterns, re-export versus redaction, and PDF/A and PDF/UA basics
+
+**Out of Scope:**
+- Extracting text or tables from a PDF
+- Decrypting, editing, redacting or re-exporting PDFs; fixes happen in the source document
+- Analysing whether embedded JavaScript or attachments are malicious; that needs a sandbox
+- Producing PDFs or HTML documents (see `markdown-html/md-document/`)
+
+**Important Caveats:**
+- The auditor scans the raw file bytes with pattern matching and does not decompress streams. Page counts, metadata and indicators stored inside compressed object streams can be missed, so a clean result is not proof that nothing is there.
+- A JavaScript or embedded-file indicator means the marker is present, not that the file is harmful.
+- Checks such as an "unscrubbed" author or a working-title title are heuristics. Only you know which metadata values are expected for this document.
 
 ---
 

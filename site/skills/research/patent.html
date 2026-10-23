@@ -608,6 +608,26 @@ infringing someone else&#x27;s patent?
 - **Patenting everything.** $30K per patent adds up; portfolio bloat distracts.
 - **Filing without commercial strategy.** Patents are means, not ends.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Prior-art search plans from claim elements, keywords, CPC/IPC classifications and jurisdictions with `prior_art_search_planner.py`: database list, query strings and a search log template
+- IP landscape maps with `claim_landscape_mapper.py`, clustering patents by owner, technology subarea, recency and claim type to show white space and crowded areas
+- Patentability scoring on novelty, non-obviousness, utility, subject matter eligibility and enablement with `patentability_scorer.py`
+- Background on patentability criteria, prior-art categories, freedom-to-operate concepts and IP strategy by company stage
+
+**Out of Scope:**
+- Drafting, filing or prosecuting patent applications
+- Formal freedom-to-operate, infringement or validity opinions. These need a licensed patent attorney.
+- IP licensing agreements (see `legal/contract-review/`)
+- Strategic IP counsel at company level (see `c-level-advisor/general-counsel-advisor/`)
+- Trademarks and copyright
+
+**Important Caveats:**
+- The tools do not query USPTO, EPO, WIPO or any patent database. Patents, prior art and the inventor&#x27;s judgments, such as whether the invention would be obvious, are entered by the user.
+- The patentability criteria use a US baseline. Other jurisdictions differ, for example on grace periods for public disclosure.
+- No output is a patentability or freedom-to-operate opinion. Patent status, ownership and legal status change, so a landscape is only current on the day it is built.
+
 ## References
 
 - `references/prior-art-search-strategy.md` — search databases, classifications, query patterns
@@ -809,6 +829,26 @@ infringing someone else&#x27;s patent?
 - **No FTO before product launch.** Surprise injunctions.
 - **Patenting everything.** $30K per patent adds up; portfolio bloat distracts.
 - **Filing without commercial strategy.** Patents are means, not ends.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Prior-art search plans from claim elements, keywords, CPC/IPC classifications and jurisdictions with `prior_art_search_planner.py`: database list, query strings and a search log template
+- IP landscape maps with `claim_landscape_mapper.py`, clustering patents by owner, technology subarea, recency and claim type to show white space and crowded areas
+- Patentability scoring on novelty, non-obviousness, utility, subject matter eligibility and enablement with `patentability_scorer.py`
+- Background on patentability criteria, prior-art categories, freedom-to-operate concepts and IP strategy by company stage
+
+**Out of Scope:**
+- Drafting, filing or prosecuting patent applications
+- Formal freedom-to-operate, infringement or validity opinions. These need a licensed patent attorney.
+- IP licensing agreements (see `legal/contract-review/`)
+- Strategic IP counsel at company level (see `c-level-advisor/general-counsel-advisor/`)
+- Trademarks and copyright
+
+**Important Caveats:**
+- The tools do not query USPTO, EPO, WIPO or any patent database. Patents, prior art and the inventor&#x27;s judgments, such as whether the invention would be obvious, are entered by the user.
+- The patentability criteria use a US baseline. Other jurisdictions differ, for example on grace periods for public disclosure.
+- No output is a patentability or freedom-to-operate opinion. Patent status, ownership and legal status change, so a landscape is only current on the day it is built.
 
 ## References
 

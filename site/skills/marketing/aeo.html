@@ -587,7 +587,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 1. **Audit existing content**: `python3 scripts/aeo_content_auditor.py --path ./content`
 2. **Add Q&amp;A schema to high-value pages**: `python3 scripts/schema_qa_generator.py --content article.md`
-3. **Track citations from competitors**: `python3 scripts/citation_extractor.py --query &quot;What is X?&quot; --brand &quot;Your Brand&quot;`
+3. **Track citations from competitors**: save the answers the AI assistants gave to your target queries, then run `python3 scripts/citation_extractor.py --responses responses.json --brands &quot;Your Brand,Competitor A&quot;`
 4. **Iterate**: monthly content review with AEO scoring
 
 ---
@@ -674,6 +674,29 @@ Optimize content with structure markers (headings, lists, tables) and authority 
 | `scripts/aeo_content_auditor.py` | Score content for AEO patterns (definition, table, steps, stats, list, structure markers) |
 | `scripts/citation_extractor.py` | Parse LLM responses (saved transcripts) for brand citations + competitive analysis |
 | `scripts/schema_qa_generator.py` | Generate JSON-LD FAQ schema from content (FAQPage / QAPage / HowTo) |
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Positioning AEO against traditional SEO and AI-SEO, and the five cited content patterns: definitions, comparison tables, step-by-step procedures, sourced statistics and explained lists
+- Scoring markdown or HTML content for those patterns and structure markers, with remediation notes, via `scripts/aeo_content_auditor.py`
+- Extracting URL citations, brand mentions, share of voice and mention sentiment from saved LLM responses via `scripts/citation_extractor.py`
+- Generating FAQPage, QAPage or HowTo JSON-LD from a content file via `scripts/schema_qa_generator.py`
+- Workflows for AEO strategy, single-page audits, competitive citation analysis and performance measurement
+
+**Out of Scope:**
+- Ranking in AI search engines such as Perplexity and Google AI Overviews (see `marketing/ai-seo/`)
+- Traditional search rankings and technical SEO audits (see `marketing/seo-specialist/` and `marketing/seo-audit/`)
+- Site-wide structured data strategy and rich-result eligibility (see `marketing/schema-markup/`)
+- Writing the content itself and building backlinks or other authority signals
+
+**Important Caveats:**
+- The skill does not query any LLM. You run the queries, save the responses, and pass them to `citation_extractor.py`; its sentiment labels come from a basic keyword list.
+- The auditor checks whether patterns are present. It does not judge accuracy, authority or whether an LLM will cite the page.
+- Google gives no rich result for FAQ or HowTo markup and says AI features need no special schema, so generated schema is optional and low impact.
+- LLM citation behaviour and AI search features change often. The per-LLM table and the traffic-share estimates describe a point in time and can go stale.
 
 ---
 
@@ -868,7 +891,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 1. **Audit existing content**: `python3 scripts/aeo_content_auditor.py --path ./content`
 2. **Add Q&amp;A schema to high-value pages**: `python3 scripts/schema_qa_generator.py --content article.md`
-3. **Track citations from competitors**: `python3 scripts/citation_extractor.py --query &quot;What is X?&quot; --brand &quot;Your Brand&quot;`
+3. **Track citations from competitors**: save the answers the AI assistants gave to your target queries, then run `python3 scripts/citation_extractor.py --responses responses.json --brands &quot;Your Brand,Competitor A&quot;`
 4. **Iterate**: monthly content review with AEO scoring
 
 ---
@@ -955,6 +978,29 @@ Optimize content with structure markers (headings, lists, tables) and authority 
 | `scripts/aeo_content_auditor.py` | Score content for AEO patterns (definition, table, steps, stats, list, structure markers) |
 | `scripts/citation_extractor.py` | Parse LLM responses (saved transcripts) for brand citations + competitive analysis |
 | `scripts/schema_qa_generator.py` | Generate JSON-LD FAQ schema from content (FAQPage / QAPage / HowTo) |
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Positioning AEO against traditional SEO and AI-SEO, and the five cited content patterns: definitions, comparison tables, step-by-step procedures, sourced statistics and explained lists
+- Scoring markdown or HTML content for those patterns and structure markers, with remediation notes, via `scripts/aeo_content_auditor.py`
+- Extracting URL citations, brand mentions, share of voice and mention sentiment from saved LLM responses via `scripts/citation_extractor.py`
+- Generating FAQPage, QAPage or HowTo JSON-LD from a content file via `scripts/schema_qa_generator.py`
+- Workflows for AEO strategy, single-page audits, competitive citation analysis and performance measurement
+
+**Out of Scope:**
+- Ranking in AI search engines such as Perplexity and Google AI Overviews (see `marketing/ai-seo/`)
+- Traditional search rankings and technical SEO audits (see `marketing/seo-specialist/` and `marketing/seo-audit/`)
+- Site-wide structured data strategy and rich-result eligibility (see `marketing/schema-markup/`)
+- Writing the content itself and building backlinks or other authority signals
+
+**Important Caveats:**
+- The skill does not query any LLM. You run the queries, save the responses, and pass them to `citation_extractor.py`; its sentiment labels come from a basic keyword list.
+- The auditor checks whether patterns are present. It does not judge accuracy, authority or whether an LLM will cite the page.
+- Google gives no rich result for FAQ or HowTo markup and says AI features need no special schema, so generated schema is optional and low impact.
+- LLM citation behaviour and AI search features change often. The per-LLM table and the traffic-share estimates describe a point in time and can go stale.
 
 ---
 
@@ -1062,7 +1108,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
   
   <h2>Quick Start</h2>1. **Audit existing content**: `python3 scripts/aeo_content_auditor.py --path ./content`
 2. **Add Q&A schema to high-value pages**: `python3 scripts/schema_qa_generator.py --content article.md`
-3. **Track citations from competitors**: `python3 scripts/citation_extractor.py --query "What is X?" --brand "Your Brand"`
+3. **Track citations from competitors**: save the answers the AI assistants gave to your target queries, then run `python3 scripts/citation_extractor.py --responses responses.json --brands "Your Brand,Competitor A"`
 4. **Iterate**: monthly content review with AEO scoring
 
 ---

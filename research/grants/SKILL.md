@@ -156,6 +156,25 @@ A proposal that can't answer all seven crisply isn't ready.
 - **Team without right credentials.** Match key personnel to scope.
 - **Submitting at last minute.** Errors; missed letters of support.
 
+## Scope & Limitations
+
+**In Scope:**
+- Funder fit scoring across seven dimensions (topic, mechanism, stage, geography, team profile, budget envelope, competitive density) with `funder_fit_scorer.py`
+- Proposal structure checks against funder-type expectations (NIH, NSF, SBIR, foundation, DARPA, generic) with `proposal_structure_validator.py`: missing sections and page-limit problems
+- Budget realism checks with `budget_realism_checker.py`: personnel effort, PI effort sum, equipment and supplies balance, travel, indirect rate and justification coverage
+- Narrative guidance using funder mental models and the Heilmeier catechism
+
+**Out of Scope:**
+- The literature review behind the proposal (see `research/litreview/`)
+- Detailed study costing from unit costs (see `research-ops/research-finance/`)
+- Legal review of award terms (see `c-level-advisor/general-counsel-advisor/`)
+- Searching funder databases for open calls and submitting through funder portals
+
+**Important Caveats:**
+- Fit ratings such as mechanism or budget alignment are judgments the user enters. The score summarizes them and does not check them against the funder.
+- Section lists and page limits built into the validator are general patterns per funder type. The current solicitation and funder guide always take precedence, and they change between cycles.
+- Indirect cost rates and allowable costs depend on the institution and the funder. A clean run does not mean the proposal will be funded.
+
 ## References
 
 - `references/funder-fit-and-research-strategy.md` — fit dimensions, funder types, multi-funder strategy

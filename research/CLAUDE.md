@@ -47,7 +47,7 @@ research/<skill>/
 - `product-team/research-summarizer` — synthesizing user research (different domain)
 - `legal/` — formal legal IP work (patent skill here is research, not filing)
 - `c-level-advisor/general-counsel-advisor` — strategic legal counsel
-- `marketing/competitive-teardown` — competitive analysis (different lens)
+- `business-growth/competitive-teardown` — competitive analysis (different lens)
 - `business-growth/` — commercial intelligence
 
 ## Quality Standard

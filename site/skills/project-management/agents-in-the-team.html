@@ -622,6 +622,28 @@ Score each 0-2; 10+ of 14 is ready to expand beyond a pilot.
 **Why it happens:** Issue text feels like internal documentation, not input to a program.
 **Instead:** Treat tickets, comments and repo content as untrusted; restrict who can trigger agents; review diffs; security-review changes to CI, dependencies and permissions.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- A delegation policy with three bands (agent-eligible, agent-assisted, human-only) and hard blocks for sensitive areas
+- Per-ticket scoring on clarity, context, risk, blast radius, verifiability and type fit, plus a review-capacity gate (`agent_delegation_scorer.py`)
+- Delivery metrics split by human and agent authorship, with DORA change fail rate, deployment rework rate and recovery time, and an optional regression gate (`agent_delivery_metrics.py`)
+- Templates for agent-ready tickets, the delegation policy and a phased rollout plan
+- Security controls for agents on trackers and repos, including prompt-injection-aware review
+
+**Out of Scope:**
+- Choosing or evaluating an AI coding tool vendor
+- Building or designing an agent (see `engineering/agent-designer/`)
+- Capacity math for the human side of the sprint (see `project-management/execution/sprint-plan/`)
+- Configuring Jira or Linear themselves (see `project-management/jira-expert/` and `project-management/linear-expert/`)
+- Blameless review after an agent change causes an incident (see `project-management/execution/post-mortem/`)
+
+**Important Caveats:**
+- Both tools read hand-prepared JSON exports. They do not connect to trackers, repos or deployment systems.
+- Review-hour defaults (0.5 h base, 0.5 h per point, 30% rework, 80% utilization) and the factor weights are planning assumptions until replaced with measured values.
+- Cohorts under 10 merged PRs are flagged as directional. Without a pre-agent baseline, instability cannot be attributed to agents.
+- Tracker and vendor behaviour is described as of September 2026 and can change. The tolerance, the hard-block list and any relaxation of it stay team and security decisions.
+
 ## Reference Documentation
 
 - [references/delegation-and-accountability.md](references/delegation-and-accountability.md) - scoring factors and calibration, hard blocks, ticket-writing rules with before/after, Scrum Guide Expansion Pack AI guidance, how Linear, Jira and GitHub model agent delegation (as of September 2026)
@@ -862,6 +884,28 @@ Score each 0-2; 10+ of 14 is ready to expand beyond a pilot.
 **Mistake:** Letting anyone who can comment on an issue steer the agent, and reviewing the PR description instead of the diff.
 **Why it happens:** Issue text feels like internal documentation, not input to a program.
 **Instead:** Treat tickets, comments and repo content as untrusted; restrict who can trigger agents; review diffs; security-review changes to CI, dependencies and permissions.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- A delegation policy with three bands (agent-eligible, agent-assisted, human-only) and hard blocks for sensitive areas
+- Per-ticket scoring on clarity, context, risk, blast radius, verifiability and type fit, plus a review-capacity gate (`agent_delegation_scorer.py`)
+- Delivery metrics split by human and agent authorship, with DORA change fail rate, deployment rework rate and recovery time, and an optional regression gate (`agent_delivery_metrics.py`)
+- Templates for agent-ready tickets, the delegation policy and a phased rollout plan
+- Security controls for agents on trackers and repos, including prompt-injection-aware review
+
+**Out of Scope:**
+- Choosing or evaluating an AI coding tool vendor
+- Building or designing an agent (see `engineering/agent-designer/`)
+- Capacity math for the human side of the sprint (see `project-management/execution/sprint-plan/`)
+- Configuring Jira or Linear themselves (see `project-management/jira-expert/` and `project-management/linear-expert/`)
+- Blameless review after an agent change causes an incident (see `project-management/execution/post-mortem/`)
+
+**Important Caveats:**
+- Both tools read hand-prepared JSON exports. They do not connect to trackers, repos or deployment systems.
+- Review-hour defaults (0.5 h base, 0.5 h per point, 30% rework, 80% utilization) and the factor weights are planning assumptions until replaced with measured values.
+- Cohorts under 10 merged PRs are flagged as directional. Without a pre-agent baseline, instability cannot be attributed to agents.
+- Tracker and vendor behaviour is described as of September 2026 and can change. The tolerance, the hard-block list and any relaxation of it stay team and security decisions.
 
 ## Reference Documentation
 

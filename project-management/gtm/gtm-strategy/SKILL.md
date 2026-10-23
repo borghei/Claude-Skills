@@ -216,6 +216,28 @@ If channel-product fit is off, channel won't deliver regardless of effort.
 - **Launch sequence = "ship and see."** Predictable underperformance.
 - **All motions at once.** Try one; succeed before adding.
 
+## Scope & Limitations
+
+**In Scope:**
+- A go-to-market strategy across seven components: ICP, beachhead segment, motion, channels, messaging and positioning, success metrics and launch sequence
+- Motion choice by ACV across PLG, sales-led, marketing-led, channel-led, community-led and hybrid
+- Channel mapping per motion, channel-product fit checks and KPI focus per motion
+- A T-90 to T+90 launch sequence
+- A strategy audit for ICP specificity, motion fit, channel coherence, messaging clarity, metric definition and sequence realism (`gtm_strategy_validator.py`)
+
+**Out of Scope:**
+- Building and scoring the ICP in depth (see `project-management/gtm/ideal-customer-profile/`)
+- Marketing launch execution such as campaigns and content (see `marketing/launch-strategy/`)
+- Setting price and packaging (see `business-growth/pricing-strategy/`)
+- Sales operations, pipeline tooling and forecasting (see `business-growth/revenue-operations/`)
+- The cross-functional launch-day checklist (see `project-management/execution/launch-playbook/`)
+
+**Important Caveats:**
+- `gtm_strategy_validator.py` audits a hand-written JSON document. Flags such as `specific_enough` and `tested_with_customers` are self-reported.
+- The ACV bands for motion fit are rules of thumb. They do not replace the team's own unit economics.
+- The tool uses no market data. Segment size, channel performance and competitor positioning come from the team's own research.
+- Beachhead choice, motion and budget stay leadership decisions, and the plan needs a refresh after launch data arrives.
+
 ## References
 
 - `references/gtm-components-deep.md` — ICP, motion, channels, messaging deep

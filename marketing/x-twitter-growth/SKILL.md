@@ -116,3 +116,22 @@ I built 3 content pillars that I rotate through each week...
 | Reply Rate | < 0.1% | 0.1-0.5% | 0.5-1% | > 1% |
 | Retweet Rate | < 0.2% | 0.2-1% | 1-3% | > 3% |
 | Thread Completion | < 20% | 20-40% | 40-60% | > 60% |
+
+## Scope & Limitations
+
+**In Scope:**
+- Tweet performance pattern analysis from an exported CSV with `tweet_analyzer.py`, by content type, format and media
+- Splitting long-form text into a thread with a hook tweet, in numbered or clean style, with `thread_builder.py`
+- Follower growth, engagement rate and best posting time reports by day, week or month with `growth_tracker.py`
+- A growth playbook covering ranking signals, the Hook-Value-CTA framework, thread writing, reply strategy and profile optimization
+
+**Out of Scope:**
+- Posting, scheduling, replying or pulling data from X; the tools have no API access
+- LinkedIn content and analytics (see the suite under `tools/linkedin/`)
+- Cross-platform social strategy and editorial calendars (see `marketing/social-media-manager/`)
+- Paid X campaigns (see `marketing/paid-ads/`)
+
+**Important Caveats:**
+- All analysis runs on data you export from X Analytics or a third-party tool and save as CSV.
+- The ranking signal weights in the playbook come from X's 2023 open-source release and are historical. The content type multipliers are practitioner heuristics. X's ranker has changed since, so treat these as hypotheses to test.
+- The engagement benchmarks are general ranges. Rates vary by niche and account size, so your own past performance is the better baseline.

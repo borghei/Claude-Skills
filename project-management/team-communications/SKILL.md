@@ -214,3 +214,23 @@ them ready to fill in.
 | `assets/sample_calendar.json` | Runnable 8-person, 8-meeting calendar export |
 | `assets/sample_messages.json` | Runnable set of 7 pending communications |
 | `assets/sample_status_update.json` | Runnable mid-quality draft (scores 50 — REVISE) |
+
+## Scope & Limitations
+
+**In Scope:**
+- Meeting-load audit: person-hours, annual cost, KEEP/TRIM/ASYNC/KILL verdicts, double bookings, maker hours per person and a consolidation proposal (`meeting_load_auditor.py`)
+- Channel routing of pending messages to live 1:1, written decision record, broadcast, live meeting or async thread, with an urgency band, SLA and reason (`channel_router.py`)
+- Status update scoring from 0 to 100 on completeness, executive readability and skimmability (`status_update_scorer.py`)
+- A one-page communication charter covering core hours, channel and meeting rules, SLAs, escalation and timezone norms
+
+**Out of Scope:**
+- Writing the status update content from project data (see `project-management/execution/status-update-generator/`)
+- Summarizing or analyzing individual meetings and transcripts (see `project-management/meeting-analyzer/` and `project-management/execution/summarize-meeting/`)
+- Mapping stakeholders by power and interest (see `project-management/execution/stakeholder-map/`)
+- Changing calendars, posting messages or editing chat tools; the tools only read JSON or text files and print results
+
+**Important Caveats:**
+- Inputs are manual. The calendar export, hourly costs and decisions per month have to be prepared by hand, and decisions per month is an estimate made with the meeting owner.
+- Meeting verdicts use decisions per month as a proxy for value. A meeting that produces trust or context but few decisions can be marked ASYNC or KILL wrongly.
+- The status scorer checks structure and readability, not whether the reported facts are true.
+- Thresholds such as the 70-point send bar, the 34% sync share and the 24 maker hours are this skill's recommended defaults. The team decides whether they fit.

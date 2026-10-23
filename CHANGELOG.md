@@ -5,6 +5,23 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.13.7] - 2026-10-23
+
+### Fixed
+
+- **EU AI Act high-risk deadlines follow the Digital Omnibus (Regulation (EU) 2026/1744, in force 27 July 2026).** `eu-ai-act-specialist` called 2 August 2026 a firm high-risk deadline, `ai-act-readiness` was built around it, and `ai_compliance_checker.py` printed it for 13 obligations. High-risk obligations now read 2 December 2027 for Annex III systems and 2 August 2028 for AI in Annex I products; Article 50 transparency stays at 2 August 2026, with the 2 December 2026 marking grace period for legacy systems. The same correction reaches `ai_risk_classifier.py`, the chief AI officer, general counsel, legal red-team and statute-analysis references, and the compliance-readiness matrix. Entry into force is 1 August 2024 everywhere, and Machinery is labelled Annex I Section A.
+- **Reference files now describe what the tools actually do.** `release-notes`, `status-update-generator`, `roadmap-communication`, `sprint-retrospective` (including its worked example) and `identify-assumptions` no longer promise flags, checks, scripts or categories that don't exist. `wwas` uses four acceptance criteria everywhere, including `invest_gate_checker.py`, which passed items with three. The `aeo` and `commercial-policy` commands use their scripts' real flags, and `docx-toolkit` no longer claims a cross-reference check.
+- About a dozen links to skills that moved or never existed point to the right place: `business-growth/competitive-teardown`, `legal/data-breach-response`, `legal/dpia-assessment`, `product-team/ux-researcher-designer` and the `cs-fundraising-advisor` agent.
+
+### Added
+
+- **Scope & Limitations in 63 more skills**: every compliance, C-level, vertical, finance, research, research-ops and documents skill, plus project-management, product, marketing, business-growth and data skills that lacked one. Each says what the skill covers, what it leaves to other skills, and where its tools stop.
+- **A social preview card** (`assets/social-preview.png`, 1280×640) for the GitHub repository and the website's link previews. `scripts/generate_header.py --social` rebuilds it from `skills.json`.
+
+### Changed
+
+- The README badges sit on two lines: the project (stars, live version, license, supported assistants), then the library's numbers (skills, domains, agents, Python tools, compliance frameworks).
+
 ## [4.13.6] - 2026-10-23
 
 ### Changed

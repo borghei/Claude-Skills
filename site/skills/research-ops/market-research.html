@@ -664,6 +664,26 @@ is only useful if the segments have measurably different win rates or values.
 | `assets/sample_survey.json` | Runnable input for the survey auditor |
 | `assets/sample_demand_signals.json` | Runnable input for the demand triangulator |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- TAM, SAM and SOM built top-down and bottom-up with `tam_sam_som_builder.py`, reconciled layer by layer and flagged against plausibility ratios
+- Demand signal triangulation with `demand_signal_triangulator.py`: a weighted demand index, contradicting signals and source concentration
+- Survey instrument audits with `survey_instrument_auditor.py` for leading language, double-barrelled items, absolutes, scale problems and missing escape options, with a required sample size
+- Guidance on choosing a sizing method, growth bridges for stale anchors, segmentation and survey design, plus a market-sizing memo template
+
+**Out of Scope:**
+- Competitor tracking and battlecards (see `c-level-advisor/competitive-intel/` and `business-growth/competitive-teardown/`)
+- Defining the ideal customer profile (see `project-management/gtm/ideal-customer-profile/`)
+- Pricing and packaging decisions (see `business-growth/pricing-strategy/`)
+- User discovery research and interview studies (see `research-ops/product-research/`)
+- Fielding surveys or buying panel or analyst data
+
+**Important Caveats:**
+- The tools pull no live market data. Anchors, filters, unit counts and signal scores are all entered by the user, and the result is only as good as their sources and vintage.
+- The plausibility thresholds, such as SAM above 60% of TAM or a 3x gap between builds, are heuristics. Crossing one needs an explanation, not necessarily a fix.
+- The sample-size verdict assumes a proportion estimate from a random sample. It does not correct for panel bias, non-response or quota sampling.
+
 ---
 
 ## What I Need You to Do
@@ -909,6 +929,26 @@ is only useful if the segments have measurably different win rates or values.
 | `assets/sample_market_model.json` | Runnable input for the TAM/SAM/SOM builder |
 | `assets/sample_survey.json` | Runnable input for the survey auditor |
 | `assets/sample_demand_signals.json` | Runnable input for the demand triangulator |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- TAM, SAM and SOM built top-down and bottom-up with `tam_sam_som_builder.py`, reconciled layer by layer and flagged against plausibility ratios
+- Demand signal triangulation with `demand_signal_triangulator.py`: a weighted demand index, contradicting signals and source concentration
+- Survey instrument audits with `survey_instrument_auditor.py` for leading language, double-barrelled items, absolutes, scale problems and missing escape options, with a required sample size
+- Guidance on choosing a sizing method, growth bridges for stale anchors, segmentation and survey design, plus a market-sizing memo template
+
+**Out of Scope:**
+- Competitor tracking and battlecards (see `c-level-advisor/competitive-intel/` and `business-growth/competitive-teardown/`)
+- Defining the ideal customer profile (see `project-management/gtm/ideal-customer-profile/`)
+- Pricing and packaging decisions (see `business-growth/pricing-strategy/`)
+- User discovery research and interview studies (see `research-ops/product-research/`)
+- Fielding surveys or buying panel or analyst data
+
+**Important Caveats:**
+- The tools pull no live market data. Anchors, filters, unit counts and signal scores are all entered by the user, and the result is only as good as their sources and vintage.
+- The plausibility thresholds, such as SAM above 60% of TAM or a 3x gap between builds, are heuristics. Crossing one needs an explanation, not necessarily a fix.
+- The sample-size verdict assumes a proportion estimate from a random sample. It does not correct for panel bias, non-response or quota sampling.
 
 ---
 

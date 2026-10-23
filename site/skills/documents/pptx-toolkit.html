@@ -480,6 +480,7 @@ Audit `.pptx` files using the standard library only — no `python-pptx` require
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope &amp; Limitations](#scope--limitations)
 
 ---
 
@@ -590,6 +591,27 @@ python scripts/pptx_auditor.py deck.pptx --json
 - **Speaker notes are documentation.** Slides without notes leave readers (post-meeting) guessing what the talk track was.
 - **Delete hidden slides before sending.** Hidden slides are often older versions left for &quot;just in case&quot; — they survive forever and leak narrative context.
 - **Animations are timing risk.** Every animation is a place where the live demo can desync from the speaker.
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Read-only audit of `.pptx` files with `scripts/pptx_auditor.py`, which parses OOXML with `zipfile` and `xml.etree` and needs no third-party package
+- Slide and hidden-slide counts, speaker-notes coverage, words per slide with the densest slides, image and embedded-media count, animation timing nodes, and theme name
+- Three workflows: pre-meeting review, board or investor deck audit, and pre-conference talk check
+- A deck density rubric with words-per-slide targets by deck purpose, plus a handoff checklist
+
+**Out of Scope:**
+- Creating, editing or restyling slides; the tool only reads
+- Building a board deck&#x27;s narrative and content (see `c-level-advisor/board-deck-builder/`)
+- Reviewing a pitch deck&#x27;s story for investors (see `personal-productivity/pitch-deck-reviewer/`)
+- Producing slides from markdown (see `markdown-html/md-slides/`)
+
+**Important Caveats:**
+- The auditor does not render slides. Layout, overlap, contrast, font use and brand compliance are not checked.
+- Word counts and animation counts measure density, not quality. The thresholds in the workflows, such as 50 words per slide, are rules of thumb; the rubric sets different targets by deck purpose.
+- It counts embedded media but cannot confirm that video or audio plays; the talk workflow says to test playback locally.
 
 ---
 
@@ -663,6 +685,7 @@ Audit `.pptx` files using the standard library only — no `python-pptx` require
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope &amp; Limitations](#scope--limitations)
 
 ---
 
@@ -773,6 +796,27 @@ python scripts/pptx_auditor.py deck.pptx --json
 - **Speaker notes are documentation.** Slides without notes leave readers (post-meeting) guessing what the talk track was.
 - **Delete hidden slides before sending.** Hidden slides are often older versions left for &quot;just in case&quot; — they survive forever and leak narrative context.
 - **Animations are timing risk.** Every animation is a place where the live demo can desync from the speaker.
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Read-only audit of `.pptx` files with `scripts/pptx_auditor.py`, which parses OOXML with `zipfile` and `xml.etree` and needs no third-party package
+- Slide and hidden-slide counts, speaker-notes coverage, words per slide with the densest slides, image and embedded-media count, animation timing nodes, and theme name
+- Three workflows: pre-meeting review, board or investor deck audit, and pre-conference talk check
+- A deck density rubric with words-per-slide targets by deck purpose, plus a handoff checklist
+
+**Out of Scope:**
+- Creating, editing or restyling slides; the tool only reads
+- Building a board deck&#x27;s narrative and content (see `c-level-advisor/board-deck-builder/`)
+- Reviewing a pitch deck&#x27;s story for investors (see `personal-productivity/pitch-deck-reviewer/`)
+- Producing slides from markdown (see `markdown-html/md-slides/`)
+
+**Important Caveats:**
+- The auditor does not render slides. Layout, overlap, contrast, font use and brand compliance are not checked.
+- Word counts and animation counts measure density, not quality. The thresholds in the workflows, such as 50 words per slide, are rules of thumb; the rubric sets different targets by deck purpose.
+- It counts embedded media but cannot confirm that video or audio plays; the talk workflow says to test playback locally.
 
 ---
 
@@ -874,7 +918,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 Outputs: slide count, hidden slide count, slides with speaker notes, words per slide (with per-slide breakdown), image and embedded-media count, animation node count, theme name.
 
 ---
-  <h2>Related Skills in Documents</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Docx Toolkit</h3><p>Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pdf-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pdf Toolkit</h3><p>Audit PDF files for metadata leakage, page count, encryption, JavaScript, embedded files, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/xlsx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Xlsx Toolkit</h3><p>Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges,...</p></a></div>
+  <h2>Related Skills in Documents</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Docx Toolkit</h3><p>Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pdf-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pdf Toolkit</h3><p>Audit PDF files for metadata leakage, page count, encryption, JavaScript, embedded files, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/xlsx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Xlsx Toolkit</h3><p>Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges,...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/documents/pptx-toolkit/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

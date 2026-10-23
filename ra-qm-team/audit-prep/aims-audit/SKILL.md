@@ -210,6 +210,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- ISO 42001:2023 audit-prep sprints for Stage 1, Stage 2, surveillance and internal audits (4-week and 8-week plans)
+- Readiness scoring per clause (4-10) and Annex A area, with a sprint-length recommendation, from `aims_readiness_score.py`
+- AI Impact Assessment completeness checks per Annex A.5 from `ai_impact_assessment_checker.py`
+- Evidence punch lists for AI inventory, policy and governance, lifecycle, data governance and third-party AI, plus an internal audit playbook
+
+**Out of Scope:**
+- Building an AIMS from scratch as a multi-quarter program (see `ra-qm-team/iso42001-ai-management/`)
+- EU AI Act readiness and conformity (see `ra-qm-team/audit-prep/ai-act-readiness/` and `ra-qm-team/eu-ai-act-specialist/`)
+- Running several frameworks in one program (see `ra-qm-team/audit-prep/compliance-readiness/`)
+- Acting as the certification body or issuing a certificate
+
+**Important Caveats:**
+- The readiness score adds fixed weights for each control you mark as true in YAML. It measures what you claim, not whether the control works in practice.
+- The AIIA checker tests whether sections are filled in, not whether the impact analysis is sound.
+- A high score does not predict the certification decision. Only an accredited certification body can recommend certification.
+
+---
+
 ## References
 
 - [iso42001-aims-readiness-checklist.md](references/iso42001-aims-readiness-checklist.md) — punch list per clause + Annex A

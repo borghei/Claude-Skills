@@ -788,7 +788,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 ### Workflow: Generate region-specific policy
 
 1. **Identify region-specific requirements** — currency, jurisdiction, payment norms, regulatory
-2. **Run** `scripts/commercial_policy_generator.py --base policy.yaml --region &lt;region&gt;` to get base + regional overlay
+2. **Run** `scripts/commercial_policy_generator.py --org-spec org.yaml --region &lt;region&gt;` to get base + regional overlay
 3. **Tailor** further with local team (regional VP Sales, regional GC, regional CFO)
 4. **Approve** through standard governance
 5. **Communicate** to regional sales
@@ -819,6 +819,30 @@ Ask about the two or three inputs that matter most for this request, not the who
 | `scripts/commercial_policy_generator.py` | Base policy YAML + optional region overlay | Generated policy document (markdown), tailored to company stage, ICP, region |
 
 All scripts: stdlib only, argparse CLI, JSON or markdown output.
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- A commercial policy charter covering pricing, contract, legal, operational, customer commitment, channel and special-terms rules, with owners, approvers and an annual review
+- Policy generation from an org spec YAML, with an optional US, EU, UK or APAC overlay, via `scripts/commercial_policy_generator.py`
+- Deal compliance audits against a policy YAML via `scripts/policy_compliance_checker.py`
+- Terms-deviation pattern analysis from a deal CSV via `scripts/terms_deviation_analyzer.py`
+- Workflows for authoring, annual refresh, compliance audit and region-specific policy
+
+**Out of Scope:**
+- Setting prices and day-to-day pricing decisions (see `business-growth/pricing-strategy/`)
+- Per-deal approval and routing (see `business-growth/deal-desk/`)
+- Drafting individual contracts (see `business-growth/contract-and-proposal-writer/`)
+- Sales targets, quota and compensation policy
+- Customer success and churn-prevention tactics (see `business-growth/churn-prevention/`)
+
+**Important Caveats:**
+- The generated policy is a draft for the CRO, CFO and General Counsel to review and approve. It is not legal advice and does not check whether a term is enforceable in a given jurisdiction.
+- Regional overlays are general. Local law, tax and revenue-recognition questions need input from regional legal and finance.
+- The compliance checker only tests the rules in the policy YAML, and falls back to a built-in default policy when none is given. Deal data comes from a CSV export you supply; there is no CRM connection.
+- Thresholds in the templates, such as discount ceilings and payment terms, are starting points to calibrate to your stage and market.
 
 ---
 
@@ -1203,7 +1227,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 ### Workflow: Generate region-specific policy
 
 1. **Identify region-specific requirements** — currency, jurisdiction, payment norms, regulatory
-2. **Run** `scripts/commercial_policy_generator.py --base policy.yaml --region &lt;region&gt;` to get base + regional overlay
+2. **Run** `scripts/commercial_policy_generator.py --org-spec org.yaml --region &lt;region&gt;` to get base + regional overlay
 3. **Tailor** further with local team (regional VP Sales, regional GC, regional CFO)
 4. **Approve** through standard governance
 5. **Communicate** to regional sales
@@ -1234,6 +1258,30 @@ Ask about the two or three inputs that matter most for this request, not the who
 | `scripts/commercial_policy_generator.py` | Base policy YAML + optional region overlay | Generated policy document (markdown), tailored to company stage, ICP, region |
 
 All scripts: stdlib only, argparse CLI, JSON or markdown output.
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- A commercial policy charter covering pricing, contract, legal, operational, customer commitment, channel and special-terms rules, with owners, approvers and an annual review
+- Policy generation from an org spec YAML, with an optional US, EU, UK or APAC overlay, via `scripts/commercial_policy_generator.py`
+- Deal compliance audits against a policy YAML via `scripts/policy_compliance_checker.py`
+- Terms-deviation pattern analysis from a deal CSV via `scripts/terms_deviation_analyzer.py`
+- Workflows for authoring, annual refresh, compliance audit and region-specific policy
+
+**Out of Scope:**
+- Setting prices and day-to-day pricing decisions (see `business-growth/pricing-strategy/`)
+- Per-deal approval and routing (see `business-growth/deal-desk/`)
+- Drafting individual contracts (see `business-growth/contract-and-proposal-writer/`)
+- Sales targets, quota and compensation policy
+- Customer success and churn-prevention tactics (see `business-growth/churn-prevention/`)
+
+**Important Caveats:**
+- The generated policy is a draft for the CRO, CFO and General Counsel to review and approve. It is not legal advice and does not check whether a term is enforceable in a given jurisdiction.
+- Regional overlays are general. Local law, tax and revenue-recognition questions need input from regional legal and finance.
+- The compliance checker only tests the rules in the policy YAML, and falls back to a built-in default policy when none is given. Deal data comes from a CSV export you supply; there is no CRM connection.
+- Thresholds in the templates, such as discount ceilings and payment terms, are starting points to calibrate to your stage and market.
 
 ---
 

@@ -587,6 +587,26 @@ U002,2025-01-12,2025-03-20,2025-03
 | CAC Payback | &gt; 24 mo | 12-18 mo | &lt; 12 mo |
 | Gross Margin | &lt; 60% | 60-75% | &gt; 75% |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- MRR, ARR, net new MRR, growth and churn from a subscription CSV with `mrr_calculator.py`, by period and optionally by plan tier
+- Cohort retention matrices from user signup and activity data with `cohort_analyzer.py` (weekly, monthly or quarterly cohorts)
+- Unit economics with `unit_economics.py`: simple, gross-margin-adjusted and discounted LTV, CAC, LTV:CAC and CAC payback
+- Metric definitions and the healthy-SaaS benchmark table, with more detail in `references/saas-metrics-guide.md`
+
+**Out of Scope:**
+- Full financial statements, DCF valuation and budget variance (see `finance/financial-analyst/`)
+- Churn reduction playbooks and save flows (see `business-growth/churn-prevention/`)
+- Pricing and packaging decisions (see `business-growth/pricing-strategy/`)
+- Writing the investor update itself (see `personal-productivity/investor-update-generator/`)
+- Direct connection to billing systems such as Stripe or Chargebee, and revenue recognition accounting
+
+**Important Caveats:**
+- Data comes in as a CSV or JSON export prepared by the user. The tools do not convert currencies, so multi-currency MRR must be normalized before it is loaded.
+- Results depend on the churn definition, gross margin and discount rate supplied. Changing any of them changes LTV, payback and the health flags.
+- The benchmark thresholds (for example churn above 5% or LTV:CAC below 3:1) are general rules of thumb. They vary by segment, price point and stage.
+
 ---
 
 ## What I Need You to Do
@@ -755,6 +775,26 @@ U002,2025-01-12,2025-03-20,2025-03
 | LTV:CAC | &lt; 1:1 | 1:1-3:1 | &gt; 3:1 |
 | CAC Payback | &gt; 24 mo | 12-18 mo | &lt; 12 mo |
 | Gross Margin | &lt; 60% | 60-75% | &gt; 75% |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- MRR, ARR, net new MRR, growth and churn from a subscription CSV with `mrr_calculator.py`, by period and optionally by plan tier
+- Cohort retention matrices from user signup and activity data with `cohort_analyzer.py` (weekly, monthly or quarterly cohorts)
+- Unit economics with `unit_economics.py`: simple, gross-margin-adjusted and discounted LTV, CAC, LTV:CAC and CAC payback
+- Metric definitions and the healthy-SaaS benchmark table, with more detail in `references/saas-metrics-guide.md`
+
+**Out of Scope:**
+- Full financial statements, DCF valuation and budget variance (see `finance/financial-analyst/`)
+- Churn reduction playbooks and save flows (see `business-growth/churn-prevention/`)
+- Pricing and packaging decisions (see `business-growth/pricing-strategy/`)
+- Writing the investor update itself (see `personal-productivity/investor-update-generator/`)
+- Direct connection to billing systems such as Stripe or Chargebee, and revenue recognition accounting
+
+**Important Caveats:**
+- Data comes in as a CSV or JSON export prepared by the user. The tools do not convert currencies, so multi-currency MRR must be normalized before it is loaded.
+- Results depend on the churn definition, gross margin and discount rate supplied. Changing any of them changes LTV, payback and the health flags.
+- The benchmark thresholds (for example churn above 5% or LTV:CAC below 3:1) are general rules of thumb. They vary by segment, price point and stage.
 
 ---
 

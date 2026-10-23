@@ -66,7 +66,7 @@ Scan every retrospective format, output, and follow-up before treating it as the
 > "Retro: 'I feel rushed.' 'I feel the work is fragmented.' 'I feel good.' (No data inputs.)"
 **Good example:**
 > "Retro opens with a 5-min data review: cycle-time trend (up 30% over last 3 sprints), sprint-goal completion rate (down from 85% to 60%), throughput stable, escaped-bug rate up. Discussion grounded: 'we are taking longer per item; why?'"
-**How to catch it.** Retro starts with feelings before data = use `retrospective_analyzer.py` for a data slide.
+**How to catch it.** If the retro starts with feelings before data, run `velocity_analyzer.py` on the sprint's git history and `retro_report_generator.py` on its output to put a data slide on the table first.
 
 ---
 
@@ -148,7 +148,7 @@ Scan every retrospective format, output, and follow-up before treating it as the
 ## Related Reading
 
 - `SKILL.md` -- the retrospective skill
-- `scripts/retrospective_analyzer.py --help` -- the data-driven retro generator
+- `scripts/velocity_analyzer.py --help` and `scripts/retro_report_generator.py --help` -- the sprint data and the retro report built from it
 - `references/retro-formats.md` -- Mad-Sad-Glad, Start-Stop-Continue, 4Ls, Sailboat, Fishbone, 5-Whys
 - Sibling skill: `scrum-master/` -- sprint analytics that feed the retro
 - Sibling skill: `agile-coach/` -- broader agile-maturity coaching

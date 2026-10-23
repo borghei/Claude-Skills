@@ -165,4 +165,4 @@ python scripts/phi_scope_checker.py description.txt --json
 - **`legal/`** for BAA / DPA templates and contract review
 - **`engineering/cs-security-engineer`** — healthtech security goes beyond standard SaaS
 - **`business-growth/pricing-strategy`** — healthtech pricing has unusual constraints (PMPM, capitation, fee-for-service)
-- **`c-level-advisor/cs-fundraising-advisor`** — healthtech investor expectations differ from generic SaaS
+- **`agents/c-level/cs-fundraising-advisor.md` (agent)** — healthtech investor expectations differ from generic SaaS

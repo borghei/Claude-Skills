@@ -33,8 +33,9 @@ Scan every WWAS-formatted backlog item before it enters refinement. Each red fla
 > 1. Given a recruiter has 5+ candidates selected, when she clicks Bulk-Edit, then a dialog appears showing the 3 editable fields (status, tag, assignee).
 > 2. Given the dialog is open, when she sets a status and clicks Apply, then the status updates for all selected candidates within 3 seconds, and an audit log entry is created per candidate.
 > 3. Given any of the candidates fail validation, when the operation runs, then a partial-success message lists the failures and no successful updates are rolled back.
-> 4. Performance: bulk-edit of up to 200 candidates completes in <5 sec p95."
-**How to catch it.** No Given / When / Then format with >= 3 cases = not ready for sprint.
+> 4. Given the recruiter lacks edit rights on some selected candidates, when she opens Bulk-Edit, then those candidates are listed as skipped before she applies anything.
+> 5. Performance: bulk-edit of up to 200 candidates completes in <5 sec p95."
+**How to catch it.** Fewer than 4 observable acceptance criteria = not ready for sprint. `invest_gate_checker.py` fails the Estimable gate below 4.
 
 ---
 
@@ -145,7 +146,7 @@ Scan every WWAS-formatted backlog item before it enters refinement. Each red fla
 | # | Anti-pattern | One-line check |
 |---|---|---|
 | 1 | WHY = wishlist | WHY connects to a customer outcome or metric |
-| 2 | No ACs | Given / When / Then, >= 3 cases |
+| 2 | No ACs | At least 4 observable acceptance criteria? |
 | 3 | WHAT specifies implementation | No component libs / endpoints in WHAT |
 | 4 | WHY stops at the output | WHY terminates in outcome, not feature |
 | 5 | AC as test script | AC count <= 8 |

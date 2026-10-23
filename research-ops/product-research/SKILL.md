@@ -228,3 +228,22 @@ the one-way doors that are currently being decided on nothing at all.
 | `assets/sample_research_question.json` | Runnable input for the method recommender |
 | `assets/sample_screener.json` | Runnable input for the screener validator |
 | `assets/sample_evidence.json` | Runnable input for the insight confidence scorer |
+
+## Scope & Limitations
+
+**In Scope:**
+- Method selection with `method_recommender.py` from question type, decision reversibility, timeline and participant access, returning a primary method, a cheaper fallback, a minimum sample and ruled-out methods
+- Screener checks with `screener_validator.py` for transparent qualifying answers, missing disqualification logic, professional-respondent exposure, quota coverage and untested criteria
+- Insight confidence scoring with `insight_confidence_scorer.py`, weighting observed behaviour above reported opinion and rewarding source and participant diversity
+- The reversibility gate, saturation guidance, interview craft reference and an interview guide template
+
+**Out of Scope:**
+- Writing the findings brief or readout (see `product-team/research-summarizer/`)
+- Designing and analyzing A/B experiments (see `product-team/ab-test-setup/`)
+- Market sizing and market surveys (see `research-ops/market-research/`)
+- Recruiting operations such as panel sourcing, scheduling and incentive payments
+
+**Important Caveats:**
+- The method recommender is rule-based and returns a starting point. It does not know the team's skills, tools or budget beyond what is entered.
+- The screener validator checks the screener's structure. It cannot tell whether a real respondent answered honestly.
+- Confidence scores depend on how the user labels each evidence item, for example observed versus reported. The tools do not read session recordings, tickets or notes.
