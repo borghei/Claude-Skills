@@ -5,6 +5,12 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.13.3] - 2026-10-23
+
+### Fixed
+
+- **`skill-tester` checks the frontmatter this repo actually uses.** `skill_validator.py` and `quality_scorer.py` looked for `Name`, `Tier`, `Category`, `Dependencies`, `Author` and `Version`, which no skill has, so every skill failed the frontmatter check. They now follow `standards/skill-authoring-standard.md`: a missing `name`, `description`, `license`, `metadata.version`, `metadata.author`, `metadata.category` or `metadata.updated` is an error, and a missing `metadata.domain` or `metadata.tags`, or a `name` that differs from its folder, is a warning. All 386 SKILL.md files now pass. The skill's structure reference and its sample skill match the schema.
+
 ## [4.13.2] - 2026-10-23
 
 ### Fixed

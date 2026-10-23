@@ -61,17 +61,28 @@ skill-name/
 The `SKILL.md` file serves as the primary documentation for the skill and must contain:
 
 #### Mandatory YAML Frontmatter
+
+The schema is defined in `standards/skill-authoring-standard.md` (Pattern 2):
+
 ```yaml
 ---
-Name: skill-name
-Tier: [BASIC|STANDARD|POWERFUL]
-Category: [Category Name]
-Dependencies: [None|List of dependencies]
-Author: [Author Name]
-Version: [Semantic Version]
-Last Updated: [YYYY-MM-DD]
+name: skill-name            # lowercase, hyphenated, matches the folder name
+description: >
+  What the skill does and when to use it.
+license: MIT + Commons Clause
+metadata:
+  version: 1.0.0            # semantic version
+  author: Author Name
+  category: engineering     # top-level domain
+  domain: skill-testing     # recommended
+  updated: YYYY-MM-DD
+  tags: [tag1, tag2, tag3]  # recommended, 3-8 tags
 ---
 ```
+
+`skill_validator.py` reports a missing `name`, `description`, `license`, `metadata.version`,
+`metadata.author`, `metadata.category` or `metadata.updated` as an error, and a missing
+`metadata.domain` or `metadata.tags`, or a `name` that differs from the folder, as a warning.
 
 #### Required Sections
 - **Description**: Comprehensive overview of the skill's purpose and capabilities
