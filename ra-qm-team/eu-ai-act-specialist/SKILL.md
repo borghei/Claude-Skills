@@ -72,7 +72,7 @@ The agent classifies AI systems under the EU AI Act's risk-based framework and m
     "EU database registration (Art. 49)",
     "Post-market monitoring (Art. 72)"
   ],
-  "compliance_deadline": "2026-08-02",
+  "compliance_deadline": "2027-12-02",
   "assigned_owner": "Head of AI Governance"
 }
 ```
@@ -259,8 +259,12 @@ python scripts/ai_bias_detector.py --input dataset_stats.json --json
 | 1 Aug 2024 | Entry into force | Regulation published |
 | 2 Feb 2025 | Prohibited practices + AI literacy | Art. 5 prohibitions; Art. 4 AI literacy |
 | 2 Aug 2025 | GPAI obligations + governance | Art. 53, 55 GPAI obligations; AI Office operational |
-| 2 Aug 2026 | **Full application** | All remaining: high-risk, deployer, transparency, conformity, CE marking |
-| 2 Aug 2027 | Extended deadline | Certain Annex I Section B high-risk safety components |
+| 2 Aug 2026 | Transparency + general application | Art. 50 transparency (chatbots, deepfakes, AI-generated content); penalties and governance |
+| 2 Dec 2026 | Art. 50(2) marking, legacy systems | Machine-readable marking for systems placed on the market before 2 Aug 2026 |
+| 2 Dec 2027 | **High-risk, Annex III** | Stand-alone high-risk systems (employment, education, credit, law enforcement and the other Annex III areas): all provider and deployer obligations, conformity, CE marking, registration. Moved from 2 Aug 2026 |
+| 2 Aug 2028 | **High-risk, Annex I** | AI that is a safety component of products under EU product-safety law. Moved from 2 Aug 2027 |
+
+Dates as amended by the Digital Omnibus on AI (Regulation (EU) 2026/1744, in force 27 July 2026). Check the [Official Journal text](https://eur-lex.europa.eu/eli/reg/2026/1744/oj) before relying on a date; secondary guidance written before July 2026 still shows the old ones.
 
 ### Penalties (Art. 99)
 
@@ -428,7 +432,7 @@ python scripts/ai_bias_detector.py --input dataset_stats.json \
 
 - **All AI systems inventoried and classified** -- every system assessed against the risk-based framework with documented classification rationale, including Art. 6(3) exception analysis where applicable
 - **Prohibited practices identified and discontinued** -- all Art. 5 prohibited practices flagged by February 2, 2025, with documented evidence of discontinuation or lawful exception application
-- **High-risk systems fully compliant by August 2, 2026** -- all 12 provider obligations verified, EU Declaration of Conformity signed, CE marking affixed, and EU database registration complete
+- **High-risk systems fully compliant by their deadline** (2 December 2027 for Annex III systems, 2 August 2028 for Annex I products) -- all 12 provider obligations verified, EU Declaration of Conformity signed, CE marking affixed, and EU database registration complete
 - **Bias testing completed for all high-risk systems** -- demographic parity, equalized odds, and predictive parity metrics within four-fifths threshold for all protected attributes, or residual bias documented with justification
 - **GPAI model obligations met by August 2, 2025** -- technical documentation maintained, downstream provider information supplied, copyright compliance verified, and training data summary published
 - **Conformity assessment completed per correct route** -- internal control (Annex VI) or third-party assessment (Annex VII) selected based on system classification, with all certificates issued and filed
@@ -455,7 +459,7 @@ python scripts/ai_bias_detector.py --input dataset_stats.json \
 - Legal advice on liability, insurance, or contractual allocation of AI Act obligations
 
 **Important Notes:**
-- The EU AI Act compliance deadline of August 2, 2026 for high-risk systems is firm -- organizations should begin classification and gap analysis immediately
+- The Digital Omnibus (Regulation (EU) 2026/1744) moved the high-risk deadlines to 2 December 2027 (Annex III) and 2 August 2028 (Annex I). It did not postpone Article 50 transparency, which applies from 2 August 2026. Conformity work for a high-risk system takes many months, so classification and gap analysis should still start now
 - Penalties are severe: up to EUR 35 million or 7% of global turnover for prohibited practices, EUR 15 million or 3% for high-risk non-compliance
 - SMEs and startups receive proportionate penalty treatment (lower of absolute or percentage)
 

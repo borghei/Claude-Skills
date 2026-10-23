@@ -358,6 +358,29 @@ All scripts: stdlib only, argparse CLI, JSON or markdown output.
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- A deal-desk charter template covering scope, SLAs, intake fields, decision inputs, outputs, team and metrics
+- An approval threshold matrix with a stacking rule, and required-approver routing from a deal YAML and optional matrix YAML via `scripts/discount_authority_router.py`
+- Deal-review packet generation from a deal spec via `scripts/deal_review_packet.py`
+- Velocity analysis from a CRM CSV export via `scripts/deal_velocity_analyzer.py`: median and p90 time-to-decision, approval rate, approver bottlenecks, aging deals and discount outliers
+- Workflows for per-deal review, standing up a desk, performance audits and quarterly threshold reviews
+
+**Out of Scope:**
+- Setting published pricing (see `business-growth/pricing-strategy/`)
+- Writing the overall commercial policy the desk enforces (see `business-growth/commercial-policy/`)
+- Negotiating with the customer or drafting the contract (see `business-growth/contract-and-proposal-writer/`)
+- Order-to-cash, billing and pipeline measurement (see `business-growth/revenue-operations/`)
+- Legal review itself; legal remains one of the approvers
+
+**Important Caveats:**
+- The scripts read YAML and CSV files you prepare. They do not connect to a CRM or CPQ tool and do not send approval requests to anyone. Their built-in YAML parser handles simple maps and lists only.
+- The default matrix bands, SLAs and velocity benchmarks are generic templates. Calibrate them to your company stage, ACV mix and authority structure.
+- The packet's recommendation section is a template. The decision stays with the approvers named in the matrix, and the financial figures are only as accurate as the deal inputs.
+
+---
+
 ## References
 
 - [deal-desk-charter-and-process.md](references/deal-desk-charter-and-process.md) — full charter template, intake form spec, SLA framework

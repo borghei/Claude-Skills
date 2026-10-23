@@ -193,6 +193,27 @@ A chart with no comparison is a number floating in space.
 - **Vanity metrics (page views, signups alone).** Not action-driving.
 - **No cadence on review.** Dashboard exists; team doesn't use it.
 
+## Scope & Limitations
+
+**In Scope:**
+- Dashboard architecture in four layers: North Star, 3-5 input metrics, 3-5 guardrails and 4-8 operational metrics per team
+- Visualization, comparison anchor, refresh cadence and named owner for each metric
+- Top-level metric limits by audience and the vanity-versus-actionable test
+- A spec audit for too many top-level metrics, missing guardrails, vanity metrics, missing owners and missing comparisons (`dashboard_designer.py`)
+- Audits of existing dashboards and mapping OKRs to metrics
+
+**Out of Scope:**
+- Defining the North Star itself (see `project-management/execution/north-star-metric/`)
+- Building the dashboard in a BI tool or writing its queries (see `data-analytics/business-intelligence/`)
+- Event tracking and instrumentation (see `marketing/analytics-tracking/`)
+- Metric trees, cohort and funnel analysis on real data (see `product-team/product-analytics/`)
+
+**Important Caveats:**
+- `dashboard_designer.py` audits a hand-written JSON spec. It reads no live data and does not check that a metric is instrumented.
+- Flags such as `drives_ns` and `actionable_test_passed` are self-reported in the spec. The tool trusts them.
+- Which metrics count as guardrails or vanity, and the targets behind them, stay team judgments.
+- Dashboards go stale. The skill expects a quarterly prune, which the tool does not schedule.
+
 ## References
 
 - `references/dashboard-architecture.md` — layers, cadence, visualization patterns

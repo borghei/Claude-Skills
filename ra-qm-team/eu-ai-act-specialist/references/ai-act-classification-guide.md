@@ -43,8 +43,8 @@ START: Does the system meet the Art. 3(1) definition of an AI system?
         ├── System IS a safety component of a product covered by Annex I
         │   → HIGH-RISK (product legislation path)
         │   Assessment: Follow conformity assessment of the relevant product legislation
-        │   Note: Annex I Section A → applies from Aug 2026
-        │         Annex I Section B → applies from Aug 2027
+        │   Note: Annex I high-risk → applies from 2 Aug 2028
+        │         (moved from Aug 2026 / Aug 2027 by Reg. 2026/1744)
         │
         └── System is NOT a safety component of Annex I product
             │
@@ -488,7 +488,7 @@ AI systems that qualify as medical devices are subject to **both** the AI Act an
 | **Healthcare / Medical Devices** | High-risk (Annex I — MDR) | MDR 2017/745, IVDR 2017/746 | Dual conformity assessment; MDCG guidance on AI/ML |
 | **Automotive** | High-risk (Annex I — vehicle safety) | UNECE regulations, Type Approval | ADAS and autonomous driving systems |
 | **Aviation** | High-risk (Annex I — civil aviation) | Regulation (EU) 2018/1139 | AI in air traffic management, aircraft systems |
-| **Machinery** | High-risk (Annex I, Section B) | Machinery Regulation (EU) 2023/1230 | Extended deadline to Aug 2027 |
+| **Machinery** | High-risk (Annex I, Section A) | Machinery Regulation (EU) 2023/1230 | Deadline 2 Aug 2028 (Annex I, as amended by Reg. 2026/1744) |
 | **Financial Services** | High-risk (Annex III, point 5) | CRD, MiFID II, DORA | Credit scoring, insurance pricing |
 | **Employment** | High-risk (Annex III, point 4) | Employment law, GDPR | Recruitment AI, performance monitoring |
 | **Education** | High-risk (Annex III, point 3) | National education law | Admission, grading, proctoring |

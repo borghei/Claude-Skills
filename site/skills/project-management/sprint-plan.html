@@ -670,6 +670,28 @@ Discipline: descope early. Heroic late nights = burnout + bugs.
 - **No DoD.** &quot;Done&quot; varies by person.
 - **Velocity ignored.** Repeat estimation mistakes.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- The seven sprint-plan elements: goal, capacity, commits, stretch, dependencies, risks and definition of done
+- Capacity math per person: working days, PTO, meetings, on-call, interrupt tax and a focus factor
+- Commitment discipline with commits at 75-85% of capacity and stretch at 10-15%
+- A plan audit for capacity utilization, commit/stretch split, dependency clarity and DoD coverage (`sprint_planner.py`)
+- Diagnosing repeatedly missed sprints and rolling sprint capacity up into a quarter
+
+**Out of Scope:**
+- Refining and estimating backlog items before the sprint (see `project-management/execution/backlog-refinement/`)
+- Splitting stories larger than 5 days (see `project-management/execution/story-splitting/`)
+- Review capacity for work delegated to AI agents (see `project-management/execution/agents-in-the-team/`)
+- Running the retrospective after the sprint (see `project-management/sprint-retrospective/`)
+- Quarter-level planning and commitments (see `project-management/execution/quarterly-planning/`)
+
+**Important Caveats:**
+- `sprint_planner.py` reads a hand-written JSON plan. Available hours per person are entered by hand, and the tool does not pull from Jira, Linear or calendars.
+- Focus factor and interrupt estimates are assumptions. The skill notes that most teams overestimate capacity by 30-50%, so calibrate against actuals.
+- Flags such as `refined` and dependency `confirmed` are self-reported. The tool checks that they are set, not that they are true.
+- The sprint goal, what goes in as commit or stretch, and mid-sprint descoping stay team decisions.
+
 ## References
 
 - `references/capacity-math.md` — deep on per-person capacity, focus factor, interrupt tax
@@ -933,6 +955,28 @@ Discipline: descope early. Heroic late nights = burnout + bugs.
 - **No risk identification.** Risks surface as crises.
 - **No DoD.** &quot;Done&quot; varies by person.
 - **Velocity ignored.** Repeat estimation mistakes.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- The seven sprint-plan elements: goal, capacity, commits, stretch, dependencies, risks and definition of done
+- Capacity math per person: working days, PTO, meetings, on-call, interrupt tax and a focus factor
+- Commitment discipline with commits at 75-85% of capacity and stretch at 10-15%
+- A plan audit for capacity utilization, commit/stretch split, dependency clarity and DoD coverage (`sprint_planner.py`)
+- Diagnosing repeatedly missed sprints and rolling sprint capacity up into a quarter
+
+**Out of Scope:**
+- Refining and estimating backlog items before the sprint (see `project-management/execution/backlog-refinement/`)
+- Splitting stories larger than 5 days (see `project-management/execution/story-splitting/`)
+- Review capacity for work delegated to AI agents (see `project-management/execution/agents-in-the-team/`)
+- Running the retrospective after the sprint (see `project-management/sprint-retrospective/`)
+- Quarter-level planning and commitments (see `project-management/execution/quarterly-planning/`)
+
+**Important Caveats:**
+- `sprint_planner.py` reads a hand-written JSON plan. Available hours per person are entered by hand, and the tool does not pull from Jira, Linear or calendars.
+- Focus factor and interrupt estimates are assumptions. The skill notes that most teams overestimate capacity by 30-50%, so calibrate against actuals.
+- Flags such as `refined` and dependency `confirmed` are self-reported. The tool checks that they are set, not that they are true.
+- The sprint goal, what goes in as commit or stretch, and mid-sprint descoping stay team decisions.
 
 ## References
 

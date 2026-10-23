@@ -195,6 +195,26 @@ If you don't have an answer, it's vanity.
 - **One metric for the whole product.** Different surfaces need different metrics.
 - **Vanity North Star.** "Total signups" tells you nothing about value.
 
+## Scope & Limitations
+
+**In Scope:**
+- North Star and metric tree design (North Star, inputs, drivers, guardrails), checked by `metric_tree_designer.py` for imbalance, unowned metrics, vanity North Stars and missing guardrails
+- Event taxonomy audits with `event_taxonomy_auditor.py` for naming consistency, PII risk, duplication, undocumented events and gaps, with a remediation backlog
+- Retention cohort analysis with `retention_cohort_analyzer.py`: retention rates, trend and curve shape (smile, slow decay, leaky bucket, steep, rising)
+- Activation definition, vanity versus actionable metric tests, and the reference guides on instrumentation and funnel analysis
+
+**Out of Scope:**
+- Building data pipelines, warehouse models or dbt projects (see `data-analytics/analytics-engineer/`)
+- Designing and analyzing A/B tests (see `product-team/ab-test-setup/`)
+- Building BI dashboards in a specific tool (see `data-analytics/business-intelligence/`)
+- Ongoing data quality monitoring (see `engineering/data-quality-auditor/`)
+- Legal review of personal data in events (see `ra-qm-team/gdpr-dsgvo-expert/`)
+
+**Important Caveats:**
+- The tools have no connection to Amplitude, Mixpanel, GA4, Segment or a warehouse. Event inventories, metric trees and cohort counts are supplied as JSON.
+- PII detection matches property names against a keyword list and the declared PII tier. It can miss personal data stored under neutral names.
+- Curve-shape and trend labels come from fixed thresholds. They point to where to look and do not prove product-market fit or its absence.
+
 ## References
 
 - `references/metric-tree-and-north-star.md` — patterns by product type, tree structure, anti-patterns

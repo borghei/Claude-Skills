@@ -109,11 +109,33 @@ python scripts/student_data_compliance_checker.py description.txt --json
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- Student-data compliance scoping for FERPA, COPPA, GDPR-K and state laws such as SOPIPA and NY Ed Law 2-d
+- Keyword-based scanning of a product description for student-data handling and likely regimes with `student_data_compliance_checker.py`
+- Market selection across K-12, Higher Ed, Corporate L&D and direct-to-learner by buyer, contract length, sales cycle and pricing
+- District sales planning: decision-makers, procurement paths (RFP, sole source, statewide cooperative), rostering and SIS integration
+- An SDPA and compliance posture inventory template
+
+**Out of Scope:**
+- Drafting or reviewing SDPA and DPA contracts (pairs with `legal/`, as noted in Integration Points)
+- Privacy programs beyond student data, such as GDPR or CCPA in general (see `legal/privacy-compliance/` and `ra-qm-team/ccpa-cpra-privacy-expert/`)
+- Launch timing and campaigns (see `marketing/launch-strategy/`)
+- Curriculum design, accessibility audits or LMS integration engineering
+
+**Important Caveats:**
+- The checker matches keywords in your description. It shows likely exposure, not whether a law applies, so missing or vague wording can hide a regime.
+- The output is orientation only and not legal advice, as the disclaimer above states. Findings go to specialist counsel.
+- State student-privacy laws differ and change. Check the current rules in each state where you sell.
+
+---
+
 ## Integration Points
 
 - Pairs with `legal/` for SDPA / DPA contract review
 - Pairs with `marketing/launch-strategy` for back-to-school launch timing
-- Pairs with `c-level-advisor/cs-fundraising-advisor` for edtech-specific fundraising
+- Pairs with `agents/c-level/cs-fundraising-advisor.md` (agent) for edtech-specific fundraising
 
 ## Best Practices
 

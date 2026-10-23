@@ -684,6 +684,27 @@ When diversification fails:
 - **Static mix.** Should change with stage.
 - **Ignoring the boring Q1.** Penetration is unglamorous but highest-ROI.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Classifying growth initiatives into the four Ansoff quadrants: market penetration, market development, product development and diversification
+- Tests for what counts as a new market and a new product
+- Per-initiative scoring on investment, expected return, risk and time to revenue
+- Stage-based target investment mixes for early, growth and mature companies
+- A scorer that surfaces the investment mix and flags concentration and likely misclassification (`ansoff_growth_scorer.py`)
+
+**Out of Scope:**
+- Industry structure and competitive pressure analysis (see `project-management/strategy-frameworks/porters-five-forces/`)
+- Internal strengths and weaknesses (see `project-management/strategy-frameworks/swot-analysis/`)
+- Financial modelling and valuation of each bet (see `finance/financial-analyst/`)
+- Running an acquisition beyond classifying it (see `c-level-advisor/ma-playbook/`)
+
+**Important Caveats:**
+- The user assigns each quadrant. The scorer only flags mismatches from the risk score, such as a Q1 bet with high risk or a Q4 bet with low risk.
+- Investment, expected return and risk scores are estimates entered by hand. The output is only as good as those numbers.
+- Stage mixes and per-quadrant investment ranges are rules of thumb, not targets every company should hit.
+- Where the line between existing and new sits, and which bets to fund, stay leadership decisions.
+
 ## References
 
 - `references/ansoff-matrix-deep.md` — quadrant tactics, examples, risk patterns
@@ -961,6 +982,27 @@ When diversification fails:
 - **No investment percentages.** Just lists; no allocation.
 - **Static mix.** Should change with stage.
 - **Ignoring the boring Q1.** Penetration is unglamorous but highest-ROI.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Classifying growth initiatives into the four Ansoff quadrants: market penetration, market development, product development and diversification
+- Tests for what counts as a new market and a new product
+- Per-initiative scoring on investment, expected return, risk and time to revenue
+- Stage-based target investment mixes for early, growth and mature companies
+- A scorer that surfaces the investment mix and flags concentration and likely misclassification (`ansoff_growth_scorer.py`)
+
+**Out of Scope:**
+- Industry structure and competitive pressure analysis (see `project-management/strategy-frameworks/porters-five-forces/`)
+- Internal strengths and weaknesses (see `project-management/strategy-frameworks/swot-analysis/`)
+- Financial modelling and valuation of each bet (see `finance/financial-analyst/`)
+- Running an acquisition beyond classifying it (see `c-level-advisor/ma-playbook/`)
+
+**Important Caveats:**
+- The user assigns each quadrant. The scorer only flags mismatches from the risk score, such as a Q1 bet with high risk or a Q4 bet with low risk.
+- Investment, expected return and risk scores are estimates entered by hand. The output is only as good as those numbers.
+- Stage mixes and per-quadrant investment ranges are rules of thumb, not targets every company should hit.
+- Where the line between existing and new sits, and which bets to fund, stay leadership decisions.
 
 ## References
 

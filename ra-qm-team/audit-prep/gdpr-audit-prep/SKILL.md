@@ -174,6 +174,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- GDPR audit-prep sprints of 4, 8 or 12 weeks for supervisory-authority inquiries, customer DPA audits, internal audits and annual self-assessments
+- Readiness scoring (0-100) per GDPR area, with a sprint recommendation, from `gdpr_readiness_score.py`
+- ROPA completeness checks per Article 30 from `ropa_completeness_checker.py`
+- Audit checklists for ROPA, privacy notices, data subject rights, DPIAs, Article 28 agreements, security, breach notification and international transfers, plus a DPO engagement playbook
+
+**Out of Scope:**
+- Building a GDPR program or designing the DPIA process (see `ra-qm-team/gdpr-dsgvo-expert/`)
+- Carrying out a DPIA (see `legal/dpia-assessment/`)
+- US privacy laws (see `ra-qm-team/ccpa-cpra-privacy-expert/`)
+- Running several frameworks in one program (see `ra-qm-team/audit-prep/compliance-readiness/`)
+
+**Important Caveats:**
+- Both tools read YAML you prepare. They check that fields are present and score what you report; they do not test processing, notices or security measures.
+- A high score is not a supervisory authority's view and not legal advice. A formal inquiry response should go through your DPO and legal review, as the sprint plan sets out.
+- Transfer mechanisms and regulator guidance change over time. Check current guidance before relying on a transfer assessment.
+
+---
+
 ## References
 
 - [gdpr-pre-audit-checklist.md](references/gdpr-pre-audit-checklist.md) — full checklist per GDPR area

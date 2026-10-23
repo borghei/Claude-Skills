@@ -2,7 +2,7 @@
 name: docx-toolkit
 description: >
   Audit Microsoft Word (.docx) documents for heading hierarchy, comments,
-  tracked changes, broken cross-references, and style consistency. Use when
+  tracked changes, and style consistency. Use when
   reviewing a contract draft, preparing a document for handoff, or enforcing a
   style guide.
 license: MIT + Commons Clause
@@ -37,6 +37,7 @@ Audit `.docx` files using the standard library only — no `python-docx` require
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope & Limitations](#scope--limitations)
 
 ---
 
@@ -156,6 +157,28 @@ python scripts/docx_auditor.py document.docx --json
 - **Resolve comments before "Final v3.docx".** Files named "final" with active comments are how lawyers get tickled.
 - **Lock heading hierarchy.** H1 → H3 with no H2 breaks navigation, accessibility, and table-of-contents generation.
 - **Prefer styles over inline formatting.** A style change in one place beats hundreds of inline overrides.
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Read-only audit of `.docx` files with `scripts/docx_auditor.py`, which parses OOXML with `zipfile` and `xml.etree` and needs no third-party package
+- Word and paragraph counts, heading hierarchy with gap detection, comment count, tracked-changes detection, paragraph styles in use, and hyperlink, image and table counts
+- Three workflows: pre-handoff audit, contract review triage, and style-guide enforcement
+- A review checklist and templates for allowed styles and pre-send sign-off
+
+**Out of Scope:**
+- Creating or editing `.docx` files, including accepting tracked changes or deleting comments; the tool only reads
+- Reviewing what a contract says (see `legal/contract-review/`)
+- Writing or editing the document's prose (see `marketing/copy-editing/`)
+- Producing formatted documents from markdown (see `markdown-html/md-document/`)
+
+**Important Caveats:**
+- The auditor reports counts and structure. It does not render the document, so layout, page breaks and visual formatting are not checked.
+- It does not compare styles against your allowed list. Style-guide enforcement means reading its style list against the template in `assets/` by hand.
+- It does not check cross-references or a table of contents for broken targets.
+- The triage thresholds, such as more than 20 comments or style sprawl, are rules of thumb. Content errors like a wrong name, jurisdiction or figure need a human read, as the review checklist states.
 
 ---
 

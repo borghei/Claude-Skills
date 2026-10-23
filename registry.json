@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-23T13:05:01+00:00",
+  "generated_at": "2026-10-23T13:23:29+00:00",
   "repository": "claude-skills",
   "skill_count": 385,
   "domain_count": 21,
@@ -2851,7 +2851,7 @@
     {
       "name": "ai-act-readiness",
       "domain": "ra-qm-team",
-      "description": "EU AI Act readiness assessment and sprint playbook. Use when preparing for the Aug 2026 high-risk AI system deadline, when a notified-body conformity assessment is scheduled, or when GPAI (general-purpose AI) obligations apply.",
+      "description": "EU AI Act readiness assessment and sprint playbook. Use when preparing for the high-risk AI system deadlines (Dec 2027 / Aug 2028), when a notified-body conformity assessment is scheduled, or when GPAI (general-purpose AI) obligations apply.",
       "tags": [
         "eu-ai-act",
         "ai-readiness",
@@ -5884,7 +5884,7 @@
     {
       "name": "docx-toolkit",
       "domain": "documents",
-      "description": "Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.",
+      "description": "Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.",
       "tags": [
         "docx",
         "word",

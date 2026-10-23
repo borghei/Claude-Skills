@@ -126,6 +126,27 @@ python scripts/carbon_impact_estimator.py description.txt --json
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- Category selection across energy, storage, transport, industry, buildings, food and agriculture, carbon removal, and software and data
+- Keyword-based classification of a business description, with order-of-magnitude impact ranges and verification considerations, from `carbon_impact_estimator.py`
+- Funding strategy that blends grants, tax credits, dilutive equity and later project finance, mapped to US and EU sources
+- GHG accounting orientation (Scope 1/2/3, GHG Protocol, MRV) and how customer reporting under CSRD, the SEC climate rule or voluntary frameworks shapes the product
+
+**Out of Scope:**
+- Verified carbon accounting, lifecycle assessment or carbon-credit issuance
+- IRA tax-credit qualification and carbon-credit contracts (pairs with `legal/` counsel, as noted in Integration Points)
+- Detailed financial models and fundraising mechanics (see `c-level-advisor/cfo-advisor/`)
+- Grant writing or applications for a specific program
+
+**Important Caveats:**
+- `carbon_impact_estimator.py` is a categorization tool. It matches keywords in your text, and its impact ranges are rough orders of magnitude, not a tonnage you can claim.
+- Impact claims for credits or audit-grade customer data need a recognized methodology and third-party verification, as the disclaimer above states.
+- Funding programs, tax credits and reporting rules change with policy. Check current program terms and rule status before planning around them.
+
+---
+
 ## Integration Points
 
 - Pairs with `c-level-advisor/cfo-advisor` — climate-tech often combines grant + equity + project finance

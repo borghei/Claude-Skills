@@ -639,6 +639,27 @@ weakness as a moat.
 - **Unfair Advantage = &quot;execution&quot;.** Not an advantage.
 - **No assumption register.** Canvas isn&#x27;t a plan, it&#x27;s a hypothesis.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- A nine-block Lean Canvas: Problem, Customer Segments, Unique Value Proposition, Solution, Channels, Revenue Streams, Cost Structure, Key Metrics and Unfair Advantage
+- Problem and early-adopter work first, including existing alternatives and named early adopters
+- Tests for what counts as an unfair advantage and when to use Lean Canvas instead of the Business Model Canvas
+- A canvas audit for missing blocks, generic content, no named early adopter, no existing alternatives, missing Key Metrics and a vague Unfair Advantage (`lean_canvas_validator.py`)
+- Current-state versus proposed-state canvases for pivot conversations
+
+**Out of Scope:**
+- Operating-scale business models with partners, resources and activities (see `project-management/strategy-frameworks/business-model-canvas/`)
+- Deep work on the value proposition (see `project-management/discovery/value-proposition-canvas/`)
+- Building a full assumption register (see `project-management/discovery/identify-assumptions/`)
+- Defining the Key Metric as a North Star (see `project-management/execution/north-star-metric/`)
+- Financial forecasts behind the revenue and cost blocks (see `finance/financial-analyst/`)
+
+**Important Caveats:**
+- `lean_canvas_validator.py` reads a hand-written JSON canvas. Flags such as `names_segment` and `names_differentiator` are self-reported.
+- The tool checks structure and specificity, not whether the problems are real. That needs customer evidence.
+- A Lean Canvas is a set of hypotheses, not a plan. It goes stale as soon as tests come back.
+
 ## References
 
 - `references/lean-canvas-framework.md` — the 9 blocks deep, comparison to BMC
@@ -867,6 +888,27 @@ weakness as a moat.
 - **Vague Key Metrics.** Pirate metrics (AAARRR) or HEART or similar.
 - **Unfair Advantage = &quot;execution&quot;.** Not an advantage.
 - **No assumption register.** Canvas isn&#x27;t a plan, it&#x27;s a hypothesis.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- A nine-block Lean Canvas: Problem, Customer Segments, Unique Value Proposition, Solution, Channels, Revenue Streams, Cost Structure, Key Metrics and Unfair Advantage
+- Problem and early-adopter work first, including existing alternatives and named early adopters
+- Tests for what counts as an unfair advantage and when to use Lean Canvas instead of the Business Model Canvas
+- A canvas audit for missing blocks, generic content, no named early adopter, no existing alternatives, missing Key Metrics and a vague Unfair Advantage (`lean_canvas_validator.py`)
+- Current-state versus proposed-state canvases for pivot conversations
+
+**Out of Scope:**
+- Operating-scale business models with partners, resources and activities (see `project-management/strategy-frameworks/business-model-canvas/`)
+- Deep work on the value proposition (see `project-management/discovery/value-proposition-canvas/`)
+- Building a full assumption register (see `project-management/discovery/identify-assumptions/`)
+- Defining the Key Metric as a North Star (see `project-management/execution/north-star-metric/`)
+- Financial forecasts behind the revenue and cost blocks (see `finance/financial-analyst/`)
+
+**Important Caveats:**
+- `lean_canvas_validator.py` reads a hand-written JSON canvas. Flags such as `names_segment` and `names_differentiator` are self-reported.
+- The tool checks structure and specificity, not whether the problems are real. That needs customer evidence.
+- A Lean Canvas is a set of hypotheses, not a plan. It goes stale as soon as tests come back.
 
 ## References
 

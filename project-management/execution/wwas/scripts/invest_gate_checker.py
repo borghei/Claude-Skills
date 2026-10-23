@@ -57,7 +57,7 @@ def check_invest(item: dict) -> dict:
     }
 
     # Estimable
-    enough_context = len(what) >= 50 and len(acceptance_criteria) >= 3
+    enough_context = len(what) >= 50 and len(acceptance_criteria) >= 4
     gates["estimable"] = {
         "passed": enough_context,
         "detail": f"What: {len(what)} chars, {len(acceptance_criteria)} AC" if enough_context else "Insufficient detail for estimation",

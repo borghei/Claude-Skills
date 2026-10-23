@@ -251,3 +251,23 @@ integrity even when nothing is acted on.
 | `assets/sample_power_spec.json` | Runnable input for the sample size calculator |
 | `assets/sample_protocol.json` | Runnable input for the protocol auditor |
 | `assets/sample_sites.json` | Runnable input for the site feasibility scorer |
+
+## Scope & Limitations
+
+**In Scope:**
+- Sample size and achieved power for simple parallel designs with two proportions, two means or log-rank time-to-event endpoints, with dropout inflation (`sample_size_calculator.py`)
+- Protocol outline audits with `protocol_auditor.py` against ICH E6 element keys, endpoint definitions, eligibility consistency, and statistical and safety section gaps
+- Site feasibility with `site_feasibility_scorer.py`: discounted accrual projections, enrolment shortfall and selection of a smaller site set
+- Guidance on endpoint choice, effect size sources and eligibility restrictiveness, with a protocol outline template
+
+**Out of Scope:**
+- Regulatory strategy and submissions (see `ra-qm-team/regulatory-affairs-head/` and `ra-qm-team/fda-consultant-specialist/`)
+- Study budgets and spend tracking (see `research-ops/research-finance/`)
+- Analysis of collected trial data (see `data-analytics/statistical-analyst/` for general applied statistics)
+- Designs with interim analyses, multiplicity, covariate adjustment, clustering or crossover, which need a biostatistician
+
+**Important Caveats:**
+- All inputs are entered by the user as JSON. The tools have no access to patient data, EDC systems or site registries.
+- The site feasibility discount on self-reported accrual is a fixed heuristic. Real site performance can differ in either direction.
+- The protocol audit checks structure and internal consistency only. Nothing here replaces review by an ethics committee or IRB, the sponsor, a regulator or a qualified biostatistician.
+- The ICH E6 rule table in `scripts/protocol_rules.py` reflects the guideline as written into the skill and needs updating when the guideline changes.

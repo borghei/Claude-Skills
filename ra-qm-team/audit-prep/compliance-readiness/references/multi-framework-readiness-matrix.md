@@ -159,7 +159,7 @@ Per-framework reference: scope, audit cadence, certification timing, typical cos
 | Aspect | Detail |
 |--------|--------|
 | Scope | AI systems used in EU OR affecting EU persons |
-| Mandatory | Yes; phased timeline (Aug 2025 GPAI; Aug 2026 high-risk) |
+| Mandatory | Yes; phased timeline (Aug 2025 GPAI; Aug 2026 transparency; Dec 2027 / Aug 2028 high-risk) |
 | Conformity assessment | Internal control (most) OR notified body (specific) |
 | Cost | $30k-$200k+ (notified body); internal control lower |
 | Output | EU Declaration of Conformity + CE marking + database registration |

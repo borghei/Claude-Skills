@@ -159,6 +159,27 @@ See [references/483-warning-letter-prevention.md](references/483-warning-letter-
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- FDA inspection prep under 21 CFR 820 (QSR) and the ISO 13485-harmonized QMSR, with 2-week and 8-week sprints and a reactive 483 or Warning Letter track
+- Readiness scoring per Subpart, with an overall score and sprint recommendation, from `qsr_readiness_score.py`
+- Design History File completeness checks per 21 CFR 820.30 from `dhf_completeness_checker.py`
+- Inspection-week front room and back room operations, common 483 triggers and response patterns
+
+**Out of Scope:**
+- Building or maintaining a QMS, or preparing 510(k) and PMA submissions (see `ra-qm-team/fda-consultant-specialist/`)
+- ISO 13485 QMS implementation (see `ra-qm-team/quality-manager-qms-iso13485/`)
+- ISO 14971 risk management files (see `ra-qm-team/risk-management-specialist/`)
+- Running the CAPA process itself (see `ra-qm-team/capa-officer/`)
+
+**Important Caveats:**
+- Both tools read YAML you fill in. They score what you report and check that DHF sections exist; they do not judge the quality of design controls or records.
+- A high score does not predict the inspection outcome. The output is not regulatory or legal advice, and a Warning Letter calls for outside FDA counsel, as the skill already notes.
+- QMSR dates and requirements are stated as of when the skill was written. Check current FDA guidance before relying on them.
+
+---
+
 ## References
 
 - [fda-qsr-pre-inspection-checklist.md](references/fda-qsr-pre-inspection-checklist.md) — full pre-inspection punch list per subpart

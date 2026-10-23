@@ -37,6 +37,7 @@ Audit `.xlsx` files using the standard library only — no `openpyxl` required. 
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope & Limitations](#scope--limitations)
 
 ---
 
@@ -152,6 +153,27 @@ python scripts/xlsx_auditor.py model.xlsx --json
 - **Avoid external links across handoffs.** A formula referencing `'C:\Users\you\Desktop\old-model.xlsx'` is the workbook equivalent of leaving your laptop name in the document author field.
 - **Name your inputs.** Cells like `Inputs!B7` mean nothing. Named ranges like `WACC` and `RevenueGrowth` survive structural changes.
 - **One model, one purpose.** Workbooks that calculate, present, and serve as a database of records always end up broken.
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Read-only audit of `.xlsx` files with `scripts/xlsx_auditor.py`, which parses OOXML with `zipfile` and `xml.etree` and needs no `openpyxl`
+- Per-sheet name, hidden status, cell count, formula count and formula density, plus named ranges, external link references, data validation rule count and file size
+- Three workflows: pre-send audit, financial model review, and workbook handoff check
+- A financial model audit guide covering structure, formula and value layers, common error categories and defensive model structure
+
+**Out of Scope:**
+- Calculating or checking formula results; the tool counts formulas but does not evaluate them
+- Editing workbooks, fixing links or removing hidden sheets; the tool only reads
+- Building or reviewing the financial analysis itself (see `finance/financial-analyst/`)
+- Analysing the data held in the workbook (see `data-analytics/data-analyst/`)
+
+**Important Caveats:**
+- A clean audit says nothing about whether the numbers are right. The guide's spot-checks and reconciliation still need a person.
+- The tool does not extract full cell values, so it cannot find hardcoded numbers inside formula ranges or wrong inputs.
+- Formula-density bands (under 10 percent, 10 to 70 percent, over 70 percent) are a heuristic for where to look first, not a classification of the sheet.
 
 ---
 

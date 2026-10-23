@@ -140,8 +140,8 @@ Scan every release-note draft before it ships to customers, in-app, or via email
 > "v4.2: 'Granular permissions for projects' (ticket SEG-2400 marked Done in Jira)."
 > ... but the feature was reverted in PR #4220 due to a security review.
 **Good example:**
-> "Release-notes generator runs `git log v4.1..v4.2` and cross-references shipped commits against Jira Done tickets. Items appearing in Jira but not in the diff are flagged for human review. SEG-2400 caught; removed from notes."
-**How to catch it.** If your generator relies only on Jira / Linear "Done" status, add a git-diff cross-check. See `scripts/release_notes_generator.py`.
+> "Before building `changes.json`, the PM runs `git log v4.1..v4.2` and checks each Jira Done ticket against the shipped commits. Tickets with no commit in the range go to human review. SEG-2400 caught; left out of the input, so it never reaches the notes."
+**How to catch it.** `scripts/release_notes_generator.py` formats whatever entries it is given and does not look at git. Cross-check the Jira / Linear "Done" list against `git log <previous-tag>..<release-tag>` before you write the input file.
 
 ---
 
@@ -155,7 +155,7 @@ Scan every release-note draft before it ships to customers, in-app, or via email
 > "Two artifacts from the same release:
 > - Internal: changelog + known issues + on-call + rollback steps + post-release-check checklist.
 > - External: value-framed, audience-segmented, breaking-changes-first, with visuals.
-> Both generated from the same source data via `--format internal` and `--format external`."
+> Both built from the same ticket list: run `scripts/release_notes_generator.py` once per audience, each time with its own input file (internal entries keep known issues and rollback notes; external entries keep value framing and migration steps)."
 **How to catch it.** Audit any release note for the words 'rollback', 'known issue: internal', 'on-call'. If present in customer-facing copy, split.
 
 ---
@@ -172,13 +172,13 @@ Scan every release-note draft before it ships to customers, in-app, or via email
 | 6 | Marketing copy replacing specifics | Does every "AI-powered" line have a concrete behavior? |
 | 7 | No visual | UI changes have images? |
 | 8 | No version + date | Top of note has both? |
-| 9 | Generated from stale Jira | Does the generator cross-check git diff? |
+| 9 | Generated from stale Jira | Was the Done list checked against `git log` before generating? |
 | 10 | Internal = external | Are 'rollback' / 'on-call' in customer copy? |
 
 ## Related Reading
 
 - `SKILL.md` -- release-note structure
-- `scripts/release_notes_generator.py --help` -- the generator with git-diff cross-check
+- `scripts/release_notes_generator.py --help` -- the generator (formats JSON entries as text or JSON; it does not read git)
 - Sibling skill: `execution/launch-playbook/` -- coordinated launch sequence
 - Sibling skill: `execution/feature-flag-strategy/` -- handle gradual rollouts that span releases
 - Sibling skill: `execution/roadmap-communication/` -- audience-segmented messaging patterns

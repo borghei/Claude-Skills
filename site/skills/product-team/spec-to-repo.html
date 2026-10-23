@@ -643,6 +643,25 @@ Per epic:
 - **DoD that&#x27;s just &quot;code merged.&quot;** Forgets tests, docs, telemetry.
 - **Ticket = a day of work.** Sometimes tickets are 30 minutes; sometimes 3 days.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Decomposing a PRD, described as user capabilities, technical notes and team, into an epic, story and ticket tree with `prd_to_tickets_decomposer.py`, flagging oversized tickets and cross-team dependencies
+- Checking a planned PR sequence with `pr_scope_analyzer.py` for oversized PRs, missing tests, telemetry or docs, risky merges and ordering problems
+- Linting branch names against a configurable pattern with `branch_naming_validator.py`
+- Guidance on ticket sizing, vertical slices, PR sequencing, definition of done and staged rollout
+
+**Out of Scope:**
+- Writing the PRD itself (see `project-management/execution/create-prd/`)
+- Creating tickets in Jira or Linear (see `project-management/jira-expert/` and `project-management/linear-expert/`)
+- Feature flag platform design (see `engineering/feature-flags-architect/`)
+- Reviewing actual code changes (see `engineering/pr-review-expert/`)
+
+**Important Caveats:**
+- The decomposer does not parse PRD prose. It works from a JSON of capabilities, and effort comes from the `estimated_days` the user enters.
+- The PR analyzer reads a plan with estimated line counts, not real diffs. The branch validator checks a list of names and does not touch the git repository.
+- Size limits such as splitting tickets over 3 days or keeping PRs under 400 lines are rules of thumb. Teams should tune them to their own history.
+
 ## References
 
 - `references/spec-to-ticket-decomposition.md` — patterns for breaking specs into tickets
@@ -881,6 +900,25 @@ Per epic:
 - **PRs &gt; 1000 lines.** Reviewability dies; bugs hide.
 - **DoD that&#x27;s just &quot;code merged.&quot;** Forgets tests, docs, telemetry.
 - **Ticket = a day of work.** Sometimes tickets are 30 minutes; sometimes 3 days.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Decomposing a PRD, described as user capabilities, technical notes and team, into an epic, story and ticket tree with `prd_to_tickets_decomposer.py`, flagging oversized tickets and cross-team dependencies
+- Checking a planned PR sequence with `pr_scope_analyzer.py` for oversized PRs, missing tests, telemetry or docs, risky merges and ordering problems
+- Linting branch names against a configurable pattern with `branch_naming_validator.py`
+- Guidance on ticket sizing, vertical slices, PR sequencing, definition of done and staged rollout
+
+**Out of Scope:**
+- Writing the PRD itself (see `project-management/execution/create-prd/`)
+- Creating tickets in Jira or Linear (see `project-management/jira-expert/` and `project-management/linear-expert/`)
+- Feature flag platform design (see `engineering/feature-flags-architect/`)
+- Reviewing actual code changes (see `engineering/pr-review-expert/`)
+
+**Important Caveats:**
+- The decomposer does not parse PRD prose. It works from a JSON of capabilities, and effort comes from the `estimated_days` the user enters.
+- The PR analyzer reads a plan with estimated line counts, not real diffs. The branch validator checks a list of names and does not touch the git repository.
+- Size limits such as splitting tickets over 3 days or keeping PRs under 400 lines are rules of thumb. Teams should tune them to their own history.
 
 ## References
 

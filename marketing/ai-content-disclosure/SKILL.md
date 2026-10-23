@@ -198,6 +198,28 @@ Keep 1 and 2 distinct. A malformed manifest is a pipeline problem; a missing lab
 
 Both: Python 3.8+ standard library only, `--format text|json`, `--fail-on high|medium|low`, deterministic.
 
+## Scope & Limitations
+
+**In Scope:**
+- Asset-by-asset disclosure decisions for AI-generated or AI-assisted marketing content under EU AI Act Article 50, FTC 16 CFR Parts 465 and 255, EU UCPD and UK DMCC review rules, New York's synthetic performer ad law and India's IT Rules
+- Platform AI-label rules for YouTube, TikTok, Meta and Google Ads
+- A pre-publication gate with `scripts/disclosure_checker.py`, which maps a content manifest to required disclosures by jurisdiction and platform and exits 2 on unresolved findings at the chosen risk level
+- Review and testimonial checks with `scripts/review_authenticity_linter.py`: AI or fake reviews, insider and incentivised reviews, sentiment-conditioned incentives, suppression, hijacking, near-duplicates and posting bursts
+- A decision tree, wording library and evidence templates for recording what was disclosed and where
+
+**Out of Scope:**
+- Political and electoral advertising rules beyond platform checkboxes; these go to counsel
+- Copyright and personality or publicity rights in AI-generated likenesses
+- Sector rules that add their own disclosure duties, such as financial promotions and medicines advertising
+- EU AI Act obligations beyond Article 50 transparency, such as high-risk systems (see `ra-qm-team/eu-ai-act-specialist/`)
+- Privacy notices for chatbots and other data processing (see `legal/privacy-compliance/`)
+
+**Important Caveats:**
+- The output is decision support, not legal advice. It does not replace counsel.
+- The checker only knows what the manifest declares. If AI involvement, regions or disclosures are classified wrongly, the result is wrong. The review linter's duplicate and burst checks are heuristics that flag leads, not proof of fraud.
+- Only the listed jurisdictions and platforms are encoded. Audiences elsewhere need their own review.
+- Rules and platform policies were checked in September 2026 and change often. Dates, penalties and label settings need checking against the linked official sources before each use.
+
 ## References
 
 - [regulation-summaries.md](references/regulation-summaries.md) — EU AI Act Art. 50, FTC 465 and 255, EU UCPD, UK DMCC, New York, India, with official links and penalties

@@ -804,8 +804,9 @@ def _add_timeline_recommendations(result: Dict[str, Any]) -> None:
         )
     elif result["risk_level"] == "HIGH":
         result["recommendations"].append(
-            "DEADLINE: Full high-risk AI obligations apply from 2 August 2026. "
-            "For safety components of Annex I Section B products, the deadline extends to 2 August 2027."
+            "DEADLINE: High-risk AI obligations apply from 2 December 2027 for Annex III systems "
+            "and from 2 August 2028 for AI in Annex I products (Regulation (EU) 2026/1744). "
+            "Check the Official Journal text before relying on a date."
         )
         result["recommendations"].append(
             "ACTION: Begin compliance program immediately. Key areas: risk management system, "

@@ -185,6 +185,26 @@ Things often credited for NRR that don't move the needle:
 - **Renewals as a finance task.** Renewals are a strategic moment; insist on a 90/60/30 motion.
 - **Expansion as cross-sell-only.** Usage-driven expansion is durable; cross-sell is volatile.
 
+## Scope & Limitations
+
+**In Scope:**
+- CX strategy, CCO scope definition and the Sales, CS, Support and Services operating model
+- CX maturity scoring (0-100) across strategy, segmentation, journey, voice, operations and talent with `cx_maturity_scorer.py`
+- Prioritized churn interventions for at-risk accounts, with owner and SLA, from `churn_intervention_planner.py`
+- VoC program scoring, target architecture and a 12-month rollout from `voc_program_designer.py`
+- NRR thesis, CSM coverage ratios and the customer section of a board deck
+
+**Out of Scope:**
+- Day-to-day CSM playbooks and account management (see `business-growth/customer-success-manager/`)
+- Running save campaigns and cancel flows (see `business-growth/churn-prevention/`)
+- Renewal and expansion forecasting owned by the revenue org (see `c-level-advisor/cro-advisor/`)
+- Fielding surveys, running interviews or pulling data from a CRM or support tool
+
+**Important Caveats:**
+- The tools read JSON you prepare by hand. They do not connect to a CRM, CS platform or survey tool, so results are only as current as the export behind them.
+- Priority scores and intervention choices come from a fixed catalog keyed by risk driver and segment. They are heuristics, not a churn prediction model.
+- CSM coverage ratios and NRR benchmarks are rough guides that vary by company. Treat them as a starting point, not a target.
+
 ## References
 
 - `references/customer-experience-strategy.md` — CX strategy framing, segmentation, scorecards
@@ -198,4 +218,4 @@ Things often credited for NRR that don't move the needle:
 - `c-level-advisor/cmo-advisor` — customer marketing alignment
 - `c-level-advisor/cro-advisor` — renewals + expansion boundary
 - `c-level-advisor/cpo-advisor` — feedback loop to product
-- `product-team/user-research` — interview frameworks for churn / expansion
+- `product-team/ux-researcher-designer` — interview frameworks for churn / expansion

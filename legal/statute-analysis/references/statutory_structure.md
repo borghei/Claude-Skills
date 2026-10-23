@@ -111,7 +111,7 @@ Statutes follow a nested hierarchy. Understanding this structure is essential fo
 |---------|---------|---------|
 | "This Act enters into force on [date]" | All provisions effective on stated date | Simple effective date |
 | "This Regulation shall apply from [date]" | EU pattern: enters into force 20 days after publication but applies from later date | GDPR: entered into force May 2016, applied from May 2018 |
-| Phased effective dates | Different provisions effective at different times | EU AI Act: prohibited practices Feb 2025, high-risk Aug 2026 |
+| Phased effective dates | Different provisions effective at different times | EU AI Act: prohibited practices Feb 2025, high-risk Dec 2027 (as amended in 2026) |
 | "Within [X] months of entry into force" | Delegated acts or implementing measures due by deadline | Agency must publish rules within 12 months |
 | Sunset clause | Provision expires on stated date | Temporary measures, emergency powers |
 

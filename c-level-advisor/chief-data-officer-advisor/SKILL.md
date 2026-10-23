@@ -164,6 +164,26 @@ Per capability, not company-wide.
 - **Hiring a CDO with no platform partner.** Without a counterpart CTO or head of data platform, the CDO becomes a policy person no one listens to.
 - **Mistaking dashboards for data products.** A dashboard with no SLA and no owner is not a product.
 
+## Scope & Limitations
+
+**In Scope:**
+- Data strategy, operating-model choice (centralized, federated, data mesh, hub-and-spoke) and per-capability build-vs-buy defaults
+- Data maturity scoring (0-100) across strategy, governance, quality, platform and people with `data_maturity_assessor.py`
+- A governance audit of about 25 DAMA-DMBOK-aligned controls in 6 areas, with a remediation plan, from `data_governance_audit.py`
+- Weighted comparison of data platform options (TCO, time-to-value, openness, governance fit, AI readiness, vendor risk, ecosystem) with `data_platform_evaluator.py`
+- Data org design, the CDO role question and the data section of a board deck
+
+**Out of Scope:**
+- Implementing data quality checks and tests (see `engineering/data-quality-auditor/`)
+- Building pipelines, ingestion or transformation code (see `engineering/senior-data-engineer/`)
+- GDPR compliance work on personal data (see `ra-qm-team/gdpr-dsgvo-expert/`)
+- Security controls for data classification and access (see `c-level-advisor/ciso-advisor/`)
+
+**Important Caveats:**
+- The tools score self-reported JSON. They do not inspect a warehouse, catalog or pipeline, and missing keys score 0 in the maturity assessor.
+- Platform scores of 1-5 per criterion are your own judgments. The evaluator weights and ranks them; it does not test vendors or price them.
+- A passing governance audit score is not a regulator's or external auditor's opinion. Vendor names and tooling defaults can go out of date.
+
 ## References
 
 - `references/data-strategy-framework.md` — strategy framing, target operating model, monetization

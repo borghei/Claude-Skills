@@ -253,3 +253,22 @@ documentation if it is funded at all.
 | `assets/sample_budget.json` | Runnable input for the budget builder |
 | `assets/sample_burn.json` | Runnable input for the burn tracker |
 | `assets/sample_portfolio.json` | Runnable input for the portfolio prioritiser |
+
+## Scope & Limitations
+
+**In Scope:**
+- Study budgets from per-participant, per-site, per-site-month and fixed costs with `study_budget_builder.py`, including screen-failure grossing, contingency, overhead, cost per enrolled participant and cost per insight
+- Earned-value tracking with `burn_vs_milestone_tracker.py`: cost and schedule performance, estimate at completion and overrun warnings
+- Portfolio prioritization with `portfolio_prioritizer.py`, ranking studies by expected decision value per unit cost and allocating a fixed budget
+- Reference material on research cost models, common budget omissions, funding sources and value-of-information method
+
+**Out of Scope:**
+- Grant narrative and funder fit (see `research/grants/`)
+- Clinical study design, sample size and site feasibility (see `research-ops/clinical-research/`)
+- Company-wide budgeting, forecasting and financial statements (see `finance/financial-analyst/`)
+- Supplier negotiation and purchasing (see `business-operations/procurement-optimizer/`)
+
+**Important Caveats:**
+- Unit costs, rates, milestone weights and completion figures are entered by the user. The tools do not connect to finance, ERP or grant management systems.
+- Decision value and the probability that a study changes a decision are estimates. The reversibility multipliers are fixed values set in the skill.
+- The portfolio allocation is greedy by value per unit cost, so it may not find the best possible combination under the budget. The output supports a budget decision and is not accounting or audit advice.

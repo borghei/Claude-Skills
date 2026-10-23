@@ -480,6 +480,7 @@ Audit `.pdf` files for metadata, page count, encryption status, embedded JavaScr
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope &amp; Limitations](#scope--limitations)
 
 ---
 
@@ -597,6 +598,27 @@ python scripts/pdf_auditor.py document.pdf --json
 - **Scrub document properties at the source.** In Word: File → Inspect Document → Document Inspector. In Pages: File → Properties. Then export to PDF.
 - **Don&#x27;t trust filenames.** A file named `Public-Report.pdf` can carry private metadata indistinguishable to the human eye.
 - **Use PDF/A for archival.** PDF/A removes JavaScript and external dependencies, making documents safe for long-term archive.
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Read-only audit of `.pdf` files with `scripts/pdf_auditor.py`, using standard-library parsing with no `pypdf` or `pdfplumber`
+- PDF version, page count, file size, Info dictionary and XMP metadata, encryption status, and JavaScript and embedded-file indicators
+- Three workflows: pre-handoff metadata audit, inbound security triage, and bulk audit of an outbound set with JSON output
+- A handoff guide covering leakage patterns, re-export versus redaction, and PDF/A and PDF/UA basics
+
+**Out of Scope:**
+- Extracting text or tables from a PDF
+- Decrypting, editing, redacting or re-exporting PDFs; fixes happen in the source document
+- Analysing whether embedded JavaScript or attachments are malicious; that needs a sandbox
+- Producing PDFs or HTML documents (see `markdown-html/md-document/`)
+
+**Important Caveats:**
+- The auditor scans the raw file bytes with pattern matching and does not decompress streams. Page counts, metadata and indicators stored inside compressed object streams can be missed, so a clean result is not proof that nothing is there.
+- A JavaScript or embedded-file indicator means the marker is present, not that the file is harmful.
+- Checks such as an &quot;unscrubbed&quot; author or a working-title title are heuristics. Only you know which metadata values are expected for this document.
 
 ---
 
@@ -670,6 +692,7 @@ Audit `.pdf` files for metadata, page count, encryption status, embedded JavaScr
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope &amp; Limitations](#scope--limitations)
 
 ---
 
@@ -787,6 +810,27 @@ python scripts/pdf_auditor.py document.pdf --json
 - **Scrub document properties at the source.** In Word: File → Inspect Document → Document Inspector. In Pages: File → Properties. Then export to PDF.
 - **Don&#x27;t trust filenames.** A file named `Public-Report.pdf` can carry private metadata indistinguishable to the human eye.
 - **Use PDF/A for archival.** PDF/A removes JavaScript and external dependencies, making documents safe for long-term archive.
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Read-only audit of `.pdf` files with `scripts/pdf_auditor.py`, using standard-library parsing with no `pypdf` or `pdfplumber`
+- PDF version, page count, file size, Info dictionary and XMP metadata, encryption status, and JavaScript and embedded-file indicators
+- Three workflows: pre-handoff metadata audit, inbound security triage, and bulk audit of an outbound set with JSON output
+- A handoff guide covering leakage patterns, re-export versus redaction, and PDF/A and PDF/UA basics
+
+**Out of Scope:**
+- Extracting text or tables from a PDF
+- Decrypting, editing, redacting or re-exporting PDFs; fixes happen in the source document
+- Analysing whether embedded JavaScript or attachments are malicious; that needs a sandbox
+- Producing PDFs or HTML documents (see `markdown-html/md-document/`)
+
+**Important Caveats:**
+- The auditor scans the raw file bytes with pattern matching and does not decompress streams. Page counts, metadata and indicators stored inside compressed object streams can be missed, so a clean result is not proof that nothing is there.
+- A JavaScript or embedded-file indicator means the marker is present, not that the file is harmful.
+- Checks such as an &quot;unscrubbed&quot; author or a working-title title are heuristics. Only you know which metadata values are expected for this document.
 
 ---
 
@@ -888,7 +932,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 Outputs: PDF version, page count, file size, metadata (Author, Title, Producer, Creator, dates), encryption status, embedded JavaScript indicators, embedded file indicators.
 
 ---
-  <h2>Related Skills in Documents</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Docx Toolkit</h3><p>Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pptx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pptx Toolkit</h3><p>Audit PowerPoint (.pptx) decks for slide count, text density, embedded images and fonts, hidden...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/xlsx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Xlsx Toolkit</h3><p>Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges,...</p></a></div>
+  <h2>Related Skills in Documents</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Docx Toolkit</h3><p>Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/pptx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Pptx Toolkit</h3><p>Audit PowerPoint (.pptx) decks for slide count, text density, embedded images and fonts, hidden...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/documents/xlsx-toolkit.html" class="skill-card" style="text-decoration:none"><h3>Xlsx Toolkit</h3><p>Audit Microsoft Excel (.xlsx) workbooks for formula density, external references, named ranges,...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/documents/pdf-toolkit/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

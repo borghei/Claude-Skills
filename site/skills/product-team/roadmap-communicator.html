@@ -624,6 +624,25 @@ collaboration somehow&quot; is too vague.
 - **Big bang annual roadmap with no quarterly delta.** Misses change cycles.
 - **Feature names instead of outcomes.** &quot;Notifications v2&quot; tells the customer nothing.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Translating a master roadmap into a format for one audience (for example board or customer) with `roadmap_audience_translator.py`
+- Recommending a confidence band (commit, plan, aspire, strategic intent) per item with `confidence_band_generator.py`, from readiness, dependency risk and velocity history
+- What-changed memos from two roadmap snapshots with `roadmap_diff_reporter.py`: added, removed, slipped, re-prioritized and confidence-changed items
+- The audience-format matrix, now-next-later structure, and themes versus features guidance
+
+**Out of Scope:**
+- Setting product strategy and deciding what goes on the roadmap (see `product-team/product-strategist/` and `project-management/execution/prioritization-frameworks/`)
+- Sprint planning and backlog execution (see `product-team/agile-product-owner/`)
+- Syncing with roadmap tools such as Productboard (see `project-management/productboard-expert/`)
+- The PM-domain variant that writes executive, customer and internal roadmap versions (see `project-management/execution/roadmap-communication/`)
+
+**Important Caveats:**
+- The tools read roadmap JSON prepared by the user. They do not pull from Jira, Productboard or any other planning tool, so the output is only as current as the snapshot.
+- Confidence bands are a heuristic recommendation from the attributes entered. Engineering still has to agree to any item communicated as a commitment.
+- Generated audience text is a draft. Wording for customers, sales and the board needs review before it is sent.
+
 ## References
 
 - `references/roadmap-communication-patterns.md` — format catalog + when to use
@@ -843,6 +862,25 @@ collaboration somehow&quot; is too vague.
 - **Hiding strategic risks.** Boards prefer honest risks over surprise misses.
 - **Big bang annual roadmap with no quarterly delta.** Misses change cycles.
 - **Feature names instead of outcomes.** &quot;Notifications v2&quot; tells the customer nothing.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Translating a master roadmap into a format for one audience (for example board or customer) with `roadmap_audience_translator.py`
+- Recommending a confidence band (commit, plan, aspire, strategic intent) per item with `confidence_band_generator.py`, from readiness, dependency risk and velocity history
+- What-changed memos from two roadmap snapshots with `roadmap_diff_reporter.py`: added, removed, slipped, re-prioritized and confidence-changed items
+- The audience-format matrix, now-next-later structure, and themes versus features guidance
+
+**Out of Scope:**
+- Setting product strategy and deciding what goes on the roadmap (see `product-team/product-strategist/` and `project-management/execution/prioritization-frameworks/`)
+- Sprint planning and backlog execution (see `product-team/agile-product-owner/`)
+- Syncing with roadmap tools such as Productboard (see `project-management/productboard-expert/`)
+- The PM-domain variant that writes executive, customer and internal roadmap versions (see `project-management/execution/roadmap-communication/`)
+
+**Important Caveats:**
+- The tools read roadmap JSON prepared by the user. They do not pull from Jira, Productboard or any other planning tool, so the output is only as current as the snapshot.
+- Confidence bands are a heuristic recommendation from the attributes entered. Engineering still has to agree to any item communicated as a commitment.
+- Generated audience text is a draft. Wording for customers, sales and the board needs review before it is sent.
 
 ## References
 

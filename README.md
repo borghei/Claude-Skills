@@ -6,13 +6,17 @@
 <p align="center"><b>385 skills that turn your AI assistant into a specialist: board prep, product planning, compliance audits, code review, marketing and the rest of the business.</b></p>
 
 <p align="center">
+  <a href="https://github.com/borghei/Claude-Skills/stargazers"><img src="https://img.shields.io/github/stars/borghei/Claude-Skills?style=social" alt="GitHub Stars"></a>
+  <a href="https://github.com/borghei/Claude-Skills/tags"><img src="https://img.shields.io/github/v/tag/borghei/Claude-Skills?sort=semver&label=version&color=blue" alt="Latest version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg" alt="License: MIT + Commons Clause"></a>
+  <img src="https://img.shields.io/badge/Works_with-11_AI_assistants-orange.svg" alt="Works with 11 AI assistants">
+</p>
+<p align="center">
   <img src="https://img.shields.io/badge/Skills-385-brightgreen.svg" alt="385 Skills">
   <img src="https://img.shields.io/badge/Domains-21-blue.svg" alt="21 Domains">
   <img src="https://img.shields.io/badge/Expert_Agents-76-purple.svg" alt="76 Expert Agents">
-  <img src="https://img.shields.io/badge/AI_Assistants-11-orange.svg" alt="11 AI Assistants">
+  <img src="https://img.shields.io/badge/Python_Tools-906-informational.svg" alt="906 Python Tools">
   <img src="https://img.shields.io/badge/Compliance_Frameworks-18-red.svg" alt="18 Compliance Frameworks">
-  <img src="https://img.shields.io/github/stars/borghei/Claude-Skills?style=social" alt="GitHub Stars">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT_+_Commons_Clause-yellow.svg" alt="License"></a>
 </p>
 
 ## Add it to your assistant

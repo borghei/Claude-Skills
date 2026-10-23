@@ -561,10 +561,31 @@ python scripts/marketplace_health_scorer.py metrics.json --json
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Marketplace health scoring on liquidity, supply and demand balance, take-rate sustainability, repeat-rate strength and supply density with `marketplace_health_scorer.py`
+- Chicken-and-egg strategy: picking the constrained side, subsidies, single-player mode, vertical wedge and geographic concentration
+- Take-rate decisions using category benchmarks and full-stack versus lean models
+- Network-effect and leakage checks for two-sided and multi-sided marketplaces
+
+**Out of Scope:**
+- General pricing design outside the take rate (see `business-growth/pricing-strategy/`)
+- Building supply or demand recruitment funnels (see `marketing/landing-page-generator/`)
+- Unit economics for a single-seller online store (see `vertical-advisors/ecommerce-advisor/`)
+- Payments, trust and safety, or marketplace platform engineering
+
+**Important Caveats:**
+- The scorer uses only the metrics you enter for one market unit, such as a city or category. A blended global input can hide a broken segment.
+- Score thresholds are heuristics, and take-rate benchmarks are approximate figures for named companies. Both vary by category and over time.
+- A health score shows where the constraint likely sits. It does not forecast GMV or prove that network effects exist.
+
+---
+
 ## Integration Points
 
 - Pairs with `business-growth/pricing-strategy` — take rate is essentially marketplace pricing
-- Pairs with `c-level-advisor/cs-fundraising-advisor` — marketplace investor expectations differ from SaaS
+- Pairs with `agents/c-level/cs-fundraising-advisor.md` (agent) — marketplace investor expectations differ from SaaS
 - Pairs with `marketing/landing-page-generator` for supply / demand recruitment funnels
 
 ---
@@ -714,10 +735,31 @@ python scripts/marketplace_health_scorer.py metrics.json --json
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Marketplace health scoring on liquidity, supply and demand balance, take-rate sustainability, repeat-rate strength and supply density with `marketplace_health_scorer.py`
+- Chicken-and-egg strategy: picking the constrained side, subsidies, single-player mode, vertical wedge and geographic concentration
+- Take-rate decisions using category benchmarks and full-stack versus lean models
+- Network-effect and leakage checks for two-sided and multi-sided marketplaces
+
+**Out of Scope:**
+- General pricing design outside the take rate (see `business-growth/pricing-strategy/`)
+- Building supply or demand recruitment funnels (see `marketing/landing-page-generator/`)
+- Unit economics for a single-seller online store (see `vertical-advisors/ecommerce-advisor/`)
+- Payments, trust and safety, or marketplace platform engineering
+
+**Important Caveats:**
+- The scorer uses only the metrics you enter for one market unit, such as a city or category. A blended global input can hide a broken segment.
+- Score thresholds are heuristics, and take-rate benchmarks are approximate figures for named companies. Both vary by category and over time.
+- A health score shows where the constraint likely sits. It does not forecast GMV or prove that network effects exist.
+
+---
+
 ## Integration Points
 
 - Pairs with `business-growth/pricing-strategy` — take rate is essentially marketplace pricing
-- Pairs with `c-level-advisor/cs-fundraising-advisor` — marketplace investor expectations differ from SaaS
+- Pairs with `agents/c-level/cs-fundraising-advisor.md` (agent) — marketplace investor expectations differ from SaaS
 - Pairs with `marketing/landing-page-generator` for supply / demand recruitment funnels
 
 ---

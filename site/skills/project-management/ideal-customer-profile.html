@@ -660,6 +660,27 @@ If unreachable, ICP is academic.
 - **ICP defined by product, not customer.** &quot;Companies that need X&quot; = solution-thinking.
 - **ICP without qualification rubric.** Sales can&#x27;t apply it.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- An ICP across eight dimensions: firmographics, tech-stack signals, buyer persona, JTBD, existing alternatives, trigger events, budget authority and reachability
+- Refining the ICP from top customers by health, revenue and expansion, or from design partners when there are no customers yet
+- A yes/no qualification rubric for sales
+- Two tool modes: `--mode validate` audits an ICP definition for completeness and disqualification criteria, and `--mode score` scores accounts with weighted criteria (`icp_scorer.py`)
+
+**Out of Scope:**
+- Finding, enriching or scraping account data; the tool scores only accounts the user lists
+- The wider go-to-market plan built on the ICP (see `project-management/gtm/gtm-strategy/`)
+- Detailed buyer personas and user research (see `product-team/ux-researcher-designer/`)
+- CRM lead scoring and pipeline operations (see `business-growth/revenue-operations/`)
+- Competitive analysis of who else serves the ICP (see `business-growth/competitive-teardown/`)
+
+**Important Caveats:**
+- Every per-account fit score and every `defined` or `specific` flag is entered by hand. The tool checks and weights them but does not verify them.
+- Scoring weights and the &quot;5+ yes is a strong lead&quot; cut-off are starting defaults to tune against closed-won and closed-lost data.
+- A greenfield ICP is a hypothesis until 10-20 real customers confirm it.
+- ICPs drift with the product and the market. The skill expects a quarterly refresh.
+
 ## References
 
 - `references/icp-dimensions-deep.md` — 8 dimensions in depth + signals
@@ -670,7 +691,7 @@ If unreachable, ICP is academic.
 - `project-management/gtm/gtm-strategy` — uses ICP as input
 - `project-management/strategy-frameworks/business-model-canvas` — segments block
 - `project-management/discovery/customer-interview-script` — interview-based ICP discovery
-- `marketing/competitive-teardown` — competitive context
+- `business-growth/competitive-teardown` — competitive context
 - `c-level-advisor/cro-advisor` — sales context
 - `c-level-advisor/cmo-advisor` — marketing context
 
@@ -916,6 +937,27 @@ If unreachable, ICP is academic.
 - **ICP defined by product, not customer.** &quot;Companies that need X&quot; = solution-thinking.
 - **ICP without qualification rubric.** Sales can&#x27;t apply it.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- An ICP across eight dimensions: firmographics, tech-stack signals, buyer persona, JTBD, existing alternatives, trigger events, budget authority and reachability
+- Refining the ICP from top customers by health, revenue and expansion, or from design partners when there are no customers yet
+- A yes/no qualification rubric for sales
+- Two tool modes: `--mode validate` audits an ICP definition for completeness and disqualification criteria, and `--mode score` scores accounts with weighted criteria (`icp_scorer.py`)
+
+**Out of Scope:**
+- Finding, enriching or scraping account data; the tool scores only accounts the user lists
+- The wider go-to-market plan built on the ICP (see `project-management/gtm/gtm-strategy/`)
+- Detailed buyer personas and user research (see `product-team/ux-researcher-designer/`)
+- CRM lead scoring and pipeline operations (see `business-growth/revenue-operations/`)
+- Competitive analysis of who else serves the ICP (see `business-growth/competitive-teardown/`)
+
+**Important Caveats:**
+- Every per-account fit score and every `defined` or `specific` flag is entered by hand. The tool checks and weights them but does not verify them.
+- Scoring weights and the &quot;5+ yes is a strong lead&quot; cut-off are starting defaults to tune against closed-won and closed-lost data.
+- A greenfield ICP is a hypothesis until 10-20 real customers confirm it.
+- ICPs drift with the product and the market. The skill expects a quarterly refresh.
+
 ## References
 
 - `references/icp-dimensions-deep.md` — 8 dimensions in depth + signals
@@ -926,7 +968,7 @@ If unreachable, ICP is academic.
 - `project-management/gtm/gtm-strategy` — uses ICP as input
 - `project-management/strategy-frameworks/business-model-canvas` — segments block
 - `project-management/discovery/customer-interview-script` — interview-based ICP discovery
-- `marketing/competitive-teardown` — competitive context
+- `business-growth/competitive-teardown` — competitive context
 - `c-level-advisor/cro-advisor` — sales context
 - `c-level-advisor/cmo-advisor` — marketing context
 

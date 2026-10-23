@@ -167,6 +167,25 @@ For most non-clinical fields, **thematic synthesis** is the default.
 - **Over-reliance on one author / group / venue.** Hidden bias.
 - **No PRISMA-style flow diagram (for systematic reviews).** Process opaque.
 
+## Scope & Limitations
+
+**In Scope:**
+- Search strategies from a PICO-style question with `search_strategy_builder.py`: Boolean query strings per database, filters and a PRISMA-style log template
+- Source scoring on six quality dimensions (methodology, sample, peer review, reproducibility, recency, citation impact) plus relevance with `source_quality_scorer.py`, triaged to include, exclude or read in full
+- Theme-by-source evidence tables with `thematic_synthesis_builder.py`, showing well-supported, contested and gap themes
+- Guidance on inclusion criteria, PRISMA discipline adapted for non-medical fields, and choosing among narrative, thematic, scoping and other synthesis approaches
+
+**Out of Scope:**
+- Running the searches and retrieving full texts. The user executes the queries in each database.
+- Meta-analysis statistics and effect-size pooling (see `data-analytics/statistical-analyst/` for general statistics)
+- Patent prior-art searching (see `research/patent/`)
+- Writing grant proposals that build on the review (see `research/grants/`)
+
+**Important Caveats:**
+- The tools have no database access. Source metadata, theme tags and findings are entered by the user, and quality scores are heuristics built from that metadata.
+- The output is not a registered systematic review protocol. Pre-registration, dual independent screening and a formal risk-of-bias tool are steps the user must do separately.
+- Database syntax and coverage change over time, so generated queries need testing in each database before use.
+
 ## References
 
 - `references/search-strategy-and-prisma.md` — search patterns, PRISMA discipline

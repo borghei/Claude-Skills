@@ -40,6 +40,7 @@ Strategic frameworks for fintech founders, operators, and product leaders. Knowl
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope & Limitations](#scope--limitations)
 
 ---
 
@@ -166,9 +167,32 @@ python scripts/regulatory_trigger_checker.py business_description.txt --json
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- Regulatory exposure scoping for US and EU fintech models: money transmission, lending, securities, banking and deposit-taking, payment services, crypto and custody
+- Keyword-based scanning of a business description for candidate regulatory triggers with `regulatory_trigger_checker.py`
+- License-versus-partner decisions per capability on cost, time, control and economics, including partner failure planning
+- KYC/AML program design: tiered KYC, transaction monitoring, sanctions and PEP screening, and the MLRO role
+- Embedded finance and BaaS architecture patterns, plus a regulatory architecture template
+
+**Out of Scope:**
+- License applications, legal opinions or partner agreement drafting (engage fintech counsel and see `legal/` skills)
+- PCI DSS compliance for card data (see `ra-qm-team/pci-dss-specialist/`)
+- EU operational resilience under DORA (see `ra-qm-team/dora-compliance-expert/`)
+- Fintech pricing such as interchange, FX spread and float (see `business-growth/pricing-strategy/`)
+- Selecting or integrating a specific KYC vendor beyond a written integration plan
+
+**Important Caveats:**
+- The trigger checker matches keywords in your description. It lists candidate triggers, not conclusions, and a vague description gives vague or missing triggers.
+- The output is orientation only and not legal, regulatory, securities, tax or investment advice, as the disclaimer above states.
+- Coverage is the US, EU and UK regimes named in the references. Licensing rules, regulators' guidance and crypto rules change, so check current requirements in each jurisdiction.
+
+---
+
 ## Integration Points
 
-- Pairs with `c-level-advisor/cs-fundraising-advisor` — investors expect a clear regulatory architecture
+- Pairs with `agents/c-level/cs-fundraising-advisor.md` (agent) — investors expect a clear regulatory architecture
 - Pairs with `engineering/cs-security-engineer` — fintech security goes beyond standard SaaS
 - Pairs with `legal/` skills for contract / partner agreements
 - Pairs with `business-growth/pricing-strategy` — fintech pricing has unusual constraints (interchange, FX spread, float)

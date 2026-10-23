@@ -170,6 +170,26 @@ strength in performance-sensitive lists and complex gesture handling.
 - **No haptic feedback on iOS.** Apps that use it feel premium.
 - **No keyboard support on iPad.** Power users will leave.
 
+## Scope & Limitations
+
+**In Scope:**
+- HIG compliance audits of a screen inventory with `hig_compliance_checker.py` (navigation type, Dynamic Type, semantic colors, safe areas, touch targets, native components, SF Symbols)
+- Native component suggestions for a stated UX goal on iOS, iPadOS, macOS, watchOS, tvOS or visionOS with `component_pattern_lookup.py`
+- Accessibility gap checks with `accessibility_auditor.py`: labels, hints, traits, touch targets, color-only information, Dynamic Type, Reduce Motion and VoiceOver focus order
+- Decision guidance on sheets versus popovers, SwiftUI versus UIKit, color and dark mode, typography, and adapting an app across Apple platforms
+
+**Out of Scope:**
+- Web accessibility and WCAG audits of HTML (see `engineering/a11y-audit/`)
+- Writing the SwiftUI, UIKit or AppKit implementation (see `engineering/senior-mobile/`)
+- Building a design system or component library (see `product-team/ui-design-system/`)
+- App Store listing and ranking work (see `marketing/app-store-optimization/`)
+- Android and Material Design guidance
+
+**Important Caveats:**
+- The auditors read a JSON inventory that the user fills in, mostly true or false flags per screen. They do not inspect screenshots, design files, source code or a running app.
+- `component_pattern_lookup.py` matches keywords in the goal text against a fixed pattern catalog, so an unusual phrasing can return no match or a weak one.
+- Apple revises the HIG and platform behavior with each OS release, so the guidance can go stale. Findings still need checking with Accessibility Inspector and VoiceOver on a device.
+
 ## References
 
 - `references/hig-fundamentals.md` — principles, design language, foundational patterns

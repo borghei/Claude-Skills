@@ -211,6 +211,28 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ---
 
+## Scope & Limitations
+
+**In Scope:**
+- Sequencing and shared-evidence strategy when two or more frameworks are pursued in parallel (SOC 2, ISO 27001, NIST CSF, GDPR, HIPAA, PCI-DSS, DORA, NIS2, ISO 42001)
+- Per-framework readiness scores and a cross-framework efficiency analysis from `multi_framework_scorer.py`
+- A shared-control catalog showing which evidence satisfies several frameworks at once from `shared_evidence_finder.py`
+- A quarter-by-quarter roadmap with milestones and cumulative cost estimates from `readiness_roadmap_generator.py`
+- 16-week initial and 12-week surveillance sprint plans for SOC 2 plus ISO 27001
+
+**Out of Scope:**
+- Single-framework audit sprints (see `ra-qm-team/audit-prep/soc2-audit-prep/`, `ra-qm-team/audit-prep/gdpr-audit-prep/`, `ra-qm-team/audit-prep/aims-audit/`)
+- Building a full program for one framework (see `ra-qm-team/soc2-compliance-expert/`, `ra-qm-team/information-security-manager-iso27001/`, `ra-qm-team/nist-csf-specialist/`)
+- Medical device regulation such as ISO 13485, MDR or FDA (see `ra-qm-team/audit-prep/fda-qsr-audit-prep/`)
+- Configuring a GRC platform or collecting evidence automatically
+
+**Important Caveats:**
+- The scorer reads a YAML of controls you mark yourself, and the roadmap uses current scores you supply. Neither checks evidence.
+- Control mappings, weeks-to-certify and audit cost figures are fixed values built into the scripts. They are planning estimates, not auditor quotes, and can go stale as frameworks are revised.
+- Whether an auditor accepts evidence from one framework for another is the auditor's decision. The output is not an attestation, certification or legal advice.
+
+---
+
 ## References
 
 - [multi-framework-readiness-matrix.md](references/multi-framework-readiness-matrix.md) — per-framework requirements + cadences + cost

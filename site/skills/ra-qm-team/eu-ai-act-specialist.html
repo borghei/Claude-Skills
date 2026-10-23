@@ -530,7 +530,7 @@ The agent classifies AI systems under the EU AI Act&#x27;s risk-based framework 
     &quot;EU database registration (Art. 49)&quot;,
     &quot;Post-market monitoring (Art. 72)&quot;
   ],
-  &quot;compliance_deadline&quot;: &quot;2026-08-02&quot;,
+  &quot;compliance_deadline&quot;: &quot;2027-12-02&quot;,
   &quot;assigned_owner&quot;: &quot;Head of AI Governance&quot;
 }
 ```
@@ -717,8 +717,12 @@ python scripts/ai_bias_detector.py --input dataset_stats.json --json
 | 1 Aug 2024 | Entry into force | Regulation published |
 | 2 Feb 2025 | Prohibited practices + AI literacy | Art. 5 prohibitions; Art. 4 AI literacy |
 | 2 Aug 2025 | GPAI obligations + governance | Art. 53, 55 GPAI obligations; AI Office operational |
-| 2 Aug 2026 | **Full application** | All remaining: high-risk, deployer, transparency, conformity, CE marking |
-| 2 Aug 2027 | Extended deadline | Certain Annex I Section B high-risk safety components |
+| 2 Aug 2026 | Transparency + general application | Art. 50 transparency (chatbots, deepfakes, AI-generated content); penalties and governance |
+| 2 Dec 2026 | Art. 50(2) marking, legacy systems | Machine-readable marking for systems placed on the market before 2 Aug 2026 |
+| 2 Dec 2027 | **High-risk, Annex III** | Stand-alone high-risk systems (employment, education, credit, law enforcement and the other Annex III areas): all provider and deployer obligations, conformity, CE marking, registration. Moved from 2 Aug 2026 |
+| 2 Aug 2028 | **High-risk, Annex I** | AI that is a safety component of products under EU product-safety law. Moved from 2 Aug 2027 |
+
+Dates as amended by the Digital Omnibus on AI (Regulation (EU) 2026/1744, in force 27 July 2026). Check the [Official Journal text](https://eur-lex.europa.eu/eli/reg/2026/1744/oj) before relying on a date; secondary guidance written before July 2026 still shows the old ones.
 
 ### Penalties (Art. 99)
 
@@ -886,7 +890,7 @@ python scripts/ai_bias_detector.py --input dataset_stats.json \
 
 - **All AI systems inventoried and classified** -- every system assessed against the risk-based framework with documented classification rationale, including Art. 6(3) exception analysis where applicable
 - **Prohibited practices identified and discontinued** -- all Art. 5 prohibited practices flagged by February 2, 2025, with documented evidence of discontinuation or lawful exception application
-- **High-risk systems fully compliant by August 2, 2026** -- all 12 provider obligations verified, EU Declaration of Conformity signed, CE marking affixed, and EU database registration complete
+- **High-risk systems fully compliant by their deadline** (2 December 2027 for Annex III systems, 2 August 2028 for Annex I products) -- all 12 provider obligations verified, EU Declaration of Conformity signed, CE marking affixed, and EU database registration complete
 - **Bias testing completed for all high-risk systems** -- demographic parity, equalized odds, and predictive parity metrics within four-fifths threshold for all protected attributes, or residual bias documented with justification
 - **GPAI model obligations met by August 2, 2025** -- technical documentation maintained, downstream provider information supplied, copyright compliance verified, and training data summary published
 - **Conformity assessment completed per correct route** -- internal control (Annex VI) or third-party assessment (Annex VII) selected based on system classification, with all certificates issued and filed
@@ -913,7 +917,7 @@ python scripts/ai_bias_detector.py --input dataset_stats.json \
 - Legal advice on liability, insurance, or contractual allocation of AI Act obligations
 
 **Important Notes:**
-- The EU AI Act compliance deadline of August 2, 2026 for high-risk systems is firm -- organizations should begin classification and gap analysis immediately
+- The Digital Omnibus (Regulation (EU) 2026/1744) moved the high-risk deadlines to 2 December 2027 (Annex III) and 2 August 2028 (Annex I). It did not postpone Article 50 transparency, which applies from 2 August 2026. Conformity work for a high-risk system takes many months, so classification and gap analysis should still start now
 - Penalties are severe: up to EUR 35 million or 7% of global turnover for prohibited practices, EUR 15 million or 3% for high-risk non-compliance
 - SMEs and startups receive proportionate penalty treatment (lower of absolute or percentage)
 
@@ -1086,7 +1090,7 @@ The agent classifies AI systems under the EU AI Act&#x27;s risk-based framework 
     &quot;EU database registration (Art. 49)&quot;,
     &quot;Post-market monitoring (Art. 72)&quot;
   ],
-  &quot;compliance_deadline&quot;: &quot;2026-08-02&quot;,
+  &quot;compliance_deadline&quot;: &quot;2027-12-02&quot;,
   &quot;assigned_owner&quot;: &quot;Head of AI Governance&quot;
 }
 ```
@@ -1273,8 +1277,12 @@ python scripts/ai_bias_detector.py --input dataset_stats.json --json
 | 1 Aug 2024 | Entry into force | Regulation published |
 | 2 Feb 2025 | Prohibited practices + AI literacy | Art. 5 prohibitions; Art. 4 AI literacy |
 | 2 Aug 2025 | GPAI obligations + governance | Art. 53, 55 GPAI obligations; AI Office operational |
-| 2 Aug 2026 | **Full application** | All remaining: high-risk, deployer, transparency, conformity, CE marking |
-| 2 Aug 2027 | Extended deadline | Certain Annex I Section B high-risk safety components |
+| 2 Aug 2026 | Transparency + general application | Art. 50 transparency (chatbots, deepfakes, AI-generated content); penalties and governance |
+| 2 Dec 2026 | Art. 50(2) marking, legacy systems | Machine-readable marking for systems placed on the market before 2 Aug 2026 |
+| 2 Dec 2027 | **High-risk, Annex III** | Stand-alone high-risk systems (employment, education, credit, law enforcement and the other Annex III areas): all provider and deployer obligations, conformity, CE marking, registration. Moved from 2 Aug 2026 |
+| 2 Aug 2028 | **High-risk, Annex I** | AI that is a safety component of products under EU product-safety law. Moved from 2 Aug 2027 |
+
+Dates as amended by the Digital Omnibus on AI (Regulation (EU) 2026/1744, in force 27 July 2026). Check the [Official Journal text](https://eur-lex.europa.eu/eli/reg/2026/1744/oj) before relying on a date; secondary guidance written before July 2026 still shows the old ones.
 
 ### Penalties (Art. 99)
 
@@ -1442,7 +1450,7 @@ python scripts/ai_bias_detector.py --input dataset_stats.json \
 
 - **All AI systems inventoried and classified** -- every system assessed against the risk-based framework with documented classification rationale, including Art. 6(3) exception analysis where applicable
 - **Prohibited practices identified and discontinued** -- all Art. 5 prohibited practices flagged by February 2, 2025, with documented evidence of discontinuation or lawful exception application
-- **High-risk systems fully compliant by August 2, 2026** -- all 12 provider obligations verified, EU Declaration of Conformity signed, CE marking affixed, and EU database registration complete
+- **High-risk systems fully compliant by their deadline** (2 December 2027 for Annex III systems, 2 August 2028 for Annex I products) -- all 12 provider obligations verified, EU Declaration of Conformity signed, CE marking affixed, and EU database registration complete
 - **Bias testing completed for all high-risk systems** -- demographic parity, equalized odds, and predictive parity metrics within four-fifths threshold for all protected attributes, or residual bias documented with justification
 - **GPAI model obligations met by August 2, 2025** -- technical documentation maintained, downstream provider information supplied, copyright compliance verified, and training data summary published
 - **Conformity assessment completed per correct route** -- internal control (Annex VI) or third-party assessment (Annex VII) selected based on system classification, with all certificates issued and filed
@@ -1469,7 +1477,7 @@ python scripts/ai_bias_detector.py --input dataset_stats.json \
 - Legal advice on liability, insurance, or contractual allocation of AI Act obligations
 
 **Important Notes:**
-- The EU AI Act compliance deadline of August 2, 2026 for high-risk systems is firm -- organizations should begin classification and gap analysis immediately
+- The Digital Omnibus (Regulation (EU) 2026/1744) moved the high-risk deadlines to 2 December 2027 (Annex III) and 2 August 2028 (Annex I). It did not postpone Article 50 transparency, which applies from 2 August 2026. Conformity work for a high-risk system takes many months, so classification and gap analysis should still start now
 - Penalties are severe: up to EUR 35 million or 7% of global turnover for prohibited practices, EUR 15 million or 3% for high-risk non-compliance
 - SMEs and startups receive proportionate penalty treatment (lower of absolute or percentage)
 
@@ -1621,7 +1629,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python ra-qm-team/eu-ai-act-specialist/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Compliance</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/ai-act-readiness.html" class="skill-card" style="text-decoration:none"><h3>Ai Act Readiness</h3><p>EU AI Act readiness assessment and sprint playbook. Use when preparing for the Aug 2026...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/aims-audit.html" class="skill-card" style="text-decoration:none"><h3>Aims Audit</h3><p>ISO 42001 AI Management System (AIMS) audit-prep playbook. Use when an ISO 42001 certification...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/compliance-readiness.html" class="skill-card" style="text-decoration:none"><h3>Compliance Readiness</h3><p>Cross-framework compliance readiness orchestrator. Use when preparing for multi-framework...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/fda-qsr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Fda Qsr Audit Prep</h3><p>FDA Quality System Regulation (21 CFR 820 / QMSR) audit-prep playbook for medical devices. Use...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/gdpr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Gdpr Audit Prep</h3><p>GDPR audit-prep playbook: sprint to prepare for a supervisory authority inquiry, DPA audit, or...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/soc2-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Soc2 Audit Prep</h3><p>SOC 2 audit-prep playbook: the 4/8/12-week sprint to audit-ready for a Type I or Type II...</p></a></div>
+  <h2>Related Skills in Compliance</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/ai-act-readiness.html" class="skill-card" style="text-decoration:none"><h3>Ai Act Readiness</h3><p>EU AI Act readiness assessment and sprint playbook. Use when preparing for the high-risk AI...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/aims-audit.html" class="skill-card" style="text-decoration:none"><h3>Aims Audit</h3><p>ISO 42001 AI Management System (AIMS) audit-prep playbook. Use when an ISO 42001 certification...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/compliance-readiness.html" class="skill-card" style="text-decoration:none"><h3>Compliance Readiness</h3><p>Cross-framework compliance readiness orchestrator. Use when preparing for multi-framework...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/fda-qsr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Fda Qsr Audit Prep</h3><p>FDA Quality System Regulation (21 CFR 820 / QMSR) audit-prep playbook for medical devices. Use...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/gdpr-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Gdpr Audit Prep</h3><p>GDPR audit-prep playbook: sprint to prepare for a supervisory authority inquiry, DPA audit, or...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/ra-qm-team/soc2-audit-prep.html" class="skill-card" style="text-decoration:none"><h3>Soc2 Audit Prep</h3><p>SOC 2 audit-prep playbook: the 4/8/12-week sprint to audit-ready for a Type I or Type II...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/ra-qm-team/eu-ai-act-specialist/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

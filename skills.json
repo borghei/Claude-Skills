@@ -1,7 +1,7 @@
 {
   "name": "claude-skills",
   "description": "The Universal AI Skills Library — 385 production-ready skills across 21 domains. Project Management is the most-used domain (70 skills).",
-  "version": "4.13.6",
+  "version": "4.13.7",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
@@ -3409,7 +3409,7 @@
     },
     {
       "name": "ai-act-readiness",
-      "description": "EU AI Act readiness assessment and sprint playbook. Use when preparing for the Aug 2026 high-risk AI system deadline, when a notified-body conformity assessment is scheduled, or when GPAI (general-purpose AI) obligations apply.",
+      "description": "EU AI Act readiness assessment and sprint playbook. Use when preparing for the high-risk AI system deadlines (Dec 2027 / Aug 2028), when a notified-body conformity assessment is scheduled, or when GPAI (general-purpose AI) obligations apply.",
       "path": "ra-qm-team/audit-prep/ai-act-readiness/SKILL.md",
       "domain": "ra-qm-team",
       "category": "compliance",
@@ -6976,7 +6976,7 @@
     },
     {
       "name": "docx-toolkit",
-      "description": "Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.",
+      "description": "Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.",
       "path": "documents/docx-toolkit/SKILL.md",
       "domain": "documents",
       "category": "documents",

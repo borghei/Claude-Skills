@@ -67,7 +67,7 @@ inputs that invite misuse (zero dropout, SD from a small pilot, thin cells).
 - `product-team/product-analytics` — behavioural/quantitative product data
 - `data-analytics/statistical-analyst` — general applied statistics and test choice
 - `ra-qm-team/` — regulatory submission and quality systems
-- `marketing/competitive-teardown` — competitive positioning (different lens)
+- `business-growth/competitive-teardown` — competitive positioning (different lens)
 
 ## Quality Standard
 

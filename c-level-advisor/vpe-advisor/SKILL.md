@@ -192,6 +192,27 @@ engineering at scale.
 - **Squad-of-three model at scale.** Below 4 engineers, bus risk + on-call burden are unsustainable.
 - **Engineering culture defined by perks.** Real culture is in promotion criteria, hiring bar, incident response, code review norms.
 
+## Scope & Limitations
+
+**In Scope:**
+- Engineering org health scoring (0-100) across structure, delivery, quality, productivity, culture and talent with `eng_org_health_scorer.py`
+- Per-team DORA and DevEx classification into bands, with focus areas and an org rollup, from `eng_productivity_dashboard.py`
+- Quarter-by-quarter capacity projection with attrition, hiring ramp and overhead, and bottleneck teams, from `eng_capacity_planner.py`
+- Org shape, CTO and VPE split, delivery model choice, platform team timing, hiring and attrition engagements
+- The engineering section of a board deck
+
+**Out of Scope:**
+- Architecture, tech stack and build-vs-buy decisions (see `c-level-advisor/cto-advisor/` and `engineering/senior-architect/`)
+- SLO and error budget design (see `engineering/observability-designer/`)
+- Running incident response (see `engineering/incident-commander/`)
+- Compensation bands and HR policy (see `c-level-advisor/chro-advisor/`)
+- Collecting metrics from CI/CD, source control or survey tools
+
+**Important Caveats:**
+- The tools read JSON you assemble yourself. They do not pull DORA or DevEx data from any system, so the output is only as good as the numbers you enter.
+- Band thresholds, org-size defaults and the platform-team sizing are heuristics. Team-level context can justify a different call.
+- DORA and DevEx results describe teams and systems. They are not a measure of individual performance and should not be used as one.
+
 ## References
 
 - `references/engineering-org-design.md` — org shapes, role definitions, hiring sequence

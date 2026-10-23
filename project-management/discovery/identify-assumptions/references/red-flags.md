@@ -42,7 +42,7 @@ When you have just produced an assumption map or risk-prioritization output, sca
 
 ## Red Flag 3: Missing Categories (Only Tested What You Wanted to Test)
 
-**Symptom.** All assumptions are about Value (will customers want this?). Nothing about Usability, Viability, Feasibility, or any of the extended 4 (Ethical, Defensibility, Market Timing, Strategic Fit).
+**Symptom.** All assumptions are about Value (will customers want this?). Nothing about Usability, Viability, Feasibility, or any of the extended 4 (Ethics, Go-to-Market, Strategy, Team).
 
 **Why it's bad.** A map that covers only one category is a confirmation tool, not a risk map. Real projects fail across multiple risk categories — the most expensive failures come from categories the team did not examine.
 
@@ -152,19 +152,19 @@ When you have just produced an assumption map or risk-prioritization output, sca
 
 ---
 
-## Red Flag 10: Missing Ethical and Strategic-Fit Categories for AI / Risky Features
+## Red Flag 10: Missing Ethics and Strategy Categories for AI / Risky Features
 
-**Symptom.** For an AI-enabled feature, the assumption map has no items in the Ethical or Strategic-Fit categories (extended 8-category model).
+**Symptom.** For an AI-enabled feature, the assumption map has no items in the Ethics or Strategy categories (extended 8-category model).
 
 **Why it's bad.** AI features have category-specific risks: hallucination, bias, regulatory, reputation, opportunity cost. A map that omits these categories for an AI feature is missing the most likely failure modes.
 
 **Bad example:**
-> AI summarization feature. Assumption map: Value, Usability, Viability, Feasibility. No Ethical category.
+> AI summarization feature. Assumption map: Value, Usability, Viability, Feasibility. No Ethics category.
 
 **Good example:**
-> AI summarization feature. Map includes Ethical: 'Summaries will not hallucinate facts at a rate >2%'; 'Summaries will not exhibit racial/gender bias in stress tests'; 'Output will not violate customer NDAs (data leakage)'. Tests designed for each."
+> AI summarization feature. Map includes Ethics: 'Summaries will not hallucinate facts at a rate >2%'; 'Summaries will not exhibit racial/gender bias in stress tests'; 'Output will not violate customer NDAs (data leakage)'. Tests designed for each."
 
-**How to catch it.** For AI, security, or compliance-sensitive features, does the map include Ethical and Strategic-Fit? If not, you skipped the most failure-prone categories.
+**How to catch it.** For AI, security, or compliance-sensitive features, does the map include Ethics and Strategy? If not, you skipped the most failure-prone categories.
 
 ---
 
@@ -213,7 +213,7 @@ When you have just produced an assumption map or risk-prioritization output, sca
 | 7 | No Ownership | Each top assumption has owner + date? |
 | 8 | One-Shot Test | Quarterly re-validation cadence for load-bearing? |
 | 9 | Impact Only, No Probability | Both axes (impact + uncertainty) drive priority? |
-| 10 | Missing Ethical for AI | Ethical + Strategic-Fit covered for AI/risky? |
+| 10 | Missing Ethics for AI | Ethics + Strategy covered for AI/risky? |
 | 11 | Static Map | Last updated within 30 days? |
 | 12 | Skipping for "Obviously Risky" | High-stakes project mapped before committing? |
 

@@ -125,3 +125,22 @@ V002,Tech Review,8500,4.1,no,yes,5,blue-white,neutral
 | TikTok | 30-90 sec | 3 min |
 | LinkedIn | 1-3 min | 10 min |
 | Instagram Reels | 15-60 sec | 90 sec |
+
+## Scope & Limitations
+
+**In Scope:**
+- Content calendar and production schedule from a topics JSON with content pillars and ratios, with `video_content_planner.py` (weeks, videos per week, target platforms, start date)
+- Thumbnail pattern analysis from a CSV of thumbnail attributes and performance (face, text, word count, colours, emotion, views, CTR) with `thumbnail_analyzer.py`
+- Title, description and tag recommendations for YouTube, TikTok or LinkedIn with `video_seo_optimizer.py`, singly or in batch
+- A strategy guide covering content pillars, platform practices, thumbnail design principles, video SEO and production checklists
+
+**Out of Scope:**
+- Scripting, filming or editing video, and designing thumbnail images
+- Uploading, scheduling or publishing videos; the tools have no platform API access
+- Social media strategy beyond video, such as platform selection and community management (see `marketing/social-media-manager/`)
+- Paid video ad campaigns (see `marketing/paid-ads/`)
+
+**Important Caveats:**
+- The thumbnail analyzer does not look at images. It works only from attributes you tag by hand in the CSV, so results depend on consistent tagging.
+- Performance data such as views and CTR must be exported from each platform and entered manually.
+- SEO recommendations and the platform length guidelines are rule-based heuristics, not platform-published rules. Platform ranking and format limits change, so check current platform guidance before relying on them.

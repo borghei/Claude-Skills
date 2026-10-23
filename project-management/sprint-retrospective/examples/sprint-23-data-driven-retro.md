@@ -29,10 +29,12 @@ This retro is structured around data, not feelings. Mira pre-prepares the data p
 ### Command 1: pull sprint data
 
 ```bash
-python scripts/retrospective_analyzer.py --input sprint_23_data.json --format markdown --output retro_pack.md
+python scripts/velocity_analyzer.py --since 2026-05-05 --until 2026-05-21 -f json > velocity.json
+python scripts/code_churn_analyzer.py --since 2026-05-05 --until 2026-05-21 -f json > churn.json
+python scripts/retro_report_generator.py -v velocity.json -u churn.json -s "Sprint 23" -o retro_pack.md
 ```
 
-#### Output (data pack excerpt)
+#### What the data shows (summarised from the velocity and churn reports, with the ticket data the PM pulled alongside)
 
 ```
 === Sprint 23 Retro Data Pack ===

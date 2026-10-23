@@ -256,7 +256,7 @@ Track verification results for quality assessment.
 | # | Claim | Category | Source Checked | Result | Severity |
 |---|-------|----------|---------------|--------|----------|
 | 1 | "GDPR Art. 83(5) fines up to EUR 20M" | Citation | EUR-Lex | Verified | -- |
-| 2 | "AI Act applies from August 2026" | Date | EUR-Lex | Partially correct (phased) | MODERATE |
+| 2 | "AI Act applies from August 2026" | Date | EUR-Lex | Partially correct: only Art. 50 transparency applies then; high-risk moved to Dec 2027 / Aug 2028 (Reg. 2026/1744) | MODERATE |
 | 3 | "ENISA requires annual testing" | Authority | ENISA website | Incorrect (guidance, not requirement) | HIGH |
 
 ---

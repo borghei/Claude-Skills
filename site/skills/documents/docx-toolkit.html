@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Docx Toolkit - Claude Skills</title>
-  <meta name="description" content="Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for h">
+  <meta name="description" content="Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a st">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html">
   <meta property="og:title" content="Docx Toolkit - Claude Skills">
-  <meta property="og:description" content="Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for h">
+  <meta property="og:description" content="Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a st">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Docx Toolkit", "description": "Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.", "applicationCategory": "Documents", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Docx Toolkit", "description": "Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.", "applicationCategory": "Documents", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/documents/docx-toolkit.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Docx Toolkit</h1>
-    <p class="page-subtitle">Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.</p>
+    <p class="page-subtitle">Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.</p>
     <div class="badge-bar"><span class="badge badge-domain">Documents</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">docx</span><span class="tag">word</span><span class="tag">document-audit</span><span class="tag">tracked-changes</span><span class="tag">ooxml</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Docx Toolkit (Documents domain).
 
-Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.
+Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.
 
 Audit `.docx` files using the standard library only — no `python-docx` required. Reads OOXML directly with `zipfile` + `xml.etree`. - [Keywords](#keywords) - [Quick Start](#quick-start)
 
@@ -406,6 +406,7 @@ Audit `.docx` files using the standard library only — no `python-docx` require
 ## Frameworks &amp; Templates You Know
 - - [Templates](#templates)
 - Templates
+- - A review checklist and templates for allowed styles and pre-send sign-off
 
 ## How to Help
 When the user asks for help in this domain:
@@ -425,7 +426,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Docx Toolkit (Documents domain).
 
-Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.
+Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.
 
 Audit `.docx` files using the standard library only — no `python-docx` required. Reads OOXML directly with `zipfile` + `xml.etree`. - [Keywords](#keywords) - [Quick Start](#quick-start)
 
@@ -438,6 +439,7 @@ Audit `.docx` files using the standard library only — no `python-docx` require
 ## Frameworks &amp; Templates You Know
 - - [Templates](#templates)
 - Templates
+- - A review checklist and templates for allowed styles and pre-send sign-off
 
 ## How to Help
 When the user asks for help in this domain:
@@ -480,6 +482,7 @@ Audit `.docx` files using the standard library only — no `python-docx` require
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope &amp; Limitations](#scope--limitations)
 
 ---
 
@@ -602,6 +605,28 @@ python scripts/docx_auditor.py document.docx --json
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Read-only audit of `.docx` files with `scripts/docx_auditor.py`, which parses OOXML with `zipfile` and `xml.etree` and needs no third-party package
+- Word and paragraph counts, heading hierarchy with gap detection, comment count, tracked-changes detection, paragraph styles in use, and hyperlink, image and table counts
+- Three workflows: pre-handoff audit, contract review triage, and style-guide enforcement
+- A review checklist and templates for allowed styles and pre-send sign-off
+
+**Out of Scope:**
+- Creating or editing `.docx` files, including accepting tracked changes or deleting comments; the tool only reads
+- Reviewing what a contract says (see `legal/contract-review/`)
+- Writing or editing the document&#x27;s prose (see `marketing/copy-editing/`)
+- Producing formatted documents from markdown (see `markdown-html/md-document/`)
+
+**Important Caveats:**
+- The auditor reports counts and structure. It does not render the document, so layout, page breaks and visual formatting are not checked.
+- It does not compare styles against your allowed list. Style-guide enforcement means reading its style list against the template in `assets/` by hand.
+- It does not check cross-references or a table of contents for broken targets.
+- The triage thresholds, such as more than 20 comments or style sprawl, are rules of thumb. Content errors like a wrong name, jurisdiction or figure need a human read, as the review checklist states.
+
+---
+
 ## Integration Points
 
 - Pairs with `legal/` skills for contract redlines
@@ -634,7 +659,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Docx Toolkit&quot;**
-   - Description: &quot;Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.&quot;
+   - Description: &quot;Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -672,6 +697,7 @@ Audit `.docx` files using the standard library only — no `python-docx` require
 - [Reference Guides](#reference-guides)
 - [Templates](#templates)
 - [Best Practices](#best-practices)
+- [Scope &amp; Limitations](#scope--limitations)
 
 ---
 
@@ -794,6 +820,28 @@ python scripts/docx_auditor.py document.docx --json
 
 ---
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Read-only audit of `.docx` files with `scripts/docx_auditor.py`, which parses OOXML with `zipfile` and `xml.etree` and needs no third-party package
+- Word and paragraph counts, heading hierarchy with gap detection, comment count, tracked-changes detection, paragraph styles in use, and hyperlink, image and table counts
+- Three workflows: pre-handoff audit, contract review triage, and style-guide enforcement
+- A review checklist and templates for allowed styles and pre-send sign-off
+
+**Out of Scope:**
+- Creating or editing `.docx` files, including accepting tracked changes or deleting comments; the tool only reads
+- Reviewing what a contract says (see `legal/contract-review/`)
+- Writing or editing the document&#x27;s prose (see `marketing/copy-editing/`)
+- Producing formatted documents from markdown (see `markdown-html/md-document/`)
+
+**Important Caveats:**
+- The auditor reports counts and structure. It does not render the document, so layout, page breaks and visual formatting are not checked.
+- It does not compare styles against your allowed list. Style-guide enforcement means reading its style list against the template in `assets/` by hand.
+- It does not check cross-references or a table of contents for broken targets.
+- The triage thresholds, such as more than 20 comments or style sprawl, are rules of thumb. Content errors like a wrong name, jurisdiction or figure need a human read, as the review checklist states.
+
+---
+
 ## Integration Points
 
 - Pairs with `legal/` skills for contract redlines
@@ -826,7 +874,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Docx Toolkit&quot;**
-   - Description: &quot;Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, broken cross-references, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.&quot;
+   - Description: &quot;Audit Microsoft Word (.docx) documents for heading hierarchy, comments, tracked changes, and style consistency. Use when reviewing a contract draft, preparing a document for handoff, or enforcing a style guide.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 

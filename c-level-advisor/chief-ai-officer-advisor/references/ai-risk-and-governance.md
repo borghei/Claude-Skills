@@ -93,13 +93,16 @@ A high-risk system requires:
 10. **Post-market monitoring** (Article 72)
 11. **Serious incident reporting** (Article 73) — typically 15 days; immediate for fundamental rights breaches or critical infra
 
-### Timeline checkpoints (as enacted)
+### Timeline checkpoints (as amended by the Digital Omnibus, Regulation (EU) 2026/1744)
 
-- 2 Aug 2024 — Act enters into force
+- 1 Aug 2024 — Act enters into force
 - 2 Feb 2025 — Prohibitions on unacceptable-risk practices apply
 - 2 Aug 2025 — GPAI obligations apply; governance bodies operational
-- 2 Aug 2026 — Most high-risk and transparency obligations apply
-- 2 Aug 2027 — High-risk obligations for products already regulated under sector law apply
+- 2 Aug 2026 — Article 50 transparency obligations apply
+- 2 Dec 2027 — High-risk obligations for Annex III systems apply (moved from 2 Aug 2026)
+- 2 Aug 2028 — High-risk obligations for AI in products under EU product-safety law apply (moved from 2 Aug 2027)
+
+Check the [Official Journal text](https://eur-lex.europa.eu/eli/reg/2026/1744/oj) before relying on a date.
 
 ## 5. AI Impact Assessment (AIIA) — what to include
 
