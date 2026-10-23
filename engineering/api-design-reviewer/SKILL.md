@@ -38,13 +38,13 @@ Comprehensive analysis and review of REST API designs against conventions, best 
 
 ## Clarify First
 
-Before producing the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before producing the review, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which output** — lint report, design scorecard, or breaking-change detection (selects `api_linter.py`, `api_scorecard.py`, or `breaking_change_detector.py`)
-- [ ] **Spec file(s)** — the OpenAPI/Swagger JSON, or the two versions to diff (the input the tools parse)
-- [ ] **Quality bar / CI gate** — minimum grade or fail-on-breaking (sets `--min-grade` / `--exit-on-breaking` and how strict the verdict is)
+- **Which output:** lint report, design scorecard, or breaking-change detection (selects `api_linter.py`, `api_scorecard.py`, or `breaking_change_detector.py`).
+- **Spec file(s):** the OpenAPI/Swagger JSON, or the two versions to diff (the input the tools parse).
+- **Quality bar / CI gate:** minimum grade or fail-on-breaking (sets `--min-grade` / `--exit-on-breaking` and how strict the verdict is).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

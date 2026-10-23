@@ -5,6 +5,13 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.13.6] - 2026-10-23
+
+### Changed
+
+- **Every skill now has a Clarify First section, written as rules instead of a script.** The 37 skills that had none (the C-level and vertical advisors, the Jira, Confluence, Linear, Notion and Productboard experts, and the marketing hubs) gained one, and the 348 existing sections were converted. Each names the inputs that change the result and why, then lets the assistant judge: ask when an input would change the answer, otherwise use a stated default, and give a straight answer with assumptions when the user wants one now. Checkboxes and the all-caps "ASK" instruction are gone; every input and reason was kept word for word. C-level advisors start from `~/.claude/company-context.md` when it exists.
+- **The authoring standard and `write-a-skill` teach the rule style.** The P11 template, the playbook, the checklist and the scaffold all use it, and the playbook now matches the standard on advisory skills (optional, not forbidden). The linter accepts both the old and the new wording.
+
 ## [4.13.5] - 2026-10-23
 
 ### Added

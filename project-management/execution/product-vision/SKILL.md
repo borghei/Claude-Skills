@@ -44,14 +44,14 @@ A vision is *not* a mission, *not* a strategy, *not* a roadmap. A mission says w
 
 ## Clarify First
 
-Before generating the vision, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the vision, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Target customer + their core need** — who and what pain (drives the Pichler Board audience/needs blocks and Moore's "for [customer]")
-- [ ] **Format** — Pichler Board / Moore elevator pitch / Raskin narrative / Cagan 10-year (sets the entire structure of the artifact)
-- [ ] **Time horizon** — 5 vs 10 years out (calibrates ambition; Cagan 10-year demands a different altitude than a near-term board)
-- [ ] **Why now — the change** — the shift that makes this inevitable (drives the Raskin narrative's opening act and the vision's differentiation)
+- **Target customer + their core need:** who and what pain (drives the Pichler Board audience/needs blocks and Moore's "for [customer]").
+- **Format:** Pichler Board / Moore elevator pitch / Raskin narrative / Cagan 10-year (sets the entire structure of the artifact).
+- **Time horizon:** 5 vs 10 years out (calibrates ambition; Cagan 10-year demands a different altitude than a near-term board).
+- **Why now — the change:** the shift that makes this inevitable (drives the Raskin narrative's opening act and the vision's differentiation).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

@@ -54,14 +54,14 @@ competitive intelligence, competitor analysis, battlecard, win/loss analysis, co
 
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which output is needed** (battlecard, positioning map, win/loss analysis, or board summary) — each has a different template and data requirement
-- [ ] **Which competitors and their tier** (direct, adjacent, future) — sets tracking intensity and which competitors appear in the artifact
-- [ ] **Your ICP and the problem you solve** — drives the threat-classification matrix and what counts as a real competitor vs. noise
-- [ ] **Your actual differentiators with proof points** — the "why we win" and "killer questions" sections are worthless without concrete, evidence-backed advantages
+- **Which output is needed:** (battlecard, positioning map, win/loss analysis, or board summary) — each has a different template and data requirement.
+- **Which competitors and their tier:** (direct, adjacent, future) — sets tracking intensity and which competitors appear in the artifact.
+- **Your ICP and the problem you solve:** drives the threat-classification matrix and what counts as a real competitor vs. noise.
+- **Your actual differentiators with proof points:** the "why we win" and "killer questions" sections are worthless without concrete, evidence-backed advantages.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

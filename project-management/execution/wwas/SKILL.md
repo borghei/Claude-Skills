@@ -44,13 +44,13 @@ Before an item enters a sprint, it must pass the **INVEST** gates (Independent, 
 
 ## Clarify First
 
-Before writing the item, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before writing the item, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The strategic objective / OKR it connects to** — drives the **Why**; without it the Why is a forced exercise and the item should not be prioritized
-- [ ] **The refinement discussion or design link** — becomes the **What** (a reminder of the discussion, not a specification)
-- [ ] **The observable done-state** — drives the **Acceptance Criteria** (outcomes a user or system can observe, not implementation steps or test scripts)
+- **The strategic objective / OKR it connects to:** drives the **Why**; without it the Why is a forced exercise and the item should not be prioritized.
+- **The refinement discussion or design link:** becomes the **What** (a reminder of the discussion, not a specification).
+- **The observable done-state:** drives the **Acceptance Criteria** (outcomes a user or system can observe, not implementation steps or test scripts).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

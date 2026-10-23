@@ -35,6 +35,18 @@ edtech, K-12, higher education, higher ed, university, college, FERPA, COPPA, GD
 
 ---
 
+## Clarify First
+
+Edtech advice depends most on who the learners are, who buys the product, and where they are. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Learner age and who the customer is:** COPPA applies to services directed to children under 13 or that knowingly collect their data. When a school is the customer, it can authorize collection for educational purposes in place of parents, and FERPA reaches the vendor through the school official exception. A direct-to-learner product for under-13s needs verifiable parental consent instead.
+- **Market:** K-12, Higher Ed, Corporate L&D and direct-to-learner have different buyers, contract lengths, sales cycles and pricing. FERPA is interpreted differently in K-12 and Higher Ed, and Corporate L&D behaves more like HR-tech.
+- **States and countries:** State laws such as SOPIPA and NY Ed Law 2-d add obligations beyond FERPA, and many states require a Student Data Privacy Agreement before a tool touches student data, even in a free pilot. Learners in the EU bring GDPR-K into scope.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+---
+
 ## Quick Start
 
 1. Run student-data compliance checker on a 1-paragraph product description

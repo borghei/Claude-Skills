@@ -19,14 +19,14 @@ The agent operates as a senior operations manager, applying Lean Six Sigma, PDCA
 
 ## Clarify First
 
-Before generating the plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The operation/process in scope + its KPIs** — drives the baseline measurement (step 3); without a reliable data source per KPI the analysis is guesswork
-- [ ] **Target/benchmark each KPI must hit** — defines the gap to close (step 4); without it there is no "improvement" to design
-- [ ] **Engagement type (process redesign, capacity plan, vendor scorecard, or DMAIC project)** — selects which framework and template apply
-- [ ] **Hard constraint (budget, headcount, timeline)** — bounds the improvement design and pilot scope
+- **The operation/process in scope + its KPIs:** drives the baseline measurement (step 3); without a reliable data source per KPI the analysis is guesswork.
+- **Target/benchmark each KPI must hit:** defines the gap to close (step 4); without it there is no "improvement" to design.
+- **Engagement type (process redesign, capacity plan, vendor scorecard, or DMAIC project):** selects which framework and template apply.
+- **Hard constraint (budget, headcount, timeline):** bounds the improvement design and pilot scope.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

@@ -42,6 +42,17 @@ governance regimes).
 - Spend posture: total data spend (people + platform + tooling), trailing year + plan
 - Top frictions: stakeholders, breached SLAs, incidents, audit findings
 
+## Clarify First
+
+Data advice depends most on regulatory exposure, the use cases the data must serve, and the size and maturity of the org. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Sector and regulatory exposure:** GDPR, HIPAA or a sector regime raises the bar for classification, residency, lineage and audit evidence, and favors a centralized model early.
+- **Primary use cases:** if most value is BI on structured data, start warehouse-first; if it is ML training and cheap retention, start lake-first. Platform and build-vs-buy advice is guesswork without this.
+- **Org size and current platform:** data mesh is rarely right before about 500 engineers, and hub-and-spoke is the default from Series C. The existing stack and team set what any migration costs.
+- **What prompted the request:** a failed audit, a breached SLA, a cost problem and a new board mandate each point to a different workflow, so knowing the trigger keeps the work on the real problem.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn't cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
+
 ## Workflows
 
 ### Workflow 1 — Score data maturity

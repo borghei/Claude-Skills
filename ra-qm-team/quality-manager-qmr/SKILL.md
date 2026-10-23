@@ -56,13 +56,13 @@ Quality system accountability, management review leadership, and regulatory comp
 
 ## Clarify First
 
-Before preparing a quality artifact, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before preparing a quality artifact, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which deliverable** — management review, quality objectives, KPI framework, or culture assessment (each has a distinct workflow and output)
-- [ ] **Review period and organizational scope** — the quarter/period and which sites/jurisdictions (drives which inputs and metrics are collected)
-- [ ] **Clause 5.6.2 inputs available** — audit results, customer feedback, CAPA status, prior actions (determines whether the management review is complete)
+- **Which deliverable:** management review, quality objectives, KPI framework, or culture assessment (each has a distinct workflow and output).
+- **Review period and organizational scope:** the quarter/period and which sites/jurisdictions (drives which inputs and metrics are collected).
+- **Clause 5.6.2 inputs available:** audit results, customer feedback, CAPA status, prior actions (determines whether the management review is complete).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Management Review Workflow
 

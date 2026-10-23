@@ -483,6 +483,17 @@ Linear is an opinionated, keyboard-driven issue tracker built around a strict da
 - Migrating an existing Jira instance to Linear without losing history
 - Diagnosing why automations, sub-issues, or triage rules are not firing as expected
 
+## Clarify First
+
+Linear advice depends most on the user&#x27;s plan, whether the work reads data or changes it, and where the workspace is starting from. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **Plan:** The Free plan caps at 250 issues and 2 teams. Sub-initiatives and SAML/SCIM are Enterprise-only, and team initiatives need Business or Enterprise. A planning hierarchy or SSO setup that relies on these fails on a lower plan.
+- **Read-only or writing through the API:** A GraphQL query changes nothing. Bulk mutations across hundreds of issues, webhook handlers and migration imports change shared data and are hard to undo, so they deserve a dry run on a small sample. API keys get 2,500 requests per hour per user and OAuth apps 5,000, which sets how a bulk job has to be batched.
+- **Starting point:** A new workspace can follow `assets/linear-team-template.md`. An existing workspace needs its current teams, workflow states, labels and cycle cadence before you change them. A Jira migration needs a map from every Jira status to one of Linear&#x27;s five workflow categories, and a decision on where each Jira custom field goes, since Linear has none.
+- **Team count and size:** Cycle cadence, estimation scale, triage rotation and whether Initiatives are worth using all scale with the number of teams and people. A single team of five needs far less structure than ten teams reporting to an executive roadmap.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
 ## Quick Start
 
 Linear&#x27;s API is GraphQL-only at `https://api.linear.app/graphql`; auth via personal API key (`Authorization: &lt;key&gt;`) or OAuth2.
@@ -630,6 +641,17 @@ Linear is an opinionated, keyboard-driven issue tracker built around a strict da
 - Running bulk operations (relabel, retarget, reassign) across hundreds of issues
 - Migrating an existing Jira instance to Linear without losing history
 - Diagnosing why automations, sub-issues, or triage rules are not firing as expected
+
+## Clarify First
+
+Linear advice depends most on the user&#x27;s plan, whether the work reads data or changes it, and where the workspace is starting from. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **Plan:** The Free plan caps at 250 issues and 2 teams. Sub-initiatives and SAML/SCIM are Enterprise-only, and team initiatives need Business or Enterprise. A planning hierarchy or SSO setup that relies on these fails on a lower plan.
+- **Read-only or writing through the API:** A GraphQL query changes nothing. Bulk mutations across hundreds of issues, webhook handlers and migration imports change shared data and are hard to undo, so they deserve a dry run on a small sample. API keys get 2,500 requests per hour per user and OAuth apps 5,000, which sets how a bulk job has to be batched.
+- **Starting point:** A new workspace can follow `assets/linear-team-template.md`. An existing workspace needs its current teams, workflow states, labels and cycle cadence before you change them. A Jira migration needs a map from every Jira status to one of Linear&#x27;s five workflow categories, and a decision on where each Jira custom field goes, since Linear has none.
+- **Team count and size:** Cycle cadence, estimation scale, triage rotation and whether Initiatives are worth using all scale with the number of teams and people. A single team of five needs far less structure than ten teams reporting to an executive roadmap.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

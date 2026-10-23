@@ -476,6 +476,17 @@ Master-level expertise in Jira configuration, project management, JQL, workflows
 - Building dashboards and configuring gadgets for a team or exec
 - Managing custom fields, issue links, security levels, or bulk operations
 
+## Clarify First
+
+Jira advice depends most on which Jira the user runs, what they are allowed to change, and whether the work only reads data or changes it. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **Cloud or Data Center, and plan:** Plans (formerly Advanced Roadmaps) needs Premium or Enterprise. Cloud automation is metered in usage-based steps pooled across the organization, which limits how many rules a design can afford. Data Center reaches end of life on 28 Mar 2029, so long-lived configuration work there should assume a Cloud move.
+- **Querying or configuring:** JQL, saved filters and dashboards need little more than browse access and affect nobody else. Workflow schemes, permission schemes, custom fields and org-wide automation need project or Jira admin rights, and some go to `atlassian-admin/`. A workflow change on an active project needs a migration plan, because in-flight issues are not changed retroactively.
+- **Read-only or writing through the API or MCP:** A JQL search is safe to run. Creating, editing, transitioning or bulk-changing work items alters shared data and notifies people, so confirm the scope before any write. Workflow schemes, automation rules, permission schemes and custom-field configuration are not exposed as MCP tools and have to be done in Jira admin or the REST API.
+- **Instance size and current setup:** JQL on instances above about 100K issues can hit performance ceilings, and more than five active workflows across the org is a signal to consolidate rather than add another. `workflow_analyzer.py`, `board_optimizer.py` and `issue_quality_checker.py` need an export of issues or the board config to say anything specific.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
 ## Anti-Patterns
 
 ### A custom workflow for every project
@@ -592,6 +603,17 @@ Master-level expertise in Jira configuration, project management, JQL, workflows
 - Designing automation rules and avoiding trigger loops
 - Building dashboards and configuring gadgets for a team or exec
 - Managing custom fields, issue links, security levels, or bulk operations
+
+## Clarify First
+
+Jira advice depends most on which Jira the user runs, what they are allowed to change, and whether the work only reads data or changes it. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **Cloud or Data Center, and plan:** Plans (formerly Advanced Roadmaps) needs Premium or Enterprise. Cloud automation is metered in usage-based steps pooled across the organization, which limits how many rules a design can afford. Data Center reaches end of life on 28 Mar 2029, so long-lived configuration work there should assume a Cloud move.
+- **Querying or configuring:** JQL, saved filters and dashboards need little more than browse access and affect nobody else. Workflow schemes, permission schemes, custom fields and org-wide automation need project or Jira admin rights, and some go to `atlassian-admin/`. A workflow change on an active project needs a migration plan, because in-flight issues are not changed retroactively.
+- **Read-only or writing through the API or MCP:** A JQL search is safe to run. Creating, editing, transitioning or bulk-changing work items alters shared data and notifies people, so confirm the scope before any write. Workflow schemes, automation rules, permission schemes and custom-field configuration are not exposed as MCP tools and have to be done in Jira admin or the REST API.
+- **Instance size and current setup:** JQL on instances above about 100K issues can hit performance ceilings, and more than five active workflows across the org is a signal to consolidate rather than add another. `workflow_analyzer.py`, `board_optimizer.py` and `issue_quality_checker.py` need an export of issues or the board config to say anything specific.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

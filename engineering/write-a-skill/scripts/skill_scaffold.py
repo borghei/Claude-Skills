@@ -23,8 +23,9 @@ REQUIRED_SPEC_FIELDS = ("name", "title", "description", "category", "domain")
 MAX_DESCRIPTION_CHARS = 240
 
 STOP_RULE = (
-    'Stop rule: ask only the 2-3 that most change the output. If the user says '
-    '"just draft it," proceed and list your assumptions at the top of the artifact.'
+    "Ask about the two or three inputs that matter most for this request, not the whole "
+    "list. If the user wants a result straight away, produce it and state your assumptions "
+    "at the top."
 )
 
 
@@ -96,11 +97,13 @@ def render_body(spec: Dict[str, Any]) -> List[str]:
             "",
             "## Clarify First",
             "",
-            "Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:",
+            "TODO: one sentence naming what most shapes this skill's output. Settle the inputs "
+            "below before producing anything. When one is missing or vague and would change the "
+            "result, ask about it; when it wouldn't, use a sensible default and say which one you used.",
             "",
-            "- [ ] **TODO input 1** — why it changes the output",
-            "- [ ] **TODO input 2** — why it changes the output",
-            "- [ ] **TODO input 3** — why it changes the output",
+            "- **TODO input 1:** why it changes the result.",
+            "- **TODO input 2:** why it changes the result.",
+            "- **TODO input 3:** why it changes the result.",
             "",
             STOP_RULE,
         ]

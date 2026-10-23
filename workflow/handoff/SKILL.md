@@ -38,14 +38,14 @@ compliance audit, a draft document — wherever work outlives a single working s
 
 ## Clarify First
 
-Before writing the handoff, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before writing the handoff, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Receiver** — a teammate, a fresh AI agent, or future-you (sets how much background to spell out vs assume)
-- [ ] **The goal + done-state** — what "finished" looks like for this work (anchors the Next Steps section)
-- [ ] **Current state** — what is done, in-progress, and untouched right now (the heart of the handoff)
-- [ ] **Constraints & landmines** — deadlines, decisions already made, paths already tried and abandoned (prevents the receiver repeating dead ends)
+- **Receiver:** a teammate, a fresh AI agent, or future-you (sets how much background to spell out vs assume).
+- **The goal + done-state:** what "finished" looks like for this work (anchors the Next Steps section).
+- **Current state:** what is done, in-progress, and untouched right now (the heart of the handoff).
+- **Constraints & landmines:** deadlines, decisions already made, paths already tried and abandoned (prevents the receiver repeating dead ends).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the handoff.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

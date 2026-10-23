@@ -48,6 +48,17 @@ Until end of life Atlassian provides technical support, critical security fixes 
 - Optimizing system performance, planning backups, or running DR drills
 - Setting org-wide governance, naming conventions, and change management
 
+## Clarify First
+
+What most shapes this skill's output is the deployment type, the plan tier and the scope of the admin change. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Cloud or Data Center:** admin screens, backup options and provisioning differ between them. On Data Center, the end-of-life dates above can turn a configuration question into a migration question.
+- **Plan tier and identity provider:** Free, Standard, Premium and Enterprise unlock different controls. Data residency and advanced audit logs need Premium or Enterprise, and SCIM provisioning depends on how much of SCIM 2.0 the IdP supports.
+- **Scope and blast radius:** a single group change is low risk. Org-wide permission schemes and bulk operations need a change record with a JQL preview, backup and rollback plan. Project-level configuration belongs to `jira-expert/`.
+- **Compliance drivers:** SOC 2, ISO 27001 or GDPR obligations decide how strict the admin count, authentication policies and audit logging need to be.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
 ## Anti-Patterns
 
 ### Admin rights as the default

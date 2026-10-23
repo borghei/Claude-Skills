@@ -56,6 +56,18 @@ executive mentor, pre-mortem, board prep, hard decisions, stress test, postmorte
 
 ---
 
+## Clarify First
+
+What most shapes this skill's challenge is the specific plan or decision being tested and what it costs if it goes wrong. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **The plan or decision, stated concretely:** pre-mortems and stress tests work on explicit assumptions and numbers. A vague plan produces vague failure modes, so the useful first move is often to get the key assumptions written down as "we assume X".
+- **Which kind of help is needed:** stress-testing a plan, preparing for a board meeting, making a hard call and running a post-mortem use different frameworks. Board prep in particular depends on the meeting date, the numbers that missed and the type of board members in the room.
+- **Stakes and reversibility:** the hard call protocol starts with whether the decision can be reversed within 90 days. Reversible decisions should move fast; irreversible ones get the full framework. Severity scoring in the pre-mortem also depends on what is actually at risk: runway, the team, a key customer or the founder's credibility.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn't cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
+
+---
+
 ## The Difference
 
 Other C-suite skills build plans. Executive Mentor breaks them.

@@ -43,13 +43,13 @@ The agent builds production-grade Stripe integrations for SaaS billing: subscrip
 
 ## Clarify First
 
-Before building the integration, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the integration, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Framework** — Next.js / Express / Django (the handler and client patterns differ per stack)
-- [ ] **Billing model** — flat subscription / metered usage-based / trials + proration (shapes the subscription state machine and code)
-- [ ] **Scope** — which piece: Checkout, idempotent webhooks, dunning, or SCA/3D Secure (selects the reference and code generated)
+- **Framework:** Next.js / Express / Django (the handler and client patterns differ per stack).
+- **Billing model:** flat subscription / metered usage-based / trials + proration (shapes the subscription state machine and code).
+- **Scope:** which piece: Checkout, idempotent webhooks, dunning, or SCA/3D Secure (selects the reference and code generated).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## References
 

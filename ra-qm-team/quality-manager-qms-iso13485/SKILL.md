@@ -41,13 +41,13 @@ ISO 13485:2016 Quality Management System implementation, maintenance, and certif
 
 ## Clarify First
 
-Before building or assessing the QMS, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building or assessing the QMS, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Task** — QMS implementation/gap analysis, internal audit, process validation, or supplier qualification (picks the workflow and script)
-- [ ] **Standard scope** — ISO 13485 only, FDA QMSR transition, or digital QMS (Part 11 / Annex 11) (determines which requirements and retained FDA items apply)
-- [ ] **Certification stage** — building from scratch, remediating gaps, or certification readiness (sets the depth)
+- **Task:** QMS implementation/gap analysis, internal audit, process validation, or supplier qualification (picks the workflow and script).
+- **Standard scope:** ISO 13485 only, FDA QMSR transition, or digital QMS (Part 11 / Annex 11) (determines which requirements and retained FDA items apply).
+- **Certification stage:** building from scratch, remediating gaps, or certification readiness (sets the depth).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

@@ -42,13 +42,13 @@ The four roles in brief: **Driver** (exactly one, drives to closure), **Approver
 
 ## Clarify First
 
-Before building the DACI chart, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the DACI chart, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The specific decisions to map** — the 3-5 high-impact decisions, not "everything" (each becomes a chart row; mapping too much at once is the top failure mode)
-- [ ] **Candidate people and their real authority** — who can actually approve or veto (drives the Driver and Approver assignments; without genuine authority the chart is fiction)
-- [ ] **Current pain points** — where decisions stall or thrash today (drives the current→target-state gap and the 30/60/90 transition plan)
+- **The specific decisions to map:** the 3-5 high-impact decisions, not "everything" (each becomes a chart row; mapping too much at once is the top failure mode).
+- **Candidate people and their real authority:** who can actually approve or veto (drives the Driver and Approver assignments; without genuine authority the chart is fiction).
+- **Current pain points:** where decisions stall or thrash today (drives the current→target-state gap and the 30/60/90 transition plan).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

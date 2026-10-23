@@ -34,13 +34,13 @@ meeting prep, calendar prep, briefing, pre-read, pre-meeting, talking points, ag
 
 ## Clarify First
 
-Before generating the briefing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the briefing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Meeting type & attendees** — customer call vs board vs 1:1 changes the briefing's structure, tone, and emphasis
-- [ ] **Your goal / decision sought** — this becomes the front-loaded first line of the briefing
-- [ ] **Prior context** — last contact, open issues, current status; without it the briefing is generic and useless
+- **Meeting type & attendees:** customer call vs board vs 1:1 changes the briefing's structure, tone, and emphasis.
+- **Your goal / decision sought:** this becomes the front-loaded first line of the briefing.
+- **Prior context:** last contact, open issues, current status; without it the briefing is generic and useless.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

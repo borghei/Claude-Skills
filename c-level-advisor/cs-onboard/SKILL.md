@@ -31,6 +31,19 @@ C-Suite Onboarding captures the company context that powers every C-level adviso
 
 ---
 
+## Clarify First
+
+What most shapes this session is whether company context already exists and how much time the founder has for it. Settle the inputs below before starting the interview. When one is missing or vague and would change how the session runs, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Existing context file:** its age and completeness decide between a quick `/cs:update` (about 15 minutes, "what changed?") and a full `/cs:setup` (about 45 minutes). Context under 90 days old needs a refresh at most; past 180 days a re-interview is the better use of time.
+- **Time available:** a full interview takes about 45 minutes. With less, it is better to cover the dimensions that matter most well and mark the rest `[not captured]` for a follow-up than to rush all seven.
+- **What matters most right now:** the advisory skills the founder plans to use next decide which dimensions need depth. Financial fields matter most for CFO and CEO advice; a founder heading into a hiring push needs Team & Culture captured properly.
+- **Who is being interviewed:** with more than one founder, the file reflects the interviewee's view. Knowing this up front lets you note where a co-founder's perspective may differ.
+
+Check for an existing `~/.claude/company-context.md` before starting. If one exists, show the founder what it holds and confirm before updating or replacing it, since the file is never changed silently. Ask about the two or three inputs that matter most for this session, not the whole list. If the founder wants to start straight away, begin with the opening question and state your assumptions about the session first.
+
+---
+
 ## Commands
 
 | Command | Duration | Purpose |

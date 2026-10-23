@@ -471,13 +471,13 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 
 ## Clarify First
 
-Before designing the schema, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the schema, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Requirements or existing DDL** — the entities/relationships in natural language, or the schema to review (the source the design is derived from)
-- [ ] **Engine &amp; ORM** — PostgreSQL/MySQL/SQLite and Drizzle/Prisma/TypeORM/Alembic (sets the migration and type-generation output format)
-- [ ] **Cross-cutting needs** — multi-tenancy/RLS, soft deletes, audit trails, or temporal data (determines which patterns and policies are generated)
+- **Requirements or existing DDL:** the entities/relationships in natural language, or the schema to review (the source the design is derived from).
+- **Engine &amp; ORM:** PostgreSQL/MySQL/SQLite and Drizzle/Prisma/TypeORM/Alembic (sets the migration and type-generation output format).
+- **Cross-cutting needs:** multi-tenancy/RLS, soft deletes, audit trails, or temporal data (determines which patterns and policies are generated).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 
@@ -595,13 +595,13 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 
 ## Clarify First
 
-Before designing the schema, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the schema, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Requirements or existing DDL** — the entities/relationships in natural language, or the schema to review (the source the design is derived from)
-- [ ] **Engine &amp; ORM** — PostgreSQL/MySQL/SQLite and Drizzle/Prisma/TypeORM/Alembic (sets the migration and type-generation output format)
-- [ ] **Cross-cutting needs** — multi-tenancy/RLS, soft deletes, audit trails, or temporal data (determines which patterns and policies are generated)
+- **Requirements or existing DDL:** the entities/relationships in natural language, or the schema to review (the source the design is derived from).
+- **Engine &amp; ORM:** PostgreSQL/MySQL/SQLite and Drizzle/Prisma/TypeORM/Alembic (sets the migration and type-generation output format).
+- **Cross-cutting needs:** multi-tenancy/RLS, soft deletes, audit trails, or temporal data (determines which patterns and policies are generated).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

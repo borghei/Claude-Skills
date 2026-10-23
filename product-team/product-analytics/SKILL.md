@@ -43,13 +43,13 @@ product changes.
 
 ## Clarify First
 
-Before designing the metric tree or audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the metric tree or audit, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Product type** — B2B SaaS, consumer, marketplace, etc. (drives the North Star pattern and input metrics)
-- [ ] **The value moment** — what "delivered value" looks like for a user (defines the North Star and activation event)
-- [ ] **Current analytics stack and event taxonomy** — Amplitude/Mixpanel/GA4/Segment plus existing events (drives the instrumentation audit and gap list)
+- **Product type:** B2B SaaS, consumer, marketplace, etc. (drives the North Star pattern and input metrics).
+- **The value moment:** what "delivered value" looks like for a user (defines the North Star and activation event).
+- **Current analytics stack and event taxonomy:** Amplitude/Mixpanel/GA4/Segment plus existing events (drives the instrumentation audit and gap list).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

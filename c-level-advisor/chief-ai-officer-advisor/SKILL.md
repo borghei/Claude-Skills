@@ -43,6 +43,17 @@ When invoking this skill, you should provide some combination of:
 - Spend posture: total AI spend (people + infra + tooling), trailing year + plan
 - Top stakeholders and current frictions (CEO, CTO, CISO, CFO, GC, business leaders)
 
+## Clarify First
+
+AI advice depends most on regulatory exposure, what is already in production, and the size of the engineering org. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Sector and regulatory exposure:** this decides whether systems may fall into the EU AI Act high-risk categories (employment screening, credit scoring, critical infrastructure) and pushes the operating model toward centralized. A bank or a hospital gets a different governance program from a low-risk SaaS company.
+- **Current AI portfolio:** what is in production, in pilot or already killed is the starting point for the maturity score, the risk register and the investment plan. A strategy written without it tends to repeat failed bets.
+- **Engineering org size and AI team:** the centralize-vs-federate table leans centralized under 500 engineers and federated above 1000, and the hiring sequence is staged by engineering headcount. Who is on the team today decides what to hire next.
+- **Budget and the business outcome it serves:** the investment planner allocates against a fixed budget, and an AI strategy with no P&L outcome turns into a research project.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn't cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
+
 ## Workflows
 
 ### Workflow 1 — Assess AI maturity (0-100, 5 dimensions)

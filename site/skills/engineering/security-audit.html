@@ -511,9 +511,9 @@ If the request could be either, ask which before creating anything.
 
 ## Clarify First
 
-Before a full audit, confirm these. Ask — do not assume:
+Before a full audit, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Breadth tier** — decides which attack-class files are in play, and therefore cost and coverage. Offer all three:
+- **Breadth tier:** decides which attack-class files are in play, and therefore cost and coverage. Offer all three:
 
   | Tier | Covers | Fits |
   |---|---|---|
@@ -521,11 +521,11 @@ Before a full audit, confirm these. Ask — do not assume:
   | `focused` | Core + web/auth, AI/LLM, supply chain, cloud | Most web and API products; the default |
   | `full` | Core + all 10 companions | High-stakes targets, native code, multi-tenant platforms, device apps |
 
-- [ ] **Target and scope** — the repository root, and whether to audit all of it, named paths, or a diff between two refs
-- [ ] **Output location** — a directory outside the target (default `~/security-audits/&lt;repo&gt;/run-&lt;N&gt;`)
-- [ ] **Profile and budget** — `quick`, `standard`, or `deep`, and any cap on agent invocations
+- **Target and scope:** the repository root, and whether to audit all of it, named paths, or a diff between two refs.
+- **Output location:** a directory outside the target (default `~/security-audits/&lt;repo&gt;/run-&lt;N&gt;`).
+- **Profile and budget:** `quick`, `standard`, or `deep`, and any cap on agent invocations.
 
-Stop rule: always ask the tier; ask the others only if the request leaves them
+Always ask the tier; ask the others only if the request leaves them
 open. If the user says &quot;just run it&quot;, use `focused`, `standard`, whole
 repository, default output, no budget cap — and state those choices at the top
 of the report.
@@ -823,9 +823,9 @@ If the request could be either, ask which before creating anything.
 
 ## Clarify First
 
-Before a full audit, confirm these. Ask — do not assume:
+Before a full audit, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Breadth tier** — decides which attack-class files are in play, and therefore cost and coverage. Offer all three:
+- **Breadth tier:** decides which attack-class files are in play, and therefore cost and coverage. Offer all three:
 
   | Tier | Covers | Fits |
   |---|---|---|
@@ -833,11 +833,11 @@ Before a full audit, confirm these. Ask — do not assume:
   | `focused` | Core + web/auth, AI/LLM, supply chain, cloud | Most web and API products; the default |
   | `full` | Core + all 10 companions | High-stakes targets, native code, multi-tenant platforms, device apps |
 
-- [ ] **Target and scope** — the repository root, and whether to audit all of it, named paths, or a diff between two refs
-- [ ] **Output location** — a directory outside the target (default `~/security-audits/&lt;repo&gt;/run-&lt;N&gt;`)
-- [ ] **Profile and budget** — `quick`, `standard`, or `deep`, and any cap on agent invocations
+- **Target and scope:** the repository root, and whether to audit all of it, named paths, or a diff between two refs.
+- **Output location:** a directory outside the target (default `~/security-audits/&lt;repo&gt;/run-&lt;N&gt;`).
+- **Profile and budget:** `quick`, `standard`, or `deep`, and any cap on agent invocations.
 
-Stop rule: always ask the tier; ask the others only if the request leaves them
+Always ask the tier; ask the others only if the request leaves them
 open. If the user says &quot;just run it&quot;, use `focused`, `standard`, whole
 repository, default output, no budget cap — and state those choices at the top
 of the report.

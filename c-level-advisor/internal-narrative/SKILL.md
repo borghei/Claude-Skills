@@ -50,14 +50,14 @@ Same fact. Five narratives needed. The skill is maintaining truth while serving 
 
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The situation type** (routine update, all-hands, investor update, pivot/reorg, or crisis) — determines which framework and template you use and the urgency of the cadence
-- [ ] **Which audiences must hear this** (employees, investors, customers, candidates, partners) — each gets its own column in the translation matrix with a different frame of the same fact
-- [ ] **The core facts and current state** (honest metrics, what changed, what's good and bad) — every audience narrative derives from one true core; vague facts produce hollow narrative
-- [ ] **Any prior public statements on this topic** (last investor update, last all-hands) — needed to run contradiction detection before the new communication ships
+- **The situation type:** (routine update, all-hands, investor update, pivot/reorg, or crisis) — determines which framework and template you use and the urgency of the cadence.
+- **Which audiences must hear this:** (employees, investors, customers, candidates, partners) — each gets its own column in the translation matrix with a different frame of the same fact.
+- **The core facts and current state:** (honest metrics, what changed, what's good and bad) — every audience narrative derives from one true core; vague facts produce hollow narrative.
+- **Any prior public statements on this topic:** (last investor update, last all-hands) — needed to run contradiction detection before the new communication ships.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Framework
 

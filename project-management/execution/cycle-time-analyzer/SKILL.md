@@ -50,13 +50,13 @@ Flow metrics are the most useful diagnostic for team and process health, far mor
 
 ## Clarify First
 
-Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Issue history with status transitions** — per-item timestamps for when work started and finished (every metric is derived from these; missing transitions invalidate the numbers)
-- [ ] **Workflow states that count as "in progress" vs "done"** — your board's actual status names (defines where cycle time starts/stops, which changes every result)
-- [ ] **Analysis window** — the rolling period (e.g. last 6-8 weeks) and any type filter (scopes throughput trend and which in-flight items are flagged as aging WIP)
+- **Issue history with status transitions:** per-item timestamps for when work started and finished (every metric is derived from these; missing transitions invalidate the numbers).
+- **Workflow states that count as "in progress" vs "done":** your board's actual status names (defines where cycle time starts/stops, which changes every result).
+- **Analysis window:** the rolling period (e.g. last 6-8 weeks) and any type filter (scopes throughput trend and which in-flight items are flagged as aging WIP).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

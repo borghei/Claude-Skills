@@ -323,10 +323,10 @@ This pattern applies to **generative skills** (those that emit an artifact: PRDs
 
 - Add a `## Clarify First` section immediately before the skill's main workflow / Quick Start.
 - List only the **2–4 inputs that most change the output** — not an exhaustive intake form.
-- Phrase each as a confirmable checkbox the agent verifies, with the instruction to **ASK when unknown, never assume**.
-- Include a **stop rule** so the gate stays lightweight and never becomes an interrogation:
-  - ask at most the few inputs that materially change the output;
-  - if the user says "just draft it" (or similar), proceed using stated assumptions, listed at the top of the artifact.
+- **Write rules with their reasons, not a script.** For each input, say why it changes the output, and let the model judge when to ask. Current models follow intent well and over-follow rigid procedures, so avoid checkboxes, all-caps commands and numbered steps. Give a concrete instruction only where judgment can't replace it, such as a context file to read first.
+- Keep the gate light:
+  - ask only about inputs that would change the result; for the rest, use a sensible default and say which one;
+  - if the user wants a result straight away, produce it and list the assumptions at the top.
 - The gate lives in the SKILL.md **body**, not the `description:` — it must not consume the 60-token description budget (P1).
 
 ### Template
@@ -334,15 +334,20 @@ This pattern applies to **generative skills** (those that emit an artifact: PRDs
 ```markdown
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+<One sentence naming what most shapes this skill's output.> Settle the inputs below
+before producing anything. When one is missing or vague and would change the result,
+ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **<input 1>** — <why it changes the output>
-- [ ] **<input 2>** — <why it changes the output>
-- [ ] **<input 3>** — <why it changes the output>
+- **<Input 1>:** <why it changes the result, in this skill's terms>.
+- **<Input 2>:** <why it changes the result>.
+- **<Input 3>:** <why it changes the result>.
 
-Stop rule: ask only the 2–3 that most change the output. If the user says
-"just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole
+list. If the user wants a result straight away, produce it and state your assumptions
+at the top.
 ```
+
+Older skills use a checkbox version of this gate with an all-caps "ASK" instruction. It still passes the validator; prefer the form above for new and rewritten skills.
 
 ### Why this stays self-contained (P9)
 
@@ -362,7 +367,7 @@ Use this checklist before publishing any skill.
 - [ ] Directory structure follows standard layout (P8)
 - [ ] Self-contained: no cross-skill deps, all paths resolve (P9)
 - [ ] Time savings 40%+, consistency improvement 30%+ (P10)
-- [ ] Generative skills: `## Clarify First` gate with 2–4 inputs + stop rule (P11)
+- [ ] Generative skills: `## Clarify First` gate with 2–4 inputs, written as rules with reasons (P11)
 
 ## Examples
 

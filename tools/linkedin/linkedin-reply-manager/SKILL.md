@@ -92,14 +92,14 @@ seeing the drafts.
 
 ## Clarify First
 
-Before triaging or drafting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before triaging or drafting, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Whose post it is** — on the user's own post they are the host and silence is noticed; in someone else's thread they are a guest and should answer only what was addressed to them
-- [ ] **Thread position of each comment** — a reply to a reply lands in a flat list under the top-level comment, so the draft must name who it answers
-- [ ] **Which commenters matter commercially or personally** — relationship moves a comment up the queue more than anything in its text
-- [ ] **How many replies fit this sitting** — sets `--limit`; twelve considered replies beat thirty rushed ones
+- **Whose post it is:** on the user's own post they are the host and silence is noticed; in someone else's thread they are a guest and should answer only what was addressed to them.
+- **Thread position of each comment:** a reply to a reply lands in a flat list under the top-level comment, so the draft must name who it answers.
+- **Which commenters matter commercially or personally:** relationship moves a comment up the queue more than anything in its text.
+- **How many replies fit this sitting:** sets `--limit`; twelve considered replies beat thirty rushed ones.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the queue — in particular, that every commenter was treated as relationship `unknown`.
+Ask about the two or three inputs that matter most for this request. If the user says "just draft it," proceed and list your assumptions at the top of the queue — in particular, that every commenter was treated as relationship `unknown`.
 
 ## Workflows
 

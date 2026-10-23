@@ -465,13 +465,13 @@ Generates phased migration plans with risk assessment, compatibility analysis, a
 
 ## Clarify First
 
-Before planning the migration, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before planning the migration, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **What&#x27;s migrating** — database, API, infrastructure, or service (sets `--type` and which pattern catalog applies)
-- [ ] **Deliverable** — phased plan, compatibility diff, or rollback runbook (selects `migration_planner.py` vs `compatibility_checker.py` vs `rollback_generator.py`)
-- [ ] **Downtime budget &amp; pattern** — zero-downtime requirement and which pattern (expand-contract, dual-write, strangler fig, blue-green) (drives the phases and cutover technique)
+- **What&#x27;s migrating:** database, API, infrastructure, or service (sets `--type` and which pattern catalog applies).
+- **Deliverable:** phased plan, compatibility diff, or rollback runbook (selects `migration_planner.py` vs `compatibility_checker.py` vs `rollback_generator.py`).
+- **Downtime budget &amp; pattern:** zero-downtime requirement and which pattern (expand-contract, dual-write, strangler fig, blue-green) (drives the phases and cutover technique).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 
@@ -585,13 +585,13 @@ Generates phased migration plans with risk assessment, compatibility analysis, a
 
 ## Clarify First
 
-Before planning the migration, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before planning the migration, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **What&#x27;s migrating** — database, API, infrastructure, or service (sets `--type` and which pattern catalog applies)
-- [ ] **Deliverable** — phased plan, compatibility diff, or rollback runbook (selects `migration_planner.py` vs `compatibility_checker.py` vs `rollback_generator.py`)
-- [ ] **Downtime budget &amp; pattern** — zero-downtime requirement and which pattern (expand-contract, dual-write, strangler fig, blue-green) (drives the phases and cutover technique)
+- **What&#x27;s migrating:** database, API, infrastructure, or service (sets `--type` and which pattern catalog applies).
+- **Deliverable:** phased plan, compatibility diff, or rollback runbook (selects `migration_planner.py` vs `compatibility_checker.py` vs `rollback_generator.py`).
+- **Downtime budget &amp; pattern:** zero-downtime requirement and which pattern (expand-contract, dual-write, strangler fig, blue-green) (drives the phases and cutover technique).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

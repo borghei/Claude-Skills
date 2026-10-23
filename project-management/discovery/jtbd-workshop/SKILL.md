@@ -45,14 +45,14 @@ The workshop synthesizes four JTBD schools: Christensen's *milkshake* hiring fra
 
 ## Clarify First
 
-Before planning the workshop, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before planning the workshop, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Format** — 2h validation / 4h half-day / 8h full-day (sets the agenda depth; 2h is validation, not primary discovery)
-- [ ] **Target segment** — JTBD is segment-by-job, not persona-by-demographic (defines who you study and which job hierarchy you build)
-- [ ] **Switch-interview access** — can you recruit recent (90-day) switchers (without customer voice the forces canvas and ODI scores become team-aligned fiction)
-- [ ] **Trigger/purpose** — new product / pivot / stalled adoption (shapes which of the four forces to emphasize)
+- **Format:** 2h validation / 4h half-day / 8h full-day (sets the agenda depth; 2h is validation, not primary discovery).
+- **Target segment:** JTBD is segment-by-job, not persona-by-demographic (defines who you study and which job hierarchy you build).
+- **Switch-interview access:** can you recruit recent (90-day) switchers (without customer voice the forces canvas and ODI scores become team-aligned fiction).
+- **Trigger/purpose:** new product / pivot / stalled adoption (shapes which of the four forces to emphasize).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

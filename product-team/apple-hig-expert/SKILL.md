@@ -43,6 +43,17 @@ native fit (see web design guides for that).
 - Stack: SwiftUI vs UIKit / AppKit, recent or legacy codebase
 - Accessibility maturity (WCAG audit done; VoiceOver tested)
 
+## Clarify First
+
+What most shapes this skill's output is the target platform and how much of the actual app you can show. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Platform and OS version:** component behavior differs by platform. A popover on compact iPhone becomes a sheet, inspectors belong to macOS and iPadOS, and the version range decides which APIs are available. `component_pattern_lookup.py` takes `--platform` for this reason.
+- **Screens or designs:** the compliance and accessibility audits run on a screen inventory. Without screenshots or a description of each screen, the result is general guidance rather than findings.
+- **Stack:** SwiftUI or UIKit/AppKit, new or legacy code, changes which fixes are cheap and how semantic colors and Dynamic Type get applied.
+- **Accessibility baseline:** whether VoiceOver testing or a WCAG audit has already happened decides whether `accessibility_auditor.py` is a first pass or a check against known gaps.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
 ## Workflows
 
 ### Workflow 1 — Audit screens for HIG compliance

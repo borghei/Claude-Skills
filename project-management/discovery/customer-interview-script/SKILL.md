@@ -44,14 +44,14 @@ The script structure draws from four canonical sources: Steve Portigal's *Interv
 
 ## Clarify First
 
-Before building the interview script, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the interview script, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Interview type** — problem discovery / solution validation / journey / churn-win-loss (selects the question bank and phase emphasis)
-- [ ] **Must-answer questions** — the 2-3 assumptions you go in to test (drives the custom story-collection prompts)
-- [ ] **Time slot** — 45 / 60 / 90 minutes (sets the per-phase timing)
-- [ ] **Participant recency** — how recently they did the job (story-based probing degrades past ~90 days, which weakens the script's core)
+- **Interview type:** problem discovery / solution validation / journey / churn-win-loss (selects the question bank and phase emphasis).
+- **Must-answer questions:** the 2-3 assumptions you go in to test (drives the custom story-collection prompts).
+- **Time slot:** 45 / 60 / 90 minutes (sets the per-phase timing).
+- **Participant recency:** how recently they did the job (story-based probing degrades past ~90 days, which weakens the script's core).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

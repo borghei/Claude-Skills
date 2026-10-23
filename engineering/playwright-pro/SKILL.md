@@ -39,14 +39,14 @@ Production-grade end-to-end testing with Playwright. Generate tests from user st
 
 ## Clarify First
 
-Before generating tests, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating tests, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Task / sub-skill** — init, generate, fix-flaky, migrate, or review (routes the entire workflow)
-- [ ] **User story or flow to cover** — the happy + error paths the spec must assert (drives test generation)
-- [ ] **Locator surface** — whether the app exposes roles/labels/`data-testid` (sets locator strategy and POM resilience)
-- [ ] **Source framework (if migrating)** — Cypress or Selenium (selects the command-mapping table)
+- **Task / sub-skill:** init, generate, fix-flaky, migrate, or review (routes the entire workflow).
+- **User story or flow to cover:** the happy + error paths the spec must assert (drives test generation).
+- **Locator surface:** whether the app exposes roles/labels/`data-testid` (sets locator strategy and POM resilience).
+- **Source framework (if migrating):** Cypress or Selenium (selects the command-mapping table).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Sub-Skills
 

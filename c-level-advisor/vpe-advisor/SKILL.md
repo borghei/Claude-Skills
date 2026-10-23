@@ -46,6 +46,17 @@ teams.
 - Spend posture (eng comp budget, tooling, cloud)
 - Top frictions (CEO, CPO, CTO, customers)
 
+## Clarify First
+
+What most shapes VP of Engineering advice is the size of the engineering org, the specific symptom or decision driving the request, and how much delivery and talent data exists. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Engineering headcount and stage:** org shape defaults change with size (functional below about 30 engineers, platform plus product squads from about 50), and a platform team only starts to pay off around 30 engineers.
+- **The symptom or decision:** slowing delivery, next year's hiring plan, losing top engineers and the board section are different engagements with different data. Naming the one that matters keeps the advice from turning into a generic org review.
+- **Available metrics:** team-level DORA numbers, regrettable attrition and a DevEx survey decide whether the advice can be specific. "Engineering is slow" usually means two or three teams, which only shows up in per-team data.
+- **Whether there is a CTO, and where the line sits:** the CTO/VPE split decides which calls are the VPE's to make. When one person covers both, or the founder plays one role implicitly, the split should be made explicit before advising on org or hiring.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn't cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
+
 ## Workflows
 
 ### Workflow 1 — Score engineering org health

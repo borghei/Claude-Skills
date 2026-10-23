@@ -42,13 +42,13 @@ The agent designs multi-agent orchestration systems using five core patterns: se
 
 ## Clarify First
 
-Before designing the workflow, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the workflow, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Workflow topology** — linear, parallel, tree/delegation, reactive, or consensus (selects which of the five orchestration patterns)
-- [ ] **Framework target** — LangGraph, CrewAI, AutoGen, or Claude agent teams (determines the implementation code emitted)
-- [ ] **Reliability & cost constraints** — failure tolerance and budget (drives circuit breakers, retries, timeouts, and model-tier routing)
+- **Workflow topology:** linear, parallel, tree/delegation, reactive, or consensus (selects which of the five orchestration patterns).
+- **Framework target:** LangGraph, CrewAI, AutoGen, or Claude agent teams (determines the implementation code emitted).
+- **Reliability & cost constraints:** failure tolerance and budget (drives circuit breakers, retries, timeouts, and model-tier routing).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Pattern Selection Decision Tree
 

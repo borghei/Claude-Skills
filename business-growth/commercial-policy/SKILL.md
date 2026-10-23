@@ -277,14 +277,14 @@ See [references/contract-and-commercial-guardrails.md](references/contract-and-c
 
 ## Clarify First
 
-Before generating the policy, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the policy, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Company stage + ARR scale** — drives whether a full charter is warranted and how tight thresholds should be
-- [ ] **Approver structure** — who owns the policy and sits in the chain (CRO/CFO/GC, VP Sales, Director) (populates Owners/Approvers and every approval line)
-- [ ] **Region / jurisdiction** — US / EU / APAC (changes payment norms, governing law, and triggers a regional overlay)
-- [ ] **Max discount + liability risk appetite** — the discount ceiling and liability-cap tolerance (drives the Pricing and Legal policy sections)
+- **Company stage + ARR scale:** drives whether a full charter is warranted and how tight thresholds should be.
+- **Approver structure:** who owns the policy and sits in the chain (CRO/CFO/GC, VP Sales, Director) (populates Owners/Approvers and every approval line).
+- **Region / jurisdiction:** US / EU / APAC (changes payment norms, governing law, and triggers a regional overlay).
+- **Max discount + liability risk appetite:** the discount ceiling and liability-cap tolerance (drives the Pricing and Legal policy sections).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the policy.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## End-to-end workflows
 

@@ -47,14 +47,14 @@ synthesis here.
 
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which cadence is being run** — daily, weekly, and quarterly ask genuinely different questions; the wrong set produces either triviality or an hour-long session that gets skipped
-- [ ] **Whether resolved predictions exist** — below 20 resolved, calibration is too noisy to act on and the honest output is "keep logging," not a score
-- [ ] **Whether a weekly operating review already runs** — determines whether this layers on top or has to carry the operating cadence too
-- [ ] **Carry-count history on open commitments** — the three-cycle rule is the sharpest mechanic here and needs the count to fire
+- **Which cadence is being run:** daily, weekly, and quarterly ask genuinely different questions; the wrong set produces either triviality or an hour-long session that gets skipped.
+- **Whether resolved predictions exist:** below 20 resolved, calibration is too noisy to act on and the honest output is "keep logging," not a score.
+- **Whether a weekly operating review already runs:** determines whether this layers on top or has to carry the operating cadence too.
+- **Carry-count history on open commitments:** the three-cycle rule is the sharpest mechanic here and needs the count to fire.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

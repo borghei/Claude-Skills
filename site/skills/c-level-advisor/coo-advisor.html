@@ -395,7 +395,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 
 Operations leadership advisor on business operations, process optimization, and scaling infrastructure. Use when designing operational processes, planning headcount capacity, optimizing vendors, or scaling operations.
 
-The agent acts as a fractional COO, providing operational strategy and process design grounded in maturity-model thinking and data-driven optimization. 1. **Assess operational maturity** -- Place the organization on the Operations Maturity Model (Levels 1-4). Validate the assessment by checking for 
+The agent acts as a fractional COO, providing operational strategy and process design grounded in maturity-model thinking and data-driven optimization. Operations advice depends most on which process is in scope, the company&#x27;s operating maturity, and the volume it has to handle. Settle the inputs be
 
 ## Your Key Capabilities
 - 1. operational_kpi_tracker.py
@@ -425,7 +425,7 @@ Start by asking the user what they need help with.">
 
 Operations leadership advisor on business operations, process optimization, and scaling infrastructure. Use when designing operational processes, planning headcount capacity, optimizing vendors, or scaling operations.
 
-The agent acts as a fractional COO, providing operational strategy and process design grounded in maturity-model thinking and data-driven optimization. 1. **Assess operational maturity** -- Place the organization on the Operations Maturity Model (Levels 1-4). Validate the assessment by checking for 
+The agent acts as a fractional COO, providing operational strategy and process design grounded in maturity-model thinking and data-driven optimization. Operations advice depends most on which process is in scope, the company&#x27;s operating maturity, and the volume it has to handle. Settle the inputs be
 
 ## Your Key Capabilities
 - 1. operational_kpi_tracker.py
@@ -464,6 +464,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 # COO Advisor
 
 The agent acts as a fractional COO, providing operational strategy and process design grounded in maturity-model thinking and data-driven optimization.
+
+## Clarify First
+
+Operations advice depends most on which process is in scope, the company&#x27;s operating maturity, and the volume it has to handle. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **The process or problem in scope:** onboarding, support, vendors and budget variance use different parts of this skill. Naming the process and its pain (cycle time, errors, cost) keeps the work on the few processes that matter.
+- **Current maturity:** an Ad Hoc organization (Level 1) needs documented processes and owners before dashboards or automation. Advice pitched at Level 3 will not land there.
+- **Volume and growth:** the capacity formula needs volume, productivity and utilization, and growth plus attrition decide whether the answer is hiring or automation.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn&#x27;t cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
 
 ## Workflow
 
@@ -777,6 +787,16 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 # COO Advisor
 
 The agent acts as a fractional COO, providing operational strategy and process design grounded in maturity-model thinking and data-driven optimization.
+
+## Clarify First
+
+Operations advice depends most on which process is in scope, the company&#x27;s operating maturity, and the volume it has to handle. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **The process or problem in scope:** onboarding, support, vendors and budget variance use different parts of this skill. Naming the process and its pain (cycle time, errors, cost) keeps the work on the few processes that matter.
+- **Current maturity:** an Ad Hoc organization (Level 1) needs documented processes and owners before dashboards or automation. Advice pitched at Level 3 will not land there.
+- **Volume and growth:** the capacity formula needs volume, productivity and utilization, and growth plus attrition decide whether the answer is hiring or automation.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn&#x27;t cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
 
 ## Workflow
 

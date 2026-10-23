@@ -482,6 +482,17 @@ Strategic frameworks and tools for technology leadership, team scaling, and engi
 ## Keywords
 CTO, chief technology officer, technical leadership, tech debt, technical debt, engineering team, team scaling, architecture decisions, technology evaluation, engineering metrics, DORA metrics, ADR, architecture decision records, technology strategy, engineering leadership, engineering organization, team structure, hiring plan, technical strategy, vendor evaluation, technology selection
 
+## Clarify First
+
+What most shapes CTO advice is the kind of technical decision being made and the size, criticality and constraints of the team and systems behind it. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **The decision type:** technical debt, team scaling, an architecture choice, a vendor or technology evaluation and engineering metrics each map to a different tool or reference. A request that spans several usually has one that matters first.
+- **Team size and growth target:** the scaling calculator works from current headcount, role mix, target headcount and timeline. Ratios such as one manager per eight engineers and the 25% maximum quarterly growth rate only mean something against real numbers.
+- **System criticality:** the debt analyzer weighs findings by how critical the system is, and the capacity split (40% for critical debt, less for lower severities) depends on that rating. Uptime and DORA targets also differ; hardware or embedded teams may need different benchmarks.
+- **Constraints:** budget, timeline, compliance requirements and the existing stack are part of the requirements phase of any technology evaluation. They often rule options out before scoring starts.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn&#x27;t cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
+
 ## Quick Start
 
 ### For Technical Debt Assessment
@@ -1007,6 +1018,17 @@ Strategic frameworks and tools for technology leadership, team scaling, and engi
 
 ## Keywords
 CTO, chief technology officer, technical leadership, tech debt, technical debt, engineering team, team scaling, architecture decisions, technology evaluation, engineering metrics, DORA metrics, ADR, architecture decision records, technology strategy, engineering leadership, engineering organization, team structure, hiring plan, technical strategy, vendor evaluation, technology selection
+
+## Clarify First
+
+What most shapes CTO advice is the kind of technical decision being made and the size, criticality and constraints of the team and systems behind it. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **The decision type:** technical debt, team scaling, an architecture choice, a vendor or technology evaluation and engineering metrics each map to a different tool or reference. A request that spans several usually has one that matters first.
+- **Team size and growth target:** the scaling calculator works from current headcount, role mix, target headcount and timeline. Ratios such as one manager per eight engineers and the 25% maximum quarterly growth rate only mean something against real numbers.
+- **System criticality:** the debt analyzer weighs findings by how critical the system is, and the capacity split (40% for critical debt, less for lower severities) depends on that rating. Uptime and DORA targets also differ; hardware or embedded teams may need different benchmarks.
+- **Constraints:** budget, timeline, compliance requirements and the existing stack are part of the requirements phase of any technology evaluation. They often rule options out before scoring starts.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn&#x27;t cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
 
 ## Quick Start
 

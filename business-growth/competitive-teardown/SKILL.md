@@ -58,14 +58,14 @@ Production-grade competitor analysis framework covering systematic data collecti
 
 ## Clarify First
 
-Before running the teardown, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the teardown, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Competitors + primary focus** — the 2-4 names and which is the main threat (sets scorecard columns and depth)
-- [ ] **Your own product baseline** — so the 12-dimension scorecard and feature matrix have a "you" column to compare against
-- [ ] **Decision this feeds** — roadmap session, sales battle card, or new-market entry (determines full teardown vs single battle card vs segment incumbents)
-- [ ] **Available data sources** — pricing pages, 50+ reviews, product access (the rubric needs evidence; thin data caps which dimensions are scorable)
+- **Competitors + primary focus:** the 2-4 names and which is the main threat (sets scorecard columns and depth).
+- **Your own product baseline:** so the 12-dimension scorecard and feature matrix have a "you" column to compare against.
+- **Decision this feeds:** roadmap session, sales battle card, or new-market entry (determines full teardown vs single battle card vs segment incumbents).
+- **Available data sources:** pricing pages, 50+ reviews, product access (the rubric needs evidence; thin data caps which dimensions are scorable).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the teardown.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Teardown Workflow
 

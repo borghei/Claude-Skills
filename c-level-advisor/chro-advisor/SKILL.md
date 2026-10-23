@@ -57,6 +57,18 @@ CHRO, chief people officer, HR, human resources, people strategy, hiring plan, h
 
 ---
 
+## Clarify First
+
+People advice depends most on company stage and size, the business problem behind the request, and the budget available. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Stage and headcount:** hiring speed, the shape of the People team, equity grant ranges and when to add a manager layer all change by stage. A senior-hire grant that fits Series A (0.25-0.75%) is several times too high at Series C.
+- **The business problem behind the request:** the workforce decision tree splits on skill gap versus capacity gap and temporary versus permanent need. The same "we need to hire" can end in training, a contractor or a full-time hire.
+- **Budget and market data:** headcount plans are costed fully loaded, and comp bands are only as good as the benchmark data and locations they rest on. When either is missing, the numbers are assumptions and should be labeled that way.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn't cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
+
+---
+
 ## Quick Start
 
 ### Workforce Planning Decision Tree

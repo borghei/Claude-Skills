@@ -29,14 +29,14 @@ Production-ready financial analysis toolkit providing ratio analysis, DCF valuat
 
 ## Clarify First
 
-Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which analysis** — ratios, DCF valuation, budget variance, or forecast (selects the tool and the required input schema; each needs different data)
-- [ ] **The decision it supports** — acquisition, fundraise, board review, or budget reforecast (sets the executive-summary conclusion and which metrics lead)
-- [ ] **Materiality threshold** — absolute $ or % of budget (drives which variances surface vs. go to the appendix; default 10% / $50K)
-- [ ] **Key assumptions + as-of date** — WACC inputs, terminal growth, or forecast drivers and when each was last sourced (drives DCF/forecast outputs and the assumptions appendix)
+- **Which analysis:** ratios, DCF valuation, budget variance, or forecast (selects the tool and the required input schema; each needs different data).
+- **The decision it supports:** acquisition, fundraise, board review, or budget reforecast (sets the executive-summary conclusion and which metrics lead).
+- **Materiality threshold:** absolute $ or % of budget (drives which variances surface vs. go to the appendix; default 10% / $50K).
+- **Key assumptions + as-of date:** WACC inputs, terminal growth, or forecast drivers and when each was last sourced (drives DCF/forecast outputs and the assumptions appendix).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## 5-Phase Workflow
 

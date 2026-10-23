@@ -51,14 +51,14 @@ still surface three days late.
 
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which failure you are fixing — load, unread updates, or late blockers** — the three have opposite remedies; cutting meetings without installing written status makes late blockers worse
-- [ ] **Core-hours overlap across the team** — under 3 hours the recommendation inverts from "meet on disagreement" to "sync is an escalation"
-- [ ] **Whether cancelling meetings is actually in scope** — an audit you cannot act on is a grievance document; if the calendar is fixed, the leverage moves entirely to written quality
-- [ ] **Fully-loaded hourly cost, or permission to estimate it** — the dollar figure is what moves stakeholders; base salary alone understates by 30-40%
+- **Which failure you are fixing — load, unread updates, or late blockers:** the three have opposite remedies; cutting meetings without installing written status makes late blockers worse.
+- **Core-hours overlap across the team:** under 3 hours the recommendation inverts from "meet on disagreement" to "sync is an escalation".
+- **Whether cancelling meetings is actually in scope:** an audit you cannot act on is a grievance document; if the calendar is fixed, the leverage moves entirely to written quality.
+- **Fully-loaded hourly cost, or permission to estimate it:** the dollar figure is what moves stakeholders; base salary alone understates by 30-40%.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

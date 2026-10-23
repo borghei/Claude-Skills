@@ -48,6 +48,19 @@ chief of staff, orchestrator, routing, c-suite coordinator, board meeting, multi
 
 ---
 
+## Clarify First
+
+Routing depends most on the decision being made, the roles it touches, and how soon it is needed. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **The decision being made:** a question is not yet a decision. What is being decided, how reversible it is and its share of budget drive the complexity score, which decides whether one advisor answers or a board meeting runs. A choice that cannot be reversed within 90 days, or one above 25% of annual budget, triggers a board meeting.
+- **Which roles it touches:** domain count carries a quarter of the complexity score and picks the primary, secondary and tertiary advisors from the routing matrix. A question that looks single-domain but affects hiring, budget or compliance needs a broader route.
+- **The deadline:** time pressure is part of the score. Hours to decide calls for a fast, narrower route; weeks leave room for full synthesis.
+- **Earlier decisions on the topic:** contradicting a logged decision raises complexity, and a rejected proposal should not come back without new information.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn't cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
+
+---
+
 ## Session Protocol
 
 Every interaction follows this sequence:

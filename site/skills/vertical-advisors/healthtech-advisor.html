@@ -484,6 +484,7 @@ Strategic frameworks for digital health and healthtech founders, operators, and 
 ## Table of Contents
 
 - [Keywords](#keywords)
+- [Clarify First](#clarify-first)
 - [Quick Start](#quick-start)
 - [Core Workflows](#core-workflows)
 - [Tools](#tools)
@@ -496,6 +497,19 @@ Strategic frameworks for digital health and healthtech founders, operators, and 
 ## Keywords
 
 healthtech, digital health, HIPAA, PHI, BAA, business associate, covered entity, FDA SaMD, software as medical device, EHR, EMR, FHIR, HL7, telehealth, digital therapeutics, DTx, payor, provider, value-based care, fee-for-service, RPM, remote patient monitoring
+
+---
+
+## Clarify First
+
+Healthtech advice turns on whose health data the product touches and what the product claims to do with it. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **HIPAA role:** Whether the company handles PHI on behalf of a Covered Entity (a Business Associate), is a Covered Entity itself, or collects consumer health data outside HIPAA decides which BAAs are needed and how hosting must be built. The status depends on the relationship, not the data type, so `phi_scope_checker.py` needs a description that says what data flows from whom to whom.
+- **Intended use and claims:** Under the IMDRF framework, the severity of the healthcare situation and the significance of the information decide whether software is FDA Class I, II or III or unregulated wellness. Marketing claims can move a wellness product into regulated territory.
+- **Jurisdiction:** State laws such as California&#x27;s CMIA and Washington&#x27;s My Health My Data reach beyond HIPAA, and Texas and New York have their own. SaMD classification also differs between the US and the EU.
+- **Buyer:** Payor, provider, employer, individual, pharma or government. Payor deals take 24 to 36 months, providers require EHR integration, and employers buy on the benefits cycle, so the buyer sets the timeline and the team you need.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 
@@ -665,6 +679,7 @@ Strategic frameworks for digital health and healthtech founders, operators, and 
 ## Table of Contents
 
 - [Keywords](#keywords)
+- [Clarify First](#clarify-first)
 - [Quick Start](#quick-start)
 - [Core Workflows](#core-workflows)
 - [Tools](#tools)
@@ -677,6 +692,19 @@ Strategic frameworks for digital health and healthtech founders, operators, and 
 ## Keywords
 
 healthtech, digital health, HIPAA, PHI, BAA, business associate, covered entity, FDA SaMD, software as medical device, EHR, EMR, FHIR, HL7, telehealth, digital therapeutics, DTx, payor, provider, value-based care, fee-for-service, RPM, remote patient monitoring
+
+---
+
+## Clarify First
+
+Healthtech advice turns on whose health data the product touches and what the product claims to do with it. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **HIPAA role:** Whether the company handles PHI on behalf of a Covered Entity (a Business Associate), is a Covered Entity itself, or collects consumer health data outside HIPAA decides which BAAs are needed and how hosting must be built. The status depends on the relationship, not the data type, so `phi_scope_checker.py` needs a description that says what data flows from whom to whom.
+- **Intended use and claims:** Under the IMDRF framework, the severity of the healthcare situation and the significance of the information decide whether software is FDA Class I, II or III or unregulated wellness. Marketing claims can move a wellness product into regulated territory.
+- **Jurisdiction:** State laws such as California&#x27;s CMIA and Washington&#x27;s My Health My Data reach beyond HIPAA, and Texas and New York have their own. SaMD classification also differs between the US and the EU.
+- **Buyer:** Payor, provider, employer, individual, pharma or government. Payor deals take 24 to 36 months, providers require EHR integration, and employers buy on the benefits cycle, so the buyer sets the timeline and the team you need.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

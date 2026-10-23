@@ -43,13 +43,13 @@ The agent analyzes SQL schemas for normalization compliance, recommends optimal 
 
 ## Clarify First
 
-Before designing or migrating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing or migrating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Task** — schema analysis/ERD, index optimization, or migration generation (selects `schema_analyzer.py` vs `index_optimizer.py` vs `migration_generator.py`)
-- [ ] **Engine** — PostgreSQL, MySQL, MongoDB, or DynamoDB (drives the DDL dialect and selection guidance)
-- [ ] **Schema input & query patterns** — the DDL/JSON schema and the queries to optimize for (the input the tools analyze; index recommendations depend on the query patterns)
+- **Task:** schema analysis/ERD, index optimization, or migration generation (selects `schema_analyzer.py` vs `index_optimizer.py` vs `migration_generator.py`).
+- **Engine:** PostgreSQL, MySQL, MongoDB, or DynamoDB (drives the DDL dialect and selection guidance).
+- **Schema input & query patterns:** the DDL/JSON schema and the queries to optimize for (the input the tools analyze; index recommendations depend on the query patterns).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## References
 

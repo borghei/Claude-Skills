@@ -38,13 +38,13 @@ The agent detects documentation drift by mapping code directories to their docs,
 
 ## Clarify First
 
-Before running detection, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running detection, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which check** — full drift analysis, staleness score, API doc validation, or link audit (selects `drift_analyzer.py` vs `doc_staleness_scorer.py` vs `api_doc_validator.py` vs `link_checker.py`)
-- [ ] **Repo & doc/source paths** — the repository and which code and docs directories to compare (the input the tools scan)
-- [ ] **Threshold & gate** — minimum severity or staleness threshold for CI failure (sets `--min-severity`/`--threshold` and the exit-code gate)
+- **Which check:** full drift analysis, staleness score, API doc validation, or link audit (selects `drift_analyzer.py` vs `doc_staleness_scorer.py` vs `api_doc_validator.py` vs `link_checker.py`).
+- **Repo & doc/source paths:** the repository and which code and docs directories to compare (the input the tools scan).
+- **Threshold & gate:** minimum severity or staleness threshold for CI failure (sets `--min-severity`/`--threshold` and the exit-code gate).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

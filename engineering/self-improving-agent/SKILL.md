@@ -37,13 +37,13 @@ Architectural patterns for AI agents that get better with use. Most agents are s
 
 ## Clarify First
 
-Before capturing or promoting learnings, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before capturing or promoting learnings, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Loop stage** — remember / extract / promote / review (routes the sub-skill and the whole workflow)
-- [ ] **Source data** — which session logs, `MEMORY.md`, and rules dir to operate on (the subject the tools read and write)
-- [ ] **Promotion bar** — min occurrences / confidence threshold for graduating a learning into an enforced rule (`--min-occurrences`; decides what is kept vs discarded)
+- **Loop stage:** remember / extract / promote / review (routes the sub-skill and the whole workflow).
+- **Source data:** which session logs, `MEMORY.md`, and rules dir to operate on (the subject the tools read and write).
+- **Promotion bar:** min occurrences / confidence threshold for graduating a learning into an enforced rule (`--min-occurrences`; decides what is kept vs discarded).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Sub-Skills
 

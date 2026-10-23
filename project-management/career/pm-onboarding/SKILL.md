@@ -49,14 +49,14 @@ Diagnose the STARS situation first — a Sustaining-success area rewards 60+ day
 
 ## Clarify First
 
-Before building the onboarding plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the onboarding plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **STARS situation** — Start-up, Turnaround, Accelerated-growth, Realignment, or Sustaining-success (sets the listen-vs-act balance; misreading it is the top new-PM mistake)
-- [ ] **Transition type** — new company, internal transfer, new scope, or return from leave (chooses full-90 vs compressed-60 vs 30-day plan)
-- [ ] **Manager's 90-day expectations** — what "success" means to them (anchors early-win selection and the whole arc)
-- [ ] **Scope and key partners** — what the PM owns and who the critical stakeholders are (drives the stakeholder tiers and first-PRD)
+- **STARS situation:** Start-up, Turnaround, Accelerated-growth, Realignment, or Sustaining-success (sets the listen-vs-act balance; misreading it is the top new-PM mistake).
+- **Transition type:** new company, internal transfer, new scope, or return from leave (chooses full-90 vs compressed-60 vs 30-day plan).
+- **Manager's 90-day expectations:** what "success" means to them (anchors early-win selection and the whole arc).
+- **Scope and key partners:** what the PM owns and who the critical stakeholders are (drives the stakeholder tiers and first-PRD).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

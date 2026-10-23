@@ -47,14 +47,14 @@ This skill produces an **AI Feature PRD** that extends the standard 8-section PR
 
 ## Clarify First
 
-Before drafting the AI PRD, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before drafting the AI PRD, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **AI task & surface** — what the model does and where it appears to the user (drives Section 9 model selection + architecture pattern: prompt vs RAG vs fine-tune vs agent)
-- [ ] **Quality & safety bar** — the acceptance / hallucination / refusal / latency targets that define "good enough" (drives Section 10's eval criteria and golden set)
-- [ ] **Risk / regulatory tier** — EU AI Act tier or regulated context (health, finance, legal) (drives Section 10.7 ethical review and where human-in-the-loop is mandatory)
-- [ ] **Cost & traffic envelope** — expected volume and cost-per-call ceiling (drives Section 11's cost model and the deployment ramp gates)
+- **AI task & surface:** what the model does and where it appears to the user (drives Section 9 model selection + architecture pattern: prompt vs RAG vs fine-tune vs agent).
+- **Quality & safety bar:** the acceptance / hallucination / refusal / latency targets that define "good enough" (drives Section 10's eval criteria and golden set).
+- **Risk / regulatory tier:** EU AI Act tier or regulated context (health, finance, legal) (drives Section 10.7 ethical review and where human-in-the-loop is mandatory).
+- **Cost & traffic envelope:** expected volume and cost-per-call ceiling (drives Section 11's cost model and the deployment ramp gates).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

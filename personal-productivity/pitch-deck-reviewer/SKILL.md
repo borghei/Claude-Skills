@@ -37,13 +37,13 @@ pitch deck, pitch, fundraise, fundraising, seed deck, Series A deck, investor de
 
 ## Clarify First
 
-Before scoring the deck, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before scoring the deck, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Funding stage** — seed vs Series A sets the required-slide rubric (`--stage` flag) and what counts as a gap
-- [ ] **Slide-by-slide summary** — one bullet per slide (number + title + 1-2 sentences); vague summaries produce false gaps
-- [ ] **Round context** — amount raising and traction stage, so the "ask" and "traction" slides are judged against the right bar
+- **Funding stage:** seed vs Series A sets the required-slide rubric (`--stage` flag) and what counts as a gap.
+- **Slide-by-slide summary:** one bullet per slide (number + title + 1-2 sentences); vague summaries produce false gaps.
+- **Round context:** amount raising and traction stage, so the "ask" and "traction" slides are judged against the right bar.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

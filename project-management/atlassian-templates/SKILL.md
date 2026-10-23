@@ -34,14 +34,14 @@ Specialist in creating, modifying, and managing reusable templates and files for
 
 ## Clarify First
 
-Before building the template, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the template, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Target tool & artifact** — Confluence page template, Jira issue template, or multi-page blueprint (sets which macros/fields are available and the structure)
-- [ ] **Template type** — meeting notes, PRD, charter, bug report, decision log, etc. (selects the base structure and placeholders)
-- [ ] **Rollout scope** — one team vs org-wide canonical template (drives parameterization, naming, and governance)
-- [ ] **Dynamic vs static content** — which fields auto-populate via macros/Jira queries vs fixed placeholders (drives build complexity and adoption)
+- **Target tool & artifact:** Confluence page template, Jira issue template, or multi-page blueprint (sets which macros/fields are available and the structure).
+- **Template type:** meeting notes, PRD, charter, bug report, decision log, etc. (selects the base structure and placeholders).
+- **Rollout scope:** one team vs org-wide canonical template (drives parameterization, naming, and governance).
+- **Dynamic vs static content:** which fields auto-populate via macros/Jira queries vs fixed placeholders (drives build complexity and adoption).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

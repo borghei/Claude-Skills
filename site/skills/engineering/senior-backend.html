@@ -466,13 +466,13 @@ Scaffold and review backend services: API design and OpenAPI-driven code generat
 
 ## Clarify First
 
-Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before scaffolding, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Framework** — Express / Fastify / Koa (`--framework`; changes the generated route handlers, validators, and types)
-- [ ] **API contract source** — the OpenAPI spec or endpoint list to scaffold from (the input the scaffolder reads)
-- [ ] **Database intent** — the schema file and whether you want analysis vs migration generation (drives `database_migration_tool.py`)
+- **Framework:** Express / Fastify / Koa (`--framework`; changes the generated route handlers, validators, and types).
+- **API contract source:** the OpenAPI spec or endpoint list to scaffold from (the input the scaffolder reads).
+- **Database intent:** the schema file and whether you want analysis vs migration generation (drives `database_migration_tool.py`).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 
@@ -587,13 +587,13 @@ Scaffold and review backend services: API design and OpenAPI-driven code generat
 
 ## Clarify First
 
-Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before scaffolding, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Framework** — Express / Fastify / Koa (`--framework`; changes the generated route handlers, validators, and types)
-- [ ] **API contract source** — the OpenAPI spec or endpoint list to scaffold from (the input the scaffolder reads)
-- [ ] **Database intent** — the schema file and whether you want analysis vs migration generation (drives `database_migration_tool.py`)
+- **Framework:** Express / Fastify / Koa (`--framework`; changes the generated route handlers, validators, and types).
+- **API contract source:** the OpenAPI spec or endpoint list to scaffold from (the input the scaffolder reads).
+- **Database intent:** the schema file and whether you want analysis vs migration generation (drives `database_migration_tool.py`).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

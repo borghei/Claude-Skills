@@ -21,13 +21,13 @@ Regulatory strategy development, submission management, and global market access
 
 ## Clarify First
 
-Before developing the regulatory strategy, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before developing the regulatory strategy, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Device classification and intended use** — risk level and what the device does (drives the pathway: 510(k)/De Novo/PMA and MDR class)
-- [ ] **Target markets** — US, EU, Canada, Japan, China… (determines which regulations apply and the submission sequencing)
-- [ ] **Predicate availability** — whether a suitable predicate exists or the device is novel (selects 510(k) vs De Novo/PMA)
+- **Device classification and intended use:** risk level and what the device does (drives the pathway: 510(k)/De Novo/PMA and MDR class).
+- **Target markets:** US, EU, Canada, Japan, China… (determines which regulations apply and the submission sequencing).
+- **Predicate availability:** whether a suitable predicate exists or the device is novel (selects 510(k) vs De Novo/PMA).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the strategy.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Regulatory Strategy Workflow
 

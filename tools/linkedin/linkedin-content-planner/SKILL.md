@@ -67,14 +67,14 @@ past results what to change next month is `linkedin-engagement-analytics`.
 
 ## Clarify First
 
-Before building the plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **General or founder pillar set** — a founder writing for investors, hires and buyers needs pillars keyed to those readers; the general set is keyed to subject matter. Choosing wrong produces a plan that is balanced on paper and aimed at nobody.
-- [ ] **How many posts a week the person will still be making in week ten** — the plan is built on this number; an optimistic answer creates slots that go unfilled and a pattern of gaps.
-- [ ] **How much production time exists per week** — carousels, video and designed images take hours that text does not; this caps the format mix regardless of preference.
-- [ ] **Whether a story bank exists** — with one, slots are bound to entries and shortages show up as flags; without one, every slot is a topic with nothing behind it yet.
+- **General or founder pillar set:** a founder writing for investors, hires and buyers needs pillars keyed to those readers; the general set is keyed to subject matter. Choosing wrong produces a plan that is balanced on paper and aimed at nobody.
+- **How many posts a week the person will still be making in week ten:** the plan is built on this number; an optimistic answer creates slots that go unfilled and a pattern of gaps.
+- **How much production time exists per week:** carousels, video and designed images take hours that text does not; this caps the format mix regardless of preference.
+- **Whether a story bank exists:** with one, slots are bound to entries and shortages show up as flags; without one, every slot is a topic with nothing behind it yet.
 
-Stop rule: ask only the two or three that most change the plan. If the user says "just plan it", use the general set at three posts a week, text-heavy, and list those assumptions at the top of the plan.
+Ask about the two or three inputs that matter most for this request. If the user says "just plan it", use the general set at three posts a week, text-heavy, and list those assumptions at the top of the plan.
 
 ## Workflows
 

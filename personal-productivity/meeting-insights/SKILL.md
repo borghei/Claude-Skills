@@ -47,13 +47,13 @@ meeting, meetings, transcript, notes, minutes, action items, decisions, decision
 
 ## Clarify First
 
-Before extracting insights, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before extracting insights, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Transcript with speaker labels** — `Speaker: text` format drives owner attribution on action items
-- [ ] **Meeting type** — recap vs customer interview vs decision log changes which extractions matter (decisions/actions vs pains/quotes)
-- [ ] **Output target** — recap email, append-only decision log, or interview synthesis sets the structure of the deliverable
+- **Transcript with speaker labels:** `Speaker: text` format drives owner attribution on action items.
+- **Meeting type:** recap vs customer interview vs decision log changes which extractions matter (decisions/actions vs pains/quotes).
+- **Output target:** recap email, append-only decision log, or interview synthesis sets the structure of the deliverable.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

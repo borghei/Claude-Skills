@@ -86,14 +86,14 @@ only from the user, in this conversation.
 
 ## Clarify First
 
-Before drafting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before drafting, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The post itself, in full** — the anchor and echo checks compare the draft to the post's wording; a summary produces a comment that fits any post on the topic
-- [ ] **What the user knows first-hand** — the specific must be real. A figure the user did not supply is never invented; with nothing first-hand, the move changes to a question
-- [ ] **Relationship and aim** — a comment for a stranger's audience, a prospect's attention, and a friend's post differ in how hard they push and whether disagreement is wise
-- [ ] **Comments already there** — if the best angle is taken, a second copy is noise; replying under the existing one is the better move
+- **The post itself, in full:** the anchor and echo checks compare the draft to the post's wording; a summary produces a comment that fits any post on the topic.
+- **What the user knows first-hand:** the specific must be real. A figure the user did not supply is never invented; with nothing first-hand, the move changes to a question.
+- **Relationship and aim:** a comment for a stranger's audience, a prospect's attention, and a friend's post differ in how hard they push and whether disagreement is wise.
+- **Comments already there:** if the best angle is taken, a second copy is noise; replying under the existing one is the better move.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the drafts — and use a question-led move rather than fabricating experience.
+Ask about the two or three inputs that matter most for this request. If the user says "just draft it," proceed and list your assumptions at the top of the drafts — and use a question-led move rather than fabricating experience.
 
 ## Workflows
 

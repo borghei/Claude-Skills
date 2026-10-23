@@ -61,13 +61,13 @@ unfair advantage matter more than ops detail.
 
 ## Clarify First
 
-Before building the canvas, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the canvas, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The specific early-adopter segment** — named, not "everyone" (the Problem, UVP, and Channels blocks all hinge on a concrete early adopter)
-- [ ] **The top 3 problems** — for that segment (the Problem block; if you can't name them you have an idea, not a startup)
-- [ ] **Existing alternatives** — how customers solve this today (signals whether the problem is real; "they live with it" is important signal)
+- **The specific early-adopter segment:** named, not "everyone" (the Problem, UVP, and Channels blocks all hinge on a concrete early adopter).
+- **The top 3 problems:** for that segment (the Problem block; if you can't name them you have an idea, not a startup).
+- **Existing alternatives:** how customers solve this today (signals whether the problem is real; "they live with it" is important signal).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

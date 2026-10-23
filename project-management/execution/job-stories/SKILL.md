@@ -45,14 +45,14 @@ The format is `When [situation], I want to [motivation], so I can [outcome].` Re
 
 ## Clarify First
 
-Before writing job stories, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before writing job stories, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Situation / trigger** — the "When" anchors the entire story; a vague situation produces a persona-style story in disguise
-- [ ] **Underlying job & motivation** — the functional/social/emotional job behind the "I want to"; without it the story encodes a solution, not a need
-- [ ] **Desired outcome / progress** — the "so I can" the user is trying to reach; drives the outcome-focused acceptance criteria
-- [ ] **Source of user research** — interviews/observation/support data vs guesswork; without grounding, situations get invented and may not reflect reality
+- **Situation / trigger:** the "When" anchors the entire story; a vague situation produces a persona-style story in disguise.
+- **Underlying job & motivation:** the functional/social/emotional job behind the "I want to"; without it the story encodes a solution, not a need.
+- **Desired outcome / progress:** the "so I can" the user is trying to reach; drives the outcome-focused acceptance criteria.
+- **Source of user research:** interviews/observation/support data vs guesswork; without grounding, situations get invented and may not reflect reality.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

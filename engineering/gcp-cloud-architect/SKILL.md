@@ -44,13 +44,13 @@ End-to-end GCP-specific architecture: service selection, Google Cloud Architectu
 
 ## Clarify First
 
-Before designing or assessing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing or assessing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Task** — design from scratch, review an existing architecture, validate IaC, or estimate cost (selects `gcp_architecture_validator.py` vs `gcp_cost_estimator.py` vs `gcp_caf_scorer.py`)
-- [ ] **Workload spec** — the YAML workload config, or the Terraform/Deployment Manager files (the input the scripts parse)
-- [ ] **Priority pillar** — reliability, security, cost, operational excellence, or performance (weights the CAF assessment and which recommendations lead)
+- **Task:** design from scratch, review an existing architecture, validate IaC, or estimate cost (selects `gcp_architecture_validator.py` vs `gcp_cost_estimator.py` vs `gcp_caf_scorer.py`).
+- **Workload spec:** the YAML workload config, or the Terraform/Deployment Manager files (the input the scripts parse).
+- **Priority pillar:** reliability, security, cost, operational excellence, or performance (weights the CAF assessment and which recommendations lead).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

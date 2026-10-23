@@ -35,14 +35,14 @@ This skill handles implementation only. For analyzing campaign performance data,
 
 ## Clarify First
 
-Before building the tracking plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the tracking plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Operating mode** — build from scratch, audit existing, or debug a specific issue (selects the entire workflow)
-- [ ] **Platform stack** — GA4, GTM, and which ad platforms (Google Ads / Meta / LinkedIn) (drives implementation + conversion tracking setup)
-- [ ] **Key conversions + funnel events** — the user actions that matter to the business (drives event taxonomy + conversion configuration)
-- [ ] **Region / consent requirements** — EU/EEA users present? (determines whether Consent Mode v2 is required)
+- **Operating mode:** build from scratch, audit existing, or debug a specific issue (selects the entire workflow).
+- **Platform stack:** GA4, GTM, and which ad platforms (Google Ads / Meta / LinkedIn) (drives implementation + conversion tracking setup).
+- **Key conversions + funnel events:** the user actions that matter to the business (drives event taxonomy + conversion configuration).
+- **Region / consent requirements:** EU/EEA users present? (determines whether Consent Mode v2 is required).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Operating Modes
 

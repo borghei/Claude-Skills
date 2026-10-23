@@ -472,13 +472,13 @@ The **Docker Development** skill provides automated analysis of Dockerfiles and 
 
 ## Clarify First
 
-Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Target file** — which Dockerfile or docker-compose.yml to analyze (sets `--file` and which tool runs)
-- [ ] **Focus** — full analysis vs security-only, and whether to check port conflicts (sets `--security-only`/`--check-ports`)
-- [ ] **Output mode** — human-readable vs JSON for CI (sets `--format json` and whether findings gate a pipeline)
+- **Target file:** which Dockerfile or docker-compose.yml to analyze (sets `--file` and which tool runs).
+- **Focus:** full analysis vs security-only, and whether to check port conflicts (sets `--security-only`/`--check-ports`).
+- **Output mode:** human-readable vs JSON for CI (sets `--format json` and whether findings gate a pipeline).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 
@@ -659,13 +659,13 @@ The **Docker Development** skill provides automated analysis of Dockerfiles and 
 
 ## Clarify First
 
-Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Target file** — which Dockerfile or docker-compose.yml to analyze (sets `--file` and which tool runs)
-- [ ] **Focus** — full analysis vs security-only, and whether to check port conflicts (sets `--security-only`/`--check-ports`)
-- [ ] **Output mode** — human-readable vs JSON for CI (sets `--format json` and whether findings gate a pipeline)
+- **Target file:** which Dockerfile or docker-compose.yml to analyze (sets `--file` and which tool runs).
+- **Focus:** full analysis vs security-only, and whether to check port conflicts (sets `--security-only`/`--check-ports`).
+- **Output mode:** human-readable vs JSON for CI (sets `--format json` and whether findings gate a pipeline).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

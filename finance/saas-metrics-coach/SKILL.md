@@ -21,14 +21,14 @@ Production-ready SaaS metrics toolkit for calculating MRR/ARR, analyzing cohort 
 
 ## Clarify First
 
-Before calculating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before calculating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which metric set** — MRR/ARR growth, cohort retention, or unit economics (selects the script and the input format: subscription CSV, activity CSV, or metrics JSON)
-- [ ] **Reporting period + currency handling** — the window and how multi-currency MRR is normalized (changes every revenue and churn figure)
-- [ ] **Gross margin** — the margin to apply (drives LTV and CAC payback; LTV = ARPU x margin / churn)
-- [ ] **Churn definition** — gross vs. net, logo vs. revenue (changes churn rate, NRR, and the health-flag verdict)
+- **Which metric set:** MRR/ARR growth, cohort retention, or unit economics (selects the script and the input format: subscription CSV, activity CSV, or metrics JSON).
+- **Reporting period + currency handling:** the window and how multi-currency MRR is normalized (changes every revenue and churn figure).
+- **Gross margin:** the margin to apply (drives LTV and CAC payback; LTV = ARPU x margin / churn).
+- **Churn definition:** gross vs. net, logo vs. revenue (changes churn rate, NRR, and the health-flag verdict).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

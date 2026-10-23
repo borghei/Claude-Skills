@@ -8,6 +8,11 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.13.6** (October 2026)
+
+- Every skill has a Clarify First section, now written as rules with reasons instead of checkboxes and commands
+- The authoring standard, scaffold and linter use the same style
+
 **v4.13.5** (October 2026)
 
 - Every project-management skill, and five of the most-used skills elsewhere, now lists its three most damaging mistakes in SKILL.md

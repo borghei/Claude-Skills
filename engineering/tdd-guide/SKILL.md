@@ -35,13 +35,13 @@ The agent guides red-green-refactor TDD workflows, generates framework-specific 
 
 ## Clarify First
 
-Before generating tests or analyzing coverage, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating tests or analyzing coverage, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Framework & language** — Jest / Vitest / Pytest / JUnit / Mocha (changes the generated stubs and any conversion)
-- [ ] **Task** — generate from requirements / analyze coverage / guide a red-green-refactor cycle / convert tests (selects the tool)
-- [ ] **Source input** — the user story / acceptance criteria, or the coverage report (LCOV/JSON/XML) to parse (the script's input)
+- **Framework & language:** Jest / Vitest / Pytest / JUnit / Mocha (changes the generated stubs and any conversion).
+- **Task:** generate from requirements / analyze coverage / guide a red-green-refactor cycle / convert tests (selects the tool).
+- **Source input:** the user story / acceptance criteria, or the coverage report (LCOV/JSON/XML) to parse (the script's input).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

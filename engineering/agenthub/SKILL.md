@@ -36,13 +36,13 @@ The core insight: complex tasks decompose better than they scale. A 10-step sequ
 
 ## Clarify First
 
-Before designing the workflow, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the workflow, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Task decomposition** — how the work splits into agent sub-tasks and their dependencies (defines the DAG nodes and edges in Init)
-- [ ] **Parallelism budget** — how many agents may run concurrently (sets `max_parallel` scheduling)
-- [ ] **Merge strategy** — synthesize, rank-select, or chain (determines how the Merge stage combines outputs)
+- **Task decomposition:** how the work splits into agent sub-tasks and their dependencies (defines the DAG nodes and edges in Init).
+- **Parallelism budget:** how many agents may run concurrently (sets `max_parallel` scheduling).
+- **Merge strategy:** synthesize, rank-select, or chain (determines how the Merge stage combines outputs).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Sub-Skills
 

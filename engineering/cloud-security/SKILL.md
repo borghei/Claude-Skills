@@ -52,14 +52,14 @@ what, what is reachable, what is encrypted, and what is logged.
 
 ## Clarify First
 
-Before running the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the review, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which accounts hold production or classified data** — decides review scope and which findings are launch-blocking rather than backlog
-- [ ] **Data classification of the stores in scope** — promotes unencrypted and un-logged findings from high to critical; without it every severity is a guess
-- [ ] **Whether the exports cover all regions** — a region-scoped export reliably misses the forgotten test database that becomes the incident
-- [ ] **What the output feeds** — a launch gate, an audit evidence pack, or a backlog; changes severity strictness and report format
+- **Which accounts hold production or classified data:** decides review scope and which findings are launch-blocking rather than backlog.
+- **Data classification of the stores in scope:** promotes unencrypted and un-logged findings from high to critical; without it every severity is a guess.
+- **Whether the exports cover all regions:** a region-scoped export reliably misses the forgotten test database that becomes the incident.
+- **What the output feeds:** a launch gate, an audit evidence pack, or a backlog; changes severity strictness and report format.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

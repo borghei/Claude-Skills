@@ -43,14 +43,14 @@ publishes the cut line.
 
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Is this a supply question or a demand question?** — sizing a hiring ask and testing a roadmap use different scripts and produce different artifacts
-- [ ] **Who counts as delivery capacity?** — including managers, tech leads, or unfilled reqs at full FTE changes the answer by 10-40%
-- [ ] **Are the estimates already risk-adjusted?** — applying the confidence inflation twice overstates demand by 40%+; applying it zero times understates it by the same
-- [ ] **Is the buffer set from history or from intent?** — the unplanned-work reserve is the single largest lever on the cut line
+- **Is this a supply question or a demand question?:** sizing a hiring ask and testing a roadmap use different scripts and produce different artifacts.
+- **Who counts as delivery capacity?:** including managers, tech leads, or unfilled reqs at full FTE changes the answer by 10-40%.
+- **Are the estimates already risk-adjusted?:** applying the confidence inflation twice overstates demand by 40%+; applying it zero times understates it by the same.
+- **Is the buffer set from history or from intent?:** the unplanned-work reserve is the single largest lever on the cut line.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

@@ -42,14 +42,14 @@ labour savings. This skill is built to prevent both.
 
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which variant are we mapping, and what share of volume is it?** — mapping every exception produces an unreadable map; mapping a 20% path optimises the wrong process
-- [ ] **Where do the wait times come from — timestamps or memory?** — self-reported queue time is understated by 40-70%, which moves the constraint to the wrong step
-- [ ] **Is the goal lead time, labour cost, or quality?** — these have different constraints and often opposite fixes
-- [ ] **Has the business quantified what faster is worth?** — without their number, cycle-time gains cannot be costed and must be argued separately
+- **Which variant are we mapping, and what share of volume is it?:** mapping every exception produces an unreadable map; mapping a 20% path optimises the wrong process.
+- **Where do the wait times come from — timestamps or memory?:** self-reported queue time is understated by 40-70%, which moves the constraint to the wrong step.
+- **Is the goal lead time, labour cost, or quality?:** these have different constraints and often opposite fixes.
+- **Has the business quantified what faster is worth?:** without their number, cycle-time gains cannot be costed and must be argued separately.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 
