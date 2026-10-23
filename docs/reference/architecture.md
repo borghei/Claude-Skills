@@ -11,13 +11,13 @@ Claude-Skills/
 ├── .claude/                  # Claude Code configuration
 │   ├── agents/               # 6 subagents (code-reviewer, qa, docs, etc.)
 │   └── commands/             # 26 slash commands
-├── agents/                   # 19 role-based agents + 7 personas
+├── agents/                   # 68 cs-* agents + 8 personas
 │   ├── engineering/          # Tech lead, director, code auditor, etc.
 │   ├── c-level/              # CEO, CTO, CFO advisors
 │   ├── compliance/           # Compliance auditor, CISO advisor
 │   ├── marketing/            # Content creator, demand gen, SEO
 │   ├── product/              # Product manager
-│   └── personas/             # 7 cross-functional personas
+│   └── personas/             # 8 cross-functional personas
 ├── engineering/              # 86 engineering skills + 245 tools
 ├── marketing/                # 38 marketing skills + 115 tools
 ├── c-level-advisor/          # 26 C-level skills + 73 tools

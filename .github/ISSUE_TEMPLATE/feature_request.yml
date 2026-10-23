@@ -1,0 +1,89 @@
+name: New Skill Request
+description: Suggest a new skill for the library
+title: "[SKILL REQUEST] "
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Skills are offline and stdlib-only: Python tools make no network or LLM calls and add no paid services.
+        Requests to integrate a specific vendor or hosted service are out of scope.
+  - type: input
+    id: name
+    attributes:
+      label: Proposed skill name
+      placeholder: churn-risk-scorer
+    validations:
+      required: true
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      options:
+        - Engineering
+        - Marketing
+        - Product
+        - Project Management
+        - C-Level Advisory
+        - RA/QM Compliance
+        - Business & Growth
+        - Finance
+        - Data Analytics
+        - HR Operations
+        - Sales Success
+        - Legal
+        - Personal Productivity
+        - Documents
+        - Vertical Advisors
+        - Research
+        - Research Ops
+        - Business Operations
+        - Markdown-HTML
+        - Tools
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: users
+    attributes:
+      label: Target users
+      placeholder: Customer success managers at B2B SaaS companies
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What challenge does this skill solve, and why is it not covered by an existing skill?
+    validations:
+      required: true
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Use cases
+      description: At least one concrete scenario — what the user asks, and what the skill produces.
+      placeholder: |
+        Scenario: ...
+        User request: ...
+        Expected output: ...
+    validations:
+      required: true
+  - type: textarea
+    id: tools
+    attributes:
+      label: Python tools
+      description: Deterministic scripts the skill should ship (stdlib only), one per line with its purpose.
+      placeholder: |
+        churn_scorer.py — scores accounts from a CSV of usage signals
+  - type: textarea
+    id: references
+    attributes:
+      label: Frameworks and references
+      description: Methods, standards or templates the skill should encode.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched the existing skills and issues for duplicates
+          required: true

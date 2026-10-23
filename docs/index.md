@@ -14,7 +14,7 @@ Production-ready skill packages that bundle domain expertise, best practices, an
 <div class="label">Skills</div>
 </div>
 <div class="stat">
-<div class="number">900</div>
+<div class="number">906</div>
 <div class="label">Python Tools</div>
 </div>
 <div class="stat">
@@ -22,7 +22,7 @@ Production-ready skill packages that bundle domain expertise, best practices, an
 <div class="label">Domains</div>
 </div>
 <div class="stat">
-<div class="number">77</div>
+<div class="number">76</div>
 <div class="label">Agents</div>
 </div>
 <div class="stat">
@@ -183,7 +183,7 @@ The LinkedIn suite: story interviews, planning, post writing, humanizing, commen
 | | |
 |---|---|
 | **385 Skills** | Production-ready expertise across 21 professional domains. Project Management is the most-used (70 skills). |
-| **900 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, capacity planning, statistical testing, clinical study sizing -- all standard library, no ML dependencies |
+| **906 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, capacity planning, statistical testing, clinical study sizing -- all standard library, no ML dependencies |
 | **25 Role-Based Agents** | Specialized AI personas (Tech Lead, CFO, CISO, Compliance Auditor, etc.) that orchestrate multiple skills |
 | **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
 | **12 CI/CD Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation |

@@ -411,20 +411,19 @@ def format_single_interview(analysis: Dict) -> str:
     return "\n".join(output)
 
 def main():
-    import sys
-    
-    if len(sys.argv) < 2:
-        print("Usage: python customer_interview_analyzer.py <interview_file.txt>")
-        print("\nThis tool analyzes customer interview transcripts to extract:")
-        print("  - Pain points and frustrations")
-        print("  - Feature requests and suggestions")
-        print("  - Jobs to be done")
-        print("  - Sentiment analysis")
-        print("  - Key themes and quotes")
-        sys.exit(1)
-    
+    import argparse
+
+    parser = argparse.ArgumentParser(
+        description="Extract pain points, feature requests, jobs to be done, sentiment, "
+                    "themes and key quotes from a customer interview transcript.")
+    parser.add_argument("file", help="Interview transcript (.txt)")
+    parser.add_argument("format", nargs="?", choices=["json", "text"], default="text",
+                        help="Output format (default: text)")
+    parser.add_argument("--json", action="store_true", help="Shorthand for the json format")
+    args = parser.parse_args()
+
     # Read interview transcript
-    with open(sys.argv[1], 'r') as f:
+    with open(args.file, 'r') as f:
         interview_text = f.read()
     
     # Analyze
@@ -432,7 +431,7 @@ def main():
     analysis = analyzer.analyze_interview(interview_text)
     
     # Output
-    if len(sys.argv) > 2 and sys.argv[2] == 'json':
+    if args.json or args.format == 'json':
         print(json.dumps(analysis, indent=2))
     else:
         print(format_single_interview(analysis))

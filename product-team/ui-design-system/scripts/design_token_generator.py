@@ -546,14 +546,17 @@ class DesignTokenGenerator:
         return self._rgb_to_hex([int(c * 255) for c in new_rgb])
 
 def main():
-    import sys
-    
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Generate a complete design-token system from a brand color.")
+    parser.add_argument("brand_color", nargs="?", default="#0066CC", help="Brand color as hex (default: #0066CC)")
+    parser.add_argument("style", nargs="?", default="modern", help="Style preset, e.g. modern, classic, playful (default: modern)")
+    parser.add_argument("format", nargs="?", default="json", choices=["json", "css", "scss", "summary"],
+                        help="Output format (default: json)")
+    args = parser.parse_args()
+
     generator = DesignTokenGenerator()
-    
-    # Get parameters
-    brand_color = sys.argv[1] if len(sys.argv) > 1 else "#0066CC"
-    style = sys.argv[2] if len(sys.argv) > 2 else "modern"
-    output_format = sys.argv[3] if len(sys.argv) > 3 else "json"
+    brand_color, style, output_format = args.brand_color, args.style, args.format
     
     # Generate tokens
     tokens = generator.generate_complete_system(brand_color, style)

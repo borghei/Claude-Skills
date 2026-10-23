@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-07T00:47:30+00:00",
+  "generated_at": "2026-10-23T11:44:01+00:00",
   "skill_count": 385,
   "domain_count": 21,
   "skills": [
@@ -2347,7 +2347,7 @@
         "scripts/etl_performance_optimizer.py",
         "scripts/pipeline_orchestrator.py"
       ],
-      "size_bytes": 272981,
+      "size_bytes": 280378,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -2755,7 +2755,7 @@
         "scripts/script_tester.py",
         "scripts/skill_validator.py"
       ],
-      "size_bytes": 199887,
+      "size_bytes": 212861,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -3066,10 +3066,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 25347,
+      "size_bytes": 32948,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -3472,7 +3473,7 @@
         "scripts/brand_voice_analyzer.py",
         "scripts/seo_optimizer.py"
       ],
-      "size_bytes": 91683,
+      "size_bytes": 92361,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
@@ -4771,7 +4772,7 @@
         "scripts/team_scaling_calculator.py",
         "scripts/tech_debt_analyzer.py"
       ],
-      "size_bytes": 82978,
+      "size_bytes": 82938,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
@@ -4998,7 +4999,7 @@
         "scripts/org_health_scorer.py",
         "scripts/span_of_control_analyzer.py"
       ],
-      "size_bytes": 46505,
+      "size_bytes": 46507,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9337,7 +9338,7 @@
         "scripts/component_scaffold.py",
         "scripts/token_gen.py"
       ],
-      "size_bytes": 54235,
+      "size_bytes": 54307,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,
@@ -9435,7 +9436,7 @@
         "scripts/customer_interview_analyzer.py",
         "scripts/rice_prioritizer.py"
       ],
-      "size_bytes": 76021,
+      "size_bytes": 76125,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
@@ -9599,7 +9600,7 @@
         "references/token-generation.md",
         "scripts/design_token_generator.py"
       ],
-      "size_bytes": 72854,
+      "size_bytes": 73279,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -10065,7 +10066,7 @@
         "scripts/headcount_planner.py",
         "scripts/survey_analyzer.py"
       ],
-      "size_bytes": 59410,
+      "size_bytes": 59412,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": false,

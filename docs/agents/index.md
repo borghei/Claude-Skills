@@ -4,7 +4,7 @@ title: Agents
 
 # Agents
 
-Claude Skills includes **25 role-based agents** and **7 personas** that combine multiple skills into specialized AI experts. Agents select the right skills, run relevant tools, and produce structured analysis.
+Claude Skills includes **68 role-based agents** and **8 personas** that combine multiple skills into specialized AI experts. Agents select the right skills, run relevant tools, and produce structured analysis.
 
 ## Two Types of Agents
 
@@ -12,7 +12,7 @@ Claude Skills includes **25 role-based agents** and **7 personas** that combine 
 
 Task agents are domain specialists. Each one focuses on a specific function like code review, security auditing, or compliance assessment. They follow structured workflows and produce actionable reports.
 
-**19 task agents** across 5 domains.
+**68 task agents** across every domain.
 
 [:octicons-arrow-right-24: View all task agents](task-agents.md)
 
@@ -20,7 +20,7 @@ Task agents are domain specialists. Each one focuses on a specific function like
 
 Personas are cross-functional roles that combine skills from multiple domains. A "Startup CTO" persona draws from engineering, product, and c-level skills simultaneously.
 
-**7 personas** for common professional roles.
+**8 personas** for common professional roles.
 
 [:octicons-arrow-right-24: View all personas](personas.md)
 

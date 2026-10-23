@@ -4,7 +4,7 @@ Instructions for Google Gemini CLI when working with the Claude Skills Library.
 
 ## Project Overview
 
-This is the **Universal AI Skills Library** -- **385 production-ready skill packages across 21 domains** with **900 Python automation tools**. Each skill bundles domain expertise, best practices, analysis tools, and strategic frameworks into self-contained packages.
+This is the **Universal AI Skills Library** -- **385 production-ready skill packages across 21 domains** with **906 Python automation tools**. Each skill bundles domain expertise, best practices, analysis tools, and strategic frameworks into self-contained packages.
 
 **This is NOT a traditional application.** It is a library of skill packages meant to be extracted and deployed into your AI coding workflows.
 

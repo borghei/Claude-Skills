@@ -8,6 +8,13 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.13.2** (October 2026)
+
+- Thirteen Python tools that crashed on start now run, and every tool answers `--help`
+- `skill-tester` and the pipeline orchestrator no longer need PyYAML
+- `build_manifest.py --check` reports out-of-date manifests without writing them
+- Counts corrected everywhere: 385 skills, 21 domains, 906 Python tools, 76 agents, 6 CI/CD workflows
+
 **v4.13.1** (October 2026)
 
 - README badge corrected to 21 domains, matching the domain list and every other count

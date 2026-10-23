@@ -6,7 +6,7 @@
 
 ## What This Repository Is
 
-This is the universal AI skills library — **339 production-ready skill packages across 17 professional domains** with **787 Python automation tools**, 76 agents (incl. 8 cross-domain personas), 27 slash commands, and 8 CI/CD workflows. It works with every major AI coding assistant.
+This is the universal AI skills library — **385 production-ready skill packages across 21 professional domains** with **906 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
 
 This is NOT a traditional application. It's a library of self-contained skill packages meant to be extracted and deployed into user workflows.
 

@@ -1,6 +1,6 @@
 # Installation Guide - AI Skills Library
 
-Complete installation guide for all 385 production-ready skills across 21 domains, 900 Python tools, 77 agents, 26 slash commands, 21 compound sub-skills, 18 compliance frameworks and 8 CI/CD workflows. Works with Claude Code, Claude.ai, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, ChatGPT and more.
+Complete installation guide for all 385 production-ready skills across 21 domains, 906 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 18 compliance frameworks and 6 CI/CD workflows. Works with Claude Code, Claude.ai, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, ChatGPT and more.
 
 ## Table of Contents
 
@@ -964,5 +964,5 @@ See `.codex/skills-index.json` for the complete manifest with descriptions.
 ---
 
 **Last Updated:** October 2026
-**Skills Version:** 4.13.1 (385 production skills, 900 Python tools, 77 agents, 26 slash commands, 21 compound sub-skills, 8 CI/CD workflows)
+**Skills Version:** 4.13.2 (385 production skills, 906 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 6 CI/CD workflows)
 **Universal Installer:** [Agent Skills CLI](https://github.com/Karanjot786/agent-skills-cli)

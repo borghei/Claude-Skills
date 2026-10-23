@@ -75,9 +75,11 @@ A11Y_REQUIREMENTS = {
 
 def generate_props(name: str, category: str, variants: List[str], sizes: List[str]) -> List[Dict]:
     """Generate standard props table for a component."""
+    variant_type = " | ".join(f"'{v}'" for v in variants)
+    size_type = " | ".join(f"'{s}'" for s in sizes)
     props = [
-        {"name": "variant", "type": f"'{\"' | '\".join(variants)}'", "default": f"'{variants[0]}'", "required": False, "description": f"Visual style variant"},
-        {"name": "size", "type": f"'{\"' | '\".join(sizes)}'", "default": "'md'", "required": False, "description": "Component size"},
+        {"name": "variant", "type": variant_type, "default": f"'{variants[0]}'", "required": False, "description": f"Visual style variant"},
+        {"name": "size", "type": size_type, "default": "'md'", "required": False, "description": "Component size"},
         {"name": "disabled", "type": "boolean", "default": "false", "required": False, "description": "Disables interaction"},
         {"name": "className", "type": "string", "default": "''", "required": False, "description": "Additional CSS class names"},
     ]

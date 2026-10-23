@@ -1,0 +1,73 @@
+name: Bug Report
+description: Report a bug in a skill or Python script
+title: "[BUG] "
+labels: [bug]
+body:
+  - type: input
+    id: skill
+    attributes:
+      label: Affected skill
+      description: Folder path of the skill, e.g. `marketing/content-creator`
+      placeholder: marketing/content-creator
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Python script
+        - SKILL.md
+        - Reference file
+        - Asset or template
+        - CLI (npx claude-skills)
+        - Website
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened
+      description: A clear description of the bug.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The exact command you ran and the input it used.
+      placeholder: |
+        1. python3 scripts/seo_optimizer.py post.md "keyword"
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Error output
+      description: Paste the full traceback or error message.
+      render: shell
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, Python version and AI assistant.
+      placeholder: macOS 15, Python 3.13, Claude Code
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues for duplicates
+          required: true
+        - label: I reproduced this on the latest `main`
+          required: true

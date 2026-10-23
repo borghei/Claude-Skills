@@ -173,13 +173,15 @@ def analyze_content(content: str, output_format: str = 'json') -> str:
         return '\n'.join(output)
 
 if __name__ == "__main__":
-    import sys
-    
-    if len(sys.argv) > 1:
-        with open(sys.argv[1], 'r') as f:
-            content = f.read()
-        
-        output_format = sys.argv[2] if len(sys.argv) > 2 else 'text'
-        print(analyze_content(content, output_format))
-    else:
-        print("Usage: python brand_voice_analyzer.py <file> [json|text]")
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Analyze the brand voice of a piece of content.")
+    parser.add_argument("file", help="Text or markdown file to analyze")
+    parser.add_argument("format", nargs="?", choices=["json", "text"], default="text",
+                        help="Output format (default: text)")
+    parser.add_argument("--json", action="store_true", help="Shorthand for the json format")
+    args = parser.parse_args()
+
+    with open(args.file, 'r') as f:
+        content = f.read()
+    print(analyze_content(content, "json" if args.json else args.format))
