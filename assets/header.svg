@@ -1,43 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
-  <defs>
-    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1A1C1E"/>
-      <stop offset="100%" stop-color="#0D0E0F"/>
-    </linearGradient>
-    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#E86A33"/>
-      <stop offset="100%" stop-color="#F29F67"/>
-    </linearGradient>
-  </defs>
-
-  <rect width="1280" height="640" fill="url(#bgGradient)"/>
-
-  <circle cx="1150" cy="100" r="400" fill="#E86A33" opacity="0.03"/>
-  <circle cx="1150" cy="100" r="250" fill="#E86A33" opacity="0.04"/>
-  <path d="M 900 640 L 1280 200 L 1280 640 Z" fill="#ffffff" opacity="0.01"/>
-
-  <text x="1000" y="480" font-family="monospace" font-weight="bold" font-size="280" fill="#ffffff" opacity="0.03">&lt;/&gt;</text>
-
-  <text x="120" y="240" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="76" fill="#F0F0F0" letter-spacing="-1">
-    AI Skills Library
-  </text>
-
-  <text x="120" y="325" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="34" fill="url(#accentGradient)">
-    Expert-Level AI Skills — Transform any AI assistant into a
-  </text>
-  <text x="120" y="375" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="34" fill="url(#accentGradient)">
-    world-class specialist for any professional domain.
-  </text>
-
-  <text x="120" y="460" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#A0A4A8" font-weight="400">
-    Each skill contains production-ready frameworks, templates, code
-  </text>
-  <text x="120" y="500" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#A0A4A8" font-weight="400">
-    examples, and domain expertise that makes your AI assistant perform like
-  </text>
-  <text x="120" y="540" font-family="system-ui, -apple-system, sans-serif" font-size="24" fill="#A0A4A8" font-weight="400">
-    a senior professional with 10+ years of experience.
-  </text>
-
-  <rect x="120" y="635" width="1040" height="5" fill="url(#accentGradient)" opacity="0.7"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 420" width="1280" height="420" role="img" aria-labelledby="t d">
+<title id="t">Claude Skills</title>
+<desc id="d">385 skills across 21 domains, drawn as a treemap where each tile is a domain sized by its number of skills.</desc>
+<style>
+  .bg{fill:#f7f6f2} .ink{fill:#16181d} .mute{fill:#5b616b} .acc{fill:#c4572f}
+  .cmd{fill:#ffffff;stroke:#dedbd2} .cmdt{fill:#16181d}
+  .ga{fill:#c4572f} .gb{fill:#2f5bb8} .gc{fill:#14806a} .gd{fill:#8a5cc2}
+  .tl,.tn{fill:#ffffff;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+  .tl{font-weight:800} .tn{font-weight:600;opacity:.92}
+  .sans{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .tile{animation:rise .5s cubic-bezier(.2,.7,.2,1) both, glow 26s ease-in-out infinite}
+  .tile rect{transition:opacity .2s}
+  .cursor{animation:blink 1.1s steps(1) infinite}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @keyframes glow{0%,94%,100%{filter:none}96%{filter:brightness(1.35) saturate(1.1)}}
+  @keyframes blink{50%{opacity:0}}
+  @media (prefers-color-scheme:dark){
+    .bg{fill:#0f1115} .ink{fill:#f1efe9} .mute{fill:#9aa1ad} .acc{fill:#ef8a5c}
+    .cmd{fill:#171a20;stroke:#2a2f38} .cmdt{fill:#e9e6df}
+    .ga{fill:#d0653b} .gb{fill:#3d6fd6} .gc{fill:#1a9a80} .gd{fill:#9a6ed6}
+  }
+  @media (prefers-reduced-motion:reduce){.tile,.cursor{animation:none}}
+</style>
+<rect class="bg" width="1280" height="420"/>
+<rect class="acc" x="64" y="70" width="44" height="6" rx="3"/>
+<text class="ink sans" x="62" y="152" font-size="66" font-weight="800" letter-spacing="-2">Claude Skills</text>
+<text class="mute sans" x="64" y="198" font-size="23" font-weight="500">Turn your AI assistant into a specialist.</text>
+<text class="mute sans" x="64" y="230" font-size="17">385 skills · 21 domains · Python tools that compute, not guess</text>
+<rect class="cmd" x="64" y="282" width="540" height="52" rx="10" stroke-width="1.5"/>
+<text class="acc mono" x="86" y="315" font-size="17" font-weight="600">❯</text>
+<text class="cmdt mono" x="108" y="315" font-size="17">/plugin marketplace add borghei/Claude-Skills</text>
+<rect class="acc cursor" x="586" y="300" width="2" height="18"/>
+<g class="tile" style="animation-delay:0.15s, 3.0s"><title>Engineering: 92 skills</title><rect class="gb" x="677.5" y="45.5" width="232.6" height="185.5" rx="5"/><text class="tl" x="689.5" y="89.5" font-size="40">92</text><text class="tn" x="689.5" y="117.5" font-size="22">Engineering</text></g><g class="tile" style="animation-delay:0.21s, 4.7s"><title>Project Mgmt: 70 skills</title><rect class="gb" x="677.5" y="234.0" width="232.6" height="140.5" rx="5"/><text class="tl" x="689.5" y="278.0" font-size="40">70</text><text class="tn" x="689.5" y="306.0" font-size="22">Project Mgmt</text></g><g class="tile" style="animation-delay:0.27s, 6.4s"><title>Marketing: 41 skills</title><rect class="gd" x="913.1" y="45.5" width="131.3" height="144.4" rx="5"/><text class="tl" x="925.1" y="73.5" font-size="20">41</text><text class="tn" x="925.1" y="93.5" font-size="14">Marketing</text></g><g class="tile" style="animation-delay:0.33s, 8.1s"><title>C-Level: 31 skills</title><rect class="ga" x="1047.5" y="45.5" width="98.6" height="144.4" rx="5"/><text class="tl" x="1059.5" y="73.5" font-size="20">31</text><text class="tn" x="1059.5" y="93.5" font-size="14">C-Level</text></g><g class="tile" style="animation-delay:0.39s, 9.8s"><title>Compliance: 27 skills</title><rect class="gc" x="1149.0" y="45.5" width="85.5" height="144.4" rx="5"/><text class="tl" x="1161.0" y="73.5" font-size="20">27</text><text class="tn" x="1161.0" y="89.5" font-size="10">Compliance</text></g><g class="tile" style="animation-delay:0.45s, 11.5s"><title>Growth: 20 skills</title><rect class="ga" x="913.1" y="192.9" width="93.8" height="96.8" rx="5"/><text class="tl" x="925.1" y="220.9" font-size="20">20</text><text class="tn" x="925.1" y="240.9" font-size="14">Growth</text></g><g class="tile" style="animation-delay:0.51s, 13.2s"><title>Legal: 17 skills</title><rect class="gc" x="913.1" y="292.7" width="93.8" height="81.8" rx="5"/><text class="tl" x="925.1" y="320.7" font-size="20">17</text><text class="tn" x="925.1" y="340.7" font-size="14">Legal</text></g><g class="tile" style="animation-delay:0.57s, 14.9s"><title>Productivity: 13 skills</title><rect class="gd" x="1009.9" y="192.9" width="65.0" height="89.3" rx="5"/><text class="tl" x="1042.4" y="242.5" font-size="13" text-anchor="middle">13</text></g><g class="tile" style="animation-delay:0.63s, 16.6s"><title>Product: 13 skills</title><rect class="gb" x="1009.9" y="285.2" width="65.0" height="89.3" rx="5"/><text class="tl" x="1042.4" y="334.8" font-size="13" text-anchor="middle">13</text></g><g class="tile" style="animation-delay:0.69s, 18.3s"><title>LinkedIn: 12 skills</title><rect class="gd" x="1077.9" y="192.9" width="97.8" height="54.5" rx="5"/><text class="tl" x="1089.9" y="220.9" font-size="20">12</text><text class="tn" x="1089.9" y="240.9" font-size="14">LinkedIn</text></g><g class="tile" style="animation-delay:0.75s, 20.0s"><title>Verticals: 7 skills</title><rect class="ga" x="1178.7" y="192.9" width="55.8" height="54.5" rx="5"/><text class="tl" x="1206.6" y="225.1" font-size="13" text-anchor="middle">7</text></g><g class="tile" style="animation-delay:0.81s, 21.7s"><title>Ops: 6 skills</title><rect class="ga" x="1077.9" y="250.4" width="42.6" height="60.6" rx="5"/><text class="tl" x="1099.2" y="285.7" font-size="13" text-anchor="middle">6</text></g><g class="tile" style="animation-delay:0.87s, 23.4s"><title>Data: 6 skills</title><rect class="gb" x="1077.9" y="313.9" width="42.6" height="60.6" rx="5"/><text class="tl" x="1099.2" y="349.2" font-size="13" text-anchor="middle">6</text></g><g class="tile" style="animation-delay:0.93s, 25.1s"><title>Sales: 5 skills</title><rect class="ga" x="1123.5" y="250.4" width="40.8" height="52.1" rx="5"/><text class="tl" x="1143.9" y="281.4" font-size="13" text-anchor="middle">5</text></g><g class="tile" style="animation-delay:0.99s, 26.8s"><title>Docs: 4 skills</title><rect class="gd" x="1167.4" y="250.4" width="32.1" height="52.1" rx="5"/></g><g class="tile" style="animation-delay:1.05s, 28.5s"><title>HR: 4 skills</title><rect class="ga" x="1202.4" y="250.4" width="32.1" height="52.1" rx="5"/></g><g class="tile" style="animation-delay:1.11s, 30.2s"><title>MD→HTML: 4 skills</title><rect class="gd" x="1123.5" y="305.5" width="50.6" height="33.0" rx="5"/><text class="tl" x="1148.8" y="327.0" font-size="13" text-anchor="middle">4</text></g><g class="tile" style="animation-delay:1.17s, 31.9s"><title>Research: 4 skills</title><rect class="gd" x="1123.5" y="341.5" width="50.6" height="33.0" rx="5"/><text class="tl" x="1148.8" y="363.0" font-size="13" text-anchor="middle">4</text></g><g class="tile" style="animation-delay:1.23s, 33.6s"><title>Research Ops: 4 skills</title><rect class="gd" x="1177.2" y="305.5" width="57.3" height="29.0" rx="5"/><text class="tl" x="1205.8" y="325.0" font-size="13" text-anchor="middle">4</text></g><g class="tile" style="animation-delay:1.29s, 35.3s"><title>Finance: 3 skills</title><rect class="ga" x="1177.2" y="337.5" width="33.2" height="37.0" rx="5"/></g><g class="tile" style="animation-delay:1.35s, 37.0s"><title>Workflow: 2 skills</title><rect class="gd" x="1213.4" y="337.5" width="21.1" height="37.0" rx="5"/></g>
+<g class="sans" font-size="13">
+  <rect class="ga" x="676" y="390" width="10" height="10" rx="2"/><text class="mute" x="692" y="399">Leadership &amp; business</text>
+  <rect class="gb" x="846" y="390" width="10" height="10" rx="2"/><text class="mute" x="862" y="399">Product &amp; engineering</text>
+  <rect class="gc" x="1014" y="390" width="10" height="10" rx="2"/><text class="mute" x="1030" y="399">Compliance &amp; legal</text>
+  <rect class="gd" x="1158" y="390" width="10" height="10" rx="2"/><text class="mute" x="1174" y="399">Content</text>
+</g>
 </svg>

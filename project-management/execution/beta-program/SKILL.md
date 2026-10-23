@@ -65,6 +65,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 See `references/beta-framework.md` for the full framework tables, step-by-step workflow, troubleshooting, and success criteria.
 
+## Anti-Patterns
+
+### Recruiting only friends
+**Mistake:** The cohort is 30 employees and 5 advisor friends, with no Fanatics cold-recruited from the ICP.
+**Why it happens:** Friends say yes within two days, and cold recruiting is slow.
+**Instead:** Sequence Friends, then Family, then Fanatics, and keep Fanatics at 30% of the cohort or more. Screen them for active pain in the problem area.
+
+### Recruitment that leads with the feature
+**Mistake:** The outreach email opens "We're launching an exciting new AI assistant, want to try it?"
+**Why it happens:** The team is proud of what it built and leads with it.
+**Instead:** Name the participant's problem in the first paragraph, then the ask (hours per week, duration) and the payoff. Target people who described this pain in discovery, starting from `assets/recruitment-script.md`.
+
+### Building one-offs for a single participant
+**Mistake:** The largest beta customer asks for a custom export format, and engineering builds it in week 3 for that customer alone.
+**Why it happens:** The participant is a paying account, and keeping them happy feels like protecting the beta.
+**Instead:** Log the request in the `customer-feedback-triage/` queue with the rest of the beta input. Commit to it for v1.1 only if the broader signal supports it, and track sales-promised customizations separately.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - `references/beta-framework.md` -- Full framework (cohort, Kano, success gates, cadence, exit gates), the 8-step workflow, troubleshooting matrix, and success criteria. Read this when building the plan, setting gates, running the cadence, or diagnosing problems.

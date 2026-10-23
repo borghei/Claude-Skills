@@ -68,6 +68,25 @@ AI app builders, AI design tools, and AI coding assistants can produce a clickab
 - **Guard the data** — use synthetic data; do not load customer PII into third-party tools without approval.
 - **Record the outcome** in `assets/experiment_plan_template.md`, then carry validated results into `execution/create-prd/` (Prototype-First Path) — the PRD still owns problem, metrics, constraints, non-goals, and risks.
 
+## Anti-Patterns
+
+### Sample too small to mean anything
+**Mistake:** Eight users see the test, five click, and the team reports "62.5% conversion" and moves on.
+**Why it happens:** Small tests are quick, and an early good number is tempting to believe.
+**Instead:** Write down the minimum sample size next to the XYZ threshold before the test starts. Don't stop early because the result looks good. The sample-size rules of thumb are in `references/experiment-methods.md`.
+
+### Pretotype that takes weeks
+**Mistake:** The "quick smoke test" takes six weeks and three engineers, and the team is committed before data comes back.
+**Why it happens:** The team keeps polishing the test so it feels fair to the idea.
+**Instead:** Keep the time from idea to live experiment under one week. If it will take longer, pick a cheaper method from the catalog, such as a fake door, landing page or concierge MVP.
+
+### No counter-metric
+**Mistake:** The test measures clicks on "Upgrade" and ignores whether those users paid, stayed or were happy.
+**Why it happens:** The primary metric is the one tied to the hypothesis, so it gets all the attention.
+**Instead:** Declare at least one counter-metric before launch and record it in `assets/experiment_plan_template.md`. Count a pass only if the primary metric clears its threshold and the counter-metric holds.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

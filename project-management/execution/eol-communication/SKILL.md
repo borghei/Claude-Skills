@@ -51,6 +51,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 - Internal tooling changes with no customer impact.
 - Bug fixes or patches (use release notes instead).
 
+## Anti-Patterns
+
+### Announcing before the migration path works
+**Mistake:** The EOL email goes out while the migration tool is still "coming soon". Customers try it at launch, it breaks, and the support queue floods.
+**Why it happens:** The shutdown date is set and the announcement feels urgent, so the tooling is assumed to catch up.
+**Instead:** Treat a working migration path as a gate. Announce only after at least 10 real customers have migrated in production on the path you are about to recommend.
+
+### Vague timeline
+**Mistake:** The message says "in the coming months" or "later this year" with no dates.
+**Why it happens:** Some dates are not locked yet, and soft wording feels safer than committing.
+**Instead:** Search the draft for "coming", "later", "in due course" and "soon", and replace each with a date. Give every milestone a date: announcement, new signups closed, feature freeze, data export deadline, shutdown.
+
+### Customer-facing staff learn from customers
+**Mistake:** Internal Slack hears about the EOL a minute after the public post, and a sales rep first hears of it from a customer on a call.
+**Why it happens:** Internal comms feel like a formality next to the external message.
+**Instead:** Brief sales, CS and support 7-10 business days before the external announcement, with the internal FAQ in hand. Before T-0, ask 3 customer-facing employees what the EOL message is. If they hesitate, hold the announcement.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/playbook.md](references/playbook.md)** — read this when crafting a sunset announcement: the 4-phase EOL framework, the messaging template and writing rules, the segment/channel matrix, the internal support FAQ, the monitoring checklist, timeline best practices by product type, troubleshooting, and success criteria.

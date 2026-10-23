@@ -42,6 +42,25 @@ The agent acts as an expert agile coach guiding teams and organizations through 
 | `team_health_checker.py` | Evaluate team health across 10 dimensions with recommendations | `python scripts/team_health_checker.py --survey survey.json` |
 | `velocity_analyzer.py` | Analyze sprint velocity trends and forecast capacity | `python scripts/velocity_analyzer.py --sprints sprints.json --forecast 3` |
 
+## Anti-Patterns
+
+### Velocity reported as performance
+**Mistake:** The report to leadership celebrates "velocity went from 30 to 45 points" as proof the team improved.
+**Why it happens:** Velocity is the number `velocity_analyzer.py` already produces, so it is the easiest one to show.
+**Instead:** Treat velocity as a planning input only. Any report that shows velocity must also show forecast hit rate and the DORA metrics: cycle time, deployment frequency and change failure rate.
+
+### Maturity scores with no evidence
+**Mistake:** The assessment puts the team at Level 4 on all six dimensions when the evidence supports Level 2.
+**Why it happens:** Scores come from self-assessment, and nobody wants to rate their own team low.
+**Instead:** Write a one-sentence evidence statement for every dimension score before you run `agile_maturity_scorer.py`. No evidence, no score.
+
+### Retros that produce only complaints
+**Mistake:** The retro ends with a list of grievances, or the same three actions carry over sprint after sprint.
+**Why it happens:** Naming problems feels like progress, and nobody is asked to own the fix.
+**Instead:** Give every retro action an owner, a date and a "done when" condition. Track carryovers. If an action shows up in three retros, escalate it or drop it.
+
+Eight more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/frameworks.md](references/frameworks.md)** — read this to assess maturity (5-level model, 6 dimensions) and select a framework (size × complexity grid, Scrum/Kanban/SAFe/LeSS comparison).

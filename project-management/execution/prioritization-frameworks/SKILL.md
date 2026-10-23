@@ -58,6 +58,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 Supported frameworks: `rice`, `ice`, `opportunity`, `moscow`, `weighted`. See `references/tool-and-troubleshooting.md` for input JSON schemas and flags.
 
+## Anti-Patterns
+
+### Every item scores massive impact
+**Mistake:** Most of the backlog gets Impact = 3 on the RICE scale.
+**Why it happens:** Each item has a champion, and nobody wants theirs marked minor.
+**Instead:** RICE ranks items against each other, so uniform impact ranks nothing. If more than 30% of items score 3, recalibrate: only items with behavioural or revenue evidence keep it.
+
+### Confidence padded to reach the cut line
+**Mistake:** A favoured item's Confidence moves from 50% to 80% with no new evidence.
+**Why it happens:** The ranking was decided first, and the score is adjusted to match it.
+**Instead:** Add a Confidence Source column. An item with no written source is capped at 50%.
+
+### Effort scored without engineering
+**Mistake:** The PM sizes Effort alone, as small, medium or large.
+**Why it happens:** It is quicker than booking engineers, and backend, security and migration work is hard to see from the product side.
+**Instead:** Effort is the denominator, so a wrong estimate flips the ranking. Don't publish a score until an engineer has signed off on its Effort.
+
+Eight more in `references/red-flags.md`; framework-specific mistakes in `references/prioritization-guide.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

@@ -57,6 +57,25 @@ linear_query() {
 
 Cache team/label/state UUIDs locally, use nested selection to avoid N+1 calls, and prefer webhooks over polling. See the references below for the full query catalog and operating workflows.
 
+## Anti-Patterns
+
+### Trusting unsigned webhooks
+**Mistake:** A Linear webhook posts to an internal service that acts on the payload without checking where it came from.
+**Why it happens:** The integration works in testing, and verification looks like optional hardening.
+**Instead:** Validate the `Linear-Signature` header in every webhook handler before acting. Without it, anyone can forge or replay events that trigger deletions, status changes or notifications. Any handler that skips the check needs a security review now.
+
+### Migrating from Jira without a status map
+**Mistake:** Thousands of Jira issues are bulk-imported and every status lands in Backlog.
+**Why it happens:** The importer runs without one, and mapping many Jira states onto Linear's five workflow categories takes work.
+**Instead:** Write a table that maps each Jira status to a Linear state before you import (see `references/linear-vs-jira.md`). A migration plan with no status-mapping table is not ready to run.
+
+### Letting Triage pile up
+**Mistake:** The Triage queue holds hundreds of issues going back months.
+**Why it happens:** Nobody owns Triage, so it only gets done when someone has spare time.
+**Instead:** Staff Triage with a rotation and a daily routine (`assets/linear-triage-workflow.md`). If the queue passes 30 issues or the oldest is over 14 days old, add triage capacity.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

@@ -56,6 +56,25 @@ Before drafting the AI PRD, confirm these inputs. If any is unknown or vague, AS
 
 Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
 
+## Anti-Patterns
+
+### Choosing the model before the eval
+**Mistake:** Section 9.1 names a primary model while Section 10.1 still says the golden set is under construction.
+**Why it happens:** Model choice is the exciting decision, and "use the strongest model" sounds safe.
+**Instead:** Define the golden set and the acceptance, hallucination and refusal bars in Section 10 first. Then score candidate models against it and record why the primary and the fallback won.
+
+### Golden set left as "TBD"
+**Mistake:** Section 10.2 says the golden set will be compiled during the build.
+**Why it happens:** Building one takes curation work with Support and Safety, and the PRD deadline comes first.
+**Instead:** Commit the golden set to source control before kickoff, for example 200 items split 70% common, 20% edge and 10% adversarial. Name one owner for the set and one for the eval runner.
+
+### Deployment ramp with no gates
+**Mistake:** Section 11.3 lists Shadow, Internal, Canary, Percent and GA with dates, but no metric that must hold to advance.
+**Why it happens:** A calendar plan is easier to write than agreeing a threshold for each stage.
+**Instead:** Give every stage a gate metric and an owner, such as golden-set acceptance, P0 safety incidents and cost per interaction. Test the plan by asking which number halts the ramp at each stage.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Pull the reference that matches the task; keep this file lean and load detail on demand.

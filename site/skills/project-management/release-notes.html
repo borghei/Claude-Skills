@@ -399,6 +399,9 @@ Transform raw technical changes -- tickets, changelogs, git logs, PRDs -- into c
 
 ## Your Key Capabilities
 - When to Use
+- Notes for features that never shipped
+- Marketing copy in place of specifics
+- One note for internal and external readers
 
 ## How to Help
 When the user asks for help in this domain:
@@ -424,6 +427,9 @@ Transform raw technical changes -- tickets, changelogs, git logs, PRDs -- into c
 
 ## Your Key Capabilities
 - When to Use
+- Notes for features that never shipped
+- Marketing copy in place of specifics
+- One note for internal and external readers
 
 ## How to Help
 When the user asks for help in this domain:
@@ -489,6 +495,25 @@ python scripts/release_notes_generator.py --demo --product-name &quot;Acme App&q
 ```
 
 Include only categories that have entries. Breaking changes must state what changed, what the user must do, and by when. See the references for the full methodology, output template, and flag reference.
+
+## Anti-Patterns
+
+### Notes for features that never shipped
+**Mistake:** An item appears because its ticket was marked Done, but the code was reverted before release.
+**Why it happens:** The ticket tracker looks like the source of truth, so its Done list goes straight into `changes.json`.
+**Instead:** Before running `release_notes_generator.py`, cross-check Done tickets against the shipped commits (for example `git log v4.1..v4.2`). Flag any ticket that is missing from the diff for human review, and remove it if it didn&#x27;t ship.
+
+### Marketing copy in place of specifics
+**Mistake:** &quot;Game-changing AI-powered insights now live across the platform!&quot; with no behavior described.
+**Why it happens:** Hype feels like it drives adoption, and describing the exact behavior takes more work.
+**Instead:** Search for &quot;revolutionary&quot;, &quot;game-changing&quot;, &quot;powered by AI&quot; and &quot;next-generation&quot;. Replace each with the specific behavior, the plans it is on, and how to turn it off.
+
+### One note for internal and external readers
+**Mistake:** The customer email includes &quot;known issue: occasional 502 on Safari, rollback in progress, on-call: @ana&quot;.
+**Why it happens:** Writing one note is faster, and the internal details feel like useful transparency.
+**Instead:** Produce two artifacts from the same source. The internal one carries known issues, on-call and rollback steps. The external one is value-framed with breaking changes first. Check customer copy for &quot;rollback&quot;, &quot;on-call&quot; and internal known issues before sending.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -617,6 +642,25 @@ python scripts/release_notes_generator.py --demo --product-name &quot;Acme App&q
 ```
 
 Include only categories that have entries. Breaking changes must state what changed, what the user must do, and by when. See the references for the full methodology, output template, and flag reference.
+
+## Anti-Patterns
+
+### Notes for features that never shipped
+**Mistake:** An item appears because its ticket was marked Done, but the code was reverted before release.
+**Why it happens:** The ticket tracker looks like the source of truth, so its Done list goes straight into `changes.json`.
+**Instead:** Before running `release_notes_generator.py`, cross-check Done tickets against the shipped commits (for example `git log v4.1..v4.2`). Flag any ticket that is missing from the diff for human review, and remove it if it didn&#x27;t ship.
+
+### Marketing copy in place of specifics
+**Mistake:** &quot;Game-changing AI-powered insights now live across the platform!&quot; with no behavior described.
+**Why it happens:** Hype feels like it drives adoption, and describing the exact behavior takes more work.
+**Instead:** Search for &quot;revolutionary&quot;, &quot;game-changing&quot;, &quot;powered by AI&quot; and &quot;next-generation&quot;. Replace each with the specific behavior, the plans it is on, and how to turn it off.
+
+### One note for internal and external readers
+**Mistake:** The customer email includes &quot;known issue: occasional 502 on Safari, rollback in progress, on-call: @ana&quot;.
+**Why it happens:** Writing one note is faster, and the internal details feel like useful transparency.
+**Instead:** Produce two artifacts from the same source. The internal one carries known issues, on-call and rollback steps. The external one is value-framed with breaking changes first. Check customer copy for &quot;rollback&quot;, &quot;on-call&quot; and internal known issues before sending.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

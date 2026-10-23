@@ -71,6 +71,25 @@ python scripts/feedback_triage.py --demo --format markdown
 
 The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`. The 6-phase workflow (intake → triage → categorize → score → respond → feed forward) and the scoring formula live in the workflow guide reference.
 
+## Anti-Patterns
+
+### One loud account counted as many
+**Mistake:** One enterprise account sends 5 messages about CSV export, and its cluster outranks one backed by 14 distinct customers.
+**Why it happens:** Submission count is the number on screen, and repeated messages feel urgent.
+**Instead:** Use distinct customers as volume, so five messages from one account count as 1. Compare `distinct_customers` to `request_count` per cluster; a ratio under 0.3 means one shouter.
+
+### Exec requests that skip the queue
+**Mistake:** A VP forwards a customer email on Monday and the item tops the roadmap by Tuesday, with no volume check or scoring.
+**Why it happens:** Execs do have customer context, and pushing back on them feels risky.
+**Instead:** Log exec asks with channel `exec_ask` and run them through the same triage. Send the VP the score and the queue. If more than 30% of roadmap adds over 6 months came from the exec channel, raise it.
+
+### Building the literal request
+**Mistake:** A customer asks for PDF export and the team builds it. Excel, CSV and Google Sheets requests follow, and each gets built in turn.
+**Why it happens:** The request arrives already shaped as a solution, so it looks ready to build.
+**Instead:** Cluster related requests and write the `opportunity_label` as a job, such as "share results with people who don't have a login". If the label is a verb plus a file type, rewrite it before scoring.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/customer-feedback-triage-guide.md](references/customer-feedback-triage-guide.md)** — the full workflow with the 4 frameworks (Cagan, Kano, layered customer development, request management), the 6-phase process, week-over-week cadence, channel-by-channel intake norms, and the weekly triage meeting agenda. Read when running or setting up the triage process.

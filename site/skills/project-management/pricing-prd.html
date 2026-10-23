@@ -397,6 +397,11 @@ Tactical PM PRD for pricing experiments and pricing-page launches. Pairs with bu
 
 A pricing PRD is the tactical artifact that converts a pricing strategy into a shipped change. Where `business-growth/pricing-strategy/` decides &quot;we are moving from per-seat to per-usage and adding an enterprise tier&quot;, a pricing PRD decides &quot;here is the page, the experiment, the rollout, and the rol
 
+## Your Key Capabilities
+- Van Westendorp without segmentation
+- Conversion as the primary test metric
+- Testing prices on existing customers
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Tactical PM PRD for pricing experiments and pricing-page launches. Pairs with business-growth/pricing-strategy. Covers packaging, willingness-to-pay, grandfathering, A/B design, rollback, regional pricing, and UX.
 
 A pricing PRD is the tactical artifact that converts a pricing strategy into a shipped change. Where `business-growth/pricing-strategy/` decides &quot;we are moving from per-seat to per-usage and adding an enterprise tier&quot;, a pricing PRD decides &quot;here is the page, the experiment, the rollout, and the rol
+
+## Your Key Capabilities
+- Van Westendorp without segmentation
+- Conversion as the primary test metric
+- Testing prices on existing customers
 
 ## How to Help
 When the user asks for help in this domain:
@@ -483,6 +493,25 @@ Before generating the pricing PRD, confirm these inputs. If any is unknown or va
 - [ ] **Rollback trigger** — the revenue/conversion threshold that aborts the change (drives the pre-written rollback criteria)
 
 Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Anti-Patterns
+
+### Van Westendorp without segmentation
+**Mistake:** One aggregate Van Westendorp curve across all respondents sets a single price for every segment.
+**Why it happens:** One curve is simpler to present, and the sample feels too small to split.
+**Instead:** Report the curves per segment (SMB, mid-market, enterprise) and price each tier inside its segment&#x27;s IPP-to-OPP band. Treat the aggregate curve as informational only.
+
+### Conversion as the primary test metric
+**Mistake:** A cheaper variant lifts conversion, the team ships it, and 90 days later ARPU and retention are down.
+**Why it happens:** Conversion moves fast and is easy to read inside a short test window.
+**Instead:** Make ARPU (revenue per visitor) the primary metric in `assets/pricing_experiment_design.md`. Track trial-to-paid, D30 downgrade and D90 retention as secondary metrics. If the primary-metric line says only &quot;conversion rate&quot;, rewrite it.
+
+### Testing prices on existing customers
+**Mistake:** The A/B split includes logged-in customers, who see a different price from the one they signed up at.
+**Why it happens:** Splitting all traffic is the default setup and gives the largest sample.
+**Instead:** Limit eligibility to anonymous visitors and new signups who haven&#x27;t seen a price yet. Exclude existing customers and price-freeze contracts, get Legal sign-off on eligibility, and disclose pricing experiments in the Terms and the pricing FAQ.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -611,6 +640,25 @@ Before generating the pricing PRD, confirm these inputs. If any is unknown or va
 - [ ] **Rollback trigger** — the revenue/conversion threshold that aborts the change (drives the pre-written rollback criteria)
 
 Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Anti-Patterns
+
+### Van Westendorp without segmentation
+**Mistake:** One aggregate Van Westendorp curve across all respondents sets a single price for every segment.
+**Why it happens:** One curve is simpler to present, and the sample feels too small to split.
+**Instead:** Report the curves per segment (SMB, mid-market, enterprise) and price each tier inside its segment&#x27;s IPP-to-OPP band. Treat the aggregate curve as informational only.
+
+### Conversion as the primary test metric
+**Mistake:** A cheaper variant lifts conversion, the team ships it, and 90 days later ARPU and retention are down.
+**Why it happens:** Conversion moves fast and is easy to read inside a short test window.
+**Instead:** Make ARPU (revenue per visitor) the primary metric in `assets/pricing_experiment_design.md`. Track trial-to-paid, D30 downgrade and D90 retention as secondary metrics. If the primary-metric line says only &quot;conversion rate&quot;, rewrite it.
+
+### Testing prices on existing customers
+**Mistake:** The A/B split includes logged-in customers, who see a different price from the one they signed up at.
+**Why it happens:** Splitting all traffic is the default setup and gives the largest sample.
+**Instead:** Limit eligibility to anonymous visitors and new signups who haven&#x27;t seen a price yet. Exclude existing customers and price-freeze contracts, get Legal sign-off on eligibility, and disclose pricing experiments in the Terms and the pricing FAQ.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

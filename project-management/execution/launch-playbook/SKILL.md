@@ -64,6 +64,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 Full timeline tables, RACI matrix, launch-type rules, and the 10-step workflow are in `references/launch-timeline-and-execution.md`.
 
+## Anti-Patterns
+
+### Launch message that doesn't match the rollout
+**Mistake:** The launch post says "available to all customers today" while engineering ramps from 5% to 100% over a week. Most readers click through and hit "not available".
+**Why it happens:** PMM and engineering each plan their own track, and nobody reads the two side by side.
+**Instead:** At T-7, have PMM and the Eng Lead review the public messaging against the rollout plan together. Any mismatch in scope or timing gets fixed in the copy, for example "rolling out this week".
+
+### Launching on the calendar after a failed beta gate
+**Mistake:** The beta exit memo shows the outcome gate missed (38% vs a 50% target), and the team launches anyway because the date was promised.
+**Why it happens:** The date is public or committed upward, and "ship and iterate" sounds reasonable.
+**Instead:** Re-read the beta exit memo before the go/no-go decision. Any failed gate gets addressed before T-0 or the date moves. Re-baseline the date with the exec sponsor. The criteria are the gate, the calendar is not.
+
+### Support not trained before launch
+**Mistake:** Launch day brings a ticket spike, and agents answer "let me check on that" because the runbook is still a draft.
+**Why it happens:** Support prep gets scheduled last, after the build and the external comms.
+**Instead:** Finish the support runbook by T-14, run mandatory training at T-7, and pre-write macros for the top 10 expected questions. At T-3, ask 2 agents how to handle a likely ticket. If they hesitate, training is missing.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - `references/launch-timeline-and-execution.md` — read this when planning/running the launch: three-launches framework, full T-30→T+30 timeline, launch-type selection, RACI matrix, 10-step workflow, troubleshooting, and success criteria.

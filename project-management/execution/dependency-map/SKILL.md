@@ -65,6 +65,25 @@ python scripts/dependency_graph.py --demo --format markdown               # samp
 
 Populate `deps.json` from `assets/dependency-template.json`, run the analyzer, give every critical-path item a named owner, and walk it weekly with `assets/weekly-sync-agenda.md`. Update the JSON *before* each sync.
 
+## Anti-Patterns
+
+### Dependencies that never reach the JSON
+**Mistake:** The JSON lists 8 dependencies while 22 exist. The rest live in Slack DMs and people's heads, and one team blocks another for three weeks before anyone notices.
+**Why it happens:** Only the dependencies someone remembers to report get added.
+**Instead:** Run a 90-minute inventory with each team lead at the start of the planning period, and log any dependency found outside the JSON within 24 hours. If a fresh round finds more than 30% new ones, the map is incomplete.
+
+### Tracking tasks instead of cross-team work
+**Mistake:** The JSON holds 80 task-level items such as "Frontend needs button asset from Design", and the Mermaid diagram becomes unreadable.
+**Why it happens:** Teams log every handoff to be thorough.
+**Instead:** Track at the epic level, roughly 1-2 weeks of cross-team work each, and keep intra-team handoffs on the team's sprint board. More than about 25 dependencies per program means you should aggregate.
+
+### Arrows pointing the wrong way
+**Mistake:** A dependency is entered with `from_team` as the team delivering the work and `to_team` as the team waiting for it.
+**Why it happens:** "From" reads naturally as where the work comes from.
+**Instead:** `from_team` is the team that needs the work, and `to_team` is the team that owes it. Spot-check a few descriptions before running `dependency_graph.py`, because a reversed arrow breaks the critical path and the risk ordering.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/dependency-map-operations.md](references/dependency-map-operations.md)** — read this for the operational detail: the six-field model, slack/risk derivation, critical-path computation, the 8-step weekly workflow, tool flags, input/output JSON schemas, troubleshooting, and success criteria.

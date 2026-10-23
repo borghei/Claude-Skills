@@ -400,6 +400,9 @@ Turn customer interview transcripts into actionable product opportunities. This 
 ## Your Key Capabilities
 - When to Use
 - When NOT to Use
+- Synthesis that confirms the starting hypothesis
+- One theme pooled across segments
+- Percentages from a handful of interviews
 
 ## How to Help
 When the user asks for help in this domain:
@@ -426,6 +429,9 @@ Turn customer interview transcripts into actionable product opportunities. This 
 ## Your Key Capabilities
 - When to Use
 - When NOT to Use
+- Synthesis that confirms the starting hypothesis
+- One theme pooled across segments
+- Percentages from a handful of interviews
 
 ## How to Help
 When the user asks for help in this domain:
@@ -501,6 +507,25 @@ python scripts/interview_synthesizer.py --input interviews.json --format mermaid
 ```
 
 Prepare input per `assets/interview_input_template.json` (one entry per interview: participant id, role, q/a pairs). See the references for the full framework and flag reference.
+
+## Anti-Patterns
+
+### Synthesis that confirms the starting hypothesis
+**Mistake:** Every theme matches what the PM believed before the interviews. Transcripts also mention pricing, trust or confusion, but none of it reaches the theme list.
+**Why it happens:** People pattern-match toward the answer they expect, and a solo pass has nothing to force a second reading.
+**Instead:** Require at least one finding that contradicts or expands the original hypothesis. Code surprises and contradictions as snippets, and have the product trio code independently before merging.
+
+### One theme pooled across segments
+**Mistake:** A theme says &quot;users want better onboarding&quot; but draws on admins setting up the workspace and end users in week 1 as if they were one group.
+**Why it happens:** Each segment alone looks too thin to support a theme, so pooling feels like more evidence.
+**Instead:** Tag every theme with the segment it applies to. If two segments share a theme, apply the evidence threshold (3 or more snippets from 2 or more participants) to each segment separately.
+
+### Percentages from a handful of interviews
+**Mistake:** &quot;60% of users want feature X&quot;, when 3 of 5 interviewees mentioned it.
+**Why it happens:** A percentage looks more rigorous in a readout than a raw count.
+**Instead:** Write &quot;X of N&quot; for any sample under 20. Treat the theme as a candidate to survey or test quantitatively before anyone calls it a population-level finding.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -641,6 +666,25 @@ python scripts/interview_synthesizer.py --input interviews.json --format mermaid
 ```
 
 Prepare input per `assets/interview_input_template.json` (one entry per interview: participant id, role, q/a pairs). See the references for the full framework and flag reference.
+
+## Anti-Patterns
+
+### Synthesis that confirms the starting hypothesis
+**Mistake:** Every theme matches what the PM believed before the interviews. Transcripts also mention pricing, trust or confusion, but none of it reaches the theme list.
+**Why it happens:** People pattern-match toward the answer they expect, and a solo pass has nothing to force a second reading.
+**Instead:** Require at least one finding that contradicts or expands the original hypothesis. Code surprises and contradictions as snippets, and have the product trio code independently before merging.
+
+### One theme pooled across segments
+**Mistake:** A theme says &quot;users want better onboarding&quot; but draws on admins setting up the workspace and end users in week 1 as if they were one group.
+**Why it happens:** Each segment alone looks too thin to support a theme, so pooling feels like more evidence.
+**Instead:** Tag every theme with the segment it applies to. If two segments share a theme, apply the evidence threshold (3 or more snippets from 2 or more participants) to each segment separately.
+
+### Percentages from a handful of interviews
+**Mistake:** &quot;60% of users want feature X&quot;, when 3 of 5 interviewees mentioned it.
+**Why it happens:** A percentage looks more rigorous in a readout than a raw count.
+**Instead:** Write &quot;X of N&quot; for any sample under 20. Treat the theme as a candidate to survey or test quantitatively before anyone calls it a population-level finding.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

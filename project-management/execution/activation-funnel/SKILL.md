@@ -65,6 +65,25 @@ python scripts/funnel_analyzer.py --input funnel.json --format markdown   # conv
 python scripts/funnel_analyzer.py --demo --format mermaid                 # worked SaaS funnel diagram
 ```
 
+## Anti-Patterns
+
+### Activation event that does not predict retention
+**Mistake:** Activation is set to "clicked Get Started on day 1" without checking whether that event predicts day-30 retention.
+**Why it happens:** An easy-to-instrument event is at hand, and validating it needs a cohort analysis nobody has run.
+**Instead:** Compare 30-day retention for users who hit the candidate event with users who did not, and adopt it only when the lift is large. Use `assets/activation_metric_worksheet.md` and re-validate every 1-2 quarters.
+
+### Local stage win, funnel loss
+**Mistake:** Removing six signup fields lifts signup conversion 40% and the change ships. Two weeks later activation is down 20%.
+**Why it happens:** Each experiment is judged on the stage it changed.
+**Instead:** When you optimize a stage, measure the next one or two stages downstream and report net activated users. Pair each stage metric with a counter-metric before the test starts.
+
+### Biggest drop treated as biggest opportunity
+**Mistake:** The team works on a 40pp signup-to-activation drop while a 25pp drop at a later, higher-value stage is worth several times more revenue.
+**Why it happens:** The `funnel_analyzer.py` bottleneck call-out ranks by drop size, and that is the easiest number to quote.
+**Instead:** Treat the bottleneck call-out as a starting point. Weight each drop by what a user at that stage is worth (LTV or revenue) before choosing where to invest.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

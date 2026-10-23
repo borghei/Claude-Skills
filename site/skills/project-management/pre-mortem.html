@@ -397,6 +397,11 @@ Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, a
 
 A pre-mortem is a prospective hindsight exercise: imagine that your product has launched and failed, then work backward to identify why. This skill uses the Tiger / Paper Tiger / Elephant classification to categorize risks by type and urgency, ensuring launch-blocking issues are addressed before lau
 
+## Your Key Capabilities
+- Mitigating Paper Tigers
+- Risks too vague to act on
+- Running the pre-mortem too late
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.
 
 A pre-mortem is a prospective hindsight exercise: imagine that your product has launched and failed, then work backward to identify why. This skill uses the Tiger / Paper Tiger / Elephant classification to categorize risks by type and urgency, ensuring launch-blocking issues are addressed before lau
+
+## Your Key Capabilities
+- Mitigating Paper Tigers
+- Risks too vague to act on
+- Running the pre-mortem too late
 
 ## How to Help
 When the user asks for help in this domain:
@@ -485,6 +495,25 @@ python3 scripts/risk_categorizer.py input.json --format json
 ```
 
 Each risk needs `description`, `category` (`tiger`/`paper_tiger`/`elephant`), `evidence`, and `urgency` (`launch_blocking`/`fast_follow`/`track`) for tigers. Document the session with `assets/pre_mortem_template.md`.
+
+## Anti-Patterns
+
+### Mitigating Paper Tigers
+**Mistake:** &quot;AWS regional outage on launch day&quot; is classed as a Tiger and gets weeks of redundancy work, with no evidence that it is likely.
+**Why it happens:** A frightening consequence feels like a high probability.
+**Instead:** For every Tiger, write the `evidence` that it could actually happen. A described consequence alone does not count. With no evidence, reclassify it as `paper_tiger` and cover it with a standard runbook.
+
+### Risks too vague to act on
+**Mistake:** The list holds &quot;stakeholder issues&quot;, &quot;scope creep&quot; and &quot;technical risk&quot;.
+**Why it happens:** Generic labels are safe to say aloud and need no evidence.
+**Instead:** Describe each risk as a concrete failure scenario in 1-2 sentences, such as &quot;the CRO blocks launch on Day -7 because the enterprise SKU was cut&quot;. Translate worries (&quot;the design feels weak&quot;) into a measurable consequence, or drop them.
+
+### Running the pre-mortem too late
+**Mistake:** The session happens a week before launch and surfaces a Tiger that needs four weeks of work. The team launches anyway.
+**Why it happens:** Pre-mortems get scheduled as a launch-readiness check instead of a planning step.
+**Instead:** Run the first pre-mortem at project kickoff and a second one around Day -30. For each risk, confirm it can still be mitigated in the time left.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -602,6 +631,25 @@ python3 scripts/risk_categorizer.py input.json --format json
 ```
 
 Each risk needs `description`, `category` (`tiger`/`paper_tiger`/`elephant`), `evidence`, and `urgency` (`launch_blocking`/`fast_follow`/`track`) for tigers. Document the session with `assets/pre_mortem_template.md`.
+
+## Anti-Patterns
+
+### Mitigating Paper Tigers
+**Mistake:** &quot;AWS regional outage on launch day&quot; is classed as a Tiger and gets weeks of redundancy work, with no evidence that it is likely.
+**Why it happens:** A frightening consequence feels like a high probability.
+**Instead:** For every Tiger, write the `evidence` that it could actually happen. A described consequence alone does not count. With no evidence, reclassify it as `paper_tiger` and cover it with a standard runbook.
+
+### Risks too vague to act on
+**Mistake:** The list holds &quot;stakeholder issues&quot;, &quot;scope creep&quot; and &quot;technical risk&quot;.
+**Why it happens:** Generic labels are safe to say aloud and need no evidence.
+**Instead:** Describe each risk as a concrete failure scenario in 1-2 sentences, such as &quot;the CRO blocks launch on Day -7 because the enterprise SKU was cut&quot;. Translate worries (&quot;the design feels weak&quot;) into a measurable consequence, or drop them.
+
+### Running the pre-mortem too late
+**Mistake:** The session happens a week before launch and surfaces a Tiger that needs four weeks of work. The team launches anyway.
+**Why it happens:** Pre-mortems get scheduled as a launch-readiness check instead of a planning step.
+**Instead:** Run the first pre-mortem at project kickoff and a second one around Day -30. For each risk, confirm it can still be mitigated in the time left.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

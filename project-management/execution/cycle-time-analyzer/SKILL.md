@@ -74,6 +74,25 @@ Review the 85th-percentile cycle time (not the average), flag aging WIP that exc
 |------|---------|---------|
 | `flow_metrics.py` | Compute lead time, cycle time, throughput, WIP, aging WIP, CFD | `python scripts/flow_metrics.py --input issues.json --format markdown` |
 
+## Anti-Patterns
+
+### Quoting cycle time when asked for lead time
+**Mistake:** An exec asks how long a feature takes, the team says 6 days, and the customer waits 11 weeks because the item sat in the backlog first.
+**Why it happens:** Cycle time is the team's own number and the one the board shows.
+**Instead:** Report both, labelled. Use lead time (from when the request entered the backlog) for customer commitments and cycle time for engineering planning, each at p85.
+
+### WIP limits set by feel
+**Mistake:** The team adopts a WIP limit of 5 per engineer because "that feels manageable".
+**Why it happens:** Teams pick a limit before anyone has measured current WIP.
+**Instead:** Measure the team's current WIP distribution first and set the limit just below its 50th percentile. A limit above the 85th percentile has no effect. Re-measure cycle time with `flow_metrics.py` after 4 weeks.
+
+### Single-sprint throughput read as a trend
+**Mistake:** "Throughput dropped to 4 items this sprint, down from 6. Investigating slowdown."
+**Why it happens:** Status updates cover one sprint, so one sprint's number is what gets reported.
+**Instead:** Report throughput as a rolling 6-8 week trend with its range, and annotate known causes such as PTO. Investigate only when a sprint falls outside that range.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - `references/metrics-and-tool-reference.md` -- Precise definitions of the four metrics, Little's Law, aging WIP, the 7-step workflow, troubleshooting matrix, success criteria, and the full `flow_metrics.py` CLI flags + input/output JSON schemas. Read when running an analysis or wiring up the tool.

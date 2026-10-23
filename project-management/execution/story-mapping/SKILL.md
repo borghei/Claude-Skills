@@ -49,6 +49,25 @@ Before building the map, confirm these inputs. If any is unknown or vague, ASK â
 
 Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
 
+## Anti-Patterns
+
+### Skipping the walking skeleton
+**Mistake:** Release 1 polishes sign-up and activation but has no cards under Pay or Upgrade, so users can't finish a real workflow.
+**Why it happens:** The first steps of the journey are the most familiar, so the team fills them in depth before reaching the end.
+**Instead:** Make R1 the thinnest end-to-end slice: 1-3 stories under every backbone step, each minimal. If any backbone column has zero R1 cards, there is no walking skeleton yet. Enrich steps in R2 where data shows friction.
+
+### Implementation tasks on the map
+**Mistake:** Cards read "set up Postgres", "configure Auth0", "write /users endpoint" instead of what the user does.
+**Why it happens:** Engineers think in build tasks, and those tasks feel like the real work to plan.
+**Instead:** Every card describes a user action ("enter email and password", "verify via email link"). Keep implementation work as sub-tickets in the tracker. If a card describes a system or code, rewrite it as a user story.
+
+### Building the map alone
+**Mistake:** The PM builds the map over a weekend and presents it to the team on Monday.
+**Why it happens:** Solo work is easier to schedule than a workshop, and the PM already holds most of the context.
+**Instead:** Build the map in a workshop with PM, design lead, eng lead and someone close to customers, using the facilitation guide in `references/playbook.md`. The shared understanding is the output. A map with a single author should be redone as a workshop.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/playbook.md](references/playbook.md)** â€” read this when building a map: story-map anatomy, the 6-step build sequence, the artifact template, map patterns (walking skeleton / thick slice / progressive enhancement), the workshop facilitation guide, troubleshooting, and success criteria.

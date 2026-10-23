@@ -397,6 +397,11 @@ Experiment design expert using pretotyping and lean validation for both new prod
 
 Design fast, low-cost experiments to validate product hypotheses before committing to full development. This skill applies Alberto Savoia&#x27;s pretotyping philosophy (&quot;Make sure you are building The Right It before you build It right&quot;) alongside lean experimentation methods for both new and existing pr
 
+## Your Key Capabilities
+- Sample too small to mean anything
+- Pretotype that takes weeks
+- No counter-metric
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.
 
 Design fast, low-cost experiments to validate product hypotheses before committing to full development. This skill applies Alberto Savoia&#x27;s pretotyping philosophy (&quot;Make sure you are building The Right It before you build It right&quot;) alongside lean experimentation methods for both new and existing pr
+
+## Your Key Capabilities
+- Sample too small to mean anything
+- Pretotype that takes weeks
+- No counter-metric
 
 ## How to Help
 When the user asks for help in this domain:
@@ -494,6 +504,25 @@ AI app builders, AI design tools, and AI coding assistants can produce a clickab
 - **Test it** with 5-8 target users on scripted tasks; measure task success and errors, not compliments. Say plainly that it is a prototype.
 - **Guard the data** — use synthetic data; do not load customer PII into third-party tools without approval.
 - **Record the outcome** in `assets/experiment_plan_template.md`, then carry validated results into `execution/create-prd/` (Prototype-First Path) — the PRD still owns problem, metrics, constraints, non-goals, and risks.
+
+## Anti-Patterns
+
+### Sample too small to mean anything
+**Mistake:** Eight users see the test, five click, and the team reports &quot;62.5% conversion&quot; and moves on.
+**Why it happens:** Small tests are quick, and an early good number is tempting to believe.
+**Instead:** Write down the minimum sample size next to the XYZ threshold before the test starts. Don&#x27;t stop early because the result looks good. The sample-size rules of thumb are in `references/experiment-methods.md`.
+
+### Pretotype that takes weeks
+**Mistake:** The &quot;quick smoke test&quot; takes six weeks and three engineers, and the team is committed before data comes back.
+**Why it happens:** The team keeps polishing the test so it feels fair to the idea.
+**Instead:** Keep the time from idea to live experiment under one week. If it will take longer, pick a cheaper method from the catalog, such as a fake door, landing page or concierge MVP.
+
+### No counter-metric
+**Mistake:** The test measures clicks on &quot;Upgrade&quot; and ignores whether those users paid, stayed or were happy.
+**Why it happens:** The primary metric is the one tied to the hypothesis, so it gets all the attention.
+**Instead:** Declare at least one counter-metric before launch and record it in `assets/experiment_plan_template.md`. Count a pass only if the primary metric clears its threshold and the counter-metric holds.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -620,6 +649,25 @@ AI app builders, AI design tools, and AI coding assistants can produce a clickab
 - **Test it** with 5-8 target users on scripted tasks; measure task success and errors, not compliments. Say plainly that it is a prototype.
 - **Guard the data** — use synthetic data; do not load customer PII into third-party tools without approval.
 - **Record the outcome** in `assets/experiment_plan_template.md`, then carry validated results into `execution/create-prd/` (Prototype-First Path) — the PRD still owns problem, metrics, constraints, non-goals, and risks.
+
+## Anti-Patterns
+
+### Sample too small to mean anything
+**Mistake:** Eight users see the test, five click, and the team reports &quot;62.5% conversion&quot; and moves on.
+**Why it happens:** Small tests are quick, and an early good number is tempting to believe.
+**Instead:** Write down the minimum sample size next to the XYZ threshold before the test starts. Don&#x27;t stop early because the result looks good. The sample-size rules of thumb are in `references/experiment-methods.md`.
+
+### Pretotype that takes weeks
+**Mistake:** The &quot;quick smoke test&quot; takes six weeks and three engineers, and the team is committed before data comes back.
+**Why it happens:** The team keeps polishing the test so it feels fair to the idea.
+**Instead:** Keep the time from idea to live experiment under one week. If it will take longer, pick a cheaper method from the catalog, such as a fake door, landing page or concierge MVP.
+
+### No counter-metric
+**Mistake:** The test measures clicks on &quot;Upgrade&quot; and ignores whether those users paid, stayed or were happy.
+**Why it happens:** The primary metric is the one tied to the hypothesis, so it gets all the attention.
+**Instead:** Declare at least one counter-metric before launch and record it in `assets/experiment_plan_template.md`. Count a pass only if the primary metric clears its threshold and the counter-metric holds.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

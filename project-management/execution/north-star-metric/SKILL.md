@@ -65,6 +65,25 @@ python scripts/metric_tree_builder.py --input nsm_spec.json --format mermaid   #
 python scripts/metric_tree_builder.py --demo --format markdown                 # worked SaaS productivity NSM
 ```
 
+## Anti-Patterns
+
+### Inputs with no formula to the NSM
+**Mistake:** The input metrics are "loosely related" to the NSM: marketing launches, NPS, feature adoption. Nobody can write the equation.
+**Why it happens:** Picking metrics that feel important is faster than working out how the NSM actually decomposes.
+**Instead:** Write the formula explicitly (multiplicative, additive, funnel or ratio), for example `WAA = new signups x activation rate x 4-week retention`. If the team cannot write it, the inputs are correlated at best, and moving them may not move the NSM.
+
+### Leading indicators that are really lagging
+**Mistake:** "Weekly retention" is listed as the leading indicator for weekly retention.
+**Why it happens:** Any metric close to the input feels predictive.
+**Instead:** For each leading indicator, state how many days or weeks before the input it moves. If the answer is zero or "same time", replace it with an earlier signal, such as day-1 sessions or first-action completion for new signups.
+
+### Target with no baseline
+**Mistake:** "Reach 50,000 WAA by Q4", with no current value and no trend.
+**Why it happens:** The target is the exciting part, and pulling the history takes a data request.
+**Instead:** Record the current value and the last 4 quarters of trajectory next to every target, and state how far above trend the target sits. If the metric can't be reported from today's instrumentation, ship the instrumentation first.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

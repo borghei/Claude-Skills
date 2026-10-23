@@ -58,6 +58,25 @@ Before drafting the 1:1 agenda, confirm these inputs. If any is unknown or vague
 
 Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
 
+## Anti-Patterns
+
+### Jumping to the solution
+**Mistake:** The other person raises an issue and you answer with "you should..." within the first few minutes.
+**Why it happens:** Giving the answer is faster and feels helpful.
+**Instead:** Run GROW in order: Goal, Reality, Options, then Will. Ask first whether they want coaching questions or just want to be heard. Offering the fix up front builds dependency.
+
+### No notes, no follow-through
+**Mistake:** Nobody writes anything down, so agreed actions vanish and the same topics come back two weeks later.
+**Why it happens:** The conversation felt clear at the time, so notes seem unnecessary.
+**Instead:** Record agreements and next steps after every 1:1. Skip the transcript. Check: can you show four months of agreed actions for each 1:1 relationship? If not, your follow-through only exists in memory.
+
+### Feedback that only flows down
+**Mistake:** Your manager gives you feedback and you never give any back. Or you give feedback to your reports and never ask for theirs.
+**Why it happens:** Upward feedback feels risky, and nobody puts it on the agenda.
+**Instead:** Put upward feedback on the agenda on purpose. Over your last four 1:1s, aim for at least one piece of upward feedback. Use the Radical Candor frame: care personally, challenge directly.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task; keep this file lean and pull detail on demand.

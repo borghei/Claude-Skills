@@ -83,6 +83,25 @@ AI app builders, AI design tools, and AI coding assistants make a clickable or w
 
 **Handoff to engineering:** label the prototype as throwaway or as a starting point, and say which. Generated prototype code is not production code by default — list what it skips (auth, error states, accessibility, performance, security review, data model) so engineering scopes the real build. Hand over the prototype link, the tested flows, the findings, and the P0/P1/P2 scope together.
 
+## Anti-Patterns
+
+### Writing the solution before the problem
+**Mistake:** The PRD opens with features, mockups and a P0 list, while Background and Market Segments get one line each.
+**Why it happens:** The team arrives with a solution in mind, and the solution is the part people enjoy writing.
+**Instead:** Write Section 3 (Background) and Section 5 (Market Segments) first. Then test Section 7 alone: if a reader can't tell what problem it solves, the problem sections are still too thin.
+
+### Key results without baselines
+**Mistake:** "Increase activation by 30%", with no current value, no target value and no date.
+**Why it happens:** The baseline needs a data pull, and the PRD is due before anyone runs it.
+**Instead:** Write every key result as "[metric] from [baseline] to [target] by [date]". If the baseline is unknown, measuring it is the first task, not a gap to leave in the document.
+
+### Assumptions with no validation plan
+**Mistake:** An Assumptions list with four bullets, none with an owner or a test.
+**Why it happens:** Writing assumptions down feels like managing the risk.
+**Instead:** For each assumption, name who tests it, by when and how. Run the load-bearing ones through `discovery/identify-assumptions` before build starts.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - `references/prd-framework.md` — read this while writing: the two pre-PRD techniques, full 8-section framework with per-section guidance, writing principles, scaffolder flag reference, troubleshooting, and success criteria.

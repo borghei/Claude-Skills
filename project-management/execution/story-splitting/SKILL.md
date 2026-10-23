@@ -64,6 +64,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 3. **Draft slices** in `wwas/` or `job-stories/` format; verify each is vertical (crosses all layers, independently demoable).
 4. **Order slices** smallest-value-first, run the INVEST check, and replace the original story in the backlog.
 
+## Anti-Patterns
+
+### Splitting by acceptance criteria
+**Mistake:** A story with 6 acceptance criteria becomes 6 stories: validate inputs, render PDF, attach signature, and so on.
+**Why it happens:** The ACs are already a neat list, so they look like ready-made seams.
+**Instead:** Treat ACs as checks on done, not as split points. If the story is still too big, walk the decision tree and split by a user-facing operation, such as "send simple offer letter" first. If the slice count exceeds the AC count, rethink the split.
+
+### Splitting to fit sprint capacity
+**Mistake:** The sprint is 4 points over, so a 5-point story is carved into "3 + 2" and the 3 is committed.
+**Why it happens:** Carving off a piece feels more productive than deferring a story at the capacity wall.
+**Instead:** Defer the whole story to the next sprint. Split only in refinement, only for value, and with a named Lawrence pattern. A split made in sprint planning because capacity is tight is a signal to defer instead.
+
+### Slices that always close together
+**Mistake:** Story A (backend filter) and story B (filter UI) must merge in the same PR and are marked done together.
+**Why it happens:** The split was made for tracking, and nobody checked that each slice could ship alone.
+**Instead:** Re-merge the two, or make each independently shippable behind a feature flag so A ships first and B follows. Two stories that always close together fail the Independent test in INVEST.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

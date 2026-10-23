@@ -62,6 +62,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 
 The blameless principles, severity thresholds, full template, workflow, and root-cause methods all live in the references below.
 
+## Anti-Patterns
+
+### Counterfactuals in the root-cause analysis
+**Mistake:** The analysis says "if only the engineer had checked the dashboard at 14:05, this would have been caught".
+**Why it happens:** Hindsight makes the right action look obvious, and a counterfactual reads like an explanation.
+**Instead:** Search the draft for "if only", "would have", "should have" and "could have". Replace each with the system property behind it, such as "queue depth was not shown above the fold", and turn that into an action item.
+
+### Stopping at a single root cause
+**Mistake:** The post-mortem names one cause ("connection pool exhausted"), proposes one fix, and ends.
+**Why it happens:** One clean cause feels like closure, and 5 Whys can lead to a single chain.
+**Instead:** List the contributing factors that aligned: capacity settings, alert thresholds, escalation paths, runbook gaps. For multi-factor Sev 0/1/2 incidents, use the Causal Tree instead of 5 Whys, and give each factor its own action item.
+
+### Treating a recurring incident as new
+**Mistake:** This is the third incident of the same class in 8 months. Each post-mortem named a different cause and none looked back.
+**Why it happens:** Each incident is written up on its own, and nobody searches the archive first.
+**Instead:** Before the review meeting, search the archive for the failure class and audit the open action items from earlier post-mortems. More than 2 occurrences in 12 months means you analyze the pattern, and finishing the old items is the first action.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 - **[references/post-mortem-process.md](references/post-mortem-process.md)** — severity thresholds, the 10-section template, the Day 0 → Day 30 workflow, action-item follow-through, distribution/archive practice, and the assets inventory. Read when running a post-mortem end to end.

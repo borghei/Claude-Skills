@@ -47,6 +47,25 @@ Before ideating, confirm these inputs. If any is unknown or vague, ASK — do no
 
 Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
 
+## Anti-Patterns
+
+### Ideas with no opportunity behind them
+**Mistake:** The session produces a feature list ("dark mode, AI assistant, calendar integration") with no link to a customer opportunity or outcome.
+**Why it happens:** Features are concrete and easy to picture, so they come out first.
+**Instead:** Anchor every idea to a named opportunity on the Opportunity Solution Tree, and that opportunity to the target outcome. If you can't name the opportunity an idea serves, park it.
+
+### No confidence score
+**Mistake:** Ideas get impact estimates, but nothing shows how sure the team is about those estimates.
+**Why it happens:** The weighted scoring covers impact and feasibility, so confidence seems already covered.
+**Instead:** Add a confidence score or evidence column for each idea before ranking the top 5. Note whether each estimate rests on customer interviews or one person's hunch, and test the low-confidence bets first.
+
+### Ideas with no next-step owner
+**Mistake:** The workshop ends, the ideas stay on the board, and a month later nothing has happened.
+**Why it happens:** Generating ideas feels like the output, so nobody plans what comes after.
+**Instead:** Give each surviving idea an owner and a next step before the session ends. Hand each one's riskiest assumption to `discovery/identify-assumptions`.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

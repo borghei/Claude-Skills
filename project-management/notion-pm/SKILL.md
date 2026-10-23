@@ -40,6 +40,25 @@ Notion's PM value comes from its database model: every meaningful PM artifact (a
 - Setting up two-way sync between Notion and Jira/Linear/GitHub
 - Establishing governance: ownership, review cadence, archive strategy
 
+## Anti-Patterns
+
+### Ignoring API pagination
+**Mistake:** A script queries a database through `POST /v1/data_sources/{data_source_id}/query`, gets 100 results back and treats them as all results.
+**Why it happens:** The first page looks complete, and small test databases never go past 100 rows.
+**Instead:** Loop until `has_more` is false, passing `next_cursor` as `start_cursor` on each call. Any Notion API call that doesn't loop on `has_more` is broken, and decisions made on its output rest on a partial sample.
+
+### Cross-database links stored as text
+**Mistake:** The PRDs, OKRs and Roadmap databases exist, but each PRD names its OKR in plain text instead of linking to it.
+**Why it happens:** Typing a name is quicker than setting up a Relation property, and it reads fine on the page.
+**Instead:** Convert every cross-database reference to a Relation. Text references go stale when the OKR's wording changes, and they make basic queries like "all PRDs supporting this OKR" impossible.
+
+### PRDs as free-form pages
+**Mistake:** Each PRD is a hand-made page in a folder, some with a status and some without.
+**Why it happens:** A new page is Notion's default, and a database feels like overhead for a few documents.
+**Instead:** Make every PRD a row in the PRDs database with consistent properties (see `references/notion-database-design-for-pm.md`). Then you can query which PRDs are blocked or waiting on design review. Migrate PRD pages that live outside the database.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Pull the reference that matches the task; keep this file lean and load detail on demand.

@@ -44,6 +44,25 @@ The job of a Productboard expert is to operate fluently inside this model: confi
 - Writing API calls to bulk-create Insights, update Features, or read prioritization data
 - Migrating from spreadsheet-based prioritization, or troubleshooting "Insights aren't flowing", "scores aren't updating", and similar workflow failures
 
+## Anti-Patterns
+
+### Insights without sources
+**Mistake:** Sales reps type insights into the inbox as paraphrases, with no link to the call recording, email, Slack thread or interview.
+**Why it happens:** Paraphrasing is fast, and linking the source takes an extra step.
+**Instead:** Require a link to the recording, transcript or email on every Insight, and reject ones without it during triage. Unsourced insights can't be verified, and the same one often gets recorded several times by different people.
+
+### Scoring that ignores customer segment
+**Mistake:** An Insight from a free-tier user and one from an enterprise customer count equally toward a Feature's priority.
+**Why it happens:** Counting insights is the default, and segment weighting needs customer data synced in first.
+**Instead:** Weight scores by segment, for example by ARR from the Salesforce or HubSpot sync. Test it: if rankings flip when you re-score weighted by ARR, the current scoring is segment-blind.
+
+### Dates on a customer-facing roadmap
+**Mistake:** A public roadmap view shows "Bulk-edit: Q2 2026 (May)", and sales and customers read it as a promise.
+**Why it happens:** Releases carry dates internally, and the same view is easy to expose outside.
+**Instead:** Use Now / Next / Later for any customer-facing view or Portal, and keep calendar dates on internal views. Switch any external view that shows dates.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

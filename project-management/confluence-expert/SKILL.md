@@ -34,6 +34,25 @@ Master-level expertise in Confluence space management, documentation architectur
 - Defining or auditing space permission schemes
 - Driving documentation strategy and knowledge-base health
 
+## Anti-Patterns
+
+### Flat space with no hierarchy
+**Mistake:** Hundreds of pages sit at the root of one space, and nobody knows where new content goes.
+**Why it happens:** Creating a page at the top level is the default, and nobody owns the structure.
+**Instead:** Design the page tree before content piles up. If the space root has more than about 15 pages, regroup them under parent pages by team, project or topic.
+
+### Pages with no owner or review date
+**Mistake:** Pages carry no owner and no "last reviewed" date, so stale content stays live.
+**Why it happens:** Writing the page feels like the end of the job.
+**Instead:** Give every page in an operational space a named owner and a review date, and set a review cadence. A runbook that pages someone who left two years ago is an outage waiting to happen.
+
+### "Source of truth" with four versions
+**Mistake:** The team calls Confluence its source of truth, but one topic has four pages that disagree.
+**Why it happens:** Writing a new page is easier than finding and fixing the old one.
+**Instead:** For your top 10 most-searched topics, keep exactly one canonical page. Merge or archive the duplicates and link them to the canonical page.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

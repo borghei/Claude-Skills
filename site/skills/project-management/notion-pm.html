@@ -397,6 +397,11 @@ Notion expert for product management workflows. Use for database design for PRDs
 
 Master-level expertise in using Notion as the documentation and operational backbone for a product team: PRDs, OKRs, roadmaps, decision logs, sprint reviews, 1:1 notes, customer research, and sync patterns with Jira, Linear, and GitHub. Covers Notion&#x27;s database model, view design, formula and rollup
 
+## Your Key Capabilities
+- Ignoring API pagination
+- Cross-database links stored as text
+- PRDs as free-form pages
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.
 
 Master-level expertise in using Notion as the documentation and operational backbone for a product team: PRDs, OKRs, roadmaps, decision logs, sprint reviews, 1:1 notes, customer research, and sync patterns with Jira, Linear, and GitHub. Covers Notion&#x27;s database model, view design, formula and rollup
+
+## Your Key Capabilities
+- Ignoring API pagination
+- Cross-database links stored as text
+- PRDs as free-form pages
 
 ## How to Help
 When the user asks for help in this domain:
@@ -470,6 +480,25 @@ Notion&#x27;s PM value comes from its database model: every meaningful PM artifa
 - Authoring Notion REST API calls (page creation, database queries, block updates)
 - Setting up two-way sync between Notion and Jira/Linear/GitHub
 - Establishing governance: ownership, review cadence, archive strategy
+
+## Anti-Patterns
+
+### Ignoring API pagination
+**Mistake:** A script queries a database through `POST /v1/data_sources/{data_source_id}/query`, gets 100 results back and treats them as all results.
+**Why it happens:** The first page looks complete, and small test databases never go past 100 rows.
+**Instead:** Loop until `has_more` is false, passing `next_cursor` as `start_cursor` on each call. Any Notion API call that doesn&#x27;t loop on `has_more` is broken, and decisions made on its output rest on a partial sample.
+
+### Cross-database links stored as text
+**Mistake:** The PRDs, OKRs and Roadmap databases exist, but each PRD names its OKR in plain text instead of linking to it.
+**Why it happens:** Typing a name is quicker than setting up a Relation property, and it reads fine on the page.
+**Instead:** Convert every cross-database reference to a Relation. Text references go stale when the OKR&#x27;s wording changes, and they make basic queries like &quot;all PRDs supporting this OKR&quot; impossible.
+
+### PRDs as free-form pages
+**Mistake:** Each PRD is a hand-made page in a folder, some with a status and some without.
+**Why it happens:** A new page is Notion&#x27;s default, and a database feels like overhead for a few documents.
+**Instead:** Make every PRD a row in the PRDs database with consistent properties (see `references/notion-database-design-for-pm.md`). Then you can query which PRDs are blocked or waiting on design review. Migrate PRD pages that live outside the database.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -582,6 +611,25 @@ Notion&#x27;s PM value comes from its database model: every meaningful PM artifa
 - Authoring Notion REST API calls (page creation, database queries, block updates)
 - Setting up two-way sync between Notion and Jira/Linear/GitHub
 - Establishing governance: ownership, review cadence, archive strategy
+
+## Anti-Patterns
+
+### Ignoring API pagination
+**Mistake:** A script queries a database through `POST /v1/data_sources/{data_source_id}/query`, gets 100 results back and treats them as all results.
+**Why it happens:** The first page looks complete, and small test databases never go past 100 rows.
+**Instead:** Loop until `has_more` is false, passing `next_cursor` as `start_cursor` on each call. Any Notion API call that doesn&#x27;t loop on `has_more` is broken, and decisions made on its output rest on a partial sample.
+
+### Cross-database links stored as text
+**Mistake:** The PRDs, OKRs and Roadmap databases exist, but each PRD names its OKR in plain text instead of linking to it.
+**Why it happens:** Typing a name is quicker than setting up a Relation property, and it reads fine on the page.
+**Instead:** Convert every cross-database reference to a Relation. Text references go stale when the OKR&#x27;s wording changes, and they make basic queries like &quot;all PRDs supporting this OKR&quot; impossible.
+
+### PRDs as free-form pages
+**Mistake:** Each PRD is a hand-made page in a folder, some with a status and some without.
+**Why it happens:** A new page is Notion&#x27;s default, and a database feels like overhead for a few documents.
+**Instead:** Make every PRD a row in the PRDs database with consistent properties (see `references/notion-database-design-for-pm.md`). Then you can query which PRDs are blocked or waiting on design review. Migrate PRD pages that live outside the database.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

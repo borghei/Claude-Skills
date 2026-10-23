@@ -64,6 +64,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says "just 
 3. **Derive the customer variant** — translate features to benefits, strip dates beyond the current quarter, use "exploring / in development / shipping soon." Use `assets/customer_roadmap_template.md`.
 4. **Run the triangulation check** — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
 
+## Anti-Patterns
+
+### Now / Next / Later with no themes
+**Mistake:** Each column is a flat list of features with no organizing theme.
+**Why it happens:** Features are what teams track day to day, and themes take a strategy decision to name.
+**Instead:** Group every item under a theme, such as Activation or Enterprise readiness, in all three variants. If you can't name the themes, settle the strategy before publishing the roadmap.
+
+### A wishlist presented as a roadmap
+**Mistake:** Sales and Success add every customer request, and the roadmap grows past 60 items.
+**Why it happens:** Adding a request to the roadmap is an easy way to say yes to a customer.
+**Instead:** Put only prioritized, validated bets on the roadmap. Keep requests in a separate insights inbox that feeds discovery, and let only the PM move items onto the roadmap. More than 20 items per quarter means the roadmap has become a wishlist.
+
+### An internal variant that hides bad news
+**Mistake:** The internal roadmap shows every initiative as on track, while standups know two are weeks behind.
+**Why it happens:** Red status feels like a career risk, and the PM hopes to recover before anyone looks.
+**Instead:** Give the internal variant a red/yellow/green status column that initiative leads update weekly, with a mitigation plan for each red item. More than 95% green for more than 2 weeks means the status column is not being used honestly.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

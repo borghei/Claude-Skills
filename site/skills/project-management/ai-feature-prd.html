@@ -397,6 +397,11 @@ AI/ML feature PRD scaffolding for the modern AI product manager. Use to extend a
 
 AI and ML features break the assumptions a standard PRD takes for granted. Outputs are non-deterministic. Quality is statistical, not categorical. The &quot;spec&quot; is half product, half eval suite. A regular PRD that says &quot;Search returns the top result&quot; is replaced by &quot;the assistant returns a helpful, har
 
+## Your Key Capabilities
+- Choosing the model before the eval
+- Golden set left as &quot;TBD&quot;
+- Deployment ramp with no gates
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 AI/ML feature PRD scaffolding for the modern AI product manager. Use to extend a standard PRD with AI-specific sections covering model selection, evals, guardrails, failure modes, human-in-the-loop, AI metrics, and cost monitoring.
 
 AI and ML features break the assumptions a standard PRD takes for granted. Outputs are non-deterministic. Quality is statistical, not categorical. The &quot;spec&quot; is half product, half eval suite. A regular PRD that says &quot;Search returns the top result&quot; is replaced by &quot;the assistant returns a helpful, har
+
+## Your Key Capabilities
+- Choosing the model before the eval
+- Golden set left as &quot;TBD&quot;
+- Deployment ramp with no gates
 
 ## How to Help
 When the user asks for help in this domain:
@@ -480,6 +490,25 @@ Before drafting the AI PRD, confirm these inputs. If any is unknown or vague, AS
 - [ ] **Cost &amp; traffic envelope** — expected volume and cost-per-call ceiling (drives Section 11&#x27;s cost model and the deployment ramp gates)
 
 Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Anti-Patterns
+
+### Choosing the model before the eval
+**Mistake:** Section 9.1 names a primary model while Section 10.1 still says the golden set is under construction.
+**Why it happens:** Model choice is the exciting decision, and &quot;use the strongest model&quot; sounds safe.
+**Instead:** Define the golden set and the acceptance, hallucination and refusal bars in Section 10 first. Then score candidate models against it and record why the primary and the fallback won.
+
+### Golden set left as &quot;TBD&quot;
+**Mistake:** Section 10.2 says the golden set will be compiled during the build.
+**Why it happens:** Building one takes curation work with Support and Safety, and the PRD deadline comes first.
+**Instead:** Commit the golden set to source control before kickoff, for example 200 items split 70% common, 20% edge and 10% adversarial. Name one owner for the set and one for the eval runner.
+
+### Deployment ramp with no gates
+**Mistake:** Section 11.3 lists Shadow, Internal, Canary, Percent and GA with dates, but no metric that must hold to advance.
+**Why it happens:** A calendar plan is easier to write than agreeing a threshold for each stage.
+**Instead:** Give every stage a gate metric and an owner, such as golden-set acceptance, P0 safety incidents and cost per interaction. Test the plan by asking which number halts the ramp at each stage.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -602,6 +631,25 @@ Before drafting the AI PRD, confirm these inputs. If any is unknown or vague, AS
 - [ ] **Cost &amp; traffic envelope** — expected volume and cost-per-call ceiling (drives Section 11&#x27;s cost model and the deployment ramp gates)
 
 Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+
+## Anti-Patterns
+
+### Choosing the model before the eval
+**Mistake:** Section 9.1 names a primary model while Section 10.1 still says the golden set is under construction.
+**Why it happens:** Model choice is the exciting decision, and &quot;use the strongest model&quot; sounds safe.
+**Instead:** Define the golden set and the acceptance, hallucination and refusal bars in Section 10 first. Then score candidate models against it and record why the primary and the fallback won.
+
+### Golden set left as &quot;TBD&quot;
+**Mistake:** Section 10.2 says the golden set will be compiled during the build.
+**Why it happens:** Building one takes curation work with Support and Safety, and the PRD deadline comes first.
+**Instead:** Commit the golden set to source control before kickoff, for example 200 items split 70% common, 20% edge and 10% adversarial. Name one owner for the set and one for the eval runner.
+
+### Deployment ramp with no gates
+**Mistake:** Section 11.3 lists Shadow, Internal, Canary, Percent and GA with dates, but no metric that must hold to advance.
+**Why it happens:** A calendar plan is easier to write than agreeing a threshold for each stage.
+**Instead:** Give every stage a gate metric and an owner, such as golden-set acceptance, P0 safety incidents and cost per interaction. Test the plan by asking which number halts the ramp at each stage.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

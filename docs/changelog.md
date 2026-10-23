@@ -8,6 +8,12 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.13.5** (October 2026)
+
+- Every project-management skill, and five of the most-used skills elsewhere, now lists its three most damaging mistakes in SKILL.md
+- New README header: a treemap of all 385 skills by domain
+- The website's link preview image works again
+
 **v4.13.4** (October 2026)
 
 - A shorter README: how to add the library wherever you work, one real run, and a starter table by task

@@ -397,6 +397,11 @@ Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking 
 
 The PR/FAQ is Amazon&#x27;s &quot;working backwards&quot; artifact: before any team is funded to build a product, the PM writes a future-dated press release and an FAQ that anticipates every hard question. The discipline forces clarity on customer, problem, and outcome before a single design decision is made. If t
 
+## Your Key Capabilities
+- An internal FAQ with only easy questions
+- No magnitude in the press release
+- No &quot;what we will NOT do in v1&quot;
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact.
 
 The PR/FAQ is Amazon&#x27;s &quot;working backwards&quot; artifact: before any team is funded to build a product, the PM writes a future-dated press release and an FAQ that anticipates every hard question. The discipline forces clarity on customer, problem, and outcome before a single design decision is made. If t
+
+## Your Key Capabilities
+- An internal FAQ with only easy questions
+- No magnitude in the press release
+- No &quot;what we will NOT do in v1&quot;
 
 ## How to Help
 When the user asks for help in this domain:
@@ -489,6 +499,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 4. Run the &quot;5 readers&quot; rule, date and save the artifact, then hand off to `create-prd/`.
 
 Use `assets/prfaq_template.md` as the fill-in scaffold. See `references/prfaq-playbook.md` for the full structure, FAQ categories, sample questions, workflow, and troubleshooting.
+
+## Anti-Patterns
+
+### An internal FAQ with only easy questions
+**Mistake:** The internal FAQ has 6 questions like &quot;What is this product?&quot; and &quot;Who is it for?&quot;. Cost, failure and &quot;why now&quot; are missing.
+**Why it happens:** Hard questions expose weak spots, and the author wants the idea to look ready.
+**Instead:** Write 10-20 Q&amp;A pairs across all 9 required categories, including business model, feasibility, risk and scope. Fewer than 10 means the hard questions were skipped. Load the category you fear most, which you named in Clarify First.
+
+### No magnitude in the press release
+**Mistake:** The release says &quot;saves time&quot; or &quot;improves efficiency&quot; with no numbers.
+**Why it happens:** The real numbers aren&#x27;t known yet, and vague claims can&#x27;t be wrong.
+**Instead:** Quantify the outcome, for example &quot;cuts pre-call prep from 90 minutes to 10&quot;. Count the numbers in the first half of the release. Fewer than 3 quantified claims means magnitude is missing.
+
+### No &quot;what we will NOT do in v1&quot;
+**Mistake:** The internal FAQ lists everything v1 does and nothing it leaves out.
+**Why it happens:** Listing exclusions feels like drawing attention to weaknesses before funding review.
+**Instead:** Add an explicit question, &quot;What are we explicitly NOT doing in v1?&quot;, with each cut named and the reason given. Without it, every reader imagines features that later turn into commitments.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -611,6 +640,25 @@ Stop rule: ask only the 2-3 that most change the output. If the user says &quot;
 4. Run the &quot;5 readers&quot; rule, date and save the artifact, then hand off to `create-prd/`.
 
 Use `assets/prfaq_template.md` as the fill-in scaffold. See `references/prfaq-playbook.md` for the full structure, FAQ categories, sample questions, workflow, and troubleshooting.
+
+## Anti-Patterns
+
+### An internal FAQ with only easy questions
+**Mistake:** The internal FAQ has 6 questions like &quot;What is this product?&quot; and &quot;Who is it for?&quot;. Cost, failure and &quot;why now&quot; are missing.
+**Why it happens:** Hard questions expose weak spots, and the author wants the idea to look ready.
+**Instead:** Write 10-20 Q&amp;A pairs across all 9 required categories, including business model, feasibility, risk and scope. Fewer than 10 means the hard questions were skipped. Load the category you fear most, which you named in Clarify First.
+
+### No magnitude in the press release
+**Mistake:** The release says &quot;saves time&quot; or &quot;improves efficiency&quot; with no numbers.
+**Why it happens:** The real numbers aren&#x27;t known yet, and vague claims can&#x27;t be wrong.
+**Instead:** Quantify the outcome, for example &quot;cuts pre-call prep from 90 minutes to 10&quot;. Count the numbers in the first half of the release. Fewer than 3 quantified claims means magnitude is missing.
+
+### No &quot;what we will NOT do in v1&quot;
+**Mistake:** The internal FAQ lists everything v1 does and nothing it leaves out.
+**Why it happens:** Listing exclusions feels like drawing attention to weaknesses before funding review.
+**Instead:** Add an explicit question, &quot;What are we explicitly NOT doing in v1?&quot;, with each cut named and the reason given. Without it, every reader imagines features that later turn into commitments.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

@@ -62,6 +62,25 @@ python scripts/retro_report_generator.py -v /tmp/v.json -c /tmp/c.json -u /tmp/c
 
 All tools support `--format text|json`, `--days N`, `--since/--until YYYY-MM-DD`, and `--repo /path`.
 
+## Anti-Patterns
+
+### Generating the retro without the team
+**Mistake:** Someone runs the pipeline, writes conclusions from the report alone and sends them out as the retro.
+**Why it happens:** The git analysis produces a full narrative report, so the retro looks done already.
+**Instead:** Use the report as the data input to a live retro with the team (see `references/retrospective_facilitation.md`). The conclusions come out of that conversation. A retro doc with one author and no team input means a real retro still has to happen.
+
+### Blame framing
+**Mistake:** The retro output says "<name> did not finish the integration in time, which blocked the sprint."
+**Why it happens:** Per-person data from `contributor_insights.py` makes it easy to tie a slip to one name.
+**Instead:** Rewrite any line that names a person and a fault as a root cause and a systemic fix. Use contributor data for patterns such as bus-factor risk, not for blame. Once blame appears, nobody admits anything at the next retro.
+
+### Action items reborn each sprint
+**Mistake:** "Improve cross-team comms" appears as the action item three sprints running.
+**Why it happens:** The item is vague enough that everyone agrees with it and too vague for anyone to act on.
+**Instead:** Save a snapshot each sprint so carry-over shows repeats. If the wording repeats, root-cause the problem instead of re-adding it. Give each new action an owner, a due date and a definition of done.
+
+Seven more, each with a bad and a good example: `references/red-flags.md`.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:

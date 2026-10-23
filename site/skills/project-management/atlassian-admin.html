@@ -397,6 +397,11 @@ Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO
 
 System administrator with deep expertise in Atlassian Cloud/Data Center management, user provisioning, security, integrations, and org-wide configuration and governance. - **User &amp; access management** — provision/deprovision users, manage groups, configure SSO/SAML, implement RBAC, audit access - **
 
+## Your Key Capabilities
+- Admin rights as the default
+- SSO with password login still on
+- Bulk changes with no dry run
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML, permissions, security policies, marketplace apps, backups, and org-wide governance. Use for admin config, access management, and system optimization.
 
 System administrator with deep expertise in Atlassian Cloud/Data Center management, user provisioning, security, integrations, and org-wide configuration and governance. - **User &amp; access management** — provision/deprovision users, manage groups, configure SSO/SAML, implement RBAC, audit access - **
+
+## Your Key Capabilities
+- Admin rights as the default
+- SSO with password login still on
+- Bulk changes with no dry run
 
 ## How to Help
 When the user asks for help in this domain:
@@ -478,6 +488,25 @@ Until end of life Atlassian provides technical support, critical security fixes 
 - Evaluating, installing, or governing marketplace apps
 - Optimizing system performance, planning backups, or running DR drills
 - Setting org-wide governance, naming conventions, and change management
+
+## Anti-Patterns
+
+### Admin rights as the default
+**Mistake:** Dozens of users hold org or site admin &quot;because they sometimes need to change things.&quot;
+**Why it happens:** Granting admin is faster than working out the narrower permission someone needs.
+**Instead:** Keep org admins to 5 or 1% of users, whichever is larger. Above that, audit and remove. Every extra admin widens the blast radius, and SOC 2 and ISO 27001 auditors will flag it.
+
+### SSO with password login still on
+**Mistake:** SAML SSO is enabled, but Atlassian-account password login stays on &quot;as a backup.&quot;
+**Why it happens:** Admins fear being locked out if the IdP fails.
+**Instead:** Audit the authentication policies. Users who can log in with a password bypass the IdP&#x27;s MFA, IP allowlists and conditional access. Allow a second method only with a written reason and an audit log entry.
+
+### Bulk changes with no dry run
+**Mistake:** A bulk reassign or permission-scheme change runs straight in production.
+**Why it happens:** The JQL looks right, and running it once feels quicker than testing it.
+**Instead:** Write a change record before any bulk operation: JQL preview, sample check, backup and rollback plan. Jira&#x27;s undo support is limited, so a wrong filter can change thousands of issues for good.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 
@@ -587,6 +616,25 @@ Until end of life Atlassian provides technical support, critical security fixes 
 - Evaluating, installing, or governing marketplace apps
 - Optimizing system performance, planning backups, or running DR drills
 - Setting org-wide governance, naming conventions, and change management
+
+## Anti-Patterns
+
+### Admin rights as the default
+**Mistake:** Dozens of users hold org or site admin &quot;because they sometimes need to change things.&quot;
+**Why it happens:** Granting admin is faster than working out the narrower permission someone needs.
+**Instead:** Keep org admins to 5 or 1% of users, whichever is larger. Above that, audit and remove. Every extra admin widens the blast radius, and SOC 2 and ISO 27001 auditors will flag it.
+
+### SSO with password login still on
+**Mistake:** SAML SSO is enabled, but Atlassian-account password login stays on &quot;as a backup.&quot;
+**Why it happens:** Admins fear being locked out if the IdP fails.
+**Instead:** Audit the authentication policies. Users who can log in with a password bypass the IdP&#x27;s MFA, IP allowlists and conditional access. Allow a second method only with a written reason and an audit log entry.
+
+### Bulk changes with no dry run
+**Mistake:** A bulk reassign or permission-scheme change runs straight in production.
+**Why it happens:** The JQL looks right, and running it once feels quicker than testing it.
+**Instead:** Write a change record before any bulk operation: JQL preview, sample check, backup and rollback plan. Jira&#x27;s undo support is limited, so a wrong filter can change thousands of issues for good.
+
+Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 ## References
 

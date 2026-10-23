@@ -258,6 +258,25 @@ python scripts/soc2_infrastructure_auditor.py --config infra-config.json --forma
 
 ---
 
+## Anti-Patterns
+
+### Starting the observation period before controls run
+**Mistake:** The Type II observation period starts while controls are still being built.
+**Why it happens:** A sales deal fixes the audit date, and starting the clock feels like progress.
+**Instead:** Every in-scope control must operate from day one; a gap during observation becomes a finding in the report. Run `soc2_readiness_checker.py` and close the critical gaps before the period starts.
+
+### Gathering evidence at fieldwork
+**Mistake:** Screenshots, tickets and logs are collected in the weeks before the auditor arrives.
+**Why it happens:** Evidence feels like paperwork that can wait until someone asks for it.
+**Instead:** A control you can't prove is treated as a control you don't have. Collect from the first day of the observation period and track each item with `evidence_collector.py`.
+
+### Scoping every Trust Services Criteria category
+**Mistake:** Security, Availability, Processing Integrity, Confidentiality and Privacy all go into scope.
+**Why it happens:** A broader report looks stronger to buyers.
+**Instead:** Security is mandatory; add other categories only when customers ask for them. Each one adds controls, evidence and audit cost.
+
+Seven more in `references/audit-preparation-playbook.md` (Common Mistakes to Avoid).
+
 ## References
 
 | Document | Description |

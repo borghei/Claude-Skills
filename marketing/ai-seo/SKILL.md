@@ -37,6 +37,7 @@ Generative engine optimization (GEO) for getting cited by AI search platforms �
 - [Bot Access Configuration](#bot-access-configuration)
 - [Monitoring and Tracking](#monitoring-and-tracking)
 - [Best Practices](#best-practices)
+- [Anti-Patterns](#anti-patterns)
 - [Integration Points](#integration-points)
 
 ---
@@ -550,6 +551,25 @@ Diagnostic checklist when you lose a citation:
 9. **Avoid JavaScript-rendered content for key answers** — AI crawlers may not execute JavaScript. Ensure important content is in the initial HTML.
 
 10. **Implement schema accurately, not as a hack** — Article, Product, Organization, and BreadcrumbList markup that matches visible content helps entity understanding. Google says no special schema is required for AI features, and FAQ/HowTo rich results no longer display.
+
+---
+
+## Anti-Patterns
+
+### Burying the answer in prose
+**Mistake:** The page answers the question in paragraph six, after background and brand story.
+**Why it happens:** It was written the way long-form SEO content used to be written, for a reader who scrolls.
+**Instead:** AI systems extract sections, not pages. Put the answer in the first 200 words and make each H2 block citable on its own.
+
+### Blocking AI crawlers without knowing it
+**Mistake:** OAI-SearchBot or PerplexityBot is disallowed in robots.txt.
+**Why it happens:** A CMS update or security plugin rewrote robots.txt, and nobody checks it after updates.
+**Instead:** Audit robots.txt after every CMS or plugin change, and keep key answers in the initial HTML, because AI crawlers may not run JavaScript.
+
+### Treating schema markup as a ranking trick
+**Mistake:** FAQ or HowTo markup goes on every page in the hope of AI citations.
+**Why it happens:** Rich-result tricks once worked for classic search.
+**Instead:** Mark up what the page visibly contains (Article, Product, Organization, BreadcrumbList). Google says AI features need no special schema, and FAQ and HowTo rich results no longer display.
 
 ---
 
