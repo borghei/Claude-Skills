@@ -1,3 +1,5 @@
+[![AgentShield Security](https://merx.help/badge/A+.svg)](https://merx.help/shield)
+
 <p align="center">
   <img src="assets/header.svg" alt="Claude Skills" width="100%"/>
 </p>
