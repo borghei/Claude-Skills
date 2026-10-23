@@ -23,7 +23,7 @@ Utility skills for individual workflows that don't fit cleanly into a single bus
 ## Design Notes
 
 - All scripts use the Python standard library only — no `pip install` needed.
-- Each script supports both human-readable and `--json` output.
+- Each script supports both human-readable and `--json` output. For `calendar-prep` and `weekly-review`, `--json` prints the parsed input rather than a computed report.
 - Each skill follows the standard package layout: `SKILL.md`, `scripts/`, `references/`, `assets/`.
 - These skills are deliberately scoped to **single-person workflows**. Team-level workflows belong in `business-growth/`, `sales-success/`, `hr-operations/`, or `finance/`.
 

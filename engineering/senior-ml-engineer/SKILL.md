@@ -45,6 +45,8 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
+The three scripts are scaffolds: they validate their arguments and write a run record, but do not yet perform the analysis described. Until they are implemented, do the work inline using the workflows and references.
+
 | Tool | Purpose | Command |
 |------|---------|---------|
 | `model_deployment_pipeline.py` | Generate deployment artifacts (Dockerfile, K8s manifests, health checks) | `python scripts/model_deployment_pipeline.py --input <path> --output <path> [--config <file>]` |

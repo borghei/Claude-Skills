@@ -693,6 +693,25 @@ Tools overview and reference documentation for this skill:
 | `assets/target_audience_template.json` | Blank target audience file |
 | `assets/post_readout_template.md` | One-page readout and baseline log that identifies no one |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Reads one or more CSV or JSON engagement exports, merges duplicates, sets aside colleagues, and segments engagers by seniority band, function and company from their headlines (`engager_segmenter.py`).
+- Compares the share of core-audience engagers with a target audience written beforehand and with the author&#x27;s own baseline, using a Wilson interval; `--fail-on-miss` turns this into a gate.
+- Aggregate output only, with data-handling rules for minimisation, local storage, no enrichment and deletion.
+
+**Out of Scope:**
+- Collecting engagement data, signing in, scraping, posting or scheduling. The user supplies an export of their own post, made by a permitted method.
+- Per-person profiles, contact lists or enrichment from other sources.
+- Writing or re-planning content from the result; see `tools/linkedin/linkedin-post-writer/` and `tools/linkedin/linkedin-content-planner/`.
+- Engagement rates, ROI and cross-platform benchmarks; see `marketing/social-media-analyzer/`.
+
+**Important Caveats:**
+- Headline classification uses ordered English-language patterns. Non-English titles, portfolio headlines and colliding abbreviations are misclassified; `references/segmentation-method.md` lists the known weaknesses.
+- People who engage are not a random sample of the people who saw the post. The readout describes responders, not the audience reached.
+- A verdict needs a minimum number of classified external engagers (`--min-sample`, default 30). Smaller samples give wide intervals and are reported as such.
+- Nothing here models how the feed chose who saw the post.
+
 ---
 
 ## What I Need You to Do
@@ -959,6 +978,25 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_target_audience.json` | Target audience, own-company names, goal and baseline for the sample |
 | `assets/target_audience_template.json` | Blank target audience file |
 | `assets/post_readout_template.md` | One-page readout and baseline log that identifies no one |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Reads one or more CSV or JSON engagement exports, merges duplicates, sets aside colleagues, and segments engagers by seniority band, function and company from their headlines (`engager_segmenter.py`).
+- Compares the share of core-audience engagers with a target audience written beforehand and with the author&#x27;s own baseline, using a Wilson interval; `--fail-on-miss` turns this into a gate.
+- Aggregate output only, with data-handling rules for minimisation, local storage, no enrichment and deletion.
+
+**Out of Scope:**
+- Collecting engagement data, signing in, scraping, posting or scheduling. The user supplies an export of their own post, made by a permitted method.
+- Per-person profiles, contact lists or enrichment from other sources.
+- Writing or re-planning content from the result; see `tools/linkedin/linkedin-post-writer/` and `tools/linkedin/linkedin-content-planner/`.
+- Engagement rates, ROI and cross-platform benchmarks; see `marketing/social-media-analyzer/`.
+
+**Important Caveats:**
+- Headline classification uses ordered English-language patterns. Non-English titles, portfolio headlines and colliding abbreviations are misclassified; `references/segmentation-method.md` lists the known weaknesses.
+- People who engage are not a random sample of the people who saw the post. The readout describes responders, not the audience reached.
+- A verdict needs a minimum number of classified external engagers (`--min-sample`, default 30). Smaller samples give wide intervals and are reported as such.
+- Nothing here models how the feed chose who saw the post.
 
 ---
 

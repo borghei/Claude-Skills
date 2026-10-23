@@ -44,7 +44,7 @@ python scripts/dockerfile_analyzer.py --file Dockerfile --format json
 # Validate a docker-compose file
 python scripts/compose_validator.py --file docker-compose.yml
 
-# Check for port conflicts across compose files
+# Check for host port conflicts between services in one compose file
 python scripts/compose_validator.py --file docker-compose.yml --check-ports
 ```
 
@@ -57,7 +57,7 @@ Analyzes Dockerfiles for best practices, security issues, and optimization oppor
 | Feature | Description |
 |---------|-------------|
 | Layer optimization | Detects unnecessary layers, recommends combining RUN statements |
-| Multi-stage analysis | Validates multi-stage build patterns and final image size |
+| Multi-stage analysis | Lists build stages and suggests a multi-stage build when a single stage has many RUN steps (does not measure image size) |
 | Security scanning | Flags running as root, use of latest tags, exposed secrets |
 | Base image checks | Recommends smaller base images (alpine, distroless, slim) |
 | Cache optimization | Identifies poor layer ordering that breaks Docker cache |
@@ -83,7 +83,7 @@ Validates docker-compose files for correctness, dependency issues, and port conf
 | Dependency graph | Validates depends_on chains for circular dependencies |
 | Port conflict detection | Identifies duplicate host port bindings |
 | Volume mount checks | Validates volume paths and mount configurations |
-| Network analysis | Checks network definitions and service connectivity |
+| Network mode check | Flags services using `network_mode: host` (network definitions and connectivity are not checked) |
 
 ```bash
 # Full validation
@@ -112,7 +112,7 @@ python scripts/compose_validator.py --file docker-compose.yml --format json
 2. **Check dependencies** - Review service dependency graph for circular refs
 3. **Audit ports** - Ensure no host port conflicts across services
 4. **Review volumes** - Confirm volume mounts are correct and necessary
-5. **Network review** - Verify service isolation and connectivity
+5. **Network review** - Act on any host network mode warning, then check network definitions and service isolation by hand
 
 ### CI Integration Workflow
 
@@ -123,6 +123,26 @@ python scripts/compose_validator.py --file docker-compose.yml --format json
     python scripts/dockerfile_analyzer.py --file Dockerfile --format json > results.json
     python scripts/compose_validator.py --file docker-compose.yml --format json >> results.json
 ```
+
+## Scope & Limitations
+
+**In Scope:**
+- Dockerfile analysis with `dockerfile_analyzer.py`: layer count, multi-stage use, running as root, `latest` tags, secrets in the file, base image choice and cache-breaking instruction order, with `--security-only` for a narrower report
+- Compose file checks with `compose_validator.py`: file structure, circular `depends_on` chains, duplicate host port bindings, volume mounts, security settings and best practices such as restart policies and resource limits
+- Text or JSON output for review and CI steps
+- Dockerfile and Compose patterns from the Docker best practices reference
+
+**Out of Scope:**
+- Building images, running containers or measuring real image size
+- Scanning image layers or packages for known CVEs (dependency-level scanning is in `engineering/dependency-auditor/`)
+- Kubernetes manifests and Helm charts (see `engineering/kubernetes-operator/` and `engineering/helm-chart-builder/`)
+- CI pipeline design around image builds (see `engineering/devops-workflow-engineer/`)
+
+**Important Caveats:**
+- Both tools read files as text. The Compose validator uses a small built-in YAML parser, so anchors, merge keys, `extends`, `include` and variable substitution may not be read correctly.
+- `compose_validator.py` checks one file per run. Port conflicts or overrides spread across several Compose files are not detected.
+- Base image advice is general. Whether `alpine`, `slim` or distroless suits an image depends on its libraries and needs a test build.
+- A clean report means the rules found nothing. It is not a container security assessment.
 
 ## Reference Documentation
 

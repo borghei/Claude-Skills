@@ -489,8 +489,9 @@ python scripts/workspace_audit.py --config gws-config.json
 # Generate auth setup guide
 python scripts/auth_setup_guide.py --method oauth --scopes admin,drive
 
-# Run diagnostics
-python scripts/gws_doctor.py --check all
+# Run diagnostics on a config JSON (try --sample first to see the output)
+python scripts/gws_doctor.py --config gws-doctor.json --check all
+python scripts/gws_doctor.py --sample --check all
 
 # JSON output for automation
 python scripts/workspace_audit.py --config gws-config.json --format json
@@ -526,21 +527,21 @@ Generates step-by-step authentication setup documentation for GWS API access.
 
 ### gws_doctor.py
 
-Diagnostic tool for common Google Workspace configuration issues.
+Diagnostic tool for common Google Workspace configuration issues. It needs `--config &lt;file&gt;` or `--sample`, and every check reads values from that JSON. Nothing is looked up live. `--generate-sample` prints the doctor&#x27;s config schema, which differs from the `workspace_audit.py` schema. The tool exits 1 when any check fails.
 
-| Feature | Description |
+| `--check` | Description |
 |---------|-------------|
-| DNS checks | Validates MX, SPF, DKIM, DMARC records format |
-| SSL/TLS | Checks certificate and transport security settings |
-| Integration health | Validates common integration patterns |
-| Config consistency | Checks for conflicting settings |
-| Best practices | Compares against GWS recommended settings |
+| `dns` | Checks the MX, SPF, DKIM and DMARC record values written in the config |
+| `email` | Reviews the email routing and spam filtering settings |
+| `security` | Checks 2-step verification enforcement and session duration |
+| `integration` | Reviews SSO and directory sync settings |
+| `consistency` | Flags conflicting settings, such as external sharing without 2-step verification |
 
 ## Workflows
 
 ### Security Audit Workflow
 
-1. **Export config** - Export GWS settings to JSON via Admin SDK or manual export
+1. **Prepare config** - Write your settings into a JSON file in the tool&#x27;s schema; `workspace_audit.py --generate-sample` prints a template to fill in. No tool in this skill exports settings
 2. **Audit** - Run workspace_audit.py against the config file
 3. **Review findings** - Prioritize critical security gaps
 4. **Remediate** - Apply recommended settings in Admin Console
@@ -556,10 +557,11 @@ Diagnostic tool for common Google Workspace configuration issues.
 
 ### Health Check Workflow
 
-1. **Run diagnostics** - Execute gws_doctor.py with all checks
-2. **Review results** - Check DNS, email, and integration health
-3. **Fix issues** - Address failures in priority order
-4. **Re-check** - Verify fixes pass diagnostics
+1. **Prepare config** - Fill in the template from `gws_doctor.py --generate-sample` with the values from your Admin Console and DNS zone
+2. **Run diagnostics** - Execute `gws_doctor.py --config &lt;file&gt; --check all`
+3. **Review results** - Check DNS, email, and integration health. DNS results reflect the values in the file, so confirm them against the live zone
+4. **Fix issues** - Address failures in priority order
+5. **Re-check** - Update the file and verify fixes pass diagnostics
 
 ### Regular Maintenance
 
@@ -568,8 +570,28 @@ Diagnostic tool for common Google Workspace configuration issues.
 python scripts/workspace_audit.py --config gws-export.json --format json &gt; audit_$(date +%Y%m).json
 
 # Weekly health check
-python scripts/gws_doctor.py --check dns,email --format json
+python scripts/gws_doctor.py --config gws-doctor.json --check dns,email --format json
 ```
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Security audits of a Workspace configuration JSON with `workspace_audit.py`: 2-step verification, password policy, external sharing, third-party app access, admin roles, mobile management and Drive settings
+- Diagnostics with `gws_doctor.py` on the same kind of JSON: MX, SPF, DKIM and DMARC record format, email and security settings, integrations and conflicting settings
+- Auth setup guides from `auth_setup_guide.py` for OAuth or service accounts, with scopes for Admin SDK, Drive, Gmail, Calendar, Sheets and Reports, and optional domain-wide delegation steps
+- Sample configs (`--generate-sample`, `--sample`) and an admin reference for security settings, API configuration and DNS requirements
+
+**Out of Scope:**
+- Calling the Admin SDK or any Google API, exporting settings, or changing settings in the Admin Console
+- Microsoft 365 tenant administration (see `engineering/ms365-tenant-manager/`)
+- Privacy law and data-protection compliance for Workspace data (see `ra-qm-team/gdpr-dsgvo-expert/`)
+- General cloud IAM and posture outside Workspace (see `engineering/cloud-security/`)
+
+**Important Caveats:**
+- All three tools work offline. The audit and diagnostics read a JSON file the user prepares in the tool&#x27;s own schema, and there is no export tool in this skill.
+- DNS checks look at the record values in that file. They do not query live DNS, so a record that is correct in the file can still be missing or wrong in the real zone.
+- Findings compare settings with the skill&#x27;s recommended values. They are not a Google security review or a compliance certification.
+- Google changes Admin Console settings, API scopes and auth requirements over time. Confirm generated setup steps against current Google documentation.
 
 ## Reference Documentation
 
@@ -689,8 +711,9 @@ python scripts/workspace_audit.py --config gws-config.json
 # Generate auth setup guide
 python scripts/auth_setup_guide.py --method oauth --scopes admin,drive
 
-# Run diagnostics
-python scripts/gws_doctor.py --check all
+# Run diagnostics on a config JSON (try --sample first to see the output)
+python scripts/gws_doctor.py --config gws-doctor.json --check all
+python scripts/gws_doctor.py --sample --check all
 
 # JSON output for automation
 python scripts/workspace_audit.py --config gws-config.json --format json
@@ -726,21 +749,21 @@ Generates step-by-step authentication setup documentation for GWS API access.
 
 ### gws_doctor.py
 
-Diagnostic tool for common Google Workspace configuration issues.
+Diagnostic tool for common Google Workspace configuration issues. It needs `--config &lt;file&gt;` or `--sample`, and every check reads values from that JSON. Nothing is looked up live. `--generate-sample` prints the doctor&#x27;s config schema, which differs from the `workspace_audit.py` schema. The tool exits 1 when any check fails.
 
-| Feature | Description |
+| `--check` | Description |
 |---------|-------------|
-| DNS checks | Validates MX, SPF, DKIM, DMARC records format |
-| SSL/TLS | Checks certificate and transport security settings |
-| Integration health | Validates common integration patterns |
-| Config consistency | Checks for conflicting settings |
-| Best practices | Compares against GWS recommended settings |
+| `dns` | Checks the MX, SPF, DKIM and DMARC record values written in the config |
+| `email` | Reviews the email routing and spam filtering settings |
+| `security` | Checks 2-step verification enforcement and session duration |
+| `integration` | Reviews SSO and directory sync settings |
+| `consistency` | Flags conflicting settings, such as external sharing without 2-step verification |
 
 ## Workflows
 
 ### Security Audit Workflow
 
-1. **Export config** - Export GWS settings to JSON via Admin SDK or manual export
+1. **Prepare config** - Write your settings into a JSON file in the tool&#x27;s schema; `workspace_audit.py --generate-sample` prints a template to fill in. No tool in this skill exports settings
 2. **Audit** - Run workspace_audit.py against the config file
 3. **Review findings** - Prioritize critical security gaps
 4. **Remediate** - Apply recommended settings in Admin Console
@@ -756,10 +779,11 @@ Diagnostic tool for common Google Workspace configuration issues.
 
 ### Health Check Workflow
 
-1. **Run diagnostics** - Execute gws_doctor.py with all checks
-2. **Review results** - Check DNS, email, and integration health
-3. **Fix issues** - Address failures in priority order
-4. **Re-check** - Verify fixes pass diagnostics
+1. **Prepare config** - Fill in the template from `gws_doctor.py --generate-sample` with the values from your Admin Console and DNS zone
+2. **Run diagnostics** - Execute `gws_doctor.py --config &lt;file&gt; --check all`
+3. **Review results** - Check DNS, email, and integration health. DNS results reflect the values in the file, so confirm them against the live zone
+4. **Fix issues** - Address failures in priority order
+5. **Re-check** - Update the file and verify fixes pass diagnostics
 
 ### Regular Maintenance
 
@@ -768,8 +792,28 @@ Diagnostic tool for common Google Workspace configuration issues.
 python scripts/workspace_audit.py --config gws-export.json --format json &gt; audit_$(date +%Y%m).json
 
 # Weekly health check
-python scripts/gws_doctor.py --check dns,email --format json
+python scripts/gws_doctor.py --config gws-doctor.json --check dns,email --format json
 ```
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Security audits of a Workspace configuration JSON with `workspace_audit.py`: 2-step verification, password policy, external sharing, third-party app access, admin roles, mobile management and Drive settings
+- Diagnostics with `gws_doctor.py` on the same kind of JSON: MX, SPF, DKIM and DMARC record format, email and security settings, integrations and conflicting settings
+- Auth setup guides from `auth_setup_guide.py` for OAuth or service accounts, with scopes for Admin SDK, Drive, Gmail, Calendar, Sheets and Reports, and optional domain-wide delegation steps
+- Sample configs (`--generate-sample`, `--sample`) and an admin reference for security settings, API configuration and DNS requirements
+
+**Out of Scope:**
+- Calling the Admin SDK or any Google API, exporting settings, or changing settings in the Admin Console
+- Microsoft 365 tenant administration (see `engineering/ms365-tenant-manager/`)
+- Privacy law and data-protection compliance for Workspace data (see `ra-qm-team/gdpr-dsgvo-expert/`)
+- General cloud IAM and posture outside Workspace (see `engineering/cloud-security/`)
+
+**Important Caveats:**
+- All three tools work offline. The audit and diagnostics read a JSON file the user prepares in the tool&#x27;s own schema, and there is no export tool in this skill.
+- DNS checks look at the record values in that file. They do not query live DNS, so a record that is correct in the file can still be missing or wrong in the real zone.
+- Findings compare settings with the skill&#x27;s recommended values. They are not a Google security review or a compliance certification.
+- Google changes Admin Console settings, API scopes and auth requirements over time. Confirm generated setup steps against current Google documentation.
 
 ## Reference Documentation
 
@@ -897,15 +941,16 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/google-workspace-cli/scripts/tool_name.py --help</code></pre>
-  <h2>Python Tools</h2><div class="tool-item"><h4>workspace_audit.py</h4><p>Audits Google Workspace configuration exports for security best practices.</p></div><div class="tool-item"><h4>auth_setup_guide.py</h4><p>Generates step-by-step authentication setup documentation for GWS API access.</p></div><div class="tool-item"><h4>gws_doctor.py</h4><p>Diagnostic tool for common Google Workspace configuration issues.</p></div>
+  <h2>Python Tools</h2><div class="tool-item"><h4>workspace_audit.py</h4><p>Audits Google Workspace configuration exports for security best practices.</p></div><div class="tool-item"><h4>auth_setup_guide.py</h4><p>Generates step-by-step authentication setup documentation for GWS API access.</p></div><div class="tool-item"><h4>gws_doctor.py</h4><p>Diagnostic tool for common Google Workspace configuration issues. It needs `--config &lt;file&gt;` or `--sample`, and every check reads values from that JSON. Nothing is looked up live. `--generate-sample` prints the doctor&#x27;s config schema, which differs from the `workspace_audit.py` schema. The tool exits 1 when any check fails.</p></div>
   <h2>Quick Start</h2><pre><code># Audit Workspace security configuration
 python scripts/workspace_audit.py --config gws-config.json
 
 # Generate auth setup guide
 python scripts/auth_setup_guide.py --method oauth --scopes admin,drive
 
-# Run diagnostics
-python scripts/gws_doctor.py --check all
+# Run diagnostics on a config JSON (try --sample first to see the output)
+python scripts/gws_doctor.py --config gws-doctor.json --check all
+python scripts/gws_doctor.py --sample --check all
 
 # JSON output for automation
 python scripts/workspace_audit.py --config gws-config.json --format json

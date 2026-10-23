@@ -217,3 +217,21 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_roster.json` | Invented nine-person roster with deliberate governance and roster gaps |
 | `assets/roster_template.json` | Blank roster with every governance key and member field |
 | `assets/advocacy_charter_template.md` | Fill-in charter covering consent, never-scripted list, disclosure, triggers, pause, leavers and agreed plans |
+
+## Scope & Limitations
+
+**In Scope:**
+- Plans a team programme from a roster file: a weekly cadence matrix, a topic coverage map and time budgets, scheduling only people with `opted_in: true` (`advocacy_planner.py`).
+- Checks the roster's governance answers for blockers and warnings: voluntariness, links to pay or review, company-held logins, disclosure guidance, verbatim shared copy, engagement rotas, review triggers, pause and leaver rules.
+- A charter template covering consent, disclosure, review triggers, incident pause and leavers, and guidance on measuring the programme without individual rankings.
+
+**Out of Scope:**
+- Writing posts or comments for team members; see `tools/linkedin/linkedin-post-writer/` and `tools/linkedin/linkedin-comment-writer/`.
+- One person's content calendar; see `tools/linkedin/linkedin-content-planner/`.
+- Posting, scheduling, scraping or holding anyone's account access. The skill plans from a file and never touches an account.
+- Legal sign-off. Disclosure and employment wording needs review by counsel in each country.
+
+**Important Caveats:**
+- The time model and cadence defaults are assumptions. `--minutes-per-post` and `--minutes-per-comment` change them, and `advocacy_rules.py --list-rules` prints the values in use.
+- The planner takes the roster at face value. A recorded `opted_in: true` or governance answer is not checked against what people actually agreed to.
+- The governance reference is not legal advice. Employment, advertising-disclosure and securities rules differ by country and sector.

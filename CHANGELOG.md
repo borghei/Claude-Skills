@@ -5,6 +5,21 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.13.8] - 2026-10-23
+
+### Added
+
+- **Every skill now has a Scope & Limitations section.** The last 63 (engineering, personal productivity, the LinkedIn suite, markdown-html and three business-operations skills) gained one, each saying what the skill covers, what it leaves to other skills, and where its tools stop.
+- **`aws-solution-architect` tools run from the command line.** `architecture_designer.py`, `cost_optimizer.py` and `serverless_stack.py` were documented as commands but had no entry point, so they printed nothing. Each now takes the documented flags, prints an input template with `--example`, supports `--format json`, and reports bad input files in one line.
+
+### Fixed
+
+- **No skill tells you to run a tool that doesn't exist.** `agile-coach`, `delivery-manager`, `program-manager`, `senior-cloud-architect`, `senior-data-scientist`, `senior-mobile`, `skill-security-auditor` and `notion-pm` now point to their real tools with real flags, or describe the step plainly. Sample output shown as tool output is the tool's actual output.
+- **Tool bugs found while checking docs against code:** `snowflake_query_helper.py` never flagged `SELECT *` (now catches `SELECT *`, `select*` and `SELECT DISTINCT *`, not `COUNT(*)`) and sized ETL warehouses with `AUTO_SUSPEND = 0`, which disables auto-suspend (now 60); `tf_security_scanner.py` checked the non-existent `aws_rds_instance`, so RDS encryption was never checked (now `aws_db_instance`); `engagement_planner.py` phase shares added up to 101–102% (now exactly 100); `prompt_catalog_manager.py` left an orphan file when rejecting a duplicate; the markdown-html converters blocked the image data URIs their docs offered (PNG, JPEG, GIF, WebP and AVIF are now allowed in images only; SVG, HTML and links stay blocked).
+- **`a11y_scanner.py` reports positive `tabindex` (2.4.3) and skipped headings (1.3.1) as Level A**, not AA. They are now critical, so a page whose only issues are these now exits 1. Adjust CI that relied on the old behaviour.
+- **Docs that described checks, flags or formats the tools don't have** now match the tools: browser-automation, google-workspace-cli, qa-browser-automation, sql-database-assistant, md-review, threat-detection, ai-security, docker-development, helm-chart-builder, secrets-vault-manager, senior-data-engineer, red-team, terraform-patterns, the Azure (Bicep only) and GCP validators, and five personal-productivity skills.
+- `senior-data-scientist`, `senior-ml-engineer` and `senior-devops` state that their scripts are scaffolds that don't yet perform the analysis described.
+
 ## [4.13.7] - 2026-10-23
 
 ### Fixed

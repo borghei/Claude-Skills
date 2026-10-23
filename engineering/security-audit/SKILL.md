@@ -276,3 +276,23 @@ of the harm is too high.
 | `assets/sample_coverage_ledger.json` | Units in each state, including a reopened attempt; passes the validator |
 | `assets/sample_run_metadata.json` | Run metadata as `init` writes it |
 | `assets/report_template.md` | Layout for `REPORT.md` |
+
+## Scope & Limitations
+
+**In Scope:**
+- A defensive, source-first audit of a repository or a scoped part of it, run through the six phases above with three breadth tiers (`core`, `focused`, `full`) and three profiles (`quick`, `standard`, `deep`).
+- Run setup, coverage IDs, budget splits and summary tables with `audit_run.py`.
+- Machine checks on the run's records with `validate_coverage_ledger.py` and `validate_findings.py`, and controlled evidence handling with `promote_evidence.py`.
+- Findings in three states (confirmed, needs validation, rejected) and the reports `REPORT.md`, `FINDINGS-DETAIL.md` and `NEEDS-VALIDATION.md`.
+
+**Out of Scope:**
+- Testing deployed systems or sending traffic to them (engagement planning is in `engineering/red-team/`).
+- STRIDE threat modeling and secret scanning as a main task (see `engineering/senior-security/`).
+- Live cloud account review (see `engineering/cloud-security/`) and dependency CVE listings (see `engineering/dependency-auditor/`).
+- Fixing the code. The audit describes fixes and never edits the target repository.
+
+**Important Caveats:**
+- The audit is meant for code the user owns or is authorized to review. Running target code depends on the sandbox controls in Execution safety, and without them findings stay at needs validation.
+- The validators check structure, IDs, links and severity rules. They do not prove a finding is true; that rests on the independent verifier and record reader steps.
+- Results cover only the units the ledger shows as reviewed. Deferred and out-of-scope units are named in the report, and no run, however clean, is a guarantee that no vulnerabilities remain.
+- Severity reflects the impact shown in the repository. Deployment facts outside the source, such as proxies, providers or policies, can change it and are recorded as blockers.

@@ -395,7 +395,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 
 This skill should be used when the user asks to &quot;analyze logs for threats&quot;, &quot;detect suspicious activity&quot;, &quot;scan for brute force attempts&quot;, &quot;identify injection attacks&quot;, or &quot;audit access patterns for anomalies&quot;.
 
-&gt; **Category:** Engineering &gt; **Domain:** Security Operations The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators. It helps security teams triag
+&gt; **Category:** Engineering &gt; **Domain:** Security Operations The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attempts, injection attempts, path traversal, admin path probing and request flooding. It helps security teams triage lo
 
 ## Your Key Capabilities
 - threat_signal_analyzer.py
@@ -425,7 +425,7 @@ Start by asking the user what they need help with.">
 
 This skill should be used when the user asks to &quot;analyze logs for threats&quot;, &quot;detect suspicious activity&quot;, &quot;scan for brute force attempts&quot;, &quot;identify injection attacks&quot;, or &quot;audit access patterns for anomalies&quot;.
 
-&gt; **Category:** Engineering &gt; **Domain:** Security Operations The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators. It helps security teams triag
+&gt; **Category:** Engineering &gt; **Domain:** Security Operations The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attempts, injection attempts, path traversal, admin path probing and request flooding. It helps security teams triage lo
 
 ## Your Key Capabilities
 - threat_signal_analyzer.py
@@ -468,14 +468,14 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Overview
 
-The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators. It helps security teams triage log data and identify threats before they escalate.
+The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attempts, injection attempts, path traversal, admin path probing and request flooding. It helps security teams triage log data and identify threats before they escalate.
 
 ## Clarify First
 
 Before analyzing logs, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
 - **Log file &amp; source type:** auth / access / application logs to analyze (`--file`; the subject of detection).
-- **Threat category:** brute force / injection / access anomaly / privilege escalation (`--category`; focuses the scan).
+- **Threat category:** injection / auth (brute force) / traversal / probe / rate (`--category`; focuses the scan).
 - **Minimum severity:** the reporting/alert threshold (`--min-severity`; changes which signals surface and any SIEM/CI gate).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
@@ -504,12 +504,11 @@ Analyzes log files for suspicious activity patterns across multiple threat categ
 
 | Feature | Description |
 |---------|-------------|
-| Brute force detection | Identifies repeated failed login attempts from same source |
+| Brute force detection | Counts failed login lines per source IP across the whole file |
 | Injection scanning | Detects SQL injection, XSS, command injection in requests |
-| Access anomalies | Flags unusual access times, forbidden paths, admin probes |
-| Privilege escalation | Detects sudo abuse, role changes, permission modifications |
-| Rate analysis | Identifies request flooding and denial-of-service patterns |
-| IP reputation | Flags known-bad patterns (scanners, bots, TOR indicators) |
+| Path traversal | Detects `../` sequences and their URL-encoded forms |
+| Admin probing | Flags requests to admin and sensitive paths such as `/admin`, `/.env` and `/.git` |
+| Rate analysis | Counts requests per source IP across the whole file and flags high volumes |
 
 ## Workflows
 
@@ -539,6 +538,25 @@ python scripts/threat_signal_analyzer.py --file /var/log/auth.log --format json 
 python scripts/threat_signal_analyzer.py --file app.log --category injection --format json
 ```
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Rule-based scanning of a single log file with `threat_signal_analyzer.py` for SQL injection, XSS, command injection, path traversal, failed authentication and brute force, admin path probing, and request flooding.
+- Filtering by `--category` (injection, auth, traversal, probe, rate) and `--min-severity`, with text or JSON output.
+- Attack categories, severity levels, common log formats, scanner indicators and an incident response playbook in `references/threat-indicators.md`.
+
+**Out of Scope:**
+- Real-time monitoring, alert routing or SIEM integration. The script reads one file per run.
+- Running an incident response (see `engineering/incident-commander/`) and building a security operations program (see `engineering/senior-secops/`).
+- Vault audit log analysis (see `engineering/secrets-vault-manager/`).
+- Blocking IPs or changing any system. The script reports signals only.
+
+**Important Caveats:**
+- Detection uses regular expressions on log lines and simple counts. Encoded or new attack strings can be missed, and legitimate traffic can match.
+- Brute force and flooding thresholds count events per IP across the whole file, not within a time window.
+- The script does not detect privilege escalation, check IP reputation or flag unusual access times.
+- A quiet report does not mean no attack took place. Findings need correlation with other sources before any response.
+
 ## Reference Documentation
 
 - [Threat Indicators](references/threat-indicators.md) - Common attack patterns, indicators of compromise, response playbooks
@@ -548,17 +566,17 @@ python scripts/threat_signal_analyzer.py --file app.log --category injection --f
 ### Threat Categories
 | Category | Signals | Severity |
 |----------|---------|----------|
-| Brute force | 5+ failed logins from same IP in 5 min | High |
+| Brute force | 5+ failed logins from same IP in the file (3-4 is Medium) | High |
 | SQL injection | UNION SELECT, OR 1=1, DROP TABLE in requests | Critical |
 | XSS | script tags, javascript: URIs, event handlers in input | High |
 | Path traversal | ../ sequences, /etc/passwd access attempts | High |
 | Command injection | ; cat /etc/passwd, | nc, backtick usage | Critical |
 | Admin probing | /admin, /wp-admin, /phpmyadmin access attempts | Medium |
-| Rate flooding | 100+ requests/minute from single IP | High |
+| Rate flooding | More than 500 requests from a single IP in the file (more than 200 is Medium) | High |
 
 ### Severity Levels
 - **CRITICAL** - Active exploitation attempt (injection, RCE)
-- **HIGH** - Likely attack in progress (brute force, privilege escalation)
+- **HIGH** - Likely attack in progress (brute force, XSS, path traversal, flooding)
 - **MEDIUM** - Suspicious activity requiring investigation
 - **LOW** - Informational, possible false positive
 
@@ -626,14 +644,14 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Overview
 
-The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attacks, injection attempts, unusual access patterns, and privilege escalation indicators. It helps security teams triage log data and identify threats before they escalate.
+The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attempts, injection attempts, path traversal, admin path probing and request flooding. It helps security teams triage log data and identify threats before they escalate.
 
 ## Clarify First
 
 Before analyzing logs, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
 - **Log file &amp; source type:** auth / access / application logs to analyze (`--file`; the subject of detection).
-- **Threat category:** brute force / injection / access anomaly / privilege escalation (`--category`; focuses the scan).
+- **Threat category:** injection / auth (brute force) / traversal / probe / rate (`--category`; focuses the scan).
 - **Minimum severity:** the reporting/alert threshold (`--min-severity`; changes which signals surface and any SIEM/CI gate).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
@@ -662,12 +680,11 @@ Analyzes log files for suspicious activity patterns across multiple threat categ
 
 | Feature | Description |
 |---------|-------------|
-| Brute force detection | Identifies repeated failed login attempts from same source |
+| Brute force detection | Counts failed login lines per source IP across the whole file |
 | Injection scanning | Detects SQL injection, XSS, command injection in requests |
-| Access anomalies | Flags unusual access times, forbidden paths, admin probes |
-| Privilege escalation | Detects sudo abuse, role changes, permission modifications |
-| Rate analysis | Identifies request flooding and denial-of-service patterns |
-| IP reputation | Flags known-bad patterns (scanners, bots, TOR indicators) |
+| Path traversal | Detects `../` sequences and their URL-encoded forms |
+| Admin probing | Flags requests to admin and sensitive paths such as `/admin`, `/.env` and `/.git` |
+| Rate analysis | Counts requests per source IP across the whole file and flags high volumes |
 
 ## Workflows
 
@@ -697,6 +714,25 @@ python scripts/threat_signal_analyzer.py --file /var/log/auth.log --format json 
 python scripts/threat_signal_analyzer.py --file app.log --category injection --format json
 ```
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Rule-based scanning of a single log file with `threat_signal_analyzer.py` for SQL injection, XSS, command injection, path traversal, failed authentication and brute force, admin path probing, and request flooding.
+- Filtering by `--category` (injection, auth, traversal, probe, rate) and `--min-severity`, with text or JSON output.
+- Attack categories, severity levels, common log formats, scanner indicators and an incident response playbook in `references/threat-indicators.md`.
+
+**Out of Scope:**
+- Real-time monitoring, alert routing or SIEM integration. The script reads one file per run.
+- Running an incident response (see `engineering/incident-commander/`) and building a security operations program (see `engineering/senior-secops/`).
+- Vault audit log analysis (see `engineering/secrets-vault-manager/`).
+- Blocking IPs or changing any system. The script reports signals only.
+
+**Important Caveats:**
+- Detection uses regular expressions on log lines and simple counts. Encoded or new attack strings can be missed, and legitimate traffic can match.
+- Brute force and flooding thresholds count events per IP across the whole file, not within a time window.
+- The script does not detect privilege escalation, check IP reputation or flag unusual access times.
+- A quiet report does not mean no attack took place. Findings need correlation with other sources before any response.
+
 ## Reference Documentation
 
 - [Threat Indicators](references/threat-indicators.md) - Common attack patterns, indicators of compromise, response playbooks
@@ -706,17 +742,17 @@ python scripts/threat_signal_analyzer.py --file app.log --category injection --f
 ### Threat Categories
 | Category | Signals | Severity |
 |----------|---------|----------|
-| Brute force | 5+ failed logins from same IP in 5 min | High |
+| Brute force | 5+ failed logins from same IP in the file (3-4 is Medium) | High |
 | SQL injection | UNION SELECT, OR 1=1, DROP TABLE in requests | Critical |
 | XSS | script tags, javascript: URIs, event handlers in input | High |
 | Path traversal | ../ sequences, /etc/passwd access attempts | High |
 | Command injection | ; cat /etc/passwd, | nc, backtick usage | Critical |
 | Admin probing | /admin, /wp-admin, /phpmyadmin access attempts | Medium |
-| Rate flooding | 100+ requests/minute from single IP | High |
+| Rate flooding | More than 500 requests from a single IP in the file (more than 200 is Medium) | High |
 
 ### Severity Levels
 - **CRITICAL** - Active exploitation attempt (injection, RCE)
-- **HIGH** - Likely attack in progress (brute force, privilege escalation)
+- **HIGH** - Likely attack in progress (brute force, XSS, path traversal, flooding)
 - **MEDIUM** - Suspicious activity requiring investigation
 - **LOW** - Informational, possible false positive
 

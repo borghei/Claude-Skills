@@ -190,3 +190,25 @@ the business owner, not from the analyst's spreadsheet.
 | `assets/process-map-template.md` | Full map deliverable: SIPOC, swimlane, step detail, metrics, handoffs, backlog, validation checklist |
 | `assets/sample_process.json` | Twelve-step order-to-activation process across seven owners with rework loops and system switches |
 | `assets/sample_opportunities.json` | Eight improvement opportunities spanning all five improvement verbs, including two that correctly fail scoring |
+
+## Scope & Limitations
+
+**In Scope:**
+- Process capture on one page with a SIPOC frame and swimlane map, using `assets/process-map-template.md`.
+- Lead time, process cycle efficiency, value-added ratio, first-pass yield, rework cost and constraint identification with `process_analyzer.py`.
+- Handoff density, ping-pong owners, cross-team rework loops and system switches with `handoff_analyzer.py`.
+- A payback-tiered improvement backlog with `improvement_scorer.py`, ordered by the eliminate, consolidate, parallelise, standardise, automate hierarchy.
+- Labour savings costed from touch time only, reported separately from lead-time savings.
+
+**Out of Scope:**
+- Headcount and delivery-capacity planning (see `business-operations/capacity-planner/`).
+- Flow metrics for software delivery teams, such as WIP, throughput and aging work (see `project-management/execution/cycle-time-analyzer/`).
+- Rolling out the redesigned process and managing resistance to it (see `c-level-advisor/change-management/`).
+- Keeping process documentation current in an internal knowledge base (see `business-operations/knowledge-ops/`).
+- Building the automation itself. The skill decides whether a step should be automated, not how to build it.
+
+**Important Caveats:**
+- The scripts read a process JSON file written by hand. They do not connect to workflow, ticketing or ERP systems and do not pull timestamps.
+- Results are only as good as the step data. Self-reported wait times are usually understated, which can move the constraint to the wrong step.
+- The diagnostic thresholds and PCE bands are heuristics for transactional processes. Manufacturing benchmarks do not transfer.
+- The tools do not value a shorter lead time. `annual_cycle_time_value` has to come from the business owner.

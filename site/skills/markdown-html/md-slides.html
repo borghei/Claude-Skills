@@ -491,7 +491,7 @@ slides an audience cannot absorb before you are standing in front of them.
 - The talk length and format — presented live, or circulated to be read
 - Layout intent per slide: title, section divider, bullets, two-column, quote, image
 - Speaker notes after a `???` marker on each content slide
-- Images as relative paths, or as data URIs for a genuinely single-file deck
+- Images as relative paths, or as base64 data URIs (PNG, JPEG, GIF, WebP or AVIF) for a genuinely single-file deck
 - The presentation environment: room lighting and display size
 
 ## Clarify First
@@ -673,6 +673,26 @@ parser is the remedy the tool-design standard prescribes for an oversized
 script, and same-directory imports keep the package self-contained: nothing here
 imports from another skill, and `md-document` carries its own separate copy of
 the equivalent renderer rather than sharing this one.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Builds a self-contained HTML deck from markdown split on `---` (or on every `##` with `--split-on h2`), with six layouts, speaker notes after `???`, and the theme and keyboard navigation inlined (`md_to_slides.py`).
+- Lints each slide against word, bullet, heading, table-row and code-line budgets for a presented (`present`) or read-alone (`read`) profile (`slide_density_linter.py`).
+- Produces a timed runsheet from speaker notes at a chosen speaking rate and target length (`notes_runsheet.py`).
+- Guidance on layout choice, deck length by slot and contrast at projection.
+
+**Out of Scope:**
+- PowerPoint, Keynote or Google Slides files. Auditing an existing `.pptx` deck is `documents/pptx-toolkit/`.
+- Long-form documents with numbered figures, cross-references and footnotes; see `markdown-html/md-document/`.
+- Pre-publication review of links, readability and frontmatter; see `markdown-html/md-review/`.
+- Building or validating theme tokens and contrast; see `markdown-html/design-system/`.
+
+**Important Caveats:**
+- The renderer supports a subset of markdown: headings, emphasis, code spans and fences, flat lists, pipe tables, blockquotes, links and images. Raw HTML is escaped, not rendered.
+- The converter does not embed image files itself. A deck with relative image paths is a folder rather than a single file. For a single file, write each image as a base64 data URI (`data:image/png;base64,...`); the allowlist accepts PNG, JPEG, GIF, WebP and AVIF data URIs in an image source only. SVG data URIs, other `data:` types and `data:` link targets are replaced with `#blocked-url`.
+- Density budgets and the 4-second transition allowance are house heuristics. Durations for slides without notes are estimated from on-slide content and are the least reliable figures in the runsheet.
+- Type scales with viewport width, so legibility depends on the display. The deck needs a full-screen check on the screen it will be shown on.
 
 ---
 
@@ -745,7 +765,7 @@ slides an audience cannot absorb before you are standing in front of them.
 - The talk length and format — presented live, or circulated to be read
 - Layout intent per slide: title, section divider, bullets, two-column, quote, image
 - Speaker notes after a `???` marker on each content slide
-- Images as relative paths, or as data URIs for a genuinely single-file deck
+- Images as relative paths, or as base64 data URIs (PNG, JPEG, GIF, WebP or AVIF) for a genuinely single-file deck
 - The presentation environment: room lighting and display size
 
 ## Clarify First
@@ -927,6 +947,26 @@ parser is the remedy the tool-design standard prescribes for an oversized
 script, and same-directory imports keep the package self-contained: nothing here
 imports from another skill, and `md-document` carries its own separate copy of
 the equivalent renderer rather than sharing this one.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Builds a self-contained HTML deck from markdown split on `---` (or on every `##` with `--split-on h2`), with six layouts, speaker notes after `???`, and the theme and keyboard navigation inlined (`md_to_slides.py`).
+- Lints each slide against word, bullet, heading, table-row and code-line budgets for a presented (`present`) or read-alone (`read`) profile (`slide_density_linter.py`).
+- Produces a timed runsheet from speaker notes at a chosen speaking rate and target length (`notes_runsheet.py`).
+- Guidance on layout choice, deck length by slot and contrast at projection.
+
+**Out of Scope:**
+- PowerPoint, Keynote or Google Slides files. Auditing an existing `.pptx` deck is `documents/pptx-toolkit/`.
+- Long-form documents with numbered figures, cross-references and footnotes; see `markdown-html/md-document/`.
+- Pre-publication review of links, readability and frontmatter; see `markdown-html/md-review/`.
+- Building or validating theme tokens and contrast; see `markdown-html/design-system/`.
+
+**Important Caveats:**
+- The renderer supports a subset of markdown: headings, emphasis, code spans and fences, flat lists, pipe tables, blockquotes, links and images. Raw HTML is escaped, not rendered.
+- The converter does not embed image files itself. A deck with relative image paths is a folder rather than a single file. For a single file, write each image as a base64 data URI (`data:image/png;base64,...`); the allowlist accepts PNG, JPEG, GIF, WebP and AVIF data URIs in an image source only. SVG data URIs, other `data:` types and `data:` link targets are replaced with `#blocked-url`.
+- Density budgets and the 4-second transition allowance are house heuristics. Durations for slides without notes are estimated from on-slide content and are the least reliable figures in the runsheet.
+- Type scales with viewport width, so legibility depends on the display. The deck needs a full-screen check on the screen it will be shown on.
 
 ---
 

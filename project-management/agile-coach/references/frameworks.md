@@ -7,7 +7,7 @@
 The agent evaluates organizational agile maturity using the 5-level model:
 
 ```bash
-python scripts/maturity_scorer.py --assessment assessment.yaml
+python scripts/agile_maturity_scorer.py --assessment assessment.json
 ```
 
 **Maturity Levels:**

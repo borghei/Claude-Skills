@@ -233,3 +233,23 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_story_bank.json` | Eight-entry bank matching the general sample, deliberately short on two pillars |
 | `assets/plan_config_template.json` | Minimal valid config to copy and edit |
 | `assets/weekly_plan_template.md` | Fill-in sheet for one week: slot, pillar, format, ask, source entry, angle, status |
+
+## Scope & Limitations
+
+**In Scope:**
+- Builds a dated plan of one to thirteen weeks from a config of pillars with target shares, posting and conversation weekdays, skip dates, a format mix and limits (`plan_builder.py`).
+- Spreads pillars and formats evenly, gives each slot one reader ask (`reply`, `keep`, `pass-on`, `contact`), and raises flags from a fifteen-flag catalogue at `error`, `warn` and `info` levels.
+- Optionally binds slots to ready entries in a story bank and marks slots that have no material behind them.
+- Ships a general and a founder pillar set, with cadence and format guidance.
+
+**Out of Scope:**
+- Writing the post for each slot; see `tools/linkedin/linkedin-post-writer/`.
+- Finding material to fill empty slots; see `tools/linkedin/linkedin-story-interviewer/`.
+- Programmes for several people posting together; see `tools/linkedin/linkedin-employee-advocacy/`.
+- Strategy across several social platforms; see `marketing/social-content/`.
+- Scheduling or publishing posts, or reading a feed or analytics. The plan is a document the user acts on.
+
+**Important Caveats:**
+- Cadence figures, shares and limits are planning heuristics, not platform rules. Nothing in the plan reflects how the feed currently distributes posts.
+- The plan is only as reliable as the posts-per-week and production-time figures in the config. An optimistic config produces slots that go unfilled.
+- Pillar shares must sum to 100, and story bank pillar names must match the plan's. The builder does not guess either.

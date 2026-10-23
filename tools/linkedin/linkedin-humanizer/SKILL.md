@@ -239,3 +239,23 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_voice.json` | Fingerprint generated from the sample posts, ready to pass to `--voice` |
 | `assets/voice_profile_template.md` | Fill-in profile recording an author's fingerprint, protected habits and off-limits phrases |
 | `assets/audit_report_template.md` | Fill-in report for handing audit results and proposed edits back to an author |
+
+## Scope & Limitations
+
+**In Scope:**
+- Audits a draft against a 33-rule catalogue in three tiers (remove, reduce, review), reporting each match with its fix and the case for keeping the text (`tell_audit.py`).
+- Scores emoji placement from 0 to 100 across eight rules (`emoji_audit.py`).
+- Builds a voice fingerprint from the author's past posts and reports where a draft drifts from it, so the author's own habits are protected (`voice_fingerprint.py`).
+- A rewrite playbook with an order of operations and an over-edit checklist.
+
+**Out of Scope:**
+- Writing a post from a blank page or choosing an angle; see `tools/linkedin/linkedin-post-writer/`.
+- Supplying missing facts. The skill reports that a figure or name is missing; gathering it is `tools/linkedin/linkedin-story-interviewer/`.
+- Scoring against, or trying to pass, automated AI-text classifiers. The target is a human reader.
+- Disclosure rules for AI-assisted content; see `marketing/ai-content-disclosure/`.
+- Posting, scheduling or fetching anything. The user pastes the finished draft into LinkedIn.
+
+**Important Caveats:**
+- Rules are pattern matches. A match is a prompt to review, and some matches are deliberate choices; the review tier exists for those.
+- The fingerprint needs several past posts (three to ten are expected), and its contraction, first-person and stop-word logic is English-only.
+- Gate thresholds (`--max-load`, `--fail-under`, `--max-drift`) are house defaults to tune per author.

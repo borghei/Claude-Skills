@@ -677,6 +677,25 @@ Tools overview and reference documentation for this skill:
 | `assets/profile_template.json` | Blank profile to fill in with pasted text and visual answers |
 | `assets/profile_rewrite_worksheet.md` | Fill-in worksheet: goal, evidence inventory, section rewrites, re-audit record |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Scores a profile JSON across seven sections (headline, About, experience, skills, Featured, visuals, credibility), weights them by goal (clients, job search, authority, hiring) and lists fixes in priority order (`profile_auditor.py`).
+- Rewrite guidance for the headline and About, duty-to-result conversion for experience, skills selection, recommendation requests and Featured slots.
+- A visuals check built from the user&#x27;s answers about the photo and banner.
+
+**Out of Scope:**
+- Opening a profile URL, signing in, scraping, posting or scheduling. The profile is pasted as text.
+- Feed posts; see `tools/linkedin/linkedin-post-writer/`.
+- Rolling profile standards out across a team; see `tools/linkedin/linkedin-employee-advocacy/`.
+- CVs and job applications outside LinkedIn; see `personal-productivity/resume-tailor/`.
+- Editing the photo or designing the banner image.
+
+**Important Caveats:**
+- The visuals score rests on the user&#x27;s own answers. The skill never sees the photo or banner.
+- Character limits and preview cut-offs are current as of writing; `--headline-limit` and `--about-preview` exist so they can be updated. Verify them in the product.
+- Scores come from a rule catalogue. LinkedIn search ranking is not modelled, and claims in the profile are not verified.
+
 ---
 
 ## What I Need You to Do
@@ -933,6 +952,25 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_profile_rewritten.json` | The same invented profile after a rewrite, for the re-audit workflow |
 | `assets/profile_template.json` | Blank profile to fill in with pasted text and visual answers |
 | `assets/profile_rewrite_worksheet.md` | Fill-in worksheet: goal, evidence inventory, section rewrites, re-audit record |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Scores a profile JSON across seven sections (headline, About, experience, skills, Featured, visuals, credibility), weights them by goal (clients, job search, authority, hiring) and lists fixes in priority order (`profile_auditor.py`).
+- Rewrite guidance for the headline and About, duty-to-result conversion for experience, skills selection, recommendation requests and Featured slots.
+- A visuals check built from the user&#x27;s answers about the photo and banner.
+
+**Out of Scope:**
+- Opening a profile URL, signing in, scraping, posting or scheduling. The profile is pasted as text.
+- Feed posts; see `tools/linkedin/linkedin-post-writer/`.
+- Rolling profile standards out across a team; see `tools/linkedin/linkedin-employee-advocacy/`.
+- CVs and job applications outside LinkedIn; see `personal-productivity/resume-tailor/`.
+- Editing the photo or designing the banner image.
+
+**Important Caveats:**
+- The visuals score rests on the user&#x27;s own answers. The skill never sees the photo or banner.
+- Character limits and preview cut-offs are current as of writing; `--headline-limit` and `--about-preview` exist so they can be updated. Verify them in the product.
+- Scores come from a rule catalogue. LinkedIn search ranking is not modelled, and claims in the profile are not verified.
 
 ---
 

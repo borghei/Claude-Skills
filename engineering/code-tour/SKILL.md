@@ -204,3 +204,23 @@ wild are broken within a month of being written.
 | `references/tour-maintenance.md` | Anchoring strategies, rot mechanics, CI wiring, and the rules for updating a drifted tour |
 | `assets/sample_tour.json` | Runnable tour of this skill's own scripts, with a deliberately broken stop and a weak note |
 | `assets/tour-template.json` | Empty tour definition with every supported field documented |
+
+## Scope & Limitations
+
+**In Scope:**
+- Proposing candidate tour stops with `tour_propose.py`, ranked by entry points, config and boundary files, and fan-in
+- Auditing tour notes with `tour_render.py` for why-not-what quality, and rendering a tour into an onboarding document
+- Validating a tour against the current tree with `tour_validate.py`: symbol anchors resolved and stops reported as deleted, moved, drifted or shifted, with relocation suggestions, `--update` to re-freeze lines and fingerprints, and a CI exit code
+- Guidance on choosing the first stop, stop count by time budget, anchoring strategy and tour upkeep
+
+**Out of Scope:**
+- Full onboarding packs such as architecture overviews, setup guides and runbooks (see `engineering/codebase-onboarding/`)
+- Detecting drift in general documentation and API docs (see `engineering/doc-drift-detector/`)
+- Reviewing code quality or correctness (see `engineering/code-reviewer/`)
+- Writing the why-notes; the tools rank and check, but the rationale must come from people who know the history
+
+**Important Caveats:**
+- Fan-in is read from the AST import graph for Python only. Other languages use a filename-reference heuristic that over-counts common names, so treat their ranking as a shortlist.
+- The why-ratio audit looks for word count and causal language. A note can pass and still be wrong about the reason a design exists.
+- Validation shows that an anchor still resolves or that its body changed. It cannot show that the note is still accurate, so drifted stops need a human re-read.
+- Scans stop at the default `--max-files` caps (4000 for proposals, 3000 for relocation search), so very large repositories may be only partly covered.

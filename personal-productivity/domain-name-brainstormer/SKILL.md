@@ -34,6 +34,7 @@ Generate and score candidate brand / domain names from seed words using common n
 - [Tools](#tools)
 - [Reference Guides](#reference-guides)
 - [Best Practices](#best-practices)
+- [Scope & Limitations](#scope--limitations)
 
 ---
 
@@ -165,6 +166,28 @@ python scripts/name_generator.py "data,signal" --json
 - **Avoid naming-collisions.** A "DataLoop" in your space and a "DataLoop" in adjacent SaaS will cause confusion forever.
 - **Don't pick the first one.** Generate 200, filter to 30, shortlist 10, sit on the shortlist for 24 hours. The one that still feels right after sleeping is the one.
 - **Trademark before launching.** A great name with a trademark conflict will cost you a rebrand later.
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- Candidate names generated from seed words with five patterns: `vowel_drop`, `prefix_suffix`, `blend`, `tld_suffix` and `repeat` (`name_generator.py`).
+- A 0-100 score per name based on length, consonant-vowel pronounceability, common-word collisions, and hyphens or numbers.
+- The elimination filter and naming-pattern playbook in `references/naming_framework.md`.
+- A manual pre-check workflow for registrars, trademark databases and web search.
+
+**Out of Scope:**
+- Live domain availability or pricing lookups. The script makes no network calls.
+- Trademark searches or clearance opinions.
+- Brand positioning and narrative (see `marketing/brand-strategist/`).
+- Messaging and landing pages once a name is chosen (see `marketing/landing-page-generator/`).
+
+**Important Caveats:**
+- A high score does not mean a domain is available or a name is free of trademark conflict. Both checks are manual.
+- The score is a heuristic on spelling and length. It does not test meaning in other languages, sound-alike competitors or search noise.
+- Availability changes quickly. A name that was free during the check can be registered by someone else before purchase.
+- The output is not legal advice. Trademark clearance in the relevant class and jurisdiction needs a qualified professional.
 
 ---
 

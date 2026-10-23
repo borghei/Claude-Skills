@@ -666,6 +666,26 @@ If both fail, it is not a task but an unmade decision. File it as
 | `assets/capture-log-template.md` | Capture-log format, quality reminders, and the JSON schema the scripts read |
 | `assets/sample_capture_log.json` | 14-item sample log exercising every bucket and flag, so both workflows run out of the box |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Triage of a capture log (JSON or markdown bullets) into action, project, reference, someday or drop, with a suggested next action per item and flags for 2-minute tasks and unactionable phrasing (`capture_triage.py`).
+- A habit-health audit covering staleness, rot, phrasing quality and source leaks, with a healthy, at-risk or failing status (`capture_audit.py`).
+- The processing sequence, the do/defer/delegate/drop tests and a timed 45-minute weekly inbox-zero checklist.
+- Capture conventions: the friction budget, the one-processing-inbox principle and the metadata worth recording.
+
+**Out of Scope:**
+- Classifying an email inbox (see `personal-productivity/email-triage/`).
+- The weekly operating review of wins, blockers and priorities (see `personal-productivity/weekly-review/`).
+- Protecting time to do the actions once they are filed (see `personal-productivity/deep-work/`).
+- Moving items into a task manager or calendar. The skill sorts items; the user files them.
+
+**Important Caveats:**
+- The tools read an exported log. They do not connect to notes apps, task managers, email or chat.
+- Bucket assignment and next-action suggestions are rule-based heuristics on the item text. Ambiguous items still need a human decision.
+- Without `captured_at` timestamps, staleness cannot be measured and the audit covers phrasing only.
+- Ageing depends on the `--today` date passed in. The tools never read the clock.
+
 ---
 
 ## What I Need You to Do
@@ -913,6 +933,26 @@ If both fail, it is not a task but an unmade decision. File it as
 | `assets/weekly-processing-pass.md` | Timed 45-minute checklist for the weekly inbox-zero pass with outcome-count targets |
 | `assets/capture-log-template.md` | Capture-log format, quality reminders, and the JSON schema the scripts read |
 | `assets/sample_capture_log.json` | 14-item sample log exercising every bucket and flag, so both workflows run out of the box |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Triage of a capture log (JSON or markdown bullets) into action, project, reference, someday or drop, with a suggested next action per item and flags for 2-minute tasks and unactionable phrasing (`capture_triage.py`).
+- A habit-health audit covering staleness, rot, phrasing quality and source leaks, with a healthy, at-risk or failing status (`capture_audit.py`).
+- The processing sequence, the do/defer/delegate/drop tests and a timed 45-minute weekly inbox-zero checklist.
+- Capture conventions: the friction budget, the one-processing-inbox principle and the metadata worth recording.
+
+**Out of Scope:**
+- Classifying an email inbox (see `personal-productivity/email-triage/`).
+- The weekly operating review of wins, blockers and priorities (see `personal-productivity/weekly-review/`).
+- Protecting time to do the actions once they are filed (see `personal-productivity/deep-work/`).
+- Moving items into a task manager or calendar. The skill sorts items; the user files them.
+
+**Important Caveats:**
+- The tools read an exported log. They do not connect to notes apps, task managers, email or chat.
+- Bucket assignment and next-action suggestions are rule-based heuristics on the item text. Ambiguous items still need a human decision.
+- Without `captured_at` timestamps, staleness cannot be measured and the audit covers phrasing only.
+- Ageing depends on the `--today` date passed in. The tools never read the clock.
 
 ---
 

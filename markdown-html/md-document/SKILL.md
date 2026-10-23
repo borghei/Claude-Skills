@@ -34,7 +34,7 @@ no external assets.
 ## Inputs the skill expects
 
 - A markdown source file, optionally with YAML frontmatter
-- Figure images as relative paths (or data URIs, for true single-file output)
+- Figure images as relative paths, or as base64 data URIs (PNG, JPEG, GIF, WebP or AVIF) for true single-file output
 - The intended output: screen, print, or both
 - Document length and whether a table of contents is warranted
 - Page geometry, if printing: size, margins, single- or double-sided
@@ -210,3 +210,24 @@ converter came to 429 lines, well over the 300-line ceiling. Splitting CLI from
 parser is the remedy the tool-design standard prescribes for an oversized script,
 and same-directory imports keep the package self-contained: `md-slides` carries
 its own separate `slide_render.py` rather than importing this one.
+
+## Scope & Limitations
+
+**In Scope:**
+- Converts one markdown file into a self-contained HTML document with the theme inlined, a table of contents, numbered figures and tables, `[@fig:]`, `[@tbl:]` and `[@sec:]` cross-references, and footnotes (`md_to_html.py`).
+- Audits labels, references, alt text and heading hierarchy before conversion (`crossref_auditor.py`).
+- Generates a print/PDF stylesheet from a JSON page profile covering page size, margins, mirrored margins and running heads (`print_profile.py`).
+- Escapes all source text, including raw HTML, and passes link and image URLs through a scheme allowlist.
+
+**Out of Scope:**
+- Producing the PDF file itself. The skill writes print CSS; the PDF comes from a browser's print dialog.
+- Slide decks; see `markdown-html/md-slides/`.
+- Pre-publication review of links, readability, terminology and frontmatter; see `markdown-html/md-review/`.
+- Building or validating theme tokens and contrast; see `markdown-html/design-system/`.
+- Reading or auditing existing Word or PDF files; see `documents/docx-toolkit/` and `documents/pdf-toolkit/`.
+
+**Important Caveats:**
+- The converter supports a subset of markdown. Nested lists, reference-style links and raw HTML are not rendered; anything outside the subset appears as escaped text. A URL with a literal parenthesis truncates unless it is percent-encoded.
+- The converter does not embed image files itself. A document with relative image paths needs those files beside it. For a single file, write the image as a base64 data URI (`data:image/png;base64,...`); the allowlist accepts PNG, JPEG, GIF, WebP and AVIF data URIs in an image source only. SVG data URIs, other `data:` types and `data:` link targets are replaced with `#blocked-url`.
+- Fenced code gets a `language-*` class but no syntax highlighting.
+- The gate checks only that references resolve and footnotes are defined. Stranded headings, split tables and clipped margins show up only when the printed output is proofed, and browsers differ in how much of `@page` they honour.

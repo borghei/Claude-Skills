@@ -651,6 +651,27 @@ score below a threshold while one public database sits unremarked.
 | `assets/posture_review_template.md` | Review report template structured around decisions rather than finding dumps |
 | `assets/inventory_export_guide.md` | Export schemas, field semantics, per-provider collection commands, and export hygiene rules |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Cloud posture audits of a normalized resource inventory with `posture_auditor.py`: public exposure, open ingress, unencrypted stores, missing logging and backups, and account guardrail gaps, with provider-specific remediation for AWS, Azure and GCP
+- IAM least-privilege review with `iam_least_privilege.py`: wildcard grants, privilege-escalation paths, over-broad trust, stale credentials and missing MFA, with principals ranked by risk
+- Severity calibration driven by data classification, and `--fail-on` exit codes for launch gates
+- Landing-zone guardrails, a control catalog mapped across the three providers and a posture maturity model from the references
+
+**Out of Scope:**
+- Application-code vulnerabilities, dependency CVEs and compliance-framework mapping (see `engineering/senior-secops/`)
+- Log analysis and intrusion detection (see `engineering/threat-detection/`)
+- Offensive engagement planning and rules of engagement (see `engineering/red-team/`)
+- Prompt injection, model extraction and ML-pipeline threats (see `engineering/ai-security/`)
+- Secrets storage and rotation design (see `engineering/secrets-vault-manager/`)
+
+**Important Caveats:**
+- The tools read JSON exports the user produces in the schema from `assets/inventory_export_guide.md`. They never call a cloud API, so anything missing from the export, including whole regions, is not assessed.
+- Severity depends on `tags.data_classification`. Unclassified stores fall into the lower band and can understate real exposure.
+- Escalation-path detection uses a fixed catalog of eight known paths. A principal with no match can still escalate through a path not in the catalog.
+- The output is a configuration review. It is not a penetration test, a compliance attestation or proof that no breach occurred.
+
 ---
 
 ## What I Need You to Do
@@ -881,6 +902,27 @@ score below a threshold while one public database sits unremarked.
 | `assets/sample_iam_export.json` | Six-principal IAM export containing escalation paths, wildcard trust, and stale credentials |
 | `assets/posture_review_template.md` | Review report template structured around decisions rather than finding dumps |
 | `assets/inventory_export_guide.md` | Export schemas, field semantics, per-provider collection commands, and export hygiene rules |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Cloud posture audits of a normalized resource inventory with `posture_auditor.py`: public exposure, open ingress, unencrypted stores, missing logging and backups, and account guardrail gaps, with provider-specific remediation for AWS, Azure and GCP
+- IAM least-privilege review with `iam_least_privilege.py`: wildcard grants, privilege-escalation paths, over-broad trust, stale credentials and missing MFA, with principals ranked by risk
+- Severity calibration driven by data classification, and `--fail-on` exit codes for launch gates
+- Landing-zone guardrails, a control catalog mapped across the three providers and a posture maturity model from the references
+
+**Out of Scope:**
+- Application-code vulnerabilities, dependency CVEs and compliance-framework mapping (see `engineering/senior-secops/`)
+- Log analysis and intrusion detection (see `engineering/threat-detection/`)
+- Offensive engagement planning and rules of engagement (see `engineering/red-team/`)
+- Prompt injection, model extraction and ML-pipeline threats (see `engineering/ai-security/`)
+- Secrets storage and rotation design (see `engineering/secrets-vault-manager/`)
+
+**Important Caveats:**
+- The tools read JSON exports the user produces in the schema from `assets/inventory_export_guide.md`. They never call a cloud API, so anything missing from the export, including whole regions, is not assessed.
+- Severity depends on `tags.data_classification`. Unclassified stores fall into the lower band and can understate real exposure.
+- Escalation-path detection uses a fixed catalog of eight known paths. A principal with no match can still escalate through a path not in the catalog.
+- The output is a configuration review. It is not a penetration test, a compliance attestation or proof that no breach occurred.
 
 ---
 

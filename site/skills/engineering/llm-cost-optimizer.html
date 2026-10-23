@@ -515,6 +515,26 @@ python scripts/prompt_optimizer.py --file prompt.txt --target-reduction 30
 4. Re-count tokens to verify reduction
 5. A/B test optimized vs. original for quality
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Token estimates for a prompt from a file, text or stdin, and per-request cost estimates across the OpenAI, Anthropic and Google models in `token_counter.py`&#x27;s built-in catalog, using an assumed output/input ratio (`--output-ratio`, default 1.5).
+- Rule-based prompt review with `prompt_optimizer.py`: repeated content, filler phrases, redundant instructions and formatting overhead, with estimated savings checked against an optional `--target-reduction`.
+- Prompt-cache economics with `cache_savings_calculator.py`: naive versus cached cost, break-even reuse count and percentage savings from user-supplied prices and multipliers.
+- Guidance on model tiering, caching, batch processing, reasoning effort and structured-output overhead in `references/`.
+
+**Out of Scope:**
+- Exact token counts from a provider tokenizer, or actual spend from a billing dashboard or usage API. The scripts make no network calls.
+- Measuring whether a shortened prompt still performs as well (see `engineering/agentic-evaluation-framework/`).
+- Running batch jobs (see `engineering/batch-api-orchestrator/`) or designing context and memory management (see `engineering/context-engine/`).
+- Security, bias and safety review of prompts (see `engineering/prompt-governance/`).
+
+**Important Caveats:**
+- Token counts are heuristic estimates blended from character, word and piece counts with a per-model adjustment. The pricing guide notes that counts can differ by 10-20% between tokenizers.
+- Model prices and IDs in `token_counter.py` and `references/llm-pricing-guide.md` are a dated snapshot (Q1 2026, Anthropic rows checked 2026-09). Prices, model names and discounts change often, so current provider pricing is needed before any budget decision.
+- `prompt_optimizer.py` lists suggested edits. It does not rewrite the prompt or judge whether a removed phrase mattered, so each change needs a quality check against the original.
+- The calculator&#x27;s defaults (1.25 write multiplier, 0.1 read multiplier, price unit 1.0) are placeholders, not any vendor&#x27;s published rates.
+
 ## Reference Documentation
 
 - [LLM Pricing Guide](references/llm-pricing-guide.md) - Current pricing for major LLM providers, token estimation methods
@@ -644,6 +664,26 @@ python scripts/prompt_optimizer.py --file prompt.txt --target-reduction 30
 3. Apply suggested optimizations
 4. Re-count tokens to verify reduction
 5. A/B test optimized vs. original for quality
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Token estimates for a prompt from a file, text or stdin, and per-request cost estimates across the OpenAI, Anthropic and Google models in `token_counter.py`&#x27;s built-in catalog, using an assumed output/input ratio (`--output-ratio`, default 1.5).
+- Rule-based prompt review with `prompt_optimizer.py`: repeated content, filler phrases, redundant instructions and formatting overhead, with estimated savings checked against an optional `--target-reduction`.
+- Prompt-cache economics with `cache_savings_calculator.py`: naive versus cached cost, break-even reuse count and percentage savings from user-supplied prices and multipliers.
+- Guidance on model tiering, caching, batch processing, reasoning effort and structured-output overhead in `references/`.
+
+**Out of Scope:**
+- Exact token counts from a provider tokenizer, or actual spend from a billing dashboard or usage API. The scripts make no network calls.
+- Measuring whether a shortened prompt still performs as well (see `engineering/agentic-evaluation-framework/`).
+- Running batch jobs (see `engineering/batch-api-orchestrator/`) or designing context and memory management (see `engineering/context-engine/`).
+- Security, bias and safety review of prompts (see `engineering/prompt-governance/`).
+
+**Important Caveats:**
+- Token counts are heuristic estimates blended from character, word and piece counts with a per-model adjustment. The pricing guide notes that counts can differ by 10-20% between tokenizers.
+- Model prices and IDs in `token_counter.py` and `references/llm-pricing-guide.md` are a dated snapshot (Q1 2026, Anthropic rows checked 2026-09). Prices, model names and discounts change often, so current provider pricing is needed before any budget decision.
+- `prompt_optimizer.py` lists suggested edits. It does not rewrite the prompt or judge whether a removed phrase mattered, so each change needs a quality check against the original.
+- The calculator&#x27;s defaults (1.25 write multiplier, 0.1 read multiplier, price unit 1.0) are placeholders, not any vendor&#x27;s published rates.
 
 ## Reference Documentation
 

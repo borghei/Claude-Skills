@@ -154,9 +154,11 @@ not just what was projected.
 The deck is only truly portable if its images are embedded. A deck referencing
 `figures/chart.png` is a folder, not a file, and it will break when emailed.
 
-For genuine single-file output, embed images as data URIs. Base64 adds ~33%
-overhead, so downsample first — a 200KB chart becomes ~270KB inline, which is
-fine; a 4MB photograph becomes 5.3MB, which is not.
+For genuine single-file output, embed images as base64 data URIs
+(`data:image/png;base64,...`). The renderer accepts PNG, JPEG, GIF, WebP and
+AVIF data URIs and blocks SVG ones, so rasterize vector charts first. Base64
+adds ~33% overhead, so downsample first — a 200KB chart becomes ~270KB inline,
+which is fine; a 4MB photograph becomes 5.3MB, which is not.
 
 ## Anti-patterns
 

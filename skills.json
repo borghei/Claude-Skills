@@ -1,7 +1,7 @@
 {
   "name": "claude-skills",
   "description": "The Universal AI Skills Library — 385 production-ready skills across 21 domains. Project Management is the most-used domain (70 skills).",
-  "version": "4.13.7",
+  "version": "4.13.8",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
@@ -6956,7 +6956,7 @@
     },
     {
       "name": "weekly-review",
-      "description": "Synthesize a week of inputs (calendar, tasks, journal, OKR check-ins) into a structured review with wins, learnings, blockers, and next-week priorities. Use for a Friday/Sunday weekly review, GTD review, or OKR check-in.",
+      "description": "Turn a week's wins, learnings, blockers and OKR progress, gathered by hand from your calendar, tasks and journal, into a structured review with next-week priorities. Use for a Friday/Sunday weekly review, GTD review, or OKR check-in.",
       "path": "personal-productivity/weekly-review/SKILL.md",
       "domain": "personal-productivity",
       "category": "personal-productivity",

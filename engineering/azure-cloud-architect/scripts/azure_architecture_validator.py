@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-azure_architecture_validator.py — Validate Azure workload configs / Bicep / ARM for anti-patterns.
+azure_architecture_validator.py — Validate Azure workload configs / Bicep for anti-patterns.
 
-Reads a workload YAML spec OR scans Bicep/ARM files for common Azure anti-patterns:
+Reads a workload YAML spec OR scans Bicep files for common Azure anti-patterns
+(the rules match Bicep syntax; ARM JSON templates are not matched):
   - Public endpoints on storage/SQL/Cosmos when private endpoint expected
   - Connection strings / shared keys instead of Managed Identity
   - Single-AZ deployment for tier-1
@@ -272,12 +273,12 @@ def scan_bicep_file(path: str, text: str) -> list[Finding]:
 
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(
-        description="Validate Azure workload spec / Bicep / ARM for anti-patterns",
+        description="Validate Azure workload spec / Bicep for anti-patterns",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
     p.add_argument("--workload-config", help="Path to workload YAML spec")
-    p.add_argument("--bicep", nargs="*", default=[], help="Bicep / ARM file paths or globs")
+    p.add_argument("--bicep", nargs="*", default=[], help="Bicep file paths or globs (ARM JSON is not matched)")
     p.add_argument("--severity", choices=["info", "warning", "critical"], default="info")
     p.add_argument("--format", choices=["markdown", "json"], default="markdown")
     p.add_argument("--output", help="Output file path")

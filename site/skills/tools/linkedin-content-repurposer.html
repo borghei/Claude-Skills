@@ -690,6 +690,26 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_draft_clean.txt` | The same thread rebuilt properly; passes the gate |
 | `assets/repurposing_brief_template.md` | Fill-in brief agreed with the author before drafting: source, rights, point, reader, ask, carry-over list, cut list |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Measures a local `.txt` or `.md` source (thread, transcript, talk, article, newsletter or note), detects its channel, lists the artefacts that will not carry over, recommends compress, expand, split or rebuild in place, ranks spine candidates and estimates how many posts it holds (`repurpose_analyzer.py`).
+- Compares a draft with its source: blocks new figures and altered quotations, and flags copied sentences, leftover artefacts, stale openings and length (`draft_fidelity_check.py`).
+- Per-channel playbooks and the rules for what may and may not change between source and post.
+- Optional story bank input to widen the set of confirmed figures and enforce never-name and no-go lists.
+
+**Out of Scope:**
+- Fetching URLs, downloading video or audio, or producing transcripts. The source must already be text.
+- Writing a post from a blank page; see `tools/linkedin/linkedin-post-writer/`.
+- Deciding which week the repurposed post runs; see `tools/linkedin/linkedin-content-planner/`.
+- Adapting material for other social platforms; see `marketing/social-content/`.
+- Posting, scheduling or calling any API. The user pastes the finished post into LinkedIn.
+
+**Important Caveats:**
+- The fidelity check matches figures, quotations and sentences by pattern. It cannot tell whether reworded prose changed the meaning, so the draft still needs reading against the source.
+- The 800 to 1,600 character band and the 200-character opening window are house heuristics, not platform limits. Post length limits and the feed&#x27;s truncation point are current only as of writing.
+- The skill does not settle rights. Adapting someone else&#x27;s talk or article needs their permission and attribution, which the user confirms.
+
 ---
 
 ## What I Need You to Do
@@ -959,6 +979,26 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_draft.txt` | Draft made from the thread by paste and trim, with a changed figure and an invented quotation; fails the gate |
 | `assets/sample_draft_clean.txt` | The same thread rebuilt properly; passes the gate |
 | `assets/repurposing_brief_template.md` | Fill-in brief agreed with the author before drafting: source, rights, point, reader, ask, carry-over list, cut list |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Measures a local `.txt` or `.md` source (thread, transcript, talk, article, newsletter or note), detects its channel, lists the artefacts that will not carry over, recommends compress, expand, split or rebuild in place, ranks spine candidates and estimates how many posts it holds (`repurpose_analyzer.py`).
+- Compares a draft with its source: blocks new figures and altered quotations, and flags copied sentences, leftover artefacts, stale openings and length (`draft_fidelity_check.py`).
+- Per-channel playbooks and the rules for what may and may not change between source and post.
+- Optional story bank input to widen the set of confirmed figures and enforce never-name and no-go lists.
+
+**Out of Scope:**
+- Fetching URLs, downloading video or audio, or producing transcripts. The source must already be text.
+- Writing a post from a blank page; see `tools/linkedin/linkedin-post-writer/`.
+- Deciding which week the repurposed post runs; see `tools/linkedin/linkedin-content-planner/`.
+- Adapting material for other social platforms; see `marketing/social-content/`.
+- Posting, scheduling or calling any API. The user pastes the finished post into LinkedIn.
+
+**Important Caveats:**
+- The fidelity check matches figures, quotations and sentences by pattern. It cannot tell whether reworded prose changed the meaning, so the draft still needs reading against the source.
+- The 800 to 1,600 character band and the 200-character opening window are house heuristics, not platform limits. Post length limits and the feed&#x27;s truncation point are current only as of writing.
+- The skill does not settle rights. Adapting someone else&#x27;s talk or article needs their permission and attribution, which the user confirms.
 
 ---
 

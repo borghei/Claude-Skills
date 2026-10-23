@@ -490,6 +490,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 | `blast_radius_calculator.py` | Compute worst-case affected users, recommended caps, and abort triggers | `python scripts/blast_radius_calculator.py --users 100000 --percent-targeted 1 --duration 60` |
 | `gameday_planner.py` | Generate a tailored gameday agenda with roles, timeline, and debrief template | `python scripts/gameday_planner.py --service search-api --duration full --scenarios region-failover,dep-outage` |
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Experiment design with the nine-step loop, and experiment documents scaffolded by `chaos_experiment_designer.py` for nine fault types (CPU, memory, disk, network latency and partition, pod kill, dependency error and timeout, traffic spike)
+- Blast-radius sizing with `blast_radius_calculator.py`: worst-case affected users and sessions, fallback success, optional revenue at risk, recommended caps and abort timing
+- Gameday plans from `gameday_planner.py`: half- or full-day agendas, role assignments, scenario blocks and debrief templates
+- The five principles, a maturity model, a fault catalog mapped to Chaos Mesh, Litmus, AWS FIS, Gremlin and ChaosToolkit, and the first five experiments for a new program
+
+**Out of Scope:**
+- Injecting faults; the scripts write plans and documents and never touch a system
+- Building the metrics and SLOs that define steady state (see `engineering/observability-designer/`)
+- Running live incident response (see `engineering/incident-commander/`)
+- Kill-switch and flag design (see `engineering/feature-flags-architect/`)
+- Mapping chaos results to DORA resilience-testing obligations (see `ra-qm-team/dora-compliance-expert/`)
+
+**Important Caveats:**
+- Blast-radius numbers are arithmetic on the user&#x27;s inputs for user count, percent targeted, detection and abort time. They are only as accurate as those estimates.
+- A generated experiment document leaves the steady-state metric and the hypothesis for the team to fill in. Its abort criteria are templates, not tuned thresholds.
+- Running experiments in production carries real risk. The skill&#x27;s advice is to start with one pod, 1% of traffic or one minute and grow scope only after a run passes.
+- Fault-injection tool features differ by version and platform. Confirm a fault type is supported in the tool you use before planning around it.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
@@ -600,6 +621,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 | `chaos_experiment_designer.py` | Scaffold a chaos experiment doc (hypothesis stub, steady-state template, abort criteria, checklist) | `python scripts/chaos_experiment_designer.py --target payments-svc --fault dependency-timeout --duration 5m` |
 | `blast_radius_calculator.py` | Compute worst-case affected users, recommended caps, and abort triggers | `python scripts/blast_radius_calculator.py --users 100000 --percent-targeted 1 --duration 60` |
 | `gameday_planner.py` | Generate a tailored gameday agenda with roles, timeline, and debrief template | `python scripts/gameday_planner.py --service search-api --duration full --scenarios region-failover,dep-outage` |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Experiment design with the nine-step loop, and experiment documents scaffolded by `chaos_experiment_designer.py` for nine fault types (CPU, memory, disk, network latency and partition, pod kill, dependency error and timeout, traffic spike)
+- Blast-radius sizing with `blast_radius_calculator.py`: worst-case affected users and sessions, fallback success, optional revenue at risk, recommended caps and abort timing
+- Gameday plans from `gameday_planner.py`: half- or full-day agendas, role assignments, scenario blocks and debrief templates
+- The five principles, a maturity model, a fault catalog mapped to Chaos Mesh, Litmus, AWS FIS, Gremlin and ChaosToolkit, and the first five experiments for a new program
+
+**Out of Scope:**
+- Injecting faults; the scripts write plans and documents and never touch a system
+- Building the metrics and SLOs that define steady state (see `engineering/observability-designer/`)
+- Running live incident response (see `engineering/incident-commander/`)
+- Kill-switch and flag design (see `engineering/feature-flags-architect/`)
+- Mapping chaos results to DORA resilience-testing obligations (see `ra-qm-team/dora-compliance-expert/`)
+
+**Important Caveats:**
+- Blast-radius numbers are arithmetic on the user&#x27;s inputs for user count, percent targeted, detection and abort time. They are only as accurate as those estimates.
+- A generated experiment document leaves the steady-state metric and the hypothesis for the team to fill in. Its abort criteria are templates, not tuned thresholds.
+- Running experiments in production carries real risk. The skill&#x27;s advice is to start with one pod, 1% of traffic or one minute and grow scope only after a run passes.
+- Fault-injection tool features differ by version and platform. Confirm a fault type is supported in the tool you use before planning around it.
 
 ## References
 

@@ -64,7 +64,7 @@ Analyzes Terraform modules for complexity, structure, dependencies, and document
 
 ### tf_security_scanner.py
 
-Scans Terraform configurations for security misconfigurations and compliance violations.
+Scans Terraform configurations for security misconfigurations and compliance violations. The rules are written for AWS resource types and argument names, so Azure and Google Cloud configurations get little or no coverage.
 
 | Feature | Description |
 |---------|-------------|
@@ -88,7 +88,7 @@ Scans Terraform configurations for security misconfigurations and compliance vio
 
 1. **Analyze** - Run tf_module_analyzer.py on each module
 2. **Score** - Review complexity scores, identify modules over threshold
-3. **Refactor** - Break down modules scoring above 70/100 complexity
+3. **Refactor** - Break down modules scoring above 60/100 complexity (the analyzer flags 61-80 as high and 81-100 as critical)
 4. **Document** - Fill in missing variable and output descriptions
 5. **Standardize** - Apply consistent naming and file organization
 
@@ -105,6 +105,24 @@ fi
 # Module quality check
 python scripts/tf_module_analyzer.py --path . --recursive --format json
 ```
+
+## Scope & Limitations
+
+**In Scope:**
+- Module analysis with `tf_module_analyzer.py`: a 0-100 complexity score, dependency and data source mapping, variable and output documentation checks and naming checks, with `--recursive` for many modules.
+- Security misconfiguration scanning of `.tf` files with `tf_security_scanner.py`: open CIDR ranges, public access, missing encryption, wildcard IAM and logging gaps, filtered by `--min-severity` with a non-zero exit code for CI.
+- Module design, file layout, state management, naming and provider pinning guidance in `references/terraform-patterns.md`.
+
+**Out of Scope:**
+- Running `terraform init`, `validate`, `plan` or `apply`, or reading state files.
+- Live cloud account posture (see `engineering/cloud-security/`) and compliance audits of infrastructure (see `ra-qm-team/infrastructure-compliance-auditor/`).
+- Helm chart review (see `engineering/helm-chart-builder/`).
+- Writing new modules. The scripts review existing configuration.
+
+**Important Caveats:**
+- Both scripts match patterns in raw `.tf` text. Variables, locals, module inputs and dynamic blocks are not evaluated, so values set elsewhere can hide or create findings.
+- The security rules are written for AWS resource types. Azure and Google Cloud configurations get little or no security coverage.
+- A clean scan does not mean the infrastructure is secure. Provider resource names and arguments change between versions, so rules can fall behind.
 
 ## Reference Documentation
 

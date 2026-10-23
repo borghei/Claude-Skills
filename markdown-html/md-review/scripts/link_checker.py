@@ -25,6 +25,7 @@ HEADING_RE = re.compile(r"^(#{1,6})\s+(.+?)\s*#*\s*$")
 LINK_RE = re.compile(r"(!?)\[([^\]]*)\]\(\s*<?([^)>\s]+)>?(?:\s+\"[^\"]*\")?\s*\)")
 HTML_ID_RE = re.compile(r"<a[^>]+(?:name|id)=[\"']([^\"']+)[\"']", re.IGNORECASE)
 EXTERNAL_SCHEMES = ("http://", "https://", "mailto:", "tel:", "ftp://", "//")
+DATA_IMAGE_RE = re.compile(r"^data:image/(png|jpeg|gif|webp|avif);base64,[A-Za-z0-9+/]+={0,2}$")
 
 
 @dataclass
@@ -156,8 +157,11 @@ def check_links(source: Path, root: Optional[Path]) -> List[LinkRef]:
     own_anchors = collect_anchors(source)
     anchor_cache: Dict[Path, Set[str]] = {source.resolve(): own_anchors}
     for ref in refs:
-        ref.kind = classify(ref.target)
-        if ref.kind == "external":
+        embedded = ref.is_image and DATA_IMAGE_RE.match(ref.target)
+        ref.kind = "embedded" if embedded else classify(ref.target)
+        if ref.kind == "embedded":
+            ref.status, ref.detail = "ok", "embedded image data URI"
+        elif ref.kind == "external":
             ref.status = "not-checked"
             ref.detail = "external link inventoried, never fetched"
         elif ref.kind == "anchor":

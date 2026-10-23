@@ -35,7 +35,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Scan HTML for WCAG violations
+# Scan HTML for WCAG 2.1 violations
 python scripts/a11y_scanner.py --file index.html
 
 # Scan a directory of HTML files
@@ -70,7 +70,7 @@ Scans HTML files for WCAG 2.1 violations including structural, semantic, and int
 
 ### contrast_checker.py
 
-Checks color contrast ratios against WCAG AA and AAA thresholds.
+Checks color contrast ratios against the WCAG 2.1 AA and AAA thresholds.
 
 | Feature | Description |
 |---------|-------------|
@@ -107,6 +107,27 @@ python scripts/contrast_checker.py --css ./static/css/main.css --format json
 3. **Staging audit** - Comprehensive scan before release
 4. **Monitoring** - Regular scheduled audits
 
+## Scope & Limitations
+
+**In Scope:**
+- Static scanning of a single HTML file or a directory of `.html`/`.htm` files with `a11y_scanner.py` for WCAG 2.1 issues: image alt text, heading hierarchy, form labels, ARIA attributes, generic link text, the `lang` attribute, positive `tabindex` values and landmarks
+- Findings tagged with a WCAG level and success criterion, mapped to critical (A), warning (AA) and info (AAA), with `--level` filtering and a `--strict` exit code for CI gates
+- Contrast ratio checks with `contrast_checker.py` for one foreground/background pair or for color pairs pulled from a CSS file, against the AA and AAA thresholds, with a suggested compliant color
+- Remediation guidance from the WCAG reference and the quick-fix tables in this file
+
+**Out of Scope:**
+- Testing a rendered page in a real browser, including content added by JavaScript, runtime focus order and keyboard traps (see `engineering/qa-browser-automation/` and `engineering/playwright-pro/`)
+- Testing with screen readers or other assistive technology, or with users who rely on them
+- Visual design review and design-token audits (see `engineering/design-auditor/`)
+- Native app accessibility (see `product-team/apple-hig-expert/` for Apple platforms)
+- Legal advice on accessibility obligations
+
+**Important Caveats:**
+- Both tools read source files only. Markup built at runtime by a framework or template engine, and styles computed in the browser, are not seen the way a user sees them.
+- The CSS check pairs `color` with `background-color` or `background` declared in the same rule. Inherited colors, CSS variables, images and gradients behind text are not resolved, so contrast results need visual confirmation.
+- A clean scan covers the checks listed above, not every WCAG success criterion. It is not a conformance claim or an accessibility statement, and many criteria still need manual review.
+- The rules target WCAG 2.1. Criteria added in WCAG 2.2, such as minimum target size, are not checked.
+
 ## Reference Documentation
 
 - [WCAG Guidelines](references/wcag-guidelines.md) - Conformance levels, success criteria, common fixes
@@ -124,7 +145,7 @@ python scripts/contrast_checker.py --css ./static/css/main.css --format json
 | Context | AA | AAA |
 |---------|-----|-----|
 | Normal text (<18pt) | 4.5:1 | 7:1 |
-| Large text (>=18pt bold or >=14pt) | 3:1 | 4.5:1 |
+| Large text (>=18pt, or >=14pt bold) | 3:1 | 4.5:1 |
 | UI components | 3:1 | 3:1 |
 
 ### Quick Fixes

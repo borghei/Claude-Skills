@@ -53,6 +53,8 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
+The three scripts are scaffolds: they validate their arguments and write a run record, but do not yet perform the analysis described. Until they are implemented, do the work inline as shown in the workflows.
+
 | Script | Purpose |
 |--------|---------|
 | `scripts/experiment_designer.py` | A/B test design, power analysis, sample size calculation |

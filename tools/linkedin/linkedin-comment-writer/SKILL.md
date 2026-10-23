@@ -235,3 +235,22 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_comment_drafts.json` | Fictional post, three existing comments (one containing an injection attempt), and six drafts — two that pass and four that each trip a different block |
 | `assets/sample_story_bank.json` | Fictional story bank showing the optional input: ready and soft entries, naming rules, no-go topics; pass it with `--story-bank` |
 | `assets/comment_brief_template.md` | Fill-in brief for one comment plus the JSON skeleton the linter reads |
+
+## Scope & Limitations
+
+**In Scope:**
+- Drafts two or three top-level comment variants on someone else's post, each built on one of eight moves (straight answer, boundary, field report, mechanism, price tag, open thread, counter-case, translation), plus the short take above a repost.
+- Gates drafts with `comment_linter.py` against thirteen rules covering length, empty praise, echo of the post, missing specifics, pitching, tag-farming, stock phrasing, bait endings, duplication, decoration, and names or topics an optional story bank rules out.
+- Flags pasted text that addresses an assistant and keeps it out of every draft.
+- Decision tables for comment, reply, repost or skip, and for how hard to disagree by relationship.
+
+**Out of Scope:**
+- Replies on the user's own post or in an existing thread; see `tools/linkedin/linkedin-reply-manager/`.
+- Keeping a record of comments left and replies received; see `tools/linkedin/linkedin-thread-tracker/`.
+- Full posts; see `tools/linkedin/linkedin-post-writer/`.
+- Posting, scheduling, scraping or signing in to LinkedIn. The user pastes the post in and the chosen comment back out.
+
+**Important Caveats:**
+- The linter is a set of pattern and text-overlap checks. A pass means no rule fired, not that the comment is good; the manual checklist in `references/comment-quality-rubric.md` still applies.
+- A comment is only as specific as the material the user supplies. Without first-hand detail the draft becomes a question rather than an invented figure.
+- Length limits are house defaults, adjustable with `--min-words`, `--max-words` and `--max-chars`. Nothing here reflects how LinkedIn currently ranks or shows comments.

@@ -1,9 +1,10 @@
 ---
 name: weekly-review
 description: >
-  Synthesize a week of inputs (calendar, tasks, journal, OKR check-ins) into
-  a structured review with wins, learnings, blockers, and next-week priorities.
-  Use for a Friday/Sunday weekly review, GTD review, or OKR check-in.
+  Turn a week's wins, learnings, blockers and OKR progress, gathered by hand
+  from your calendar, tasks and journal, into a structured review with
+  next-week priorities. Use for a Friday/Sunday weekly review, GTD review, or
+  OKR check-in.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
@@ -23,7 +24,7 @@ metadata:
 
 # Weekly Review
 
-Synthesize a week into a structured review covering wins, learnings, blockers, and next-week priorities.
+Turn a hand-filled summary of the week into a structured review covering wins, learnings, blockers, OKR progress and next-week priorities.
 
 ---
 
@@ -77,7 +78,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 1. Save weekly reviews in a single folder
 2. Quarterly: read all 12-13 weeks
 3. Look for patterns: recurring blockers, energy patterns, OKR drift
-4. Adjust cadence, cadence, or commitments based on patterns
+4. Adjust cadence, priorities, or commitments based on patterns
 
 **Time Estimate:** 1-2 hours quarterly.
 
@@ -87,12 +88,34 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ### weekly_review_synthesizer.py
 
-Reads structured weekly input JSON and produces a markdown weekly review.
+Renders a hand-filled weekly input JSON as a markdown weekly review. It formats what you entered, adds item counts and self-coach prompts, and does no analysis. `--json` prints the input back as JSON, not a review.
 
 ```bash
 python scripts/weekly_review_synthesizer.py input.json
 python scripts/weekly_review_synthesizer.py input.json --json
 ```
+
+---
+
+## Scope & Limitations
+
+**In Scope:**
+- A markdown weekly review rendered from a hand-filled JSON input (`assets/weekly_review_input.json`) by `weekly_review_synthesizer.py`.
+- Sections for wins, learnings, blockers, OKR or goal progress, and next-week priorities.
+- GTD weekly review and OKR check-in methodology in `references/weekly_review_methodology.md`.
+- Friday review, first-time setup and quarterly pattern review workflows.
+
+**Out of Scope:**
+- Pulling inputs from calendars, task tools, journals or OKR software. All content is typed into the JSON.
+- Scoring judgement and tracking commitments across quarters (see `personal-productivity/reflect/`).
+- Writing OKRs (see `project-management/execution/brainstorm-okrs/`).
+- Team retrospectives (see `project-management/sprint-retrospective/`).
+- Processing the capture inbox (see `personal-productivity/capture/`).
+
+**Important Caveats:**
+- The synthesizer formats the input. It does not analyse it, detect patterns or judge OKR drift.
+- The `--json` flag echoes the input rather than producing a JSON review.
+- The quarterly pattern review is a manual read of saved reviews. No tool aggregates weeks.
 
 ---
 

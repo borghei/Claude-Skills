@@ -344,3 +344,67 @@ class CostOptimizer:
                 ]
             }
         ]
+
+
+EXAMPLE_RESOURCES = {
+    "ec2_instances": [
+        {"type": "t3.large", "cpu_utilization": 8, "monthly_cost": 60, "pricing": "on-demand"},
+        {"type": "m5.xlarge", "cpu_utilization": 55, "monthly_cost": 140, "pricing": "on-demand"},
+    ],
+    "rds_instances": [{"engine": "postgres", "monthly_cost": 220, "connections_per_day": 40}],
+    "s3_buckets": [{"size_gb": 800, "storage_class": "STANDARD", "has_lifecycle_policy": False}],
+    "nat_gateways": [{"monthly_cost": 32}, {"monthly_cost": 32}],
+    "multi_az_required": False,
+    "elastic_ips": [{"attached": False}],
+    "cloudwatch_log_groups": [{"retention_days": 0, "size_gb": 50}],
+    "has_budget_alerts": False,
+    "has_cost_explorer": True,
+}
+
+
+def main():
+    import argparse
+    import json
+
+    parser = argparse.ArgumentParser(description="Find AWS cost savings in a description of current resources.")
+    parser.add_argument("--resources", help="Current resources JSON (see --example for the shape)")
+    parser.add_argument("--monthly-spend", type=float, help="Current monthly AWS spend in USD")
+    parser.add_argument("--example", action="store_true", help="Print an example resources file and exit")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (default: text)")
+    args = parser.parse_args()
+
+    if args.example:
+        print(json.dumps(EXAMPLE_RESOURCES, indent=2))
+        return
+    if not args.resources or args.monthly_spend is None:
+        parser.error("--resources and --monthly-spend are required (or use --example)")
+    try:
+        with open(args.resources) as f:
+            resources = json.load(f)
+    except (OSError, ValueError) as e:
+        parser.error(f"cannot read {args.resources}: {e}")
+    if not isinstance(resources, dict):
+        parser.error(f"{args.resources} must contain a JSON object (see --example)")
+
+    optimizer = CostOptimizer(resources, args.monthly_spend)
+    result = optimizer.analyze_and_optimize()
+    checklist = optimizer.generate_optimization_checklist()
+    if args.format == "json":
+        print(json.dumps({"analysis": result, "checklist": checklist}, indent=2, default=str))
+        return
+    for key, value in result.items():
+        if isinstance(value, list):
+            print(f"{key}:")
+            for item in value:
+                if isinstance(item, dict):
+                    title = item.get("recommendation") or item.get("title") or item.get("action") or json.dumps(item, default=str)
+                    saving = item.get("potential_savings") or item.get("savings")
+                    print(f"  - {title}" + (f" (saves ~${saving:,.0f}/month)" if isinstance(saving, (int, float)) else ""))
+                else:
+                    print(f"  - {item}")
+        else:
+            print(f"{key}: {value}")
+
+
+if __name__ == "__main__":
+    main()

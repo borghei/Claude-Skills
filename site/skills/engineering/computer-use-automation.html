@@ -515,6 +515,26 @@ All scripts: Python 3 standard library only, argparse CLI, `--json` and human-re
 3. Resolve each finding — add verification steps, add confirmation gates, replace blocking-dialog flows.
 4. Re-run until clean, then dry-run in the sandbox before any real target.
 
+## Scope &amp; Limitations
+
+**In Scope:**
+- Deciding between computer use and a structured API, SDK, CLI or MCP tool with `tool_choice_advisor.py`, based on API availability, GUI stability, volume and reversibility
+- Linting a planned action list with `action_safety_linter.py` for destructive verbs, state changes with no verification, destructive steps with no confirmation gate, and patterns that open blocking dialogs
+- Design patterns for the screenshot, reason and act loop: grounding each action in a fresh screenshot, verifying after each step and recovering from misclicks
+- Safety guardrails, sandboxing choices and an evaluation approach from the computer-use patterns reference
+
+**Out of Scope:**
+- Running a computer-use agent, taking screenshots or controlling a desktop or browser
+- Scripted browser automation and scraping with selectors (see `engineering/browser-automation/`)
+- Building the MCP server or API that would replace a GUI flow (see `engineering/mcp-server-builder/`)
+- Regression-testing an agent from recorded runs (see `engineering/agent-harness/`)
+
+**Important Caveats:**
+- The linter matches action types and target text against fixed word lists. It cannot tell what a click does in a real interface, so an innocuous label on a destructive control will pass.
+- The advisor applies fixed rules to a few coarse inputs. Its output is a starting recommendation, not a measured comparison.
+- The skill is model-agnostic and names no vendor tool. Computer-use model support, action types and pricing change often and need checking against current provider documentation.
+- A clean lint does not make an agent safe to run against production accounts. Dry-run in a sandbox first.
+
 ## Reference Documentation
 
 - [Computer Use Patterns](references/computer-use-patterns.md) - The action loop; computer-use vs structured-tool decision matrix; reliability patterns (grounding, verification, recovery); safety guardrails (confirmation gates, sandboxing, blocking dialogs); evaluation approach; and common failure modes.
@@ -640,6 +660,26 @@ All scripts: Python 3 standard library only, argparse CLI, `--json` and human-re
 2. Run `action_safety_linter.py --file plan.json` to flag risky verbs, unverified state changes, ungated destructive actions, and dialog-triggering patterns.
 3. Resolve each finding — add verification steps, add confirmation gates, replace blocking-dialog flows.
 4. Re-run until clean, then dry-run in the sandbox before any real target.
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Deciding between computer use and a structured API, SDK, CLI or MCP tool with `tool_choice_advisor.py`, based on API availability, GUI stability, volume and reversibility
+- Linting a planned action list with `action_safety_linter.py` for destructive verbs, state changes with no verification, destructive steps with no confirmation gate, and patterns that open blocking dialogs
+- Design patterns for the screenshot, reason and act loop: grounding each action in a fresh screenshot, verifying after each step and recovering from misclicks
+- Safety guardrails, sandboxing choices and an evaluation approach from the computer-use patterns reference
+
+**Out of Scope:**
+- Running a computer-use agent, taking screenshots or controlling a desktop or browser
+- Scripted browser automation and scraping with selectors (see `engineering/browser-automation/`)
+- Building the MCP server or API that would replace a GUI flow (see `engineering/mcp-server-builder/`)
+- Regression-testing an agent from recorded runs (see `engineering/agent-harness/`)
+
+**Important Caveats:**
+- The linter matches action types and target text against fixed word lists. It cannot tell what a click does in a real interface, so an innocuous label on a destructive control will pass.
+- The advisor applies fixed rules to a few coarse inputs. Its output is a starting recommendation, not a measured comparison.
+- The skill is model-agnostic and names no vendor tool. Computer-use model support, action types and pricing change often and need checking against current provider documentation.
+- A clean lint does not make an agent safe to run against production accounts. Dry-run in a sandbox first.
 
 ## Reference Documentation
 

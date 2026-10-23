@@ -241,3 +241,22 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_draft.txt` | First draft from that brief; fails the gate on a placeholder, a stock closer, a long opening, a dense paragraph and six hashtags |
 | `assets/sample_draft_revised.txt` | The same post after revision; passes the gate |
 | `assets/post_brief_template.md` | Fill-in brief covering goal, audience, material inventory, constraints and sign-off |
+
+## Scope & Limitations
+
+**In Scope:**
+- Ranks fourteen opening patterns by the material in a brief and the stated goal, prints the opening skeleton, body beats and close for each, and names the question that would unlock each unsupported pattern (`angle_picker.py`).
+- Gates a draft with fifteen checks: opening fit and phrasing, length, placeholders and markup, paragraph density, hashtags, links, specificity, a habit spot-check and the closing line (`post_gate.py`).
+- Body structures per pattern, closes by goal, length bands and a brief template.
+
+**Out of Scope:**
+- The full machine-tell audit, emoji scoring and voice fingerprinting; see `tools/linkedin/linkedin-humanizer/`.
+- Finding material when the author has none; see `tools/linkedin/linkedin-story-interviewer/`.
+- Turning an existing article, talk or thread into a post; see `tools/linkedin/linkedin-content-repurposer/`.
+- Designing carousels, images or video. The skill drafts the text of a single feed post.
+- Posting, scheduling or fetching. The user pastes the post into LinkedIn.
+
+**Important Caveats:**
+- The gate is not a fact-checker. It can tell that a figure is present, not that it is right.
+- Length bands, the fold position and hashtag limits are editorial heuristics. Platform numbers such as the 3,000-character limit are current as of writing; verify them in the product.
+- A pass means no check fired. The manual checks in `references/pre-publish-gate.md` still apply.

@@ -338,7 +338,8 @@ def main():
     )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--html-file", help="Path to HTML file containing forms")
-    group.add_argument("--url", help="Base URL (used with --html-file for resolving relative actions)")
+    group.add_argument("--url", help="Not supported: pages are not fetched. Save the page and use --html-file "
+                       "(with --base-url for relative actions)")
     parser.add_argument("--output", help="Write generated script to file")
     parser.add_argument("--form-index", type=int, default=0,
                         help="Index of form to generate script for (default: 0)")

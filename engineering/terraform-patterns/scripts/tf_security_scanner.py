@@ -223,7 +223,7 @@ class TerraformSecurityScanner:
         encryption_resources = {
             "aws_s3_bucket": "server_side_encryption_configuration",
             "aws_ebs_volume": "encrypted",
-            "aws_rds_instance": "storage_encrypted",
+            "aws_db_instance": "storage_encrypted",
             "aws_rds_cluster": "storage_encrypted",
             "aws_redshift_cluster": "encrypted",
             "aws_efs_file_system": "encrypted",

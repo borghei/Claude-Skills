@@ -395,7 +395,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 
 Validate a monthly investor update against a rubric of strong-update sections (transparency, decision-relevance, specific asks). Use before sending a monthly investor update or setting a fundraise communication cadence.
 
-Validate a draft monthly investor update against a rubric of what makes them work — and provide a starting template if you don&#x27;t have one yet. investor update, monthly update, founder update, investor communication, fundraise, lead investor, board, KPIs, asks Before generating the update, settle the
+Write a monthly investor update and check it against a rubric of what makes updates work. The assistant writes the draft, starting from `assets/investor_update_template.md` and your metrics, asks and news. The one tool, `investor_update_validator.py`, does not generate text: it only scores a finishe
 
 ## Your Key Capabilities
 - Monthly Update Production
@@ -405,6 +405,7 @@ Validate a draft monthly investor update against a rubric of what makes them wor
 ## Frameworks &amp; Templates You Know
 - OR start from scratch with `assets/investor_update_template.md`.
 - 2. Draft against `assets/investor_update_template.md`
+- - A monthly update template in `assets/investor_update_template.md`.
 - Templates
 - - **`assets/investor_update_template.md`** — Monthly update template
 
@@ -428,7 +429,7 @@ Start by asking the user what they need help with.">
 
 Validate a monthly investor update against a rubric of strong-update sections (transparency, decision-relevance, specific asks). Use before sending a monthly investor update or setting a fundraise communication cadence.
 
-Validate a draft monthly investor update against a rubric of what makes them work — and provide a starting template if you don&#x27;t have one yet. investor update, monthly update, founder update, investor communication, fundraise, lead investor, board, KPIs, asks Before generating the update, settle the
+Write a monthly investor update and check it against a rubric of what makes updates work. The assistant writes the draft, starting from `assets/investor_update_template.md` and your metrics, asks and news. The one tool, `investor_update_validator.py`, does not generate text: it only scores a finishe
 
 ## Your Key Capabilities
 - Monthly Update Production
@@ -438,6 +439,7 @@ Validate a draft monthly investor update against a rubric of what makes them wor
 ## Frameworks &amp; Templates You Know
 - OR start from scratch with `assets/investor_update_template.md`.
 - 2. Draft against `assets/investor_update_template.md`
+- - A monthly update template in `assets/investor_update_template.md`.
 - Templates
 - - **`assets/investor_update_template.md`** — Monthly update template
 
@@ -469,7 +471,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Investor Update Generator
 
-Validate a draft monthly investor update against a rubric of what makes them work — and provide a starting template if you don&#x27;t have one yet.
+Write a monthly investor update and check it against a rubric of what makes updates work. The assistant writes the draft, starting from `assets/investor_update_template.md` and your metrics, asks and news. The one tool, `investor_update_validator.py`, does not generate text: it only scores a finished draft against the rubric.
 
 ---
 
@@ -532,6 +534,27 @@ Scans an update markdown file for the structural sections of a strong update and
 python scripts/investor_update_validator.py update.md
 python scripts/investor_update_validator.py update.md --json
 ```
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Structural validation of a markdown draft with `investor_update_validator.py`: a 0-100 score, sections present, missing or weak sections, and penalties for anti-patterns.
+- A monthly update template in `assets/investor_update_template.md`.
+- Guidance on what good updates contain: highlights and lowlights, hard numbers, context behind the numbers, and specific asks.
+- Setting a monthly or quarterly update cadence and distribution list.
+
+**Out of Scope:**
+- Writing the update from company data. Despite the name, the tool validates a draft; it does not generate one.
+- Calculating SaaS metrics such as MRR, churn, LTV or CAC (see `finance/saas-metrics-coach/`).
+- Board decks and quarterly board materials (see `c-level-advisor/board-deck-builder/`).
+- Pitch decks for a fundraise (see `personal-productivity/pitch-deck-reviewer/`).
+
+**Important Caveats:**
+- The validator checks for sections by pattern matching. A high score means the structure is present, not that the numbers are right or the update is persuasive.
+- No metrics, accounting or cap-table system is read. All figures come from the user.
+- The output is not legal or securities advice on what can be disclosed to investors.
 
 ---
 
@@ -606,7 +629,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Investor Update Generator
 
-Validate a draft monthly investor update against a rubric of what makes them work — and provide a starting template if you don&#x27;t have one yet.
+Write a monthly investor update and check it against a rubric of what makes updates work. The assistant writes the draft, starting from `assets/investor_update_template.md` and your metrics, asks and news. The one tool, `investor_update_validator.py`, does not generate text: it only scores a finished draft against the rubric.
 
 ---
 
@@ -669,6 +692,27 @@ Scans an update markdown file for the structural sections of a strong update and
 python scripts/investor_update_validator.py update.md
 python scripts/investor_update_validator.py update.md --json
 ```
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Structural validation of a markdown draft with `investor_update_validator.py`: a 0-100 score, sections present, missing or weak sections, and penalties for anti-patterns.
+- A monthly update template in `assets/investor_update_template.md`.
+- Guidance on what good updates contain: highlights and lowlights, hard numbers, context behind the numbers, and specific asks.
+- Setting a monthly or quarterly update cadence and distribution list.
+
+**Out of Scope:**
+- Writing the update from company data. Despite the name, the tool validates a draft; it does not generate one.
+- Calculating SaaS metrics such as MRR, churn, LTV or CAC (see `finance/saas-metrics-coach/`).
+- Board decks and quarterly board materials (see `c-level-advisor/board-deck-builder/`).
+- Pitch decks for a fundraise (see `personal-productivity/pitch-deck-reviewer/`).
+
+**Important Caveats:**
+- The validator checks for sections by pattern matching. A high score means the structure is present, not that the numbers are right or the update is persuasive.
+- No metrics, accounting or cap-table system is read. All figures come from the user.
+- The output is not legal or securities advice on what can be disclosed to investors.
 
 ---
 

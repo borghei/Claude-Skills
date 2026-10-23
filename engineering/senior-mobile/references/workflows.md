@@ -109,7 +109,7 @@ class ProductListViewModel @Inject constructor(
 
 ## Workflow 4: Optimize Mobile Performance
 
-1. **Profile** -- `python scripts/profile.py --platform <ios|android> --output report.html`
+1. **Find likely hotspots** -- `python scripts/app_performance_analyzer.py <project_dir> --platform react-native` scans the source for known performance anti-patterns. Measure on a device with Xcode Instruments or Android Studio Profiler.
 2. **Apply React Native optimizations:**
    - Use `FlatList` with `keyExtractor`, `initialNumToRender=10`, `windowSize=5`, `removeClippedSubviews=true`
    - Memoize components with `React.memo` and handlers with `useCallback`
@@ -118,12 +118,12 @@ class ProductListViewModel @Inject constructor(
    - Implement `prefetchItemsAt` for image pre-loading in collection views
 4. **Apply native Android optimizations:**
    - Set `setHasFixedSize(true)` and `setItemViewCacheSize(20)` on RecyclerViews
-5. **Validate** -- Re-run profiler and confirm frame drops reduced and startup time improved.
+5. **Validate** -- Re-run the analyzer and the device profiler, and confirm frame drops fell and startup time improved.
 
 ## Workflow 5: Submit to App Store / Play Store
 
-1. **Generate metadata** -- `python scripts/store_metadata.py --screenshots ./screenshots`
-2. **Build release** -- `python scripts/build.py --platform ios --env production`
+1. **Generate metadata** -- `python scripts/store_metadata_generator.py --app-name "<name>" --category <category> --features "<feature1,feature2>"` drafts the title, description and keywords; screenshots are prepared separately.
+2. **Build release** -- Archive in Xcode (iOS) or run `./gradlew bundleRelease` (Android); the skill has no build script.
 3. **Review** the generated listing (title, description, keywords, screenshots).
 4. **Upload** via Xcode (iOS) or Play Console (Android).
 5. **Validate** -- Monitor review status and address any rejection feedback.

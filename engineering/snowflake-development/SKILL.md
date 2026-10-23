@@ -66,6 +66,24 @@ python scripts/snowflake_query_helper.py --file slow_query.sql --action optimize
 3. Review recommendations
 4. Implement multi-cluster settings if applicable
 
+## Scope & Limitations
+
+**In Scope:**
+- Rule-based review of Snowflake SQL from a file or `--sql` text with `snowflake_query_helper.py --action analyze` or `optimize`, with a complexity score and a suggested warehouse size per query.
+- Warehouse sizing for five workload types (etl, bi, ad-hoc, data-science, ingest) from a data volume, with credits per hour, an estimated daily cost and a `CREATE WAREHOUSE` statement.
+- Query, warehouse, cost and data modeling practices in `references/snowflake-best-practices.md`.
+
+**Out of Scope:**
+- Connecting to Snowflake, reading query history or query profiles, or running any statement.
+- SQL work for other databases (see `engineering/sql-database-assistant/`).
+- Building and orchestrating data pipelines (see `engineering/senior-data-engineer/`).
+- Access control, governance and data sharing setup.
+
+**Important Caveats:**
+- Analysis matches patterns in SQL text. It does not see execution plans, table sizes or clustering, so it misses issues that only show at run time.
+- Sizing comes from a fixed table of data volume and concurrency limits. It is a starting point to adjust with observed query performance.
+- Cost figures assume 8 hours a day at $2 per credit. Credit prices depend on edition, region and contract, and Snowflake features and pricing change over time.
+
 ## Reference Documentation
 
 - [Snowflake Best Practices](references/snowflake-best-practices.md) - Query patterns, warehouse management, cost optimization

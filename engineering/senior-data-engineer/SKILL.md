@@ -76,7 +76,7 @@ python scripts/etl_performance_optimizer.py estimate-cost query.sql \
 | `data_quality_validator.py` | `validate`, `profile`, `generate-suite`, `contract`, `schema` | Schema validation, profiling, anomaly detection, Great Expectations |
 | `etl_performance_optimizer.py` | `analyze-sql`, `analyze-spark`, `optimize-partition`, `estimate-cost`, `template` | SQL/Spark optimization, partition strategy, cost estimation |
 
-All subcommands support `--json` for machine-readable output and `--output` for file writing.
+`--json` is available on `data_quality_validator.py` `validate`, `profile` and `contract` and on the four `etl_performance_optimizer.py` analysis subcommands (`analyze-sql`, `analyze-spark`, `optimize-partition`, `estimate-cost`). `pipeline_orchestrator.py` has no `--json` flag: `generate` and `template` print pipeline code, and `validate` always prints its result as JSON. Every subcommand except `pipeline_orchestrator.py validate` takes `--output` to write to a file.
 
 ## References
 
@@ -87,6 +87,26 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/data_pipeline_architecture.md](references/data_pipeline_architecture.md)** — deep reference on pipeline architecture patterns. Read for architecture design depth.
 - **[references/data_modeling_patterns.md](references/data_modeling_patterns.md)** — dimensional modeling and data-modeling patterns. Read when modeling marts and dimensions.
 - **[references/dataops_best_practices.md](references/dataops_best_practices.md)** — DataOps practices for CI/CD, testing, and operating pipelines. Read when operationalizing pipelines.
+
+## Scope & Limitations
+
+**In Scope:**
+- Pipeline code generation for Airflow, Prefect and Dagster with `pipeline_orchestrator.py` (`generate`, `validate`, `template`), including incremental and full load modes.
+- Data quality checks on CSV, JSON or JSONL files with `data_quality_validator.py`: schema validation, profiling, anomaly detection, data contracts, schema inference and Great Expectations suite generation.
+- SQL and Spark analysis with `etl_performance_optimizer.py`: query recommendations, Spark job metrics review, partition strategy and query cost estimates for BigQuery, Snowflake, Redshift and Databricks.
+- Batch versus streaming and warehouse versus lakehouse decision frameworks, worked pipelines and troubleshooting in `references/`.
+
+**Out of Scope:**
+- Running pipelines or connecting to sources, warehouses, Kafka or Spark clusters. The scripts work on local files.
+- Snowflake-specific query tuning and warehouse sizing (see `engineering/snowflake-development/`).
+- An organization-wide data quality program (see `engineering/data-quality-auditor/`).
+- Model training and feature pipelines for ML (see `engineering/senior-ml-engineer/`).
+
+**Important Caveats:**
+- Generated DAG and flow code is a scaffold. It imports Airflow, Prefect, Dagster or pandas, which are not installed by the skill, and it needs real connections, credentials and testing before use.
+- SQL analysis is pattern-based on query text. It does not read execution plans or table statistics unless a stats file is provided.
+- Cost estimates use per-credit and per-TB prices built into the script. Warehouse pricing changes and varies by contract and region, so estimates are for comparison, not budgeting.
+- The YAML used for configs and contracts is read with a small stdlib parser, so complex YAML may not load as expected.
 
 ## Integration Points
 

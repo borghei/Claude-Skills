@@ -216,3 +216,22 @@ someone who just cloned the repo.
 | `assets/sample_descriptions.json` | Runnable audit input for Workflow 2, including deliberately failing examples |
 | `assets/sample_lint_rules.json` | Threshold overrides for Workflow 3 |
 | `assets/skill-review-checklist.md` | Reviewer checklist covering the judgement half the linter cannot check |
+
+## Scope & Limitations
+
+**In Scope:**
+- Package scaffolding from a JSON spec with `skill_scaffold.py`, which refuses descriptions over 240 characters or without a `Use when` clause.
+- Description scoring and collision detection with `description_audit.py`, from a JSON list or a whole domain directory.
+- Linting a skill folder against the 11 patterns of `standards/skill-authoring-standard.md` with `skill_lint.py`, including `--strict`, rule overrides and `--selftest`.
+- Content routing, description budget and script shape guidance in `references/`, and a reviewer checklist in `assets/`.
+
+**Out of Scope:**
+- Writing the domain knowledge, frameworks or scripts that go inside a new package.
+- Testing how a skill activates or performs in a real assistant session.
+- Security review of third-party skills before installation.
+- Regenerating repository manifests or publishing a skill.
+
+**Important Caveats:**
+- The linter checks structure, sections, line counts, imports and phrasing rules. A clean lint does not mean the content is correct or useful; `assets/skill-review-checklist.md` covers that half.
+- Description scores and collision values come from word heuristics, not from real activation data.
+- The thresholds (240 characters, 500 lines, 0.50 overlap) are this repository's standard and can be overridden with a rules file.

@@ -216,3 +216,23 @@ up as needing to redo it.
 | `assets/sample_calendar.json` | Five-day IC calendar with one heavily fragmented day, so the reschedule search has something to find |
 | `assets/sample_calendar_manager_4weeks.json` | 104 events over 20 working days of a meeting-dense manager calendar — drives the role-calibrated target example and the four-week advocacy export |
 | `assets/sample_sessions.json` | Four weeks of sessions with a visible improving trend and two failed sessions, exercising every finding |
+
+## Scope & Limitations
+
+**In Scope:**
+- Calendar fragmentation analysis: per-day longest block, context switches, deep-work ratio against a target, and one proposed meeting move (`calendar_fragmentation.py`).
+- Session log analysis: weekly volume, session-length distribution, interruption rate, plan-vs-actual drift, single-artefact adherence and trend (`session_log_analyzer.py`).
+- Block-length economics, interruption budgets, role-calibrated targets and session design rules.
+- Encroachment patterns, decline scripts and a data case for protected time, plus a session-log template.
+
+**Out of Scope:**
+- Editing or rescheduling calendar events. The tool proposes one move and the user makes it.
+- Processing open loops and the 2-minute rule (see `personal-productivity/capture/`).
+- Team-wide meeting load and communication norms (see `project-management/team-communications/`).
+- Founder workload and burnout (see `c-level-advisor/founder-coach/`).
+
+**Important Caveats:**
+- The tools read a JSON calendar export and a hand-kept session log. They have no calendar access.
+- The defaults (90-minute block, 0.40 target, 09:00-17:00 window) fit an individual contributor. Other roles and hours need `--target`, `--day-start` and `--day-end` set, or most days read as failing.
+- Figures such as the 23-minute interruption cost and the warmup shares are general estimates, not measurements of the user.
+- Session metrics reflect only what was logged. Unlogged sessions and interruptions do not appear.

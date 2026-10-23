@@ -246,3 +246,21 @@ Tools overview and reference documentation for this skill:
 | `assets/sample_thread_log.json` | Fictional eleven-thread log with at least one thread in every state |
 | `assets/thread_log_template.json` | Skeleton log with one placeholder thread to copy |
 | `assets/weekly_review_template.md` | Fill-in review: actions taken, threads closed, metrics, what to change |
+
+## Scope & Limitations
+
+**In Scope:**
+- Keeps a local JSON log of comments the user left and the replies recorded against them, written only through `thread_log.py` (`init`, `add`, `event`, `close`, `validate`) with atomic writes.
+- Reports each thread's state, an action list in urgency order, threads to close and reply-rate metrics (`thread_tracker.py`).
+- A follow-up playbook for late replies, moving to a direct message, closing lines and round limits.
+
+**Out of Scope:**
+- Writing the comment in the first place; see `tools/linkedin/linkedin-comment-writer/`.
+- Drafting the follow-up reply or triaging comments on the user's own post; see `tools/linkedin/linkedin-reply-manager/`.
+- Reading notifications, comments or messages from LinkedIn, posting or scheduling. Every event is entered by the user or the agent.
+
+**Important Caveats:**
+- The tracker knows only what is in the log. An unrecorded reply shows as silence, and reactions, messages, deleted comments and connection status are invisible to it.
+- State thresholds such as `--reply-due-hours`, `--lapsed-days` and `--dead-days` are heuristics exposed as flags.
+- The tool does not read reply text to decide whether an answer is needed; the `note` field carries that judgement.
+- Reports are measured from `--as-of`, which defaults to the current time in UTC.

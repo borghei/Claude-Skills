@@ -195,3 +195,23 @@ for aggregate movement, never for safety failures.
 | `assets/sample_candidate_report.json` | Scored candidate report — input for `eval_diff.py` |
 | `assets/eval_report_template.md` | Release-decision report template |
 | `assets/scenario_authoring_checklist.md` | Pre-merge checklist for any scenario joining a gating suite |
+
+## Scope & Limitations
+
+**In Scope:**
+- Scoring recorded agent transcripts against a JSON scenario suite with `scenario_runner.py`: tool called, not called, call order and arguments, JSON fields, output text, and latency, cost and turn budgets
+- Severity-based gating (`critical`, `major`, `minor`) with `--strict-critical` and `--fail-under` exit codes for CI
+- Paired regression diffs between a baseline and a candidate run with `eval_diff.py`: regressed, fixed and stable scenarios, Wilson intervals, exact McNemar on discordant pairs, and cost and latency drift
+- Scenario design across six buckets (happy, boundary, refusal, adversarial, failure-recovery, ambiguity), fixture recording rules and budget setting from the references, plus a report template and an authoring checklist
+
+**Out of Scope:**
+- Running the agent, calling a model or recording transcripts; the instrumentation that produces transcripts is the user's own
+- Model-graded rubrics for tone, helpfulness or faithfulness, and pairwise ranking of variants (see `engineering/agentic-evaluation-framework/`)
+- Designing the agent's architecture, tools or workflow (see `engineering/agent-designer/` and `engineering/agent-workflow-designer/`)
+- Token pricing and cost reduction work (see `engineering/llm-cost-optimizer/`)
+
+**Important Caveats:**
+- The tools score transcripts that already exist. Results are only as good as the recorded runs, and a replayed tool result can hide a fault a live backend would show.
+- A passing suite shows the agent held the asserted behaviour on these scenarios. It does not show the agent is safe on inputs the suite does not cover.
+- At 20 to 30 scenarios, pass-rate confidence intervals are wide. Measure the run-to-run noise floor before reading small diffs as real change.
+- Cost and latency budgets come from the user's own measurements and go stale when the model, prompt or provider pricing changes.

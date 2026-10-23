@@ -489,7 +489,7 @@ python scripts/test_report_generator.py session_data.json --format markdown -o r
 | `visual_regression_tracker.py` | Baseline + current screenshot dirs | Pass/fail per page, change percentages |
 | `test_report_generator.py` | Session data JSON | Markdown or JSON report with recommendations |
 
-All tools support `--json` for machine output. Health scorer and regression tracker return exit code 1 on failure (CI-friendly).
+The health scorer, accessibility auditor and regression tracker take `--json` for machine output; the report generator uses `--format json`. Health scorer and regression tracker return exit code 1 on failure (CI-friendly).
 
 ---
 
@@ -527,7 +527,8 @@ All tools support `--json` for machine output. Health scorer and regression trac
 
 **Phase 10-11: Regression check and report.**
 - Re-visit fixed pages. Verify no new errors.
-- Generate report: `python scripts/test_report_generator.py session.json --save-baseline`
+- Save the score as the next baseline: `python scripts/qa_health_scorer.py findings.json --save-baseline` (writes `.qa-baselines/{date}.json` and `.qa-baselines/latest.json`)
+- Generate report: `python scripts/test_report_generator.py session.json -o report.md`
 
 **Validation checkpoint:** Health score &gt;= 85. Zero P0 findings. WCAG AA &gt;= 95%.
 
@@ -546,7 +547,7 @@ python scripts/visual_regression_tracker.py --baseline ./baselines --current ./s
 python scripts/visual_regression_tracker.py --update-baseline --baseline ./baselines --current ./screenshots
 ```
 
-Pages exceeding the threshold (default 5%) are flagged as regressions. Uses SHA-256 hashing and byte-level comparison.
+Pages exceeding the threshold (default 5%) are flagged as regressions. The tracker compares SHA-256 hashes and the raw bytes of the image files, not decoded pixels, so the change percentage is a rough signal and a re-encoded but visually identical screenshot can still read as changed.
 
 ---
 
@@ -558,9 +559,9 @@ curl -s https://example.com | python scripts/accessibility_auditor.py - --level 
 ```
 
 **What gets checked by level:**
-- **A (Must Fix):** Alt text, page language, form labels, headings, duplicate IDs, autoplay media
-- **AA (Should Fix):** Color contrast (4.5:1 text, 3:1 large), heading hierarchy, focus visible, error identification
-- **AAA (Nice to Have):** Enhanced contrast (7:1), extended audio, reading level
+- **A (Must Fix):** Alt text, page language, page title, heading hierarchy, duplicate IDs, form labels, empty link text, media captions and autoplay, main and nav landmarks, positive tabindex
+- **AA (Should Fix):** Adds focus indicators removed with `outline:none`, and flags elements with inline color styles for manual contrast review. Contrast ratios are not measured, because the tool cannot compute styles
+- **AAA (Nice to Have):** Adds generic link text such as &quot;click here&quot; (2.4.9). There is no enhanced-contrast measurement and no reading-level check; review those by hand
 
 Each violation includes: WCAG criterion, severity, element selector, and remediation guidance.
 
@@ -629,6 +630,28 @@ Each violation includes: WCAG criterion, severity, element selector, and remedia
 | Browser Testing Methodology | `references/browser_testing_methodology.md` |
 | WCAG Compliance Guide | `references/wcag_compliance_guide.md` |
 | Performance Benchmarks | `references/performance_benchmarks.md` |
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- A live QA sweep driven through Chrome MCP: page discovery, console and network errors, forms, UI states, breakpoints and security headers, with the testing tiers and safety controls above.
+- Weighted health scoring from a findings JSON with `qa_health_scorer.py`: 0-100 score, A-F grade, ten categories, baseline trend and an exit code below `--threshold`.
+- Static WCAG 2.1 checks on saved HTML with `accessibility_auditor.py` at level A, AA or AAA.
+- Screenshot baseline tracking with `visual_regression_tracker.py`, and Markdown or JSON session reports with `test_report_generator.py`.
+
+**Out of Scope:**
+- Writing and maintaining an automated end-to-end test suite (see `engineering/playwright-pro/`).
+- A full accessibility program with screen-reader and keyboard testing (see `engineering/a11y-audit/`).
+- Detailed performance profiling (see `engineering/performance-profiler/`).
+- Security testing beyond header and cookie checks (see `engineering/security-audit/`).
+
+**Important Caveats:**
+- The Python tools do not open a browser. Browser work depends on Chrome MCP being available, and the scorer and report generator only process findings that were recorded by hand or by the agent.
+- `accessibility_auditor.py` parses static HTML. It cannot compute styles, so color contrast is flagged for manual review rather than measured, and content rendered by JavaScript is missed unless the saved HTML includes it.
+- `visual_regression_tracker.py` compares file hashes and bytes of image files, not pixels. Its change percentage is a rough signal, and a re-encoded but identical screenshot can still read as changed.
+- The fix loop edits and commits code. The clean-tree check, fix cap and approval rules above limit that, and a passing health score does not mean the application is free of defects.
 
 ---
 
@@ -740,7 +763,7 @@ python scripts/test_report_generator.py session_data.json --format markdown -o r
 | `visual_regression_tracker.py` | Baseline + current screenshot dirs | Pass/fail per page, change percentages |
 | `test_report_generator.py` | Session data JSON | Markdown or JSON report with recommendations |
 
-All tools support `--json` for machine output. Health scorer and regression tracker return exit code 1 on failure (CI-friendly).
+The health scorer, accessibility auditor and regression tracker take `--json` for machine output; the report generator uses `--format json`. Health scorer and regression tracker return exit code 1 on failure (CI-friendly).
 
 ---
 
@@ -778,7 +801,8 @@ All tools support `--json` for machine output. Health scorer and regression trac
 
 **Phase 10-11: Regression check and report.**
 - Re-visit fixed pages. Verify no new errors.
-- Generate report: `python scripts/test_report_generator.py session.json --save-baseline`
+- Save the score as the next baseline: `python scripts/qa_health_scorer.py findings.json --save-baseline` (writes `.qa-baselines/{date}.json` and `.qa-baselines/latest.json`)
+- Generate report: `python scripts/test_report_generator.py session.json -o report.md`
 
 **Validation checkpoint:** Health score &gt;= 85. Zero P0 findings. WCAG AA &gt;= 95%.
 
@@ -797,7 +821,7 @@ python scripts/visual_regression_tracker.py --baseline ./baselines --current ./s
 python scripts/visual_regression_tracker.py --update-baseline --baseline ./baselines --current ./screenshots
 ```
 
-Pages exceeding the threshold (default 5%) are flagged as regressions. Uses SHA-256 hashing and byte-level comparison.
+Pages exceeding the threshold (default 5%) are flagged as regressions. The tracker compares SHA-256 hashes and the raw bytes of the image files, not decoded pixels, so the change percentage is a rough signal and a re-encoded but visually identical screenshot can still read as changed.
 
 ---
 
@@ -809,9 +833,9 @@ curl -s https://example.com | python scripts/accessibility_auditor.py - --level 
 ```
 
 **What gets checked by level:**
-- **A (Must Fix):** Alt text, page language, form labels, headings, duplicate IDs, autoplay media
-- **AA (Should Fix):** Color contrast (4.5:1 text, 3:1 large), heading hierarchy, focus visible, error identification
-- **AAA (Nice to Have):** Enhanced contrast (7:1), extended audio, reading level
+- **A (Must Fix):** Alt text, page language, page title, heading hierarchy, duplicate IDs, form labels, empty link text, media captions and autoplay, main and nav landmarks, positive tabindex
+- **AA (Should Fix):** Adds focus indicators removed with `outline:none`, and flags elements with inline color styles for manual contrast review. Contrast ratios are not measured, because the tool cannot compute styles
+- **AAA (Nice to Have):** Adds generic link text such as &quot;click here&quot; (2.4.9). There is no enhanced-contrast measurement and no reading-level check; review those by hand
 
 Each violation includes: WCAG criterion, severity, element selector, and remediation guidance.
 
@@ -880,6 +904,28 @@ Each violation includes: WCAG criterion, severity, element selector, and remedia
 | Browser Testing Methodology | `references/browser_testing_methodology.md` |
 | WCAG Compliance Guide | `references/wcag_compliance_guide.md` |
 | Performance Benchmarks | `references/performance_benchmarks.md` |
+
+---
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- A live QA sweep driven through Chrome MCP: page discovery, console and network errors, forms, UI states, breakpoints and security headers, with the testing tiers and safety controls above.
+- Weighted health scoring from a findings JSON with `qa_health_scorer.py`: 0-100 score, A-F grade, ten categories, baseline trend and an exit code below `--threshold`.
+- Static WCAG 2.1 checks on saved HTML with `accessibility_auditor.py` at level A, AA or AAA.
+- Screenshot baseline tracking with `visual_regression_tracker.py`, and Markdown or JSON session reports with `test_report_generator.py`.
+
+**Out of Scope:**
+- Writing and maintaining an automated end-to-end test suite (see `engineering/playwright-pro/`).
+- A full accessibility program with screen-reader and keyboard testing (see `engineering/a11y-audit/`).
+- Detailed performance profiling (see `engineering/performance-profiler/`).
+- Security testing beyond header and cookie checks (see `engineering/security-audit/`).
+
+**Important Caveats:**
+- The Python tools do not open a browser. Browser work depends on Chrome MCP being available, and the scorer and report generator only process findings that were recorded by hand or by the agent.
+- `accessibility_auditor.py` parses static HTML. It cannot compute styles, so color contrast is flagged for manual review rather than measured, and content rendered by JavaScript is missed unless the saved HTML includes it.
+- `visual_regression_tracker.py` compares file hashes and bytes of image files, not pixels. Its change percentage is a rough signal, and a re-encoded but identical screenshot can still read as changed.
+- The fix loop edits and commits code. The clean-tree check, fix cap and approval rules above limit that, and a passing health score does not mean the application is free of defects.
 
 ---
 

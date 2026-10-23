@@ -661,3 +661,33 @@ output "table_name" {{
 }}
 """
         return terraform
+
+
+def main():
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Generate infrastructure-as-code for a serverless AWS application.")
+    parser.add_argument("--app-name", required=True, help="Application name, used for resource naming")
+    parser.add_argument("--region", default="us-east-1", help="AWS region (default: us-east-1)")
+    parser.add_argument("--format", choices=["cloudformation", "cdk", "terraform"], default="cloudformation",
+                        help="Template type (default: cloudformation)")
+    parser.add_argument("--output", help="Write the template to this file instead of stdout")
+    args = parser.parse_args()
+
+    generator = ServerlessStackGenerator(args.app_name, {"region": args.region})
+    render = {
+        "cloudformation": generator.generate_cloudformation_template,
+        "cdk": generator.generate_cdk_stack,
+        "terraform": generator.generate_terraform_configuration,
+    }[args.format]
+    template = render()
+    if args.output:
+        with open(args.output, "w") as f:
+            f.write(template)
+        print(f"Wrote {args.format} template to {args.output}")
+    else:
+        print(template)
+
+
+if __name__ == "__main__":
+    main()
