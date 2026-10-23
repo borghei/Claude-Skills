@@ -43,13 +43,13 @@ A toolkit for designing, architecting, and evaluating multi-agent systems. It pr
 
 ## Clarify First
 
-Before designing the system, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the system, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **System goal & scale** — the task the agents perform and expected load (drives which architecture pattern: single, supervisor, swarm, hierarchical, or pipeline)
-- [ ] **Tool protocol target** — OpenAI function calling vs Anthropic tool use (sets the schema format `tool_schema_generator.py` emits)
-- [ ] **Optimization priority** — cost, latency, or quality (determines agent roles, model tiers, and which metrics the evaluator weights)
+- **System goal & scale:** the task the agents perform and expected load (drives which architecture pattern: single, supervisor, swarm, hierarchical, or pipeline).
+- **Tool protocol target:** OpenAI function calling vs Anthropic tool use (sets the schema format `tool_schema_generator.py` emits).
+- **Optimization priority:** cost, latency, or quality (determines agent roles, model tiers, and which metrics the evaluator weights).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

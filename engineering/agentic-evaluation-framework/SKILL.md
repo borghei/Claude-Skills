@@ -25,13 +25,13 @@ Design and run trustworthy evaluations for LLM and agent outputs: pick the right
 
 ## Clarify First
 
-Before designing or running an evaluation, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing or running an evaluation, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **What "good" means** — the dimensions you care about (accuracy, helpfulness, safety, format, tool-use) and their relative weight (defines the rubric `criteria` and `weights`)
-- [ ] **Grading method** — can a deterministic check decide it, do you need an LLM judge, or must a human review it? (selects programmatic vs `rubric_scorer.py` absolute scoring vs `pairwise_ranking.py` comparison vs human-in-the-loop)
-- [ ] **Ground truth & budget** — do you have human-labeled examples to calibrate the judge against, and what cost/latency per eval run is acceptable? (sets calibration plan and the quality/cost/latency budget)
+- **What "good" means:** the dimensions you care about (accuracy, helpfulness, safety, format, tool-use) and their relative weight (defines the rubric `criteria` and `weights`).
+- **Grading method:** can a deterministic check decide it, do you need an LLM judge, or must a human review it? (selects programmatic vs `rubric_scorer.py` absolute scoring vs `pairwise_ranking.py` comparison vs human-in-the-loop).
+- **Ground truth & budget:** do you have human-labeled examples to calibrate the judge against, and what cost/latency per eval run is acceptable? (sets calibration plan and the quality/cost/latency budget).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions.
+Ask about the two or three inputs that matter most for this request. If the user says "just draft it," proceed and list your assumptions.
 
 ## Quick Start
 

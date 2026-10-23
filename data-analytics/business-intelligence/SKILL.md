@@ -19,13 +19,13 @@ The agent operates as a senior BI specialist, designing dashboards, defining KPI
 
 ## Clarify First
 
-Before designing the dashboard, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the dashboard, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Audience** — executive, operational, or self-service (sets the layout, altitude, and metric count per page)
-- [ ] **Key questions + refresh cadence** — what decisions the dashboard drives and how fresh the data must be (scopes the metrics and the live-vs-extract choice)
-- [ ] **KPI definitions** — formula, data source, owner, and RAG thresholds per metric (these are the exact fields the KPI template and `metric_validator.py` require)
+- **Audience:** executive, operational, or self-service (sets the layout, altitude, and metric count per page).
+- **Key questions + refresh cadence:** what decisions the dashboard drives and how fresh the data must be (scopes the metrics and the live-vs-extract choice).
+- **KPI definitions:** formula, data source, owner, and RAG thresholds per metric (these are the exact fields the KPI template and `metric_validator.py` require).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

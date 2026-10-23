@@ -470,13 +470,13 @@ The **Computer Use Automation** skill helps you design AI agents that operate a 
 
 ## Clarify First
 
-Before designing or auditing a computer-use agent, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing or auditing a computer-use agent, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Does a real API/MCP tool exist?** — whether the target exposes an API, SDK, CLI, or MCP server, or is GUI-only (the single biggest factor; if a real API exists, prefer it and skip computer-use)
-- [ ] **Task &amp; risk** — what the agent must accomplish and whether any step is destructive or irreversible (delete, send, pay, submit), which sets the confirmation gates and sandboxing
-- [ ] **Which tool** — advise on tool choice for a target, or lint a planned action sequence for safety (selects `tool_choice_advisor.py` vs `action_safety_linter.py`)
+- **Does a real API/MCP tool exist?:** whether the target exposes an API, SDK, CLI, or MCP server, or is GUI-only (the single biggest factor; if a real API exists, prefer it and skip computer-use).
+- **Task &amp; risk:** what the agent must accomplish and whether any step is destructive or irreversible (delete, send, pay, submit), which sets the confirmation gates and sandboxing.
+- **Which tool:** advise on tool choice for a target, or lint a planned action sequence for safety (selects `tool_choice_advisor.py` vs `action_safety_linter.py`).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 
@@ -596,13 +596,13 @@ The **Computer Use Automation** skill helps you design AI agents that operate a 
 
 ## Clarify First
 
-Before designing or auditing a computer-use agent, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing or auditing a computer-use agent, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Does a real API/MCP tool exist?** — whether the target exposes an API, SDK, CLI, or MCP server, or is GUI-only (the single biggest factor; if a real API exists, prefer it and skip computer-use)
-- [ ] **Task &amp; risk** — what the agent must accomplish and whether any step is destructive or irreversible (delete, send, pay, submit), which sets the confirmation gates and sandboxing
-- [ ] **Which tool** — advise on tool choice for a target, or lint a planned action sequence for safety (selects `tool_choice_advisor.py` vs `action_safety_linter.py`)
+- **Does a real API/MCP tool exist?:** whether the target exposes an API, SDK, CLI, or MCP server, or is GUI-only (the single biggest factor; if a real API exists, prefer it and skip computer-use).
+- **Task &amp; risk:** what the agent must accomplish and whether any step is destructive or irreversible (delete, send, pay, submit), which sets the confirmation gates and sandboxing.
+- **Which tool:** advise on tool choice for a target, or lint a planned action sequence for safety (selects `tool_choice_advisor.py` vs `action_safety_linter.py`).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

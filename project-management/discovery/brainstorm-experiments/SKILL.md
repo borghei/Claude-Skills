@@ -40,14 +40,14 @@ Design fast, low-cost experiments to validate product hypotheses before committi
 
 ## Clarify First
 
-Before designing the experiment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the experiment, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Hypothesis to test** — the specific belief stated as "At least X% of Y will do Z" (drives `hypothesis_text` and the pass/fail threshold)
-- [ ] **Product type** — new vs existing (selects the method catalog: landing page / pre-order / concierge vs fake door / feature stub / A-B test)
-- [ ] **Target segment** — who "Y" is in the hypothesis (drives the metric and who you expose the test to)
-- [ ] **Available SITG signal** — what skin-in-the-game you can capture (money, time, reputation) given budget/tooling (narrows realistic methods)
+- **Hypothesis to test:** the specific belief stated as "At least X% of Y will do Z" (drives `hypothesis_text` and the pass/fail threshold).
+- **Product type:** new vs existing (selects the method catalog: landing page / pre-order / concierge vs fake door / feature stub / A-B test).
+- **Target segment:** who "Y" is in the hypothesis (drives the metric and who you expose the test to).
+- **Available SITG signal:** what skin-in-the-game you can capture (money, time, reputation) given budget/tooling (narrows realistic methods).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

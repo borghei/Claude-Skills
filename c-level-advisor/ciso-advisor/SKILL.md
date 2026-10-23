@@ -57,6 +57,19 @@ CISO, security strategy, risk quantification, ALE, SLE, ARO, security posture, c
 
 ---
 
+## Clarify First
+
+Security advice depends most on the data you hold, who you sell to, and what you can spend. Settle the inputs below before advising. When one is missing or vague and would change the answer, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Data you handle:** PII, PHI or payment data change the depth of security review, the notification deadlines (72 hours under GDPR, 60 days under HIPAA) and the size of a loss in the ALE math.
+- **Customers and markets:** the compliance sequence follows what buyers and regulators ask for: SOC 2 for US B2B sales, ISO 27001 for European enterprise, HIPAA for healthcare, FedRAMP for federal. A specific deal waiting on a certificate changes the order.
+- **Stage, revenue and security budget:** budget norms run from 2-4% of revenue at seed to 5-10% at enterprise, and each investment is judged by ROI against ALE. Without loss and revenue figures, the risk register rests on assumed numbers.
+- **Whether an incident is live:** an active incident puts containment and regulatory clocks ahead of any program advice.
+
+If `~/.claude/company-context.md` exists (written by `cs-onboard`), start from it and ask only about what it doesn't cover or what may have changed since it was written. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants an answer straight away, give it and state your assumptions at the top.
+
+---
+
 ## Risk Quantification Framework
 
 Every security investment must be justified in business terms. "We need better security" is not a business case. "$800K expected annual loss from this unmitigated risk" is.

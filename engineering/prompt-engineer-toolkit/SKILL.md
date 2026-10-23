@@ -43,13 +43,13 @@ The complete lifecycle for production prompts: design patterns that work, testin
 
 ## Clarify First
 
-Before designing or testing the prompt, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing or testing the prompt, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Task & definition of "good"** — what the prompt must produce and how success is judged (drives the 5-dimension evaluation rubric)
-- [ ] **Target model** — calibration (temperature, few-shot count) and migration paths differ by model
-- [ ] **Lifecycle stage** — design new / debug a degraded prompt / migrate to a new model (selects the workflow)
+- **Task & definition of "good":** what the prompt must produce and how success is judged (drives the 5-dimension evaluation rubric).
+- **Target model:** calibration (temperature, few-shot count) and migration paths differ by model.
+- **Lifecycle stage:** design new / debug a degraded prompt / migrate to a new model (selects the workflow).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

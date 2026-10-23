@@ -45,13 +45,13 @@ Systematic performance profiling for Node.js, Python, and Go applications. Ident
 
 ## Clarify First
 
-Before profiling, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before profiling, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Runtime & symptom** — Node / Python / Go and CPU / memory / bundle / query / load-spike (selects the profiler and toolchain)
-- [ ] **Baseline + SLA target** — current numbers and the P95/P99 (or size) threshold to beat (measure-first needs both to verify a delta)
-- [ ] **Environment** — local / staging / prod determines the safe profiling method and whether load testing is allowed
+- **Runtime & symptom:** Node / Python / Go and CPU / memory / bundle / query / load-spike (selects the profiler and toolchain).
+- **Baseline + SLA target:** current numbers and the P95/P99 (or size) threshold to beat (measure-first needs both to verify a delta).
+- **Environment:** local / staging / prod determines the safe profiling method and whether load testing is allowed.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

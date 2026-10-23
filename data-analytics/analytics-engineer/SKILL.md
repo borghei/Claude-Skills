@@ -24,13 +24,13 @@ The agent operates as a senior analytics engineer, building scalable dbt transfo
 
 ## Clarify First
 
-Before building the models, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the models, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Required grain + downstream consumers** — the row grain of the target model and who queries it (dashboard, notebook, reverse-ETL) (drives the dimensional model and materialization)
-- [ ] **Source tables and freshness** — which sources exist, their keys, and load cadence (determines staging models and incremental logic)
-- [ ] **Data volume + refresh SLA** — table size and how often it must rebuild (selects view vs. table vs. incremental materialization)
+- **Required grain + downstream consumers:** the row grain of the target model and who queries it (dashboard, notebook, reverse-ETL) (drives the dimensional model and materialization).
+- **Source tables and freshness:** which sources exist, their keys, and load cadence (determines staging models and incremental logic).
+- **Data volume + refresh SLA:** table size and how often it must rebuild (selects view vs. table vs. incremental materialization).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

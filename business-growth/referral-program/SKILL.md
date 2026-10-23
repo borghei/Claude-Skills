@@ -38,14 +38,14 @@ Production-grade referral and affiliate program framework covering the 4-stage r
 
 ## Clarify First
 
-Before designing the referral program, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the referral program, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Program type** — customer referral vs affiliate (enthusiastic/social customers vs team buyers) (selects the entire framework)
-- [ ] **Trigger moment** — the in-product or lifecycle point where you ask (a broken Stage 1 can't be fixed by a bigger reward at Stage 4)
-- [ ] **Reward economics** — first-payment value, margin, and CAC (caps the reward at <30% of first payment)
-- [ ] **Current referral rate (if any)** — decides single- vs double-sided incentive and which stage to fix first
+- **Program type:** customer referral vs affiliate (enthusiastic/social customers vs team buyers) (selects the entire framework).
+- **Trigger moment:** the in-product or lifecycle point where you ask (a broken Stage 1 can't be fixed by a bigger reward at Stage 4).
+- **Reward economics:** first-payment value, margin, and CAC (caps the reward at <30% of first payment).
+- **Current referral rate (if any):** decides single- vs double-sided incentive and which stage to fix first.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

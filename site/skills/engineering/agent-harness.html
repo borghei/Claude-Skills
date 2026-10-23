@@ -501,14 +501,14 @@ here score an agent; they never invoke one, so they run offline on every commit.
 
 ## Clarify First
 
-Before building the harness, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the harness, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Which agent actions are irreversible** — determines which scenarios need `tool_not_called` assertions at `critical` severity, and what the release gate blocks on
-- [ ] **Whether transcripts are already recorded** — decides whether workflow 1 starts from replay or from an instrumentation task first
-- [ ] **What the suite gates** — a CI blocking check, a nightly report, or a one-off comparison; changes suite size, runtime budget, and severity strictness
-- [ ] **The known failure modes** — past incidents seed the adversarial and refusal buckets, which is where regressions actually hide
+- **Which agent actions are irreversible:** determines which scenarios need `tool_not_called` assertions at `critical` severity, and what the release gate blocks on.
+- **Whether transcripts are already recorded:** decides whether workflow 1 starts from replay or from an instrumentation task first.
+- **What the suite gates:** a CI blocking check, a nightly report, or a one-off comparison; changes suite size, runtime budget, and severity strictness.
+- **The known failure modes:** past incidents seed the adversarial and refusal buckets, which is where regressions actually hide.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 
@@ -732,14 +732,14 @@ here score an agent; they never invoke one, so they run offline on every commit.
 
 ## Clarify First
 
-Before building the harness, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the harness, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Which agent actions are irreversible** — determines which scenarios need `tool_not_called` assertions at `critical` severity, and what the release gate blocks on
-- [ ] **Whether transcripts are already recorded** — decides whether workflow 1 starts from replay or from an instrumentation task first
-- [ ] **What the suite gates** — a CI blocking check, a nightly report, or a one-off comparison; changes suite size, runtime budget, and severity strictness
-- [ ] **The known failure modes** — past incidents seed the adversarial and refusal buckets, which is where regressions actually hide
+- **Which agent actions are irreversible:** determines which scenarios need `tool_not_called` assertions at `critical` severity, and what the release gate blocks on.
+- **Whether transcripts are already recorded:** decides whether workflow 1 starts from replay or from an instrumentation task first.
+- **What the suite gates:** a CI blocking check, a nightly report, or a one-off comparison; changes suite size, runtime budget, and severity strictness.
+- **The known failure modes:** past incidents seed the adversarial and refusal buckets, which is where regressions actually hide.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

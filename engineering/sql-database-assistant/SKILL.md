@@ -24,13 +24,13 @@ The **SQL Database Assistant** skill provides tools for analyzing SQL query perf
 
 ## Clarify First
 
-Before analyzing or generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before analyzing or generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Task** — query optimization / schema documentation / migration generation (selects the script)
-- [ ] **SQL input** — the query, the DDL file, or the from/to schema pair to operate on (the script's actual input)
-- [ ] **Target database / dialect** — Postgres / MySQL / etc. (changes index recommendations and migration SQL syntax)
+- **Task:** query optimization / schema documentation / migration generation (selects the script).
+- **SQL input:** the query, the DDL file, or the from/to schema pair to operate on (the script's actual input).
+- **Target database / dialect:** Postgres / MySQL / etc. (changes index recommendations and migration SQL syntax).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

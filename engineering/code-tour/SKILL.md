@@ -43,14 +43,14 @@ this skill.
 
 ## Clarify First
 
-Before building the tour, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the tour, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The question the tour answers** — a tour of "the codebase" has no ordering principle; a tour of "how a request becomes a row" orders itself
-- [ ] **Audience and their existing knowledge** — decides which stops can be skipped and which concepts need a stop of their own
-- [ ] **Time budget** — 30 minutes is 5-7 stops; anything longer gets abandoned midway and never resumed
-- [ ] **Which decisions are worth explaining** — the why-notes are the entire value; without them the tour is a file listing
+- **The question the tour answers:** a tour of "the codebase" has no ordering principle; a tour of "how a request becomes a row" orders itself.
+- **Audience and their existing knowledge:** decides which stops can be skipped and which concepts need a stop of their own.
+- **Time budget:** 30 minutes is 5-7 stops; anything longer gets abandoned midway and never resumed.
+- **Which decisions are worth explaining:** the why-notes are the entire value; without them the tour is a file listing.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

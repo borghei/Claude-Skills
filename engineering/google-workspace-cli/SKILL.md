@@ -24,13 +24,13 @@ The **Google Workspace CLI** skill provides tools for auditing Google Workspace 
 
 ## Clarify First
 
-Before running, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Task** — security audit, auth setup guide, or diagnostics (selects `workspace_audit.py` vs `auth_setup_guide.py` vs `gws_doctor.py`)
-- [ ] **Config export or auth method** — the GWS config JSON to audit, or the auth method and scopes for a setup guide (sets `--config` or `--method`/`--scopes`)
-- [ ] **Output mode** — human-readable vs JSON for automation (sets `--format json`)
+- **Task:** security audit, auth setup guide, or diagnostics (selects `workspace_audit.py` vs `auth_setup_guide.py` vs `gws_doctor.py`).
+- **Config export or auth method:** the GWS config JSON to audit, or the auth method and scopes for a setup guide (sets `--config` or `--method`/`--scopes`).
+- **Output mode:** human-readable vs JSON for automation (sets `--format json`).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

@@ -141,13 +141,13 @@ End-to-end AI system lifecycle guidance:
 
 ## Clarify First
 
-Before running the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the assessment, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **AIMS scope** — which AI systems and organizational boundaries are in scope (drives the readiness assessment and per-system impact assessments)
-- [ ] **Task** — AIMS readiness assessment vs per-system AI impact assessment (selects the tool and workflow)
-- [ ] **Certification target** — initial certification, surveillance, or internal-only (sets the score threshold and evidence depth)
+- **AIMS scope:** which AI systems and organizational boundaries are in scope (drives the readiness assessment and per-system impact assessments).
+- **Task:** AIMS readiness assessment vs per-system AI impact assessment (selects the tool and workflow).
+- **Certification target:** initial certification, surveillance, or internal-only (sets the score threshold and evidence depth).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

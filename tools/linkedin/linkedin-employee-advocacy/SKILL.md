@@ -63,14 +63,14 @@ this one.
 
 ## Clarify First
 
-Before producing a plan or charter, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before producing a plan or charter, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Whether each person has opted in themselves** — the planner schedules only people with a recorded yes; a manager's list is not consent and changes the roster entirely
-- [ ] **The programme goal** — decides which role families the plan depends on and what the outcome log counts
-- [ ] **Hours each person has really agreed to** — every cadence is capped by it; an optimistic figure produces a plan nobody keeps
-- [ ] **Regulated roles and jurisdictions** — decides who needs a pre-publication check and which sections of the charter need counsel
+- **Whether each person has opted in themselves:** the planner schedules only people with a recorded yes; a manager's list is not consent and changes the roster entirely.
+- **The programme goal:** decides which role families the plan depends on and what the outcome log counts.
+- **Hours each person has really agreed to:** every cadence is capped by it; an optimistic figure produces a plan nobody keeps.
+- **Regulated roles and jurisdictions:** decides who needs a pre-publication check and which sections of the charter need counsel.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

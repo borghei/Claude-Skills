@@ -19,14 +19,14 @@ The agent operates as a strategic HRBP, partnering with business leaders to alig
 
 ## Clarify First
 
-Before generating the plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Business priority / strategic goal (next 1-4 quarters)** — drives the people plan's targets and gap analysis
-- [ ] **Engagement (workforce plan, calibration, ER case, or comp/offer review)** — selects the framework and template
-- [ ] **Current-state workforce data (headcount, voluntary vs regrettable attrition, engagement)** — the baseline for gap analysis (step 2)
-- [ ] **Headcount / budget envelope** — bounds the hiring plan and succession depth
+- **Business priority / strategic goal (next 1-4 quarters):** drives the people plan's targets and gap analysis.
+- **Engagement (workforce plan, calibration, ER case, or comp/offer review):** selects the framework and template.
+- **Current-state workforce data (headcount, voluntary vs regrettable attrition, engagement):** the baseline for gap analysis (step 2).
+- **Headcount / budget envelope:** bounds the hiring plan and succession depth.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

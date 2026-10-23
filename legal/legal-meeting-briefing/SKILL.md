@@ -33,14 +33,14 @@ Production-ready toolkit for preparing structured briefings for meetings with le
 
 ## Clarify First
 
-Before generating the briefing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the briefing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Meeting type** — deal-review, board, regulatory, litigation, etc. — selects which type-specific sections appear (e.g. privilege considerations only for regulatory/litigation)
-- [ ] **Participants with orgs and roles** — populate the counterparty-dynamics and interests sections; without them the brief is generic
-- [ ] **Objective / agenda** — sets the depth and which sections matter; drives the preparation-gap list
-- [ ] **Privilege sensitivity** — for regulatory/government or litigation meetings, determines what goes in the privilege section vs what can be shared
+- **Meeting type:** deal-review, board, regulatory, litigation, etc. — selects which type-specific sections appear (e.g. privilege considerations only for regulatory/litigation).
+- **Participants with orgs and roles:** populate the counterparty-dynamics and interests sections; without them the brief is generic.
+- **Objective / agenda:** sets the depth and which sections matter; drives the preparation-gap list.
+- **Privilege sensitivity:** for regulatory/government or litigation meetings, determines what goes in the privilege section vs what can be shared.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the briefing.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

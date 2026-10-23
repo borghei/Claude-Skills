@@ -36,14 +36,14 @@ This skill is the **above-OKR-writing** companion to `execution/brainstorm-okrs/
 
 ## Clarify First
 
-Before running a phase, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running a phase, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which phase** — pre-quarter/kickoff vs mid-quarter check-in vs close retro (selects the agenda and artifacts produced)
-- [ ] **Position in the 13-week cycle** — what week you're in (the carry/kill/pivot check belongs at ~week 6, the retro at week 13)
-- [ ] **Existing OKRs & strategy** — the committed Objective and the annual strategy it serves (the kickoff commits OKRs; every Objective must trace to a vision pillar)
-- [ ] **Real team capacity** — honest capacity after PTO/on-call (a stretch slate dressed as commitments is the #1 cadence failure)
+- **Which phase:** pre-quarter/kickoff vs mid-quarter check-in vs close retro (selects the agenda and artifacts produced).
+- **Position in the 13-week cycle:** what week you're in (the carry/kill/pivot check belongs at ~week 6, the retro at week 13).
+- **Existing OKRs & strategy:** the committed Objective and the annual strategy it serves (the kickoff commits OKRs; every Objective must trace to a vision pillar).
+- **Real team capacity:** honest capacity after PTO/on-call (a stretch slate dressed as commitments is the #1 cadence failure).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## The Quarterly Cycle
 

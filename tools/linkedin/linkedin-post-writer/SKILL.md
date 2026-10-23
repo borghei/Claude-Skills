@@ -64,14 +64,14 @@ LinkedIn themselves. It does not post, schedule, fetch, or call any service.
 
 ## Clarify First
 
-Before drafting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before drafting, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The one goal** (conversation, saves, reshares, or inbound interest) — it changes which pattern ranks first and what the last line asks for; a post that tries for all four gets none
-- [ ] **What the author actually has** — at least one concrete item of material; without it every pattern is locked and the only honest output is a question back to the author
-- [ ] **Who it is for** — the same fact is written differently for peers, buyers and candidates; "everyone" produces a post for no one
-- [ ] **What cannot be said** — client names, unreleased figures, people who have not agreed to be named; these decide whether a quote or a number can be used at all
+- **The one goal:** (conversation, saves, reshares, or inbound interest) — it changes which pattern ranks first and what the last line asks for; a post that tries for all four gets none.
+- **What the author actually has:** at least one concrete item of material; without it every pattern is locked and the only honest output is a question back to the author.
+- **Who it is for:** the same fact is written differently for peers, buyers and candidates; "everyone" produces a post for no one.
+- **What cannot be said:** client names, unreleased figures, people who have not agreed to be named; these decide whether a quote or a number can be used at all.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just
+Ask about the two or three inputs that matter most for this request. If the user says "just
 draft it," use the material in the request as given, pick the top-ranked
 pattern, and list the assumed goal and audience at the top of the reply. If
 there is no material at all, ask the single unlock question for the pattern

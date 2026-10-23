@@ -43,14 +43,14 @@ A production-ready skill package for pre-sales engineering that bridges technica
 
 ## Clarify First
 
-Before producing the deliverable, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before producing the deliverable, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which deliverable** — RFP/RFI coverage analysis, competitive matrix, or POC plan (selects the tool and phase)
-- [ ] **Customer requirements + priorities** — the must/should/nice-to-have list (drives weighted coverage and the bid/no-bid call)
-- [ ] **Competitor(s) in the deal** — needed for the feature matrix, differentiators, and battlecard
-- [ ] **POC scope + success criteria** — when planning a POC, the use cases and measurable go/no-go bar (prevents an unbounded POC)
+- **Which deliverable:** RFP/RFI coverage analysis, competitive matrix, or POC plan (selects the tool and phase).
+- **Customer requirements + priorities:** the must/should/nice-to-have list (drives weighted coverage and the bid/no-bid call).
+- **Competitor(s) in the deal:** needed for the feature matrix, differentiators, and battlecard.
+- **POC scope + success criteria:** when planning a POC, the use cases and measurable go/no-go bar (prevents an unbounded POC).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the deliverable.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## 5-Phase Workflow
 

@@ -64,14 +64,14 @@ finished draft into LinkedIn themselves.
 
 ## Clarify First
 
-Before editing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before editing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Audit only, or audit and rewrite** — an audit returns findings and leaves every word alone; a rewrite changes the author's text and needs their sign-off on meaning
-- [ ] **Whether past posts are available** — with a fingerprint, the author's real habits (their dashes, their fragments) are waived; without one, every reduce-tier rule applies at face value and the edit may strip their voice
-- [ ] **The facts behind vague sentences** — when the audit reports "nothing only the author could know", the only honest fix is a real figure or name from the author; the agent must not supply one
-- [ ] **How strict the audience is** — a general feed needs the remove and reduce tiers; an audience that hunts for generated text may justify acting on the review tier too
+- **Audit only, or audit and rewrite:** an audit returns findings and leaves every word alone; a rewrite changes the author's text and needs their sign-off on meaning.
+- **Whether past posts are available:** with a fingerprint, the author's real habits (their dashes, their fragments) are waived; without one, every reduce-tier rule applies at face value and the edit may strip their voice.
+- **The facts behind vague sentences:** when the audit reports "nothing only the author could know", the only honest fix is a real figure or name from the author; the agent must not supply one.
+- **How strict the audience is:** a general feed needs the remove and reduce tiers; an audience that hunts for generated text may justify acting on the review tier too.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just
+Ask about the two or three inputs that matter most for this request. If the user says "just
 clean it up," run the remove and reduce tiers, change nothing in the review
 tier, and list every assumption and every unfilled fact at the top of the reply.
 

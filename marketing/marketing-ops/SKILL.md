@@ -28,6 +28,7 @@ Central command for marketing operations — routing questions, orchestrating ca
 ## Table of Contents
 
 - [Keywords](#keywords)
+- [Clarify First](#clarify-first)
 - [Quick Start](#quick-start)
 - [Skill Routing Matrix](#skill-routing-matrix)
 - [Campaign Orchestration](#campaign-orchestration)
@@ -44,6 +45,19 @@ Central command for marketing operations — routing questions, orchestrating ca
 ## Keywords
 
 marketing ops, marketing operations, MarTech stack, marketing automation, campaign orchestration, skill routing, marketing coordination, data management, attribution, marketing technology, campaign management, workflow automation, lead management, marketing analytics, marketing infrastructure, CRM integration, email automation, lead scoring
+
+---
+
+## Clarify First
+
+What most shapes this skill's output is what the user is trying to get done, and the stack and data it has to run on. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Request type:** a routing question, a campaign to orchestrate, a stack audit and an automation build lead to different sections. For campaigns, the type (launch, content sprint, lead generation, brand awareness, conversion) sets which skills run and in what order.
+- **Current stack:** the stack evaluation framework weighs CRM integration and cost, and the audit checklist needs the list of tools in use. Advice given without knowing the CRM tends to add disconnected tools.
+- **Sales motion:** lead scoring weights, the MQL and SQL thresholds and the attribution model depend on whether leads go to a sales team or convert self-serve. ABM tooling only matters for B2B.
+- **Budget:** `campaign_budget_allocator.py` splits a total budget across channels, and the same figure decides whether a new tool passes the cost criterion.
+
+The campaign steps below start by checking for marketing context. If a marketing context document exists (the one the marketing-context skill builds), start from it and ask only about the gaps. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

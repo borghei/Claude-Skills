@@ -33,13 +33,13 @@ Document control system design and management for ISO 13485-compliant quality ma
 
 ## Clarify First
 
-Before setting up document control or validating a document, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before setting up document control or validating a document, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Document type** — QM, SOP, WI, TF, SPEC, or PLN (sets the required reviewers, approvers, and numbering)
-- [ ] **Regulatory scope** — ISO 13485 only vs 21 CFR Part 11 electronic records (determines whether audit-trail and e-signature controls are required)
-- [ ] **Change classification** — administrative, minor, major, or emergency (sets the approval path and impact assessment)
+- **Document type:** QM, SOP, WI, TF, SPEC, or PLN (sets the required reviewers, approvers, and numbering).
+- **Regulatory scope:** ISO 13485 only vs 21 CFR Part 11 electronic records (determines whether audit-trail and e-signature controls are required).
+- **Change classification:** administrative, minor, major, or emergency (sets the approval path and impact assessment).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the document.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Document Control Workflow
 

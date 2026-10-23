@@ -481,6 +481,17 @@ Notion&#x27;s PM value comes from its database model: every meaningful PM artifa
 - Setting up two-way sync between Notion and Jira/Linear/GitHub
 - Establishing governance: ownership, review cadence, archive strategy
 
+## Clarify First
+
+Notion advice depends most on whether the user is designing a workspace or scripting against the API, and on what already exists. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **New workspace or existing sprawl:** A new workspace can start from the canonical schemas in `references/notion-database-design-for-pm.md`. A refactor needs an inventory first: which PRDs live outside the database, which cross-database references are plain text instead of Relations, and who owns each Teamspace.
+- **Read-only, write or sync:** Querying a database is low risk but has to loop on `has_more`. Creating pages, updating properties or running a two-way sync with Jira, Linear or GitHub writes to shared content, and the limit of about 3 requests per second decides whether a sync needs batching and a queue.
+- **Plan tier and API version:** Lower plan tiers cannot create Status options through the API, so those must be created by hand first. The API references target `Notion-Version: 2025-09-03`, where databases are queried as data sources; an integration pinned to an older version uses different endpoints and cannot chain rollups.
+- **Access level:** Teamspace setup, database design and views are in scope for a Teamspace owner. SCIM, SAML and billing are workspace-admin tasks outside this skill, and Teamspace-level changes can override page permissions, so know who can change what before proposing a permission model.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
 ## Anti-Patterns
 
 ### Ignoring API pagination
@@ -611,6 +622,17 @@ Notion&#x27;s PM value comes from its database model: every meaningful PM artifa
 - Authoring Notion REST API calls (page creation, database queries, block updates)
 - Setting up two-way sync between Notion and Jira/Linear/GitHub
 - Establishing governance: ownership, review cadence, archive strategy
+
+## Clarify First
+
+Notion advice depends most on whether the user is designing a workspace or scripting against the API, and on what already exists. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **New workspace or existing sprawl:** A new workspace can start from the canonical schemas in `references/notion-database-design-for-pm.md`. A refactor needs an inventory first: which PRDs live outside the database, which cross-database references are plain text instead of Relations, and who owns each Teamspace.
+- **Read-only, write or sync:** Querying a database is low risk but has to loop on `has_more`. Creating pages, updating properties or running a two-way sync with Jira, Linear or GitHub writes to shared content, and the limit of about 3 requests per second decides whether a sync needs batching and a queue.
+- **Plan tier and API version:** Lower plan tiers cannot create Status options through the API, so those must be created by hand first. The API references target `Notion-Version: 2025-09-03`, where databases are queried as data sources; an integration pinned to an older version uses different endpoints and cannot chain rollups.
+- **Access level:** Teamspace setup, database design and views are in scope for a Teamspace owner. SCIM, SAML and billing are workspace-admin tasks outside this skill, and Teamspace-level changes can override page permissions, so know who can change what before proposing a permission model.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

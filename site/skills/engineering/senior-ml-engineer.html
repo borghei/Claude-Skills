@@ -467,13 +467,13 @@ Production ML engineering patterns for model deployment, MLOps infrastructure, a
 
 ## Clarify First
 
-Before generating artifacts, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating artifacts, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Task** — model deployment / RAG pipeline build / monitoring setup (selects the script and workflow)
-- [ ] **Serving target &amp; rollout** — container vs K8s and canary vs direct (drives the generated Dockerfile/manifests and health gates)
-- [ ] **Model or data interface** — the input/output contract, and for RAG the corpus + vector store (shapes the scaffold)
+- **Task:** model deployment / RAG pipeline build / monitoring setup (selects the script and workflow).
+- **Serving target &amp; rollout:** container vs K8s and canary vs direct (drives the generated Dockerfile/manifests and health gates).
+- **Model or data interface:** the input/output contract, and for RAG the corpus + vector store (shapes the scaffold).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 
@@ -596,13 +596,13 @@ Production ML engineering patterns for model deployment, MLOps infrastructure, a
 
 ## Clarify First
 
-Before generating artifacts, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating artifacts, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Task** — model deployment / RAG pipeline build / monitoring setup (selects the script and workflow)
-- [ ] **Serving target &amp; rollout** — container vs K8s and canary vs direct (drives the generated Dockerfile/manifests and health gates)
-- [ ] **Model or data interface** — the input/output contract, and for RAG the corpus + vector store (shapes the scaffold)
+- **Task:** model deployment / RAG pipeline build / monitoring setup (selects the script and workflow).
+- **Serving target &amp; rollout:** container vs K8s and canary vs direct (drives the generated Dockerfile/manifests and health gates).
+- **Model or data interface:** the input/output contract, and for RAG the corpus + vector store (shapes the scaffold).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

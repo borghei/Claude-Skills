@@ -35,6 +35,19 @@ proptech, real estate, real-estate, MLS, brokerage, broker, agent, iBuyer, prope
 
 ---
 
+## Clarify First
+
+Proptech advice turns on where the product sits in the real-estate transaction and in which states it operates. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Segment:** Transaction, listings, financing, property management, services, or data and infrastructure. Regulatory exposure differs sharply between them, and `market_segment_classifier.py` reports considerations per segment it detects.
+- **Role in the transaction:** Becoming a broker, partnering with one, referring to brokers, or staying outside the transaction. Brokerage needs a license, full MLS access usually needs broker membership, and referral fees and affiliated business arrangements fall under RESPA Section 8.
+- **States:** Licensing, agency, escrow and disclosure rules vary by state, and each state requires separate licensure. A national launch and a single-state pilot need different plans.
+- **Residential or commercial:** They differ in buyers, deal sizes, sales cycles and regulation. Residential products that rank or filter properties also carry fair-housing disparate-impact risk.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+---
+
 ## Quick Start
 
 ```bash

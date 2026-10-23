@@ -28,6 +28,7 @@ The foundational context document that every marketing skill reads before starti
 ## Table of Contents
 
 - [Keywords](#keywords)
+- [Clarify First](#clarify-first)
 - [Quick Start](#quick-start)
 - [Core Workflows](#core-workflows)
 - [Context Sections](#context-sections)
@@ -43,6 +44,19 @@ The foundational context document that every marketing skill reads before starti
 ## Keywords
 
 marketing context, brand voice, target audience, ICP, ideal customer profile, positioning, customer insights, competitive analysis, market research, customer language, brand personality, buyer persona, product marketing, go-to-market, messaging framework, competitive landscape, objection handling, proof points, switching dynamics, value proposition
+
+---
+
+## Clarify First
+
+What most shapes this skill's output is whether a context document already exists and how much of it can rest on real customer evidence rather than internal assumptions. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Existing document:** if one exists, the job is a targeted update that keeps the accurate sections. If not, it is a fresh build. Rewriting a document that is mostly right throws away verbatim customer language that is hard to collect again.
+- **Source material:** a repository with a README, landing pages and docs supports the auto-draft path. Customer interviews, sales calls and reviews are what fill the customer language, objections and switching dynamics sections; without them those sections are guesses, and the document says so.
+- **Product and audience scope:** one product for one segment gives a single ICP and persona set. Several products or segments change how many personas, anti-personas and competitor sets the document needs.
+- **What it feeds next:** if the immediate need is ads or cold email, the ICP, pain points and customer language come first. If it is content or SEO, the keyword and competitive sections matter more. This decides which sections get depth when time is short.
+
+If the user already has a context document, read it first (`context_completeness_checker.py` shows which sections are missing or thin) and ask only about the gaps. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

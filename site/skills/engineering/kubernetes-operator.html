@@ -473,13 +473,13 @@ End-to-end Kubernetes operator design and construction. Covers the operator patt
 
 ## Clarify First
 
-Before scaffolding or auditing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before scaffolding or auditing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Task** — scaffold an operator, validate a CRD, or audit a controller (selects `operator_scaffold.py` vs `crd_validator.py` vs `reconciliation_audit.py`)
-- [ ] **Resource identity** — for scaffolding: the operator name, API group, and kind (sets `--name`/`--group`/`--kind`); for validation/audit: the CRD YAML or controller path (the input the scripts read)
-- [ ] **Framework** — controller-runtime/Kubebuilder/operator-SDK (Go), or KOPF/JOSDK/kube-rs (drives the scaffold patterns)
+- **Task:** scaffold an operator, validate a CRD, or audit a controller (selects `operator_scaffold.py` vs `crd_validator.py` vs `reconciliation_audit.py`).
+- **Resource identity:** for scaffolding: the operator name, API group, and kind (sets `--name`/`--group`/`--kind`); for validation/audit: the CRD YAML or controller path (the input the scripts read).
+- **Framework:** controller-runtime/Kubebuilder/operator-SDK (Go), or KOPF/JOSDK/kube-rs (drives the scaffold patterns).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 
@@ -592,13 +592,13 @@ End-to-end Kubernetes operator design and construction. Covers the operator patt
 
 ## Clarify First
 
-Before scaffolding or auditing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before scaffolding or auditing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Task** — scaffold an operator, validate a CRD, or audit a controller (selects `operator_scaffold.py` vs `crd_validator.py` vs `reconciliation_audit.py`)
-- [ ] **Resource identity** — for scaffolding: the operator name, API group, and kind (sets `--name`/`--group`/`--kind`); for validation/audit: the CRD YAML or controller path (the input the scripts read)
-- [ ] **Framework** — controller-runtime/Kubebuilder/operator-SDK (Go), or KOPF/JOSDK/kube-rs (drives the scaffold patterns)
+- **Task:** scaffold an operator, validate a CRD, or audit a controller (selects `operator_scaffold.py` vs `crd_validator.py` vs `reconciliation_audit.py`).
+- **Resource identity:** for scaffolding: the operator name, API group, and kind (sets `--name`/`--group`/`--kind`); for validation/audit: the CRD YAML or controller path (the input the scripts read).
+- **Framework:** controller-runtime/Kubebuilder/operator-SDK (Go), or KOPF/JOSDK/kube-rs (drives the scaffold patterns).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

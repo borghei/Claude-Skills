@@ -34,13 +34,13 @@ Design end-to-end computer vision pipelines for object detection, instance/seman
 
 ## Clarify First
 
-Before generating training configs or pipelines, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating training configs or pipelines, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Task** — detection / instance or semantic segmentation / classification (selects the architecture and `--task`)
-- [ ] **Dataset** — location and format (COCO / YOLO / VOC) to analyze or convert (the input to `dataset_pipeline_builder.py`)
-- [ ] **Deployment target** — GPU / edge / mobile (drives architecture choice and `inference_optimizer --target`)
+- **Task:** detection / instance or semantic segmentation / classification (selects the architecture and `--task`).
+- **Dataset:** location and format (COCO / YOLO / VOC) to analyze or convert (the input to `dataset_pipeline_builder.py`).
+- **Deployment target:** GPU / edge / mobile (drives architecture choice and `inference_optimizer --target`).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

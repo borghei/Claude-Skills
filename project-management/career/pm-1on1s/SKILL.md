@@ -50,13 +50,13 @@ This skill provides templates and question banks for the most common 1:1 types a
 
 ## Clarify First
 
-Before drafting the 1:1 agenda, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before drafting the 1:1 agenda, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Partner type** — your manager, EM partner, designer, direct report, or cross-functional lead (selects the agenda template and question bank)
-- [ ] **Relationship stage** — brand-new vs steady-state (decides whether you run the kickoff script or the recurring agenda)
-- [ ] **Purpose this session** — growth/feedback, alignment, or status-clearing (sets which sections matter and whether the Radical Candor frame applies)
+- **Partner type:** your manager, EM partner, designer, direct report, or cross-functional lead (selects the agenda template and question bank).
+- **Relationship stage:** brand-new vs steady-state (decides whether you run the kickoff script or the recurring agenda).
+- **Purpose this session:** growth/feedback, alignment, or status-clearing (sets which sections matter and whether the Radical Candor frame applies).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

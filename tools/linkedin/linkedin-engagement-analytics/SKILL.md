@@ -69,14 +69,14 @@ is independent of this one.
 
 ## Clarify First
 
-Before analysing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before analysing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Who the post was written for** — the whole verdict is measured against it; a target invented after reading the export describes whoever turned up
-- [ ] **Where the export came from and whose post it is** — decides whether the analysis should run at all, and which limits go in the readout
-- [ ] **The user's own-company names** — without them colleagues count as audience and the fit figure is inflated
-- [ ] **Whether a baseline exists** — with one, the readout can say above, in line or below; without one, this run becomes the first baseline point and no verdict is given
+- **Who the post was written for:** the whole verdict is measured against it; a target invented after reading the export describes whoever turned up.
+- **Where the export came from and whose post it is:** decides whether the analysis should run at all, and which limits go in the readout.
+- **The user's own-company names:** without them colleagues count as audience and the fit figure is inflated.
+- **Whether a baseline exists:** with one, the readout can say above, in line or below; without one, this run becomes the first baseline point and no verdict is given.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

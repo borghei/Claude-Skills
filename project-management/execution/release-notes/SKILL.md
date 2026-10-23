@@ -42,13 +42,13 @@ Transform raw technical changes -- tickets, changelogs, git logs, PRDs -- into c
 
 ## Clarify First
 
-Before generating the release notes, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the release notes, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Audience** — B2B/enterprise, consumer, developer/API, or internal (sets the entire tone matrix and how much detail to include)
-- [ ] **Source changes** — the tickets/PRs/changelog to translate, classified into the 5 categories (nothing generates without these)
-- [ ] **Breaking changes & deprecations** — what changed, the required action, and by when (forces the mandatory breaking-change fields that protect user trust)
+- **Audience:** B2B/enterprise, consumer, developer/API, or internal (sets the entire tone matrix and how much detail to include).
+- **Source changes:** the tickets/PRs/changelog to translate, classified into the 5 categories (nothing generates without these).
+- **Breaking changes & deprecations:** what changed, the required action, and by when (forces the mandatory breaking-change fields that protect user trust).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

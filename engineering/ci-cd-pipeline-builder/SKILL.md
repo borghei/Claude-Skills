@@ -45,13 +45,13 @@ Generate production-grade CI/CD pipelines from detected project stack signals. A
 
 ## Clarify First
 
-Before generating the pipeline, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the pipeline, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Target platform** — GitHub Actions, GitLab CI, CircleCI, or Buildkite (sets the YAML dialect `pipeline_generator.py` emits via `--platform`)
-- [ ] **Project stack** — language/runtime, package manager, and whether Docker/K8s/Terraform are present (drives stack detection, caching, and which stages are generated)
-- [ ] **Deployment strategy & gates** — blue-green, canary, rolling, or CI-only, plus any manual approval gates (determines the deploy stages and conditions)
+- **Target platform:** GitHub Actions, GitLab CI, CircleCI, or Buildkite (sets the YAML dialect `pipeline_generator.py` emits via `--platform`).
+- **Project stack:** language/runtime, package manager, and whether Docker/K8s/Terraform are present (drives stack detection, caching, and which stages are generated).
+- **Deployment strategy & gates:** blue-green, canary, rolling, or CI-only, plus any manual approval gates (determines the deploy stages and conditions).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

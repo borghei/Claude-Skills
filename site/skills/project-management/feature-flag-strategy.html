@@ -484,14 +484,14 @@ This skill is the **PM-facing** rollout playbook. It does not describe how to wi
 
 ## Clarify First
 
-Before drafting the rollout plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before drafting the rollout plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Flag type** — release / experiment / ops / permission sets the lifespan and whether a retirement date even applies (permanent vs temporary)
-- [ ] **Rollout shape** — linear / segmented / geo / A-B-with-holdout / dark / reverse-ramp defines the stages and gate criteria of the ramp
-- [ ] **Kill-switch threshold + authority** — the metric that triggers rollback and who on-call may flip it; a flag without this is worse than no flag
-- [ ] **Retirement date** — for release/experiment flags, the date the toggle is removed; omitting it is how flag debt accrues
+- **Flag type:** release / experiment / ops / permission sets the lifespan and whether a retirement date even applies (permanent vs temporary).
+- **Rollout shape:** linear / segmented / geo / A-B-with-holdout / dark / reverse-ramp defines the stages and gate criteria of the ramp.
+- **Kill-switch threshold + authority:** the metric that triggers rollback and who on-call may flip it; a flag without this is worse than no flag.
+- **Retirement date:** for release/experiment flags, the date the toggle is removed; omitting it is how flag debt accrues.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 
@@ -631,14 +631,14 @@ This skill is the **PM-facing** rollout playbook. It does not describe how to wi
 
 ## Clarify First
 
-Before drafting the rollout plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before drafting the rollout plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Flag type** — release / experiment / ops / permission sets the lifespan and whether a retirement date even applies (permanent vs temporary)
-- [ ] **Rollout shape** — linear / segmented / geo / A-B-with-holdout / dark / reverse-ramp defines the stages and gate criteria of the ramp
-- [ ] **Kill-switch threshold + authority** — the metric that triggers rollback and who on-call may flip it; a flag without this is worse than no flag
-- [ ] **Retirement date** — for release/experiment flags, the date the toggle is removed; omitting it is how flag debt accrues
+- **Flag type:** release / experiment / ops / permission sets the lifespan and whether a retirement date even applies (permanent vs temporary).
+- **Rollout shape:** linear / segmented / geo / A-B-with-holdout / dark / reverse-ramp defines the stages and gate criteria of the ramp.
+- **Kill-switch threshold + authority:** the metric that triggers rollback and who on-call may flip it; a flag without this is worse than no flag.
+- **Retirement date:** for release/experiment flags, the date the toggle is removed; omitting it is how flag debt accrues.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

@@ -25,13 +25,13 @@ Decide when to run LLM work through an asynchronous batch API versus realtime/st
 
 ## Clarify First
 
-Before recommending or designing a batch job, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before recommending or designing a batch job, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Latency tolerance** — is a human waiting (interactive), or can results land in minutes/hours? (sets `--latency-tolerance` and the batch-vs-realtime verdict)
-- [ ] **Volume & token shape** — how many requests, and the average input/output tokens each? (sets `--requests`, `--avg-input-tokens`, `--avg-output-tokens` for the cost estimate)
-- [ ] **Pricing & discount** — your realtime per-token prices and the batch discount your vendor offers (sets `--realtime-input-price`, `--realtime-output-price`, `--batch-discount`; defaults are neutral placeholders, not real prices)
+- **Latency tolerance:** is a human waiting (interactive), or can results land in minutes/hours? (sets `--latency-tolerance` and the batch-vs-realtime verdict).
+- **Volume & token shape:** how many requests, and the average input/output tokens each? (sets `--requests`, `--avg-input-tokens`, `--avg-output-tokens` for the cost estimate).
+- **Pricing & discount:** your realtime per-token prices and the batch discount your vendor offers (sets `--realtime-input-price`, `--realtime-output-price`, `--batch-discount`; defaults are neutral placeholders, not real prices).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions.
+Ask about the two or three inputs that matter most for this request. If the user says "just draft it," proceed and list your assumptions.
 
 ## Quick Start
 

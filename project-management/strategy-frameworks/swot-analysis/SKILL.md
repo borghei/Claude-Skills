@@ -50,14 +50,14 @@ The single most-common SWOT failure: confusing internal with external.
 
 ## Clarify First
 
-Before building the SWOT, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the SWOT, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Explicit scope/subject** — e.g. "entering market X" or "our position vs Competitor X" (a SWOT for "the company" produces four lists pointing in four directions)
-- [ ] **Evidence per item** — the data/quote/benchmark behind each entry (strengths must be facts, not aspirations; a SWOT with no real weaknesses signals bias)
-- [ ] **Competitor/market reference frame** — what you're comparing against (strengths and threats are relative, not absolute)
-- [ ] **TOWS actions wanted** — whether to cross-cut into SO/ST/WO/WT moves (converts the static SWOT into strategy rather than a wall of bullets)
+- **Explicit scope/subject:** e.g. "entering market X" or "our position vs Competitor X" (a SWOT for "the company" produces four lists pointing in four directions).
+- **Evidence per item:** the data/quote/benchmark behind each entry (strengths must be facts, not aspirations; a SWOT with no real weaknesses signals bias).
+- **Competitor/market reference frame:** what you're comparing against (strengths and threats are relative, not absolute).
+- **TOWS actions wanted:** whether to cross-cut into SO/ST/WO/WT moves (converts the static SWOT into strategy rather than a wall of bullets).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

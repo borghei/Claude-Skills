@@ -25,14 +25,14 @@ The **Red Team** skill provides tools for planning and scoping security engageme
 
 ## Clarify First
 
-Before planning the engagement, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before planning the engagement, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Authorization & ROE owner** — who has signed off and the escalation contacts (no engagement plan without confirmed authorization)
-- [ ] **In-scope targets & boundaries** — the exact assets in and explicitly out of bounds (drives scope and `--target`)
-- [ ] **Engagement type** — red-team / pentest / purple / bug-bounty (sets stealth, methodology, and `--type`)
-- [ ] **Compliance framework** — e.g. pci-dss (maps test cases to controls via `--compliance`)
+- **Authorization & ROE owner:** who has signed off and the escalation contacts (no engagement plan without confirmed authorization).
+- **In-scope targets & boundaries:** the exact assets in and explicitly out of bounds (drives scope and `--target`).
+- **Engagement type:** red-team / pentest / purple / bug-bounty (sets stealth, methodology, and `--type`).
+- **Compliance framework:** e.g. pci-dss (maps test cases to controls via `--compliance`).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

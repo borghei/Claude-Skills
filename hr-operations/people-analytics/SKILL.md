@@ -19,14 +19,14 @@ The agent operates as a senior people analytics partner, translating workforce d
 
 ## Clarify First
 
-Before generating the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Business question + success metric** — frames the entire analysis (step 1); a vague question yields an unfocused output
-- [ ] **Analysis type (descriptive, attrition risk, pay equity, or engagement driver)** — selects the method and which script applies
-- [ ] **Available data sources + their quality/completeness** — determines which method is even possible (step 2)
-- [ ] **Segments + privacy threshold (minimum group size)** — drives segmentation and the anonymization/aggregation applied
+- **Business question + success metric:** frames the entire analysis (step 1); a vague question yields an unfocused output.
+- **Analysis type (descriptive, attrition risk, pay equity, or engagement driver):** selects the method and which script applies.
+- **Available data sources + their quality/completeness:** determines which method is even possible (step 2).
+- **Segments + privacy threshold (minimum group size):** drives segmentation and the anonymization/aggregation applied.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

@@ -171,13 +171,13 @@ Week 8: Stage 2 audit
 
 ## Clarify First
 
-Before running the audit-prep, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the audit-prep, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Audit type and stage** — Stage 1 documentation review, Stage 2 operational, surveillance, or internal (sets sprint length and whether the focus is documentation or operational evidence)
-- [ ] **AIMS maturity** — mature system vs building from gaps (picks the 4-week vs 8-week sprint)
-- [ ] **AI systems in scope** — which systems and how many (drives the AIIA count and Annex A coverage)
+- **Audit type and stage:** Stage 1 documentation review, Stage 2 operational, surveillance, or internal (sets sprint length and whether the focus is documentation or operational evidence).
+- **AIMS maturity:** mature system vs building from gaps (picks the 4-week vs 8-week sprint).
+- **AI systems in scope:** which systems and how many (drives the AIIA count and Annex A coverage).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the readiness assessment.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick start
 

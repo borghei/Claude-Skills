@@ -28,14 +28,14 @@ The work runs in four phases: **(1) Pre-announcement planning** (what, why, who,
 
 ## Clarify First
 
-Before crafting the EOL communication, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before crafting the EOL communication, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **What is being sunset and why** — drives the transition narrative and Phase 1 planning; a vague "why" reads as abandonment
-- [ ] **Replacement / migration path** — drives the transition solution and the single CTA; if it is broken or absent, do not announce yet
-- [ ] **Timeline and key dates** — drives the timeline section and varies sharply by product type (API vs paid product vs free feature)
-- [ ] **Customer segments affected** — drives the Phase 3 segment/channel matrix; high-value accounts need different message and outreach than self-serve
+- **What is being sunset and why:** drives the transition narrative and Phase 1 planning; a vague "why" reads as abandonment.
+- **Replacement / migration path:** drives the transition solution and the single CTA; if it is broken or absent, do not announce yet.
+- **Timeline and key dates:** drives the timeline section and varies sharply by product type (API vs paid product vs free feature).
+- **Customer segments affected:** drives the Phase 3 segment/channel matrix; high-value accounts need different message and outreach than self-serve.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## When to Use
 

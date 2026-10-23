@@ -395,7 +395,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 
 Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or optimizing warehouse queries.
 
-The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions. Before building the models, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] *
+The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions. Before building the models, settle the inputs below. When one is missing or vague and would change the res
 
 ## How to Help
 When the user asks for help in this domain:
@@ -417,7 +417,7 @@ Start by asking the user what they need help with.">
 
 Analytics engineering across data modeling, dbt, transformation, and semantic layers. Use when building dbt models, designing star schemas, writing staging or mart SQL, configuring data tests, or optimizing warehouse queries.
 
-The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions. Before building the models, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] *
+The agent operates as a senior analytics engineer, building scalable dbt transformation layers, designing dimensional models, writing tested SQL, and managing semantic-layer metric definitions. Before building the models, settle the inputs below. When one is missing or vague and would change the res
 
 ## How to Help
 When the user asks for help in this domain:
@@ -451,13 +451,13 @@ The agent operates as a senior analytics engineer, building scalable dbt transfo
 
 ## Clarify First
 
-Before building the models, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the models, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Required grain + downstream consumers** — the row grain of the target model and who queries it (dashboard, notebook, reverse-ETL) (drives the dimensional model and materialization)
-- [ ] **Source tables and freshness** — which sources exist, their keys, and load cadence (determines staging models and incremental logic)
-- [ ] **Data volume + refresh SLA** — table size and how often it must rebuild (selects view vs. table vs. incremental materialization)
+- **Required grain + downstream consumers:** the row grain of the target model and who queries it (dashboard, notebook, reverse-ETL) (drives the dimensional model and materialization).
+- **Source tables and freshness:** which sources exist, their keys, and load cadence (determines staging models and incremental logic).
+- **Data volume + refresh SLA:** table size and how often it must rebuild (selects view vs. table vs. incremental materialization).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 
@@ -802,13 +802,13 @@ The agent operates as a senior analytics engineer, building scalable dbt transfo
 
 ## Clarify First
 
-Before building the models, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the models, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Required grain + downstream consumers** — the row grain of the target model and who queries it (dashboard, notebook, reverse-ETL) (drives the dimensional model and materialization)
-- [ ] **Source tables and freshness** — which sources exist, their keys, and load cadence (determines staging models and incremental logic)
-- [ ] **Data volume + refresh SLA** — table size and how often it must rebuild (selects view vs. table vs. incremental materialization)
+- **Required grain + downstream consumers:** the row grain of the target model and who queries it (dashboard, notebook, reverse-ETL) (drives the dimensional model and materialization).
+- **Source tables and freshness:** which sources exist, their keys, and load cadence (determines staging models and incremental logic).
+- **Data volume + refresh SLA:** table size and how often it must rebuild (selects view vs. table vs. incremental materialization).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

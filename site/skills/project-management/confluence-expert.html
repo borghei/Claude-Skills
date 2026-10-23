@@ -481,6 +481,17 @@ Master-level expertise in Confluence space management, documentation architectur
 - Defining or auditing space permission schemes
 - Driving documentation strategy and knowledge-base health
 
+## Clarify First
+
+Confluence advice depends most on which Confluence the user runs and how much of it they can change. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **Cloud or Data Center, and plan tier:** Cloud plan tiers set storage limits that matter for attachment-heavy spaces, and page-view and contributor analytics need Premium or a marketplace app. Data Center reaches end of life on 28 Mar 2029, so a restructure there should be planned around the Cloud migration.
+- **Permission level:** A space admin can change the page tree, space templates and space permissions. Org-wide templates, blueprints, global automation and cross-space permissions belong to `atlassian-admin/`, and space settings cannot override stricter org-wide security policies. The user&#x27;s rights decide whether you deliver a change they can make or a request for their admin.
+- **New space or existing one:** A new space can get the right page tree from the start. An existing space needs its current tree or a page export first, because moving pages between spaces can break internal links, and `space_structure_analyzer.py`, `content_health_auditor.py` and `label_taxonomy_analyzer.py` all work from such an export.
+- **What the space is for:** A team workspace, an operational space of runbooks and a published knowledge base need different hierarchies, permissions and review cadences. Operational pages need a named owner and a review date; a scratch team space can be looser.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
 ## Anti-Patterns
 
 ### Flat space with no hierarchy
@@ -595,6 +606,17 @@ Master-level expertise in Confluence space management, documentation architectur
 - Embedding Jira issues, charts, or reports inside Confluence pages
 - Defining or auditing space permission schemes
 - Driving documentation strategy and knowledge-base health
+
+## Clarify First
+
+Confluence advice depends most on which Confluence the user runs and how much of it they can change. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+
+- **Cloud or Data Center, and plan tier:** Cloud plan tiers set storage limits that matter for attachment-heavy spaces, and page-view and contributor analytics need Premium or a marketplace app. Data Center reaches end of life on 28 Mar 2029, so a restructure there should be planned around the Cloud migration.
+- **Permission level:** A space admin can change the page tree, space templates and space permissions. Org-wide templates, blueprints, global automation and cross-space permissions belong to `atlassian-admin/`, and space settings cannot override stricter org-wide security policies. The user&#x27;s rights decide whether you deliver a change they can make or a request for their admin.
+- **New space or existing one:** A new space can get the right page tree from the start. An existing space needs its current tree or a page export first, because moving pages between spaces can break internal links, and `space_structure_analyzer.py`, `content_health_auditor.py` and `label_taxonomy_analyzer.py` all work from such an export.
+- **What the space is for:** A team workspace, an operational space of runbooks and a published knowledge base need different hierarchies, permissions and review cadences. Operational pages need a named owner and a review date; a scratch team space can be looser.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

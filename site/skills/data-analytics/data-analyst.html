@@ -395,7 +395,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 
 Data analysis across SQL, visualization, statistics, and reporting. Use when writing SQL queries, building dashboards, performing cohort or funnel analysis, running hypothesis tests, or presenting data-driven recommendations.
 
-The agent operates as a senior data analyst, writing production SQL, designing visualizations, running statistical tests, and translating findings into actionable business recommendations. Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] **Business qu
+The agent operates as a senior data analyst, writing production SQL, designing visualizations, running statistical tests, and translating findings into actionable business recommendations. Before the analysis, settle the inputs below. When one is missing or vague and would change the result, ask abo
 
 ## Frameworks &amp; Templates You Know
 - Insight Delivery Template
@@ -421,7 +421,7 @@ Start by asking the user what they need help with.">
 
 Data analysis across SQL, visualization, statistics, and reporting. Use when writing SQL queries, building dashboards, performing cohort or funnel analysis, running hypothesis tests, or presenting data-driven recommendations.
 
-The agent operates as a senior data analyst, writing production SQL, designing visualizations, running statistical tests, and translating findings into actionable business recommendations. Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume: - [ ] **Business qu
+The agent operates as a senior data analyst, writing production SQL, designing visualizations, running statistical tests, and translating findings into actionable business recommendations. Before the analysis, settle the inputs below. When one is missing or vague and would change the result, ask abo
 
 ## Frameworks &amp; Templates You Know
 - Insight Delivery Template
@@ -459,14 +459,14 @@ The agent operates as a senior data analyst, writing production SQL, designing v
 
 ## Clarify First
 
-Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Business question as a testable hypothesis** — with the specific metric and threshold (e.g., &quot;&gt;= 5% lift in 7-day retention&quot;) (frames the whole analysis and the headline)
-- [ ] **Data sources and grain** — which tables/columns exist and the row grain (determines feasibility and the SQL you can write)
-- [ ] **Audience and the decision** — who consumes the insight and what they will decide (sets altitude and the &quot;Now What&quot; recommendation)
-- [ ] **Analysis type** — cohort, funnel, hypothesis test, or trend (selects the method and the chart)
+- **Business question as a testable hypothesis:** with the specific metric and threshold (e.g., &quot;&gt;= 5% lift in 7-day retention&quot;) (frames the whole analysis and the headline).
+- **Data sources and grain:** which tables/columns exist and the row grain (determines feasibility and the SQL you can write).
+- **Audience and the decision:** who consumes the insight and what they will decide (sets altitude and the &quot;Now What&quot; recommendation).
+- **Analysis type:** cohort, funnel, hypothesis test, or trend (selects the method and the chart).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 
@@ -726,14 +726,14 @@ The agent operates as a senior data analyst, writing production SQL, designing v
 
 ## Clarify First
 
-Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Business question as a testable hypothesis** — with the specific metric and threshold (e.g., &quot;&gt;= 5% lift in 7-day retention&quot;) (frames the whole analysis and the headline)
-- [ ] **Data sources and grain** — which tables/columns exist and the row grain (determines feasibility and the SQL you can write)
-- [ ] **Audience and the decision** — who consumes the insight and what they will decide (sets altitude and the &quot;Now What&quot; recommendation)
-- [ ] **Analysis type** — cohort, funnel, hypothesis test, or trend (selects the method and the chart)
+- **Business question as a testable hypothesis:** with the specific metric and threshold (e.g., &quot;&gt;= 5% lift in 7-day retention&quot;) (frames the whole analysis and the headline).
+- **Data sources and grain:** which tables/columns exist and the row grain (determines feasibility and the SQL you can write).
+- **Audience and the decision:** who consumes the insight and what they will decide (sets altitude and the &quot;Now What&quot; recommendation).
+- **Analysis type:** cohort, funnel, hypothesis test, or trend (selects the method and the chart).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

@@ -19,14 +19,14 @@ The agent operates as a senior growth marketer, delivering experiment-driven str
 
 ## Clarify First
 
-Before designing experiments or a growth plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing experiments or a growth plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **North Star Metric + current AARRR baselines** — the metric and per-stage numbers (Steps 1–2 require these; without a baseline the "biggest lever" is a guess)
-- [ ] **Experiment hypothesis + primary/guardrail metrics** — the change expected and how it's judged (drives the experiment doc and ship/iterate/kill)
-- [ ] **Baseline rate + MDE** — current conversion and smallest lift worth detecting (feeds the sample-size calc directly)
-- [ ] **Daily eligible traffic** — visitors per variant per day (determines whether the test can reach significance and over what duration)
+- **North Star Metric + current AARRR baselines:** the metric and per-stage numbers (Steps 1–2 require these; without a baseline the "biggest lever" is a guess).
+- **Experiment hypothesis + primary/guardrail metrics:** the change expected and how it's judged (drives the experiment doc and ship/iterate/kill).
+- **Baseline rate + MDE:** current conversion and smallest lift worth detecting (feeds the sample-size calc directly).
+- **Daily eligible traffic:** visitors per variant per day (determines whether the test can reach significance and over what duration).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

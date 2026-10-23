@@ -58,14 +58,14 @@ power, and testing whether the site network can deliver the enrolment target.
 
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The primary endpoint and its measurement timepoint** — everything downstream (sample size, visit schedule, site burden, cost) derives from it
-- [ ] **The effect size and where it came from** — a literature effect and a pilot effect carry very different uncertainty, and a pilot-derived SD needs an inflation allowance
-- [ ] **Design features that break the simple formulas** — interim analyses, co-primary endpoints, cluster randomisation, or crossover each require a different calculation and a statistician
-- [ ] **The enrolment window and site network available** — a sample size that cannot be accrued is not a plan
+- **The primary endpoint and its measurement timepoint:** everything downstream (sample size, visit schedule, site burden, cost) derives from it.
+- **The effect size and where it came from:** a literature effect and a pilot effect carry very different uncertainty, and a pilot-derived SD needs an inflation allowance.
+- **Design features that break the simple formulas:** interim analyses, co-primary endpoints, cluster randomisation, or crossover each require a different calculation and a statistician.
+- **The enrolment window and site network available:** a sample size that cannot be accrued is not a plan.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

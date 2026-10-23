@@ -47,14 +47,14 @@ A good closed beta runs 4-8 weeks, recruits 10-30 participants from three concen
 
 ## Clarify First
 
-Before building the beta plan, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the beta plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Beta hypothesis & headline outcome** — what you are trying to learn and the one result that matters (drives the whole plan and which exit gates you set)
-- [ ] **Exit gates** — the quantitative + qualitative success criteria, agreed *before* recruiting (resolve to Greenlight / Extend / Pivot / Kill — the decision rule of the program)
-- [ ] **Target cohort & size** — Friends / Family / Fanatics mix and participant count (drives the recruitment script and how you weight feedback)
-- [ ] **Duration** — the 4-8 week window (drives the weekly cadence and when the exit memo is due)
+- **Beta hypothesis & headline outcome:** what you are trying to learn and the one result that matters (drives the whole plan and which exit gates you set).
+- **Exit gates:** the quantitative + qualitative success criteria, agreed *before* recruiting (resolve to Greenlight / Extend / Pivot / Kill — the decision rule of the program).
+- **Target cohort & size:** Friends / Family / Fanatics mix and participant count (drives the recruitment script and how you weight feedback).
+- **Duration:** the 4-8 week window (drives the weekly cadence and when the exit memo is due).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

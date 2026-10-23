@@ -23,7 +23,9 @@ DEFAULT_RULES: Dict[str, Any] = {
 }
 
 CONFIDENCE_TAGS = ("[PROVEN]", "[RECOMMENDED]", "[EXPERIMENTAL]")
-STOP_RULE_HINT = "if the user says"
+# The line that keeps a Clarify First gate light; older skills use the first form
+STOP_RULE_HINTS = ("if the user says", "if the user wants", "assumptions at the top",
+                   "straight away", "skip the questions")
 SEVERITY_ORDER = {"error": 0, "warn": 1, "info": 2}
 
 
@@ -162,7 +164,7 @@ def check_body(body: str, rules: Dict[str, Any], line_count: int) -> List[Findin
         out.append(Finding("P5", "error", f"{anti} anti-patterns found (minimum {rules['min_anti_patterns']})"))
     if not any(tag in body for tag in CONFIDENCE_TAGS):
         out.append(Finding("P6", "warn", "no confidence tags ([PROVEN]/[RECOMMENDED]/[EXPERIMENTAL])"))
-    if any(m in lowered for m in rules["generative_markers"]) and STOP_RULE_HINT not in lowered:
+    if any(m in lowered for m in rules["generative_markers"]) and not any(h in lowered for h in STOP_RULE_HINTS):
         out.append(Finding("P11", "error", "Clarify First section present but the stop rule is missing"))
     if not re.search(r"```bash", body):
         out.append(Finding("P8", "warn", "no runnable bash block — workflows should invoke a script"))

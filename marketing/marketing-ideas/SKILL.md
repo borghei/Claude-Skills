@@ -36,6 +36,15 @@ metadata:
 - Running a campaign ideation session that needs structure and scoring
 - Evaluating whether to act on an emerging marketing trend
 
+## Clarify First
+
+What most shapes this skill's output is the team's situation, because the catalog is filtered by stage, budget, goal and timeline. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Stage and budget:** the cross-reference tables in `references/idea-catalog.md` and `idea_scorer.py --stage --budget` filter on these. A pre-launch team with no budget and a scaling team with paid spend share very few ideas.
+- **Goal and timeline:** leads, authority, retention and awareness draw on different categories, and a team that needs results this quarter should not get ideas whose timeline runs past it.
+
+If a marketing context document exists (the one the marketing-context skill builds), start from it and ask only about the gaps. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
 ## Quick Start
 
 ### Get Curated Ideas for Your Situation

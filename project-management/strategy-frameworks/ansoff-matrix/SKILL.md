@@ -111,13 +111,13 @@ or genuine adjacent opportunity with shared capability.
 
 ## Clarify First
 
-Before scoring the growth options, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before scoring the growth options, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Precise "existing" boundaries** — which segment/geography/buyer is "existing market" and which SKU/capabilities are "existing product" (vague boundaries cause the #1 error: misclassifying a Q4 bet as Q2/Q3)
-- [ ] **The growth initiatives to classify** — the actual list of bets (the raw input to quadrant assignment; no list, no matrix)
-- [ ] **Company stage** — early / growth / mature (sets the stage-appropriate target investment mix across quadrants)
+- **Precise "existing" boundaries:** which segment/geography/buyer is "existing market" and which SKU/capabilities are "existing product" (vague boundaries cause the #1 error: misclassifying a Q4 bet as Q2/Q3).
+- **The growth initiatives to classify:** the actual list of bets (the raw input to quadrant assignment; no list, no matrix).
+- **Company stage:** early / growth / mature (sets the stage-appropriate target investment mix across quadrants).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

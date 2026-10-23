@@ -119,23 +119,37 @@ Name the input, then parenthesise why it matters when the reason is not obvious.
 
 ---
 
-## 5. Clarify First (generative skills only)
+## 5. Clarify First
 
-Include this section if and only if the skill emits an artifact. Advisory and
-reference skills must omit it — a gate before answering a question is friction with
-no payoff.
+Include this section when the skill emits an artifact. For advisory skills it is
+optional: add it when the advice depends on inputs the user often leaves out, such as
+company stage, jurisdiction or the decision being made. Pure reference skills omit it.
 
-Three to four checkboxes, each with an em-dash clause explaining **why it changes the
-output**. That clause is the whole point: it tells the assistant which inputs are
-load-bearing, so it knows what is worth interrupting the user for.
+Write it as rules with their reasons, not as a script. Name two to four inputs and,
+for each, say **why it changes the output**. That reason is the whole point: it tells
+the assistant which inputs are load-bearing, so it can judge what is worth
+interrupting the user for. Current models follow intent well and over-follow rigid
+procedures, so leave out checkboxes, all-caps commands and numbered steps.
 
-The stop rule is verbatim and non-negotiable:
+Keep the gate light. Say that the assistant asks only about inputs that would change
+the result and uses a sensible default (stated) for the rest, and that a user who
+wants a result straight away gets one, with the assumptions listed at the top.
+Without that, the gate turns into an intake interview and users learn to route
+around the skill.
 
-> Stop rule: ask only the 2-3 that most change the output. If the user says "just
-> draft it," proceed and list your assumptions at the top of the artifact.
+```markdown
+## Clarify First
 
-Without the stop rule the gate degrades into an intake interview, and users learn to
-route around the skill entirely.
+<One sentence naming what most shapes this skill's output.> Settle the inputs below
+before producing anything. When one is missing or vague and would change the result,
+ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **<Input>:** <why it changes the result>.
+
+Ask about the two or three inputs that matter most for this request, not the whole
+list. If the user wants a result straight away, produce it and state your assumptions
+at the top.
+```
 
 ### Choosing the right inputs to gate on
 

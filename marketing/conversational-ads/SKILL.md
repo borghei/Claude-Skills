@@ -37,14 +37,14 @@ Paid placements next to AI answers: ChatGPT Ads (test began February 2026, self-
 
 ## Clarify First
 
-Before planning, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before planning, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Category and markets/language** — sensitive categories are excluded on ChatGPT and AI Overviews, and AI Overviews ads are English-only in 12 countries
-- [ ] **Monthly budget and target CPA** — decides how many platforms can be tested with a readable holdout (≥50 conversions per arm)
-- [ ] **Real customer prompts** — 20-50 questions people ask assistants, tagged research / compare / purchase / support
-- [ ] **Measurement readiness** — server-side conversions and the ability to hold out regions; without these the test cannot be read
+- **Category and markets/language:** sensitive categories are excluded on ChatGPT and AI Overviews, and AI Overviews ads are English-only in 12 countries.
+- **Monthly budget and target CPA:** decides how many platforms can be tested with a readable holdout (≥50 conversions per arm).
+- **Real customer prompts:** 20-50 questions people ask assistants, tagged research / compare / purchase / support.
+- **Measurement readiness:** server-side conversions and the ability to hold out regions; without these the test cannot be read.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the plan.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

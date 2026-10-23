@@ -467,13 +467,13 @@ Test automation, coverage analysis, and quality assurance patterns for React and
 
 ## Clarify First
 
-Before generating tests, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating tests, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Test layer** — unit (Jest+RTL) vs E2E (Playwright) (selects `test_suite_generator` vs `e2e_test_scaffolder`)
-- [ ] **Source path** — the components or Next.js routes to generate tests from (the scaffolder&#x27;s input)
-- [ ] **Coverage focus** — happy path only vs interaction/state/a11y (`jest-axe`) (sets which test stubs are emitted)
+- **Test layer:** unit (Jest+RTL) vs E2E (Playwright) (selects `test_suite_generator` vs `e2e_test_scaffolder`).
+- **Source path:** the components or Next.js routes to generate tests from (the scaffolder&#x27;s input).
+- **Coverage focus:** happy path only vs interaction/state/a11y (`jest-axe`) (sets which test stubs are emitted).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 
@@ -589,13 +589,13 @@ Test automation, coverage analysis, and quality assurance patterns for React and
 
 ## Clarify First
 
-Before generating tests, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating tests, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Test layer** — unit (Jest+RTL) vs E2E (Playwright) (selects `test_suite_generator` vs `e2e_test_scaffolder`)
-- [ ] **Source path** — the components or Next.js routes to generate tests from (the scaffolder&#x27;s input)
-- [ ] **Coverage focus** — happy path only vs interaction/state/a11y (`jest-axe`) (sets which test stubs are emitted)
+- **Test layer:** unit (Jest+RTL) vs E2E (Playwright) (selects `test_suite_generator` vs `e2e_test_scaffolder`).
+- **Source path:** the components or Next.js routes to generate tests from (the scaffolder&#x27;s input).
+- **Coverage focus:** happy path only vs interaction/state/a11y (`jest-axe`) (sets which test stubs are emitted).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

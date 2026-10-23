@@ -41,13 +41,13 @@ Transform meeting notes, transcripts, or recordings into clear, actionable summa
 
 ## Clarify First
 
-Before summarizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before summarizing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The source material and its fidelity** — raw notes, transcript, or recording (summary quality is bounded by input; missing owners/dates for action items cannot be invented)
-- [ ] **Meeting type** — planning, retro, steering committee, or client call (tailors discussion synthesis and which decisions matter)
-- [ ] **Distribution scope + confidentiality** — attendees, non-attendees, or execs, and any sensitivity limits (determines whether standard 24-hour distribution applies)
+- **The source material and its fidelity:** raw notes, transcript, or recording (summary quality is bounded by input; missing owners/dates for action items cannot be invented).
+- **Meeting type:** planning, retro, steering committee, or client call (tailors discussion synthesis and which decisions matter).
+- **Distribution scope + confidentiality:** attendees, non-attendees, or execs, and any sensitivity limits (determines whether standard 24-hour distribution applies).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

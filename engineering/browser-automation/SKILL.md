@@ -25,13 +25,13 @@ The **Browser Automation** skill provides tools for building robust web automati
 
 ## Clarify First
 
-Before generating automation, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating automation, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Target site & task** — the URL and exactly what to automate or scrape (drives the generated selectors and flow)
-- [ ] **Which tool** — audit an existing script, build form automation, or generate a scraper (selects `anti_detection_checker.py` vs `form_automation_builder.py` vs `scraping_toolkit.py`)
-- [ ] **Politeness strategy & authorization** — polite vs aggressive, robots.txt compliance, and that you are permitted to automate this target (sets request delays and backoff in the generated code)
+- **Target site & task:** the URL and exactly what to automate or scrape (drives the generated selectors and flow).
+- **Which tool:** audit an existing script, build form automation, or generate a scraper (selects `anti_detection_checker.py` vs `form_automation_builder.py` vs `scraping_toolkit.py`).
+- **Politeness strategy & authorization:** polite vs aggressive, robots.txt compliance, and that you are permitted to automate this target (sets request delays and backoff in the generated code).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

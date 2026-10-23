@@ -51,14 +51,14 @@ board meeting, executive deliberation, strategic decision, C-suite, multi-agent,
 
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The exact decision to be made** (stated in one sentence) — the whole protocol synthesizes toward a single decision; a fuzzy topic produces a fuzzy synthesis
-- [ ] **Which roles to activate** — the role-activation matrix decides whose perspectives appear in Phase 2; the wrong roster means a missing voice or noise
-- [ ] **What data and context is available** vs. assumed — Phase 2 contributions tag confidence and source, so known facts must be separated from guesses
-- [ ] **Reversibility and stakes of the decision** — drives whether the full 6-phase protocol or an abbreviated advisory meeting is appropriate
+- **The exact decision to be made:** (stated in one sentence) — the whole protocol synthesizes toward a single decision; a fuzzy topic produces a fuzzy synthesis.
+- **Which roles to activate:** the role-activation matrix decides whose perspectives appear in Phase 2; the wrong roster means a missing voice or noise.
+- **What data and context is available:** vs. assumed — Phase 2 contributions tag confidence and source, so known facts must be separated from guesses.
+- **Reversibility and stakes of the decision:** drives whether the full 6-phase protocol or an abbreviated advisory meeting is appropriate.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

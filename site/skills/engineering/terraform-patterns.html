@@ -472,13 +472,13 @@ The **Terraform Patterns** skill provides automated analysis of Terraform config
 
 ## Clarify First
 
-Before analyzing or scanning, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before analyzing or scanning, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Target path** — the module or environment directory to analyze (`--path`; the subject)
-- [ ] **Task** — module complexity/quality analysis vs security misconfiguration scan (selects `tf_module_analyzer` vs `tf_security_scanner`)
-- [ ] **Minimum severity / gate** — the severity bar for findings and whether it blocks a PR (`--min-severity`; changes the report and CI pass/fail)
+- **Target path:** the module or environment directory to analyze (`--path`; the subject).
+- **Task:** module complexity/quality analysis vs security misconfiguration scan (selects `tf_module_analyzer` vs `tf_security_scanner`).
+- **Minimum severity / gate:** the severity bar for findings and whether it blocks a PR (`--min-severity`; changes the report and CI pass/fail).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 
@@ -649,13 +649,13 @@ The **Terraform Patterns** skill provides automated analysis of Terraform config
 
 ## Clarify First
 
-Before analyzing or scanning, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before analyzing or scanning, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Target path** — the module or environment directory to analyze (`--path`; the subject)
-- [ ] **Task** — module complexity/quality analysis vs security misconfiguration scan (selects `tf_module_analyzer` vs `tf_security_scanner`)
-- [ ] **Minimum severity / gate** — the severity bar for findings and whether it blocks a PR (`--min-severity`; changes the report and CI pass/fail)
+- **Target path:** the module or environment directory to analyze (`--path`; the subject).
+- **Task:** module complexity/quality analysis vs security misconfiguration scan (selects `tf_module_analyzer` vs `tf_security_scanner`).
+- **Minimum severity / gate:** the severity bar for findings and whether it blocks a PR (`--min-severity`; changes the report and CI pass/fail).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

@@ -41,13 +41,13 @@ A pre-mortem is a prospective hindsight exercise: imagine that your product has 
 
 ## Clarify First
 
-Before running the pre-mortem, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the pre-mortem, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The thing being stress-tested** — the specific launch/build/migration that "failed 14 days after launch" (anchors the prospective-hindsight framing)
-- [ ] **Failure horizon** — the date/milestone you imagine looking back from (a vague horizon produces vague risks)
-- [ ] **Who's in the room** — the 4-8 participants and whether psychological safety exists (elephants only surface with candor and the right people)
+- **The thing being stress-tested:** the specific launch/build/migration that "failed 14 days after launch" (anchors the prospective-hindsight framing).
+- **Failure horizon:** the date/milestone you imagine looking back from (a vague horizon produces vague risks).
+- **Who's in the room:** the 4-8 participants and whether psychological safety exists (elephants only surface with candor and the right people).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

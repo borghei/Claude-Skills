@@ -50,14 +50,14 @@ AI SEO, generative engine optimization, GEO, AI overviews, Google SGE, ChatGPT c
 
 ## Clarify First
 
-Before optimizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before optimizing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Target queries** — the questions you want to be cited for (drives which pages to optimize and the extractable blocks to add)
-- [ ] **Target AI platform(s)** — Perplexity / ChatGPT / Google AI Overviews / Claude (crawling, indexing, and citation behavior differ per platform)
-- [ ] **Brand/entity name** — exact wording to track (drives citation testing and entity optimization)
-- [ ] **The page/content to optimize** — the URL or draft being restructured (drives extractability scoring + schema selection)
+- **Target queries:** the questions you want to be cited for (drives which pages to optimize and the extractable blocks to add).
+- **Target AI platform(s):** Perplexity / ChatGPT / Google AI Overviews / Claude (crawling, indexing, and citation behavior differ per platform).
+- **Brand/entity name:** exact wording to track (drives citation testing and entity optimization).
+- **The page/content to optimize:** the URL or draft being restructured (drives extractability scoring + schema selection).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

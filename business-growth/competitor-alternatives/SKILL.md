@@ -55,14 +55,14 @@ Production-grade framework for creating competitor comparison and alternative pa
 
 ## Clarify First
 
-Before writing the comparison content, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before writing the comparison content, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Page format** — singular alternative, plural alternatives, you-vs-competitor, or competitor-vs-competitor (selects the page structure template)
-- [ ] **Primary goal** — SEO traffic capture vs sales enablement (changes tone, depth, and whether to include objection handling)
-- [ ] **Target competitor + data freshness** — who, and how recent the pricing/feature data is (every claim must be verifiable)
-- [ ] **Honest positioning** — who you genuinely win for and who the competitor wins for (drives the trust-building "who it's for" sections)
+- **Page format:** singular alternative, plural alternatives, you-vs-competitor, or competitor-vs-competitor (selects the page structure template).
+- **Primary goal:** SEO traffic capture vs sales enablement (changes tone, depth, and whether to include objection handling).
+- **Target competitor + data freshness:** who, and how recent the pricing/feature data is (every claim must be verifiable).
+- **Honest positioning:** who you genuinely win for and who the competitor wins for (drives the trust-building "who it's for" sections).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the page.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Core Principles
 

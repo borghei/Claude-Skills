@@ -57,13 +57,13 @@ Use ICP for "which companies." Use persona for "which humans within ICP."
 
 ## Clarify First
 
-Before defining the ICP, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before defining the ICP, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Existing customers vs greenfield** — refine from closed-won/best-customer patterns vs design-partner proxy (the real ICP comes from data, not a guess)
-- [ ] **The JTBD the product solves** — what customers are trying to accomplish (anchors firmographics, alternatives, and trigger events)
-- [ ] **Reachable channels you have** — paid / outbound / events / content / partners (an ICP you can't reach is academic; drives the Reachability dimension)
+- **Existing customers vs greenfield:** refine from closed-won/best-customer patterns vs design-partner proxy (the real ICP comes from data, not a guess).
+- **The JTBD the product solves:** what customers are trying to accomplish (anchors firmographics, alternatives, and trigger events).
+- **Reachable channels you have:** paid / outbound / events / content / partners (an ICP you can't reach is academic; drives the Reachability dimension).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

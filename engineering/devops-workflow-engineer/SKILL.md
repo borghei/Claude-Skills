@@ -36,13 +36,13 @@ Generate GitHub Actions workflow YAML, analyze existing pipelines for optimizati
 
 ## Clarify First
 
-Before generating the workflow, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the workflow, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Workflow type** — CI, CD, release, or security-scan (sets `workflow_generator.py --type`)
-- [ ] **Stack** — language and test framework (e.g. python/pytest) (drives the generated YAML steps via `--language`/`--test-framework`)
-- [ ] **Deployment strategy & environments** — blue-green, canary, or rolling, and which of dev/staging/prod (drives the `deployment_planner.py` plan)
+- **Workflow type:** CI, CD, release, or security-scan (sets `workflow_generator.py --type`).
+- **Stack:** language and test framework (e.g. python/pytest) (drives the generated YAML steps via `--language`/`--test-framework`).
+- **Deployment strategy & environments:** blue-green, canary, or rolling, and which of dev/staging/prod (drives the `deployment_planner.py` plan).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

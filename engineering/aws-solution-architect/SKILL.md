@@ -36,13 +36,13 @@ Design scalable, cost-effective AWS architectures for startups with infrastructu
 
 ## Clarify First
 
-Before designing the architecture, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the architecture, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **App type & scale** — workload type and expected traffic (selects the pattern: serverless, three-tier, microservices, data-pipeline, or multi-region)
-- [ ] **IaC target** — CloudFormation/SAM, CDK, or Terraform (sets the template format `serverless_stack.py` generates)
-- [ ] **Budget & compliance constraints** — cost ceiling and any regulatory needs (drive service selection and the cost-optimization recommendations)
+- **App type & scale:** workload type and expected traffic (selects the pattern: serverless, three-tier, microservices, data-pipeline, or multi-region).
+- **IaC target:** CloudFormation/SAM, CDK, or Terraform (sets the template format `serverless_stack.py` generates).
+- **Budget & compliance constraints:** cost ceiling and any regulatory needs (drive service selection and the cost-optimization recommendations).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

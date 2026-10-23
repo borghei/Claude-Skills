@@ -44,6 +44,17 @@ The job of a Productboard expert is to operate fluently inside this model: confi
 - Writing API calls to bulk-create Insights, update Features, or read prioritization data
 - Migrating from spreadsheet-based prioritization, or troubleshooting "Insights aren't flowing", "scores aren't updating", and similar workflow failures
 
+## Clarify First
+
+Productboard advice depends most on the user's plan, the systems connected to the workspace, and whether the work reads data or changes it. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Plan:** Per-Component access control is an Enterprise feature, and most plans cap Drivers at 10 per workspace. A workspace or scoring design that assumes either needs to match what the user has.
+- **Read-only or writing through the API:** Recipes target Public API v2; v1 was scheduled to sunset on 2026-07-08, and a few v1 capabilities have no v2 equivalent. Bulk Insight or Feature writes change scores and roadmaps other people rely on, and the default limit of 50 requests per second is shared with every integration using the same token.
+- **Connected tracker and CRM:** Which of Jira, Linear or Azure DevOps receives Features decides the push-down mapping. Segment-weighted scoring needs customer data from Salesforce or HubSpot, and that sync is one-way and scheduled, so scores lag the CRM.
+- **Roadmap audience:** An internal view can show Release dates. A customer-facing view or Portal should use Now / Next / Later, because dates there get read as promises.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
 ## Anti-Patterns
 
 ### Insights without sources

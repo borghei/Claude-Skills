@@ -33,6 +33,7 @@ Strategic frameworks for fintech founders, operators, and product leaders. Knowl
 ## Table of Contents
 
 - [Keywords](#keywords)
+- [Clarify First](#clarify-first)
 - [Quick Start](#quick-start)
 - [Core Workflows](#core-workflows)
 - [Tools](#tools)
@@ -45,6 +46,18 @@ Strategic frameworks for fintech founders, operators, and product leaders. Knowl
 ## Keywords
 
 fintech, payments, banking, neobank, lending, money transmitter, KYC, AML, PSD2, open banking, BaaS, banking-as-a-service, embedded finance, card issuing, ACH, SEPA, stablecoin, crypto, broker-dealer, RIA, regulation, compliance
+
+---
+
+## Clarify First
+
+Fintech advice turns on the flow of funds: who pays whom, who holds the money, and where the business operates. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Flow of funds and custody:** Whether the company holds customer funds, issues cards, lends, takes deposits, or handles securities or crypto decides which triggers apply: money transmission, lending, securities, banking, payment services, crypto or custody. `regulatory_trigger_checker.py` can only flag what the description states, so a vague description gives vague triggers.
+- **Jurisdiction:** In the US, money transmission is licensed state by state, and the regulators range from FinCEN, the OCC and the CFPB to state banking commissioners. In the EU the questions are e-money or payment institution status under PSD2, and MiCA for crypto; the UK falls under the FCA. Name the states and countries before mapping triggers to regulators.
+- **License or partner, and stage:** A company already working with a sponsor bank or BaaS provider needs partner diligence and failure planning; one planning its own license needs a licensing path. Most early-stage fintechs partner, so stage shifts the default answer.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

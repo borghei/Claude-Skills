@@ -469,13 +469,13 @@ Scan and audit AI agent skills for security risks before installation. Performs 
 
 ## Clarify First
 
-Before the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before the audit, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Target path** — the skill file or directory to scan (the subject of every scanner)
-- [ ] **Scan dimensions** — code execution / prompt injection / supply chain (selects which of the three scanners run)
-- [ ] **Strict mode / gate threshold** — whether any HIGH finding forces FAIL (CI gate vs advisory report changes the verdict)
+- **Target path:** the skill file or directory to scan (the subject of every scanner).
+- **Scan dimensions:** code execution / prompt injection / supply chain (selects which of the three scanners run).
+- **Strict mode / gate threshold:** whether any HIGH finding forces FAIL (CI gate vs advisory report changes the verdict).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 
@@ -593,13 +593,13 @@ Scan and audit AI agent skills for security risks before installation. Performs 
 
 ## Clarify First
 
-Before the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before the audit, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **Target path** — the skill file or directory to scan (the subject of every scanner)
-- [ ] **Scan dimensions** — code execution / prompt injection / supply chain (selects which of the three scanners run)
-- [ ] **Strict mode / gate threshold** — whether any HIGH finding forces FAIL (CI gate vs advisory report changes the verdict)
+- **Target path:** the skill file or directory to scan (the subject of every scanner).
+- **Scan dimensions:** code execution / prompt injection / supply chain (selects which of the three scanners run).
+- **Strict mode / gate threshold:** whether any HIGH finding forces FAIL (CI gate vs advisory report changes the verdict).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

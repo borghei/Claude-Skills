@@ -19,14 +19,14 @@ The agent operates as a senior data analyst, writing production SQL, designing v
 
 ## Clarify First
 
-Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Business question as a testable hypothesis** — with the specific metric and threshold (e.g., ">= 5% lift in 7-day retention") (frames the whole analysis and the headline)
-- [ ] **Data sources and grain** — which tables/columns exist and the row grain (determines feasibility and the SQL you can write)
-- [ ] **Audience and the decision** — who consumes the insight and what they will decide (sets altitude and the "Now What" recommendation)
-- [ ] **Analysis type** — cohort, funnel, hypothesis test, or trend (selects the method and the chart)
+- **Business question as a testable hypothesis:** with the specific metric and threshold (e.g., ">= 5% lift in 7-day retention") (frames the whole analysis and the headline).
+- **Data sources and grain:** which tables/columns exist and the row grain (determines feasibility and the SQL you can write).
+- **Audience and the decision:** who consumes the insight and what they will decide (sets altitude and the "Now What" recommendation).
+- **Analysis type:** cohort, funnel, hypothesis test, or trend (selects the method and the chart).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 

@@ -24,13 +24,13 @@ The **Helm Chart Builder** skill provides automated analysis of Helm charts incl
 
 ## Clarify First
 
-Before analyzing the chart, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before analyzing the chart, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Chart path** — which chart directory to analyze (sets `--path`/`--chart`)
-- [ ] **Values files** — which environment values files to validate (sets `--values` and what gets checked against best practices)
-- [ ] **Strictness** — strict/lint mode and JSON for CI (sets `--strict --format json` and whether findings gate the pipeline)
+- **Chart path:** which chart directory to analyze (sets `--path`/`--chart`).
+- **Values files:** which environment values files to validate (sets `--values` and what gets checked against best practices).
+- **Strictness:** strict/lint mode and JSON for CI (sets `--strict --format json` and whether findings gate the pipeline).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

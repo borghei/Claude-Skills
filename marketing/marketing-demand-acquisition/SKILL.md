@@ -25,6 +25,7 @@ Acquisition playbook for Series A+ startups scaling internationally (EU/US/Canad
 
 - [Role Coverage](#role-coverage)
 - [Core KPIs](#core-kpis)
+- [Clarify First](#clarify-first)
 - [Demand Generation Framework](#demand-generation-framework)
 - [Paid Media Channels](#paid-media-channels)
 - [SEO Strategy](#seo-strategy)
@@ -55,6 +56,19 @@ Acquisition playbook for Series A+ startups scaling internationally (EU/US/Canad
 **SEO:** Organic sessions, non-brand traffic %, keyword rankings, technical health score
 
 **Partnerships:** Partner-sourced pipeline $, partner CAC, co-marketing ROI
+
+---
+
+## Clarify First
+
+What most shapes this skill's output is the sales motion, the monthly budget and the markets the demand is bought in. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Motion and deal size:** the playbook assumes a hybrid PLG and sales-led B2B motion. That assumption sets the W-shaped attribution model, the SQL criteria (Director+, $10k+ annual budget) and the LinkedIn-heavy mix. A self-serve or SMB product points toward Meta and Google instead.
+- **Budget:** the allocation table is built for $40k a month at Series A. A much smaller budget cannot carry LinkedIn's $150-400 CAC range across several campaigns, so fewer channels get funded.
+- **Target markets:** EU, US and Canada each have their own tactics in `references/international-playbooks.md`, and EU campaigns need consent and double opt-in handling that changes the tracking setup.
+- **Current numbers and stack:** existing CAC, MQL to SQL rate and LTV decide whether a channel gets scaled or cut. The setup steps assume HubSpot, so a different CRM changes the UTM, scoring and attribution steps.
+
+If a marketing context document exists (the one the marketing-context skill builds), start from it and ask only about the gaps. Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

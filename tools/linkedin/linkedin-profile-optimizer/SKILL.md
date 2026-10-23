@@ -60,14 +60,14 @@ and threads (`linkedin-comment-writer`, `linkedin-reply-manager`,
 
 ## Clarify First
 
-Before auditing or rewriting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before auditing or rewriting, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The single goal** (clients, job search, authority, hiring) — sets the section weights, the Featured slots and the closing action; a profile aimed at two goals argues for neither
-- [ ] **Who the reader is and what they would search for** — without it the headline and skills checks have nothing to test against, and the rewrite defaults to generic wording
-- [ ] **What evidence exists and what may be published** — decides whether the rewrite can use figures, must fall back to scope, or has to stop and collect proof first
-- [ ] **Whether the pasted text is the whole profile** — never score a section that was not supplied, and never infer content from a URL or a name
+- **The single goal:** (clients, job search, authority, hiring) — sets the section weights, the Featured slots and the closing action; a profile aimed at two goals argues for neither.
+- **Who the reader is and what they would search for:** without it the headline and skills checks have nothing to test against, and the rewrite defaults to generic wording.
+- **What evidence exists and what may be published:** decides whether the rewrite can use figures, must fall back to scope, or has to stop and collect proof first.
+- **Whether the pasted text is the whole profile:** never score a section that was not supplied, and never infer content from a URL or a name.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

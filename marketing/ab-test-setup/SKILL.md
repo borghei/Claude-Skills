@@ -21,14 +21,14 @@ Production-ready A/B testing toolkit for calculating sample sizes, designing rig
 
 ## Clarify First
 
-Before designing the test, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before designing the test, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Hypothesis + primary metric** — what change you expect and the single metric that judges it (drives test plan + analysis)
-- [ ] **Baseline conversion rate** — the current rate the metric sits at today (drives sample size calculation)
-- [ ] **Minimum detectable effect (MDE)** — smallest lift worth detecting (drives required samples + duration)
-- [ ] **Daily traffic available** — eligible visitors per day per variant (determines how long the test must run)
+- **Hypothesis + primary metric:** what change you expect and the single metric that judges it (drives test plan + analysis).
+- **Baseline conversion rate:** the current rate the metric sits at today (drives sample size calculation).
+- **Minimum detectable effect (MDE):** smallest lift worth detecting (drives required samples + duration).
+- **Daily traffic available:** eligible visitors per day per variant (determines how long the test must run).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

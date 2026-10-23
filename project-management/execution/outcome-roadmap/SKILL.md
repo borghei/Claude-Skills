@@ -41,14 +41,14 @@ The agent transforms output-based roadmaps ("build feature X") into outcome-driv
 
 ## Clarify First
 
-Before transforming the roadmap, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before transforming the roadmap, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Customer segment + business impact per item** — fills the "Enable [segment] to [outcome] so that [impact]" statement; without it the tool only emits placeholder templates
-- [ ] **Target quarter per initiative** — drives Now/Next/Later horizon placement and the detail/commitment level
-- [ ] **Initiative type** — feature / improvement / infrastructure drives the strategic-question and metric suggestions
-- [ ] **Success metric per Now/Next item** — the primary/secondary/counter-metrics; Later items intentionally stay metric-light to avoid false precision
+- **Customer segment + business impact per item:** fills the "Enable [segment] to [outcome] so that [impact]" statement; without it the tool only emits placeholder templates.
+- **Target quarter per initiative:** drives Now/Next/Later horizon placement and the detail/commitment level.
+- **Initiative type:** feature / improvement / infrastructure drives the strategic-question and metric suggestions.
+- **Success metric per Now/Next item:** the primary/secondary/counter-metrics; Later items intentionally stay metric-light to avoid false precision.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

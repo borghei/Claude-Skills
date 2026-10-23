@@ -35,13 +35,13 @@ weekly review, GTD, getting things done, OKR check-in, retrospective, weekly ret
 
 ## Clarify First
 
-Before synthesizing the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before synthesizing the review, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The week's raw inputs** — actual wins, learnings, and blockers; this is the content the review synthesizes, not invented
-- [ ] **OKR / goal progress** — current numbers vs target drives the check-in section and flags drift
-- [ ] **Next-week priorities** — the top 1-3 commitments the review must end on
+- **The week's raw inputs:** actual wins, learnings, and blockers; this is the content the review synthesizes, not invented.
+- **OKR / goal progress:** current numbers vs target drives the check-in section and flags drift.
+- **Next-week priorities:** the top 1-3 commitments the review must end on.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ---
 

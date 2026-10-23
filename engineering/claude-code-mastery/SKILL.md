@@ -40,13 +40,13 @@ Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, sub
 
 ## Clarify First
 
-Before scaffolding or optimizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before scaffolding or optimizing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which task** — scaffold a new skill, optimize a CLAUDE.md, create a subagent, or analyze context budget (selects `skill_scaffolder.py` vs `claudemd_optimizer.py` vs `context_analyzer.py`)
-- [ ] **Target identity** — for a new skill: its name, domain, and one-line description; for optimization: the file or project path (the inputs the scripts require)
-- [ ] **Token budget** — the target ceiling (sets `--token-limit` and what counts as over-budget)
+- **Which task:** scaffold a new skill, optimize a CLAUDE.md, create a subagent, or analyze context budget (selects `skill_scaffolder.py` vs `claudemd_optimizer.py` vs `context_analyzer.py`).
+- **Target identity:** for a new skill: its name, domain, and one-line description; for optimization: the file or project path (the inputs the scripts require).
+- **Token budget:** the target ceiling (sets `--token-limit` and what counts as over-budget).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

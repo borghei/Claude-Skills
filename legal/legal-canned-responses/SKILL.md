@@ -34,13 +34,13 @@ Production-ready toolkit for generating templated responses to common legal inqu
 
 ## Clarify First
 
-Before generating the response, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the response, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Inquiry category + sub-type** — DSR-acknowledgment vs subpoena-objection select completely different templates
-- [ ] **The raw inquiry text** — required to run escalation detection first; a litigation, regulator, law-enforcement, or press trigger means STOP and route to counsel, not a templated reply
-- [ ] **Substitution variables** — requestor name, dates, matter, and regulation — populate the response; missing values leave placeholders and the wrong timelines (GDPR 30-day vs CCPA 45-day)
+- **Inquiry category + sub-type:** DSR-acknowledgment vs subpoena-objection select completely different templates.
+- **The raw inquiry text:** required to run escalation detection first; a litigation, regulator, law-enforcement, or press trigger means STOP and route to counsel, not a templated reply.
+- **Substitution variables:** requestor name, dates, matter, and regulation — populate the response; missing values leave placeholders and the wrong timelines (GDPR 30-day vs CCPA 45-day).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the response.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

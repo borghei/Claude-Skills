@@ -38,14 +38,14 @@ Production-grade conversion rate optimization framework for marketing pages. Cov
 
 ## Clarify First
 
-Before optimizing the page, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before optimizing the page, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Page type** — homepage, landing page, pricing, feature, or blog (selects the page-type playbook and benchmark)
-- [ ] **Traffic source** — organic, paid, email, or social (drives message-match requirements)
-- [ ] **Primary conversion goal + current rate** — focuses the 7-dimension analysis and sets the baseline
-- [ ] **Behavioral data available** — heatmaps / session recordings (reveals friction that analytics alone cannot)
+- **Page type:** homepage, landing page, pricing, feature, or blog (selects the page-type playbook and benchmark).
+- **Traffic source:** organic, paid, email, or social (drives message-match requirements).
+- **Primary conversion goal + current rate:** focuses the 7-dimension analysis and sets the baseline.
+- **Behavioral data available:** heatmaps / session recordings (reveals friction that analytics alone cannot).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the audit.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Initial Assessment
 

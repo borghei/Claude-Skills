@@ -21,14 +21,14 @@ Production-ready investment analysis toolkit for screening opportunities, analyz
 
 ## Clarify First
 
-Before the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Which task** — screen opportunities, analyze a portfolio, or generate a DD checklist (selects the script and the required input JSON)
-- [ ] **Screening thresholds** — minimum ROI, maximum payback, and acceptable risk level (drives which opportunities pass and how they rank)
-- [ ] **Target profile for DD** — investment type, stage, and check size (drives which items and weights the due-diligence checklist generates)
-- [ ] **Risk tolerance / concentration limits** — max exposure per holding or sector (drives portfolio rebalancing recommendations)
+- **Which task:** screen opportunities, analyze a portfolio, or generate a DD checklist (selects the script and the required input JSON).
+- **Screening thresholds:** minimum ROI, maximum payback, and acceptable risk level (drives which opportunities pass and how they rank).
+- **Target profile for DD:** investment type, stage, and check size (drives which items and weights the due-diligence checklist generates).
+- **Risk tolerance / concentration limits:** max exposure per holding or sector (drives portfolio rebalancing recommendations).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

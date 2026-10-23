@@ -38,14 +38,14 @@ Tools and guidance for multi-regulation privacy compliance across 9 major global
 
 ## Clarify First
 
-Before the assessment, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before the assessment, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Org location + where your data subjects are** — sets which of the 9 regulations apply via territorial scope (the entire obligations matrix)
-- [ ] **Data types processed** — personal, sensitive, financial, health, biometric, children — drives obligations and special-category triggers
-- [ ] **Processing activities** — marketing, analytics, HR, profiling, healthcare — affects applicability and which obligations attach
-- [ ] **Current practices** (if you want a gap analysis) — needed to flag gaps; without them you get an obligations matrix only, no gap report
+- **Org location + where your data subjects are:** sets which of the 9 regulations apply via territorial scope (the entire obligations matrix).
+- **Data types processed:** personal, sensitive, financial, health, biometric, children — drives obligations and special-category triggers.
+- **Processing activities:** marketing, analytics, HR, profiling, healthcare — affects applicability and which obligations attach.
+- **Current practices:** (if you want a gap analysis) — needed to flag gaps; without them you get an obligations matrix only, no gap report.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the assessment.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

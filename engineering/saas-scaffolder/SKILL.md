@@ -44,14 +44,14 @@ Generate a complete, production-ready SaaS application boilerplate including aut
 
 ## Clarify First
 
-Before scaffolding, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before scaffolding, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Auth provider** — NextAuth / Clerk / Supabase Auth (`--auth`; changes the auth config and middleware generated)
-- [ ] **Payments provider** — Stripe / Lemon Squeezy / none (`--payments`; determines the billing + webhook handler)
-- [ ] **Tenancy model** — workspace / organization / single-tenant (`--tenancy`; shapes the entire database schema and scoped queries)
-- [ ] **Database** — Neon / Supabase / other Postgres (`--db`; sets the Drizzle adapter and connection config)
+- **Auth provider:** NextAuth / Clerk / Supabase Auth (`--auth`; changes the auth config and middleware generated).
+- **Payments provider:** Stripe / Lemon Squeezy / none (`--payments`; determines the billing + webhook handler).
+- **Tenancy model:** workspace / organization / single-tenant (`--tenancy`; shapes the entire database schema and scoped queries).
+- **Database:** Neon / Supabase / other Postgres (`--db`; sets the Drizzle adapter and connection config).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

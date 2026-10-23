@@ -25,13 +25,13 @@ The **LLM Cost Optimizer** skill provides tools for counting tokens, estimating 
 
 ## Clarify First
 
-Before estimating or optimizing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before estimating or optimizing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Input prompt/text** — the prompt file or text to count or optimize (the input via `--file`/`--text`/`--stdin`)
-- [ ] **Target models** — which models to estimate cost for (sets `--models` and the pricing comparison)
-- [ ] **Goal** — cost estimation vs prompt optimization, and any target reduction (selects `token_counter.py` vs `prompt_optimizer.py` and sets `--target-reduction`)
+- **Input prompt/text:** the prompt file or text to count or optimize (the input via `--file`/`--text`/`--stdin`).
+- **Target models:** which models to estimate cost for (sets `--models` and the pricing comparison).
+- **Goal:** cost estimation vs prompt optimization, and any target reduction (selects `token_counter.py` vs `prompt_optimizer.py` and sets `--target-reduction`).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

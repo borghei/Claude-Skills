@@ -217,14 +217,16 @@ the skill it is 30." If you cannot write that sentence honestly, do not publish.
 
 ## P11 — Clarify-First Gate
 
-**Rule:** generative skills carry a `## Clarify First` section with 2-4 checkboxes
-and the verbatim stop rule. Advisory skills omit it.
+**Rule:** generative skills carry a `## Clarify First` section naming 2-4 inputs, each
+with why it changes the output, plus a line that keeps the gate light (ask only what
+changes the result; a user who wants a result now gets one, with assumptions stated).
+Advisory skills may include it; reference skills omit it.
 
 | Criterion | Auto | Notes |
 |-----------|------|-------|
 | Section present for generative skills | Human | Linter cannot tell generative from advisory |
-| Stop rule present when section is | Yes | Fires if the section exists without it |
-| 2-4 checkboxes, not more | Human | Longer is an intake form, and users route around it |
+| Light-gate line present when section is | Yes | Fires if the section exists without it |
+| 2-4 inputs, not more | Human | Longer is an intake form, and users route around it |
 | Each has a "why it changes the output" clause | Human | The clause is the payload |
 | Gate lives in the body, not the description | Yes | It must not consume the P1 budget |
 

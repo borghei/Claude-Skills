@@ -51,14 +51,14 @@ values; run it once before trusting any result.
 
 ## Clarify First
 
-Before analyzing, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before analyzing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The unit of measurement, and whether each unit appears once** — clustering (many sessions per user counted as independent rows) deflates standard errors and manufactures significance; it invalidates every test below
-- [ ] **The smallest effect worth acting on** — without it there is no way to size the study or to say whether a significant result matters
-- [ ] **How many comparisons are in the family, and which metric was primary** — decides the correction and whether the result is confirmatory or exploratory
-- [ ] **Whether anyone has already looked at the data while it accumulated** — peeking invalidates a fixed-horizon test and changes the whole approach
+- **The unit of measurement, and whether each unit appears once:** clustering (many sessions per user counted as independent rows) deflates standard errors and manufactures significance; it invalidates every test below.
+- **The smallest effect worth acting on:** without it there is no way to size the study or to say whether a significant result matters.
+- **How many comparisons are in the family, and which metric was primary:** decides the correction and whether the result is confirmatory or exploratory.
+- **Whether anyone has already looked at the data while it accumulated:** peeking invalidates a fixed-horizon test and changes the whole approach.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

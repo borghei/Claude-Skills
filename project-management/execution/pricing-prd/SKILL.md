@@ -44,14 +44,14 @@ This skill is opinionated about the structure of a pricing PRD (distinct from a 
 
 ## Clarify First
 
-Before generating the pricing PRD, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the pricing PRD, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Pricing model change** — tier / usage / hybrid / per-seat / outcome-based shift (drives the pricing-model + packaging sections)
-- [ ] **Existing customers' fate** — the grandfathering policy (drives the most-skipped grandfathering + communication sections that cause the most damage)
-- [ ] **Experiment vs hard launch** — A/B test or direct rollout (drives the experiment-design section: hypothesis, MDE, holdout)
-- [ ] **Rollback trigger** — the revenue/conversion threshold that aborts the change (drives the pre-written rollback criteria)
+- **Pricing model change:** tier / usage / hybrid / per-seat / outcome-based shift (drives the pricing-model + packaging sections).
+- **Existing customers' fate:** the grandfathering policy (drives the most-skipped grandfathering + communication sections that cause the most damage).
+- **Experiment vs hard launch:** A/B test or direct rollout (drives the experiment-design section: hypothesis, MDE, holdout).
+- **Rollback trigger:** the revenue/conversion threshold that aborts the change (drives the pre-written rollback criteria).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Anti-Patterns
 

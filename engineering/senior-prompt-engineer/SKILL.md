@@ -32,6 +32,17 @@ Prompt engineering patterns, LLM evaluation frameworks, and agentic system desig
 - Evaluating LLM outputs or RAG retrieval/generation quality.
 - Building or validating agentic systems and tool-calling workflows.
 
+## Clarify First
+
+What shapes this skill's output most is the target model, the job the prompt has to do, and the data you can test it against. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **Target model:** token counts and cost estimates depend on it. `prompt_optimizer.py --model` and `agent_orchestrator.py --estimate-cost` use different characters-per-token ratios for Claude and GPT models, and a pattern that suits one model family may not suit another.
+- **Task and output contract:** whether the prompt classifies, extracts, generates or drives an agent decides which of the 10 patterns fits and whether a JSON or XML schema has to be enforced. A missing output format is one of the first issues the optimizer flags.
+- **Evaluation data:** without sample inputs, expected outputs or pre-retrieved contexts, the work stays at static clarity and structure scoring. `rag_evaluator.py` needs contexts and questions before it can report relevance, faithfulness or Precision@K, so find out what exists before promising those numbers.
+- **Volume and budget:** the daily run count drives the monthly cost projection (`--runs`), and a tight budget shifts the trade-off between more few-shot examples and a shorter prompt.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
 ## Tools
 
 | Tool | Purpose | Command |

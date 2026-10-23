@@ -46,14 +46,14 @@ congratulate themselves on a 10% discount against 40% more seats than they need.
 
 ## Clarify First
 
-Before generating, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Whether seat data is assigned or active** — this is the single most consequential input. Assigned seats overstate usage by 30-60%, and an analysis built on them finds almost nothing
-- [ ] **Notice periods and auto-renew flags** — a contract inside its notice window is committed for another full term, so its "savings" are not available this cycle and must not be counted toward a target
-- [ ] **Whether the goal is in-year cash or run-rate reduction** — seat cuts at renewal reduce run-rate but may deliver nothing this fiscal year, which is the wrong answer to an in-year cash problem
-- [ ] **Which tools are politically untouchable** — if the CRM is the CRO's and cannot be cut, that changes which opportunities are worth analysing at all
+- **Whether seat data is assigned or active:** this is the single most consequential input. Assigned seats overstate usage by 30-60%, and an analysis built on them finds almost nothing.
+- **Notice periods and auto-renew flags:** a contract inside its notice window is committed for another full term, so its "savings" are not available this cycle and must not be counted toward a target.
+- **Whether the goal is in-year cash or run-rate reduction:** seat cuts at renewal reduce run-rate but may deliver nothing this fiscal year, which is the wrong answer to an in-year cash problem.
+- **Which tools are politically untouchable:** if the CRM is the CRO's and cannot be cut, that changes which opportunities are worth analysing at all.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflows
 

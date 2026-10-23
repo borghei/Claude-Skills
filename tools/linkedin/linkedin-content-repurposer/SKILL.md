@@ -70,14 +70,14 @@ read. Deciding which week the repurposed post runs in is
 
 ## Clarify First
 
-Before analysing or drafting, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before analysing or drafting, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Whose words these are** — adapting your own talk is editing; adapting a colleague's, a panel's or an employer's needs permission and attribution, and changes whether the post can be first-person at all.
-- [ ] **One post or several** — a long source usually holds more than one; deciding up front stops the draft becoming a summary of everything.
-- [ ] **Which single point this post carries** — the analyser offers candidates, but the author knows which one they would defend in the comments.
-- [ ] **What happens to links and to co-speakers' remarks** — both are easy to carry over by accident and awkward to remove after publishing.
+- **Whose words these are:** adapting your own talk is editing; adapting a colleague's, a panel's or an employer's needs permission and attribution, and changes whether the post can be first-person at all.
+- **One post or several:** a long source usually holds more than one; deciding up front stops the draft becoming a summary of everything.
+- **Which single point this post carries:** the analyser offers candidates, but the author knows which one they would defend in the comments.
+- **What happens to links and to co-speakers' remarks:** both are easy to carry over by accident and awkward to remove after publishing.
 
-Stop rule: ask only the two that most change the output. If the user says "just convert it", take the top-ranked spine candidate, produce one post, leave links out of the body, and list those assumptions above the draft.
+Ask only the two that most change the output. If the user says "just convert it", take the top-ranked spine candidate, produce one post, leave links out of the body, and list those assumptions above the draft.
 
 ## Workflows
 

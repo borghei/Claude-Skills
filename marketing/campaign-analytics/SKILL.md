@@ -115,14 +115,14 @@ All scripts support two output formats via the `--format` flag:
 
 ## Clarify First
 
-Before running the analysis, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the analysis, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Analysis type** — attribution, funnel, or ROI (selects which tool and report you produce)
-- [ ] **Source data** — journey touchpoints / funnel stage counts / campaign spend+revenue as JSON (the required input the analysis runs on)
-- [ ] **Attribution model + half-life** — matched to your average sales cycle (changes how credit is allocated across channels)
-- [ ] **Channel + vertical for benchmarking** — sets the benchmark thresholds used to flag underperformance
+- **Analysis type:** attribution, funnel, or ROI (selects which tool and report you produce).
+- **Source data:** journey touchpoints / funnel stage counts / campaign spend+revenue as JSON (the required input the analysis runs on).
+- **Attribution model + half-life:** matched to your average sales cycle (changes how credit is allocated across channels).
+- **Channel + vertical for benchmarking:** sets the benchmark thresholds used to flag underperformance.
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## How to Use
 

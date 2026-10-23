@@ -43,13 +43,13 @@ The canvas has two sides. The **Customer Profile** describes the customer's worl
 
 ## Clarify First
 
-Before building the canvas, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before building the canvas, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **The one segment** — the VPC is segment-level; one canvas per segment (defines whose Customer Profile you fill)
-- [ ] **Customer evidence source** — interviews/synthesis vs team assumptions (jobs/pains/gains in the team's own words is the #1 way the canvas becomes fiction)
-- [ ] **Which fit level** — problem-solution / product-market / business-model (sets the validation method: interviews vs behavior vs unit economics)
+- **The one segment:** the VPC is segment-level; one canvas per segment (defines whose Customer Profile you fill).
+- **Customer evidence source:** interviews/synthesis vs team assumptions (jobs/pains/gains in the team's own words is the #1 way the canvas becomes fiction).
+- **Which fit level:** problem-solution / product-market / business-model (sets the validation method: interviews vs behavior vs unit economics).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

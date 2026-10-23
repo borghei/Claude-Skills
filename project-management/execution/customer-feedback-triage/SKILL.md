@@ -51,13 +51,13 @@ The frameworks behind it are Marty Cagan's separation of *request* from *opportu
 
 ## Clarify First
 
-Before triaging the feedback, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before triaging the feedback, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Feedback items with channel + segment tags** — the verbatims and where each came from (drives clustering, volume counts, and the Kano guess)
-- [ ] **Segment weights** — which customer segments count more (sets `segment_weight` in the score, i.e. whether enterprise asks outrank long-tail volume)
-- [ ] **Strategic alignment definition** — what current strategy a request must match (sets the `strategic_alignment` term that boosts on-strategy asks)
+- **Feedback items with channel + segment tags:** the verbatims and where each came from (drives clustering, volume counts, and the Kano guess).
+- **Segment weights:** which customer segments count more (sets `segment_weight` in the score, i.e. whether enterprise asks outrank long-tail volume).
+- **Strategic alignment definition:** what current strategy a request must match (sets the `strategic_alignment` term that boosts on-strategy asks).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

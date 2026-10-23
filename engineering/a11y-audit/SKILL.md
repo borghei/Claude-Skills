@@ -24,13 +24,13 @@ The **Accessibility Audit** skill provides automated scanning of HTML files for 
 
 ## Clarify First
 
-Before running the audit, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before running the audit, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Target & scope** — which HTML files, directory, or CSS to scan (determines what gets checked and the `--file`/`--dir`/`--css` arguments)
-- [ ] **Conformance level** — A, AA, or AAA target (sets contrast thresholds and which violations are CRITICAL vs WARNING vs INFO)
-- [ ] **Use context** — one-off remediation vs CI gate (drives `--strict` gating and JSON output)
+- **Target & scope:** which HTML files, directory, or CSS to scan (determines what gets checked and the `--file`/`--dir`/`--css` arguments).
+- **Conformance level:** A, AA, or AAA target (sets contrast thresholds and which violations are CRITICAL vs WARNING vs INFO).
+- **Use context:** one-off remediation vs CI gate (drives `--strict` gating and JSON output).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 

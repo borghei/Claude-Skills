@@ -467,13 +467,13 @@ Automated code review tooling that analyzes pull requests for complexity and ris
 
 ## Clarify First
 
-Before producing the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before producing the review, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **What to review** — the git diff/branch (base and head) or a source directory (sets `--base`/`--head` or the path the analyzers scan)
-- [ ] **Language** — TypeScript, JavaScript, Python, Go, Swift, or Kotlin (selects the rules `code_quality_checker.py` applies via `--language`)
-- [ ] **Output &amp; gate** — report format (text/markdown/JSON) and any pass/fail score threshold (sets the artifact format and CI verdict)
+- **What to review:** the git diff/branch (base and head) or a source directory (sets `--base`/`--head` or the path the analyzers scan).
+- **Language:** TypeScript, JavaScript, Python, Go, Swift, or Kotlin (selects the rules `code_quality_checker.py` applies via `--language`).
+- **Output &amp; gate:** report format (text/markdown/JSON) and any pass/fail score threshold (sets the artifact format and CI verdict).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 
@@ -588,13 +588,13 @@ Automated code review tooling that analyzes pull requests for complexity and ris
 
 ## Clarify First
 
-Before producing the review, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before producing the review, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- [ ] **What to review** — the git diff/branch (base and head) or a source directory (sets `--base`/`--head` or the path the analyzers scan)
-- [ ] **Language** — TypeScript, JavaScript, Python, Go, Swift, or Kotlin (selects the rules `code_quality_checker.py` applies via `--language`)
-- [ ] **Output &amp; gate** — report format (text/markdown/JSON) and any pass/fail score threshold (sets the artifact format and CI verdict)
+- **What to review:** the git diff/branch (base and head) or a source directory (sets `--base`/`--head` or the path the analyzers scan).
+- **Language:** TypeScript, JavaScript, Python, Go, Swift, or Kotlin (selects the rules `code_quality_checker.py` applies via `--language`).
+- **Output &amp; gate:** report format (text/markdown/JSON) and any pass/fail score threshold (sets the artifact format and CI verdict).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says &quot;just draft it,&quot; proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Tools
 

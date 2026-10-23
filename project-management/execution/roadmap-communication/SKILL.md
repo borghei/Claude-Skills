@@ -49,13 +49,13 @@ This skill produces three variants of the same underlying roadmap, each tailored
 
 ## Clarify First
 
-Before generating the variants, confirm these inputs. If any is unknown or vague, ASK — do not assume:
+Before generating the variants, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- [ ] **Target audience(s)** — executive, customer, internal, or all three (each is a distinct variant with different detail, framing, and risk language)
-- [ ] **The roadmap source of truth** — Now/Next/Later items with owners and dates (the internal variant is authored first; exec/customer derive from it)
-- [ ] **Date-commitment policy** — what you can promise customers publicly (the customer variant strips firm dates; the exec variant gets confidence ratings instead)
+- **Target audience(s):** executive, customer, internal, or all three (each is a distinct variant with different detail, framing, and risk language).
+- **The roadmap source of truth:** Now/Next/Later items with owners and dates (the internal variant is authored first; exec/customer derive from it).
+- **Date-commitment policy:** what you can promise customers publicly (the customer variant strips firm dates; the exec variant gets confidence ratings instead).
 
-Stop rule: ask only the 2-3 that most change the output. If the user says "just draft it," proceed and list your assumptions at the top of the artifact.
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Quick Start
 
