@@ -48,9 +48,9 @@ The cs-mlops-engineer agent is most valuable when (1) shipping a new model from 
 **Goal:** Move a validated model from notebook to monitored production endpoint.
 
 **Steps:**
-1. Generate deployment pipeline: `python ../../engineering/senior-ml-engineer/scripts/model_deployment_pipeline.py model-config.yaml`
+1. Generate deployment pipeline: `python ../../engineering/senior-ml-engineer/scripts/model_deployment_pipeline.py --input deployment_spec.json --output deploy/`
 2. Apply MLOps patterns from `mlops_production_patterns.md` (versioning, shadow deploy, gradual rollout)
-3. Configure monitoring: `python ../../engineering/senior-ml-engineer/scripts/ml_monitoring_suite.py --model my-model`
+3. Configure monitoring: `python ../../engineering/senior-ml-engineer/scripts/ml_monitoring_suite.py --baseline baseline.csv --current current.csv --output monitoring/`
 4. Define drift, skew, and quality thresholds; alert on breach
 5. Document rollback path and retraining trigger
 
@@ -64,7 +64,7 @@ The cs-mlops-engineer agent is most valuable when (1) shipping a new model from 
 
 **Steps:**
 1. Architect components per `rag_system_architecture.md` (chunking, embeddings, retrieval, reranking)
-2. Scaffold system: `python ../../engineering/senior-ml-engineer/scripts/rag_system_builder.py spec.yaml`
+2. Scaffold system: `python ../../engineering/senior-ml-engineer/scripts/rag_system_builder.py --input rag_spec.json --output rag-plan/`
 3. Build offline eval set; measure retrieval precision, answer quality
 4. Wire production telemetry — query logging, citation tracking, user feedback
 5. Establish refresh schedule for the document index
@@ -78,7 +78,7 @@ The cs-mlops-engineer agent is most valuable when (1) shipping a new model from 
 **Goal:** Diagnose drift or quality regression and decide between retrain, rollback, or feature fix.
 
 **Steps:**
-1. Pull monitoring snapshot: `python ../../engineering/senior-ml-engineer/scripts/ml_monitoring_suite.py --since 7d`
+1. Pull monitoring snapshot: `python ../../engineering/senior-ml-engineer/scripts/ml_monitoring_suite.py --baseline baseline.csv --current last_7_days.csv`
 2. Validate data sources: `python ../../engineering/senior-data-engineer/scripts/data_quality_validator.py features.csv`
 3. Identify whether issue is data, model, or pipeline
 4. Pick remediation: retrain on fresh data, rollback to prior version, or fix upstream pipeline
@@ -93,12 +93,12 @@ The cs-mlops-engineer agent is most valuable when (1) shipping a new model from 
 ### Example 1: Pre-Deploy Eval
 ```bash
 python ../../engineering/senior-data-engineer/scripts/data_quality_validator.py training.csv
-python ../../engineering/senior-ml-engineer/scripts/model_deployment_pipeline.py config.yaml
+python ../../engineering/senior-ml-engineer/scripts/model_deployment_pipeline.py --input deployment_spec.json --output deploy/
 ```
 
 ### Example 2: Daily ML Health
 ```bash
-python ../../engineering/senior-ml-engineer/scripts/ml_monitoring_suite.py --since 1d > ml-health.txt
+python ../../engineering/senior-ml-engineer/scripts/ml_monitoring_suite.py --baseline baseline.csv --current last_1_day.csv --fail-on alert > ml-health.txt
 python ../../engineering/senior-data-engineer/scripts/etl_performance_optimizer.py pipelines/
 ```
 

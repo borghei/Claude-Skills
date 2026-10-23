@@ -38,7 +38,7 @@ The cs-devops-engineer agent is most valuable when (1) building or refactoring a
 ## Workflows
 
 ### Workflow 1: Pipeline Build
-1. Generate pipeline: `python ../../engineering/senior-devops/scripts/pipeline_generator.py --service api --target k8s`
+1. Generate pipeline: `python ../../engineering/senior-devops/scripts/pipeline_generator.py ./api --platform github-actions --output .github/workflows/ci.yml`
 2. Apply guidance from `cicd_pipeline_guide.md`
 3. Pick deployment strategy from `deployment_strategies.md` based on risk profile
 4. Wire monitoring and automatic rollback on health-check failure
@@ -46,7 +46,7 @@ The cs-devops-engineer agent is most valuable when (1) building or refactoring a
 **Time Estimate:** 2-5 days per service pipeline.
 
 ### Workflow 2: IaC Standardization
-1. Scaffold Terraform: `python ../../engineering/senior-devops/scripts/terraform_scaffolder.py --module vpc`
+1. Scaffold Terraform: `python ../../engineering/senior-devops/scripts/terraform_scaffolder.py ./infra --provider aws --name vpc --envs dev,staging,prod`
 2. Apply patterns from `infrastructure_as_code.md` (modules, state, drift detection)
 3. Establish module library; require modules over inline resources
 4. Quarterly drift scan and remediation
@@ -55,7 +55,7 @@ The cs-devops-engineer agent is most valuable when (1) building or refactoring a
 
 ### Workflow 3: Kubernetes Production Operation
 1. Apply patterns from `kubernetes_patterns.md` (workloads, autoscaling, network policies, RBAC)
-2. Manage deployments: `python ../../engineering/senior-devops/scripts/deployment_manager.py --action deploy --service api`
+2. Manage deployments: `python ../../engineering/senior-devops/scripts/deployment_manager.py deploy-api.json` (plans the rollout: strategy, steps, health checks, rollback triggers)
 3. Wire pod-level monitoring, log aggregation, and PVC backup
 4. Run quarterly chaos game day on staging
 
@@ -64,8 +64,8 @@ The cs-devops-engineer agent is most valuable when (1) building or refactoring a
 ## Integration Examples
 
 ```bash
-python ../../engineering/senior-devops/scripts/pipeline_generator.py --service api --target k8s
-python ../../engineering/senior-devops/scripts/deployment_manager.py --action rollback --service api
+python ../../engineering/senior-devops/scripts/pipeline_generator.py ./api --platform github-actions
+python ../../engineering/senior-devops/scripts/deployment_manager.py deploy-api.json --json   # plan includes the rollback runbook
 ```
 
 ## Success Metrics

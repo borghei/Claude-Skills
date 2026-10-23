@@ -482,13 +482,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-The three scripts are scaffolds: they validate their arguments and write a run record, but do not yet perform the analysis described. Until they are implemented, do the work inline as shown in the workflows.
+Three standard-library Python tools. Each takes `--format text|json`, prints a sample input with `--example`, and writes a JSON file only when you pass `--output DIR` (it will not overwrite an existing one without `--force`). Sample inputs live in `assets/`.
 
-| Script | Purpose |
-|--------|---------|
-| `scripts/experiment_designer.py` | A/B test design, power analysis, sample size calculation |
-| `scripts/feature_engineering_pipeline.py` | Automated feature generation, correlation analysis, feature selection |
-| `scripts/model_evaluation_suite.py` | Model comparison, cross-validation, deployment readiness checks |
+| Script | Purpose | Example |
+|--------|---------|---------|
+| `scripts/experiment_designer.py` | Per-arm sample size, power and test duration for a two-proportion or difference-in-means A/B test, with Bonferroni adjustment for extra arms and warnings for underpowered or very long designs | `python scripts/experiment_designer.py --baseline 0.10 --mde 0.02 --daily-traffic 5000` |
+| `scripts/feature_engineering_pipeline.py` | Profiles a CSV (types, nulls, cardinality, quantiles, skew), flags constant, ID-like and highly correlated columns, scores features against a target, flags leakage suspects, and drafts a keep/transform/drop plan | `python scripts/feature_engineering_pipeline.py --input assets/customers_sample.csv --target churned` |
+| `scripts/model_evaluation_suite.py` | Scores saved predictions: classification (confusion matrix, precision, recall, F1, ROC AUC, log loss, Brier) or regression (MAE, RMSE, R², MAPE), side by side, with a fold stability check and pass/fail against thresholds | `python scripts/model_evaluation_suite.py --input assets/predictions_sample.csv --folds 5 --config assets/eval_thresholds.json` |
 
 &gt; For hypothesis testing, causal inference, and regression analysis, use inline scipy/statsmodels — see [references/statistical_methods_advanced.md](references/statistical_methods_advanced.md).
 
@@ -509,6 +509,12 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Feature engineering pipelines with profiling, generation, selection, and validation
 - Model training evaluation including cross-validation, calibration, and fairness checks
 - Production model deployment with monitoring, drift detection, and canary rollouts
+
+**What the tools do and do not do:**
+- `experiment_designer.py` sizes a test with the normal approximation. It does not analyze results, check for sample ratio mismatch, or size tests for ratio metrics, CUPED or sequential designs. Below a 1% baseline treat its numbers as a lower bound.
+- `feature_engineering_pipeline.py` profiles and recommends. It does not generate or write transformed features, and its leakage check is statistical (|association| of 0.90 or more with the target), so a leak that is only weakly correlated still needs a timing review.
+- `model_evaluation_suite.py` evaluates predictions you already have. It does not train or retrain models, so its fold check shows how stable a metric is across subsets of the same predictions, not cross-validated generalization. Classification is binary only, and rows with a missing actual are skipped. Readiness verdicts use only the thresholds a model can be measured on; the others are listed as not applicable. Latency, error rate and drift need serving metrics; config keys for them are reported as ignored.
+- Hypothesis tests on finished experiments and causal inference are done with inline scipy/statsmodels, as in the workflows.
 
 **This skill does NOT cover:**
 - Data engineering infrastructure (ETL orchestration, pipeline scheduling, data lake management) -- see `senior-data-engineer`
@@ -613,13 +619,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-The three scripts are scaffolds: they validate their arguments and write a run record, but do not yet perform the analysis described. Until they are implemented, do the work inline as shown in the workflows.
+Three standard-library Python tools. Each takes `--format text|json`, prints a sample input with `--example`, and writes a JSON file only when you pass `--output DIR` (it will not overwrite an existing one without `--force`). Sample inputs live in `assets/`.
 
-| Script | Purpose |
-|--------|---------|
-| `scripts/experiment_designer.py` | A/B test design, power analysis, sample size calculation |
-| `scripts/feature_engineering_pipeline.py` | Automated feature generation, correlation analysis, feature selection |
-| `scripts/model_evaluation_suite.py` | Model comparison, cross-validation, deployment readiness checks |
+| Script | Purpose | Example |
+|--------|---------|---------|
+| `scripts/experiment_designer.py` | Per-arm sample size, power and test duration for a two-proportion or difference-in-means A/B test, with Bonferroni adjustment for extra arms and warnings for underpowered or very long designs | `python scripts/experiment_designer.py --baseline 0.10 --mde 0.02 --daily-traffic 5000` |
+| `scripts/feature_engineering_pipeline.py` | Profiles a CSV (types, nulls, cardinality, quantiles, skew), flags constant, ID-like and highly correlated columns, scores features against a target, flags leakage suspects, and drafts a keep/transform/drop plan | `python scripts/feature_engineering_pipeline.py --input assets/customers_sample.csv --target churned` |
+| `scripts/model_evaluation_suite.py` | Scores saved predictions: classification (confusion matrix, precision, recall, F1, ROC AUC, log loss, Brier) or regression (MAE, RMSE, R², MAPE), side by side, with a fold stability check and pass/fail against thresholds | `python scripts/model_evaluation_suite.py --input assets/predictions_sample.csv --folds 5 --config assets/eval_thresholds.json` |
 
 &gt; For hypothesis testing, causal inference, and regression analysis, use inline scipy/statsmodels — see [references/statistical_methods_advanced.md](references/statistical_methods_advanced.md).
 
@@ -640,6 +646,12 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Feature engineering pipelines with profiling, generation, selection, and validation
 - Model training evaluation including cross-validation, calibration, and fairness checks
 - Production model deployment with monitoring, drift detection, and canary rollouts
+
+**What the tools do and do not do:**
+- `experiment_designer.py` sizes a test with the normal approximation. It does not analyze results, check for sample ratio mismatch, or size tests for ratio metrics, CUPED or sequential designs. Below a 1% baseline treat its numbers as a lower bound.
+- `feature_engineering_pipeline.py` profiles and recommends. It does not generate or write transformed features, and its leakage check is statistical (|association| of 0.90 or more with the target), so a leak that is only weakly correlated still needs a timing review.
+- `model_evaluation_suite.py` evaluates predictions you already have. It does not train or retrain models, so its fold check shows how stable a metric is across subsets of the same predictions, not cross-validated generalization. Classification is binary only, and rows with a missing actual are skipped. Readiness verdicts use only the thresholds a model can be measured on; the others are listed as not applicable. Latency, error rate and drift need serving metrics; config keys for them are reported as ignored.
+- Hypothesis tests on finished experiments and causal inference are done with inline scipy/statsmodels, as in the workflows.
 
 **This skill does NOT cover:**
 - Data engineering infrastructure (ETL orchestration, pipeline scheduling, data lake management) -- see `senior-data-engineer`

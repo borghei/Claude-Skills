@@ -1,0 +1,13 @@
+{
+  "name": "checkout-button-color",
+  "metric": "proportion",
+  "baseline": 0.05,
+  "mde": 0.1,
+  "mde_type": "relative",
+  "alpha": 0.05,
+  "power": 0.8,
+  "sides": 2,
+  "variants": 3,
+  "daily_traffic": 20000,
+  "allocation": 0.5
+}

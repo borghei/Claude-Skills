@@ -1,0 +1,7 @@
+{
+  "min_auc": 0.85,
+  "min_recall": 0.70,
+  "max_brier": 0.15,
+  "max_fold_std": 0.08,
+  "max_latency_ms": 100
+}

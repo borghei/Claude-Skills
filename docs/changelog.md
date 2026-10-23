@@ -8,6 +8,10 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.13.9** (October 2026)
+
+- Nine data-science, ML-engineering and DevOps tools that were placeholders now work: A/B test sizing, feature profiling, model evaluation, deployment manifests, RAG planning, drift monitoring, CI pipeline generation, Terraform scaffolding and deployment planning
+
 **v4.13.8** (October 2026)
 
 - Every skill now has a Scope & Limitations section

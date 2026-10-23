@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-23T14:07:09+00:00",
+  "generated_at": "2026-10-23T14:52:53+00:00",
   "skill_count": 385,
   "domain_count": 21,
   "skills": [
@@ -2529,6 +2529,11 @@
       "path": "engineering/senior-data-scientist",
       "files": [
         "SKILL.md",
+        "assets/customers_sample.csv",
+        "assets/eval_thresholds.json",
+        "assets/experiment_design.json",
+        "assets/predictions_sample.csv",
+        "assets/regression_sample.csv",
         "references/ds-operations.md",
         "references/ds-workflows.md",
         "references/experiment_design_frameworks.md",
@@ -2538,11 +2543,11 @@
         "scripts/feature_engineering_pipeline.py",
         "scripts/model_evaluation_suite.py"
       ],
-      "size_bytes": 32922,
+      "size_bytes": 91179,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "senior-devops",
@@ -2564,6 +2569,17 @@
       "path": "engineering/senior-devops",
       "files": [
         "SKILL.md",
+        "assets/deploy-blue-green.json",
+        "assets/deploy-canary.json",
+        "assets/deploy-rolling.json",
+        "assets/sample-node-app/Dockerfile",
+        "assets/sample-node-app/package-lock.json",
+        "assets/sample-node-app/package.json",
+        "assets/sample-python-app/app.py",
+        "assets/sample-python-app/pyproject.toml",
+        "assets/sample-python-app/requirements-dev.txt",
+        "assets/sample-python-app/requirements.txt",
+        "assets/sample-python-app/test_app.py",
         "references/cicd_pipeline_guide.md",
         "references/cloud_platform_guide.md",
         "references/deployment_strategies.md",
@@ -2574,11 +2590,11 @@
         "scripts/pipeline_generator.py",
         "scripts/terraform_scaffolder.py"
       ],
-      "size_bytes": 39815,
+      "size_bytes": 109820,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "senior-frontend",
@@ -2667,6 +2683,10 @@
       "path": "engineering/senior-ml-engineer",
       "files": [
         "SKILL.md",
+        "assets/deployment_spec.json",
+        "assets/monitoring_baseline.csv",
+        "assets/monitoring_current.csv",
+        "assets/rag_spec.json",
         "references/llm_integration_guide.md",
         "references/mlops_production_patterns.md",
         "references/production-ml-workflows.md",
@@ -2676,11 +2696,11 @@
         "scripts/model_deployment_pipeline.py",
         "scripts/rag_system_builder.py"
       ],
-      "size_bytes": 53754,
+      "size_bytes": 150619,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "senior-mobile",
@@ -3250,10 +3270,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 26886,
+      "size_bytes": 34487,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
