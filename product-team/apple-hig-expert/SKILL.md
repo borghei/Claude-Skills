@@ -12,7 +12,7 @@ metadata:
   category: product-team
   domain: design
   updated: 2026-05-27
-  tags: [apple, ios, ipados, macos, watchos, tvos, visionos, hig, design, accessibility]
+  tags: [apple, hig, ios, macos, watchos, visionos, design, accessibility]
 ---
 
 # Apple Human Interface Guidelines (HIG) Expert

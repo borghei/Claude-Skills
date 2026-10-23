@@ -12,6 +12,12 @@ metadata:
   domain: observability
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - observability
+    - slo
+    - alerting
+    - dashboards
+    - monitoring
 ---
 # Observability Designer
 

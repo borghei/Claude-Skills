@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-15
   frameworks: stripe-subscriptions, webhook-handling, billing-infrastructure
+  tags:
+    - stripe
+    - payments
+    - subscriptions
+    - webhooks
+    - billing
 ---
 # Stripe Integration Expert
 

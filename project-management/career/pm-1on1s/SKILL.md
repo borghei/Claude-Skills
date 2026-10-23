@@ -12,6 +12,12 @@ metadata:
   domain: pm-career
   updated: 2026-06-15
   tech-stack: 1on1s, manager-cadence, grow-model, radical-candor
+  tags:
+    - one-on-ones
+    - coaching
+    - radical-candor
+    - grow-model
+    - pm-career
 ---
 # PM 1:1 Expert
 

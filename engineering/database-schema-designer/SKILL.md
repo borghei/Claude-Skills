@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: drizzle, prisma, alembic, typeorm
+  tags:
+    - schema-design
+    - normalization
+    - erd
+    - row-level-security
+    - postgresql
 ---
 # Database Schema Designer
 

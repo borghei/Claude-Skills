@@ -12,6 +12,12 @@ metadata:
   category: marketing
   domain: strategy
   updated: 2026-03-09
+  tags:
+    - positioning
+    - icp
+    - brand-voice
+    - competitive-landscape
+    - marketing-context
 ---
 # Marketing Context
 

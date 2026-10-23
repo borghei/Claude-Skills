@@ -8,6 +8,12 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.13.4** (October 2026)
+
+- A shorter README: how to add the library wherever you work, one real run, and a starter table by task
+- Every skill has a domain and tags, and tags now reach the website and CLI search for all 385 skills
+- `skill-tester` checks sections by meaning instead of five fixed headings
+
 **v4.13.3** (October 2026)
 
 - `skill-tester` validates and scores the frontmatter schema the library actually uses, so real skills no longer fail its frontmatter check

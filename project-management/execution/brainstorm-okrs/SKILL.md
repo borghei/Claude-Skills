@@ -13,6 +13,11 @@ metadata:
   updated: 2026-06-15
   python-tools: okr_validator.py
   tech-stack: okr, radical-focus, goal-setting, strategic-planning
+  tags:
+    - okrs
+    - radical-focus
+    - key-results
+    - goal-setting
 ---
 # OKR Brainstorming Expert
 

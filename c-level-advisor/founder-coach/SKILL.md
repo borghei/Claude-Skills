@@ -40,6 +40,12 @@ metadata:
     - executive transition
     - founder mental health
     - co-founder dynamics
+  tags:
+    - founder
+    - first-time-ceo
+    - delegation
+    - burnout
+    - leadership-development
 ---
 # Founder Coach
 

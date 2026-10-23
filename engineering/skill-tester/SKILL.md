@@ -12,6 +12,12 @@ metadata:
   domain: meta-skills
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - skill-validation
+    - quality-scoring
+    - frontmatter
+    - testing
+    - meta-skills
 ---
 # Skill Tester
 

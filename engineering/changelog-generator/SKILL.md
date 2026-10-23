@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: conventional-commits, keep-a-changelog, semantic-versioning
+  tags:
+    - changelog
+    - release-notes
+    - conventional-commits
+    - semver
+    - monorepo
 ---
 # Changelog Generator
 

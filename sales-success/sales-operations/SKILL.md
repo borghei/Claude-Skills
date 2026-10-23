@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: sales-success
+  domain: sales-operations
   updated: 2026-03-31
   tags: [sales-ops, crm, analytics, territory, compensation]
 ---

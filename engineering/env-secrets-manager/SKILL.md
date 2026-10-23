@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: vault, aws-ssm, 1password-cli, doppler
+  tags:
+    - secrets
+    - env-files
+    - vault
+    - secret-rotation
+    - leak-detection
 ---
 # Env & Secrets Manager
 

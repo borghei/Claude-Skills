@@ -32,6 +32,12 @@ metadata:
     - risk dashboard
     - overall health
     - company assessment
+  tags:
+    - org-health
+    - diagnostics
+    - traffic-light
+    - board-review
+    - risk
 ---
 # Org Health Diagnostic
 

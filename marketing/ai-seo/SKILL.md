@@ -12,6 +12,12 @@ metadata:
   category: marketing
   domain: seo
   updated: 2026-09-21
+  tags:
+    - ai-search
+    - geo
+    - ai-overviews
+    - citability
+    - schema-markup
 ---
 # AI SEO
 

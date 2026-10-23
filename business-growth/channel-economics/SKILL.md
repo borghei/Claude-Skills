@@ -11,7 +11,7 @@ metadata:
   category: commercial
   domain: business-growth
   updated: 2026-05-27
-  tags: [channel-economics, channel-strategy, partner-program, margin-analysis, gtm, reseller, distributor, marketplace, msp]
+  tags: [channel-economics, channel-strategy, partner-program, margin-analysis, gtm, reseller, distributor, marketplace]
 ---
 
 # Channel Economics

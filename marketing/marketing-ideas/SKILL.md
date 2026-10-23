@@ -12,6 +12,11 @@ metadata:
   category: marketing
   domain: strategy
   updated: 2026-06-15
+  tags:
+    - marketing-ideas
+    - growth-tactics
+    - brainstorming
+    - channel-strategy
 ---
 # Marketing Ideas
 

@@ -84,19 +84,21 @@ metadata:
 `metadata.author`, `metadata.category` or `metadata.updated` as an error, and a missing
 `metadata.domain` or `metadata.tags`, or a `name` that differs from the folder, as a warning.
 
-#### Required Sections
-- **Description**: Comprehensive overview of the skill's purpose and capabilities
-- **Features**: Detailed list of key features and functionality
-- **Usage**: Instructions for using the skill and its components
-- **Examples**: Practical usage examples with expected outcomes
+#### Sections
 
-#### Recommended Sections
-- **Architecture**: Technical architecture and design decisions
-- **Installation**: Setup and installation instructions
-- **Configuration**: Configuration options and parameters
-- **Troubleshooting**: Common issues and solutions
-- **Contributing**: Guidelines for contributors
-- **Changelog**: Version history and changes
+Skills name their sections in different words, so the validator checks each section as a
+concept and accepts any of the headings that express it (H2 or H3, outside code blocks).
+
+**Required** — at least one of:
+- **Purpose**: `When to Use`, `Overview`, `Core Capabilities`, `Purpose`
+- **Usage**: `Quick Start`, `Workflows`, `Usage`, `How to Use`, `Operating Modes`, `Tools`
+
+**Recommended** (reported as warnings):
+- **Clarify First** — the input gate for generative skills (authoring standard, P11)
+- **Anti-Patterns** — any heading that names anti-patterns, mistakes, pitfalls or red flags (P5)
+- **Scope & Limitations** — also `Limitations`, `Out of Scope`
+- **Tools** — when `scripts/` holds Python tools; every script should be named in SKILL.md
+- **References** — when `references/` exists, SKILL.md should point to it
 
 #### Content Requirements by Tier
 - **BASIC**: Minimum 100 lines of substantial content

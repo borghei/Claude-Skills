@@ -11,6 +11,12 @@ metadata:
   category: marketing
   domain: content
   updated: 2026-03-09
+  tags:
+    - content-strategy
+    - content-pillars
+    - topic-clusters
+    - content-audit
+    - funnel
 ---
 # Content Strategy
 

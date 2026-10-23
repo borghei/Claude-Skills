@@ -13,6 +13,12 @@ metadata:
   updated: 2026-06-15
   python-tools: funnel_analyzer.py
   tech-stack: aarrr, pirate-metrics, activation, conversion-funnel, growth, north-star
+  tags:
+    - activation
+    - funnel
+    - aarrr
+    - conversion
+    - drop-off
 ---
 # Activation Funnel Expert
 

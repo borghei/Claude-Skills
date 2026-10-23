@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: weekly_review_synthesizer.py
   tech-stack: GTD, OKRs, productivity
+  tags:
+    - weekly-review
+    - reflection
+    - planning
+    - productivity
+    - okrs
 ---
 
 # Weekly Review

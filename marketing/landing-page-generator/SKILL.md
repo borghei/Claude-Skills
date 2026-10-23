@@ -12,6 +12,12 @@ metadata:
   category: marketing
   domain: conversion
   updated: 2026-03-09
+  tags:
+    - landing-pages
+    - conversion
+    - copywriting
+    - seo
+    - core-web-vitals
 ---
 # Landing Page Generator
 

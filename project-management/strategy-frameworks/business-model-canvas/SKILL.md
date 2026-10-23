@@ -14,6 +14,11 @@ metadata:
   updated: 2026-05-27
   python-tools: canvas_validator.py
   tech-stack: business-model-canvas, osterwalder, strategy
+  tags:
+    - business-model-canvas
+    - osterwalder
+    - business-model
+    - strategy
 ---
 
 # Business Model Canvas

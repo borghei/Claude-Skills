@@ -14,6 +14,12 @@ metadata:
   updated: 2026-05-27
   python-tools: dashboard_designer.py
   tech-stack: metrics, dashboard, north-star, hexagonal-metrics
+  tags:
+    - metrics
+    - dashboard
+    - north-star
+    - guardrail-metrics
+    - product-analytics
 ---
 
 # Metrics Dashboard

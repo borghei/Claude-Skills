@@ -12,6 +12,12 @@ metadata:
   domain: ai-ml
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - rag
+    - retrieval
+    - chunking
+    - vector-database
+    - embeddings
 ---
 # RAG Architect
 

@@ -14,6 +14,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: react-email, mjml, email-deliverability, responsive-email
+  tags:
+    - email-templates
+    - react-email
+    - mjml
+    - transactional-email
+    - deliverability
 ---
 # Email Template Builder
 

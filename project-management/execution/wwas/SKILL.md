@@ -9,6 +9,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: backlog-management, invest-criteria, strategic-alignment
+  tags:
+    - backlog
+    - acceptance-criteria
+    - invest
+    - strategic-alignment
 ---
 # Why-What-Acceptance Backlog Expert
 

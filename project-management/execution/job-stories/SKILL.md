@@ -9,6 +9,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: jtbd, jobs-to-be-done, invest-criteria
+  tags:
+    - job-stories
+    - jobs-to-be-done
+    - backlog
+    - user-stories
 ---
 # Job Stories Expert
 

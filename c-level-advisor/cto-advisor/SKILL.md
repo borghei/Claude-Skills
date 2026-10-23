@@ -14,6 +14,12 @@ metadata:
   python-tools: tech_debt_analyzer.py, team_scaling_calculator.py
   tech-stack: engineering-management, team-organization
   frameworks: DORA-metrics, architecture-decision-records, engineering-metrics
+  tags:
+    - cto
+    - technical-debt
+    - architecture
+    - engineering-teams
+    - technology-strategy
 ---
 # CTO Advisor
 

@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-29
   frameworks: mcp-sdk, typescript, python, openapi
+  tags:
+    - mcp
+    - ai-integration
+    - tool-definitions
+    - api
+    - ai-agents
 ---
 # MCP Server Builder
 

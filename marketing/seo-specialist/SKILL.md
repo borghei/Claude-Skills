@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: marketing-growth
+  domain: seo
   updated: 2026-03-31
   tags: [seo, search, keywords, technical-seo, link-building]
 ---

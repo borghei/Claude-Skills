@@ -31,6 +31,12 @@ metadata:
     - strategic routing
     - advisor selection
     - cross-functional decision
+  tags:
+    - chief-of-staff
+    - orchestration
+    - routing
+    - executive-team
+    - board-meeting
 ---
 # Chief of Staff
 

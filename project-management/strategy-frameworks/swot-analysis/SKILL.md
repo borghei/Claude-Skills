@@ -14,6 +14,11 @@ metadata:
   updated: 2026-05-27
   python-tools: swot_scorer.py
   tech-stack: swot-analysis, strategic-positioning, situation-analysis
+  tags:
+    - swot
+    - strategic-positioning
+    - competitive-analysis
+    - strategy
 ---
 
 # SWOT Analysis

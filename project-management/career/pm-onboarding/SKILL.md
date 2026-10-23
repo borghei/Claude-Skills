@@ -12,6 +12,12 @@ metadata:
   domain: pm-career
   updated: 2026-06-15
   tech-stack: pm-onboarding, 30-60-90, first-90-days, stars-framework
+  tags:
+    - pm-onboarding
+    - 30-60-90
+    - first-90-days
+    - new-role
+    - pm-career
 ---
 # PM Onboarding Expert
 

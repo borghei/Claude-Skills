@@ -12,6 +12,11 @@ metadata:
   updated: 2026-06-15
   python-tools: risk_categorizer.py
   tech-stack: pre-mortem, risk-analysis, gary-klein, prospective-hindsight
+  tags:
+    - pre-mortem
+    - risk-analysis
+    - launch-readiness
+    - discovery
 ---
 # Pre-Mortem Risk Analysis Expert
 

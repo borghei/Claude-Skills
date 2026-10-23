@@ -13,6 +13,11 @@ metadata:
   updated: 2026-06-15
   python-tools: metric_tree_builder.py
   tech-stack: north-star, input-metrics, leading-indicators, counter-metrics, omtm
+  tags:
+    - north-star-metric
+    - metric-tree
+    - leading-indicators
+    - counter-metrics
 ---
 # North Star Metric (NSM) Expert
 

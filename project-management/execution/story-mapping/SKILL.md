@@ -11,6 +11,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: story-mapping, user-stories, release-planning, jeff-patton
+  tags:
+    - story-mapping
+    - user-journey
+    - mvp
+    - release-planning
 ---
 # User Story Mapping Expert
 

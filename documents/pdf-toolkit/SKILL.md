@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: pdf_auditor.py
   tech-stack: pdf
+  tags:
+    - pdf
+    - document-audit
+    - metadata
+    - redaction
+    - security
 ---
 
 # PDF Toolkit

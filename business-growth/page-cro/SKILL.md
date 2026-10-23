@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: business-growth
+  domain: conversion-optimization
   updated: 2026-03-31
   tags: [cro, landing-page, conversion-optimization, copywriting, ux]
 ---

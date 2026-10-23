@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: deck_structure_scorer.py
   tech-stack: fundraising, pitch
+  tags:
+    - pitch-deck
+    - fundraising
+    - startups
+    - investors
+    - deck-review
 ---
 
 # Pitch Deck Reviewer

@@ -12,6 +12,12 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: launch, three-launches, dark-launch, raci, progressive-rollout
+  tags:
+    - launch
+    - run-of-show
+    - raci
+    - rollback
+    - go-to-market
 ---
 # Launch Playbook (Internal + External Coordination)
 

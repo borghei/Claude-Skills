@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: pptx_auditor.py
   tech-stack: pptx, OOXML
+  tags:
+    - pptx
+    - powerpoint
+    - presentation-audit
+    - slides
+    - ooxml
 ---
 
 # Pptx Toolkit

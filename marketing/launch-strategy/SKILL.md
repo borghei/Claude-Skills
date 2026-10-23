@@ -13,6 +13,12 @@ metadata:
   domain: product-launch
   updated: 2026-03-09
   frameworks: phased-launch, orb-channels, product-hunt, launch-momentum
+  tags:
+    - product-launch
+    - go-to-market
+    - product-hunt
+    - beta
+    - announcements
 ---
 # Launch Strategy
 

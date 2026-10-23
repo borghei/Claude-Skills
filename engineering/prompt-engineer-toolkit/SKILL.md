@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: prompt-patterns, evaluation-rubrics, regression-testing, version-control
+  tags:
+    - prompt-engineering
+    - few-shot
+    - evals
+    - regression-testing
+    - llm
 ---
 # Prompt Engineer Toolkit — Production Prompt Engineering
 

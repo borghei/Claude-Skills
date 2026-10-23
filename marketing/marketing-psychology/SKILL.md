@@ -12,6 +12,12 @@ metadata:
   category: marketing
   domain: psychology
   updated: 2026-06-15
+  tags:
+    - behavioral-psychology
+    - cognitive-biases
+    - persuasion
+    - conversion
+    - pricing-psychology
 ---
 # Marketing Psychology
 

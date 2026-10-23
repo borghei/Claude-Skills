@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: github, gitlab, review-checklist
+  tags:
+    - code-review
+    - pull-requests
+    - blast-radius
+    - breaking-changes
+    - test-coverage
 ---
 # PR Review Expert
 

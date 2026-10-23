@@ -11,6 +11,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: beta-program, kano-model, cohort-design, beta-to-ga-gates
+  tags:
+    - beta-program
+    - early-access
+    - success-criteria
+    - ga-readiness
 ---
 # Closed Beta Program Playbook
 

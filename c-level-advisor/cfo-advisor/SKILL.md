@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: executive-leadership
+  domain: cfo-leadership
   updated: 2026-03-31
   tags: [finance, fundraising, accounting, reporting, treasury]
 ---

@@ -13,6 +13,12 @@ metadata:
   domain: email-marketing
   updated: 2026-09-21
   frameworks: email-automation, lifecycle-marketing, drip-campaigns
+  tags:
+    - email-marketing
+    - drip-campaigns
+    - onboarding-emails
+    - nurture
+    - saas
 ---
 # Email Sequence Design
 

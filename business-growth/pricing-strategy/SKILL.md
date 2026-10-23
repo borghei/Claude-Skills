@@ -9,6 +9,7 @@ metadata:
   version: 1.1.0
   author: borghei
   category: business-growth
+  domain: pricing
   updated: 2026-06-15
   tags: [pricing, monetization, packaging, saas, value-based-pricing, revenue]
 ---

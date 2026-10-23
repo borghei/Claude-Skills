@@ -14,6 +14,12 @@ metadata:
   updated: 2026-05-27
   python-tools: gtm_strategy_validator.py
   tech-stack: gtm, go-to-market, motion, launch, beachhead
+  tags:
+    - go-to-market
+    - icp
+    - channels
+    - messaging
+    - launch
 ---
 
 # GTM Strategy

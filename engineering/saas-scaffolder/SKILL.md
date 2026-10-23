@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: nextjs, drizzle, stripe, nextauth, tailwind, shadcn
+  tags:
+    - saas
+    - boilerplate
+    - nextjs
+    - stripe
+    - multi-tenancy
 ---
 # SaaS Scaffolder
 

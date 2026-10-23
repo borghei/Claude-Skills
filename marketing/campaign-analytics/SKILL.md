@@ -12,6 +12,12 @@ metadata:
   updated: 2026-09-21
   python-tools: attribution_analyzer.py, funnel_analyzer.py, campaign_roi_calculator.py
   tech-stack: marketing-analytics, attribution-modeling
+  tags:
+    - campaign-analytics
+    - attribution
+    - funnel
+    - roi
+    - marketing-performance
 ---
 # Campaign Analytics
 

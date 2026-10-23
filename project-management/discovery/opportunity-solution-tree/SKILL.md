@@ -14,6 +14,11 @@ metadata:
   updated: 2026-05-27
   python-tools: ost_validator.py
   tech-stack: opportunity-solution-tree, continuous-discovery, teresa-torres
+  tags:
+    - opportunity-solution-tree
+    - continuous-discovery
+    - teresa-torres
+    - assumption-testing
 ---
 
 # Opportunity Solution Tree (OST)

@@ -13,6 +13,12 @@ metadata:
   domain: ai-agents
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - ai-agents
+    - multi-agent
+    - orchestration
+    - tool-schemas
+    - agent-evaluation
 ---
 # Agent Designer - Multi-Agent System Architecture
 

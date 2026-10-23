@@ -13,6 +13,11 @@ metadata:
   updated: 2026-06-15
   python-tools: prd_scaffolder.py
   tech-stack: prd, product-requirements, documentation
+  tags:
+    - prd
+    - requirements
+    - working-backwards
+    - problem-framing
 ---
 # PRD Scaffolding Expert
 

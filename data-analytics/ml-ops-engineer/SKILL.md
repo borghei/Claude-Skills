@@ -10,6 +10,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: data-analytics
+  domain: mlops
   updated: 2026-03-31
   tags: [mlops, deployment, pipelines, monitoring, feature-store]
 ---

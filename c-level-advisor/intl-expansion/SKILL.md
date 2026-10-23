@@ -38,6 +38,11 @@ metadata:
     - data residency
     - local entity
     - regional team
+  tags:
+    - international-expansion
+    - market-entry
+    - localization
+    - go-to-market
 ---
 # International Expansion
 

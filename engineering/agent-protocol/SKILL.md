@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-15
   frameworks: mcp, a2a, openai-functions, langchain-tools
+  tags:
+    - mcp
+    - a2a
+    - function-calling
+    - tool-schemas
+    - multi-agent
 ---
 # Agent Protocol
 

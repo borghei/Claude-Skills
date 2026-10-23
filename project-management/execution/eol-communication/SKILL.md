@@ -12,6 +12,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: eol, product-lifecycle, change-communication
+  tags:
+    - end-of-life
+    - sunset
+    - deprecation
+    - customer-communication
 ---
 # EOL Communication Expert
 

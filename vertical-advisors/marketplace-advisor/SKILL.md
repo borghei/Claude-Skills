@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: marketplace_health_scorer.py
   tech-stack: marketplace, network-effects
+  tags:
+    - marketplace
+    - network-effects
+    - take-rate
+    - liquidity
+    - two-sided
 ---
 
 # Marketplace Advisor

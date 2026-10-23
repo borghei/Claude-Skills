@@ -13,6 +13,12 @@ metadata:
   domain: social-media
   updated: 2026-03-09
   frameworks: content-pillars, community-management, social-audit, crisis-response
+  tags:
+    - social-media
+    - editorial-calendar
+    - community
+    - b2b-saas
+    - crisis-response
 ---
 # Social Media Manager
 

@@ -34,6 +34,12 @@ metadata:
     - investor report
     - board materials
     - board slides
+  tags:
+    - board-deck
+    - investor-update
+    - qbr
+    - board-meeting
+    - executive-reporting
 ---
 # Board Deck Builder
 

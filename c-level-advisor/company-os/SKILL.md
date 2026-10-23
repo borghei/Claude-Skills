@@ -43,6 +43,12 @@ metadata:
     - meeting cadence
     - weekly meeting
     - annual planning
+  tags:
+    - operating-system
+    - eos
+    - scaling-up
+    - okrs
+    - company-operations
 ---
 # Company Operating System
 

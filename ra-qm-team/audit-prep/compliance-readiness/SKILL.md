@@ -12,7 +12,7 @@ metadata:
   category: compliance
   domain: ra-qm-team
   updated: 2026-05-27
-  tags: [compliance-readiness, multi-framework, shared-evidence, control-mapping, soc2, iso27001, nist, gdpr, hipaa]
+  tags: [compliance-readiness, multi-framework, shared-evidence, control-mapping, soc2, iso27001, gdpr, hipaa]
 ---
 
 # Compliance Readiness (Cross-Framework)

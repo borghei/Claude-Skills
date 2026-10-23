@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: marketing-growth
+  domain: seo
   updated: 2026-09-21
   tags: [seo, schema, structured-data, json-ld, rich-snippets, knowledge-graph]
 ---

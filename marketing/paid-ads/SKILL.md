@@ -12,6 +12,13 @@ metadata:
   category: marketing
   domain: advertising
   updated: 2026-09-21
+  tags:
+    - paid-ads
+    - google-ads
+    - meta-ads
+    - linkedin-ads
+    - retargeting
+    - bidding
 ---
 # Paid Ads
 

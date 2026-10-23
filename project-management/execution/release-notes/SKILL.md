@@ -14,6 +14,11 @@ metadata:
   python-tools:
     - scripts/release_notes_generator.py
   tech-stack: release-management, changelog, semantic-versioning
+  tags:
+    - release-notes
+    - changelog
+    - customer-communication
+    - product-updates
 ---
 # Release Notes Expert
 

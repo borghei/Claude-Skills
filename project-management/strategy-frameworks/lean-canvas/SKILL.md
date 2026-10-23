@@ -14,6 +14,11 @@ metadata:
   updated: 2026-05-27
   python-tools: lean_canvas_validator.py
   tech-stack: lean-canvas, ash-maurya, lean-startup, problem-solution-fit
+  tags:
+    - lean-canvas
+    - startups
+    - assumptions
+    - business-model
 ---
 
 # Lean Canvas

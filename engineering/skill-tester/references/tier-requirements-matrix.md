@@ -40,7 +40,7 @@ Advanced skills that provide comprehensive functionality with sophisticated impl
 
 #### Documentation Requirements
 - **SKILL.md**: Minimum 100 lines of substantial content
-- **Required Sections**: Name, Description, Features, Usage, Examples
+- **Required Sections**: a section on what the skill is for (When to Use, Overview, Core Capabilities) or how to use it (Quick Start, Workflows, Tools) — see `skill-structure-specification.md`
 - **README.md**: Basic usage instructions (200+ characters)
 - **Content Quality**: Clear and functional documentation
 - **Examples**: At least 1 practical usage example
@@ -69,7 +69,7 @@ Advanced skills that provide comprehensive functionality with sophisticated impl
 
 #### Documentation Requirements
 - **SKILL.md**: Minimum 200 lines with comprehensive coverage
-- **Required Sections**: All BASIC sections plus Architecture, Installation
+- **Recommended Sections**: Clarify First and Scope & Limitations (reported as warnings)
 - **README.md**: Detailed usage instructions (500+ characters)
 - **References**: Technical documentation in `references/` directory
 - **Content Quality**: Professional-grade documentation with technical depth
@@ -100,7 +100,7 @@ Advanced skills that provide comprehensive functionality with sophisticated impl
 
 #### Documentation Requirements
 - **SKILL.md**: Minimum 300 lines with expert-level comprehensiveness
-- **Required Sections**: All STANDARD sections plus Troubleshooting, Contributing, Advanced Usage
+- **Recommended Sections**: also an Anti-Patterns section (the authoring standard, P5, asks for 3+ entries; the validator checks that the section exists)
 - **README.md**: Comprehensive guide with installation and setup (1000+ characters)
 - **References**: Multiple technical documents with specifications
 - **Content Quality**: Publication-ready documentation with architectural details

@@ -12,6 +12,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: product-vision, strategic-narrative, working-backwards, vision-board
+  tags:
+    - product-vision
+    - vision-board
+    - strategy
+    - narrative
 ---
 # Product Vision Expert
 

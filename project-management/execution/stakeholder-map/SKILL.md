@@ -14,6 +14,11 @@ metadata:
   updated: 2026-05-27
   python-tools: stakeholder_analyzer.py
   tech-stack: stakeholder-mapping, power-interest, change-management
+  tags:
+    - stakeholder-mapping
+    - power-interest
+    - communication-plan
+    - change-management
 ---
 
 # Stakeholder Map

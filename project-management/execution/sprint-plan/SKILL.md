@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-27
   python-tools: sprint_planner.py
   tech-stack: sprint-planning, capacity, agile, story-points
+  tags:
+    - sprint-planning
+    - capacity
+    - commitment
+    - scrum
+    - risk
 ---
 
 # Sprint Planning

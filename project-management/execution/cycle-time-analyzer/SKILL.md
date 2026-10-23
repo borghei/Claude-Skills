@@ -12,6 +12,12 @@ metadata:
   updated: 2026-06-15
   python-tools: flow_metrics.py
   tech-stack: kanban, flow-metrics, cfd, littles-law, aging-wip
+  tags:
+    - flow-metrics
+    - cycle-time
+    - throughput
+    - wip
+    - cumulative-flow
 ---
 # Cycle Time Analyzer (Flow Metrics)
 

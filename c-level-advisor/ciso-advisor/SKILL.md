@@ -39,6 +39,13 @@ metadata:
     - cyber risk
     - security program
     - threat modeling
+  tags:
+    - ciso
+    - security-program
+    - compliance
+    - soc2
+    - iso-27001
+    - incident-response
 ---
 # CISO Advisor
 

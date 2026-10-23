@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: lead_qualifier.py
   tech-stack: sales, outbound, CRM
+  tags:
+    - lead-research
+    - icp
+    - lead-scoring
+    - outreach
+    - prospecting
 ---
 
 # Lead Researcher

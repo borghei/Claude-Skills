@@ -39,6 +39,12 @@ metadata:
     - pivot decision
     - layoff planning
     - co-founder conflict
+  tags:
+    - executive-coaching
+    - plan-review
+    - board-prep
+    - red-team
+    - decision-making
 ---
 # Executive Mentor
 

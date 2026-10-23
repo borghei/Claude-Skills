@@ -38,6 +38,12 @@ metadata:
     - selling the company
     - exit strategy
     - data room
+  tags:
+    - mergers-acquisitions
+    - due-diligence
+    - integration
+    - acquisition
+    - exit
 ---
 # M&A Playbook
 

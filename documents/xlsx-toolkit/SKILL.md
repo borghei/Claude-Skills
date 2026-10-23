@@ -14,6 +14,12 @@ metadata:
   updated: 2026-05-04
   python-tools: xlsx_auditor.py
   tech-stack: xlsx, OOXML
+  tags:
+    - xlsx
+    - excel
+    - spreadsheet-audit
+    - formulas
+    - financial-model
 ---
 
 # Xlsx Toolkit

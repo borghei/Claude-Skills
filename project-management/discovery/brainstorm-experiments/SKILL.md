@@ -12,6 +12,11 @@ metadata:
   updated: 2026-06-15
   python-tools: experiment_designer.py
   tech-stack: pretotyping, lean-validation, ab-testing, xyz-hypothesis
+  tags:
+    - experiments
+    - pretotyping
+    - lean-validation
+    - discovery
 ---
 # Experiment Design Expert
 

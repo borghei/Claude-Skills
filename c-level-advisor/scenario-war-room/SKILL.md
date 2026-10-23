@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: cascade-modeling, scenario-planning, pre-mortem, contingency-design
+  tags:
+    - scenario-planning
+    - risk
+    - what-if
+    - contingency-planning
+    - strategy
 ---
 # Scenario War Room
 

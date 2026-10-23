@@ -32,6 +32,12 @@ metadata:
     - multi-agent deliberation
     - need all perspectives
     - complex decision
+  tags:
+    - board-meeting
+    - strategic-decisions
+    - multi-agent
+    - deliberation
+    - governance
 ---
 # Board Meeting Protocol
 

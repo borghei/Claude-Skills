@@ -12,6 +12,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: story-splitting, vertical-slicing, lawrence-flowchart, invest
+  tags:
+    - story-splitting
+    - vertical-slicing
+    - epics
+    - user-stories
 ---
 # Story Splitting (Vertical Slicing Patterns)
 

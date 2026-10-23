@@ -10,6 +10,7 @@ metadata:
   version: 1.1.0
   author: borghei
   category: marketing-growth
+  domain: seo
   updated: 2026-06-15
   tags:
     - seo

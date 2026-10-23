@@ -9,6 +9,7 @@ metadata:
   version: 1.1.0
   author: borghei
   category: business-growth
+  domain: referral-marketing
   updated: 2026-06-15
   tags: [referral, affiliate, growth, viral, word-of-mouth, acquisition]
 ---

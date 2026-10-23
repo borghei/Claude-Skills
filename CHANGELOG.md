@@ -5,6 +5,19 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.13.4] - 2026-10-23
+
+### Changed
+
+- **The README is rewritten so a first-time visitor can act on it.** It opens with how to add the library wherever you work (Claude desktop app, the browser, Claude Code, or Cursor, Codex and other assistants), shows one real run of `board-deck-builder` with its metrics tool output, and gives a starter table that maps common jobs to the plugin to add and a first prompt to try. It is 111 lines, down from 179. The claim that a kit installs in one step is gone, because no command does that; the starter table uses the per-domain plugins instead.
+- **`skill-tester` checks sections the way skills are actually written.** It no longer requires `Name`, `Description`, `Features`, `Usage` and `Examples` headings. A skill needs a section on what it is for or how to use it; a missing Clarify First, Anti-Patterns or Scope & Limitations section, a `scripts/` folder without a Tools section, or a script SKILL.md never names is reported as a warning. Headings are matched by meaning, so "Query Anti-Patterns" and "Common Mistakes" both count.
+
+### Fixed
+
+- **Every skill now has `metadata.domain` and `metadata.tags`.** 185 skills gained them, written from each skill's description, and 8 tag lists that broke the 3–8 lowercase rule were corrected.
+- **Tags written as a block list reach the catalog.** `build_manifest.py` skipped `- item` lists, so 160 skills had no tags on the website or in CLI search. All 385 now carry their tags.
+- The Personal Productivity and Data Analytics plugin descriptions listed 10 and 5 skills; they have 13 and 6.
+
 ## [4.13.3] - 2026-10-23
 
 ### Fixed
