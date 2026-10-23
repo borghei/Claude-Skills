@@ -48,6 +48,13 @@ metadata:
     - ICP
     - ideal customer profile
     - territory design
+  tags:
+    - cro
+    - revenue
+    - forecasting
+    - quotas
+    - net-revenue-retention
+    - b2b-saas
 ---
 # CRO Advisor
 

@@ -13,6 +13,11 @@ metadata:
   updated: 2026-06-15
   python-tools: interview_synthesizer.py
   tech-stack: customer-interviews, opportunity-solution-tree, jobs-to-be-done
+  tags:
+    - interview-synthesis
+    - insights
+    - continuous-discovery
+    - opportunity-solution-tree
 ---
 # Customer Interview Synthesis Expert
 

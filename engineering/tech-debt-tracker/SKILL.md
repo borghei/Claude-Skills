@@ -12,6 +12,12 @@ metadata:
   domain: code-quality
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - technical-debt
+    - code-quality
+    - refactoring
+    - ast
+    - prioritization
 ---
 # Tech Debt Tracker
 

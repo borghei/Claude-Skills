@@ -13,6 +13,11 @@ metadata:
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: founder-interview, context-capture, quarterly-refresh
+  tags:
+    - onboarding
+    - company-context
+    - founder-interview
+    - advisory-setup
 ---
 # C-Suite Onboarding
 

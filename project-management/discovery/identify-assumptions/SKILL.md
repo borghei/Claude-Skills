@@ -13,6 +13,11 @@ metadata:
   updated: 2026-06-15
   python-tools: assumption_tracker.py
   tech-stack: assumption-mapping, risk-matrix, teresa-torres, continuous-discovery
+  tags:
+    - assumption-mapping
+    - risk
+    - devils-advocate
+    - discovery
 ---
 # Assumption Mapping Expert
 

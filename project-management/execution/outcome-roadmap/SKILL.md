@@ -14,6 +14,11 @@ metadata:
   updated: 2026-06-15
   python-tools: roadmap_transformer.py
   tech-stack: outcome-roadmap, product-strategy, now-next-later
+  tags:
+    - roadmap
+    - outcomes
+    - now-next-later
+    - product-strategy
 ---
 # Outcome Roadmap Expert
 

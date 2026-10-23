@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: hr-operations
+  domain: hr-business-partnering
   updated: 2026-03-31
   tags: [hr, talent, org-development, employee-relations, people-analytics]
 ---

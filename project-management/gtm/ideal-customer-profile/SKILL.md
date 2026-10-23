@@ -14,6 +14,12 @@ metadata:
   updated: 2026-05-27
   python-tools: icp_scorer.py
   tech-stack: icp, ideal-customer-profile, firmographics, jtbd
+  tags:
+    - icp
+    - buyer-persona
+    - firmographics
+    - jobs-to-be-done
+    - segmentation
 ---
 
 # Ideal Customer Profile (ICP)

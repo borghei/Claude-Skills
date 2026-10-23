@@ -12,6 +12,12 @@ metadata:
   domain: infrastructure
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - migrations
+    - zero-downtime
+    - rollback
+    - database-migration
+    - infrastructure
 ---
 # Migration Architect
 

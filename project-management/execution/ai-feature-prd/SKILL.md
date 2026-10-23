@@ -13,6 +13,12 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: ai-prd, ml-prd, llm-product, evals, guardrails, responsible-ai
+  tags:
+    - prd
+    - ai-features
+    - evals
+    - guardrails
+    - model-selection
 ---
 # AI Feature PRD Expert
 

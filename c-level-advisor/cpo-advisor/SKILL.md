@@ -41,6 +41,12 @@ metadata:
     - invest maintain kill
     - feature prioritization
     - product portfolio
+  tags:
+    - cpo
+    - product-vision
+    - product-portfolio
+    - product-market-fit
+    - product-strategy
 ---
 # CPO Advisor
 

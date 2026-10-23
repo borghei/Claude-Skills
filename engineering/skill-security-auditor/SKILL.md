@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: static-analysis, supply-chain-security
+  tags:
+    - skill-security
+    - prompt-injection
+    - supply-chain
+    - code-scanning
+    - ai-security
 ---
 # Skill Security Auditor
 

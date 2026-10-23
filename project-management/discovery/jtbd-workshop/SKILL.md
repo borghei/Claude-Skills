@@ -12,6 +12,12 @@ metadata:
   domain: pm-discovery
   updated: 2026-06-15
   tech-stack: jobs-to-be-done, switch-interviews, forces-of-progress, odi
+  tags:
+    - jobs-to-be-done
+    - switch-interviews
+    - odi
+    - workshop
+    - discovery
 ---
 # JTBD Workshop Expert
 

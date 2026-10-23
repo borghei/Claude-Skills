@@ -217,6 +217,54 @@ def yaml_lite_load(text: str):
     return parse_block(0)
 
 
+# ---------------------------------------------------------------------------
+# SKILL.md section concepts
+#
+# Skills in this library name their sections in different words, so sections
+# are checked as concepts, each matched by the headings that express it.
+# Requirements follow standards/skill-authoring-standard.md (P5, P11).
+# ---------------------------------------------------------------------------
+
+# Structural concepts must match the whole heading ("Tools", not "Tool Selection
+# Criteria"); topical ones may appear anywhere in it ("Query Anti-Patterns").
+_TOOLS = r"(python |automation )*(tools?|scripts|tooling)( overview| reference| & scripts)?"
+SECTION_CONCEPTS = {
+    "purpose": (r"when to use( this skill)?|use when|overview|purpose|(core )?capabilities"
+                r"|what (this|the) skill does", "full"),
+    "usage": (r"quick ?start|((core|end-to-end|common) )?workflows?|usage|how to use|getting started"
+              r"|operating modes|common engagements|" + _TOOLS, "full"),
+    "clarify_first": (r"clarify[- ]first", "anywhere"),
+    "anti_patterns": (r"anti[- ]?patterns?|mistakes|pitfalls|red flags", "anywhere"),
+    "scope": (r"scope|limitations|out[- ]of[- ]scope", "anywhere"),
+    "tools": (_TOOLS, "full"),
+    "references": (r"references?|reference (guides|documentation|materials)|knowledge base", "full"),
+}
+
+SECTION_LABELS = {
+    "purpose": "what the skill is for (When to Use, Overview, Core Capabilities)",
+    "usage": "how to use it (Quick Start, Workflows, Tools)",
+    "clarify_first": "Clarify First",
+    "anti_patterns": "Anti-Patterns",
+    "scope": "Scope & Limitations",
+    "tools": "Tools",
+    "references": "References",
+}
+
+
+def skill_md_section_concepts(content: str) -> set:
+    """Return the section concepts present in a SKILL.md, ignoring fenced code."""
+    prose = re.sub(r"^```.*?^```", "", content, flags=re.MULTILINE | re.DOTALL)
+    headings = [re.sub(r"[^\w &/-]", "", h).strip().lower()
+                for h in re.findall(r"^#{2,3}\s+(.+?)\s*$", prose, re.MULTILINE)]
+    found = set()
+    for name, (pattern, mode) in SECTION_CONCEPTS.items():
+        regex = re.compile(rf"(?:{pattern})" if mode == "full" else rf"\b(?:{pattern})\b")
+        match = regex.fullmatch if mode == "full" else regex.search
+        if any(match(h) for h in headings):
+            found.add(name)
+    return found
+
+
 class QualityDimension:
     """Represents a quality scoring dimension"""
     
@@ -537,30 +585,25 @@ class QualityScorer:
             return 5  # Some credit for attempting frontmatter
             
     def _score_sections(self, content: str) -> float:
-        """Score section completeness"""
-        required_sections = ["Description", "Features", "Usage", "Examples"]
-        recommended_sections = ["Architecture", "Installation", "Troubleshooting", "Contributing"]
-        
+        """Score section completeness against the authoring standard's section concepts"""
+        present = skill_md_section_concepts(content)
         score = 0
-        
-        # Required sections (15 points)
-        present_required = 0
-        for section in required_sections:
-            if re.search(rf'^#+\s*{re.escape(section)}\s*$', content, re.MULTILINE | re.IGNORECASE):
-                present_required += 1
-                
-        score += (present_required / len(required_sections)) * 15
-        
-        # Recommended sections (10 points)
-        present_recommended = 0
-        for section in recommended_sections:
-            if re.search(rf'^#+\s*{re.escape(section)}\s*$', content, re.MULTILINE | re.IGNORECASE):
-                present_recommended += 1
-                
-        score += (present_recommended / len(recommended_sections)) * 10
-        
+
+        # Required: what the skill is for, and how to use it (15 points)
+        score += sum(7.5 for concept in ("purpose", "usage") if concept in present)
+
+        # Recommended (10 points): Clarify First (P11), Anti-Patterns (P5), Scope,
+        # plus Tools / References sections when the skill ships those folders
+        recommended = ["clarify_first", "anti_patterns", "scope"]
+        if any((self.skill_path / "scripts").glob("*.py")):
+            recommended.append("tools")
+        if (self.skill_path / "references").is_dir():
+            recommended.append("references")
+        present_recommended = sum(1 for concept in recommended if concept in present)
+        score += (present_recommended / len(recommended)) * 10
+
         return score
-        
+
     def _score_content_depth(self, content: str) -> float:
         """Score content depth and technical detail"""
         score = 0

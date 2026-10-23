@@ -14,6 +14,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: narrative-construction, audience-translation, crisis-communication
+  tags:
+    - narrative
+    - company-story
+    - all-hands
+    - investor-communication
+    - messaging
 ---
 # Internal Narrative Builder
 

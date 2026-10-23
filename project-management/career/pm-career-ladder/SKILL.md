@@ -12,6 +12,12 @@ metadata:
   domain: pm-career
   updated: 2026-06-15
   tech-stack: pm-rubric, promotion-packet, growth-plan, career-ladder
+  tags:
+    - career-ladder
+    - pm-levels
+    - growth-planning
+    - promotion
+    - pm-career
 ---
 # PM Career Ladder Expert
 

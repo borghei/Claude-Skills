@@ -36,6 +36,11 @@ metadata:
     - competitive win
     - market positioning
     - sales battlecard
+  tags:
+    - competitive-intelligence
+    - battlecards
+    - positioning
+    - market-monitoring
 ---
 # Competitive Intelligence
 

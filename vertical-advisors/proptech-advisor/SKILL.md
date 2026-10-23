@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: market_segment_classifier.py
   tech-stack: proptech, real-estate
+  tags:
+    - proptech
+    - real-estate
+    - mls
+    - brokerage
+    - licensing
 ---
 
 # Proptech Advisor

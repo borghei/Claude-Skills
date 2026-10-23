@@ -13,6 +13,13 @@ metadata:
   tier: POWERFUL
   updated: 2026-03-09
   frameworks: contract-templates, jurisdiction-compliance, proposal-writing
+  tags:
+    - contracts
+    - proposals
+    - sow
+    - nda
+    - msa
+    - legal-documents
 ---
 # Contract & Proposal Writer
 

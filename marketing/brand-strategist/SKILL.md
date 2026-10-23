@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: marketing-growth
+  domain: brand-strategy
   updated: 2026-03-31
   tags: [brand, strategy, positioning, identity, messaging]
 ---

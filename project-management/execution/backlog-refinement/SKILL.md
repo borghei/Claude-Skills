@@ -13,6 +13,12 @@ metadata:
   updated: 2026-06-15
   python-tools: refinement_scorer.py
   tech-stack: invest, story-splitting, definition-of-ready, definition-of-done
+  tags:
+    - backlog
+    - invest
+    - story-splitting
+    - definition-of-ready
+    - definition-of-done
 ---
 # Backlog Refinement Expert
 

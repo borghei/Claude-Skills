@@ -12,6 +12,11 @@ metadata:
   domain: pm-discovery
   updated: 2026-06-15
   tech-stack: customer-interviews, discovery, jobs-to-be-done, mom-test
+  tags:
+    - customer-interviews
+    - interview-script
+    - discovery
+    - user-research
 ---
 # Customer Interview Script Expert
 

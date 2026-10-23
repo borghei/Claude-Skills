@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: clinic, py-spy, pprof, k6, webpack-bundle-analyzer
+  tags:
+    - performance
+    - profiling
+    - flamegraphs
+    - memory-leaks
+    - load-testing
 ---
 # Performance Profiler
 

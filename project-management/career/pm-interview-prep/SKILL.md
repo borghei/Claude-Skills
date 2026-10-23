@@ -12,6 +12,12 @@ metadata:
   domain: pm-career
   updated: 2026-06-15
   tech-stack: pm-interviews, product-sense, execution, behavioral, frameworks
+  tags:
+    - pm-interviews
+    - product-sense
+    - circles
+    - star-method
+    - pm-career
 ---
 # PM Interview Prep Expert
 

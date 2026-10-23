@@ -11,6 +11,11 @@ metadata:
   domain: product-discovery
   updated: 2026-06-15
   tech-stack: product-trio, opportunity-solution-tree, scamper, hmw
+  tags:
+    - ideation
+    - product-trio
+    - opportunity-solution-tree
+    - discovery
 ---
 # Product Ideation Expert
 

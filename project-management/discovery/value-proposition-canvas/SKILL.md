@@ -12,6 +12,11 @@ metadata:
   domain: pm-discovery
   updated: 2026-06-15
   tech-stack: value-proposition, jobs-to-be-done, strategyzer, product-market-fit
+  tags:
+    - value-proposition-canvas
+    - strategyzer
+    - product-market-fit
+    - jobs-to-be-done
 ---
 # Value Proposition Canvas Expert
 

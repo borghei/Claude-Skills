@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: transcript_analyzer.py
   tech-stack: meetings, async-collaboration
+  tags:
+    - meetings
+    - transcripts
+    - action-items
+    - decisions
+    - summaries
 ---
 
 # Meeting Insights

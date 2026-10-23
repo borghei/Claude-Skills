@@ -12,6 +12,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: roadmap, communication, now-next-later, outcome-roadmap, marty-cagan
+  tags:
+    - roadmap
+    - stakeholder-communication
+    - executive-update
+    - customer-roadmap
 ---
 # Roadmap Communication Expert
 

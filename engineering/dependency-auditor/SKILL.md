@@ -12,6 +12,12 @@ metadata:
   domain: security
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - dependencies
+    - vulnerabilities
+    - licenses
+    - supply-chain
+    - upgrades
 ---
 # Dependency Auditor
 

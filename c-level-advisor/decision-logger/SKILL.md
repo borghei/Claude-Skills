@@ -32,6 +32,11 @@ metadata:
     - decision search
     - what did we decide
     - reopen decision
+  tags:
+    - decision-log
+    - executive-decisions
+    - memory
+    - governance
 ---
 # Decision Logger
 

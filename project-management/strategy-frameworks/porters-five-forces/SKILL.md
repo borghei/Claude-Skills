@@ -14,6 +14,11 @@ metadata:
   updated: 2026-05-27
   python-tools: five_forces_scorer.py
   tech-stack: porters-five-forces, industry-analysis, competitive-strategy
+  tags:
+    - porters-five-forces
+    - industry-analysis
+    - competition
+    - market-entry
 ---
 
 # Porter's Five Forces

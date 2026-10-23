@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: ecom_unit_economics_calculator.py
   tech-stack: ecommerce, retail
+  tags:
+    - ecommerce
+    - unit-economics
+    - fulfillment
+    - payments
+    - dtc
 ---
 
 # E-commerce Advisor

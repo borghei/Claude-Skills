@@ -10,7 +10,7 @@ metadata:
   category: legal
   domain: contract-negotiation
   updated: 2026-04-10
-  tags: [contract-negotiation, technology-agreements, B2B, SLA, indemnification]
+  tags: [contract-negotiation, technology-agreements, b2b, sla, indemnification]
 ---
 > **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
 

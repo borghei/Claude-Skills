@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: data-analytics
+  domain: analytics-engineering
   updated: 2026-03-31
   tags:
     - analytics-engineering

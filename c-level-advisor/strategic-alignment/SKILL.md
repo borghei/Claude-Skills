@@ -41,6 +41,12 @@ metadata:
     - OKRs don't connect
     - local optimization
     - strategy communication
+  tags:
+    - alignment
+    - strategy-cascade
+    - okrs
+    - cross-functional
+    - execution
 ---
 # Strategic Alignment Engine
 

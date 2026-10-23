@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: github-actions, gitlab-ci, circleci, buildkite
+  tags:
+    - ci-cd
+    - github-actions
+    - gitlab-ci
+    - circleci
+    - pipelines
 ---
 # CI/CD Pipeline Builder
 

@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: git-worktree
+  tags:
+    - git
+    - worktrees
+    - parallel-development
+    - branching
+    - developer-tooling
 ---
 # Git Worktree Manager
 

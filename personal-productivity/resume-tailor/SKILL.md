@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: resume_matcher.py
   tech-stack: ATS, job-search
+  tags:
+    - resume
+    - job-search
+    - ats
+    - keywords
+    - career
 ---
 
 # Resume Tailor

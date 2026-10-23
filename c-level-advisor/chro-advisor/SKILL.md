@@ -39,6 +39,13 @@ metadata:
     - attrition
     - workforce planning
     - remote work policy
+  tags:
+    - chro
+    - hiring
+    - compensation
+    - org-design
+    - retention
+    - people-strategy
 ---
 # CHRO Advisor
 

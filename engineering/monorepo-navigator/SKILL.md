@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: turborepo, nx, pnpm-workspaces, changesets
+  tags:
+    - monorepo
+    - turborepo
+    - nx
+    - pnpm
+    - changesets
 ---
 # Monorepo Navigator
 

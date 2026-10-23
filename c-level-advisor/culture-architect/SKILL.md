@@ -42,6 +42,12 @@ metadata:
     - culture clash
     - M&A culture
     - employer brand
+  tags:
+    - culture
+    - company-values
+    - rituals
+    - culture-health
+    - leadership
 ---
 # Culture Architect
 

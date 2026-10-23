@@ -11,6 +11,12 @@ metadata:
   category: marketing
   domain: advertising
   updated: 2026-09-21
+  tags:
+    - ad-creative
+    - ad-copy
+    - paid-social
+    - a-b-testing
+    - advertising
 ---
 # Ad Creative
 

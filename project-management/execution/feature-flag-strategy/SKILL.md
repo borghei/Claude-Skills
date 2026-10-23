@@ -12,6 +12,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: feature-flags, dark-launch, kill-switch, rollout, holdout, ab-test, launchdarkly, statsig
+  tags:
+    - feature-flags
+    - phased-rollout
+    - kill-switch
+    - experiments
 ---
 # Feature Flag Strategy (PM playbook)
 

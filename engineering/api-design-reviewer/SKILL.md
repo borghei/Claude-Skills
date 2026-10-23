@@ -12,6 +12,12 @@ metadata:
   domain: api-design
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - api-design
+    - rest
+    - openapi
+    - breaking-changes
+    - linting
 ---
 # API Design Reviewer
 

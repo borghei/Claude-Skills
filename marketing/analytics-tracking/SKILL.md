@@ -13,6 +13,12 @@ metadata:
   domain: analytics-implementation
   updated: 2026-09-21
   frameworks: ga4, gtm, event-taxonomy, conversion-tracking
+  tags:
+    - ga4
+    - google-tag-manager
+    - event-tracking
+    - conversion-tracking
+    - utm
 ---
 # Analytics Tracking - Implementation & Auditing
 

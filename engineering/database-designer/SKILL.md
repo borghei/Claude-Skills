@@ -12,6 +12,13 @@ metadata:
   domain: databases
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - database
+    - schema-design
+    - indexing
+    - migrations
+    - postgresql
+    - mongodb
 ---
 # Database Designer
 

@@ -12,6 +12,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: working-backwards, pr-faq, amazon-method, narrative-memo
+  tags:
+    - prfaq
+    - working-backwards
+    - press-release
+    - amazon
 ---
 # PR/FAQ (Working Backwards) Expert
 

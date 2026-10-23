@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: carbon_impact_estimator.py
   tech-stack: climate, sustainability
+  tags:
+    - climate-tech
+    - carbon-markets
+    - ghg-accounting
+    - climate-regulation
+    - startups
 ---
 
 # Climate-Tech Advisor

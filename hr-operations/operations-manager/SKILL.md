@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: hr-operations
+  domain: operations-management
   updated: 2026-03-31
   tags: [operations, efficiency, process, optimization, management]
 ---

@@ -11,6 +11,12 @@ metadata:
   category: marketing
   domain: content
   updated: 2026-03-09
+  tags:
+    - content-production
+    - content-briefs
+    - editorial
+    - seo
+    - blog
 ---
 # Content Production
 

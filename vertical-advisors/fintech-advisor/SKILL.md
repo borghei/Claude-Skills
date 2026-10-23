@@ -14,6 +14,12 @@ metadata:
   updated: 2026-05-04
   python-tools: regulatory_trigger_checker.py
   tech-stack: fintech, banking, payments
+  tags:
+    - fintech
+    - kyc-aml
+    - licensing
+    - embedded-finance
+    - regulation
 ---
 
 # Fintech Advisor

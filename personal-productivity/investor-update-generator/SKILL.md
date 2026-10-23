@@ -13,6 +13,11 @@ metadata:
   updated: 2026-05-04
   python-tools: investor_update_validator.py
   tech-stack: investor-relations, fundraising
+  tags:
+    - investor-update
+    - fundraising
+    - founders
+    - reporting
 ---
 
 # Investor Update Generator

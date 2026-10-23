@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: markdown, notion, confluence
+  tags:
+    - onboarding
+    - documentation
+    - architecture
+    - runbooks
+    - developer-experience
 ---
 # Codebase Onboarding
 

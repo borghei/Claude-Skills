@@ -1,7 +1,7 @@
 {
   "name": "claude-skills",
   "description": "The Universal AI Skills Library — 385 production-ready skills across 21 domains. Project Management is the most-used domain (70 skills).",
-  "version": "4.13.3",
+  "version": "4.13.4",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
@@ -124,7 +124,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "ai-agents",
+        "multi-agent",
+        "orchestration",
+        "tool-schemas",
+        "agent-evaluation"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -158,7 +164,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "mcp",
+        "a2a",
+        "function-calling",
+        "tool-schemas",
+        "multi-agent"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -172,7 +184,14 @@
       "subdomain": "",
       "version": "1.2.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "multi-agent",
+        "orchestration",
+        "workflow-dag",
+        "routing",
+        "handoffs",
+        "state-management"
+      ],
       "tools": 4,
       "has_references": true,
       "has_assets": false
@@ -247,7 +266,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "api-design",
+        "rest",
+        "openapi",
+        "breaking-changes",
+        "linting"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -261,7 +286,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "api-testing",
+        "contract-testing",
+        "load-testing",
+        "k6",
+        "openapi"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -357,7 +388,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "changelog",
+        "release-notes",
+        "conventional-commits",
+        "semver",
+        "monorepo"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -393,7 +430,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "ci-cd",
+        "github-actions",
+        "gitlab-ci",
+        "circleci",
+        "pipelines"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -485,7 +528,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "onboarding",
+        "documentation",
+        "architecture",
+        "runbooks",
+        "developer-experience"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -538,7 +587,13 @@
       "subdomain": "",
       "version": "1.2.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "context-management",
+        "ai-agents",
+        "memory",
+        "rag",
+        "token-budget"
+      ],
       "tools": 4,
       "has_references": true,
       "has_assets": false
@@ -554,7 +609,6 @@
       "license": "MIT + Commons Clause",
       "tags": [
         "data-quality",
-        "dq",
         "freshness",
         "schema-drift",
         "great-expectations",
@@ -576,7 +630,14 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "database",
+        "schema-design",
+        "indexing",
+        "migrations",
+        "postgresql",
+        "mongodb"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -590,7 +651,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "schema-design",
+        "normalization",
+        "erd",
+        "row-level-security",
+        "postgresql"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -604,7 +671,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "dependencies",
+        "vulnerabilities",
+        "licenses",
+        "supply-chain",
+        "upgrades"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -695,7 +768,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "secrets",
+        "env-files",
+        "vault",
+        "secret-rotation",
+        "leak-detection"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -774,13 +853,11 @@
       "tags": [
         "gcp",
         "google-cloud",
-        "architecture",
         "cloud-architecture-framework",
         "gke",
         "cloud-run",
         "bigquery",
         "iam",
-        "networking",
         "cost-optimization"
       ],
       "tools": 3,
@@ -796,7 +873,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "git",
+        "worktrees",
+        "parallel-development",
+        "branching",
+        "developer-tooling"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -869,7 +952,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "interviews",
+        "hiring",
+        "question-bank",
+        "calibration",
+        "competencies"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -925,7 +1014,13 @@
       "subdomain": "",
       "version": "1.2.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "mcp",
+        "ai-integration",
+        "tool-definitions",
+        "api",
+        "ai-agents"
+      ],
       "tools": 4,
       "has_references": true,
       "has_assets": false
@@ -939,7 +1034,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "migrations",
+        "zero-downtime",
+        "rollback",
+        "database-migration",
+        "infrastructure"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -953,7 +1054,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "monorepo",
+        "turborepo",
+        "nx",
+        "pnpm",
+        "changesets"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -986,7 +1093,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "observability",
+        "slo",
+        "alerting",
+        "dashboards",
+        "monitoring"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -1000,7 +1113,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "performance",
+        "profiling",
+        "flamegraphs",
+        "memory-leaks",
+        "load-testing"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -1037,7 +1156,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "code-review",
+        "pull-requests",
+        "blast-radius",
+        "breaking-changes",
+        "test-coverage"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -1051,7 +1176,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "prompt-engineering",
+        "few-shot",
+        "evals",
+        "regression-testing",
+        "llm"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -1104,7 +1235,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "rag",
+        "retrieval",
+        "chunking",
+        "vector-database",
+        "embeddings"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": false
@@ -1138,7 +1275,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "release-management",
+        "semver",
+        "changelog",
+        "release-readiness",
+        "versioning"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -1171,7 +1314,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "runbooks",
+        "incident-response",
+        "sre",
+        "operations",
+        "rollback"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -1185,7 +1334,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "saas",
+        "boilerplate",
+        "nextjs",
+        "stripe",
+        "multi-tenancy"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -1522,7 +1677,12 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "security-operations",
+        "vulnerability-management",
+        "incident-response",
+        "siem"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -1555,7 +1715,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "skill-security",
+        "prompt-injection",
+        "supply-chain",
+        "code-scanning",
+        "ai-security"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -1569,7 +1735,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "skill-validation",
+        "quality-scoring",
+        "frontmatter",
+        "testing",
+        "meta-skills"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -1643,7 +1815,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "stripe",
+        "payments",
+        "subscriptions",
+        "webhooks",
+        "billing"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -1676,7 +1854,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "technical-debt",
+        "code-quality",
+        "refactoring",
+        "ast",
+        "prioritization"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -1788,7 +1972,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "ad-creative",
+        "ad-copy",
+        "paid-social",
+        "a-b-testing",
+        "advertising"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -1848,7 +2038,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "ai-search",
+        "geo",
+        "ai-overviews",
+        "citability",
+        "schema-markup"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -1862,7 +2058,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "ga4",
+        "google-tag-manager",
+        "event-tracking",
+        "conversion-tracking",
+        "utm"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -1896,7 +2098,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "brand-guidelines",
+        "visual-identity",
+        "voice-and-tone",
+        "style-guide",
+        "brand"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -1930,7 +2138,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "campaign-analytics",
+        "attribution",
+        "funnel",
+        "roi",
+        "marketing-performance"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -1944,7 +2158,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "cold-email",
+        "outbound",
+        "b2b",
+        "deliverability",
+        "sales-sequences"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -1958,7 +2178,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "content-marketing",
+        "seo",
+        "brand-voice",
+        "blog",
+        "social-media"
+      ],
       "tools": 2,
       "has_references": true,
       "has_assets": true
@@ -1972,7 +2198,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "ai-content",
+        "humanizing",
+        "writing-quality",
+        "editing",
+        "authenticity"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -1986,7 +2218,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "content-production",
+        "content-briefs",
+        "editorial",
+        "seo",
+        "blog"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2000,7 +2238,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "content-strategy",
+        "content-pillars",
+        "topic-clusters",
+        "content-audit",
+        "funnel"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2037,7 +2281,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "copy-editing",
+        "editing",
+        "clarity",
+        "brand-voice",
+        "copywriting"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2051,7 +2301,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "copywriting",
+        "landing-pages",
+        "headlines",
+        "cta",
+        "conversion"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2065,7 +2321,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "email-marketing",
+        "drip-campaigns",
+        "onboarding-emails",
+        "nurture",
+        "saas"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2079,7 +2341,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "email-templates",
+        "react-email",
+        "mjml",
+        "transactional-email",
+        "deliverability"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2113,7 +2381,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "landing-pages",
+        "conversion",
+        "copywriting",
+        "seo",
+        "core-web-vitals"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2127,7 +2401,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "product-launch",
+        "go-to-market",
+        "product-hunt",
+        "beta",
+        "announcements"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2161,7 +2441,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "positioning",
+        "icp",
+        "brand-voice",
+        "competitive-landscape",
+        "marketing-context"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2175,7 +2461,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "demand-generation",
+        "paid-media",
+        "seo",
+        "partnerships",
+        "series-a"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": false
@@ -2189,7 +2481,12 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "marketing-ideas",
+        "growth-tactics",
+        "brainstorming",
+        "channel-strategy"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -2203,7 +2500,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "marketing-operations",
+        "martech",
+        "automation",
+        "attribution",
+        "routing"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2217,7 +2520,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "behavioral-psychology",
+        "cognitive-biases",
+        "persuasion",
+        "conversion",
+        "pricing-psychology"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -2251,7 +2560,14 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "paid-ads",
+        "google-ads",
+        "meta-ads",
+        "linkedin-ads",
+        "retargeting",
+        "bidding"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2306,7 +2622,14 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "seo",
+        "audit",
+        "technical-seo",
+        "core-web-vitals",
+        "indexation",
+        "crawl-analysis"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": false
@@ -2340,7 +2663,14 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "seo",
+        "information-architecture",
+        "internal-linking",
+        "url-structure",
+        "navigation",
+        "siloing"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2354,7 +2684,14 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT",
-      "tags": [],
+      "tags": [
+        "social-media",
+        "linkedin",
+        "instagram",
+        "tiktok",
+        "hooks",
+        "content-pillars"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2387,7 +2724,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "social-media",
+        "editorial-calendar",
+        "community",
+        "b2b-saas",
+        "crisis-response"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2443,7 +2786,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "board-deck",
+        "investor-update",
+        "qbr",
+        "board-meeting",
+        "executive-reporting"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2457,7 +2806,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "board-meeting",
+        "strategic-decisions",
+        "multi-agent",
+        "deliberation",
+        "governance"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2471,7 +2826,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "ceo",
+        "strategy",
+        "leadership",
+        "board",
+        "stakeholder-management"
+      ],
       "tools": 2,
       "has_references": true,
       "has_assets": false
@@ -2505,7 +2866,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "change-management",
+        "adkar",
+        "reorg",
+        "communication",
+        "startups"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2585,7 +2952,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "chief-of-staff",
+        "orchestration",
+        "routing",
+        "executive-team",
+        "board-meeting"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2599,7 +2972,14 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "chro",
+        "hiring",
+        "compensation",
+        "org-design",
+        "retention",
+        "people-strategy"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2613,7 +2993,14 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "ciso",
+        "security-program",
+        "compliance",
+        "soc2",
+        "iso-27001",
+        "incident-response"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2647,7 +3034,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "operating-system",
+        "eos",
+        "scaling-up",
+        "okrs",
+        "company-operations"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2661,7 +3054,12 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "competitive-intelligence",
+        "battlecards",
+        "positioning",
+        "market-monitoring"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2695,7 +3093,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "cpo",
+        "product-vision",
+        "product-portfolio",
+        "product-market-fit",
+        "product-strategy"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2709,7 +3113,14 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "cro",
+        "revenue",
+        "forecasting",
+        "quotas",
+        "net-revenue-retention",
+        "b2b-saas"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2723,7 +3134,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "onboarding",
+        "company-context",
+        "founder-interview",
+        "advisory-setup"
+      ],
       "tools": 0,
       "has_references": false,
       "has_assets": false
@@ -2737,7 +3153,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "cto",
+        "technical-debt",
+        "architecture",
+        "engineering-teams",
+        "technology-strategy"
+      ],
       "tools": 2,
       "has_references": true,
       "has_assets": false
@@ -2751,7 +3173,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "culture",
+        "company-values",
+        "rituals",
+        "culture-health",
+        "leadership"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2765,7 +3193,12 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "decision-log",
+        "executive-decisions",
+        "memory",
+        "governance"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2779,7 +3212,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "executive-coaching",
+        "plan-review",
+        "board-prep",
+        "red-team",
+        "decision-making"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2793,7 +3232,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "founder",
+        "first-time-ceo",
+        "delegation",
+        "burnout",
+        "leadership-development"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2829,7 +3274,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "narrative",
+        "company-story",
+        "all-hands",
+        "investor-communication",
+        "messaging"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2843,7 +3294,12 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "international-expansion",
+        "market-entry",
+        "localization",
+        "go-to-market"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2857,7 +3313,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "mergers-acquisitions",
+        "due-diligence",
+        "integration",
+        "acquisition",
+        "exit"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2871,7 +3333,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "org-health",
+        "diagnostics",
+        "traffic-light",
+        "board-review",
+        "risk"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2885,7 +3353,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "scenario-planning",
+        "risk",
+        "what-if",
+        "contingency-planning",
+        "strategy"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2899,7 +3373,13 @@
       "subdomain": "",
       "version": "2.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "alignment",
+        "strategy-cascade",
+        "okrs",
+        "cross-functional",
+        "execution"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -2914,10 +3394,9 @@
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
       "tags": [
-        "engineering",
         "vpe",
-        "leadership",
-        "productivity",
+        "engineering-leadership",
+        "developer-productivity",
         "dora",
         "space",
         "capacity",
@@ -2988,7 +3467,6 @@
         "control-mapping",
         "soc2",
         "iso27001",
-        "nist",
         "gdpr",
         "hipaa"
       ],
@@ -3407,7 +3885,13 @@
       "subdomain": "",
       "version": "1.1.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "iso-13485",
+        "qms",
+        "design-control",
+        "supplier-qualification",
+        "medical-device"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": false
@@ -3488,8 +3972,7 @@
         "gtm",
         "reseller",
         "distributor",
-        "marketplace",
-        "msp"
+        "marketplace"
       ],
       "tools": 3,
       "has_references": true,
@@ -3547,7 +4030,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "competitive-intelligence",
+        "competitor-analysis",
+        "product-strategy",
+        "battle-cards",
+        "market-analysis"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -3561,7 +4050,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "competitive-content",
+        "seo",
+        "comparison-pages",
+        "alternative-pages",
+        "sales-enablement"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -3575,7 +4070,14 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "contracts",
+        "proposals",
+        "sow",
+        "nda",
+        "msa",
+        "legal-documents"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -3651,7 +4153,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "growth",
+        "free-tools",
+        "engineering-as-marketing",
+        "lead-generation",
+        "product-led-growth"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -3665,7 +4173,14 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "cro",
+        "onboarding",
+        "activation",
+        "user-experience",
+        "retention",
+        "time-to-value"
+      ],
       "tools": 3,
       "has_references": false,
       "has_assets": false
@@ -4010,7 +4525,7 @@
         "negotiation",
         "dispute-resolution",
         "settlement",
-        "BATNA"
+        "batna"
       ],
       "tools": 2,
       "has_references": true,
@@ -4148,8 +4663,8 @@
       "tags": [
         "contract-negotiation",
         "technology-agreements",
-        "B2B",
-        "SLA",
+        "b2b",
+        "sla",
         "indemnification"
       ],
       "tools": 2,
@@ -4264,7 +4779,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "one-on-ones",
+        "coaching",
+        "radical-candor",
+        "grow-model",
+        "pm-career"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4278,7 +4799,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "career-ladder",
+        "pm-levels",
+        "growth-planning",
+        "promotion",
+        "pm-career"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4292,7 +4819,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "pm-interviews",
+        "product-sense",
+        "circles",
+        "star-method",
+        "pm-career"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4306,7 +4839,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "pm-onboarding",
+        "30-60-90",
+        "first-90-days",
+        "new-role",
+        "pm-career"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4359,7 +4898,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "prototyping",
+        "ai-tools",
+        "validation",
+        "engineering-handoff",
+        "discovery"
+      ],
       "tools": 2,
       "has_references": true,
       "has_assets": true
@@ -4373,7 +4918,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "experiments",
+        "pretotyping",
+        "lean-validation",
+        "discovery"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4387,7 +4937,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "ideation",
+        "product-trio",
+        "opportunity-solution-tree",
+        "discovery"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -4401,7 +4956,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "customer-interviews",
+        "interview-script",
+        "discovery",
+        "user-research"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4415,7 +4975,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "assumption-mapping",
+        "risk",
+        "devils-advocate",
+        "discovery"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4429,7 +4994,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "interview-synthesis",
+        "insights",
+        "continuous-discovery",
+        "opportunity-solution-tree"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4443,7 +5013,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "jobs-to-be-done",
+        "switch-interviews",
+        "odi",
+        "workshop",
+        "discovery"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4457,7 +5033,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "metrics",
+        "dashboard",
+        "north-star",
+        "guardrail-metrics",
+        "product-analytics"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4471,7 +5053,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "opportunity-solution-tree",
+        "continuous-discovery",
+        "teresa-torres",
+        "assumption-testing"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4485,7 +5072,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "pre-mortem",
+        "risk-analysis",
+        "launch-readiness",
+        "discovery"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4499,7 +5091,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "value-proposition-canvas",
+        "strategyzer",
+        "product-market-fit",
+        "jobs-to-be-done"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4513,7 +5110,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "activation",
+        "funnel",
+        "aarrr",
+        "conversion",
+        "drop-off"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4527,7 +5130,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "ai-agents",
+        "delegation",
+        "agent-ready-tickets",
+        "review-capacity",
+        "delivery"
+      ],
       "tools": 2,
       "has_references": true,
       "has_assets": true
@@ -4541,7 +5150,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "prd",
+        "ai-features",
+        "evals",
+        "guardrails",
+        "model-selection"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4555,7 +5170,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "backlog",
+        "invest",
+        "story-splitting",
+        "definition-of-ready",
+        "definition-of-done"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4569,7 +5190,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "beta-program",
+        "early-access",
+        "success-criteria",
+        "ga-readiness"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4583,7 +5209,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "okrs",
+        "radical-focus",
+        "key-results",
+        "goal-setting"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4597,7 +5228,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "prd",
+        "requirements",
+        "working-backwards",
+        "problem-framing"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4632,7 +5268,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "flow-metrics",
+        "cycle-time",
+        "throughput",
+        "wip",
+        "cumulative-flow"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4646,7 +5288,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "daci",
+        "decision-making",
+        "roles",
+        "governance"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": false
@@ -4660,7 +5307,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "dependencies",
+        "critical-path",
+        "program-management",
+        "mermaid"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4674,7 +5326,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "end-of-life",
+        "sunset",
+        "deprecation",
+        "customer-communication"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": false
@@ -4688,7 +5345,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "feature-flags",
+        "phased-rollout",
+        "kill-switch",
+        "experiments"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4702,7 +5364,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "job-stories",
+        "jobs-to-be-done",
+        "backlog",
+        "user-stories"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -4716,7 +5383,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "launch",
+        "run-of-show",
+        "raci",
+        "rollback",
+        "go-to-market"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4730,7 +5403,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "north-star-metric",
+        "metric-tree",
+        "leading-indicators",
+        "counter-metrics"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4744,7 +5422,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "roadmap",
+        "outcomes",
+        "now-next-later",
+        "product-strategy"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4780,7 +5463,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "prfaq",
+        "working-backwards",
+        "press-release",
+        "amazon"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4815,7 +5503,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "prioritization",
+        "rice",
+        "ice",
+        "moscow",
+        "kano"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4829,7 +5523,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "product-vision",
+        "vision-board",
+        "strategy",
+        "narrative"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4843,7 +5542,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "quarterly-planning",
+        "okrs",
+        "radical-focus",
+        "planning-cycle"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4857,7 +5561,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "release-notes",
+        "changelog",
+        "customer-communication",
+        "product-updates"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4871,7 +5580,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "roadmap",
+        "stakeholder-communication",
+        "executive-update",
+        "customer-roadmap"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4885,7 +5599,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "sprint-planning",
+        "capacity",
+        "commitment",
+        "scrum",
+        "risk"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4899,7 +5619,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "stakeholder-mapping",
+        "power-interest",
+        "communication-plan",
+        "change-management"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4913,7 +5638,13 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "status-update",
+        "jira",
+        "linear",
+        "executive-reporting",
+        "weekly-update"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4927,7 +5658,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "story-mapping",
+        "user-journey",
+        "mvp",
+        "release-planning"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": false
@@ -4941,7 +5677,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "story-splitting",
+        "vertical-slicing",
+        "epics",
+        "user-stories"
+      ],
       "tools": 0,
       "has_references": true,
       "has_assets": true
@@ -4955,7 +5696,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "meeting-summary",
+        "action-items",
+        "decisions",
+        "meetings"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -4969,7 +5715,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "test-scenarios",
+        "edge-cases",
+        "qa",
+        "test-coverage",
+        "acceptance-testing"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -4983,7 +5735,12 @@
       "subdomain": "",
       "version": "1.0.1",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "backlog",
+        "acceptance-criteria",
+        "invest",
+        "strategic-alignment"
+      ],
       "tools": 3,
       "has_references": true,
       "has_assets": true
@@ -4997,7 +5754,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "go-to-market",
+        "icp",
+        "channels",
+        "messaging",
+        "launch"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -5011,7 +5774,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "icp",
+        "buyer-persona",
+        "firmographics",
+        "jobs-to-be-done",
+        "segmentation"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -5209,7 +5978,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "ansoff-matrix",
+        "growth-strategy",
+        "diversification",
+        "market-development"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -5223,7 +5997,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "business-model-canvas",
+        "osterwalder",
+        "business-model",
+        "strategy"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -5237,7 +6016,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "lean-canvas",
+        "startups",
+        "assumptions",
+        "business-model"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -5251,7 +6035,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "porters-five-forces",
+        "industry-analysis",
+        "competition",
+        "market-entry"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -5265,7 +6054,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "swot",
+        "strategic-positioning",
+        "competitive-analysis",
+        "strategy"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -5341,13 +6135,11 @@
       "license": "MIT + Commons Clause",
       "tags": [
         "apple",
+        "hig",
         "ios",
-        "ipados",
         "macos",
         "watchos",
-        "tvos",
         "visionos",
-        "hig",
         "design",
         "accessibility"
       ],
@@ -5569,7 +6361,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "analytics-engineering",
+        "dbt",
+        "data-modeling",
+        "transformation",
+        "semantic-layer"
+      ],
       "tools": 4,
       "has_references": true,
       "has_assets": true
@@ -5928,7 +6726,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "meeting-prep",
+        "briefing",
+        "calendar",
+        "one-on-ones"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -5982,7 +6785,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "naming",
+        "domain-names",
+        "branding",
+        "brainstorming"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": false
@@ -5996,7 +6804,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "email",
+        "inbox-zero",
+        "triage",
+        "unsubscribe",
+        "productivity"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6010,7 +6824,12 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "investor-update",
+        "fundraising",
+        "founders",
+        "reporting"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6024,7 +6843,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "invoices",
+        "receipts",
+        "bookkeeping",
+        "tax-prep",
+        "expenses"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6038,7 +6863,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "lead-research",
+        "icp",
+        "lead-scoring",
+        "outreach",
+        "prospecting"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6052,7 +6883,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "meetings",
+        "transcripts",
+        "action-items",
+        "decisions",
+        "summaries"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6066,7 +6903,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "pitch-deck",
+        "fundraising",
+        "startups",
+        "investors",
+        "deck-review"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6100,7 +6943,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "resume",
+        "job-search",
+        "ats",
+        "keywords",
+        "career"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6114,7 +6963,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "weekly-review",
+        "reflection",
+        "planning",
+        "productivity",
+        "okrs"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6128,7 +6983,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "docx",
+        "word",
+        "document-audit",
+        "tracked-changes",
+        "ooxml"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6142,7 +7003,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "pdf",
+        "document-audit",
+        "metadata",
+        "redaction",
+        "security"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6156,7 +7023,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "pptx",
+        "powerpoint",
+        "presentation-audit",
+        "slides",
+        "ooxml"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6170,7 +7043,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "xlsx",
+        "excel",
+        "spreadsheet-audit",
+        "formulas",
+        "financial-model"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6184,7 +7063,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "climate-tech",
+        "carbon-markets",
+        "ghg-accounting",
+        "climate-regulation",
+        "startups"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6198,7 +7083,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "ecommerce",
+        "unit-economics",
+        "fulfillment",
+        "payments",
+        "dtc"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6212,7 +7103,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "edtech",
+        "ferpa",
+        "coppa",
+        "k-12",
+        "district-sales"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6226,7 +7123,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "fintech",
+        "kyc-aml",
+        "licensing",
+        "embedded-finance",
+        "regulation"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6240,7 +7143,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "healthtech",
+        "hipaa",
+        "fda-samd",
+        "ehr-integration",
+        "digital-health"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6254,7 +7163,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "marketplace",
+        "network-effects",
+        "take-rate",
+        "liquidity",
+        "two-sided"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true
@@ -6268,7 +7183,13 @@
       "subdomain": "",
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
-      "tags": [],
+      "tags": [
+        "proptech",
+        "real-estate",
+        "mls",
+        "brokerage",
+        "licensing"
+      ],
       "tools": 1,
       "has_references": true,
       "has_assets": true

@@ -14,6 +14,12 @@ metadata:
   updated: 2026-09-21
   python-tools: prototype_plan.py, prototype_handoff_checker.py
   tech-stack: ai-prototyping, product-discovery, usability-testing, handoff
+  tags:
+    - prototyping
+    - ai-tools
+    - validation
+    - engineering-handoff
+    - discovery
 ---
 
 # AI Prototyping

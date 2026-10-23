@@ -12,6 +12,13 @@ metadata:
   category: marketing
   domain: social-media
   updated: 2026-03-09
+  tags:
+    - social-media
+    - linkedin
+    - instagram
+    - tiktok
+    - hooks
+    - content-pillars
 ---
 # Social Content
 

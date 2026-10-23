@@ -12,6 +12,12 @@ metadata:
   category: marketing
   domain: brand
   updated: 2026-03-09
+  tags:
+    - brand-guidelines
+    - visual-identity
+    - voice-and-tone
+    - style-guide
+    - brand
 ---
 # Brand Guidelines
 

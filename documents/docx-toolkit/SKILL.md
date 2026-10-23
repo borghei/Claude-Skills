@@ -14,6 +14,12 @@ metadata:
   updated: 2026-05-04
   python-tools: docx_auditor.py
   tech-stack: docx, OOXML
+  tags:
+    - docx
+    - word
+    - document-audit
+    - tracked-changes
+    - ooxml
 ---
 
 # Docx Toolkit

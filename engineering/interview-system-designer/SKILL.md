@@ -9,7 +9,14 @@ metadata:
   version: 1.1.0
   author: borghei
   category: engineering
+  domain: hiring
   updated: 2026-06-17
+  tags:
+    - interviews
+    - hiring
+    - question-bank
+    - calibration
+    - competencies
 ---
 # Interview System Designer
 

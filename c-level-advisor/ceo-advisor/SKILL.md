@@ -13,6 +13,12 @@ metadata:
   updated: 2025-10-20
   python-tools: strategy_analyzer.py, financial_scenario_analyzer.py
   frameworks: executive-decision-framework, board-governance, investor-relations
+  tags:
+    - ceo
+    - strategy
+    - leadership
+    - board
+    - stakeholder-management
 ---
 # CEO Advisor
 

@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: executive-leadership
+  domain: coo-leadership
   updated: 2026-03-31
   tags: [operations, process, scaling, efficiency, execution]
 ---

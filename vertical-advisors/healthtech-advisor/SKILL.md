@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: phi_scope_checker.py
   tech-stack: healthtech, digital-health
+  tags:
+    - healthtech
+    - hipaa
+    - fda-samd
+    - ehr-integration
+    - digital-health
 ---
 
 # Healthtech Advisor

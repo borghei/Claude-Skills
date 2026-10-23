@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updated": "2026-10-23T12:01:48+00:00",
+  "updated": "2026-10-23T12:23:51+00:00",
   "total_skills": 385,
   "skills": [
     {
@@ -26,7 +26,13 @@
       "domain": "engineering",
       "path": "engineering/agent-designer/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "ai-agents",
+        "multi-agent",
+        "orchestration",
+        "tool-schemas",
+        "agent-evaluation"
+      ]
     },
     {
       "name": "agent-harness",
@@ -55,7 +61,13 @@
         "protocol_validator.py",
         "schema_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "mcp",
+        "a2a",
+        "function-calling",
+        "tool-schemas",
+        "multi-agent"
+      ]
     },
     {
       "name": "agent-workflow-designer",
@@ -68,7 +80,14 @@
         "workflow_validator.py",
         "workflow_visualizer.py"
       ],
-      "tags": []
+      "tags": [
+        "multi-agent",
+        "orchestration",
+        "workflow-dag",
+        "routing",
+        "handoffs",
+        "state-management"
+      ]
     },
     {
       "name": "agenthub",
@@ -133,7 +152,13 @@
         "api_scorecard.py",
         "breaking_change_detector.py"
       ],
-      "tags": []
+      "tags": [
+        "api-design",
+        "rest",
+        "openapi",
+        "breaking-changes",
+        "linting"
+      ]
     },
     {
       "name": "api-test-suite-builder",
@@ -145,7 +170,13 @@
         "coverage_analyzer.py",
         "test_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "api-testing",
+        "contract-testing",
+        "load-testing",
+        "k6",
+        "openapi"
+      ]
     },
     {
       "name": "aws-solution-architect",
@@ -230,7 +261,13 @@
         "changelog_formatter.py",
         "commit_parser.py"
       ],
-      "tags": []
+      "tags": [
+        "changelog",
+        "release-notes",
+        "conventional-commits",
+        "semver",
+        "monorepo"
+      ]
     },
     {
       "name": "chaos-engineering",
@@ -262,7 +299,13 @@
         "pipeline_generator.py",
         "pipeline_linter.py"
       ],
-      "tags": []
+      "tags": [
+        "ci-cd",
+        "github-actions",
+        "gitlab-ci",
+        "circleci",
+        "pipelines"
+      ]
     },
     {
       "name": "claude-code-mastery",
@@ -345,7 +388,13 @@
         "onboarding_generator.py",
         "setup_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "onboarding",
+        "documentation",
+        "architecture",
+        "runbooks",
+        "developer-experience"
+      ]
     },
     {
       "name": "codex-cli-specialist",
@@ -392,7 +441,13 @@
         "context_pruner.py",
         "memory_indexer.py"
       ],
-      "tags": []
+      "tags": [
+        "context-management",
+        "ai-agents",
+        "memory",
+        "rag",
+        "token-budget"
+      ]
     },
     {
       "name": "data-quality-auditor",
@@ -406,7 +461,6 @@
       ],
       "tags": [
         "data-quality",
-        "dq",
         "freshness",
         "schema-drift",
         "great-expectations",
@@ -422,7 +476,14 @@
       "domain": "engineering",
       "path": "engineering/database-designer/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "database",
+        "schema-design",
+        "indexing",
+        "migrations",
+        "postgresql",
+        "mongodb"
+      ]
     },
     {
       "name": "database-schema-designer",
@@ -434,7 +495,13 @@
         "migration_diffr.py",
         "schema_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "schema-design",
+        "normalization",
+        "erd",
+        "row-level-security",
+        "postgresql"
+      ]
     },
     {
       "name": "dependency-auditor",
@@ -446,7 +513,13 @@
         "license_checker.py",
         "upgrade_planner.py"
       ],
-      "tags": []
+      "tags": [
+        "dependencies",
+        "vulnerabilities",
+        "licenses",
+        "supply-chain",
+        "upgrades"
+      ]
     },
     {
       "name": "design-auditor",
@@ -528,7 +601,13 @@
         "env_validator.py",
         "secret_scanner.py"
       ],
-      "tags": []
+      "tags": [
+        "secrets",
+        "env-files",
+        "vault",
+        "secret-rotation",
+        "leak-detection"
+      ]
     },
     {
       "name": "extended-thinking-architect",
@@ -596,13 +675,11 @@
       "tags": [
         "gcp",
         "google-cloud",
-        "architecture",
         "cloud-architecture-framework",
         "gke",
         "cloud-run",
         "bigquery",
         "iam",
-        "networking",
         "cost-optimization"
       ]
     },
@@ -616,7 +693,13 @@
         "worktree_manager.py",
         "worktree_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "git",
+        "worktrees",
+        "parallel-development",
+        "branching",
+        "developer-tooling"
+      ]
     },
     {
       "name": "google-workspace-cli",
@@ -679,7 +762,13 @@
       "domain": "engineering",
       "path": "engineering/interview-system-designer/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "interviews",
+        "hiring",
+        "question-bank",
+        "calibration",
+        "competencies"
+      ]
     },
     {
       "name": "kubernetes-operator",
@@ -730,7 +819,13 @@
         "tool_linter.py",
         "tool_schema_linter.py"
       ],
-      "tags": []
+      "tags": [
+        "mcp",
+        "ai-integration",
+        "tool-definitions",
+        "api",
+        "ai-agents"
+      ]
     },
     {
       "name": "migration-architect",
@@ -742,7 +837,13 @@
         "migration_planner.py",
         "rollback_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "migrations",
+        "zero-downtime",
+        "rollback",
+        "database-migration",
+        "infrastructure"
+      ]
     },
     {
       "name": "monorepo-navigator",
@@ -754,7 +855,13 @@
         "impact_detector.py",
         "package_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "monorepo",
+        "turborepo",
+        "nx",
+        "pnpm",
+        "changesets"
+      ]
     },
     {
       "name": "ms365-tenant-manager",
@@ -783,7 +890,13 @@
         "dashboard_generator.py",
         "slo_designer.py"
       ],
-      "tags": []
+      "tags": [
+        "observability",
+        "slo",
+        "alerting",
+        "dashboards",
+        "monitoring"
+      ]
     },
     {
       "name": "performance-profiler",
@@ -795,7 +908,13 @@
         "bottleneck_detector.py",
         "resource_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "performance",
+        "profiling",
+        "flamegraphs",
+        "memory-leaks",
+        "load-testing"
+      ]
     },
     {
       "name": "playwright-pro",
@@ -831,7 +950,13 @@
         "diff_analyzer.py",
         "review_checklist_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "code-review",
+        "pull-requests",
+        "blast-radius",
+        "breaking-changes",
+        "test-coverage"
+      ]
     },
     {
       "name": "prompt-engineer-toolkit",
@@ -843,7 +968,13 @@
         "prompt_analyzer.py",
         "prompt_diff.py"
       ],
-      "tags": []
+      "tags": [
+        "prompt-engineering",
+        "few-shot",
+        "evals",
+        "regression-testing",
+        "llm"
+      ]
     },
     {
       "name": "prompt-governance",
@@ -886,7 +1017,13 @@
       "domain": "engineering",
       "path": "engineering/rag-architect/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "rag",
+        "retrieval",
+        "chunking",
+        "vector-database",
+        "embeddings"
+      ]
     },
     {
       "name": "red-team",
@@ -910,7 +1047,13 @@
       "domain": "engineering",
       "path": "engineering/release-manager/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "release-management",
+        "semver",
+        "changelog",
+        "release-readiness",
+        "versioning"
+      ]
     },
     {
       "name": "release-orchestrator",
@@ -940,7 +1083,13 @@
         "runbook_validator.py",
         "staleness_checker.py"
       ],
-      "tags": []
+      "tags": [
+        "runbooks",
+        "incident-response",
+        "sre",
+        "operations",
+        "rollback"
+      ]
     },
     {
       "name": "saas-scaffolder",
@@ -952,7 +1101,13 @@
         "saas_scaffolder.py",
         "tenant_config_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "saas",
+        "boilerplate",
+        "nextjs",
+        "stripe",
+        "multi-tenancy"
+      ]
     },
     {
       "name": "secrets-vault-manager",
@@ -1256,7 +1411,12 @@
         "security_scanner.py",
         "vulnerability_assessor.py"
       ],
-      "tags": []
+      "tags": [
+        "security-operations",
+        "vulnerability-management",
+        "incident-response",
+        "siem"
+      ]
     },
     {
       "name": "senior-security",
@@ -1284,7 +1444,13 @@
         "prompt_injection_scanner.py",
         "supply_chain_checker.py"
       ],
-      "tags": []
+      "tags": [
+        "skill-security",
+        "prompt-injection",
+        "supply-chain",
+        "code-scanning",
+        "ai-security"
+      ]
     },
     {
       "name": "skill-tester",
@@ -1296,7 +1462,13 @@
         "script_tester.py",
         "skill_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "skill-validation",
+        "quality-scoring",
+        "frontmatter",
+        "testing",
+        "meta-skills"
+      ]
     },
     {
       "name": "snowflake-development",
@@ -1360,7 +1532,13 @@
         "integration_auditor.py",
         "webhook_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "stripe",
+        "payments",
+        "subscriptions",
+        "webhooks",
+        "billing"
+      ]
     },
     {
       "name": "tdd-guide",
@@ -1394,7 +1572,13 @@
         "debt_prioritizer.py",
         "debt_scanner.py"
       ],
-      "tags": []
+      "tags": [
+        "technical-debt",
+        "code-quality",
+        "refactoring",
+        "ast",
+        "prioritization"
+      ]
     },
     {
       "name": "tech-stack-evaluator",
@@ -1496,7 +1680,13 @@
         "creative_matrix_builder.py",
         "headline_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "ad-creative",
+        "ad-copy",
+        "paid-social",
+        "a-b-testing",
+        "advertising"
+      ]
     },
     {
       "name": "aeo",
@@ -1549,7 +1739,13 @@
         "keyword_analyzer.py",
         "serp_simulator.py"
       ],
-      "tags": []
+      "tags": [
+        "ai-search",
+        "geo",
+        "ai-overviews",
+        "citability",
+        "schema-markup"
+      ]
     },
     {
       "name": "analytics-tracking",
@@ -1561,7 +1757,13 @@
         "funnel_drop_off_analyzer.py",
         "utm_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "ga4",
+        "google-tag-manager",
+        "event-tracking",
+        "conversion-tracking",
+        "utm"
+      ]
     },
     {
       "name": "app-store-optimization",
@@ -1596,7 +1798,13 @@
         "color_accessibility_checker.py",
         "messaging_consistency_checker.py"
       ],
-      "tags": []
+      "tags": [
+        "brand-guidelines",
+        "visual-identity",
+        "voice-and-tone",
+        "style-guide",
+        "brand"
+      ]
     },
     {
       "name": "brand-strategist",
@@ -1626,7 +1834,13 @@
         "campaign_roi_calculator.py",
         "funnel_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "campaign-analytics",
+        "attribution",
+        "funnel",
+        "roi",
+        "marketing-performance"
+      ]
     },
     {
       "name": "cold-email",
@@ -1638,7 +1852,13 @@
         "sequence_optimizer.py",
         "subject_line_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "cold-email",
+        "outbound",
+        "b2b",
+        "deliverability",
+        "sales-sequences"
+      ]
     },
     {
       "name": "content-creator",
@@ -1649,7 +1869,13 @@
         "brand_voice_analyzer.py",
         "seo_optimizer.py"
       ],
-      "tags": []
+      "tags": [
+        "content-marketing",
+        "seo",
+        "brand-voice",
+        "blog",
+        "social-media"
+      ]
     },
     {
       "name": "content-humanizer",
@@ -1661,7 +1887,13 @@
         "content_scorer.py",
         "readability_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "ai-content",
+        "humanizing",
+        "writing-quality",
+        "editing",
+        "authenticity"
+      ]
     },
     {
       "name": "content-production",
@@ -1673,7 +1905,13 @@
         "headline_analyzer.py",
         "readability_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "content-production",
+        "content-briefs",
+        "editorial",
+        "seo",
+        "blog"
+      ]
     },
     {
       "name": "content-strategy",
@@ -1685,7 +1923,13 @@
         "content_calendar_planner.py",
         "headline_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "content-strategy",
+        "content-pillars",
+        "topic-clusters",
+        "content-audit",
+        "funnel"
+      ]
     },
     {
       "name": "conversational-ads",
@@ -1717,7 +1961,13 @@
         "readability_scorer.py",
         "style_checker.py"
       ],
-      "tags": []
+      "tags": [
+        "copy-editing",
+        "editing",
+        "clarity",
+        "brand-voice",
+        "copywriting"
+      ]
     },
     {
       "name": "copywriting",
@@ -1729,7 +1979,13 @@
         "headline_scorer.py",
         "page_copy_auditor.py"
       ],
-      "tags": []
+      "tags": [
+        "copywriting",
+        "landing-pages",
+        "headlines",
+        "cta",
+        "conversion"
+      ]
     },
     {
       "name": "email-sequence",
@@ -1741,7 +1997,13 @@
         "sequence_mapper.py",
         "subject_line_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "email-marketing",
+        "drip-campaigns",
+        "onboarding-emails",
+        "nurture",
+        "saas"
+      ]
     },
     {
       "name": "email-template-builder",
@@ -1753,7 +2015,13 @@
         "spam_score_checker.py",
         "template_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "email-templates",
+        "react-email",
+        "mjml",
+        "transactional-email",
+        "deliverability"
+      ]
     },
     {
       "name": "growth-marketer",
@@ -1783,7 +2051,13 @@
         "cta_analyzer.py",
         "page_speed_estimator.py"
       ],
-      "tags": []
+      "tags": [
+        "landing-pages",
+        "conversion",
+        "copywriting",
+        "seo",
+        "core-web-vitals"
+      ]
     },
     {
       "name": "launch-strategy",
@@ -1795,7 +2069,13 @@
         "launch_readiness_checker.py",
         "launch_timeline_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "product-launch",
+        "go-to-market",
+        "product-hunt",
+        "beta",
+        "announcements"
+      ]
     },
     {
       "name": "marketing-analyst",
@@ -1825,7 +2105,13 @@
         "context_completeness_checker.py",
         "icp_fit_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "positioning",
+        "icp",
+        "brand-voice",
+        "competitive-landscape",
+        "marketing-context"
+      ]
     },
     {
       "name": "marketing-demand-acquisition",
@@ -1835,7 +2121,13 @@
       "tools": [
         "calculate_cac.py"
       ],
-      "tags": []
+      "tags": [
+        "demand-generation",
+        "paid-media",
+        "seo",
+        "partnerships",
+        "series-a"
+      ]
     },
     {
       "name": "marketing-ideas",
@@ -1847,7 +2139,12 @@
         "idea_scorer.py",
         "trend_evaluator.py"
       ],
-      "tags": []
+      "tags": [
+        "marketing-ideas",
+        "growth-tactics",
+        "brainstorming",
+        "channel-strategy"
+      ]
     },
     {
       "name": "marketing-ops",
@@ -1859,7 +2156,13 @@
         "lead_scoring_simulator.py",
         "martech_stack_auditor.py"
       ],
-      "tags": []
+      "tags": [
+        "marketing-operations",
+        "martech",
+        "automation",
+        "attribution",
+        "routing"
+      ]
     },
     {
       "name": "marketing-psychology",
@@ -1871,7 +2174,13 @@
         "persuasion_auditor.py",
         "pricing_psychology_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "behavioral-psychology",
+        "cognitive-biases",
+        "persuasion",
+        "conversion",
+        "pricing-psychology"
+      ]
     },
     {
       "name": "marketing-strategy-pmm",
@@ -1901,7 +2210,14 @@
         "audience_sizer.py",
         "cpc_calculator.py"
       ],
-      "tags": []
+      "tags": [
+        "paid-ads",
+        "google-ads",
+        "meta-ads",
+        "linkedin-ads",
+        "retargeting",
+        "bidding"
+      ]
     },
     {
       "name": "programmatic-seo",
@@ -1950,7 +2266,14 @@
         "redirect_checker.py",
         "sitemap_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "seo",
+        "audit",
+        "technical-seo",
+        "core-web-vitals",
+        "indexation",
+        "crawl-analysis"
+      ]
     },
     {
       "name": "seo-specialist",
@@ -1980,7 +2303,14 @@
         "redirect_checker.py",
         "sitemap_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "seo",
+        "information-architecture",
+        "internal-linking",
+        "url-structure",
+        "navigation",
+        "siloing"
+      ]
     },
     {
       "name": "social-content",
@@ -1992,7 +2322,14 @@
         "hashtag_analyzer.py",
         "post_scheduler.py"
       ],
-      "tags": []
+      "tags": [
+        "social-media",
+        "linkedin",
+        "instagram",
+        "tiktok",
+        "hooks",
+        "content-pillars"
+      ]
     },
     {
       "name": "social-media-analyzer",
@@ -2020,7 +2357,13 @@
         "growth_tracker.py",
         "social_audit_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "social-media",
+        "editorial-calendar",
+        "community",
+        "b2b-saas",
+        "crisis-response"
+      ]
     },
     {
       "name": "video-content-strategist",
@@ -2070,7 +2413,13 @@
         "deck_structure_validator.py",
         "metrics_dashboard_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "board-deck",
+        "investor-update",
+        "qbr",
+        "board-meeting",
+        "executive-reporting"
+      ]
     },
     {
       "name": "board-meeting",
@@ -2082,7 +2431,13 @@
         "decision_tracker.py",
         "meeting_simulator.py"
       ],
-      "tags": []
+      "tags": [
+        "board-meeting",
+        "strategic-decisions",
+        "multi-agent",
+        "deliberation",
+        "governance"
+      ]
     },
     {
       "name": "ceo-advisor",
@@ -2093,7 +2448,13 @@
         "financial_scenario_analyzer.py",
         "strategy_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "ceo",
+        "strategy",
+        "leadership",
+        "board",
+        "stakeholder-management"
+      ]
     },
     {
       "name": "cfo-advisor",
@@ -2123,7 +2484,13 @@
         "change_readiness_assessor.py",
         "communication_planner.py"
       ],
-      "tags": []
+      "tags": [
+        "change-management",
+        "adkar",
+        "reorg",
+        "communication",
+        "startups"
+      ]
     },
     {
       "name": "chief-ai-officer-advisor",
@@ -2195,7 +2562,13 @@
         "routing_engine.py",
         "synthesis_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "chief-of-staff",
+        "orchestration",
+        "routing",
+        "executive-team",
+        "board-meeting"
+      ]
     },
     {
       "name": "chro-advisor",
@@ -2207,7 +2580,14 @@
         "headcount_planner.py",
         "retention_risk_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "chro",
+        "hiring",
+        "compensation",
+        "org-design",
+        "retention",
+        "people-strategy"
+      ]
     },
     {
       "name": "ciso-advisor",
@@ -2219,7 +2599,14 @@
         "risk_register_manager.py",
         "security_posture_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "ciso",
+        "security-program",
+        "compliance",
+        "soc2",
+        "iso-27001",
+        "incident-response"
+      ]
     },
     {
       "name": "cmo-advisor",
@@ -2249,7 +2636,13 @@
         "rocks_tracker.py",
         "scorecard_builder.py"
       ],
-      "tags": []
+      "tags": [
+        "operating-system",
+        "eos",
+        "scaling-up",
+        "okrs",
+        "company-operations"
+      ]
     },
     {
       "name": "competitive-intel",
@@ -2261,7 +2654,12 @@
         "market_landscape_mapper.py",
         "swot_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "competitive-intelligence",
+        "battlecards",
+        "positioning",
+        "market-monitoring"
+      ]
     },
     {
       "name": "coo-advisor",
@@ -2291,7 +2689,13 @@
         "product_health_scorer.py",
         "product_portfolio_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "cpo",
+        "product-vision",
+        "product-portfolio",
+        "product-market-fit",
+        "product-strategy"
+      ]
     },
     {
       "name": "cro-advisor",
@@ -2303,7 +2707,14 @@
         "revenue_waterfall_analyzer.py",
         "sales_efficiency_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "cro",
+        "revenue",
+        "forecasting",
+        "quotas",
+        "net-revenue-retention",
+        "b2b-saas"
+      ]
     },
     {
       "name": "cs-onboard",
@@ -2311,7 +2722,12 @@
       "domain": "c-level-advisor",
       "path": "c-level-advisor/cs-onboard/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "onboarding",
+        "company-context",
+        "founder-interview",
+        "advisory-setup"
+      ]
     },
     {
       "name": "cto-advisor",
@@ -2322,7 +2738,13 @@
         "team_scaling_calculator.py",
         "tech_debt_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "cto",
+        "technical-debt",
+        "architecture",
+        "engineering-teams",
+        "technology-strategy"
+      ]
     },
     {
       "name": "culture-architect",
@@ -2334,7 +2756,13 @@
         "engagement_tracker.py",
         "values_alignment_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "culture",
+        "company-values",
+        "rituals",
+        "culture-health",
+        "leadership"
+      ]
     },
     {
       "name": "decision-logger",
@@ -2346,7 +2774,12 @@
         "decision_tracker.py",
         "decision_tree_builder.py"
       ],
-      "tags": []
+      "tags": [
+        "decision-log",
+        "executive-decisions",
+        "memory",
+        "governance"
+      ]
     },
     {
       "name": "executive-mentor",
@@ -2358,7 +2791,13 @@
         "goal_tracker.py",
         "leadership_assessment.py"
       ],
-      "tags": []
+      "tags": [
+        "executive-coaching",
+        "plan-review",
+        "board-prep",
+        "red-team",
+        "decision-making"
+      ]
     },
     {
       "name": "founder-coach",
@@ -2370,7 +2809,13 @@
         "milestone_tracker.py",
         "startup_stage_assessor.py"
       ],
-      "tags": []
+      "tags": [
+        "founder",
+        "first-time-ceo",
+        "delegation",
+        "burnout",
+        "leadership-development"
+      ]
     },
     {
       "name": "general-counsel-advisor",
@@ -2402,7 +2847,13 @@
         "narrative_consistency_checker.py",
         "stakeholder_mapper.py"
       ],
-      "tags": []
+      "tags": [
+        "narrative",
+        "company-story",
+        "all-hands",
+        "investor-communication",
+        "messaging"
+      ]
     },
     {
       "name": "intl-expansion",
@@ -2414,7 +2865,12 @@
         "market_readiness_scorer.py",
         "regulatory_mapper.py"
       ],
-      "tags": []
+      "tags": [
+        "international-expansion",
+        "market-entry",
+        "localization",
+        "go-to-market"
+      ]
     },
     {
       "name": "ma-playbook",
@@ -2426,7 +2882,13 @@
         "integration_planner.py",
         "synergy_calculator.py"
       ],
-      "tags": []
+      "tags": [
+        "mergers-acquisitions",
+        "due-diligence",
+        "integration",
+        "acquisition",
+        "exit"
+      ]
     },
     {
       "name": "org-health-diagnostic",
@@ -2438,7 +2900,13 @@
         "org_health_scorer.py",
         "span_of_control_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "org-health",
+        "diagnostics",
+        "traffic-light",
+        "board-review",
+        "risk"
+      ]
     },
     {
       "name": "scenario-war-room",
@@ -2450,7 +2918,13 @@
         "impact_matrix_calculator.py",
         "scenario_builder.py"
       ],
-      "tags": []
+      "tags": [
+        "scenario-planning",
+        "risk",
+        "what-if",
+        "contingency-planning",
+        "strategy"
+      ]
     },
     {
       "name": "strategic-alignment",
@@ -2462,7 +2936,13 @@
         "okr_cascade_validator.py",
         "strategy_map_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "alignment",
+        "strategy-cascade",
+        "okrs",
+        "cross-functional",
+        "execution"
+      ]
     },
     {
       "name": "vpe-advisor",
@@ -2475,10 +2955,9 @@
         "eng_productivity_dashboard.py"
       ],
       "tags": [
-        "engineering",
         "vpe",
-        "leadership",
-        "productivity",
+        "engineering-leadership",
+        "developer-productivity",
         "dora",
         "space",
         "capacity",
@@ -2541,7 +3020,6 @@
         "control-mapping",
         "soc2",
         "iso27001",
-        "nist",
         "gdpr",
         "hipaa"
       ]
@@ -2894,7 +3372,13 @@
       "tools": [
         "qms_audit_checklist.py"
       ],
-      "tags": []
+      "tags": [
+        "iso-13485",
+        "qms",
+        "design-control",
+        "supplier-qualification",
+        "medical-device"
+      ]
     },
     {
       "name": "regulatory-affairs-head",
@@ -2963,8 +3447,7 @@
         "gtm",
         "reseller",
         "distributor",
-        "marketplace",
-        "msp"
+        "marketplace"
       ]
     },
     {
@@ -3016,7 +3499,13 @@
         "competitor_scorer.py",
         "feature_matrix_builder.py"
       ],
-      "tags": []
+      "tags": [
+        "competitive-intelligence",
+        "competitor-analysis",
+        "product-strategy",
+        "battle-cards",
+        "market-analysis"
+      ]
     },
     {
       "name": "competitor-alternatives",
@@ -3028,7 +3517,13 @@
         "comparison_page_planner.py",
         "competitor_data_tracker.py"
       ],
-      "tags": []
+      "tags": [
+        "competitive-content",
+        "seo",
+        "comparison-pages",
+        "alternative-pages",
+        "sales-enablement"
+      ]
     },
     {
       "name": "contract-and-proposal-writer",
@@ -3040,7 +3535,14 @@
         "contract_comparison_analyzer.py",
         "proposal_cost_estimator.py"
       ],
-      "tags": []
+      "tags": [
+        "contracts",
+        "proposals",
+        "sow",
+        "nda",
+        "msa",
+        "legal-documents"
+      ]
     },
     {
       "name": "customer-success-manager",
@@ -3108,7 +3610,13 @@
         "tool_idea_scorer.py",
         "tool_roi_calculator.py"
       ],
-      "tags": []
+      "tags": [
+        "growth",
+        "free-tools",
+        "engineering-as-marketing",
+        "lead-generation",
+        "product-led-growth"
+      ]
     },
     {
       "name": "onboarding-cro",
@@ -3120,7 +3628,14 @@
         "onboarding_checklist_scorer.py",
         "ttv_estimator.py"
       ],
-      "tags": []
+      "tags": [
+        "cro",
+        "onboarding",
+        "activation",
+        "user-experience",
+        "retention",
+        "time-to-value"
+      ]
     },
     {
       "name": "page-cro",
@@ -3423,7 +3938,7 @@
         "negotiation",
         "dispute-resolution",
         "settlement",
-        "BATNA"
+        "batna"
       ]
     },
     {
@@ -3539,8 +4054,8 @@
       "tags": [
         "contract-negotiation",
         "technology-agreements",
-        "B2B",
-        "SLA",
+        "b2b",
+        "sla",
         "indemnification"
       ]
     },
@@ -3637,7 +4152,13 @@
       "domain": "project-management",
       "path": "project-management/career/pm-1on1s/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "one-on-ones",
+        "coaching",
+        "radical-candor",
+        "grow-model",
+        "pm-career"
+      ]
     },
     {
       "name": "pm-career-ladder",
@@ -3645,7 +4166,13 @@
       "domain": "project-management",
       "path": "project-management/career/pm-career-ladder/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "career-ladder",
+        "pm-levels",
+        "growth-planning",
+        "promotion",
+        "pm-career"
+      ]
     },
     {
       "name": "pm-interview-prep",
@@ -3653,7 +4180,13 @@
       "domain": "project-management",
       "path": "project-management/career/pm-interview-prep/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "pm-interviews",
+        "product-sense",
+        "circles",
+        "star-method",
+        "pm-career"
+      ]
     },
     {
       "name": "pm-onboarding",
@@ -3661,7 +4194,13 @@
       "domain": "project-management",
       "path": "project-management/career/pm-onboarding/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "pm-onboarding",
+        "30-60-90",
+        "first-90-days",
+        "new-role",
+        "pm-career"
+      ]
     },
     {
       "name": "confluence-expert",
@@ -3707,7 +4246,13 @@
         "prototype_handoff_checker.py",
         "prototype_plan.py"
       ],
-      "tags": []
+      "tags": [
+        "prototyping",
+        "ai-tools",
+        "validation",
+        "engineering-handoff",
+        "discovery"
+      ]
     },
     {
       "name": "brainstorm-experiments",
@@ -3717,7 +4262,12 @@
       "tools": [
         "experiment_designer.py"
       ],
-      "tags": []
+      "tags": [
+        "experiments",
+        "pretotyping",
+        "lean-validation",
+        "discovery"
+      ]
     },
     {
       "name": "brainstorm-ideas",
@@ -3729,7 +4279,12 @@
         "opportunity_tree_builder.py",
         "scamper_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "ideation",
+        "product-trio",
+        "opportunity-solution-tree",
+        "discovery"
+      ]
     },
     {
       "name": "customer-interview-script",
@@ -3737,7 +4292,12 @@
       "domain": "project-management",
       "path": "project-management/discovery/customer-interview-script/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "customer-interviews",
+        "interview-script",
+        "discovery",
+        "user-research"
+      ]
     },
     {
       "name": "identify-assumptions",
@@ -3747,7 +4307,12 @@
       "tools": [
         "assumption_tracker.py"
       ],
-      "tags": []
+      "tags": [
+        "assumption-mapping",
+        "risk",
+        "devils-advocate",
+        "discovery"
+      ]
     },
     {
       "name": "interview-synthesis",
@@ -3757,7 +4322,12 @@
       "tools": [
         "interview_synthesizer.py"
       ],
-      "tags": []
+      "tags": [
+        "interview-synthesis",
+        "insights",
+        "continuous-discovery",
+        "opportunity-solution-tree"
+      ]
     },
     {
       "name": "jtbd-workshop",
@@ -3765,7 +4335,13 @@
       "domain": "project-management",
       "path": "project-management/discovery/jtbd-workshop/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "jobs-to-be-done",
+        "switch-interviews",
+        "odi",
+        "workshop",
+        "discovery"
+      ]
     },
     {
       "name": "metrics-dashboard",
@@ -3775,7 +4351,13 @@
       "tools": [
         "dashboard_designer.py"
       ],
-      "tags": []
+      "tags": [
+        "metrics",
+        "dashboard",
+        "north-star",
+        "guardrail-metrics",
+        "product-analytics"
+      ]
     },
     {
       "name": "opportunity-solution-tree",
@@ -3785,7 +4367,12 @@
       "tools": [
         "ost_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "opportunity-solution-tree",
+        "continuous-discovery",
+        "teresa-torres",
+        "assumption-testing"
+      ]
     },
     {
       "name": "pre-mortem",
@@ -3795,7 +4382,12 @@
       "tools": [
         "risk_categorizer.py"
       ],
-      "tags": []
+      "tags": [
+        "pre-mortem",
+        "risk-analysis",
+        "launch-readiness",
+        "discovery"
+      ]
     },
     {
       "name": "value-proposition-canvas",
@@ -3803,7 +4395,12 @@
       "domain": "project-management",
       "path": "project-management/discovery/value-proposition-canvas/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "value-proposition-canvas",
+        "strategyzer",
+        "product-market-fit",
+        "jobs-to-be-done"
+      ]
     },
     {
       "name": "activation-funnel",
@@ -3813,7 +4410,13 @@
       "tools": [
         "funnel_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "activation",
+        "funnel",
+        "aarrr",
+        "conversion",
+        "drop-off"
+      ]
     },
     {
       "name": "agents-in-the-team",
@@ -3824,7 +4427,13 @@
         "agent_delegation_scorer.py",
         "agent_delivery_metrics.py"
       ],
-      "tags": []
+      "tags": [
+        "ai-agents",
+        "delegation",
+        "agent-ready-tickets",
+        "review-capacity",
+        "delivery"
+      ]
     },
     {
       "name": "ai-feature-prd",
@@ -3832,7 +4441,13 @@
       "domain": "project-management",
       "path": "project-management/execution/ai-feature-prd/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "prd",
+        "ai-features",
+        "evals",
+        "guardrails",
+        "model-selection"
+      ]
     },
     {
       "name": "backlog-refinement",
@@ -3842,7 +4457,13 @@
       "tools": [
         "refinement_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "backlog",
+        "invest",
+        "story-splitting",
+        "definition-of-ready",
+        "definition-of-done"
+      ]
     },
     {
       "name": "beta-program",
@@ -3850,7 +4471,12 @@
       "domain": "project-management",
       "path": "project-management/execution/beta-program/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "beta-program",
+        "early-access",
+        "success-criteria",
+        "ga-readiness"
+      ]
     },
     {
       "name": "brainstorm-okrs",
@@ -3860,7 +4486,12 @@
       "tools": [
         "okr_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "okrs",
+        "radical-focus",
+        "key-results",
+        "goal-setting"
+      ]
     },
     {
       "name": "create-prd",
@@ -3870,7 +4501,12 @@
       "tools": [
         "prd_scaffolder.py"
       ],
-      "tags": []
+      "tags": [
+        "prd",
+        "requirements",
+        "working-backwards",
+        "problem-framing"
+      ]
     },
     {
       "name": "customer-feedback-triage",
@@ -3897,7 +4533,13 @@
       "tools": [
         "flow_metrics.py"
       ],
-      "tags": []
+      "tags": [
+        "flow-metrics",
+        "cycle-time",
+        "throughput",
+        "wip",
+        "cumulative-flow"
+      ]
     },
     {
       "name": "daci-framework",
@@ -3905,7 +4547,12 @@
       "domain": "project-management",
       "path": "project-management/execution/daci-framework/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "daci",
+        "decision-making",
+        "roles",
+        "governance"
+      ]
     },
     {
       "name": "dependency-map",
@@ -3915,7 +4562,12 @@
       "tools": [
         "dependency_graph.py"
       ],
-      "tags": []
+      "tags": [
+        "dependencies",
+        "critical-path",
+        "program-management",
+        "mermaid"
+      ]
     },
     {
       "name": "eol-communication",
@@ -3923,7 +4575,12 @@
       "domain": "project-management",
       "path": "project-management/execution/eol-communication/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "end-of-life",
+        "sunset",
+        "deprecation",
+        "customer-communication"
+      ]
     },
     {
       "name": "feature-flag-strategy",
@@ -3931,7 +4588,12 @@
       "domain": "project-management",
       "path": "project-management/execution/feature-flag-strategy/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "feature-flags",
+        "phased-rollout",
+        "kill-switch",
+        "experiments"
+      ]
     },
     {
       "name": "job-stories",
@@ -3943,7 +4605,12 @@
         "story_converter.py",
         "story_quality_checker.py"
       ],
-      "tags": []
+      "tags": [
+        "job-stories",
+        "jobs-to-be-done",
+        "backlog",
+        "user-stories"
+      ]
     },
     {
       "name": "launch-playbook",
@@ -3951,7 +4618,13 @@
       "domain": "project-management",
       "path": "project-management/execution/launch-playbook/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "launch",
+        "run-of-show",
+        "raci",
+        "rollback",
+        "go-to-market"
+      ]
     },
     {
       "name": "north-star-metric",
@@ -3961,7 +4634,12 @@
       "tools": [
         "metric_tree_builder.py"
       ],
-      "tags": []
+      "tags": [
+        "north-star-metric",
+        "metric-tree",
+        "leading-indicators",
+        "counter-metrics"
+      ]
     },
     {
       "name": "outcome-roadmap",
@@ -3971,7 +4649,12 @@
       "tools": [
         "roadmap_transformer.py"
       ],
-      "tags": []
+      "tags": [
+        "roadmap",
+        "outcomes",
+        "now-next-later",
+        "product-strategy"
+      ]
     },
     {
       "name": "post-mortem",
@@ -3995,7 +4678,12 @@
       "domain": "project-management",
       "path": "project-management/execution/prfaq/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "prfaq",
+        "working-backwards",
+        "press-release",
+        "amazon"
+      ]
     },
     {
       "name": "pricing-prd",
@@ -4020,7 +4708,13 @@
       "tools": [
         "prioritization_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "prioritization",
+        "rice",
+        "ice",
+        "moscow",
+        "kano"
+      ]
     },
     {
       "name": "product-vision",
@@ -4028,7 +4722,12 @@
       "domain": "project-management",
       "path": "project-management/execution/product-vision/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "product-vision",
+        "vision-board",
+        "strategy",
+        "narrative"
+      ]
     },
     {
       "name": "quarterly-planning",
@@ -4036,7 +4735,12 @@
       "domain": "project-management",
       "path": "project-management/execution/quarterly-planning/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "quarterly-planning",
+        "okrs",
+        "radical-focus",
+        "planning-cycle"
+      ]
     },
     {
       "name": "release-notes",
@@ -4046,7 +4750,12 @@
       "tools": [
         "release_notes_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "release-notes",
+        "changelog",
+        "customer-communication",
+        "product-updates"
+      ]
     },
     {
       "name": "roadmap-communication",
@@ -4054,7 +4763,12 @@
       "domain": "project-management",
       "path": "project-management/execution/roadmap-communication/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "roadmap",
+        "stakeholder-communication",
+        "executive-update",
+        "customer-roadmap"
+      ]
     },
     {
       "name": "sprint-plan",
@@ -4064,7 +4778,13 @@
       "tools": [
         "sprint_planner.py"
       ],
-      "tags": []
+      "tags": [
+        "sprint-planning",
+        "capacity",
+        "commitment",
+        "scrum",
+        "risk"
+      ]
     },
     {
       "name": "stakeholder-map",
@@ -4074,7 +4794,12 @@
       "tools": [
         "stakeholder_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "stakeholder-mapping",
+        "power-interest",
+        "communication-plan",
+        "change-management"
+      ]
     },
     {
       "name": "status-update-generator",
@@ -4084,7 +4809,13 @@
       "tools": [
         "status_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "status-update",
+        "jira",
+        "linear",
+        "executive-reporting",
+        "weekly-update"
+      ]
     },
     {
       "name": "story-mapping",
@@ -4092,7 +4823,12 @@
       "domain": "project-management",
       "path": "project-management/execution/story-mapping/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "story-mapping",
+        "user-journey",
+        "mvp",
+        "release-planning"
+      ]
     },
     {
       "name": "story-splitting",
@@ -4100,7 +4836,12 @@
       "domain": "project-management",
       "path": "project-management/execution/story-splitting/SKILL.md",
       "tools": [],
-      "tags": []
+      "tags": [
+        "story-splitting",
+        "vertical-slicing",
+        "epics",
+        "user-stories"
+      ]
     },
     {
       "name": "summarize-meeting",
@@ -4112,7 +4853,12 @@
         "decision_log_builder.py",
         "meeting_effectiveness_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "meeting-summary",
+        "action-items",
+        "decisions",
+        "meetings"
+      ]
     },
     {
       "name": "test-scenarios",
@@ -4122,7 +4868,13 @@
       "tools": [
         "test_scenario_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "test-scenarios",
+        "edge-cases",
+        "qa",
+        "test-coverage",
+        "acceptance-testing"
+      ]
     },
     {
       "name": "wwas",
@@ -4134,7 +4886,12 @@
         "invest_gate_checker.py",
         "wwas_quality_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "backlog",
+        "acceptance-criteria",
+        "invest",
+        "strategic-alignment"
+      ]
     },
     {
       "name": "gtm-strategy",
@@ -4144,7 +4901,13 @@
       "tools": [
         "gtm_strategy_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "go-to-market",
+        "icp",
+        "channels",
+        "messaging",
+        "launch"
+      ]
     },
     {
       "name": "ideal-customer-profile",
@@ -4154,7 +4917,13 @@
       "tools": [
         "icp_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "icp",
+        "buyer-persona",
+        "firmographics",
+        "jobs-to-be-done",
+        "segmentation"
+      ]
     },
     {
       "name": "jira-expert",
@@ -4321,7 +5090,12 @@
       "tools": [
         "ansoff_growth_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "ansoff-matrix",
+        "growth-strategy",
+        "diversification",
+        "market-development"
+      ]
     },
     {
       "name": "business-model-canvas",
@@ -4331,7 +5105,12 @@
       "tools": [
         "canvas_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "business-model-canvas",
+        "osterwalder",
+        "business-model",
+        "strategy"
+      ]
     },
     {
       "name": "lean-canvas",
@@ -4341,7 +5120,12 @@
       "tools": [
         "lean_canvas_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "lean-canvas",
+        "startups",
+        "assumptions",
+        "business-model"
+      ]
     },
     {
       "name": "porters-five-forces",
@@ -4351,7 +5135,12 @@
       "tools": [
         "five_forces_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "porters-five-forces",
+        "industry-analysis",
+        "competition",
+        "market-entry"
+      ]
     },
     {
       "name": "swot-analysis",
@@ -4361,7 +5150,12 @@
       "tools": [
         "swot_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "swot",
+        "strategic-positioning",
+        "competitive-analysis",
+        "strategy"
+      ]
     },
     {
       "name": "team-communications",
@@ -4427,13 +5221,11 @@
       ],
       "tags": [
         "apple",
+        "hig",
         "ios",
-        "ipados",
         "macos",
         "watchos",
-        "tvos",
         "visionos",
-        "hig",
         "design",
         "accessibility"
       ]
@@ -4627,7 +5419,13 @@
         "quality_scorer.py",
         "schema_diff.py"
       ],
-      "tags": []
+      "tags": [
+        "analytics-engineering",
+        "dbt",
+        "data-modeling",
+        "transformation",
+        "semantic-layer"
+      ]
     },
     {
       "name": "business-intelligence",
@@ -4950,7 +5748,12 @@
       "tools": [
         "meeting_prep_briefer.py"
       ],
-      "tags": []
+      "tags": [
+        "meeting-prep",
+        "briefing",
+        "calendar",
+        "one-on-ones"
+      ]
     },
     {
       "name": "capture",
@@ -4994,7 +5797,12 @@
       "tools": [
         "name_generator.py"
       ],
-      "tags": []
+      "tags": [
+        "naming",
+        "domain-names",
+        "branding",
+        "brainstorming"
+      ]
     },
     {
       "name": "email-triage",
@@ -5004,7 +5812,13 @@
       "tools": [
         "email_classifier.py"
       ],
-      "tags": []
+      "tags": [
+        "email",
+        "inbox-zero",
+        "triage",
+        "unsubscribe",
+        "productivity"
+      ]
     },
     {
       "name": "investor-update-generator",
@@ -5014,7 +5828,12 @@
       "tools": [
         "investor_update_validator.py"
       ],
-      "tags": []
+      "tags": [
+        "investor-update",
+        "fundraising",
+        "founders",
+        "reporting"
+      ]
     },
     {
       "name": "invoice-organizer",
@@ -5024,7 +5843,13 @@
       "tools": [
         "invoice_categorizer.py"
       ],
-      "tags": []
+      "tags": [
+        "invoices",
+        "receipts",
+        "bookkeeping",
+        "tax-prep",
+        "expenses"
+      ]
     },
     {
       "name": "lead-researcher",
@@ -5034,7 +5859,13 @@
       "tools": [
         "lead_qualifier.py"
       ],
-      "tags": []
+      "tags": [
+        "lead-research",
+        "icp",
+        "lead-scoring",
+        "outreach",
+        "prospecting"
+      ]
     },
     {
       "name": "meeting-insights",
@@ -5044,7 +5875,13 @@
       "tools": [
         "transcript_analyzer.py"
       ],
-      "tags": []
+      "tags": [
+        "meetings",
+        "transcripts",
+        "action-items",
+        "decisions",
+        "summaries"
+      ]
     },
     {
       "name": "pitch-deck-reviewer",
@@ -5054,7 +5891,13 @@
       "tools": [
         "deck_structure_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "pitch-deck",
+        "fundraising",
+        "startups",
+        "investors",
+        "deck-review"
+      ]
     },
     {
       "name": "reflect",
@@ -5082,7 +5925,13 @@
       "tools": [
         "resume_matcher.py"
       ],
-      "tags": []
+      "tags": [
+        "resume",
+        "job-search",
+        "ats",
+        "keywords",
+        "career"
+      ]
     },
     {
       "name": "weekly-review",
@@ -5092,7 +5941,13 @@
       "tools": [
         "weekly_review_synthesizer.py"
       ],
-      "tags": []
+      "tags": [
+        "weekly-review",
+        "reflection",
+        "planning",
+        "productivity",
+        "okrs"
+      ]
     },
     {
       "name": "docx-toolkit",
@@ -5102,7 +5957,13 @@
       "tools": [
         "docx_auditor.py"
       ],
-      "tags": []
+      "tags": [
+        "docx",
+        "word",
+        "document-audit",
+        "tracked-changes",
+        "ooxml"
+      ]
     },
     {
       "name": "pdf-toolkit",
@@ -5112,7 +5973,13 @@
       "tools": [
         "pdf_auditor.py"
       ],
-      "tags": []
+      "tags": [
+        "pdf",
+        "document-audit",
+        "metadata",
+        "redaction",
+        "security"
+      ]
     },
     {
       "name": "pptx-toolkit",
@@ -5122,7 +5989,13 @@
       "tools": [
         "pptx_auditor.py"
       ],
-      "tags": []
+      "tags": [
+        "pptx",
+        "powerpoint",
+        "presentation-audit",
+        "slides",
+        "ooxml"
+      ]
     },
     {
       "name": "xlsx-toolkit",
@@ -5132,7 +6005,13 @@
       "tools": [
         "xlsx_auditor.py"
       ],
-      "tags": []
+      "tags": [
+        "xlsx",
+        "excel",
+        "spreadsheet-audit",
+        "formulas",
+        "financial-model"
+      ]
     },
     {
       "name": "climate-tech-advisor",
@@ -5142,7 +6021,13 @@
       "tools": [
         "carbon_impact_estimator.py"
       ],
-      "tags": []
+      "tags": [
+        "climate-tech",
+        "carbon-markets",
+        "ghg-accounting",
+        "climate-regulation",
+        "startups"
+      ]
     },
     {
       "name": "ecommerce-advisor",
@@ -5152,7 +6037,13 @@
       "tools": [
         "ecom_unit_economics_calculator.py"
       ],
-      "tags": []
+      "tags": [
+        "ecommerce",
+        "unit-economics",
+        "fulfillment",
+        "payments",
+        "dtc"
+      ]
     },
     {
       "name": "edtech-advisor",
@@ -5162,7 +6053,13 @@
       "tools": [
         "student_data_compliance_checker.py"
       ],
-      "tags": []
+      "tags": [
+        "edtech",
+        "ferpa",
+        "coppa",
+        "k-12",
+        "district-sales"
+      ]
     },
     {
       "name": "fintech-advisor",
@@ -5172,7 +6069,13 @@
       "tools": [
         "regulatory_trigger_checker.py"
       ],
-      "tags": []
+      "tags": [
+        "fintech",
+        "kyc-aml",
+        "licensing",
+        "embedded-finance",
+        "regulation"
+      ]
     },
     {
       "name": "healthtech-advisor",
@@ -5182,7 +6085,13 @@
       "tools": [
         "phi_scope_checker.py"
       ],
-      "tags": []
+      "tags": [
+        "healthtech",
+        "hipaa",
+        "fda-samd",
+        "ehr-integration",
+        "digital-health"
+      ]
     },
     {
       "name": "marketplace-advisor",
@@ -5192,7 +6101,13 @@
       "tools": [
         "marketplace_health_scorer.py"
       ],
-      "tags": []
+      "tags": [
+        "marketplace",
+        "network-effects",
+        "take-rate",
+        "liquidity",
+        "two-sided"
+      ]
     },
     {
       "name": "proptech-advisor",
@@ -5202,7 +6117,13 @@
       "tools": [
         "market_segment_classifier.py"
       ],
-      "tags": []
+      "tags": [
+        "proptech",
+        "real-estate",
+        "mls",
+        "brokerage",
+        "licensing"
+      ]
     },
     {
       "name": "dossier",

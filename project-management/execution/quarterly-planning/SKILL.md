@@ -12,6 +12,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: quarterly-planning, okrs, product-strategy, radical-focus
+  tags:
+    - quarterly-planning
+    - okrs
+    - radical-focus
+    - planning-cycle
 ---
 # Quarterly Planning Expert
 

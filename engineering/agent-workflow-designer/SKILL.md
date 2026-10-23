@@ -13,6 +13,13 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-29
   frameworks: langgraph, crewai, autogen, claude-agent-teams
+  tags:
+    - multi-agent
+    - orchestration
+    - workflow-dag
+    - routing
+    - handoffs
+    - state-management
 ---
 # Agent Workflow Designer
 

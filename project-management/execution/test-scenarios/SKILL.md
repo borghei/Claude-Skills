@@ -14,6 +14,12 @@ metadata:
   updated: 2026-05-27
   python-tools: test_scenario_generator.py
   tech-stack: test-scenarios, qa, edge-cases, acceptance-criteria
+  tags:
+    - test-scenarios
+    - edge-cases
+    - qa
+    - test-coverage
+    - acceptance-testing
 ---
 
 # Test Scenarios

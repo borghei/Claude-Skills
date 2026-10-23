@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: email_classifier.py
   tech-stack: email, productivity
+  tags:
+    - email
+    - inbox-zero
+    - triage
+    - unsubscribe
+    - productivity
 ---
 
 # Email Triage

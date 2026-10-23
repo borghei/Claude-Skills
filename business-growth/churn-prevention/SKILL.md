@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: business-growth
+  domain: retention
   updated: 2026-03-31
   tags: [churn, retention, cancel-flow, dunning, payment-recovery, win-back]
 ---

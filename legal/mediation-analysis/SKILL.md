@@ -11,7 +11,7 @@ metadata:
   category: legal
   domain: dispute-resolution
   updated: 2026-04-10
-  tags: [mediation, negotiation, dispute-resolution, settlement, BATNA]
+  tags: [mediation, negotiation, dispute-resolution, settlement, batna]
 ---
 > **⚠️ EXPERIMENTAL** — This skill is provided for educational and informational purposes only. It does NOT constitute legal advice. All responsibility for usage rests with the user. Consult qualified legal professionals before acting on any output.
 

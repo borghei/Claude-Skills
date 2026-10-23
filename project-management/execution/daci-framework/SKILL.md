@@ -12,6 +12,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: daci, decision-framework, governance
+  tags:
+    - daci
+    - decision-making
+    - roles
+    - governance
 ---
 # DACI Decision Framework
 

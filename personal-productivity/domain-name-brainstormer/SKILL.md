@@ -13,6 +13,11 @@ metadata:
   updated: 2026-05-04
   python-tools: name_generator.py
   tech-stack: branding, naming
+  tags:
+    - naming
+    - domain-names
+    - branding
+    - brainstorming
 ---
 
 # Domain Name Brainstormer

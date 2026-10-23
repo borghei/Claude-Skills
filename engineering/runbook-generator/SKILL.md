@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: github-actions, vercel, aws, kubernetes, postgresql
+  tags:
+    - runbooks
+    - incident-response
+    - sre
+    - operations
+    - rollback
 ---
 # Runbook Generator
 

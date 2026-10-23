@@ -14,6 +14,11 @@ metadata:
   updated: 2026-05-27
   python-tools: ansoff_growth_scorer.py
   tech-stack: ansoff-matrix, growth-strategy, product-market-expansion
+  tags:
+    - ansoff-matrix
+    - growth-strategy
+    - diversification
+    - market-development
 ---
 
 # Ansoff Matrix

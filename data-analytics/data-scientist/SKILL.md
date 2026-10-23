@@ -10,6 +10,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: data-analytics
+  domain: data-science
   updated: 2026-03-31
   tags: [data-science, machine-learning, statistics, modeling, analytics]
 ---

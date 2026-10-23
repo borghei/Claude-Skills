@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: engineering
   updated: 2026-06-17
-  tags: [data-quality, dq, freshness, schema-drift, great-expectations, dbt-tests, soda, data-observability, data-engineering]
+  tags: [data-quality, freshness, schema-drift, great-expectations, dbt-tests, soda, data-observability, data-engineering]
 ---
 
 # Data Quality Auditor

@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-29
   frameworks: context-window-optimization, memory-architecture, knowledge-graphs
+  tags:
+    - context-management
+    - ai-agents
+    - memory
+    - rag
+    - token-budget
 ---
 # Context Engine - AI Agent Context Management
 

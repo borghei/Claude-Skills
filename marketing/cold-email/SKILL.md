@@ -11,6 +11,12 @@ metadata:
   category: marketing
   domain: outbound
   updated: 2026-03-09
+  tags:
+    - cold-email
+    - outbound
+    - b2b
+    - deliverability
+    - sales-sequences
 ---
 # Cold Email Outreach
 

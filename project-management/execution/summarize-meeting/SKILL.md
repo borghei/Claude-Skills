@@ -11,6 +11,11 @@ metadata:
   domain: pm-execution
   updated: 2026-06-15
   tech-stack: meeting-facilitation, action-tracking, decision-logging
+  tags:
+    - meeting-summary
+    - action-items
+    - decisions
+    - meetings
 ---
 # Meeting Summary Expert
 

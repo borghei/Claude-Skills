@@ -217,6 +217,54 @@ def yaml_lite_load(text: str):
     return parse_block(0)
 
 
+# ---------------------------------------------------------------------------
+# SKILL.md section concepts
+#
+# Skills in this library name their sections in different words, so sections
+# are checked as concepts, each matched by the headings that express it.
+# Requirements follow standards/skill-authoring-standard.md (P5, P11).
+# ---------------------------------------------------------------------------
+
+# Structural concepts must match the whole heading ("Tools", not "Tool Selection
+# Criteria"); topical ones may appear anywhere in it ("Query Anti-Patterns").
+_TOOLS = r"(python |automation )*(tools?|scripts|tooling)( overview| reference| & scripts)?"
+SECTION_CONCEPTS = {
+    "purpose": (r"when to use( this skill)?|use when|overview|purpose|(core )?capabilities"
+                r"|what (this|the) skill does", "full"),
+    "usage": (r"quick ?start|((core|end-to-end|common) )?workflows?|usage|how to use|getting started"
+              r"|operating modes|common engagements|" + _TOOLS, "full"),
+    "clarify_first": (r"clarify[- ]first", "anywhere"),
+    "anti_patterns": (r"anti[- ]?patterns?|mistakes|pitfalls|red flags", "anywhere"),
+    "scope": (r"scope|limitations|out[- ]of[- ]scope", "anywhere"),
+    "tools": (_TOOLS, "full"),
+    "references": (r"references?|reference (guides|documentation|materials)|knowledge base", "full"),
+}
+
+SECTION_LABELS = {
+    "purpose": "what the skill is for (When to Use, Overview, Core Capabilities)",
+    "usage": "how to use it (Quick Start, Workflows, Tools)",
+    "clarify_first": "Clarify First",
+    "anti_patterns": "Anti-Patterns",
+    "scope": "Scope & Limitations",
+    "tools": "Tools",
+    "references": "References",
+}
+
+
+def skill_md_section_concepts(content: str) -> set:
+    """Return the section concepts present in a SKILL.md, ignoring fenced code."""
+    prose = re.sub(r"^```.*?^```", "", content, flags=re.MULTILINE | re.DOTALL)
+    headings = [re.sub(r"[^\w &/-]", "", h).strip().lower()
+                for h in re.findall(r"^#{2,3}\s+(.+?)\s*$", prose, re.MULTILINE)]
+    found = set()
+    for name, (pattern, mode) in SECTION_CONCEPTS.items():
+        regex = re.compile(rf"(?:{pattern})" if mode == "full" else rf"\b(?:{pattern})\b")
+        match = regex.fullmatch if mode == "full" else regex.search
+        if any(match(h) for h in headings):
+            found.add(name)
+    return found
+
+
 class ValidationError(Exception):
     """Custom exception for validation errors"""
     pass
@@ -309,9 +357,10 @@ class SkillValidator:
         }
     }
     
-    REQUIRED_SKILL_MD_SECTIONS = [
-        "Name", "Description", "Features", "Usage", "Examples"
-    ]
+    # Section concepts (see SECTION_CONCEPTS): missing required ones are errors,
+    # missing recommended ones are warnings
+    REQUIRED_SECTION_CONCEPTS = ["purpose", "usage"]
+    RECOMMENDED_SECTION_CONCEPTS = ["clarify_first", "anti_patterns", "scope"]
     
     # Schema from standards/skill-authoring-standard.md (Pattern 2)
     FRONTMATTER_REQUIRED_FIELDS = ["name", "description", "license"]
@@ -470,23 +519,32 @@ class SkillValidator:
             self.report.add_error("SKILL.md must start with YAML frontmatter")
             
     def _validate_required_sections(self, content: str):
-        """Validate required sections in SKILL.md"""
+        """Validate SKILL.md section concepts against the authoring standard"""
         self.log_verbose("Checking required sections...")
-        
-        missing_sections = []
-        for section in self.REQUIRED_SKILL_MD_SECTIONS:
-            pattern = rf'^#+\s*{re.escape(section)}\s*$'
-            if not re.search(pattern, content, re.MULTILINE | re.IGNORECASE):
-                missing_sections.append(section)
-                
-        if not missing_sections:
-            self.report.add_check("required_sections", True,
-                                 "All required sections present", 1.0)
+
+        present = skill_md_section_concepts(content)
+        # A skill passes "purpose or usage" with either; slim skills route to references/
+        if not present & set(self.REQUIRED_SECTION_CONCEPTS):
+            missing = " or ".join(SECTION_LABELS[c] for c in self.REQUIRED_SECTION_CONCEPTS)
+            self.report.add_check("required_sections", False, f"Missing a section on {missing}", 0.0)
+            self.report.add_error(f"SKILL.md needs a section on {missing}")
         else:
-            self.report.add_check("required_sections", False,
-                                 f"Missing sections: {', '.join(missing_sections)}", 0.0)
-            self.report.add_error(f"Missing required sections: {', '.join(missing_sections)}")
-            
+            self.report.add_check("required_sections", True, "Required sections present", 1.0)
+
+        for concept in self.RECOMMENDED_SECTION_CONCEPTS:
+            if concept not in present:
+                self.report.add_warning(f"Recommended section missing: {SECTION_LABELS[concept]}")
+
+        scripts = [s for s in (self.skill_path / "scripts").glob("*.py") if s.name != "__init__.py"]
+        if scripts and "tools" not in present:
+            self.report.add_warning("scripts/ has Python tools but SKILL.md has no Tools section")
+        unmentioned = sorted(s.name for s in scripts if s.name not in content)
+        if unmentioned:
+            self.report.add_warning(f"Tools not mentioned in SKILL.md: {', '.join(unmentioned)}")
+        if (self.skill_path / "references").is_dir() and "references/" not in content \
+                and "references" not in present:
+            self.report.add_warning("references/ exists but SKILL.md never points to it")
+
     def _validate_readme(self):
         """Validate README.md content"""
         self.log_verbose("Validating README.md...")

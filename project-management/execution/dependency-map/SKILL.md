@@ -12,6 +12,11 @@ metadata:
   updated: 2026-06-15
   python-tools: dependency_graph.py
   tech-stack: dependencies, critical-path, dsm, conway, mermaid
+  tags:
+    - dependencies
+    - critical-path
+    - program-management
+    - mermaid
 ---
 # Cross-Team Dependency Map
 

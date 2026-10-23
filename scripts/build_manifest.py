@@ -55,7 +55,8 @@ def parse_frontmatter(text: str) -> dict:
     """Minimal YAML-frontmatter parser covering the observed SKILL.md shapes.
 
     Handles: scalar key:value, multi-line `>` folded scalars, nested metadata:
-    block with indented key:value pairs, and inline JSON-style arrays.
+    block with indented key:value pairs, inline JSON-style arrays, and block
+    lists of `- item` lines.
     """
     if not text.startswith("---"):
         return {}
@@ -101,6 +102,22 @@ def parse_frontmatter(text: str) -> dict:
             if indent == "":
                 nested_key = None
             target = result if nested_key is None else result.setdefault(nested_key, {})
+
+            if value == "":
+                # Block-style list: `tags:` followed by indented `- item` lines
+                j = i + 1
+                while j < len(lines) and not lines[j].strip():
+                    j += 1
+                if j < len(lines) and re.match(r"^\s*- ", lines[j]) and \
+                        len(lines[j]) - len(lines[j].lstrip()) >= len(indent):
+                    items = []
+                    while j < len(lines) and (re.match(r"^\s*- ", lines[j]) or not lines[j].strip()):
+                        if lines[j].strip():
+                            items.append(_parse_scalar(lines[j].strip()[2:].strip()))
+                        j += 1
+                    target[key] = items
+                    i = j
+                    continue
 
             if value in ("", ">", "|"):
                 if value in (">", "|"):

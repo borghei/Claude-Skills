@@ -11,7 +11,7 @@ metadata:
   category: executive-leadership
   domain: c-level-advisor
   updated: 2026-05-27
-  tags: [engineering, vpe, leadership, productivity, dora, space, capacity, hiring, retention]
+  tags: [vpe, engineering-leadership, developer-productivity, dora, space, capacity, hiring, retention]
 ---
 
 # VP of Engineering Advisor

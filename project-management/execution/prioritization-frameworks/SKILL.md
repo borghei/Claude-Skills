@@ -12,6 +12,12 @@ metadata:
   updated: 2026-06-15
   python-tools: prioritization_scorer.py
   tech-stack: rice, ice, kano, moscow, eisenhower, opportunity-score, prioritization
+  tags:
+    - prioritization
+    - rice
+    - ice
+    - moscow
+    - kano
 ---
 # Prioritization Framework Expert
 

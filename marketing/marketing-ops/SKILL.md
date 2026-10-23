@@ -12,6 +12,12 @@ metadata:
   category: marketing
   domain: operations
   updated: 2026-03-09
+  tags:
+    - marketing-operations
+    - martech
+    - automation
+    - attribution
+    - routing
 ---
 # Marketing Ops
 

@@ -13,6 +13,11 @@ metadata:
   updated: 2026-05-04
   python-tools: meeting_prep_briefer.py
   tech-stack: meetings, productivity
+  tags:
+    - meeting-prep
+    - briefing
+    - calendar
+    - one-on-ones
 ---
 
 # Calendar Prep

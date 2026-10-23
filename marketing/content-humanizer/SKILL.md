@@ -12,6 +12,12 @@ metadata:
   category: marketing
   domain: content
   updated: 2026-09-21
+  tags:
+    - ai-content
+    - humanizing
+    - writing-quality
+    - editing
+    - authenticity
 ---
 # Content Humanizer
 

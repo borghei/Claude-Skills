@@ -13,6 +13,12 @@ metadata:
   tier: POWERFUL
   updated: 2026-06-17
   frameworks: vitest, pytest, supertest, httpx, k6, pact
+  tags:
+    - api-testing
+    - contract-testing
+    - load-testing
+    - k6
+    - openapi
 ---
 # API Test Suite Builder
 

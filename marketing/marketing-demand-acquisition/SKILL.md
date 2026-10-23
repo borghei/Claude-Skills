@@ -10,6 +10,12 @@ metadata:
   category: marketing
   domain: demand-generation
   updated: 2025-01
+  tags:
+    - demand-generation
+    - paid-media
+    - seo
+    - partnerships
+    - series-a
 ---
 # Marketing Demand & Acquisition
 

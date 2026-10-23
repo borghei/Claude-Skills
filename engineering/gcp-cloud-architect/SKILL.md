@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: engineering
   updated: 2026-06-17
-  tags: [gcp, google-cloud, architecture, cloud-architecture-framework, gke, cloud-run, bigquery, iam, networking, cost-optimization]
+  tags: [gcp, google-cloud, cloud-architecture-framework, gke, cloud-run, bigquery, iam, cost-optimization]
 ---
 
 # GCP Cloud Architect

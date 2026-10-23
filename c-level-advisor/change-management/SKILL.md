@@ -38,6 +38,12 @@ metadata:
     - new process
     - announce change
     - manage resistance
+  tags:
+    - change-management
+    - adkar
+    - reorg
+    - communication
+    - startups
 ---
 # Change Management Playbook
 

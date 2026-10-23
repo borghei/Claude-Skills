@@ -12,6 +12,12 @@ metadata:
   category: marketing
   domain: copywriting
   updated: 2026-03-09
+  tags:
+    - copywriting
+    - landing-pages
+    - headlines
+    - cta
+    - conversion
 ---
 # Copywriting
 

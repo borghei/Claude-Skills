@@ -12,6 +12,12 @@ metadata:
   domain: devops
   tier: POWERFUL
   updated: 2026-06-17
+  tags:
+    - release-management
+    - semver
+    - changelog
+    - release-readiness
+    - versioning
 ---
 # Release Manager
 

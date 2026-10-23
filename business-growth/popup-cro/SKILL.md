@@ -10,6 +10,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: business-growth
+  domain: conversion-optimization
   updated: 2026-03-31
   tags: [cro, popup, modal, exit-intent, lead-capture, conversion-optimization]
 ---

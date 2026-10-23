@@ -13,6 +13,12 @@ metadata:
   updated: 2026-05-04
   python-tools: invoice_categorizer.py
   tech-stack: bookkeeping, tax
+  tags:
+    - invoices
+    - receipts
+    - bookkeeping
+    - tax-prep
+    - expenses
 ---
 
 # Invoice Organizer

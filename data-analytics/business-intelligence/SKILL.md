@@ -9,6 +9,7 @@ metadata:
   version: 1.0.0
   author: borghei
   category: data-analytics
+  domain: business-intelligence
   updated: 2026-03-31
   tags: [bi, dashboards, visualization, reporting, insights]
 ---

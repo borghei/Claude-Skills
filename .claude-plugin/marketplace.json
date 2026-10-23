@@ -170,7 +170,7 @@
     {
       "name": "personal-productivity-skills",
       "source": "./personal-productivity",
-      "description": "10 personal productivity skills: resume, lead research, meeting insights, naming, invoices, email triage, calendar prep, investor updates, pitch decks, and weekly review",
+      "description": "13 personal productivity skills: resume, lead research, meeting insights, naming, invoices, email triage, calendar prep, investor updates, pitch decks, weekly review, capture, deep work, and reflection",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
@@ -208,7 +208,7 @@
     {
       "name": "data-analytics-skills",
       "source": "./data-analytics",
-      "description": "5 data analytics skills: data analysis, business intelligence, data science, ML ops, and analytics engineering",
+      "description": "6 data analytics skills: data analysis, business intelligence, data science, statistics, ML ops, and analytics engineering",
       "version": "1.0.0",
       "author": {
         "name": "borghei"

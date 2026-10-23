@@ -13,6 +13,12 @@ metadata:
   updated: 2026-06-15
   python-tools: status_generator.py
   tech-stack: jira, linear, weekly-status, executive-reporting, sbnr, r-y-g
+  tags:
+    - status-update
+    - jira
+    - linear
+    - executive-reporting
+    - weekly-update
 ---
 # Status Update Generator
 

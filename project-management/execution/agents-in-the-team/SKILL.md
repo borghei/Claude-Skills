@@ -13,6 +13,12 @@ metadata:
   updated: 2026-09-21
   python-tools: agent_delegation_scorer.py, agent_delivery_metrics.py
   tech-stack: ai-agents, delivery-management, dora-metrics, code-review, scrum
+  tags:
+    - ai-agents
+    - delegation
+    - agent-ready-tickets
+    - review-capacity
+    - delivery
 ---
 
 # Agents in the Team
