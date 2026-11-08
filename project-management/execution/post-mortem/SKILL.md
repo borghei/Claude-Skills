@@ -1,16 +1,16 @@
 ---
 name: post-mortem
 description: >
-  Blameless post-mortem expert for incidents, outages, regressions, customer
-  escalations, missed launches, and failed experiments. Pairs Google SRE
-  practice with Allspaw / Dekker / Perrow systems thinking.
+  Run a blameless review with a timeline, contributing causes and owned action
+  items. Use when an incident, outage, missed launch or failed experiment
+  needs a written review.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: [post-mortem, incident-management, rca, blameless, 5-whys]
   tags: [post-mortem, rca, blameless, incident, sre, five-whys, causal-tree]
 ---
@@ -20,7 +20,7 @@ metadata:
 
 A post-mortem is a structured, blameless review held after an incident, outage, regression, missed launch, or failed experiment. The goal is not to assign fault but to learn how the system (people, process, code, and organization) produced the outcome, and to commit to durable changes that reduce the chance of recurrence.
 
-This skill operationalizes the Google SRE blameless post-mortem template, the Etsy "morgue" tradition, John Allspaw's "How Complex Systems Fail" reading, Charles Perrow's Normal Accident Theory, and Sidney Dekker's *Field Guide to Understanding "Human Error"*. Where the companion `discovery/pre-mortem/` skill imagines failure before it happens, post-mortem learns from failure that already did.
+It follows the blameless post-mortem practice common in site reliability engineering, with systems-thinking sources listed under References. Where the companion `discovery/pre-mortem/` skill imagines failure before it happens, post-mortem learns from failure that already did.
 
 ## Core Capabilities
 
@@ -53,12 +53,16 @@ Before authoring the post-mortem, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. At incident close, the incident commander assigns an author who opens `assets/post_mortem_template.md`.
 2. Scaffold Header, Summary, Impact, and Timeline from the incident chat transcript.
-3. Within the SLA window (Sev 1: 5 business days, Sev 2: 7), draft the remaining sections, run the chosen root-cause method, and hold a 60-90 min blameless review.
+3. Within the SLA window, draft the remaining sections, run the chosen root-cause method, and hold a 60-90 min blameless review.
 4. Apply the Allspaw test, file every action item as a real ticket with an owner and due date, then publish to the searchable archive.
+
+Default SLAs [RECOMMENDED], to replace with your organisation's: Sev 1 draft within 5 business days, Sev 2 within 7. The reason for a short window: memory and chat context fade within a week, and the timeline is the part that cannot be reconstructed later.
+
+**Done when** the timeline has no unexplained gaps, the analysis names contributing factors (not a person), and every action item has one owner, a ticket and a testable done condition.
 
 The blameless principles, severity thresholds, full template, workflow, and root-cause methods all live in the references below.
 
@@ -81,13 +85,22 @@ The blameless principles, severity thresholds, full template, workflow, and root
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/post_mortem_template.md` | 10-section post-mortem template |
+| `assets/incident_timeline_worksheet.md` | Timeline prompts |
+| `assets/action_item_tracker.md` | Cross-incident action tracker |
+| `assets/what_went_well_prompts.md` | Positive-observation prompts |
+| `examples/payment-processing-outage.md` | Worked post-mortem |
+
 ## References
 
 - **[references/post-mortem-process.md](references/post-mortem-process.md)** — severity thresholds, the 10-section template, the Day 0 → Day 30 workflow, action-item follow-through, distribution/archive practice, and the assets inventory. Read when running a post-mortem end to end.
 - **[references/blameless-culture-guide.md](references/blameless-culture-guide.md)** — what blameless means, the Dekker reframe, blameful vs blameless phrasing, hindsight bias, counterfactuals, establishing the culture, plus the five ground rules and the Allspaw test. Read when facilitating or when a draft feels blameful.
 - **[references/5-whys-vs-causal-tree.md](references/5-whys-vs-causal-tree.md)** — both root-cause methods with worked examples, the choose-between table, and the root-cause vs contributing-factors distinction. Read before the root-cause section of the meeting.
 - **[references/red-flags.md](references/red-flags.md)** — 12 anti-patterns (blame language, ownerless action items, single root cause, second-mortems...), plus the troubleshooting table and success criteria. Read before publishing or signing off.
-- **assets** — [post_mortem_template.md](assets/post_mortem_template.md) (SRE 10-section template), [incident_timeline_worksheet.md](assets/incident_timeline_worksheet.md) (timeline prompts), [action_item_tracker.md](assets/action_item_tracker.md) (cross-incident tracker), [what_went_well_prompts.md](assets/what_went_well_prompts.md) (positive-observation prompts).
 - Foundational reading: Google SRE "Postmortem Culture"; Allspaw "Blameless PostMortems and a Just Culture" (2012); Cook "How Complex Systems Fail" (1998); Perrow *Normal Accidents* (1984); Dekker *Field Guide* (2014) and *Just Culture* (2017).
 
 ## Scope & Limitations

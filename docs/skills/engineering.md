@@ -4,7 +4,7 @@ title: Engineering Skills
 
 # Engineering Skills
 
-**100 skills** with **298 Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
+**100 skills** with **303 Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
 
 ## AI & Agent Systems
 

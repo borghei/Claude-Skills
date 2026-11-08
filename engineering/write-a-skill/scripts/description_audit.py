@@ -9,6 +9,9 @@ Usage:
   python3 description_audit.py --input assets/sample_descriptions.json
   python3 description_audit.py --input assets/sample_descriptions.json --format json
   python3 description_audit.py --domain engineering --min-score 70
+
+Exit codes: 0 every description passes, 1 at least one below --min-score,
+2 bad input (missing file or directory, invalid JSON, wrong shape).
 """
 
 from __future__ import annotations
@@ -32,6 +35,10 @@ STOPWORDS = {
     "the", "and", "for", "with", "use", "when", "a", "an", "of", "to", "or", "in", "on",
     "your", "you", "that", "this", "it", "is", "are", "from", "into", "by", "as", "at",
 }
+
+
+class InputError(Exception):
+    """Bad input: missing file, invalid JSON or wrong shape (exit 2)."""
 
 
 def estimate_tokens(text: str) -> int:
@@ -121,34 +128,57 @@ def read_input(input_path: str) -> List[Tuple[str, str]]:
     try:
         data = json.loads(Path(input_path).read_text(encoding="utf-8"))
     except FileNotFoundError:
-        raise SystemExit(f"error: input file not found: {input_path}")
+        raise InputError(f"input file not found: {input_path}")
     except json.JSONDecodeError as exc:
-        raise SystemExit(f"error: input is not valid JSON ({input_path}): {exc}")
+        raise InputError(f"input is not valid JSON ({input_path}): {exc}")
     records = data.get("skills") if isinstance(data, dict) else data
     if not isinstance(records, list):
-        raise SystemExit("error: input must be a list of {name, description} objects")
+        raise InputError("input must be a list of {name, description} objects")
     pairs: List[Tuple[str, str]] = []
     for record in records:
         if not isinstance(record, dict) or "description" not in record:
-            raise SystemExit("error: every record needs 'name' and 'description' keys")
+            raise InputError("every record needs 'name' and 'description' keys")
         pairs.append((str(record.get("name", "unnamed")), str(record["description"])))
     return pairs
 
 
+def frontmatter_description(text: str) -> str:
+    """Return the frontmatter description: folded/literal (>, >-, |, |-), quoted or plain."""
+    lines = text.splitlines()
+    if not lines or lines[0].strip() != "---":
+        return ""
+    end = next((i for i in range(1, len(lines)) if lines[i].strip() == "---"), len(lines))
+    for i in range(1, end):
+        match = re.match(r"^description:[ \t]*(.*)$", lines[i])
+        if not match:
+            continue
+        value = match.group(1).strip()
+        block: List[str] = []
+        for raw in lines[i + 1:end]:
+            if raw.strip() and not raw[:1].isspace():
+                break
+            block.append(raw.strip())
+        if re.fullmatch(r"[>|][+-]?", value):
+            return " ".join(part for part in block if part)
+        if value[:1] in ("'", '"') and value[-1:] == value[:1] and len(value) > 1:
+            return value[1:-1].replace("''", "'") if value[0] == "'" else value[1:-1]
+        return " ".join([value] + [part for part in block if part])
+    return ""
+
+
 def read_domain(domain_path: str) -> List[Tuple[str, str]]:
-    """Extract name/description pairs from every SKILL.md under a domain directory."""
+    """Extract name/description pairs from every SKILL.md under a domain directory (recursive)."""
     root = Path(domain_path)
     if not root.is_dir():
-        raise SystemExit(f"error: not a directory: {domain_path}")
+        raise InputError(f"not a directory: {domain_path}")
     pairs: List[Tuple[str, str]] = []
-    for doc in sorted(root.glob("*/SKILL.md")):
+    for doc in sorted(root.rglob("SKILL.md")):
+        if doc.parent == root:
+            continue
         text = doc.read_text(encoding="utf-8", errors="replace")
-        match = re.search(r"^description:\s*>?\s*\n?((?:.*\n)*?)^[a-z]", text, re.MULTILINE)
-        inline = re.search(r"^description:\s*(?!>)(.+)$", text, re.MULTILINE)
-        raw = inline.group(1) if inline else (match.group(1) if match else "")
-        pairs.append((doc.parent.name, " ".join(raw.split())))
+        pairs.append((doc.parent.relative_to(root).as_posix(), frontmatter_description(text)))
     if not pairs:
-        raise SystemExit(f"error: no */SKILL.md found under {domain_path}")
+        raise InputError(f"no SKILL.md found under {domain_path}")
     return pairs
 
 
@@ -193,11 +223,12 @@ def main() -> None:
             "collisions": find_collisions(scored, args.collision_threshold),
         }
         output(report, args.format)
-    except SystemExit:
-        raise
+    except InputError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        sys.exit(2)
     except OSError as exc:
         print(f"error: could not read descriptions: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     sys.exit(1 if report["failing"] else 0)
 
 

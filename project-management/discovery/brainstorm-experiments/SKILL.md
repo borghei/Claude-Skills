@@ -1,15 +1,16 @@
 ---
 name: brainstorm-experiments
 description: >
-  Experiment design expert using pretotyping and lean validation for both new
-  product concepts and existing product features.
+  Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and
+  picks the method. Use when validating an idea before building, testing willingness to
+  pay, or choosing between fake door, landing page and A/B test.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: product-discovery
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: experiment_designer.py
   tech-stack: pretotyping, lean-validation, ab-testing, xyz-hypothesis
   tags:
@@ -49,24 +50,24 @@ Before designing the experiment, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Write each belief as "At least X% of Y will do Z within T" and settle the Clarify First inputs.
+2. Run `experiment_designer.py` for method suggestions; pick the cheapest method that captures a skin-in-the-game signal.
+3. Record method, X% pass bar, minimum sample, counter-metric and timebox in `assets/experiment_plan_template.md` before launch.
+4. Done when the result is called pass, fail or inconclusive against the bar written before launch, with the counter-metric checked.
 
 ```bash
-python3 scripts/experiment_designer.py --demo            # built-in sample (3 hypotheses)
-python3 scripts/experiment_designer.py input.json        # design experiments for your hypotheses
-python3 scripts/experiment_designer.py input.json --format json
+python3 project-management/discovery/brainstorm-experiments/scripts/experiment_designer.py project-management/discovery/brainstorm-experiments/assets/sample_hypotheses.json         # exit 0
+python3 project-management/discovery/brainstorm-experiments/scripts/experiment_designer.py project-management/discovery/brainstorm-experiments/assets/sample_hypotheses_flawed.json  # exit 1: no X%
+python3 project-management/discovery/brainstorm-experiments/scripts/experiment_designer.py --demo --format json
 ```
 
-Each hypothesis needs `hypothesis_text`, `target_segment`, and `product_type` (`new`/`existing`). Document each experiment with `assets/experiment_plan_template.md`.
+Each hypothesis needs `hypothesis_text`, `target_segment`, and `product_type` (`new`/`existing`). The tool suggests up to 3 methods by keyword match (treat them as suggestions, not a ranking you must follow) and sets each method's pass bar to the hypothesis's own X%, showing the method's typical range only as context. Exit codes: 0 every hypothesis has an X% bar, 1 at least one has none, 2 bad input (missing file, invalid JSON, no hypotheses).
 
 ## Prototype-First Experiments
 
-AI app builders, AI design tools, and AI coding assistants can produce a clickable or working prototype in hours. Treat it as one more experiment method, with the same XYZ hypothesis and pre-set threshold:
-
-- **Use it when** the riskiest assumption is usability or desirability of a specific interaction. For demand ("will anyone want this at all?"), a landing page, fake door, or pre-order is still cheaper and more honest.
-- **Test it** with 5-8 target users on scripted tasks; measure task success and errors, not compliments. Say plainly that it is a prototype.
-- **Guard the data** — use synthetic data; do not load customer PII into third-party tools without approval.
-- **Record the outcome** in `assets/experiment_plan_template.md`, then carry validated results into `execution/create-prd/` (Prototype-First Path) — the PRD still owns problem, metrics, constraints, non-goals, and risks.
+An AI-built prototype is one more method with the same XYZ bar. Use it when the riskiest assumption is usability of a specific interaction, not demand (a fake door or landing page is cheaper for that). Test with 5-8 target users on scripted tasks and synthetic data. Fidelity levels, kill criteria and the handoff are in `discovery/ai-prototyping`.
 
 ## Anti-Patterns
 
@@ -103,13 +104,12 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Important Caveats:** pretotyping validates demand and value, not usability or performance; in-app surveys are the weakest SITG signal — use only when behavioral experiments are impractical; the tool's keyword-to-signal matching is heuristic — override when domain knowledge dictates a better method.
 
-## Integration Points
+## Files
 
-| Integration | Direction | Description |
-|------------|-----------|-------------|
-| `brainstorm-ideas/` | Receives from | Ideas generated become hypotheses for experiment design |
-| `identify-assumptions/` | Receives from | "Test Now" assumptions become hypotheses for this skill |
-| `pre-mortem/` | Feeds into | Experiment results inform pre-mortem risk assessment before full build |
-| `execution/create-prd/` | Feeds into | Validated hypotheses become PRD assumptions with evidence |
-| `execution/brainstorm-okrs/` | Feeds into | Experiment metrics may become OKR key results |
-| `execution/outcome-roadmap/` | Feeds into | Experiment outcomes inform Now/Next/Later roadmap placement |
+| File | Purpose |
+|------|---------|
+| `scripts/experiment_designer.py` | Method suggestions with metric, pass bar, effort, duration and SITG level per hypothesis |
+| `assets/sample_hypotheses.json`, `assets/sample_hypotheses_flawed.json` | Runnable inputs: sound (exit 0) and missing pass bar (exit 1) |
+| `assets/experiment_plan_template.md` | Experiment plan to fill in before launch |
+| `examples/ai-summarization-willingness-to-pay-experiment.md` | Worked example |
+| `references/*.md` | See References |

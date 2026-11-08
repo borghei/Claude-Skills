@@ -391,6 +391,12 @@ def generate_report(
         issue_counts["critical"],
         issue_counts["high"]
     )
+    # No diff (or a failed diff analysis) is not a clean bill of health
+    pr_status = pr_analysis.get("status")
+    if pr_status == "no_changes":
+        verdict, rationale = "nothing_to_review", "No changes between base and HEAD; nothing was reviewed"
+    elif pr_status != "analyzed":
+        verdict, rationale = "incomplete", f"Diff analysis did not run ({pr_analysis.get('message', pr_status)})"
 
     # Generate action items
     action_items = generate_action_items(findings)
@@ -463,7 +469,7 @@ def main():
     repo_path = Path(args.repo_path).resolve()
     if not repo_path.exists():
         print(f"Error: Path does not exist: {repo_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Load pre-computed analyses if provided
     pr_analysis = None

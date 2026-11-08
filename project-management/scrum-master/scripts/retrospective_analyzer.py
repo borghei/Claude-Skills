@@ -887,7 +887,11 @@ def main() -> int:
             data = json.load(f)
         
         # Perform analysis
+        if not isinstance(data, dict):
+            raise ValueError("top level must be a JSON object (see assets/sample_sprint_data.json)")
         result = analyze_retrospectives(data)
+        if isinstance(result.summary, dict) and "error" in result.summary:
+            raise ValueError(result.summary["error"])
         
         # Output results
         if args.format == "json":
@@ -901,13 +905,13 @@ def main() -> int:
         
     except FileNotFoundError:
         print(f"Error: File '{args.data_file}' not found", file=sys.stderr)
-        return 1
+        return 2
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in '{args.data_file}': {e}", file=sys.stderr)
-        return 1
+        return 2
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        return 1
+        return 2
 
 
 if __name__ == "__main__":

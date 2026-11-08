@@ -28,7 +28,7 @@ def load_result_files(results_dir, max_runs):
     result_dir = Path(results_dir)
     if not result_dir.is_dir():
         print(f"Error: '{results_dir}' is not a directory.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     json_files = sorted(
         result_dir.glob("*.json"),
@@ -267,7 +267,7 @@ def main():
     runs = load_result_files(args.results_dir, args.runs)
     if not runs:
         print(f"Error: No JSON result files found in '{args.results_dir}'.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     test_results = compute_flakiness(runs)
 

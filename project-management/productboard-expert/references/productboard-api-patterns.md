@@ -11,7 +11,7 @@ Authoritative reference: https://developer.productboard.com/ (append `.md` to an
 ## API version status (as of September 2026)
 
 - **Public API v2 is the only supported version.** It became generally available on 2026-04-09, and the same changelog entry deprecated v1 ([changelog 2026-04-09](https://developer.productboard.com/changelog/2026-04-09)).
-- **Public API v1 was scheduled to sunset on 2026-07-08**, after which v1 endpoints are no longer available. Any script still calling un-prefixed v1 paths (`/features`, `/notes/feature-links`, `/release-assignments`, `/hierarchy-entities/...`) with an `X-Version: 1` header must be migrated.
+- **Public API v1 was scheduled to sunset on 2026-07-08** per the provider's deprecation notice; confirm v1 is retired before relying on it. Any script still calling un-prefixed v1 paths (`/features`, `/notes/feature-links`, `/release-assignments`, `/hierarchy-entities/...`) with an `X-Version: 1` header must be migrated.
 - Official migration guide: https://developer.productboard.com/reference/migration-guide
 
 ### v1 → v2 mapping at a glance

@@ -292,12 +292,12 @@ def main():
 
     if not Path(args.input).exists():
         print(f"Error: Input file '{args.input}' not found.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     entries = load_sessions(args.input, max_days=args.days)
     if not entries:
         print("No session entries found.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     results = extract_patterns(entries, args.min_occurrences)
 

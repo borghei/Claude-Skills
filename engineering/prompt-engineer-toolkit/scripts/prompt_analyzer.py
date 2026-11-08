@@ -80,6 +80,11 @@ CLARITY_DEDUCTORS = [
     (r"(?i)\bprobably\b", 0.02, "hedging_probably"),
     (r"(?i)\bbasically\b", 0.02, "filler_basically"),
     (r"(?i)\bjust\b", 0.01, "filler_just"),
+    # Reasoning models already think; scaffolding wastes tokens and shouting causes over-triggering
+    (r"(?i)\b(think|reason|work) (it )?(through )?step[- ]by[- ]step\b|\blet'?s think\b|\bchain[- ]of[- ]thought\b",
+     0.05, "cot_scaffold (drop for reasoning models)"),
+    (r"(?m)^\s*Thought:", 0.05, "forced_thought_block"),
+    (r"\b(MUST|NEVER|ALWAYS|CRITICAL|IMPORTANT)\b", 0.02, "all_caps_emphasis"),
 ]
 
 
@@ -272,7 +277,7 @@ def main():
     for filepath in args.files:
         if not os.path.isfile(filepath):
             print(f"Error: file not found: {filepath}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         with open(filepath, "r", encoding="utf-8") as f:
             text = f.read()
         results.append(analyze_prompt(text, filepath))

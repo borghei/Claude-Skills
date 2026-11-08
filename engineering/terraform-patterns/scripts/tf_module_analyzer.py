@@ -5,7 +5,6 @@ Terraform Module Analyzer - Analyze Terraform modules for complexity and quality
 Examines module structure, variable documentation, output coverage,
 resource complexity, and dependency patterns.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 

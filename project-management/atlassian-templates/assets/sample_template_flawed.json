@@ -1,0 +1,15 @@
+{
+  "name": "PRD",
+  "owner": "",
+  "description": "PRD.",
+  "version": "",
+  "last_updated": "2024-06-01",
+  "as_of": "2026-03-21",
+  "labels": [],
+  "has_example": false,
+  "has_dynamic_content": false,
+  "sections": [
+    {"title": "Overview", "content": "", "has_instructions": false},
+    {"title": "Requirements", "content": "TBD", "has_instructions": false}
+  ]
+}

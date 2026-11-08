@@ -1,16 +1,16 @@
 ---
 name: identify-assumptions
 description: >
-  Assumption mapping expert that identifies, categorizes, and prioritizes
-  product assumptions across 4-8 risk categories using devil's advocate
-  analysis.
+  Surfaces the assumptions behind a product bet, scores impact against confidence and
+  picks the few to test first. Use when an idea feels right but is unproven, the team
+  disagrees on risk, or before designing experiments.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: product-discovery
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: assumption_tracker.py
   tech-stack: assumption-mapping, risk-matrix, teresa-torres, continuous-discovery
   tags:
@@ -50,15 +50,20 @@ Before mapping assumptions, settle the inputs below. When one is missing or vagu
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Settle the Clarify First inputs, then surface assumptions from PM, design and engineering angles (prompts in `references/methodology-and-tools.md`).
+2. Rate each with `impact` (1-10) and `confidence`, citing the evidence behind every `high`.
+3. Run `assumption_tracker.py`; it ranks by `Risk Score = Impact x (1 - Confidence)` and places each in a quadrant.
+4. Done when Test Now holds about 20% of the map, each Test Now item has an owner, a date and a test, and the tool exits 0.
 
 ```bash
-python3 scripts/assumption_tracker.py --demo            # built-in sample (8 assumptions)
-python3 scripts/assumption_tracker.py input.json        # score & prioritize your assumptions
-python3 scripts/assumption_tracker.py input.json --format json
+python3 project-management/discovery/identify-assumptions/scripts/assumption_tracker.py project-management/discovery/identify-assumptions/assets/sample_assumptions.json             # exit 0
+python3 project-management/discovery/identify-assumptions/scripts/assumption_tracker.py project-management/discovery/identify-assumptions/assets/sample_assumptions_overloaded.json  # exit 1
+python3 project-management/discovery/identify-assumptions/scripts/assumption_tracker.py --demo --format json
 ```
 
-Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
+Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Confidence maps to fixed values (high 0.8, medium 0.5, low 0.2) and drives every ranking; impact 7+ counts as high. Quadrants: Test Now (high impact, low or medium confidence), Proceed (high impact, high confidence), Investigate (lower impact, low confidence), Defer (the rest). Exit codes: 0 sound map, 1 Test Now holds more than about 20% (round(0.2 x n), minimum 1), 2 bad input. Document with `assets/assumption_map_template.md`.
 
 ## Anti-Patterns
 
@@ -95,13 +100,12 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Important Caveats:** confidence levels map to fixed numeric values (0.8/0.5/0.2) — a simplification of continuous confidence; the "high impact" threshold is 7/10, adjustable for your risk tolerance; assumption mapping works best collaboratively (Product Trio), not solo.
 
-## Integration Points
+## Files
 
-| Integration | Direction | Description |
-|------------|-----------|-------------|
-| `brainstorm-ideas/` | Receives from | Ideas generated become the subjects whose assumptions are mapped |
-| `brainstorm-experiments/` | Feeds into | "Test Now" assumptions become hypotheses for experiment design |
-| `pre-mortem/` | Complements | Pre-mortem catches risks that assumption mapping may miss (especially elephants) |
-| `execution/create-prd/` | Feeds into | Validated assumptions populate the PRD Assumptions section (Section 7) |
-| `execution/brainstorm-okrs/` | Feeds into | Viability assumptions inform OKR key result selection and confidence levels |
-| `senior-pm/` | Feeds into | High-impact assumptions feed into portfolio risk registers |
+| File | Purpose |
+|------|---------|
+| `scripts/assumption_tracker.py` | Risk score, quadrant, suggested test per assumption; Test Now overload gate |
+| `assets/sample_assumptions.json`, `assets/sample_assumptions_overloaded.json` | Runnable inputs: balanced map (exit 0) and overloaded map (exit 1) |
+| `assets/assumption_map_template.md` | Assumption map to fill in |
+| `examples/shared-dashboards-assumption-mapping.md` | Worked example |
+| `references/*.md` | See References |

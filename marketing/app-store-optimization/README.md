@@ -2,7 +2,6 @@
 
 **Version**: 1.0.0
 **Last Updated**: November 7, 2025
-**Author**: Claude Skills Factory
 
 ## Overview
 
@@ -415,7 +414,6 @@ This skill is designed to help app developers and marketers succeed in competiti
 
 ## Credits
 
-Developed by Claude Skills Factory
 Based on industry-standard ASO best practices
 Platform requirements current as of November 2025
 

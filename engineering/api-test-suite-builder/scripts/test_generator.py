@@ -15,6 +15,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import sys
 import textwrap
 from pathlib import Path
@@ -25,20 +26,20 @@ def load_spec(spec_path: str) -> dict:
     path = Path(spec_path)
     if not path.exists():
         print(f"Error: spec file not found: {spec_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     if not path.suffix.lower() == ".json":
         print("Error: only JSON spec files are supported", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     try:
         with open(path, "r", encoding="utf-8") as f:
             spec = json.load(f)
     except json.JSONDecodeError as e:
         print(f"Error: invalid JSON in spec file: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     # Basic validation
-    if "openapi" not in spec and "swagger" not in spec:
+    if not isinstance(spec, dict) or ("openapi" not in spec and "swagger" not in spec):
         print("Error: file does not appear to be an OpenAPI or Swagger spec", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     return spec
 
 
@@ -109,6 +110,21 @@ def _extract_properties(schema: dict) -> dict:
     return props
 
 
+def _concrete_path(endpoint: dict) -> str:
+    """Fill {param} placeholders with sample values (1 for integers) so the URL is callable."""
+    types = {p.get("name"): (p.get("schema") or p).get("type", "string")
+             for p in endpoint.get("parameters", []) if p.get("in") == "path"}
+    return re.sub(r"\{([^}]+)\}",
+                  lambda m: "1" if types.get(m.group(1)) in ("integer", "number") else f"sample-{m.group(1)}",
+                  endpoint["path"])
+
+
+def _success_status(endpoint: dict) -> str:
+    """Lowest 2xx code the spec declares for the operation, else 200."""
+    codes = sorted(c for c in endpoint["responses"] if str(c).startswith("2"))
+    return codes[0] if codes else "200"
+
+
 def _has_auth(endpoint: dict) -> bool:
     """Check if endpoint requires authentication."""
     return bool(endpoint.get("security"))
@@ -153,7 +169,7 @@ def generate_pytest(endpoints: list, spec: dict) -> dict:
         for ep in group_eps:
             test_name = _make_test_name(ep)
             method_lower = ep["method"].lower()
-            path = ep["path"]
+            path = _concrete_path(ep)
             summary = ep["summary"] or f'{ep["method"]} {ep["path"]}'
 
             # Happy path test
@@ -229,12 +245,8 @@ def generate_pytest(endpoints: list, spec: dict) -> dict:
                         lines.append(f"        assert response.status_code == 422")
                         lines.append("")
 
-            # Happy path
-            happy_status = "200"
-            if ep["method"] == "POST":
-                happy_status = "201" if "201" in ep["responses"] else "200"
-            elif ep["method"] == "DELETE":
-                happy_status = "204" if "204" in ep["responses"] else "200"
+            # Happy path: the success code the spec declares
+            happy_status = _success_status(ep)
 
             lines.append(f"    def test_success(self):")
             lines.append(f'        """Successful {ep["method"]} returns {happy_status}."""')
@@ -254,6 +266,7 @@ def generate_pytest(endpoints: list, spec: dict) -> dict:
                 lines.append(f"            headers=auth_headers()")
             lines.append(f"        )")
             lines.append(f"        assert response.status_code == {happy_status}")
+            lines.append(f"        # TODO: assert on response.json() fields the spec promises")
             lines.append("")
 
             # Error code tests from responses
@@ -262,8 +275,7 @@ def generate_pytest(endpoints: list, spec: dict) -> dict:
                     continue
                 lines.append(f"    def test_returns_{status_code}(self):")
                 lines.append(f'        """Trigger {status_code}: {desc}"""')
-                lines.append(f"        # TODO: set up conditions to trigger {status_code}")
-                lines.append(f"        pass")
+                lines.append(f'        pytest.skip("TODO: set up conditions that return {status_code}")')
                 lines.append("")
 
         filename = f"test_{group_name}.py"
@@ -298,9 +310,10 @@ def generate_vitest(endpoints: list, spec: dict) -> dict:
         for ep in group_eps:
             summary = ep["summary"] or f'{ep["method"]} {ep["path"]}'
             method_lower = ep["method"].lower()
-            path = ep["path"]
+            path = _concrete_path(ep)
+            auth = f"\n      .set(authHeaders())" if _has_auth(ep) else ""
 
-            lines.append(f"describe('{ep['method']} {path}', () => {{")
+            lines.append(f"describe('{ep['method']} {ep['path']}', () => {{")
 
             if _has_auth(ep):
                 lines.append(f"  it('returns 401 without auth header', async () => {{")
@@ -315,16 +328,13 @@ def generate_vitest(endpoints: list, spec: dict) -> dict:
                 if required:
                     lines.append(f"  it('returns 422 with empty body', async () => {{")
                     lines.append(f"    const res = await request(BASE_URL)")
-                    lines.append(f"      .{method_lower}('{path}')")
-                    lines.append(f"      .set(authHeaders())")
+                    lines.append(f"      .{method_lower}('{path}'){auth}")
                     lines.append(f"      .send({{}})")
                     lines.append(f"    expect(res.status).toBe(422)")
                     lines.append(f"  }})")
                     lines.append("")
 
-            happy_status = "200"
-            if ep["method"] == "POST":
-                happy_status = "201" if "201" in ep["responses"] else "200"
+            happy_status = _success_status(ep)
 
             lines.append(f"  it('returns {happy_status} on success', async () => {{")
             if ep["request_body"] and ep["method"] in ("POST", "PUT", "PATCH"):
@@ -335,14 +345,13 @@ def generate_vitest(endpoints: list, spec: dict) -> dict:
                 payload_str = json.dumps(sample, indent=4)
                 lines.append(f"    const payload = {payload_str}")
                 lines.append(f"    const res = await request(BASE_URL)")
-                lines.append(f"      .{method_lower}('{path}')")
-                lines.append(f"      .set(authHeaders())")
+                lines.append(f"      .{method_lower}('{path}'){auth}")
                 lines.append(f"      .send(payload)")
             else:
                 lines.append(f"    const res = await request(BASE_URL)")
-                lines.append(f"      .{method_lower}('{path}')")
-                lines.append(f"      .set(authHeaders())")
+                lines.append(f"      .{method_lower}('{path}'){auth}")
             lines.append(f"    expect(res.status).toBe({happy_status})")
+            lines.append(f"    // TODO: assert on res.body fields the spec promises")
             lines.append(f"  }})")
 
             lines.append(f"}})")
@@ -362,7 +371,7 @@ def _build_sample_payload(properties: dict, required: list, exclude: str = None)
         if info.get("enum"):
             payload[name] = info["enum"][0]
         elif info["type"] == "string":
-            payload[name] = f"test-{name}"
+            payload[name] = "user@example.com" if info.get("format") == "email" else f"test-{name}"
         elif info["type"] == "integer":
             payload[name] = 1
         elif info["type"] == "number":
@@ -430,8 +439,8 @@ def main():
     endpoints = extract_endpoints(spec)
 
     if not endpoints:
-        print("Warning: no endpoints found in spec.", file=sys.stderr)
-        sys.exit(1)
+        print("Error: no endpoints found in spec.", file=sys.stderr)
+        sys.exit(2)
 
     if args.framework == "pytest":
         files = generate_pytest(endpoints, spec)

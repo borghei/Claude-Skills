@@ -165,11 +165,14 @@ def main() -> None:
         tour = load_tour(args.input)
         audit = audit_tour(tour)
         output(tour, audit, args.format, args.audit_only)
-    except SystemExit:
+    except SystemExit as exc:
+        if isinstance(exc.code, str):  # input error raised as SystemExit("error: ...")
+            print(exc.code, file=sys.stderr)
+            sys.exit(2)
         raise
     except OSError as exc:
         print(f"error: could not render tour: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     sys.exit(1 if audit["why_ratio"] < args.min_why_ratio else 0)
 
 

@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: ai-agents
   tier: POWERFUL
-  updated: 2026-06-29
+  updated: 2026-11-08
   frameworks: context-window-optimization, memory-architecture, knowledge-graphs
   tags:
     - context-management
@@ -22,26 +22,14 @@ metadata:
 ---
 # Context Engine - AI Agent Context Management
 
-Context Engine provides production-grade patterns for managing what AI agents know, remember, and retrieve. It covers the full lifecycle: ingestion of project knowledge, optimal packing of context windows, persistent memory across sessions, and retrieval-augmented generation for large codebases. The difference between a useful agent and a hallucinating one is context management.
-
-## Core Capabilities
-
-- **Context window architecture** — token budget allocation plus greedy, tiered, and adaptive-compression packing strategies.
-- **Memory architecture** — three-layer model (working / session / knowledge base), promotion protocol, and staleness detection.
-- **Code retrieval** — file-level, chunk-level (RAG), and dependency-aware retrieval with code chunking and embedding guidance.
-- **Knowledge graph construction** — codebase graph schema (nodes + edges) and graph queries that resolve agent questions.
-- **Window optimization patterns** — sliding window with anchors, progressive summarization, selective tool-result caching.
-- **Memory tool & context editing** — file-backed persistent memory across sessions, plus context compaction (evict stale tool outputs, summarize-and-replace history) to keep a long loop from exhausting the window.
-- **Long-context strategies** — when to use a 1M-token window vs. RAG vs. a hybrid agent loop, budget allocation across a big window, and position/attention effects.
-- **Multi-agent context sharing** — shared context bus and a five-element handoff protocol.
+Decide what an agent should have in its context window, what it should keep in persistent memory, and what it should retrieve on demand, then measure and trim the window to fit. The goal is an agent that has the facts it needs for the current step and nothing that crowds them out.
 
 ## When to Use
 
-- Bootstrapping agent context for a new codebase (index → graph → summary → tiers).
-- Optimizing context for a specific task (bug fix, feature, refactor, review).
-- Capturing, promoting, and pruning session memory across sessions.
-- Designing a RAG pipeline for code retrieval.
-- Coordinating context across multiple collaborating agents.
+- Bootstrapping agent context for a new codebase, or tailoring it to a task (bug fix, feature, refactor, review).
+- A long agent loop is running out of window, or quality drops late in a session.
+- Designing persistent memory across sessions, or a retrieval pipeline over code.
+- Coordinating what context several agents share and hand off.
 
 ## Clarify First
 
@@ -53,16 +41,56 @@ Before designing or analyzing, settle the inputs below. When one is missing or v
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `context_analyzer.py` | Analyze files/prompts for token usage, relevance, and optimization suggestions | `python scripts/context_analyzer.py src/ --budget 128000 --json` |
-| `context_pruner.py` | Prune low-relevance content, redundancy, and verbose patterns from context | `python scripts/context_pruner.py src/main.py --aggressive --json` |
-| `memory_indexer.py` | Index and search a memory/knowledge base with TF-IDF relevance scoring | `python scripts/memory_indexer.py docs/ --query 'auth middleware' --top 5` |
-| `context_budget_planner.py` | Allocate a window across components, flag overflow, and suggest what to compact/evict first | `python scripts/context_budget_planner.py --window-size 200000 --system 4000 --history 60000 --tools 90000 --rag 40000 --reserve-output 8000` |
+1. **Measure.** Run `context_analyzer.py` on the files or prompt you plan to load. Token counts are estimates (about 4 characters per token); use the provider's token-counting endpoint when you need exact numbers.
+2. **Budget.** Run `context_budget_planner.py` with the window size and each component's size. It flags components outside their band and, on overflow, lists what to evict first.
+3. **Decide where each piece lives**, using these rules:
+   - Needed on every step and small (instructions, task spec, key interfaces): keep it in the window as an anchor.
+   - Needed across sessions (decisions, conventions, open questions): write it to the memory tool or a memory file, and reload it at session start. Recomputable facts (file contents, test output) do not belong in memory.
+   - Large, and only some of it is relevant per step (a codebase, a doc set): retrieve it. Use `memory_indexer.py` for a quick lexical index; move to embeddings plus code-aware chunking when lexical search misses.
+   - Fits comfortably and the task needs cross-references across all of it: load it into a long window instead of building retrieval.
+4. **Compact before the cliff.** Trigger compaction at a high-water mark (around 70-80% of the window), not at 100%: evict superseded tool outputs first, then summarize-and-replace old history, never the anchors. Write durable conclusions to memory before evicting them. Where the platform offers server-side context editing or compaction, prefer it to hand-rolled summaries.
+5. **Prune what you load.** `context_pruner.py` strips comments, docstrings, import blocks and duplicates from code; for Markdown and text it only removes duplicate blocks and extra blank lines, so headings and structure survive.
+6. **Verify** the result: the task still succeeds with the trimmed context (rerun the step or an eval), and the budget planner reports no overflow.
 
-## References
+## Quick Start
+
+```bash
+python3 scripts/context_analyzer.py references/ --budget 128000
+python3 scripts/context_budget_planner.py --window-size 200000 --system 4000 --history 60000 --tools 90000 --rag 40000 --reserve-output 8000
+python3 scripts/context_pruner.py scripts/memory_indexer.py --aggressive
+python3 scripts/memory_indexer.py references/ --query "compaction high-water mark" --top 3
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `context_analyzer.py` | Estimated tokens, relevance and suggestions for files or a prompt | `<path>` or `--prompt`, `--budget`, `--json` | 0 ok, 2 nothing to analyze |
+| `context_budget_planner.py` | Allocate a window across system, memory, history, tools, RAG and reserved output; flag bands and overflow; eviction order | `--window-size` (required), component sizes, `--json` | 0 fits, 1 overflow, 2 bad arguments |
+| `context_pruner.py` | Prune code (comments, docstrings, imports, braces, duplicates) or prose (duplicates, blank runs only) | `<path>` or `--stdin [--prose]`, `--level light|moderate|aggressive`, `--output <dir>`, `--json` | 0 ok, 2 no files / no input |
+| `memory_indexer.py` | TF-IDF index and search over a directory of notes or docs | `<dir>`, `--query`, `--top`, `--index-only`, `--stats` | 0 ok, 2 not a directory / nothing indexable |
+
+## Anti-Patterns
+
+**Mistake:** Loading everything that might be relevant "to be safe".
+**Why it happens:** Large windows make it possible, and missing context feels riskier than extra context.
+**Instead:** Irrelevant tokens dilute attention and cost money on every turn. Load anchors, retrieve the rest, and check the budget.
+
+**Mistake:** Compacting at the limit.
+**Why it happens:** Nothing forces action until the window is full.
+**Instead:** Set a high-water mark and compact while there is headroom to write a good summary.
+
+**Mistake:** Evicting history without saving what was learned.
+**Why it happens:** Compaction is treated as deletion.
+**Instead:** Write decisions and open questions to memory first; then evict. Compaction is only safe when memory holds the conclusions.
+
+## Files
+
+- `scripts/context_analyzer.py`, `scripts/context_budget_planner.py`, `scripts/context_pruner.py`, `scripts/memory_indexer.py` — the tools above. They run on any files; the Quick Start uses this skill's own `references/` and `scripts/` as input.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -75,25 +103,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 ## Scope & Limitations
 
-**This skill covers:**
-- Context window token budget planning, allocation strategies, and packing algorithms for AI coding agents.
-- Multi-layer memory architecture design (working memory, session memory, knowledge base) with promotion and staleness protocols.
-- Code-specific retrieval strategies including file-level, chunk-level, and dependency-aware retrieval for RAG pipelines.
-- Knowledge graph construction from codebases and graph-based context queries for agent workflows.
+Covers context budgeting, memory layering, compaction, code retrieval strategy and multi-agent context hand-off. Does not cover vector store or embedding infrastructure, agent role design or orchestration, monitoring, or prompt writing.
 
-**This skill does NOT cover:**
-- Vector store infrastructure setup, embedding model selection, or database deployment — see **rag-architect** for vector store design and embedding strategies.
-- Agent role definition, personality design, or multi-agent orchestration logic — see **agent-designer** for agent architecture and **agent-workflow-designer** for orchestration patterns.
-- Runtime observability, metrics dashboards, or alerting for agent systems — see **observability-designer** for monitoring and instrumentation.
-- Prompt engineering techniques, chain-of-thought design, or instruction tuning — see **prompt-engineer-toolkit** for prompt construction patterns.
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| **rag-architect** | Context Engine defines retrieval strategies; RAG Architect implements the vector store and embedding pipeline | Retrieval queries flow from Context Engine to RAG Architect's indexed store; ranked results flow back as context chunks |
-| **agent-designer** | Agent Designer defines agent roles and capabilities; Context Engine manages per-agent context budgets and memory layers | Agent specifications define context requirements; Context Engine returns tailored context windows per agent role |
-| **self-improving-agent** | Self-Improving Agent identifies recurring patterns and corrections; Context Engine decides when to promote learnings to persistent memory | Candidate learnings flow from Self-Improving Agent; promotion decisions and memory updates flow back through Context Engine's staleness and promotion protocols |
-| **observability-designer** | Observability Designer instruments context utilization metrics (relevance, staleness, cache hits); Context Engine exposes metric endpoints | Raw metric events flow from Context Engine; Observability Designer aggregates into dashboards and alerts |
-| **agent-workflow-designer** | Agent Workflow Designer defines multi-agent handoff sequences; Context Engine implements the shared context bus and handoff protocol | Workflow definitions specify which agents share context; Context Engine manages the context bus, serialization, and handoff payloads |
-| **codebase-onboarding** | Codebase Onboarding generates project summaries and architecture maps; Context Engine consumes these as Tier 0 bootstrap context | Onboarding artifacts (project summary, directory map, entry points) feed into Context Engine's initial knowledge graph and context tiers |
+Related skills: `engineering/rag-architect` (vector stores, embeddings), `engineering/agent-designer` and `engineering/agent-workflow-designer` (agent roles, orchestration), `engineering/llm-cost-optimizer` (caching and token cost), `engineering/codebase-onboarding` (project summaries to bootstrap context).

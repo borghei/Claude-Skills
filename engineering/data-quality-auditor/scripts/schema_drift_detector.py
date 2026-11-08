@@ -18,6 +18,9 @@ Usage:
     python3 schema_drift_detector.py --baseline baseline.json --current current.json
     python3 schema_drift_detector.py --baseline baseline.json --current current.json --format json
     python3 schema_drift_detector.py --snapshot mytable.json  # generate baseline from inferred data
+
+Exit codes: 0 no drift at or above --fail-on (default critical), 1 drift at or
+above --fail-on, 2 bad input (missing file, bad JSON, wrong shape).
 """
 
 from __future__ import annotations
@@ -208,6 +211,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--current", help="Current schema JSON")
     p.add_argument("--snapshot", help="Generate baseline by inferring from this data file (CSV/JSON)")
     p.add_argument("--severity", choices=["info", "warning", "critical"], default="info")
+    p.add_argument("--fail-on", choices=["info", "warning", "critical"], default="critical",
+                   help="Exit 1 when any finding is at or above this severity (default: critical)")
     p.add_argument("--format", choices=["markdown", "json"], default="markdown")
     p.add_argument("--output", help="Output file path")
     return p.parse_args()
@@ -216,7 +221,11 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     if args.snapshot:
-        cols = infer_schema_from_data(Path(args.snapshot))
+        try:
+            cols = infer_schema_from_data(Path(args.snapshot))
+        except (OSError, ValueError, AttributeError) as e:
+            print(f"error: cannot snapshot {args.snapshot}: {e}", file=sys.stderr)
+            return 2
         out = json.dumps({"columns": [asdict(c) for c in cols]}, indent=2)
         if args.output:
             Path(args.output).write_text(out)
@@ -232,8 +241,8 @@ def main() -> int:
     try:
         baseline = load_schema(Path(args.baseline))
         current = load_schema(Path(args.current))
-    except (OSError, json.JSONDecodeError) as e:
-        print(f"error: {e}", file=sys.stderr)
+    except (OSError, ValueError, AttributeError, TypeError) as e:
+        print(f"error: cannot load schema: {e}", file=sys.stderr)
         return 2
 
     findings = diff_schemas(baseline, current)
@@ -255,7 +264,8 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    gate = SEVERITY_LEVEL[args.fail_on]
+    return 1 if any(SEVERITY_LEVEL[f.severity] >= gate for f in findings) else 0
 
 
 if __name__ == "__main__":

@@ -1,17 +1,16 @@
 ---
 name: ansoff-matrix
 description: >
-  Ansoff Matrix — 4-quadrant framework for growth options: market
-  penetration, market/product development, and diversification. Use
-  when evaluating growth bets, prioritizing investment across quadrants,
-  or weighing the risk ladder of each move.
+  Classifies growth bets into the four Ansoff quadrants and checks the
+  investment mix against the company's stage. Use when prioritising growth
+  bets, allocating a growth budget or testing a pitched "adjacent" move.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: strategy-frameworks
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: ansoff_growth_scorer.py
   tech-stack: ansoff-matrix, growth-strategy, product-market-expansion
   tags:
@@ -23,91 +22,15 @@ metadata:
 
 # Ansoff Matrix
 
-Igor Ansoff's product/market matrix for evaluating growth options.
-Forces explicit choice between four growth bets of increasing risk.
+The agent uses the product/market matrix to force an explicit choice between four growth bets of increasing risk. Market penetration (existing product, existing market) carries the least risk, diversification (new product, new market) the most; market and product development sit between. Quadrant tactics, the risk ladder and misclassification patterns are in `references/ansoff-matrix-deep.md`.
 
-## The 2x2
+**Done looks like:** "existing market" and "existing product" defined in a sentence each; every initiative in one quadrant with investment, expected return, a 1-5 risk score, an owner and a rationale; the mix compared with the stage target and every drift over 20 points explained; `ansoff_growth_scorer.py` exits 0.
 
-|                 | **Existing Products** | **New Products**       |
-|-----------------|------------------------|------------------------|
-| **Existing Markets** | Market Penetration (lowest risk) | Product Development |
-| **New Markets**       | Market Development | Diversification (highest risk) |
+## When to Use
 
-## When to use this skill
-
-- **Annual / quarterly growth planning**
-- **Investment allocation** across growth bets
-- **Post-funding deployment** planning
-- **Board strategy discussions**
-- **Strategic-pivot decisions** (which quadrant are we really in?)
-- **Acquisition rationale** assessment
-
-## The 4 quadrants in depth
-
-### Q1 — Market Penetration (existing product × existing market)
-Sell more of what we have to people we know.
-
-**Tactics:**
-- Increase usage / frequency
-- Take share from competitors
-- Improve conversion rates
-- Pricing optimization
-- Loyalty / retention programs
-
-**Risk profile:** Lowest. You know the product + market.
-
-**Investment:** ~30-50% of growth investment for most companies.
-
-**When dominant:** Early-stage; high-growth market with share to take.
-
-### Q2 — Market Development (existing product × new market)
-Take what works to a new market.
-
-**Tactics:**
-- New geography
-- New industry vertical
-- New customer segment (SMB → mid-market)
-- New use case
-- New channel (direct → channel; SMB → enterprise sales)
-
-**Risk profile:** Medium. Product known; market unknown.
-
-**Investment:** ~20-30%.
-
-**When dominant:** Product-market fit established in initial segment;
-proven by reference customers; ready to scale.
-
-### Q3 — Product Development (new product × existing market)
-Build something new for people we know.
-
-**Tactics:**
-- New SKU / module / add-on
-- Adjacent product line
-- Platform extension
-- Feature line that becomes its own product
-
-**Risk profile:** Medium. Market known; product unknown.
-
-**Investment:** ~15-25%.
-
-**When dominant:** Captive audience with related JTBDs;
-distribution advantage; brand permission to extend.
-
-### Q4 — Diversification (new product × new market)
-New thing for new people.
-
-**Tactics:**
-- Adjacent diversification (related to current)
-- Conglomerate diversification (unrelated)
-- Acquisition-driven new categories
-
-**Risk profile:** Highest. Both axes unknown.
-
-**Investment:** ~5-15% (or 0% — most companies should not diversify).
-
-**When dominant:** Few situations justify high diversification. Usually:
-mature core business with cash, declining core business needing pivot,
-or genuine adjacent opportunity with shared capability.
+- Annual or quarterly growth planning, or deploying a new funding round
+- Board discussions of where growth money goes
+- Checking whether an "adjacent" bet or an acquisition is really diversification
 
 ## Clarify First
 
@@ -119,122 +42,55 @@ Before scoring the growth options, settle the inputs below. When one is missing 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Define "existing" precisely
-Most Ansoff confusion comes from vague boundaries.
-- "Existing market" = which segment, which geography, which buyer
-- "Existing product" = which SKU, which capabilities
-- "New" = anything outside those boundaries
-
-### Step 2 — List current growth initiatives
-For each initiative, classify into a quadrant. Be honest:
-- "Adjacent vertical for our SaaS" = Market Development (usually)
-- "New module for existing customers" = Product Development
-- "Same product in EU" = Market Development (regulatory, cultural,
-  linguistic differences = market difference)
-
-### Step 3 — Score by risk-adjusted return
-Per initiative:
-- Investment size
-- Expected return
-- Risk of failure
-- Time to revenue
-- Risk-adjusted ROI
-
-### Step 4 — Allocate across quadrants
-Most companies cluster in Q1 + one other. Pure diversification (Q4) is
-rare; usually disguised market or product development.
-
-### Step 5 — Validate the mix
-Target mix depends on stage:
-- **Early:** 70% Q1 + 30% Q2/Q3 (split)
-- **Growth:** 50% Q1 + 25% Q2 + 25% Q3
-- **Mature:** 30% Q1 + 30% Q2 + 30% Q3 + 10% Q4
-
-If you're 90% Q1, you're not growing strategically. If you're 40% Q4,
-you're betting the company.
-
-### Step 6 — Run `ansoff_growth_scorer.py`
-Score each initiative; surface mix; flag risky concentration.
+## Quick Start
 
 ```bash
+# Balanced growth-stage portfolio: exit 0
 python3 project-management/strategy-frameworks/ansoff-matrix/scripts/ansoff_growth_scorer.py \
-  --input initiatives.json --format markdown
+  --input project-management/strategy-frameworks/ansoff-matrix/assets/sample_initiatives.json --format markdown
 ```
 
-## Decision frameworks
+```bash
+# Invalid quadrant, low-risk diversification, return below investment: exit 1
+python3 project-management/strategy-frameworks/ansoff-matrix/scripts/ansoff_growth_scorer.py \
+  --input project-management/strategy-frameworks/ansoff-matrix/assets/sample_initiatives_flawed.json --format markdown
+```
 
-### What counts as "new market"?
+```bash
+# Input schema and flags
+python3 project-management/strategy-frameworks/ansoff-matrix/scripts/ansoff_growth_scorer.py --help
+```
 
-| Different... | New market? |
-|--------------|-------------|
-| Geography | Yes (regulation, culture, language, channel) |
-| Industry vertical | Yes |
-| Company size band (SMB → ENT) | Usually yes |
-| Use case (same persona) | Usually no |
-| Buyer persona | Yes |
-| Pricing tier (free vs paid) | Usually no |
+## Tools Overview
 
-If you'd need a different sales motion or different channels, it's a new market.
+`ansoff_growth_scorer.py` is the quality gate for this skill. **What the scorer checks:** a valid quadrant per initiative (fail otherwise); missing investment, return, rationale or owner; risk scores that contradict the quadrant (low-risk diversification, maximum-risk product development); expected return below investment; drift over 20 points from the target mix; diversification above 25%; penetration above 85% past the early stage. It classifies nothing itself: you assign the quadrant.
 
-### What counts as "new product"?
+**Exit codes:** `0` no fail findings · `1` at least one fail (no initiatives, an invalid quadrant, a `target_mix` that does not sum to 100) · `2` unreadable file, invalid JSON or a top level that is not an object. JSON by default, `--format markdown`, `--output FILE`.
 
-| Different... | New product? |
-|--------------|--------------|
-| New SKU / module | Yes |
-| New pricing tier of same product | No |
-| New feature in existing product | No |
-| Significantly different value prop | Yes |
-| Different underlying tech | Yes |
+## Workflow
 
-If you'd need a different roadmap and different success metrics, it's a new product.
+1. **Define "existing".** Which segment, geography and buyer is the existing market; which SKU and capabilities are the existing product. Vague boundaries are the most common error.
+2. **Classify each initiative.** A different geography, vertical, size band or buyer persona is a new market; if it needs a different sales motion or channel, treat it as new. A new SKU, module, value proposition or underlying technology is a new product; a feature or pricing tier of the same product is not. "Adjacent" often hides diversification.
+3. **Size each bet:** investment, expected return, risk (1-5), time to revenue, owner, rationale.
+4. **Compare the mix with the stage target.** The defaults are a heuristic starting point, not a standard: early 75/10/15/0, growth 50/25/20/5, mature 35/27/28/10, declining 25/25/35/15 (penetration / market dev / product dev / diversification, % of investment). Put your own split in `target_mix` when leadership has one.
+5. **Audit.** Write the bets as JSON (schema in `--help`; `assets/sample_initiatives.json` is a complete example) and run the scorer. It must pass with no fail findings; then verify that each drift is either fixed or explained in the plan.
 
-### When diversification (Q4) makes sense
+## Anti-Patterns
 
-- **Adjacent diversification:** shared capability or audience
-  - Amazon → AWS: shared capability (infra)
-  - Disney → theme parks: shared capability (IP)
-- **Acquisition-led:** buying expertise + product + market together
-- **Declining core:** need new business model
+### Diversification dressed as product development
+**Mistake:** A new product for a new buyer is labelled "adjacent product development" and skips the scrutiny a diversification bet would get.
+**Why it happens:** The lower-risk label gets budget approved faster.
+**Instead:** Apply the new-market and new-product tests in step 2. If both answers are "new", call it diversification and justify it as one.
 
-When diversification fails:
-- "Synergies" overclaimed
-- Acquired company managed by incumbent culture
-- No shared capability or audience
-- Justified by spreadsheet only
+### No allocation, only a list
+**Mistake:** The matrix shows initiatives in boxes but no investment numbers.
+**Why it happens:** Classification feels like the analysis.
+**Instead:** Put a budget on every bet so the mix can be compared with the stage target.
 
-## Common engagements
-
-### "Help us prioritize growth bets"
-1. List all growth initiatives.
-2. Classify into quadrants.
-3. Score risk-adjusted return.
-4. Reconcile against stage-appropriate target mix.
-5. Recommend top 5 with allocation.
-
-### "We're considering acquiring company X"
-1. Classify the acquisition by quadrant.
-2. Q1 (existing × existing) = bolt-on; lower risk
-3. Q2 (existing × new) = market expansion via M&A
-4. Q3 (new × existing) = product line extension
-5. Q4 (new × new) = highest risk; question hard
-
-### "Should we enter market X?"
-1. Confirm it's truly Q2 (new market for existing product).
-2. Test: same value prop? same buyer? same channel? if all yes, it's
-   really Q1 (different segment).
-3. If true Q2, scope cost + time to validate vs Q1 alternatives.
-
-## Anti-patterns to avoid
-
-- **Misclassifying initiatives.** Q4 dressed as Q3 or Q2 — gets approved that wouldn't pass Q4 scrutiny.
-- **All-Q1 portfolio.** Not strategic growth.
-- **All-Q4 portfolio.** Bet-the-company every quarter.
-- **"Adjacent" labelling.** Often hides Q4 as Q3.
-- **No investment percentages.** Just lists; no allocation.
-- **Static mix.** Should change with stage.
-- **Ignoring the boring Q1.** Penetration is unglamorous but highest-ROI.
+### Ignoring penetration
+**Mistake:** Every new bet is market or product development while the core still has headroom.
+**Why it happens:** Penetration work looks unglamorous.
+**Instead:** Size the penetration opportunity first; it is usually the highest return for the risk.
 
 ## Scope & Limitations
 
@@ -242,7 +98,7 @@ When diversification fails:
 - Classifying growth initiatives into the four Ansoff quadrants: market penetration, market development, product development and diversification
 - Tests for what counts as a new market and a new product
 - Per-initiative scoring on investment, expected return, risk and time to revenue
-- Stage-based target investment mixes for early, growth and mature companies
+- Stage-based default investment mixes (heuristic, overridable with `target_mix`)
 - A scorer that surfaces the investment mix and flags concentration and likely misclassification (`ansoff_growth_scorer.py`)
 
 **Out of Scope:**
@@ -257,10 +113,19 @@ When diversification fails:
 - Stage mixes and per-quadrant investment ranges are rules of thumb, not targets every company should hit.
 - Where the line between existing and new sits, and which bets to fund, stay leadership decisions.
 
-## References
+## Files
 
-- `references/ansoff-matrix-deep.md` — quadrant tactics, examples, risk patterns
-- `references/growth-strategy-patterns.md` — stage-based mixes, common pitfalls
+| File | Purpose |
+|------|---------|
+| `scripts/ansoff_growth_scorer.py` | Quadrant mix audit and misclassification flags |
+| `assets/sample_initiatives.json` | Five growth-stage bets; exits 0 |
+| `assets/sample_initiatives_flawed.json` | Misclassified and invalid bets; exits 1 |
+| `assets/ansoff_template.md` | Fill-in template |
+
+## Reference Documentation
+
+- [references/ansoff-matrix-deep.md](references/ansoff-matrix-deep.md): Quadrant tactics, examples, risk patterns, misclassification
+- [references/growth-strategy-patterns.md](references/growth-strategy-patterns.md): Stage-based patterns and pitfalls
 
 ## Related skills
 

@@ -10,6 +10,8 @@ Usage:
     python3 ost_validator.py --input ost.json
     python3 ost_validator.py --input ost.json --format markdown
 
+Exit codes: 0 no fail findings, 1 at least one fail finding, 2 bad input.
+
 Input schema:
 {
   "tree_name": "Activation Q3",
@@ -98,6 +100,10 @@ def check_outcome(o: dict[str, Any]) -> list[Issue]:
     return issues
 
 
+BUILD_VERBS = {"add", "build", "create", "implement", "launch", "integrate", "redesign",
+               "replace", "ship", "introduce", "enable", "develop", "migrate", "automate"}
+
+
 def check_opportunities(opps: list[dict[str, Any]]) -> list[Issue]:
     issues = []
     if not opps:
@@ -114,6 +120,11 @@ def check_opportunities(opps: list[dict[str, Any]]) -> list[Issue]:
         if not opp.get("is_customer_phrased"):
             issues.append(Issue("warn", f"opp:{oid}",
                 "not marked as customer-phrased — may be a solution disguised as opportunity"))
+        # Cross-check the self-reported flag against the text: a build verb up front is a solution.
+        first = str(opp.get("statement", "")).strip().lower().split(" ")[0]
+        if first in BUILD_VERBS:
+            issues.append(Issue("warn", f"opp:{oid}",
+                f"statement starts with '{first}' — reads as a solution; rephrase as the customer need"))
         if not opp.get("has_evidence"):
             issues.append(Issue("warn", f"opp:{oid}",
                 "no evidence flag set — opportunities need customer evidence"))
@@ -178,12 +189,12 @@ def check_freshness(tree: dict[str, Any]) -> list[Issue]:
         issues.append(Issue("info", "freshness", "no last_updated date"))
         return issues
     days = (today - last).days
-    if days > 14:
-        issues.append(Issue("warn", "freshness",
-            f"OST not updated in {days} days — weekly rhythm recommended"))
-    elif days > 30:
+    if days > 30:  # checked first: the 30-day fail was unreachable behind the 14-day warn
         issues.append(Issue("fail", "freshness",
             f"OST not updated in {days} days — stale tree; refresh required"))
+    elif days > 14:
+        issues.append(Issue("warn", "freshness",
+            f"OST not updated in {days} days — weekly rhythm recommended"))
     return issues
 
 
@@ -276,8 +287,12 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    return 1 if report["severity_counts"]["fail"] else 0  # 1 = at least one fail finding
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Release Orchestrator - Claude Skills</title>
-  <meta name="description" content="Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanni">
+  <meta name="description" content="Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes and plans from text:">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/release-orchestrator.html">
   <meta property="og:title" content="Release Orchestrator - Claude Skills">
-  <meta property="og:description" content="Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanni">
+  <meta property="og:description" content="Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes and plans from text:">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/release-orchestrator.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Release Orchestrator", "description": "Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/release-orchestrator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Release Orchestrator", "description": "Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes and plans from text: release-manager).", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/release-orchestrator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Release Orchestrator</h1>
-    <p class="page-subtitle">Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v2.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes and plans from text: release-manager).</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v2.3.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">release-pipeline</span><span class="tag">versioning</span><span class="tag">pre-flight</span><span class="tag">readiness</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Release Orchestrator (Engineering domain).
 
-Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.
+Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes and plans from text: release-manager).
 
 The agent runs pre-flight validation, generates changelogs from conventional commits, auto-bumps semantic versions, and scores deployment readiness with a GO/CONDITIONAL/NO-GO decision. - **Pre-flight validation** — 7 automated checks: branch sync, merge conflicts, dirty tree, secret scanning (AWS/G
 
@@ -415,7 +415,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Release Orchestrator (Engineering domain).
 
-Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.
+Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes and plans from text: release-manager).
 
 The agent runs pre-flight validation, generates changelogs from conventional commits, auto-bumps semantic versions, and scores deployment readiness with a GO/CONDITIONAL/NO-GO decision. - **Pre-flight validation** — 7 automated checks: branch sync, merge conflicts, dirty tree, secret scanning (AWS/G
 
@@ -487,7 +487,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 All tools support `--json` for machine output. Exit code 0 = pass, 1 = fail (CI-friendly).
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -496,21 +496,37 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/rollback_strategies.md](references/rollback_strategies.md)** — database migration rollbacks, reversible-migration rules, and rollback playbooks. Read when planning the rollback portion of a release.
 - **[references/ci_cd_best_practices.md](references/ci_cd_best_practices.md)** — pipeline design patterns (stage-gate, fan-out/fan-in) and CI/CD best practices. Read when designing the surrounding pipeline.
 
+## Anti-Patterns
+
+**Mistake:** Tagging a release from a dirty or unpushed working tree.
+**Why it matters:** The tag then points at code nobody reviewed, and the build cannot be reproduced.
+**Instead:** Let the preflight checker fail the release until the tree is clean and in sync with the remote.
+
+**Mistake:** Overriding a NO-GO score because the date is fixed.
+**Why it matters:** The checks that fail (tests, secrets, missing changelog) are the ones that cause rollbacks.
+**Instead:** Fix the failing input or record an explicit, named exception with a rollback plan.
+
+**Mistake:** Hand-editing the version in one file.
+**Why it matters:** Manifests, in-app constants and docs drift apart, and users see two versions.
+**Instead:** Bump with `version_bumper.py` from the commit history, then grep for the old version.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/preflight_checker.py` | Repo-state checks (clean tree, branch, remote sync, tests, secrets) |
+| `scripts/version_bumper.py` | SemVer bump from conventional commits since the last tag |
+| `scripts/changelog_generator.py` | Changelog from a git range |
+| `scripts/release_readiness_scorer.py` | Weighted GO/NO-GO score from release data |
+| `assets/sample_release_data.json` | Release data for the scorer (89/100, GO) |
+
 ## Scope &amp; Limitations
 
 **This skill covers:** pre-flight validation, semantic version bumping, changelog generation, deployment-readiness scoring, and gating releases with GO/NO-GO decisions for git + conventional-commits projects.
 
 **This skill does NOT cover:** the actual deploy/orchestration execution (handled by `senior-devops` / `devops-workflow-engineer`), test authoring (`senior-qa`), or deep security scanning beyond secret pattern-matching (`senior-secops`).
 
-## Integration Points
-
-| Skill | Integration |
-|-------|-------------|
-| `senior-devops` | Pipeline stages consume pre-flight and readiness JSON as gates |
-| `senior-qa` | Test results feed Tests category (25% weight) |
-| `senior-secops` | Secret scan and CVE counts feed Security category (15%) |
-| `code-reviewer` | Code quality metrics feed Code Quality category (20%) |
-| `devops-workflow-engineer` | Workflow YAML calls tools as pipeline steps |
+**Pick this or `engineering/release-manager`:** this skill works against a live checkout (preflight checks, secret scan, tag-based bumps, GO/NO-GO). `release-manager` works offline on commit text and a release-plan file (notes, version, readiness, rollback runbook, comms plan).
 
 ---
 
@@ -538,7 +554,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Release Orchestrator&quot;**
-   - Description: &quot;Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.&quot;
+   - Description: &quot;Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes and plans from text: release-manager).&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -603,7 +619,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 All tools support `--json` for machine output. Exit code 0 = pass, 1 = fail (CI-friendly).
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -612,21 +628,37 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/rollback_strategies.md](references/rollback_strategies.md)** — database migration rollbacks, reversible-migration rules, and rollback playbooks. Read when planning the rollback portion of a release.
 - **[references/ci_cd_best_practices.md](references/ci_cd_best_practices.md)** — pipeline design patterns (stage-gate, fan-out/fan-in) and CI/CD best practices. Read when designing the surrounding pipeline.
 
+## Anti-Patterns
+
+**Mistake:** Tagging a release from a dirty or unpushed working tree.
+**Why it matters:** The tag then points at code nobody reviewed, and the build cannot be reproduced.
+**Instead:** Let the preflight checker fail the release until the tree is clean and in sync with the remote.
+
+**Mistake:** Overriding a NO-GO score because the date is fixed.
+**Why it matters:** The checks that fail (tests, secrets, missing changelog) are the ones that cause rollbacks.
+**Instead:** Fix the failing input or record an explicit, named exception with a rollback plan.
+
+**Mistake:** Hand-editing the version in one file.
+**Why it matters:** Manifests, in-app constants and docs drift apart, and users see two versions.
+**Instead:** Bump with `version_bumper.py` from the commit history, then grep for the old version.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/preflight_checker.py` | Repo-state checks (clean tree, branch, remote sync, tests, secrets) |
+| `scripts/version_bumper.py` | SemVer bump from conventional commits since the last tag |
+| `scripts/changelog_generator.py` | Changelog from a git range |
+| `scripts/release_readiness_scorer.py` | Weighted GO/NO-GO score from release data |
+| `assets/sample_release_data.json` | Release data for the scorer (89/100, GO) |
+
 ## Scope &amp; Limitations
 
 **This skill covers:** pre-flight validation, semantic version bumping, changelog generation, deployment-readiness scoring, and gating releases with GO/NO-GO decisions for git + conventional-commits projects.
 
 **This skill does NOT cover:** the actual deploy/orchestration execution (handled by `senior-devops` / `devops-workflow-engineer`), test authoring (`senior-qa`), or deep security scanning beyond secret pattern-matching (`senior-secops`).
 
-## Integration Points
-
-| Skill | Integration |
-|-------|-------------|
-| `senior-devops` | Pipeline stages consume pre-flight and readiness JSON as gates |
-| `senior-qa` | Test results feed Tests category (25% weight) |
-| `senior-secops` | Secret scan and CVE counts feed Security category (15%) |
-| `code-reviewer` | Code quality metrics feed Code Quality category (20%) |
-| `devops-workflow-engineer` | Workflow YAML calls tools as pipeline steps |
+**Pick this or `engineering/release-manager`:** this skill works against a live checkout (preflight checks, secret scan, tag-based bumps, GO/NO-GO). `release-manager` works offline on commit text and a release-plan file (notes, version, readiness, rollback runbook, comms plan).
 
 ---
 
@@ -654,7 +686,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Release Orchestrator&quot;**
-   - Description: &quot;Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.&quot;
+   - Description: &quot;Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes and plans from text: release-manager).&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -715,7 +747,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/release-orchestrator/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/release-orchestrator/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

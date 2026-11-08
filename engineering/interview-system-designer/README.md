@@ -26,16 +26,16 @@ Generates complete interview loops tailored to specific roles, levels, and teams
 **Usage:**
 ```bash
 # Basic usage
-python3 loop_designer.py --role "Senior Software Engineer" --level senior
+python3 scripts/loop_designer.py --role "Senior Software Engineer" --level senior
 
 # With team and custom competencies  
-python3 loop_designer.py --role "Product Manager" --level mid --team growth --competencies leadership,strategy,analytics
+python3 scripts/loop_designer.py --role "Product Manager" --level mid --team growth --competencies leadership,strategy,analytics
 
 # Using JSON input file
-python3 loop_designer.py --input assets/sample_role_definitions.json --output loops/
+python3 scripts/loop_designer.py --input assets/sample_role_definitions.json --output loops/
 
 # Specify output format
-python3 loop_designer.py --role "Staff Data Scientist" --level staff --format json --output data_scientist_loop.json
+python3 scripts/loop_designer.py --role "Staff Data Scientist" --level staff --format json --output data_scientist_loop.json
 ```
 
 **Input Options:**
@@ -82,13 +82,13 @@ Creates comprehensive interview question banks organized by competency area.
 **Usage:**
 ```bash
 # Generate questions for specific competencies
-python3 question_bank_generator.py --role "Frontend Engineer" --competencies react,typescript,system-design
+python3 scripts/question_bank_generator.py --role "Frontend Engineer" --competencies react,typescript,system-design
 
 # Create behavioral question bank
-python3 question_bank_generator.py --role "Product Manager" --question-types behavioral,leadership --num-questions 15
+python3 scripts/question_bank_generator.py --role "Product Manager" --question-types behavioral,situational --num-questions 15
 
 # Generate questions for multiple levels
-python3 question_bank_generator.py --role "DevOps Engineer" --levels junior,mid,senior --output questions/
+python3 scripts/question_bank_generator.py --role "DevOps Engineer" --level senior --output questions/
 ```
 
 **Input Options:**
@@ -120,13 +120,13 @@ Analyzes interview scores to detect bias, calibration issues, and provides recom
 **Usage:**
 ```bash
 # Comprehensive analysis
-python3 hiring_calibrator.py --input assets/sample_interview_results.json --analysis-type comprehensive
+python3 scripts/hiring_calibrator.py --input assets/sample_interview_results.json --analysis-type comprehensive
 
 # Focus on specific areas
-python3 hiring_calibrator.py --input interview_data.json --analysis-type bias --competencies technical,leadership
+python3 scripts/hiring_calibrator.py --input interview_data.json --analysis-type bias --competencies technical,leadership
 
 # Trend analysis over time
-python3 hiring_calibrator.py --input historical_data.json --trend-analysis --period quarterly
+python3 scripts/hiring_calibrator.py --input historical_data.json --trend-analysis --period quarterly
 ```
 
 **Input Options:**
@@ -253,9 +253,9 @@ cd interview-system-designer/
 chmod +x *.py
 
 # Test with sample data
-python3 loop_designer.py --role "Senior Software Engineer" --level senior
-python3 question_bank_generator.py --role "Product Manager" --level mid  
-python3 hiring_calibrator.py --input assets/sample_interview_results.json
+python3 scripts/loop_designer.py --role "Senior Software Engineer" --level senior
+python3 scripts/question_bank_generator.py --role "Product Manager" --level mid  
+python3 scripts/hiring_calibrator.py --input assets/sample_interview_results.json
 ```
 
 ## Integration

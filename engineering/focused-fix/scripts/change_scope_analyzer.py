@@ -5,7 +5,6 @@ Change Scope Analyzer - Identify minimal files to change for a bugfix.
 Analyzes a bug description against a codebase to find the most relevant files,
 estimate change scope, and recommend a focused fix approach.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -382,7 +381,7 @@ def main():
 
     if not path.exists():
         print(f"Error: Path not found: {args.path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     extensions = None
     if args.extensions:

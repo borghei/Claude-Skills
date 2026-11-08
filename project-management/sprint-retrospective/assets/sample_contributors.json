@@ -1,0 +1,161 @@
+{
+  "period": {
+    "since": "2026-03-04",
+    "until": "2026-03-18",
+    "days": 14
+  },
+  "contributor_count": 3,
+  "contributors": [
+    {
+      "author": "alice@example.com",
+      "commits": 34,
+      "loc_added": 1204,
+      "loc_removed": 387,
+      "loc_net": 817,
+      "files_touched": 28,
+      "peak_hours": [
+        10,
+        11,
+        14,
+        15
+      ],
+      "hourly_distribution": {
+        "10": 8,
+        "11": 8,
+        "14": 8,
+        "15": 8
+      },
+      "specialization": {
+        "backend": 0.67,
+        "tests": 0.22,
+        "docs": 0.11
+      },
+      "sessions": {
+        "deep_work": 5,
+        "focused": 4,
+        "micro": 3,
+        "total": 12
+      },
+      "consistency_score": 0.82,
+      "top_directories": [
+        {
+          "dir": "src/api",
+          "files": 19
+        },
+        {
+          "dir": "tests",
+          "files": 6
+        },
+        {
+          "dir": "docs",
+          "files": 3
+        }
+      ]
+    },
+    {
+      "author": "bob@example.com",
+      "commits": 28,
+      "loc_added": 1567,
+      "loc_removed": 823,
+      "loc_net": 744,
+      "files_touched": 35,
+      "peak_hours": [
+        9,
+        10,
+        11,
+        13,
+        14
+      ],
+      "hourly_distribution": {
+        "9": 5,
+        "10": 5,
+        "11": 5,
+        "13": 5,
+        "14": 5
+      },
+      "specialization": {
+        "frontend": 0.55,
+        "backend": 0.3,
+        "infra": 0.15
+      },
+      "sessions": {
+        "deep_work": 6,
+        "focused": 5,
+        "micro": 2,
+        "total": 13
+      },
+      "consistency_score": 0.75,
+      "top_directories": [
+        {
+          "dir": "src/ui",
+          "files": 19
+        },
+        {
+          "dir": "src/api",
+          "files": 10
+        },
+        {
+          "dir": "infra",
+          "files": 5
+        }
+      ]
+    },
+    {
+      "author": "carol@example.com",
+      "commits": 25,
+      "loc_added": 987,
+      "loc_removed": 412,
+      "loc_net": 575,
+      "files_touched": 22,
+      "peak_hours": [
+        11,
+        14,
+        15,
+        16
+      ],
+      "hourly_distribution": {
+        "11": 6,
+        "14": 6,
+        "15": 6,
+        "16": 6
+      },
+      "specialization": {
+        "backend": 0.48,
+        "data": 0.32,
+        "tests": 0.2
+      },
+      "sessions": {
+        "deep_work": 4,
+        "focused": 7,
+        "micro": 3,
+        "total": 14
+      },
+      "consistency_score": 0.88,
+      "top_directories": [
+        {
+          "dir": "src/api",
+          "files": 11
+        },
+        {
+          "dir": "data",
+          "files": 7
+        },
+        {
+          "dir": "tests",
+          "files": 4
+        }
+      ]
+    }
+  ],
+  "collaboration": {
+    "total_files_touched": 96,
+    "single_owner_files": 31,
+    "single_owner_pct": 32.3,
+    "bus_factor_risks": [
+      {
+        "directory": "infra",
+        "sole_author": "bob@example.com"
+      }
+    ]
+  }
+}

@@ -27,7 +27,7 @@ metadata:
 
 Refinement is the most under-invested ritual in agile teams. Stories arrive at sprint planning oversized, ambiguous, or strategically disconnected, and the team spends planning meetings doing what should have happened the week before. This skill is the refinement playbook: grade stories against INVEST, split them vertically (so each slice ships value end-to-end), and keep a working Definition of Ready and Definition of Done that prevent half-baked work from entering or leaving a sprint.
 
-The skill includes a Python scorer (`refinement_scorer.py`) that grades each story in a JSON backlog against the six INVEST criteria and outputs a readiness score (0-6) per story. Stories scoring 5-6 are sprint-ready; 3-4 need targeted refinement; below 3 go back to discovery.
+The skill includes a Python scorer (`refinement_scorer.py`) that grades each story in a JSON backlog against the six INVEST criteria and outputs a readiness score (0-6) per story. Stories scoring 5-6 are `READY`; 3-4 are `REFINE` (targeted refinement); below 3 are `SEND_TO_DISCOVERY`.
 
 This complements `wwas/` (Why-What-Acceptance format) and `job-stories/` (JTBD format). Either format produces stories; this skill grades them and gets them sprint-ready.
 
@@ -123,7 +123,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 | File | Purpose |
 |------|---------|
-| `scripts/refinement_scorer.py` | INVEST scorer: 0-6 per story with a ready / refine / return verdict |
+| `scripts/refinement_scorer.py` | INVEST scorer: 0-6 per story with a `READY` (5-6) / `REFINE` (3-4) / `SEND_TO_DISCOVERY` (0-2) verdict |
 | `references/refinement-playbook.md` | Session workflow, DoR/DoD templates, scorer reference |
 | `references/invest-and-splitting-guide.md` | INVEST, Lawrence patterns, SPIDR, tracer-bullet slicing |
 | `references/red-flags.md` | Refinement failures with bad and good examples |

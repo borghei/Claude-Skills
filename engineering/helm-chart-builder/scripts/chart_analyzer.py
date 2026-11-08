@@ -5,7 +5,6 @@ Helm Chart Analyzer - Analyze Helm chart structure, metadata, and templates.
 Checks for required files, validates Chart.yaml metadata, inspects templates
 for common issues, and reviews dependency configurations.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -50,6 +49,7 @@ class SimpleYamlParser:
         current_list_item: Optional[Dict] = None
 
         for line in content.split("\n"):
+            line = re.sub(r"\s+#.*$", "", line)  # trailing comment
             stripped = line.strip()
             if not stripped or stripped.startswith("#"):
                 continue
@@ -190,8 +190,8 @@ class ChartAnalyzer:
             self.findings.append(Finding(
                 severity="warning",
                 category="metadata",
-                message=f"Chart uses apiVersion '{api_version}'. Helm 3 expects 'v2'.",
-                recommendation="Set apiVersion to 'v2' for Helm 3 compatibility.",
+                message=f"Chart uses apiVersion '{api_version}'. Helm 3 and Helm 4 charts use 'v2'.",
+                recommendation="Set apiVersion to 'v2' (v1 is the Helm 2 format; move requirements.yaml into Chart.yaml dependencies).",
             ))
 
         # Check version format

@@ -24,6 +24,28 @@ DEFAULT_WEIGHTS = {
 }
 
 
+VALIDATION_BY_RISK = {
+    "value": "Value risk: fake-door or landing-page test, or 5 problem interviews, before building.",
+    "usability": "Usability risk: put a clickable prototype in front of 5 target users and watch them try it.",
+    "feasibility": "Feasibility risk: 2-3 day technical spike on real data to prove the core mechanism.",
+    "viability": "Viability risk: price or cost test, plus a review with legal, finance or sales.",
+}
+RISK_KEYWORDS = {
+    "feasibility": ("we can", "accurately", "technically", "predict", "integrat", "scale", "latency", "build"),
+    "viability": ("pay", "price", "revenue", "margin", "cost", "legal", "compliance", "sales"),
+    "usability": ("complete", "understand", "find", "skip", "learn", "confus", "navigate", "figure out"),
+}
+
+
+def classify_assumption(text: str) -> str:
+    """Map an assumption to value/usability/feasibility/viability risk by keywords."""
+    lowered = str(text).lower()
+    for risk, words in RISK_KEYWORDS.items():
+        if any(w in lowered for w in words):
+            return risk
+    return "value"
+
+
 def load_data(path: str) -> dict:
     with open(path, "r") as f:
         return json.load(f)
@@ -47,15 +69,13 @@ def score_ideas(data: dict) -> dict:
 
         weighted_score = round(weighted_score, 2)
 
-        # Validation suggestion based on weakest score
         weakest = min(scores.items(), key=lambda x: x[1]) if scores else ("unknown", 5)
-        validation_focus = {
-            "customer_impact": "Run 5 customer interviews to validate the pain point severity.",
-            "strategic_alignment": "Map this idea to a specific OKR and get stakeholder confirmation.",
-            "feasibility": "Run a technical spike (2-3 days) to validate core assumptions.",
-            "speed_to_validate": "Design a Wizard-of-Oz or concierge test for rapid validation.",
-            "differentiation": "Conduct competitive analysis on the top 3 alternatives.",
-        }.get(weakest[0], "Validate the riskiest assumption first.")
+        # The validation step tests the riskiest assumption, so it follows the assumption's
+        # risk type: explicit "assumption_type", else keywords in the assumption text.
+        assumption = idea.get("riskiest_assumption", "TBD")
+        risk_type = idea.get("assumption_type") or classify_assumption(assumption)
+        validation_focus = VALIDATION_BY_RISK[risk_type]
+        confidence = idea.get("confidence")
 
         results.append({
             "rank": 0,
@@ -65,7 +85,9 @@ def score_ideas(data: dict) -> dict:
             "weighted_score": weighted_score,
             "scores": scores,
             "effort": idea.get("effort", "M"),
-            "riskiest_assumption": idea.get("riskiest_assumption", "TBD"),
+            "riskiest_assumption": assumption,
+            "assumption_type": risk_type,
+            "confidence": confidence,
             "validation_suggestion": validation_focus,
             "weakest_criterion": weakest[0],
         })
@@ -103,7 +125,11 @@ def print_report(result: dict) -> None:
         print(f"\n  #{idea['rank']} {idea['name']} (Score: {idea['weighted_score']:.2f})")
         if idea["description"]:
             print(f"     {idea['description'][:80]}")
-        print(f"     Riskiest Assumption: {idea['riskiest_assumption']}")
+        print(f"     Riskiest Assumption ({idea['assumption_type']}): {idea['riskiest_assumption']}")
+        if idea["confidence"] is None:
+            print("     Confidence: not stated - say what evidence the scores rest on")
+        elif idea["confidence"] < 5:
+            print(f"     Confidence: {idea['confidence']}/10 - low; test this bet before ranking it")
         print(f"     Validation: {idea['validation_suggestion']}")
     print()
 
@@ -118,6 +144,7 @@ def print_example() -> None:
                 "description": "Step-by-step wizard for first-time setup",
                 "effort": "M",
                 "riskiest_assumption": "Users will complete the wizard rather than skip it",
+                "confidence": 7,
                 "scores": {"customer_impact": 9, "strategic_alignment": 8, "feasibility": 7, "speed_to_validate": 6, "differentiation": 5},
             },
             {
@@ -126,6 +153,7 @@ def print_example() -> None:
                 "description": "Auto-configure settings based on industry and company size",
                 "effort": "L",
                 "riskiest_assumption": "We can accurately predict useful defaults from limited signup data",
+                "confidence": 3,
                 "scores": {"customer_impact": 7, "strategic_alignment": 7, "feasibility": 5, "speed_to_validate": 4, "differentiation": 8},
             },
             {
@@ -163,4 +191,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

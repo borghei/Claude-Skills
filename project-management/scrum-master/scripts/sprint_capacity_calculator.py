@@ -191,6 +191,9 @@ def calculate_capacity(data: Dict[str, Any]) -> CapacityResult:
     historical_velocity = data.get("historical_velocity", None)
 
     team_members_data = data.get("team_members", [])
+    if not isinstance(team_members_data, list) or not team_members_data:
+        raise ValueError("input needs a non-empty 'team_members' list (see assets/sample_team_data.json); "
+                         "sprint history files belong to velocity_analyzer.py")
     if not team_members_data:
         result.warnings.append("No team members provided.")
         return result
@@ -417,13 +420,13 @@ def main() -> int:
 
     except FileNotFoundError:
         print(f"Error: File '{args.data_file}' not found", file=sys.stderr)
-        return 1
+        return 2
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in '{args.data_file}': {e}", file=sys.stderr)
-        return 1
+        return 2
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        return 1
+        return 2
 
 
 if __name__ == "__main__":

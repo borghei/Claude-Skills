@@ -1,0 +1,68 @@
+{
+  "meetings": [
+    {
+      "date": "2026-03-14",
+      "topic": "Sprint 12 Planning",
+      "duration_minutes": 60,
+      "participants": ["Alice", "Bob", "Carol", "Dave"],
+      "agenda_items": 4,
+      "agenda_items_covered": 4,
+      "decisions": [
+        {
+          "decision": "Focus sprint 12 on the onboarding flow",
+          "rationale": "Activation drop-off is the top retention driver this quarter",
+          "decided_by": "Alice",
+          "category": "Scope",
+          "impact": "High",
+          "reversible": true
+        }
+      ],
+      "action_items": [
+        {"action": "Draft API spec for the invite endpoint", "owner": "Alice", "due_date": "2026-03-18", "status": "complete"},
+        {"action": "Set up staging environment for onboarding tests", "owner": "Bob", "due_date": "2026-03-16", "status": "open"}
+      ]
+    },
+    {
+      "date": "2026-03-12",
+      "topic": "Weekly Status Sync",
+      "duration_minutes": 45,
+      "participants": ["Alice", "Bob", "Carol", "Dave", "Eve", "Frank", "Grace", "Henry"],
+      "agenda_items": 0,
+      "agenda_items_covered": 0,
+      "decisions": [],
+      "action_items": [
+        {"action": "Look into the issue", "owner": "", "due_date": "", "status": "open"}
+      ]
+    },
+    {
+      "date": "2026-03-07",
+      "topic": "Architecture Review",
+      "duration_minutes": 60,
+      "participants": ["Alice", "Bob", "Carol"],
+      "agenda_items": 3,
+      "agenda_items_covered": 2,
+      "decisions": [
+        {
+          "decision": "Use PostgreSQL for the analytics service",
+          "rationale": "80% of planned queries are relational joins",
+          "decided_by": "Engineering leads",
+          "category": "Technical",
+          "impact": "High",
+          "reversible": false
+        },
+        {
+          "decision": "Adopt trunk-based development",
+          "rationale": "",
+          "decided_by": "Alice",
+          "category": "Process",
+          "impact": "Medium",
+          "reversible": true
+        }
+      ],
+      "action_items": [
+        {"action": "Prepare Q1 metrics report", "owner": "Carol", "due_date": "2026-03-10", "status": "open"},
+        {"action": "Schedule design review", "owner": "Alice", "due_date": "2026-03-12", "status": "complete"}
+      ]
+    }
+  ]
+}

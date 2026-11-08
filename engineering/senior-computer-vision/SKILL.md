@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: computer-vision
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [object-detection, image-segmentation, computer-vision, model-training]
 ---
 # Senior Computer Vision Engineer
@@ -44,11 +44,25 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-| Tool | Purpose | Command |
+All three are stdlib-only CLIs. `inference_optimizer.py` needs the model's runtime (torch for
+`.pt`, onnx/onnxruntime and numpy for `.onnx`) to analyse or benchmark; without it only
+format-based recommendations are produced and `--benchmark` exits 2.
+
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `vision_model_trainer.py` | Generate training configs for YOLO / Detectron2 / MMDetection | `python scripts/vision_model_trainer.py data/coco/ --task detection --arch yolov8m -o configs/train.yaml` |
-| `inference_optimizer.py` | Analyze, benchmark, and recommend optimizations for a model | `python scripts/inference_optimizer.py model.pt --analyze --benchmark --recommend --target edge` |
-| `dataset_pipeline_builder.py` | Analyze/convert/split/augment/validate CV datasets (subcommands) | `python scripts/dataset_pipeline_builder.py analyze --input data/coco/` |
+| `vision_model_trainer.py` | Analyse a COCO/YOLO dataset and generate a YOLO / Detectron2 / MMDetection training config (`--framework`, `--arch`, `--epochs`, `--batch`, `-o`, `--analyze-only`, `--json`) | `python scripts/vision_model_trainer.py assets/sample_coco_valid --analyze-only --json` |
+| `inference_optimizer.py` | Analyse, benchmark and recommend optimisations per target (`--analyze`, `--benchmark`, `--recommend`, `--target gpu/cpu/edge/mobile/apple/intel`, `--json`, `-o`) | `python scripts/inference_optimizer.py model.onnx --analyze --recommend --target edge` |
+| `dataset_pipeline_builder.py` | Subcommands `analyze`, `convert`, `split`, `augment-config`, `validate` | `python scripts/dataset_pipeline_builder.py validate --input assets/sample_coco_flawed` |
+
+Exit codes: `0` ok; `1` `validate` found errors (broken image references, malformed boxes);
+`2` bad input (missing path, unknown architecture or format) or a requested benchmark that
+could not run. `assets/sample_coco_valid/` validates clean (exit 0); `assets/sample_coco_flawed/`
+has an orphan annotation and a 3-value bbox (exit 1).
+
+Default recommendation: YOLO26 (Ultralytics' current family; COCO mAP50-95 yolo26n 40.9,
+yolo26s 48.6, yolo26m 53.1 per docs.ultralytics.com/models/yolo26/, checked November 2026),
+with YOLO11 kept for existing pipelines. The trainer's table cites its source per entry;
+check the docs again before quoting figures, since families turn over yearly.
 
 ## References
 
@@ -77,13 +91,30 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Medical imaging regulatory compliance (DICOM, FDA 510(k)) -- see `ra-qm-team/` compliance skills
 - Real-time video streaming infrastructure (RTSP, WebRTC, GStreamer pipeline design) -- see `senior-devops` for infrastructure
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-ml-engineer` | Model serving and MLOps pipeline setup | Trained model artifacts (.pt, .onnx) flow into `model_deployment_pipeline.py` for containerized serving and monitoring |
-| `senior-data-engineer` | Dataset ETL and storage pipelines | Raw image data ingested via `pipeline_orchestrator.py`; cleaned datasets flow into `dataset_pipeline_builder.py` for CV formatting |
-| `senior-data-scientist` | Experiment design and statistical analysis | Experiment parameters from `experiment_designer.py` guide hyperparameter search; model metrics feed back for significance testing |
-| `senior-devops` | CI/CD and GPU infrastructure provisioning | Optimized model artifacts deployed via CI/CD pipelines; GPU node scaling managed through infrastructure-as-code |
-| `senior-prompt-engineer` | Multimodal RAG and vision-language integration | Vision model embeddings and detections feed into `rag_system_builder.py` for multimodal retrieval pipelines |
-| `senior-cloud-architect` | Cloud GPU resource planning and cost optimization | Benchmark results from `inference_optimizer.py` inform instance type selection and auto-scaling policies |
+### Benchmarking Without the Runtime
+**Mistake:** Reporting latency or speedup numbers from `inference_optimizer.py` when torch or onnxruntime is not installed.
+**Why it happens:** The recommendations print either way, so the run looks complete.
+**Instead:** Treat exit 2 from `--benchmark` as "no measurement". Install the runtime, benchmark on the target hardware, and quote only measured numbers.
+
+### Quantizing Without an Accuracy Check
+**Mistake:** Shipping an INT8 model because it is 2-4x faster, without re-measuring mAP.
+**Why it happens:** Speed is visible immediately; accuracy loss shows up later, on rare classes first.
+**Instead:** Re-run validation on the held-out split after every precision change and accept the model only inside the agreed mAP budget.
+
+### Splitting After Augmenting
+**Mistake:** Augmenting the whole dataset, then splitting into train/val/test.
+**Why it happens:** It feels like one pipeline step.
+**Instead:** Split first (stratified), keep val/test untouched, and apply augmentation online during training. Otherwise near-duplicates leak into evaluation and inflate mAP.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/vision_model_trainer.py` | Dataset analysis and training-config generation |
+| `scripts/inference_optimizer.py` | Model analysis, benchmark and optimisation recommendations |
+| `scripts/dataset_pipeline_builder.py` | Dataset analyze / convert / split / augment-config / validate |
+| `assets/sample_coco_valid/annotations.json` | Sound COCO sample (validate exits 0) |
+| `assets/sample_coco_flawed/annotations.json` | Flawed COCO sample (validate exits 1) |
+| `references/*.md` | Workflows, command catalogs, architectures, optimisation and deployment detail |

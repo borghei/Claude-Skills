@@ -5,7 +5,6 @@ Schema Explorer - Generate documentation from SQL DDL files.
 Parses CREATE TABLE, CREATE INDEX, and constraint definitions to produce
 a complete schema catalog with relationships and documentation.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 

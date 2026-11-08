@@ -1,16 +1,16 @@
 ---
 name: pm-1on1s
 description: >
-  Structured PM 1:1 templates by partner type — manager, engineering-manager
-  partner, designer, IC reports, cross-functional — grounded in Radical Candor,
-  the GROW coaching model, and the Manager Tools 1:1 framework.
+  Builds 1:1 agendas and kickoff scripts for a PM's manager, EM, designer, reports and
+  cross-functional partners. Use when starting a new 1:1, a 1:1 has turned into status
+  updates, or you need to give a partner hard feedback.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-career
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: 1on1s, manager-cadence, grow-model, radical-candor
   tags:
     - one-on-ones
@@ -25,7 +25,7 @@ metadata:
 
 PMs run more 1:1s than almost any other role: with their manager, their engineering manager partner, their design lead, cross-functional partners (sales, support, data), and -- once they have reports -- with their direct PMs. Each 1:1 type has a different purpose, cadence, and ideal structure.
 
-This skill provides templates and question banks for the most common 1:1 types a PM runs, calibrated to the PM context. It draws on Kim Scott's Radical Candor (caring personally + challenging directly), the GROW coaching model (Whitmore), the Manager Tools 1:1 framework (Auzenne & Horstman), and PM-specific 1:1 patterns popularized by senior product leaders.
+The value here is the partner-specific agendas, question banks and cadence rules in `assets/` and `references/`; apply the coaching frameworks you already know (Radical Candor, GROW) through them rather than restating them.
 
 ### Five core principles
 
@@ -47,6 +47,15 @@ This skill provides templates and question banks for the most common 1:1 types a
 - Ad-hoc problem-solving meetings (treat as project meetings, not 1:1s).
 - Performance management conversations (use a separate, manager-led structure).
 - Initial intro meetings during onboarding -- use `pm-onboarding/` for those.
+
+## Quick Start
+
+The workflow, start to finish:
+
+1. Settle the Clarify First inputs below.
+2. New relationship: run `assets/kickoff_template.md`. Recurring: use the partner-type agenda from `references/one-on-one-templates.md` (`assets/manager_1on1_agenda.md` for your own manager).
+3. Fill the agenda with the other person's topics first, then growth, feedback and decisions; move status to async.
+4. Verify that the agenda fits the time slot, every item is something only a live conversation can do, and agreements from last time have an owner and a date in `assets/1on1_notes_template.md` before calling it done.
 
 ## Clarify First
 
@@ -98,12 +107,12 @@ External: Scott, K. *Radical Candor* (2017); Whitmore, J. *Coaching for Performa
 
 **Caveats:** 1:1 patterns are culturally inflected — calibrate directness to the room. Templates are starting points that should evolve as the relationship deepens. Re-establish the kickoff conversation when you join a new team.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `pm-career-ladder/` | Bidirectional | Quarterly growth 1:1s use the ladder rubric as the calibration tool |
-| `pm-onboarding/` | Receives from | Onboarding 1:1s evolve into steady-state 1:1s after day 90 |
-| `pm-interview-prep/` | Reuses | Behavioral story prep often surfaces from 1:1 reflections |
-| `senior-pm/stakeholder-mapper/` | Reuses | Tier-1 stakeholders should be your weekly 1:1s |
-| `personal-productivity/weekly-review/` | Feeds into | Weekly review captures 1:1 actions and growth-plan progress |
+| File | Purpose |
+|------|---------|
+| `assets/kickoff_template.md`, `assets/manager_1on1_agenda.md`, `assets/1on1_notes_template.md` | Kickoff script, manager agenda, running notes |
+| `references/one-on-one-templates.md`, `references/1on1-playbook.md`, `references/red-flags.md` | Agendas by partner type, cadence and question banks, failure modes |
+| `examples/sr-pm-first-month-with-em-partner.md` | Worked first month with an EM partner |
+
+Related skills: `pm-onboarding` for first-90-day intro meetings, `pm-career-ladder` for growth 1:1s, `senior-pm` (`stakeholder_mapper.py`) to decide who earns a weekly slot.

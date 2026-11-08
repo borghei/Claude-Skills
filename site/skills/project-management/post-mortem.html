@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post Mortem - Claude Skills</title>
-  <meta name="description" content="Blameless post-mortem expert for incidents, outages, regressions, customer escalations, missed launches, and failed experiments. Pairs Google SRE practice with Allspaw / Dekker / Perrow systems thinki">
+  <meta name="description" content="Run a blameless review with a timeline, contributing causes and owned action items. Use when an incident, outage, missed launch or failed experiment needs a written review.">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/post-mortem.html">
   <meta property="og:title" content="Post Mortem - Claude Skills">
-  <meta property="og:description" content="Blameless post-mortem expert for incidents, outages, regressions, customer escalations, missed launches, and failed experiments. Pairs Google SRE practice with Allspaw / Dekker / Perrow systems thinki">
+  <meta property="og:description" content="Run a blameless review with a timeline, contributing causes and owned action items. Use when an incident, outage, missed launch or failed experiment needs a written review.">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/post-mortem.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Post Mortem", "description": "Blameless post-mortem expert for incidents, outages, regressions, customer escalations, missed launches, and failed experiments. Pairs Google SRE practice with Allspaw / Dekker / Perrow systems thinking.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/post-mortem.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Post Mortem", "description": "Run a blameless review with a timeline, contributing causes and owned action items. Use when an incident, outage, missed launch or failed experiment needs a written review.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/post-mortem.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Post Mortem</h1>
-    <p class="page-subtitle">Blameless post-mortem expert for incidents, outages, regressions, customer escalations, missed launches, and failed experiments. Pairs Google SRE practice with Allspaw / Dekker / Perrow systems thinking.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Run a blameless review with a timeline, contributing causes and owned action items. Use when an incident, outage, missed launch or failed experiment needs a written review.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.2</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">post-mortem</span><span class="tag">rca</span><span class="tag">blameless</span><span class="tag">incident</span><span class="tag">sre</span><span class="tag">five-whys</span><span class="tag">causal-tree</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Post Mortem (Project Management domain).
 
-Blameless post-mortem expert for incidents, outages, regressions, customer escalations, missed launches, and failed experiments. Pairs Google SRE practice with Allspaw / Dekker / Perrow systems thinking.
+Run a blameless review with a timeline, contributing causes and owned action items. Use when an incident, outage, missed launch or failed experiment needs a written review.
 
 A post-mortem is a structured, blameless review held after an incident, outage, regression, missed launch, or failed experiment. The goal is not to assign fault but to learn how the system (people, process, code, and organization) produced the outcome, and to commit to durable changes that reduce th
 
@@ -401,6 +401,9 @@ A post-mortem is a structured, blameless review held after an incident, outage, 
 - Counterfactuals in the root-cause analysis
 - Stopping at a single root cause
 - Treating a recurring incident as new
+
+## Frameworks &amp; Templates You Know
+- | `assets/post_mortem_template.md` | 10-section post-mortem template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -420,7 +423,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Post Mortem (Project Management domain).
 
-Blameless post-mortem expert for incidents, outages, regressions, customer escalations, missed launches, and failed experiments. Pairs Google SRE practice with Allspaw / Dekker / Perrow systems thinking.
+Run a blameless review with a timeline, contributing causes and owned action items. Use when an incident, outage, missed launch or failed experiment needs a written review.
 
 A post-mortem is a structured, blameless review held after an incident, outage, regression, missed launch, or failed experiment. The goal is not to assign fault but to learn how the system (people, process, code, and organization) produced the outcome, and to commit to durable changes that reduce th
 
@@ -428,6 +431,9 @@ A post-mortem is a structured, blameless review held after an incident, outage, 
 - Counterfactuals in the root-cause analysis
 - Stopping at a single root cause
 - Treating a recurring incident as new
+
+## Frameworks &amp; Templates You Know
+- | `assets/post_mortem_template.md` | 10-section post-mortem template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -461,7 +467,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A post-mortem is a structured, blameless review held after an incident, outage, regression, missed launch, or failed experiment. The goal is not to assign fault but to learn how the system (people, process, code, and organization) produced the outcome, and to commit to durable changes that reduce the chance of recurrence.
 
-This skill operationalizes the Google SRE blameless post-mortem template, the Etsy &quot;morgue&quot; tradition, John Allspaw&#x27;s &quot;How Complex Systems Fail&quot; reading, Charles Perrow&#x27;s Normal Accident Theory, and Sidney Dekker&#x27;s *Field Guide to Understanding &quot;Human Error&quot;*. Where the companion `discovery/pre-mortem/` skill imagines failure before it happens, post-mortem learns from failure that already did.
+It follows the blameless post-mortem practice common in site reliability engineering, with systems-thinking sources listed under References. Where the companion `discovery/pre-mortem/` skill imagines failure before it happens, post-mortem learns from failure that already did.
 
 ## Core Capabilities
 
@@ -494,12 +500,16 @@ Before authoring the post-mortem, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. At incident close, the incident commander assigns an author who opens `assets/post_mortem_template.md`.
 2. Scaffold Header, Summary, Impact, and Timeline from the incident chat transcript.
-3. Within the SLA window (Sev 1: 5 business days, Sev 2: 7), draft the remaining sections, run the chosen root-cause method, and hold a 60-90 min blameless review.
+3. Within the SLA window, draft the remaining sections, run the chosen root-cause method, and hold a 60-90 min blameless review.
 4. Apply the Allspaw test, file every action item as a real ticket with an owner and due date, then publish to the searchable archive.
+
+Default SLAs [RECOMMENDED], to replace with your organisation&#x27;s: Sev 1 draft within 5 business days, Sev 2 within 7. The reason for a short window: memory and chat context fade within a week, and the timeline is the part that cannot be reconstructed later.
+
+**Done when** the timeline has no unexplained gaps, the analysis names contributing factors (not a person), and every action item has one owner, a ticket and a testable done condition.
 
 The blameless principles, severity thresholds, full template, workflow, and root-cause methods all live in the references below.
 
@@ -522,13 +532,22 @@ The blameless principles, severity thresholds, full template, workflow, and root
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/post_mortem_template.md` | 10-section post-mortem template |
+| `assets/incident_timeline_worksheet.md` | Timeline prompts |
+| `assets/action_item_tracker.md` | Cross-incident action tracker |
+| `assets/what_went_well_prompts.md` | Positive-observation prompts |
+| `examples/payment-processing-outage.md` | Worked post-mortem |
+
 ## References
 
 - **[references/post-mortem-process.md](references/post-mortem-process.md)** — severity thresholds, the 10-section template, the Day 0 → Day 30 workflow, action-item follow-through, distribution/archive practice, and the assets inventory. Read when running a post-mortem end to end.
 - **[references/blameless-culture-guide.md](references/blameless-culture-guide.md)** — what blameless means, the Dekker reframe, blameful vs blameless phrasing, hindsight bias, counterfactuals, establishing the culture, plus the five ground rules and the Allspaw test. Read when facilitating or when a draft feels blameful.
 - **[references/5-whys-vs-causal-tree.md](references/5-whys-vs-causal-tree.md)** — both root-cause methods with worked examples, the choose-between table, and the root-cause vs contributing-factors distinction. Read before the root-cause section of the meeting.
 - **[references/red-flags.md](references/red-flags.md)** — 12 anti-patterns (blame language, ownerless action items, single root cause, second-mortems...), plus the troubleshooting table and success criteria. Read before publishing or signing off.
-- **assets** — [post_mortem_template.md](assets/post_mortem_template.md) (SRE 10-section template), [incident_timeline_worksheet.md](assets/incident_timeline_worksheet.md) (timeline prompts), [action_item_tracker.md](assets/action_item_tracker.md) (cross-incident tracker), [what_went_well_prompts.md](assets/what_went_well_prompts.md) (positive-observation prompts).
 - Foundational reading: Google SRE &quot;Postmortem Culture&quot;; Allspaw &quot;Blameless PostMortems and a Just Culture&quot; (2012); Cook &quot;How Complex Systems Fail&quot; (1998); Perrow *Normal Accidents* (1984); Dekker *Field Guide* (2014) and *Just Culture* (2017).
 
 ## Scope &amp; Limitations
@@ -578,7 +597,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Post Mortem&quot;**
-   - Description: &quot;Blameless post-mortem expert for incidents, outages, regressions, customer escalations, missed launches, and failed experiments. Pairs Google SRE practice with Allspaw / Dekker / Perrow systems thinking.&quot;
+   - Description: &quot;Run a blameless review with a timeline, contributing causes and owned action items. Use when an incident, outage, missed launch or failed experiment needs a written review.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -607,7 +626,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 A post-mortem is a structured, blameless review held after an incident, outage, regression, missed launch, or failed experiment. The goal is not to assign fault but to learn how the system (people, process, code, and organization) produced the outcome, and to commit to durable changes that reduce the chance of recurrence.
 
-This skill operationalizes the Google SRE blameless post-mortem template, the Etsy &quot;morgue&quot; tradition, John Allspaw&#x27;s &quot;How Complex Systems Fail&quot; reading, Charles Perrow&#x27;s Normal Accident Theory, and Sidney Dekker&#x27;s *Field Guide to Understanding &quot;Human Error&quot;*. Where the companion `discovery/pre-mortem/` skill imagines failure before it happens, post-mortem learns from failure that already did.
+It follows the blameless post-mortem practice common in site reliability engineering, with systems-thinking sources listed under References. Where the companion `discovery/pre-mortem/` skill imagines failure before it happens, post-mortem learns from failure that already did.
 
 ## Core Capabilities
 
@@ -640,12 +659,16 @@ Before authoring the post-mortem, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. At incident close, the incident commander assigns an author who opens `assets/post_mortem_template.md`.
 2. Scaffold Header, Summary, Impact, and Timeline from the incident chat transcript.
-3. Within the SLA window (Sev 1: 5 business days, Sev 2: 7), draft the remaining sections, run the chosen root-cause method, and hold a 60-90 min blameless review.
+3. Within the SLA window, draft the remaining sections, run the chosen root-cause method, and hold a 60-90 min blameless review.
 4. Apply the Allspaw test, file every action item as a real ticket with an owner and due date, then publish to the searchable archive.
+
+Default SLAs [RECOMMENDED], to replace with your organisation&#x27;s: Sev 1 draft within 5 business days, Sev 2 within 7. The reason for a short window: memory and chat context fade within a week, and the timeline is the part that cannot be reconstructed later.
+
+**Done when** the timeline has no unexplained gaps, the analysis names contributing factors (not a person), and every action item has one owner, a ticket and a testable done condition.
 
 The blameless principles, severity thresholds, full template, workflow, and root-cause methods all live in the references below.
 
@@ -668,13 +691,22 @@ The blameless principles, severity thresholds, full template, workflow, and root
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/post_mortem_template.md` | 10-section post-mortem template |
+| `assets/incident_timeline_worksheet.md` | Timeline prompts |
+| `assets/action_item_tracker.md` | Cross-incident action tracker |
+| `assets/what_went_well_prompts.md` | Positive-observation prompts |
+| `examples/payment-processing-outage.md` | Worked post-mortem |
+
 ## References
 
 - **[references/post-mortem-process.md](references/post-mortem-process.md)** — severity thresholds, the 10-section template, the Day 0 → Day 30 workflow, action-item follow-through, distribution/archive practice, and the assets inventory. Read when running a post-mortem end to end.
 - **[references/blameless-culture-guide.md](references/blameless-culture-guide.md)** — what blameless means, the Dekker reframe, blameful vs blameless phrasing, hindsight bias, counterfactuals, establishing the culture, plus the five ground rules and the Allspaw test. Read when facilitating or when a draft feels blameful.
 - **[references/5-whys-vs-causal-tree.md](references/5-whys-vs-causal-tree.md)** — both root-cause methods with worked examples, the choose-between table, and the root-cause vs contributing-factors distinction. Read before the root-cause section of the meeting.
 - **[references/red-flags.md](references/red-flags.md)** — 12 anti-patterns (blame language, ownerless action items, single root cause, second-mortems...), plus the troubleshooting table and success criteria. Read before publishing or signing off.
-- **assets** — [post_mortem_template.md](assets/post_mortem_template.md) (SRE 10-section template), [incident_timeline_worksheet.md](assets/incident_timeline_worksheet.md) (timeline prompts), [action_item_tracker.md](assets/action_item_tracker.md) (cross-incident tracker), [what_went_well_prompts.md](assets/what_went_well_prompts.md) (positive-observation prompts).
 - Foundational reading: Google SRE &quot;Postmortem Culture&quot;; Allspaw &quot;Blameless PostMortems and a Just Culture&quot; (2012); Cook &quot;How Complex Systems Fail&quot; (1998); Perrow *Normal Accidents* (1984); Dekker *Field Guide* (2014) and *Just Culture* (2017).
 
 ## Scope &amp; Limitations
@@ -724,7 +756,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Post Mortem&quot;**
-   - Description: &quot;Blameless post-mortem expert for incidents, outages, regressions, customer escalations, missed launches, and failed experiments. Pairs Google SRE practice with Allspaw / Dekker / Perrow systems thinking.&quot;
+   - Description: &quot;Run a blameless review with a timeline, contributing causes and owned action items. Use when an incident, outage, missed launch or failed experiment needs a written review.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -782,13 +814,8 @@ cp -r Claude-Skills/project-management/execution/post-mortem your-project/
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/execution/post-mortem</code></pre>
 </div>
   
-  <h2>Quick Start</h2>1. At incident close, the incident commander assigns an author who opens `assets/post_mortem_template.md`.
-2. Scaffold Header, Summary, Impact, and Timeline from the incident chat transcript.
-3. Within the SLA window (Sev 1: 5 business days, Sev 2: 7), draft the remaining sections, run the chosen root-cause method, and hold a 60-90 min blameless review.
-4. Apply the Allspaw test, file every action item as a real ticket with an owner and due date, then publish to the searchable archive.
-
-The blameless principles, severity thresholds, full template, workflow, and root-cause methods all live in the references below.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/post-mortem/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

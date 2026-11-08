@@ -109,17 +109,19 @@ This guide covers the **74 production-ready project management skills** organize
 - **Atlassian MCP Server** integration for direct Jira/Confluence operations
 - **Linear + Notion** integration patterns (GraphQL + REST)
 - **15+ Python CLI tools** across role-based, discovery, execution, career
-- **Shared output schema** (`--format json|markdown|mermaid|confluence|notion|linear`) — see `SHARED_OUTPUT_SCHEMA.md`
+- **Shared output schema** (`--format json|markdown|mermaid|confluence|notion|linear`) on the tools built on it (flow metrics, dependency map, status updates, interview synthesis, metric trees); older tools offer `text|json` — check each tool's `--help`. See `SHARED_OUTPUT_SCHEMA.md`
 - **Worked examples** in `examples/` showing end-to-end flows
 - **Role-based Quick Start** in `README.md` from APM → CPO
 
 ## Shared Output Format Schema
 
-All PM Python tools follow `SHARED_OUTPUT_SCHEMA.md`:
+Tools built on `SHARED_OUTPUT_SCHEMA.md` (`flow_metrics.py`, `dependency_graph.py`, `status_generator.py`, `interview_synthesizer.py`, `metric_tree_builder.py`) take:
 
 ```bash
-python <tool>.py --format <json|markdown|mermaid|confluence|notion|linear> [--output file]
+python <tool>.py --input data.json --format <json|markdown|mermaid|confluence|notion|linear>
 ```
+
+The other PM tools offer `--format text|json` (some also `markdown`); run `--help` for each tool's exact flags.
 
 When generating outputs for a PM artifact, always consider which format the consumer expects:
 - **json** for machine pipelines (CI, MCP servers, agents)
@@ -184,7 +186,7 @@ curl -X POST https://api.notion.com/v1/pages \
   -d '{
     "parent": { "type": "data_source_id", "data_source_id": "<prd-data-source-id>" },
     "properties": { ... },
-    "children": [ <blocks from prd_scaffolder.py --format notion> ]
+    "children": [ <blocks converted from the markdown prd_scaffolder.py writes> ]
   }'
 ```
 
@@ -286,44 +288,44 @@ status-update-generator → (weekly exec comms)
 ```bash
 python scrum-master/scripts/sprint_capacity_calculator.py team.json
 python scrum-master/scripts/velocity_analyzer.py sprints.json
-python execution/prioritization-frameworks/scripts/prioritization_scorer.py backlog.json --framework rice
-python execution/cycle-time-analyzer/scripts/flow_metrics.py issues.json
+python execution/prioritization-frameworks/scripts/prioritization_scorer.py --input backlog.json --framework rice
+python execution/cycle-time-analyzer/scripts/flow_metrics.py --input issues.json
 # then, via the Atlassian Rovo MCP Server: manageJiraSprint (create "Sprint 23" on the team board)
 ```
 
 ### Pattern 3: Cross-Team Coordination
 
 ```bash
-python execution/dependency-map/scripts/dependency_graph.py deps.json --format mermaid
+python execution/dependency-map/scripts/dependency_graph.py --input deps.json --format mermaid
 python execution/daci-framework/...  # Document decision rights
-python execution/status-update-generator/scripts/status_generator.py --format confluence
+python execution/status-update-generator/scripts/status_generator.py --input status.json --format confluence
 # then, via the Atlassian Rovo MCP Server: createConfluenceContent (space PROG, title "Weekly status")
 ```
 
 ### Pattern 4: Customer Discovery → Roadmap
 
 ```bash
-python discovery/interview-synthesis/scripts/interview_synthesizer.py interviews.json --format mermaid
+python discovery/interview-synthesis/scripts/interview_synthesizer.py --input interviews.json --format mermaid
 python discovery/identify-assumptions/scripts/assumption_tracker.py opportunities.json
-python execution/north-star-metric/scripts/metric_tree_builder.py --nsm "QBR engagement"
-python execution/outcome-roadmap/scripts/roadmap_transformer.py outputs.json
+python execution/north-star-metric/scripts/metric_tree_builder.py --input nsm.json --format mermaid
+python execution/outcome-roadmap/scripts/roadmap_transformer.py --input roadmap.json
 ```
 
 ### Pattern 5: Push to Linear (instead of Jira)
 
 ```bash
-python execution/prioritization-frameworks/scripts/prioritization_scorer.py backlog.json \
-  --framework rice --format linear | linear-cli issues create-batch --team PROD
-python execution/status-update-generator/scripts/status_generator.py issues.json \
-  --format linear --output status.md
+python execution/prioritization-frameworks/scripts/prioritization_scorer.py --input backlog.json \
+  --framework rice --format json > ranked.json   # map ranked.json to Linear issues via linear-expert/ patterns
+python execution/status-update-generator/scripts/status_generator.py --input status.json \
+  --format linear > status.md
 ```
 
 ### Pattern 6: Push to Notion DB
 
 ```bash
 python execution/create-prd/scripts/prd_scaffolder.py \
-  --product-name "Shared Dashboards" --format notion --output prd.md
-# Then post to Notion API via notion-pm/ patterns
+  --product-name "Shared Dashboards" --output prd.md
+# Then convert the markdown to Notion blocks and post via notion-pm/ patterns
 ```
 
 ## Career Track Usage Patterns

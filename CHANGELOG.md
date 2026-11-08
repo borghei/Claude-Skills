@@ -5,6 +5,32 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.17.0] - 2026-11-08
+
+### Changed
+
+- **All 175 engineering and project-management skills were reviewed for reasoning-first models, and the 167 that needed it were reworked.** Each batch was then checked again by an independent pass that re-ran the original problems and checked versions against official sources.
+  - Instructions state goals, constraints and how to verify the result instead of step-by-step reasoning scaffolding. The two prompt-engineering skills now teach explicit chain-of-thought only for models that don't reason on their own, and their analyzers flag forced reasoning and ALL-CAPS rules. Temperature advice is gone where current models reject it.
+  - Descriptions say what the skill does and when to use it, in 240 characters or fewer.
+  - Model ids, prices and versions are current or written so they don't go stale: current Claude model ids, dated price snapshots with a `--prices` override, GitHub Actions majors for Node 24, Expo SDK 58 with Android API 36, Next.js 16 (`proxy.ts`), Vite 8, the Stripe `2026-10-28.endive` API version, Terraform AWS provider 6, Airflow 3, YOLO26 and Go 1.27.
+  - Every script is documented in its SKILL.md with a command that runs as written and its exit codes.
+- Across the changed skills, lint errors fell from 628 to 320 and the average quality score rose from 72 to 82.
+- `project-management/CLAUDE.md` examples now use the flags and formats each tool really supports.
+
+### Fixed
+
+- Tools that gave wrong or reassuring results on their own samples: blank project names and 0h of demand in `senior-pm`, an empty window rated Elite in `delivery-manager`, "LOW RISK" for unprotected scripts in `browser-automation`, 100% coverage for skeleton tests in `api-test-suite-builder`, 0 of 14 foreign keys found in `database-designer`, nested values never read in `helm-chart-builder`, an invented number scored as faithful in `senior-prompt-engineer`, and a broken scaffold in `kubernetes-operator`, among others.
+- Missing or malformed input now exits 2 with a one-line message instead of a traceback, and a target that doesn't exist never passes a gate.
+- Demos no longer depend on today's date, and scaffolders no longer write into the current directory.
+- `description_audit.py` reads folded descriptions and nested skill folders; `skill_lint.py` exits 2 on a bad path.
+
+### Changed behaviour to check if you gate on these tools
+
+- `ai-security` and `senior-secops` scanners exit 1 on findings and 2 on bad input.
+- `api-test-suite-builder --threshold` counts only tests that assert on the response body.
+- The Azure validator exits 1 on critical findings.
+- `incident-commander`'s severity classifier exits 0 when it classifies; use `--fail-on` to gate.
+
 ## [4.16.0] - 2026-11-08
 
 ### Added

@@ -224,3 +224,29 @@ For each initiative:
 - **Communications schedule (what / when / to whom)**
 
 These artifacts live as long as the initiative.
+
+## Appendix: engagement patterns by stakeholder type
+
+_Moved from SKILL.md._
+
+**For executive sponsor (HP/HI):**
+- Weekly 1:1 (you bring updates + asks)
+- Co-author the strategic narrative
+- Defend at board level
+- Veto power to be used selectively
+
+**For powerful skeptic (HP/HI, low support):**
+- Discover the actual objection (often different than stated)
+- Find evidence that addresses it
+- Pre-brief before big decisions
+- Make their support visible to their peers
+
+**For powerless advocate (LP/HI, high support):**
+- Use them to influence others
+- Amplify their voice publicly
+- Don't burn them with surprise asks
+
+**For powerful absent leader (HP/LI):**
+- Don't let them tune in late and veto
+- Pre-brief before key decisions
+- Make engagement low-friction (5-min readouts)

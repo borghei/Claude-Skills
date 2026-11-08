@@ -1610,12 +1610,12 @@ Examples:
     try:
         with open(args.spec_file, 'r') as f:
             spec = json.load(f)
-    except FileNotFoundError:
+    except OSError:
         print(f"Error: Specification file '{args.spec_file}' not found.", file=sys.stderr)
-        return 1
+        return 2
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in '{args.spec_file}': {e}", file=sys.stderr)
-        return 1
+        return 2
     
     # Initialize scoring engine and generate scorecard
     engine = APIScoringEngine()
@@ -1624,7 +1624,7 @@ Examples:
         scorecard = engine.score_api(spec)
     except Exception as e:
         print(f"Error during scoring: {e}", file=sys.stderr)
-        return 1
+        return 2
     
     # Generate report
     if args.format == 'json':
@@ -1640,7 +1640,7 @@ Examples:
             print(f"Scorecard written to {args.output}")
         except IOError as e:
             print(f"Error writing to '{args.output}': {e}", file=sys.stderr)
-            return 1
+            return 2
     else:
         print(output)
     
@@ -1657,5 +1657,5 @@ Examples:
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

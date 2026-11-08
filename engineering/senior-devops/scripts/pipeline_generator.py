@@ -312,7 +312,7 @@ def main() -> None:
             written = str(out)
     except (ValueError, OSError) as exc:
         print(f"error: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     stack = {k: p.get(k) for k in ("language", "version", "package_manager", "image", "lockfile", "install",
                                    "lint", "test", "build", "docker")}
     if args.json:

@@ -1,0 +1,37 @@
+{
+  "organization": "Acme Corp",
+  "products": [
+    {
+      "name": "Jira",
+      "metrics": {
+        "storage_total_gb": 50,
+        "storage_used_gb": 38,
+        "api_rate_limit": 100000,
+        "api_rate_used": 72000,
+        "avg_response_ms": 1200,
+        "error_rate_pct": 0.3,
+        "automation_limit_monthly": 48000,
+        "automation_used_monthly": 43200,
+        "active_users_daily": 85,
+        "active_users_monthly": 120,
+        "issues_created_30d": 450
+      }
+    },
+    {
+      "name": "Confluence",
+      "metrics": {
+        "storage_total_gb": 30,
+        "storage_used_gb": 12,
+        "api_rate_limit": 50000,
+        "api_rate_used": 8000,
+        "avg_response_ms": 800,
+        "error_rate_pct": 0.1,
+        "automation_limit_monthly": 9500,
+        "automation_used_monthly": 1900,
+        "active_users_daily": 45,
+        "active_users_monthly": 95,
+        "pages_created_30d": 120
+      }
+    }
+  ]
+}

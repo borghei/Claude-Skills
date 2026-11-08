@@ -3,9 +3,11 @@
 Migration Generator - Generate SQL migration from schema differences.
 
 Compares two SQL DDL files and generates ALTER TABLE, CREATE TABLE,
-and DROP TABLE statements to migrate from one schema to another.
+and DROP TABLE statements to migrate from one schema to another, with a DOWN script.
+PostgreSQL syntax. Index changes are not diffed.
+Exit codes: 0 no destructive step (or --allow-destructive), 1 destructive steps present,
+2 bad input (file not found).
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -119,10 +121,11 @@ class SimpleDDLParser:
         for i in range(1, len(parts)):
             word = parts[i].upper().strip('"`')
             if word in ("NOT", "NULL", "DEFAULT", "PRIMARY", "UNIQUE",
-                       "REFERENCES", "CHECK", "CONSTRAINT", "AUTO_INCREMENT",
-                       "SERIAL", "GENERATED"):
+                       "REFERENCES", "CHECK", "CONSTRAINT", "AUTO_INCREMENT", "GENERATED"):
                 break
             type_parts.append(parts[i])
+            if word in ("SERIAL", "BIGSERIAL", "SMALLSERIAL"):
+                break  # SERIAL is the type itself
 
         data_type = " ".join(type_parts).strip(",")
         nullable = "NOT NULL" not in upper_def
@@ -301,6 +304,11 @@ def format_text(steps: List[MigrationStep]) -> str:
     lines.append("-- MIGRATION SCRIPT")
     lines.append("-- " + "=" * 58)
     lines.append(f"-- Steps: {len(steps)}")
+    destructive = [st for st in steps if is_destructive(st)]
+    if destructive:
+        lines.append(f"-- WARNING: {len(destructive)} destructive step(s). The DOWN script recreates")
+        lines.append("-- dropped tables and columns but NOT their data: take a backup or copy the data")
+        lines.append("-- out first, and apply to staging before production.")
     lines.append("")
 
     if not steps:
@@ -311,7 +319,7 @@ def format_text(steps: List[MigrationStep]) -> str:
     lines.append("BEGIN;")
     lines.append("")
     for i, step in enumerate(steps, 1):
-        lines.append(f"-- Step {i}: {step.description}")
+        lines.append(f"-- Step {i}: {step.description}{'  [DESTRUCTIVE]' if is_destructive(step) else ''}")
         lines.append(step.sql_up)
         lines.append("")
     lines.append("COMMIT;")
@@ -320,10 +328,15 @@ def format_text(steps: List[MigrationStep]) -> str:
     lines.append("-- ==================== DOWN (ROLLBACK) ====================")
     lines.append("-- BEGIN;")
     for step in reversed(steps):
-        lines.append(f"-- {step.sql_down}")
+        lines.extend(f"-- {line}" for line in step.sql_down.splitlines() if line.strip())
     lines.append("-- COMMIT;")
 
     return "\n".join(lines)
+
+
+def is_destructive(step: MigrationStep) -> bool:
+    """Steps that can lose data: drops, and type changes (which may truncate or fail)."""
+    return step.operation in ("drop_table", "drop_column", "alter_column")
 
 
 def format_json(steps: List[MigrationStep]) -> str:
@@ -337,6 +350,7 @@ def format_json(steps: List[MigrationStep]) -> str:
             "add_column": sum(1 for s in steps if s.operation == "add_column"),
             "drop_column": sum(1 for s in steps if s.operation == "drop_column"),
             "alter_column": sum(1 for s in steps if s.operation == "alter_column"),
+            "destructive": sum(1 for s in steps if is_destructive(s)),
         }
     }, indent=2)
 
@@ -348,6 +362,8 @@ def main():
     parser.add_argument("--from", dest="from_file", required=True, help="Path to source (current) DDL file")
     parser.add_argument("--to", dest="to_file", required=True, help="Path to target (desired) DDL file")
     parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format")
+    parser.add_argument("--allow-destructive", action="store_true",
+                        help="Exit 0 even when the migration drops or retypes columns or tables")
     args = parser.parse_args()
 
     from_path = Path(args.from_file)
@@ -369,6 +385,10 @@ def main():
         print(format_json(steps))
     else:
         print(format_text(steps))
+
+    # Destructive steps need a human decision before they run anywhere
+    if any(is_destructive(st) for st in steps) and not args.allow_destructive:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

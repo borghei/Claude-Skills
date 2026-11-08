@@ -31,7 +31,7 @@ def parse_input(source):
     raw = raw.strip()
     if not raw:
         print("Error: empty input", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if raw.startswith("["):
         return json.loads(raw)
@@ -399,11 +399,11 @@ def main():
         entries = parse_input(args.input)
     except (json.JSONDecodeError, FileNotFoundError) as e:
         print(f"Error reading input: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if not entries:
         print("Error: no resource data entries found", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     cpu_result = analyze_cpu(entries, args.cpu_threshold)
     mem_result = analyze_memory(entries, args.memory_threshold)

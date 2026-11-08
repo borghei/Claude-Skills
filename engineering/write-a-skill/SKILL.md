@@ -32,14 +32,7 @@ description nothing matches, and a SKILL.md carrying content that belonged in `r
 - **Onboarding a new author** who needs the standard operationalised rather than explained
 - **Writing for an agent reader** — deciding whether a skill is user-only, building a thin skill that chains others, or tightening `AGENTS.md` / `CLAUDE.md`
 
-## Inputs the skill expects
-
-- The skill's one-sentence purpose and the domain directory it belongs in
-- The three to five user sentences that should activate it (these become the description)
-- Which existing skills sit closest to it in trigger space
-- Whether it emits a deliverable (drives the Pattern 11 Clarify First gate) or only advises
-- The analysis each script will perform, and the sample input each will run against
-- Any deep knowledge that will exceed the SKILL.md budget and belongs in `references/`
+## Scope rule
 
 Under Pattern 9 this skill is self-contained except for one permitted outbound
 reference: `standards/skill-authoring-standard.md`. Standards apply library-wide, so
@@ -99,9 +92,11 @@ python3 engineering/write-a-skill/scripts/description_audit.py \
   --min-score 70 --collision-threshold 0.5 --format text
 ```
 
-Exit code is 1 when any description scores below `--min-score`, which makes this
-usable as a CI gate. Point `--domain engineering` at a whole directory to audit
-every shipped description at once.
+Exit codes: 0 all pass, 1 any description scores below `--min-score` (the CI gate),
+2 bad input (missing file or directory, invalid JSON, wrong shape). Point
+`--domain engineering` at a whole directory to audit every shipped description at
+once; it walks nested skill folders and reads folded (`>`, `>-`), literal (`|`),
+quoted and plain `description` values.
 
 ### Workflow 3 — Lint before review
 
@@ -131,29 +126,19 @@ built-in fixtures before shipping a linter change:
 python3 engineering/write-a-skill/scripts/skill_lint.py --selftest
 ```
 
-### Workflow 4 — Write for the agent that reads it [RECOMMENDED]
+### Workflow 4 — Write for the agent that reads it
 
 Every file in a package, and every steering file in a repo, is read first by a model that
-pays for each token and acts on each line. Detail and examples:
-`references/writing-for-agents.md`.
+pays for each token and acts on each line. Read `references/writing-for-agents.md` before
+deciding three things:
 
-1. **Decide who invokes it.** If the skill has side effects the user must choose (publish,
-   deploy, open tickets), is a ritual with a user-chosen moment (retro, handoff), or is
-   expensive, add `disable-model-invocation: true` to the frontmatter so only the user can
-   run it. Its description then becomes a label for the command list; add a one-line pointer
-   in the steering file so people remember it exists. The linter rejects any value other
-   than `true` or `false`.
-2. **Decide whether it is a composing skill.** When the same sequence of skills runs often
-   and steps get skipped, write a thin skill that names each step by skill, states what each
-   must produce, passes artifacts by path rather than by copy, and stops on a failed step.
-   It holds no domain content of its own, and refers to other skills by name only, so the
-   package stays self-contained.
-3. **Write steering lines as a checklist.** In `AGENTS.md` / `CLAUDE.md`: one short
-   imperative line per fact, the situation first, the positive action stated, no filler,
-   pointers instead of pasted procedures, nothing one command could reveal. Prefer a lint
-   rule to a sentence for anything with a fixed shape, and move review-only rules to the
-   standards document the reviewer reads.
-4. **Prune while adding.** Every edit to a steering file looks for a line to delete.
+1. **Who invokes it.** Side effects the user must choose (publish, deploy, open tickets), a
+   ritual with a user-chosen moment, or an expensive run: add `disable-model-invocation: true`.
+   The linter rejects any value other than `true` or `false`.
+2. **Whether it is a composing skill** that chains other skills by name and passes artifacts
+   by path, holding no domain content of its own.
+3. **How the steering lines read.** One short imperative line per fact; prune a line every
+   time you add one.
 
 ## Decision frameworks
 
@@ -187,7 +172,7 @@ Never spend budget on: the skill's own name, feature enumerations (those are `ta
 is resident in context for every session in which the skill is installed — it is the
 most expensive text in the package per byte.
 
-### Does this deserve to be a skill? [RECOMMENDED]
+### Does this deserve to be a skill?
 
 | Signal | Build it | Do not build it |
 |--------|----------|-----------------|
@@ -203,7 +188,8 @@ Two "do not build it" columns is a rejection. One is a warning worth arguing abo
 
 Two to three scripts, 150-300 lines each. Under 150 lines means the tool does not
 justify a file; over 300 means it is two tools. Every script takes `--format
-{text,json}` with text as the default, exits 1 on findings so CI can gate on it, and
+{text,json}` with text as the default, exits 1 on findings so CI can gate on it and 2 on
+bad input so a tool error is never mistaken for a finding, and
 ships a `sample_*.json` in `assets/` so the workflow block in SKILL.md is runnable by
 someone who just cloned the repo.
 
@@ -248,10 +234,10 @@ someone who just cloned the repo.
 
 | File | Purpose |
 |------|---------|
-| `scripts/skill_lint.py` | Lint a skill folder against all 11 patterns; per-pattern findings, exit 1 on error. `--selftest` runs the built-in helper/dependency fixtures |
+| `scripts/skill_lint.py` | Lint a skill folder against all 11 patterns; per-pattern findings; exit 0 pass, 1 error findings (or warnings with `--strict`), 2 bad `--skill` path or rules file. `--selftest` runs the built-in helper/dependency fixtures |
 | `scripts/lint_checks.py` | Helper library for `skill_lint.py` — rule set, frontmatter parser, SKILL.md and structure checks. No CLI by design |
-| `scripts/skill_scaffold.py` | Generate a compliant package skeleton from a JSON spec, with every required section stubbed |
-| `scripts/description_audit.py` | Score descriptions on budget and trigger quality; flag colliding skill pairs |
+| `scripts/skill_scaffold.py` | Generate a compliant package skeleton from a JSON spec, with every required section stubbed; exit 2 on a bad or refused spec |
+| `scripts/description_audit.py` | Score descriptions on budget and trigger quality; flag colliding skill pairs; exit 0 pass, 1 below bar, 2 bad input |
 | `references/authoring-playbook.md` | Section-by-section guidance, worked description rewrites, and the content-routing rules |
 | `references/writing-for-agents.md` | User-only skills (`disable-model-invocation`), thin composing skills, and steering-file style with a before/after rewrite |
 | `references/pattern-checklist.md` | The 11 patterns as concrete pass/fail criteria with common failure modes and fixes |

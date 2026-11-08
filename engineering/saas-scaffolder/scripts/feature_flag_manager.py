@@ -27,8 +27,16 @@ def load_store(path):
     """Load the flag store from a JSON file. Returns dict."""
     if not os.path.exists(path):
         return {"flags": {}, "metadata": {"created_at": now_iso(), "updated_at": now_iso()}}
-    with open(path, "r") as f:
-        return json.load(f)
+    try:
+        with open(path, "r") as f:
+            store = json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"error: cannot load flag store {path}: {e}", file=sys.stderr)
+        sys.exit(2)
+    if not isinstance(store, dict) or not isinstance(store.get("flags"), dict):
+        print(f"error: {path} is not a flag store (expected an object with a 'flags' object)", file=sys.stderr)
+        sys.exit(2)
+    return store
 
 
 def save_store(store, path):

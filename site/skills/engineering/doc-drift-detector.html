@@ -476,18 +476,50 @@ Before running detection, settle the inputs below. When one is missing or vague 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `drift_analyzer.py` | Full drift analysis between code and docs | `python scripts/drift_analyzer.py &lt;repo&gt; --min-severity high --json` |
-| `doc_staleness_scorer.py` | Score documentation freshness 0-100 | `python scripts/doc_staleness_scorer.py &lt;repo&gt; --threshold 60` |
-| `api_doc_validator.py` | Validate API docs against Python source (AST) | `python scripts/api_doc_validator.py &lt;src&gt; &lt;docs&gt; --recursive` |
-| `link_checker.py` | Audit all markdown links and anchors | `python scripts/link_checker.py &lt;repo&gt; --broken-only` |
+1. **Links first** (fast, no git needed): `link_checker.py &lt;docs-dir&gt; --broken-only`. Fix broken files and anchors.
+2. **API docs** (Python): `api_doc_validator.py &lt;src&gt; &lt;docs&gt; --recursive` lists documented-but-missing and undocumented functions and classes, and signature mismatches.
+3. **Drift against history**: `drift_analyzer.py &lt;repo&gt;` compares doc and code change history (needs a git checkout; on very large repositories use `--scope` to limit it).
+4. **Score freshness**: `doc_staleness_scorer.py &lt;repo&gt; --threshold 60` for a 0-100 score per document and an aggregate gate.
+5. **Fix** in order: broken links and wrong API signatures (readers act on them), then stale how-tos, then completeness.
+6. **Verify** that all four tools exit 0 at the gates you chose before merging.
 
-All tools: Python 3.8+ stdlib only, `--json` and `--help`, non-zero exit codes for CI, any OS.
+## Quick Start
 
-## References
+```bash
+python3 scripts/link_checker.py . --broken-only                       # this skill&#x27;s own docs: clean (exit 0)
+python3 scripts/api_doc_validator.py scripts references --recursive    # undocumented helpers are reported
+python3 scripts/drift_analyzer.py /path/to/repo --min-severity medium --fail-on high
+python3 scripts/doc_staleness_scorer.py /path/to/repo --threshold 60 --json
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `link_checker.py &lt;path&gt;` | Local files, anchors (GitHub slug rules), cross-doc anchors, images, case mismatches, duplicate anchors; ignores fenced and inline code | `--broken-only`, `--check-external`, `--json` | 0 clean, 1 broken links or duplicate anchors, 2 bad path |
+| `api_doc_validator.py &lt;src&gt; &lt;docs&gt;` | Python AST vs docs: missing, undocumented and mismatched functions/classes/parameters | `--recursive`, `--include-private`, `--json` | 0 no documented-but-missing items, 1 mismatches, 2 bad path |
+| `drift_analyzer.py &lt;repo&gt;` | Structural, factual, referential, temporal and semantic drift from git history | `--min-severity` (what to report), `--fail-on` (what fails, default high), `--scope`, `--doc-patterns`, `--json` | 0, 1 issue at/above `--fail-on`, 2 not a directory or not a git checkout |
+| `doc_staleness_scorer.py &lt;repo&gt;` | Weighted 0-100 freshness per doc (age, code alignment, links, completeness, accuracy) | `--threshold`, `--readme-focus`, `--required-sections`, `--weight-*`, `--json` | 0, 1 aggregate below threshold, 2 bad path |
+
+All tools are Python stdlib only; `drift_analyzer.py` and the scorer read git history through the `git` command.
+
+## Anti-Patterns
+
+**Mistake:** Gating CI on every low-severity drift finding.
+**Why it happens:** Strict gates look rigorous.
+**Instead:** Fail on high (the default) and report the rest; a gate that fails on cosmetic drift gets disabled.
+
+**Mistake:** Treating &quot;recently edited&quot; as &quot;accurate&quot;.
+**Why it happens:** Age is the easiest signal to compute.
+**Instead:** Check alignment with the code that changed (drift analyzer, API validator); a doc edited yesterday can still describe last year&#x27;s API.
+
+**Mistake:** Writing example links in docs as real links.
+**Why it happens:** It is the natural way to show syntax.
+**Instead:** Put examples in inline code or fenced blocks; the checker ignores them there and reports only real links.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -496,12 +528,10 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/documentation_standards.md](references/documentation_standards.md)** — README structure, API docs, changelogs, ADRs, docs-as-code standards.
 - **[references/drift_prevention_guide.md](references/drift_prevention_guide.md)** — coupling strategies, CI gates, review checklists, and prevention patterns.
 
-## Assets
+## Files
 
-| Asset | Description |
-|-------|-------------|
-| [Drift Report Template](assets/drift_report_template.md) | Template for drift analysis reports |
-| [Sample Drift Data](assets/sample_drift_data.json) | Sample JSON for testing and demonstration |
+- `scripts/link_checker.py`, `scripts/api_doc_validator.py`, `scripts/drift_analyzer.py`, `scripts/doc_staleness_scorer.py` — the tools above.
+- [assets/drift_report_template.md](assets/drift_report_template.md) — report template; [assets/sample_drift_data.json](assets/sample_drift_data.json) — example of a combined report&#x27;s shape (illustrative data, not tool input).
 
 ## Scope &amp; Limitations
 
@@ -519,16 +549,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Automatic documentation rewriting -- tools classify issues as `[AUTO]`, `[SEMI]`, or `[MANUAL]` but do not generate replacement text; use the **code-reviewer** skill for AI-assisted doc suggestions
 - Content quality or readability assessment -- staleness scoring measures freshness and structural completeness, not prose quality; see the **standards/communication** library for writing guidelines
 
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| **code-reviewer** | Include drift report in PR review comments | `drift_analyzer.py --json` output feeds into review checklists as a documentation health section |
-| **senior-devops** | Add staleness gate to CI/CD pipelines | `doc_staleness_scorer.py --threshold 50` returns exit code 1 on failure, blocking deploys |
-| **senior-qa** | Documentation quality as part of QA acceptance | `link_checker.py --json` output merges into QA dashboards alongside test coverage metrics |
-| **senior-fullstack** | Validate generated project docs post-scaffold | Run `api_doc_validator.py` against scaffolded `docs/` directory to confirm generated API docs match source |
-| **senior-secops** | Audit security documentation currency | `drift_analyzer.py --scope security/` detects when security docs fall behind policy changes |
-| **senior-architect** | Architecture decision record (ADR) freshness | `doc_staleness_scorer.py --required-sections &quot;Status,Context,Decision,Consequences&quot;` validates ADR completeness |
+Related skills: `engineering/code-reviewer` (attach the drift report to PR review), `engineering/senior-devops` (CI gates).
 
 ---
 
@@ -610,18 +631,50 @@ Before running detection, settle the inputs below. When one is missing or vague 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `drift_analyzer.py` | Full drift analysis between code and docs | `python scripts/drift_analyzer.py &lt;repo&gt; --min-severity high --json` |
-| `doc_staleness_scorer.py` | Score documentation freshness 0-100 | `python scripts/doc_staleness_scorer.py &lt;repo&gt; --threshold 60` |
-| `api_doc_validator.py` | Validate API docs against Python source (AST) | `python scripts/api_doc_validator.py &lt;src&gt; &lt;docs&gt; --recursive` |
-| `link_checker.py` | Audit all markdown links and anchors | `python scripts/link_checker.py &lt;repo&gt; --broken-only` |
+1. **Links first** (fast, no git needed): `link_checker.py &lt;docs-dir&gt; --broken-only`. Fix broken files and anchors.
+2. **API docs** (Python): `api_doc_validator.py &lt;src&gt; &lt;docs&gt; --recursive` lists documented-but-missing and undocumented functions and classes, and signature mismatches.
+3. **Drift against history**: `drift_analyzer.py &lt;repo&gt;` compares doc and code change history (needs a git checkout; on very large repositories use `--scope` to limit it).
+4. **Score freshness**: `doc_staleness_scorer.py &lt;repo&gt; --threshold 60` for a 0-100 score per document and an aggregate gate.
+5. **Fix** in order: broken links and wrong API signatures (readers act on them), then stale how-tos, then completeness.
+6. **Verify** that all four tools exit 0 at the gates you chose before merging.
 
-All tools: Python 3.8+ stdlib only, `--json` and `--help`, non-zero exit codes for CI, any OS.
+## Quick Start
 
-## References
+```bash
+python3 scripts/link_checker.py . --broken-only                       # this skill&#x27;s own docs: clean (exit 0)
+python3 scripts/api_doc_validator.py scripts references --recursive    # undocumented helpers are reported
+python3 scripts/drift_analyzer.py /path/to/repo --min-severity medium --fail-on high
+python3 scripts/doc_staleness_scorer.py /path/to/repo --threshold 60 --json
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `link_checker.py &lt;path&gt;` | Local files, anchors (GitHub slug rules), cross-doc anchors, images, case mismatches, duplicate anchors; ignores fenced and inline code | `--broken-only`, `--check-external`, `--json` | 0 clean, 1 broken links or duplicate anchors, 2 bad path |
+| `api_doc_validator.py &lt;src&gt; &lt;docs&gt;` | Python AST vs docs: missing, undocumented and mismatched functions/classes/parameters | `--recursive`, `--include-private`, `--json` | 0 no documented-but-missing items, 1 mismatches, 2 bad path |
+| `drift_analyzer.py &lt;repo&gt;` | Structural, factual, referential, temporal and semantic drift from git history | `--min-severity` (what to report), `--fail-on` (what fails, default high), `--scope`, `--doc-patterns`, `--json` | 0, 1 issue at/above `--fail-on`, 2 not a directory or not a git checkout |
+| `doc_staleness_scorer.py &lt;repo&gt;` | Weighted 0-100 freshness per doc (age, code alignment, links, completeness, accuracy) | `--threshold`, `--readme-focus`, `--required-sections`, `--weight-*`, `--json` | 0, 1 aggregate below threshold, 2 bad path |
+
+All tools are Python stdlib only; `drift_analyzer.py` and the scorer read git history through the `git` command.
+
+## Anti-Patterns
+
+**Mistake:** Gating CI on every low-severity drift finding.
+**Why it happens:** Strict gates look rigorous.
+**Instead:** Fail on high (the default) and report the rest; a gate that fails on cosmetic drift gets disabled.
+
+**Mistake:** Treating &quot;recently edited&quot; as &quot;accurate&quot;.
+**Why it happens:** Age is the easiest signal to compute.
+**Instead:** Check alignment with the code that changed (drift analyzer, API validator); a doc edited yesterday can still describe last year&#x27;s API.
+
+**Mistake:** Writing example links in docs as real links.
+**Why it happens:** It is the natural way to show syntax.
+**Instead:** Put examples in inline code or fenced blocks; the checker ignores them there and reports only real links.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -630,12 +683,10 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/documentation_standards.md](references/documentation_standards.md)** — README structure, API docs, changelogs, ADRs, docs-as-code standards.
 - **[references/drift_prevention_guide.md](references/drift_prevention_guide.md)** — coupling strategies, CI gates, review checklists, and prevention patterns.
 
-## Assets
+## Files
 
-| Asset | Description |
-|-------|-------------|
-| [Drift Report Template](assets/drift_report_template.md) | Template for drift analysis reports |
-| [Sample Drift Data](assets/sample_drift_data.json) | Sample JSON for testing and demonstration |
+- `scripts/link_checker.py`, `scripts/api_doc_validator.py`, `scripts/drift_analyzer.py`, `scripts/doc_staleness_scorer.py` — the tools above.
+- [assets/drift_report_template.md](assets/drift_report_template.md) — report template; [assets/sample_drift_data.json](assets/sample_drift_data.json) — example of a combined report&#x27;s shape (illustrative data, not tool input).
 
 ## Scope &amp; Limitations
 
@@ -653,16 +704,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Automatic documentation rewriting -- tools classify issues as `[AUTO]`, `[SEMI]`, or `[MANUAL]` but do not generate replacement text; use the **code-reviewer** skill for AI-assisted doc suggestions
 - Content quality or readability assessment -- staleness scoring measures freshness and structural completeness, not prose quality; see the **standards/communication** library for writing guidelines
 
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| **code-reviewer** | Include drift report in PR review comments | `drift_analyzer.py --json` output feeds into review checklists as a documentation health section |
-| **senior-devops** | Add staleness gate to CI/CD pipelines | `doc_staleness_scorer.py --threshold 50` returns exit code 1 on failure, blocking deploys |
-| **senior-qa** | Documentation quality as part of QA acceptance | `link_checker.py --json` output merges into QA dashboards alongside test coverage metrics |
-| **senior-fullstack** | Validate generated project docs post-scaffold | Run `api_doc_validator.py` against scaffolded `docs/` directory to confirm generated API docs match source |
-| **senior-secops** | Audit security documentation currency | `drift_analyzer.py --scope security/` detects when security docs fall behind policy changes |
-| **senior-architect** | Architecture decision record (ADR) freshness | `doc_staleness_scorer.py --required-sections &quot;Status,Context,Decision,Consequences&quot;` validates ADR completeness |
+Related skills: `engineering/code-reviewer` (attach the drift report to PR review), `engineering/senior-devops` (CI gates).
 
 ---
 
@@ -750,8 +792,12 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/doc-drift-detector/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Quick Start</h2><pre><code>python3 scripts/link_checker.py . --broken-only                       # this skill&#x27;s own docs: clean (exit 0)
+python3 scripts/api_doc_validator.py scripts references --recursive    # undocumented helpers are reported
+python3 scripts/drift_analyzer.py /path/to/repo --min-severity medium --fail-on high
+python3 scripts/doc_staleness_scorer.py /path/to/repo --threshold 60 --json
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/doc-drift-detector/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

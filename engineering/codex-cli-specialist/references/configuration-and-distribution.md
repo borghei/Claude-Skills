@@ -44,7 +44,7 @@ tools:
         default: text
 
 # Optional metadata
-model: o4-mini                      # Preferred model
+# model: <model-id>               # optional; omit to inherit the CLI default
 version: 1.0.0                     # Skill version
 ```
 
@@ -127,7 +127,6 @@ metadata:
 
 # Codex-specific hints (optional, ignored by Claude Code)
 codex:
-  model: o4-mini
   approval_mode: suggest
 ---
 ```

@@ -1,0 +1,14 @@
+{
+  "hypotheses": [
+    {
+      "hypothesis_text": "At least 20% of trial users will click Upgrade to Pro within 7 days",
+      "target_segment": "trial users on free plan",
+      "product_type": "existing"
+    },
+    {
+      "hypothesis_text": "At least 10% of visitors will sign up for the waitlist after reading the value proposition",
+      "target_segment": "developers building internal tools",
+      "product_type": "new"
+    }
+  ]
+}

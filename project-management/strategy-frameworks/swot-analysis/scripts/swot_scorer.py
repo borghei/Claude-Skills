@@ -35,6 +35,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -59,7 +60,7 @@ def has_generic(text: str) -> list[str]:
     if not text:
         return []
     t = text.lower()
-    return [g for g in GENERIC_TERMS if g in t]
+    return [g for g in GENERIC_TERMS if re.search(r"\b" + re.escape(g) + r"\b", t)]
 
 
 def check_scope(s: dict[str, Any]) -> list[Issue]:
@@ -255,7 +256,14 @@ def main() -> int:
         print(f"error: invalid JSON: {e}", file=sys.stderr)
         return 2
 
-    report = audit(swot)
+    if not isinstance(swot, dict):
+        print("error: top level must be a JSON object (see the schema in --help)", file=sys.stderr)
+        return 2
+    try:
+        report = audit(swot)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        print(f"error: unexpected input shape ({type(e).__name__}: {e})", file=sys.stderr)
+        return 2
     out = render_markdown(report) if args.format == "markdown" else json.dumps(report, indent=2)
 
     if args.output:
@@ -263,7 +271,8 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    # Gate: 1 when any finding has severity "fail", else 0.
+    return 1 if report.get("severity_counts", {}).get("fail") else 0
 
 
 if __name__ == "__main__":

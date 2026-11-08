@@ -13,6 +13,7 @@ Usage:
 
 import argparse
 import json
+import re
 import statistics
 import sys
 from datetime import datetime, timedelta
@@ -123,7 +124,7 @@ class Resource:
         self.skills: List[str] = data.get("skills", [])
         self.skill_levels: Dict[str, float] = data.get("skill_levels", {})
         self.hourly_rate: float = data.get("hourly_rate", 0)
-        self.max_hours_per_week: int = data.get("max_hours_per_week", 40)
+        self.max_hours_per_week: int = data.get("max_hours_per_week", data.get("available_hours", 40))
         self.current_utilization: float = data.get("current_utilization", 0.0)
         self.availability_start: str = data.get("availability_start", "")
         self.availability_end: Optional[str] = data.get("availability_end")
@@ -586,17 +587,62 @@ def generate_capacity_recommendations(analysis_results: Dict[str, Any]) -> List[
 # Main Analysis Function
 # ---------------------------------------------------------------------------
 
-def analyze_capacity(data: Dict[str, Any]) -> CapacityAnalysisResult:
+def _date(value: Any) -> Optional[datetime]:
+    try:
+        return datetime.strptime(str(value)[:10], "%Y-%m-%d")
+    except ValueError:
+        return None
+
+
+def resolve_as_of(data: Dict[str, Any], override: Optional[str]) -> datetime:
+    """--as-of, else portfolio_metadata.generated_on, else the latest date in the data."""
+    if override:
+        if not _date(override):
+            raise ValueError(f"--as-of must be YYYY-MM-DD, got {override!r}")
+        return _date(override)
+    meta = _date((data.get("portfolio_metadata") or {}).get("generated_on", ""))
+    dates = [d for d in (_date(x) for x in re.findall(r'"(\d{4}-\d{2}-\d{2})', json.dumps(data))) if d]
+    return meta or (max(dates) if dates else datetime.now())
+
+
+def normalize_project(rec: Dict[str, Any], resources: List[Dict[str, Any]], as_of: datetime) -> Dict[str, Any]:
+    """Map the nested portfolio schema (assets/sample_project_data.json) to capacity fields.
+
+    Remaining demand = remaining budget / blended hourly rate of the assigned resources,
+    spread over the weeks left to planned_end_date. Allocation comes from each resource's
+    utilisation split evenly across its current_projects. Flat records pass through.
+    """
+    if "estimated_hours" in rec or "budget" not in rec:
+        return rec
+    assigned = [r for r in resources if rec.get("id") in r.get("current_projects", [])]
+    rates = [r.get("hourly_rate", 0) for r in (assigned or resources) if r.get("hourly_rate")]
+    rate = sum(rates) / len(rates) if rates else 100.0
+    remaining = float(rec.get("budget", {}).get("remaining", 0))
+    allocation = [{"resource_id": r.get("id"), "hours_per_week": round(
+        r.get("available_hours", 40) * r.get("current_utilization", 0) / max(len(r.get("current_projects", [])), 1), 1)}
+        for r in assigned]
+    status = rec.get("status", "planned")
+    return {"id": rec.get("id"), "name": rec.get("name", ""), "priority": rec.get("priority", "medium"),
+            "complexity": rec.get("complexity", "moderate"), "estimated_hours": round(remaining / rate),
+            "start_date": max(as_of, _date(rec.get("start_date", "")) or as_of).strftime("%Y-%m-%d"),
+            "target_end_date": rec.get("planned_end_date", ""), "required_skills": rec.get("required_skills", []),
+            "current_allocation": allocation, "status": "completed" if status in ("completed", "closed") else status}
+
+
+def analyze_capacity(data: Dict[str, Any], as_of: Optional[datetime] = None) -> CapacityAnalysisResult:
     """Perform comprehensive capacity analysis."""
     result = CapacityAnalysisResult()
+    as_of = as_of or resolve_as_of(data, None)
     
     try:
         # Parse resource and project data
         resource_records = data.get("resources", [])
         project_records = data.get("projects", [])
         
+        if not isinstance(resource_records, list) or not isinstance(project_records, list):
+            raise ValueError("'resources' and 'projects' must be lists")
         resources = [Resource(record) for record in resource_records]
-        projects = [Project(record) for record in project_records]
+        projects = [Project(normalize_project(r, resource_records, as_of)) for r in project_records]
         
         if not resources:
             raise ValueError("No resource data found")
@@ -811,15 +857,17 @@ def main() -> int:
         help="Output format (default: text)"
     )
     
+    parser.add_argument("--as-of", help="Evaluation date YYYY-MM-DD (default: portfolio_metadata.generated_on, else latest date in the data)")
     args = parser.parse_args()
-    
+
     try:
-        # Load and validate data
         with open(args.data_file, 'r') as f:
             data = json.load(f)
-        
-        # Perform analysis
-        result = analyze_capacity(data)
+        if not isinstance(data, dict):
+            raise ValueError("top level must be a JSON object with 'resources' and 'projects'")
+        result = analyze_capacity(data, resolve_as_of(data, args.as_of))
+        if "error" in result.summary:
+            raise ValueError(result.summary["error"])
         
         # Output results
         if args.format == "json":
@@ -831,15 +879,9 @@ def main() -> int:
         
         return 0
         
-    except FileNotFoundError:
-        print(f"Error: File '{args.data_file}' not found", file=sys.stderr)
-        return 1
-    except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON in '{args.data_file}': {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        return 1
+    except (OSError, json.JSONDecodeError, ValueError, TypeError, KeyError, AttributeError) as e:
+        print(f"Error: cannot analyze '{args.data_file}': {e}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

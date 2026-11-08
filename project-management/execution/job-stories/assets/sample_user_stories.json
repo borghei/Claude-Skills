@@ -1,0 +1,22 @@
+{
+  "stories": [
+    {
+      "title": "Export User Data",
+      "role": "admin",
+      "want": "export user data as a CSV file",
+      "so_that": "I can comply with data subject access requests"
+    },
+    {
+      "title": "View Dashboard",
+      "role": "user",
+      "want": "see a dashboard with my key metrics",
+      "so_that": "I can track my progress"
+    },
+    {
+      "title": "Click Button",
+      "role": "manager",
+      "want": "click the approve button on the modal",
+      "so_that": "the request is processed"
+    }
+  ]
+}

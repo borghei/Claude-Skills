@@ -1,0 +1,16 @@
+{
+  "test_cases": [
+    {"test_id": "tc-001", "tags": ["happy-path"],
+     "actual": "{\"category\": \"account-access\", \"priority\": \"p1\", \"evidence\": \"nobody can log in\"}",
+     "expected": {"contains": ["account-access", "p1"], "regex": "^\\{.*\\}$"}},
+    {"test_id": "tc-002", "tags": ["happy-path"],
+     "actual": "{\"category\": \"billing\", \"priority\": \"p2\", \"evidence\": \"charged twice, refund requested\"}",
+     "expected": {"contains": ["billing", "p2"], "regex": "^\\{.*\\}$"}},
+    {"test_id": "tc-003", "tags": ["edge-case"],
+     "actual": "{\"category\": \"bug\", \"priority\": \"p2\", \"evidence\": \"PDF export shows the wrong VAT total\"}",
+     "expected": {"contains": ["bug"], "regex": "\"priority\": \"p[12]\""}},
+    {"test_id": "tc-004", "tags": ["format"],
+     "actual": "Sure! This looks like a feature request. {\"category\": \"feature-request\", \"priority\": \"p3\"}",
+     "expected": {"contains": ["feature-request"], "regex": "^\\{.*\\}$"}}
+  ]
+}

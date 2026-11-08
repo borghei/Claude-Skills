@@ -1,0 +1,45 @@
+{
+  "space": "Engineering Team",
+  "pages": [
+    {
+      "title": "Onboarding Guide",
+      "labels": [
+        "onboarding",
+        "guide",
+        "engineering"
+      ]
+    },
+    {
+      "title": "API Reference",
+      "labels": [
+        "api",
+        "reference",
+        "Engineering"
+      ]
+    },
+    {
+      "title": "Sprint 23 Retro",
+      "labels": [
+        "sprint",
+        "retro"
+      ]
+    },
+    {
+      "title": "Old Design Doc",
+      "labels": [
+        "design doc"
+      ]
+    },
+    {
+      "title": "Quick Notes",
+      "labels": []
+    },
+    {
+      "title": "Architecture Overview",
+      "labels": [
+        "architecture",
+        "reference"
+      ]
+    }
+  ]
+}

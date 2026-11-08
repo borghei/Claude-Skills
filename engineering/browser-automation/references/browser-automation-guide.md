@@ -1,25 +1,25 @@
 # Browser Automation Guide
 
-## Anti-Detection Techniques
+## Being a Good Bot
 
-### Browser Fingerprinting Signals
-Modern bot detection systems check for:
+Permitted automation does not need to look like a person. Make the script easy for the site owner
+to identify, throttle and contact, and stay inside the site's rules:
 
-1. **Navigator Properties**: `navigator.webdriver`, `navigator.plugins`, `navigator.languages`
-2. **WebGL Fingerprint**: Canvas and WebGL rendering differences between headless and real browsers
-3. **Timing Patterns**: Consistent request intervals indicate automation
-4. **Mouse/Keyboard Events**: Lack of human-like interaction events
-5. **JavaScript API Presence**: Missing APIs that real browsers expose
-6. **HTTP Header Order**: Automated clients often send headers in different order
-7. **TLS Fingerprint (JA3)**: Client TLS handshake characteristics
+- **Identify yourself.** A User-Agent with the bot name, a URL describing it and a contact
+  address, for example `MyCrawler/1.0 (+https://example.com/bot; ops@example.com)`. Do not copy a
+  browser's User-Agent or rotate User-Agents.
+- **Do not mask automation.** No `navigator.webdriver` overrides, fingerprint or TLS spoofing,
+  stealth plugins or rotating proxies. If a site blocks automation, that is its answer: ask for
+  access or an API.
+- **Follow robots.txt and the terms of service**, and honour `Retry-After`, `X-RateLimit-*`,
+  `meta robots` and `X-Robots-Tag`.
+- **Keep the load low.** Jittered delays, one connection per host unless the owner allows more,
+  backoff on 429/503, a page cap, and caching so nothing is fetched twice.
 
-### Common Detection Signatures in Code
-- Hardcoded `navigator.webdriver = false` overrides
-- Missing viewport or screen size randomization
-- Fixed User-Agent strings that don't rotate
-- No cookie handling between requests
-- Predictable wait times (e.g., `sleep(2)` vs randomized delays)
-- Missing referrer headers on navigation
+### What `anti_detection_checker.py` flags
+- Concealment: webdriver masking, browser fingerprint rewrites, browser-impersonating User-Agents, proxies.
+- Load: sub-second or fixed delays with no back-pressure.
+- Missing protections: rate limiting, robots.txt, backoff, jitter, an identifying User-Agent, a reused session.
 
 ## Rate Limiting Strategies
 
@@ -28,7 +28,7 @@ Modern bot detection systems check for:
 | Aggressive | 0.5-1s | Own APIs, test environments |
 | Normal | 1-3s | General scraping |
 | Polite | 3-7s | Respectful scraping |
-| Stealth | 5-15s | Sensitive targets |
+| Gentle | 5-15s | Small or fragile sites |
 
 ### Exponential Backoff
 On HTTP 429 or 503 responses:

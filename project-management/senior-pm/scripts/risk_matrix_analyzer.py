@@ -13,6 +13,7 @@ Usage:
 
 import argparse
 import json
+import re
 import statistics
 import sys
 from datetime import datetime, timedelta
@@ -204,7 +205,7 @@ class Risk:
         
         try:
             target_date = datetime.strptime(self.target_resolution, "%Y-%m-%d")
-            return datetime.now() > target_date and self.is_active
+            return AS_OF > target_date and self.is_active
         except ValueError:
             return False
 
@@ -458,6 +459,25 @@ def _calculate_mitigation_coverage(risks: List[Risk]) -> float:
 # Main Analysis Function
 # ---------------------------------------------------------------------------
 
+AS_OF = datetime.now()  # replaced in main() so reports are reproducible
+
+
+def resolve_as_of(data: Dict[str, Any], override: Optional[str]) -> datetime:
+    """--as-of, else portfolio_metadata.generated_on, else the latest date in the data."""
+    def parse(v: Any) -> Optional[datetime]:
+        try:
+            return datetime.strptime(str(v)[:10], "%Y-%m-%d")
+        except ValueError:
+            return None
+    if override:
+        if not parse(override):
+            raise ValueError(f"--as-of must be YYYY-MM-DD, got {override!r}")
+        return parse(override)
+    meta = parse((data.get("portfolio_metadata") or {}).get("generated_on", ""))
+    dates = [d for d in (parse(x) for x in re.findall(r'"(\d{4}-\d{2}-\d{2})', json.dumps(data))) if d]
+    return meta or (max(dates) if dates else datetime.now())
+
+
 def analyze_risks(data: Dict[str, Any]) -> RiskAnalysisResult:
     """Perform comprehensive risk analysis."""
     result = RiskAnalysisResult()
@@ -663,15 +683,19 @@ def main() -> int:
         help="Output format (default: text)"
     )
     
+    parser.add_argument("--as-of", help="Date for overdue checks, YYYY-MM-DD (default: portfolio_metadata.generated_on, else latest date in the data)")
     args = parser.parse_args()
-    
+    global AS_OF
     try:
-        # Load and validate data
         with open(args.data_file, 'r') as f:
             data = json.load(f)
-        
-        # Perform analysis
+        if not isinstance(data, dict):
+            raise ValueError("top level must be a JSON object with a 'risks' list")
+        AS_OF = resolve_as_of(data, args.as_of)
         result = analyze_risks(data)
+        if "error" in result.summary:
+            raise ValueError(result.summary["error"])
+        result.summary["as_of"] = AS_OF.strftime("%Y-%m-%d")
         
         # Output results
         if args.format == "json":
@@ -683,15 +707,9 @@ def main() -> int:
         
         return 0
         
-    except FileNotFoundError:
-        print(f"Error: File '{args.data_file}' not found", file=sys.stderr)
-        return 1
-    except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON in '{args.data_file}': {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        return 1
+    except (OSError, json.JSONDecodeError, ValueError, TypeError, KeyError, AttributeError) as e:
+        print(f"Error: cannot analyze '{args.data_file}': {e}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

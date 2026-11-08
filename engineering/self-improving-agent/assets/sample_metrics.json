@@ -1,0 +1,151 @@
+{
+  "baseline": {
+    "period": "2026-02-01 to 2026-02-15",
+    "sessions": [
+      {
+        "session_id": "b0",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 0,
+        "turns": 4,
+        "tool_calls": 12,
+        "tool_errors": 0,
+        "context_items_retrieved": 5,
+        "context_items_used": 4
+      },
+      {
+        "session_id": "b1",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 0,
+        "turns": 4,
+        "tool_calls": 12,
+        "tool_errors": 0,
+        "context_items_retrieved": 5,
+        "context_items_used": 3
+      },
+      {
+        "session_id": "b2",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 0,
+        "turns": 4,
+        "tool_calls": 12,
+        "tool_errors": 0,
+        "context_items_retrieved": 5,
+        "context_items_used": 4
+      },
+      {
+        "session_id": "b3",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 0,
+        "turns": 4,
+        "tool_calls": 12,
+        "tool_errors": 0,
+        "context_items_retrieved": 5,
+        "context_items_used": 3
+      },
+      {
+        "session_id": "b4",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 0,
+        "turns": 4,
+        "tool_calls": 12,
+        "tool_errors": 0,
+        "context_items_retrieved": 5,
+        "context_items_used": 4
+      },
+      {
+        "session_id": "b5",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 0,
+        "turns": 4,
+        "tool_calls": 12,
+        "tool_errors": 0,
+        "context_items_retrieved": 5,
+        "context_items_used": 3
+      }
+    ]
+  },
+  "current": {
+    "period": "2026-03-01 to 2026-03-15",
+    "sessions": [
+      {
+        "session_id": "c0",
+        "task_type": "code-review",
+        "outcome": "FAILURE",
+        "corrections": 1,
+        "turns": 7,
+        "tool_calls": 12,
+        "tool_errors": 0,
+        "context_items_retrieved": 5,
+        "context_items_used": 4
+      },
+      {
+        "session_id": "c1",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 2,
+        "turns": 7,
+        "tool_calls": 12,
+        "tool_errors": 1,
+        "context_items_retrieved": 5,
+        "context_items_used": 3
+      },
+      {
+        "session_id": "c2",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 1,
+        "turns": 7,
+        "tool_calls": 12,
+        "tool_errors": 2,
+        "context_items_retrieved": 5,
+        "context_items_used": 4
+      },
+      {
+        "session_id": "c3",
+        "task_type": "code-review",
+        "outcome": "FAILURE",
+        "corrections": 2,
+        "turns": 7,
+        "tool_calls": 12,
+        "tool_errors": 0,
+        "context_items_retrieved": 5,
+        "context_items_used": 3
+      },
+      {
+        "session_id": "c4",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 1,
+        "turns": 7,
+        "tool_calls": 12,
+        "tool_errors": 1,
+        "context_items_retrieved": 5,
+        "context_items_used": 4
+      },
+      {
+        "session_id": "c5",
+        "task_type": "code-review",
+        "outcome": "SUCCESS",
+        "corrections": 2,
+        "turns": 7,
+        "tool_calls": 12,
+        "tool_errors": 2,
+        "context_items_retrieved": 5,
+        "context_items_used": 3
+      }
+    ]
+  },
+  "changes": [
+    {
+      "date": "2026-02-20",
+      "type": "rule_added",
+      "description": "Always run the full test suite before review"
+    }
+  ]
+}

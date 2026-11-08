@@ -610,11 +610,11 @@ Output formats:
     project_path = Path(args.project_path).resolve()
     if not project_path.exists():
         print(f"Error: Project path does not exist: {project_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if not project_path.is_dir():
         print(f"Error: Project path is not a directory: {project_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if args.verbose:
         print(f"Scanning project: {project_path}")
@@ -656,5 +656,5 @@ Output formats:
         print(diagram)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

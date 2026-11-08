@@ -1,110 +1,34 @@
 # Tools, Quick Start & Workflows
 
-Read this when running the generator scripts, wiring up the import-based Python API, or executing an end-to-end tenant operation (setup, hardening, offboarding).
+Read this when running the generator, wiring up the import-based Python API, or executing an end-to-end tenant operation (setup, hardening, offboarding).
+
+All commands run from the skill folder. `scripts/ms365_cli.py` is the command-line entry point; the three modules behind it are importable libraries (see Tool Reference below). Nothing here connects to a tenant: the output is PowerShell for an administrator to review and run.
 
 ## Quick Start
 
-### Generate Security Audit Script
-
 ```bash
-python scripts/powershell_generator.py --action audit --output audit_script.ps1
+python3 scripts/ms365_cli.py audit --domain contoso.com -o audit.ps1
+python3 scripts/ms365_cli.py provision --domain contoso.com --users assets/sample_users.csv -o provision.ps1
+python3 scripts/ms365_cli.py conditional-access --domain contoso.com --exclude breakglass@contoso.com -o ca-mfa.ps1
 ```
 
-### Create Bulk User Provisioning Script
+## CLI
 
-```bash
-python scripts/user_management.py --action provision --csv users.csv --license E3
-```
+| Subcommand | Output | Key flags |
+|------------|--------|-----------|
+| `audit` | Security audit script: MFA, admin roles, inactive users, guests, licenses, mailbox delegation, CA policies | `--domain`, `-o` |
+| `conditional-access` | CA policy script, created as `enabledForReportingButNotEnforced` | `--domain`, `--name`, `--include`, `--exclude ...`, `--no-mfa` |
+| `bulk-license` | License assignment script for a CSV with a `UserPrincipalName` column | `--domain`, `--csv`, `--sku` |
+| `provision` | Validates every user, then writes the creation script; random 20-character temporary passwords, forced change at first sign-in | `--domain`, `--users CSV\|JSON` |
+| `offboard` | Offboarding script (disable sign-in, revoke sessions, remove groups and devices, convert mailbox to shared, remove licenses); supports `-WhatIf` | `--domain`, `--user` |
+| `recommend-license` | License recommendation with justification and list price | `--role`, `--department`, `--format json` |
+| `setup` | Checklist, DNS records, setup script or license distribution from a tenant config | `--config`, `--part checklist\|dns\|script\|licenses`, `--format json` |
 
-### Configure Conditional Access Policy
+Users CSV columns: `first_name,last_name,username,display_name,job_title,department,license_sku` (the first three are required).
 
-```bash
-python scripts/powershell_generator.py --action conditional-access --require-mfa --include-admins
-```
+Exit codes: 0 output written; 1 `provision` found invalid users and wrote nothing; 2 unusable input (missing file, bad JSON or CSV, invalid domain or UPN).
 
----
-
-## Tools
-
-### powershell_generator.py
-
-Generates ready-to-use PowerShell scripts for Microsoft 365 administration.
-
-**Usage:**
-
-```bash
-# Generate security audit script
-python scripts/powershell_generator.py --action audit
-
-# Generate Conditional Access policy script
-python scripts/powershell_generator.py --action conditional-access \
-  --policy-name "Require MFA for Admins" \
-  --require-mfa \
-  --include-users "All"
-
-# Generate bulk license assignment script
-python scripts/powershell_generator.py --action license \
-  --csv users.csv \
-  --sku "ENTERPRISEPACK"
-```
-
-**Parameters:**
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `--action` | Yes | Script type: `audit`, `conditional-access`, `license`, `users` |
-| `--policy-name` | No | Name for Conditional Access policy |
-| `--require-mfa` | No | Require MFA in policy |
-| `--include-users` | No | Users to include: `All` or specific UPNs |
-| `--csv` | No | CSV file path for bulk operations |
-| `--sku` | No | License SKU for assignment |
-| `--output` | No | Output file path (default: stdout) |
-
-**Output:** Complete PowerShell scripts with error handling, logging, and best practices.
-
-### user_management.py
-
-Automates user lifecycle operations and bulk provisioning.
-
-**Usage:**
-
-```bash
-# Provision users from CSV
-python scripts/user_management.py --action provision --csv new_users.csv
-
-# Offboard user securely
-python scripts/user_management.py --action offboard --user john.doe@company.com
-
-# Generate inactive users report
-python scripts/user_management.py --action report-inactive --days 90
-```
-
-**Parameters:**
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `--action` | Yes | Operation: `provision`, `offboard`, `report-inactive`, `sync` |
-| `--csv` | No | CSV file for bulk operations |
-| `--user` | No | Single user UPN |
-| `--days` | No | Days for inactivity threshold (default: 90) |
-| `--license` | No | License SKU to assign |
-
-### tenant_setup.py
-
-Initial tenant configuration and service provisioning automation.
-
-**Usage:**
-
-```bash
-# Generate tenant setup checklist
-python scripts/tenant_setup.py --action checklist --company "Acme Inc" --users 50
-
-# Generate DNS records configuration
-python scripts/tenant_setup.py --action dns --domain acme.com
-
-# Generate security baseline script
-python scripts/tenant_setup.py --action security-baseline
-```
+Prices printed by `recommend-license` and `setup --part licenses` are list prices embedded in the module; check current Microsoft pricing before quoting them.
 
 ---
 
@@ -112,69 +36,34 @@ python scripts/tenant_setup.py --action security-baseline
 
 ### Workflow 1: New Tenant Setup
 
-**Step 1: Generate Setup Checklist**
-
 ```bash
-python scripts/tenant_setup.py --action checklist --company "Company Name" --users 100
+python3 scripts/ms365_cli.py setup --config sample_input.json --part checklist
+python3 scripts/ms365_cli.py setup --config sample_input.json --part dns        # records to create at the registrar
+python3 scripts/ms365_cli.py setup --config sample_input.json --part script -o setup.ps1
+python3 scripts/ms365_cli.py provision --domain acme.com --users employees.csv -o provision.ps1
 ```
 
-**Step 2: Configure DNS Records**
-
-```bash
-python scripts/tenant_setup.py --action dns --domain company.com
-```
-
-**Step 3: Apply Security Baseline**
-
-```bash
-python scripts/powershell_generator.py --action audit > initial_audit.ps1
-```
-
-**Step 4: Provision Users**
-
-```bash
-python scripts/user_management.py --action provision --csv employees.csv --license E3
-```
+Replace the `MS=msXXXXXXXX` verification value with the one the admin center shows. Teams-only tenants do not need the legacy Skype for Business SRV and `lyncdiscover` records; check Microsoft's current DNS list for your services.
 
 ### Workflow 2: Security Hardening
 
-**Step 1: Run Security Audit**
-
 ```bash
-python scripts/powershell_generator.py --action audit --output security_audit.ps1
+python3 scripts/ms365_cli.py audit --domain company.com -o security_audit.ps1
+python3 scripts/ms365_cli.py conditional-access --domain company.com \
+  --name "Require MFA All Users" --exclude <break-glass-object-id> -o ca-mfa.ps1
 ```
 
-**Step 2: Create MFA Policy**
-
-```bash
-python scripts/powershell_generator.py --action conditional-access \
-  --policy-name "Require MFA All Users" \
-  --require-mfa \
-  --include-users "All"
-```
-
-**Step 3: Review Results**
-
-Execute generated scripts and review CSV reports in output directory.
+Run the audit, review its CSV reports, then create the policy. It starts in report-only mode; watch sign-in logs for a week before switching it to enabled.
 
 ### Workflow 3: User Offboarding
 
-**Step 1: Generate Offboarding Script**
-
 ```bash
-python scripts/user_management.py --action offboard --user departing.user@company.com
+python3 scripts/ms365_cli.py offboard --domain company.com --user departing.user@company.com -o offboard_user.ps1
 ```
 
-**Step 2: Execute Script with -WhatIf**
-
 ```powershell
-.\offboard_user.ps1 -WhatIf
-```
-
-**Step 3: Execute for Real**
-
-```powershell
-.\offboard_user.ps1 -Confirm:$false
+.\offboard_user.ps1 -WhatIf     # preview
+.\offboard_user.ps1             # run after the preview and any legal-hold check
 ```
 
 ---
@@ -185,7 +74,7 @@ python scripts/user_management.py --action offboard --user departing.user@compan
 
 **Purpose:** Generates production-ready PowerShell scripts for Microsoft 365 administration including security audits, Conditional Access policies, and bulk license assignment.
 
-**Module:** `PowerShellScriptGenerator` class (import and instantiate, not a CLI tool)
+**Module:** `PowerShellScriptGenerator` class (library; the command-line entry point is `ms365_cli.py`)
 
 **Initialization:**
 
@@ -263,7 +152,7 @@ script = generator.generate_bulk_license_assignment_script("users.csv", "ENTERPR
 
 **Purpose:** Manages user lifecycle operations including bulk provisioning, secure offboarding, license recommendations, group membership, and data validation.
 
-**Module:** `UserLifecycleManager` class (import and instantiate, not a CLI tool)
+**Module:** `UserLifecycleManager` class (library; the command-line entry point is `ms365_cli.py`)
 
 **Initialization:**
 
@@ -378,7 +267,7 @@ result = manager.validate_user_data({"first_name": "Jane", "last_name": "Doe", "
 
 **Purpose:** Manages initial Microsoft 365 tenant configuration including setup checklists, DNS record generation, PowerShell setup scripts, and license distribution recommendations.
 
-**Module:** `TenantSetupManager` class (import and instantiate, not a CLI tool)
+**Module:** `TenantSetupManager` class (library; the command-line entry point is `ms365_cli.py`)
 
 **Initialization:**
 

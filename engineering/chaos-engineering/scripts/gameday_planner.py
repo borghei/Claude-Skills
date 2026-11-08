@@ -354,7 +354,7 @@ def parse_args() -> argparse.Namespace:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
-    p.add_argument("--service", required=True, help="Target service name")
+    p.add_argument("--service", help="Target service name (required unless --list-scenarios)")
     p.add_argument(
         "--duration",
         choices=["half", "full"],
@@ -363,7 +363,6 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--scenarios",
-        required=True,
         help="Comma-separated scenario IDs (run --list-scenarios for catalog)",
     )
     p.add_argument(
@@ -376,7 +375,10 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--format", choices=["markdown", "json"], default="markdown")
     p.add_argument("--output", help="Output file path")
     p.add_argument("--list-scenarios", action="store_true", help="List all scenarios in catalog")
-    return p.parse_args()
+    args = p.parse_args()
+    if not args.list_scenarios and not (args.service and args.scenarios):
+        p.error("--service and --scenarios are required (or use --list-scenarios)")
+    return args
 
 
 def main() -> int:

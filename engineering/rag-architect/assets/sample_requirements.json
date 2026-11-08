@@ -1,0 +1,18 @@
+{
+  "document_types": [
+    "text",
+    "markdown"
+  ],
+  "document_count": 12000,
+  "avg_document_size": 3500,
+  "queries_per_day": 4000,
+  "query_patterns": [
+    "factual",
+    "conversational"
+  ],
+  "latency_requirement": "interactive",
+  "budget_monthly": 800,
+  "accuracy_priority": 0.8,
+  "cost_priority": 0.5,
+  "maintenance_complexity": "medium"
+}

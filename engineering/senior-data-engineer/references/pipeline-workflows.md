@@ -41,7 +41,7 @@ WHERE o._extracted_at > (SELECT MAX(_extracted_at) FROM {{ this }})
 **Step 4 -- Wire into Airflow DAG.**
 
 ```python
-with DAG('daily_etl', schedule_interval='0 5 * * *', catchup=False, tags=['etl']) as dag:
+with DAG('daily_etl', schedule='0 5 * * *', catchup=False, tags=['etl']) as dag:
     extract = BashOperator(task_id='extract', bash_command='python scripts/extract.py --date {{ ds }}')
     transform = BashOperator(task_id='dbt_run', bash_command='dbt run --select marts.*')
     test = BashOperator(task_id='dbt_test', bash_command='dbt test --select marts.*')

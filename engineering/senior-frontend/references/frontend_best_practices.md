@@ -2,8 +2,6 @@
 
 Modern frontend development standards for accessibility, testing, TypeScript, and Tailwind CSS.
 
----
-
 ## Table of Contents
 
 - [Accessibility (a11y)](#accessibility-a11y)
@@ -12,8 +10,6 @@ Modern frontend development standards for accessibility, testing, TypeScript, an
 - [Tailwind CSS](#tailwind-css)
 - [Project Structure](#project-structure)
 - [Security](#security)
-
----
 
 ## Accessibility (a11y)
 
@@ -204,8 +200,6 @@ const srOnly = 'absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap b
 </button>
 ```
 
----
-
 ## Testing Strategies
 
 ### Component Testing with Testing Library
@@ -377,8 +371,6 @@ test.describe('Checkout flow', () => {
 });
 ```
 
----
-
 ## TypeScript Patterns
 
 ### Component Props
@@ -537,9 +529,9 @@ function isApiSuccess<T>(response: ApiResponse<T>): response is ApiSuccess<T> {
 }
 ```
 
----
-
 ## Tailwind CSS
+
+Examples use a JS config; on Tailwind v4 load it from CSS with `@config "../tailwind.config.ts";` or move tokens into an `@theme` block.
 
 ### Component Variants with CVA
 
@@ -664,8 +656,6 @@ module.exports = {
 <div className="animate-fade-in">Fading in</div>
 ```
 
----
-
 ## Project Structure
 
 ### Feature-Based Structure
@@ -719,8 +709,6 @@ export { Dialog, DialogTrigger, DialogContent } from './Dialog';
 // Usage
 import { Button, Input, Card } from '@/components/ui';
 ```
-
----
 
 ## Security
 

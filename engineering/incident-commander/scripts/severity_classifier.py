@@ -1152,6 +1152,10 @@ examples:
   %(prog)s incident.json --format markdown
   cat incident.json | %(prog)s
   cat incident.json | %(prog)s --format json
+  %(prog)s incident.json --fail-on SEV2   # exit 1 when SEV1 or SEV2
+
+exit codes: 0 classified (any severity), 1 severity at or above --fail-on,
+            2 bad input (missing file, invalid JSON, missing incident fields)
 """,
     )
 
@@ -1168,6 +1172,12 @@ examples:
         dest="output_format",
         help="Output format (default: text)",
     )
+    parser.add_argument(
+        "--fail-on",
+        choices=["SEV1", "SEV2", "SEV3"],
+        default=None,
+        help="Exit 1 when the incident is classified at or above this severity (default: never)",
+    )
 
     args = parser.parse_args()
 
@@ -1182,20 +1192,20 @@ examples:
             raw_data = json.load(sys.stdin)
     except json.JSONDecodeError as exc:
         print(f"Error: invalid JSON input -- {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     except FileNotFoundError:
         print(f"Error: file not found -- {args.data_file}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     except IOError as exc:
         print(f"Error: could not read input -- {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # -- Parse and validate --
     try:
         incident, impact, signals, context = parse_incident_data(raw_data)
     except ValueError as exc:
         print(f"Error: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # -- Classify --
     severity_score = classify_severity(incident, impact, signals, context)
@@ -1215,13 +1225,13 @@ examples:
 
     print(output)
 
-    # -- Exit code reflects severity --
-    if severity_score.severity_level == SeverityLevel.SEV1:
-        sys.exit(2)
-    elif severity_score.severity_level == SeverityLevel.SEV2:
-        sys.exit(1)
-    else:
-        sys.exit(0)
+    # -- Exit code: 0 = classified; 1 only when an explicit --fail-on gate is met --
+    if args.fail_on:
+        rank = {"SEV1": 1, "SEV2": 2, "SEV3": 3, "SEV4": 4}
+        level = getattr(severity_score.severity_level, "value", str(severity_score.severity_level))
+        if rank.get(str(level).upper().replace("-", ""), 9) <= rank[args.fail_on]:
+            sys.exit(1)
+    sys.exit(0)
 
 
 if __name__ == "__main__":

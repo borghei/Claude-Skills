@@ -166,3 +166,16 @@ When SWOT is the wrong tool:
 - **Blue Ocean Strategy Canvas** — for uncontested market space
 
 Use SWOT for breadth. Use these others for depth on specific questions.
+
+## 11. Internal vs external: the test
+
+If the item depends on something we own (people, money, tech, brand, process, IP), it is internal. If it depends on something we do not own (market, customers, competitors, regulators, technology trends), it is external.
+
+- "Strong brand recognition in segment X": internal (we own it)
+- "Customers love our brand": external (customer behaviour)
+- "Strong eng team": internal; "Hard to recruit eng talent": external
+- "Our cloud bill is high": internal; "Cloud prices rising": external
+
+## 12. From SWOT to strategy
+
+SWOT is input, not a strategy: SWOT (positioning) → TOWS (options) → prioritisation (2-3 options) → resourcing (what we fund and give up) → KPIs (how we will know). Skipping a step produces analysis without action.

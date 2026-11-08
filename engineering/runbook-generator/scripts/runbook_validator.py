@@ -66,13 +66,13 @@ QUALITY_PATTERNS = {
         "min_count": 1,
     },
     "last_verified": {
-        "pattern": r"(?i)last\s+verified[:]\s*\d{4}-\d{2}-\d{2}",
+        "pattern": r"(?i)last\s+verified(?:\*\*)?:(?:\*\*)?\s*\d{4}-\d{2}-\d{2}",
         "description": "Last verified date",
         "severity": "error",
         "min_count": 1,
     },
     "owner_field": {
-        "pattern": r"(?i)\*\*owner\*\*[:]\s*\S+",
+        "pattern": r"(?i)owner(?:\*\*)?:(?:\*\*)?\s*\S+",
         "description": "Owner field",
         "severity": "error",
         "min_count": 1,
@@ -96,7 +96,7 @@ QUALITY_PATTERNS = {
         "min_count": 1,
     },
     "monitoring_links": {
-        "pattern": r"(?i)dashboard[:]\s*(?:https?://\S+|\[.*\]\(.*\)|FILL IN)",
+        "pattern": r"(?i)dashboard(?:\*\*)?:(?:\*\*)?\s*(?:https?://\S+|\[.*\]\(.*\)|FILL IN)",
         "description": "Monitoring dashboard link or placeholder",
         "severity": "warning",
         "min_count": 1,
@@ -253,6 +253,7 @@ def check_placeholder_commands(content):
         (r"CHANGEME", "CHANGEME placeholder"),
         (r"TODO", "TODO marker"),
         (r"xxx+", "xxx placeholder"),
+        (r"FILL IN", "FILL IN placeholder"),
     ]
 
     in_code_block = False
@@ -392,6 +393,7 @@ def main():
     parser.add_argument("files", nargs="*", help="Runbook markdown files to validate")
     parser.add_argument("--dir", "-d", help="Directory containing runbook markdown files")
     parser.add_argument("--json", action="store_true", help="Output results as JSON")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (json = --json)")
     parser.add_argument("--strict", action="store_true",
                         help="Treat warnings as errors (exit 1 if any warnings)")
 
@@ -411,9 +413,14 @@ def main():
         print("\nError: No files specified. Provide file paths or use --dir.", file=sys.stderr)
         sys.exit(2)
 
+    missing = [f for f in files if not os.path.isfile(f)]
+    if missing:
+        print(f"Error: File not found: {', '.join(missing)}", file=sys.stderr)
+        sys.exit(2)
+
     results = [validate_runbook(f) for f in files]
 
-    if args.json:
+    if args.json or args.format == "json":
         print(json.dumps(results, indent=2))
     else:
         print(format_human_output(results))

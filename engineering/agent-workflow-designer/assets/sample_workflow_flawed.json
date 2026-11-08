@@ -1,0 +1,9 @@
+{
+  "name": "broken-pipeline",
+  "steps": [
+    {"id": "plan", "agent": "planner", "depends_on": ["review"]},
+    {"id": "write", "agent": "writer", "depends_on": ["plan"]},
+    {"id": "review", "agent": "reviewer", "depends_on": ["write"]},
+    {"id": "publish", "agent": "publisher", "depends_on": ["approve"], "terminal": true}
+  ]
+}

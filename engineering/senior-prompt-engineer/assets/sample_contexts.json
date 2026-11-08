@@ -1,0 +1,6 @@
+[
+  {"question_id": "q1", "content": "Refunds are issued to the original payment method within 5 business days of approval."},
+  {"question_id": "q1", "content": "Annual plans can be refunded in full within 30 days of purchase."},
+  {"question_id": "q2", "content": "The API rate limit is 100 requests per minute per workspace token."},
+  {"question_id": "q2", "content": "Webhook deliveries are retried up to 8 times with exponential backoff."}
+]

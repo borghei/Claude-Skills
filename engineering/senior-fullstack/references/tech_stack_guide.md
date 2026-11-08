@@ -524,7 +524,7 @@ function authenticate(req, res, next) {
 ### Startup MVP
 
 ```
-Frontend: Next.js 14 (App Router)
+Frontend: Next.js 16 (App Router)
 Backend:  Next.js API Routes
 Database: PostgreSQL (Neon/Supabase)
 Auth:     Auth.js or Clerk
@@ -537,7 +537,7 @@ Cache:    Vercel KV or Upstash Redis
 ### SaaS Product
 
 ```
-Frontend: Next.js 14
+Frontend: Next.js 16
 Backend:  Separate API (FastAPI or NestJS)
 Database: PostgreSQL (RDS)
 Auth:     Custom JWT + Auth.js

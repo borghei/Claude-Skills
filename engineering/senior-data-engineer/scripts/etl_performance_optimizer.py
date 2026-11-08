@@ -1338,6 +1338,9 @@ def cmd_analyze_sql(args):
     if sql_path.exists():
         with open(sql_path, 'r') as f:
             sql = f.read()
+    elif sql_path.suffix.lower() == '.sql' or not re.search(r'\b(select|with|insert|update|delete|merge)\b', args.input, re.I):
+        print(f"error: SQL file not found (and input is not inline SQL): {args.input}", file=sys.stderr)
+        sys.exit(2)
     else:
         sql = args.input  # Treat as inline SQL
 
@@ -1347,6 +1350,17 @@ def cmd_analyze_sql(args):
 
     optimizer = SQLOptimizer()
     recommendations = optimizer.analyze(query_info, sql)
+    if args.warehouse:
+        # Cloud warehouses have no user-defined B-tree indexes; reword index advice
+        alt = {'snowflake': 'a clustering key', 'bigquery': 'clustering/partitioning',
+               'redshift': 'sort/dist keys', 'databricks': 'Z-ordering or liquid clustering'}[args.warehouse]
+        for rec in recommendations:
+            if rec.category == 'index':
+                rec.title = rec.title.replace('Indexes', 'Clustering').replace('Index', 'Cluster on')
+                rec.description = f"{args.warehouse} has no secondary indexes; pruning comes from {alt}."
+                rec.recommendation = (f"Only if these tables are large and poorly pruned, consider {alt} "
+                                      "on these columns; check the query profile first")
+                rec.implementation = "Compare partitions scanned vs total in the query profile before changing layout"
 
     # Cost estimate if warehouse specified
     cost_estimate = None
@@ -1488,6 +1502,9 @@ def cmd_estimate_cost(args):
     if sql_path.exists():
         with open(sql_path, 'r') as f:
             sql = f.read()
+    elif sql_path.suffix.lower() == '.sql' or not re.search(r'\b(select|with|insert|update|delete|merge)\b', args.input, re.I):
+        print(f"error: SQL file not found (and input is not inline SQL): {args.input}", file=sys.stderr)
+        sys.exit(2)
     else:
         sql = args.input
 
@@ -1674,12 +1691,12 @@ Examples:
     try:
         args.func(args)
     except Exception as e:
-        logger.error(f"Error: {e}")
+        print(f"error: {e}", file=sys.stderr)
         if args.verbose:
             import traceback
             traceback.print_exc()
-        sys.exit(1)
+        sys.exit(2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

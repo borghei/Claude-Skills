@@ -102,7 +102,7 @@ Computes critical path, lists risks, and renders the dependency graph from a JSO
 | `--output` | path | stdout | Output file path |
 | `--criticality` | string | (all) | Comma-separated filter: `critical,high,medium,low` |
 | `--team` | string (repeatable) | (none) | Filter to dependencies involving these team names |
-| `--as-of` | ISO date | today | Reference date for slack and risk calculations |
+| `--as-of` | ISO date | file `as_of`, else today | Reference date for risk calculations |
 
 ### Input JSON schema
 

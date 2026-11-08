@@ -224,7 +224,7 @@ def main() -> None:
             Path(args.output).write_text(json.dumps(plan, indent=2) + "\n", encoding="utf-8")
     except (ValueError, OSError, KeyError, TypeError) as exc:
         print(f"error: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     if args.json:
         print(json.dumps(plan, indent=2))
         return

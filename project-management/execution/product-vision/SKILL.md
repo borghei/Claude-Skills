@@ -1,16 +1,17 @@
 ---
 name: product-vision
 description: >
-  Write the Product Vision document -- the durable 5-10 year narrative above the
-  north-star metric -- using Pichler's Vision Board, Moore's elevator pitch,
-  Raskin's strategic narrative, Cagan's 10-year framing, and Amazon Working Backwards.
+  Write the 5-10 year product vision as a vision board, narrative or elevator
+  pitch, and stress-test it. Use when setting or refreshing long-range
+  direction, or when strategy decks lack a shared picture of where the product
+  is going.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: product-vision, strategic-narrative, working-backwards, vision-board
   tags:
     - product-vision
@@ -53,13 +54,15 @@ Before generating the vision, settle the inputs below. When one is missing or va
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. Gather inputs: customer interviews, JTBD hierarchy, value proposition canvas, competitive landscape.
 2. Pick a starting format -- new product: Pichler Board; reset: Raskin narrative; multi-year: Cagan 10-year.
 3. Draft, then **translate into a second format** -- a vision that survives translation is sharp.
-4. Run the Vision Review Checklist; rewrite anything scoring under 3 of 5.
-5. Test with 3 internal audiences and 2 customers; publish as the first link in onboarding and the cover of strategy decks; revisit annually.
+4. Run the Vision Review Checklist [RECOMMENDED]; rewrite anything scoring under 3 of 5. A 3 means a reader could act on that element without asking you; below that, it will be read differently by different teams.
+5. Test it on several internal audiences and a few customers (for example 3 and 2): the point is to hear it played back in their own words, and that it rules something out. Publish it as the first link in onboarding and the cover of strategy decks; revisit annually.
+
+**Done when** the vision survives translation into a second format, names who it is for and what it rules out, and test readers can restate it without the document.
 
 ## Anti-Patterns
 
@@ -88,7 +91,16 @@ Load the reference that matches the task -- keep this file lean and pull detail 
 - **[references/vision-frameworks-guide.md](references/vision-frameworks-guide.md)** -- the framework theory (Pichler, Moore, Raskin, Cagan, Amazon) with block-by-block guidance and "choosing a framework" advice. Read this when you need the reasoning behind each format.
 - **[references/red-flags.md](references/red-flags.md)** -- 10 vision anti-patterns (vision = mission, 12-month vision, vision without a customer, vision as roadmap) with symptoms and fixes. Read this when stress-testing a draft.
 
-Templates live in `assets/`: `vision_board_template.md`, `narrative_vision_template.md`, `elevator_pitch_template.md`, `vision_review_checklist.md`.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/vision_board_template.md` | Vision board |
+| `assets/narrative_vision_template.md` | Narrative vision |
+| `assets/elevator_pitch_template.md` | Elevator pitch |
+| `assets/vision_review_checklist.md` | Review checklist scored 1-5 |
+| `examples/helix-platform-vision.md` | Worked vision |
 
 ## Scope & Limitations
 

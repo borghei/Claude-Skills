@@ -701,27 +701,27 @@ def main() -> int:
                     raw_data = json.load(f)
             except FileNotFoundError:
                 print(f"Error: File '{args.data_file}' not found.", file=sys.stderr)
-                return 1
+                return 2
             except json.JSONDecodeError as e:
                 print(f"Error: Invalid JSON in '{args.data_file}': {e}", file=sys.stderr)
-                return 1
+                return 2
         else:
             if sys.stdin.isatty():
                 print("Error: No input file specified and stdin is a terminal. "
                       "Provide a file argument or pipe JSON to stdin.", file=sys.stderr)
-                return 1
+                return 2
             try:
                 raw_data = json.load(sys.stdin)
             except json.JSONDecodeError as e:
                 print(f"Error: Invalid JSON on stdin: {e}", file=sys.stderr)
-                return 1
+                return 2
 
         if not isinstance(raw_data, dict):
             print("Error: Input must be a JSON object.", file=sys.stderr)
-            return 1
+            return 2
         if "incident" not in raw_data and "events" not in raw_data:
             print("Error: Input must contain at least 'incident' or 'events' keys.", file=sys.stderr)
-            return 1
+            return 2
 
         analysis = build_timeline(raw_data)
 
@@ -735,7 +735,7 @@ def main() -> int:
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        return 1
+        return 2
 
 
 if __name__ == "__main__":

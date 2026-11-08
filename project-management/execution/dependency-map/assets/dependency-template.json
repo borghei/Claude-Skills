@@ -1,5 +1,6 @@
 {
   "program": "Q3 Mobile Launch",
+  "as_of": "2026-05-25",
   "dependencies": [
     {
       "id": "DEP-001",

@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Performance Profiler</h1>
     <p class="page-subtitle">Performance profiling for Node.js, Python, and Go: CPU flamegraphs, memory leak detection, bundle analysis, query optimization, and k6 load testing. Use when diagnosing slow endpoints, memory growth, large bundles, or traffic spikes.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">performance</span><span class="tag">profiling</span><span class="tag">flamegraphs</span><span class="tag">memory-leaks</span><span class="tag">load-testing</span></div>
   </div>
   <h2>How to Use</h2>
@@ -478,23 +478,51 @@ Before profiling, settle the inputs below. When one is missing or vague and woul
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `benchmark_reporter.py` | Parse benchmark results and report regressions/improvements vs thresholds | `python scripts/benchmark_reporter.py results.json --fail-on-regression` |
-| `bottleneck_detector.py` | Analyze logs/traces to flag slow latency, queries, and spans | `python scripts/bottleneck_detector.py trace.json --latency-threshold 200` |
-| `resource_analyzer.py` | Analyze CPU/memory/disk usage data and flag anomalies and trends | `python scripts/resource_analyzer.py metrics.json --cpu-threshold 80` |
+| Tool | Input (JSON) | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `scripts/benchmark_reporter.py` | `{&quot;baseline&quot;: [...], &quot;current&quot;: [...]}`, each entry `name`, `iterations`, `mean_ms`, `median_ms`, `min_ms`, `max_ms`, `p95_ms` | `--regression-threshold 5`, `--improvement-threshold 5`, `--fail-on-regression`, `--json` | 0 report; 1 regression with `--fail-on-regression`; 2 unreadable input |
+| `scripts/bottleneck_detector.py` | Array or JSONL of requests: `endpoint`, `duration_ms`, optional `queries` (`template`, `duration_ms`) and `spans` (`name`, `type`, `duration_ms`) | `--latency-threshold`, `--cv-threshold`, `--json` | 0 report; 2 unreadable input |
+| `scripts/resource_analyzer.py` | Array of snapshots: `timestamp` plus `cpu`, `memory`, `disk` (number or `{&quot;percent&quot;: n}`) | `--cpu-threshold`, `--memory-threshold`, `--disk-threshold`, `--json` | 0 report; 2 unreadable input |
 
-All three accept a file path or `-` for stdin and support `--json`.
+```bash
+# from engineering/performance-profiler/
+python3 scripts/benchmark_reporter.py assets/sample_benchmarks.json --fail-on-regression   # exit 1: parse_invoice +50%
+python3 scripts/bottleneck_detector.py assets/sample_request_log.json                     # slow GET /orders, N+1 confirmed
+python3 scripts/resource_analyzer.py assets/sample_resources.json                         # memory climbing all day
+```
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
 - **[references/cpu-and-memory-profiling.md](references/cpu-and-memory-profiling.md)** — the full Measure-First rule, Node.js CPU profiling (Clinic.js flamegraphs, V8 CPU profiles), and memory leak detection (Node heap snapshots, Python memray/tracemalloc). Read when chasing CPU or memory issues.
 - **[references/database-and-bundle.md](references/database-and-bundle.md)** — EXPLAIN ANALYZE workflow, N+1 detection patterns and middleware script, Next.js bundle analyzer setup, quick size checks, and the common-bundle-wins table. Read when optimizing queries or bundle size.
 - **[references/load-testing-and-methodology.md](references/load-testing-and-methodology.md)** — full k6 load-test script, the before/after measurement template, quick-win optimization checklist, common pitfalls, best practices, troubleshooting table, and success criteria. Read when load testing or documenting a win.
+
+## Anti-Patterns
+
+**Mistake:** Optimizing before measuring.
+**Why it matters:** Intuition picks the wrong hotspot most of the time, and the change adds risk without moving the number users feel.
+**Instead:** Profile or trace first, fix the top finding, and re-measure against the same baseline.
+
+**Mistake:** Comparing benchmarks run on different machines or loads.
+**Why it matters:** Noise from hardware and contention looks like regressions or wins.
+**Instead:** Run baseline and current on the same environment, with enough iterations, and gate CI with `--fail-on-regression` only on stable runners.
+
+**Mistake:** Treating averages as the user experience.
+**Why it matters:** A good mean hides a slow tail, and the tail is what times out.
+**Instead:** Track p95 and p99 per endpoint, and look at variance as well as the median.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/benchmark_reporter.py`, `scripts/bottleneck_detector.py`, `scripts/resource_analyzer.py` | Stdlib CLIs |
+| `assets/sample_benchmarks.json` | Two benchmarks: one regression (+50%), one improvement |
+| `assets/sample_request_log.json` | 30 requests with an N+1 pattern and a slow external call |
+| `assets/sample_resources.json` | 48 half-hourly snapshots with steadily rising memory |
 
 ## Scope &amp; Limitations
 
@@ -509,17 +537,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Infrastructure-level performance tuning (kernel parameters, network stack, container resource limits) — see `engineering/senior-devops`
 - Security-focused performance concerns such as DDoS mitigation or rate limiting — see `engineering/senior-security`
 - Mobile application profiling (iOS Instruments, Android Profiler) — see `engineering/senior-mobile`
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `engineering/observability-designer` | Performance profiling findings feed into observability dashboard design; alerting thresholds derived from profiling baselines | Profiler baselines and SLA thresholds → Prometheus/Grafana alert rules and dashboard panels |
-| `engineering/ci-cd-pipeline-builder` | k6 load tests and bundle size checks integrate as CI pipeline gates | k6 threshold configs and bundle budget scripts → CI pipeline stage definitions |
-| `engineering/database-designer` | Query optimization recommendations inform schema design decisions; index suggestions feed back to schema migrations | EXPLAIN ANALYZE findings and index recommendations → schema migration files and index definitions |
-| `engineering/senior-backend` | Backend architecture decisions incorporate profiling data; connection pool sizing and caching strategies validated by load tests | Profiling reports and load test results → architecture decision records and implementation guidance |
-| `engineering/tech-debt-tracker` | Performance regressions and unresolved bottlenecks are tracked as technical debt items with measured impact | Before/after measurement reports and unresolved findings → tech debt backlog with quantified cost |
-| `engineering/senior-frontend` | Bundle analysis results drive frontend optimization work; code-splitting and lazy-loading decisions backed by profiler data | Bundle analyzer output and Lighthouse scores → frontend optimization tasks and component refactoring plans |
 
 ---
 
@@ -603,23 +620,51 @@ Before profiling, settle the inputs below. When one is missing or vague and woul
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `benchmark_reporter.py` | Parse benchmark results and report regressions/improvements vs thresholds | `python scripts/benchmark_reporter.py results.json --fail-on-regression` |
-| `bottleneck_detector.py` | Analyze logs/traces to flag slow latency, queries, and spans | `python scripts/bottleneck_detector.py trace.json --latency-threshold 200` |
-| `resource_analyzer.py` | Analyze CPU/memory/disk usage data and flag anomalies and trends | `python scripts/resource_analyzer.py metrics.json --cpu-threshold 80` |
+| Tool | Input (JSON) | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `scripts/benchmark_reporter.py` | `{&quot;baseline&quot;: [...], &quot;current&quot;: [...]}`, each entry `name`, `iterations`, `mean_ms`, `median_ms`, `min_ms`, `max_ms`, `p95_ms` | `--regression-threshold 5`, `--improvement-threshold 5`, `--fail-on-regression`, `--json` | 0 report; 1 regression with `--fail-on-regression`; 2 unreadable input |
+| `scripts/bottleneck_detector.py` | Array or JSONL of requests: `endpoint`, `duration_ms`, optional `queries` (`template`, `duration_ms`) and `spans` (`name`, `type`, `duration_ms`) | `--latency-threshold`, `--cv-threshold`, `--json` | 0 report; 2 unreadable input |
+| `scripts/resource_analyzer.py` | Array of snapshots: `timestamp` plus `cpu`, `memory`, `disk` (number or `{&quot;percent&quot;: n}`) | `--cpu-threshold`, `--memory-threshold`, `--disk-threshold`, `--json` | 0 report; 2 unreadable input |
 
-All three accept a file path or `-` for stdin and support `--json`.
+```bash
+# from engineering/performance-profiler/
+python3 scripts/benchmark_reporter.py assets/sample_benchmarks.json --fail-on-regression   # exit 1: parse_invoice +50%
+python3 scripts/bottleneck_detector.py assets/sample_request_log.json                     # slow GET /orders, N+1 confirmed
+python3 scripts/resource_analyzer.py assets/sample_resources.json                         # memory climbing all day
+```
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
 - **[references/cpu-and-memory-profiling.md](references/cpu-and-memory-profiling.md)** — the full Measure-First rule, Node.js CPU profiling (Clinic.js flamegraphs, V8 CPU profiles), and memory leak detection (Node heap snapshots, Python memray/tracemalloc). Read when chasing CPU or memory issues.
 - **[references/database-and-bundle.md](references/database-and-bundle.md)** — EXPLAIN ANALYZE workflow, N+1 detection patterns and middleware script, Next.js bundle analyzer setup, quick size checks, and the common-bundle-wins table. Read when optimizing queries or bundle size.
 - **[references/load-testing-and-methodology.md](references/load-testing-and-methodology.md)** — full k6 load-test script, the before/after measurement template, quick-win optimization checklist, common pitfalls, best practices, troubleshooting table, and success criteria. Read when load testing or documenting a win.
+
+## Anti-Patterns
+
+**Mistake:** Optimizing before measuring.
+**Why it matters:** Intuition picks the wrong hotspot most of the time, and the change adds risk without moving the number users feel.
+**Instead:** Profile or trace first, fix the top finding, and re-measure against the same baseline.
+
+**Mistake:** Comparing benchmarks run on different machines or loads.
+**Why it matters:** Noise from hardware and contention looks like regressions or wins.
+**Instead:** Run baseline and current on the same environment, with enough iterations, and gate CI with `--fail-on-regression` only on stable runners.
+
+**Mistake:** Treating averages as the user experience.
+**Why it matters:** A good mean hides a slow tail, and the tail is what times out.
+**Instead:** Track p95 and p99 per endpoint, and look at variance as well as the median.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/benchmark_reporter.py`, `scripts/bottleneck_detector.py`, `scripts/resource_analyzer.py` | Stdlib CLIs |
+| `assets/sample_benchmarks.json` | Two benchmarks: one regression (+50%), one improvement |
+| `assets/sample_request_log.json` | 30 requests with an N+1 pattern and a slow external call |
+| `assets/sample_resources.json` | 48 half-hourly snapshots with steadily rising memory |
 
 ## Scope &amp; Limitations
 
@@ -634,17 +679,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Infrastructure-level performance tuning (kernel parameters, network stack, container resource limits) — see `engineering/senior-devops`
 - Security-focused performance concerns such as DDoS mitigation or rate limiting — see `engineering/senior-security`
 - Mobile application profiling (iOS Instruments, Android Profiler) — see `engineering/senior-mobile`
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `engineering/observability-designer` | Performance profiling findings feed into observability dashboard design; alerting thresholds derived from profiling baselines | Profiler baselines and SLA thresholds → Prometheus/Grafana alert rules and dashboard panels |
-| `engineering/ci-cd-pipeline-builder` | k6 load tests and bundle size checks integrate as CI pipeline gates | k6 threshold configs and bundle budget scripts → CI pipeline stage definitions |
-| `engineering/database-designer` | Query optimization recommendations inform schema design decisions; index suggestions feed back to schema migrations | EXPLAIN ANALYZE findings and index recommendations → schema migration files and index definitions |
-| `engineering/senior-backend` | Backend architecture decisions incorporate profiling data; connection pool sizing and caching strategies validated by load tests | Profiling reports and load test results → architecture decision records and implementation guidance |
-| `engineering/tech-debt-tracker` | Performance regressions and unresolved bottlenecks are tracked as technical debt items with measured impact | Before/after measurement reports and unresolved findings → tech debt backlog with quantified cost |
-| `engineering/senior-frontend` | Bundle analysis results drive frontend optimization work; code-splitting and lazy-loading decisions backed by profiler data | Bundle analyzer output and Lighthouse scores → frontend optimization tasks and component refactoring plans |
 
 ---
 
@@ -733,7 +767,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/performance-profiler/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/performance-profiler/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

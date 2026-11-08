@@ -1,0 +1,26 @@
+[
+  {
+    "id": "AUTH-001",
+    "name": "User login with email",
+    "priority": "critical",
+    "keywords": ["login", "sign in", "email", "password"],
+    "pages": ["/login", "/dashboard"],
+    "steps": ["Navigate to login", "Enter email", "Enter password", "Click sign in", "See dashboard"]
+  },
+  {
+    "id": "CHK-001",
+    "name": "Checkout with saved card",
+    "priority": "critical",
+    "keywords": ["checkout", "payment", "card", "order"],
+    "pages": ["/cart", "/checkout"],
+    "steps": ["Open cart", "Start checkout", "Pick saved card", "Place order"]
+  },
+  {
+    "id": "PRF-001",
+    "name": "Update profile name",
+    "priority": "medium",
+    "keywords": ["profile", "settings", "name"],
+    "pages": ["/settings/profile"],
+    "steps": ["Open profile", "Change name", "Save"]
+  }
+]

@@ -202,7 +202,7 @@ describe('{{Feature Name}}', () => {{
 
     // Assert
     // TODO: Verify expected behavior
-    expect(true).toBe(true); // Replace with actual assertion
+    throw new Error('TODO: replace with the real assertion'); // starts RED on purpose
   }});
 }});
 """
@@ -226,7 +226,7 @@ def test_{name}():
 
     # Assert
     # TODO: Verify expected behavior
-    assert True  # Replace with actual assertion
+    raise NotImplementedError("TODO: replace with the real assertion")  # starts RED on purpose
 """
         return stub.strip()
 
@@ -252,7 +252,7 @@ public void {method_name}() {{
 
     // Assert
     // TODO: Verify expected behavior
-    assertTrue(true); // Replace with actual assertion
+    fail("TODO: replace with the real assertion"); // starts RED on purpose
 }}
 """
         return stub.strip()
@@ -275,7 +275,7 @@ describe('{{Feature Name}}', () => {{
 
     // Assert
     // TODO: Verify expected behavior
-    expect(true).toBe(true); // Replace with actual assertion
+    throw new Error('TODO: replace with the real assertion'); // starts RED on purpose
   }});
 }});
 """

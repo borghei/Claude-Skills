@@ -119,12 +119,10 @@ def call_llm_with_retry(provider: LLMProvider, prompt: str) -> str:
 
 ### Cost Management
 
-| Provider | Input Cost | Output Cost |
-|----------|------------|-------------|
-| GPT-4 | $0.03/1K | $0.06/1K |
-| GPT-3.5 | $0.0005/1K | $0.0015/1K |
-| Claude 3 Opus | $0.015/1K | $0.075/1K |
-| Claude 3 Haiku | $0.00025/1K | $0.00125/1K |
+Keep per-model input, output and cached-input prices in configuration with an as-of date,
+copied from each provider's pricing page; they change several times a year. Track spend per
+feature from logged token counts, route easy requests to the provider's small model, and
+cache stable prompt prefixes.
 
 ---
 

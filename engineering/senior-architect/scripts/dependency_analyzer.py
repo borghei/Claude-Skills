@@ -568,33 +568,38 @@ Supported package managers:
     project_path = Path(args.project_path).resolve()
     if not project_path.exists():
         print(f"Error: Project path does not exist: {project_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if not project_path.is_dir():
         print(f"Error: Project path is not a directory: {project_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Run analysis
     analyzer = DependencyAnalyzer(project_path, verbose=args.verbose)
     report = analyzer.analyze()
 
     # Filter report based on --check option
+    # --check gates honour --output json too, so CI can parse either result
     if args.check == 'circular':
-        if report['circular_dependencies']:
+        cycles = report['circular_dependencies']
+        if args.output == 'json':
+            print(json.dumps({"check": "circular", "passed": not cycles, "cycles": cycles}, indent=2))
+        elif cycles:
             print("Circular dependencies found:")
-            for cycle in report['circular_dependencies']:
+            for cycle in cycles:
                 print(f"  {' -> '.join(cycle)}")
-            sys.exit(1)
         else:
             print("No circular dependencies found.")
-            sys.exit(0)
+        sys.exit(1 if cycles else 0)
     elif args.check == 'coupling':
         score = report['summary']['coupling_score']
-        print(f"Coupling score: {score}/100")
-        if score > 70:
-            print("WARNING: High coupling detected")
-            sys.exit(1)
-        sys.exit(0)
+        if args.output == 'json':
+            print(json.dumps({"check": "coupling", "passed": score <= 70, "coupling_score": score}, indent=2))
+        else:
+            print(f"Coupling score: {score}/100")
+            if score > 70:
+                print("WARNING: High coupling detected")
+        sys.exit(1 if score > 70 else 0)
 
     # Output report
     if args.output == 'json':
@@ -611,5 +616,5 @@ Supported package managers:
             print(f"\nJSON report saved to {args.save}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

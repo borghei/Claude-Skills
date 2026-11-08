@@ -1,0 +1,65 @@
+{
+  "project": "PROJ",
+  "issues": [
+    {
+      "key": "PROJ-101",
+      "type": "Story",
+      "transitions": [
+        {
+          "from_status": "To Do",
+          "to_status": "In Progress",
+          "entered": "2026-03-01",
+          "exited": "2026-03-03"
+        },
+        {
+          "from_status": "In Progress",
+          "to_status": "In Review",
+          "entered": "2026-03-03",
+          "exited": "2026-03-05"
+        },
+        {
+          "from_status": "In Review",
+          "to_status": "Done",
+          "entered": "2026-03-05",
+          "exited": "2026-03-06"
+        }
+      ]
+    },
+    {
+      "key": "PROJ-102",
+      "type": "Bug",
+      "transitions": [
+        {
+          "from_status": "To Do",
+          "to_status": "In Progress",
+          "entered": "2026-03-02",
+          "exited": "2026-03-04"
+        },
+        {
+          "from_status": "In Progress",
+          "to_status": "In Review",
+          "entered": "2026-03-04",
+          "exited": "2026-03-07"
+        },
+        {
+          "from_status": "In Review",
+          "to_status": "In Progress",
+          "entered": "2026-03-07",
+          "exited": "2026-03-09"
+        },
+        {
+          "from_status": "In Progress",
+          "to_status": "In Review",
+          "entered": "2026-03-09",
+          "exited": "2026-03-10"
+        },
+        {
+          "from_status": "In Review",
+          "to_status": "Done",
+          "entered": "2026-03-10",
+          "exited": "2026-03-11"
+        }
+      ]
+    }
+  ]
+}

@@ -7,7 +7,7 @@ metadata:
   author: borghei
   category: testing
   domain: skill-testing
-  updated: 2026-02-16
+  updated: 2026-11-08
   tier: BASIC
   tags:
     - sample
@@ -21,7 +21,6 @@ metadata:
 **Tier**: BASIC
 **Category**: Text Processing
 **Dependencies**: None (Python Standard Library Only)
-**Author**: Claude Skills Engineering Team
 **Version**: 1.0.0
 **Last Updated**: 2026-02-16
 

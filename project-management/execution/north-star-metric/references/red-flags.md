@@ -18,7 +18,7 @@ Scan the NSM spec and `metric_tree_builder.py` output before publishing to the t
 > "NSM: Monthly Recurring Revenue. Current: $4.2M. Target: $6.5M by Q4. Inputs: 'Marketing spend, Sales velocity, Product features'."
 
 **Good example:**
-> "NSM: Weekly active accounts that complete a deliverable. Current: 12,400. Target: 22,000 by 2026-09-30. Why: revenue follows from value; value is delivered when a user completes a deliverable; we are a productivity product. Inputs: (1) WAA — direct activity, (2) Publisher rate — depth of value. Revenue is tracked as a KPI alongside the NSM but is not the NSM."
+> "NSM: Weekly active accounts that complete a deliverable. Current: 12,400. Target: 22,000 by 2027-06-30. Why: revenue follows from value; value is delivered when a user completes a deliverable; we are a productivity product. Inputs: (1) WAA — direct activity, (2) Publisher rate — depth of value. Revenue is tracked as a KPI alongside the NSM but is not the NSM."
 
 **How to catch it.** Apply the 5 tests: customer value, strategic alignment, leading, single number, movable. Revenue fails "leading" — it lags every action.
 

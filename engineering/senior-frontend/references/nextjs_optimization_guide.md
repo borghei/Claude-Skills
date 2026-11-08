@@ -1,6 +1,6 @@
 # Next.js Optimization Guide
 
-Performance optimization techniques for Next.js 14+ applications.
+Performance optimization techniques for Next.js 16 applications.
 
 ---
 

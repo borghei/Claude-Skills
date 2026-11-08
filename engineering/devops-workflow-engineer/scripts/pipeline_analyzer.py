@@ -271,13 +271,15 @@ def analyze_workflow_file(filepath):
             ))
 
     # --- Check: Deprecated actions ---
+    # Current majors as of Nov 2026 (gh api repos/actions/<name>/releases/latest).
     deprecated_patterns = [
-        (r"actions/checkout@v[12]\b", "actions/checkout@v4"),
-        (r"actions/setup-python@v[1-3]\b", "actions/setup-python@v5"),
-        (r"actions/setup-node@v[1-3]\b", "actions/setup-node@v4"),
-        (r"actions/cache@v[1-3]\b", "actions/cache@v4"),
-        (r"actions/upload-artifact@v[1-3]\b", "actions/upload-artifact@v4"),
-        (r"actions/download-artifact@v[1-3]\b", "actions/download-artifact@v4"),
+        (r"actions/checkout@v[1-6]\b", "actions/checkout@v7"),
+        (r"actions/setup-node@v[1-6]\b", "actions/setup-node@v7"),
+        (r"actions/setup-python@v[1-6]\b", "actions/setup-python@v7"),
+        (r"actions/upload-artifact@v[1-6]\b", "actions/upload-artifact@v7"),
+        (r"actions/download-artifact@v[1-7]\b", "actions/download-artifact@v8"),
+        (r"actions/cache@v[1-5]\b", "actions/cache@v6"),
+        (r"actions/setup-go@v[1-6]\b", "actions/setup-go@v7"),
     ]
     for pattern, replacement in deprecated_patterns:
         matches = re.findall(pattern, content)
@@ -599,7 +601,7 @@ def main():
 
     if not target.exists():
         print(f"Error: Path does not exist: {args.path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Collect workflow files
     workflow_files = []
@@ -608,16 +610,16 @@ def main():
             workflow_files.append(target)
         else:
             print(f"Error: File is not a YAML file: {target}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
     elif target.is_dir():
         for ext in ("*.yml", "*.yaml"):
             workflow_files.extend(sorted(target.glob(ext)))
         if not workflow_files:
             print(f"Error: No .yml or .yaml files found in {target}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
     else:
         print(f"Error: Path is not a file or directory: {target}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Analyze
     results = []
@@ -634,6 +636,8 @@ def main():
         print(f"Report written to {args.output}", file=sys.stderr)
     else:
         print(report)
+    # Exit 1 when any critical finding (e.g. a hard-coded secret) is present.
+    sys.exit(1 if any(f.severity == "critical" for _, fs in results for f in fs) else 0)
 
 
 if __name__ == "__main__":

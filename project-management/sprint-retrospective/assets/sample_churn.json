@@ -1,0 +1,106 @@
+{
+  "period": {
+    "since": "2026-03-04",
+    "until": "2026-03-18",
+    "days": 14
+  },
+  "hotspots": [
+    {
+      "file": "src/api/handlers.py",
+      "changes": 12,
+      "authors": [
+        "alice@example.com",
+        "bob@example.com",
+        "carol@example.com"
+      ],
+      "author_count": 3,
+      "loc_added": 480,
+      "loc_removed": 264,
+      "loc_churn": 744,
+      "churn_rate": 0.86,
+      "churn_score": 8.4
+    },
+    {
+      "file": "src/models/user.py",
+      "changes": 8,
+      "authors": [
+        "alice@example.com",
+        "bob@example.com"
+      ],
+      "author_count": 2,
+      "loc_added": 320,
+      "loc_removed": 176,
+      "loc_churn": 496,
+      "churn_rate": 0.57,
+      "churn_score": 5.2
+    },
+    {
+      "file": "src/ui/dashboard.tsx",
+      "changes": 7,
+      "authors": [
+        "alice@example.com",
+        "bob@example.com"
+      ],
+      "author_count": 2,
+      "loc_added": 280,
+      "loc_removed": 154,
+      "loc_churn": 434,
+      "churn_rate": 0.5,
+      "churn_score": 4.8
+    }
+  ],
+  "directory_churn": [
+    {
+      "directory": "src/api",
+      "changes": 41,
+      "unique_files": 18,
+      "authors": [
+        "alice@example.com",
+        "bob@example.com",
+        "carol@example.com"
+      ],
+      "author_count": 3,
+      "loc_added": 1630,
+      "loc_removed": 702
+    },
+    {
+      "directory": "src/ui",
+      "changes": 29,
+      "unique_files": 14,
+      "authors": [
+        "bob@example.com",
+        "carol@example.com"
+      ],
+      "author_count": 2,
+      "loc_added": 1210,
+      "loc_removed": 640
+    }
+  ],
+  "health_indicators": {
+    "churn_rate": 0.34,
+    "hotspot_concentration": 0.32,
+    "test_to_prod_ratio": 0.38,
+    "refactor_frequency": 0.12,
+    "total_files_changed": 96,
+    "total_commits": 115,
+    "commit_type_distribution": {
+      "feat": 48,
+      "fix": 21,
+      "docs": 16,
+      "refactor": 14,
+      "test": 9,
+      "chore": 7
+    }
+  },
+  "refactoring_candidates": [
+    {
+      "file": "src/api/handlers.py",
+      "churn_score": 8.4,
+      "reasons": [
+        "changed 12 times in 14 days",
+        "touched by 3 authors (coordination overhead)"
+      ],
+      "recommendation": "Consider splitting, refactoring, or stabilizing this file."
+    }
+  ]
+}

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Summarize Meeting - Claude Skills</title>
-  <meta name="description" content="Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.">
+  <meta name="description" content="Turns meeting notes or transcripts into a summary of decisions, owned and dated action items, and open questions. Use when writing up a meeting, a recap email or a decision log; for patterns across a ">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/summarize-meeting.html">
   <meta property="og:title" content="Summarize Meeting - Claude Skills">
-  <meta property="og:description" content="Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.">
+  <meta property="og:description" content="Turns meeting notes or transcripts into a summary of decisions, owned and dated action items, and open questions. Use when writing up a meeting, a recap email or a decision log; for patterns across a ">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/summarize-meeting.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Summarize Meeting", "description": "Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/summarize-meeting.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Summarize Meeting", "description": "Turns meeting notes or transcripts into a summary of decisions, owned and dated action items, and open questions. Use when writing up a meeting, a recap email or a decision log; for patterns across a series use meeting-analyzer.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/summarize-meeting.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Summarize Meeting</h1>
-    <p class="page-subtitle">Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.</p>
+    <p class="page-subtitle">Turns meeting notes or transcripts into a summary of decisions, owned and dated action items, and open questions. Use when writing up a meeting, a recap email or a decision log; for patterns across a series use meeting-analyzer.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">meeting-summary</span><span class="tag">action-items</span><span class="tag">decisions</span><span class="tag">meetings</span></div>
   </div>
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Summarize Meeting (Project Management domain).
 
-Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.
+Turns meeting notes or transcripts into a summary of decisions, owned and dated action items, and open questions. Use when writing up a meeting, a recap email or a decision log; for patterns across a series use meeting-analyzer.
 
-Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when. - **Metadata capture** — date
+Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when. **Done looks like:** every de
 
 ## Your Key Capabilities
 - Posting an AI summary without review
@@ -403,7 +403,7 @@ Transform meeting notes, transcripts, or recordings into clear, actionable summa
 - Pasting the transcript as the summary
 
 ## Frameworks &amp; Templates You Know
-- - Document recurring meeting outcomes in `../confluence-expert/` templates.
+- | `assets/meeting_summary_template.md` | Fill-in summary template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -423,9 +423,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Summarize Meeting (Project Management domain).
 
-Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.
+Turns meeting notes or transcripts into a summary of decisions, owned and dated action items, and open questions. Use when writing up a meeting, a recap email or a decision log; for patterns across a series use meeting-analyzer.
 
-Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when. - **Metadata capture** — date
+Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when. **Done looks like:** every de
 
 ## Your Key Capabilities
 - Posting an AI summary without review
@@ -433,7 +433,7 @@ Transform meeting notes, transcripts, or recordings into clear, actionable summa
 - Pasting the transcript as the summary
 
 ## Frameworks &amp; Templates You Know
-- - Document recurring meeting outcomes in `../confluence-expert/` templates.
+- | `assets/meeting_summary_template.md` | Fill-in summary template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -467,14 +467,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when.
 
-## Core Capabilities
-
-- **Metadata capture** — date, time, participants with roles, topic, location
-- **Discussion synthesis** — summarize substantive topics in plain language; note disagreements and resolutions
-- **Action extraction** — one owner, concrete deliverable, and a specific calendar due date per item
-- **Decision logging** — numbered decisions with rationale and decision-maker
-- **Open-question tracking** — unresolved items with owner and target date
-- **Consistent output** — fixed template plus naming convention and 24-hour distribution discipline
+**Done looks like:** every decision is numbered with who made it and why; every action item has one owner, a concrete deliverable and a calendar date; open questions have an owner; nothing is invented that the notes do not support (mark gaps as `[owner?]` or `[date?]` and ask).
 
 ## When to Use
 
@@ -482,6 +475,8 @@ Transform meeting notes, transcripts, or recordings into clear, actionable summa
 - **Sprint ceremonies** -- planning, retro, backlog refinement, sprint review.
 - **Stakeholder meetings** -- steering committees, executive reviews, client calls.
 - **Ad-hoc discussions** -- when an impromptu conversation produces commitments that need tracking.
+
+For accountability across a recurring series (who keeps missing commitments, which meetings never decide anything), use `../../meeting-analyzer/` instead.
 
 ## Clarify First
 
@@ -492,6 +487,29 @@ Before summarizing, settle the inputs below. When one is missing or vague and wo
 - **Distribution scope + confidentiality:** attendees, non-attendees, or execs, and any sensitivity limits (determines whether standard 24-hour distribution applies).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+## Tools
+
+Once summaries are captured as JSON (one object per meeting under `meetings`), three tools check them. All read `--meetings FILE`, print text or `--format json` (`--json` is the same), and `--example` prints a valid input.
+
+| Tool | Checks |
+|------|--------|
+| `action_item_tracker.py` | Completion rate, overdue items, owners with the most open work, items with no owner or date. `--as-of YYYY-MM-DD` sets the date for overdue checks; it defaults to the latest meeting date so old notes give a stable result. |
+| `decision_log_builder.py` | Numbered decision log (`DEC-YYYYMMDD-NNN`), rationale coverage, high-impact decisions marked reversible. `--search TEXT` filters by keyword. |
+| `meeting_effectiveness_scorer.py` | 0-100 per meeting from decisions, owned/dated actions, time per output, agenda coverage and attendee count. |
+
+```bash
+python3 project-management/execution/summarize-meeting/scripts/action_item_tracker.py \
+  --meetings project-management/execution/summarize-meeting/assets/sample_meetings.json
+python3 project-management/execution/summarize-meeting/scripts/decision_log_builder.py \
+  --meetings project-management/execution/summarize-meeting/assets/sample_meetings.json --search postgres
+python3 project-management/execution/summarize-meeting/scripts/meeting_effectiveness_scorer.py \
+  --meetings project-management/execution/summarize-meeting/assets/sample_meetings.json --format json
+```
+
+On the sample: 5 actions, 2 done, 1 overdue (Carol, 4 days as of 2026-03-14), 1 with no owner or date; 3 decisions with 67% rationale coverage; the status sync with eight people, no agenda and no decision scores lowest.
+
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape (top level not an object, `meetings` not a list). The tools report findings; they do not gate.
 
 ## Anti-Patterns
 
@@ -512,7 +530,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -520,12 +538,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/meeting-facilitation-guide.md](references/meeting-facilitation-guide.md)** — meeting types, note-taking strategies, and anti-patterns. Read to tailor the summary to the meeting type or improve input quality.
 - **[references/red-flags.md](references/red-flags.md)** — common ways summaries go wrong with bad/good examples. Read before posting, emailing, or linking a summary.
 - **[assets/meeting_summary_template.md](assets/meeting_summary_template.md)** — ready-to-use fill-in template. Use to draft the summary directly.
-
-## Integration with Other Skills
-
-- Feed decisions into `wwas/` to create backlog items with strategic context.
-- Use action items to create tickets via `../jira-expert/`.
-- Document recurring meeting outcomes in `../confluence-expert/` templates.
 
 ## Scope &amp; Limitations
 
@@ -545,6 +557,17 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `../confluence-expert/` | Meetings -&gt; Confluence | Summaries stored in Confluence using meeting notes template |
 | `../senior-pm/` | Meetings -&gt; PM | Steering committee and stakeholder meeting summaries feed portfolio reporting |
 | `../delivery-manager/` | Meetings -&gt; DM | Release planning and incident review meeting outcomes feed delivery tracking |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/action_item_tracker.py` | Action completion, overdue and ownership report |
+| `scripts/decision_log_builder.py` | Decision log with rationale coverage |
+| `scripts/meeting_effectiveness_scorer.py` | Per-meeting effectiveness score |
+| `assets/sample_meetings.json` | Three meetings that exercise all three tools |
+| `assets/meeting_summary_template.md` | Fill-in summary template |
+| `examples/product-review-may-22.md` | Worked summary |
 
 ---
 
@@ -572,7 +595,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Summarize Meeting&quot;**
-   - Description: &quot;Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.&quot;
+   - Description: &quot;Turns meeting notes or transcripts into a summary of decisions, owned and dated action items, and open questions. Use when writing up a meeting, a recap email or a decision log; for patterns across a series use meeting-analyzer.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -601,14 +624,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Transform meeting notes, transcripts, or recordings into clear, actionable summaries. Every summary follows a consistent structure that makes it easy for attendees and non-attendees alike to understand what was discussed, what was decided, and who is doing what by when.
 
-## Core Capabilities
-
-- **Metadata capture** — date, time, participants with roles, topic, location
-- **Discussion synthesis** — summarize substantive topics in plain language; note disagreements and resolutions
-- **Action extraction** — one owner, concrete deliverable, and a specific calendar due date per item
-- **Decision logging** — numbered decisions with rationale and decision-maker
-- **Open-question tracking** — unresolved items with owner and target date
-- **Consistent output** — fixed template plus naming convention and 24-hour distribution discipline
+**Done looks like:** every decision is numbered with who made it and why; every action item has one owner, a concrete deliverable and a calendar date; open questions have an owner; nothing is invented that the notes do not support (mark gaps as `[owner?]` or `[date?]` and ask).
 
 ## When to Use
 
@@ -616,6 +632,8 @@ Transform meeting notes, transcripts, or recordings into clear, actionable summa
 - **Sprint ceremonies** -- planning, retro, backlog refinement, sprint review.
 - **Stakeholder meetings** -- steering committees, executive reviews, client calls.
 - **Ad-hoc discussions** -- when an impromptu conversation produces commitments that need tracking.
+
+For accountability across a recurring series (who keeps missing commitments, which meetings never decide anything), use `../../meeting-analyzer/` instead.
 
 ## Clarify First
 
@@ -626,6 +644,29 @@ Before summarizing, settle the inputs below. When one is missing or vague and wo
 - **Distribution scope + confidentiality:** attendees, non-attendees, or execs, and any sensitivity limits (determines whether standard 24-hour distribution applies).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+## Tools
+
+Once summaries are captured as JSON (one object per meeting under `meetings`), three tools check them. All read `--meetings FILE`, print text or `--format json` (`--json` is the same), and `--example` prints a valid input.
+
+| Tool | Checks |
+|------|--------|
+| `action_item_tracker.py` | Completion rate, overdue items, owners with the most open work, items with no owner or date. `--as-of YYYY-MM-DD` sets the date for overdue checks; it defaults to the latest meeting date so old notes give a stable result. |
+| `decision_log_builder.py` | Numbered decision log (`DEC-YYYYMMDD-NNN`), rationale coverage, high-impact decisions marked reversible. `--search TEXT` filters by keyword. |
+| `meeting_effectiveness_scorer.py` | 0-100 per meeting from decisions, owned/dated actions, time per output, agenda coverage and attendee count. |
+
+```bash
+python3 project-management/execution/summarize-meeting/scripts/action_item_tracker.py \
+  --meetings project-management/execution/summarize-meeting/assets/sample_meetings.json
+python3 project-management/execution/summarize-meeting/scripts/decision_log_builder.py \
+  --meetings project-management/execution/summarize-meeting/assets/sample_meetings.json --search postgres
+python3 project-management/execution/summarize-meeting/scripts/meeting_effectiveness_scorer.py \
+  --meetings project-management/execution/summarize-meeting/assets/sample_meetings.json --format json
+```
+
+On the sample: 5 actions, 2 done, 1 overdue (Carol, 4 days as of 2026-03-14), 1 with no owner or date; 3 decisions with 67% rationale coverage; the status sync with eight people, no agenda and no decision scores lowest.
+
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape (top level not an object, `meetings` not a list). The tools report findings; they do not gate.
 
 ## Anti-Patterns
 
@@ -646,7 +687,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -654,12 +695,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/meeting-facilitation-guide.md](references/meeting-facilitation-guide.md)** — meeting types, note-taking strategies, and anti-patterns. Read to tailor the summary to the meeting type or improve input quality.
 - **[references/red-flags.md](references/red-flags.md)** — common ways summaries go wrong with bad/good examples. Read before posting, emailing, or linking a summary.
 - **[assets/meeting_summary_template.md](assets/meeting_summary_template.md)** — ready-to-use fill-in template. Use to draft the summary directly.
-
-## Integration with Other Skills
-
-- Feed decisions into `wwas/` to create backlog items with strategic context.
-- Use action items to create tickets via `../jira-expert/`.
-- Document recurring meeting outcomes in `../confluence-expert/` templates.
 
 ## Scope &amp; Limitations
 
@@ -679,6 +714,17 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `../confluence-expert/` | Meetings -&gt; Confluence | Summaries stored in Confluence using meeting notes template |
 | `../senior-pm/` | Meetings -&gt; PM | Steering committee and stakeholder meeting summaries feed portfolio reporting |
 | `../delivery-manager/` | Meetings -&gt; DM | Release planning and incident review meeting outcomes feed delivery tracking |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/action_item_tracker.py` | Action completion, overdue and ownership report |
+| `scripts/decision_log_builder.py` | Decision log with rationale coverage |
+| `scripts/meeting_effectiveness_scorer.py` | Per-meeting effectiveness score |
+| `assets/sample_meetings.json` | Three meetings that exercise all three tools |
+| `assets/meeting_summary_template.md` | Fill-in summary template |
+| `examples/product-review-may-22.md` | Worked summary |
 
 ---
 
@@ -706,7 +752,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Summarize Meeting&quot;**
-   - Description: &quot;Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.&quot;
+   - Description: &quot;Turns meeting notes or transcripts into a summary of decisions, owned and dated action items, and open questions. Use when writing up a meeting, a recap email or a decision log; for patterns across a series use meeting-analyzer.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -767,7 +813,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python project-management/execution/summarize-meeting/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/summarize-meeting/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

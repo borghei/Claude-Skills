@@ -1,26 +1,27 @@
 ---
 name: docker-development
 description: >
-  This skill should be used when the user asks to "analyze a Dockerfile",
-  "optimize Docker layers", "validate docker-compose", "check container
-  best practices", or "audit Docker configurations".
+  Analyse Dockerfiles and Compose files for security, image size, cache and config problems,
+  with CI-ready exit codes. Use when reviewing or optimising a Dockerfile, validating
+  docker-compose, or adding a container lint step.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: containers
-  updated: 2026-04-02
+  updated: 2026-11-08
   tags: [docker, containers, devops, compose, dockerfile]
 ---
 # Docker Development
 
-> **Category:** Engineering
-> **Domain:** Container Development & Optimization
+The agent reviews Dockerfiles and Compose files the way a careful platform engineer would: security first (root user, secrets, privileged containers, floating tags), then image size and build-cache order, then operability (health checks, restart policies, resource limits). The two analyzers catch the mechanical issues so the review can focus on the design.
 
-## Overview
+## When to Use
 
-The **Docker Development** skill provides automated analysis of Dockerfiles and docker-compose configurations. It identifies layer optimization opportunities, security issues, best practice violations, and compose service misconfigurations. Use this skill to enforce container standards across your team and catch issues before they reach production.
+- Reviewing or optimising a Dockerfile (size, cache hits, security).
+- Validating a docker-compose file before it is shared or deployed.
+- Adding a container lint step to CI.
 
 ## Clarify First
 
@@ -32,97 +33,54 @@ Before running the analysis, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. **Analyse** the Dockerfile with `dockerfile_analyzer.py` and the Compose file with `compose_validator.py`.
+2. **Fix critical findings first**: secrets in `ENV`/environment, root user, privileged mode, host port conflicts. Then floating tags, then layer and cache order, then health checks and limits.
+3. **Change the design where the findings point to it**: a multi-stage build when build tools ship in the runtime image, a non-root `USER`, dependency files copied before source.
+4. **Verify** by rerunning both tools (critical count must be 0), then a real `docker build` and `docker compose config` to confirm the files still work. The analyzers read text; only a build proves the image.
+
 ## Quick Start
 
 ```bash
-# Analyze a Dockerfile for best practices
-python scripts/dockerfile_analyzer.py --file Dockerfile
+python3 scripts/dockerfile_analyzer.py --file examples/Dockerfile.sample                 # latest tag, ENV secret, root (exit 1)
+python3 scripts/compose_validator.py --file examples/docker-compose.sample.yml          # port clash, privileged, literal passwords (exit 1)
+python3 scripts/compose_validator.py --file examples/docker-compose.sound.yml           # clean (exit 0)
+python3 scripts/compose_validator.py --file examples/docker-compose.sample.yml --check-ports   # port check only
+```
 
-# Analyze with JSON output
-python scripts/dockerfile_analyzer.py --file Dockerfile --format json
+In CI, write one report per tool (two JSON documents in one file is not valid JSON) and gate on the exit codes:
 
-# Validate a docker-compose file
-python scripts/compose_validator.py --file docker-compose.yml
-
-# Check for host port conflicts between services in one compose file
-python scripts/compose_validator.py --file docker-compose.yml --check-ports
+```bash
+python3 scripts/dockerfile_analyzer.py --file Dockerfile --format json > dockerfile-report.json
+python3 scripts/compose_validator.py --file docker-compose.yml --format json > compose-report.json
 ```
 
 ## Tools Overview
 
-### dockerfile_analyzer.py
+| Tool | Checks | Key flags | Exit codes |
+|------|--------|-----------|------------|
+| `dockerfile_analyzer.py` | Root user, `latest`/untagged base, secrets in `ENV`/`ARG`, oversized base images, runs of consecutive `RUN` layers, missing `--no-install-recommends`, cache-breaking `COPY .` before installs, single-stage builds with many steps, missing `HEALTHCHECK`, missing `.dockerignore` next to the Dockerfile | `--file`, `--security-only`, `--format text|json` | 0 no critical, 1 critical finding, 2 file not found |
+| `compose_validator.py` | Structure, circular `depends_on`, host port conflicts, Docker socket and sensitive mounts, privileged and host network mode, floating image tags, literal passwords/secrets/tokens in `environment`, restart policy, resource limits | `--file`, `--check-ports` (runs only the port check), `--format text|json` | 0 no critical, 1 critical finding, 2 file not found |
 
-Analyzes Dockerfiles for best practices, security issues, and optimization opportunities.
+## Anti-Patterns
 
-| Feature | Description |
-|---------|-------------|
-| Layer optimization | Detects unnecessary layers, recommends combining RUN statements |
-| Multi-stage analysis | Lists build stages and suggests a multi-stage build when a single stage has many RUN steps (does not measure image size) |
-| Security scanning | Flags running as root, use of latest tags, exposed secrets |
-| Base image checks | Recommends smaller base images (alpine, distroless, slim) |
-| Cache optimization | Identifies poor layer ordering that breaks Docker cache |
+**Mistake:** Treating a clean analyzer run as a container security review.
+**Why it happens:** Zero findings looks like approval.
+**Instead:** The rules are text checks. Scan the built image for CVEs (Trivy, Grype or the registry's scanner) and review runtime privileges separately.
 
-```bash
-# Full analysis
-python scripts/dockerfile_analyzer.py --file Dockerfile
+**Mistake:** "Fixing" a secret finding by moving the value to a build `ARG`.
+**Why it happens:** The warning disappears from `ENV`.
+**Instead:** Build args are stored in image history. Use BuildKit secrets (`RUN --mount=type=secret`) for build-time secrets and runtime environment or secret stores for the rest.
 
-# Security-focused scan
-python scripts/dockerfile_analyzer.py --file Dockerfile --security-only
+**Mistake:** Switching every base image to Alpine for size.
+**Why it happens:** Smaller looks strictly better.
+**Instead:** musl breaks some native wheels and binaries. Prefer `-slim` or distroless when Alpine causes rebuilds from source, and confirm with a test build.
 
-# JSON output for CI integration
-python scripts/dockerfile_analyzer.py --file Dockerfile --format json
-```
+## Files
 
-### compose_validator.py
-
-Validates docker-compose files for correctness, dependency issues, and port conflicts.
-
-| Feature | Description |
-|---------|-------------|
-| Schema validation | Checks compose file structure and syntax |
-| Dependency graph | Validates depends_on chains for circular dependencies |
-| Port conflict detection | Identifies duplicate host port bindings |
-| Volume mount checks | Validates volume paths and mount configurations |
-| Network mode check | Flags services using `network_mode: host` (network definitions and connectivity are not checked) |
-
-```bash
-# Full validation
-python scripts/compose_validator.py --file docker-compose.yml
-
-# Check port conflicts only
-python scripts/compose_validator.py --file docker-compose.yml --check-ports
-
-# JSON output
-python scripts/compose_validator.py --file docker-compose.yml --format json
-```
-
-## Workflows
-
-### Dockerfile Review Workflow
-
-1. **Analyze** - Run dockerfile_analyzer.py against the target Dockerfile
-2. **Review findings** - Address critical security issues first (root user, secrets)
-3. **Optimize layers** - Combine RUN statements, reorder for cache efficiency
-4. **Validate base images** - Switch to minimal base images where possible
-5. **Re-analyze** - Confirm improvements and verify no regressions
-
-### Compose Validation Workflow
-
-1. **Validate structure** - Run compose_validator.py for syntax and schema checks
-2. **Check dependencies** - Review service dependency graph for circular refs
-3. **Audit ports** - Ensure no host port conflicts across services
-4. **Review volumes** - Confirm volume mounts are correct and necessary
-5. **Network review** - Act on any host network mode warning, then check network definitions and service isolation by hand
-
-### CI Integration Workflow
-
-```yaml
-# Example GitHub Actions step
-- name: Docker Lint
-  run: |
-    python scripts/dockerfile_analyzer.py --file Dockerfile --format json > results.json
-    python scripts/compose_validator.py --file docker-compose.yml --format json >> results.json
-```
+- `scripts/dockerfile_analyzer.py`, `scripts/compose_validator.py` — the analyzers.
+- `examples/Dockerfile.sample`, `examples/docker-compose.sample.yml` (deliberately flawed), `examples/docker-compose.sound.yml` (passes).
 
 ## Scope & Limitations
 
@@ -146,27 +104,4 @@ python scripts/compose_validator.py --file docker-compose.yml --format json
 
 ## Reference Documentation
 
-- [Docker Best Practices](references/docker-best-practices.md) - Comprehensive guide to Dockerfile and Compose patterns
-
-## Common Patterns Quick Reference
-
-| Pattern | Good | Bad |
-|---------|------|-----|
-| Base image | `FROM python:3.12-slim` | `FROM python:latest` |
-| User | `USER appuser` | Running as root |
-| Layer combining | `RUN apt-get update && apt-get install -y pkg` | Separate RUN for update and install |
-| COPY ordering | Copy requirements first, then code | Copy everything at once |
-| Multi-stage | Use builder stage + minimal runtime | Single stage with build tools |
-| Secrets | Use build secrets or env at runtime | `COPY .env .` or `ENV SECRET=value` |
-| Health checks | `HEALTHCHECK CMD curl -f http://localhost/` | No health check defined |
-| .dockerignore | Include node_modules, .git, etc. | No .dockerignore file |
-
-### Compose Patterns
-
-| Pattern | Good | Bad |
-|---------|------|-----|
-| Restart policy | `restart: unless-stopped` | No restart policy |
-| Resource limits | `deploy.resources.limits` set | Unlimited resources |
-| Named volumes | `volumes: [db-data:/var/lib/postgresql]` | Anonymous volumes |
-| Networks | Explicit network definitions | Default bridge only |
-| Environment | `env_file: .env` | Inline secrets in compose |
+- [references/docker-best-practices.md](references/docker-best-practices.md) — Dockerfile and Compose patterns (multi-stage builds, layer order, non-root users, health checks, secrets) with examples. Read when rewriting a Dockerfile or Compose file.

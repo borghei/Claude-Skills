@@ -1,0 +1,11 @@
+{
+  "name": "doStuff",
+  "description": "Does stuff",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "input": {}
+    },
+    "required": ["input", "mode"]
+  }
+}

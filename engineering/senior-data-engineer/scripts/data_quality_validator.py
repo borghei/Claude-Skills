@@ -142,13 +142,14 @@ class TypeDetector:
     """Detect and infer data types from values"""
 
     PATTERNS = {
+        # Dates first: an ISO date also matches the loose phone pattern below
+        'datetime_iso': r'^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}',
+        'date_iso': r'^\d{4}-\d{2}-\d{2}$',
         'email': r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
         'uuid': r'^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
         'phone': r'^\+?[\d\s\-\(\)]{10,}$',
         'url': r'^https?://[^\s]+$',
         'ipv4': r'^(\d{1,3}\.){3}\d{1,3}$',
-        'date_iso': r'^\d{4}-\d{2}-\d{2}$',
-        'datetime_iso': r'^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}',
         'credit_card': r'^\d{4}[\s\-]?\d{4}[\s\-]?\d{4}[\s\-]?\d{4}$',
     }
 
@@ -1625,12 +1626,12 @@ Examples:
     try:
         args.func(args)
     except Exception as e:
-        logger.error(f"Error: {e}")
+        print(f"error: {e}", file=sys.stderr)
         if args.verbose:
             import traceback
             traceback.print_exc()
-        sys.exit(1)
+        sys.exit(2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

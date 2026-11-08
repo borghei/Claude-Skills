@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: ai-security
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   frameworks: static-analysis, supply-chain-security
   tags:
     - skill-security
@@ -22,16 +22,16 @@ metadata:
 ---
 # Skill Security Auditor
 
-Scan and audit AI agent skills for security risks before installation. Performs static analysis on code files for dangerous patterns, scans markdown files for prompt injection, validates dependency supply chains, checks file system boundaries, and detects obfuscation. Produces a structured PASS / WARN / FAIL verdict with findings categorized by severity and actionable remediation guidance.
+Scan and audit AI agent skills for security risks before installation. Performs static analysis on Python files for dangerous patterns, scans markdown, text and YAML for prompt injection, and checks dependency manifests. Produces a PASS / WARN / FAIL verdict with findings by severity and remediation guidance.
 
-**Keywords:** skill security, AI security, prompt injection, code audit, supply chain, dependency scanning, data exfiltration, credential harvesting, obfuscation detection, pre-install security
+**What a verdict means.** The scanners match regular expressions line by line. They catch the common, unobfuscated forms of each attack and are easy to evade (string building, encoding, indirection through helpers). PASS means "nothing obvious was found", not "safe". For any skill from an untrusted source, read the scripts yourself after a PASS, and treat WARN as "read these lines before installing".
 
 ## Core Capabilities
 
 - **Code execution risk detection** — command injection (`os.system`, `subprocess shell=True`, backticks), `eval`/`exec`/`compile`, obfuscation (base64/hex/`chr()`), network exfiltration, credential harvesting (`~/.ssh`, `~/.aws`), privilege escalation.
-- **Prompt injection detection** — system-prompt overrides, role hijacking, safety bypass, hidden zero-width/HTML-comment instructions, data-extraction directives, excessive-permission requests.
-- **Supply chain analysis** — known-vulnerable pins, typosquatting, unpinned versions, inline `pip`/`npm install`, low-reputation packages.
-- **File system & structure validation** — out-of-scope paths, hidden/credential files, unexpected binaries, escaping symlinks, oversized payloads.
+- **Prompt injection detection** — system-prompt overrides, role hijacking, safety bypass, hidden zero-width/HTML-comment instructions, data-extraction and credential-access directives, instructions to conceal actions from the user, excessive-permission requests.
+- **Supply chain analysis** — typosquatted Python package names, unpinned versions in `requirements*.txt` and `package.json`, inline `pip`/`npm install`. Pinned versions are not checked against advisories; run `pip-audit`, `npm audit` or OSV-Scanner for CVEs.
+- **Manual structure review** (checklist in `references/audit-output-and-workflow.md`, not automated) — out-of-scope paths, hidden or credential files, unexpected binaries, escaping symlinks, oversized payloads.
 - **Verdict & reporting** — PASS / WARN / FAIL with severity-categorized findings, remediation, and a strict mode for CI gates.
 
 ## When to Use
@@ -62,6 +62,19 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 All tools take a `target` (file or directory), and support `--strict` (any HIGH → FAIL) and `--json`.
 
+Exit codes: `0` PASS or WARN, `1` FAIL (any CRITICAL, or any HIGH with `--strict`), `2` target
+does not exist. A directory with nothing scannable exits 0 with a note on stderr.
+
+Samples: `assets/sample_malicious_skill/` (hidden override comment, credential read with a
+clause asking the assistant to hide it, `os.system` concatenation, `~/.ssh` exfiltration, a typosquatted
+`reqeusts` pin) fails all three scanners; `assets/sample_benign_skill/` passes all three.
+
+```bash
+python scripts/code_scanner.py assets/sample_malicious_skill              # exit 1
+python scripts/prompt_injection_scanner.py assets/sample_malicious_skill  # exit 1
+python scripts/supply_chain_checker.py assets/sample_benign_skill         # exit 0
+```
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
@@ -73,10 +86,10 @@ Load the reference that matches the task — keep this file lean and pull detail
 ## Scope & Limitations
 
 **This skill covers:**
-- Static pattern-based detection of dangerous code constructs in Python, Bash, JavaScript, and TypeScript files
-- Prompt injection scanning across all markdown files within a skill package
-- Dependency supply chain validation for `requirements.txt` and `package.json`
-- File structure boundary checks including symlinks, binaries, hidden files, and oversized payloads
+- Static pattern-based detection of dangerous code constructs in Python files (other languages need a manual read)
+- Prompt injection scanning across markdown, text, YAML, reST and AsciiDoc files within a skill package
+- Dependency checks for `requirements*.txt` and `package.json`, plus inline installs in `.py` and `.sh` files
+- A manual checklist for structure risks (symlinks, binaries, hidden files, oversized payloads)
 
 **This skill does NOT cover:**
 - Runtime or dynamic analysis — code is never executed during the audit (see `skill-tester` for runtime validation)
@@ -94,3 +107,31 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `infrastructure-compliance-auditor` | Extend auditing scope from skill-level to infrastructure-level security controls | Skill audit findings → infrastructure auditor for environment-wide posture review |
 | `env-secrets-manager` | Cross-reference credential harvesting findings with secrets management policy | Credential-access flags from audit → env-secrets-manager for policy verification |
 | `pr-review-expert` | Surface audit findings as inline PR review comments on flagged lines | Audit report line references → PR review annotations for developer visibility |
+
+## Anti-Patterns
+
+### Treating PASS as Safe
+**Mistake:** Installing an untrusted skill because all three scanners returned PASS.
+**Why it happens:** A green verdict reads like a clearance.
+**Instead:** The scanners are regex tripwires. Read every script in an untrusted skill, look for string-built commands, encoded blobs and network calls, and only then install.
+
+### Running the Target's Code to Audit It
+**Mistake:** Executing a suspicious skill's scripts (or its test runner) to "see what it does".
+**Why it happens:** Dynamic testing feels more thorough.
+**Instead:** Audit statically first. Run code only in a disposable sandbox with no credentials and no network, and only after the static pass is clean.
+
+### Equating Pinned With Patched
+**Mistake:** Accepting a dependency list because every version is pinned.
+**Why it happens:** The checker's unpinned warnings disappear.
+**Instead:** Pinning makes builds reproducible, not safe. Run the ecosystem's advisory scanner on the pinned set.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/code_scanner.py` | Python code patterns: command injection, eval/exec, obfuscation, exfiltration, credential harvesting |
+| `scripts/prompt_injection_scanner.py` | Prompt-injection patterns in markdown, text and YAML |
+| `scripts/supply_chain_checker.py` | Typosquats, unpinned versions, inline installs |
+| `assets/sample_malicious_skill/` | Hostile fixture (all scanners exit 1) |
+| `assets/sample_benign_skill/` | Benign fixture (all scanners exit 0) |
+| `references/*.md` | Threat model and patterns, report format and CI wiring, limitations and checklists |

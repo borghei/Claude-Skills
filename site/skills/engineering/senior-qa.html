@@ -397,6 +397,11 @@ Testing for React/Next.js with Jest, React Testing Library, and Playwright. Use 
 
 Test automation, coverage analysis, and quality assurance patterns for React and Next.js applications. Generates Jest + React Testing Library unit test stubs, analyzes Istanbul/LCOV coverage for gaps, and scaffolds Playwright E2E suites for App Router and Pages Router projects. - **Unit test generat
 
+## Your Key Capabilities
+- Shipping Generated Stubs as Tests
+- Querying by Test ID First
+- Gating on Overall Coverage Only
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Testing for React/Next.js with Jest, React Testing Library, and Playwright. Use when generating tests, writing unit tests, analyzing coverage, scaffolding E2E tests, configuring Jest, or improving test quality.
 
 Test automation, coverage analysis, and quality assurance patterns for React and Next.js applications. Generates Jest + React Testing Library unit test stubs, analyzes Istanbul/LCOV coverage for gaps, and scaffolds Playwright E2E suites for App Router and Pages Router projects. - **Unit test generat
+
+## Your Key Capabilities
+- Shipping Generated Stubs as Tests
+- Querying by Test ID First
+- Gating on Overall Coverage Only
 
 ## How to Help
 When the user asks for help in this domain:
@@ -475,13 +485,29 @@ Before generating tests, settle the inputs below. When one is missing or vague a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `test_suite_generator.py` | Generate Jest + RTL test stubs from React components | `python scripts/test_suite_generator.py src/components/ --output __tests__/` |
-| `coverage_analyzer.py` | Analyze Istanbul/LCOV coverage and report gaps | `python scripts/coverage_analyzer.py coverage/coverage-final.json --threshold 80` |
-| `e2e_test_scaffolder.py` | Scaffold Playwright E2E tests from Next.js routes | `python scripts/e2e_test_scaffolder.py src/app/ --output e2e/` |
+| `test_suite_generator.py` | Jest + RTL stubs from React components; reads the `XProps` interface to build typed `mockProps` for required props (`--output`, `--include-a11y`, `--scan-only`, `--json`) | `python scripts/test_suite_generator.py assets/sample_components --output /tmp/qa/tests` |
+| `coverage_analyzer.py` | Istanbul JSON / LCOV gap analysis with critical-path weighting (`--threshold`, `--strict`, `--critical-paths`, `--format text/html/json`, `--json`) | `python scripts/coverage_analyzer.py assets/sample_lcov.info --threshold 80 --strict` |
+| `e2e_test_scaffolder.py` | Playwright specs, page objects, fixtures and `playwright.config.ts` from Next.js routes, all written under `--output` | `python scripts/e2e_test_scaffolder.py assets/sample_app/app --output /tmp/qa/e2e` |
+
+Exit codes: `0` ok; `1` coverage below `--threshold` when `--strict` is set (without
+`--strict` the analyzer always reports and exits 0, so use `--strict` in CI); `2` bad input
+(path not found, unparseable report). With `--json` the report goes to stderr and stdout is
+pure JSON.
+
+Generated stubs are a starting point: they render with valid required props and leave
+`TODO` assertions, so they compile but assert nothing until you write the checks. The
+sample LCOV has a payment file at 37.5% line coverage, so `--strict --threshold 80` exits 1.
+
+## Workflow
+
+1. Generate stubs or scaffold E2E specs into the project&#x27;s test folder (always pass `--output`).
+2. Replace every `TODO` with an assertion on behaviour the user can see (role, text, called handler); delete stubs that test nothing useful.
+3. Run the project&#x27;s tests with coverage, then `coverage_analyzer.py &lt;report&gt; --threshold &lt;n&gt; --strict`.
+4. Done when the suite passes, the analyzer exits 0, and no generated test is still assertion-free.
 
 ## References
 
@@ -507,16 +533,34 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Visual regression testing or screenshot comparison workflows.
 - Mobile-native testing (React Native, Flutter) -- this skill targets web browser-based testing only.
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-frontend` | Generated test stubs align with component patterns from the frontend skill | Frontend components --&gt; `test_suite_generator.py` --&gt; test files |
-| `senior-fullstack` | Code quality analyzer consumes the same coverage reports produced here | `coverage_analyzer.py` output --&gt; fullstack quality dashboard |
-| `senior-devops` | E2E test scaffolder generates CI-ready Playwright configs that plug into DevOps pipelines | `e2e_test_scaffolder.py` --&gt; `playwright.config.ts` --&gt; GitHub Actions workflow |
-| `code-reviewer` | Coverage gaps feed directly into code review checklists for untested changes | `coverage_analyzer.py` gaps --&gt; review checklist items |
-| `tdd-guide` | TDD workflow references this skill&#x27;s test generator for initial red-phase stub creation | TDD cycle --&gt; `test_suite_generator.py --scan-only` --&gt; write tests --&gt; implement |
-| `qa-browser-automation` | Page Object Models generated here are consumed by the browser automation skill for advanced E2E scenarios | `e2e_test_scaffolder.py --include-pom` --&gt; POM classes --&gt; browser automation flows |
+### Shipping Generated Stubs as Tests
+**Mistake:** Committing the generated files with their `TODO` assertions still in place.
+**Why it happens:** They run green and raise the coverage number.
+**Instead:** A render with no assertion only proves the component does not throw. Write the assertion or delete the case.
+
+### Querying by Test ID First
+**Mistake:** Reaching for `getByTestId` for every element.
+**Why it happens:** It is the most stable selector to write.
+**Instead:** Prefer `getByRole` and `getByLabelText`: they test what users and assistive tech see, and fail when accessibility regresses. Keep test IDs for elements with no accessible name.
+
+### Gating on Overall Coverage Only
+**Mistake:** Passing CI because the project average clears 80%.
+**Why it happens:** One number is easy to configure.
+**Instead:** Use `--critical-paths` and read the per-file gaps: a 37% payment module hidden behind a 90% average is the bug that ships.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/test_suite_generator.py` | Jest + RTL stub generator |
+| `scripts/coverage_analyzer.py` | Coverage gap analyzer and CI gate |
+| `scripts/e2e_test_scaffolder.py` | Playwright scaffolder for Next.js routes |
+| `assets/sample_components/Button.tsx` | Component with a typed props interface for the generator |
+| `assets/sample_app/app/` | Two-route Next.js App Router tree for the scaffolder |
+| `assets/sample_lcov.info` | LCOV report with an under-tested payment file (strict gate exits 1 at 80) |
+| `references/*.md` | Workflows, CLI reference, strategies, automation patterns, best practices |
 
 ---
 
@@ -597,13 +641,29 @@ Before generating tests, settle the inputs below. When one is missing or vague a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `test_suite_generator.py` | Generate Jest + RTL test stubs from React components | `python scripts/test_suite_generator.py src/components/ --output __tests__/` |
-| `coverage_analyzer.py` | Analyze Istanbul/LCOV coverage and report gaps | `python scripts/coverage_analyzer.py coverage/coverage-final.json --threshold 80` |
-| `e2e_test_scaffolder.py` | Scaffold Playwright E2E tests from Next.js routes | `python scripts/e2e_test_scaffolder.py src/app/ --output e2e/` |
+| `test_suite_generator.py` | Jest + RTL stubs from React components; reads the `XProps` interface to build typed `mockProps` for required props (`--output`, `--include-a11y`, `--scan-only`, `--json`) | `python scripts/test_suite_generator.py assets/sample_components --output /tmp/qa/tests` |
+| `coverage_analyzer.py` | Istanbul JSON / LCOV gap analysis with critical-path weighting (`--threshold`, `--strict`, `--critical-paths`, `--format text/html/json`, `--json`) | `python scripts/coverage_analyzer.py assets/sample_lcov.info --threshold 80 --strict` |
+| `e2e_test_scaffolder.py` | Playwright specs, page objects, fixtures and `playwright.config.ts` from Next.js routes, all written under `--output` | `python scripts/e2e_test_scaffolder.py assets/sample_app/app --output /tmp/qa/e2e` |
+
+Exit codes: `0` ok; `1` coverage below `--threshold` when `--strict` is set (without
+`--strict` the analyzer always reports and exits 0, so use `--strict` in CI); `2` bad input
+(path not found, unparseable report). With `--json` the report goes to stderr and stdout is
+pure JSON.
+
+Generated stubs are a starting point: they render with valid required props and leave
+`TODO` assertions, so they compile but assert nothing until you write the checks. The
+sample LCOV has a payment file at 37.5% line coverage, so `--strict --threshold 80` exits 1.
+
+## Workflow
+
+1. Generate stubs or scaffold E2E specs into the project&#x27;s test folder (always pass `--output`).
+2. Replace every `TODO` with an assertion on behaviour the user can see (role, text, called handler); delete stubs that test nothing useful.
+3. Run the project&#x27;s tests with coverage, then `coverage_analyzer.py &lt;report&gt; --threshold &lt;n&gt; --strict`.
+4. Done when the suite passes, the analyzer exits 0, and no generated test is still assertion-free.
 
 ## References
 
@@ -629,16 +689,34 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Visual regression testing or screenshot comparison workflows.
 - Mobile-native testing (React Native, Flutter) -- this skill targets web browser-based testing only.
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-frontend` | Generated test stubs align with component patterns from the frontend skill | Frontend components --&gt; `test_suite_generator.py` --&gt; test files |
-| `senior-fullstack` | Code quality analyzer consumes the same coverage reports produced here | `coverage_analyzer.py` output --&gt; fullstack quality dashboard |
-| `senior-devops` | E2E test scaffolder generates CI-ready Playwright configs that plug into DevOps pipelines | `e2e_test_scaffolder.py` --&gt; `playwright.config.ts` --&gt; GitHub Actions workflow |
-| `code-reviewer` | Coverage gaps feed directly into code review checklists for untested changes | `coverage_analyzer.py` gaps --&gt; review checklist items |
-| `tdd-guide` | TDD workflow references this skill&#x27;s test generator for initial red-phase stub creation | TDD cycle --&gt; `test_suite_generator.py --scan-only` --&gt; write tests --&gt; implement |
-| `qa-browser-automation` | Page Object Models generated here are consumed by the browser automation skill for advanced E2E scenarios | `e2e_test_scaffolder.py --include-pom` --&gt; POM classes --&gt; browser automation flows |
+### Shipping Generated Stubs as Tests
+**Mistake:** Committing the generated files with their `TODO` assertions still in place.
+**Why it happens:** They run green and raise the coverage number.
+**Instead:** A render with no assertion only proves the component does not throw. Write the assertion or delete the case.
+
+### Querying by Test ID First
+**Mistake:** Reaching for `getByTestId` for every element.
+**Why it happens:** It is the most stable selector to write.
+**Instead:** Prefer `getByRole` and `getByLabelText`: they test what users and assistive tech see, and fail when accessibility regresses. Keep test IDs for elements with no accessible name.
+
+### Gating on Overall Coverage Only
+**Mistake:** Passing CI because the project average clears 80%.
+**Why it happens:** One number is easy to configure.
+**Instead:** Use `--critical-paths` and read the per-file gaps: a 37% payment module hidden behind a 90% average is the bug that ships.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/test_suite_generator.py` | Jest + RTL stub generator |
+| `scripts/coverage_analyzer.py` | Coverage gap analyzer and CI gate |
+| `scripts/e2e_test_scaffolder.py` | Playwright scaffolder for Next.js routes |
+| `assets/sample_components/Button.tsx` | Component with a typed props interface for the generator |
+| `assets/sample_app/app/` | Two-route Next.js App Router tree for the scaffolder |
+| `assets/sample_lcov.info` | LCOV report with an under-tested payment file (strict gate exits 1 at 80) |
+| `references/*.md` | Workflows, CLI reference, strategies, automation patterns, best practices |
 
 ---
 
@@ -727,7 +805,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/senior-qa/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-qa/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

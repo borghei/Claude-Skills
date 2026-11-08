@@ -1,17 +1,17 @@
 ---
 name: pr-review-expert
 description: >
-  Systematic PR review with blast-radius analysis, security scanning, and breaking-change and
-  test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database
-  schemas, auth, or security-sensitive code.
+  Reviews risky PRs by blast radius: what imports the changed files, breaking API and schema
+  changes, sensitive paths and test deltas. Use when a PR touches shared libraries, APIs,
+  schemas or auth (for general review use code-reviewer).
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: code-review
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   frameworks: github, gitlab, review-checklist
   tags:
     - code-review
@@ -61,6 +61,15 @@ Ask about the two or three inputs that matter most for this request. If the user
 | `diff_analyzer.py` | Analyze a diff for risk indicators (large files, sensitive paths, config/breaking/security patterns) | `gh pr diff $PR \| python scripts/diff_analyzer.py --json` |
 | `review_checklist_generator.py` | Generate a tailored review checklist from changed file types/patterns | `git diff --name-only main...HEAD \| python scripts/review_checklist_generator.py` |
 
+## Workflow
+
+1. **Gather context:** the PR description, linked issue and the list of changed files (`git diff --name-only main...HEAD`).
+2. **Measure blast radius** with `blast_radius_calculator.py`: which modules import the changed files, directly and transitively.
+3. **Scan the diff** with `diff_analyzer.py` for sensitive paths, config, removed exports and security patterns, and build the checklist with `review_checklist_generator.py`.
+4. **Check breaking changes and tests:** removed or renamed API fields, schema changes without a migration path, changed behaviour without a test that shows it.
+5. **Write the review** in the format from [references/writeup-format-and-checklist.md](references/writeup-format-and-checklist.md): must fix, should fix, suggestions, looks good, each with file and line.
+6. Done when every blocking item names the file, the risk and the fix, high blast-radius changes have a test or a rollback note, and the verdict (approve, request changes) is stated.
+
 ## Anti-Patterns
 
 ### Reviewing style instead of substance
@@ -101,14 +110,3 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Runtime security analysis, SAST/DAST tool orchestration, or CVE database lookups — use `engineering/dependency-auditor` for dependency-level vulnerability scanning
 - CI/CD pipeline configuration or build failure triage — use `engineering/ci-cd-pipeline-builder` for pipeline design
 - Performance benchmarking or load testing — use `engineering/performance-profiler` for profiling and optimization guidance
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `engineering/dependency-auditor` | Run dependency audit before reviewing PRs that add or upgrade packages | Audit report feeds into the Security section of the review report |
-| `engineering/ci-cd-pipeline-builder` | Embed review checklist gates into CI pipelines as automated PR checks | Checklist items become pass/fail signals in the pipeline |
-| `engineering/performance-profiler` | Escalate N+1 and unbounded query findings for detailed profiling | Flagged code paths from review become profiling targets |
-| `engineering/migration-architect` | Validate database migration safety for PRs that include schema changes | Migration risk assessment supplements the Breaking Changes section |
-| `engineering/release-manager` | Feed breaking change detection results into release notes and changelogs | Detected breaking changes auto-populate release documentation |
-| `engineering/api-design-reviewer` | Cross-reference API endpoint changes with API design standards | API review findings merge into the Blast Radius and Breaking Changes sections |

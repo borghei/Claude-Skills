@@ -17,8 +17,20 @@ import sys
 
 
 def load_data(path: str) -> dict:
-    with open(path, "r") as f:
-        return json.load(f)
+    try:
+        with open(path, "r") as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        fail(f"cannot read {path}: {e}")
+    if not isinstance(data, dict):
+        fail(f"{path}: top level must be a JSON object (see --example)")
+    return data
+
+
+def fail(msg: str) -> None:
+    """Bad input: one line on stderr, exit 2."""
+    print(f"Error: {msg}", file=sys.stderr)
+    sys.exit(2)
 
 
 def check_invest(item: dict) -> dict:
@@ -79,9 +91,12 @@ def check_invest(item: dict) -> dict:
     }
 
     # Testable
-    observable_patterns = [r"\bshows\b", r"\bdisplays\b", r"\benables\b", r"\bprevents\b", r"\bnotifies\b", r"\bwithin\b", r"\bwhen\b", r"\bif\b", r"\bless than\b", r"\bmore than\b"]
+    observable_patterns = [r"\bshow(s|n)?\b", r"\bdisplay(s|ed)?\b", r"\bappears?\b", r"\benables\b", r"\bprevents\b",
+                           r"\bnotifies\b", r"\breturns?\b", r"\bcan(not)?\b", r"\bdoes not\b", r"\b(is|are) (saved|sent|blocked|visible)\b",
+                           r"\bwithin\b", r"\bwhen\b", r"\bif\b", r"\bless than\b", r"\bmore than\b", r"\d"]
     testable_count = sum(1 for ac in acceptance_criteria if any(re.search(p, ac, re.IGNORECASE) for p in observable_patterns))
-    is_testable = testable_count >= 2 or len(acceptance_criteria) >= 4
+    # At least half the criteria must name an observable behaviour or threshold.
+    is_testable = bool(acceptance_criteria) and testable_count * 2 >= len(acceptance_criteria)
     gates["testable"] = {
         "passed": is_testable,
         "detail": f"{testable_count}/{len(acceptance_criteria)} criteria clearly testable" if acceptance_criteria else "No acceptance criteria",
@@ -191,6 +206,7 @@ def main():
     parser = argparse.ArgumentParser(description="Check WWAS items against INVEST gates.")
     parser.add_argument("--items", type=str, help="Path to items JSON file")
     parser.add_argument("--json", action="store_true", help="Output as JSON")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (--json is the same as --format json)")
     parser.add_argument("--example", action="store_true", help="Print example and exit")
     args = parser.parse_args()
 
@@ -201,11 +217,16 @@ def main():
         parser.error("--items is required")
 
     data = load_data(args.items)
-    result = analyze_items(data)
-    if args.json:
+    try:
+        result = analyze_items(data)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        fail(f"unexpected input shape ({type(e).__name__}: {e}); run --example for the format")
+    if args.json or args.format == "json":
         print(json.dumps(result, indent=2))
     else:
         print_report(result)
+    # Gate: exit 1 when any item is not sprint-ready (FAIL or CONDITIONAL).
+    sys.exit(1 if result["failed"] or result["conditional"] else 0)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,8 @@
+[
+  {"type": "click", "target": "Terminal"},
+  {"type": "type", "target": "terminal", "text": "rm -rf ./build && sudo systemctl restart api"},
+  {"type": "type", "target": "Card number field", "text": "4111 1111 1111 1111"},
+  {"type": "click", "target": "Pay now"},
+  {"type": "click", "target": "Upload receipt"},
+  {"type": "click", "target": "Delete account"}
+]

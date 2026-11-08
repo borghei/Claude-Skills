@@ -266,17 +266,17 @@ def main():
         data = parse_input(args.input)
     except (json.JSONDecodeError, FileNotFoundError) as e:
         print(f"Error reading input: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     baseline = data.get("baseline") or data.get("before") or []
     current = data.get("current") or data.get("after") or data.get("results") or []
 
     if not baseline:
         print("Error: no baseline benchmark data found (expected 'baseline' or 'before' key)", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     if not current:
         print("Error: no current benchmark data found (expected 'current' or 'after' key)", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     comparisons = compare_benchmarks(baseline, current, args.regression_threshold, args.improvement_threshold)
     report = build_report(comparisons, args.regression_threshold)

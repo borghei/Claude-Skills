@@ -1047,22 +1047,22 @@ Examples:
     try:
         with open(args.old_spec, 'r') as f:
             old_spec = json.load(f)
-    except FileNotFoundError:
+    except OSError:
         print(f"Error: Old specification file '{args.old_spec}' not found.", file=sys.stderr)
-        return 1
+        return 2
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in '{args.old_spec}': {e}", file=sys.stderr)
-        return 1
+        return 2
     
     try:
         with open(args.new_spec, 'r') as f:
             new_spec = json.load(f)
-    except FileNotFoundError:
+    except OSError:
         print(f"Error: New specification file '{args.new_spec}' not found.", file=sys.stderr)
-        return 1
+        return 2
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in '{args.new_spec}': {e}", file=sys.stderr)
-        return 1
+        return 2
     
     # Initialize detector and compare specifications
     detector = BreakingChangeDetector()
@@ -1071,7 +1071,7 @@ Examples:
         report = detector.compare_specs(old_spec, new_spec)
     except Exception as e:
         print(f"Error during comparison: {e}", file=sys.stderr)
-        return 1
+        return 2
     
     # Generate report
     if args.format == 'json':
@@ -1087,7 +1087,7 @@ Examples:
             print(f"Breaking change report written to {args.output}")
         except IOError as e:
             print(f"Error writing to '{args.output}': {e}", file=sys.stderr)
-            return 1
+            return 2
     else:
         print(output)
     
@@ -1098,5 +1098,5 @@ Examples:
     return 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

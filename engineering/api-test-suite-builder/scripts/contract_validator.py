@@ -278,16 +278,16 @@ def load_spec(spec_path: str) -> dict:
     path = Path(spec_path)
     if not path.exists():
         print(f"Error: spec file not found: {spec_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     try:
         with open(path, "r", encoding="utf-8") as f:
             spec = json.load(f)
     except json.JSONDecodeError as e:
         print(f"Error: invalid JSON in spec file: {e}", file=sys.stderr)
-        sys.exit(1)
-    if "openapi" not in spec and "swagger" not in spec:
+        sys.exit(2)
+    if not isinstance(spec, dict) or "openapi" not in spec and "swagger" not in spec:
         print("Error: not an OpenAPI/Swagger spec", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     return spec
 
 
@@ -324,7 +324,7 @@ def load_samples(samples_dir: str) -> list:
     samples_path = Path(samples_dir)
     if not samples_path.exists():
         print(f"Error: samples directory not found: {samples_dir}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     for json_file in sorted(samples_path.rglob("*.json")):
         try:
@@ -476,8 +476,8 @@ def main():
     samples = load_samples(args.samples_dir)
 
     if not samples:
-        print("Warning: no JSON sample files found.", file=sys.stderr)
-        sys.exit(1)
+        print("Error: no JSON sample files found.", file=sys.stderr)
+        sys.exit(2)
 
     results = validate_samples(spec, samples, strict=args.strict)
 

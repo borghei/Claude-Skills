@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: engineering
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [kubernetes, operator-pattern, crd, controller-runtime, kubebuilder, platform-engineering, sre]
 ---
 
@@ -50,17 +50,60 @@ Before scaffolding or auditing, settle the inputs below. When one is missing or 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `crd_validator.py` | Validate CRD YAML against design best practices (preserve-unknown, missing descriptions/enums/printer-columns, status subresource, cluster-scope) | `python3 scripts/crd_validator.py --schema my-crd.yaml --format markdown` |
-| `operator_scaffold.py` | Generate a production-ready operator project skeleton with stricter RBAC, observability, and finalizer scaffolding | `python3 scripts/operator_scaffold.py --name db-operator --group example.com --kind Database` |
-| `reconciliation_audit.py` | Audit Go controller source + CRDs for static-detectable anti-patterns (missing finalizers, no leader election, tight loops, no ownerRef, wide RBAC) | `python3 scripts/reconciliation_audit.py --controller-path ./internal/controllers --crd ./config/crd/bases/*.yaml` |
+1. **Decide whether to build one.** Use the decision matrix in [references/operator-decisions-and-workflows.md](references/operator-decisions-and-workflows.md); a Helm chart, GitOps or an admission policy is often enough.
+2. **Design the CRD** (spec/status split, structural schema, CEL rules, status subresource, printer columns) and check it with `crd_validator.py`.
+3. **Scaffold** with `operator_scaffold.py`, then `go mod tidy` (resolves current controller-runtime and k8s.io versions) and `make generate manifests build` (controller-gen writes DeepCopy methods, CRDs and RBAC). Kubebuilder (`kubebuilder init` / `create api`) is the fuller alternative when you want its project layout, webhooks and test harness.
+4. **Implement** the reconciler: idempotent, level-triggered, owner references on children, finalizers for external resources, `observedGeneration` and conditions in status.
+5. **Audit** with `reconciliation_audit.py` against the controller source and CRDs; fix every critical finding.
+6. **Verify** with envtest or a kind cluster: create, update and delete the resource; kill the controller mid-reconcile and confirm it converges; run two replicas with leader election on.
 
-All scripts: stdlib only, argparse CLI, JSON or markdown output.
+## Quick Start
 
-## References
+```bash
+python3 scripts/crd_validator.py --schema assets/sample_crd_weak.yaml                            # no status subresource, untyped spec (exit 1)
+python3 scripts/reconciliation_audit.py --controller-path assets --crd assets/sample_crd_weak.yaml  # missing finalizer/ownerRef, wildcard RBAC ... (exit 1)
+python3 scripts/operator_scaffold.py --name db-operator --group example.com --kind Database --out "$(mktemp -d)/db-operator"
+```
+
+Then, in the scaffolded project:
+
+```bash
+go mod tidy && make generate manifests build
+python3 <skill>/scripts/reconciliation_audit.py --controller-path . --crd config/crd/bases/*.yaml   # 0 findings (exit 0)
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `crd_validator.py` | CRD design checks: status subresource, structural schema (root or spec preserve-unknown-fields), descriptions, enums, printer columns, observedGeneration/conditions, storage versions and conversion, cluster scope, categories, shortNames | `--schema <files/globs>`, `--severity`, `--format markdown|json` | 0 no critical, 1 critical finding, 2 unreadable file or no CRD |
+| `operator_scaffold.py` | controller-runtime skeleton: go.mod (versions resolved by `go mod tidy`), Makefile with controller-gen targets, main.go with leader election flag, health and metrics, typed API, reconciler with finalizer and status handling, Dockerfile, Deployment, README | `--name`, `--group`, `--kind`, `--scope`, `--out`, `--go-module`, `--namespace`, `--categories` | 0, 2 output directory not empty |
+| `reconciliation_audit.py` | Static checks on Go controllers and CRDs: creates without finalizer, no owner reference, tight error requeue, status/spec mixing, hard-coded namespace, wildcard RBAC, no observedGeneration, manager without leader election | `--controller-path`, `--crd`, `--severity`, `--format` | 0 no critical, 1 critical finding, 2 bad path |
+
+The scaffold targets Go 1.27 (go.mod and the Dockerfile's `GO_VERSION` agree; keep them in step). To confirm it builds in your environment, run `go mod tidy && make generate manifests build` in the generated project: it must finish without errors and write `bin/manager` and `config/crd/bases/*.yaml`. It is a starting skeleton, not a finished operator. The audit is pattern-based: it cannot see dynamic dispatch or code generated elsewhere, so pair it with envtest.
+
+## Anti-Patterns
+
+**Mistake:** Writing an operator for something a Helm chart already handles.
+**Why it happens:** Operators feel like the "proper" Kubernetes way.
+**Instead:** Build one only when you need a control loop over live state (failover, backups, upgrades). Every operator is a service you have to run.
+
+**Mistake:** Edge-triggered logic ("on create, do X").
+**Why it happens:** Events look like the natural trigger.
+**Instead:** Reconcile from current state every time; events are dropped and replayed, so the loop must converge from any starting point.
+
+**Mistake:** Returning every error to the work queue.
+**Why it happens:** It is the default pattern in tutorials.
+**Instead:** Separate permanent errors (bad spec: record a condition, return nil) from transient ones (requeue with backoff), or a bad object spins forever.
+
+## Files
+
+- `scripts/crd_validator.py`, `scripts/operator_scaffold.py`, `scripts/reconciliation_audit.py` — the tools above.
+- `assets/sample_crd_weak.yaml` (flawed CRD), `assets/sample_controller_flawed.go` (flawed reconciler).
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 

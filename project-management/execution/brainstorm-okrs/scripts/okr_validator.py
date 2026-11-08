@@ -199,7 +199,8 @@ def validate_key_result(kr: dict, index: int) -> dict:
 
     # Check for output verbs (suggests task, not outcome)
     desc_lower = description.lower()
-    found_outputs = [v for v in OUTPUT_VERBS if desc_lower.startswith(v) or f" {v} " in f" {desc_lower} "]
+    found_outputs = [v for v in OUTPUT_VERBS if desc_lower.startswith(v + " ")
+                     or any(f" {w} {v} " in f" {desc_lower} " for w in ("to", "and", "will", "then"))]
     if found_outputs:
         issues.append({
             "severity": "warning",
@@ -385,7 +386,6 @@ def format_text_report(results: list[dict]) -> str:
 
 
 def _severity_icon(severity: str) -> str:
-    """Return a text indicator for severity level."""
     return {
         "error": "[ERROR]",
         "warning": "[WARN] ",
@@ -395,7 +395,6 @@ def _severity_icon(severity: str) -> str:
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
         description="Validate and score OKR sets against quality criteria.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -403,19 +402,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             Examples:
               python okr_validator.py --demo
               python okr_validator.py --input okrs.json
-              python okr_validator.py --input okrs.json --format json
+              python okr_validator.py --input okrs.json --format json --threshold 80
 
-            Input JSON format:
-              {
-                "okr_sets": [
-                  {
-                    "objective": "...",
-                    "key_results": [
-                      {"description": "...", "metric": "...", "target_value": N, "current_value": N}
-                    ]
-                  }
-                ]
-              }
+            Exit codes: 0 every set scores >= threshold, 1 at least one below, 2 bad input.
+            Input: {"okr_sets": [{"objective": "...", "key_results": [{"description",
+              "metric", "target_value", "current_value"}]}]} - see assets/sample_okrs.json
         """),
     )
     group = parser.add_mutually_exclusive_group(required=True)
@@ -429,6 +420,10 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Run validation on built-in demo data (mix of good and bad OKRs)",
     )
     parser.add_argument(
+        "--threshold", type=int, default=80,
+        help="Minimum set score to pass (default 80, the 'Strong' line); exit 1 below it",
+    )
+    parser.add_argument(
         "--format",
         choices=["text", "json"],
         default="text",
@@ -437,8 +432,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def main(argv: list[str] | None = None) -> None:
-    """Main entry point."""
+def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
 
     if args.demo:
@@ -447,27 +441,33 @@ def main(argv: list[str] | None = None) -> None:
         try:
             with open(args.input, "r", encoding="utf-8") as f:
                 data = json.load(f)
-        except FileNotFoundError:
-            print(f"Error: File not found: {args.input}", file=sys.stderr)
-            sys.exit(1)
-        except json.JSONDecodeError as e:
-            print(f"Error: Invalid JSON in {args.input}: {e}", file=sys.stderr)
-            sys.exit(1)
+        except OSError as e:
+            print(f"error: cannot read {args.input}: {e.strerror or e}", file=sys.stderr)
+            return 2
+        except ValueError as e:
+            print(f"error: invalid JSON in {args.input}: {e}", file=sys.stderr)
+            return 2
 
-    okr_sets = data.get("okr_sets", [])
-    if not okr_sets:
-        print("Error: No okr_sets found in input data.", file=sys.stderr)
-        sys.exit(1)
+    okr_sets = data.get("okr_sets") if isinstance(data, dict) else None
+    if not isinstance(okr_sets, list) or not okr_sets or not all(isinstance(o, dict) for o in okr_sets):
+        print("error: input must be a JSON object with a non-empty 'okr_sets' list of objects", file=sys.stderr)
+        return 2
 
-    results = []
-    for i, okr_set in enumerate(okr_sets, 1):
-        results.append(validate_okr_set(okr_set, i))
+    try:
+        results = [validate_okr_set(okr_set, i) for i, okr_set in enumerate(okr_sets, 1)]
+    except (AttributeError, TypeError) as e:
+        print(f"error: malformed OKR set: {e}", file=sys.stderr)
+        return 2
 
     if args.format == "json":
         print(json.dumps(results, indent=2))
     else:
         print(format_text_report(results))
+    below = [r["set_index"] for r in results if r["overall_score"] < args.threshold]
+    if below:
+        print(f"Below threshold {args.threshold}: set(s) {', '.join(map(str, below))}", file=sys.stderr)
+    return 1 if below else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -299,10 +299,14 @@ class AirflowGenerator(PipelineGenerator):
     """Generate Airflow DAG code."""
 
     OPERATOR_IMPORTS = {
-        'python': 'from airflow.operators.python import PythonOperator',
-        'bash': 'from airflow.operators.bash import BashOperator',
-        'postgres': 'from airflow.providers.postgres.operators.postgres import PostgresOperator',
-        'snowflake': 'from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator',
+        # Airflow 3 moved the core operators into the standard provider; the fallback keeps 2.x working
+        'python': ('try:  # Airflow 3\n    from airflow.providers.standard.operators.python import PythonOperator\n'
+                   'except ImportError:  # Airflow 2.x\n    from airflow.operators.python import PythonOperator'),
+        'bash': ('try:  # Airflow 3\n    from airflow.providers.standard.operators.bash import BashOperator\n'
+                 'except ImportError:  # Airflow 2.x\n    from airflow.operators.bash import BashOperator'),
+        # PostgresOperator and SnowflakeOperator are deprecated in favour of the common SQL operator
+        'postgres': 'from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator',
+        'snowflake': 'from airflow.providers.common.sql.operators.sql import SQLExecuteQueryOperator',
         's3': 'from airflow.providers.amazon.aws.operators.s3 import S3CreateBucketOperator',
         's3_to_snowflake': 'from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeOperator',
         'sensor': 'from airflow.sensors.base import BaseSensorOperator',
@@ -329,9 +333,12 @@ class AirflowGenerator(PipelineGenerator):
     def _collect_imports(self, config: PipelineConfig) -> List[str]:
         """Collect required import statements."""
         imports = [
-            "from airflow import DAG",
-            "from airflow.utils.dates import days_ago",
-            "from datetime import datetime, timedelta",
+            "try:  # Airflow 3: the task SDK is the public authoring API\n"
+            "    from airflow.sdk import DAG\n"
+            "except ImportError:  # Airflow 2.x\n"
+            "    from airflow import DAG",
+            "from datetime import timedelta",
+            "import pendulum",
         ]
 
         operators_used = set()
@@ -352,9 +359,12 @@ class AirflowGenerator(PipelineGenerator):
                 operators_used.add('snowflake')
                 operators_used.add('s3_to_snowflake')
 
-        for op in operators_used:
-            if op in self.OPERATOR_IMPORTS:
-                imports.append(self.OPERATOR_IMPORTS[op])
+        # Generic task placeholders use PythonOperator
+        operators_used.add('python')
+        for op in sorted(operators_used):
+            line = self.OPERATOR_IMPORTS.get(op)
+            if line and line not in imports:
+                imports.append(line)
 
         return imports
 
@@ -393,8 +403,9 @@ with DAG(
     dag_id='{config.name}',
     default_args=default_args,
     description='{config.description}',
-    schedule_interval='{config.schedule}',
-    start_date=days_ago(1),
+    schedule='{config.schedule}',
+    # Fixed, timezone-aware start date; the old relative-date helper is gone in Airflow 3
+    start_date=pendulum.datetime(2026, 1, 1, tz="UTC"),
     catchup={config.catchup},
     max_active_runs={config.max_active_runs},
     tags={tags_str},
@@ -461,9 +472,9 @@ with DAG(
         conn_id = config.source.connection_id if config.source else 'default_conn'
 
         return f'''
-    {task.task_id} = PostgresOperator(
+    {task.task_id} = SQLExecuteQueryOperator(
         task_id='{task.task_id}',
-        postgres_conn_id='{conn_id}',
+        conn_id='{conn_id}',
         sql="""{sql}""",
         retries={task.retries},
         retry_delay=timedelta(minutes={task.retry_delay_minutes}),
@@ -475,9 +486,9 @@ with DAG(
         """Generate SnowflakeOperator task."""
         sql = task.params.get('sql', 'SELECT 1')
         return f'''
-    {task.task_id} = SnowflakeOperator(
+    {task.task_id} = SQLExecuteQueryOperator(
         task_id='{task.task_id}',
-        snowflake_conn_id='snowflake_default',
+        conn_id='snowflake_default',
         sql="""{sql}""",
         retries={task.retries},
         retry_delay=timedelta(minutes={task.retry_delay_minutes}),
@@ -519,8 +530,10 @@ with DAG(
         if 'with DAG' not in code:
             issues.append("Missing DAG context manager")
 
-        if 'schedule_interval' not in code:
-            warnings.append("No schedule_interval defined, DAG won't run automatically")
+        if 'schedule=' not in code:
+            warnings.append("No schedule defined, DAG won't run automatically")
+        if 'schedule_interval' in code or 'days_ago' in code:
+            issues.append("Uses schedule_interval/days_ago, which Airflow 3 removed")
 
         # Try to parse the code
         try:
@@ -1012,6 +1025,7 @@ Examples:
 
             # Output
             if args.output:
+                Path(args.output).parent.mkdir(parents=True, exist_ok=True)
                 with open(args.output, 'w') as f:
                     f.write(code)
                 logger.info(f"Generated pipeline saved to {args.output}")
@@ -1063,6 +1077,7 @@ Examples:
             code = generator.generate(config)
 
             if args.output:
+                Path(args.output).parent.mkdir(parents=True, exist_ok=True)
                 with open(args.output, 'w') as f:
                     f.write(code)
                 logger.info(f"Generated {args.pattern} pipeline saved to {args.output}")
@@ -1072,9 +1087,9 @@ Examples:
         sys.exit(0)
 
     except Exception as e:
-        logger.error(f"Error: {e}")
-        sys.exit(1)
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

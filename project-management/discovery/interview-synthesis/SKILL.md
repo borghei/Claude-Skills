@@ -1,16 +1,16 @@
 ---
 name: interview-synthesis
 description: >
-  Customer interview synthesis: raw transcripts to themed insights, an opportunity
-  solution tree, and follow-up questions (Teresa Torres continuous discovery). Use
-  for post-interview synthesis, opportunity mapping, and evidence gap analysis.
+  Turns customer interview notes into evidenced themes, an opportunity tree and
+  follow-up questions. Use when you have just run interviews, need to show what
+  customers said, or must find evidence gaps before the next round.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-discovery
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: interview_synthesizer.py
   tech-stack: customer-interviews, opportunity-solution-tree, jobs-to-be-done
   tags:
@@ -59,14 +59,19 @@ Before synthesizing, settle the inputs below. When one is missing or vague and w
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Put each interview in the shape of `assets/interview_input_template.json` (participant id, role, segment, q/a pairs), verbatim where you can.
+2. Run the synthesizer; it codes sentences against pain, gain and emotion lexicons, clusters them into themes, and rates each theme 1-3 (1 = one participant, 2 = two or more, 3 = two or more plus a story).
+3. Read every theme against its quotes. The coding is keyword-based, so rename or merge themes the lexicon got wrong; a quote marked `[shared]` is one sentence counted under several themes, not several sources.
+4. Done when every opportunity rests on a strength-2+ theme and the follow-up questions are scheduled for the next interviews. To audit the resulting tree, use `discovery/opportunity-solution-tree`.
 
 ```bash
-python scripts/interview_synthesizer.py --input interviews.json --format markdown --output synthesis.md
-python scripts/interview_synthesizer.py --input interviews.json --format mermaid   # tree only
+python3 project-management/discovery/interview-synthesis/scripts/interview_synthesizer.py --input project-management/discovery/interview-synthesis/assets/interview_input_template.json --format markdown
+python3 project-management/discovery/interview-synthesis/scripts/interview_synthesizer.py --demo --format mermaid --min-strength 2
 ```
 
-Prepare input per `assets/interview_input_template.json` (one entry per interview: participant id, role, q/a pairs). See the references for the full framework and flag reference.
+Formats: `markdown` (default), `json`, `mermaid`, `confluence`, `notion`, `linear`; `--output` writes a file, `--outcome` overrides the tree root, `--min-strength` drops weaker themes. Exit 0 on success, 2 on bad input (missing file, invalid JSON, wrong shape).
 
 ## Anti-Patterns
 
@@ -118,13 +123,12 @@ Load the reference that matches the task — keep this file lean and pull detail
 - The opportunity solution tree is a thinking aid, not a roadmap. Solutions still need experiment validation.
 - Teresa Torres' methodology assumes continuous discovery (weekly touchpoints). One-off interview rounds produce shallower trees.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/brainstorm-experiments/` | Feeds into | Validated opportunities become hypotheses for lean experiments |
-| `discovery/identify-assumptions/` | Bidirectional | Assumptions inform follow-up questions; interview evidence resolves assumptions |
-| `discovery/brainstorm-ideas/` | Feeds into | Themed insights seed Product Trio ideation sessions |
-| `discovery/pre-mortem/` | Feeds into | Pain themes surface candidate risks for pre-mortem analysis |
-| `execution/create-prd/` | Feeds into | Top opportunities + supporting evidence populate PRD Background and Market Segments sections |
-| `execution/job-stories/` | Feeds into | Klement-format job codes convert directly into When/Want/So job stories |
+| File | Purpose |
+|------|---------|
+| `scripts/interview_synthesizer.py` | Interview notes to themes, opportunity tree and follow-ups in six formats |
+| `assets/interview_input_template.json` | Input shape and runnable sample (3 interviews) |
+| `assets/opportunity_tree_template.md` | Tree worksheet |
+| `examples/wayfinder-8-interview-synthesis.md` | Worked synthesis |
+| `references/*.md` | See References |

@@ -1,0 +1,8 @@
+You are an expert analyst.
+
+Analyze the customer feedback below and handle any issues as necessary.
+Think step by step and show your reasoning before giving the answer.
+You MUST be thorough. NEVER skip anything. ALWAYS be accurate. This is CRITICAL.
+
+Feedback:
+{feedback}

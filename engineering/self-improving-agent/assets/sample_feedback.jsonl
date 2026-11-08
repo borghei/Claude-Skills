@@ -1,0 +1,12 @@
+{"timestamp": "2026-03-01T10:00:00Z", "task_type": "code-review", "outcome": "SUCCESS", "corrections": 1, "turns": 4, "tools_used": ["Read"], "tool_errors": 0, "feedback": ""}
+{"timestamp": "2026-03-02T10:00:00Z", "task_type": "bugfix", "outcome": "SUCCESS", "corrections": 0, "turns": 5, "tools_used": ["Read", "Edit"], "tool_errors": 0, "feedback": ""}
+{"timestamp": "2026-03-03T10:00:00Z", "task_type": "refactor", "outcome": "SUCCESS", "corrections": 1, "turns": 6, "tools_used": ["Read", "Edit", "Bash"], "tool_errors": 0, "feedback": ""}
+{"timestamp": "2026-03-04T10:00:00Z", "task_type": "code-review", "outcome": "FAILURE", "corrections": 0, "turns": 4, "tools_used": ["Read"], "tool_errors": 2, "feedback": "used npm instead of pnpm"}
+{"timestamp": "2026-03-05T10:00:00Z", "task_type": "bugfix", "outcome": "SUCCESS", "corrections": 1, "turns": 5, "tools_used": ["Read", "Edit"], "tool_errors": 0, "feedback": ""}
+{"timestamp": "2026-03-06T10:00:00Z", "task_type": "refactor", "outcome": "SUCCESS", "corrections": 0, "turns": 6, "tools_used": ["Read", "Edit", "Bash"], "tool_errors": 0, "feedback": ""}
+{"timestamp": "2026-03-07T10:00:00Z", "task_type": "code-review", "outcome": "SUCCESS", "corrections": 1, "turns": 4, "tools_used": ["Read"], "tool_errors": 0, "feedback": ""}
+{"timestamp": "2026-03-08T10:00:00Z", "task_type": "bugfix", "outcome": "FAILURE", "corrections": 0, "turns": 5, "tools_used": ["Read", "Edit"], "tool_errors": 2, "feedback": "used npm instead of pnpm"}
+{"timestamp": "2026-03-09T10:00:00Z", "task_type": "refactor", "outcome": "SUCCESS", "corrections": 1, "turns": 6, "tools_used": ["Read", "Edit", "Bash"], "tool_errors": 0, "feedback": ""}
+{"timestamp": "2026-03-10T10:00:00Z", "task_type": "code-review", "outcome": "SUCCESS", "corrections": 0, "turns": 4, "tools_used": ["Read"], "tool_errors": 0, "feedback": ""}
+{"timestamp": "2026-03-11T10:00:00Z", "task_type": "bugfix", "outcome": "SUCCESS", "corrections": 1, "turns": 5, "tools_used": ["Read", "Edit"], "tool_errors": 0, "feedback": ""}
+{"timestamp": "2026-03-12T10:00:00Z", "task_type": "refactor", "outcome": "FAILURE", "corrections": 0, "turns": 6, "tools_used": ["Read", "Edit", "Bash"], "tool_errors": 2, "feedback": "used npm instead of pnpm"}

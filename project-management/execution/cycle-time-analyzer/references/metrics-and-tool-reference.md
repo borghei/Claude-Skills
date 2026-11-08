@@ -48,7 +48,7 @@ Aging WIP is the single most actionable flow metric for daily use. Most teams ig
 
 1. **Export issue history** from your tracker as JSON. Required fields per issue: `id`, `title`, `created_at`, `status_history` (list of `{status, entered_at}`), and ideally `team` and `type`. See `references/flow-metrics-guide.md` for tracker-specific export instructions.
 2. **Define your states.** Tell the tool which status names map to "Ready" (commitment), "In Progress" (active work start), and "Done" (delivery). Defaults: `Ready`/`To Do`, `In Progress`, `Done`.
-3. **Run the analyzer.** `python scripts/flow_metrics.py --input issues.json --format markdown`
+3. **Run the analyzer.** `python3 scripts/flow_metrics.py --input issues.json --format markdown --as-of <today>`
 4. **Review the distribution.** Look at 85th-percentile cycle time, not the average. Identify aging WIP that exceeds it.
 5. **Generate the CFD.** Use `--format mermaid` to produce a cumulative flow diagram for share-back in retrospectives or exec reports.
 6. **Calibrate WIP limits.** Use the WIP histogram to set per-state WIP limits at roughly the team's current 50th percentile.
@@ -94,7 +94,7 @@ Computes the four core flow metrics plus aging WIP and a Mermaid cumulative flow
 | `--type` | string | (none) | Filter by issue type (e.g., `bug`, `feature`) |
 | `--window-days` | int | 60 | Trailing window in days for throughput trend |
 | `--ignore-missing` | flag | off | Skip issues that lack required fields |
-| `--as-of` | ISO date | today | Compute metrics as of this date (for historical review) |
+| `--as-of` | YYYY-MM-DD | latest timestamp in the data | Compute metrics as of this date; pass today for a live board |
 
 ### Input JSON schema
 

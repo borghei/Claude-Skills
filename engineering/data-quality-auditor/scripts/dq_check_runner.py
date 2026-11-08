@@ -5,16 +5,8 @@ dq_check_runner.py — Run a DQ check suite against tabular data from CSV / JSON
 Stdlib only. Reads a check definition YAML + data file; emits pass/fail per check.
 For live DB queries, integrate with your DB driver (out of scope for stdlib-only).
 
-Supports check types from the catalog:
-  - not_null (column not-null rate threshold)
-  - unique (column or composite uniqueness)
-  - accepted_values (in enum)
-  - matches_regex
-  - between (numeric range)
-  - row_count_between (table row count)
-  - freshness (max timestamp recency)
-  - length_between (string length)
-  - reference_exists (FK lookup against a list)
+Check types: not_null, unique, accepted_values, matches_regex, between,
+row_count_between, freshness, length_between, reference_exists.
 
 Output: Markdown or JSON. Per-check status + actionable message.
 
@@ -22,6 +14,10 @@ Usage:
     python3 dq_check_runner.py --data orders.csv --checks orders_dq.yaml
     python3 dq_check_runner.py --data events.json --checks events_dq.yaml --format json
     python3 dq_check_runner.py --profile --data orders.csv
+
+Checks file: YAML (block or flow lists) or JSON, with a top-level `checks:` list.
+Exit codes: 0 all checks pass, 1 a check failed or errored, 2 bad input
+(missing/unreadable file, unsupported format, no checks loaded).
 """
 
 from __future__ import annotations
@@ -124,6 +120,8 @@ def _parse_seq(lines, idx, indent):
 
 def _scalar(s: str):
     s = s.strip()
+    if s.startswith("[") and s.endswith("]"):  # YAML flow list: [a, b, "c"]
+        return [_scalar(x) for x in s[1:-1].split(",") if x.strip()]
     if s.startswith('"') and s.endswith('"'):
         return s[1:-1]
     if s.startswith("'") and s.endswith("'"):
@@ -207,7 +205,7 @@ class CheckResult:
 
 
 def run_check(check: dict[str, Any], rows: list[dict[str, Any]]) -> CheckResult:
-    cid = check.get("id", "")
+    cid = str(check.get("id") or check.get("name") or "")
     ctype = check.get("type", "")
     col = check.get("column", "")
     threshold = check.get("threshold")
@@ -289,11 +287,9 @@ def _check_between(cid: str, col: str, rows: list, min_v, max_v) -> CheckResult:
 
 def _check_row_count(cid: str, rows: list, min_v, max_v) -> CheckResult:
     n = len(rows)
-    if (min_v is not None and n < min_v) or (max_v is not None and n > max_v):
-        return CheckResult(cid, "row_count_between", "", "fail", n, f"[{min_v}, {max_v}]",
-                           f"Row count {n} outside expected range")
-    return CheckResult(cid, "row_count_between", "", "pass", n, f"[{min_v}, {max_v}]",
-                       f"Row count {n} in range")
+    bad = (min_v is not None and n < min_v) or (max_v is not None and n > max_v)
+    return CheckResult(cid, "row_count_between", "", "fail" if bad else "pass", n, f"[{min_v}, {max_v}]",
+                       f"Row count {n} {'outside expected range' if bad else 'in range'}")
 
 
 def _check_freshness(cid: str, col: str, rows: list, max_age_min: int, now_iso: str | None) -> CheckResult:
@@ -351,16 +347,9 @@ def render_markdown(results: list[CheckResult], profile: dict[str, Any] | None) 
             out.append(f"| {col} | {info['non_null_count']} | {info['null_rate']:.3f} | {info['distinct_count']} | {sample} |")
         out.append("")
     if results:
-        n_pass = sum(1 for r in results if r.status == "pass")
-        n_fail = sum(1 for r in results if r.status == "fail")
-        n_err = sum(1 for r in results if r.status == "error")
-        out.append("## Check Summary")
-        out.append("")
-        out.append(f"- **Total**: {len(results)}")
-        out.append(f"- **Passed**: {n_pass}")
-        out.append(f"- **Failed**: {n_fail}")
-        out.append(f"- **Errored**: {n_err}")
-        out.append("")
+        n = Counter(r.status for r in results)
+        out += ["## Check Summary", "", f"- **Total**: {len(results)}", f"- **Passed**: {n['pass']}",
+                f"- **Failed**: {n['fail']}", f"- **Errored**: {n['error']}", ""]
         out.append("## Check Details")
         out.append("")
         out.append("| ID | Type | Column | Status | Message |")
@@ -399,13 +388,21 @@ def main() -> int:
     results: list[CheckResult] = []
     if args.checks:
         try:
-            checks_doc = parse_yaml(Path(args.checks).read_text())
-        except OSError as e:
+            text = Path(args.checks).read_text()
+            checks_doc = json.loads(text) if args.checks.lower().endswith(".json") else parse_yaml(text)
+        except (OSError, ValueError) as e:
             print(f"error loading checks: {e}", file=sys.stderr)
             return 2
-        for check in checks_doc.get("checks", []) or []:
-            if isinstance(check, dict):
-                results.append(run_check(check, rows))
+        checks = checks_doc.get("checks") if isinstance(checks_doc, dict) else None
+        if not isinstance(checks, list) or not any(isinstance(c, dict) for c in checks):
+            print(f"error: no checks loaded from {args.checks} (expected a top-level 'checks' list)", file=sys.stderr)
+            return 2
+        for idx, check in enumerate(c for c in checks if isinstance(c, dict)):
+            check.setdefault("id", check.get("name") or f"check_{idx + 1}")
+            results.append(run_check(check, rows))
+    elif not args.profile:
+        print("error: pass --checks <file> and/or --profile", file=sys.stderr)
+        return 2
 
     if args.format == "json":
         out = json.dumps(
@@ -420,7 +417,7 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    return 1 if any(r.status in ("fail", "error") for r in results) else 0
 
 
 if __name__ == "__main__":

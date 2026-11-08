@@ -230,9 +230,20 @@ def detect_redundant_blocks(lines, min_block_size=3):
     return result, removed
 
 
-def prune_content(content, level="moderate"):
-    """Apply pruning strategies to content string. Returns (pruned_content, stats)."""
-    config = PRUNING_LEVELS.get(level, PRUNING_LEVELS["moderate"])
+PROSE_SUFFIXES = {".md", ".markdown", ".txt", ".rst", ".adoc"}
+
+
+def prune_content(content, level="moderate", prose=False):
+    """Apply pruning strategies to content string. Returns (pruned_content, stats).
+
+    For prose (Markdown, text) a leading '#' is a heading and '---' is structure,
+    so only duplicate blocks and blank-line runs are pruned.
+    """
+    config = dict(PRUNING_LEVELS.get(level, PRUNING_LEVELS["moderate"]))
+    if prose:
+        for key in ("strip_decorative", "strip_comments", "strip_docstrings", "strip_imports", "collapse_braces"):
+            config[key] = False
+        config["strip_blank_runs"] = max(1, config["strip_blank_runs"])  # blank lines separate paragraphs
     lines = content.splitlines()
     original_lines = len(lines)
     original_tokens = max(1, len(content) // 4)
@@ -311,7 +322,7 @@ def prune_file(file_path, level, output_dir=None):
     except (OSError, IOError) as e:
         return {"path": str(file_path), "error": str(e)}
 
-    pruned, stats = prune_content(content, level)
+    pruned, stats = prune_content(content, level, prose=Path(file_path).suffix.lower() in PROSE_SUFFIXES)
     stats["path"] = str(file_path)
 
     if output_dir:
@@ -399,19 +410,21 @@ def main():
     parser.add_argument("--output", type=str, help="Output directory for pruned files")
     parser.add_argument("--max-files", type=int, default=50, help="Max files to process (default: 50)")
     parser.add_argument("--json", action="store_true", dest="json_output", help="Output results as JSON")
+    parser.add_argument("--prose", action="store_true",
+                        help="Treat --stdin input as prose (Markdown/text): keep headings and rules")
 
     args = parser.parse_args()
     level = "aggressive" if args.aggressive else args.level
 
     if not args.path and not args.stdin:
-        parser.print_help()
-        sys.exit(1)
+        parser.print_help(sys.stderr)
+        sys.exit(2)
 
     results = []
 
     if args.stdin:
         content = sys.stdin.read()
-        pruned, stats = prune_content(content, level)
+        pruned, stats = prune_content(content, level, prose=args.prose)
         stats["path"] = "<stdin>"
         if not args.json_output:
             print(pruned)
@@ -422,7 +435,7 @@ def main():
         files = collect_files(args.path, max_files=args.max_files)
         if not files:
             print(f"Error: No files found at '{args.path}'", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         for f in files:
             r = prune_file(f, level, output_dir=args.output)
             r.pop("pruned_content", None)

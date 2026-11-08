@@ -222,11 +222,14 @@ def main() -> None:
             print(json.dumps(rebuild_tour(tour, report), indent=2, ensure_ascii=False))
         else:
             output(report, args.format)
-    except SystemExit:
+    except SystemExit as exc:
+        if isinstance(exc.code, str):  # input error raised as SystemExit("error: ...")
+            print(exc.code, file=sys.stderr)
+            sys.exit(2)
         raise
     except OSError as exc:
         print(f"error: could not validate tour: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     sys.exit(1 if report["broken_stops"] else 0)
 
 

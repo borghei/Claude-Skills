@@ -13,6 +13,7 @@ Usage:
 
 import argparse
 import json
+import re
 import statistics
 import sys
 from datetime import datetime, timedelta
@@ -96,7 +97,9 @@ INTERVENTION_THRESHOLDS = {
 class ProjectMetrics:
     """Represents project health metrics and calculations."""
     
-    def __init__(self, data: Dict[str, Any]):
+    def __init__(self, data: Dict[str, Any], as_of: Optional[datetime] = None):
+        self.as_of: datetime = as_of or datetime.now()
+        self.quality_override: Optional[float] = data.get("quality_index", -1.0)
         self.project_id: str = data.get("project_id", "")
         self.project_name: str = data.get("project_name", "")
         self.priority: str = data.get("priority", "medium").lower()
@@ -181,7 +184,7 @@ class ProjectMetrics:
             elif self.status in ["completed", "cancelled"]:
                 return 0.0  # Project is done
             else:
-                forecast_date = datetime.now()
+                forecast_date = self.as_of
             
             actual_duration = (forecast_date - planned_start).days
             variance = max(0, actual_duration - planned_duration) / planned_duration
@@ -214,8 +217,10 @@ class ProjectMetrics:
         
         return self.completed_features / effective_planned
     
-    def _calculate_quality_score(self) -> float:
-        """Calculate quality score based on defects and test coverage."""
+    def _calculate_quality_score(self) -> Optional[float]:
+        """Quality 0-1 from defects and coverage; None when not yet measurable."""
+        if self.quality_override is None or self.quality_override >= 0:
+            return self.quality_override
         if self.total_defects == 0:
             defect_score = 1.0
         else:
@@ -308,26 +313,25 @@ def calculate_project_health_score(project: ProjectMetrics) -> Dict[str, Any]:
     timeline_score = calculate_dimension_score(project.timeline_health, "timeline")
     budget_score = calculate_dimension_score(project.budget_health, "budget")
     scope_score = calculate_dimension_score(project.scope_health, "scope", is_reverse=True)
-    quality_score = calculate_dimension_score(project.quality_health, "quality", is_reverse=True)
     risk_score = calculate_dimension_score(project.risk_health, "risk")
-    
-    # Calculate weighted composite score
     dimensions = {
         "timeline": {"score": timeline_score, "weight": HEALTH_DIMENSIONS["timeline"]["weight"]},
         "budget": {"score": budget_score, "weight": HEALTH_DIMENSIONS["budget"]["weight"]},
         "scope": {"score": scope_score, "weight": HEALTH_DIMENSIONS["scope"]["weight"]},
-        "quality": {"score": quality_score, "weight": HEALTH_DIMENSIONS["quality"]["weight"]},
         "risk": {"score": risk_score, "weight": HEALTH_DIMENSIONS["risk"]["weight"]}
     }
-    
-    composite_score = sum(
-        dim_data["score"] * dim_data["weight"] 
-        for dim_data in dimensions.values()
-    )
-    
-    # Apply priority weighting
+    # Quality is left out (weights renormalised) when it cannot be measured yet,
+    # e.g. a project still in planning with no test data.
+    if project.quality_health is not None:
+        dimensions["quality"] = {
+            "score": calculate_dimension_score(project.quality_health, "quality", is_reverse=True),
+            "weight": HEALTH_DIMENSIONS["quality"]["weight"]}
+    total_weight = sum(d["weight"] for d in dimensions.values())
+    composite_score = round(sum(d["score"] * d["weight"] for d in dimensions.values()) / total_weight, 1)
+
+    # Priority-weighted value used only to rank interventions; it can exceed 100.
     priority_weight = PRIORITY_WEIGHTS.get(project.priority, 1.0)
-    adjusted_score = composite_score * priority_weight
+    adjusted_score = round(composite_score * priority_weight, 1)
     
     # Determine RAG status
     if composite_score >= 80:
@@ -367,8 +371,8 @@ def analyze_portfolio_dimensions(project_scores: List[Dict[str, Any]]) -> Dict[s
     
     for dimension in HEALTH_DIMENSIONS.keys():
         scores = [
-            project["dimension_scores"][dimension]["score"] 
-            for project in project_scores
+            project["dimension_scores"][dimension]["score"]
+            for project in project_scores if dimension in project["dimension_scores"]
         ]
         
         if scores:
@@ -469,23 +473,23 @@ def _generate_project_recommendations(project: Dict[str, Any]) -> List[str]:
     dimension_scores = project["dimension_scores"]
     
     # Timeline recommendations
-    if dimension_scores["timeline"]["score"] < 60:
+    if dimension_scores.get("timeline", {"score": 100})["score"] < 60:
         recommendations.append("Conduct timeline recovery analysis and implement fast-tracking or crashing strategies")
     
     # Budget recommendations
-    if dimension_scores["budget"]["score"] < 60:
+    if dimension_scores.get("budget", {"score": 100})["score"] < 60:
         recommendations.append("Implement cost control measures and review budget forecasts")
     
     # Scope recommendations
-    if dimension_scores["scope"]["score"] < 60:
+    if dimension_scores.get("scope", {"score": 100})["score"] < 60:
         recommendations.append("Review scope management and consider feature prioritization or descoping")
     
     # Quality recommendations
-    if dimension_scores["quality"]["score"] < 60:
+    if dimension_scores.get("quality", {"score": 100})["score"] < 60:
         recommendations.append("Increase testing coverage and implement quality improvement processes")
     
     # Risk recommendations
-    if dimension_scores["risk"]["score"] < 60:
+    if dimension_scores.get("risk", {"score": 100})["score"] < 60:
         recommendations.append("Escalate critical risks and implement additional risk mitigation measures")
     
     # Overall health recommendations
@@ -566,14 +570,71 @@ def generate_portfolio_recommendations(analysis_results: Dict[str, Any]) -> List
 # Main Analysis Function
 # ---------------------------------------------------------------------------
 
-def analyze_portfolio_health(data: Dict[str, Any]) -> PortfolioHealthResult:
+def _parse_date(value: Any) -> Optional[datetime]:
+    try:
+        return datetime.strptime(str(value)[:10], "%Y-%m-%d")
+    except ValueError:
+        return None
+
+
+def resolve_as_of(data: Dict[str, Any], override: Optional[str]) -> datetime:
+    """--as-of, else portfolio_metadata.generated_on, else the latest date in the data."""
+    if override:
+        parsed = _parse_date(override)
+        if not parsed:
+            raise ValueError(f"--as-of must be YYYY-MM-DD, got {override!r}")
+        return parsed
+    meta = _parse_date((data.get("portfolio_metadata") or {}).get("generated_on", ""))
+    if meta:
+        return meta
+    found = re.findall(r'"(\d{4}-\d{2}-\d{2})', json.dumps(data))
+    dates = [d for d in (_parse_date(x) for x in found) if d]
+    return max(dates) if dates else datetime.now()
+
+
+def normalize_project(rec: Dict[str, Any], risks: List[Dict[str, Any]], as_of: datetime) -> Dict[str, Any]:
+    """Map the nested portfolio schema (assets/sample_project_data.json) to flat metrics.
+
+    Flat records (project_id, planned_budget, ...) pass through unchanged.
+    """
+    if "project_id" in rec or "id" not in rec:
+        return rec
+    budget, timeline, quality = rec.get("budget", {}), rec.get("timeline", {}), rec.get("quality_metrics", {})
+    progress = float(timeline.get("progress_percentage", 0))
+    end = _parse_date(rec.get("planned_end_date", ""))
+    forecast = end + timedelta(days=int(timeline.get("days_behind_schedule", 0))) if end else None
+    spent, planned = float(budget.get("spent", 0)), float(budget.get("planned", 0))
+    # Estimate at completion: run-rate (spent / progress) once 20% done, else spent + remaining.
+    eac = spent / (progress / 100) if progress >= 20 else spent + float(budget.get("remaining", planned - spent))
+    due = [m for m in rec.get("key_milestones", []) if (_parse_date(m.get("planned_date", "")) or as_of) <= as_of]
+    done_ratio = (sum(1 for m in due if m.get("status") == "completed") / len(due)) if due else 1.0
+    scope = max(0.0, done_ratio - 0.03 * int(rec.get("scope_change_count", 0)))
+    has_quality = quality.get("test_pass_rate", 0) or quality.get("code_coverage", 0)
+    qidx = (0.7 * quality.get("test_pass_rate", 0) + 0.3 * quality.get("code_coverage", 0)) / 100 if has_quality else None
+    open_risks = [r for r in risks if r.get("project_id") == rec["id"] and r.get("status") not in ("closed", "mitigated")]
+    return {
+        "project_id": rec["id"], "project_name": rec.get("name", rec["id"]),
+        "priority": rec.get("priority", "medium"), "status": rec.get("status", "active"),
+        "planned_start": rec.get("start_date", ""), "planned_end": rec.get("planned_end_date", ""),
+        "forecasted_end": forecast.strftime("%Y-%m-%d") if forecast else "",
+        "completion_percentage": progress, "planned_budget": planned, "spent_to_date": spent,
+        "forecasted_total_cost": eac, "planned_features": 1, "completed_features": scope,
+        "quality_index": qidx, "risk_score": sum(r.get("probability", 0) * r.get("impact", 0) for r in open_risks),
+        "open_risks": len(open_risks), "stakeholder_satisfaction": rec.get("stakeholder_satisfaction"),
+    }
+
+
+def analyze_portfolio_health(data: Dict[str, Any], as_of: Optional[datetime] = None) -> PortfolioHealthResult:
     """Perform comprehensive portfolio health analysis."""
     result = PortfolioHealthResult()
-    
+    as_of = as_of or resolve_as_of(data, None)
     try:
-        # Parse project data
         project_records = data.get("projects", [])
-        projects = [ProjectMetrics(record) for record in project_records]
+        if not isinstance(project_records, list) or any(
+                not isinstance(r, dict) or not (r.get("project_id") or r.get("id")) for r in project_records):
+            raise ValueError("every entry in 'projects' needs a 'project_id' or 'id'")
+        risks = data.get("risks", []) if isinstance(data.get("risks"), list) else []
+        projects = [ProjectMetrics(normalize_project(r, risks, as_of), as_of) for r in project_records]
         
         if not projects:
             raise ValueError("No project data found")
@@ -745,16 +806,6 @@ def format_json_output(result: PortfolioHealthResult) -> Dict[str, Any]:
     }
 
 
-# ---------------------------------------------------------------------------
-# ProjectMetrics Helper Method
-# ---------------------------------------------------------------------------
-
-def _calculate_composite_health_score(self) -> float:
-    """Helper method to calculate composite health score."""
-    health_calc = calculate_project_health_score(self)
-    return health_calc["composite_score"]
-
-
 # Add the method to the class
 ProjectMetrics.calculate_composite_health_score = lambda self: calculate_project_health_score(self)["composite_score"]
 
@@ -779,17 +830,18 @@ def main() -> int:
         help="Output format (default: text)"
     )
     
+    parser.add_argument("--as-of", help="Evaluation date YYYY-MM-DD (default: portfolio_metadata.generated_on, else latest date in the data)")
     args = parser.parse_args()
-    
+
     try:
-        # Load and validate data
         with open(args.data_file, 'r') as f:
             data = json.load(f)
-        
-        # Perform analysis
-        result = analyze_portfolio_health(data)
-        
-        # Output results
+        if not isinstance(data, dict):
+            raise ValueError("top level must be a JSON object with a 'projects' list")
+        result = analyze_portfolio_health(data, resolve_as_of(data, args.as_of))
+        if "error" in result.summary:
+            raise ValueError(result.summary["error"])
+        result.summary["as_of"] = resolve_as_of(data, args.as_of).strftime("%Y-%m-%d")
         if args.format == "json":
             output = format_json_output(result)
             print(json.dumps(output, indent=2))
@@ -799,15 +851,9 @@ def main() -> int:
         
         return 0
         
-    except FileNotFoundError:
-        print(f"Error: File '{args.data_file}' not found", file=sys.stderr)
-        return 1
-    except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON in '{args.data_file}': {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        return 1
+    except (OSError, json.JSONDecodeError, ValueError, TypeError, KeyError, AttributeError) as e:
+        print(f"Error: cannot analyze '{args.data_file}': {e}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

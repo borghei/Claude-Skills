@@ -51,14 +51,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 def read_input(args):
     """Read parsed commit JSON from file or stdin."""
-    if args.file:
-        with open(args.file, "r", encoding="utf-8") as f:
-            return json.load(f)
-    if not sys.stdin.isatty():
-        return json.load(sys.stdin)
-    print("Error: No input provided. Pipe commit_parser.py --json output or use --file.",
-          file=sys.stderr)
-    sys.exit(1)
+    try:
+        if args.file:
+            with open(args.file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        elif not sys.stdin.isatty():
+            data = json.load(sys.stdin)
+        else:
+            print("Error: No input provided. Pipe commit_parser.py --json output or use --file.",
+                  file=sys.stderr)
+            sys.exit(2)
+    except OSError as e:
+        print(f"Error: cannot read {args.file}: {e.strerror}", file=sys.stderr)
+        sys.exit(2)
+    except json.JSONDecodeError:
+        print("Error: input is not JSON. Pipe it through 'commit_parser.py --json' first.", file=sys.stderr)
+        sys.exit(2)
+    if not isinstance(data, dict) or not ("commits" in data or "groups" in data):
+        print("Error: expected commit_parser.py --json output (an object with 'commits' or 'groups')",
+              file=sys.stderr)
+        sys.exit(2)
+    return data
 
 
 def extract_commits(data):

@@ -1,16 +1,16 @@
 ---
 name: senior-backend
 description: >
-  Backend development with Node.js/Express/Fastify and PostgreSQL. Use when designing REST or
-  GraphQL APIs, optimizing database queries, implementing authentication, building
-  microservices, handling migrations, or reviewing backend code.
+  Builds and reviews Node.js REST APIs on PostgreSQL: OpenAPI-to-route scaffolding, schema and
+  index analysis with migrations, HTTP load tests with a CI gate. Use when designing endpoints,
+  fixing slow queries, or load-testing an API.
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: backend
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [api-design, microservices, databases, caching, queues]
 ---
 # Senior Backend Engineer
@@ -42,15 +42,27 @@ Before scaffolding, settle the inputs below. When one is missing or vague and wo
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `api_scaffolder.py` | Generate route handlers, Zod validators, and TS types from an OpenAPI spec | `python scripts/api_scaffolder.py openapi.yaml --framework express --output src/routes/` |
-| `database_migration_tool.py` | Analyze schemas, suggest indexes, and generate migrations with rollbacks | `python scripts/database_migration_tool.py schema.sql --analyze` |
-| `api_load_tester.py` | HTTP load test with latency percentiles, throughput, and comparison | `python scripts/api_load_tester.py https://api.example.com/users --concurrency 50 --duration 30` |
+| `api_scaffolder.py` | Route handlers, Zod validators and TS types from an OpenAPI spec (JSON, or block-style YAML; flow-style YAML needs PyYAML) | `python3 scripts/api_scaffolder.py openapi.json --framework express --output src/routes/` |
+| `database_migration_tool.py` | PostgreSQL schema analysis, index suggestions, migrations with rollbacks | `python3 scripts/database_migration_tool.py schema.sql --analyze` |
+| `api_load_tester.py` | HTTP load test with latency percentiles, throughput and comparison; `--min-success` turns it into a CI gate | `python3 scripts/api_load_tester.py https://staging.example.com/health --concurrency 20 --duration 30 --min-success 99` |
 
-## References
+**Exit codes:** 0 done; 1 `api_load_tester.py` success rate below `--min-success`; 2 unusable input (unreadable spec, unsupported YAML, bad arguments). Without `--min-success` the load tester reports failures but exits 0, so set it in CI.
+
+## Quick Start
+
+```bash
+# from engineering/senior-backend/; write generated code outside the repo
+python3 scripts/database_migration_tool.py assets/sample_schema.sql --analyze    # flags the unindexed orders.user_id
+python3 scripts/api_scaffolder.py assets/sample_openapi.json --framework express --output "$(mktemp -d)"
+```
+
+Run load tests only against systems you own or are allowed to test, and never against production without agreement: the tester sends real traffic.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -59,6 +71,28 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/api_design_patterns.md](references/api_design_patterns.md)** — REST vs GraphQL, versioning, error handling, pagination. Read when designing new APIs.
 - **[references/database_optimization_guide.md](references/database_optimization_guide.md)** — indexing strategies, query optimization, N+1 solutions. Read when fixing slow queries.
 - **[references/backend_security_practices.md](references/backend_security_practices.md)** — OWASP Top 10, auth patterns, input validation. Read when hardening security.
+
+## Anti-Patterns
+
+**Mistake:** Adding an index for every slow query.
+**Why it matters:** Each index slows writes and costs memory; overlapping indexes are common after a few rounds.
+**Instead:** Read the query plan (`EXPLAIN ANALYZE`), add the index that the plan needs, and drop ones that are never used.
+
+**Mistake:** Shipping a migration without a tested rollback.
+**Why it matters:** A failed deploy then needs a manual fix under pressure, and data changes may not reverse cleanly.
+**Instead:** Generate the rollback with the migration, run both on a copy of production data, and use expand-then-contract for breaking changes.
+
+**Mistake:** Reading a load test that "finished" as a pass.
+**Why it matters:** A run where most requests failed still prints latency numbers.
+**Instead:** Check the success rate first, and gate CI with `--min-success`.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/api_scaffolder.py`, `scripts/database_migration_tool.py`, `scripts/api_load_tester.py` | CLIs (stdlib; PyYAML optional for flow-style YAML) |
+| `assets/sample_openapi.json` | Orders API with list and create operations |
+| `assets/sample_schema.sql` | Two tables with an unindexed foreign key |
 
 ## Scope & Limitations
 
@@ -73,14 +107,3 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Infrastructure provisioning, container orchestration, or CI/CD pipeline setup -- see `senior-devops`
 - GraphQL schema design, resolvers, or subscriptions -- see `senior-fullstack`
 - Application performance monitoring (APM), distributed tracing, or log aggregation -- see `senior-secops`
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-fullstack` | API routes generated here feed into fullstack project scaffolding | OpenAPI spec &rarr; fullstack scaffolder consumes as API contract |
-| `senior-devops` | Migration scripts output here are consumed by CI/CD deployment pipelines | `migrations/` directory &rarr; deployment workflow applies and verifies |
-| `senior-security` | Load test results and security hardening output feed into security review | Load test JSON &rarr; security audit validates rate limiting and error handling |
-| `senior-qa` | Generated route handlers and validators provide test surface for QA automation | Route files + Zod schemas &rarr; QA generates integration test suites |
-| `senior-frontend` | TypeScript types generated by the scaffolder are shared with frontend consumers | `types.ts` &rarr; frontend imports API types for type-safe client code |
-| `code-reviewer` | Schema analysis issues and migration diffs feed into code review checklists | Analysis report &rarr; reviewer validates index coverage and naming conventions |

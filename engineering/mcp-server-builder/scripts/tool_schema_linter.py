@@ -209,6 +209,8 @@ def load_tools(file_path: str, json_path):
             else:
                 raise ValueError(f"Cannot traverse path '{json_path}' — key '{key}' not found")
 
+    if not json_path and isinstance(data, dict) and isinstance(data.get("tools"), list):
+        data = data["tools"]  # converter output and scaffolder configs wrap tools in {"tools": [...]}
     if isinstance(data, dict) and "name" in data:
         return [data]
     if isinstance(data, list):
@@ -233,13 +235,13 @@ def main():
 
     try:
         tools = load_tools(args.file, args.path)
-    except (FileNotFoundError, ValueError, json.JSONDecodeError) as e:
+    except (OSError, ValueError, json.JSONDecodeError) as e:
         if args.json:
             json.dump({"error": str(e)}, sys.stdout, indent=2)
             print()
         else:
             print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)  # unusable input
 
     all_results = []
     total_warnings = 0

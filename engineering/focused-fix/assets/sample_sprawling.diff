@@ -1,0 +1,49 @@
+diff --git a/src/auth/email.py b/src/auth/email.py
+index 3b1c2d4..8f9e0a1 100644
+--- a/src/auth/email.py
++++ b/src/auth/email.py
+@@ -12,7 +12,7 @@ def normalize_email(raw: str) -> str:
+     """Lower-case the domain and strip whitespace."""
+     local, _, domain = raw.strip().partition("@")
+-    local = local.split("+")[0]
++    # Keep sub-addresses.
+     return f"{local}@{domain.lower()}"
+
+
+diff --git a/src/auth/session.py b/src/auth/session.py
+index 7c8d9e0..1f2a3b4 100644
+--- a/src/auth/session.py
++++ b/src/auth/session.py
+@@ -40,6 +40,6 @@ class Session:
+     def refresh(self):
+-        if self.expired():
+-            self.token = issue()
++        if self.expired() :
++            self.token = issue( )
+         return self.token
+
+diff --git a/src/billing/invoice.py b/src/billing/invoice.py
+index 2a3b4c5..6d7e8f9 100644
+--- a/src/billing/invoice.py
++++ b/src/billing/invoice.py
+@@ -88,4 +88,5 @@ def total(lines):
+-    return sum(l.amount for l in lines)
++    subtotal = sum(l.amount for l in lines)
++    return round(subtotal, 2)
+
+diff --git a/src/ui/banner.py b/src/ui/banner.py
+index 0a1b2c3..4d5e6f7 100644
+--- a/src/ui/banner.py
++++ b/src/ui/banner.py
+@@ -5,3 +5,3 @@
+-TITLE = "Welcome back"
++TITLE = "Welcome back!"
+
+diff --git a/requirements.txt b/requirements.txt
+index 9a8b7c6..5d4e3f2 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -3,3 +3,3 @@
+-requests==2.31.0
++requests==2.32.3
+

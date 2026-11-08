@@ -38,9 +38,10 @@ def load_json(path: str) -> dict:
     try:
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError) as e:
-        print(f"Warning: Could not load {path}: {e}", file=sys.stderr)
-        return {}
+    except (OSError, json.JSONDecodeError) as e:
+        # A path the user passed that cannot be read is an input error, not an empty sprint.
+        print(f"Error: cannot load {path}: {e}", file=sys.stderr)
+        sys.exit(2)
 
 
 def load_text(path: str) -> str:
@@ -229,8 +230,11 @@ def generate_executive_summary(velocity: dict, contributors: dict, churn: dict) 
     refactor_freq = health.get("refactor_frequency", 0)
 
     health_notes = []
-    if churn_rate > 0.5:
+    # Same thresholds as the Code Health table, so the summary never contradicts it.
+    if churn_rate > 0.3:
         health_notes.append("elevated churn rate")
+    if health.get("hotspot_concentration", 0) > 0.3:
+        health_notes.append("concentrated hotspots")
     if test_ratio < 0.3:
         health_notes.append("low test-to-production ratio")
     if refactor_freq < 0.08:
@@ -637,12 +641,19 @@ def main():
     if args.previous_velocity:
         previous_velocity = load_json(args.previous_velocity)
 
-    report = generate_report(
-        velocity, contributors, churn,
-        sprint_name=args.sprint_name,
-        previous_retro_text=previous_retro_text,
-        previous_velocity=previous_velocity,
-    )
+    if not isinstance(velocity, dict) or not isinstance(velocity.get("current"), dict):
+        print(f"Error: {args.velocity} is not velocity_analyzer.py JSON output (no 'current' object)", file=sys.stderr)
+        sys.exit(2)
+    try:
+        report = generate_report(
+            velocity, contributors, churn,
+            sprint_name=args.sprint_name,
+            previous_retro_text=previous_retro_text,
+            previous_velocity=previous_velocity,
+        )
+    except (AttributeError, TypeError, KeyError) as e:
+        print(f"Error: input files do not match the tools' JSON output ({type(e).__name__}: {e})", file=sys.stderr)
+        sys.exit(2)
 
     if args.output:
         with open(args.output, "w", encoding="utf-8") as f:

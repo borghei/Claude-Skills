@@ -1,0 +1,24 @@
+{
+  "tree_name": "Q3 roadmap",
+  "as_of": "2026-05-27",
+  "last_updated": "2026-03-30",
+  "outcome": {
+    "statement": "Ship the new onboarding",
+    "is_measurable": false,
+    "is_behavioral_or_business": false,
+    "is_bounded": true,
+    "team_can_influence": true
+  },
+  "opportunities": [
+    {
+      "id": "O1",
+      "statement": "Add bulk CSV import",
+      "is_customer_phrased": true,
+      "has_evidence": false,
+      "evidence_sources": [],
+      "solutions": [
+        {"id": "O1-S1", "statement": "CSV import", "is_solution_not_opportunity": true, "assumption_tests": []}
+      ]
+    }
+  ]
+}

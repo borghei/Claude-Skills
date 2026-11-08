@@ -1,0 +1,59 @@
+{
+  "tree_name": "Activation Q3",
+  "as_of": "2026-05-27",
+  "last_updated": "2026-05-22",
+  "outcome": {
+    "statement": "Lift week-1 activation from 28% to 40% by end of Q3",
+    "is_measurable": true,
+    "is_behavioral_or_business": true,
+    "is_bounded": true,
+    "team_can_influence": true
+  },
+  "opportunities": [
+    {
+      "id": "O1",
+      "statement": "New admins don't know which step to do first after signup",
+      "is_customer_phrased": true,
+      "has_evidence": true,
+      "evidence_sources": ["interview-007", "interview-011", "funnel: 46% drop after signup"],
+      "solutions": [
+        {"id": "O1-S1", "statement": "Three-step setup checklist on the empty home screen", "is_solution_not_opportunity": true,
+         "assumption_tests": [{"description": "5-user prototype test: 4 of 5 reach step 3 unaided", "time_bounded": true, "success_criterion_defined": true}]},
+        {"id": "O1-S2", "statement": "Pre-filled demo workspace", "is_solution_not_opportunity": true,
+         "assumption_tests": [{"description": "Fake door on signup: 15%+ choose demo", "time_bounded": true, "success_criterion_defined": true}]},
+        {"id": "O1-S3", "statement": "Concierge onboarding call for teams over 20 seats", "is_solution_not_opportunity": true,
+         "assumption_tests": [{"description": "Offer to 20 accounts: 6+ book within a week", "time_bounded": true, "success_criterion_defined": true}]}
+      ]
+    },
+    {
+      "id": "O2",
+      "statement": "Admins want to invite their whole team at once",
+      "is_customer_phrased": true,
+      "has_evidence": true,
+      "evidence_sources": ["support tickets: 38 in May", "interview-009"],
+      "solutions": [
+        {"id": "O2-S1", "statement": "CSV invite upload", "is_solution_not_opportunity": true,
+         "assumption_tests": [{"description": "Wizard-of-Oz CSV invites for 10 accounts: 7+ use it", "time_bounded": true, "success_criterion_defined": true}]},
+        {"id": "O2-S2", "statement": "Invite by email domain", "is_solution_not_opportunity": true,
+         "assumption_tests": [{"description": "Interview 5 admins on domain-join trust concerns", "time_bounded": true, "success_criterion_defined": true}]},
+        {"id": "O2-S3", "statement": "Directory sync for SSO customers", "is_solution_not_opportunity": true,
+         "assumption_tests": [{"description": "2-day spike against the IdP sandbox", "time_bounded": true, "success_criterion_defined": true}]}
+      ]
+    },
+    {
+      "id": "O3",
+      "statement": "Invited members can't tell why they were added",
+      "is_customer_phrased": true,
+      "has_evidence": true,
+      "evidence_sources": ["invite acceptance 31%", "interview-012"],
+      "solutions": [
+        {"id": "O3-S1", "statement": "Personal note from the inviter in the invite email", "is_solution_not_opportunity": true,
+         "assumption_tests": [{"description": "A/B on invite email: +5pp acceptance", "time_bounded": true, "success_criterion_defined": true}]},
+        {"id": "O3-S2", "statement": "Landing page showing the inviter's first project", "is_solution_not_opportunity": true,
+         "assumption_tests": [{"description": "Prototype test with 5 invitees", "time_bounded": true, "success_criterion_defined": true}]},
+        {"id": "O3-S3", "statement": "Slack notification instead of email", "is_solution_not_opportunity": true,
+         "assumption_tests": [{"description": "Fake door in admin invite flow: 20%+ pick Slack", "time_bounded": true, "success_criterion_defined": true}]}
+      ]
+    }
+  ]
+}

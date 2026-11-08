@@ -1,15 +1,16 @@
 ---
 name: beta-program
 description: >
-  Closed beta program playbook covering recruitment, success criteria,
-  communication cadence, and beta-to-GA exit gates.
+  Plan and run a closed beta: cohorts, exit gates agreed before recruiting,
+  weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a
+  closed beta or design-partner program before general availability.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: beta-program, kano-model, cohort-design, beta-to-ga-gates
   tags:
     - beta-program
@@ -24,13 +25,6 @@ metadata:
 A structured playbook for running a closed beta that produces clear learning, retained design partners, and an unambiguous decision on whether to proceed to general availability. Most betas fail not because the product is wrong, but because the program is run informally: recruitment is opportunistic, success criteria are implicit, communication is sporadic, and exit gates are never defined. This skill replaces all of that with concrete templates and decision rules.
 
 A good closed beta runs 4-8 weeks, recruits 10-30 participants from three concentric cohorts ("friends, family, fanatics"), publishes a weekly cadence the team commits to, and exits on pre-agreed criteria rather than the calendar. The outputs are a beta program plan, a recruitment script, a weekly cadence template, and an exit memo that either greenlights GA, extends the beta, or kills the feature.
-
-## Core Capabilities
-
-- **Cohort design** — sequence recruitment through Friends → Family → Fanatics rings of decreasing trust and increasing signal.
-- **Kano scoping** — decide the beta feature set (Must-be / Performance / Delight) so the beta produces quotable testimonials, not neutral feedback.
-- **Exit gates** — quantitative + qualitative success criteria set *before* recruitment, resolving to Greenlight / Extend / Pivot / Kill.
-- **Weekly cadence** — a committed Monday→Friday communication rhythm that keeps a beta from dying of silence.
 
 ## When to Use
 
@@ -56,14 +50,20 @@ Before building the beta plan, settle the inputs below. When one is missing or v
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
-1. Frame the beta hypothesis, target cohort, and headline outcome (from `create-prd/`).
-2. Set exit gates in `assets/beta-program-plan.md` and get PM + Eng + sponsor sign-off **before** recruiting.
-3. Recruit via `assets/recruitment-script.md` (over-recruit 2x), then stand up the comms channel and publish the cadence on day 1.
-4. Run the weekly cadence (`assets/weekly-cadence-template.md`); review the exit memo (`assets/exit-memo.md`) at week N for a Greenlight / Extend / Pivot / Kill decision.
+1. Frame the beta hypothesis, target cohort and headline outcome (from `create-prd/`).
+2. Set exit gates in `assets/beta-program-plan.md` and get PM, Eng and sponsor sign-off **before** recruiting. Gates set afterwards drift toward whatever the beta happened to show.
+3. Recruit via `assets/recruitment-script.md`. Defaults [RECOMMENDED], to adjust for your context:
+   - **Over-recruit about 2x:** roughly half of recruited participants go quiet by week 2, so 2x keeps the active cohort at target. A 6-account enterprise beta with contracted participants needs far less.
+   - **Fanatics at 30% or more:** friends and colleagues are polite; cold-recruited users with active pain are the ones who report real friction.
+   - **Weight Fanatic feedback about 2x** when tallying, for the same reason; say so in the exit memo.
+4. Stand up the comms channel and publish the cadence on day 1; run it weekly (`assets/weekly-cadence-template.md`).
+5. **Decide** at the pre-agreed date with `assets/exit-memo.md`: Greenlight, Extend, Pivot or Kill, against the gates as written.
 
-See `references/beta-framework.md` for the full framework tables, step-by-step workflow, troubleshooting, and success criteria.
+**Done when** the exit memo records each gate's result against its pre-agreed threshold and a decision signed by the same people who signed the gates.
+
+Framework tables, troubleshooting and success criteria: `references/beta-framework.md`.
 
 ## Anti-Patterns
 
@@ -84,15 +84,21 @@ See `references/beta-framework.md` for the full framework tables, step-by-step w
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/beta-program-plan.md` | Plan template: gates, cohort sizing, timeline |
+| `assets/recruitment-script.md` | Outreach templates for the three cohorts, screening questions |
+| `assets/weekly-cadence-template.md` | Monday digest, office hours, review, Friday snapshot |
+| `assets/exit-memo.md` | Exit decision memo (Greenlight / Extend / Pivot / Kill) |
+| `examples/shared-dashboards-closed-beta.md` | Worked beta |
+
 ## References
 
 - `references/beta-framework.md` -- Full framework (cohort, Kano, success gates, cadence, exit gates), the 8-step workflow, troubleshooting matrix, and success criteria. Read this when building the plan, setting gates, running the cadence, or diagnosing problems.
 - `references/beta-program-guide.md` -- Practical reference guide: why betas fail, cohort sequencing, Kano deep dive, exit-gate worked examples, common failure modes. Read this for narrative depth and worked examples.
 - `references/red-flags.md` -- Bad-vs-good examples for the beta plan, recruitment script, cadence, and exit memo. Read this to review beta artifacts before opening recruitment.
-- `assets/beta-program-plan.md` -- Beta program plan template with gates, cohort sizing, timeline.
-- `assets/recruitment-script.md` -- Email/DM templates for the three cohorts plus screening questions.
-- `assets/weekly-cadence-template.md` -- Monday digest, Tuesday office hours, Wednesday review, Friday snapshot templates.
-- `assets/exit-memo.md` -- Exit-gate decision memo template (Greenlight / Extend / Pivot / Kill).
 - Kano, Noriaki. "Attractive Quality and Must-Be Quality." Journal of the Japanese Society for Quality Control, 1984.
 
 ## Scope & Limitations

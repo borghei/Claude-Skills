@@ -16,7 +16,7 @@ import json
 import argparse
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Set
+from typing import Any, Dict, List, Optional, Tuple, Set
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 
@@ -36,6 +36,7 @@ class ComponentInfo:
     has_callbacks: bool
     exports: List[str]
     imports: List[str]
+    prop_types: Dict[str, Any] = field(default_factory=dict)  # name -> (type, optional)
 
 
 @dataclass
@@ -55,12 +56,30 @@ class TestFile:
     imports: Set[str] = field(default_factory=set)
 
 
+PROP_TYPE_BLOCK = re.compile(r'(?:interface|type)\s+(\w*Props)\s*=?\s*\{([^}]*)\}')
+PROP_ENTRY = re.compile(r'^\s*(?:readonly\s+)?(\w+)(\?)?\s*:\s*([^;,\n]+)', re.MULTILINE)
+
+
+def extract_prop_types(content: str) -> Dict[str, Any]:
+    """Parse the first `XProps` interface/type into {prop: (type, optional)}."""
+    block = PROP_TYPE_BLOCK.search(content)
+    if not block:
+        return {}
+    return {m.group(1): (m.group(3).strip(), bool(m.group(2)))
+            for m in PROP_ENTRY.finditer(block.group(2))}
+
+
 class ComponentScanner:
     """Scans source files for React components"""
 
     # Patterns for detecting React components
     FUNCTIONAL_COMPONENT = re.compile(
         r'^(?:export\s+)?(?:const|function)\s+([A-Z][a-zA-Z0-9]*)\s*[=:]?\s*(?:\([^)]*\)\s*(?::\s*[^=]+)?\s*=>|function\s*\([^)]*\))',
+        re.MULTILINE
+    )
+
+    FUNCTION_DECLARATION = re.compile(
+        r'^(?:export\s+(?:default\s+)?)?function\s+([A-Z][a-zA-Z0-9]*)\s*\(',
         re.MULTILINE
     )
 
@@ -125,6 +144,10 @@ class ComponentScanner:
             name = match.group(1)
             self._add_component(name, file_path, content, 'functional')
 
+        # Find plain function declarations (export function Button(props) { ... })
+        for match in self.FUNCTION_DECLARATION.finditer(content):
+            self._add_component(match.group(1), file_path, content, 'functional')
+
         # Find arrow function components
         for match in self.ARROW_COMPONENT.finditer(content):
             name = match.group(1)
@@ -157,6 +180,9 @@ class ComponentScanner:
             props_str = props_match.group(1) or ''
             props = [p.strip().split(':')[0].strip() for p in props_str.split(',') if p.strip()]
 
+        prop_types = extract_prop_types(content)
+        props = props or list(prop_types)
+
         # Extract imports
         imports = re.findall(r"import\s+(?:{[^}]+}|[^;]+)\s+from\s+['\"]([^'\"]+)['\"]", content)
 
@@ -175,7 +201,8 @@ class ComponentScanner:
             has_state=bool(self.STATE_PATTERN.search(content)),
             has_callbacks=bool(self.CALLBACK_PATTERN.search(content)),
             exports=exports[:5],
-            imports=imports[:10]
+            imports=imports[:10],
+            prop_types=prop_types,
         )
 
         self.components.append(component)
@@ -263,9 +290,12 @@ class TestGenerator:
         props = component.props[:3] if component.props else ['prop1']
 
         prop_tests = []
+        spread = ' {...mockProps}' if component.has_props else ''
         for prop in props:
+            ts_type = component.prop_types.get(prop, ('string', False))[0]
+            value = self._mock_value(prop, ts_type)
             prop_tests.append(f'''  it('renders with {prop} prop', () => {{
-    render(<{component.name} {prop}="test-value" />);
+    render(<{component.name}{spread} {prop}={{{value}}} />);
     // TODO: Assert that {prop} affects rendering
   }});''')
 
@@ -348,6 +378,36 @@ class TestGenerator:
             code=code
         )
 
+    @staticmethod
+    def _mock_value(name: str, ts_type: str) -> str:
+        """Pick a minimal valid value for a TypeScript prop type."""
+        t = ts_type.replace(' ', '')
+        if '=>' in t or t.startswith('Function'):
+            return 'jest.fn()'
+        if t.endswith('[]') or t.startswith('Array<'):
+            return '[]'
+        if t == 'boolean':
+            return 'false'
+        if t == 'number':
+            return '1'
+        if t == 'string':
+            return f"'test-{name}'"
+        if t.startswith(("'", '"')):
+            return t.split('|')[0]
+        if 'ReactNode' in t or 'ReactElement' in t or t == 'JSX.Element':
+            return "'content'"
+        return f'{{}} as never /* TODO: real {ts_type} */'
+
+    def _mock_props_block(self, component: ComponentInfo) -> List[str]:
+        """Typed mockProps with a value for every required prop."""
+        required = {n: t for n, (t, optional) in component.prop_types.items() if not optional}
+        if not required:
+            return ['const mockProps = {};']
+        lines = ['const mockProps = {']
+        lines += [f'  {name}: {self._mock_value(name, t)},' for name, t in required.items()]
+        lines.append('};')
+        return lines
+
     def _get_mock_props(self, component: ComponentInfo) -> str:
         """Generate mock props string for a component"""
         if not component.has_props or not component.props:
@@ -374,8 +434,12 @@ class TestGenerator:
 
         # Mock props if component has props
         if test_file.component.has_props:
-            lines.append('// TODO: Define mock props')
-            lines.append('const mockProps = {};')
+            if test_file.component.prop_types:
+                lines.append('// Minimal valid values for the required props; adjust per test')
+                lines.extend(self._mock_props_block(test_file.component))
+            else:
+                lines.append('// TODO: Define mock props (no Props interface was found to infer them)')
+                lines.append('const mockProps = {};')
             lines.append('')
 
         # Describe block
@@ -597,9 +661,9 @@ Examples:
             print(json.dumps(results, indent=2))
 
     except Exception as e:
-        print(f"Error: {e}")
-        sys.exit(1)
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -2,31 +2,13 @@
 """Estimate token usage and dollar cost for agent workflow execution.
 
 Takes a workflow definition with step-level token and model annotations, then
-calculates per-step and total costs using published pricing.  Supports model
-tiering analysis (what-if you swapped Sonnet for Haiku on routing steps?).
+calculates per-step and total costs from your rates (--prices) or placeholder tier
+rates.  Supports what-if analysis with --override-model.
 
-Workflow JSON format:
-{
-  "name": "content-pipeline",
-  "steps": [
-    {
-      "id": "research",
-      "agent": "researcher",
-      "depends_on": [],
-      "model": "claude-sonnet-5",
-      "estimated_input_tokens": 2000,
-      "estimated_output_tokens": 4000
-    },
-    {
-      "id": "write",
-      "agent": "writer",
-      "depends_on": ["research"],
-      "model": "claude-sonnet-5",
-      "estimated_input_tokens": 5000,
-      "estimated_output_tokens": 8000
-    }
-  ]
-}
+Workflow JSON format (same shape workflow_validator.py checks):
+{"name": "content-pipeline", "steps": [
+  {"id": "research", "agent": "researcher", "depends_on": [], "model": "claude-sonnet-5-5",
+   "estimated_input_tokens": 2000, "estimated_output_tokens": 4000}]}
 
 Optional fields per step:
   - "parallel_branches": int (for fan-out steps, multiplies cost)
@@ -37,7 +19,8 @@ Usage:
   python cost_estimator.py workflow.json
   python cost_estimator.py workflow.json --json
   python cost_estimator.py workflow.json --runs 1000
-  python cost_estimator.py workflow.json --override-model claude-haiku-4-5
+  python cost_estimator.py workflow.json --override-model claude-haiku-5-5
+  python cost_estimator.py workflow.json --prices my_rates.json
 """
 
 import argparse
@@ -45,39 +28,35 @@ import json
 import sys
 from typing import Any
 
-# Pricing per 1M tokens (USD), Anthropic rows checked 2026-09.
-# cached_input = cache-read rate (0.1x input; Opus 5.5 is $0.20, Fable 5.1 $0.25).
-# Source: anthropic.com/pricing, openai.com/pricing
-MODEL_PRICING: dict[str, dict[str, float]] = {
-    # Anthropic models
-    "claude-fable-5-1": {"input": 10.00, "output": 50.00, "cached_input": 0.25},
-    "claude-opus-5-5":  {"input": 4.00,  "output": 20.00, "cached_input": 0.20},
-    "claude-opus-5":    {"input": 5.00,  "output": 25.00, "cached_input": 0.50},
-    "claude-sonnet-5":  {"input": 2.00,  "output": 10.00, "cached_input": 0.20},
-    "claude-haiku-4-5": {"input": 1.00,  "output": 5.00,  "cached_input": 0.10},
-    # Legacy snapshots (deprecated) kept so older workflow files still price correctly
-    "claude-opus-4-20250514":   {"input": 15.00, "output": 75.00, "cached_input": 1.50},
-    "claude-sonnet-4-20250514": {"input": 3.00,  "output": 15.00, "cached_input": 0.30},
-    # Aliases (priced as the model each alias resolves to: Opus 5, Sonnet 5, Haiku 4.5)
-    "claude-opus":   {"input": 5.00,  "output": 25.00, "cached_input": 0.50},
-    "claude-sonnet": {"input": 2.00,  "output": 10.00, "cached_input": 0.20},
-    "claude-haiku":  {"input": 1.00,  "output": 5.00,  "cached_input": 0.10},
-    # OpenAI models (approximate)
-    "gpt-4o":       {"input": 2.50, "output": 10.00, "cached_input": 1.25},
-    "gpt-4o-mini":  {"input": 0.15, "output": 0.60,  "cached_input": 0.075},
-    "gpt-4-turbo":  {"input": 10.00, "output": 30.00, "cached_input": 5.00},
-    # Default fallback
-    "default":      {"input": 2.00,  "output": 10.00, "cached_input": 0.20},
+# Placeholder rates per 1M tokens (USD), NOT any provider's price list. Prices change often,
+# so pass your real rates with --prices FILE (JSON: {"model-id": {"input": x, "output": y,
+# "cached_input": z}}). Without it, a model is priced by the tier its name suggests.
+PLACEHOLDER_TIERS: dict[str, dict[str, float]] = {
+    "large":  {"input": 5.00, "output": 25.00, "cached_input": 0.50},
+    "medium": {"input": 2.00, "output": 10.00, "cached_input": 0.20},
+    "small":  {"input": 0.50, "output": 2.50,  "cached_input": 0.05},
 }
+TIER_HINTS = (("large", ("opus", "fable", "large", "pro")),
+              ("small", ("haiku", "mini", "nano", "flash", "small")))
+MODEL_PRICING: dict[str, dict[str, float]] = {}  # filled from --prices
 
-DEFAULT_MODEL = "claude-sonnet-5"
+DEFAULT_MODEL = "claude-sonnet-5-5"
 DEFAULT_INPUT_TOKENS = 1000
 DEFAULT_OUTPUT_TOKENS = 500
 
 
+def model_tier(model: str) -> str:
+    """Guess a size tier from the model name; 'medium' when nothing matches."""
+    low = model.lower()
+    for tier, hints in TIER_HINTS:
+        if any(h in low for h in hints):
+            return tier
+    return "medium"
+
+
 def get_pricing(model: str) -> dict[str, float]:
-    """Look up pricing for a model, falling back to default."""
-    return MODEL_PRICING.get(model, MODEL_PRICING["default"])
+    """Return the user's rate for a model, else the placeholder rate of its tier."""
+    return MODEL_PRICING.get(model) or PLACEHOLDER_TIERS[model_tier(model)]
 
 
 def cost_for_tokens(token_count: int, rate_per_million: float) -> float:
@@ -119,6 +98,7 @@ def estimate_step(step: dict[str, Any], override_model: str | None = None) -> di
     return {
         "step_id": step_id,
         "model": model,
+        "price_source": "user" if model in MODEL_PRICING else f"placeholder-{model_tier(model)}",
         "input_tokens": input_tokens,
         "output_tokens": output_tokens,
         "cached_input_tokens": cached_tokens,
@@ -185,31 +165,31 @@ def _generate_suggestions(step_estimates: list[dict]) -> list[str]:
     """Generate cost optimization suggestions based on step analysis."""
     suggestions: list[str] = []
 
-    # Find expensive steps using Opus
-    opus_steps = [e for e in step_estimates if "opus" in e["model"].lower()]
-    if opus_steps:
-        names = ", ".join(e["step_id"] for e in opus_steps)
+    # Large-tier steps: the biggest lever is usually a smaller model where quality allows
+    large = [e for e in step_estimates if model_tier(e["model"]) == "large"]
+    if large:
+        names = ", ".join(e["step_id"] for e in large)
         suggestions.append(
-            f"Steps using Opus ({names}): consider Sonnet for 5x cost reduction "
-            f"unless output quality requires Opus."
+            f"Steps on a large-tier model ({names}): rerun with --override-model <mid-tier id> "
+            f"to see the saving, and keep the large model only where quality needs it."
         )
 
-    # Find routing/classification steps not using Haiku
+    # Routing/classification steps rarely need more than the small tier
     for e in step_estimates:
         sid = e["step_id"].lower()
         if any(k in sid for k in ("route", "classify", "dispatch", "triage", "intent")):
-            if "haiku" not in e["model"].lower():
+            if model_tier(e["model"]) != "small":
                 suggestions.append(
-                    f"Step '{e['step_id']}' appears to be routing/classification — "
-                    f"consider Haiku for ~85% cost reduction."
+                    f"Step '{e['step_id']}' looks like routing/classification; a small-tier model "
+                    f"is usually enough."
                 )
 
-    # Find steps with no caching on large inputs
+    # Large inputs with no caching
     for e in step_estimates:
         if e["input_tokens"] > 3000 and e["cached_input_tokens"] == 0:
             suggestions.append(
-                f"Step '{e['step_id']}' uses {e['input_tokens']} input tokens with no caching — "
-                f"prompt caching could reduce input cost by ~90%."
+                f"Step '{e['step_id']}' sends {e['input_tokens']} input tokens with none cached; "
+                f"a stable prompt prefix billed at the cache-read rate would cut input cost."
             )
 
     # High parallel branch counts
@@ -231,6 +211,8 @@ def format_human(result: dict[str, Any]) -> str:
     lines: list[str] = []
     lines.append(f"Workflow: {result['workflow']}")
     lines.append(f"Steps:    {result['step_count']}")
+    if any(s["price_source"] != "user" for s in result["steps"]):
+        lines.append("Pricing:  placeholder tier rates for some steps; pass --prices with real rates")
     lines.append("")
 
     # Per-run summary
@@ -251,7 +233,7 @@ def format_human(result: dict[str, Any]) -> str:
     lines.append(f"  {'Step':<20} {'Model':<30} {'Tokens':>10} {'Cost':>10}")
     lines.append(f"  {'-'*20} {'-'*30} {'-'*10} {'-'*10}")
     for s in result["steps"]:
-        model_short = s["model"].replace("claude-", "").replace("-20250514", "")
+        model_short = s["model"].replace("claude-", "")
         branch_note = f" x{s['parallel_branches']}" if s["parallel_branches"] > 1 else ""
         lines.append(
             f"  {s['step_id']:<20} {model_short + branch_note:<30} "
@@ -262,7 +244,7 @@ def format_human(result: dict[str, Any]) -> str:
     lines.append("")
     lines.append("By Model:")
     for mb in result["model_breakdown"]:
-        model_short = mb["model"].replace("claude-", "").replace("-20250514", "")
+        model_short = mb["model"].replace("claude-", "")
         lines.append(f"  {model_short:<30} {mb['tokens']:>10,} tokens  ${mb['cost_usd']:.4f}")
 
     # Suggestions
@@ -298,7 +280,7 @@ def load_workflow(path: str | None, use_stdin: bool) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Estimate token usage and cost for agent workflow execution",
-        epilog="Pricing based on published rates as of early 2026.",
+        epilog="Without --prices, costs use placeholder tier rates; pass your provider's current rates.",
     )
     parser.add_argument("file", nargs="?", help="Path to workflow JSON file")
     parser.add_argument("--stdin", action="store_true", help="Read workflow from stdin")
@@ -308,6 +290,7 @@ def main() -> int:
                         help="Number of projected runs for total cost (default: 1)")
     parser.add_argument("--override-model", type=str, default=None,
                         help="Override model for all steps (what-if analysis)")
+    parser.add_argument("--prices", help="JSON file of per-model rates per 1M tokens")
     args = parser.parse_args()
 
     if not args.file and not args.stdin:
@@ -318,7 +301,18 @@ def main() -> int:
 
     try:
         workflow = load_workflow(args.file, args.stdin)
-    except (ValueError, FileNotFoundError, PermissionError) as e:
+        if args.prices:
+            with open(args.prices, encoding="utf-8") as f:
+                rates = json.load(f)
+            if isinstance(rates, dict):  # keys starting with "_" are notes
+                rates = {k: v for k, v in rates.items() if not k.startswith("_")}
+            if not isinstance(rates, dict) or not all(
+                    isinstance(v, dict) and {"input", "output"} <= set(v) for v in rates.values()):
+                raise ValueError("--prices must map model ids to {input, output[, cached_input]}")
+            for v in rates.values():
+                v.setdefault("cached_input", v["input"])
+            MODEL_PRICING.update(rates)
+    except (ValueError, OSError) as e:
         if args.json_output:
             print(json.dumps({"error": str(e)}, indent=2))
         else:

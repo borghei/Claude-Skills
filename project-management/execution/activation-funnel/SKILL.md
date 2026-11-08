@@ -1,16 +1,16 @@
 ---
 name: activation-funnel
 description: >
-  Design and analyze activation funnels (AARRR / AAARRR Pirate Metrics) with
-  conversion + drop-off math, bottleneck detection, and Mermaid funnel diagrams.
-  Includes a stdlib Python tool that emits all 6 shared PM output formats.
+  Designs and analyzes activation funnels: stage conversion, drop-off, bottlenecks and
+  the aha event that predicts retention. Use when a funnel leaks, signups grow but
+  activation is flat, or you must pick an activation event.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: funnel_analyzer.py
   tech-stack: aarrr, pirate-metrics, activation, conversion-funnel, growth, north-star
   tags:
@@ -58,12 +58,19 @@ Before analyzing the funnel, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Settle the Clarify First inputs; pin the activation event (count + window + action) with `assets/activation_metric_worksheet.md` before touching the funnel.
+2. Define 4-7 stages as events for one cohort in the shape of `assets/sample_funnel.json`, each with a counter-metric.
+3. Run `funnel_analyzer.py`. It reports the largest absolute drop, the worst conversion rate, and the worst conversion past acquisition; start with the last one, because top-of-funnel stages nearly always lose the most and say the least.
+4. Done when the chosen bottleneck has a hypothesis, a primary metric and a counter-metric, and the activation event is shown to predict retention.
 
 ```bash
-python scripts/funnel_analyzer.py --input funnel.json --format markdown   # conversion + drop-off + bottleneck
-python scripts/funnel_analyzer.py --demo --format mermaid                 # worked SaaS funnel diagram
+python3 project-management/execution/activation-funnel/scripts/funnel_analyzer.py --input project-management/execution/activation-funnel/assets/sample_funnel.json --format markdown
+python3 project-management/execution/activation-funnel/scripts/funnel_analyzer.py --demo --format mermaid
 ```
+
+Formats: `markdown`, `json`, `mermaid`, `confluence`, `notion`, `linear` (the past-acquisition bottleneck appears in `markdown` and `json`). Exit 0 on success, 2 on bad input (missing file, invalid JSON, malformed stages).
 
 ## Anti-Patterns
 
@@ -104,16 +111,12 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Caveats:** a funnel implies a linear flow — real products branch and re-enter, so complement with branched analysis. Snapshot funnels mix cohorts and lie; always specify the cohort window. Top-stage gains amplify downstream and can mislead investment — look at both absolute and relative drop. Re-validate the activation event against fresh retention cohorts every 1-2 quarters.
 
-## Integration Points
+## Files
 
-| Integration | Direction | Description |
-|---|---|---|
-| `north-star-metric/` | Pairs with | Activation rate is often the NSM or a top input metric in the NSM tree |
-| `brainstorm-okrs/` | Feeds into | Funnel-stage targets become KRs (e.g., "improve activation from 28% to 36%") |
-| `prioritization-frameworks/` | Feeds into | Fix-the-funnel projects ranked by RICE / weighted-score |
-| `discovery/brainstorm-experiments/` | Pairs with | Each funnel leak suggests testable experiments to plug it |
-| `discovery/identify-assumptions/` | Pairs with | "Users will complete step 3 if we shorten it" is an assumption to validate |
-| `status-update-generator/` | Feeds into | Weekly funnel deltas appear in Highlights / Risks |
-| `outcome-roadmap/` | Pairs with | Roadmap items justify themselves by which funnel stage they target |
-| `cycle-time-analyzer/` | Pairs with | Cycle time to fix funnel leaks is part of flow analysis |
-| `data-analytics/` (domain) | Pairs with | Telemetry instrumentation; cohort analysis; stat sig |
+| File | Purpose |
+|------|---------|
+| `scripts/funnel_analyzer.py` | Stage conversion, drop-off, cumulative conversion, bottlenecks, Mermaid diagram, six output formats |
+| `assets/sample_funnel.json` | Runnable 7-stage SaaS trial funnel |
+| `assets/activation_metric_worksheet.md`, `assets/funnel_design_canvas.md` | Worksheets |
+| `examples/freemium-saas-day-7-retention-diagnosis.md` | Worked diagnosis |
+| `references/*.md` | See References |

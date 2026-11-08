@@ -1,16 +1,16 @@
 ---
 name: a11y-audit
 description: >
-  This skill should be used when the user asks to "check accessibility",
-  "audit WCAG compliance", "scan HTML for a11y issues", "check color contrast",
-  or "find accessibility violations in web pages".
+  Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour
+  contrast checks for colour pairs or CSS. Use when auditing templates for accessibility,
+  checking contrast, or adding an a11y gate to CI.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: accessibility
-  updated: 2026-04-02
+  updated: 2026-11-08
   tags: [accessibility, a11y, wcag, contrast, html]
 ---
 # Accessibility Audit
@@ -20,7 +20,14 @@ metadata:
 
 ## Overview
 
-The **Accessibility Audit** skill provides automated scanning of HTML files for WCAG 2.1 compliance violations and color contrast checking against AA/AAA standards. It catches missing alt text, broken heading hierarchies, unlabeled form inputs, and insufficient color contrast early in development.
+The agent uses this skill to scan HTML source for WCAG 2.1 violations (plus WCAG 2.2 SC 3.3.8, paste blocking on credential fields) and to check colour contrast against AA/AAA. It catches missing alt text, broken heading hierarchies, unlabeled form inputs and low contrast early, before a browser-based audit. The rule set targets WCAG 2.1 on purpose: the other WCAG 2.2 additions (target size, focus not obscured, dragging alternatives) depend on rendered layout and need a browser or manual check.
+
+## When to Use
+
+- Reviewing HTML templates or static pages for accessibility before release.
+- Checking a palette or a stylesheet's colour pairs against AA/AAA contrast.
+- Adding a Level A gate to CI for template changes.
+- Triaging an accessibility bug report down to specific elements.
 
 ## Clarify First
 
@@ -49,7 +56,16 @@ python scripts/contrast_checker.py --css styles.css
 
 # JSON output for CI
 python scripts/a11y_scanner.py --file index.html --format json
+
+# Bundled samples
+python scripts/a11y_scanner.py --file examples/sample-page.html              # many violations, exit 1
+python scripts/a11y_scanner.py --file examples/sample-page-accessible.html   # 0 findings, exit 0
 ```
+
+**Exit codes.** `a11y_scanner.py`: `0` no Level A (critical) finding, or with `--strict` no finding
+at all at the chosen `--level`; `1` otherwise; `2` missing file or directory, or a `--file` that is
+not HTML. `contrast_checker.py`: `0` all checked pairs pass AA normal text, `1` a pair fails, `2` bad
+input (invalid colour or unreadable CSS).
 
 ## Tools Overview
 
@@ -107,6 +123,29 @@ python scripts/contrast_checker.py --css ./static/css/main.css --format json
 3. **Staging audit** - Comprehensive scan before release
 4. **Monitoring** - Regular scheduled audits
 
+## Anti-Patterns
+
+### Clean scan as conformance claim
+**Mistake:** Publishing "WCAG AA compliant" because the scanner found nothing.
+**Why it happens:** Zero findings reads like a pass.
+**Instead:** The scanner covers a subset of criteria in static source. State what was checked, then test keyboard navigation, focus order and a screen reader on the rendered page.
+
+### Alt text that repeats the filename
+**Mistake:** `alt="chart.png"` or `alt="image"` to silence the missing-alt finding.
+**Why it happens:** The fix is judged by the scanner going quiet.
+**Instead:** Describe what the image tells the reader ("Revenue rose from 1.2M to 1.5M"), or use `alt=""` when it is decorative.
+
+### Colour as the only signal
+**Mistake:** Errors shown only by turning a field red, with contrast that passes.
+**Why it happens:** Contrast checks pass, so the design looks accessible.
+**Instead:** Pair colour with text or an icon and an `aria-describedby` message; contrast is necessary but not sufficient.
+
+## Files
+
+- `scripts/a11y_scanner.py`, `scripts/contrast_checker.py` — the two CLIs above.
+- `examples/sample-page.html` (deliberate violations, including paste blocking) and `examples/sample-page-accessible.html` (clean).
+- `references/wcag-guidelines.md` — conformance levels, success criteria, fixes.
+
 ## Scope & Limitations
 
 **In Scope:**
@@ -126,7 +165,7 @@ python scripts/contrast_checker.py --css ./static/css/main.css --format json
 - Both tools read source files only. Markup built at runtime by a framework or template engine, and styles computed in the browser, are not seen the way a user sees them.
 - The CSS check pairs `color` with `background-color` or `background` declared in the same rule. Inherited colors, CSS variables, images and gradients behind text are not resolved, so contrast results need visual confirmation.
 - A clean scan covers the checks listed above, not every WCAG success criterion. It is not a conformance claim or an accessibility statement, and many criteria still need manual review.
-- The rules target WCAG 2.1. Criteria added in WCAG 2.2, such as minimum target size, are not checked.
+- The rules target WCAG 2.1 plus WCAG 2.2 SC 3.3.8 (paste blocking). Other 2.2 criteria, such as minimum target size and focus not obscured, need a rendered page and are not checked.
 
 ## Reference Documentation
 

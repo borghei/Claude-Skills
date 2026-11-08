@@ -6,7 +6,6 @@ This script analyzes dependency inventories, evaluates semantic versioning patte
 estimates breaking change risks, and generates prioritized upgrade plans with
 migration checklists and rollback procedures.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -20,7 +19,6 @@ from dataclasses import dataclass, asdict
 from datetime import datetime, timedelta
 from enum import Enum
 import re
-import subprocess
 
 class UpgradeRisk(Enum):
     """Upgrade risk levels."""
@@ -262,21 +260,14 @@ class UpgradePlanner:
     
     def _load_dependency_inventory(self, inventory_path: str) -> List[Dict[str, Any]]:
         """Load dependency inventory from JSON file."""
-        try:
-            with open(inventory_path, 'r') as f:
-                data = json.load(f)
-            
-            if 'dependencies' in data:
-                return data['dependencies']
-            elif isinstance(data, list):
-                return data
-            else:
-                print("Warning: Unexpected inventory format")
-                return []
-        
-        except Exception as e:
-            print(f"Error loading dependency inventory: {e}")
-            return []
+        with open(inventory_path, 'r') as f:
+            data = json.load(f)
+        deps = data.get('dependencies') if isinstance(data, dict) else data
+        if not isinstance(deps, list) or not deps or not all(
+                isinstance(d, dict) and d.get('name') and d.get('version') for d in deps):
+            raise ValueError("inventory must be a non-empty list (or {'dependencies': [...]}) of "
+                             "objects with 'name' and 'version' (optional: 'latest', 'ecosystem', 'direct')")
+        return deps
     
     def _analyze_dependency_upgrade(self, dependency: Dict[str, Any]) -> Optional[DependencyUpgrade]:
         """Analyze upgrade possibilities for a single dependency."""
@@ -292,8 +283,9 @@ class UpgradePlanner:
         if not current_ver:
             return None
         
-        # Get latest version (simulated - in practice would query package registries)
-        latest_version = self._get_latest_version(name, ecosystem)
+        # Prefer the 'latest' the caller supplies (from npm view / pip index versions);
+        # fall back to the small built-in sample table.
+        latest_version = dependency.get('latest') or self._get_latest_version(name, ecosystem)
         if not latest_version:
             return None
         
@@ -897,6 +889,8 @@ class UpgradePlanner:
         report.append("=" * 60)
         report.append(f"Generated: {analysis_results['timestamp']}")
         report.append(f"Timeline: {analysis_results['timeline_days']} days")
+        report.append("Note: 'latest' comes from each inventory entry's 'latest' field, else a small built-in "
+                      "sample table; packages with neither are skipped. Check registries before acting.")
         report.append("")
         
         # Statistics
@@ -904,8 +898,8 @@ class UpgradePlanner:
         report.append("UPGRADE SUMMARY:")
         report.append(f"  Total Upgrades Available: {stats.get('total_upgrades', 0)}")
         report.append(f"  Security Updates: {stats.get('security_updates', 0)}")
-        report.append(f"  Major Version Updates: {stats['by_type'].get('major', 0)}")
-        report.append(f"  High Risk Updates: {stats['by_risk'].get('high', 0)}")
+        report.append(f"  Major Version Updates: {stats.get('by_type', {}).get('major', 0)}")
+        report.append(f"  High Risk Updates: {stats.get('by_risk', {}).get('high', 0)}")
         report.append("")
         
         # Risk Assessment
@@ -989,7 +983,9 @@ Examples:
                        help='Only plan upgrades with security fixes')
     
     args = parser.parse_args()
-    
+    if not os.path.isfile(args.inventory_file):
+        print(f"error: inventory not found: {args.inventory_file}", file=sys.stderr)
+        sys.exit(2)
     try:
         planner = UpgradePlanner()
         results = planner.analyze_upgrades(args.inventory_file, args.timeline)
@@ -1022,8 +1018,8 @@ Examples:
             print(report)
     
     except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

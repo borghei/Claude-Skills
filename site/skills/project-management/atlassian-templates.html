@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Atlassian Templates - Claude Skills</title>
-  <meta name="description" content="Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content g">
+  <meta name="description" content="Builds, validates and retires reusable Jira issue and Confluence page templates. Use when creating a team or org-wide template, a template is ignored or half-filled, or a template library has sprawled">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html">
   <meta property="og:title" content="Atlassian Templates - Claude Skills">
-  <meta property="og:description" content="Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content g">
+  <meta property="og:description" content="Builds, validates and retires reusable Jira issue and Confluence page templates. Use when creating a team or org-wide template, a template is ignored or half-filled, or a template library has sprawled">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Atlassian Templates", "description": "Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content generation.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Atlassian Templates", "description": "Builds, validates and retires reusable Jira issue and Confluence page templates. Use when creating a team or org-wide template, a template is ignored or half-filled, or a template library has sprawled. Space layout is confluence-expert.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Atlassian Templates</h1>
-    <p class="page-subtitle">Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content generation.</p>
+    <p class="page-subtitle">Builds, validates and retires reusable Jira issue and Confluence page templates. Use when creating a team or org-wide template, a template is ignored or half-filled, or a template library has sprawled. Space layout is confluence-expert.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">atlassian</span><span class="tag">jira-templates</span><span class="tag">confluence-templates</span><span class="tag">workflows</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Atlassian Templates (Project Management domain).
 
-Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content generation.
+Builds, validates and retires reusable Jira issue and Confluence page templates. Use when creating a team or org-wide template, a template is ignored or half-filled, or a template library has sprawled. Space layout is confluence-expert.
 
 Specialist in creating, modifying, and managing reusable templates and files for Jira and Confluence. Ensures consistency, accelerates content creation, and maintains org-wide standards through canonical, parameterized templates rather than per-use-case sprawl. - **Template design** — Confluence pag
 
@@ -427,7 +427,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Atlassian Templates (Project Management domain).
 
-Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content generation.
+Builds, validates and retires reusable Jira issue and Confluence page templates. Use when creating a team or org-wide template, a template is ignored or half-filled, or a template library has sprawled. Space layout is confluence-expert.
 
 Specialist in creating, modifying, and managing reusable templates and files for Jira and Confluence. Ensures consistency, accelerates content creation, and maintains org-wide standards through canonical, parameterized templates rather than per-use-case sprawl. - **Template design** — Confluence pag
 
@@ -507,7 +507,26 @@ Ask about the two or three inputs that matter most for this request, not the who
 4. **Test** with sample data, then **publish** to the target space/project
 5. **Train** users and **monitor** adoption; iterate quarterly
 
-Grab a ready-made starting point from the template libraries below, then follow the full creation/modification workflow in `references/workflows-and-governance.md`.
+Grab a ready-made starting point from `references/confluence-templates.md` or `references/jira-templates.md`, then follow the full creation/modification workflow in `references/workflows-and-governance.md`. Step 3 is `template_scaffolder.py`; step 4 is `template_validator.py`; step 5 is `template_usage_analyzer.py`.
+
+## Tools
+
+Each tool reads one JSON file and prints a text report (`--json` for machine output).
+`--example` prints the input shape; samples ship in `assets/`. Bad input (missing file,
+invalid JSON, wrong shape) exits 2 with a one-line error.
+
+```bash
+python3 project-management/atlassian-templates/scripts/template_scaffolder.py --spec project-management/atlassian-templates/assets/sample_template_spec.json --format confluence
+python3 project-management/atlassian-templates/scripts/template_validator.py --template project-management/atlassian-templates/assets/sample_template.json         # exit 0
+python3 project-management/atlassian-templates/scripts/template_validator.py --template project-management/atlassian-templates/assets/sample_template_flawed.json  # exit 1
+python3 project-management/atlassian-templates/scripts/template_usage_analyzer.py --usage project-management/atlassian-templates/assets/sample_template_usage.json
+```
+
+| Tool | What it does | Exit |
+|------|--------------|------|
+| `template_scaffolder.py` | Turns a section spec into Confluence wiki markup or a Jira description (`--format confluence\|jira`) | 0 |
+| `template_validator.py` | 10 weighted checks: name, owner, description, 3+ sections, inline instructions, example, dynamic content, version, updated within 12 months of `as_of` (default today), labels | 0 all pass, 1 any fail |
+| `template_usage_analyzer.py` | Adoption, quality score and freshness per template; flags zero-use, low-quality and ownerless templates. Freshness is measured from the file&#x27;s `as_of`, else its latest `last_updated` | 0 |
 
 ## Anti-Patterns
 
@@ -546,16 +565,13 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Limitations:** Confluence Cloud templates cannot include all macro types (some advanced macros require manual insertion after page creation). Jira issue templates are limited to description field content -- they cannot pre-set custom field values without automation rules. Template analytics require Confluence Premium or a marketplace analytics app for detailed usage metrics.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `confluence-expert/` | Bidirectional | Confluence expert defines content standards; template creator implements them as templates |
-| `jira-expert/` | Templates -&gt; Jira | Issue description templates, workflow documentation templates |
-| `atlassian-admin/` | Admin -&gt; Templates | Global template deployment approval, governance policies |
-| `scrum-master/` | SM -&gt; Templates | Sprint ceremony template requirements, retrospective format preferences |
-| `senior-pm/` | PM -&gt; Templates | Executive reporting templates, portfolio tracking layouts |
-| `delivery-manager/` | DM -&gt; Templates | Post-mortem templates, release checklist templates, runbook structures |
+| File | Purpose |
+|------|---------|
+| `scripts/template_scaffolder.py`, `scripts/template_validator.py`, `scripts/template_usage_analyzer.py` | See Tools |
+| `assets/sample_template_spec.json`, `assets/sample_template.json`, `assets/sample_template_flawed.json`, `assets/sample_template_usage.json` | Runnable inputs; the flawed template shows a failing gate |
+| `references/*.md` | See References |
 
 ---
 
@@ -583,7 +599,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Atlassian Templates&quot;**
-   - Description: &quot;Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content generation.&quot;
+   - Description: &quot;Builds, validates and retires reusable Jira issue and Confluence page templates. Use when creating a team or org-wide template, a template is ignored or half-filled, or a template library has sprawled. Space layout is confluence-expert.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -644,7 +660,26 @@ Ask about the two or three inputs that matter most for this request, not the who
 4. **Test** with sample data, then **publish** to the target space/project
 5. **Train** users and **monitor** adoption; iterate quarterly
 
-Grab a ready-made starting point from the template libraries below, then follow the full creation/modification workflow in `references/workflows-and-governance.md`.
+Grab a ready-made starting point from `references/confluence-templates.md` or `references/jira-templates.md`, then follow the full creation/modification workflow in `references/workflows-and-governance.md`. Step 3 is `template_scaffolder.py`; step 4 is `template_validator.py`; step 5 is `template_usage_analyzer.py`.
+
+## Tools
+
+Each tool reads one JSON file and prints a text report (`--json` for machine output).
+`--example` prints the input shape; samples ship in `assets/`. Bad input (missing file,
+invalid JSON, wrong shape) exits 2 with a one-line error.
+
+```bash
+python3 project-management/atlassian-templates/scripts/template_scaffolder.py --spec project-management/atlassian-templates/assets/sample_template_spec.json --format confluence
+python3 project-management/atlassian-templates/scripts/template_validator.py --template project-management/atlassian-templates/assets/sample_template.json         # exit 0
+python3 project-management/atlassian-templates/scripts/template_validator.py --template project-management/atlassian-templates/assets/sample_template_flawed.json  # exit 1
+python3 project-management/atlassian-templates/scripts/template_usage_analyzer.py --usage project-management/atlassian-templates/assets/sample_template_usage.json
+```
+
+| Tool | What it does | Exit |
+|------|--------------|------|
+| `template_scaffolder.py` | Turns a section spec into Confluence wiki markup or a Jira description (`--format confluence\|jira`) | 0 |
+| `template_validator.py` | 10 weighted checks: name, owner, description, 3+ sections, inline instructions, example, dynamic content, version, updated within 12 months of `as_of` (default today), labels | 0 all pass, 1 any fail |
+| `template_usage_analyzer.py` | Adoption, quality score and freshness per template; flags zero-use, low-quality and ownerless templates. Freshness is measured from the file&#x27;s `as_of`, else its latest `last_updated` | 0 |
 
 ## Anti-Patterns
 
@@ -683,16 +718,13 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Limitations:** Confluence Cloud templates cannot include all macro types (some advanced macros require manual insertion after page creation). Jira issue templates are limited to description field content -- they cannot pre-set custom field values without automation rules. Template analytics require Confluence Premium or a marketplace analytics app for detailed usage metrics.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `confluence-expert/` | Bidirectional | Confluence expert defines content standards; template creator implements them as templates |
-| `jira-expert/` | Templates -&gt; Jira | Issue description templates, workflow documentation templates |
-| `atlassian-admin/` | Admin -&gt; Templates | Global template deployment approval, governance policies |
-| `scrum-master/` | SM -&gt; Templates | Sprint ceremony template requirements, retrospective format preferences |
-| `senior-pm/` | PM -&gt; Templates | Executive reporting templates, portfolio tracking layouts |
-| `delivery-manager/` | DM -&gt; Templates | Post-mortem templates, release checklist templates, runbook structures |
+| File | Purpose |
+|------|---------|
+| `scripts/template_scaffolder.py`, `scripts/template_validator.py`, `scripts/template_usage_analyzer.py` | See Tools |
+| `assets/sample_template_spec.json`, `assets/sample_template.json`, `assets/sample_template_flawed.json`, `assets/sample_template_usage.json` | Runnable inputs; the flawed template shows a failing gate |
+| `references/*.md` | See References |
 
 ---
 
@@ -720,7 +752,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Atlassian Templates&quot;**
-   - Description: &quot;Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content generation.&quot;
+   - Description: &quot;Builds, validates and retires reusable Jira issue and Confluence page templates. Use when creating a team or org-wide template, a template is ignored or half-filled, or a template library has sprawled. Space layout is confluence-expert.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -786,8 +818,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 4. **Test** with sample data, then **publish** to the target space/project
 5. **Train** users and **monitor** adoption; iterate quarterly
 
-Grab a ready-made starting point from the template libraries below, then follow the full creation/modification workflow in `references/workflows-and-governance.md`.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-onboarding.html" class="skill-card" style="text-decoration:none"><h3>Pm Onboarding</h3><p>30-60-90 day plan for a new PM joining a company or team, grounded in Michael Watkins&#x27; First 90...</p></a></div>
+Grab a ready-made starting point from `references/confluence-templates.md` or `references/jira-templates.md`, then follow the full creation/modification workflow in `references/workflows-and-governance.md`. Step 3 is `template_scaffolder.py`; step 4 is `template_validator.py`; step 5 is `template_usage_analyzer.py`.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-onboarding.html" class="skill-card" style="text-decoration:none"><h3>Pm Onboarding</h3><p>Builds a new PM&#x27;s 30-60-90 day plan from a situation diagnosis: stakeholder map, 1:1 questions,...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/atlassian-templates/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

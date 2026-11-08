@@ -87,7 +87,7 @@ RULE_HARDCODED_NS = re.compile(r"client\.ObjectKey\{[^}]*Namespace:\s*\"([^\"]+)
 RULE_RBAC_WIDE = re.compile(r"\+kubebuilder:rbac:[^\n]*resources=\*[^\n]*", re.MULTILINE)
 RULE_RBAC_VERBS_STAR = re.compile(r"\+kubebuilder:rbac:[^\n]*verbs=[^\n]*\*[^\n]*", re.MULTILINE)
 RULE_OBSERVED_GENERATION = re.compile(r"ObservedGeneration", re.MULTILINE)
-RULE_LEADER_ELECTION = re.compile(r"LeaderElection\s*:\s*true", re.MULTILINE)
+RULE_LEADER_ELECTION = re.compile(r"LeaderElection\s*:\s*(?!false\b)\w+", re.MULTILINE)
 
 
 def detect_no_finalizer_with_external_resources(file: str, text: str) -> list[Finding]:
@@ -422,7 +422,7 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    return 1 if any(f.severity == "critical" for f in findings) else 0
 
 
 if __name__ == "__main__":

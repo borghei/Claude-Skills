@@ -350,7 +350,10 @@ def synthesize(payload: dict[str, Any], min_strength: int = 1, outcome_override:
                     "code": t.code,
                     "strength": t.strength,
                     "participant_count": len(t.participants),
-                    "snippets": [asdict(s) for s in t.snippets],
+                    # A sentence coded under several themes is evidence for each, but it is one
+                    # quote: count it so a reader does not take two themes as two sources.
+                    "shared_snippet_count": sum(1 for s in t.snippets if sum(s in o.snippets for o in themes) > 1),
+                    "snippets": [dict(asdict(s), shared=sum(s in o.snippets for o in themes) > 1) for s in t.snippets],
                 }
                 for t in themes
             ],
@@ -386,10 +389,12 @@ def render_markdown(result: dict[str, Any]) -> str:
         lines.append("")
         lines.append(f"### {t['headline']}")
         lines.append(f"- Code: `{t['code']}`")
-        lines.append(f"- Strength: {t['strength']}/3 ({t['participant_count']} participants, {len(t['snippets'])} snippets)")
+        shared = f", {t['shared_snippet_count']} shared with another theme" if t["shared_snippet_count"] else ""
+        lines.append(f"- Strength: {t['strength']}/3 ({t['participant_count']} participants, {len(t['snippets'])} snippets{shared})")
         lines.append("- Evidence:")
         for s in t["snippets"][:5]:
-            lines.append(f"  - _\"{s['text']}\"_ -- {s['participant']} ({s['role']})")
+            mark = " [shared]" if s.get("shared") else ""
+            lines.append(f"  - _\"{s['text']}\"_ -- {s['participant']} ({s['role']}){mark}")
     lines.append("")
     lines.append("## Opportunity Solution Tree")
     lines.append("")
@@ -604,4 +609,8 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

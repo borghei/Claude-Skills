@@ -27,6 +27,8 @@ from typing import Any
 
 def detect_protocol(data: dict) -> str:
     """Detect which agent protocol a JSON document belongs to."""
+    if data.get("type") == "function" and isinstance(data.get("function"), dict):
+        return "openai"  # single OpenAI tool object, as schema_generator.py --protocol openai writes
     if "inputSchema" in data:
         return "mcp"
     if "skills" in data and ("defaultInputModes" in data or "url" in data):
@@ -60,6 +62,10 @@ def extract_capabilities(filepath: str) -> list[dict]:
             data = json.load(f)
     except (json.JSONDecodeError, OSError) as exc:
         return [{"source_file": filepath, "error": str(exc)}]
+    if isinstance(data, list):  # a bare list of tool definitions
+        data = {"tools": data}
+    if not isinstance(data, dict):
+        return [{"source_file": filepath, "error": "top level is not a JSON object or list"}]
 
     protocol = detect_protocol(data)
     caps: list[dict] = []
@@ -518,20 +524,21 @@ def main() -> int:
     if args.scan_dir:
         if not os.path.isdir(args.scan_dir):
             print(f"Error: Directory not found: {args.scan_dir}", file=sys.stderr)
-            return 1
+            return 2
         all_files.extend(find_json_files(args.scan_dir))
 
     if not all_files:
         parser.print_help()
         print("\nError: No input files specified. Provide files or use --scan-dir.", file=sys.stderr)
-        return 1
+        return 2
 
     # Extract capabilities from all files
     all_capabilities: list[dict] = []
+    missing = [f for f in all_files if not os.path.isfile(f)]
+    if missing:
+        print(f"Error: file not found: {', '.join(missing)}", file=sys.stderr)
+        return 2
     for filepath in all_files:
-        if not os.path.isfile(filepath):
-            all_capabilities.append({"source_file": filepath, "error": "File not found"})
-            continue
         all_capabilities.extend(extract_capabilities(filepath))
 
     valid_caps = [c for c in all_capabilities if "error" not in c]

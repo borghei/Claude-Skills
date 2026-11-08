@@ -42,7 +42,7 @@ python quality_scorer.py engineering/my-skill --detailed --minimum-score 75 --js
 
 | Requirement | BASIC | STANDARD | POWERFUL |
 |-------------|-------|----------|----------|
-| SKILL.md lines | 100+ | 200+ | 300+ |
+| SKILL.md lines | 40-500 | 40-500 | 40-500 |
 | Python scripts | 1 (100-300 LOC) | 1-2 (300-500 LOC) | 2-3 (500-800 LOC) |
 | Argparse | Basic | Subcommands | Multiple modes |
 | Output formats | Single | JSON + text | JSON + text + validation |

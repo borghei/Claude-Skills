@@ -7,13 +7,13 @@ scoring rubric, calibration benchmarks, and anti-pattern guardrails.
 
 ```bash
 # Design a complete interview loop for a senior software engineer role
-python loop_designer.py --role "Senior Software Engineer" --level senior --team platform --output loops/
+python3 scripts/loop_designer.py --role "Senior Software Engineer" --level senior --team platform --output loops/
 
 # Generate a question bank for a product manager position
-python question_bank_generator.py --role "Product Manager" --level senior --competencies leadership,strategy,analytics --output questions/
+python3 scripts/question_bank_generator.py --role "Product Manager" --level senior --competencies leadership,strategy,analytics --output questions/
 
 # Analyze interview calibration across candidates and interviewers
-python hiring_calibrator.py --input interview_data.json --output calibration_report.json --analysis-type full
+python3 scripts/hiring_calibrator.py --input interview_data.json --output calibration_report.json --analysis-type comprehensive
 ```
 
 ## Core Workflows
@@ -27,7 +27,7 @@ python hiring_calibrator.py --input interview_data.json --output calibration_rep
 5. **Validation checkpoint:** 100% competency coverage; no round exceeds 90 minutes; total loop under 6 hours
 
 ```bash
-python loop_designer.py --role "Staff Data Scientist" --level staff \
+python3 scripts/loop_designer.py --role "Staff Data Scientist" --level staff \
   --competencies ml,statistics,leadership --format json --output loops/ds-staff.json
 ```
 
@@ -40,7 +40,7 @@ python loop_designer.py --role "Staff Data Scientist" --level staff \
 5. **Validation checkpoint:** <15% duplicate rate; each competency has 3+ questions; calibration examples (poor/good/great) present for every question
 
 ```bash
-python question_bank_generator.py --role "Frontend Engineer" \
+python3 scripts/question_bank_generator.py --role "Frontend Engineer" \
   --competencies react,typescript,system-design --num-questions 30
 ```
 
@@ -53,7 +53,7 @@ python question_bank_generator.py --role "Frontend Engineer" \
 5. **Validation checkpoint:** Bias detection precision >80%; score distribution follows target (20/40/30/10 split)
 
 ```bash
-python hiring_calibrator.py --input q1_interviews.json \
+python3 scripts/hiring_calibrator.py --input q1_interviews.json \
   --analysis-type comprehensive --trend-analysis --period quarterly
 ```
 

@@ -1,0 +1,33 @@
+{
+  "security": {
+    "2fa_enforcement": false,
+    "password_policy": {
+      "min_length": 8,
+      "require_numbers": true,
+      "require_symbols": false
+    },
+    "third_party_app_access": "unrestricted",
+    "session_duration_hours": 24,
+    "admin_recovery_options": true,
+    "api_clients": []
+  },
+  "drive": {
+    "external_sharing": "allowed",
+    "link_sharing_default": "anyone_with_link"
+  },
+  "devices": {
+    "mobile_management": "basic"
+  },
+  "admin": {
+    "super_admins": [
+      "admin@example.com"
+    ]
+  },
+  "gmail": {
+    "spoofing_protection": true,
+    "restrict_delivery": false
+  },
+  "dns": {
+    "dmarc_policy": "none"
+  }
+}

@@ -1,17 +1,16 @@
 ---
 name: lean-canvas
 description: >
-  Lean Canvas (Ash Maurya) — startup adaptation of the Business Model
-  Canvas for capturing assumptions and unfair advantages in early-stage
-  products. Use at the idea, pre-PMF, or pivot stage, or when you need a
-  1-page model fast.
+  Sketches a one-page startup model as testable hypotheses: problem, early
+  adopters, value proposition, unfair advantage, riskiest assumptions. Use at
+  the idea, pre-product-market-fit or pivot stage, or for a fast model.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: strategy-frameworks
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: lean_canvas_validator.py
   tech-stack: lean-canvas, ash-maurya, lean-startup, problem-solution-fit
   tags:
@@ -23,41 +22,17 @@ metadata:
 
 # Lean Canvas
 
-A 9-block startup canvas adapted from BMC. Replaces 4 BMC blocks
-(Key Resources, Activities, Partnerships, Customer Relationships) with
-startup-focused ones (Problem, Solution, Key Metrics, Unfair Advantage).
+The agent sketches a startup's model as hypotheses: problem and early adopter first, a one-sentence value proposition, three features, and an honest unfair advantage, then names the riskiest assumptions to test. Lean Canvas swaps four BMC blocks (resources, activities, partnerships, relationships) for problem, solution, key metrics and unfair advantage; block detail is in `references/lean-canvas-framework.md`.
 
-## When to use this skill
+**Done looks like:** three problems for one specific segment, each with today's alternative; at least five early adopters named with their workaround; a UVP naming segment, outcome and differentiator; at most three features; channels testable within four weeks; price, LTV and CAC estimates; a North Star with inputs; the unfair advantage classified honestly (most startups: none yet, with a plan); the top assumptions with tests; `lean_canvas_validator.py` exits 0.
 
-- **Early-stage** (pre-PMF) product or company
-- Capturing **assumptions** that need testing
-- **20-minute** model sketch (BMC takes longer)
-- **Pivot conversations** — what would change?
-- Stress-testing **unfair advantage** before building
+## When to Use
 
-## The 9 Lean Canvas blocks
+- Early-stage (pre-product-market-fit or under about $1M ARR) product or company
+- A 20-minute model sketch, or comparing the current and a proposed model in a pivot conversation
+- Stress-testing the unfair advantage before building
 
-1. **Problem** — Top 3 problems for the segment
-2. **Customer Segments** — Target customers (especially Early Adopters)
-3. **Unique Value Proposition** — Single, clear, compelling message
-4. **Solution** — Top 3 features that solve the problems
-5. **Channels** — Path to customers
-6. **Revenue Streams** — Revenue model + LTV + revenue forecast
-7. **Cost Structure** — Customer acquisition cost + distribution + people + hosting
-8. **Key Metrics** — Key activities you measure
-9. **Unfair Advantage** — Something that cannot be easily copied or bought
-
-## Lean Canvas vs BMC
-
-| Lean Canvas | BMC |
-|-------------|-----|
-| Problem | Key Partnerships |
-| Solution | Key Activities |
-| Key Metrics | Key Resources |
-| Unfair Advantage | Customer Relationships |
-
-Same outer shape; different inner emphasis. Use Lean when problem +
-unfair advantage matter more than ops detail.
+Mature, multi-segment businesses usually need `business-model-canvas` instead.
 
 ## Clarify First
 
@@ -69,123 +44,59 @@ Before building the canvas, settle the inputs below. When one is missing or vagu
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Problem-Segment first
-Start with Problem and Customer Segments. If you can't list the top 3
-problems for a specific segment, you don't have a startup — you have an idea.
-
-### Step 2 — Existing alternatives
-Within Problem block, list how customers solve this today. If the answer
-is "they don't / they live with it," that's important signal.
-
-### Step 3 — Unique Value Proposition
-A single sentence that:
-- Names the early-adopter segment
-- States the differentiating outcome
-- Distinguishes from existing alternatives
-
-Template: "[Outcome] for [segment] that [differentiator]."
-
-### Step 4 — Solution (3 features max)
-Limit to 3. Founders always want to list 10. Resist.
-
-### Step 5 — Unfair Advantage
-The hardest block. What do you have that no one can easily copy?
-- Insider information / domain
-- Personal authority / reputation
-- Dream team
-- Personal endorsements
-- Existing customer base
-- Network effects already in motion
-- Patented IP
-
-If empty: most startups have nothing yet. Mark explicitly + plan how to build one.
-
-### Step 6 — Channels, Revenue, Costs, Metrics
-Fill remaining blocks. Be specific.
-
-### Step 7 — Run `lean_canvas_validator.py`
-Audit for: missing blocks, generic content, no early adopter named,
-no existing alternatives, no Key Metrics, vague Unfair Advantage.
+## Quick Start
 
 ```bash
+# Restaurant shift-swap canvas: exit 0
 python3 project-management/strategy-frameworks/lean-canvas/scripts/lean_canvas_validator.py \
-  --input canvas.json --format markdown
+  --input project-management/strategy-frameworks/lean-canvas/assets/sample_lean_canvas.json --format markdown
 ```
 
-## Decision frameworks
+```bash
+# Idea-stage canvas with no alternatives, channels, pricing or North Star: exit 1
+python3 project-management/strategy-frameworks/lean-canvas/scripts/lean_canvas_validator.py \
+  --input project-management/strategy-frameworks/lean-canvas/assets/sample_lean_canvas_flawed.json --format markdown
+```
 
-### Lean Canvas vs BMC — when to use which
+```bash
+# Input schema and flags
+python3 project-management/strategy-frameworks/lean-canvas/scripts/lean_canvas_validator.py --help
+```
 
-| Use Lean Canvas | Use BMC |
-|-----------------|---------|
-| < $1M ARR or pre-revenue | Mature company / division |
-| Single segment, single product | Multi-product or multi-segment |
-| Problem-solution fit hunting | Operating + scaling |
-| Pivot conversations | Strategic planning |
-| 20-minute sketch | Half-day planning workshop |
+## Tools Overview
 
-### Early adopter heuristic
+`lean_canvas_validator.py` is the quality gate for this skill. **What the validator checks:** problems present (at most three) with existing alternatives; a target segment and at least five early adopters; UVP present, with the segment / outcome / differentiator flags set; at most three features; channels with a test plan and CAC; pricing model, price, LTV and a first-$10K MRR plan; burn, CAC and cost lines; a North Star and inputs; generic moats ("passion", "great team", "first mover"); an assumption register with tests. The UVP flags are self-reported, so read the sentence too.
 
-Early adopters are not "future mainstream users." They are:
-- Aware they have the problem
-- Actively looking for a solution
-- Have cobbled together a workaround (existing alternative)
-- Have budget / authority to try yours
+**Exit codes:** `0` no fail findings · `1` at least one fail (no problems or alternatives, no segment, no UVP, no features, no channels, no pricing model, no North Star) · `2` unreadable file, invalid JSON or a top level that is not an object. JSON by default, `--format markdown`, `--output FILE`.
 
-If you can't name 5 specific early adopters by name + workaround, you're
-not at problem-solution fit yet.
+## Workflow
 
-### Unfair Advantage — what counts
+1. **Problem and segment first.** Top three problems for one segment, and how they solve it today. "They live with it" is a signal too; no alternatives at all usually means the problem is not painful.
+2. **Name early adopters.** People who know they have the problem, have a workaround and can buy. If you cannot name five, you are not at problem-solution fit yet.
+3. **UVP.** One sentence: "[outcome] for [segment] that [differentiator]".
+4. **Solution.** Three features at most; the rest is backlog.
+5. **Unfair advantage.** Counts: insider data, recognised authority, an existing audience, network effects already in motion. Does not count: hard work, a great team, first mover, better UX, "AI", cheaper. Mark "none-yet" with a plan rather than inventing one.
+6. **Channels, revenue, costs, metrics.** Channels you can test in four weeks, a price and LTV, burn and CAC, a North Star with input metrics.
+7. **Audit.** Write the canvas as JSON (schema in `--help`; `assets/sample_lean_canvas.json` is a complete example) and run the validator. It must pass with no fail findings; then verify that each warning is fixed or accepted, and design a test for each high-risk, low-evidence assumption.
 
-**Counts:**
-- Insider information (proprietary data, deep customer relationships)
-- Personal authority (industry-recognized expertise)
-- Existing community / audience
-- Network effects already started
-- Capital + brand recognition
+## Anti-Patterns
 
-**Doesn't count:**
-- "We work harder"
-- "Our team is great"
-- "First mover" (in most cases; usually replicable)
-- "Better UX" (replicable)
-- "AI" (everyone has AI now)
-- "Cheaper" (price competition is a race to zero)
+### Solution before problem
+**Mistake:** The canvas starts from the feature list and back-fills a problem.
+**Why it happens:** Founders usually start with the product they want to build.
+**Instead:** Fill Problem and Segment first; if the features do not map to the three problems, cut them.
 
-If your only unfair advantage is "speed" or "execution," that's a
-weakness as a moat.
+### "Execution" as the unfair advantage
+**Mistake:** The moat is speed, passion or a great team.
+**Why it happens:** Leaving the block empty feels like admitting weakness.
+**Instead:** Mark it "none-yet" and write the plan to build a real one; the validator warns on generic moats.
 
-## Common engagements
+### No assumption register
+**Mistake:** The canvas is presented as a plan.
+**Why it happens:** A filled canvas looks finished.
+**Instead:** List the riskiest assumptions with evidence ratings and a planned test each; the canvas is a set of hypotheses.
 
-### "Help me sketch a canvas for my new idea"
-1. Problem + Segment first.
-2. Force list the existing alternatives (and what they cost).
-3. Write the UVP (one sentence).
-4. List Solution as 3 features max.
-5. Identify Channels you can realistically test in 4 weeks.
-6. Stub Revenue + Cost + Metrics.
-7. Honest Unfair Advantage assessment.
-8. Identify top 3 riskiest assumptions; design test for each.
-
-### "Should we pivot?"
-1. Build current state Lean Canvas.
-2. Build proposed state Lean Canvas.
-3. Compare: what's different? what's the unfair advantage now?
-4. What evidence do we have that the new model works?
-5. Run the assumption-test for the riskiest new assumption.
-
-## Anti-patterns to avoid
-
-- **Solution before Problem.** Solution-in-search-of-problem.
-- **"Everyone" as segment.** Force a specific early adopter description.
-- **No existing alternative listed.** Customers always do something today.
-- **UVP that says everything.** Says nothing.
-- **5+ solution features listed.** Pick 3 max.
-- **Vague Key Metrics.** Pirate metrics (AAARRR) or HEART or similar.
-- **Unfair Advantage = "execution".** Not an advantage.
-- **No assumption register.** Canvas isn't a plan, it's a hypothesis.
+More with fixes: `references/lean-startup-anti-patterns.md`.
 
 ## Scope & Limitations
 
@@ -208,10 +119,19 @@ weakness as a moat.
 - The tool checks structure and specificity, not whether the problems are real. That needs customer evidence.
 - A Lean Canvas is a set of hypotheses, not a plan. It goes stale as soon as tests come back.
 
-## References
+## Files
 
-- `references/lean-canvas-framework.md` — the 9 blocks deep, comparison to BMC
-- `references/lean-startup-anti-patterns.md` — common mistakes + worked fixes
+| File | Purpose |
+|------|---------|
+| `scripts/lean_canvas_validator.py` | Lean Canvas completeness and quality audit |
+| `assets/sample_lean_canvas.json` | Restaurant shift-swap startup; exits 0 |
+| `assets/sample_lean_canvas_flawed.json` | Idea-stage canvas with gaps; exits 1 |
+| `assets/lean_canvas_template.md` | Fill-in template |
+
+## Reference Documentation
+
+- [references/lean-canvas-framework.md](references/lean-canvas-framework.md): Blocks, early adopters, unfair advantage
+- [references/lean-startup-anti-patterns.md](references/lean-startup-anti-patterns.md): Common failures and fixes
 
 ## Related skills
 

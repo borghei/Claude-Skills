@@ -1,0 +1,13 @@
+{
+  "name": "orders",
+  "version": "1.0",
+  "primary_key": ["order_id"],
+  "row_count_min": 1,
+  "columns": [
+    {"name": "order_id", "type": "integer", "nullable": false, "unique": true},
+    {"name": "customer_email", "type": "email", "nullable": false},
+    {"name": "amount", "type": "float", "nullable": false, "min_value": 0, "max_value": 10000},
+    {"name": "status", "type": "string", "nullable": false, "allowed_values": ["pending", "paid", "refunded"]},
+    {"name": "created_at", "type": "date", "nullable": false}
+  ]
+}

@@ -32,7 +32,7 @@ Read this when a tool misbehaves, when validating a design against the quality b
 
 **Usage:**
 ```bash
-python agent_planner.py <input_file> [-o OUTPUT] [--format {json,yaml,both}]
+python scripts/agent_planner.py <input_file> [-o OUTPUT] [--format {json,yaml,both}]
 ```
 
 **Parameters:**
@@ -40,12 +40,12 @@ python agent_planner.py <input_file> [-o OUTPUT] [--format {json,yaml,both}]
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
 | `input_file` | positional | Yes | -- | JSON file containing system requirements (goal, description, tasks, constraints, team_size, performance_requirements, safety_requirements, integration_requirements, scale_requirements) |
-| `-o`, `--output` | string | No | `agent_architecture` | Output file prefix for generated files |
+| `-o`, `--output` | string | No | none: summary to stdout | Output file prefix for generated files; nothing is written without it |
 | `--format` | choice | No | `both` | Output format: `json`, `yaml`, or `both` |
 
 **Example:**
 ```bash
-python agent_planner.py requirements.json -o my_system --format both
+python scripts/agent_planner.py requirements.json -o my_system --format both
 ```
 
 **Output Formats:**
@@ -62,7 +62,7 @@ python agent_planner.py requirements.json -o my_system --format both
 
 **Usage:**
 ```bash
-python agent_evaluator.py <input_file> [-o OUTPUT] [--format {json,both}] [--detailed]
+python scripts/agent_evaluator.py <input_file> [-o OUTPUT] [--format {json,both}] [--detailed]
 ```
 
 **Parameters:**
@@ -70,13 +70,13 @@ python agent_evaluator.py <input_file> [-o OUTPUT] [--format {json,both}] [--det
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
 | `input_file` | positional | Yes | -- | JSON file containing execution logs (array of log entries with task_id, agent_id, task_type, status, duration_ms, tokens_used, cost_usd, tools_used, error_details, etc.) |
-| `-o`, `--output` | string | No | `evaluation_report` | Output file prefix for generated report files |
+| `-o`, `--output` | string | No | none: summary to stdout | Output file prefix for generated report files; nothing is written without it |
 | `--format` | choice | No | `both` | Output format: `json` or `both` |
 | `--detailed` | flag | No | off | Include detailed per-agent and per-task-type breakdowns in the report |
 
 **Example:**
 ```bash
-python agent_evaluator.py execution_logs.json -o perf_report --format both --detailed
+python scripts/agent_evaluator.py execution_logs.json -o perf_report --format both --detailed
 ```
 
 **Output Formats:**
@@ -91,7 +91,7 @@ python agent_evaluator.py execution_logs.json -o perf_report --format both --det
 
 **Usage:**
 ```bash
-python tool_schema_generator.py <input_file> [-o OUTPUT] [--format {json,both}] [--validate]
+python scripts/tool_schema_generator.py <input_file> [-o OUTPUT] [--format {json,both}] [--validate]
 ```
 
 **Parameters:**
@@ -99,13 +99,13 @@ python tool_schema_generator.py <input_file> [-o OUTPUT] [--format {json,both}] 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
 | `input_file` | positional | Yes | -- | JSON file containing tool descriptions (array of objects with name, purpose, category, inputs, outputs, error_conditions, side_effects, idempotent, rate_limits, dependencies, examples, security_requirements) |
-| `-o`, `--output` | string | No | `tool_schemas` | Output file prefix for generated schema files |
+| `-o`, `--output` | string | No | none: summary to stdout | Output file prefix for generated schema files; nothing is written without it |
 | `--format` | choice | No | `both` | Output format: `json` or `both` |
 | `--validate` | flag | No | off | Validate generated schemas against JSON Schema standards and report any issues |
 
 **Example:**
 ```bash
-python tool_schema_generator.py tools.json -o my_tools --format both --validate
+python scripts/tool_schema_generator.py tools.json -o my_tools --format both --validate
 ```
 
 **Output Formats:**

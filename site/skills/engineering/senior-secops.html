@@ -395,7 +395,17 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 
 SecOps for application security, vulnerability management, compliance, and secure development. Use when implementing security controls, conducting security audits, responding to vulnerabilities, or meeting compliance requirements.
 
-The agent scans source code for security vulnerabilities (hardcoded secrets, SQL injection, XSS, command injection), assesses dependency CVEs across npm/Python/Go ecosystems, and verifies compliance against SOC 2, PCI-DSS, HIPAA, and GDPR frameworks. - **Security scanner** — detect hardcoded secrets
+The agent scans source code for common vulnerability patterns (hardcoded secrets, SQL injection, XSS, command injection), checks dependency pins against a small built-in advisory list for npm/Python/Go, and collects code-level evidence for SOC 2, PCI-DSS, HIPAA and GDPR controls. All three tools are
+
+## Your Key Capabilities
+- Treating a Clean Scan as a Clean Bill of Health
+- Quoting the Compliance Score to an Auditor
+- Relying on the Bundled Advisory List
+
+## Frameworks &amp; Templates You Know
+- on all three (use `--framework soc2` for the checker).
+- **Why it happens:** It is labelled with framework control IDs.
+- | `scripts/compliance_checker.py` | Framework code-evidence checklist |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -417,7 +427,17 @@ Start by asking the user what they need help with.">
 
 SecOps for application security, vulnerability management, compliance, and secure development. Use when implementing security controls, conducting security audits, responding to vulnerabilities, or meeting compliance requirements.
 
-The agent scans source code for security vulnerabilities (hardcoded secrets, SQL injection, XSS, command injection), assesses dependency CVEs across npm/Python/Go ecosystems, and verifies compliance against SOC 2, PCI-DSS, HIPAA, and GDPR frameworks. - **Security scanner** — detect hardcoded secrets
+The agent scans source code for common vulnerability patterns (hardcoded secrets, SQL injection, XSS, command injection), checks dependency pins against a small built-in advisory list for npm/Python/Go, and collects code-level evidence for SOC 2, PCI-DSS, HIPAA and GDPR controls. All three tools are
+
+## Your Key Capabilities
+- Treating a Clean Scan as a Clean Bill of Health
+- Quoting the Compliance Score to an Auditor
+- Relying on the Bundled Advisory List
+
+## Frameworks &amp; Templates You Know
+- on all three (use `--framework soc2` for the checker).
+- **Why it happens:** It is labelled with framework control IDs.
+- | `scripts/compliance_checker.py` | Framework code-evidence checklist |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -447,13 +467,15 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Senior SecOps Engineer
 
-The agent scans source code for security vulnerabilities (hardcoded secrets, SQL injection, XSS, command injection), assesses dependency CVEs across npm/Python/Go ecosystems, and verifies compliance against SOC 2, PCI-DSS, HIPAA, and GDPR frameworks.
+The agent scans source code for common vulnerability patterns (hardcoded secrets, SQL injection, XSS, command injection), checks dependency pins against a small built-in advisory list for npm/Python/Go, and collects code-level evidence for SOC 2, PCI-DSS, HIPAA and GDPR controls.
+
+All three tools are regex and lookup based. They catch obvious, local patterns and miss anything that flows through helpers, variables or runtime config, and the advisory list is a sample, not a CVE feed. Use them as a fast first pass and CI tripwire; confirm with a real SAST tool (Semgrep, CodeQL) and a live advisory source (`pip-audit`, `npm audit`, OSV) before calling a codebase clean.
 
 ## Core Capabilities
 
 - **Security scanner** — detect hardcoded secrets, SQL injection, XSS, command injection, and path traversal in source code.
-- **Vulnerability assessor** — scan npm / Python / Go dependency manifests for known CVEs with CVSS scores, fixed versions, and a 0-100 risk score.
-- **Compliance checker** — verify SOC 2, PCI-DSS, HIPAA, and GDPR controls (access control, encryption, audit logging, auth strength).
+- **Vulnerability assessor** — match npm / Python / Go dependency pins against a built-in advisory sample with CVSS scores, fixed versions, and a 0-100 risk score.
+- **Compliance checker** — an evidence checklist: looks for code and config evidence of SOC 2, PCI-DSS, HIPAA and GDPR controls (access control, encryption, audit logging, auth strength). A failed control means &quot;no evidence in the repo&quot;, not &quot;control absent&quot;.
 - **Security workflows** — audit, CI/CD security gate, CVE triage (with SLA tiers), and 5-phase incident response.
 - **Standards &amp; secure coding** — OWASP Top 10 prevention, secure-coding checklist, and language-specific BAD/GOOD patterns.
 
@@ -477,11 +499,20 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `security_scanner.py` | Scan source for secrets, injection, XSS, command injection, path traversal | `python scripts/security_scanner.py &lt;target&gt; --severity high --json --output report.json` |
-| `vulnerability_assessor.py` | Scan dependency manifests for known CVEs and compute risk score | `python scripts/vulnerability_assessor.py &lt;target&gt; --severity critical` |
-| `compliance_checker.py` | Verify SOC 2 / PCI-DSS / HIPAA / GDPR controls | `python scripts/compliance_checker.py &lt;target&gt; --framework soc2 --json --output soc2.json` |
+| `security_scanner.py` | Regex scan for secrets, SQL/command injection, XSS, path traversal (`--severity`, `--json`, `-o`, `-v`) | `python scripts/security_scanner.py assets/sample_app_flawed --severity high` |
+| `vulnerability_assessor.py` | Match dependency pins against the built-in advisory sample; risk score (`--severity`, `--json`, `-o`) | `python scripts/vulnerability_assessor.py assets/sample_app_flawed` |
+| `compliance_checker.py` | Code-evidence checklist per framework (`--framework soc2/pci-dss/hipaa/gdpr/all`, `--json`, `-o`) | `python scripts/compliance_checker.py assets/sample_app_sound --framework soc2` |
+
+Exit codes: `security_scanner` and `vulnerability_assessor` exit `0` with no critical/high
+findings and `1` when any remain; `compliance_checker` exits `0` at a code-evidence score of
+70% or more and `1` below. All three exit `2` on bad input (target not found), so a typo in a
+CI gate fails loudly. With `--json`, progress text goes to stderr and stdout is pure JSON.
+
+Samples: `assets/sample_app_flawed/` (hardcoded secret, %-formatted and f-string SQL,
+`os.system` concatenation, old pins) exits 1 on all three; `assets/sample_app_sound/` exits 0
+on all three (use `--framework soc2` for the checker).
 
 ## References
 
@@ -498,8 +529,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 **This skill covers:**
 
 - Static analysis of source code for common vulnerability classes (secrets, injection, XSS, command injection, path traversal).
-- Dependency vulnerability assessment against a built-in CVE database for npm, Python, and Go ecosystems.
-- Compliance verification for SOC 2 Type II, PCI-DSS v4.0, HIPAA Security Rule, and GDPR.
+- Dependency pin checks against a built-in advisory sample for npm, Python, and Go ecosystems.
+- Code-evidence checklists for SOC 2 Type II, PCI-DSS v4.0, HIPAA Security Rule, and GDPR.
 - Security workflow orchestration including CI/CD gating, CVE triage, and incident response procedures.
 
 **This skill does NOT cover:**
@@ -509,16 +540,33 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Container image scanning or Kubernetes admission control -- see the `senior-devops` skill or use Trivy directly.
 - Penetration testing execution or red-team operations -- these require specialized tooling and authorized human operators.
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-devops` | Infrastructure hardening and CI/CD pipeline configuration | Security scan results feed into deployment gates; DevOps provides container and IaC scanning |
-| `senior-backend` | Secure coding patterns and input validation in server-side code | SecOps scanner findings drive backend remediation; backend applies parameterized queries and output encoding |
-| `senior-qa` | Security test cases and regression verification after patches | Vulnerability reports generate QA test cases; QA confirms fixes do not introduce regressions |
-| `senior-architect` | Threat modeling, defense-in-depth design, and zero-trust architecture | Compliance gaps inform architecture decisions; architect provides security design patterns |
-| `code-reviewer` | Security-focused code review and pre-merge analysis | Scanner findings prioritize review focus areas; reviewer enforces secure coding standards |
-| `senior-fullstack` | End-to-end security across frontend and API layers (XSS, CSRF, auth) | SecOps identifies frontend and API vulnerabilities; fullstack applies framework-level mitigations |
+### Treating a Clean Scan as a Clean Bill of Health
+**Mistake:** Reporting &quot;no vulnerabilities&quot; because `security_scanner.py` returned exit 0.
+**Why it happens:** The exit code looks like a verdict.
+**Instead:** Say what was checked. The scanner sees single-line patterns only; injection through a helper or a query builder is invisible to it. Pair it with a dataflow-aware SAST tool for anything release-gating.
+
+### Quoting the Compliance Score to an Auditor
+**Mistake:** Presenting the checker&#x27;s percentage as SOC 2 or HIPAA readiness.
+**Why it happens:** It is labelled with framework control IDs.
+**Instead:** Use the failed list as an evidence to-do list. Most controls (policies, HR, vendor management, incident drills) live outside the code and must be evidenced separately.
+
+### Relying on the Bundled Advisory List
+**Mistake:** Taking a 0 from `vulnerability_assessor.py` to mean dependencies have no known CVEs.
+**Why it happens:** The output looks like a CVE scan.
+**Instead:** The list is a small sample for demonstration and CI wiring. Run the ecosystem&#x27;s live auditor (`pip-audit`, `npm audit`, `govulncheck`, OSV) for real coverage.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/security_scanner.py` | Source-code pattern scanner |
+| `scripts/vulnerability_assessor.py` | Dependency pin check and risk score |
+| `scripts/compliance_checker.py` | Framework code-evidence checklist |
+| `assets/sample_app_flawed/` | Deliberately vulnerable app and old pins (all tools exit 1) |
+| `assets/sample_app_sound/` | Parameterised, authenticated, logged app with evidence files (all tools exit 0) |
+| `references/*.md` | Workflows, standards, CVE triage and compliance detail |
 
 ---
 
@@ -571,13 +619,15 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Senior SecOps Engineer
 
-The agent scans source code for security vulnerabilities (hardcoded secrets, SQL injection, XSS, command injection), assesses dependency CVEs across npm/Python/Go ecosystems, and verifies compliance against SOC 2, PCI-DSS, HIPAA, and GDPR frameworks.
+The agent scans source code for common vulnerability patterns (hardcoded secrets, SQL injection, XSS, command injection), checks dependency pins against a small built-in advisory list for npm/Python/Go, and collects code-level evidence for SOC 2, PCI-DSS, HIPAA and GDPR controls.
+
+All three tools are regex and lookup based. They catch obvious, local patterns and miss anything that flows through helpers, variables or runtime config, and the advisory list is a sample, not a CVE feed. Use them as a fast first pass and CI tripwire; confirm with a real SAST tool (Semgrep, CodeQL) and a live advisory source (`pip-audit`, `npm audit`, OSV) before calling a codebase clean.
 
 ## Core Capabilities
 
 - **Security scanner** — detect hardcoded secrets, SQL injection, XSS, command injection, and path traversal in source code.
-- **Vulnerability assessor** — scan npm / Python / Go dependency manifests for known CVEs with CVSS scores, fixed versions, and a 0-100 risk score.
-- **Compliance checker** — verify SOC 2, PCI-DSS, HIPAA, and GDPR controls (access control, encryption, audit logging, auth strength).
+- **Vulnerability assessor** — match npm / Python / Go dependency pins against a built-in advisory sample with CVSS scores, fixed versions, and a 0-100 risk score.
+- **Compliance checker** — an evidence checklist: looks for code and config evidence of SOC 2, PCI-DSS, HIPAA and GDPR controls (access control, encryption, audit logging, auth strength). A failed control means &quot;no evidence in the repo&quot;, not &quot;control absent&quot;.
 - **Security workflows** — audit, CI/CD security gate, CVE triage (with SLA tiers), and 5-phase incident response.
 - **Standards &amp; secure coding** — OWASP Top 10 prevention, secure-coding checklist, and language-specific BAD/GOOD patterns.
 
@@ -601,11 +651,20 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `security_scanner.py` | Scan source for secrets, injection, XSS, command injection, path traversal | `python scripts/security_scanner.py &lt;target&gt; --severity high --json --output report.json` |
-| `vulnerability_assessor.py` | Scan dependency manifests for known CVEs and compute risk score | `python scripts/vulnerability_assessor.py &lt;target&gt; --severity critical` |
-| `compliance_checker.py` | Verify SOC 2 / PCI-DSS / HIPAA / GDPR controls | `python scripts/compliance_checker.py &lt;target&gt; --framework soc2 --json --output soc2.json` |
+| `security_scanner.py` | Regex scan for secrets, SQL/command injection, XSS, path traversal (`--severity`, `--json`, `-o`, `-v`) | `python scripts/security_scanner.py assets/sample_app_flawed --severity high` |
+| `vulnerability_assessor.py` | Match dependency pins against the built-in advisory sample; risk score (`--severity`, `--json`, `-o`) | `python scripts/vulnerability_assessor.py assets/sample_app_flawed` |
+| `compliance_checker.py` | Code-evidence checklist per framework (`--framework soc2/pci-dss/hipaa/gdpr/all`, `--json`, `-o`) | `python scripts/compliance_checker.py assets/sample_app_sound --framework soc2` |
+
+Exit codes: `security_scanner` and `vulnerability_assessor` exit `0` with no critical/high
+findings and `1` when any remain; `compliance_checker` exits `0` at a code-evidence score of
+70% or more and `1` below. All three exit `2` on bad input (target not found), so a typo in a
+CI gate fails loudly. With `--json`, progress text goes to stderr and stdout is pure JSON.
+
+Samples: `assets/sample_app_flawed/` (hardcoded secret, %-formatted and f-string SQL,
+`os.system` concatenation, old pins) exits 1 on all three; `assets/sample_app_sound/` exits 0
+on all three (use `--framework soc2` for the checker).
 
 ## References
 
@@ -622,8 +681,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 **This skill covers:**
 
 - Static analysis of source code for common vulnerability classes (secrets, injection, XSS, command injection, path traversal).
-- Dependency vulnerability assessment against a built-in CVE database for npm, Python, and Go ecosystems.
-- Compliance verification for SOC 2 Type II, PCI-DSS v4.0, HIPAA Security Rule, and GDPR.
+- Dependency pin checks against a built-in advisory sample for npm, Python, and Go ecosystems.
+- Code-evidence checklists for SOC 2 Type II, PCI-DSS v4.0, HIPAA Security Rule, and GDPR.
 - Security workflow orchestration including CI/CD gating, CVE triage, and incident response procedures.
 
 **This skill does NOT cover:**
@@ -633,16 +692,33 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Container image scanning or Kubernetes admission control -- see the `senior-devops` skill or use Trivy directly.
 - Penetration testing execution or red-team operations -- these require specialized tooling and authorized human operators.
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-devops` | Infrastructure hardening and CI/CD pipeline configuration | Security scan results feed into deployment gates; DevOps provides container and IaC scanning |
-| `senior-backend` | Secure coding patterns and input validation in server-side code | SecOps scanner findings drive backend remediation; backend applies parameterized queries and output encoding |
-| `senior-qa` | Security test cases and regression verification after patches | Vulnerability reports generate QA test cases; QA confirms fixes do not introduce regressions |
-| `senior-architect` | Threat modeling, defense-in-depth design, and zero-trust architecture | Compliance gaps inform architecture decisions; architect provides security design patterns |
-| `code-reviewer` | Security-focused code review and pre-merge analysis | Scanner findings prioritize review focus areas; reviewer enforces secure coding standards |
-| `senior-fullstack` | End-to-end security across frontend and API layers (XSS, CSRF, auth) | SecOps identifies frontend and API vulnerabilities; fullstack applies framework-level mitigations |
+### Treating a Clean Scan as a Clean Bill of Health
+**Mistake:** Reporting &quot;no vulnerabilities&quot; because `security_scanner.py` returned exit 0.
+**Why it happens:** The exit code looks like a verdict.
+**Instead:** Say what was checked. The scanner sees single-line patterns only; injection through a helper or a query builder is invisible to it. Pair it with a dataflow-aware SAST tool for anything release-gating.
+
+### Quoting the Compliance Score to an Auditor
+**Mistake:** Presenting the checker&#x27;s percentage as SOC 2 or HIPAA readiness.
+**Why it happens:** It is labelled with framework control IDs.
+**Instead:** Use the failed list as an evidence to-do list. Most controls (policies, HR, vendor management, incident drills) live outside the code and must be evidenced separately.
+
+### Relying on the Bundled Advisory List
+**Mistake:** Taking a 0 from `vulnerability_assessor.py` to mean dependencies have no known CVEs.
+**Why it happens:** The output looks like a CVE scan.
+**Instead:** The list is a small sample for demonstration and CI wiring. Run the ecosystem&#x27;s live auditor (`pip-audit`, `npm audit`, `govulncheck`, OSV) for real coverage.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/security_scanner.py` | Source-code pattern scanner |
+| `scripts/vulnerability_assessor.py` | Dependency pin check and risk score |
+| `scripts/compliance_checker.py` | Framework code-evidence checklist |
+| `assets/sample_app_flawed/` | Deliberately vulnerable app and old pins (all tools exit 1) |
+| `assets/sample_app_sound/` | Parameterised, authenticated, logged app with evidence files (all tools exit 0) |
+| `references/*.md` | Workflows, standards, CVE triage and compliance detail |
 
 ---
 
@@ -731,7 +807,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/senior-secops/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-secops/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

@@ -1,0 +1,14 @@
+{
+  "icp_name": "Mid-market HR analytics, North America",
+  "dimensions": {
+    "firmographics": {"defined": true, "specific": true, "exclusions": ["Under 200 employees", "Public sector", "Companies without a dedicated HR team"]},
+    "tech_stack": {"defined": true, "signals": ["Workday", "BambooHR", "HiBob", "Greenhouse"]},
+    "buyer_persona": {"defined": true, "title": "VP People or HR Director reporting to the CFO or CEO"},
+    "jtbd": {"defined": true, "statement": "Give the board a reliable attrition and hiring-plan view without a week of spreadsheet work"},
+    "existing_alternatives": {"defined": true, "list": ["Excel plus a part-time analyst", "Native HRIS dashboards"]},
+    "trigger_events": {"defined": true, "list": ["New VP People hired", "Board asks for workforce metrics after a raise", "HRIS migration"]},
+    "budget_authority": {"defined": true, "level": "VP signs up to $60K; CFO above"},
+    "reachability": {"defined": true, "channels": ["LinkedIn outbound", "People-analytics communities", "HRIS marketplaces"], "list_size": 1400}
+  },
+  "disqualification_criteria_present": true
+}

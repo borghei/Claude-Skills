@@ -28,7 +28,7 @@ def load_json(path):
             return json.load(f)
     except (json.JSONDecodeError, OSError) as e:
         print(f"Error loading {path}: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 def save_json(data, path):
@@ -360,7 +360,7 @@ def main():
 
     if not args.command:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     commands = {
         "create": cmd_create,

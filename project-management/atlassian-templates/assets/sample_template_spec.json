@@ -1,0 +1,51 @@
+{
+  "name": "Sprint Retrospective",
+  "include_toc": true,
+  "metadata": {
+    "Sprint": "[Sprint Number]",
+    "Date": "{date}",
+    "Team": "[Team Name]",
+    "Facilitator": "@facilitator"
+  },
+  "sections": [
+    {
+      "type": "heading",
+      "title": "Sprint Overview",
+      "level": 2,
+      "content": "**Sprint Goal**: [Goal]\n**Velocity**: [X points]\n**Completed**: [X/Y stories]"
+    },
+    {
+      "type": "heading",
+      "title": "What Went Well",
+      "level": 2,
+      "content": "- [Positive item 1]\n- [Positive item 2]"
+    },
+    {
+      "type": "heading",
+      "title": "What Needs Improvement",
+      "level": 2,
+      "content": "- [Challenge 1]\n- [Challenge 2]"
+    },
+    {
+      "type": "table",
+      "title": "Improvement Ideas",
+      "level": 2,
+      "headers": [
+        "Idea",
+        "Votes",
+        "Owner",
+        "Target Sprint"
+      ],
+      "rows": 3
+    },
+    {
+      "type": "task_list",
+      "title": "Action Items",
+      "level": 2,
+      "items": [
+        "Action 1 - @owner - Due: [Date]",
+        "Action 2 - @owner - Due: [Date]"
+      ]
+    }
+  ]
+}

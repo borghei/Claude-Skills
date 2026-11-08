@@ -512,10 +512,10 @@ Examples:
                 data = json.load(f)
         except FileNotFoundError:
             print(f"Error: File not found: {args.input}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         except json.JSONDecodeError as e:
             print(f"Error: Invalid JSON: {e}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
         results = check_pairs_from_json(data, args.level, args.suggest_fixes)
 
@@ -544,6 +544,8 @@ Examples:
         print(f"Report written to {args.output}")
     else:
         print(output)
+    # Exit 1 when any pair fails the requested WCAG level.
+    sys.exit(1 if report["summary"]["failing"] else 0)
 
 
 if __name__ == "__main__":

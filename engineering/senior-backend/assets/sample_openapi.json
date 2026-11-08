@@ -1,0 +1,29 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "Orders API", "version": "1.0.0"},
+  "paths": {
+    "/orders": {
+      "get": {
+        "operationId": "listOrders",
+        "parameters": [{"name": "status", "in": "query", "schema": {"type": "string"}}],
+        "responses": {"200": {"description": "Orders", "content": {"application/json": {"schema": {
+          "type": "array", "items": {"$ref": "#/components/schemas/Order"}}}}}}
+      },
+      "post": {
+        "operationId": "createOrder",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/NewOrder"}}}},
+        "responses": {"201": {"description": "Created", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Order"}}}}}
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NewOrder": {"type": "object", "required": ["user_id", "total_cents"],
+                   "properties": {"user_id": {"type": "integer"}, "total_cents": {"type": "integer", "minimum": 0}}},
+      "Order": {"type": "object", "required": ["id", "user_id", "status", "total_cents"],
+                "properties": {"id": {"type": "integer"}, "user_id": {"type": "integer"},
+                               "status": {"type": "string", "enum": ["pending", "paid", "shipped"]},
+                               "total_cents": {"type": "integer"}}}
+    }
+  }
+}

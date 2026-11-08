@@ -200,14 +200,18 @@ def build_output(grouped, stats, all_commits):
 def read_input(args):
     """Read git log text from file or stdin."""
     if args.file:
-        with open(args.file, "r", encoding="utf-8") as f:
-            return f.read()
+        try:
+            with open(args.file, "r", encoding="utf-8") as f:
+                return f.read()
+        except OSError as e:
+            print(f"Error: cannot read {args.file}: {e.strerror}", file=sys.stderr)
+            sys.exit(2)
     if not sys.stdin.isatty():
         return sys.stdin.read()
     print("Error: No input provided. Pipe git log output or use --file.", file=sys.stderr)
     print("Example: git log v1.0.0..HEAD --pretty=format:'%H%n%s%n%b%n---COMMIT_END---' "
           "--no-merges | python commit_parser.py", file=sys.stderr)
-    sys.exit(1)
+    sys.exit(2)
 
 
 def main():

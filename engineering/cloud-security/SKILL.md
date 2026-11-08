@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: cloud-security
-  updated: 2026-07-21
+  updated: 2026-11-08
   tags: [cloud-security, iam, least-privilege, landing-zone, posture-management]
 ---
 
@@ -195,6 +195,11 @@ score below a threshold while one public database sits unremarked.
 | `assets/sample_iam_export.json` | Six-principal IAM export containing escalation paths, wildcard trust, and stale credentials |
 | `assets/posture_review_template.md` | Review report template structured around decisions rather than finding dumps |
 | `assets/inventory_export_guide.md` | Export schemas, field semantics, per-provider collection commands, and export hygiene rules |
+
+**Exit codes (`posture_auditor.py`, `iam_least_privilege.py`).** `0` no finding at or above the
+`--fail-on` severity (or no `--fail-on` given); `1` input error (missing file, invalid JSON, wrong
+shape); `2` the `--fail-on` threshold was hit. Gate failure is `2`, not `1`, so a launch gate can
+tell "the review found a blocker" from "the review could not run".
 
 ## Scope & Limitations
 

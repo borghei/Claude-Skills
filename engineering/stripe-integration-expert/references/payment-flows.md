@@ -13,7 +13,9 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2024-12-18.acacia",  // Pin to specific version
+  // Pin to the version your SDK ships with (its types match that version);
+  // upgrade deliberately after reading Stripe's API changelog.
+  apiVersion: "2026-10-28.endive",  // as of stripe-node 23.1.0
   typescript: true,
   appInfo: {
     name: "your-app-name",

@@ -641,6 +641,9 @@ Examples:
         default="low",
         help="Minimum severity to report (default: low)",
     )
+    parser.add_argument("--fail-on", default="high",
+                        choices=["critical", "high", "medium", "low", "info"],
+                        help="Exit 1 when an issue at or above this severity is reported (default: high)")
     parser.add_argument("--scope", default="", help="Limit code analysis to a subdirectory")
     parser.add_argument(
         "--doc-patterns",
@@ -656,7 +659,8 @@ Examples:
         sys.exit(2)
 
     # Verify it's a git repo
-    if not os.path.isdir(os.path.join(repo_path, ".git")):
+    # .git is a directory in a normal clone and a file in a worktree or submodule.
+    if not os.path.exists(os.path.join(repo_path, ".git")):
         print(f"Error: {repo_path} is not a git repository", file=sys.stderr)
         sys.exit(2)
 
@@ -706,10 +710,9 @@ Examples:
     report = generate_report(repo_path, filtered, doc_files, as_json=args.json)
     print(report)
 
-    # Exit code: 1 if high/critical issues found, 0 otherwise
-    has_serious = any(
-        i["severity"] in ("critical", "high") for i in filtered
-    )
+    # Exit code: 1 if any reported issue is at or above --fail-on (default: high)
+    gate = SEVERITY_ORDER.get(args.fail_on, 1)
+    has_serious = any(SEVERITY_ORDER.get(i.get("severity", "info"), 99) <= gate for i in filtered)
     sys.exit(1 if has_serious else 0)
 
 

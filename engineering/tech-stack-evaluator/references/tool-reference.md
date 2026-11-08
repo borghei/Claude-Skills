@@ -1,6 +1,6 @@
 # Tool Reference
 
-Read this when you need the full constructor parameters, methods, and output formats for each evaluator script. All scripts are Python library modules (import and call, no CLI).
+Read this when you need the full constructor parameters, methods, and output formats for each evaluator script. The analysis scripts are library modules; run them from a shell through `scripts/evaluate.py` (subcommands `compare`, `tco`, `ecosystem`, `security`, `migration`), or import them with `PYTHONPATH=scripts`.
 
 ## stack_comparator.py
 

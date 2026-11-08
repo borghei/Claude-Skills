@@ -1,13 +1,17 @@
 ---
 name: job-stories
-description: Jobs-to-Be-Done story writing that focuses on user situations and motivations rather than personas. Use to write When/Want/So backlog items, run a JTBD discovery canvas, apply INVEST, and convert user stories to job stories.
+description: >
+  Write When/Want/So backlog stories from observed user situations, gated on
+  INVEST and outcome-focused acceptance criteria. Use when writing backlog items from
+  research or converting "As a..." user stories to job stories.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
+  python-tools: story_quality_checker.py, invest_validator.py, story_converter.py
   tech-stack: jtbd, jobs-to-be-done, invest-criteria
   tags:
     - job-stories
@@ -54,16 +58,41 @@ Before writing job stories, settle the inputs below. When one is missing or vagu
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 ```
 When [situation], I want to [motivation], so I can [outcome].
 ```
 
-1. Run the JTBD discovery canvas (or pull from research) to find job-pain-gain clusters.
+1. Run the JTBD discovery canvas (or pull from research) to find job-pain-gain clusters. The situation must come from something observed; no tool can supply it.
 2. Write one job story per cluster in the When/Want/So format.
 3. Apply INVEST; split any story that fails the Small or Independent test.
 4. Add 6-8 observable, outcome-focused acceptance criteria per story.
+5. **Verify** [RECOMMENDED]: run the two gates below and fix every flagged story before it enters sprint planning. Done means both exit 0.
+
+```bash
+# Format, vague situation/outcome, solution words, AC count and AC wording
+python3 project-management/execution/job-stories/scripts/story_quality_checker.py \
+  --stories project-management/execution/job-stories/assets/sample_job_stories_clean.json
+
+# INVEST on backlog items (print the input shape with --example)
+python3 project-management/execution/job-stories/scripts/invest_validator.py \
+  --items project-management/execution/job-stories/assets/sample_invest_items.json
+```
+
+The second command exits 1 by design: its sample includes a 40-point "platform redesign" that fails all six criteria.
+
+## Tools
+
+| Tool | Input | What it does |
+|---|---|---|
+| `story_quality_checker.py --stories F` | `{"stories": [{title, situation, motivation, outcome, acceptance_criteria}]}` | Scores each story 0-100: all three clauses present, situation not generic ("I use the app"), no UI/solution words in the motivation, outcome not vague ("be productive"), at least 4 ACs, no ACs naming APIs, status codes or components. Ready at 85+ |
+| `invest_validator.py --items F` | `{"items": [{title, description, outcome, acceptance_criteria, dependencies, story_points}]}` | The six INVEST criteria as heuristics: dependencies, prescriptive wording, stated value, enough detail, ≤8 points, testable ACs. Sprint Ready only at 6/6 |
+| `story_converter.py --stories F` | `{"stories": [{title, role, want, so_that}]}` | Drafts a job story from an "As a..." story: keeps motivation and outcome, leaves a marked `[SITUATION: ...]` placeholder with a hint, warns on generic roles, UI words and system-state outcomes. Never gates |
+
+All three take `--format text|json` and `--example` (prints a valid input file). The checks are keyword heuristics: they catch common failures, not a wrong situation.
+
+**Exit codes:** 0 every story or item ready (converter: converted), 1 at least one not ready, 2 missing file, invalid JSON or wrong shape.
 
 ## Anti-Patterns
 
@@ -84,14 +113,22 @@ When [situation], I want to [motivation], so I can [outcome].
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/*.py` | The three tools above |
+| `assets/sample_job_stories.json`, `sample_job_stories_clean.json` | Mixed (exit 1) and clean (exit 0) input for the quality checker |
+| `assets/sample_invest_items.json`, `sample_invest_items_clean.json` | Mixed (exit 1) and clean (exit 0) input for the INVEST validator |
+| `assets/sample_user_stories.json` | User stories for the converter |
+| `assets/job_story_template.md` | Story card template |
+| `examples/wayfinder-onboarding-job-stories.md` | Worked set of job stories |
+
 ## References
 
-Load the reference that matches the task — keep this file lean and pull detail on demand:
-
-- **[references/job-stories-playbook.md](references/job-stories-playbook.md)** — the full procedure: JTBD discovery canvas template + canvas-to-story mapping, format details, writing-quality tables, INVEST table, story-card template, acceptance-criteria guidelines, worked example, troubleshooting, and success criteria. Read when writing or refining stories.
-- **[references/jtbd-guide.md](references/jtbd-guide.md)** — JTBD theory, job-story vs user-story comparison, techniques for discovering situations, and story-splitting strategies. Read to understand the framework or decide which story format to use.
-- **[references/red-flags.md](references/red-flags.md)** — common ways job stories go wrong, each with a bad/good example and how to catch it. Read before stories enter sprint planning.
-- **[assets/job_story_template.md](assets/job_story_template.md)** — ready-to-use job story card template. Use when drafting a story.
+- **[references/job-stories-playbook.md](references/job-stories-playbook.md)** — JTBD discovery canvas and canvas-to-story mapping, writing-quality tables, INVEST table, AC guidelines, worked example, troubleshooting. Read when writing or refining stories.
+- **[references/jtbd-guide.md](references/jtbd-guide.md)** — JTBD theory, job story vs user story, finding situations, splitting. Read to decide which story format to use.
+- **[references/red-flags.md](references/red-flags.md)** — common failures with bad/good examples. Read before stories enter sprint planning.
 
 ## Scope & Limitations
 

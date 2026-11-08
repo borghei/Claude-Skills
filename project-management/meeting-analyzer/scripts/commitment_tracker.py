@@ -18,6 +18,12 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+
+def _die(msg: str) -> None:
+    """Bad input: message on stderr, exit 2 (1 is reserved for findings)."""
+    print(msg, file=sys.stderr)
+    sys.exit(2)
+
 OPEN_STATES = {"open", "in_progress", "blocked"}
 AGE_BANDS = [(7, "0-7 days"), (14, "8-14 days"), (30, "15-30 days"), (10**6, "31+ days")]
 # Follow-through below this fraction marks an owner as over-committed.
@@ -31,7 +37,7 @@ def parse_date(value: Optional[str], field: str) -> Optional[date]:
     try:
         return datetime.strptime(value, "%Y-%m-%d").date()
     except ValueError:
-        raise SystemExit(f"error: '{value}' in field '{field}' is not an ISO date (YYYY-MM-DD)")
+        _die(f"error: '{value}' in field '{field}' is not an ISO date (YYYY-MM-DD)")
 
 
 def load_actions(path: Path) -> List[Dict[str, Any]]:
@@ -39,15 +45,15 @@ def load_actions(path: Path) -> List[Dict[str, Any]]:
     try:
         doc = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
-        raise SystemExit(f"error: file not found: {path}")
+        _die(f"error: file not found: {path}")
     except json.JSONDecodeError as exc:
-        raise SystemExit(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
+        _die(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
     actions = doc.get("actions") if isinstance(doc, dict) else doc
     if not isinstance(actions, list) or not actions:
-        raise SystemExit("error: expected a non-empty 'actions' list")
+        _die("error: expected a non-empty 'actions' list")
     for a in actions:
         if "id" not in a or "created" not in a:
-            raise SystemExit("error: every action needs at least 'id' and 'created' (YYYY-MM-DD)")
+            _die("error: every action needs at least 'id' and 'created' (YYYY-MM-DD)")
     return actions
 
 
@@ -64,7 +70,7 @@ def reference_date(actions: List[Dict[str, Any]], as_of: Optional[str]) -> date:
             if parsed:
                 seen.append(parsed)
     if not seen:
-        raise SystemExit("error: no parsable dates in the register; pass --as-of explicitly")
+        _die("error: no parsable dates in the register; pass --as-of explicitly")
     return max(seen)
 
 
@@ -240,9 +246,9 @@ def main() -> None:
         output(build_report(enrich(actions, today), today), args.format)
     except SystemExit:
         raise
-    except (KeyError, TypeError, ValueError, ZeroDivisionError) as exc:
+    except (AttributeError, KeyError, TypeError, ValueError, ZeroDivisionError) as exc:
         print(f"error: malformed commitment data — {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

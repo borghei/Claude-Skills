@@ -29,7 +29,6 @@ for context (total bill) but does not affect savings on the cached prefix.
     break_even_N = (w - 1) / (1 - r) + 1
     savings_pct  = (naive_cost - cached_cost) / naive_cost * 100
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -175,13 +174,13 @@ def main():
 
     if args.requests < 1:
         print("Error: --requests must be >= 1", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     if args.cached_tokens < 0 or args.uncached_tokens < 0:
         print("Error: token counts must be >= 0", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     if args.base_input_price < 0:
         print("Error: --base-input-price must be >= 0", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     res = compute(
         requests=args.requests,

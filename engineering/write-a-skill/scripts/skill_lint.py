@@ -194,9 +194,14 @@ def main() -> None:
     try:
         report = run_selftest() if args.selftest else lint_skill(args.skill, load_rules(args.rules))
         output(report, args.format)
+    except SystemExit as exc:  # bad --skill path or rules file: exit 2, never a lint verdict
+        if isinstance(exc.code, str):
+            print(exc.code, file=sys.stderr)
+            sys.exit(2)
+        raise
     except OSError as exc:
         print(f"error: could not read skill package: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     failed = not report["passed"] or (args.strict and report["warnings"] > 0)
     sys.exit(1 if failed else 0)
 

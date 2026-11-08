@@ -1,0 +1,37 @@
+{
+  "industry": "Mid-market HR analytics SaaS for 200-2,000 employee firms in North America",
+  "as_of": "2026-05-27",
+  "horizon_years": 3,
+  "forces": {
+    "new_entrants": {
+      "intensity": "medium",
+      "factors": ["HRIS integrations take 12-18 months to build", "AI tooling lowers the cost of a first dashboard", "Buyers ask for SOC 2 before a pilot"],
+      "evidence": "Four funded entrants in 2025; two shut down within a year citing integration cost"
+    },
+    "supplier_power": {
+      "intensity": "high",
+      "factors": ["Three HRIS vendors hold about 70% of the segment's employee records", "Their partner APIs are rate-limited and priced per call"],
+      "evidence": "The largest HRIS vendor raised partner API fees 40% in 2026"
+    },
+    "buyer_power": {
+      "intensity": "medium",
+      "factors": ["Fragmented buyers, top 10 customers are 18% of revenue", "Annual contracts with 60-day notice", "Switching requires re-mapping two years of history"],
+      "evidence": "Gross retention 91% in 2025; average discount at renewal 6%"
+    },
+    "substitute_threat": {
+      "intensity": "high",
+      "factors": ["HRIS vendors bundle native analytics at no extra cost", "Spreadsheets plus BI tools cover basic headcount reporting"],
+      "evidence": "Native analytics cited in 11 of 26 lost deals in 2025"
+    },
+    "competitive_rivalry": {
+      "intensity": "medium",
+      "factors": ["Six direct competitors, none above 15% share", "Category growing about 14% a year", "Price competition mainly on seat bands"],
+      "evidence": "Analyst segment report, Q1 2026; win rate stable at 31%"
+    }
+  },
+  "strategy_implications": [
+    {"force": "substitute_threat", "move": "Lead with cross-system analysis the bundled HRIS dashboards cannot do", "priority": "high"},
+    {"force": "supplier_power", "move": "Add a second ingestion path (payroll and ATS exports) to cut dependence on HRIS APIs", "priority": "high"},
+    {"force": "buyer_power", "move": "Raise switching cost with saved benchmark history and board-pack templates", "priority": "medium"}
+  ]
+}

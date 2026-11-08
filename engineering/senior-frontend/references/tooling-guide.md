@@ -32,7 +32,7 @@ Generate a new Next.js or React project with TypeScript, Tailwind CSS, and best 
 
 | Option | Description |
 |--------|-------------|
-| `--template nextjs` | Next.js 14+ with App Router and Server Components |
+| `--template nextjs` | Next.js 16 with App Router and Server Components |
 | `--template react` | React + Vite with TypeScript |
 | `--features auth` | Add NextAuth.js authentication |
 | `--features api` | Add React Query + API client |
@@ -231,7 +231,7 @@ The analyzer identifies these common heavy packages:
   {
     "name": "dashboard",
     "template": "nextjs",
-    "template_name": "Next.js 14+ App Router",
+    "template_name": "Next.js 16 App Router",
     "features": ["auth", "api"],
     "path": "./dashboard",
     "files_created": 28,

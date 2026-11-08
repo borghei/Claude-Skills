@@ -1,0 +1,6 @@
+rules:
+  - id: no-eval
+    pattern: eval(...)
+    message: Do not evaluate dynamic code
+    languages: [python]
+    severity: ERROR

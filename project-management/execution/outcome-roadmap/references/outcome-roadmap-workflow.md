@@ -66,23 +66,12 @@ The agent produces a stakeholder-ready roadmap document for alignment review.
 
 ## Example: Roadmap Transformation
 
-**Input (output-based roadmap):**
-```json
-{
-  "initiatives": [
-    {"name": "Build advanced search", "quarter": "Q2"},
-    {"name": "Launch mobile app", "quarter": "Q3"},
-    {"name": "Add Slack integration", "quarter": "Q3"},
-    {"name": "Redesign dashboard", "quarter": "Q4"}
-  ]
-}
-```
+**Input (output-based roadmap):** "Build advanced search" (Q2), "Launch mobile app" (Q3),
+"Add Slack integration" (Q3), "Redesign dashboard" (Q4).
 
-```bash
-$ python scripts/roadmap_transformer.py --input roadmap.json
+**After the "so what?" pass (written by the PM; `roadmap_transformer.py` then checks it):**
 
-Outcome Roadmap Transformation
-==============================
+```text
 
 NOW (In Progress):
   Original: "Build advanced search"
@@ -165,13 +154,17 @@ For each initiative, the transformed roadmap includes:
 
 ### roadmap_transformer.py
 
-Transforms output-based roadmap initiatives into outcome-driven format with horizon classification, strategic questions, and metric suggestions.
+Places initiatives in Now/Next/Later and checks each is outcome-ready. It does not write outcomes.
 
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--input` | string | (required, mutually exclusive with --demo) | Path to JSON file containing roadmap initiatives |
-| `--demo` | flag | off | Run transformation on built-in demo data (5 initiatives) |
-| `--format` | choice | `text` | Output format: `text`, `json`, or `markdown` |
-| `--output` | string | stdout | Output file path; if omitted, prints to stdout |
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--input` / `--demo` | one required | JSON file with `initiatives`, or the built-in output-style roadmap (exits 1) |
+| `--as-of` | earliest quarter in the file | Current quarter, e.g. `Q4 2026`; pass it for a live roadmap |
+| `--format` | `text` | `text`, `json` or `markdown` |
+| `--output` | stdout | Write to a file |
 
-**Supported initiative types:** `feature`, `improvement`, `infrastructure`
+Per initiative: `title`, `description`, `quarter` ("Q3 2026"), `type` (`feature`, `improvement`, `infrastructure`), plus `outcome`, `metric {name, baseline, target}` and `counter_metric`.
+
+Errors: more than 3 Now items; Now/Next item with no outcome, an outcome that starts with an output verb, no metric, or a metric missing baseline or target; unparseable quarter. Warnings: no "so that", Now item without counter-metric, quarter before `--as-of`.
+
+Exit codes: 0 no errors, 1 errors found, 2 bad input.

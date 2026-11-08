@@ -611,7 +611,7 @@ def main():
         for field in required_fields:
             if field not in spec:
                 print(f"Error: Missing required field '{field}' in specification", file=sys.stderr)
-                return 1
+                return 2
         
         if args.validate:
             print("Migration specification is valid")
@@ -646,13 +646,13 @@ def main():
         
     except FileNotFoundError:
         print(f"Error: Input file '{args.input}' not found", file=sys.stderr)
-        return 1
+        return 2
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in input file: {e}", file=sys.stderr)
-        return 1
+        return 2
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        return 1
+        return 2
     
     return 0
 

@@ -1,0 +1,22 @@
+diff --git a/src/auth/email.py b/src/auth/email.py
+index 3b1c2d4..8f9e0a1 100644
+--- a/src/auth/email.py
++++ b/src/auth/email.py
+@@ -12,7 +12,7 @@ def normalize_email(raw: str) -> str:
+     """Lower-case the domain and strip whitespace."""
+     local, _, domain = raw.strip().partition("@")
+-    local = local.split("+")[0]
++    # Keep sub-addresses ("ana+news@"): they are distinct mailboxes for many providers.
+     return f"{local}@{domain.lower()}"
+
+
+diff --git a/tests/test_email.py b/tests/test_email.py
+index 1a2b3c4..5d6e7f8 100644
+--- a/tests/test_email.py
++++ b/tests/test_email.py
+@@ -30,3 +30,7 @@ def test_domain_is_lowercased():
+     assert normalize_email("Ana@EXAMPLE.com") == "Ana@example.com"
++
++
++def test_plus_address_is_kept():
++    assert normalize_email("ana+news@example.com") == "ana+news@example.com"

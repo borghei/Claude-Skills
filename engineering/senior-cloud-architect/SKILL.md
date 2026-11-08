@@ -1,29 +1,21 @@
 ---
 name: senior-cloud-architect
 description: >
-  Use when the user asks to "design cloud architecture", "set up Terraform infrastructure",
-  "optimize cloud costs", "plan disaster recovery", "configure multi-region failover",
-  "audit IAM policies", "migrate to cloud", "set up VPC networking",
-  "compare AWS vs GCP vs Azure", or "right-size cloud instances".
-  Expert cloud architecture covering AWS, GCP, Azure, multi-cloud strategy,
-  cost optimization, security, and infrastructure automation.
+  Cloud architecture decisions across AWS, GCP and Azure: topology, DR tier by RTO/RPO,
+  commitment mix, IAM and network posture. Use when designing, costing, migrating or
+  auditing cloud infrastructure.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
   author: borghei
   category: engineering
   domain: cloud-architecture
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [cloud, aws, gcp, azure, architecture, infrastructure, terraform]
 ---
 # Senior Cloud Architect
 
 Expert cloud architecture and infrastructure design across AWS, GCP, and Azure — production-grade VPC/compute/database topologies, cost optimization, disaster recovery, and security posture auditing.
-
-## Keywords
-
-cloud, aws, gcp, azure, terraform, infrastructure, vpc, eks, ecs, lambda,
-cost-optimization, disaster-recovery, multi-region, iam, security, migration
 
 ## Core Capabilities
 
@@ -53,6 +45,58 @@ Before designing the architecture, settle the inputs below. When one is missing 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Decision Rules
+
+These are the calls this skill exists to make well; the references hold the Terraform and
+service detail. Every number below is a starting heuristic, so state it as one and adjust to
+the workload's measurements.
+
+**DR tier from RTO/RPO** [RECOMMENDED]
+
+| Target | Tier | What it costs you |
+|--------|------|-------------------|
+| RTO hours, RPO up to 24h | Backup and restore (cross-region snapshots) | Lowest; restore time must be rehearsed |
+| RTO under an hour, RPO minutes | Pilot light (replicated data, minimal compute off) | Data replication plus IaC to bring compute up |
+| RTO minutes, RPO seconds | Warm standby (scaled-down live copy) | A second, smaller running environment |
+| RTO near zero, RPO near zero | Multi-site active-active | Roughly double, plus conflict handling in the data layer |
+
+Pick the cheapest tier that meets the target, then prove it: a DR plan is unverified until a
+failover drill has met the RTO on a clock.
+
+**Commitment mix** [RECOMMENDED]
+- Commit (savings plans / reserved / committed-use) only to the steady baseline: the floor of
+  the last 30-60 days of usage, not the average.
+- Put interruptible, stateless or batch work on spot/preemptible capacity with a fallback.
+- Leave growth and spiky load on on-demand until it has been stable for a quarter.
+- Right-size before committing; a commitment locks in an oversized instance.
+
+**Availability and blast radius** [PROVEN]
+- Production spans at least two availability zones; single-AZ is a dev/test choice.
+- Multi-region only when the RTO, latency or data-residency requirement demands it; it
+  multiplies cost and operational load.
+- Separate accounts/projects per environment, with least-privilege roles and no long-lived
+  access keys for humans.
+
+**Verify before calling it done**
+- `terraform plan` is clean and reviewed; state is remote and locked.
+- Cost estimate for the design exists (provider calculator or `infracost`), with the
+  assumptions written down and an "as of" date, since prices change.
+- Security baseline checked (CIS benchmark or the provider's security hub), public exposure
+  limited to the load balancer or CDN.
+- For DR: the last failover drill's measured RTO/RPO is recorded.
+
+## Workflow
+
+1. Settle the Clarify First inputs; write the RTO/RPO, budget and data-residency constraints at the top of the design.
+2. Choose the DR tier and commitment mix with the rules above, and the topology (AZs, regions, accounts).
+3. Write the infrastructure as Terraform modules (see `references/cloud-architecture-playbooks.md`).
+4. Validate before handing over:
+   ```bash
+   terraform fmt -check && terraform validate && terraform plan -out plan.tfplan
+   infracost breakdown --path plan.tfplan   # cost estimate, if infracost is available
+   ```
+5. Record the cost assumptions with an as-of date, the security baseline result, and the date of the next failover drill.
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
@@ -76,11 +120,32 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 ## Integration Points
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-devops` | Infrastructure provisioning feeds into CI/CD deployment pipelines | Terraform outputs (endpoints, ARNs) → deployment configs |
-| `senior-secops` | Security audit findings inform cloud hardening decisions | CIS benchmark results → security remediation tasks |
-| `senior-architect` | Application architecture requirements drive cloud resource selection | Capacity requirements → compute/storage/network sizing |
-| `aws-solution-architect` | AWS-specific deep dives complement multi-cloud strategy | Cloud platform comparison → AWS implementation details |
-| `ra-qm-team/soc2-compliance` | Compliance requirements shape infrastructure security controls | Compliance matrices → IAM policies, encryption configs, audit logging |
-| `senior-fullstack` | Fullstack application stacks deploy onto cloud infrastructure | Application stack definitions → ECS/EKS task definitions, RDS configs |
+| Skill | Use for |
+|-------|---------|
+| `aws-solution-architect`, `azure-cloud-architect`, `gcp-cloud-architect` | Provider-specific implementation detail |
+| `terraform-patterns` | Module design and Terraform security scanning |
+| `senior-devops` | CI/CD and deployment onto the provisioned infrastructure |
+
+## Anti-Patterns
+
+### Designing for Hypothetical Scale
+**Mistake:** Multi-region, multi-cloud and Kubernetes for a workload that fits one region and a managed container service.
+**Why it happens:** The target architecture diagrams of large companies look like best practice.
+**Instead:** Size to current load with headroom and a documented scale-up path. Complexity is paid for every day; scale arrives later, if at all.
+
+### Committing Before Right-Sizing
+**Mistake:** Buying a three-year commitment to cut the bill, then discovering the instances were twice the needed size.
+**Why it happens:** Commitments show an immediate percentage saving.
+**Instead:** Right-size from utilisation data first, commit to the measured floor, and review coverage quarterly.
+
+### An Untested DR Plan
+**Mistake:** Treating cross-region replication as a disaster recovery plan.
+**Why it happens:** Replication is visible in the console; failover is not.
+**Instead:** Run a failover drill, time it against the RTO, and fix what broke (DNS TTLs, secrets, hard-coded endpoints) before calling DR done.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `references/cloud-architecture-playbooks.md` | Platform comparison, AWS architecture, cost, DR and security workflows with Terraform/IAM code, Well-Architected checklist |
+| `references/cloud-operations.md` | Troubleshooting table and success criteria |

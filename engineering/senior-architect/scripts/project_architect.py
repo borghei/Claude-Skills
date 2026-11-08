@@ -694,11 +694,11 @@ Detects:
     project_path = Path(args.project_path).resolve()
     if not project_path.exists():
         print(f"Error: Project path does not exist: {project_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if not project_path.is_dir():
         print(f"Error: Project path is not a directory: {project_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Run analysis
     architect = ProjectArchitect(project_path, verbose=args.verbose)
@@ -745,5 +745,5 @@ Detects:
             print(f"\nJSON report saved to {args.save}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

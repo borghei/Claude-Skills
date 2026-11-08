@@ -212,11 +212,14 @@ def main() -> None:
         files = plan_files(spec)
         paths = sorted(str(Path(args.out) / rel) for rel in files) if args.dry_run else write_files(files, args.out, args.force)
         output({"skill": spec["name"], "dry_run": args.dry_run, "files": sorted(paths)}, args.format)
-    except SystemExit:
+    except SystemExit as exc:
+        if isinstance(exc.code, str):  # bad spec or refused target: exit 2, not 1
+            print(exc.code, file=sys.stderr)
+            sys.exit(2)
         raise
     except OSError as exc:
         print(f"error: could not write scaffold: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

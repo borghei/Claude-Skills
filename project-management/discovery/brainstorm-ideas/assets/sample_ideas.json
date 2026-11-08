@@ -1,0 +1,51 @@
+{
+  "context": {
+    "target_outcome": "Reduce time-to-value from 14 days to 3 days"
+  },
+  "ideas": [
+    {
+      "name": "Guided Onboarding Wizard",
+      "source": "PM",
+      "description": "Step-by-step wizard for first-time setup",
+      "effort": "M",
+      "riskiest_assumption": "Users will complete the wizard rather than skip it",
+      "confidence": 7,
+      "scores": {
+        "customer_impact": 9,
+        "strategic_alignment": 8,
+        "feasibility": 7,
+        "speed_to_validate": 6,
+        "differentiation": 5
+      }
+    },
+    {
+      "name": "Smart Defaults Engine",
+      "source": "Engineer",
+      "description": "Auto-configure settings based on industry and company size",
+      "effort": "L",
+      "riskiest_assumption": "We can accurately predict useful defaults from limited signup data",
+      "confidence": 3,
+      "scores": {
+        "customer_impact": 7,
+        "strategic_alignment": 7,
+        "feasibility": 5,
+        "speed_to_validate": 4,
+        "differentiation": 8
+      }
+    },
+    {
+      "name": "Interactive Demo Mode",
+      "source": "Designer",
+      "description": "Pre-populated demo environment users can explore before committing",
+      "effort": "S",
+      "riskiest_assumption": "Exploring a demo translates to higher activation",
+      "scores": {
+        "customer_impact": 6,
+        "strategic_alignment": 6,
+        "feasibility": 8,
+        "speed_to_validate": 9,
+        "differentiation": 6
+      }
+    }
+  ]
+}

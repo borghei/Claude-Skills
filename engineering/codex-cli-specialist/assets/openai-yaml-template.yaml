@@ -107,9 +107,9 @@ tools:
 # OPTIONAL: Model and version
 # ---------------------------------------------------------------------------
 
-# Preferred model for this skill (optional - uses user default if omitted)
-# Options: o4-mini (fast, cheap), o3 (complex reasoning), gpt-4.1 (broad)
-# model: o4-mini
+# Preferred model for this skill (optional). Omit it so the skill inherits the
+# user's CLI default; pin an id from OpenAI's current model list only if needed.
+# model: <model-id>
 
 # Skill version (follows semver)
 version: 1.0.0

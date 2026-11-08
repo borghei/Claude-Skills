@@ -1,19 +1,16 @@
 ---
 name: senior-data-scientist
 description: >
-  Use when the user asks to "design an experiment", "build a predictive model",
-  "run A/B test analysis", "perform causal inference", "engineer features",
-  "evaluate model performance", "set up MLOps pipeline", "analyze time series",
-  "calculate sample size", or "deploy a model to production".
-  Expert data science covering statistical modeling, experimentation, causal inference,
-  feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.
+  Experiment sizing, feature profiling with leakage checks, and model evaluation from saved
+  predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features,
+  or scoring a model before release.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
   author: borghei
   category: engineering
   domain: data-science
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [data-science, ml, statistics, experimentation, python, mlops]
 ---
 # Senior Data Scientist
@@ -61,6 +58,8 @@ Three standard-library Python tools. Each takes `--format text|json`, prints a s
 | `scripts/feature_engineering_pipeline.py` | Profiles a CSV (types, nulls, cardinality, quantiles, skew), flags constant, ID-like and highly correlated columns, scores features against a target, flags leakage suspects, and drafts a keep/transform/drop plan | `python scripts/feature_engineering_pipeline.py --input assets/customers_sample.csv --target churned` |
 | `scripts/model_evaluation_suite.py` | Scores saved predictions: classification (confusion matrix, precision, recall, F1, ROC AUC, log loss, Brier) or regression (MAE, RMSE, R², MAPE), side by side, with a fold stability check and pass/fail against thresholds | `python scripts/model_evaluation_suite.py --input assets/predictions_sample.csv --folds 5 --config assets/eval_thresholds.json` |
 
+Exit codes: `0` the run completed (a NOT READY verdict or an underpowered warning is still exit 0; read the verdict); `2` bad input (missing or malformed file, unknown column, invalid value, existing output without `--force`).
+
 > For hypothesis testing, causal inference, and regression analysis, use inline scipy/statsmodels — see [references/statistical_methods_advanced.md](references/statistical_methods_advanced.md).
 
 ## References
@@ -95,11 +94,36 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 ## Integration Points
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-data-engineer` | Feature pipeline ingests data from ETL outputs; shares data quality validation patterns | Raw data stores --> feature engineering pipeline --> feature store |
-| `senior-ml-engineer` | Trained models handed off for MLOps deployment; shares model registry and serving configs | Evaluated model artifacts --> deployment pipeline --> production serving |
-| `senior-prompt-engineer` | Embedding features from LLMs feed into ML pipelines; experiment frameworks apply to prompt A/B tests | LLM embeddings --> feature vectors; experiment designs --> prompt evaluation |
-| `senior-architect` | Model serving architecture reviewed for scalability; data platform design aligned with training infrastructure | Architecture specs --> deployment topology --> monitoring dashboards |
-| `senior-backend` | Model inference endpoints integrated into backend services; API contracts defined for prediction requests | REST/gRPC model API --> backend service layer --> client applications |
-| `senior-devops` | CI/CD pipelines extended for model retraining triggers; containerized model images deployed via infrastructure-as-code | Docker images --> Kubernetes manifests --> production clusters |
+| Skill | Use for |
+|-------|---------|
+| `senior-data-engineer` | Upstream data pipelines and data-quality checks |
+| `senior-ml-engineer` | Serving, monitoring and retraining after evaluation |
+
+## Anti-Patterns
+
+### Peeking and Stopping Early
+**Mistake:** Checking an A/B test daily and stopping the first time p < 0.05.
+**Why it happens:** Early wins are exciting and traffic is expensive.
+**Instead:** Fix the sample size with `experiment_designer.py` before launch and analyse once it is reached, or use a sequential design built for interim looks. Repeated peeking inflates the false-positive rate far above the nominal 5%.
+
+### Features That Know the Answer
+**Mistake:** Training on columns recorded after the outcome (refund issued, account closed date).
+**Why it happens:** They correlate strongly, so models built on them look excellent offline.
+**Instead:** Check every feature's timestamp against the prediction time. `feature_engineering_pipeline.py` flags statistical suspects; the timing review is still yours.
+
+### One Metric on One Split
+**Mistake:** Shipping on a single AUC from one random split.
+**Why it happens:** It is the default output of most tutorials.
+**Instead:** Evaluate on a temporal holdout that mirrors production, report calibration and the business threshold metrics, and check stability across folds (`--folds`).
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/experiment_designer.py` | Sample size, power and duration for two-arm or multi-arm tests |
+| `scripts/feature_engineering_pipeline.py` | CSV profiling, leakage suspects and a keep/transform/drop plan |
+| `scripts/model_evaluation_suite.py` | Classification/regression metrics, fold stability, readiness verdict |
+| `assets/customers_sample.csv` | Features with a planted leak (`refund_issued`) and a duplicate column |
+| `assets/predictions_sample.csv`, `regression_sample.csv` | Saved predictions for the evaluation suite |
+| `assets/eval_thresholds.json`, `experiment_design.json` | Threshold config and experiment input |
+| `references/*.md` | Workflows, operations and CLI reference, statistics, experiment design, feature patterns |

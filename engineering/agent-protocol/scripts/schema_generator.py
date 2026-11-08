@@ -502,7 +502,7 @@ def main() -> int:
     if args.from_config:
         if not os.path.isfile(args.from_config):
             print(f"Error: Config file not found: {args.from_config}", file=sys.stderr)
-            return 1
+            return 2
         tools = load_config(args.from_config)
         for tool in tools:
             name = tool.get("name", "unnamed_tool")
@@ -520,15 +520,15 @@ def main() -> int:
     elif args.from_python:
         if not os.path.isfile(args.from_python):
             print(f"Error: Python file not found: {args.from_python}", file=sys.stderr)
-            return 1
+            return 2
         if not args.function:
             print("Error: --function is required with --from-python", file=sys.stderr)
-            return 1
+            return 2
         try:
             extracted = extract_function_schema(args.from_python, args.function)
         except ValueError as exc:
             print(f"Error: {exc}", file=sys.stderr)
-            return 1
+            return 2
         name = extracted["name"]
         desc = extracted["description"]
         params = extracted["params"]
@@ -548,7 +548,7 @@ def main() -> int:
                 params.append(parse_param_spec(spec))
             except ValueError as exc:
                 print(f"Error parsing param: {exc}", file=sys.stderr)
-                return 1
+                return 2
 
         if args.protocol == "mcp":
             schemas.append(generate_mcp_schema(args.name, args.description, params))
@@ -560,7 +560,7 @@ def main() -> int:
                 args.name, args.description, args.url, args.org, tags, args.streaming))
     else:
         parser.print_help()
-        return 1
+        return 2
 
     # Output
     if len(schemas) == 1:

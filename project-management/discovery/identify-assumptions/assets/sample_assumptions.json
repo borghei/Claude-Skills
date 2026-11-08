@@ -1,0 +1,52 @@
+{
+  "assumptions": [
+    {
+      "description": "Users will prefer AI-generated summaries over manual note-taking",
+      "category": "value",
+      "confidence": "low",
+      "impact": 9
+    },
+    {
+      "description": "Our infrastructure can handle real-time processing for 10K concurrent users",
+      "category": "feasibility",
+      "confidence": "high",
+      "impact": 8
+    },
+    {
+      "description": "Users will understand the drag-and-drop interface without a tutorial",
+      "category": "usability",
+      "confidence": "high",
+      "impact": 7
+    },
+    {
+      "description": "The feature will generate enough upgrades to justify the 3-month engineering cost",
+      "category": "viability",
+      "confidence": "low",
+      "impact": 8
+    },
+    {
+      "description": "Collecting usage data will not create GDPR compliance issues",
+      "category": "ethics",
+      "confidence": "high",
+      "impact": 9
+    },
+    {
+      "description": "Our target segment actively searches for solutions on Google",
+      "category": "gtm",
+      "confidence": "low",
+      "impact": 6
+    },
+    {
+      "description": "This feature aligns with the company's Q3 objectives",
+      "category": "strategy",
+      "confidence": "high",
+      "impact": 5
+    },
+    {
+      "description": "The team can learn the required ML skills within the project timeline",
+      "category": "team",
+      "confidence": "low",
+      "impact": 6
+    }
+  ]
+}

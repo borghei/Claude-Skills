@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Status Update Generator - Claude Skills</title>
-  <meta name="description" content="Generate weekly executive status updates from Jira/Linear data exports. Produces a structured &quot;highlights / blockers / risks / asks / what&#x27;s next&quot; briefing in markdown, Confluence, Notion, Linear, JSO">
+  <meta name="description" content="Renders a weekly executive status update (highlights, blockers, risks, asks, next) from Jira or Linear data. Use when preparing a sponsor or steering update, or standardising a team&#x27;s weekly report.">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/status-update-generator.html">
   <meta property="og:title" content="Status Update Generator - Claude Skills">
-  <meta property="og:description" content="Generate weekly executive status updates from Jira/Linear data exports. Produces a structured &quot;highlights / blockers / risks / asks / what&#x27;s next&quot; briefing in markdown, Confluence, Notion, Linear, JSO">
+  <meta property="og:description" content="Renders a weekly executive status update (highlights, blockers, risks, asks, next) from Jira or Linear data. Use when preparing a sponsor or steering update, or standardising a team&#x27;s weekly report.">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/status-update-generator.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Status Update Generator", "description": "Generate weekly executive status updates from Jira/Linear data exports. Produces a structured \"highlights / blockers / risks / asks / what's next\" briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/status-update-generator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Status Update Generator", "description": "Renders a weekly executive status update (highlights, blockers, risks, asks, next) from Jira or Linear data. Use when preparing a sponsor or steering update, or standardising a team's weekly report.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/status-update-generator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Status Update Generator</h1>
-    <p class="page-subtitle">Generate weekly executive status updates from Jira/Linear data exports. Produces a structured &quot;highlights / blockers / risks / asks / what&#x27;s next&quot; briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.</p>
+    <p class="page-subtitle">Renders a weekly executive status update (highlights, blockers, risks, asks, next) from Jira or Linear data. Use when preparing a sponsor or steering update, or standardising a team&#x27;s weekly report.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">status-update</span><span class="tag">jira</span><span class="tag">linear</span><span class="tag">executive-reporting</span><span class="tag">weekly-update</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Status Update Generator (Project Management domain).
 
-Generate weekly executive status updates from Jira/Linear data exports. Produces a structured &quot;highlights / blockers / risks / asks / what&#x27;s next&quot; briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.
+Renders a weekly executive status update (highlights, blockers, risks, asks, next) from Jira or Linear data. Use when preparing a sponsor or steering update, or standardising a team&#x27;s weekly report.
 
 Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and they almost always say the same thing in subtly different ways. This skill standardizes the artifact: pull tickets from Jira or Linear (or any JSON dump), and emit a structured update with five named sections -- Highlights, B
 
@@ -420,7 +420,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Status Update Generator (Project Management domain).
 
-Generate weekly executive status updates from Jira/Linear data exports. Produces a structured &quot;highlights / blockers / risks / asks / what&#x27;s next&quot; briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.
+Renders a weekly executive status update (highlights, blockers, risks, asks, next) from Jira or Linear data. Use when preparing a sponsor or steering update, or standardising a team&#x27;s weekly report.
 
 Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and they almost always say the same thing in subtly different ways. This skill standardizes the artifact: pull tickets from Jira or Linear (or any JSON dump), and emit a structured update with five named sections -- Highlights, B
 
@@ -463,7 +463,7 @@ Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and 
 
 ## Core Capabilities
 
-- **Six-section template** — Header, Highlights, Blockers, Risks, Asks, What&#x27;s Next, in a fixed order so exec readers scan in under 5 seconds (full section definitions in `references/status-structure-and-workflow.md`).
+- **Header plus five sections** — Header (project, period, author, R/Y/G and rationale), then Highlights, Blockers, Risks, Asks, What&#x27;s Next, in a fixed order so exec readers scan in under 5 seconds (full section definitions in `references/status-structure-and-workflow.md`).
 - **Traffic-light discipline** — Green / Yellow / Red rules plus anti-patterns (watermelon status, always-yellow, color creep).
 - **Multi-format rendering** — `status_generator.py` emits all six SHARED_OUTPUT_SCHEMA formats: `markdown`, `confluence`, `notion`, `linear`, `json`, `mermaid`.
 - **SBNR mapping** — compressed async-standup variant mapped to the weekly sections.
@@ -491,12 +491,20 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `status_generator.py` | Generate a structured weekly status update | `python scripts/status_generator.py --input data.json --format markdown` |
-| `status_generator.py --demo` | Inspect demo input and output formats | `python scripts/status_generator.py --demo --format markdown` |
+```bash
+# Render the sample week (status yellow, one blocker, two risks) as markdown
+python3 project-management/execution/status-update-generator/scripts/status_generator.py \
+  --input project-management/execution/status-update-generator/assets/sample_status.json --format markdown
+# Same data as a Confluence page body; --status overrides the file&#x27;s R/Y/G
+python3 project-management/execution/status-update-generator/scripts/status_generator.py \
+  --input project-management/execution/status-update-generator/assets/sample_status.json --format confluence --status red
+```
 
-The traffic-light status is a human judgment, not a calculation — set it and document the rationale. See `references/tool-and-troubleshooting.md` for flags and the input JSON shape.
+Formats: `markdown` (default), `confluence`, `notion`, `linear`, `json`, `mermaid`; `--output FILE` writes a file, `--period` overrides the period label, `--demo` uses the built-in copy of the sample. Input shape and flags: `references/tool-and-troubleshooting.md`.
+
+The traffic-light status is a human judgment, not a calculation: the tool refuses to run without one (`status` in the file or `--status`) rather than defaulting to green. Write the rationale next to it.
+
+**Exit codes:** `0` update rendered · `2` missing or unreadable file, invalid JSON, a top level that is not an object, or no valid `status`.
 
 ## Anti-Patterns
 
@@ -517,11 +525,11 @@ The traffic-light status is a human judgment, not a calculation — set it and d
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-- **[references/status-structure-and-workflow.md](references/status-structure-and-workflow.md)** — full definition of each of the six sections, R/Y/G rules and anti-patterns, SBNR shorthand mapping, and the 6-step authoring workflow. Read when writing or standardizing an update.
+- **[references/status-structure-and-workflow.md](references/status-structure-and-workflow.md)** — full definition of the header and the five sections, R/Y/G rules and anti-patterns, SBNR shorthand mapping, and the 6-step authoring workflow. Read when writing or standardizing an update.
 - **[references/status-update-style-guide.md](references/status-update-style-guide.md)** — voice, structural rules, traffic-light discipline, and 5 worked examples (Green / Yellow / Red across team types). Read when coaching writing quality or seeing full examples.
 - **[references/red-flags.md](references/red-flags.md)** — warning signs and failure modes in status reporting practice. Read when an update process feels performative or untrusted.
 - **[references/tool-and-troubleshooting.md](references/tool-and-troubleshooting.md)** — `status_generator.py` flags, input JSON shape, Mermaid output, troubleshooting table, and success criteria. Read when running the tool or diagnosing a problem.
@@ -531,7 +539,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **In Scope:**
 - Generating weekly executive status updates from structured input
-- Five-section template (Highlights / Blockers / Risks / Asks / What&#x27;s Next) with R/Y/G traffic light
+- Header plus five sections (Highlights / Blockers / Risks / Asks / What&#x27;s Next) with an R/Y/G traffic light
 - Output in all six SHARED_OUTPUT_SCHEMA formats (json, markdown, mermaid, confluence, notion, linear)
 - Aggregating ticket data from Jira-shaped or Linear-shaped JSON dumps
 - SBNR shorthand mapping for async standup variants
@@ -561,6 +569,14 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `../program-manager/` | Feeds into | Cross-team status aggregation rolls up multiple team updates |
 | `../delivery-manager/` | Pairs with | Release windows and incident references show up in Highlights and Risks |
 
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/status_generator.py` | Renders the update in six output formats |
+| `assets/sample_status.json` | One week of status data (same as `--demo`) |
+| `assets/weekly_status_template.md` | Fill-in template matching the input JSON |
+
 ---
 
 ## What I Need You to Do
@@ -587,7 +603,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Status Update Generator&quot;**
-   - Description: &quot;Generate weekly executive status updates from Jira/Linear data exports. Produces a structured &quot;highlights / blockers / risks / asks / what&#x27;s next&quot; briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.&quot;
+   - Description: &quot;Renders a weekly executive status update (highlights, blockers, risks, asks, next) from Jira or Linear data. Use when preparing a sponsor or steering update, or standardising a team&#x27;s weekly report.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -618,7 +634,7 @@ Weekly status updates eat 30-90 minutes of every PM&#x27;s Friday afternoon and 
 
 ## Core Capabilities
 
-- **Six-section template** — Header, Highlights, Blockers, Risks, Asks, What&#x27;s Next, in a fixed order so exec readers scan in under 5 seconds (full section definitions in `references/status-structure-and-workflow.md`).
+- **Header plus five sections** — Header (project, period, author, R/Y/G and rationale), then Highlights, Blockers, Risks, Asks, What&#x27;s Next, in a fixed order so exec readers scan in under 5 seconds (full section definitions in `references/status-structure-and-workflow.md`).
 - **Traffic-light discipline** — Green / Yellow / Red rules plus anti-patterns (watermelon status, always-yellow, color creep).
 - **Multi-format rendering** — `status_generator.py` emits all six SHARED_OUTPUT_SCHEMA formats: `markdown`, `confluence`, `notion`, `linear`, `json`, `mermaid`.
 - **SBNR mapping** — compressed async-standup variant mapped to the weekly sections.
@@ -646,12 +662,20 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `status_generator.py` | Generate a structured weekly status update | `python scripts/status_generator.py --input data.json --format markdown` |
-| `status_generator.py --demo` | Inspect demo input and output formats | `python scripts/status_generator.py --demo --format markdown` |
+```bash
+# Render the sample week (status yellow, one blocker, two risks) as markdown
+python3 project-management/execution/status-update-generator/scripts/status_generator.py \
+  --input project-management/execution/status-update-generator/assets/sample_status.json --format markdown
+# Same data as a Confluence page body; --status overrides the file&#x27;s R/Y/G
+python3 project-management/execution/status-update-generator/scripts/status_generator.py \
+  --input project-management/execution/status-update-generator/assets/sample_status.json --format confluence --status red
+```
 
-The traffic-light status is a human judgment, not a calculation — set it and document the rationale. See `references/tool-and-troubleshooting.md` for flags and the input JSON shape.
+Formats: `markdown` (default), `confluence`, `notion`, `linear`, `json`, `mermaid`; `--output FILE` writes a file, `--period` overrides the period label, `--demo` uses the built-in copy of the sample. Input shape and flags: `references/tool-and-troubleshooting.md`.
+
+The traffic-light status is a human judgment, not a calculation: the tool refuses to run without one (`status` in the file or `--status`) rather than defaulting to green. Write the rationale next to it.
+
+**Exit codes:** `0` update rendered · `2` missing or unreadable file, invalid JSON, a top level that is not an object, or no valid `status`.
 
 ## Anti-Patterns
 
@@ -672,11 +696,11 @@ The traffic-light status is a human judgment, not a calculation — set it and d
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-- **[references/status-structure-and-workflow.md](references/status-structure-and-workflow.md)** — full definition of each of the six sections, R/Y/G rules and anti-patterns, SBNR shorthand mapping, and the 6-step authoring workflow. Read when writing or standardizing an update.
+- **[references/status-structure-and-workflow.md](references/status-structure-and-workflow.md)** — full definition of the header and the five sections, R/Y/G rules and anti-patterns, SBNR shorthand mapping, and the 6-step authoring workflow. Read when writing or standardizing an update.
 - **[references/status-update-style-guide.md](references/status-update-style-guide.md)** — voice, structural rules, traffic-light discipline, and 5 worked examples (Green / Yellow / Red across team types). Read when coaching writing quality or seeing full examples.
 - **[references/red-flags.md](references/red-flags.md)** — warning signs and failure modes in status reporting practice. Read when an update process feels performative or untrusted.
 - **[references/tool-and-troubleshooting.md](references/tool-and-troubleshooting.md)** — `status_generator.py` flags, input JSON shape, Mermaid output, troubleshooting table, and success criteria. Read when running the tool or diagnosing a problem.
@@ -686,7 +710,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **In Scope:**
 - Generating weekly executive status updates from structured input
-- Five-section template (Highlights / Blockers / Risks / Asks / What&#x27;s Next) with R/Y/G traffic light
+- Header plus five sections (Highlights / Blockers / Risks / Asks / What&#x27;s Next) with an R/Y/G traffic light
 - Output in all six SHARED_OUTPUT_SCHEMA formats (json, markdown, mermaid, confluence, notion, linear)
 - Aggregating ticket data from Jira-shaped or Linear-shaped JSON dumps
 - SBNR shorthand mapping for async standup variants
@@ -716,6 +740,14 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `../program-manager/` | Feeds into | Cross-team status aggregation rolls up multiple team updates |
 | `../delivery-manager/` | Pairs with | Release windows and incident references show up in Highlights and Risks |
 
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/status_generator.py` | Renders the update in six output formats |
+| `assets/sample_status.json` | One week of status data (same as `--demo`) |
+| `assets/weekly_status_template.md` | Fill-in template matching the input JSON |
+
 ---
 
 ## What I Need You to Do
@@ -742,7 +774,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Status Update Generator&quot;**
-   - Description: &quot;Generate weekly executive status updates from Jira/Linear data exports. Produces a structured &quot;highlights / blockers / risks / asks / what&#x27;s next&quot; briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.&quot;
+   - Description: &quot;Renders a weekly executive status update (highlights, blockers, risks, asks, next) from Jira or Linear data. Use when preparing a sponsor or steering update, or standardising a team&#x27;s weekly report.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -802,13 +834,20 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/status-update-generator/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2>| Tool | Purpose | Command |
-|------|---------|---------|
-| `status_generator.py` | Generate a structured weekly status update | `python scripts/status_generator.py --input data.json --format markdown` |
-| `status_generator.py --demo` | Inspect demo input and output formats | `python scripts/status_generator.py --demo --format markdown` |
+  <h2>Quick Start</h2><pre><code># Render the sample week (status yellow, one blocker, two risks) as markdown
+python3 project-management/execution/status-update-generator/scripts/status_generator.py \
+  --input project-management/execution/status-update-generator/assets/sample_status.json --format markdown
+# Same data as a Confluence page body; --status overrides the file&#x27;s R/Y/G
+python3 project-management/execution/status-update-generator/scripts/status_generator.py \
+  --input project-management/execution/status-update-generator/assets/sample_status.json --format confluence --status red
+</code></pre>
 
-The traffic-light status is a human judgment, not a calculation — set it and document the rationale. See `references/tool-and-troubleshooting.md` for flags and the input JSON shape.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+Formats: `markdown` (default), `confluence`, `notion`, `linear`, `json`, `mermaid`; `--output FILE` writes a file, `--period` overrides the period label, `--demo` uses the built-in copy of the sample. Input shape and flags: `references/tool-and-troubleshooting.md`.
+
+The traffic-light status is a human judgment, not a calculation: the tool refuses to run without one (`status` in the file or `--status`) rather than defaulting to green. Write the rationale next to it.
+
+**Exit codes:** `0` update rendered · `2` missing or unreadable file, invalid JSON, a top level that is not an object, or no valid `status`.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/status-update-generator/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

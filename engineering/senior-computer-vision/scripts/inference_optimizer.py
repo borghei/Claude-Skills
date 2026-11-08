@@ -6,9 +6,13 @@ Analyzes and benchmarks vision models, and provides optimization recommendations
 Supports PyTorch, ONNX, and TensorRT models.
 
 Usage:
-    python inference_optimizer.py model.pt --benchmark
-    python inference_optimizer.py model.pt --export onnx --output model.onnx
     python inference_optimizer.py model.onnx --analyze
+    python inference_optimizer.py model.pt --benchmark --recommend --target edge
+
+Analysis and benchmarks need the model's runtime (torch for .pt, onnx/onnxruntime + numpy
+for .onnx); without it only extension-based recommendations are available.
+Exit codes: 0 ok, 2 bad input (model missing, unsupported format) or a requested
+benchmark could not run (runtime missing or model failed to load).
 """
 
 import os
@@ -499,14 +503,14 @@ def main():
     args = parser.parse_args()
 
     if not Path(args.model_path).exists():
-        logger.error(f"Model not found: {args.model_path}")
-        sys.exit(1)
+        print(f"error: model not found: {args.model_path}", file=sys.stderr)
+        sys.exit(2)
 
     try:
         optimizer = InferenceOptimizer(args.model_path)
     except ValueError as e:
-        logger.error(str(e))
-        sys.exit(1)
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
 
     results = {}
 
@@ -552,6 +556,11 @@ def main():
             json.dump(results, f, indent=2, default=str)
         logger.info(f"Results saved to {args.output}")
 
+    bench_error = results.get('benchmark', {}).get('error')
+    if bench_error:
+        print(f"error: benchmark did not run: {bench_error}", file=sys.stderr)
+        sys.exit(2)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

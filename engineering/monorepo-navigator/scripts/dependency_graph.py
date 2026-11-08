@@ -6,7 +6,6 @@ Scans a monorepo for internal cross-package dependencies and outputs a Mermaid
 flowchart showing the dependency structure. Supports filtering by package,
 direction control, depth limits, and multiple layout orientations.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -442,14 +441,14 @@ def main() -> None:
     root = Path(args.path).resolve()
     if not root.is_dir():
         print(f"Error: {root} is not a valid directory", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     builder = DependencyGraphBuilder(str(root))
     builder.build()
 
     if not builder.nodes:
         print("No packages found. Is this a monorepo with workspace configuration?", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if args.focus:
         builder = builder.filter_by_package(args.focus, args.depth, args.direction)

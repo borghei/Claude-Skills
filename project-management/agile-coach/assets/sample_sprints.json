@@ -1,0 +1,35 @@
+{
+  "team": "Team Alpha",
+  "sprints": [
+    {
+      "name": "Sprint 18",
+      "committed_points": 34,
+      "completed_points": 30
+    },
+    {
+      "name": "Sprint 19",
+      "committed_points": 32,
+      "completed_points": 32
+    },
+    {
+      "name": "Sprint 20",
+      "committed_points": 35,
+      "completed_points": 28
+    },
+    {
+      "name": "Sprint 21",
+      "committed_points": 30,
+      "completed_points": 31
+    },
+    {
+      "name": "Sprint 22",
+      "committed_points": 33,
+      "completed_points": 35
+    },
+    {
+      "name": "Sprint 23",
+      "committed_points": 35,
+      "completed_points": 33
+    }
+  ]
+}

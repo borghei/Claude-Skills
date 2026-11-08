@@ -5,7 +5,6 @@ Scraping Toolkit - Generate web scraping code with rate limiting and best practi
 Analyzes target URLs and generates production-ready scraping scripts with proper
 rate limiting, error handling, data extraction, and anti-detection measures.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -25,16 +24,11 @@ RATE_STRATEGIES = {
     "aggressive": {"min_delay": 0.5, "max_delay": 1.5, "concurrent": 5, "description": "Fast, for own APIs or test environments"},
     "normal": {"min_delay": 1.0, "max_delay": 3.0, "concurrent": 3, "description": "Balanced speed and politeness"},
     "polite": {"min_delay": 3.0, "max_delay": 7.0, "concurrent": 1, "description": "Respectful, minimizes server impact"},
-    "stealth": {"min_delay": 5.0, "max_delay": 15.0, "concurrent": 1, "description": "Maximum stealth, mimics human browsing"},
+    "gentle": {"min_delay": 5.0, "max_delay": 15.0, "concurrent": 1, "description": "Slowest, for small or fragile sites"},
 }
 
-USER_AGENTS = [
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0",
-]
+# Generated scrapers identify themselves honestly; replace the name, URL and contact before use.
+DEFAULT_USER_AGENT = "ExampleCrawler/1.0 (+https://example.com/bot; bot-owner@example.com)"
 
 
 @dataclass
@@ -98,7 +92,8 @@ def generate_scraper_script(config: ScrapingConfig) -> str:
         RESPECT_ROBOTS = {config.respect_robots}
         OUTPUT_FORMAT = "{config.output_format}"
 
-        USER_AGENTS = {json.dumps(USER_AGENTS[:3], indent=4)}
+        # Identify the bot and give site owners a way to reach you. Edit before running.
+        USER_AGENT = "{DEFAULT_USER_AGENT}"
 
         # --- Rate Limiter ---
         class RateLimiter:
@@ -141,7 +136,7 @@ def generate_scraper_script(config: ScrapingConfig) -> str:
             def can_fetch(self, url: str) -> bool:
                 if not self.loaded:
                     self.load()
-                return self.parser.can_fetch("*", url)
+                return self.parser.can_fetch(USER_AGENT, url)
 
 
         # --- Session Manager ---
@@ -156,7 +151,7 @@ def generate_scraper_script(config: ScrapingConfig) -> str:
                     import requests
                     self.session = requests.Session()
                     self.session.headers.update({{
-                        "User-Agent": random.choice(USER_AGENTS),
+                        "User-Agent": USER_AGENT,
                         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                         "Accept-Language": "en-US,en;q=0.9",
                         "Accept-Encoding": "gzip, deflate, br",
@@ -174,10 +169,6 @@ def generate_scraper_script(config: ScrapingConfig) -> str:
 
                 for attempt in range(retries):
                     try:
-                        # Rotate User-Agent periodically
-                        if random.random() < 0.2:
-                            self.session.headers["User-Agent"] = random.choice(USER_AGENTS)
-
                         response = self.session.get(url, timeout=30)
 
                         if response.status_code == 200:
@@ -334,7 +325,7 @@ def generate_config_summary(config: ScrapingConfig) -> Dict:
             "respect_robots_txt": config.respect_robots,
             "max_pages": config.max_pages,
             "retry_with_backoff": True,
-            "user_agent_rotation": True,
+            "identifying_user_agent": DEFAULT_USER_AGENT,
         },
     }
 
@@ -355,7 +346,7 @@ def format_human_output(config: ScrapingConfig, script: str) -> str:
     lines.append("")
     lines.append("Features included:")
     lines.append("  [x] Rate limiting with randomized delays")
-    lines.append("  [x] User-Agent rotation")
+    lines.append("  [x] Identifying User-Agent (edit the name and contact)")
     lines.append("  [x] Exponential backoff on errors")
     lines.append("  [x] robots.txt compliance")
     lines.append("  [x] Session management with cookies")

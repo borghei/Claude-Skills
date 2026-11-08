@@ -2,6 +2,7 @@
 """
 test_scenario_generator.py — Audit a feature's test scenario coverage
 across 7+ categories; flag under-coverage based on feature type.
+It audits scenarios you have written; it does not generate them.
 
 Stdlib only. JSON or markdown output.
 
@@ -107,6 +108,11 @@ def audit(state: dict[str, Any]) -> dict[str, Any]:
             all_issues.append(Issue("info", cat,
                 f"{count} {cat} scenarios; recommended max {high}"))
 
+    known = set().union(*(r.keys() for r in RECOMMENDED.values())) | {"localization", "cross_platform"}
+    for cat in sorted(set(by_category) - known):
+        all_issues.append(Issue("warn", cat or "(none)",
+            f"{by_category[cat]} scenario(s) with unknown category '{cat}'; they are not counted"))
+
     # Collab + concurrent check
     if state.get("supports_collaboration") and by_category.get("concurrent", 0) < 3:
         all_issues.append(Issue("warn", "concurrent",
@@ -205,7 +211,14 @@ def main() -> int:
         print(f"error: invalid JSON: {e}", file=sys.stderr)
         return 2
 
-    report = audit(state)
+    if not isinstance(state, dict):
+        print("error: top level must be a JSON object (see the schema in --help)", file=sys.stderr)
+        return 2
+    try:
+        report = audit(state)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        print(f"error: unexpected input shape ({type(e).__name__}: {e})", file=sys.stderr)
+        return 2
     out = render_markdown(report) if args.format == "markdown" else json.dumps(report, indent=2)
 
     if args.output:
@@ -213,7 +226,8 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    # Gate: 1 when any finding has severity "fail", else 0.
+    return 1 if report.get("severity_counts", {}).get("fail") else 0
 
 
 if __name__ == "__main__":

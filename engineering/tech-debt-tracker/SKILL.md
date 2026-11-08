@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: code-quality
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags:
     - technical-debt
     - code-quality
@@ -26,12 +26,8 @@ The agent identifies, scores, prioritizes, and tracks technical debt across code
 ## Core Capabilities
 
 - **Detection** — AST parsing (Python) and regex pattern matching (all languages) across six debt categories: code, architecture, test, documentation, dependency, infrastructure.
-- **Severity scoring** — rate each item on velocity, quality, productivity, and business impact (1-10) plus effort sizing (XS-XL) and risk.
-- **Cost-of-delay** — compute interest rate (`Impact x Frequency`) and cost of delay (`Interest x Sprints x Team Multiplier`); also WSJF and RICE frameworks.
-- **Prioritization** — plot on the Cost-of-Delay vs Effort matrix (Immediate / Planned / Opportunistic / Backlog).
-- **Sprint allocation** — apply the Debt-to-Feature ratio by team velocity; reserve capacity for debt work.
-- **Refactoring strategies** — Strangler Fig, Branch by Abstraction, Feature Toggles, Parallel Run.
-- **Reporting** — executive and engineering dashboards, trend analysis, velocity tracking, and forecasts from scan snapshots.
+- **Interest rate** — the number this skill adds: `interest = impact x frequency` (how much the debt slows work each time the code is touched), and `cost of delay = interest x sprints x team multiplier`. Rank by cost of delay over effort; WSJF and RICE are available as alternatives.
+- **Data flow** — `debt_scanner.py` produces the inventory, `debt_prioritizer.py` scores and schedules it, `debt_dashboard.py` compares snapshots over time.
 
 ## When to Use
 
@@ -58,6 +54,20 @@ Ask about the two or three inputs that matter most for this request, not the who
 | `debt_prioritizer.py` | Enrich inventory with cost-of-delay/WSJF/RICE and sprint allocation | `python scripts/debt_prioritizer.py scan_results.json --framework wsjf --team-size 8` |
 | `debt_dashboard.py` | Trend analysis, velocity, forecasts, and exec summary across snapshots | `python scripts/debt_dashboard.py --input-dir ./debt_scans/ --period quarterly` |
 
+Runnable on the bundled samples:
+
+```bash
+python scripts/debt_scanner.py assets/sample_codebase --format text
+python scripts/debt_prioritizer.py assets/sample_debt_inventory.json --framework cost_of_delay
+python scripts/debt_dashboard.py assets/historical_debt_2024-01-15.json assets/historical_debt_2024-02-01.json
+```
+
+The scanner reports each duplicated region once (overlapping windows are merged and
+repetitive runs inside one file are ignored), so the 986-line sample yields about 60 items.
+Health score is `100 - severity-weighted items per 1,000 lines` (critical 5, high 3, medium 1,
+low 0.5), so it compares codebases of different sizes. Exit codes: `0` ok; `2` bad input
+(missing directory or file, unreadable inventory).
+
 ## References
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
@@ -69,7 +79,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/prioritization-framework.md](references/prioritization-framework.md)** — deep prioritization approaches based on business value, risk, effort, and strategic alignment. Read when designing a prioritization rubric.
 - **[references/stakeholder-communication-templates.md](references/stakeholder-communication-templates.md)** — templates and guidelines for communicating debt status, impact, and recommendations to different stakeholder groups. Read when reporting to execs or product.
 
-Also see the skill-root `REFERENCE.md` for the Technical Debt Quadrant (Fowler) and the implementation roadmap phases.
+- **[references/quadrant-and-roadmap.md](references/quadrant-and-roadmap.md)** — the technical debt quadrant and the implementation roadmap phases. Read when framing debt for a team new to tracking it.
 
 ## Scope & Limitations
 
@@ -87,11 +97,36 @@ Also see the skill-root `REFERENCE.md` for the Technical Debt Quadrant (Fowler) 
 
 ## Integration Points
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `engineering/dependency-auditor` | Feed dependency audit findings into the scanner as `dependency_debt` items to unify all debt in one inventory. | Dependency audit JSON -> scanner config or manual merge into `debt_inventory.json` |
-| `engineering/performance-profiler` | Correlate performance hotspots with high-complexity debt items to prioritize refactoring that yields both quality and speed gains. | Profiler hotspot report -> cross-reference with scanner output by file path |
-| `engineering/ci-cd-pipeline-builder` | Add `debt_scanner.py` as a CI pipeline step to fail builds when health score drops below a threshold or critical debt count increases. | Scanner JSON output -> CI gate condition on `summary.health_score` |
-| `engineering/pr-review-expert` | Surface relevant debt items during code review by querying the debt inventory for files touched in a pull request. | PR changed-files list -> filter `debt_inventory.json` by `file_path` |
-| `engineering/observability-designer` | Map infrastructure debt items (missing monitoring, env inconsistencies) to observability gaps identified by the observability skill. | Dashboard `category_distribution` -> observability gap analysis |
-| `engineering/migration-architect` | Use the prioritized backlog to scope and sequence large-scale migration efforts, especially for architecture-category debt rated as planned initiatives. | Prioritizer `sprint_allocation` -> migration planning timeline |
+| Skill | Use for |
+|-------|---------|
+| `engineering/dependency-auditor` | CVE and outdated-dependency findings to merge into the inventory |
+| `engineering/ci-cd-pipeline-builder` | Gate builds on `summary.health_score` or new critical items |
+
+## Anti-Patterns
+
+### Counting Items Instead of Interest
+**Mistake:** Reporting "we have 412 debt items" and prioritising by count per module.
+**Why it happens:** Counts are what scanners produce.
+**Instead:** Rank by interest: debt in code touched every sprint costs far more than debt in a file nobody opens. Weight by change frequency (for example `git log --since=6.months --name-only`).
+
+### A Debt Sprint Every Quarter
+**Mistake:** Saving all debt work for a dedicated cleanup sprint.
+**Why it happens:** It is easy to negotiate once.
+**Instead:** Reserve a fixed share of every sprint (the prioritizer's allocation) and fix debt where feature work already touches the code.
+
+### Dashboards Without a Decision
+**Mistake:** Sending executives a health trend with no ask.
+**Why it happens:** The dashboard looks like the deliverable.
+**Instead:** Lead with the decision: what to fund, what it unblocks, and what happens to delivery speed if nothing changes.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/debt_scanner.py` | Codebase scan to a debt inventory with health score |
+| `scripts/debt_prioritizer.py` | Cost-of-delay, WSJF or RICE ranking and sprint allocation |
+| `scripts/debt_dashboard.py` | Trends, velocity and forecasts across snapshots |
+| `assets/sample_codebase/` | Three-file codebase with planted debt |
+| `assets/sample_debt_inventory.json`, `historical_debt_*.json` | Inventory and snapshots for the prioritizer and dashboard |
+| `expected_outputs/*.json` | Reference outputs for the samples |
+| `references/*.md` | Methodology, tool reference, dashboards, taxonomy, prioritization, communication templates, quadrant and roadmap |

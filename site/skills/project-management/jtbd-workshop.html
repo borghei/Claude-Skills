@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jtbd Workshop - Claude Skills</title>
-  <meta name="description" content="Run a full Jobs-To-Be-Done discovery workshop with switch interviews, forces-of-progress mapping, ODI outcome scoring, and opportunity statements across 2hr, 4hr, and 8hr formats.">
+  <meta name="description" content="Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of progress, scored outcome statements. Use when you need to know why customers switch, or to ground strategy in job">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/jtbd-workshop.html">
   <meta property="og:title" content="Jtbd Workshop - Claude Skills">
-  <meta property="og:description" content="Run a full Jobs-To-Be-Done discovery workshop with switch interviews, forces-of-progress mapping, ODI outcome scoring, and opportunity statements across 2hr, 4hr, and 8hr formats.">
+  <meta property="og:description" content="Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of progress, scored outcome statements. Use when you need to know why customers switch, or to ground strategy in job">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/jtbd-workshop.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Jtbd Workshop", "description": "Run a full Jobs-To-Be-Done discovery workshop with switch interviews, forces-of-progress mapping, ODI outcome scoring, and opportunity statements across 2hr, 4hr, and 8hr formats.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/jtbd-workshop.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Jtbd Workshop", "description": "Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of progress, scored outcome statements. Use when you need to know why customers switch, or to ground strategy in jobs before writing PRDs.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/jtbd-workshop.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Jtbd Workshop</h1>
-    <p class="page-subtitle">Run a full Jobs-To-Be-Done discovery workshop with switch interviews, forces-of-progress mapping, ODI outcome scoring, and opportunity statements across 2hr, 4hr, and 8hr formats.</p>
+    <p class="page-subtitle">Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of progress, scored outcome statements. Use when you need to know why customers switch, or to ground strategy in jobs before writing PRDs.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">jobs-to-be-done</span><span class="tag">switch-interviews</span><span class="tag">odi</span><span class="tag">workshop</span><span class="tag">discovery</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Jtbd Workshop (Project Management domain).
 
-Run a full Jobs-To-Be-Done discovery workshop with switch interviews, forces-of-progress mapping, ODI outcome scoring, and opportunity statements across 2hr, 4hr, and 8hr formats.
+Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of progress, scored outcome statements. Use when you need to know why customers switch, or to ground strategy in jobs before writing PRDs.
 
 Run a Jobs-To-Be-Done (JTBD) workshop end-to-end. This skill is the workshop facilitation companion to the `execution/job-stories/` skill (the *writing format* for backlog stories). Where `job-stories/` produces When/Want/So statements for individual backlog items, this skill produces the *upstream 
 
@@ -420,7 +420,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Jtbd Workshop (Project Management domain).
 
-Run a full Jobs-To-Be-Done discovery workshop with switch interviews, forces-of-progress mapping, ODI outcome scoring, and opportunity statements across 2hr, 4hr, and 8hr formats.
+Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of progress, scored outcome statements. Use when you need to know why customers switch, or to ground strategy in jobs before writing PRDs.
 
 Run a Jobs-To-Be-Done (JTBD) workshop end-to-end. This skill is the workshop facilitation companion to the `execution/job-stories/` skill (the *writing format* for backlog stories). Where `job-stories/` produces When/Want/So statements for individual backlog items, this skill produces the *upstream 
 
@@ -461,7 +461,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Run a Jobs-To-Be-Done (JTBD) workshop end-to-end. This skill is the workshop facilitation companion to the `execution/job-stories/` skill (the *writing format* for backlog stories). Where `job-stories/` produces When/Want/So statements for individual backlog items, this skill produces the *upstream discovery output* -- the job hierarchy, the forces driving switching behavior, and the desired-outcome statements that anchor product strategy.
 
-The workshop synthesizes four JTBD schools: Christensen&#x27;s *milkshake* hiring frame, Ulwick&#x27;s Outcome-Driven Innovation (ODI) with importance/satisfaction scoring, Klement&#x27;s situation-motivation-outcome canvas (the *job story* format), and Moesta&#x27;s switch interview method surfacing the four forces of progress (push, pull, anxiety, habit). A well-run workshop produces three artifacts: a ranked job hierarchy with measurable outcome statements, a forces-of-progress map, and a prioritized opportunity list ready to feed PRDs, OKRs, or roadmap themes.
+It combines switch interviews (four forces: push, pull, anxiety, habit) with importance/satisfaction outcome scoring; the theory is in `references/jtbd-method-guide.md`. A well-run workshop produces three artifacts: a ranked job hierarchy with measurable outcome statements, a forces-of-progress map, and a prioritized opportunity list ready to feed PRDs, OKRs, or roadmap themes.
 
 ## Core Capabilities
 
@@ -492,11 +492,14 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+The workflow, start to finish:
+
 1. Pick a format (2h validation / 4h half-day / 8h full-day) by stakes and availability; define the segment.
 2. Recruit 6-12 recent (90-day) switchers and run pre-work switch interviews.
 3. Facilitate the agenda; build the job hierarchy, score outcomes (Importance x Satisfaction), fill the forces canvas.
 4. Convert top-scored outcomes into opportunity statements (`&lt;verb&gt; &lt;object&gt; &lt;context&gt;`) with named owners.
 5. Hand off to `identify-assumptions/`, `brainstorm-experiments/`, or `create-prd/`. Revisit quarterly.
+6. Verify that every top outcome statement is scored by real switchers, each force on the canvas cites an interview, and each opportunity has an owner before calling it done.
 
 ## Anti-Patterns
 
@@ -535,19 +538,16 @@ Workshop templates live in `assets/`: `workshop_agenda_2hr.md`, `workshop_agenda
 
 **Caveats:** switch interviews require *recent* (90-day) switchers; the 2-hour format is for validation, not primary discovery; ODI scoring is sensitive to who is in the room (internal scores are hypotheses, customer-derived scores are truth); a workshop without customer voice produces team-aligned fiction.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/customer-interview-script/` | Receives from | Switch interviews use the base interview script structure |
-| `discovery/interview-synthesis/` | Receives from | Synthesized themes seed the snippet wall on workshop day |
-| `discovery/identify-assumptions/` | Feeds into | Top outcomes become assumptions to test |
-| `discovery/brainstorm-experiments/` | Feeds into | Forces-of-progress weaknesses become experiment hypotheses |
-| `discovery/value-proposition-canvas/` | Feeds into | Jobs, pains, gains populate the Customer Profile |
-| `execution/job-stories/` | Feeds into | Job + outcome decomposition becomes When/Want/So backlog stories |
-| `execution/create-prd/` | Feeds into | Job hierarchy populates PRD Section 5; outcomes populate Section 6 |
-| `execution/outcome-roadmap/` | Feeds into | Top desired outcomes become roadmap themes |
-| `execution/north-star-metric/` | Feeds into | The highest-priority outcome often becomes the input metric tree root |
+| File | Purpose |
+|------|---------|
+| `assets/workshop_agenda_2hr.md`, `assets/workshop_agenda_4hr.md`, `assets/workshop_agenda_8hr.md` | Agendas by format |
+| `assets/pre_work_email.md`, `assets/switch_interview_script.md`, `assets/forces_of_progress_canvas.md` | Pre-work, interview script, forces canvas |
+| `references/facilitation-playbook.md`, `references/jtbd-method-guide.md`, `references/red-flags.md` | Facilitation, method, failure modes |
+| `examples/calendar-tool-4hr-workshop-output.md` | Worked 4-hour workshop output |
+
+Use `value-proposition-canvas` once the jobs are known and you are designing the offer against them.
 
 ---
 
@@ -575,7 +575,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Jtbd Workshop&quot;**
-   - Description: &quot;Run a full Jobs-To-Be-Done discovery workshop with switch interviews, forces-of-progress mapping, ODI outcome scoring, and opportunity statements across 2hr, 4hr, and 8hr formats.&quot;
+   - Description: &quot;Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of progress, scored outcome statements. Use when you need to know why customers switch, or to ground strategy in jobs before writing PRDs.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -604,7 +604,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Run a Jobs-To-Be-Done (JTBD) workshop end-to-end. This skill is the workshop facilitation companion to the `execution/job-stories/` skill (the *writing format* for backlog stories). Where `job-stories/` produces When/Want/So statements for individual backlog items, this skill produces the *upstream discovery output* -- the job hierarchy, the forces driving switching behavior, and the desired-outcome statements that anchor product strategy.
 
-The workshop synthesizes four JTBD schools: Christensen&#x27;s *milkshake* hiring frame, Ulwick&#x27;s Outcome-Driven Innovation (ODI) with importance/satisfaction scoring, Klement&#x27;s situation-motivation-outcome canvas (the *job story* format), and Moesta&#x27;s switch interview method surfacing the four forces of progress (push, pull, anxiety, habit). A well-run workshop produces three artifacts: a ranked job hierarchy with measurable outcome statements, a forces-of-progress map, and a prioritized opportunity list ready to feed PRDs, OKRs, or roadmap themes.
+It combines switch interviews (four forces: push, pull, anxiety, habit) with importance/satisfaction outcome scoring; the theory is in `references/jtbd-method-guide.md`. A well-run workshop produces three artifacts: a ranked job hierarchy with measurable outcome statements, a forces-of-progress map, and a prioritized opportunity list ready to feed PRDs, OKRs, or roadmap themes.
 
 ## Core Capabilities
 
@@ -635,11 +635,14 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+The workflow, start to finish:
+
 1. Pick a format (2h validation / 4h half-day / 8h full-day) by stakes and availability; define the segment.
 2. Recruit 6-12 recent (90-day) switchers and run pre-work switch interviews.
 3. Facilitate the agenda; build the job hierarchy, score outcomes (Importance x Satisfaction), fill the forces canvas.
 4. Convert top-scored outcomes into opportunity statements (`&lt;verb&gt; &lt;object&gt; &lt;context&gt;`) with named owners.
 5. Hand off to `identify-assumptions/`, `brainstorm-experiments/`, or `create-prd/`. Revisit quarterly.
+6. Verify that every top outcome statement is scored by real switchers, each force on the canvas cites an interview, and each opportunity has an owner before calling it done.
 
 ## Anti-Patterns
 
@@ -678,19 +681,16 @@ Workshop templates live in `assets/`: `workshop_agenda_2hr.md`, `workshop_agenda
 
 **Caveats:** switch interviews require *recent* (90-day) switchers; the 2-hour format is for validation, not primary discovery; ODI scoring is sensitive to who is in the room (internal scores are hypotheses, customer-derived scores are truth); a workshop without customer voice produces team-aligned fiction.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/customer-interview-script/` | Receives from | Switch interviews use the base interview script structure |
-| `discovery/interview-synthesis/` | Receives from | Synthesized themes seed the snippet wall on workshop day |
-| `discovery/identify-assumptions/` | Feeds into | Top outcomes become assumptions to test |
-| `discovery/brainstorm-experiments/` | Feeds into | Forces-of-progress weaknesses become experiment hypotheses |
-| `discovery/value-proposition-canvas/` | Feeds into | Jobs, pains, gains populate the Customer Profile |
-| `execution/job-stories/` | Feeds into | Job + outcome decomposition becomes When/Want/So backlog stories |
-| `execution/create-prd/` | Feeds into | Job hierarchy populates PRD Section 5; outcomes populate Section 6 |
-| `execution/outcome-roadmap/` | Feeds into | Top desired outcomes become roadmap themes |
-| `execution/north-star-metric/` | Feeds into | The highest-priority outcome often becomes the input metric tree root |
+| File | Purpose |
+|------|---------|
+| `assets/workshop_agenda_2hr.md`, `assets/workshop_agenda_4hr.md`, `assets/workshop_agenda_8hr.md` | Agendas by format |
+| `assets/pre_work_email.md`, `assets/switch_interview_script.md`, `assets/forces_of_progress_canvas.md` | Pre-work, interview script, forces canvas |
+| `references/facilitation-playbook.md`, `references/jtbd-method-guide.md`, `references/red-flags.md` | Facilitation, method, failure modes |
+| `examples/calendar-tool-4hr-workshop-output.md` | Worked 4-hour workshop output |
+
+Use `value-proposition-canvas` once the jobs are known and you are designing the offer against them.
 
 ---
 
@@ -718,7 +718,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Jtbd Workshop&quot;**
-   - Description: &quot;Run a full Jobs-To-Be-Done discovery workshop with switch interviews, forces-of-progress mapping, ODI outcome scoring, and opportunity statements across 2hr, 4hr, and 8hr formats.&quot;
+   - Description: &quot;Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of progress, scored outcome statements. Use when you need to know why customers switch, or to ground strategy in jobs before writing PRDs.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -776,12 +776,15 @@ cp -r Claude-Skills/project-management/discovery/jtbd-workshop your-project/
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/discovery/jtbd-workshop</code></pre>
 </div>
   
-  <h2>Quick Start</h2>1. Pick a format (2h validation / 4h half-day / 8h full-day) by stakes and availability; define the segment.
+  <h2>Quick Start</h2>The workflow, start to finish:
+
+1. Pick a format (2h validation / 4h half-day / 8h full-day) by stakes and availability; define the segment.
 2. Recruit 6-12 recent (90-day) switchers and run pre-work switch interviews.
 3. Facilitate the agenda; build the job hierarchy, score outcomes (Importance x Satisfaction), fill the forces canvas.
 4. Convert top-scored outcomes into opportunity statements (`<verb> <object> <context>`) with named owners.
 5. Hand off to `identify-assumptions/`, `brainstorm-experiments/`, or `create-prd/`. Revisit quarterly.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+6. Verify that every top outcome statement is scored by real switchers, each force on the canvas cites an interview, and each opportunity has an owner before calling it done.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/jtbd-workshop/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

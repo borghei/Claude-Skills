@@ -260,6 +260,10 @@ TF_BASIC_ROLE_RE = re.compile(r"role\s*=\s*\"roles/(?:owner|editor)\"", re.MULTI
 TF_ALL_USERS_RE = re.compile(r"member\s*=\s*\"allUsers\"|members\s*=\s*\[\s*\"allUsers\"", re.MULTILINE)
 TF_PUBLIC_IP_RE = re.compile(r"public_ip_address_configuration|ipv4_enabled\s*=\s*true", re.MULTILINE)
 TF_SA_KEY_RE = re.compile(r"resource\s+\"google_service_account_key\"", re.MULTILINE)
+# An access_config block inside network_interface gives a VM an external IP.
+TF_VM_EXTERNAL_IP_RE = re.compile(r"network_interface\s*\{[^}]*?access_config\s*\{", re.DOTALL)
+TF_RULES = ["TF001 default network", "TF002 basic roles (owner/editor)", "TF003 allUsers grants",
+            "TF004 public IP on Cloud SQL", "TF005 service account keys", "TF006 VM external IP"]
 
 
 def scan_tf_file(path: str, text: str) -> list[Finding]:
@@ -289,6 +293,11 @@ def scan_tf_file(path: str, text: str) -> list[Finding]:
         findings.append(Finding("critical", "TF005", "Service Account key resource created",
                                 f"{path}:{ln}", m.group(0),
                                 "Use Workload Identity Federation instead of SA keys."))
+    for m in TF_VM_EXTERNAL_IP_RE.finditer(text):
+        ln = text.count("\n", 0, m.start()) + 1
+        findings.append(Finding("warning", "TF006", "VM with external IP",
+                                f"{path}:{ln}", "network_interface { access_config { ... } }",
+                                "Drop access_config; reach the VM through IAP TCP forwarding or a load balancer."))
     return findings
 
 
@@ -310,6 +319,9 @@ def render_markdown(findings: list[Finding], min_sev: str) -> str:
     rel = [f for f in findings if SEVERITY_LEVEL[f.severity] >= SEVERITY_LEVEL[min_sev]]
     out = ["# GCP Architecture Validation Report", ""]
     out.append(f"_Total findings (>= {min_sev}): {len(rel)}_")
+    out.append("")
+    out.append("_Terraform rules checked (text patterns, not a plan evaluation): " + "; ".join(TF_RULES)
+               + ". A clean result covers only these rules._")
     out.append("")
     by_sev: dict[str, list[Finding]] = {}
     for f in rel:
@@ -347,13 +359,14 @@ def main() -> int:
     for f in tf_files:
         try:
             findings.extend(scan_tf_file(f, Path(f).read_text()))
-        except OSError:
-            continue
+        except OSError as e:
+            print(f"error: cannot read {f}: {e}", file=sys.stderr)
+            return 2
     if not args.workload_config and not tf_files:
         print("error: provide --workload-config or --terraform", file=sys.stderr)
         return 2
     if args.format == "json":
-        out = json.dumps({"findings": [asdict(f) for f in findings]}, indent=2)
+        out = json.dumps({"findings": [asdict(f) for f in findings], "terraform_rules_checked": TF_RULES}, indent=2)
     else:
         out = render_markdown(findings, args.severity)
     if args.output:
@@ -361,7 +374,7 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    return 1 if any(f.severity == "critical" for f in findings) else 0
 
 
 if __name__ == "__main__":

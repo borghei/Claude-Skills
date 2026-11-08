@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: release-management
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   frameworks: conventional-commits, keep-a-changelog, semantic-versioning
   tags:
     - changelog
@@ -54,15 +54,65 @@ Before generating the changelog, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Quick Start Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `commit_parser.py` | Parse `git log` (with `---COMMIT_END---` delimiters) into structured changelog entries | `git log --pretty=format:'%H%n%s%n%b%n---COMMIT_END---' --no-merges \| python scripts/commit_parser.py --json` |
-| `breaking_change_detector.py` | Scan commit messages/diffs for breaking-change indicators | `python scripts/breaking_change_detector.py -f gitlog.txt --severity high` |
-| `changelog_formatter.py` | Format parsed commits into Keep a Changelog or GitHub markdown | `python scripts/changelog_formatter.py -f parsed.json --version 1.4.0 --format keepachangelog` |
+The parser reads `git log` text with `---COMMIT_END---` after each commit and writes JSON; the
+formatter reads that JSON (never raw `git log`). Pipe one into the other:
 
-## References
+```bash
+# Real history: everything since the last tag
+git log v1.3.2..HEAD --pretty=format:'%H%n%s%n%b%n---COMMIT_END---' --no-merges \
+  | python scripts/commit_parser.py --json \
+  | python scripts/changelog_formatter.py --auto-version 1.3.2 --repo-url https://github.com/org/repo
+
+# Bundled sample (7 commits: one breaking feat, feat, fix, perf, docs, chore, one non-conventional)
+python scripts/commit_parser.py -f assets/sample_commit_log.txt --json \
+  | python scripts/changelog_formatter.py --version 2.0.0 --date 2026-11-01
+python scripts/breaking_change_detector.py -f assets/sample_commit_log.txt --severity high
+```
+
+## Tools Overview
+
+| Tool | Purpose | Key flags |
+|------|---------|-----------|
+| `commit_parser.py` | Conventional Commit parser: type, scope, breaking marker, footers; skips non-conventional subjects and counts them | `-f FILE` or stdin, `--json`, `--scope api,ui`, `--types feat,fix`, `--user-facing` |
+| `changelog_formatter.py` | Keep a Changelog or GitHub release notes, BREAKING first; computes the next version from commit types | `--version` or `--auto-version BASE`, `--date` (default today), `--format keepachangelog\|github`, `--repo-url`, `--unreleased` |
+| `breaking_change_detector.py` | Confirmed (`!`, `BREAKING CHANGE:`) and suspected (keyword, optional diff) breaking changes | `-f FILE`, `--diff-file`, `--severity`, `--confirmed-only`, `--json` |
+
+**Exit codes (all three):** `0` output written; `2` missing or unreadable file, no input on stdin,
+or (formatter) input that is not `commit_parser.py --json` output. None of them gate on content:
+read the "Skipped (invalid)" count and the breaking-change report.
+
+**Done when:**
+1. Every commit in the range is either in the changelog or deliberately skipped (docs, chore, non-conventional).
+2. Each breaking change has a migration note a user can follow, not just the commit subject.
+3. The version bump matches the highest-impact change (breaking means major).
+4. Someone who did not write the code can read the entries and understand the user impact.
+
+## Anti-Patterns
+
+### Commit log as changelog
+**Mistake:** Publishing every commit subject, including chores, merges and "fix typo".
+**Why it happens:** It is the zero-effort output.
+**Instead:** Use `--user-facing` or the formatter's sections, and rewrite entries in terms of what users notice.
+
+### Silent breaking changes
+**Mistake:** A breaking API change ships as a minor release because the commit lacked `!` or a `BREAKING CHANGE:` footer.
+**Why it happens:** The author did not think of it as breaking.
+**Instead:** Run `breaking_change_detector.py` and review its suspected list before choosing the version.
+
+### Ignoring skipped commits
+**Mistake:** Not looking at the parser's "Skipped (invalid)" count, so non-conventional commits vanish from the notes.
+**Why it happens:** The output looks complete.
+**Instead:** Review skipped commits each release and add a commit-lint hook so the count trends to zero.
+
+## Files
+
+- `scripts/commit_parser.py`, `scripts/changelog_formatter.py`, `scripts/breaking_change_detector.py` — the three CLIs above.
+- `assets/sample_commit_log.txt` — seven-commit sample in the delimiter format.
+- `references/` — commit grammar and rendering, generation and linting, quality checklist.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -79,18 +129,13 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Enforcing commit message standards via pre-commit hooks and CI linting
 
 **This skill does NOT cover:**
-- Actual release publishing or deployment pipeline execution — see `engineering/ci-cd-pipeline-design`
-- Git tag management, branch strategies, or merge workflows — see `engineering/git-workflow-automation`
+- Actual release publishing or deployment pipeline execution — see `engineering/ci-cd-pipeline-builder`
+- Git tag management, branch strategies, or merge workflows — see `standards/git/git-workflow-standards.md`
 - Writing or improving commit messages themselves — see `standards/git/git-workflow-standards.md`
 - Coordinated multi-package versioning with tools like Changesets or Lerna — referenced in monorepo strategy but not implemented here
 
-## Integration Points
+## See Also
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `engineering/ci-cd-pipeline-design` | Changelog generation runs as a CI stage before release publishing | Parsed commits and rendered changelog feed into the release pipeline as artifacts |
-| `engineering/git-workflow-automation` | Commit linting hooks enforce format before commits reach the changelog generator | Pre-commit validation ensures only parseable commits enter the git history |
-| `engineering/code-review-automation` | PR checks verify commit messages conform to Conventional Commits before merge | Linting results gate PR approval, preventing unparseable commits from reaching main |
-| `engineering/api-versioning-strategy` | Breaking change detection aligns API version bumps with changelog major releases | `BREAKING CHANGE` commits trigger both changelog entries and API version increments |
-| `project-management/release-management` | Release planning uses generated changelogs for stakeholder communication | Rendered release notes flow into release checklists and stakeholder announcements |
-| `standards/git/git-workflow-standards.md` | Commit format standards define the grammar this skill parses | Standard definitions are the source of truth for the commit regex pattern |
+- `engineering/ci-cd-pipeline-builder` — run the parse and format steps in the release pipeline.
+- `engineering/pr-description-writer` — user-facing summaries at PR time that feed good changelog entries.
+- `standards/git/git-workflow-standards.md` — the commit format this skill parses.

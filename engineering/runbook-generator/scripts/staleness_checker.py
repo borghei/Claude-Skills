@@ -26,6 +26,8 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 
 
+AS_OF = None  # set by --as-of; None means today
+
 DEFAULT_THRESHOLDS = {
     "stale_days": 90,
     "warning_days": 60,
@@ -146,7 +148,7 @@ def check_config_drift(content, repo_root, verified_date):
 def check_runbook_staleness(filepath, thresholds, repo_root=None, today=None):
     """Check staleness of a single runbook file."""
     if today is None:
-        today = date.today()
+        today = AS_OF or date.today()
 
     filepath = str(filepath)
     result = {
@@ -235,7 +237,7 @@ def load_config(config_path):
 def format_human_output(results, thresholds):
     """Format staleness results for human consumption."""
     lines = []
-    lines.append(f"Staleness Checker Report — {date.today().isoformat()}")
+    lines.append(f"Staleness Checker Report — {(AS_OF or date.today()).isoformat()}")
     lines.append(f"Thresholds: warning={thresholds['warning_days']}d, "
                  f"stale={thresholds['stale_days']}d, "
                  f"critical={thresholds['critical_days']}d")
@@ -328,8 +330,15 @@ def main():
     parser.add_argument("--config", "-c", help="Path to JSON config file with thresholds")
     parser.add_argument("--repo-root", "-r", help="Repository root for resolving config file paths")
     parser.add_argument("--json", action="store_true", help="Output results as JSON")
+    parser.add_argument("--as-of", help="Measure age from this date (YYYY-MM-DD) instead of today")
 
     args = parser.parse_args()
+    global AS_OF
+    if args.as_of:
+        AS_OF = parse_date(args.as_of)
+        if AS_OF is None:
+            print(f"Error: --as-of must be YYYY-MM-DD, got {args.as_of!r}", file=sys.stderr)
+            sys.exit(2)
 
     if not args.paths:
         parser.print_help()
@@ -358,7 +367,8 @@ def main():
         elif p.is_file():
             files.append(p)
         else:
-            print(f"Warning: Path not found — {path_str}", file=sys.stderr)
+            print(f"Error: Path not found — {path_str}", file=sys.stderr)
+            sys.exit(2)
 
     if not files:
         print("Error: No markdown files found.", file=sys.stderr)

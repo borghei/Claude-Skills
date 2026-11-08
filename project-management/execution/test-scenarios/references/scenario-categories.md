@@ -302,3 +302,44 @@ Map scenarios to priorities:
 - 3 happy / 8 edge / 8 error / 1 empty / 4 concurrent / 3 a11y / 10 security
 
 Adjust for your risk profile.
+
+## Appendix: recommended counts, risk weighting, manual vs automated
+
+### Recommended scenario counts (what `test_scenario_generator.py` checks)
+
+Generated from the script's `RECOMMENDED` table; localization and cross-platform are situational. Starting defaults, adjusted for the feature's risk.
+
+| Feature type | happy_path | edge | error | empty | concurrent | a11y | security | performance |
+|---|---|---|---|---|---|---|---|---|
+| form | 1-3 | 4-8 | 4-6 | 1-2 | 0-2 | 3-5 | 3-5 | 0-2 |
+| browse | 2-3 | 3-5 | 2-3 | 2-3 | 0-1 | 3-4 | 2-3 | 1-3 |
+| realtime | 2-4 | 4-6 | 4-6 | 1-2 | 4-6 | 3-4 | 3-5 | 1-3 |
+| upload | 1-2 | 6-10 | 4-6 | 1-1 | 1-2 | 2-3 | 5-10 | 1-3 |
+| payment | 2-3 | 6-10 | 8-12 | 1-2 | 4-6 | 3-4 | 8-12 | 1-3 |
+| bulk | 1-2 | 4-6 | 4-6 | 1-1 | 2-4 | 2-3 | 3-5 | 2-4 |
+| generic | 1-3 | 3-5 | 3-5 | 1-2 | 0-2 | 3-4 | 2-4 | 0-2 |
+
+### Risk-weighted scenario selection
+
+Not all scenarios need full QA coverage. Apply:
+- **Happy path:** always test
+- **Edge cases:** test those that matter (likelihood × severity)
+- **Error handling:** test all paths that user can recover from
+- **Empty state:** always test (first impression!)
+- **Concurrent:** test for data-integrity-critical features
+- **Accessibility:** baseline coverage on all UI; full coverage on user-facing
+- **Security:** scale with sensitivity (full coverage on auth/payment)
+
+### Manual vs automated
+
+| Scenario type | Default |
+|----------------|---------|
+| Happy path | Automated (E2E or integration) |
+| Edge cases (input validation) | Unit tests |
+| Error handling | Mix (mocked errors in unit; real in integration) |
+| Empty state | Visual regression + manual |
+| Concurrent | Hard — usually manual + targeted integration |
+| Accessibility | Automated (axe-core) + manual screen-reader |
+| Security | SAST + DAST + manual review for critical paths |
+| Performance | Automated load tests |
+| Localization | Pseudo-localization + manual spot-check |

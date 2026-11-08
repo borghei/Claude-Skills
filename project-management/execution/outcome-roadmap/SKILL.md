@@ -1,17 +1,17 @@
 ---
 name: outcome-roadmap
 description: >
-  Transform output-based feature lists into outcome-driven Now/Next/Later
-  roadmaps using the "so what?" technique. Use when converting a feature-list
-  roadmap to outcomes, communicating product strategy, or running quarterly
+  Turn a feature-list roadmap into outcome statements placed in Now/Next/Later,
+  and check each has a measure. Use when converting a feature-list
+  roadmap, reviewing a roadmap before it goes to leadership, or quarterly
   planning.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: roadmap_transformer.py
   tech-stack: outcome-roadmap, product-strategy, now-next-later
   tags:
@@ -43,22 +43,30 @@ The agent transforms output-based roadmaps ("build feature X") into outcome-driv
 
 Before transforming the roadmap, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- **Customer segment + business impact per item:** fills the "Enable [segment] to [outcome] so that [impact]" statement; without it the tool only emits placeholder templates.
-- **Target quarter per initiative:** drives Now/Next/Later horizon placement and the detail/commitment level.
-- **Initiative type:** feature / improvement / infrastructure drives the strategic-question and metric suggestions.
-- **Success metric per Now/Next item:** the primary/secondary/counter-metrics; Later items intentionally stay metric-light to avoid false precision.
+- **Customer segment + business impact per item:** the raw material for "Enable [segment] to [outcome] so that [impact]"; without it the outcome is a guess.
+- **Target quarter per initiative and the current quarter:** drive Now/Next/Later placement and the commitment level.
+- **Success metric with a baseline per Now/Next item:** an outcome nobody can measure is still an output.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. **Write the outcomes yourself.** For each initiative, run the "so what?" chain (feature → what changes for the user → which number moves → what the business gets) until you reach a named segment, a job and a number. State it as "Enable [segment] to [outcome] so that [impact]". The tool cannot write these; it checks them.
+2. **Add the measures**: a metric with baseline and target for Now and Next items, a counter-metric for Now items. Later items stay metric-light on purpose; false precision there hurts credibility.
+3. **Check the roadmap:**
 
 ```bash
-python scripts/roadmap_transformer.py --input roadmap.json            # transform a roadmap
-python scripts/roadmap_transformer.py --input roadmap.json --format markdown
-python scripts/roadmap_transformer.py --demo                          # run on built-in demo data
+python3 project-management/execution/outcome-roadmap/scripts/roadmap_transformer.py \
+  --input project-management/execution/outcome-roadmap/assets/sample_roadmap_clean.json --as-of "Q3 2026"
 ```
 
-Each input initiative needs `title`, `description`, `quarter` (format "Q[1-4] YYYY"), and `type` (`feature`/`improvement`/`infrastructure`). The tool emits outcome-statement *templates* — fill the placeholders with real customer and business data.
+4. **Fix every error and re-run.** Done when the tool exits 0 and three outcome statements read aloud could not be swapped between items.
+
+**What the tool checks:** horizon from quarter vs `--as-of` (default: earliest quarter in the file, so samples read the same on any day; pass the current quarter for a live roadmap); more than 3 Now items; Now/Next items with no outcome, an outcome that starts with an output verb (build, launch, migrate...), no "so that", no metric, or a metric without baseline or target; Now items with no counter-metric; quarters already past. Items without an outcome get the "so what?" prompts for their type.
+
+Input per initiative: `title`, `description`, `quarter` ("Q3 2026"), `type` (feature, improvement, infrastructure), and the fields you write: `outcome`, `metric {name, baseline, target}`, `counter_metric`. Flags: `--input F` or `--demo`, `--as-of`, `--format text|json|markdown`, `--output`.
+
+**Exit codes:** 0 no errors, 1 at least one error (`assets/sample_roadmap.json` and `--demo` exit 1 by design: a feature list with 4 Now items), 2 missing file, invalid JSON, wrong shape or bad `--as-of`.
 
 ## Anti-Patterns
 
@@ -70,11 +78,11 @@ Each input initiative needs `title`, `description`, `quarter` (format "Q[1-4] YY
 ### Too many Now items
 **Mistake:** The Now column lists 8 initiatives.
 **Why it happens:** Everything feels urgent, and moving an item to Next feels like saying no to a stakeholder.
-**Instead:** Cap Now at 2-3 items, sized to what the team can ship in 6-8 weeks. Move the rest to Next. More than 3 Now items means the commitment level on the roadmap is false.
+**Instead:** [RECOMMENDED] Cap Now at 2-3 items, sized to what the team can ship in 6-8 weeks. Move the rest to Next. More than 3 Now items means the commitment level on the roadmap is false.
 
 ### Interchangeable outcome statements
 **Mistake:** "Enable users to be more productive, so we grow revenue." "Enable customers to succeed, so they retain better." The template is filled in mechanically.
-**Why it happens:** `roadmap_transformer.py` emits outcome templates, and placeholders are easy to fill with generic words.
+**Why it happens:** The "Enable ... so that ..." formula is easy to fill with generic words, and a structural check passes them.
 **Instead:** Each outcome names a specific segment, a specific job and a number. Read three statements aloud. If they could be swapped between items without anyone noticing, push the "so what?" chain 2-3 levels deeper.
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
@@ -84,15 +92,24 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - **[references/outcome-roadmap-workflow.md](references/outcome-roadmap-workflow.md)** — read this when transforming a roadmap: the 6-step workflow with validation checkpoints, the "so what?" technique, Now/Next/Later detail levels, a full worked example, why output roadmaps fail, output structure, tool flags, troubleshooting, and success criteria.
 - **[references/outcome-roadmap-guide.md](references/outcome-roadmap-guide.md)** — read this for the deeper guide: output-vs-outcome comparison, outcome formulas, and stakeholder communication strategies.
 - **[references/red-flags.md](references/red-flags.md)** — read this to spot the common ways outcome roadmaps go wrong (false precision, mechanical templates, too many Now items) before sharing.
-- `assets/outcome_roadmap_template.md` — roadmap document template with Now/Next/Later sections.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/roadmap_transformer.py` | Horizon placement and outcome-readiness check |
+| `assets/sample_roadmap_clean.json` | Outcome roadmap that passes (exit 0) |
+| `assets/sample_roadmap.json` | Output-style feature list (exit 1) |
+| `assets/outcome_roadmap_template.md` | Roadmap document template |
+| `examples/output-to-outcome-transformation.md` | Worked transformation |
 
 ## Scope & Limitations
 
-**In Scope:** transforming output-based feature lists into outcome-driven items, Now/Next/Later classification by quarter-to-current-date distance, "so what?" chain generation, strategic-question and metric suggestions by initiative type, markdown/text/JSON report output grouped by horizon.
+**In Scope:** turning output-based feature lists into outcome-driven items, Now/Next/Later placement by quarter, "so what?" prompts by initiative type, and a structural check of outcomes and measures.
 
 **Out of Scope:** feature prioritization or scoring (`execution/prioritization-frameworks/`), sprint-level planning or capacity allocation (`scrum-master/`), product strategy or vision definition (roadmaps communicate strategy, they don't create it), cross-team dependency management (`program-manager/`).
 
-**Important Caveats:** outcome roadmaps require a cultural shift — teams used to date-driven lists need coaching on commitment levels; the tool generates outcome-statement templates, not finished outcomes; Later items intentionally lack detailed metrics, and adding false precision undermines credibility.
+**Important Caveats:** outcome roadmaps require a cultural shift — teams used to date-driven lists need coaching on commitment levels; the tool checks outcome statements, it does not write them; Later items intentionally lack detailed metrics, and adding false precision undermines credibility.
 
 ## Integration Points
 

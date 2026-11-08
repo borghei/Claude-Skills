@@ -685,7 +685,7 @@ class E2ETestScaffolder:
                 print(f"  pages/{pom_filename}")
 
         # Generate config files if not exists
-        config_path = Path('playwright.config.ts')
+        config_path = self.output_path / 'playwright.config.ts'
         if not config_path.exists():
             config_content = config_generator.generate_config()
             config_path.write_text(config_content, encoding='utf-8')
@@ -812,9 +812,9 @@ Examples:
             print(json.dumps(results, indent=2))
 
     except Exception as e:
-        print(f"Error: {e}")
-        sys.exit(1)
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

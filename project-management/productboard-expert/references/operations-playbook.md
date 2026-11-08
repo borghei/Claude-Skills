@@ -170,7 +170,7 @@ API patterns are detailed in `references/productboard-api-patterns.md`.
 
 ## API Patterns
 
-Productboard's REST API is **Public API v2** at `https://api.productboard.com/v2` (as of September 2026). v2 became generally available on 2026-04-09 and v1 — the un-prefixed paths called with an `X-Version: 1` header — was scheduled to sunset on 2026-07-08 ([changelog](https://developer.productboard.com/changelog/2026-04-09)). v2 needs no `X-Version` header. Authentication is via Bearer token (`Authorization: Bearer <token>`) plus `Accept: application/json`. API tokens are available on the Pro plan and higher.
+Productboard's REST API is **Public API v2** at `https://api.productboard.com/v2` (as of September 2026). v2 became generally available on 2026-04-09 and v1 — the un-prefixed paths called with an `X-Version: 1` header — was scheduled to sunset on 2026-07-08 per the provider's deprecation notice; confirm v1 is retired before relying on it ([changelog](https://developer.productboard.com/changelog/2026-04-09)). v2 needs no `X-Version` header. Authentication is via Bearer token (`Authorization: Bearer <token>`) plus `Accept: application/json`. API tokens are available on the Pro plan and higher.
 
 Full reference: https://developer.productboard.com/ — migration guide: https://developer.productboard.com/reference/migration-guide
 
@@ -374,7 +374,7 @@ List endpoints use cursor-based pagination: follow `links.next` (which carries a
 
 - Cache Workspace-level IDs (Component IDs, Custom Field UUIDs from `/v2/entities/configurations`, Status IDs). Looking them up by name on every call wastes rate-limit budget.
 - Use webhooks for event-driven workflows. Polling is expensive and slow.
-- Call the `/v2/...` paths only; v1 (`X-Version: 1`) was scheduled to sunset on 2026-07-08. Watch the developer changelog for additive v2 changes.
+- Call the `/v2/...` paths only; v1 (`X-Version: 1`) was scheduled to sunset on 2026-07-08 per the provider's deprecation notice; confirm v1 is retired before relying on it. Watch the developer changelog for additive v2 changes.
 - Implement idempotency for bulk-create operations (use external IDs to prevent duplicates on retry).
 
 ### Governance

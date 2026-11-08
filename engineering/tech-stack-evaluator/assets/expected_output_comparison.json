@@ -2,60 +2,77 @@
   "technologies": {
     "PostgreSQL": {
       "category_scores": {
-        "performance": 85.0,
-        "scalability": 90.0,
-        "developer_experience": 75.0,
-        "ecosystem": 95.0,
-        "learning_curve": 70.0,
-        "documentation": 90.0,
-        "community_support": 95.0,
-        "enterprise_readiness": 95.0
+        "performance": 85,
+        "scalability": 90,
+        "developer_experience": 75,
+        "ecosystem": 95,
+        "learning_curve": 70,
+        "documentation": 90,
+        "community_support": 95,
+        "enterprise_readiness": 95
       },
-      "weighted_total": 85.5,
-      "strengths": ["scalability", "ecosystem", "documentation", "community_support", "enterprise_readiness"],
-      "weaknesses": ["learning_curve"]
+      "weighted_total": 86.0,
+      "strengths": [
+        "performance",
+        "scalability",
+        "developer_experience",
+        "ecosystem",
+        "documentation",
+        "community_support",
+        "enterprise_readiness"
+      ],
+      "weaknesses": []
     },
     "MongoDB": {
       "category_scores": {
-        "performance": 80.0,
-        "scalability": 95.0,
-        "developer_experience": 85.0,
-        "ecosystem": 85.0,
-        "learning_curve": 80.0,
-        "documentation": 85.0,
-        "community_support": 85.0,
-        "enterprise_readiness": 75.0
+        "performance": 80,
+        "scalability": 95,
+        "developer_experience": 85,
+        "ecosystem": 85,
+        "learning_curve": 80,
+        "documentation": 85,
+        "community_support": 85,
+        "enterprise_readiness": 75
       },
-      "weighted_total": 84.5,
-      "strengths": ["scalability", "developer_experience", "learning_curve"],
+      "weighted_total": 85.0,
+      "strengths": [
+        "performance",
+        "scalability",
+        "developer_experience",
+        "ecosystem",
+        "learning_curve",
+        "documentation",
+        "community_support",
+        "enterprise_readiness"
+      ],
       "weaknesses": []
     }
   },
   "recommendation": "PostgreSQL",
-  "confidence": 52.0,
+  "confidence": 42.0,
   "decision_factors": [
     {
       "category": "performance",
       "importance": "20.0%",
       "best_performer": "PostgreSQL",
-      "score": 85.0
+      "score": 85
     },
     {
       "category": "scalability",
       "importance": "20.0%",
       "best_performer": "MongoDB",
-      "score": 95.0
+      "score": 95
     },
     {
       "category": "developer_experience",
       "importance": "15.0%",
       "best_performer": "MongoDB",
-      "score": 85.0
+      "score": 85
     }
   ],
   "comparison_matrix": [
     {
-      "category": "Performance",
+      "category": "performance",
       "weight": "20.0%",
       "scores": {
         "PostgreSQL": "85.0",
@@ -63,7 +80,7 @@
       }
     },
     {
-      "category": "Scalability",
+      "category": "scalability",
       "weight": "20.0%",
       "scores": {
         "PostgreSQL": "90.0",
@@ -71,12 +88,80 @@
       }
     },
     {
+      "category": "developer_experience",
+      "weight": "15.0%",
+      "scores": {
+        "PostgreSQL": "75.0",
+        "MongoDB": "85.0"
+      }
+    },
+    {
+      "category": "ecosystem",
+      "weight": "15.0%",
+      "scores": {
+        "PostgreSQL": "95.0",
+        "MongoDB": "85.0"
+      }
+    },
+    {
+      "category": "learning_curve",
+      "weight": "10.0%",
+      "scores": {
+        "PostgreSQL": "70.0",
+        "MongoDB": "80.0"
+      }
+    },
+    {
+      "category": "documentation",
+      "weight": "10.0%",
+      "scores": {
+        "PostgreSQL": "90.0",
+        "MongoDB": "85.0"
+      }
+    },
+    {
+      "category": "community_support",
+      "weight": "5.0%",
+      "scores": {
+        "PostgreSQL": "95.0",
+        "MongoDB": "85.0"
+      }
+    },
+    {
+      "category": "enterprise_readiness",
+      "weight": "5.0%",
+      "scores": {
+        "PostgreSQL": "95.0",
+        "MongoDB": "75.0"
+      }
+    },
+    {
       "category": "WEIGHTED TOTAL",
       "weight": "100%",
       "scores": {
-        "PostgreSQL": "85.5",
-        "MongoDB": "84.5"
+        "PostgreSQL": "86.0",
+        "MongoDB": "85.0"
       }
     }
+  ],
+  "verdict": "UNSUPPORTED",
+  "score_gap": 1.0,
+  "unsupported_scores": [
+    "PostgreSQL.performance",
+    "PostgreSQL.scalability",
+    "PostgreSQL.developer_experience",
+    "PostgreSQL.ecosystem",
+    "PostgreSQL.learning_curve",
+    "PostgreSQL.documentation",
+    "PostgreSQL.community_support",
+    "PostgreSQL.enterprise_readiness",
+    "MongoDB.performance",
+    "MongoDB.scalability",
+    "MongoDB.developer_experience",
+    "MongoDB.ecosystem",
+    "MongoDB.learning_curve",
+    "MongoDB.documentation",
+    "MongoDB.community_support",
+    "MongoDB.enterprise_readiness"
   ]
 }

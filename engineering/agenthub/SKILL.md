@@ -1,16 +1,16 @@
 ---
 name: agenthub
 description: >
-  Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency
-  graphs, covering agent spawning, output merging, and quality evaluation. Use when a task
-  needs multiple specialized agents or to parallelize AI work.
+  Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent's state on
+  a board, then ranks and merges their outputs. Use when spawning parallel agents, monitoring a
+  run, or merging results.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
   author: borghei
   category: engineering
   domain: ai-agents
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [multi-agent, orchestration, dag, workflow, parallel, agent-hub]
 ---
 # AgentHub - Multi-Agent DAG Orchestration
@@ -60,16 +60,60 @@ This skill uses compound sub-skill architecture. Each sub-skill in `skills/` han
 
 **Lifecycle:** Init defines the workflow DAG, Run orchestrates execution, Spawn creates individual agents, Board provides real-time visibility, Eval checks output quality, Merge combines results, and Status reports overall health (`Init → Run → Spawn (parallel) → Eval → Merge`, with `Board`/`Status` reading state throughout).
 
-## Tools
+**Who does what.** The scripts never start an agent or call a model. You spawn agents with your platform's own mechanism (subagents, background tasks, separate sessions) and record each state change with `session_manager.py update`; the scripts validate the plan, keep the session file, draw the board and rank what came back. For design-time work (choosing a topology, pricing it) use `engineering/agent-workflow-designer`, whose `steps`/`depends_on` files this skill does not read.
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `dag_analyzer.py` | Validate DAG definitions (cycles, unreachable nodes, critical path) | `python scripts/dag_analyzer.py --workflow workflow.json --validate --critical-path` |
-| `session_manager.py` | Manage orchestration sessions and state | `python scripts/session_manager.py create --json` |
-| `board_manager.py` | Manage agent task boards with status tracking | `python scripts/board_manager.py --session session.json --view board` |
-| `result_ranker.py` | Rank and merge outputs from multiple agents | `python scripts/result_ranker.py --session session.json --rank --merge synthesize` |
+## Quick Start Workflow
 
-## References
+```bash
+# 1. Validate the DAG: unknown dependencies, cycles, roots/terminals, inputs not covered by a dependency
+python scripts/dag_analyzer.py --workflow assets/sample_workflow.json --validate --critical-path
+
+# 2. Open a session file for the run (the global --json flag goes before the subcommand)
+python scripts/session_manager.py create --workflow assets/sample_workflow.json --output /tmp/session.json
+
+# 3. As each agent you spawned starts, finishes or fails, record it
+python scripts/session_manager.py update --session /tmp/session.json --agent researcher --state RUNNING
+python scripts/session_manager.py update --session /tmp/session.json --agent researcher --state COMPLETED \
+    --eval-score 0.8 --output-data '{"competitor_list": "..."}'
+
+# 4. Watch progress, then rank and merge the outputs
+python scripts/board_manager.py --session assets/sample_session.json --view board
+python scripts/result_ranker.py --session assets/sample_session.json --rank
+python scripts/result_ranker.py --session assets/sample_session.json --merge rank-select
+```
+
+`assets/sample_session.json` is a run caught mid-way: three agents completed, `analyst` failed on a timeout and `writer` waits on it, so the board shows a blocked run and the ranker has three outputs to score. On the sample workflow the analyzer passes with one real warning: `analyst` reads `market_size` without depending on `researcher` directly.
+
+**Tools overview.** `dag_analyzer.py` validates and reports parallel groups and the critical path (from per-agent `config.timeout`). `session_manager.py` has `create`, `status`, `update`, `history` and `list`. `board_manager.py` views are `board`, `timeline` and `summary`. `result_ranker.py` scores each output on completeness, depth, structure and any `eval_score`, then merges with `synthesize`, `rank-select` or `chain`. The ranker's score is a structural heuristic; read the top outputs before trusting the order.
+
+**Exit codes.** `dag_analyzer.py`: `0` valid, `1` validation errors, `2` missing file, bad JSON or no `agents` object. The other three: `0` done, `2` missing or malformed session or workflow file.
+
+**Done when:** the analyzer passes with no unexplained warnings, every agent in the session reached COMPLETED (or FAILED with a recorded reason and a decision on retry), and the merged output was read and checked against the workflow's terminal outputs.
+
+## Anti-Patterns
+
+### Parallel agents with overlapping scopes
+**Mistake:** Two agents both "research the market", then the merge step has to reconcile contradictory duplicates.
+**Why it happens:** Splitting by topic is easier than splitting by output.
+**Instead:** Give each agent a distinct output contract (`outputs` in the workflow). If two agents would write the same field, merge them into one.
+
+### Hidden data dependencies
+**Mistake:** An agent reads an output from an agent it does not list as a dependency, so it can start before that output exists.
+**Why it happens:** The dependency is indirect and looks implied.
+**Instead:** Declare every producer you read from. `dag_analyzer.py` warns on exactly this case.
+
+### Trusting the ranker blindly
+**Mistake:** Shipping the top-ranked output without reading it.
+**Why it happens:** A numeric score looks authoritative.
+**Instead:** Use the rank to decide what to read first. Record a real `--eval-score` from your own check so the ranker weighs it.
+
+## Files
+
+- `scripts/dag_analyzer.py`, `scripts/session_manager.py`, `scripts/board_manager.py`, `scripts/result_ranker.py` — the four CLIs above.
+- `assets/sample_workflow.json` — five-agent workflow (fan-out, fan-in); `assets/sample_session.json` — a partially failed run of it.
+- `skills/*.md` — lifecycle sub-skills; `references/` — DAG format, patterns, operations.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -91,12 +135,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Infrastructure for running agents (compute, scheduling, deployment)
 - Real-time streaming communication between agents
 
-## Integration Points
+## See Also
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `agent-designer` | Defines individual agent capabilities that become DAG nodes | Agent specs flow in; execution results flow back for agent tuning |
-| `self-improving-agent` | Each agent can use self-improvement patterns to get better | Session feedback from orchestration feeds into agent learning loops |
-| `prompt-engineer-toolkit` | Agent task prompts benefit from prompt engineering | Optimized prompts improve individual agent quality within the DAG |
-| `context-engine` | Manages what context each agent sees | Context retrieval provides relevant inputs to each spawned agent |
-| `observability-designer` | Monitors workflow execution and agent health | Agent state transitions and timing metrics feed into dashboards |
+- `engineering/agent-workflow-designer` — design-time topology, validation and cost before you run anything.
+- `engineering/agent-designer` — roles and tool schemas for the agents that become DAG nodes.
+- `engineering/observability-designer` — tracing and alerting for long-running agent jobs.

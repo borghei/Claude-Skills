@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: testing
-  updated: 2026-06-15
+  updated: 2026-11-08
   tags: [tdd, test-driven-development, testing, red-green-refactor]
 ---
 # TDD Guide
@@ -45,23 +45,42 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+`scripts/tdd.py` is the command-line entry point. Its most useful job is the coverage gate:
+it parses LCOV, Istanbul JSON or Cobertura XML, lists every file below the threshold with
+its uncovered lines, and exits 1 while any gap remains.
+
 ```bash
-# Generate test cases from requirements (Python API)
-from test_generator import TestGenerator, TestFramework
-gen = TestGenerator(framework=TestFramework.PYTEST, language="python")
-cases = gen.generate_from_requirements(requirements)
-
-# Analyze coverage gaps from LCOV report
-from coverage_analyzer import CoverageAnalyzer
-analyzer = CoverageAnalyzer()
-analyzer.parse_coverage_report(content, "lcov")
-gaps = analyzer.identify_gaps(threshold=80.0)
-
-# Guide TDD cycle
-from tdd_workflow import TDDWorkflow
-wf = TDDWorkflow()
-wf.start_cycle("User can reset password via email")
+python scripts/tdd.py coverage assets/sample_coverage_gaps.lcov --threshold 80     # exit 1, lists gaps
+python scripts/tdd.py coverage assets/sample_coverage_report.lcov --threshold 80   # exit 0
+python scripts/tdd.py generate assets/sample_input_python.json --module discount  # pytest stubs
+python scripts/tdd.py quality tests/test_discount.py --format json               # assertion density, smells
 ```
+
+## Tools Overview
+
+| Subcommand | What it does | Key flags |
+|------------|--------------|-----------|
+| `coverage <report>` | Per-file line/branch gaps, uncovered lines, prioritised P0-P2 recommendations | `--threshold` (default 80), `--format text/json` |
+| `generate <input.json>` | Test stubs from user stories, acceptance criteria, error and edge cases (Jest, Vitest, Pytest, JUnit, Mocha) | `--framework`, `--module`, `-o`, `--format` |
+| `quality <test file>` | Test count, assertions per test, isolation, naming, smells, quality score | `--format` |
+
+Generated stubs raise or throw until you write the real assertion, so they start RED by
+design; a stub that passes before the code exists proves nothing.
+
+Exit codes: `0` ok (coverage: every file meets the threshold); `1` coverage gaps found;
+`2` bad input (missing or empty file, unknown report format, invalid JSON, unknown framework).
+
+The other modules (`tdd_workflow.py` phase validation, `fixture_generator.py`
+boundary values and mocks, `framework_adapter.py` cross-framework conversion,
+`output_formatter.py`) are libraries; import them with `PYTHONPATH=scripts` as shown in
+`references/tool-reference.md`.
+
+## Workflow
+
+1. RED: write or generate a failing test for the next behaviour; run it and confirm it fails for the expected reason.
+2. GREEN: write the least code that passes; run the suite.
+3. REFACTOR: clean up with the suite green; run it again.
+4. Validate coverage with the project's own test runner producing a report, then `tdd.py coverage` on it. Done when it exits 0 at the agreed threshold and every new branch has a test that failed before the code existed.
 
 ## References
 
@@ -88,13 +107,32 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Visual/snapshot testing or browser-based test workflows -- use Playwright, Cypress, or Storybook for UI-level testing
 - Security-focused test generation (fuzz testing, penetration testing) -- see `senior-security` and `senior-secops` skills
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-qa` | Generated test stubs feed into QA review workflows; QA coverage standards inform threshold settings | `test_generator.py` output → QA review → approved test suite |
-| `code-reviewer` | Metrics calculator output provides quantitative data for code review checklists | `metrics_calculator.py` quality report → code review scoring |
-| `senior-fullstack` | Scaffolded projects include test infrastructure; TDD guide generates tests for scaffolded modules | `project_scaffolder.py` output → `test_generator.py` input |
-| `senior-devops` | Coverage reports from CI pipelines are parsed by coverage analyzer; recommendations feed back into pipeline gates | CI coverage artifact → `coverage_analyzer.py` → pass/fail gate |
-| `senior-security` | Edge-case fixtures for auth and API scenarios complement security-focused test plans | `fixture_generator.py` auth/API edge cases → security test plan |
-| `tech-stack-evaluator` | Framework detection informs stack evaluation; test quality metrics feed into technology assessment | `format_detector.py` analysis → stack evaluation input |
+### Tests Written After the Code
+**Mistake:** Writing the implementation first, then adding tests that mirror it.
+**Why it happens:** It feels faster, and the tests pass on the first run.
+**Instead:** Watch each test fail before the code exists. A test that never failed may not be able to fail.
+
+### Chasing the Coverage Number
+**Mistake:** Adding assertion-free tests to push a file over the threshold.
+**Why it happens:** The gate checks lines executed, not behaviour verified.
+**Instead:** Run `tdd.py quality` alongside `coverage`; low assertions per test with high coverage is the signature of this mistake.
+
+### Committing Generated Stubs Unfilled
+**Mistake:** Leaving generated stubs in the suite with placeholder bodies.
+**Why it happens:** They look like progress.
+**Instead:** The stubs fail until filled in, on purpose. Fill each one or delete it before merging.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/tdd.py` | CLI: `coverage`, `generate`, `quality` |
+| `scripts/coverage_analyzer.py`, `test_generator.py`, `metrics_calculator.py`, `format_detector.py` | Libraries behind the CLI |
+| `scripts/tdd_workflow.py`, `fixture_generator.py`, `framework_adapter.py`, `output_formatter.py` | Import-only libraries |
+| `assets/sample_coverage_report.lcov` | Fully covered report (coverage exits 0) |
+| `assets/sample_coverage_gaps.lcov` | Report with an untested function and branches (exits 1) |
+| `assets/sample_input_python.json`, `sample_input_typescript.json` | Requirements inputs for `generate` |
+| `assets/expected_output.json` | Example combined output |
+| `references/*.md` | Workflows, API reference, practices, frameworks, CI, troubleshooting |

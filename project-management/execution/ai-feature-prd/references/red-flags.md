@@ -26,15 +26,15 @@ Scan before sharing the artifact. Each red flag shows the *bad* version next to 
 
 ## Red Flag 2: No eval criteria before model selection
 
-**Symptom.** Section 9.1 names a primary model ("claude-sonnet-4.5") before Section 10.1 has any golden set or acceptance bar defined.
+**Symptom.** Section 9.1 names a primary model ("claude-sonnet-5-5") before Section 10.1 has any golden set or acceptance bar defined.
 
 **Why it's bad.** Karpathy's "Software 2.0" framing: the eval *is* the spec. Picking a model before defining what you are evaluating means you have no defensible reason for the choice — the team is buying a tool before knowing the job.
 
 **Bad example:**
-> "Section 9.1: Primary model is claude-sonnet-4.5 because it's the strongest model available today. Section 10.1: TBD — golden set under construction."
+> "Section 9.1: Primary model is claude-sonnet-5-5 because it's the strongest model available today. Section 10.1: TBD — golden set under construction."
 
 **Good example:**
-> "Section 10.1: 200-item gold set covering 70% common / 20% edge / 10% adversarial cases for our domain. Acceptance >= 90%, hallucination <= 2%, refusal-on-harmful >= 98%. Section 9.1: Three candidate models scored against this gold set: claude-sonnet-4.5 (94% acceptance, 1.6% hallucination), gpt-5 (92%, 1.8%), Llama-4-70B (87%, 3.1%). Primary: claude-sonnet-4.5 — wins on hallucination at acceptable cost; gpt-5-mini as fallback for outage."
+> "Section 10.1: 200-item gold set covering 70% common / 20% edge / 10% adversarial cases for our domain. Acceptance >= 90%, hallucination <= 2%, refusal-on-harmful >= 98%. Section 9.1: Three candidate models scored against this gold set: claude-sonnet-5-5 (94% acceptance, 1.6% hallucination), a second vendor's flagship (92%, 1.8%), an open-weights model (87%, 3.1%). Primary: claude-sonnet-5-5 — wins on hallucination at acceptable cost; a second vendor's small model as fallback for outage."
 
 **How to catch it.** Read Section 9 before Section 10. If 9 names a model and 10 says "TBD", reorder the work.
 
@@ -47,10 +47,10 @@ Scan before sharing the artifact. Each red flag shows the *bad* version next to 
 **Why it's bad.** Frontier-model outages happen. Vendor pricing changes happen. Vendor deprecation happens (a model labeled "GA" today can be sunset in 6 months). A single-vendor PRD bakes in operational risk that nobody named.
 
 **Bad example:**
-> "Primary model: claude-sonnet-4.5 (Anthropic, via Bedrock). Reason chosen: best on our eval set."
+> "Primary model: claude-sonnet-5-5 (Anthropic, via Bedrock). Reason chosen: best on our eval set."
 
 **Good example:**
-> "Primary: claude-sonnet-4.5 (via Bedrock). Fallback: gpt-5-mini (via Azure) for vendor outage; claude-haiku-4 for cost cap. Switch trigger: primary error rate > 2% sustained 10 min OR p95 latency > 2x baseline OR per-tenant cost > 120% of budget. Re-evaluate primary every 90 days; documented in 11.4."
+> "Primary: claude-sonnet-5-5 (via Bedrock). Fallback: a second vendor's small model (via Azure) for vendor outage; claude-haiku-5-5 for cost cap. Switch trigger: primary error rate > 2% sustained 10 min OR p95 latency > 2x baseline OR per-tenant cost > 120% of budget. Re-evaluate primary every 90 days; documented in 11.4."
 
 **How to catch it.** Ask: "What happens if Anthropic Bedrock goes down for 4 hours?" If the PRD does not answer, the fallback is missing.
 

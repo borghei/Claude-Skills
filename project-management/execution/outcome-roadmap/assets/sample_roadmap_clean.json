@@ -1,0 +1,36 @@
+{
+  "initiatives": [
+    {
+      "title": "Advanced search",
+      "description": "Full-text search with filters, autocomplete and relevance ranking.",
+      "quarter": "Q3 2026",
+      "type": "feature",
+      "outcome": "Enable returning shoppers to find a known product in under 30 seconds so that repeat-purchase conversion rises",
+      "metric": {"name": "Search-to-cart conversion for returning shoppers", "baseline": "11%", "target": "16%"},
+      "counter_metric": "Zero-result search rate stays under 8%"
+    },
+    {
+      "title": "Onboarding checklist",
+      "description": "Fewer first-run steps with contextual guidance.",
+      "quarter": "Q3 2026",
+      "type": "improvement",
+      "outcome": "Enable new admins to invite their team on day one so that more trials reach the paid decision with a team in place",
+      "metric": {"name": "Trials with 3+ invited users by day 7", "baseline": "22%", "target": "35%"},
+      "counter_metric": "Support tickets tagged onboarding do not rise"
+    },
+    {
+      "title": "Read replicas and pooling",
+      "description": "Database upgrade with connection pooling and read replicas.",
+      "quarter": "Q4 2026",
+      "type": "infrastructure",
+      "outcome": "Enable enterprise accounts to run month-end reports without timeouts so that renewals are not put at risk by reliability",
+      "metric": {"name": "p95 report time at month end", "baseline": "41 s", "target": "8 s"}
+    },
+    {
+      "title": "Team collaboration",
+      "description": "Shared workspaces, comments and real-time editing.",
+      "quarter": "Q2 2027",
+      "type": "feature"
+    }
+  ]
+}

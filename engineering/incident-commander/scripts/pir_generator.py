@@ -1144,7 +1144,9 @@ class PIRGenerator:
         summary_parts = []
         
         # Incident description
-        summary_parts.append(f"On {incident_info['start_time'].strftime('%B %d, %Y') if incident_info['start_time'] else 'an unknown date'}, we experienced a {incident_info['severity']} incident affecting {incident_info.get('affected_services', ['our services'])}.")
+        services = ", ".join(incident_info.get("affected_services") or []) or "our services"
+        when = incident_info['start_time'].strftime('%B %d, %Y') if incident_info['start_time'] else 'an unknown date'
+        summary_parts.append(f"On {when}, we experienced a {incident_info['severity'].upper()} incident affecting {services}.")
         
         # Duration and impact
         summary_parts.append(f"The incident lasted {incident_info['duration']} and had the following impact: {incident_info['customer_impact']}")
@@ -1340,7 +1342,7 @@ class PIRGenerator:
         content.append("### Additional Information")
         content.append("")
         content.append(f"- Incident ID: {incident_info['incident_id']}")
-        content.append(f"- Severity Classification: {incident_info['severity']}")
+        content.append(f"- Severity Classification: {incident_info['severity'].upper()}")
         
         if incident_info.get("affected_services"):
             content.append(f"- Affected Services: {', '.join(incident_info['affected_services'])}")
@@ -1625,13 +1627,13 @@ Incident JSON format:
     
     except FileNotFoundError as e:
         print(f"Error: File not found - {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON - {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

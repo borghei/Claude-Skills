@@ -1,16 +1,16 @@
 ---
 name: linear-expert
 description: >
-  Linear expert for workspace/team admin, Cycles, Projects, Initiatives,
-  Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk
-  operations, and Jira-to-Linear migration.
+  Administers Linear teams, cycles, projects and triage, and writes GraphQL
+  API calls. Use when setting up or fixing a Linear workspace, scripting bulk
+  changes, or migrating from Jira to Linear.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-integration
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: [linear, graphql, github, slack]
   tags: [linear, graphql, cycles, initiatives, roadmaps, triage, migration]
 ---
@@ -58,12 +58,20 @@ Ask about the two or three inputs that matter most for this request, not the who
 Linear's API is GraphQL-only at `https://api.linear.app/graphql`; auth via personal API key (`Authorization: <key>`) or OAuth2.
 
 ```bash
+# $1 = GraphQL document, $2 = variables as JSON (optional). jq builds the body, so quotes
+# and newlines in the query are escaped correctly; pass values as variables, not by string splicing.
 linear_query() {
-  curl -s -X POST https://api.linear.app/graphql \
-    -H "Authorization: $LINEAR_API_KEY" \
-    -H "Content-Type: application/json" \
-    -d "{\"query\": \"$1\"}"
+  local vars="${2:-}"
+  [ -z "$vars" ] && vars='{}'
+  jq -n --arg q "$1" --argjson v "$vars" '{query: $q, variables: $v}' |
+    curl -s -X POST https://api.linear.app/graphql \
+      -H "Authorization: $LINEAR_API_KEY" \
+      -H "Content-Type: application/json" \
+      --data @-
 }
+
+linear_query 'query { viewer { id name } }'
+linear_query 'query($id: String!) { issue(id: $id) { title state { name } } }' '{"id": "ENG-123"}'
 ```
 
 Cache team/label/state UUIDs locally, use nested selection to avoid N+1 calls, and prefer webhooks over polling. See the references below for the full query catalog and operating workflows.
@@ -87,7 +95,7 @@ Cache team/label/state UUIDs locally, use nested selection to avoid N+1 calls, a
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -123,3 +131,12 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `scrum-master/` | Linear → Analytics | Cycle data feeds velocity_analyzer.py and sprint_health_scorer.py |
 | `senior-pm/` | Linear → Portfolio | Initiative-level rollups feed project_health_dashboard.py |
 | `delivery-manager/` | Linear → Release | Project completion state and milestone dates feed release coordination |
+
+## Files
+
+Reference files are described under Reference Documentation above. Templates:
+
+| File | Purpose |
+|------|---------|
+| `assets/linear-team-template.md` | Team setup template |
+| `assets/linear-triage-workflow.md` | Triage workflow template |

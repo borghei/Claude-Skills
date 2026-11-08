@@ -397,6 +397,11 @@ Data engineering for batch and streaming pipelines with Airflow, dbt, Spark, and
 
 Generate pipeline configurations (Airflow, Prefect, Dagster), validate data quality with profiling and anomaly detection, and optimize SQL/Spark performance with actionable recommendations. - **Pipeline generation** — Airflow/Prefect/Dagster DAG code for batch and incremental loads, with DAG validat
 
+## Your Key Capabilities
+- Validating Against an Inferred Schema
+- Non-Idempotent Loads
+- Relative Start Dates in DAGs
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Data engineering for batch and streaming pipelines with Airflow, dbt, Spark, and Kafka. Use when designing data architectures, building pipelines, adding data-quality checks, optimizing ETL/ELT, or troubleshooting pipeline failures.
 
 Generate pipeline configurations (Airflow, Prefect, Dagster), validate data quality with profiling and anomaly detection, and optimize SQL/Spark performance with actionable recommendations. - **Pipeline generation** — Airflow/Prefect/Dagster DAG code for batch and incremental loads, with DAG validat
+
+## Your Key Capabilities
+- Validating Against an Inferred Schema
+- Non-Idempotent Loads
+- Relative Start Dates in DAGs
 
 ## How to Help
 When the user asks for help in this domain:
@@ -477,26 +487,37 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Generate an Airflow DAG for incremental PostgreSQL -&gt; Snowflake
+# Generate an Airflow DAG for incremental PostgreSQL -&gt; Snowflake. Targets Airflow 3 (`airflow.sdk`,
+# current 3.4) with import fallbacks for 2.7+; --output creates missing parent folders
 python scripts/pipeline_orchestrator.py generate \
   --type airflow --source postgres --destination snowflake \
-  --tables orders,customers --mode incremental --schedule &quot;0 5 * * *&quot;
+  --tables orders,customers --mode incremental --schedule &quot;0 5 * * *&quot; --output dags/orders_etl.py
 
-# Validate data quality against a schema
-python scripts/data_quality_validator.py validate data.csv \
-  --schema schema.json --detect-anomalies --json
+# Validate data against a schema (sample schema and data ship in assets/)
+python scripts/data_quality_validator.py validate assets/sample_orders_flawed.csv \
+  --schema assets/sample_schema.json --detect-anomalies
 
-# Profile a dataset
-python scripts/data_quality_validator.py profile data.csv --json
+# Draft a schema from existing data, then tighten it by hand
+python scripts/data_quality_validator.py schema assets/sample_orders_clean.csv --output schema.json
 
-# Optimize a slow SQL query
-python scripts/etl_performance_optimizer.py analyze-sql query.sql \
-  --warehouse snowflake --json
-
-# Estimate query cost
-python scripts/etl_performance_optimizer.py estimate-cost query.sql \
-  --warehouse bigquery --stats data_stats.json --json
+# Review a SQL query (static analysis; read the warehouse&#x27;s query profile for ground truth)
+python scripts/etl_performance_optimizer.py analyze-sql assets/sample_query.sql --warehouse snowflake
 ```
+
+Schema file format (`--schema`): a JSON object with `name`, `version`, optional
+`primary_key` (list of columns), `row_count_min`/`row_count_max`, and `columns`, each with
+`name`, `type` (`string`, `integer`, `float`, `boolean`, `date`, `datetime`, `email`, `uuid`),
+and optional `nullable`, `unique`, `min_value`, `max_value`, `min_length`, `max_length`,
+`pattern` (regex) and `allowed_values`. See `assets/sample_schema.json`. A schema generated
+by the `schema` subcommand only records types and observed ranges, so validating the same
+data against it finds nothing by construction; add the real business rules before using it
+as a gate. The report&#x27;s check counts list failed checks, so a clean run shows 0.
+
+Exit codes: `0` ok; `1` `validate`/`contract` found error-severity failures, or
+`pipeline_orchestrator.py validate` found issues; `2` bad input (missing file, invalid JSON
+or schema). `assets/sample_orders_clean.csv` validates clean (exit 0);
+`assets/sample_orders_flawed.csv` has a duplicate key, a null and a malformed email, a
+negative amount, an unknown status and a bad date (exit 1).
 
 ## Tools
 
@@ -538,15 +559,35 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Cost estimates use per-credit and per-TB prices built into the script. Warehouse pricing changes and varies by contract and region, so estimates are for comparison, not budgeting.
 - The YAML used for configs and contracts is read with a small stdlib parser, so complex YAML may not load as expected.
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration |
-|-------|-------------|
-| `senior-data-scientist` | Feature engineering consumes curated mart data |
-| `senior-ml-engineer` | ML pipelines depend on feature store tables |
-| `senior-devops` | CI/CD for dbt, Airflow deployment, container orchestration |
-| `senior-architect` | Architecture reviews for lakehouse vs warehouse decisions |
-| `code-reviewer` | Pipeline code reviews for DAGs, dbt models, Spark jobs |
+### Validating Against an Inferred Schema
+**Mistake:** Generating a schema from today&#x27;s data with `schema`, then gating tomorrow&#x27;s loads on it.
+**Why it happens:** It is one command and the first run passes.
+**Instead:** An inferred schema encodes whatever the data already is, including its errors. Add the business rules (keys, allowed values, ranges) by hand and review them with the data owner.
+
+### Non-Idempotent Loads
+**Mistake:** Appending each run&#x27;s rows without a merge key, so retries and backfills duplicate data.
+**Why it happens:** Appends are simpler and work on the happy path.
+**Instead:** Load by partition or `MERGE` on a business key so re-running any date gives the same result; test by running the same date twice.
+
+### Relative Start Dates in DAGs
+**Mistake:** `start_date=days_ago(1)` or `datetime.now()` in a DAG.
+**Why it happens:** Older tutorials used it.
+**Instead:** A fixed, timezone-aware `start_date` with `catchup` set deliberately. Relative dates shift every parse, break backfills, and the helper is gone in Airflow 3.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/pipeline_orchestrator.py` | Airflow / Prefect / Dagster code generation and DAG validation |
+| `scripts/data_quality_validator.py` | Schema validation, profiling, anomalies, contracts, schema inference, GE suites |
+| `scripts/etl_performance_optimizer.py` | SQL and Spark analysis, partition strategy, cost estimates |
+| `assets/sample_schema.json` | Schema with keys, types, ranges and allowed values |
+| `assets/sample_orders_clean.csv` | Data that passes the schema (exit 0) |
+| `assets/sample_orders_flawed.csv` | Data with six rule violations (exit 1) |
+| `assets/sample_query.sql` | Query for `analyze-sql` (SELECT *, function on a filter column, ORDER BY without LIMIT) |
+| `references/*.md` | Worked pipelines, decisions and troubleshooting, architecture, modeling, DataOps |
 
 ---
 
@@ -629,26 +670,37 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Generate an Airflow DAG for incremental PostgreSQL -&gt; Snowflake
+# Generate an Airflow DAG for incremental PostgreSQL -&gt; Snowflake. Targets Airflow 3 (`airflow.sdk`,
+# current 3.4) with import fallbacks for 2.7+; --output creates missing parent folders
 python scripts/pipeline_orchestrator.py generate \
   --type airflow --source postgres --destination snowflake \
-  --tables orders,customers --mode incremental --schedule &quot;0 5 * * *&quot;
+  --tables orders,customers --mode incremental --schedule &quot;0 5 * * *&quot; --output dags/orders_etl.py
 
-# Validate data quality against a schema
-python scripts/data_quality_validator.py validate data.csv \
-  --schema schema.json --detect-anomalies --json
+# Validate data against a schema (sample schema and data ship in assets/)
+python scripts/data_quality_validator.py validate assets/sample_orders_flawed.csv \
+  --schema assets/sample_schema.json --detect-anomalies
 
-# Profile a dataset
-python scripts/data_quality_validator.py profile data.csv --json
+# Draft a schema from existing data, then tighten it by hand
+python scripts/data_quality_validator.py schema assets/sample_orders_clean.csv --output schema.json
 
-# Optimize a slow SQL query
-python scripts/etl_performance_optimizer.py analyze-sql query.sql \
-  --warehouse snowflake --json
-
-# Estimate query cost
-python scripts/etl_performance_optimizer.py estimate-cost query.sql \
-  --warehouse bigquery --stats data_stats.json --json
+# Review a SQL query (static analysis; read the warehouse&#x27;s query profile for ground truth)
+python scripts/etl_performance_optimizer.py analyze-sql assets/sample_query.sql --warehouse snowflake
 ```
+
+Schema file format (`--schema`): a JSON object with `name`, `version`, optional
+`primary_key` (list of columns), `row_count_min`/`row_count_max`, and `columns`, each with
+`name`, `type` (`string`, `integer`, `float`, `boolean`, `date`, `datetime`, `email`, `uuid`),
+and optional `nullable`, `unique`, `min_value`, `max_value`, `min_length`, `max_length`,
+`pattern` (regex) and `allowed_values`. See `assets/sample_schema.json`. A schema generated
+by the `schema` subcommand only records types and observed ranges, so validating the same
+data against it finds nothing by construction; add the real business rules before using it
+as a gate. The report&#x27;s check counts list failed checks, so a clean run shows 0.
+
+Exit codes: `0` ok; `1` `validate`/`contract` found error-severity failures, or
+`pipeline_orchestrator.py validate` found issues; `2` bad input (missing file, invalid JSON
+or schema). `assets/sample_orders_clean.csv` validates clean (exit 0);
+`assets/sample_orders_flawed.csv` has a duplicate key, a null and a malformed email, a
+negative amount, an unknown status and a bad date (exit 1).
 
 ## Tools
 
@@ -690,15 +742,35 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Cost estimates use per-credit and per-TB prices built into the script. Warehouse pricing changes and varies by contract and region, so estimates are for comparison, not budgeting.
 - The YAML used for configs and contracts is read with a small stdlib parser, so complex YAML may not load as expected.
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration |
-|-------|-------------|
-| `senior-data-scientist` | Feature engineering consumes curated mart data |
-| `senior-ml-engineer` | ML pipelines depend on feature store tables |
-| `senior-devops` | CI/CD for dbt, Airflow deployment, container orchestration |
-| `senior-architect` | Architecture reviews for lakehouse vs warehouse decisions |
-| `code-reviewer` | Pipeline code reviews for DAGs, dbt models, Spark jobs |
+### Validating Against an Inferred Schema
+**Mistake:** Generating a schema from today&#x27;s data with `schema`, then gating tomorrow&#x27;s loads on it.
+**Why it happens:** It is one command and the first run passes.
+**Instead:** An inferred schema encodes whatever the data already is, including its errors. Add the business rules (keys, allowed values, ranges) by hand and review them with the data owner.
+
+### Non-Idempotent Loads
+**Mistake:** Appending each run&#x27;s rows without a merge key, so retries and backfills duplicate data.
+**Why it happens:** Appends are simpler and work on the happy path.
+**Instead:** Load by partition or `MERGE` on a business key so re-running any date gives the same result; test by running the same date twice.
+
+### Relative Start Dates in DAGs
+**Mistake:** `start_date=days_ago(1)` or `datetime.now()` in a DAG.
+**Why it happens:** Older tutorials used it.
+**Instead:** A fixed, timezone-aware `start_date` with `catchup` set deliberately. Relative dates shift every parse, break backfills, and the helper is gone in Airflow 3.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/pipeline_orchestrator.py` | Airflow / Prefect / Dagster code generation and DAG validation |
+| `scripts/data_quality_validator.py` | Schema validation, profiling, anomalies, contracts, schema inference, GE suites |
+| `scripts/etl_performance_optimizer.py` | SQL and Spark analysis, partition strategy, cost estimates |
+| `assets/sample_schema.json` | Schema with keys, types, ranges and allowed values |
+| `assets/sample_orders_clean.csv` | Data that passes the schema (exit 0) |
+| `assets/sample_orders_flawed.csv` | Data with six rule violations (exit 1) |
+| `assets/sample_query.sql` | Query for `analyze-sql` (SELECT *, function on a filter column, ORDER BY without LIMIT) |
+| `references/*.md` | Worked pipelines, decisions and troubleshooting, architecture, modeling, DataOps |
 
 ---
 
@@ -786,27 +858,38 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/senior-data-engineer/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Generate an Airflow DAG for incremental PostgreSQL -&gt; Snowflake
+  <h2>Quick Start</h2><pre><code># Generate an Airflow DAG for incremental PostgreSQL -&gt; Snowflake. Targets Airflow 3 (`airflow.sdk`,
+# current 3.4) with import fallbacks for 2.7+; --output creates missing parent folders
 python scripts/pipeline_orchestrator.py generate \
   --type airflow --source postgres --destination snowflake \
-  --tables orders,customers --mode incremental --schedule &quot;0 5 * * *&quot;
+  --tables orders,customers --mode incremental --schedule &quot;0 5 * * *&quot; --output dags/orders_etl.py
 
-# Validate data quality against a schema
-python scripts/data_quality_validator.py validate data.csv \
-  --schema schema.json --detect-anomalies --json
+# Validate data against a schema (sample schema and data ship in assets/)
+python scripts/data_quality_validator.py validate assets/sample_orders_flawed.csv \
+  --schema assets/sample_schema.json --detect-anomalies
 
-# Profile a dataset
-python scripts/data_quality_validator.py profile data.csv --json
+# Draft a schema from existing data, then tighten it by hand
+python scripts/data_quality_validator.py schema assets/sample_orders_clean.csv --output schema.json
 
-# Optimize a slow SQL query
-python scripts/etl_performance_optimizer.py analyze-sql query.sql \
-  --warehouse snowflake --json
-
-# Estimate query cost
-python scripts/etl_performance_optimizer.py estimate-cost query.sql \
-  --warehouse bigquery --stats data_stats.json --json
+# Review a SQL query (static analysis; read the warehouse&#x27;s query profile for ground truth)
+python scripts/etl_performance_optimizer.py analyze-sql assets/sample_query.sql --warehouse snowflake
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+
+Schema file format (`--schema`): a JSON object with `name`, `version`, optional
+`primary_key` (list of columns), `row_count_min`/`row_count_max`, and `columns`, each with
+`name`, `type` (`string`, `integer`, `float`, `boolean`, `date`, `datetime`, `email`, `uuid`),
+and optional `nullable`, `unique`, `min_value`, `max_value`, `min_length`, `max_length`,
+`pattern` (regex) and `allowed_values`. See `assets/sample_schema.json`. A schema generated
+by the `schema` subcommand only records types and observed ranges, so validating the same
+data against it finds nothing by construction; add the real business rules before using it
+as a gate. The report's check counts list failed checks, so a clean run shows 0.
+
+Exit codes: `0` ok; `1` `validate`/`contract` found error-severity failures, or
+`pipeline_orchestrator.py validate` found issues; `2` bad input (missing file, invalid JSON
+or schema). `assets/sample_orders_clean.csv` validates clean (exit 0);
+`assets/sample_orders_flawed.csv` has a duplicate key, a null and a malformed email, a
+negative amount, an unknown status and a bad date (exit 1).
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-data-engineer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

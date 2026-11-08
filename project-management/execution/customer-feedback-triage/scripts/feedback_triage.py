@@ -7,10 +7,10 @@ heuristic for category guessing, computes a priority score combining Kano
 weight, volume, segment weight, and strategic alignment, and emits suggested
 response templates per item.
 
-Outputs follow the PM SHARED_OUTPUT_SCHEMA:
-    --format json|markdown|mermaid|confluence|notion|linear
-
-Standard library only. No external dependencies.
+Labels are placeholders unless items carry `opportunity_label`; replies are
+"exploring" unless an item carries `decision` (will-build / won't-build).
+Exit codes: 0 report written, 2 bad input. Formats: json|markdown|mermaid|
+confluence|notion|linear (PM SHARED_OUTPUT_SCHEMA).
 
 Usage:
     python feedback_triage.py --demo
@@ -28,10 +28,8 @@ from datetime import datetime, timezone
 
 SCHEMA = "pm/customer-feedback-triage/v1"
 
-# -----------------------------------------------------------
 # Kano keyword heuristic. Documented and transparent — this is
 # a starting guess; the PM should override liberally.
-# -----------------------------------------------------------
 
 KANO_KEYWORDS = {
     "basic": [
@@ -79,6 +77,7 @@ CATEGORY_KEYWORDS = {
     "bug": [
         "broken", "doesn't work", "does not work", "error", "crash",
         "404", "regression", "stopped working", "wrong result",
+        "slow", "timeout", "times out", "takes forever", "hangs", "freezes",
     ],
     "question": [
         "how do i", "how to", "where is", "where can i", "is there a way",
@@ -91,10 +90,8 @@ CATEGORY_KEYWORDS = {
 }
 
 
-# -----------------------------------------------------------
 # Stopwords for the word-overlap clustering heuristic.
 # Intentionally small and inspectable; not a real NLP stopword list.
-# -----------------------------------------------------------
 
 STOPWORDS = set("""
 a an the of to and or for in on at by with from as is are was were be been being
@@ -106,7 +103,6 @@ about into onto over under between among through during while before after
 
 
 def tokenize(text: str) -> set:
-    """Lowercase, strip punctuation, return content word set."""
     text = text.lower()
     text = re.sub(r"[^a-z0-9\s]", " ", text)
     words = [w for w in text.split() if w and w not in STOPWORDS and len(w) > 2]
@@ -114,7 +110,6 @@ def tokenize(text: str) -> set:
 
 
 def jaccard(a: set, b: set) -> float:
-    """Jaccard similarity between two sets."""
     if not a or not b:
         return 0.0
     inter = len(a & b)
@@ -122,9 +117,7 @@ def jaccard(a: set, b: set) -> float:
     return inter / union if union else 0.0
 
 
-# -----------------------------------------------------------
 # Kano + category classification
-# -----------------------------------------------------------
 
 def classify_kano(text: str) -> str:
     """Coarse Kano guess from keyword presence.
@@ -147,7 +140,6 @@ def classify_kano(text: str) -> str:
 
 
 def classify_category(text: str) -> str:
-    """Bug / Question / Strategy / Feature classification."""
     text = text.lower()
     for cat, keywords in CATEGORY_KEYWORDS.items():
         for kw in keywords:
@@ -156,16 +148,13 @@ def classify_category(text: str) -> str:
     return "feature_request"
 
 
-# -----------------------------------------------------------
 # Clustering — group items by opportunity similarity.
 # Simple greedy clustering on Jaccard token similarity, stdlib only.
-# -----------------------------------------------------------
 
 CLUSTER_SIMILARITY_THRESHOLD = 0.12  # tuned empirically against the demo set; word-overlap only
 
 
 def cluster_items(items: list) -> list:
-    """Greedy cluster by Jaccard token similarity."""
     tokenized = [(item, tokenize(item.get("raw_text", ""))) for item in items]
     clusters = []
     for item, tokens in tokenized:
@@ -191,20 +180,26 @@ def cluster_items(items: list) -> list:
 
 
 def derive_label(items: list) -> str:
-    """Derive a coarse opportunity label from the most common content words."""
+    """Use a human-written opportunity_label if any item carries one.
+
+    Otherwise return a marked placeholder plus the top keywords. Naming the
+    job ("share results with people who have no login") is a judgement the
+    PM or model makes; keyword soup must not pass for a label.
+    """
+    given = [it["opportunity_label"] for it in items if it.get("opportunity_label")]
+    if given:
+        return given[0]
     counts = {}
     for item in items:
         for tok in tokenize(item.get("raw_text", "")):
             counts[tok] = counts.get(tok, 0) + 1
     if not counts:
         return "Unlabeled opportunity"
-    top = sorted(counts.items(), key=lambda kv: -kv[1])[:4]
-    return " / ".join(t[0] for t in top)
+    top = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[:4]
+    return "[write the job] keywords: " + ", ".join(t[0] for t in top)
 
 
-# -----------------------------------------------------------
 # Scoring
-# -----------------------------------------------------------
 
 def score_cluster(cluster: dict, segment_weights: dict, strategic_alignment_map: dict) -> dict:
     """Compute composite priority score for a cluster.
@@ -264,15 +259,12 @@ def score_cluster(cluster: dict, segment_weights: dict, strategic_alignment_map:
     }
 
 
-# -----------------------------------------------------------
 # Response templating
-# -----------------------------------------------------------
 
 WILL_BUILD_BODY = (
-    "Hi {name},\n\n"
-    "Thanks for raising this. We've heard the same need from {count_other} "
-    "other customers and it's on our roadmap for {when}. We'll let you know "
-    "as we make progress.\n\n"
+    "Hi{name},\n\n"
+    "Thanks for raising this. {heard}We've decided to work on it and will "
+    "let you know when it reaches you.\n\n"
     "What you asked for: {request}\n"
     "What we plan to ship: a solution that addresses the underlying need; "
     "the exact shape is being finalized.\n\n"
@@ -280,7 +272,7 @@ WILL_BUILD_BODY = (
 )
 
 EXPLORING_BODY = (
-    "Hi {name},\n\n"
+    "Hi{name},\n\n"
     "Thank you for the detailed feedback. We're hearing this kind of request "
     "from a handful of customers and we're looking into the underlying need "
     "more carefully before committing to a solution. We don't have a date yet, "
@@ -290,8 +282,13 @@ EXPLORING_BODY = (
     "— The product team"
 )
 
+BUG_BODY = (
+    "Hi{name},\n\nThanks for reporting this, and sorry for the trouble. We've logged it with "
+    "engineering as a defect and will update you when there's a fix or a workaround.\n\n"
+    "What you reported: {request}\n\n— The product team")
+
 WONT_BUILD_BODY = (
-    "Hi {name},\n\n"
+    "Hi{name},\n\n"
     "Thank you for the suggestion. We've thought carefully about this and "
     "have decided not to build it in the foreseeable future. A few reasons:\n"
     "  - It doesn't fit the direction of the product for the next 2-3 quarters.\n"
@@ -305,37 +302,39 @@ WONT_BUILD_BODY = (
 
 
 def response_for(item: dict, cluster_score: dict, threshold: float) -> dict:
-    """Pick a response template for an item based on its cluster's score."""
+    """Draft a reply. Exploring unless a decision is recorded on the item.
+
+    "Always acknowledge, sometimes commit, rarely promise": the score only
+    suggests a tier; will-build / won't-build need `decision` set by a person.
+    """
     score = cluster_score["priority_score"]
-    customer = item.get("customer_id", "there")
+    name = f" {item['customer_name']}" if item.get("customer_name") else " there"
     request_excerpt = (item.get("raw_text", "") or "")[:140]
-
     if cluster_score["category"] in ("bug", "question", "strategy"):
-        # Bugs / questions / strategy are not "build" decisions; acknowledge with routing
-        template = "won't-build" if cluster_score["category"] == "strategy" else "exploring"
-        body = EXPLORING_BODY.format(name=customer, request=request_excerpt)
-        return {"item_id": item.get("id"), "template": template, "body_markdown": body}
-
-    if score >= threshold * 1.5:
-        template = "will-build"
-        body = WILL_BUILD_BODY.format(
-            name=customer,
-            count_other=max(cluster_score["distinct_customers"] - 1, 0),
-            when="an upcoming release",
-            request=request_excerpt,
-        )
+        suggested = "route:" + cluster_score["category"]
+    elif score >= threshold * 1.5:
+        suggested = "will-build candidate"
     elif score >= threshold:
-        template = "exploring"
-        body = EXPLORING_BODY.format(name=customer, request=request_excerpt)
+        suggested = "exploring"
     else:
-        template = "won't-build"
-        body = WONT_BUILD_BODY.format(name=customer, request=request_excerpt)
-    return {"item_id": item.get("id"), "template": template, "body_markdown": body}
+        suggested = "won't-build candidate"
+    decision = (item.get("decision") or "").lower()
+    if decision == "will-build":
+        others = max(cluster_score["distinct_customers"] - 1, 0)
+        heard = (f"{others} other customer{'s' if others != 1 else ''} asked for the same thing. "
+                 if others else "")
+        template, body = "will-build", WILL_BUILD_BODY.format(name=name, heard=heard, request=request_excerpt)
+    elif decision == "won't-build":
+        template, body = "won't-build", WONT_BUILD_BODY.format(name=name, request=request_excerpt)
+    elif cluster_score["category"] == "bug":
+        template, body = "bug-acknowledged", BUG_BODY.format(name=name, request=request_excerpt)
+    else:
+        template, body = "exploring", EXPLORING_BODY.format(name=name, request=request_excerpt)
+    return {"item_id": item.get("id"), "template": template, "suggested_tier": suggested,
+            "body_markdown": body}
 
 
-# -----------------------------------------------------------
 # Routing
-# -----------------------------------------------------------
 
 def build_routing(scores: list, threshold: float) -> dict:
     routing = {
@@ -352,16 +351,14 @@ def build_routing(scores: list, threshold: float) -> dict:
             routing["to_docs"].append(s["cluster_id"])
         elif s["category"] == "strategy":
             routing["to_strategy"].append(s["cluster_id"])
-        elif s["priority_score"] >= threshold:
+        elif s["priority_score"] >= threshold or s["kano_category"] in ("basic", "performance"):
             routing["to_prioritization"].append(s["cluster_id"])
         else:
             routing["to_archive"].append(s["cluster_id"])
     return routing
 
 
-# -----------------------------------------------------------
 # Demo data
-# -----------------------------------------------------------
 
 def demo_items() -> list:
     return [
@@ -416,9 +413,7 @@ def demo_items() -> list:
     ]
 
 
-# -----------------------------------------------------------
 # Renderers
-# -----------------------------------------------------------
 
 def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -455,7 +450,7 @@ def render_markdown(payload: dict) -> str:
     out.append("## Response drafts")
     out.append("")
     for r in data["responses"]:
-        out.append(f"### {r['item_id']} — `{r['template']}`")
+        out.append(f"### {r['item_id']} — `{r['template']}` (suggested: {r['suggested_tier']})")
         out.append("")
         out.append("```")
         out.append(r["body_markdown"])
@@ -567,9 +562,7 @@ RENDERERS = {
 }
 
 
-# -----------------------------------------------------------
 # Main orchestration
-# -----------------------------------------------------------
 
 def validate_items(items: list) -> list:
     required = ["id", "channel", "customer_id", "raw_text", "received_at"]
@@ -664,10 +657,13 @@ def main():
         try:
             with open(args.input) as f:
                 payload = json.load(f)
-        except (IOError, json.JSONDecodeError) as e:
+        except (OSError, ValueError) as e:
             print(f"Error reading input: {e}", file=sys.stderr)
             sys.exit(2)
-        items = payload.get("items", [])
+        items = payload.get("items") if isinstance(payload, dict) else None
+        if not isinstance(items, list) or not items or not all(isinstance(i, dict) for i in items):
+            print("error: input must be a JSON object with a non-empty 'items' list of objects", file=sys.stderr)
+            sys.exit(2)
     else:
         p.error("Either --demo or --input is required.")
 
@@ -690,4 +686,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (TypeError, ValueError, AttributeError, KeyError) as exc:  # field of the wrong type
+        print(f"error: input has a field of the wrong type: {exc}", file=sys.stderr)
+        sys.exit(2)

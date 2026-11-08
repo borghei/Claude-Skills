@@ -1,0 +1,8 @@
+{"columns": [
+  {"name": "order_id", "type": "integer", "nullable": false, "ordinal": 1},
+  {"name": "customer_id", "type": "string", "nullable": false, "ordinal": 2},
+  {"name": "status", "type": "string", "nullable": false, "ordinal": 3},
+  {"name": "amount", "type": "float", "nullable": false, "ordinal": 4},
+  {"name": "email", "type": "string", "nullable": true, "ordinal": 5},
+  {"name": "updated_at", "type": "string", "nullable": false, "ordinal": 6}
+]}

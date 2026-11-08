@@ -402,6 +402,9 @@ The agent acts as a data-driven retrospective facilitator that mines git history
 - Blame framing
 - Action items reborn each sprint
 
+## Frameworks &amp; Templates You Know
+- | `assets/retro_report_template.md` | Report template |
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -428,6 +431,9 @@ The agent acts as a data-driven retrospective facilitator that mines git history
 - Generating the retro without the team
 - Blame framing
 - Action items reborn each sprint
+
+## Frameworks &amp; Templates You Know
+- | `assets/retro_report_template.md` | Report template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -464,7 +470,7 @@ The agent acts as a data-driven retrospective facilitator that mines git history
 ## Core Capabilities
 
 - **Velocity analysis** — throughput, cycle/lead time, deploy frequency, commit-type breakdown, work-session detection (deep/focused/micro)
-- **Contributor deep dive** — per-person LOC, peak hours, specialization (frontend/backend/infra/docs/tests/data), consistency, collaboration
+- **Team work patterns** — specialization spread, knowledge silos, review and collaboration patterns across the team. The contributor output has per-person numbers for spotting bus-factor risk; report them at team level by default and never as a performance score
 - **Code quality trends** — churn hotspots, oscillation, test-to-production ratio, refactor frequency, healthy-range indicators
 - **Team health** — review coverage, bus factor / knowledge-silo detection, cross-boundary work
 - **Report generation &amp; trend tracking** — narrative markdown reports, sprint snapshots, sprint-over-sprint deltas, action-item carry-over
@@ -491,15 +497,29 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+Three tools read git history (`velocity_analyzer.py`, `contributor_insights.py`, `code_churn_analyzer.py`: each takes `--days N` or `--since/--until YYYY-MM-DD`, `--repo PATH`, `-f text|json`). `retro_report_generator.py` reads their JSON output and writes the markdown report (`-v` velocity JSON, required; `-c` contributors; `-u` churn; `--previous-retro` last report for action-item carry-over; `--previous-velocity` for deltas; `-s` sprint name; `-o` output file; `--save DIR` snapshot).
+
 ```bash
-# Full pipeline (last 14 days) → markdown report
-python scripts/velocity_analyzer.py --days 14 -f json &gt; /tmp/v.json &amp;&amp; \
-python scripts/contributor_insights.py --days 14 -f json &gt; /tmp/c.json &amp;&amp; \
-python scripts/code_churn_analyzer.py --days 14 -f json &gt; /tmp/ch.json &amp;&amp; \
-python scripts/retro_report_generator.py -v /tmp/v.json -c /tmp/c.json -u /tmp/ch.json -s &quot;Sprint 23&quot;
+# Try the report without a repo: the samples are the three tools&#x27; JSON for a 3-person sprint
+python3 project-management/sprint-retrospective/scripts/retro_report_generator.py \
+  -v project-management/sprint-retrospective/assets/sample_velocity.json \
+  -c project-management/sprint-retrospective/assets/sample_contributors.json \
+  -u project-management/sprint-retrospective/assets/sample_churn.json \
+  --previous-retro project-management/sprint-retrospective/assets/sample_previous_retro.md -s &quot;Sprint 23&quot;
 ```
 
-All tools support `--format text|json`, `--days N`, `--since/--until YYYY-MM-DD`, and `--repo /path`.
+```bash
+# Full pipeline on a real repo, last 14 days (JSON goes to a temp dir, not the repo)
+S=project-management/sprint-retrospective/scripts; OUT=$(mktemp -d)
+python3 $S/velocity_analyzer.py --days 14 --repo . -f json &gt; $OUT/v.json
+python3 $S/contributor_insights.py --days 14 --repo . -f json &gt; $OUT/c.json
+python3 $S/code_churn_analyzer.py --days 14 --repo . -f json &gt; $OUT/ch.json
+python3 $S/retro_report_generator.py -v $OUT/v.json -c $OUT/c.json -u $OUT/ch.json -s &quot;Sprint 23&quot; -o $OUT/retro.md
+```
+
+On the sample the report flags churn rate 0.34 and hotspot concentration 0.32 as attention areas, one single-owner directory, and two of three previous action items still open.
+
+**Exit codes:** `0` report produced · `2` not a repository, an invalid `--since`/`--until` date, or a report input that is missing, unreadable or not the tools&#x27; JSON. The tools report; they do not gate.
 
 ## Anti-Patterns
 
@@ -520,7 +540,7 @@ All tools support `--format text|json`, `--days N`, `--since/--until YYYY-MM-DD`
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -548,6 +568,18 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `execution/release-notes/` | Feeds into | Sprint commit data and type distribution inform release note generation |
 | CI/CD Workflows | Automated | GitHub Actions runs the 4-tool pipeline on a cron schedule (see workflows reference) |
 | `.retro-history/` | Bidirectional | Save sprint snapshots for trend tracking; load previous snapshots for comparison |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/velocity_analyzer.py` | Throughput, cycle/lead time, commit types, sessions |
+| `scripts/contributor_insights.py` | Specialization, sessions, collaboration and bus-factor data |
+| `scripts/code_churn_analyzer.py` | Hotspots, directory churn, health indicators, refactoring candidates |
+| `scripts/retro_report_generator.py` | Markdown retro report from the three JSON outputs |
+| `assets/sample_velocity.json`, `assets/sample_contributors.json`, `assets/sample_churn.json` | Tool-shaped outputs for a sample sprint |
+| `assets/sample_previous_retro.md` | Previous retro with action items for carry-over |
+| `assets/retro_report_template.md` | Report template |
 
 ---
 
@@ -607,7 +639,7 @@ The agent acts as a data-driven retrospective facilitator that mines git history
 ## Core Capabilities
 
 - **Velocity analysis** — throughput, cycle/lead time, deploy frequency, commit-type breakdown, work-session detection (deep/focused/micro)
-- **Contributor deep dive** — per-person LOC, peak hours, specialization (frontend/backend/infra/docs/tests/data), consistency, collaboration
+- **Team work patterns** — specialization spread, knowledge silos, review and collaboration patterns across the team. The contributor output has per-person numbers for spotting bus-factor risk; report them at team level by default and never as a performance score
 - **Code quality trends** — churn hotspots, oscillation, test-to-production ratio, refactor frequency, healthy-range indicators
 - **Team health** — review coverage, bus factor / knowledge-silo detection, cross-boundary work
 - **Report generation &amp; trend tracking** — narrative markdown reports, sprint snapshots, sprint-over-sprint deltas, action-item carry-over
@@ -634,15 +666,29 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+Three tools read git history (`velocity_analyzer.py`, `contributor_insights.py`, `code_churn_analyzer.py`: each takes `--days N` or `--since/--until YYYY-MM-DD`, `--repo PATH`, `-f text|json`). `retro_report_generator.py` reads their JSON output and writes the markdown report (`-v` velocity JSON, required; `-c` contributors; `-u` churn; `--previous-retro` last report for action-item carry-over; `--previous-velocity` for deltas; `-s` sprint name; `-o` output file; `--save DIR` snapshot).
+
 ```bash
-# Full pipeline (last 14 days) → markdown report
-python scripts/velocity_analyzer.py --days 14 -f json &gt; /tmp/v.json &amp;&amp; \
-python scripts/contributor_insights.py --days 14 -f json &gt; /tmp/c.json &amp;&amp; \
-python scripts/code_churn_analyzer.py --days 14 -f json &gt; /tmp/ch.json &amp;&amp; \
-python scripts/retro_report_generator.py -v /tmp/v.json -c /tmp/c.json -u /tmp/ch.json -s &quot;Sprint 23&quot;
+# Try the report without a repo: the samples are the three tools&#x27; JSON for a 3-person sprint
+python3 project-management/sprint-retrospective/scripts/retro_report_generator.py \
+  -v project-management/sprint-retrospective/assets/sample_velocity.json \
+  -c project-management/sprint-retrospective/assets/sample_contributors.json \
+  -u project-management/sprint-retrospective/assets/sample_churn.json \
+  --previous-retro project-management/sprint-retrospective/assets/sample_previous_retro.md -s &quot;Sprint 23&quot;
 ```
 
-All tools support `--format text|json`, `--days N`, `--since/--until YYYY-MM-DD`, and `--repo /path`.
+```bash
+# Full pipeline on a real repo, last 14 days (JSON goes to a temp dir, not the repo)
+S=project-management/sprint-retrospective/scripts; OUT=$(mktemp -d)
+python3 $S/velocity_analyzer.py --days 14 --repo . -f json &gt; $OUT/v.json
+python3 $S/contributor_insights.py --days 14 --repo . -f json &gt; $OUT/c.json
+python3 $S/code_churn_analyzer.py --days 14 --repo . -f json &gt; $OUT/ch.json
+python3 $S/retro_report_generator.py -v $OUT/v.json -c $OUT/c.json -u $OUT/ch.json -s &quot;Sprint 23&quot; -o $OUT/retro.md
+```
+
+On the sample the report flags churn rate 0.34 and hotspot concentration 0.32 as attention areas, one single-owner directory, and two of three previous action items still open.
+
+**Exit codes:** `0` report produced · `2` not a repository, an invalid `--since`/`--until` date, or a report input that is missing, unreadable or not the tools&#x27; JSON. The tools report; they do not gate.
 
 ## Anti-Patterns
 
@@ -663,7 +709,7 @@ All tools support `--format text|json`, `--days N`, `--since/--until YYYY-MM-DD`
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -691,6 +737,18 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `execution/release-notes/` | Feeds into | Sprint commit data and type distribution inform release note generation |
 | CI/CD Workflows | Automated | GitHub Actions runs the 4-tool pipeline on a cron schedule (see workflows reference) |
 | `.retro-history/` | Bidirectional | Save sprint snapshots for trend tracking; load previous snapshots for comparison |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/velocity_analyzer.py` | Throughput, cycle/lead time, commit types, sessions |
+| `scripts/contributor_insights.py` | Specialization, sessions, collaboration and bus-factor data |
+| `scripts/code_churn_analyzer.py` | Hotspots, directory churn, health indicators, refactoring candidates |
+| `scripts/retro_report_generator.py` | Markdown retro report from the three JSON outputs |
+| `assets/sample_velocity.json`, `assets/sample_contributors.json`, `assets/sample_churn.json` | Tool-shaped outputs for a sample sprint |
+| `assets/sample_previous_retro.md` | Previous retro with action items for carry-over |
+| `assets/retro_report_template.md` | Report template |
 
 ---
 
@@ -778,15 +836,28 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/sprint-retrospective/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Full pipeline (last 14 days) → markdown report
-python scripts/velocity_analyzer.py --days 14 -f json &gt; /tmp/v.json &amp;&amp; \
-python scripts/contributor_insights.py --days 14 -f json &gt; /tmp/c.json &amp;&amp; \
-python scripts/code_churn_analyzer.py --days 14 -f json &gt; /tmp/ch.json &amp;&amp; \
-python scripts/retro_report_generator.py -v /tmp/v.json -c /tmp/c.json -u /tmp/ch.json -s &quot;Sprint 23&quot;
+  <h2>Quick Start</h2>Three tools read git history (`velocity_analyzer.py`, `contributor_insights.py`, `code_churn_analyzer.py`: each takes `--days N` or `--since/--until YYYY-MM-DD`, `--repo PATH`, `-f text|json`). `retro_report_generator.py` reads their JSON output and writes the markdown report (`-v` velocity JSON, required; `-c` contributors; `-u` churn; `--previous-retro` last report for action-item carry-over; `--previous-velocity` for deltas; `-s` sprint name; `-o` output file; `--save DIR` snapshot).
+
+<pre><code># Try the report without a repo: the samples are the three tools&#x27; JSON for a 3-person sprint
+python3 project-management/sprint-retrospective/scripts/retro_report_generator.py \
+  -v project-management/sprint-retrospective/assets/sample_velocity.json \
+  -c project-management/sprint-retrospective/assets/sample_contributors.json \
+  -u project-management/sprint-retrospective/assets/sample_churn.json \
+  --previous-retro project-management/sprint-retrospective/assets/sample_previous_retro.md -s &quot;Sprint 23&quot;
 </code></pre>
 
-All tools support `--format text|json`, `--days N`, `--since/--until YYYY-MM-DD`, and `--repo /path`.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+<pre><code># Full pipeline on a real repo, last 14 days (JSON goes to a temp dir, not the repo)
+S=project-management/sprint-retrospective/scripts; OUT=$(mktemp -d)
+python3 $S/velocity_analyzer.py --days 14 --repo . -f json &gt; $OUT/v.json
+python3 $S/contributor_insights.py --days 14 --repo . -f json &gt; $OUT/c.json
+python3 $S/code_churn_analyzer.py --days 14 --repo . -f json &gt; $OUT/ch.json
+python3 $S/retro_report_generator.py -v $OUT/v.json -c $OUT/c.json -u $OUT/ch.json -s &quot;Sprint 23&quot; -o $OUT/retro.md
+</code></pre>
+
+On the sample the report flags churn rate 0.34 and hotspot concentration 0.32 as attention areas, one single-owner directory, and two of three previous action items still open.
+
+**Exit codes:** `0` report produced · `2` not a repository, an invalid `--since`/`--until` date, or a report input that is missing, unreadable or not the tools' JSON. The tools report; they do not gate.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/sprint-retrospective/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

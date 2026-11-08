@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Database Schema Designer - Claude Skills</title>
-  <meta name="description" content="Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or ad">
+  <meta name="description" content="Design a new relational schema from product requirements: tables, ORM models, RLS, indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy or soft deletes, or writing Dr">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/database-schema-designer.html">
   <meta property="og:title" content="Database Schema Designer - Claude Skills">
-  <meta property="og:description" content="Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or ad">
+  <meta property="og:description" content="Design a new relational schema from product requirements: tables, ORM models, RLS, indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy or soft deletes, or writing Dr">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/database-schema-designer.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Database Schema Designer", "description": "Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/database-schema-designer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Database Schema Designer", "description": "Design a new relational schema from product requirements: tables, ORM models, RLS, indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy or soft deletes, or writing Drizzle/Prisma/Alembic schemas.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/database-schema-designer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Database Schema Designer</h1>
-    <p class="page-subtitle">Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.</p>
+    <p class="page-subtitle">Design a new relational schema from product requirements: tables, ORM models, RLS, indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy or soft deletes, or writing Drizzle/Prisma/Alembic schemas.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">schema-design</span><span class="tag">normalization</span><span class="tag">erd</span><span class="tag">row-level-security</span><span class="tag">postgresql</span></div>
   </div>
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Database Schema Designer (Engineering domain).
 
-Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.
+Design a new relational schema from product requirements: tables, ORM models, RLS, indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy or soft deletes, or writing Drizzle/Prisma/Alembic schemas.
 
-Design normalized relational database schemas from requirements and generate migrations, TypeScript/Python types, seed data, Row-Level Security policies, index strategies, and ERD diagrams. Handles multi-tenancy, soft deletes, audit trails, optimistic locking, polymorphic associations, and temporal 
+The agent turns product requirements into a normalized relational schema with the cross-cutting columns, constraints, Row-Level Security, indexes, migrations and generated types the application needs, for PostgreSQL, MySQL or SQLite with Drizzle, Prisma, TypeORM or Alembic. - **Schema design from re
 
 ## How to Help
 When the user asks for help in this domain:
@@ -415,9 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Database Schema Designer (Engineering domain).
 
-Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.
+Design a new relational schema from product requirements: tables, ORM models, RLS, indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy or soft deletes, or writing Drizzle/Prisma/Alembic schemas.
 
-Design normalized relational database schemas from requirements and generate migrations, TypeScript/Python types, seed data, Row-Level Security policies, index strategies, and ERD diagrams. Handles multi-tenancy, soft deletes, audit trails, optimistic locking, polymorphic associations, and temporal 
+The agent turns product requirements into a normalized relational schema with the cross-cutting columns, constraints, Row-Level Security, indexes, migrations and generated types the application needs, for PostgreSQL, MySQL or SQLite with Drizzle, Prisma, TypeORM or Alembic. - **Schema design from re
 
 ## How to Help
 When the user asks for help in this domain:
@@ -447,11 +447,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Database Schema Designer
 
-Design normalized relational database schemas from requirements and generate migrations, TypeScript/Python types, seed data, Row-Level Security policies, index strategies, and ERD diagrams. Handles multi-tenancy, soft deletes, audit trails, optimistic locking, polymorphic associations, and temporal data patterns. Supports PostgreSQL, MySQL, and SQLite with Drizzle, Prisma, TypeORM, and Alembic.
-
-## Keywords
-
-database schema, schema design, normalization, migration, ERD, row-level security, indexing, multi-tenancy, soft deletes, audit trail, Drizzle, Prisma, PostgreSQL
+The agent turns product requirements into a normalized relational schema with the cross-cutting columns, constraints, Row-Level Security, indexes, migrations and generated types the application needs, for PostgreSQL, MySQL or SQLite with Drizzle, Prisma, TypeORM or Alembic.
 
 ## Core Capabilities
 
@@ -464,7 +460,7 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 ## When to Use
 
 - Designing tables for a new feature
-- Reviewing an existing schema for normalization or performance issues
+- Checking a schema you are designing for missing indexes and conventions (for deep analysis of an existing schema and index tuning, use `engineering/database-designer`)
 - Adding multi-tenancy to a single-tenant schema
 - Planning a breaking schema migration
 - Generating ERD documentation for a service
@@ -479,15 +475,52 @@ Before designing the schema, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `erd_generator.py` | Parse SQL DDL and generate a Mermaid ER diagram | `python scripts/erd_generator.py schema.sql -o erd.mmd` |
-| `migration_diffr.py` | Diff two SQL schemas into migration ALTER statements (with rollback) | `python scripts/migration_diffr.py old.sql new.sql` |
-| `schema_validator.py` | Validate DDL for normalization violations, missing indexes, naming | `python scripts/schema_validator.py schema.sql --strict` |
+1. **Model.** List the entities, their relationships and cardinalities from the requirements; normalize to 3NF, then denormalize only where a read path needs it and say why.
+2. **Add the cross-cutting columns** each table needs: `id`, `created_at`, `updated_at`, and where required `deleted_at`, `organization_id`, `version`.
+   - Primary keys: UUIDv7 (time-ordered, so B-tree inserts stay local) stored in the native `uuid` type, or CUID2 where IDs are generated in the app. PostgreSQL 18+ can generate UUIDv7 with `uuidv7()`. Use integer identity keys only for internal tables whose IDs never leave the database.
+3. **Write the DDL or ORM schema**, with a foreign-key index on every FK column, partial indexes for soft-deleted tables, and RLS policies for multi-tenant tables (see `references/schema-design-and-security.md`).
+4. **Validate** with `schema_validator.py` and fix every error; then render the ERD with `erd_generator.py` and check that it matches the requirements.
+5. **Migrate.** For a change to an existing schema, diff the two DDL versions with `migration_diffr.py`, review the forward and rollback SQL, and use the zero-downtime patterns in `references/indexes-and-migrations.md` for large tables.
 
-## References
+## Quick Start
+
+```bash
+python3 scripts/schema_validator.py assets/sample_schema_v1.sql               # warnings only (exit 0)
+python3 scripts/schema_validator.py assets/sample_schema_v2.sql               # new table without FK indexes (exit 1)
+python3 scripts/migration_diffr.py assets/sample_schema_v1.sql assets/sample_schema_v2.sql   # forward + rollback SQL
+python3 scripts/erd_generator.py assets/sample_schema_v2.sql                  # Mermaid ERD
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `scripts/schema_validator.py &lt;file.sql&gt;` | Missing PK, sequential PK, FK without index, nullable FK, missing timestamps, soft deletes without a partial index, tables with no index, naming | `--json`, `--strict` (warnings fail too) | 0 clean, 1 errors (or warnings with `--strict`), 2 bad input |
+| `scripts/migration_diffr.py &lt;old.sql&gt; &lt;new.sql&gt;` | Added/removed tables and columns, type and nullability changes, index changes, with rollback | `--json`, `--no-rollback`, `-o &lt;file&gt;` | 0 no differences, 1 differences found, 2 bad input |
+| `scripts/erd_generator.py &lt;file.sql&gt;` | Mermaid `erDiagram` with PK/FK markers and a table summary | `-o &lt;file.mmd&gt;`, `--json` | 0, 2 bad input |
+
+## Anti-Patterns
+
+**Mistake:** Exposing sequential integer IDs in URLs and APIs.
+**Why it happens:** `SERIAL` is the default in most tutorials.
+**Instead:** Use UUIDv7 or CUID2 for anything that leaves the database; sequential IDs leak volume and invite enumeration.
+
+**Mistake:** Multi-tenant tables that rely on the application to filter by tenant.
+**Why it happens:** A `WHERE organization_id = ?` in the repository layer feels sufficient.
+**Instead:** Add RLS policies keyed on the tenant column so a missed filter returns nothing instead of another tenant&#x27;s rows.
+
+**Mistake:** Foreign keys without an index.
+**Why it happens:** PostgreSQL does not create one automatically.
+**Instead:** Index every FK column; joins and cascading deletes scan the child table otherwise. `schema_validator.py` reports each one.
+
+## Files
+
+- `scripts/schema_validator.py`, `scripts/migration_diffr.py`, `scripts/erd_generator.py` — the tools above.
+- `assets/sample_schema_v1.sql` and `assets/sample_schema_v2.sql` — two versions of a small multi-tenant schema (v2 adds soft deletes, due dates and a comments table without FK indexes).
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -509,16 +542,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Database infrastructure provisioning, replication, or failover configuration — see `senior-cloud-architect` for cloud database setup
 - Application-layer ORM patterns, connection pooling, or caching strategies — see `senior-backend` for backend architecture decisions
 
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `migration-architect` | Hands off generated DDL and migration files for sequencing across services | Schema Designer produces migrations, Migration Architect orchestrates cross-service rollout order |
-| `api-design-reviewer` | Schema entities map directly to API resource models and endpoint structure | Schema entities and relationships feed into REST/GraphQL resource definitions and validation rules |
-| `senior-backend` | Generated types and ORM schemas plug into repository and service layers | TypeScript interfaces and Pydantic models from schema become the backend&#x27;s data access contracts |
-| `performance-profiler` | Index strategy recommendations are validated against real query execution plans | Schema Designer proposes indexes, Performance Profiler confirms effectiveness with `EXPLAIN ANALYZE` data |
-| `senior-secops` | RLS policies and column encryption align with security compliance requirements | Security requirements flow in, RLS policies and encryption specifications flow out for audit verification |
-| `observability-designer` | Audit log schema provides the foundation for operational dashboards and alerting | Audit log table structure feeds into observability pipelines for change tracking and anomaly detection |
+Related skills: `engineering/database-designer` (analysis and index tuning of existing schemas), `engineering/migration-architect` (cross-service rollout), `engineering/api-design-reviewer` (API resources from the schema).
 
 ---
 
@@ -546,7 +570,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Database Schema Designer&quot;**
-   - Description: &quot;Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.&quot;
+   - Description: &quot;Design a new relational schema from product requirements: tables, ORM models, RLS, indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy or soft deletes, or writing Drizzle/Prisma/Alembic schemas.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -571,11 +595,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Database Schema Designer
 
-Design normalized relational database schemas from requirements and generate migrations, TypeScript/Python types, seed data, Row-Level Security policies, index strategies, and ERD diagrams. Handles multi-tenancy, soft deletes, audit trails, optimistic locking, polymorphic associations, and temporal data patterns. Supports PostgreSQL, MySQL, and SQLite with Drizzle, Prisma, TypeORM, and Alembic.
-
-## Keywords
-
-database schema, schema design, normalization, migration, ERD, row-level security, indexing, multi-tenancy, soft deletes, audit trail, Drizzle, Prisma, PostgreSQL
+The agent turns product requirements into a normalized relational schema with the cross-cutting columns, constraints, Row-Level Security, indexes, migrations and generated types the application needs, for PostgreSQL, MySQL or SQLite with Drizzle, Prisma, TypeORM or Alembic.
 
 ## Core Capabilities
 
@@ -588,7 +608,7 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 ## When to Use
 
 - Designing tables for a new feature
-- Reviewing an existing schema for normalization or performance issues
+- Checking a schema you are designing for missing indexes and conventions (for deep analysis of an existing schema and index tuning, use `engineering/database-designer`)
 - Adding multi-tenancy to a single-tenant schema
 - Planning a breaking schema migration
 - Generating ERD documentation for a service
@@ -603,15 +623,52 @@ Before designing the schema, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `erd_generator.py` | Parse SQL DDL and generate a Mermaid ER diagram | `python scripts/erd_generator.py schema.sql -o erd.mmd` |
-| `migration_diffr.py` | Diff two SQL schemas into migration ALTER statements (with rollback) | `python scripts/migration_diffr.py old.sql new.sql` |
-| `schema_validator.py` | Validate DDL for normalization violations, missing indexes, naming | `python scripts/schema_validator.py schema.sql --strict` |
+1. **Model.** List the entities, their relationships and cardinalities from the requirements; normalize to 3NF, then denormalize only where a read path needs it and say why.
+2. **Add the cross-cutting columns** each table needs: `id`, `created_at`, `updated_at`, and where required `deleted_at`, `organization_id`, `version`.
+   - Primary keys: UUIDv7 (time-ordered, so B-tree inserts stay local) stored in the native `uuid` type, or CUID2 where IDs are generated in the app. PostgreSQL 18+ can generate UUIDv7 with `uuidv7()`. Use integer identity keys only for internal tables whose IDs never leave the database.
+3. **Write the DDL or ORM schema**, with a foreign-key index on every FK column, partial indexes for soft-deleted tables, and RLS policies for multi-tenant tables (see `references/schema-design-and-security.md`).
+4. **Validate** with `schema_validator.py` and fix every error; then render the ERD with `erd_generator.py` and check that it matches the requirements.
+5. **Migrate.** For a change to an existing schema, diff the two DDL versions with `migration_diffr.py`, review the forward and rollback SQL, and use the zero-downtime patterns in `references/indexes-and-migrations.md` for large tables.
 
-## References
+## Quick Start
+
+```bash
+python3 scripts/schema_validator.py assets/sample_schema_v1.sql               # warnings only (exit 0)
+python3 scripts/schema_validator.py assets/sample_schema_v2.sql               # new table without FK indexes (exit 1)
+python3 scripts/migration_diffr.py assets/sample_schema_v1.sql assets/sample_schema_v2.sql   # forward + rollback SQL
+python3 scripts/erd_generator.py assets/sample_schema_v2.sql                  # Mermaid ERD
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `scripts/schema_validator.py &lt;file.sql&gt;` | Missing PK, sequential PK, FK without index, nullable FK, missing timestamps, soft deletes without a partial index, tables with no index, naming | `--json`, `--strict` (warnings fail too) | 0 clean, 1 errors (or warnings with `--strict`), 2 bad input |
+| `scripts/migration_diffr.py &lt;old.sql&gt; &lt;new.sql&gt;` | Added/removed tables and columns, type and nullability changes, index changes, with rollback | `--json`, `--no-rollback`, `-o &lt;file&gt;` | 0 no differences, 1 differences found, 2 bad input |
+| `scripts/erd_generator.py &lt;file.sql&gt;` | Mermaid `erDiagram` with PK/FK markers and a table summary | `-o &lt;file.mmd&gt;`, `--json` | 0, 2 bad input |
+
+## Anti-Patterns
+
+**Mistake:** Exposing sequential integer IDs in URLs and APIs.
+**Why it happens:** `SERIAL` is the default in most tutorials.
+**Instead:** Use UUIDv7 or CUID2 for anything that leaves the database; sequential IDs leak volume and invite enumeration.
+
+**Mistake:** Multi-tenant tables that rely on the application to filter by tenant.
+**Why it happens:** A `WHERE organization_id = ?` in the repository layer feels sufficient.
+**Instead:** Add RLS policies keyed on the tenant column so a missed filter returns nothing instead of another tenant&#x27;s rows.
+
+**Mistake:** Foreign keys without an index.
+**Why it happens:** PostgreSQL does not create one automatically.
+**Instead:** Index every FK column; joins and cascading deletes scan the child table otherwise. `schema_validator.py` reports each one.
+
+## Files
+
+- `scripts/schema_validator.py`, `scripts/migration_diffr.py`, `scripts/erd_generator.py` — the tools above.
+- `assets/sample_schema_v1.sql` and `assets/sample_schema_v2.sql` — two versions of a small multi-tenant schema (v2 adds soft deletes, due dates and a comments table without FK indexes).
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -633,16 +690,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Database infrastructure provisioning, replication, or failover configuration — see `senior-cloud-architect` for cloud database setup
 - Application-layer ORM patterns, connection pooling, or caching strategies — see `senior-backend` for backend architecture decisions
 
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `migration-architect` | Hands off generated DDL and migration files for sequencing across services | Schema Designer produces migrations, Migration Architect orchestrates cross-service rollout order |
-| `api-design-reviewer` | Schema entities map directly to API resource models and endpoint structure | Schema entities and relationships feed into REST/GraphQL resource definitions and validation rules |
-| `senior-backend` | Generated types and ORM schemas plug into repository and service layers | TypeScript interfaces and Pydantic models from schema become the backend&#x27;s data access contracts |
-| `performance-profiler` | Index strategy recommendations are validated against real query execution plans | Schema Designer proposes indexes, Performance Profiler confirms effectiveness with `EXPLAIN ANALYZE` data |
-| `senior-secops` | RLS policies and column encryption align with security compliance requirements | Security requirements flow in, RLS policies and encryption specifications flow out for audit verification |
-| `observability-designer` | Audit log schema provides the foundation for operational dashboards and alerting | Audit log table structure feeds into observability pipelines for change tracking and anomaly detection |
+Related skills: `engineering/database-designer` (analysis and index tuning of existing schemas), `engineering/migration-architect` (cross-service rollout), `engineering/api-design-reviewer` (API resources from the schema).
 
 ---
 
@@ -670,7 +718,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Database Schema Designer&quot;**
-   - Description: &quot;Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.&quot;
+   - Description: &quot;Design a new relational schema from product requirements: tables, ORM models, RLS, indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy or soft deletes, or writing Drizzle/Prisma/Alembic schemas.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -730,8 +778,12 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/database-schema-designer/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Quick Start</h2><pre><code>python3 scripts/schema_validator.py assets/sample_schema_v1.sql               # warnings only (exit 0)
+python3 scripts/schema_validator.py assets/sample_schema_v2.sql               # new table without FK indexes (exit 1)
+python3 scripts/migration_diffr.py assets/sample_schema_v1.sql assets/sample_schema_v2.sql   # forward + rollback SQL
+python3 scripts/erd_generator.py assets/sample_schema_v2.sql                  # Mermaid ERD
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/database-schema-designer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

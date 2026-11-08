@@ -1,0 +1,44 @@
+{
+  "risks": [
+    {
+      "description": "Authentication service has had 3 outages in the last month; a launch-day outage is plausible",
+      "category": "tiger",
+      "evidence": "3 incident reports in the last 30 days (P1-level severity)",
+      "urgency": "launch_blocking",
+      "owner": "Platform lead",
+      "decision_date": "2026-06-10"
+    },
+    {
+      "description": "CSV export does not handle unicode characters correctly",
+      "category": "tiger",
+      "evidence": "QA found the bug last week; affects ~15% of accounts with non-ASCII data",
+      "urgency": "fast_follow"
+    },
+    {
+      "description": "No automated monitoring alerts for the new data pipeline",
+      "category": "tiger",
+      "evidence": "Pipeline deployed 2 weeks ago; only manual log checks exist currently",
+      "urgency": "track"
+    },
+    {
+      "description": "A major competitor might copy our feature within weeks",
+      "category": "paper_tiger",
+      "evidence": "Competitor's last release was 9 months ago; their team is focused on a different market segment"
+    },
+    {
+      "description": "Users might not discover the new analytics dashboard",
+      "category": "paper_tiger",
+      "evidence": "Dashboard is the new default landing page; usability test showed 100% discovery rate"
+    },
+    {
+      "description": "The PM who originally championed this feature has left the company; nobody has re-validated requirements with current customers",
+      "category": "elephant",
+      "evidence": "PM departed 6 weeks ago; no customer interviews since then; team has been building to the original spec"
+    },
+    {
+      "description": "The team is experiencing burnout after 3 consecutive crunch sprints; quality may be declining",
+      "category": "elephant",
+      "evidence": "Two engineers mentioned burnout in 1-on-1s; PR review thoroughness has visibly dropped"
+    }
+  ]
+}

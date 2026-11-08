@@ -92,8 +92,13 @@ def load_spec(spec_path: Path) -> Dict:
             import yaml
             return yaml.safe_load(content)
         except ImportError:
-            # Fallback to basic YAML parser
-            return load_yaml_as_json(content)
+            # Fallback: a small block-style YAML reader; flow style ({a: b}, [x, y]) is not supported
+            if re.search(r"^\s*[\w$/.-]+:\s*[{\[]", content, re.M):
+                raise ValueError("flow-style YAML ({...} or [...]) needs PyYAML; install it or convert the spec to JSON")
+            spec = load_yaml_as_json(content)
+            if not isinstance(spec, dict) or not isinstance(spec.get("paths"), dict):
+                raise ValueError("could not read 'paths' from the YAML spec; convert it to JSON and retry")
+            return spec
     else:
         return json.loads(content)
 
@@ -638,8 +643,8 @@ Examples:
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

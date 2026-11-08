@@ -818,14 +818,14 @@ def main():
     
     # Load inventory
     if not prioritizer.load_debt_inventory(args.inventory_file):
-        sys.exit(1)
+        sys.exit(2)
     
     # Analyze and prioritize
     try:
         analysis_result = prioritizer.analyze_and_prioritize(args.framework)
     except Exception as e:
-        print(f"Analysis failed: {e}")
-        sys.exit(1)
+        print(f"error: analysis failed: {e}", file=sys.stderr)
+        sys.exit(2)
     
     # Output results
     if args.format in ["json", "both"]:

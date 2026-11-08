@@ -1,0 +1,77 @@
+{
+  "okrs": [
+    {
+      "id": "OKR-1",
+      "name": "Reduce churn to <5% monthly",
+      "keywords": [
+        "churn",
+        "retention",
+        "activation"
+      ]
+    },
+    {
+      "id": "OKR-2",
+      "name": "Grow ARR to $10M",
+      "keywords": [
+        "revenue",
+        "ARR",
+        "enterprise",
+        "upsell"
+      ]
+    },
+    {
+      "id": "OKR-3",
+      "name": "Improve developer experience",
+      "keywords": [
+        "developer",
+        "DX",
+        "API",
+        "documentation"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "title": "Guided Onboarding Wizard",
+      "why": "Our Q2 North Star is reducing time-to-value from 14 days to 3 days. 60% of churned users never completed setup.",
+      "what": "Add a step-by-step setup wizard that guides new users through connecting a data source, inviting a teammate, and creating their first dashboard. Skippable and resumable.",
+      "design_link": "https://figma.com/file/abc123",
+      "acceptance_criteria": [
+        "Wizard appears automatically on first login for new users",
+        "Users can skip at any step and return from help menu",
+        "Each milestone completable independently in any order",
+        "Completion confirmation with suggested next steps",
+        "Does not appear for existing users who completed setup",
+        "Functional on desktop and mobile browsers"
+      ],
+      "okr_ref": "OKR-1"
+    },
+    {
+      "title": "Admin Dashboard Polish",
+      "why": "Because the customer asked for it.",
+      "what": "Clean up the admin dashboard UI.",
+      "acceptance_criteria": [
+        "Looks better"
+      ]
+    },
+    {
+      "title": "API Rate Limit Docs",
+      "why": "Developer support tickets about rate limits increased 40% last quarter, costing 10 hours/week.",
+      "what": "Create comprehensive rate limit documentation with examples and troubleshooting guide.",
+      "acceptance_criteria": [
+        "Docs cover all endpoints",
+        "Includes code examples",
+        "FAQ section",
+        "Linked from API portal"
+      ]
+    },
+    {
+      "title": "Fix UI Bug",
+      "why": "Customer asked for it.",
+      "what": "Fix the button.",
+      "acceptance_criteria": [
+        "API returns 200"
+      ]
+    }
+  ]
+}

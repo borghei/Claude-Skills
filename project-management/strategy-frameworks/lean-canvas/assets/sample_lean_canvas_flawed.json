@@ -1,0 +1,26 @@
+{
+  "canvas_name": "Idea",
+  "as_of": "2026-05-27",
+  "problem": {
+    "top_problems": ["Scheduling is hard"],
+    "existing_alternatives": []
+  },
+  "customer_segments": {
+    "target": "Businesses",
+    "early_adopters_named": []
+  },
+  "unique_value_proposition": {
+    "statement": "The best AI-powered scheduling platform"
+  },
+  "solution": {
+    "features": ["AI", "Dashboard", "Mobile app", "Integrations", "Reports", "Chat"]
+  },
+  "channels": [],
+  "revenue_streams": {},
+  "cost_structure": {},
+  "key_metrics": {},
+  "unfair_advantage": {
+    "current": "Our passion and great team",
+    "honest_classification": "real"
+  }
+}

@@ -1,16 +1,16 @@
 ---
 name: sql-database-assistant
 description: >
-  This skill should be used when the user asks to "optimize SQL queries",
-  "explore database schemas", "generate migration SQL", "analyze query
-  performance", or "document database structure".
+  Review SQL queries for index and scan problems, document schemas from DDL, and generate
+  migrations with rollback and destructive-change flags. Use when tuning a query, documenting
+  a schema, or diffing two schemas.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: databases
-  updated: 2026-04-02
+  updated: 2026-11-08
   tags: [sql, database, optimization, migration, schema]
 ---
 # SQL Database Assistant
@@ -21,6 +21,12 @@ metadata:
 ## Overview
 
 The **SQL Database Assistant** skill provides tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. It helps teams write efficient queries, maintain clean schemas, and manage database evolution safely.
+
+## When to Use
+
+- A query is slow and you want the likely text-level causes before reading its plan.
+- You need schema documentation (tables, columns, keys) from DDL.
+- You have a current and a target schema and need the migration SQL and its rollback.
 
 ## Clarify First
 
@@ -35,61 +41,36 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Analyze a SQL query for performance issues
-python scripts/query_optimizer.py --file slow_query.sql
+# Review a file of queries (bundled sample: 8 findings; --strict exits 1 on any finding)
+python scripts/query_optimizer.py --file examples/queries.sql --strict
 
-# Analyze inline SQL
+# Review one inline query
 python scripts/query_optimizer.py --query "SELECT * FROM users WHERE name LIKE '%john%'"
 
-# Explore schema from DDL file
-python scripts/schema_explorer.py --file schema.sql
+# Document a schema
+python scripts/schema_explorer.py --file examples/schema.sql --format markdown
 
-# Generate migration from schema diff
-python scripts/migration_generator.py --from old_schema.sql --to new_schema.sql
-
-# JSON output
-python scripts/query_optimizer.py --file query.sql --format json
+# Diff two schemas: additive change exits 0, drops exit 1 until reviewed
+python scripts/migration_generator.py --from examples/schema.sql --to examples/schema_additive.sql
+python scripts/migration_generator.py --from examples/schema.sql --to examples/schema_v2.sql
 ```
 
 ## Tools Overview
 
-### query_optimizer.py
+| Tool | What it checks or produces | Key flags |
+|------|---------------------------|-----------|
+| `query_optimizer.py` | `SELECT *`, leading-wildcard `LIKE`, missing `WHERE`, correlated subqueries, join and `OR` patterns, `DISTINCT`, unbounded `ORDER BY`, `= NULL`; comments are ignored | `--file` or `--query`, `--format text/json`, `--strict` |
+| `schema_explorer.py` | Table catalog, columns with types/nullability/defaults, indexes, foreign keys | `--file`, `--format text/json/markdown` |
+| `migration_generator.py` | UP and commented DOWN SQL for added/dropped tables and columns and type changes, with a destructive-change banner | `--from`, `--to`, `--format`, `--allow-destructive` |
 
-Analyzes SQL queries for performance issues and optimization opportunities.
+Exit codes: `0` ok; `1` `query_optimizer.py --strict` found something, or
+`migration_generator.py` produced destructive steps (drops or type changes) without
+`--allow-destructive`; `2` bad input (file not found). Index changes are not diffed.
 
-| Feature | Description |
-|---------|-------------|
-| SELECT * detection | Flags queries selecting all columns |
-| Missing index hints | Identifies WHERE/JOIN columns likely needing indexes |
-| N+1 detection | Flags correlated subquery patterns |
-| Full table scan | Detects queries without WHERE clauses on large tables |
-| JOIN analysis | Checks join conditions and types |
-| LIKE optimization | Flags leading wildcard LIKE patterns |
-
-### schema_explorer.py
-
-Generates documentation from SQL DDL (CREATE TABLE) files.
-
-| Feature | Description |
-|---------|-------------|
-| Table catalog | Lists all tables with column counts |
-| Column details | Documents types, nullability, defaults |
-| Index listing | Catalogs indexes and their columns |
-| Relationship mapping | Identifies foreign key relationships |
-| Markdown output | Generates schema documentation |
-
-### migration_generator.py
-
-Generates migration SQL by comparing two schema DDL files.
-
-| Feature | Description |
-|---------|-------------|
-| Column additions | ALTER TABLE ADD COLUMN for new columns |
-| Column removals | ALTER TABLE DROP COLUMN for removed columns |
-| Type changes | ALTER TABLE ALTER COLUMN for type modifications |
-| New tables | CREATE TABLE for entirely new tables |
-| Dropped tables | DROP TABLE for removed tables |
-| Index changes | CREATE/DROP INDEX for index differences |
+The optimizer reads query text only. For a real diagnosis ask for the plan
+(`EXPLAIN (ANALYZE, BUFFERS)` in PostgreSQL, `EXPLAIN ANALYZE` in MySQL 8) and trust it over
+the script when they disagree: look for sequential scans on large tables, row-estimate
+errors and sorts or hashes spilling to disk.
 
 ## Workflows
 
@@ -112,10 +93,10 @@ Generates migration SQL by comparing two schema DDL files.
 
 1. **Capture current** - Export current schema DDL
 2. **Define target** - Write desired schema DDL
-3. **Generate migration** - Run migration_generator.py
-4. **Review SQL** - Check generated migration for safety
-5. **Test** - Apply to staging database first
-6. **Deploy** - Apply to production with rollback plan
+3. **Generate migration** - Run migration_generator.py; exit 1 means it drops or retypes something
+4. **Review SQL** - For every `[DESTRUCTIVE]` step, decide how the data is preserved (backup, copy column, expand-and-contract) before passing `--allow-destructive`
+5. **Test** - Apply UP, then the DOWN script, then UP again on a copy of production data
+6. **Deploy** - Done when UP and DOWN both ran cleanly on the copy, data in kept columns is unchanged, and the backup of dropped data is verified
 
 ### CI Integration
 
@@ -180,3 +161,32 @@ python scripts/schema_explorer.py --file schema.sql --format markdown > SCHEMA.m
 - Test migrations against a copy of production data
 - Add columns as nullable first, then backfill, then add constraints
 - Never rename columns directly; add new, migrate data, drop old
+
+## Anti-Patterns
+
+### Trusting DOWN to Restore Data
+**Mistake:** Running a migration that drops a column because "there is a rollback script".
+**Why it happens:** The DOWN section looks like an undo button.
+**Instead:** DOWN recreates the column empty. Copy or back up the data first, and prefer expand-and-contract (add new, backfill, switch reads, drop later).
+
+### Adding Indexes From Text Alone
+**Mistake:** Creating every index the optimizer suggests.
+**Why it happens:** Each suggestion looks cheap.
+**Instead:** Indexes cost writes and storage. Confirm with the query plan and the column's selectivity, and check for an existing composite index that already covers it.
+
+### Renames as Drop and Add
+**Mistake:** Applying a generated drop-plus-add for what is really a renamed column.
+**Why it happens:** A schema diff cannot tell a rename from a replacement.
+**Instead:** Replace the pair with `ALTER TABLE ... RENAME COLUMN` (or a staged copy for zero downtime) before running it.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/query_optimizer.py` | Static SQL query review |
+| `scripts/schema_explorer.py` | Schema documentation from DDL |
+| `scripts/migration_generator.py` | Schema diff to UP/DOWN migration with destructive flags |
+| `examples/queries.sql` | Queries with deliberate anti-patterns |
+| `examples/schema.sql` | Six-table e-commerce schema |
+| `examples/schema_additive.sql`, `schema_v2.sql` | Target schemas: additive (exit 0) and destructive (exit 1) |
+| `references/sql-optimization.md` | Index strategies, query patterns, anti-patterns |

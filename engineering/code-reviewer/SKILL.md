@@ -1,9 +1,9 @@
 ---
 name: code-reviewer
 description: >
-  Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes
-  PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs,
-  analyzing code quality, or generating review checklists.
+  Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID
+  issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a
+  review checklist.
 license: MIT + Commons Clause
 metadata:
   version: 1.2.0
@@ -22,7 +22,7 @@ Automated code review tooling that analyzes pull requests for complexity and ris
 - **PR risk analysis** — scan git diffs for hardcoded secrets, SQL injection, debug statements, lint bypasses, `any` types, and TODO/FIXME, with a 1-10 complexity score.
 - **Code quality checking** — detect long functions, large files, god classes, deep nesting, too many params, high cyclomatic complexity, missing error handling, unused imports, and magic numbers against fixed thresholds.
 - **SOLID & antipattern detection** — flag structural, logic, security, performance, testing, and async antipatterns with fixes.
-- **Review reports** — merge PR and quality findings into a verdict (approve / request changes / block), 0-100 score, and ranked action items in text, markdown, or JSON.
+- **Review reports** — merge PR and quality findings into a verdict (approve / request changes / block), 0-100 score, and ranked action items in text, markdown, or JSON. An empty diff gives `nothing_to_review` and a failed diff analysis `incomplete`, never an approval. The scripts are regex heuristics: they point a human or model reviewer at likely problems; they do not replace reading the diff.
 - **Review order prioritization** — sort files so security-sensitive code is inspected first.
 - **Commit hygiene** — validate conventional-commit format across a branch.
 - **Two-axis review** — review the diff since a fixed base twice, independently: once against repo standards, once against the original spec or issue (missed requirements, scope creep), then merge.

@@ -1,0 +1,16 @@
+{
+  "name": "search_docs",
+  "description": "Search internal docs by keyword and return the top matches",
+  "inputSchema": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "Search terms"
+      }
+    },
+    "required": [
+      "query"
+    ]
+  }
+}

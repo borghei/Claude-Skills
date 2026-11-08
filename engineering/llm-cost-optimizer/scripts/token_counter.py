@@ -5,7 +5,6 @@ Token Counter - Count tokens in prompts and estimate costs across LLM models.
 Uses heuristic tokenization (character and word-based estimation) to provide
 accurate token counts without requiring external tokenizer libraries.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -30,7 +29,9 @@ class ModelPricing:
     token_ratio: float = 1.0   # Multiplier vs. GPT-4 tokenizer baseline
 
 
-# Pricing as of Q1 2026 (Anthropic rows checked 2026-09)
+# Illustrative price snapshot, USD per 1M tokens (assembled Q1 2026; not verified against current
+# provider pages). For any real budget pass --prices FILE with rates from each provider's pricing page.
+PRICES_AS_OF = "illustrative snapshot, not current prices; use --prices FILE"
 MODEL_CATALOG = {
     "gpt-4o": ModelPricing("GPT-4o", "OpenAI", 2.50, 10.00, 128000, 1.0),
     "gpt-4o-mini": ModelPricing("GPT-4o-mini", "OpenAI", 0.15, 0.60, 128000, 1.0),
@@ -202,7 +203,10 @@ def format_human(text: str, token_count: int, costs: List[Dict],
     if costs:
         cheapest = costs[0]
         most_expensive = costs[-1]
-        if len(costs) > 1:
+        spread = (most_expensive["total_cost_usd"] - cheapest["total_cost_usd"]) / max(most_expensive["total_cost_usd"], 1e-12)
+        if len(costs) > 1 and spread < 0.05:
+            lines.append("All models within 5% of each other at this size; compare per-1K-request cost at real volume.")
+        elif len(costs) > 1:
             savings = most_expensive["total_cost_usd"] - cheapest["total_cost_usd"]
             lines.append(f"Cheapest: {cheapest['model']} (${cheapest['total_cost_usd']:.4f}/request)")
             lines.append(f"Most expensive: {most_expensive['model']} (${most_expensive['total_cost_usd']:.4f}/request)")
@@ -210,6 +214,7 @@ def format_human(text: str, token_count: int, costs: List[Dict],
                 pct = (savings / most_expensive["total_cost_usd"]) * 100
                 lines.append(f"Potential savings by switching: ${savings:.4f}/request ({pct:.0f}%)")
 
+    lines.append(f"Prices: {PRICES_AS_OF}. Check each provider's pricing page before budgeting.")
     lines.append("=" * 65)
     return "\n".join(lines)
 
@@ -230,15 +235,27 @@ def main():
                         help="Assumed output/input token ratio (default: 1.5)")
     parser.add_argument("--format", choices=["human", "json"], default="human",
                         help="Output format (default: human)")
+    parser.add_argument("--prices", help='JSON price table overriding the snapshot: '
+                        '{"key": {"name", "provider", "input_per_million", "output_per_million", "context_window"}}')
 
     args = parser.parse_args()
+    global PRICES_AS_OF
+    if args.prices:
+        try:
+            table = json.loads(Path(args.prices).read_text(encoding="utf-8"))
+            MODEL_CATALOG.clear()
+            MODEL_CATALOG.update({k: ModelPricing(**v) for k, v in table.items()})
+        except (OSError, ValueError, TypeError, AttributeError) as exc:
+            print(f"Error: cannot load --prices {args.prices}: {exc}", file=sys.stderr)
+            sys.exit(2)
+        PRICES_AS_OF = f"from {args.prices}"
 
     # Read input
     if args.file:
         path = Path(args.file)
         if not path.exists():
             print(f"Error: File not found: {args.file}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         text = path.read_text(encoding="utf-8", errors="ignore")
     elif args.text:
         text = args.text
@@ -247,7 +264,7 @@ def main():
 
     if not text.strip():
         print("Error: Empty input", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Resolve models
     if "all" in args.models:

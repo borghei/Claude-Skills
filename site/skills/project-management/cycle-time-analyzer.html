@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cycle Time Analyzer - Claude Skills</title>
-  <meta name="description" content="Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.">
+  <meta name="description" content="Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative flow diagram from issue status history. Use when diagnosing slow delivery, setting WIP limits or preparing a flow review.">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/cycle-time-analyzer.html">
   <meta property="og:title" content="Cycle Time Analyzer - Claude Skills">
-  <meta property="og:description" content="Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.">
+  <meta property="og:description" content="Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative flow diagram from issue status history. Use when diagnosing slow delivery, setting WIP limits or preparing a flow review.">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/cycle-time-analyzer.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Cycle Time Analyzer", "description": "Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/cycle-time-analyzer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Cycle Time Analyzer", "description": "Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative flow diagram from issue status history. Use when diagnosing slow delivery, setting WIP limits or preparing a flow review.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/cycle-time-analyzer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Cycle Time Analyzer</h1>
-    <p class="page-subtitle">Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative flow diagram from issue status history. Use when diagnosing slow delivery, setting WIP limits or preparing a flow review.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.2</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">flow-metrics</span><span class="tag">cycle-time</span><span class="tag">throughput</span><span class="tag">wip</span><span class="tag">cumulative-flow</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Cycle Time Analyzer (Project Management domain).
 
-Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.
+Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative flow diagram from issue status history. Use when diagnosing slow delivery, setting WIP limits or preparing a flow review.
 
 Compute and visualize the four core Kanban flow metrics -- lead time, cycle time, throughput, and work-in-progress -- from issue history data exported from Jira, Linear, GitHub Projects, or any tracker that records status transitions. The output is a dashboard suitable for sprint retrospectives, exe
 
@@ -401,6 +401,9 @@ Compute and visualize the four core Kanban flow metrics -- lead time, cycle time
 - Quoting cycle time when asked for lead time
 - WIP limits set by feel
 - Single-sprint throughput read as a trend
+
+## Frameworks &amp; Templates You Know
+- | `assets/flow-metrics-dashboard.md` | Dashboard template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -420,7 +423,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Cycle Time Analyzer (Project Management domain).
 
-Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.
+Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative flow diagram from issue status history. Use when diagnosing slow delivery, setting WIP limits or preparing a flow review.
 
 Compute and visualize the four core Kanban flow metrics -- lead time, cycle time, throughput, and work-in-progress -- from issue history data exported from Jira, Linear, GitHub Projects, or any tracker that records status transitions. The output is a dashboard suitable for sprint retrospectives, exe
 
@@ -428,6 +431,9 @@ Compute and visualize the four core Kanban flow metrics -- lead time, cycle time
 - Quoting cycle time when asked for lead time
 - WIP limits set by feel
 - Single-sprint throughput read as a trend
+
+## Frameworks &amp; Templates You Know
+- | `assets/flow-metrics-dashboard.md` | Dashboard template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -494,21 +500,30 @@ Before running the analysis, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. **Export** issue history with status transitions into the input shape (`assets/sample_issues.json`).
+2. **Map your states** if your board&#x27;s names differ from the defaults (`--ready-state`, `--in-progress-state`, `--done-state`, each repeatable).
+3. **Run the analysis:**
 
 ```bash
-python scripts/flow_metrics.py --input issues.json --format markdown   # full dashboard
-python scripts/flow_metrics.py --input issues.json --format mermaid     # cumulative flow diagram
-python scripts/flow_metrics.py --demo --format markdown                 # sample output, no input
+python3 project-management/execution/cycle-time-analyzer/scripts/flow_metrics.py \
+  --input project-management/execution/cycle-time-analyzer/assets/sample_issues.json --format markdown
+# Live board: add --as-of YYYY-MM-DD (today) so aging WIP is measured to now
 ```
 
-Review the 85th-percentile cycle time (not the average), flag aging WIP that exceeds it, and re-run weekly to track the trend. See `references/metrics-and-tool-reference.md` for the full workflow, CLI flags, and JSON schemas.
+4. **Read the distribution, not the average:** quote p85 cycle time and p85 lead time, flag aging WIP above p85, read throughput as a 6-8 week trend.
+5. **Verify** before sharing: completed-in-window is not zero, WIP matches the board, and the as-of date in the header is the date you meant. Re-run weekly.
+
+**As-of date:** defaults to the latest timestamp in the data, so the sample (April-May 2026) reads the same on any day: 7 completed, 0.82 items/week, 1 aging item. For a live board pass `--as-of` with today&#x27;s date; otherwise items still in progress look younger than they are.
 
 ## Tools
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Key flags |
 |------|---------|---------|
-| `flow_metrics.py` | Compute lead time, cycle time, throughput, WIP, aging WIP, CFD | `python scripts/flow_metrics.py --input issues.json --format markdown` |
+| `flow_metrics.py` | Lead time, cycle time, throughput, WIP, aging WIP, CFD | `--input F` or `--demo`, `--format json\|markdown\|mermaid\|confluence\|notion\|linear`, `--type`, `--window-days 60`, `--as-of`, `--ignore-missing`, `--output` |
+
+**Exit codes:** 0 report written; 2 missing file, invalid JSON, empty or wrong-shape `issues`, bad `--as-of`, or malformed issue data. Full flags and schemas: `references/metrics-and-tool-reference.md`.
 
 ## Anti-Patterns
 
@@ -520,7 +535,7 @@ Review the 85th-percentile cycle time (not the average), flag aging WIP that exc
 ### WIP limits set by feel
 **Mistake:** The team adopts a WIP limit of 5 per engineer because &quot;that feels manageable&quot;.
 **Why it happens:** Teams pick a limit before anyone has measured current WIP.
-**Instead:** Measure the team&#x27;s current WIP distribution first and set the limit just below its 50th percentile. A limit above the 85th percentile has no effect. Re-measure cycle time with `flow_metrics.py` after 4 weeks.
+**Instead:** Measure the team&#x27;s current WIP distribution first. A starting heuristic [EXPERIMENTAL] is a limit just below its median: low enough to bind on a normal day (that is what forces finishing over starting), high enough not to idle people. A limit above the 85th percentile almost never binds, so it has no effect. Re-measure cycle time with `flow_metrics.py` after 4 weeks and adjust.
 
 ### Single-sprint throughput read as a trend
 **Mistake:** &quot;Throughput dropped to 4 items this sprint, down from 6. Investigating slowdown.&quot;
@@ -528,6 +543,15 @@ Review the 85th-percentile cycle time (not the average), flag aging WIP that exc
 **Instead:** Report throughput as a rolling 6-8 week trend with its range, and annotate known causes such as PTO. Investigate only when a sprint falls outside that range.
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/flow_metrics.py` | The analyzer |
+| `assets/sample_issues.json` | 10-issue history (same as `--demo`) |
+| `assets/flow-metrics-dashboard.md` | Dashboard template |
+| `examples/wayfinder-flow-analysis.md` | Worked analysis |
 
 ## References
 
@@ -597,7 +621,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Cycle Time Analyzer&quot;**
-   - Description: &quot;Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.&quot;
+   - Description: &quot;Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative flow diagram from issue status history. Use when diagnosing slow delivery, setting WIP limits or preparing a flow review.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -659,21 +683,30 @@ Before running the analysis, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. **Export** issue history with status transitions into the input shape (`assets/sample_issues.json`).
+2. **Map your states** if your board&#x27;s names differ from the defaults (`--ready-state`, `--in-progress-state`, `--done-state`, each repeatable).
+3. **Run the analysis:**
 
 ```bash
-python scripts/flow_metrics.py --input issues.json --format markdown   # full dashboard
-python scripts/flow_metrics.py --input issues.json --format mermaid     # cumulative flow diagram
-python scripts/flow_metrics.py --demo --format markdown                 # sample output, no input
+python3 project-management/execution/cycle-time-analyzer/scripts/flow_metrics.py \
+  --input project-management/execution/cycle-time-analyzer/assets/sample_issues.json --format markdown
+# Live board: add --as-of YYYY-MM-DD (today) so aging WIP is measured to now
 ```
 
-Review the 85th-percentile cycle time (not the average), flag aging WIP that exceeds it, and re-run weekly to track the trend. See `references/metrics-and-tool-reference.md` for the full workflow, CLI flags, and JSON schemas.
+4. **Read the distribution, not the average:** quote p85 cycle time and p85 lead time, flag aging WIP above p85, read throughput as a 6-8 week trend.
+5. **Verify** before sharing: completed-in-window is not zero, WIP matches the board, and the as-of date in the header is the date you meant. Re-run weekly.
+
+**As-of date:** defaults to the latest timestamp in the data, so the sample (April-May 2026) reads the same on any day: 7 completed, 0.82 items/week, 1 aging item. For a live board pass `--as-of` with today&#x27;s date; otherwise items still in progress look younger than they are.
 
 ## Tools
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Key flags |
 |------|---------|---------|
-| `flow_metrics.py` | Compute lead time, cycle time, throughput, WIP, aging WIP, CFD | `python scripts/flow_metrics.py --input issues.json --format markdown` |
+| `flow_metrics.py` | Lead time, cycle time, throughput, WIP, aging WIP, CFD | `--input F` or `--demo`, `--format json\|markdown\|mermaid\|confluence\|notion\|linear`, `--type`, `--window-days 60`, `--as-of`, `--ignore-missing`, `--output` |
+
+**Exit codes:** 0 report written; 2 missing file, invalid JSON, empty or wrong-shape `issues`, bad `--as-of`, or malformed issue data. Full flags and schemas: `references/metrics-and-tool-reference.md`.
 
 ## Anti-Patterns
 
@@ -685,7 +718,7 @@ Review the 85th-percentile cycle time (not the average), flag aging WIP that exc
 ### WIP limits set by feel
 **Mistake:** The team adopts a WIP limit of 5 per engineer because &quot;that feels manageable&quot;.
 **Why it happens:** Teams pick a limit before anyone has measured current WIP.
-**Instead:** Measure the team&#x27;s current WIP distribution first and set the limit just below its 50th percentile. A limit above the 85th percentile has no effect. Re-measure cycle time with `flow_metrics.py` after 4 weeks.
+**Instead:** Measure the team&#x27;s current WIP distribution first. A starting heuristic [EXPERIMENTAL] is a limit just below its median: low enough to bind on a normal day (that is what forces finishing over starting), high enough not to idle people. A limit above the 85th percentile almost never binds, so it has no effect. Re-measure cycle time with `flow_metrics.py` after 4 weeks and adjust.
 
 ### Single-sprint throughput read as a trend
 **Mistake:** &quot;Throughput dropped to 4 items this sprint, down from 6. Investigating slowdown.&quot;
@@ -693,6 +726,15 @@ Review the 85th-percentile cycle time (not the average), flag aging WIP that exc
 **Instead:** Report throughput as a rolling 6-8 week trend with its range, and annotate known causes such as PTO. Investigate only when a sprint falls outside that range.
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/flow_metrics.py` | The analyzer |
+| `assets/sample_issues.json` | 10-issue history (same as `--demo`) |
+| `assets/flow-metrics-dashboard.md` | Dashboard template |
+| `examples/wayfinder-flow-analysis.md` | Worked analysis |
 
 ## References
 
@@ -762,7 +804,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Cycle Time Analyzer&quot;**
-   - Description: &quot;Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.&quot;
+   - Description: &quot;Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative flow diagram from issue status history. Use when diagnosing slow delivery, setting WIP limits or preparing a flow review.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -822,13 +864,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/cycle-time-analyzer/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code>python scripts/flow_metrics.py --input issues.json --format markdown   # full dashboard
-python scripts/flow_metrics.py --input issues.json --format mermaid     # cumulative flow diagram
-python scripts/flow_metrics.py --demo --format markdown                 # sample output, no input
-</code></pre>
-
-Review the 85th-percentile cycle time (not the average), flag aging WIP that exceeds it, and re-run weekly to track the trend. See `references/metrics-and-tool-reference.md` for the full workflow, CLI flags, and JSON schemas.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/cycle-time-analyzer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

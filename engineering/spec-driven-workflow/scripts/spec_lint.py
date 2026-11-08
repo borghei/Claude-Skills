@@ -172,10 +172,16 @@ def main() -> None:
         raise
     except OSError as exc:
         print(f"error: could not read spec: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     failed = report["errors"] > args.max_findings or report["precision_ratio"] < args.min_precision
     sys.exit(1 if failed else 0)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit as exc:
+        if isinstance(exc.code, str):  # input errors are raised as sys.exit("ERROR: ...")
+            print(exc.code, file=sys.stderr)
+            sys.exit(2)
+        raise

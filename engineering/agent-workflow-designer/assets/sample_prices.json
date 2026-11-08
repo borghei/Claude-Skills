@@ -1,0 +1,6 @@
+{
+  "_note": "Illustrative rates in USD per 1M tokens, not a price list. Replace with the numbers on your provider's pricing page.",
+  "claude-haiku-5-5": {"input": 1.00, "output": 5.00, "cached_input": 0.10},
+  "claude-sonnet-5-5": {"input": 3.00, "output": 15.00, "cached_input": 0.30},
+  "claude-opus-5-5": {"input": 5.00, "output": 25.00, "cached_input": 0.50}
+}

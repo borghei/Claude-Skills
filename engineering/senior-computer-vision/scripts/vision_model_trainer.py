@@ -6,8 +6,11 @@ Generates training configuration files for object detection and segmentation mod
 Supports Ultralytics YOLO, Detectron2, and MMDetection frameworks.
 
 Usage:
-    python vision_model_trainer.py <data_dir> --task detection --arch yolov8m
+    python vision_model_trainer.py <data_dir> --task detection --arch yolo26m
     python vision_model_trainer.py <data_dir> --framework detectron2 --arch faster_rcnn_R_50_FPN
+
+Stdlib only: YAML is written by a small built-in emitter.
+Exit codes: 0 config generated, 2 bad input (dataset directory missing or unknown architecture).
 """
 
 import os
@@ -26,8 +29,18 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-# Architecture configurations
+# Architecture configurations. COCO val mAP50-95 as published by Ultralytics
+# (YOLO26: docs.ultralytics.com/models/yolo26/, checked November 2026; YOLO11 and older from
+# their model pages). Re-check the docs for newer families before recommending one.
 YOLO_ARCHITECTURES = {
+    'yolo26n': {'map': 40.9, 'source': 'docs.ultralytics.com/models/yolo26/'},
+    'yolo26s': {'map': 48.6, 'source': 'docs.ultralytics.com/models/yolo26/'},
+    'yolo26m': {'map': 53.1, 'source': 'docs.ultralytics.com/models/yolo26/'},
+    'yolo11n': {'params': '2.6M', 'gflops': 6.5, 'map': 39.5},
+    'yolo11s': {'params': '9.4M', 'gflops': 21.5, 'map': 47.0},
+    'yolo11m': {'params': '20.1M', 'gflops': 68.0, 'map': 51.5},
+    'yolo11l': {'params': '25.3M', 'gflops': 86.9, 'map': 53.4},
+    'yolo11x': {'params': '56.9M', 'gflops': 194.9, 'map': 54.7},
     'yolov8n': {'params': '3.2M', 'gflops': 8.7, 'map': 37.3},
     'yolov8s': {'params': '11.2M', 'gflops': 28.6, 'map': 44.9},
     'yolov8m': {'params': '25.9M', 'gflops': 78.9, 'map': 50.2},
@@ -71,6 +84,20 @@ class VisionModelTrainer:
         self.task = task
         self.framework = framework
         self.config = {}
+        self.output_path = None
+
+    def _coco_files(self) -> List[Path]:
+        """Root-level JSON files that look like COCO annotations."""
+        found = []
+        for path in sorted(self.data_dir.glob('*.json')):
+            try:
+                with open(path, 'r') as f:
+                    data = json.load(f)
+            except (OSError, ValueError):
+                continue
+            if isinstance(data, dict) and 'images' in data and 'annotations' in data:
+                found.append(path)
+        return found
 
     def analyze_dataset(self) -> Dict[str, Any]:
         """Analyze dataset structure and statistics."""
@@ -105,6 +132,17 @@ class VisionModelTrainer:
                                 c['name'] for c in data.get('categories', [])
                             ]
 
+        # COCO JSON at the dataset root (annotations.json, train.json, ...)
+        elif any(self._coco_files()):
+            analysis['annotations']['format'] = 'coco'
+            for ann_file in self._coco_files():
+                with open(ann_file, 'r') as f:
+                    data = json.load(f)
+                split = ann_file.stem if ann_file.stem in ('train', 'val', 'test') else 'train'
+                analysis['images'][split] += len(data.get('images', []))
+                if not analysis['annotations']['classes']:
+                    analysis['annotations']['classes'] = [c['name'] for c in data.get('categories', [])]
+
         # YOLO format
         elif (self.data_dir / 'labels').exists():
             analysis['annotations']['format'] = 'yolo'
@@ -116,10 +154,7 @@ class VisionModelTrainer:
             # Try to read classes from data.yaml
             data_yaml = self.data_dir / 'data.yaml'
             if data_yaml.exists():
-                import yaml
-                with open(data_yaml, 'r') as f:
-                    data = yaml.safe_load(f)
-                    analysis['annotations']['classes'] = data.get('names', [])
+                analysis['annotations']['classes'] = _read_yaml_names(data_yaml)
 
         # Generate recommendations
         total_images = sum(analysis['images'].values())
@@ -137,7 +172,7 @@ class VisionModelTrainer:
         if num_classes > 80:
             analysis['recommendations'].append(
                 f"Large number of classes ({num_classes}). "
-                "Consider using larger model (yolov8l/x) or longer training."
+                "Consider using larger model (yolo26m, or yolo11l/x) or longer training."
             )
 
         logger.info(f"Found {total_images} images, {num_classes} classes")
@@ -438,10 +473,12 @@ class VisionModelTrainer:
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
         if self.framework == 'ultralytics':
-            # YOLO uses YAML
-            import yaml
+            # YOLO uses YAML; metadata goes in a comment because Ultralytics rejects unknown keys
+            body = {k: v for k, v in self.config.items() if k != '_metadata'}
+            meta = self.config.get('_metadata', {})
             with open(output_path, 'w') as f:
-                yaml.dump(self.config, f, default_flow_style=False, sort_keys=False)
+                f.write(f"# Generated for {meta.get('architecture')} ({meta.get('task')})\n")
+                f.write(_to_yaml(body))
         else:
             # Detectron2 and MMDetection use Python configs
             with open(output_path, 'w') as f:
@@ -455,8 +492,10 @@ class VisionModelTrainer:
     def generate_training_command(self) -> str:
         """Generate the training command for the framework."""
         if self.framework == 'ultralytics':
+            if self.output_path:
+                return f"yolo detect train cfg={self.output_path}"
             return f"yolo detect train data={self.config.get('data', 'data.yaml')} " \
-                   f"model={self.config.get('model', 'yolov8m.pt')} " \
+                   f"model={self.config.get('model', 'yolo26m.pt')} " \
                    f"epochs={self.config.get('epochs', 100)} " \
                    f"imgsz={self.config.get('imgsz', 640)}"
         elif self.framework == 'detectron2':
@@ -498,7 +537,7 @@ def main():
                        default='detection', help='Task type')
     parser.add_argument('--framework', choices=['ultralytics', 'detectron2', 'mmdetection'],
                        default='ultralytics', help='Training framework')
-    parser.add_argument('--arch', default='yolov8m',
+    parser.add_argument('--arch', default='yolo26m',
                        help='Model architecture')
     parser.add_argument('--epochs', type=int, default=100, help='Training epochs')
     parser.add_argument('--batch', type=int, default=16, help='Batch size')
@@ -516,6 +555,11 @@ def main():
         task=args.task,
         framework=args.framework
     )
+
+    if not Path(args.data_dir).is_dir():
+        print(f"error: dataset directory not found: {args.data_dir}", file=sys.stderr)
+        sys.exit(2)
+    trainer.output_path = args.output
 
     # Analyze dataset
     analysis = trainer.analyze_dataset()
@@ -559,8 +603,8 @@ def main():
                 batch=args.batch
             )
     except ValueError as e:
-        logger.error(str(e))
-        sys.exit(1)
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
 
     # Output
     if args.json:
@@ -572,5 +616,54 @@ def main():
             trainer.save_config(args.output)
 
 
-if __name__ == '__main__':
+def _yaml_scalar(v: Any) -> str:
+    if v is None:
+        return 'null'
+    if isinstance(v, bool):
+        return 'true' if v else 'false'
+    if isinstance(v, (int, float)):
+        return repr(v)
+    return json.dumps(str(v))
+
+
+def _to_yaml(data: Any, indent: int = 0) -> str:
+    """Emit a dict/list structure as block YAML (enough for training configs)."""
+    pad = '  ' * indent
+    lines = []
+    items = data.items() if isinstance(data, dict) else enumerate(data)
+    for k, v in items:
+        lead = f"{pad}{k}:" if isinstance(data, dict) else f"{pad}-"
+        if isinstance(v, (dict, list)) and v:
+            lines.append(lead + "\n" + _to_yaml(v, indent + 1).rstrip("\n"))
+        elif isinstance(v, (dict, list)):
+            lines.append(f"{lead} {json.dumps(v)}")
+        else:
+            lines.append(f"{lead} {_yaml_scalar(v)}")
+    return "\n".join(lines) + "\n"
+
+
+def _read_yaml_names(path: Path) -> List[str]:
+    """Read the `names:` list from a YOLO data.yaml (inline, dash or index-map form)."""
+    names: List[str] = []
+    in_names = False
+    for raw in path.read_text(encoding='utf-8', errors='replace').splitlines():
+        line = raw.split('#', 1)[0].rstrip()
+        if line.startswith('names:'):
+            rest = line[6:].strip()
+            if rest.startswith('['):
+                return [n.strip().strip('\'"') for n in rest.strip('[]').split(',') if n.strip()]
+            in_names = True
+            continue
+        if in_names:
+            if line and not line[0].isspace():
+                break
+            item = line.strip()
+            if item.startswith('- '):
+                names.append(item[2:].strip().strip('\'"'))
+            elif ':' in item:
+                names.append(item.split(':', 1)[1].strip().strip('\'"'))
+    return names
+
+
+if __name__ == "__main__":
     main()

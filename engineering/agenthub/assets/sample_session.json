@@ -1,0 +1,175 @@
+{
+  "session_id": "0de18ecb",
+  "workflow_name": "competitive-analysis",
+  "workflow_description": "Research competitors, collect pricing, analyse positioning, write a summary",
+  "created_at": "2026-11-08T17:00:26.056011",
+  "started_at": "2026-11-08T17:00:26.056011",
+  "completed_at": null,
+  "state": "RUNNING",
+  "config": {
+    "max_parallel": 3,
+    "timeout_per_agent": 300,
+    "retry_on_failure": 1,
+    "quality_threshold": 0.7
+  },
+  "agents": {
+    "researcher": {
+      "state": "COMPLETED",
+      "task": "Research competitor landscape and market size",
+      "inputs": [
+        "product_description"
+      ],
+      "expected_outputs": [
+        "competitor_list",
+        "market_size"
+      ],
+      "dependencies": [],
+      "outputs": {
+        "competitor_list": "## Competitors\n- Acme (enterprise)\n- Bolt (SMB)\n- Corex (open source)",
+        "market_size": "Estimated 1.2B USD serviceable market, growing ~18% a year, based on three analyst reports."
+      },
+      "started_at": null,
+      "completed_at": "2026-11-08T17:00:26.090687",
+      "duration_s": null,
+      "retries": 0,
+      "max_retries": 1,
+      "eval_score": 0.82,
+      "error": null
+    },
+    "pricing_collector": {
+      "state": "COMPLETED",
+      "task": "Collect pricing tiers for each competitor",
+      "inputs": [
+        "competitor_list"
+      ],
+      "expected_outputs": [
+        "pricing_data"
+      ],
+      "dependencies": [
+        "researcher"
+      ],
+      "outputs": {
+        "pricing_data": "## Pricing\n- Acme: 49/user/month, annual only\n- Bolt: 19/user/month\n- Corex: free core, 12/user hosted"
+      },
+      "started_at": null,
+      "completed_at": "2026-11-08T17:00:26.127149",
+      "duration_s": null,
+      "retries": 0,
+      "max_retries": 1,
+      "eval_score": 0.74,
+      "error": null
+    },
+    "feature_collector": {
+      "state": "COMPLETED",
+      "task": "Build a feature matrix for each competitor",
+      "inputs": [
+        "competitor_list"
+      ],
+      "expected_outputs": [
+        "feature_matrix"
+      ],
+      "dependencies": [
+        "researcher"
+      ],
+      "outputs": {
+        "feature_matrix": "SSO: Acme yes, Bolt no, Corex paid."
+      },
+      "started_at": null,
+      "completed_at": "2026-11-08T17:00:26.163591",
+      "duration_s": null,
+      "retries": 0,
+      "max_retries": 1,
+      "eval_score": 0.61,
+      "error": null
+    },
+    "analyst": {
+      "state": "FAILED",
+      "task": "Analyse positioning opportunities and pricing strategy",
+      "inputs": [
+        "pricing_data",
+        "feature_matrix",
+        "market_size"
+      ],
+      "expected_outputs": [
+        "positioning_report",
+        "pricing_recommendation"
+      ],
+      "dependencies": [
+        "pricing_collector",
+        "feature_collector"
+      ],
+      "outputs": null,
+      "started_at": null,
+      "completed_at": "2026-11-08T17:00:26.200608",
+      "duration_s": null,
+      "retries": 0,
+      "max_retries": 1,
+      "eval_score": null,
+      "error": "timeout after 180s"
+    },
+    "writer": {
+      "state": "PENDING",
+      "task": "Write an executive summary of the findings",
+      "inputs": [
+        "positioning_report",
+        "pricing_recommendation"
+      ],
+      "expected_outputs": [
+        "executive_summary"
+      ],
+      "dependencies": [
+        "analyst"
+      ],
+      "outputs": null,
+      "started_at": null,
+      "completed_at": null,
+      "duration_s": null,
+      "retries": 0,
+      "max_retries": 1,
+      "eval_score": null,
+      "error": null
+    }
+  },
+  "history": [
+    {
+      "timestamp": "2026-11-08T17:00:26.056011",
+      "event": "session_created",
+      "detail": "Workflow: competitive-analysis"
+    },
+    {
+      "timestamp": "2026-11-08T17:00:26.090687",
+      "event": "agent_state_change",
+      "agent": "researcher",
+      "old_state": "READY",
+      "new_state": "COMPLETED",
+      "newly_ready": [
+        "pricing_collector",
+        "feature_collector"
+      ]
+    },
+    {
+      "timestamp": "2026-11-08T17:00:26.127149",
+      "event": "agent_state_change",
+      "agent": "pricing_collector",
+      "old_state": "READY",
+      "new_state": "COMPLETED"
+    },
+    {
+      "timestamp": "2026-11-08T17:00:26.163591",
+      "event": "agent_state_change",
+      "agent": "feature_collector",
+      "old_state": "READY",
+      "new_state": "COMPLETED",
+      "newly_ready": [
+        "analyst"
+      ]
+    },
+    {
+      "timestamp": "2026-11-08T17:00:26.200608",
+      "event": "agent_state_change",
+      "agent": "analyst",
+      "old_state": "READY",
+      "new_state": "FAILED"
+    }
+  ]
+}

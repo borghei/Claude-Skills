@@ -9,7 +9,6 @@ formatting, and compliance with tier-specific requirements.
 Usage:
     python skill_validator.py <skill_path> [--tier TIER] [--json] [--verbose]
 
-Author: Claude Skills Engineering Team
 Version: 1.0.0
 Dependencies: Python Standard Library Only
 """
@@ -444,15 +443,20 @@ class SkillValidator:
             lines = content.split('\n')
             line_count = len([line for line in lines if line.strip()])
             
-            # Check line count
-            min_lines = self._get_tier_requirement("min_skill_md_lines", 100)
-            if line_count >= min_lines:
-                self.report.add_check("skill_md_length", True, 
-                                     f"SKILL.md has {line_count} lines (≥{min_lines})", 1.0)
-            else:
+            # Check line count: a lean SKILL.md with detail in references/ is the goal, so the
+            # check is a band (a floor that catches stubs, a ceiling of 500), not "longer is better"
+            min_lines, max_lines = 40, 500
+            if min_lines <= line_count <= max_lines:
+                self.report.add_check("skill_md_length", True,
+                                     f"SKILL.md has {line_count} lines ({min_lines}-{max_lines})", 1.0)
+            elif line_count < min_lines:
                 self.report.add_check("skill_md_length", False,
                                      f"SKILL.md has {line_count} lines (<{min_lines})", 0.0)
-                self.report.add_error(f"SKILL.md too short: {line_count} lines, minimum {min_lines}")
+                self.report.add_error(f"SKILL.md looks like a stub: {line_count} lines, minimum {min_lines}")
+            else:
+                self.report.add_check("skill_md_length", False,
+                                     f"SKILL.md has {line_count} lines (>{max_lines})", 0.0)
+                self.report.add_warning(f"SKILL.md is {line_count} lines; move detail into references/")
                 
             # Validate frontmatter
             self._validate_frontmatter(content)
@@ -860,9 +864,10 @@ Examples:
   python skill_validator.py engineering/my-skill --verbose
 
 Tier Options:
-  BASIC     - Basic skill requirements (100+ lines SKILL.md, 1+ script)
-  STANDARD  - Standard skill requirements (200+ lines, advanced features)
-  POWERFUL  - Powerful skill requirements (300+ lines, comprehensive features)
+  BASIC     - 1+ script with argparse and a main guard
+  STANDARD  - adds assets/ and references/, JSON output and help text
+  POWERFUL  - 2+ scripts, expected_outputs/, error handling
+  (all tiers: SKILL.md 40-500 non-blank lines, detail in references/)
         """
     )
     
@@ -880,6 +885,10 @@ Tier Options:
     
     args = parser.parse_args()
     
+    if not Path(args.skill_path).is_dir():
+        print(f"error: skill directory not found: {args.skill_path}", file=sys.stderr)
+        sys.exit(2)
+
     try:
         # Create validator and run validation
         validator = SkillValidator(args.skill_path, args.tier, args.verbose)

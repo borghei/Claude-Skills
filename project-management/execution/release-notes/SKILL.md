@@ -1,16 +1,16 @@
 ---
 name: release-notes
 description: >
-  Structured release notes that translate technical changes (tickets, changelogs,
-  git logs, PRDs) into user-benefit communication. Use for product releases, sprint
-  demos, changelog maintenance, or customer release announcements.
+  Turn tickets, changelogs and git logs into user-facing notes grouped by
+  type, breaking changes first. Use when announcing a product release,
+  maintaining a changelog, or rewriting technical entries for customers.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools:
     - scripts/release_notes_generator.py
   tech-stack: release-management, changelog, semantic-versioning
@@ -50,14 +50,23 @@ Before generating the release notes, settle the inputs below. When one is missin
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. **Collect what shipped**: cross-check Done tickets against the release diff; drop anything reverted.
+2. **Write each entry for the reader** [RECOMMENDED]: what they can now do, not what the team changed. Breaking changes state what changed, what the user must do, and by which date.
+3. **Generate** the grouped notes (categories with no entries are left out):
 
 ```bash
-python scripts/release_notes_generator.py --input changes.json --product-name "Acme App" --version "2.5.0"
-python scripts/release_notes_generator.py --demo --product-name "Acme App" --version "1.0.0"
+python3 project-management/execution/release-notes/scripts/release_notes_generator.py \
+  --input project-management/execution/release-notes/assets/sample_release_entries.json \
+  --product-name "Acme App" --version "2.5.0" --date 2026-11-08
 ```
 
-Include only categories that have entries. Breaking changes must state what changed, what the user must do, and by when. See the references for the full methodology, output template, and flag reference.
+4. **Verify**: rewrite every entry listed under "Rewriting Suggestions" (the tool flags developer jargon such as "refactor", "endpoint", CamelCase or snake_case identifiers) or confirm it is right for the audience, and check customer copy for internal details before sending.
+
+Input: `{"entries": [{title, description, type, ticket_id}]}` with `type` one of feature, improvement, bugfix, breaking, deprecation. Flags: `--input F` or `--demo`, `--product-name`, `--version` (both required), `--date` (default today; pass it for reproducible output), `--format text|json`.
+
+**Exit codes:** 0 notes written; 2 missing file, invalid JSON, wrong shape, invalid entries or a bad `--date`.
 
 ## Anti-Patterns
 
@@ -85,7 +94,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/methodology-and-tooling.md](references/methodology-and-tooling.md)** — full 5-step methodology, classification tables, rewriting before/after examples, audience tone matrix, output template, troubleshooting, success criteria, and the `release_notes_generator.py` flag + JSON-schema reference. Read when producing notes or running the tool.
 - **[references/release-notes-guide.md](references/release-notes-guide.md)** — best-practices guide on category definitions, audience guidance, and worked examples. Read for the deeper rationale.
 - **[references/red-flags.md](references/red-flags.md)** — concrete bad-vs-good entry examples and how to fix them. Read before publishing a draft.
-- **[assets/release_notes_template.md](assets/release_notes_template.md)** — ready-to-use release notes document template.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/release_notes_generator.py` | Groups entries, flags jargon, renders markdown or JSON |
+| `assets/sample_release_entries.json` | Sample entries incl. a breaking change and a deprecation |
+| `assets/release_notes_template.md` | Release notes document template |
+| `examples/wayfinder-v2-1-release-notes.md` | Worked release |
 
 ## Integration Points
 

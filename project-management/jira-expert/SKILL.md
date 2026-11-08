@@ -1,17 +1,18 @@
 ---
 name: jira-expert
 description: >
-  Jira expert for project setup, workflow design, JQL queries, custom fields,
-  automation rules, dashboards, and reporting. Use for Jira configuration,
-  advanced search, board and dashboard creation, and technical Jira operations.
+  Configures Jira projects, workflows, boards, JQL, automation and dashboards, and
+  audits board, issue and workflow exports. Use when setting up or fixing Jira,
+  writing or debugging JQL, or designing automation rules.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: atlassian
-  updated: 2026-06-15
+  updated: 2026-11-08
   tags: [jira, jql, workflows, automation, dashboards]
+  python-tools: board_optimizer.py, issue_quality_checker.py, workflow_analyzer.py
 ---
 # Atlassian Jira Expert
 
@@ -45,6 +46,26 @@ Jira advice depends most on which Jira the user runs, what they are allowed to c
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Tools
+
+Three offline audits of Jira exports (they never call Jira). Each prints text or `--format json` (`--json` is the same); `--example` prints a valid input, and the files in `assets/` are those examples.
+
+| Tool | Input | Reports |
+|------|-------|---------|
+| `board_optimizer.py --board FILE` | Board config: `name`, `type`, `team_size`, `filter_jql`, `columns[]` (`name`, `wip_limit`, `statuses`), card fields | 0-100 score, active columns without WIP limits, missing card fields, suggested WIP (about 1.5x team size) |
+| `issue_quality_checker.py --issues FILE` | `issues[]` with `key`, `type`, `summary`, `description`, `assignee`, `priority`, `story_points`, `labels`, `epic_link`, `sprint` | Per-issue score against summary, description, acceptance-criteria, assignee and estimate checks; most common gaps |
+| `workflow_analyzer.py --issues FILE` | `issues[]` each with `transitions[]` (`from_status`, `to_status`, `entered`, `exited`) | Time in status (avg/median/P90), bottleneck status, rework rate (backward moves) |
+
+```bash
+python3 project-management/jira-expert/scripts/board_optimizer.py --board project-management/jira-expert/assets/sample_board.json
+python3 project-management/jira-expert/scripts/issue_quality_checker.py --issues project-management/jira-expert/assets/sample_issues.json --format json
+python3 project-management/jira-expert/scripts/workflow_analyzer.py --issues project-management/jira-expert/assets/sample_transitions.json
+```
+
+On the samples: the board scores 80 with "In Review" missing a WIP limit; PROJ-102 scores 11% (no description, no criteria, unassigned); the workflow shows a 12.5% rework rate from one review bounce.
+
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. They report; none of them gates.
+
 ## Anti-Patterns
 
 ### A custom workflow for every project
@@ -64,7 +85,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Eight more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -91,3 +112,13 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `confluence-expert/` | Bidirectional | Jira macros embedded in Confluence pages; documentation links in issue descriptions |
 | `atlassian-templates/` | Templates -> Jira | Issue description templates, workflow documentation |
 | `delivery-manager/` | DM -> Jira | Release version management, deployment tracking fields |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/board_optimizer.py` | Board configuration audit |
+| `scripts/issue_quality_checker.py` | Issue description and field quality |
+| `scripts/workflow_analyzer.py` | Time in status, bottleneck, rework |
+| `assets/sample_board.json`, `assets/sample_issues.json`, `assets/sample_transitions.json` | Inputs for the three tools |
+| `examples/acme-50-person-eng-setup.md` | Worked Jira setup for a 50-person org |

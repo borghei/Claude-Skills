@@ -6,12 +6,12 @@ description: >
   defining SLOs and error budgets, or reducing alert fatigue.
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: observability
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags:
     - observability
     - slo
@@ -51,7 +51,7 @@ Before designing the observability strategy, settle the inputs below. When one i
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
 | Tool | Purpose | Command |
 |------|---------|---------|
@@ -59,7 +59,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 | `alert_optimizer.py` | Analyze alert configs for noise, coverage gaps, and duplicates; emit an optimization report | `python scripts/alert_optimizer.py --input alerts.json --analyze-only` |
 | `dashboard_generator.py` | Produce Grafana-compatible dashboard JSON with golden signals and role-based views | `python scripts/dashboard_generator.py --service-type api --name "Payment Service"` |
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -69,6 +69,30 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/slo_cookbook.md](references/slo_cookbook.md)** — a practical, in-depth cookbook for defining and operating Service Level Objectives. Read when you need detailed SLO methodology beyond the quick reference.
 - **[references/alert_design_patterns.md](references/alert_design_patterns.md)** — a deep guide to effective alerting patterns and anti-patterns. Read when designing a complete alerting strategy.
 - **[references/dashboard_best_practices.md](references/dashboard_best_practices.md)** — comprehensive dashboard design-for-insight best practices. Read when building a dashboard system from scratch.
+
+## Anti-Patterns
+
+**Mistake:** Alerting on causes (CPU, memory, a single pod) instead of symptoms.
+**Why it matters:** Cause alerts page people for things users never notice and stay quiet when users are hurting.
+**Instead:** Page on SLO burn rate (multi-window), and keep cause metrics on dashboards for diagnosis.
+
+**Mistake:** SLO targets copied from another service or set at 100%.
+**Why it matters:** A target with no error budget blocks every release, and an unmeasured target is ignored.
+**Instead:** Start from current measured performance, agree the target with the service owner, and review it after a quarter.
+
+**Mistake:** Shipping generated dashboards and alerts without review.
+**Why it matters:** Metric names, labels and thresholds are templates; a wrong label silently matches nothing.
+**Instead:** Load them in staging, confirm every panel shows data, and fire each alert once on purpose.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/slo_designer.py`, `scripts/alert_optimizer.py`, `scripts/dashboard_generator.py` | Stdlib CLIs; exit 0 on success, 2 on unusable input |
+| `assets/sample_service_api.json`, `assets/sample_service_web.json` | Service definitions for the SLO designer and dashboard generator |
+| `assets/sample_alerts.json` | Ten alert rules with noise and duplication for the optimizer |
+
+The dashboard generator emits Grafana JSON with `schemaVersion` 30; current Grafana versions migrate older schema versions on import, so check the result in your Grafana before committing it.
 
 ## Scope & Limitations
 
@@ -83,14 +107,3 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Incident response workflow orchestration or post-mortem facilitation -- see `runbook-generator` for runbook authoring.
 - Application Performance Management (APM) agent installation or vendor-specific SDK integration.
 - Security monitoring, SIEM rule design, or compliance audit logging -- see `skill-security-auditor` for security-focused analysis.
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `runbook-generator` | Every burn-rate alert references a runbook; the runbook generator consumes alert definitions to scaffold investigation steps | Alert YAML --> runbook-generator --> Markdown runbook linked in alert annotations |
-| `ci-cd-pipeline-builder` | Deployment events feed into dashboard annotations and alert suppression windows | Pipeline events --> Grafana annotations + Alertmanager silences |
-| `performance-profiler` | Latency SLI breaches trigger profiling; profiler results inform SLO target adjustments | SLO burn-rate alert --> profiler invocation --> refined latency thresholds |
-| `database-designer` | Database SLIs (query latency, connection success rate, replication lag) align with schema-level health checks | DB schema metadata --> SLI metric expressions for database-type services |
-| `tech-debt-tracker` | Error budget depletion signals feed into tech debt prioritization as reliability investments | Error budget reports --> tech debt backlog items with SLO-linked severity |
-| `release-manager` | Release readiness gates check remaining error budget before approving deployments | Error budget API --> release gate pass/fail decision |

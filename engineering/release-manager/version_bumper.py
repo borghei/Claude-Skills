@@ -494,16 +494,20 @@ def main():
     
     args = parser.parse_args()
     
-    # Read input
-    if args.input:
-        with open(args.input, 'r', encoding='utf-8') as f:
-            input_data = f.read()
-    else:
-        input_data = sys.stdin.read()
+    # Read input; exit 2 means the input could not be used
+    try:
+        if args.input:
+            with open(args.input, 'r', encoding='utf-8') as f:
+                input_data = f.read()
+        else:
+            input_data = sys.stdin.read()
+    except (OSError, UnicodeDecodeError) as e:
+        print(f"error: cannot read input: {e}", file=sys.stderr)
+        sys.exit(2)
     
     if not input_data.strip():
-        print("No input data provided", file=sys.stderr)
-        sys.exit(1)
+        print("error: no input data provided", file=sys.stderr)
+        sys.exit(2)
     
     # Initialize version bumper
     bumper = VersionBumper()
@@ -536,8 +540,11 @@ def main():
         else:
             bumper.parse_commits_from_git_log(input_data)
     except Exception as e:
-        print(f"Error parsing commits: {e}", file=sys.stderr)
-        sys.exit(1)
+        print(f"error: cannot parse commits: {e}", file=sys.stderr)
+        sys.exit(2)
+    if not bumper.commits:
+        print("error: no commits found (expected `git log --oneline` output or --input-format json)", file=sys.stderr)
+        sys.exit(2)
     
     # Determine pre-release type
     prerelease_type = None

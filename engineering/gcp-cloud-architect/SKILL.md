@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: engineering
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [gcp, google-cloud, cloud-architecture-framework, gke, cloud-run, bigquery, iam, cost-optimization]
 ---
 
@@ -52,13 +52,51 @@ Before designing or assessing, settle the inputs below. When one is missing or v
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `gcp_architecture_validator.py` | Validate a Terraform plan or YAML workload spec for anti-patterns | `python scripts/gcp_architecture_validator.py --terraform ./infra/*.tf` |
-| `gcp_cost_estimator.py` | Estimate monthly GCP cost from a workload spec, with optimization opportunities | `python scripts/gcp_cost_estimator.py --workload-config workload.yaml` |
-| `gcp_caf_scorer.py` | Score a workload against the five Cloud Architecture Framework pillars | `python scripts/gcp_caf_scorer.py --workload-config workload.yaml` |
+1. **Describe the workload** in a YAML spec (`assets/sample_workload.yaml` shows every section: `compute`, `data`, `observability`, `network`, `identity`, `security`, `operations`, `cost`, `performance`, `reliability`). Leave out what you do not know; the tools report it as not provided rather than guessing.
+2. **Choose services** with the compute and data-store decision trees in [references/decision-trees.md](references/decision-trees.md).
+3. **Score** the spec against the Cloud Architecture Framework with `gcp_caf_scorer.py`; pillar scores use only the checks the spec answers.
+4. **Validate** the spec and any Terraform with `gcp_architecture_validator.py`; fix every critical finding.
+5. **Estimate cost** with `gcp_cost_estimator.py`, then confirm the big lines in the Google Cloud Pricing Calculator. Prices in the tool are approximate US list prices from early 2026, without sustained-use or committed-use discounts.
+6. **Verify** before production: no critical validator findings, the not-provided list is empty for the reliability and security pillars, and the cost estimate has been checked against the calculator.
+
+## Quick Start
+
+```bash
+python3 scripts/gcp_caf_scorer.py --workload-config assets/sample_workload.yaml        # 19 of 50 checks answered, 3 failed
+python3 scripts/gcp_architecture_validator.py --workload-config assets/sample_workload.yaml --terraform assets/sample_main.tf   # allUsers, SA key, editor role, VM external IP (exit 1)
+python3 scripts/gcp_cost_estimator.py --workload-config assets/sample_workload.yaml --format json
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `gcp_caf_scorer.py` | 50 CAF checks (10 per pillar) from the spec; scores count answered checks only and list the rest as not provided | `--workload-config`, `--format markdown|json` | 0, 2 unreadable or empty spec |
+| `gcp_architecture_validator.py` | Spec rules (single-zone tier-1, missing VPC, basic roles, SA keys, public data services, Cloud SQL without HA, on-demand BigQuery at volume, no org policy ...) and Terraform text rules TF001-TF006 (default network, owner/editor roles, allUsers, Cloud SQL public IP, SA key resources, VM external IP); the report lists the Terraform rules it checked | `--workload-config`, `--terraform <files/globs>`, `--severity`, `--format` | 0 no critical, 1 critical finding, 2 bad input |
+| `gcp_cost_estimator.py` | Monthly estimate for GCE, GKE (Autopilot/Standard), Cloud Run, Cloud SQL, Spanner, BigQuery, GCS, Memorystore, Logging and egress, with savings suggestions; warns on unknown keys and unpriced services | `--workload-config`, `--format human|json` | 0, 2 empty spec or nothing to price |
+
+The Terraform rules are regular expressions over `.tf` text: they do not evaluate modules, variables or plans, so a clean result covers only those six patterns. For a full posture check, run `terraform plan` through a policy tool (for example OPA/Conftest or the provider's policy validation) as well.
+
+## Anti-Patterns
+
+**Mistake:** Reading a low CAF score from a sparse spec as a bad architecture.
+**Why it happens:** Older versions of the scorer counted missing answers as failures.
+**Instead:** Check the not-provided list first; fill in what you know, then judge the score.
+
+**Mistake:** Service account keys for CI or workloads outside GCP.
+**Why it happens:** A JSON key is the quickest way to authenticate.
+**Instead:** Use Workload Identity Federation (CI, other clouds) and Workload Identity on GKE; keys leak and do not expire by default.
+
+**Mistake:** Budgeting from the estimator's total.
+**Why it happens:** It prints a single precise-looking number.
+**Instead:** Use it to compare designs and find the big-ticket lines; quote from the Pricing Calculator with your discounts.
+
+## Files
+
+- `scripts/gcp_caf_scorer.py`, `scripts/gcp_architecture_validator.py`, `scripts/gcp_cost_estimator.py` — the tools above.
+- `assets/sample_workload.yaml` (shared spec, partly filled in), `assets/sample_main.tf` (Terraform with four deliberate anti-patterns).
 
 ## Scope & Limitations
 
@@ -81,7 +119,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 - Cost figures come from a built-in table of approximate US-region list prices from early 2026, with no sustained-use or committed-use discounts. They are for relative comparison, not a quote; check the Google Cloud Pricing Calculator before budgeting.
 - Service tiers, SLAs, limits and prices in the references change often and should be confirmed against current Google Cloud documentation.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 

@@ -7,7 +7,6 @@ Detects packages in a monorepo by scanning workspace configuration files
 internal cross-package dependencies, identifies shared external dependencies,
 and reports on package health metrics.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -383,14 +382,14 @@ def main() -> None:
     root = Path(args.path).resolve()
     if not root.is_dir():
         print(f"Error: {root} is not a valid directory", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     analyzer = PackageAnalyzer(str(root))
     result = analyzer.analyze()
 
     if result.total_packages == 0:
         print("No packages found. Is this a monorepo with workspace configuration?", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if args.json_output:
         print(json.dumps(asdict(result), indent=2))

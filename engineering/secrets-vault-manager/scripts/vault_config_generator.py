@@ -5,7 +5,6 @@ Vault Config Generator - Generate HashiCorp Vault configurations.
 Creates HCL configuration files for Vault secrets engines, auth methods,
 access policies, and audit backends based on environment requirements.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -447,7 +446,7 @@ def main():
     for e in engines:
         if e not in SUPPORTED_ENGINES:
             print(f"Error: Unknown secrets engine '{e}'. Supported: {SUPPORTED_ENGINES}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
     config = VaultConfig(
         environment=args.env,

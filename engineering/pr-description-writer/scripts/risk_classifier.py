@@ -94,13 +94,15 @@ def read_files(arg: str) -> List[str]:
     try:
         raw = sys.stdin.read() if arg == "-" else Path(arg).read_text(encoding="utf-8")
     except OSError as exc:
-        raise SystemExit(f"error: cannot read files list: {exc}")
+        print(f"error: cannot read files list: {exc}", file=sys.stderr)
+        sys.exit(2)  # unusable input; exit 1 is reserved for the --fail-on gate
     text = raw.strip()
     if text.startswith(("[", "{")):
         try:
             data = json.loads(text)
         except json.JSONDecodeError as exc:
-            raise SystemExit(f"error: files list looks like JSON but is invalid: {exc}")
+            print(f"error: files list looks like JSON but is invalid: {exc}", file=sys.stderr)
+            sys.exit(2)
         items = data.get("files", []) if isinstance(data, dict) else data
         return [str(i).strip() for i in items if str(i).strip()]
     return [line.strip() for line in text.splitlines() if line.strip() and not line.startswith("#")]

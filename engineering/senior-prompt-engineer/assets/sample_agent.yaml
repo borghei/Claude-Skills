@@ -1,0 +1,12 @@
+name: research_assistant
+pattern: react
+model: claude-sonnet-5-5
+max_iterations: 8
+system_prompt: Answer research questions from the internal wiki and cite page titles.
+tools:
+  - name: wiki_search
+    description: Search the internal wiki and return the top 5 page titles and snippets
+    estimated_tokens: 600
+  - name: fetch_page
+    description: Return the full text of one wiki page by title
+    estimated_tokens: 2500

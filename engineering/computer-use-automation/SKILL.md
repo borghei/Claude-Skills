@@ -1,16 +1,16 @@
 ---
 name: computer-use-automation
 description: >
-  This skill should be used when the user asks to "build a computer-use agent",
-  "automate a GUI with an AI agent", "when to use computer use vs an API",
-  "make browser automation reliable", or "design screenshot-driven agent actions".
+  Decides when a GUI-driving (computer-use) agent beats an API and lints planned screen actions
+  for missing confirmation, verification and grounding. Use when designing a computer-use agent
+  or reviewing its action plan.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: ai-agents
-  updated: 2026-06-29
+  updated: 2026-11-08
   tags: [computer-use, browser-automation, agents, gui, reliability]
 ---
 
@@ -22,6 +22,12 @@ metadata:
 ## Overview
 
 The **Computer Use Automation** skill helps you design AI agents that operate a graphical interface the way a person does — take a screenshot, reason about what is on screen, then click, type, scroll, or navigate, and repeat. It covers the core perception→reason→action loop, the decision of when computer-use is the right tool versus a structured API/MCP tool (prefer a real API whenever one exists; reach for computer-use only for GUIs with no programmatic surface), reliability patterns (grounding every action in the *current* screenshot, verifying after each step, recovering from misclicks), safety guardrails (confirmation gates for destructive actions, sandboxing, avoiding blocking dialogs), and how to evaluate a computer-use agent. It is model-agnostic — the patterns apply to any computer-use-capable model and any GUI tool surface.
+
+## When to Use
+
+- Deciding whether a task needs a screen-driving agent or can use an API, SDK, CLI or MCP tool.
+- Designing the screenshot, act, verify loop and its guardrails for a GUI-only target.
+- Reviewing a planned action sequence for ungated destructive steps and missing verification before a dry run.
 
 ## Clarify First
 
@@ -40,7 +46,8 @@ Ask about the two or three inputs that matter most for this request, not the who
 python scripts/tool_choice_advisor.py --api-exists no --gui-stability high --volume low --json
 
 # Lint a planned action sequence for safety/reliability gaps
-python scripts/action_safety_linter.py --file planned_actions.json
+python scripts/action_safety_linter.py --file assets/sample_plan_safe.json    # CLEAN, exit 0
+python scripts/action_safety_linter.py --file assets/sample_plan_risky.json   # HIGH, exit 1
 
 # Read actions from stdin and emit a markdown risk report
 echo '[{"type":"click","target":"Delete"},{"type":"submit","target":"Confirm"}]' \
@@ -56,6 +63,17 @@ echo '[{"type":"click","target":"Delete"},{"type":"submit","target":"Confirm"}]'
 
 All scripts: Python 3 standard library only, argparse CLI, `--json` and human-readable output. Run `--help` for full usage.
 
+**Action plan format.** A JSON list of objects with `type` (or its alias `action`): `screenshot`, `observe`, `verify`, `click`, `type`, `submit`, `navigate`, `upload`, ...; `target` (the visible label); optional `text` (what gets typed), `confirmed` (a human or explicit gate approved it) and `verified` (the step checks its own result). Plain text with one `<type> <target>` per line also works. An object with no `type` or `action` is rejected rather than silently passed.
+
+**What the linter flags.** High: destructive verbs (delete, send, pay, submit...) without `confirmed`, state changes on a destructive step with no verification, and typed text that looks like a destructive command (`rm -rf`, `DROP TABLE`, `sudo`...). Medium: unverified state changes, typing into password or payment fields, actions that open native dialogs. Low: actions not preceded by a fresh screenshot.
+
+**Exit codes.** `action_safety_linter.py`: `0` no high finding, `1` at least one high finding, `2` unreadable file or an action list it cannot parse. `tool_choice_advisor.py`: `0` recommendation printed, `2` invalid option value.
+
+**Done when:**
+1. The advisor's recommendation is recorded, and an API or MCP route was ruled out with a reason.
+2. The linter shows no high findings on the final plan.
+3. A sandbox dry run (throwaway profile, test account or VM) completed the task with every verification step passing.
+
 ## Workflows
 
 ### Decide and Design a Computer-Use Agent
@@ -65,7 +83,7 @@ All scripts: Python 3 standard library only, argparse CLI, `--json` and human-re
 4. Insert confirmation gates before any destructive/irreversible step and choose a sandbox (throwaway profile, test account, isolated VM/container).
 
 ### Audit a Planned Action Sequence
-1. Express the plan as a JSON/text list of actions (`type`, `target`, optional `verified`/`confirmed`).
+1. Express the plan as a JSON/text list of actions (`type`, `target`, optional `text`, `verified`, `confirmed`).
 2. Run `action_safety_linter.py --file plan.json` to flag risky verbs, unverified state changes, ungated destructive actions, and dialog-triggering patterns.
 3. Resolve each finding — add verification steps, add confirmation gates, replace blocking-dialog flows.
 4. Re-run until clean, then dry-run in the sandbox before any real target.
@@ -85,7 +103,7 @@ All scripts: Python 3 standard library only, argparse CLI, `--json` and human-re
 - Regression-testing an agent from recorded runs (see `engineering/agent-harness/`)
 
 **Important Caveats:**
-- The linter matches action types and target text against fixed word lists. It cannot tell what a click does in a real interface, so an innocuous label on a destructive control will pass.
+- The linter matches action types, target labels and typed text against fixed word lists and patterns. It cannot tell what a click does in a real interface, so an innocuous label on a destructive control will pass.
 - The advisor applies fixed rules to a few coarse inputs. Its output is a starting recommendation, not a measured comparison.
 - The skill is model-agnostic and names no vendor tool. Computer-use model support, action types and pricing change often and need checking against current provider documentation.
 - A clean lint does not make an agent safe to run against production accounts. Dry-run in a sandbox first.
@@ -93,6 +111,29 @@ All scripts: Python 3 standard library only, argparse CLI, `--json` and human-re
 ## Reference Documentation
 
 - [Computer Use Patterns](references/computer-use-patterns.md) - The action loop; computer-use vs structured-tool decision matrix; reliability patterns (grounding, verification, recovery); safety guardrails (confirmation gates, sandboxing, blocking dialogs); evaluation approach; and common failure modes.
+
+## Anti-Patterns
+
+### Pixels when an API exists
+**Mistake:** Driving a SaaS dashboard by screenshot when the product has a documented API.
+**Why it happens:** Computer use demos well and needs no integration work up front.
+**Instead:** Run `tool_choice_advisor.py` first. An API call is cheaper, faster and verifiable; reserve the GUI loop for targets with no programmatic surface.
+
+### Acting on a stale screen
+**Mistake:** Clicking coordinates taken from a screenshot several steps ago.
+**Why it happens:** Re-capturing feels redundant when nothing seems to have changed.
+**Instead:** Take a fresh screenshot before each action and target what is visible now. Layouts shift after every load, toast and modal.
+
+### Trusting intent instead of result
+**Mistake:** Marking a payment or send step done because the click was issued.
+**Why it happens:** The agent's plan says the click happens, so the outcome is assumed.
+**Instead:** Read the resulting screen (confirmation banner, new row, changed status) before moving on, and gate irreversible steps behind a human approval.
+
+## Files
+
+- `scripts/tool_choice_advisor.py`, `scripts/action_safety_linter.py` — the two CLIs above.
+- `assets/sample_plan_safe.json` (clean plan) and `assets/sample_plan_risky.json` (destructive command, payment field, ungated delete).
+- `references/computer-use-patterns.md` — action loop, decision matrix, reliability and safety patterns, evaluation.
 
 ## Common Patterns
 

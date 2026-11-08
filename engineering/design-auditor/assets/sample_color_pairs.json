@@ -1,0 +1,8 @@
+{
+  "pairs": [
+    {"label": "body text", "foreground": "#1f2933", "background": "#ffffff", "text_size": "normal"},
+    {"label": "muted caption", "foreground": "#777777", "background": "#ffffff", "text_size": "normal"},
+    {"label": "button label", "foreground": "#ffffff", "background": "#2563eb", "text_size": "normal"},
+    {"label": "focus ring", "foreground": "#93c5fd", "background": "#ffffff", "text_size": "ui"}
+  ]
+}

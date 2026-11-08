@@ -1,23 +1,28 @@
 ---
 name: llm-cost-optimizer
 description: >
-  This skill should be used when the user asks to "estimate LLM costs",
-  "count tokens in prompts", "optimize prompt token usage",
-  "compare model pricing", or "reduce LLM API costs".
+  Estimates LLM token counts and per-request cost across models, flags wasteful prompt text,
+  and models prompt-cache break-even. Use when budgeting LLM spend, comparing models on
+  cost, or trimming prompt tokens.
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: ai-cost-management
-  updated: 2026-06-29
+  updated: 2026-11-08
   tags: [llm, tokens, cost-optimization, prompt-engineering, pricing]
 ---
 
 # LLM Cost Optimizer
 
-> **Category:** Engineering
-> **Domain:** AI Cost Management
+The agent turns "what will this cost?" into a number with its assumptions shown: estimated tokens, cost per request and per 1,000 requests by model, savings from caching, and prompt text that costs tokens without changing the result. The built-in price table is an illustrative snapshot, not verified current pricing: for real numbers, copy rates from each provider's pricing page into a JSON file and pass it with `--prices FILE` (shape: `assets/sample_prices.json`).
+
+## When to Use
+
+- Budgeting a new LLM feature, or comparing models on cost at expected volume.
+- Finding token waste in a long system prompt (repetition, filler, reasoning scaffolds, shouting).
+- Deciding whether prompt caching pays off for a given reuse pattern.
 
 ## Overview
 
@@ -36,24 +41,26 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Count tokens in a prompt file and estimate costs
-python scripts/token_counter.py --file prompt.txt --models gpt-4o claude-sonnet
+# Count tokens and estimate costs. Built-in prices are illustrative; real numbers come from --prices FILE
+python3 scripts/token_counter.py --text "Summarize the attached contract in five bullets." --models claude-opus-5-5 claude-sonnet gpt-4o-mini
 
 # Count tokens from stdin
-echo "Hello world" | python scripts/token_counter.py --stdin --models all
+echo "Hello world" | python3 scripts/token_counter.py --stdin --models all
 
-# Analyze a prompt for optimization opportunities
-python scripts/prompt_optimizer.py --file system_prompt.txt
+# Costs from your own price file (copy current rates from the providers' pricing pages)
+python3 scripts/token_counter.py --file assets/sample_prompt.txt --prices assets/sample_prices.json
 
-# Optimize with target reduction
-python scripts/prompt_optimizer.py --file prompt.txt --target-reduction 30
+# Analyze a prompt: three findings, one per line (role preamble, CoT scaffold, all-caps emphasis)
+python3 scripts/prompt_optimizer.py --file assets/sample_prompt.txt
 ```
+
+**Exit codes:** 0 report produced; 2 unusable input (missing file, empty input, invalid numbers, unreadable `--prices`).
 
 ## Tools Overview
 
 | Tool | Purpose | Key Flags |
 |------|---------|-----------|
-| `token_counter.py` | Count tokens and estimate costs across models | `--file`, `--text`, `--stdin`, `--models` |
+| `token_counter.py` | Count tokens and estimate costs across models | `--file`, `--text`, `--stdin`, `--models`, `--output-ratio`, `--prices FILE` |
 | `prompt_optimizer.py` | Analyze prompts for token reduction opportunities | `--file`, `--target-reduction`, `--format` |
 | `cache_savings_calculator.py` | Model prompt-cache economics: naive vs cached cost, break-even reuse, % savings | `--requests`, `--cached-tokens`, `--cache-write-multiplier`, `--cache-read-multiplier`, `--base-input-price`, `--json` |
 
@@ -88,7 +95,7 @@ python scripts/prompt_optimizer.py --file prompt.txt --target-reduction 30
 
 **Important Caveats:**
 - Token counts are heuristic estimates blended from character, word and piece counts with a per-model adjustment. The pricing guide notes that counts can differ by 10-20% between tokenizers.
-- Model prices and IDs in `token_counter.py` and `references/llm-pricing-guide.md` are a dated snapshot (Q1 2026, Anthropic rows checked 2026-09). Prices, model names and discounts change often, so current provider pricing is needed before any budget decision.
+- Model prices and IDs in `token_counter.py` and `references/llm-pricing-guide.md` are an illustrative snapshot assembled in Q1 2026 and not verified against current provider pages. Use `--prices FILE` with rates from each provider's pricing page for any budget decision.
 - `prompt_optimizer.py` lists suggested edits. It does not rewrite the prompt or judge whether a removed phrase mattered, so each change needs a quality check against the original.
 - The calculator's defaults (1.25 write multiplier, 0.1 read multiplier, price unit 1.0) are placeholders, not any vendor's published rates.
 
@@ -96,6 +103,20 @@ python scripts/prompt_optimizer.py --file prompt.txt --target-reduction 30
 
 - [LLM Pricing Guide](references/llm-pricing-guide.md) - Current pricing for major LLM providers, token estimation methods
 - [Caching & Batch Economics](references/caching-and-batch-economics.md) - Prompt/context caching break-even math, batch-API cost tradeoff, reasoning-effort cost impact, structured-output token overhead (model-agnostic, user-supplied rates)
+
+## Anti-Patterns
+
+**Mistake:** Budgeting from the built-in price snapshot.
+**Why it matters:** Prices and model lines change several times a year; a stale table can be off by a factor of two or more.
+**Instead:** Pass `--prices` with rates copied from each provider's pricing page, and record the date.
+
+**Mistake:** Picking the cheapest model from a one-request estimate.
+**Why it matters:** At small sizes every model rounds to fractions of a cent; quality differences cost far more than the token bill.
+**Instead:** Compare per-1K-request cost at real volume, and only among models that pass the quality bar.
+
+**Mistake:** Applying every optimizer suggestion.
+**Why it matters:** Some "redundant" text carries meaning; removing it can lower quality more than it saves.
+**Instead:** Apply edits, then run the prompt's eval suite before shipping the shorter version.
 
 ## Common Patterns
 

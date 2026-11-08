@@ -1,0 +1,49 @@
+{
+  "nsm": {
+    "name": "Weekly active accounts publishing >=1 deliverable",
+    "archetype": "productivity",
+    "formula": "WAA * (publishers / WAA)",
+    "current": 12400,
+    "target": 22000,
+    "due": "2027-06-30"
+  },
+  "inputs": [
+    {
+      "name": "Weekly active accounts (WAA)",
+      "formula_role": "WAA",
+      "current": 28000,
+      "target": 40000,
+      "leading_indicators": [
+        "Day-1 session count for new signups",
+        "Returning signups in week 1",
+        "Invites accepted in first 7 days"
+      ]
+    },
+    {
+      "name": "Publisher rate (publishers / WAA)",
+      "formula_role": "publishers / WAA",
+      "current": 0.44,
+      "target": 0.55,
+      "leading_indicators": [
+        "Templates opened by new users",
+        "First-deliverable started within session 1"
+      ]
+    }
+  ],
+  "anti_metrics": [
+    {
+      "name": "Weekly churn",
+      "threshold": "must stay below 4.0%"
+    },
+    {
+      "name": "Time-to-publish (median)",
+      "threshold": "must stay below 22 minutes"
+    }
+  ],
+  "counter_metrics": [
+    {
+      "name": "Server cost per published deliverable",
+      "threshold": "must stay below $0.08"
+    }
+  ]
+}

@@ -139,11 +139,11 @@ Sprint 12 — Apr 14 to Apr 25
 Goal: Ship checkout flow MVP enabling first paid customers (target Friday Apr 25)
 
 Capacity:
-- 6 engineers × 36 effective hours = 216 hours = ~22 person-days
+- 5 engineers × 36 effective hours = 180 hours
 - Alice on-call this sprint = effective 28 hrs
-- Total: 196 hours
-- Commit target (80%): 157 hrs
-- Stretch (15%): 29 hrs
+- Total: 208 hours (= 26 person-days at 8 h)
+- Commit target (80%): 166 hrs
+- Stretch (15%): 31 hrs
 - Reserve (5%): 10 hrs
 
 Last 3 sprints velocity: 32, 36, 34 pts (avg 34)

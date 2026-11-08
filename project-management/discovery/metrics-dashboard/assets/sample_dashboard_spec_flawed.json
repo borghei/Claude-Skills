@@ -1,0 +1,12 @@
+{
+  "dashboard_name": "Company KPIs",
+  "as_of": "2026-05-27",
+  "audience": "board",
+  "north_star": {"name": "Total users", "definition": "", "owner": "", "has_comparison": false, "has_target": false},
+  "inputs": [
+    {"name": "Page views", "owner": "", "drives_ns": false, "has_comparison": false},
+    {"name": "Total signups", "owner": "Marketing", "drives_ns": true, "has_comparison": false}
+  ],
+  "guardrails": [],
+  "operational": []
+}

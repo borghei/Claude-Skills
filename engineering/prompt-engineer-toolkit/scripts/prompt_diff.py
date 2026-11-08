@@ -32,7 +32,8 @@ RISK_CHECKS = [
         "label": "Constraints removed",
         "risk": "Safety regression",
         "patterns_old": [r"(?i)\bmust\b", r"(?i)\bnever\b", r"(?i)\bdo not\b", r"(?i)\bdon't\b",
-                         r"(?i)\bshall not\b", r"(?i)\bprohibit", r"(?i)\bforbid"],
+                         r"(?i)\bshall not\b", r"(?i)\bprohibit", r"(?i)\bforbid", r"(?i)\bonly\b",
+                         r"(?im)^#+\s*(constraints|rules)\b"],  # calm wording counts as constraints too
     },
     {
         "id": "examples_changed",
@@ -180,7 +181,8 @@ def check_risks(old_text: str, new_text: str, line_diff: dict) -> list:
 def compute_instruction_delta(old_text: str, new_text: str) -> dict:
     """Compare instruction-bearing lines between versions."""
     instruction_pat = re.compile(
-        r"(?i)\b(must|should|shall|always|never|do not|don't|avoid|ensure|require|critical|important)\b"
+        r"(?i)\b(must|should|shall|always|never|do not|don't|avoid|ensure|require|critical|important"
+        r"|return|assign|pick|classify|use|include|only)\b"
     )
     old_instructions = [l.strip() for l in old_text.splitlines() if instruction_pat.search(l)]
     new_instructions = [l.strip() for l in new_text.splitlines() if instruction_pat.search(l)]
@@ -314,7 +316,7 @@ def main():
     for path in (args.old_file, args.new_file):
         if not os.path.isfile(path):
             print(f"Error: file not found: {path}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
     result = diff_prompts(args.old_file, args.new_file)
 

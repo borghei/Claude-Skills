@@ -5,7 +5,6 @@ Helm Values Validator - Validate values.yaml against chart requirements.
 Checks for missing resource limits, security contexts, image tag best practices,
 and other Kubernetes configuration requirements.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -34,7 +33,9 @@ class ValuesParser:
     def parse(self, content: str) -> Dict[str, Any]:
         """Parse YAML-like content into nested dict."""
         result: Dict[str, Any] = {}
-        stack: List[tuple] = []  # (indent, dict_ref)
+        # (indent of the key that opened the block, that block's dict): lines indented
+        # deeper than the key belong to the block.
+        stack: List[tuple] = []
         current = result
 
         for line in content.split("\n"):
@@ -61,6 +62,7 @@ class ValuesParser:
                 key = key.strip()
                 value = value.strip()
 
+                value = re.sub(r"\s+#.*$", "", value)  # trailing comment
                 if value:
                     # Strip quotes
                     value = value.strip('"').strip("'")
@@ -82,9 +84,8 @@ class ValuesParser:
                 else:
                     # Nested dict
                     current[key] = {}
-                    stack.append((indent, current))
+                    stack.append((indent, current[key]))
                     current = current[key]
-                    stack.append((indent + 2, current))
 
         return result
 
@@ -103,7 +104,8 @@ class ValuesParser:
 class ValuesValidator:
     """Validates Helm chart values files."""
 
-    def __init__(self, values: Dict[str, Any], values_file: str):
+    def __init__(self, values: Dict[str, Any], values_file: str, raw: str = ""):
+        self.raw = raw  # original text: list items (env:) are not in the parsed dict
         self.values = values
         self.values_file = values_file
         self.findings: List[Finding] = []
@@ -119,7 +121,27 @@ class ValuesValidator:
         self._check_ingress()
         self._check_probes()
         self._check_autoscaling()
+        self._check_plaintext_secrets()
         return self.findings
+
+    SECRET_KEY_RE = re.compile(r"^\s*-?\s*(?:name:\s*)?\"?([\w.-]*(?:password|passwd|secret|token|api_?key)[\w.-]*)\"?\s*:\s*[\"']?([^\"'\s#{][^\"'#]{5,})", re.I | re.M)
+    CRED_URL_RE = re.compile(r"\b[a-z][a-z0-9+.-]*://[^\s:/@\"']+:[^\s@\"']+@", re.I)
+
+    def _check_plaintext_secrets(self):
+        """Literal credentials in values end up in the release secret history and in git."""
+        # existingSecret / secretName / secretKeyRef point at a Secret; they are not secrets.
+        hits = [m.group(1) for m in self.SECRET_KEY_RE.finditer(self.raw)
+                if not re.search(r"^existing|(name|ref|secretkey)$", m.group(1), re.I)]
+        if self.CRED_URL_RE.search(self.raw):
+            hits.append("connection string with embedded password")
+        for what in dict.fromkeys(hits):
+            self.findings.append(Finding(
+                severity="critical",
+                category="security",
+                path=what,
+                message=f"Plaintext secret in values: {what}.",
+                recommendation="Reference an existing Secret (existingSecret / secretKeyRef) or use External Secrets / SOPS.",
+            ))
 
     def _get(self, path: str, default=None):
         """Helper to get nested values."""
@@ -434,7 +456,7 @@ def main():
         vp = ValuesParser()
         values = vp.parse(content)
 
-        validator = ValuesValidator(values, str(path))
+        validator = ValuesValidator(values, str(path), raw=content)
         findings = validator.validate()
 
         if args.format == "json":

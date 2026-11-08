@@ -17,7 +17,7 @@ A working catalogue of the failure modes a 2026-era AI feature must plan for, wi
 
 **Mitigation:**
 - Retrieval-augmented generation with strict cite-or-refuse instructions.
-- Lower temperature.
+- Lower temperature where the model exposes it; otherwise tighten the output contract or raise reasoning effort.
 - Add "If you do not know, say so" to system prompt; reward refusal in fine-tune signal.
 - Switch to a less hallucination-prone model variant.
 

@@ -653,7 +653,7 @@ def main() -> None:
 
     if not Path(args.skill_dir).is_dir():
         print(f"Error: '{args.skill_dir}' is not a directory", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     report = validate_skill(args.skill_dir, strict=args.strict)
 

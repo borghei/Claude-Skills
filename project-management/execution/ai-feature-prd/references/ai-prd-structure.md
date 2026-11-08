@@ -23,7 +23,7 @@ The standard PRD has no place to declare a hallucination budget, an eval golden 
 Sections 1-8 follow the standard PRD from `create-prd/` (Summary, Contacts, Background, Objective, Market Segments, Value Proposition, Solution, Release). The summary below is abbreviated; full guidance lives in `create-prd/SKILL.md`. Sections 9-11 are AI-specific and are the heart of this skill.
 
 ### Section 1: Summary
-Two to three sentences. What the AI feature is, who it is for, why it matters now. State the model class plainly ("a Claude Sonnet-4.5 based assistant", "a fine-tuned BERT classifier") -- abstraction here hides cost and risk.
+Two to three sentences. What the AI feature is, who it is for, why it matters now. State the model class plainly ("a Claude Sonnet 5.5 based assistant", "a fine-tuned BERT classifier") -- abstraction here hides cost and risk.
 
 ### Section 2: Contacts
 PM, Eng Lead, Design Lead, ML/Applied Research Lead, Safety/Trust reviewer, Legal/Compliance reviewer. AI features need more cross-functional sign-off than standard features.
@@ -56,13 +56,14 @@ The architectural decisions for the AI subsystem.
 
 | Field | Example |
 |---|---|
-| Primary model | `claude-sonnet-4.5` (Anthropic, via Bedrock) |
-| Fallback model | `claude-haiku-4` for cost cap; `gpt-5-mini` for outage |
-| Reason chosen | Best quality on our eval set; cheaper than `opus`; safety profile fits |
+| Primary model | `claude-sonnet-5-5` (Anthropic, via Bedrock) |
+| Fallback model | `claude-haiku-5-5` for cost cap; a second vendor's small model for outage |
+| Reason chosen | Best quality on our eval set; cheaper than `claude-opus-5-5`; safety profile fits |
+| Reasoning effort / thinking budget | Effort `medium` (or a fixed thinking-token budget) chosen on the golden set: `high` gained 1 point of acceptance at 2.4x latency and cost |
 | Update policy | Re-evaluate primary every 90 days against new releases |
-| Vendor risk | Single-vendor risk mitigated by `gpt-5-mini` fallback |
+| Vendor risk | Single-vendor risk mitigated by the second-vendor fallback |
 
-State a primary, a fallback, and a switch trigger. "Model lock-in" is the most expensive technical debt in AI products -- the PRD names the exit ramp.
+State a primary, a fallback, and a switch trigger. For reasoning models, also state the effort setting or thinking budget: it moves quality, latency and cost together, so pick it on the golden set like any other model parameter, and bill thinking tokens as output tokens in 11.1. Model ids here are examples as of November 2026; check the vendor's current list and pricing page. "Model lock-in" is the most expensive technical debt in AI products -- the PRD names the exit ramp.
 
 **9.2 Architecture pattern (Prompt vs Fine-tune vs RAG vs Agent)**
 
@@ -130,7 +131,7 @@ Tools commonly used in 2026: **Promptfoo** (offline eval), **Langfuse** or **Ant
 |---|---|---|
 | Input filter | Strip PII; refuse out-of-scope; classify intent | Regex + classifier; LlamaGuard 3 |
 | Pre-prompt | System prompt constraints, refusal instructions | Prompt template |
-| In-model | Use models with strong refusal training | Choice of `claude-sonnet-4.5` over base models |
+| In-model | Use models with strong refusal training | Choice of `claude-sonnet-5-5` over base models |
 | Output filter | Profanity, PII, jailbreak-success detection | Output classifier; Anthropic content filter |
 | Post-response | Citation check (for RAG), schema validation | Programmatic check |
 | Human-in-loop | Escalation queue for low-confidence outputs | Slack/Linear ticket on flag |
@@ -177,7 +178,8 @@ Where does a human have to approve, review, or escalate?
 
 | Cost line | Formula | Estimate at scale |
 |---|---|---|
-| Inference (primary) | requests/mo x avg_tokens x $/token | $X/mo at projected MAU |
+| Inference (primary) | requests/mo x (input + output + thinking tokens) x $/token | $X/mo at projected MAU |
+| Prompt caching | cached share of input tokens x (full - cached rate) | -$C/mo |
 | Inference (fallback) | <= 10% of primary | $Y/mo |
 | Vector store | docs x dimension x $/GB-mo | $Z/mo |
 | Eval runs | golden_set_size x model_calls x $/call | $E/mo |

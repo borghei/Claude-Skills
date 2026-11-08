@@ -1,0 +1,18 @@
+{
+  "name": "orders-api",
+  "stack": {
+    "hosting": "kubernetes",
+    "database": "postgresql",
+    "ci_cd": "github-actions",
+    "framework": "fastapi"
+  },
+  "dependencies": ["redis", "stripe-api", "sendgrid"],
+  "endpoints": ["/health", "/api/v1/orders?limit=1"],
+  "contacts": {
+    "owner": "Payments Platform",
+    "l1": {"name": "Payments on-call", "contact": "PagerDuty: payments-primary"},
+    "l2": {"name": "Payments lead", "contact": "#payments-oncall"},
+    "l3": {"name": "Head of Platform", "contact": "phone tree in the on-call wiki"}
+  },
+  "config_files": ["k8s/deployment.yaml", ".github/workflows/deploy.yml", "alembic.ini"]
+}

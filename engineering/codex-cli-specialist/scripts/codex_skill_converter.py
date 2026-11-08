@@ -463,6 +463,9 @@ def main() -> None:
     )
 
     args = parser.parse_args()
+    if not os.path.isfile(args.skill_md):
+        print(f"Error: SKILL.md not found: {args.skill_md}", file=sys.stderr)
+        sys.exit(2)
 
     result = convert_skill(args.skill_md, args.output_dir)
 

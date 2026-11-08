@@ -56,7 +56,8 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Lint the spec, freeze IDs, then gate on coverage (lint and coverage exit 1 on the samples' deliberate flaws)
+# Lint the spec, freeze IDs, then gate on coverage (lint and coverage exit 1 on the samples' deliberate flaws;
+# every tool exits 2 on bad input such as a missing file or invalid JSON)
 python3 engineering/spec-driven-workflow/scripts/spec_lint.py --spec engineering/spec-driven-workflow/assets/sample_spec.md
 python3 engineering/spec-driven-workflow/scripts/spec_parse.py --spec engineering/spec-driven-workflow/assets/sample_spec.md --format text
 python3 engineering/spec-driven-workflow/scripts/trace_coverage.py --requirements engineering/spec-driven-workflow/assets/sample_requirements.json --index engineering/spec-driven-workflow/assets/sample_trace_index.json

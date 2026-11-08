@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prfaq - Claude Skills</title>
-  <meta name="description" content="Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact">
+  <meta name="description" content="Write a Working Backwards press release with internal and external FAQs before anything is built. Use when a funding or go/no-go decision needs the customer outcome made concrete first; write the PRD ">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/prfaq.html">
   <meta property="og:title" content="Prfaq - Claude Skills">
-  <meta property="og:description" content="Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact">
+  <meta property="og:description" content="Write a Working Backwards press release with internal and external FAQs before anything is built. Use when a funding or go/no-go decision needs the customer outcome made concrete first; write the PRD ">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/prfaq.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Prfaq", "description": "Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/prfaq.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Prfaq", "description": "Write a Working Backwards press release with internal and external FAQs before anything is built. Use when a funding or go/no-go decision needs the customer outcome made concrete first; write the PRD after it passes.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/prfaq.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Prfaq</h1>
-    <p class="page-subtitle">Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Write a Working Backwards press release with internal and external FAQs before anything is built. Use when a funding or go/no-go decision needs the customer outcome made concrete first; write the PRD after it passes.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.2</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">prfaq</span><span class="tag">working-backwards</span><span class="tag">press-release</span><span class="tag">amazon</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Prfaq (Project Management domain).
 
-Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact.
+Write a Working Backwards press release with internal and external FAQs before anything is built. Use when a funding or go/no-go decision needs the customer outcome made concrete first; write the PRD after it passes.
 
 The PR/FAQ is Amazon&#x27;s &quot;working backwards&quot; artifact: before any team is funded to build a product, the PM writes a future-dated press release and an FAQ that anticipates every hard question. The discipline forces clarity on customer, problem, and outcome before a single design decision is made. If t
 
@@ -401,6 +401,9 @@ The PR/FAQ is Amazon&#x27;s &quot;working backwards&quot; artifact: before any t
 - An internal FAQ with only easy questions
 - No magnitude in the press release
 - No &quot;what we will NOT do in v1&quot;
+
+## Frameworks &amp; Templates You Know
+- | `assets/prfaq_template.md` | Fill-in PR, internal FAQ and external FAQ |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -420,7 +423,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Prfaq (Project Management domain).
 
-Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact.
+Write a Working Backwards press release with internal and external FAQs before anything is built. Use when a funding or go/no-go decision needs the customer outcome made concrete first; write the PRD after it passes.
 
 The PR/FAQ is Amazon&#x27;s &quot;working backwards&quot; artifact: before any team is funded to build a product, the PM writes a future-dated press release and an FAQ that anticipates every hard question. The discipline forces clarity on customer, problem, and outcome before a single design decision is made. If t
 
@@ -428,6 +431,9 @@ The PR/FAQ is Amazon&#x27;s &quot;working backwards&quot; artifact: before any t
 - An internal FAQ with only easy questions
 - No magnitude in the press release
 - No &quot;what we will NOT do in v1&quot;
+
+## Frameworks &amp; Templates You Know
+- | `assets/prfaq_template.md` | Fill-in PR, internal FAQ and external FAQ |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -491,12 +497,14 @@ Before generating the PR/FAQ, settle the inputs below. When one is missing or va
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. Complete the one-liner: &quot;We are announcing \[product\] for \[customer\] that does \[outcome\].&quot;
 2. Draft the press release first; do not write any FAQ until it passes the Press Release Test with one outside reader.
 3. Write the internal FAQ in question/answer pairs (PM asks, sponsor/finance/eng answers), then the external FAQ last.
 4. Run the &quot;5 readers&quot; rule, date and save the artifact, then hand off to `create-prd/`.
+
+**Done when** an outside reader can say what the customer gets and why it beats today&#x27;s alternative from the press release alone, and the internal FAQ answers the hardest cost, risk and &quot;why not&quot; questions rather than the easy ones.
 
 Use `assets/prfaq_template.md` as the fill-in scaffold. See `references/prfaq-playbook.md` for the full structure, FAQ categories, sample questions, workflow, and troubleshooting.
 
@@ -524,7 +532,13 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - **[references/prfaq-playbook.md](references/prfaq-playbook.md)** — the Working Backwards method, the 9-part press-release structure and test, internal/external FAQ category requirements and sample questions, the authoring workflow, troubleshooting, and success criteria. Read when drafting or reviewing a PR/FAQ.
 - **[references/working-backwards-guide.md](references/working-backwards-guide.md)** — deep dive on the Amazon method, its origin/intent, and the review choreography that makes it effective. Read for context on why the discipline works.
 - **[references/red-flags.md](references/red-flags.md)** — common ways a PR/FAQ goes wrong, with concrete fixes. Read before circulating a draft for review.
-- `assets/prfaq_template.md` — complete fill-in PR/FAQ template (PR + internal FAQ + external FAQ).
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/prfaq_template.md` | Fill-in PR, internal FAQ and external FAQ |
+| `examples/shared-dashboards-prfaq.md` | Worked PR/FAQ |
 
 ## Scope &amp; Limitations
 
@@ -573,7 +587,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Prfaq&quot;**
-   - Description: &quot;Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact.&quot;
+   - Description: &quot;Write a Working Backwards press release with internal and external FAQs before anything is built. Use when a funding or go/no-go decision needs the customer outcome made concrete first; write the PRD after it passes.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -632,12 +646,14 @@ Before generating the PR/FAQ, settle the inputs below. When one is missing or va
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. Complete the one-liner: &quot;We are announcing \[product\] for \[customer\] that does \[outcome\].&quot;
 2. Draft the press release first; do not write any FAQ until it passes the Press Release Test with one outside reader.
 3. Write the internal FAQ in question/answer pairs (PM asks, sponsor/finance/eng answers), then the external FAQ last.
 4. Run the &quot;5 readers&quot; rule, date and save the artifact, then hand off to `create-prd/`.
+
+**Done when** an outside reader can say what the customer gets and why it beats today&#x27;s alternative from the press release alone, and the internal FAQ answers the hardest cost, risk and &quot;why not&quot; questions rather than the easy ones.
 
 Use `assets/prfaq_template.md` as the fill-in scaffold. See `references/prfaq-playbook.md` for the full structure, FAQ categories, sample questions, workflow, and troubleshooting.
 
@@ -665,7 +681,13 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - **[references/prfaq-playbook.md](references/prfaq-playbook.md)** — the Working Backwards method, the 9-part press-release structure and test, internal/external FAQ category requirements and sample questions, the authoring workflow, troubleshooting, and success criteria. Read when drafting or reviewing a PR/FAQ.
 - **[references/working-backwards-guide.md](references/working-backwards-guide.md)** — deep dive on the Amazon method, its origin/intent, and the review choreography that makes it effective. Read for context on why the discipline works.
 - **[references/red-flags.md](references/red-flags.md)** — common ways a PR/FAQ goes wrong, with concrete fixes. Read before circulating a draft for review.
-- `assets/prfaq_template.md` — complete fill-in PR/FAQ template (PR + internal FAQ + external FAQ).
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/prfaq_template.md` | Fill-in PR, internal FAQ and external FAQ |
+| `examples/shared-dashboards-prfaq.md` | Worked PR/FAQ |
 
 ## Scope &amp; Limitations
 
@@ -714,7 +736,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Prfaq&quot;**
-   - Description: &quot;Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact.&quot;
+   - Description: &quot;Write a Working Backwards press release with internal and external FAQs before anything is built. Use when a funding or go/no-go decision needs the customer outcome made concrete first; write the PRD after it passes.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -772,13 +794,8 @@ cp -r Claude-Skills/project-management/execution/prfaq your-project/
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/execution/prfaq</code></pre>
 </div>
   
-  <h2>Quick Start</h2>1. Complete the one-liner: "We are announcing \[product\] for \[customer\] that does \[outcome\]."
-2. Draft the press release first; do not write any FAQ until it passes the Press Release Test with one outside reader.
-3. Write the internal FAQ in question/answer pairs (PM asks, sponsor/finance/eng answers), then the external FAQ last.
-4. Run the "5 readers" rule, date and save the artifact, then hand off to `create-prd/`.
-
-Use `assets/prfaq_template.md` as the fill-in scaffold. See `references/prfaq-playbook.md` for the full structure, FAQ categories, sample questions, workflow, and troubleshooting.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/prfaq/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

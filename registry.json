@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T15:36:10+00:00",
+  "generated_at": "2026-11-08T17:14:52+00:00",
   "repository": "claude-skills",
   "skill_count": 403,
   "domain_count": 21,
@@ -31,7 +31,7 @@
     {
       "name": "a11y-audit",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"check accessibility\", \"audit WCAG compliance\", \"scan HTML for a11y issues\", \"check color contrast\", or \"find accessibility violations in web pages\".",
+      "description": "Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour contrast checks for colour pairs or CSS. Use when auditing templates for accessibility, checking contrast, or adding an a11y gate to CI.",
       "tags": [
         "accessibility",
         "a11y",
@@ -40,7 +40,7 @@
         "html"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/a11y-audit",
       "has_scripts": true,
       "has_references": true
@@ -57,9 +57,9 @@
         "agent-evaluation"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/agent-designer",
-      "has_scripts": false,
+      "has_scripts": true,
       "has_references": true
     },
     {
@@ -74,7 +74,7 @@
         "llm-testing"
       ],
       "version": "1.0.0",
-      "updated": "2026-07-21",
+      "updated": "2026-11-08",
       "path": "engineering/agent-harness",
       "has_scripts": true,
       "has_references": true
@@ -91,7 +91,7 @@
         "multi-agent"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "engineering/agent-protocol",
       "has_scripts": true,
       "has_references": true
@@ -99,7 +99,7 @@
     {
       "name": "agent-workflow-designer",
       "domain": "engineering",
-      "description": "Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state management. Use when building pipelines of specialized agents, designing fan-out/fan-in patterns, or implementing fault-tolerant workflows.",
+      "description": "Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs them before build. Use when planning a pipeline of specialised agents, fan-out/fan-in, or a lead with subagents.",
       "tags": [
         "multi-agent",
         "orchestration",
@@ -109,7 +109,7 @@
         "state-management"
       ],
       "version": "1.2.0",
-      "updated": "2026-06-29",
+      "updated": "2026-11-08",
       "path": "engineering/agent-workflow-designer",
       "has_scripts": true,
       "has_references": true
@@ -117,7 +117,7 @@
     {
       "name": "agenthub",
       "domain": "engineering",
-      "description": "Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs, covering agent spawning, output merging, and quality evaluation. Use when a task needs multiple specialized agents or to parallelize AI work.",
+      "description": "Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent's state on a board, then ranks and merges their outputs. Use when spawning parallel agents, monitoring a run, or merging results.",
       "tags": [
         "multi-agent",
         "orchestration",
@@ -127,7 +127,7 @@
         "agent-hub"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/agenthub",
       "has_scripts": true,
       "has_references": true
@@ -135,7 +135,7 @@
     {
       "name": "agentic-evaluation-framework",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"evaluate LLM output quality\", \"set up LLM-as-judge\", \"build an eval rubric\", \"compare model outputs pairwise\", or \"measure agent quality\".",
+      "description": "Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge, scoring outputs, or comparing model or prompt variants.",
       "tags": [
         "evaluation",
         "llm-as-judge",
@@ -144,7 +144,7 @@
         "quality"
       ],
       "version": "1.0.0",
-      "updated": "2026-06-29",
+      "updated": "2026-11-08",
       "path": "engineering/agentic-evaluation-framework",
       "has_scripts": true,
       "has_references": true
@@ -152,7 +152,7 @@
     {
       "name": "ai-security",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"scan AI systems for security threats\", \"check for prompt injection vulnerabilities\", \"assess model security posture\", \"detect data poisoning risks\", or \"audit AI/ML pipeline security\".",
+      "description": "Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model extraction and insecure serving, plus an agent and tool-use threat checklist. Use when reviewing an LLM app, model API or ML pipeline for security.",
       "tags": [
         "ai-security",
         "prompt-injection",
@@ -161,7 +161,7 @@
         "adversarial-ml"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/ai-security",
       "has_scripts": true,
       "has_references": true
@@ -178,7 +178,7 @@
         "linting"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/api-design-reviewer",
       "has_scripts": true,
       "has_references": true
@@ -186,7 +186,7 @@
     {
       "name": "api-test-suite-builder",
       "domain": "engineering",
-      "description": "Generate API test suites from route definitions across frameworks: auth, input validation, contract, k6 load testing, mocking, and OpenAPI-driven generation. Use when adding new APIs, auditing test coverage, or building regression suites.",
+      "description": "Generates API test skeletons from an OpenAPI spec, measures which endpoints tests really assert on, and checks response samples against the spec. Use when adding API tests, auditing API test coverage, or catching contract drift.",
       "tags": [
         "api-testing",
         "contract-testing",
@@ -195,7 +195,7 @@
         "openapi"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/api-test-suite-builder",
       "has_scripts": true,
       "has_references": true
@@ -211,7 +211,7 @@
         "cost-optimization"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/aws-solution-architect",
       "has_scripts": true,
       "has_references": true
@@ -231,7 +231,7 @@
         "cost-optimization"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/azure-cloud-architect",
       "has_scripts": true,
       "has_references": true
@@ -239,7 +239,7 @@
     {
       "name": "batch-api-orchestrator",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"batch LLM requests\", \"should I use the batch API\", \"estimate batch vs realtime cost\", \"design a bulk LLM job\", or \"process thousands of prompts cheaply\".",
+      "description": "Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction through a provider batch API.",
       "tags": [
         "batch-api",
         "llm",
@@ -248,7 +248,7 @@
         "async"
       ],
       "version": "1.0.0",
-      "updated": "2026-06-29",
+      "updated": "2026-11-08",
       "path": "engineering/batch-api-orchestrator",
       "has_scripts": true,
       "has_references": true
@@ -256,16 +256,16 @@
     {
       "name": "browser-automation",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"build web automation scripts\", \"check browser automation for detection\", \"generate web scraping code\", \"create form filling automation\", or \"build anti-detection browser scripts\".",
+      "description": "Generates polite, rate-limited scraper and form-submission scripts (requests, no JS) and audits automation code for blocking and overload risks. Use when writing a permitted scraper, scripting a form post, or reviewing a crawler.",
       "tags": [
         "browser-automation",
         "web-scraping",
-        "anti-detection",
+        "rate-limiting",
         "form-automation",
-        "selenium"
+        "robots-txt"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/browser-automation",
       "has_scripts": true,
       "has_references": true
@@ -301,7 +301,7 @@
         "monorepo"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/changelog-generator",
       "has_scripts": true,
       "has_references": true
@@ -309,7 +309,7 @@
     {
       "name": "chaos-engineering",
       "domain": "engineering",
-      "description": "Chaos engineering: hypothesis-driven fault injection to surface weakness before users do. Use when designing a chaos experiment, planning a gameday, choosing what to inject, computing blast radius, or building a chaos maturity model.",
+      "description": "Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject, or building a chaos maturity model.",
       "tags": [
         "chaos-engineering",
         "resilience",
@@ -320,7 +320,7 @@
         "blast-radius"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/chaos-engineering",
       "has_scripts": true,
       "has_references": true
@@ -328,7 +328,7 @@
     {
       "name": "ci-cd-pipeline-builder",
       "domain": "engineering",
-      "description": "Design and generate CI/CD pipelines from project stack signals across GitHub Actions, GitLab CI, CircleCI, and Buildkite. Use when bootstrapping CI, migrating pipelines, adding deployment gates, or optimizing build times.",
+      "description": "Generates GitHub Actions or GitLab CI pipelines from a repo's stack, lints pipelines for security and reliability gaps, and finds missing caches. Use when bootstrapping CI, reviewing a workflow, adding deploy gates, or speeding up builds.",
       "tags": [
         "ci-cd",
         "github-actions",
@@ -337,7 +337,7 @@
         "pipelines"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/ci-cd-pipeline-builder",
       "has_scripts": true,
       "has_references": true
@@ -345,7 +345,7 @@
     {
       "name": "claude-code-mastery",
       "domain": "engineering",
-      "description": "Use when the user asks to \"optimize CLAUDE.md\", \"create a new skill\", \"write a custom agent\", \"configure hooks\", \"manage context window\", \"set up MCP servers\", \"scaffold a skill package\", \"analyze token budget\", \"create subagents\", \"configure permissions\", \"set up worktrees\", or \"integrate Claude Code with editors\". Covers Claude Code CLI mastery, skill authoring, context engineering, hooks automation, subagent creation, and development workflow optimization.",
+      "description": "Optimizes CLAUDE.md files, scaffolds skills and subagents, wires hooks and measures context budget for Claude Code. Use when writing or trimming a CLAUDE.md, creating a skill, subagent or hook, or auditing token usage.",
       "tags": [
         "claude-code",
         "skill-authoring",
@@ -353,7 +353,7 @@
         "hooks"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/claude-code-mastery",
       "has_scripts": true,
       "has_references": true
@@ -370,7 +370,7 @@
         "posture-management"
       ],
       "version": "1.0.0",
-      "updated": "2026-07-21",
+      "updated": "2026-11-08",
       "path": "engineering/cloud-security",
       "has_scripts": true,
       "has_references": true
@@ -378,7 +378,7 @@
     {
       "name": "code-reviewer",
       "domain": "engineering",
-      "description": "Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, or generating review checklists.",
+      "description": "Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a review checklist.",
       "tags": [
         "code-review",
         "pull-request",
@@ -404,7 +404,7 @@
         "handoff"
       ],
       "version": "1.0.0",
-      "updated": "2026-07-21",
+      "updated": "2026-11-08",
       "path": "engineering/code-tour",
       "has_scripts": true,
       "has_references": true
@@ -412,7 +412,7 @@
     {
       "name": "codebase-onboarding",
       "domain": "engineering",
-      "description": "Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing, or documenting after a major refactor.",
+      "description": "Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when onboarding engineers or re-documenting after a refactor.",
       "tags": [
         "onboarding",
         "documentation",
@@ -421,7 +421,7 @@
         "developer-experience"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/codebase-onboarding",
       "has_scripts": true,
       "has_references": true
@@ -429,7 +429,7 @@
     {
       "name": "codex-cli-specialist",
       "domain": "engineering",
-      "description": "OpenAI Codex CLI and cross-platform skill authoring. Use when setting up Codex CLI, converting or syncing skills between Claude Code and Codex, configuring agents/openai.yaml, or validating cross-platform skill compatibility.",
+      "description": "Converts Claude Code skills to OpenAI Codex format (agents/openai.yaml), checks dual-platform compatibility and builds a skills index. Use when porting or syncing skills to Codex, or setting up Codex CLI for a skill library.",
       "tags": [
         "openai-codex",
         "cross-platform",
@@ -437,7 +437,7 @@
         "cli"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/codex-cli-specialist",
       "has_scripts": true,
       "has_references": true
@@ -445,7 +445,7 @@
     {
       "name": "computer-use-automation",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"build a computer-use agent\", \"automate a GUI with an AI agent\", \"when to use computer use vs an API\", \"make browser automation reliable\", or \"design screenshot-driven agent actions\".",
+      "description": "Decides when a GUI-driving (computer-use) agent beats an API and lints planned screen actions for missing confirmation, verification and grounding. Use when designing a computer-use agent or reviewing its action plan.",
       "tags": [
         "computer-use",
         "browser-automation",
@@ -454,7 +454,7 @@
         "reliability"
       ],
       "version": "1.0.0",
-      "updated": "2026-06-29",
+      "updated": "2026-11-08",
       "path": "engineering/computer-use-automation",
       "has_scripts": true,
       "has_references": true
@@ -471,7 +471,7 @@
         "token-budget"
       ],
       "version": "1.2.0",
-      "updated": "2026-06-29",
+      "updated": "2026-11-08",
       "path": "engineering/context-engine",
       "has_scripts": true,
       "has_references": true
@@ -491,7 +491,7 @@
         "data-engineering"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/data-quality-auditor",
       "has_scripts": true,
       "has_references": true
@@ -499,7 +499,7 @@
     {
       "name": "database-designer",
       "domain": "engineering",
-      "description": "Database design with schema analysis, index optimization, and migration generation for PostgreSQL, MySQL, MongoDB, and DynamoDB. Use when designing schemas, optimizing queries, planning migrations, or analyzing database performance.",
+      "description": "Analyse an existing SQL schema for normalization and constraint gaps, recommend indexes from query patterns, and generate forward/rollback migrations. Use when reviewing DDL, tuning indexes, or diffing two schema versions.",
       "tags": [
         "database",
         "schema-design",
@@ -509,15 +509,15 @@
         "mongodb"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/database-designer",
-      "has_scripts": false,
+      "has_scripts": true,
       "has_references": true
     },
     {
       "name": "database-schema-designer",
       "domain": "engineering",
-      "description": "Design relational schemas from requirements with normalization, migrations, ERDs, RLS policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features, reviewing schemas, or adding multi-tenancy.",
+      "description": "Design a new relational schema from product requirements: tables, ORM models, RLS, indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy or soft deletes, or writing Drizzle/Prisma/Alembic schemas.",
       "tags": [
         "schema-design",
         "normalization",
@@ -526,7 +526,7 @@
         "postgresql"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/database-schema-designer",
       "has_scripts": true,
       "has_references": true
@@ -562,7 +562,7 @@
         "upgrades"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/dependency-auditor",
       "has_scripts": true,
       "has_references": true
@@ -570,7 +570,7 @@
     {
       "name": "design-auditor",
       "domain": "engineering",
-      "description": "Audit UI/UX designs for quality, AI-generated slop, and accessibility. Use when reviewing designs, detecting slop patterns, validating WCAG compliance, checking design-token adherence, or reviewing responsive design across breakpoints.",
+      "description": "Grade a UI (Design, AI-slop and Accessibility, A-F) and gate it in CI: batch WCAG contrast, token compliance, slop detection. Use when asked to audit, score or gate a UI; to fix one, use interface-refinement.",
       "tags": [
         "design-audit",
         "ai-slop",
@@ -578,7 +578,7 @@
         "accessibility"
       ],
       "version": "2.2.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/design-auditor",
       "has_scripts": true,
       "has_references": true
@@ -586,7 +586,7 @@
     {
       "name": "devops-workflow-engineer",
       "domain": "engineering",
-      "description": "Generate and optimize GitHub Actions CI/CD workflows. Use when designing workflows, planning multi-environment deployments, optimizing pipeline cost and runtime, or implementing blue- green, canary, or rolling deployment strategies.",
+      "description": "Generate and optimize GitHub Actions CI/CD workflows. Use when designing workflows, planning multi-environment deployments, optimizing pipeline cost and runtime, or implementing blue-green, canary, or rolling deployment strategies.",
       "tags": [
         "github-actions",
         "ci-cd",
@@ -594,7 +594,7 @@
         "workflows"
       ],
       "version": "1.2.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/devops-workflow-engineer",
       "has_scripts": true,
       "has_references": true
@@ -610,7 +610,7 @@
         "drift-analysis"
       ],
       "version": "2.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/doc-drift-detector",
       "has_scripts": true,
       "has_references": true
@@ -618,7 +618,7 @@
     {
       "name": "docker-development",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"analyze a Dockerfile\", \"optimize Docker layers\", \"validate docker-compose\", \"check container best practices\", or \"audit Docker configurations\".",
+      "description": "Analyse Dockerfiles and Compose files for security, image size, cache and config problems, with CI-ready exit codes. Use when reviewing or optimising a Dockerfile, validating docker-compose, or adding a container lint step.",
       "tags": [
         "docker",
         "containers",
@@ -627,7 +627,7 @@
         "dockerfile"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/docker-development",
       "has_scripts": true,
       "has_references": true
@@ -662,7 +662,7 @@
         "leak-detection"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/env-secrets-manager",
       "has_scripts": true,
       "has_references": true
@@ -670,7 +670,7 @@
     {
       "name": "extended-thinking-architect",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"decide reasoning effort\", \"set a thinking budget\", \"when to use extended thinking\", \"tune reasoning vs cost\", or \"should this task use a reasoning model\".",
+      "description": "Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model plus a better prompt, and split effort across agent-loop phases. Use when tuning reasoning vs cost or latency, or setting thinking budgets.",
       "tags": [
         "extended-thinking",
         "reasoning-effort",
@@ -679,7 +679,7 @@
         "agents"
       ],
       "version": "1.0.0",
-      "updated": "2026-06-29",
+      "updated": "2026-11-08",
       "path": "engineering/extended-thinking-architect",
       "has_scripts": true,
       "has_references": true
@@ -698,7 +698,7 @@
         "flag-governance"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/feature-flags-architect",
       "has_scripts": true,
       "has_references": true
@@ -706,7 +706,7 @@
     {
       "name": "focused-fix",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"fix a bug with minimal changes\", \"analyze change scope for a bugfix\", \"find the minimal set of files to change\", \"do a focused bugfix\", or \"scope a minimal repair\".",
+      "description": "Constrain a bugfix to the smallest reviewable change: reproduce, patch, add a regression test, check the diff for scope creep. Use when asked for a minimal fix, hotfix or release-blocker; diagnose unknown causes with bug-diagnosis.",
       "tags": [
         "bugfix",
         "minimal-change",
@@ -715,7 +715,7 @@
         "focused-fix"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/focused-fix",
       "has_scripts": true,
       "has_references": true
@@ -735,7 +735,7 @@
         "cost-optimization"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/gcp-cloud-architect",
       "has_scripts": true,
       "has_references": true
@@ -761,7 +761,7 @@
     {
       "name": "git-worktree-manager",
       "domain": "engineering",
-      "description": "Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.",
+      "description": "Run parallel Git worktrees without collisions: a port block per worktree, .env sync, health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several branches or agents need running dev servers at once.",
       "tags": [
         "git",
         "worktrees",
@@ -770,7 +770,7 @@
         "developer-tooling"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/git-worktree-manager",
       "has_scripts": true,
       "has_references": true
@@ -778,7 +778,7 @@
     {
       "name": "google-workspace-cli",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"audit Google Workspace\", \"check GWS security settings\", \"set up Google Workspace authentication\", \"diagnose Workspace issues\", or \"review Google admin configurations\".",
+      "description": "Offline audit of an exported Google Workspace config: 2SV, passwords, sharing, apps, admins, email DNS. Writes API auth setup guides. Use when asked to audit Workspace security, check SPF/DKIM/DMARC, or set up Admin SDK access.",
       "tags": [
         "google-workspace",
         "gws",
@@ -786,8 +786,8 @@
         "security",
         "audit"
       ],
-      "version": "1.0.0",
-      "updated": "2026-04-02",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "engineering/google-workspace-cli",
       "has_scripts": true,
       "has_references": true
@@ -795,7 +795,7 @@
     {
       "name": "helm-chart-builder",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"analyze Helm charts\", \"validate Helm values\", \"review chart structure\", \"check Kubernetes Helm templates\", or \"audit chart dependencies and configuration\".",
+      "description": "Review an existing Helm chart and its values files: metadata, structure, dependency pinning, resources, security context, image tags, probes and plaintext secrets. Use when auditing a chart before release or adding chart checks to CI.",
       "tags": [
         "helm",
         "kubernetes",
@@ -804,7 +804,7 @@
         "devops"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/helm-chart-builder",
       "has_scripts": true,
       "has_references": true
@@ -838,7 +838,7 @@
         "postmortem"
       ],
       "version": "1.2.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/incident-commander",
       "has_scripts": true,
       "has_references": true
@@ -866,7 +866,7 @@
     {
       "name": "interview-system-designer",
       "domain": "engineering",
-      "description": "Design calibrated interview loops, competency-based question banks, and hiring calibration. Use when designing interview processes, creating hiring pipelines, generating scoring rubrics, analyzing interviewer bias, or building question banks.",
+      "description": "Design interview loops, competency rubrics and question banks, and check interviewer calibration. Use when designing an interview process, writing scorecards or questions, or reviewing hiring-bar drift and interviewer bias.",
       "tags": [
         "interviews",
         "hiring",
@@ -875,9 +875,9 @@
         "competencies"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/interview-system-designer",
-      "has_scripts": false,
+      "has_scripts": true,
       "has_references": true
     },
     {
@@ -894,7 +894,7 @@
         "sre"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/kubernetes-operator",
       "has_scripts": true,
       "has_references": true
@@ -902,7 +902,7 @@
     {
       "name": "llm-cost-optimizer",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"estimate LLM costs\", \"count tokens in prompts\", \"optimize prompt token usage\", \"compare model pricing\", or \"reduce LLM API costs\".",
+      "description": "Estimates LLM token counts and per-request cost across models, flags wasteful prompt text, and models prompt-cache break-even. Use when budgeting LLM spend, comparing models on cost, or trimming prompt tokens.",
       "tags": [
         "llm",
         "tokens",
@@ -910,8 +910,8 @@
         "prompt-engineering",
         "pricing"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-29",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/llm-cost-optimizer",
       "has_scripts": true,
       "has_references": true
@@ -938,7 +938,7 @@
     {
       "name": "mcp-server-builder",
       "domain": "engineering",
-      "description": "Build MCP (Model Context Protocol) servers with tool definitions, resource providers, prompt templates, and transports. Use when exposing APIs to AI agents, building tool servers, converting OpenAPI to MCP, or creating MCP integrations.",
+      "description": "Builds MCP servers: OpenAPI-to-tool conversion, tool and schema linting, TypeScript or Python scaffolds, transports. Use when exposing an API to AI agents, building a tool server, or reviewing MCP tool definitions.",
       "tags": [
         "mcp",
         "ai-integration",
@@ -946,8 +946,8 @@
         "api",
         "ai-agents"
       ],
-      "version": "1.2.0",
-      "updated": "2026-06-29",
+      "version": "1.3.0",
+      "updated": "2026-11-08",
       "path": "engineering/mcp-server-builder",
       "has_scripts": true,
       "has_references": true
@@ -963,8 +963,8 @@
         "database-migration",
         "infrastructure"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/migration-architect",
       "has_scripts": true,
       "has_references": true
@@ -980,8 +980,8 @@
         "pnpm",
         "changesets"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/monorepo-navigator",
       "has_scripts": true,
       "has_references": true
@@ -989,15 +989,15 @@
     {
       "name": "ms365-tenant-manager",
       "domain": "engineering",
-      "description": "Microsoft 365 tenant administration for Global Administrators. Use for tenant setup, Azure AD user management, Exchange Online and Teams config, Conditional Access policies, license management, and PowerShell bulk-operation scripts.",
+      "description": "Generates reviewed PowerShell for Microsoft 365 admin: tenant setup and DNS, bulk provisioning, offboarding, Conditional Access and security audits. Use when setting up, hardening or auditing a tenant, or onboarding and offboarding users.",
       "tags": [
         "microsoft-365",
         "azure-ad",
         "office-365",
         "administration"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/ms365-tenant-manager",
       "has_scripts": true,
       "has_references": true
@@ -1013,8 +1013,8 @@
         "dashboards",
         "monitoring"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/observability-designer",
       "has_scripts": true,
       "has_references": true
@@ -1030,8 +1030,8 @@
         "memory-leaks",
         "load-testing"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/performance-profiler",
       "has_scripts": true,
       "has_references": true
@@ -1050,8 +1050,8 @@
         "visual-regression",
         "accessibility"
       ],
-      "version": "2.1.0",
-      "updated": "2026-06-17",
+      "version": "2.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/playwright-pro",
       "has_scripts": true,
       "has_references": true
@@ -1077,7 +1077,7 @@
     {
       "name": "pr-review-expert",
       "domain": "engineering",
-      "description": "Systematic PR review with blast-radius analysis, security scanning, and breaking-change and test-coverage deltas. Use when reviewing PRs that touch shared libraries, APIs, database schemas, auth, or security-sensitive code.",
+      "description": "Reviews risky PRs by blast radius: what imports the changed files, breaking API and schema changes, sensitive paths and test deltas. Use when a PR touches shared libraries, APIs, schemas or auth (for general review use code-reviewer).",
       "tags": [
         "code-review",
         "pull-requests",
@@ -1085,8 +1085,8 @@
         "breaking-changes",
         "test-coverage"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/pr-review-expert",
       "has_scripts": true,
       "has_references": true
@@ -1094,7 +1094,7 @@
     {
       "name": "prompt-engineer-toolkit",
       "domain": "engineering",
-      "description": "Prompt engineering frameworks for building, testing, versioning, and evaluating prompts: chain-of-thought, few-shot, regression testing, and rubrics. Use when designing production prompts, running A/B tests, or building prompt libraries.",
+      "description": "Tests, versions and scores production prompts: prompt linting, version diffs, eval-suite scoring with a CI gate. Use when changing a production prompt, building an eval suite, debugging a regression, or migrating to a new model.",
       "tags": [
         "prompt-engineering",
         "few-shot",
@@ -1102,8 +1102,8 @@
         "regression-testing",
         "llm"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/prompt-engineer-toolkit",
       "has_scripts": true,
       "has_references": true
@@ -1119,8 +1119,8 @@
         "prompt-catalog",
         "ai-compliance"
       ],
-      "version": "1.0.0",
-      "updated": "2026-04-02",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "engineering/prompt-governance",
       "has_scripts": true,
       "has_references": true
@@ -1128,15 +1128,15 @@
     {
       "name": "qa-browser-automation",
       "domain": "engineering",
-      "description": "Browser-based QA combining Chrome MCP control with Python analysis tools. Use when performing browser QA testing, visual regression tracking, WCAG accessibility auditing, performance profiling, or health-scoring web applications.",
+      "description": "Live browser QA through Chrome MCP plus Python tools for health scoring, static WCAG checks, screenshot baselines and reports. Use when running a QA sweep on a web app, auditing accessibility, or tracking visual regressions.",
       "tags": [
         "browser-qa",
         "wcag",
         "visual-regression",
         "health-scoring"
       ],
-      "version": "2.1.0",
-      "updated": "2026-04-02",
+      "version": "2.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/qa-browser-automation",
       "has_scripts": true,
       "has_references": true
@@ -1144,7 +1144,7 @@
     {
       "name": "rag-architect",
       "domain": "engineering",
-      "description": "Design RAG pipelines: chunking, retrieval evaluation, and architecture. Use when building a RAG system, selecting a chunking strategy, choosing a vector database, optimizing retrieval quality, or evaluating with RAGAS metrics.",
+      "description": "Designs and evaluates RAG pipelines: chunking analysis, retrieval metrics on your queries, first-pass designs with costs. Use when building a RAG system, choosing chunking, embeddings or a vector store, or fixing poor retrieval.",
       "tags": [
         "rag",
         "retrieval",
@@ -1152,8 +1152,8 @@
         "vector-database",
         "embeddings"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/rag-architect",
       "has_scripts": false,
       "has_references": true
@@ -1170,7 +1170,7 @@
         "engagement-planning"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/red-team",
       "has_scripts": true,
       "has_references": true
@@ -1178,7 +1178,7 @@
     {
       "name": "release-manager",
       "domain": "engineering",
-      "description": "Automates release management with changelog generation, semantic versioning, and release readiness checks. Use when preparing releases, generating changelogs, bumping versions, or validating release candidates.",
+      "description": "Turns conventional-commit logs into a changelog and SemVer bump, and scores a release plan for readiness, rollback and comms. Use when you have commit text or a plan JSON to turn into release notes, a version or a go/no-go.",
       "tags": [
         "release-management",
         "semver",
@@ -1186,8 +1186,8 @@
         "release-readiness",
         "versioning"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/release-manager",
       "has_scripts": false,
       "has_references": true
@@ -1195,15 +1195,15 @@
     {
       "name": "release-orchestrator",
       "domain": "engineering",
-      "description": "Orchestrate end-to-end release pipelines. Use when running pre-release validation, generating changelogs, bumping semantic versions, scoring deployment readiness, or gating releases with secret scanning and GO/NO-GO checks.",
+      "description": "Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes and plans from text: release-manager).",
       "tags": [
         "release-pipeline",
         "versioning",
         "pre-flight",
         "readiness"
       ],
-      "version": "2.2.0",
-      "updated": "2026-06-17",
+      "version": "2.3.0",
+      "updated": "2026-11-08",
       "path": "engineering/release-orchestrator",
       "has_scripts": true,
       "has_references": true
@@ -1211,7 +1211,7 @@
     {
       "name": "runbook-generator",
       "domain": "engineering",
-      "description": "Generate operational runbooks from codebase analysis covering deployment, incident response, scaling, and monitoring, with copy-paste commands and rollback steps. Use when bootstrapping ops docs, preparing for on-call, or post-incident.",
+      "description": "Drafts, validates and ages operational runbooks (deploy, incident, database, scaling, monitoring) with stack-specific commands, VERIFY steps and rollback. Use when bootstrapping ops docs, preparing on-call, or after an incident.",
       "tags": [
         "runbooks",
         "incident-response",
@@ -1219,8 +1219,8 @@
         "operations",
         "rollback"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/runbook-generator",
       "has_scripts": true,
       "has_references": true
@@ -1228,7 +1228,7 @@
     {
       "name": "saas-scaffolder",
       "domain": "engineering",
-      "description": "Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new SaaS product, subscription app, or multi-tenant platform.",
+      "description": "Lays down a Next.js SaaS skeleton (provider-specific deps, env, Drizzle tenancy schema, middleware) and guides auth, billing and tenant isolation. Use when starting a SaaS, subscription app or multi-tenant platform.",
       "tags": [
         "saas",
         "boilerplate",
@@ -1236,8 +1236,8 @@
         "stripe",
         "multi-tenancy"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/saas-scaffolder",
       "has_scripts": true,
       "has_references": true
@@ -1245,7 +1245,7 @@
     {
       "name": "secrets-vault-manager",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"generate Vault configurations\", \"plan secret rotation\", \"analyze vault audit logs\", \"manage secrets lifecycle\", or \"set up HashiCorp Vault\".",
+      "description": "Generates HashiCorp Vault configs, plans secret rotation from an inventory, and flags suspicious access in Vault audit logs. Use when setting up Vault, scheduling rotation, or investigating secret access.",
       "tags": [
         "secrets",
         "vault",
@@ -1254,8 +1254,8 @@
         "audit",
         "security"
       ],
-      "version": "1.0.0",
-      "updated": "2026-04-02",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "engineering/secrets-vault-manager",
       "has_scripts": true,
       "has_references": true
@@ -1280,7 +1280,7 @@
     {
       "name": "self-improving-agent",
       "domain": "engineering",
-      "description": "Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.",
+      "description": "Curates agent memory and turns repeated lessons into reviewed rules: memory health checks, pattern extraction, feedback and regression analysis. Use when managing auto-memory or building agents that learn from their own sessions.",
       "tags": [
         "self-improvement",
         "ai-agents",
@@ -1289,8 +1289,8 @@
         "meta-learning",
         "memory-curation"
       ],
-      "version": "2.1.0",
-      "updated": "2026-06-17",
+      "version": "2.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/self-improving-agent",
       "has_scripts": true,
       "has_references": true
@@ -1298,7 +1298,7 @@
     {
       "name": "senior-architect",
       "domain": "engineering",
-      "description": "System architecture design and review. Use when designing architecture, evaluating microservices vs monolith, writing ADRs, choosing a database, planning for scalability, reviewing system design, or generating architecture diagrams.",
+      "description": "Makes and records architecture decisions (pattern, database, monolith vs services) as ADRs, backed by coupling and diagram tools. Use when writing an ADR, choosing an architecture or database, or reviewing system structure.",
       "tags": [
         "system-design",
         "distributed-systems",
@@ -1306,8 +1306,8 @@
         "adr",
         "scalability"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/senior-architect",
       "has_scripts": true,
       "has_references": true
@@ -1315,7 +1315,7 @@
     {
       "name": "senior-backend",
       "domain": "engineering",
-      "description": "Backend development with Node.js/Express/Fastify and PostgreSQL. Use when designing REST or GraphQL APIs, optimizing database queries, implementing authentication, building microservices, handling migrations, or reviewing backend code.",
+      "description": "Builds and reviews Node.js REST APIs on PostgreSQL: OpenAPI-to-route scaffolding, schema and index analysis with migrations, HTTP load tests with a CI gate. Use when designing endpoints, fixing slow queries, or load-testing an API.",
       "tags": [
         "api-design",
         "microservices",
@@ -1323,8 +1323,8 @@
         "caching",
         "queues"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/senior-backend",
       "has_scripts": true,
       "has_references": true
@@ -1332,7 +1332,7 @@
     {
       "name": "senior-cloud-architect",
       "domain": "engineering",
-      "description": "Use when the user asks to \"design cloud architecture\", \"set up Terraform infrastructure\", \"optimize cloud costs\", \"plan disaster recovery\", \"configure multi-region failover\", \"audit IAM policies\", \"migrate to cloud\", \"set up VPC networking\", \"compare AWS vs GCP vs Azure\", or \"right-size cloud instances\". Expert cloud architecture covering AWS, GCP, Azure, multi-cloud strategy, cost optimization, security, and infrastructure automation.",
+      "description": "Cloud architecture decisions across AWS, GCP and Azure: topology, DR tier by RTO/RPO, commitment mix, IAM and network posture. Use when designing, costing, migrating or auditing cloud infrastructure.",
       "tags": [
         "cloud",
         "aws",
@@ -1343,7 +1343,7 @@
         "terraform"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-cloud-architect",
       "has_scripts": false,
       "has_references": true
@@ -1359,7 +1359,7 @@
         "model-training"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-computer-vision",
       "has_scripts": true,
       "has_references": true
@@ -1376,7 +1376,7 @@
         "etl"
       ],
       "version": "1.2.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-data-engineer",
       "has_scripts": true,
       "has_references": true
@@ -1384,7 +1384,7 @@
     {
       "name": "senior-data-scientist",
       "domain": "engineering",
-      "description": "Use when the user asks to \"design an experiment\", \"build a predictive model\", \"run A/B test analysis\", \"perform causal inference\", \"engineer features\", \"evaluate model performance\", \"set up MLOps pipeline\", \"analyze time series\", \"calculate sample size\", or \"deploy a model to production\". Expert data science covering statistical modeling, experimentation, causal inference, feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.",
+      "description": "Experiment sizing, feature profiling with leakage checks, and model evaluation from saved predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features, or scoring a model before release.",
       "tags": [
         "data-science",
         "ml",
@@ -1394,7 +1394,7 @@
         "mlops"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-data-scientist",
       "has_scripts": true,
       "has_references": true
@@ -1411,7 +1411,7 @@
         "monitoring"
       ],
       "version": "2.2.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-devops",
       "has_scripts": true,
       "has_references": true
@@ -1428,7 +1428,7 @@
         "state-management"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-frontend",
       "has_scripts": true,
       "has_references": true
@@ -1445,7 +1445,7 @@
         "system-architecture"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-fullstack",
       "has_scripts": true,
       "has_references": true
@@ -1453,7 +1453,7 @@
     {
       "name": "senior-ml-engineer",
       "domain": "engineering",
-      "description": "ML engineering skill for productionizing models, building MLOps pipelines, and integrating LLMs. Covers model deployment, feature stores, drift monitoring, RAG systems, and cost optimization.",
+      "description": "Productionize ML models and LLM features: deployment specs, drift monitoring, RAG design and cost control. Use when deploying a model, building RAG, or monitoring drift.",
       "tags": [
         "ml-pipelines",
         "model-deployment",
@@ -1461,7 +1461,7 @@
         "rag"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-ml-engineer",
       "has_scripts": true,
       "has_references": true
@@ -1469,7 +1469,7 @@
     {
       "name": "senior-mobile",
       "domain": "engineering",
-      "description": "Use when the user asks to \"build a mobile app\", \"scaffold React Native project\", \"create SwiftUI views\", \"set up Jetpack Compose\", \"optimize mobile performance\", \"configure Expo Router navigation\", \"implement offline-first storage\", \"submit to App Store\", or \"profile mobile rendering\". Expert mobile development covering iOS (Swift/SwiftUI), Android (Kotlin/Compose), React Native, and Flutter for native and cross-platform applications.",
+      "description": "Mobile development across SwiftUI, Jetpack Compose, React Native (Expo) and Flutter: scaffolding, feature architecture, static performance checks and store listings. Use when building, optimizing or shipping a mobile app.",
       "tags": [
         "mobile",
         "ios",
@@ -1480,7 +1480,7 @@
         "kotlin"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-mobile",
       "has_scripts": true,
       "has_references": true
@@ -1496,7 +1496,7 @@
         "prompt-engineering"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-prompt-engineer",
       "has_scripts": true,
       "has_references": true
@@ -1512,7 +1512,7 @@
         "test-frameworks"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-qa",
       "has_scripts": true,
       "has_references": true
@@ -1528,7 +1528,7 @@
         "siem"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-secops",
       "has_scripts": true,
       "has_references": true
@@ -1544,7 +1544,7 @@
         "application-security"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/senior-security",
       "has_scripts": true,
       "has_references": true
@@ -1561,7 +1561,7 @@
         "ai-security"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/skill-security-auditor",
       "has_scripts": true,
       "has_references": true
@@ -1578,7 +1578,7 @@
         "meta-skills"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/skill-tester",
       "has_scripts": true,
       "has_references": true
@@ -1586,7 +1586,7 @@
     {
       "name": "snowflake-development",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"optimize Snowflake queries\", \"analyze Snowflake SQL performance\", \"size Snowflake warehouses\", \"review Snowflake data models\", or \"troubleshoot Snowflake cost issues\".",
+      "description": "Review Snowflake SQL for pruning and join problems, size warehouses and cut credit spend. Use when a Snowflake query is slow or expensive, or when sizing or reviewing warehouses.",
       "tags": [
         "snowflake",
         "sql",
@@ -1595,7 +1595,7 @@
         "warehouse-sizing"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/snowflake-development",
       "has_scripts": true,
       "has_references": true
@@ -1620,7 +1620,7 @@
     {
       "name": "sql-database-assistant",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"optimize SQL queries\", \"explore database schemas\", \"generate migration SQL\", \"analyze query performance\", or \"document database structure\".",
+      "description": "Review SQL queries for index and scan problems, document schemas from DDL, and generate migrations with rollback and destructive-change flags. Use when tuning a query, documenting a schema, or diffing two schemas.",
       "tags": [
         "sql",
         "database",
@@ -1629,7 +1629,7 @@
         "schema"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/sql-database-assistant",
       "has_scripts": true,
       "has_references": true
@@ -1646,7 +1646,7 @@
         "billing"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "engineering/stripe-integration-expert",
       "has_scripts": true,
       "has_references": true
@@ -1662,7 +1662,7 @@
         "red-green-refactor"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "engineering/tdd-guide",
       "has_scripts": true,
       "has_references": true
@@ -1679,7 +1679,7 @@
         "prioritization"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/tech-debt-tracker",
       "has_scripts": true,
       "has_references": true
@@ -1694,7 +1694,7 @@
         "technology-evaluation"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-17",
+      "updated": "2026-11-08",
       "path": "engineering/tech-stack-evaluator",
       "has_scripts": true,
       "has_references": true
@@ -1702,7 +1702,7 @@
     {
       "name": "terraform-patterns",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"analyze Terraform modules\", \"scan IaC for security issues\", \"review Terraform configurations\", \"check infrastructure code for misconfigurations\", or \"audit cloud resources\".",
+      "description": "Terraform module design and review: complexity and documentation analysis plus an AWS-focused misconfiguration scan. Use when writing or reviewing Terraform modules or gating IaC changes.",
       "tags": [
         "terraform",
         "iac",
@@ -1711,7 +1711,7 @@
         "infrastructure"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/terraform-patterns",
       "has_scripts": true,
       "has_references": true
@@ -1719,7 +1719,7 @@
     {
       "name": "threat-detection",
       "domain": "engineering",
-      "description": "This skill should be used when the user asks to \"analyze logs for threats\", \"detect suspicious activity\", \"scan for brute force attempts\", \"identify injection attacks\", or \"audit access patterns for anomalies\".",
+      "description": "Scan auth and access logs for brute force, injection, path traversal, admin probing and request floods, with triage guidance. Use when analyzing logs for threats or reviewing suspicious activity after an alert.",
       "tags": [
         "security",
         "threat-detection",
@@ -1728,7 +1728,7 @@
         "incident-response"
       ],
       "version": "1.0.0",
-      "updated": "2026-04-02",
+      "updated": "2026-11-08",
       "path": "engineering/threat-detection",
       "has_scripts": true,
       "has_references": true
@@ -4141,7 +4141,7 @@
         "kanban"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/agile-coach",
       "has_scripts": true,
       "has_references": true
@@ -4149,7 +4149,7 @@
     {
       "name": "atlassian-admin",
       "domain": "project-management",
-      "description": "Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML, permissions, security policies, marketplace apps, backups, and org-wide governance. Use for admin config, access management, and system optimization.",
+      "description": "Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions, licences and instance health. Use when onboarding or offboarding users, auditing access, cutting licence cost or planning a DC exit.",
       "tags": [
         "atlassian",
         "jira",
@@ -4158,7 +4158,7 @@
         "permissions"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/atlassian-admin",
       "has_scripts": true,
       "has_references": true
@@ -4166,7 +4166,7 @@
     {
       "name": "atlassian-templates",
       "domain": "project-management",
-      "description": "Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized content structures. Use for org-wide templates, custom blueprints, page layouts, and automated content generation.",
+      "description": "Builds, validates and retires reusable Jira issue and Confluence page templates. Use when creating a team or org-wide template, a template is ignored or half-filled, or a template library has sprawled. Space layout is confluence-expert.",
       "tags": [
         "atlassian",
         "jira-templates",
@@ -4174,7 +4174,7 @@
         "workflows"
       ],
       "version": "1.1.0",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/atlassian-templates",
       "has_scripts": true,
       "has_references": true
@@ -4182,7 +4182,7 @@
     {
       "name": "pm-1on1s",
       "domain": "project-management",
-      "description": "Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC reports, cross-functional — grounded in Radical Candor, the GROW coaching model, and the Manager Tools 1:1 framework.",
+      "description": "Builds 1:1 agendas and kickoff scripts for a PM's manager, EM, designer, reports and cross-functional partners. Use when starting a new 1:1, a 1:1 has turned into status updates, or you need to give a partner hard feedback.",
       "tags": [
         "one-on-ones",
         "coaching",
@@ -4191,7 +4191,7 @@
         "pm-career"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/career/pm-1on1s",
       "has_scripts": false,
       "has_references": true
@@ -4199,7 +4199,7 @@
     {
       "name": "pm-career-ladder",
       "domain": "project-management",
-      "description": "PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership, strategy, and communication. Includes gap analysis, growth planning, and promotion packet templates.",
+      "description": "Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth plan or promotion packet. Use when preparing for promotion, calibrating your level, or turning manager feedback into a plan.",
       "tags": [
         "career-ladder",
         "pm-levels",
@@ -4208,7 +4208,7 @@
         "pm-career"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/career/pm-career-ladder",
       "has_scripts": false,
       "has_references": true
@@ -4216,7 +4216,7 @@
     {
       "name": "pm-interview-prep",
       "domain": "project-management",
-      "description": "Structured PM interview preparation across product sense, execution, strategy, behavioral, and technical rounds, using CIRCLES, AARM, STAR, and the estimation framework. Calibrated to APM, PM, Senior PM, and Group PM rubrics.",
+      "description": "Plans PM interview prep across product sense, execution, strategy, behavioral and technical rounds, calibrated to level. Use when a PM loop is scheduled, you are running mock interviews, or you are moving up a level.",
       "tags": [
         "pm-interviews",
         "product-sense",
@@ -4225,7 +4225,7 @@
         "pm-career"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/career/pm-interview-prep",
       "has_scripts": false,
       "has_references": true
@@ -4233,7 +4233,7 @@
     {
       "name": "pm-onboarding",
       "domain": "project-management",
-      "description": "30-60-90 day plan for a new PM joining a company or team, grounded in Michael Watkins' First 90 Days framework and the STARS situational diagnosis. Includes week-by-week plan, stakeholder map, 1:1 question bank, and first-PRD template.",
+      "description": "Builds a new PM's 30-60-90 day plan from a situation diagnosis: stakeholder map, 1:1 questions, early wins and a first PRD. Use when starting a PM job, moving to a new team, or taking on new scope.",
       "tags": [
         "pm-onboarding",
         "30-60-90",
@@ -4242,7 +4242,7 @@
         "pm-career"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/career/pm-onboarding",
       "has_scripts": false,
       "has_references": true
@@ -4250,7 +4250,7 @@
     {
       "name": "confluence-expert",
       "domain": "project-management",
-      "description": "Confluence expert for spaces, knowledge bases, documentation, page layouts, macros, templates, and Jira-Confluence integration. Use for documentation strategy, space architecture, content organization, and collaborative knowledge management.",
+      "description": "Designs and audits Confluence spaces: page trees, labels, permissions, page ownership and stale content. Use when setting up or restructuring a space, a wiki has gone stale or duplicated, or labels are a mess.",
       "tags": [
         "confluence",
         "knowledge-management",
@@ -4258,7 +4258,7 @@
         "documentation"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/confluence-expert",
       "has_scripts": true,
       "has_references": true
@@ -4266,7 +4266,7 @@
     {
       "name": "delivery-manager",
       "domain": "project-management",
-      "description": "Expert delivery management for release planning, deployment strategy, incident response, change management, SLA/error-budget tracking, and DORA metrics across continuous delivery pipelines.",
+      "description": "Plans releases, picks deployment strategies, runs incidents and tracks DORA metrics and error budgets. Use when preparing a Go/No-Go, choosing canary or blue-green, handling a production incident or reporting delivery health.",
       "tags": [
         "delivery",
         "release",
@@ -4275,7 +4275,7 @@
         "devops"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/delivery-manager",
       "has_scripts": true,
       "has_references": true
@@ -4292,7 +4292,7 @@
         "discovery"
       ],
       "version": "1.0.0",
-      "updated": "2026-09-21",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/ai-prototyping",
       "has_scripts": true,
       "has_references": true
@@ -4300,7 +4300,7 @@
     {
       "name": "brainstorm-experiments",
       "domain": "project-management",
-      "description": "Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.",
+      "description": "Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and picks the method. Use when validating an idea before building, testing willingness to pay, or choosing between fake door, landing page and A/B test.",
       "tags": [
         "experiments",
         "pretotyping",
@@ -4308,7 +4308,7 @@
         "discovery"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/brainstorm-experiments",
       "has_scripts": true,
       "has_references": true
@@ -4316,7 +4316,7 @@
     {
       "name": "brainstorm-ideas",
       "domain": "project-management",
-      "description": "Product ideation expert using Product Trio approach and Opportunity Solution Trees for both new and existing products.",
+      "description": "Generates product ideas from PM, design and engineering angles, ties each to an opportunity and ranks the top five. Use when brainstorming features for an outcome, exploring a new product, or choosing which ideas to test first.",
       "tags": [
         "ideation",
         "product-trio",
@@ -4324,7 +4324,7 @@
         "discovery"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/brainstorm-ideas",
       "has_scripts": true,
       "has_references": true
@@ -4332,7 +4332,7 @@
     {
       "name": "customer-interview-script",
       "domain": "project-management",
-      "description": "Run high-signal customer discovery interviews using a scripted question hierarchy, behavior-over-opinion probes, and rapport techniques drawn from Portigal, Torres, Fitzpatrick (Mom Test), and Lewis Lin.",
+      "description": "Writes and times a customer interview script that collects past-behavior stories, not opinions. Use when preparing a discovery, solution-validation, journey, churn or win-loss interview, or when interviews keep producing compliments.",
       "tags": [
         "customer-interviews",
         "interview-script",
@@ -4340,7 +4340,7 @@
         "user-research"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/customer-interview-script",
       "has_scripts": false,
       "has_references": true
@@ -4348,7 +4348,7 @@
     {
       "name": "identify-assumptions",
       "domain": "project-management",
-      "description": "Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil's advocate analysis.",
+      "description": "Surfaces the assumptions behind a product bet, scores impact against confidence and picks the few to test first. Use when an idea feels right but is unproven, the team disagrees on risk, or before designing experiments.",
       "tags": [
         "assumption-mapping",
         "risk",
@@ -4356,7 +4356,7 @@
         "discovery"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/identify-assumptions",
       "has_scripts": true,
       "has_references": true
@@ -4364,7 +4364,7 @@
     {
       "name": "interview-synthesis",
       "domain": "project-management",
-      "description": "Customer interview synthesis: raw transcripts to themed insights, an opportunity solution tree, and follow-up questions (Teresa Torres continuous discovery). Use for post-interview synthesis, opportunity mapping, and evidence gap analysis.",
+      "description": "Turns customer interview notes into evidenced themes, an opportunity tree and follow-up questions. Use when you have just run interviews, need to show what customers said, or must find evidence gaps before the next round.",
       "tags": [
         "interview-synthesis",
         "insights",
@@ -4372,7 +4372,7 @@
         "opportunity-solution-tree"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/interview-synthesis",
       "has_scripts": true,
       "has_references": true
@@ -4380,7 +4380,7 @@
     {
       "name": "jtbd-workshop",
       "domain": "project-management",
-      "description": "Run a full Jobs-To-Be-Done discovery workshop with switch interviews, forces-of-progress mapping, ODI outcome scoring, and opportunity statements across 2hr, 4hr, and 8hr formats.",
+      "description": "Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of progress, scored outcome statements. Use when you need to know why customers switch, or to ground strategy in jobs before writing PRDs.",
       "tags": [
         "jobs-to-be-done",
         "switch-interviews",
@@ -4389,7 +4389,7 @@
         "discovery"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/jtbd-workshop",
       "has_scripts": false,
       "has_references": true
@@ -4397,7 +4397,7 @@
     {
       "name": "metrics-dashboard",
       "domain": "project-management",
-      "description": "Design a product metrics dashboard — North Star, input metrics, and guardrails — that a team actually uses to make decisions. Use when building dashboard architecture: layers, owners, cadence, and visualization.",
+      "description": "Designs a product metrics dashboard in four layers (North Star, inputs, guardrails, operational) with owners, comparisons and cadence, and audits the spec. Use when building a launch dashboard or pruning one nobody uses.",
       "tags": [
         "metrics",
         "dashboard",
@@ -4406,7 +4406,7 @@
         "product-analytics"
       ],
       "version": "1.0.0",
-      "updated": "2026-05-27",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/metrics-dashboard",
       "has_scripts": true,
       "has_references": true
@@ -4414,7 +4414,7 @@
     {
       "name": "opportunity-solution-tree",
       "domain": "project-management",
-      "description": "Opportunity Solution Tree (Teresa Torres) mapping outcomes → opportunities → solutions → assumption tests. Use when prioritizing discovery work, mapping solutions to a problem, or checking whether a roadmap moves outcomes.",
+      "description": "Maps one outcome to customer opportunities, 3+ solutions each and assumption tests, then audits the tree. Use when prioritizing discovery work, mapping solutions to a problem, or checking whether a roadmap moves outcomes.",
       "tags": [
         "opportunity-solution-tree",
         "continuous-discovery",
@@ -4422,7 +4422,7 @@
         "assumption-testing"
       ],
       "version": "1.0.0",
-      "updated": "2026-05-27",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/opportunity-solution-tree",
       "has_scripts": true,
       "has_references": true
@@ -4447,7 +4447,7 @@
     {
       "name": "pre-mortem",
       "domain": "project-management",
-      "description": "Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.",
+      "description": "Runs a pre-mortem that sorts launch risks into evidenced tigers, paper tigers and unspoken elephants, each with an owner. Use when a big launch, build or migration is coming, or the team has a bad feeling it cannot name.",
       "tags": [
         "pre-mortem",
         "risk-analysis",
@@ -4455,7 +4455,7 @@
         "discovery"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/pre-mortem",
       "has_scripts": true,
       "has_references": true
@@ -4463,7 +4463,7 @@
     {
       "name": "value-proposition-canvas",
       "domain": "project-management",
-      "description": "Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit validation across problem-solution, product-market, and business-model dimensions. Use for jobs-to-be-done, pains/gains, and product-market-fit framing.",
+      "description": "Maps one segment's jobs, pains and gains against your product's relievers and creators and checks fit. Use when testing whether an offer matches what customers care about, or positioning a product for one segment.",
       "tags": [
         "value-proposition-canvas",
         "strategyzer",
@@ -4471,7 +4471,7 @@
         "jobs-to-be-done"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/discovery/value-proposition-canvas",
       "has_scripts": false,
       "has_references": true
@@ -4479,7 +4479,7 @@
     {
       "name": "activation-funnel",
       "domain": "project-management",
-      "description": "Design and analyze activation funnels (AARRR / AAARRR Pirate Metrics) with conversion + drop-off math, bottleneck detection, and Mermaid funnel diagrams. Includes a stdlib Python tool that emits all 6 shared PM output formats.",
+      "description": "Designs and analyzes activation funnels: stage conversion, drop-off, bottlenecks and the aha event that predicts retention. Use when a funnel leaks, signups grow but activation is flat, or you must pick an activation event.",
       "tags": [
         "activation",
         "funnel",
@@ -4488,7 +4488,7 @@
         "drop-off"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/execution/activation-funnel",
       "has_scripts": true,
       "has_references": true
@@ -4505,7 +4505,7 @@
         "delivery"
       ],
       "version": "1.0.0",
-      "updated": "2026-09-21",
+      "updated": "2026-11-08",
       "path": "project-management/execution/agents-in-the-team",
       "has_scripts": true,
       "has_references": true
@@ -4513,7 +4513,7 @@
     {
       "name": "ai-feature-prd",
       "domain": "project-management",
-      "description": "AI/ML feature PRD scaffolding for the modern AI product manager. Use to extend a standard PRD with AI-specific sections covering model selection, evals, guardrails, failure modes, human-in-the-loop, AI metrics, and cost monitoring.",
+      "description": "Extends a PRD with model choice, eval and safety plan, guardrails, cost model and rollout gates for an AI or ML feature. Use when specifying any LLM, RAG, agent or ML feature, or replacing a rules-based flow with a model.",
       "tags": [
         "prd",
         "ai-features",
@@ -4522,7 +4522,7 @@
         "model-selection"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/execution/ai-feature-prd",
       "has_scripts": false,
       "has_references": true
@@ -4548,15 +4548,15 @@
     {
       "name": "beta-program",
       "domain": "project-management",
-      "description": "Closed beta program playbook covering recruitment, success criteria, communication cadence, and beta-to-GA exit gates.",
+      "description": "Plan and run a closed beta: cohorts, exit gates agreed before recruiting, weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a closed beta or design-partner program before general availability.",
       "tags": [
         "beta-program",
         "early-access",
         "success-criteria",
         "ga-readiness"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/beta-program",
       "has_scripts": false,
       "has_references": true
@@ -4564,15 +4564,15 @@
     {
       "name": "brainstorm-okrs",
       "domain": "project-management",
-      "description": "OKR brainstorming and validation using the Radical Focus framework — outcome objectives, measurable key results, counter-metrics. Use for setting or validating quarterly OKRs, aligning team goals, or teaching outcomes vs outputs.",
+      "description": "Draft and score quarterly OKRs: a qualitative objective, measurable key results and a counter-metric. Use when setting or reviewing a team's OKRs before they are committed, or when KRs read like a task list.",
       "tags": [
         "okrs",
         "radical-focus",
         "key-results",
         "goal-setting"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/execution/brainstorm-okrs",
       "has_scripts": true,
       "has_references": true
@@ -4580,15 +4580,15 @@
     {
       "name": "create-prd",
       "domain": "project-management",
-      "description": "PRD scaffolding expert that generates structured product requirements documents using an 8-section framework, problem framing canvas, and working-backwards press release. Use to spec a new product or feature.",
+      "description": "Write an 8-section product requirements document, framing the problem before the solution. Use when specifying a new product or a large feature that needs engineering, design and business aligned on one document.",
       "tags": [
         "prd",
         "requirements",
         "working-backwards",
         "problem-framing"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/create-prd",
       "has_scripts": true,
       "has_references": true
@@ -4596,7 +4596,7 @@
     {
       "name": "customer-feedback-triage",
       "domain": "project-management",
-      "description": "Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.",
+      "description": "Cluster, score and route inbound feature requests from support, sales, NPS and exec asks, and draft honest replies. Use when a feedback queue needs triaging or a customer needs a defensible yes, no or exploring answer.",
       "tags": [
         "feedback",
         "triage",
@@ -4605,8 +4605,8 @@
         "voice-of-customer",
         "intake"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/execution/customer-feedback-triage",
       "has_scripts": true,
       "has_references": true
@@ -4614,7 +4614,7 @@
     {
       "name": "cycle-time-analyzer",
       "domain": "project-management",
-      "description": "Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP) for sprint and team health, with cumulative flow diagrams.",
+      "description": "Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative flow diagram from issue status history. Use when diagnosing slow delivery, setting WIP limits or preparing a flow review.",
       "tags": [
         "flow-metrics",
         "cycle-time",
@@ -4622,8 +4622,8 @@
         "wip",
         "cumulative-flow"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/cycle-time-analyzer",
       "has_scripts": true,
       "has_references": true
@@ -4631,15 +4631,15 @@
     {
       "name": "daci-framework",
       "domain": "project-management",
-      "description": "DACI decision facilitation framework (Driver, Approver, Contributor, Informed) for clarifying decision ownership, reducing decision thrash, role assignment, and governance design across product teams.",
+      "description": "Assign Driver, Approver, Contributor and Informed roles for the decisions that keep stalling, then roll the chart out. Use when decisions thrash, ownership is unclear after a reorg, or a new team needs decision rights.",
       "tags": [
         "daci",
         "decision-making",
         "roles",
         "governance"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/daci-framework",
       "has_scripts": false,
       "has_references": true
@@ -4664,15 +4664,15 @@
     {
       "name": "dependency-map",
       "domain": "project-management",
-      "description": "Cross-team dependency tracking with critical path analysis and Mermaid dependency graphs for program coordination.",
+      "description": "Track cross-team dependencies in one JSON file and get a risk-ranked blocker list, the longest hand-off chain and a Mermaid graph. Use when several teams depend on each other and you need to know what to chase this week.",
       "tags": [
         "dependencies",
         "critical-path",
         "program-management",
         "mermaid"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/dependency-map",
       "has_scripts": true,
       "has_references": true
@@ -4680,15 +4680,15 @@
     {
       "name": "eol-communication",
       "domain": "project-management",
-      "description": "End-of-life product messaging and sunset communication framework for clear, empathetic EOL announcements that preserve customer trust. Use when sunsetting a product, feature, service, API version, or pricing tier.",
+      "description": "Plan and write end-of-life announcements with dated milestones, a working migration path and per-segment messages. Use when sunsetting a product, feature, API version or pricing tier.",
       "tags": [
         "end-of-life",
         "sunset",
         "deprecation",
         "customer-communication"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/eol-communication",
       "has_scripts": false,
       "has_references": true
@@ -4696,15 +4696,15 @@
     {
       "name": "feature-flag-strategy",
       "domain": "project-management",
-      "description": "PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming conventions.",
+      "description": "Plan a flag-gated rollout: classify the flag, pick a rollout shape, set kill-switch thresholds and retire the flag. Use when planning a phased rollout, a kill switch, a holdout or a cleanup of old flags.",
       "tags": [
         "feature-flags",
         "phased-rollout",
         "kill-switch",
         "experiments"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/feature-flag-strategy",
       "has_scripts": false,
       "has_references": true
@@ -4729,7 +4729,7 @@
     {
       "name": "job-stories",
       "domain": "project-management",
-      "description": "Jobs-to-Be-Done story writing that focuses on user situations and motivations rather than personas. Use to write When/Want/So backlog items, run a JTBD discovery canvas, apply INVEST, and convert user stories to job stories.",
+      "description": "Write When/Want/So backlog stories from observed user situations, gated on INVEST and outcome-focused acceptance criteria. Use when writing backlog items from research or converting \"As a...\" user stories to job stories.",
       "tags": [
         "job-stories",
         "jobs-to-be-done",
@@ -4737,7 +4737,7 @@
         "user-stories"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/execution/job-stories",
       "has_scripts": true,
       "has_references": true
@@ -4745,7 +4745,7 @@
     {
       "name": "launch-playbook",
       "domain": "project-management",
-      "description": "Internal and external launch coordination playbook covering pre-launch, launch day, and post-launch with run-of-show, comms, RACI, rollback, and retro. Use to coordinate a GA launch, major release, or re-launch.",
+      "description": "Coordinate a launch from T-30 to T+30: owners, run-of-show, internal and external comms, rollback and retro. Use when a feature goes GA after beta, a major release ships, or a product is relaunched.",
       "tags": [
         "launch",
         "run-of-show",
@@ -4753,8 +4753,8 @@
         "rollback",
         "go-to-market"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/launch-playbook",
       "has_scripts": false,
       "has_references": true
@@ -4762,15 +4762,15 @@
     {
       "name": "north-star-metric",
       "domain": "project-management",
-      "description": "Define a North Star Metric (NSM) and its input metric tree, with leading indicators, anti-metrics, and counter-metrics. Includes a Python tool that renders the metric tree as a Mermaid diagram.",
+      "description": "Pick the one metric that tracks customer value, decompose it into inputs with leading indicators and guardrail metrics. Use when defining the metric a team optimises before writing OKRs, or when a dashboard has no headline.",
       "tags": [
         "north-star-metric",
         "metric-tree",
         "leading-indicators",
         "counter-metrics"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/north-star-metric",
       "has_scripts": true,
       "has_references": true
@@ -4778,15 +4778,15 @@
     {
       "name": "outcome-roadmap",
       "domain": "project-management",
-      "description": "Transform output-based feature lists into outcome-driven Now/Next/Later roadmaps using the \"so what?\" technique. Use when converting a feature-list roadmap to outcomes, communicating product strategy, or running quarterly planning.",
+      "description": "Turn a feature-list roadmap into outcome statements placed in Now/Next/Later, and check each has a measure. Use when converting a feature-list roadmap, reviewing a roadmap before it goes to leadership, or quarterly planning.",
       "tags": [
         "roadmap",
         "outcomes",
         "now-next-later",
         "product-strategy"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/execution/outcome-roadmap",
       "has_scripts": true,
       "has_references": true
@@ -4794,7 +4794,7 @@
     {
       "name": "post-mortem",
       "domain": "project-management",
-      "description": "Blameless post-mortem expert for incidents, outages, regressions, customer escalations, missed launches, and failed experiments. Pairs Google SRE practice with Allspaw / Dekker / Perrow systems thinking.",
+      "description": "Run a blameless review with a timeline, contributing causes and owned action items. Use when an incident, outage, missed launch or failed experiment needs a written review.",
       "tags": [
         "post-mortem",
         "rca",
@@ -4804,8 +4804,8 @@
         "five-whys",
         "causal-tree"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/post-mortem",
       "has_scripts": false,
       "has_references": true
@@ -4813,15 +4813,15 @@
     {
       "name": "prfaq",
       "domain": "project-management",
-      "description": "Amazon Working Backwards PR/FAQ generator that forces customer-outcome thinking before any code is written. Produces a press release, an internal FAQ, and an external FAQ as a single decision artifact.",
+      "description": "Write a Working Backwards press release with internal and external FAQs before anything is built. Use when a funding or go/no-go decision needs the customer outcome made concrete first; write the PRD after it passes.",
       "tags": [
         "prfaq",
         "working-backwards",
         "press-release",
         "amazon"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/prfaq",
       "has_scripts": false,
       "has_references": true
@@ -4829,7 +4829,7 @@
     {
       "name": "pricing-prd",
       "domain": "project-management",
-      "description": "Tactical PM PRD for pricing experiments and pricing-page launches. Pairs with business-growth/pricing-strategy. Covers packaging, willingness-to-pay, grandfathering, A/B design, rollback, regional pricing, and UX.",
+      "description": "Write the PRD for a pricing change: model and packaging, experiment design, grandfathering, communication and rollback thresholds. Use when turning a pricing decision into an experiment, a pricing-page launch or a tier change.",
       "tags": [
         "pricing",
         "prd",
@@ -4838,8 +4838,8 @@
         "grandfathering",
         "monetization"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/pricing-prd",
       "has_scripts": false,
       "has_references": true
@@ -4847,7 +4847,7 @@
     {
       "name": "prioritization-frameworks",
       "domain": "project-management",
-      "description": "Comprehensive prioritization framework expert covering 9 methods with scoring tools and decision guidance for product managers.",
+      "description": "Pick a prioritization method and rank a backlog: RICE, ICE, opportunity, MoSCoW and weighted scoring, plus four reference-only methods. Use when ranking features, problems or initiatives against each other.",
       "tags": [
         "prioritization",
         "rice",
@@ -4855,8 +4855,8 @@
         "moscow",
         "kano"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/prioritization-frameworks",
       "has_scripts": true,
       "has_references": true
@@ -4864,15 +4864,15 @@
     {
       "name": "product-vision",
       "domain": "project-management",
-      "description": "Write the Product Vision document -- the durable 5-10 year narrative above the north-star metric -- using Pichler's Vision Board, Moore's elevator pitch, Raskin's strategic narrative, Cagan's 10-year framing, and Amazon Working Backwards.",
+      "description": "Write the 5-10 year product vision as a vision board, narrative or elevator pitch, and stress-test it. Use when setting or refreshing long-range direction, or when strategy decks lack a shared picture of where the product is going.",
       "tags": [
         "product-vision",
         "vision-board",
         "strategy",
         "narrative"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/product-vision",
       "has_scripts": false,
       "has_references": true
@@ -4880,15 +4880,15 @@
     {
       "name": "quarterly-planning",
       "domain": "project-management",
-      "description": "Run the full quarterly planning cycle -- pre-quarter homework, kickoff, weekly Wodtke rhythm, mid-quarter check-in, and close retro -- using Radical Focus, Cagan strategy, and a fixed planning cadence around your OKRs.",
+      "description": "Run the meetings around a quarter's OKRs: homework and kickoff, weekly check-ins, the week-6 carry/kill/pivot review and the close retro. Use when running any phase of that cadence; writing the OKRs is brainstorm-okrs.",
       "tags": [
         "quarterly-planning",
         "okrs",
         "radical-focus",
         "planning-cycle"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/quarterly-planning",
       "has_scripts": false,
       "has_references": true
@@ -4896,15 +4896,15 @@
     {
       "name": "release-notes",
       "domain": "project-management",
-      "description": "Structured release notes that translate technical changes (tickets, changelogs, git logs, PRDs) into user-benefit communication. Use for product releases, sprint demos, changelog maintenance, or customer release announcements.",
+      "description": "Turn tickets, changelogs and git logs into user-facing notes grouped by type, breaking changes first. Use when announcing a product release, maintaining a changelog, or rewriting technical entries for customers.",
       "tags": [
         "release-notes",
         "changelog",
         "customer-communication",
         "product-updates"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/release-notes",
       "has_scripts": true,
       "has_references": true
@@ -4912,15 +4912,15 @@
     {
       "name": "roadmap-communication",
       "domain": "project-management",
-      "description": "Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.",
+      "description": "Produce executive, customer and internal versions of one roadmap with consistent framing and the right detail and risk language for each. Use when publishing the quarterly roadmap, a board packet or a customer or sales roadmap.",
       "tags": [
         "roadmap",
         "stakeholder-communication",
         "executive-update",
         "customer-roadmap"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.0.2",
+      "updated": "2026-11-08",
       "path": "project-management/execution/roadmap-communication",
       "has_scripts": false,
       "has_references": true
@@ -4928,7 +4928,7 @@
     {
       "name": "sprint-plan",
       "domain": "project-management",
-      "description": "Plan a sprint that ships — capacity, commitment vs stretch, dependencies, and risk identification that prevents mid-sprint surprises. Use to build the sprint planning artifact itself.",
+      "description": "Build and audit the plan for one iteration: goal, real capacity, commit vs stretch, dependencies, risks and definition of done. Use when planning the next sprint or auditing a plan for a team that keeps missing its sprints.",
       "tags": [
         "sprint-planning",
         "capacity",
@@ -4936,8 +4936,8 @@
         "scrum",
         "risk"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/execution/sprint-plan",
       "has_scripts": true,
       "has_references": true
@@ -4945,15 +4945,15 @@
     {
       "name": "stakeholder-map",
       "domain": "project-management",
-      "description": "Map stakeholders by power × interest and design a communication plan that prevents surprise objections. Use when launching a major initiative, navigating an enterprise deal, planning a re-org, or pre-empting resistance to a roadmap change.",
+      "description": "Maps stakeholders by power, interest and stance, then plans engagement and blocker conversion so objections surface early. Use for a major initiative, an enterprise deal, a re-org or a contested roadmap change.",
       "tags": [
         "stakeholder-mapping",
         "power-interest",
         "communication-plan",
         "change-management"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/execution/stakeholder-map",
       "has_scripts": true,
       "has_references": true
@@ -4961,7 +4961,7 @@
     {
       "name": "status-update-generator",
       "domain": "project-management",
-      "description": "Generate weekly executive status updates from Jira/Linear data exports. Produces a structured \"highlights / blockers / risks / asks / what's next\" briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.",
+      "description": "Renders a weekly executive status update (highlights, blockers, risks, asks, next) from Jira or Linear data. Use when preparing a sponsor or steering update, or standardising a team's weekly report.",
       "tags": [
         "status-update",
         "jira",
@@ -4970,7 +4970,7 @@
         "weekly-update"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/execution/status-update-generator",
       "has_scripts": true,
       "has_references": true
@@ -4978,7 +4978,7 @@
     {
       "name": "story-mapping",
       "domain": "project-management",
-      "description": "Jeff Patton-style user story mapping for visualizing user journeys, MVP definition, release planning, backlog sequencing, and cross-team alignment.",
+      "description": "Builds a user story map (journey backbone, ranked tasks, release lines) to agree an MVP and release order. Use when defining an MVP, slicing releases, or turning a flat backlog back into a user journey.",
       "tags": [
         "story-mapping",
         "user-journey",
@@ -4986,7 +4986,7 @@
         "release-planning"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/execution/story-mapping",
       "has_scripts": false,
       "has_references": true
@@ -4994,7 +4994,7 @@
     {
       "name": "story-splitting",
       "domain": "project-management",
-      "description": "Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting epics into shippable user stories without losing user value. Use when a story is too big, exceeds cycle time, or fails INVEST-S.",
+      "description": "Splits oversized epics and stories into thin vertical slices with nine named patterns and a decision tree. Use when a story is too big, overruns cycle time, or fails the Small test of INVEST.",
       "tags": [
         "story-splitting",
         "vertical-slicing",
@@ -5002,7 +5002,7 @@
         "user-stories"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/execution/story-splitting",
       "has_scripts": false,
       "has_references": true
@@ -5010,7 +5010,7 @@
     {
       "name": "summarize-meeting",
       "domain": "project-management",
-      "description": "Structured meeting summarization that captures decisions, action items, and open questions in a consistent format.",
+      "description": "Turns meeting notes or transcripts into a summary of decisions, owned and dated action items, and open questions. Use when writing up a meeting, a recap email or a decision log; for patterns across a series use meeting-analyzer.",
       "tags": [
         "meeting-summary",
         "action-items",
@@ -5018,7 +5018,7 @@
         "meetings"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/execution/summarize-meeting",
       "has_scripts": true,
       "has_references": true
@@ -5026,7 +5026,7 @@
     {
       "name": "test-scenarios",
       "domain": "project-management",
-      "description": "Generate test scenario coverage from a feature spec — happy paths, edge cases, error handling, accessibility, security, and performance — with a coverage analyzer that flags gaps. Use to define what to test before QA writes the test plan.",
+      "description": "Writes QA cases from a feature spec across happy, edge, error, empty, concurrent, accessibility and security paths, then audits coverage. Use when planning QA for a feature, or finding coverage gaps after an incident.",
       "tags": [
         "test-scenarios",
         "edge-cases",
@@ -5034,8 +5034,8 @@
         "test-coverage",
         "acceptance-testing"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/execution/test-scenarios",
       "has_scripts": true,
       "has_references": true
@@ -5060,7 +5060,7 @@
     {
       "name": "wwas",
       "domain": "project-management",
-      "description": "Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.",
+      "description": "Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR and passes INVEST before a sprint. Use when writing backlog items, checking sprint readiness, or finding work that serves no objective.",
       "tags": [
         "backlog",
         "acceptance-criteria",
@@ -5068,7 +5068,7 @@
         "strategic-alignment"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/execution/wwas",
       "has_scripts": true,
       "has_references": true
@@ -5076,7 +5076,7 @@
     {
       "name": "gtm-strategy",
       "domain": "project-management",
-      "description": "Integrated go-to-market strategy spanning ICP, motion, channels, messaging, success metrics, and launch plan. Use when launching a new product, entering a new segment, or auditing why an existing GTM isn't working.",
+      "description": "Builds and audits a go-to-market plan: beachhead, motion matched to ACV, funded channels, tested messaging, owned metrics and a T-90 launch sequence. Use when launching a product, entering a segment or fixing a stalled GTM.",
       "tags": [
         "go-to-market",
         "icp",
@@ -5084,8 +5084,8 @@
         "messaging",
         "launch"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/gtm/gtm-strategy",
       "has_scripts": true,
       "has_references": true
@@ -5093,7 +5093,7 @@
     {
       "name": "ideal-customer-profile",
       "domain": "project-management",
-      "description": "Define a sharp Ideal Customer Profile (ICP) — firmographics, behavioral signals, JTBD, and buyer persona. Use when defining a new ICP, refining one from actual closed customers, or auditing why pipeline or conversion is poor.",
+      "description": "Defines which accounts to sell to across eight dimensions with explicit exclusions, then scores real accounts against that profile. Use when defining or refining an ICP, building a qualification rubric, or diagnosing poor pipeline.",
       "tags": [
         "icp",
         "buyer-persona",
@@ -5101,8 +5101,8 @@
         "jobs-to-be-done",
         "segmentation"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/gtm/ideal-customer-profile",
       "has_scripts": true,
       "has_references": true
@@ -5110,7 +5110,7 @@
     {
       "name": "jira-expert",
       "domain": "project-management",
-      "description": "Jira expert for project setup, workflow design, JQL queries, custom fields, automation rules, dashboards, and reporting. Use for Jira configuration, advanced search, board and dashboard creation, and technical Jira operations.",
+      "description": "Configures Jira projects, workflows, boards, JQL, automation and dashboards, and audits board, issue and workflow exports. Use when setting up or fixing Jira, writing or debugging JQL, or designing automation rules.",
       "tags": [
         "jira",
         "jql",
@@ -5119,7 +5119,7 @@
         "dashboards"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/jira-expert",
       "has_scripts": true,
       "has_references": true
@@ -5127,7 +5127,7 @@
     {
       "name": "linear-expert",
       "domain": "project-management",
-      "description": "Linear expert for workspace/team admin, Cycles, Projects, Initiatives, Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk operations, and Jira-to-Linear migration.",
+      "description": "Administers Linear teams, cycles, projects and triage, and writes GraphQL API calls. Use when setting up or fixing a Linear workspace, scripting bulk changes, or migrating from Jira to Linear.",
       "tags": [
         "linear",
         "graphql",
@@ -5138,7 +5138,7 @@
         "migration"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/linear-expert",
       "has_scripts": false,
       "has_references": true
@@ -5146,7 +5146,7 @@
     {
       "name": "meeting-analyzer",
       "domain": "project-management",
-      "description": "Turn meeting notes into an accountable register — extract decisions, actions and open questions, flag ownerless items, track follow-through. Use when commitments get dropped or a recurring meeting decides nothing.",
+      "description": "Turns meeting notes into an accountable register and diagnoses recurring meetings. Use when commitments get dropped or a series decides nothing; for a single meeting's recap use summarize-meeting.",
       "tags": [
         "meeting-notes",
         "action-items",
@@ -5155,7 +5155,7 @@
         "meeting-health"
       ],
       "version": "1.0.0",
-      "updated": "2026-07-21",
+      "updated": "2026-11-08",
       "path": "project-management/meeting-analyzer",
       "has_scripts": true,
       "has_references": true
@@ -5163,7 +5163,7 @@
     {
       "name": "notion-pm",
       "domain": "project-management",
-      "description": "Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.",
+      "description": "Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps and decisions, and writes REST API calls. Use when asked to \"design a PRD database\", sync Notion with Jira or Linear, or script the Notion API.",
       "tags": [
         "notion",
         "databases",
@@ -5173,7 +5173,7 @@
         "decisions"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/notion-pm",
       "has_scripts": false,
       "has_references": true
@@ -5181,7 +5181,7 @@
     {
       "name": "productboard-expert",
       "domain": "project-management",
-      "description": "Productboard expert for workspace setup, Insight-to-Feature triage, Driver scoring, Releases, Roadmap views, and REST API automation. Use for Productboard administration, prioritization workflows, and programmatic API operations.",
+      "description": "Sets up Productboard workspaces, insight triage, driver scoring, releases and roadmaps, and writes v2 REST API calls. Use when administering Productboard, scoring features, or scripting the Productboard API.",
       "tags": [
         "productboard",
         "prioritization",
@@ -5193,7 +5193,7 @@
         "slack"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/productboard-expert",
       "has_scripts": false,
       "has_references": true
@@ -5201,7 +5201,7 @@
     {
       "name": "program-manager",
       "domain": "project-management",
-      "description": "Program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, charters, and steering-committee reporting. Use to stand up or run a program and escalate program status.",
+      "description": "Runs multi-project programs: charters, governance, cross-project dependencies, benefits tracking and steering-committee reporting. Use when standing up a program, tracking its milestones and people, or preparing a steering update.",
       "tags": [
         "program",
         "portfolio",
@@ -5210,7 +5210,7 @@
         "coordination"
       ],
       "version": "1.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/program-manager",
       "has_scripts": true,
       "has_references": true
@@ -5218,7 +5218,7 @@
     {
       "name": "scrum-master",
       "domain": "project-management",
-      "description": "Data-driven Scrum Master for sprint health scoring, Monte Carlo velocity forecasting, retrospective analysis, capacity planning, and Tuckman team coaching. Use when facilitating sprint planning, diagnosing velocity, or running retrospectives.",
+      "description": "Scores sprint health, forecasts velocity with Monte Carlo, analyses retros and plans capacity from sprint data. Use when facilitating sprint planning, diagnosing a velocity drop, or checking whether retro actions land.",
       "tags": [
         "scrum",
         "agile",
@@ -5227,7 +5227,7 @@
         "impediments"
       ],
       "version": "2.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/scrum-master",
       "has_scripts": true,
       "has_references": true
@@ -5235,7 +5235,7 @@
     {
       "name": "senior-pm",
       "domain": "project-management",
-      "description": "Senior PM for enterprise software and SaaS — portfolio management, quantitative risk analysis, prioritization, and executive reporting. Use for portfolio health reviews, board-ready status reports, and multi-project risk/capacity analysis.",
+      "description": "Scores portfolio health, risk exposure and resource capacity from a project JSON and frames board-ready status reports. Use when running a portfolio review, writing an executive RAG report, or rebalancing people across projects.",
       "tags": [
         "project-management",
         "stakeholder-management",
@@ -5243,7 +5243,7 @@
         "planning"
       ],
       "version": "2.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/senior-pm",
       "has_scripts": true,
       "has_references": true
@@ -5259,7 +5259,7 @@
         "team"
       ],
       "version": "2.0.1",
-      "updated": "2026-06-15",
+      "updated": "2026-11-08",
       "path": "project-management/sprint-retrospective",
       "has_scripts": true,
       "has_references": true
@@ -5267,15 +5267,15 @@
     {
       "name": "ansoff-matrix",
       "domain": "project-management",
-      "description": "Ansoff Matrix — 4-quadrant framework for growth options: market penetration, market/product development, and diversification. Use when evaluating growth bets, prioritizing investment across quadrants, or weighing the risk ladder of each move.",
+      "description": "Classifies growth bets into the four Ansoff quadrants and checks the investment mix against the company's stage. Use when prioritising growth bets, allocating a growth budget or testing a pitched \"adjacent\" move.",
       "tags": [
         "ansoff-matrix",
         "growth-strategy",
         "diversification",
         "market-development"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/strategy-frameworks/ansoff-matrix",
       "has_scripts": true,
       "has_references": true
@@ -5283,15 +5283,15 @@
     {
       "name": "business-model-canvas",
       "domain": "project-management",
-      "description": "Build, evaluate, and stress-test a Business Model Canvas (Osterwalder) across all 9 blocks. Use when designing or refreshing a business model, auditing a canvas for gaps, exploring monetization, or aligning on the model's assumptions.",
+      "description": "Builds and audits a nine-block Business Model Canvas, tracing each segment through value, channel and revenue and naming the riskiest assumptions. Use when designing, refreshing or stress-testing a business model.",
       "tags": [
         "business-model-canvas",
         "osterwalder",
         "business-model",
         "strategy"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/strategy-frameworks/business-model-canvas",
       "has_scripts": true,
       "has_references": true
@@ -5299,15 +5299,15 @@
     {
       "name": "lean-canvas",
       "domain": "project-management",
-      "description": "Lean Canvas (Ash Maurya) — startup adaptation of the Business Model Canvas for capturing assumptions and unfair advantages in early-stage products. Use at the idea, pre-PMF, or pivot stage, or when you need a 1-page model fast.",
+      "description": "Sketches a one-page startup model as testable hypotheses: problem, early adopters, value proposition, unfair advantage, riskiest assumptions. Use at the idea, pre-product-market-fit or pivot stage, or for a fast model.",
       "tags": [
         "lean-canvas",
         "startups",
         "assumptions",
         "business-model"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/strategy-frameworks/lean-canvas",
       "has_scripts": true,
       "has_references": true
@@ -5315,15 +5315,15 @@
     {
       "name": "porters-five-forces",
       "domain": "project-management",
-      "description": "Porter's Five Forces — analyze the competitive intensity and attractiveness of an industry. Use when evaluating a new market entry, diagnosing margin pressure, designing a defensive strategy, or auditing industry-level positioning.",
+      "description": "Rates the five competitive forces of one precisely defined industry with evidence and turns the dominant forces into moves. Use when weighing market entry, diagnosing margin pressure or auditing industry positioning.",
       "tags": [
         "porters-five-forces",
         "industry-analysis",
         "competition",
         "market-entry"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/strategy-frameworks/porters-five-forces",
       "has_scripts": true,
       "has_references": true
@@ -5331,15 +5331,15 @@
     {
       "name": "swot-analysis",
       "domain": "project-management",
-      "description": "SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for strategic positioning. Use when assessing a new market entry, a strategic pivot, a competitive response, an org restructure, or as input to annual strategic planning.",
+      "description": "Builds and audits an evidence-backed SWOT with TOWS actions for one explicit strategic question. Use when assessing a market entry, pivot, competitive response or restructure, or as input to annual planning.",
       "tags": [
         "swot",
         "strategic-positioning",
         "competitive-analysis",
         "strategy"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/strategy-frameworks/swot-analysis",
       "has_scripts": true,
       "has_references": true
@@ -5357,7 +5357,7 @@
         "team-operations"
       ],
       "version": "1.0.0",
-      "updated": "2026-07-21",
+      "updated": "2026-11-08",
       "path": "project-management/team-communications",
       "has_scripts": true,
       "has_references": true

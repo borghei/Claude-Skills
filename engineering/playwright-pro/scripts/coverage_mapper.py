@@ -33,9 +33,17 @@ from pathlib import Path
 
 
 def load_flows(path):
-    """Load user flow definitions from JSON file."""
-    with open(path, "r") as f:
-        flows = json.load(f)
+    """Load and validate user flow definitions; exit 2 with a one-line message if unusable."""
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            flows = json.load(f)
+    except (OSError, json.JSONDecodeError) as exc:
+        sys.exit(print(f"Error: cannot read flows file '{path}': {exc}", file=sys.stderr) or 2)
+    if not isinstance(flows, list) or not flows:
+        sys.exit(print("Error: flows file must be a non-empty JSON array of flow objects", file=sys.stderr) or 2)
+    bad = [i for i, f in enumerate(flows) if not isinstance(f, dict) or not f.get("id") or not f.get("name")]
+    if bad:
+        sys.exit(print(f"Error: flow(s) at index {bad} need 'id' and 'name' (see --help)", file=sys.stderr) or 2)
     for flow in flows:
         flow.setdefault("priority", "medium")
         flow.setdefault("keywords", [])
@@ -201,12 +209,8 @@ def compute_summary(coverage):
 def format_human(coverage, summary, test_file_count):
     """Format results for human-readable output."""
     output = []
-    output.append("=" * 70)
-    output.append("TEST COVERAGE MAPPER")
-    output.append("=" * 70)
-    output.append("")
-    output.append(f"  User flows:     {summary['total_flows']}")
-    output.append(f"  Test files:     {test_file_count}")
+    output += ["=" * 70, "TEST COVERAGE MAPPER", "=" * 70, ""]
+    output += [f"  User flows:     {summary['total_flows']}", f"  Test files:     {test_file_count}"]
     output.append(f"  Covered:        {summary['covered']} ({summary['coverage_pct']}%)")
     output.append(f"  Gaps:           {summary['gaps']}")
     output.append("")
@@ -242,7 +246,7 @@ def format_human(coverage, summary, test_file_count):
     output.append("")
 
     # Gaps detail
-    gaps = [c for c in coverage if c["status"] == "gap"]
+    gaps = [c for c in coverage if c["status"] == "gap"]  # listing may be filtered; summary is not
     if gaps:
         output.append("COVERAGE GAPS (need tests)")
         output.append("-" * 70)
@@ -256,7 +260,7 @@ def format_human(coverage, summary, test_file_count):
     if critical_gaps:
         output.append(f"VERDICT: CRITICAL GAPS - {len(critical_gaps)} critical flows have no test coverage")
     elif gaps:
-        output.append(f"VERDICT: GAPS EXIST - {len(gaps)} flows need tests ({summary['coverage_pct']}% covered)")
+        output.append(f"VERDICT: GAPS EXIST - {summary['gaps']} flows need tests ({summary['coverage_pct']}% covered)")
     else:
         output.append("VERDICT: FULL COVERAGE - All defined user flows have test coverage")
     output.append("=" * 70)
@@ -279,19 +283,15 @@ def main():
 
     if not os.path.isdir(args.tests):
         print(f"Error: Test directory '{args.tests}' not found.", file=sys.stderr)
-        sys.exit(1)
-    if not os.path.isfile(args.flows):
-        print(f"Error: Flows file '{args.flows}' not found.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     flows = load_flows(args.flows)
     test_files = scan_test_files(args.tests)
     coverage = map_coverage(flows, test_files, args.threshold)
 
+    summary = compute_summary(coverage)  # always over every flow, so --gaps-only keeps the real percentage
     if args.gaps_only:
         coverage = [c for c in coverage if c["status"] == "gap"]
-
-    summary = compute_summary(coverage)
 
     if args.json_output:
         print(json.dumps({"summary": summary, "coverage": coverage}, indent=2))

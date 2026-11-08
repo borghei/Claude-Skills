@@ -493,6 +493,14 @@ def parse_args() -> argparse.Namespace:
 
 def main():
     args = parse_args()
+    for flag in ("since", "until"):
+        value = getattr(args, flag, None)
+        if value:
+            try:
+                datetime.strptime(value, "%Y-%m-%d")
+            except ValueError:
+                print(f"Error: --{flag} must be YYYY-MM-DD, got {value!r}", file=sys.stderr)
+                sys.exit(2)
 
     # Determine date range
     if args.until:
@@ -518,7 +526,7 @@ def main():
     check = run_git(["rev-parse", "--is-inside-work-tree"], args.repo)
     if check != "true":
         print(f"Error: '{args.repo}' is not a git repository.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Analyze current period
     current = analyze_period(since_date, until_date, args.repo, args.gap_minutes)

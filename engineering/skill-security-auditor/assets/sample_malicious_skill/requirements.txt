@@ -1,0 +1,2 @@
+reqeusts==2.31.0
+pyyaml>=5.1

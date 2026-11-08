@@ -517,7 +517,7 @@ Ensure agent-generated code matches project style:
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
-        "command": "prettier --write \"$CLAUDE_FILE_PATH\" 2>/dev/null || true"
+        "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); prettier --write \"$F\" 2>/dev/null || true"
       }
     ]
   }

@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: security-devops
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   frameworks: vault, aws-ssm, 1password-cli, doppler
   tags:
     - secrets
@@ -51,15 +51,51 @@ Before running, settle the inputs below. When one is missing or vague and would 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `env_validator.py` | Validate a `.env` against `.env.example`: missing/extra vars, empty secrets, leaked credentials | `python scripts/env_validator.py .env.example .env --strict --check-secrets` |
-| `secret_scanner.py` | Scan a directory/file for hardcoded secrets via pattern matching | `python scripts/secret_scanner.py ./src --severity high --json` |
-| `env_sync_checker.py` | Compare env configs across dev/staging/prod and report drift | `python scripts/env_sync_checker.py .env.* --baseline .env.example` |
+1. **Scan first.** Run `secret_scanner.py` over the repository (and `git log -p` output or a history scanner such as gitleaks for past commits). Any high-severity hit is treated as leaked: rotate it before cleaning history, because the old value is already exposed.
+2. **Validate each environment** against `.env.example` with `env_validator.py`; missing required variables fail, extras fail under `--strict`.
+3. **Check drift** between environments with `env_sync_checker.py`. By default only missing and extra keys count; values are expected to differ between staging and production. Add `--compare-values` for environments that should be identical (blue and green, two regions).
+4. **Move secrets to a manager** (Vault, AWS SSM, 1Password, Doppler) using `references/secret-manager-integration.md`, and leave only `${VAR}` references or placeholders in files.
+5. **Verify**: the scanner reports nothing at high severity, every environment validates, drift is within the target, and rotated credentials are confirmed working.
 
-## References
+## Quick Start
+
+```bash
+python3 scripts/secret_scanner.py assets/sample_leaky_config.py                       # 2 high, 1 medium (exit 1); all values fake
+python3 scripts/env_validator.py assets/sample.env.example assets/sample.env.staging --check-secrets   # passes with warnings (exit 0)
+python3 scripts/env_validator.py assets/sample.env.example assets/sample.env.production --strict       # missing + extra key (exit 1)
+python3 scripts/env_sync_checker.py assets/sample.env.staging assets/sample.env.production --baseline assets/sample.env.example  # key drift (exit 1)
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `secret_scanner.py <path>` | Regex scan for AWS/Google/Stripe/GitHub/GitLab/Slack/SendGrid keys, private keys, JWTs, password assignments and credentialed connection strings; values are redacted in output | `--severity low|medium|high`, `--include`, `--exclude`, `--json` | 0 none found, 1 findings, 2 bad path |
+| `env_validator.py <reference> <target>` | Missing and extra variables, empty or placeholder secrets; `--check-secrets` also checks the reference file for real-looking values | `--strict`, `--check-secrets`, `--json` | 0 valid, 1 errors, 2 bad input |
+| `env_sync_checker.py <files...>` | Missing/extra keys per environment pair and against a baseline; differing values listed (redacted) | `--baseline`, `--compare-values`, `--show-values`, `--json` | 0 drift within 5%, 1 drift or baseline gaps, 2 a file not found |
+
+## Anti-Patterns
+
+**Mistake:** Deleting a leaked secret from the latest commit and calling it fixed.
+**Why it happens:** The scanner goes quiet once the line is gone.
+**Instead:** The value is in history, forks and CI logs. Rotate it first, then purge history if policy requires.
+
+**Mistake:** Real values in `.env.example`.
+**Why it happens:** Copying the working `.env` is the fastest way to create the example.
+**Instead:** Placeholders only; run `env_validator.py --check-secrets` on the example in CI.
+
+**Mistake:** Counting every differing value as configuration drift.
+**Why it happens:** A diff of two files shows every line that changed.
+**Instead:** Hosts and credentials should differ between environments. Track key drift by default and compare values only where environments must match.
+
+## Files
+
+- `scripts/secret_scanner.py`, `scripts/env_validator.py`, `scripts/env_sync_checker.py` — the tools above.
+- `assets/sample.env.example`, `assets/sample.env.staging`, `assets/sample.env.production` — environments with deliberate key drift; `assets/sample_leaky_config.py` — scanner demo with fake credentials (the AWS key is AWS's documented example).
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -91,4 +127,4 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `engineering/skill-security-auditor` | Validate that no skill packages ship embedded secrets or credentials | Security audit references this skill's regex patterns for detection |
 | `engineering/codebase-onboarding` | Include `.env.example` setup and secret-manager access in onboarding checklists | Onboarding workflow consumes the `.env` hierarchy and validation script |
 | `engineering/observability-designer` | Monitor authentication failures post-rotation; alert on anomalous secret access | Post-rotation verification metrics flow into observability dashboards |
-| `ra-qm-team/soc2-compliance-auditor` | Demonstrate secret management controls for SOC 2 CC6.1 and CC6.6 criteria | Rotation audit logs and access policies serve as SOC 2 evidence artifacts |
+| `ra-qm-team/soc2-compliance-expert` | Demonstrate secret management controls for SOC 2 CC6.1 and CC6.6 criteria | Rotation audit logs and access policies serve as SOC 2 evidence artifacts |

@@ -1,9 +1,9 @@
 ---
 name: git-worktree-manager
 description: >
-  Manage parallel development with Git worktrees: creation with port allocation, environment
-  sync, branch isolation, and cleanup. Use when working multiple branches at once, running
-  parallel CI validations, or isolating agent workspaces.
+  Run parallel Git worktrees without collisions: a port block per worktree, .env sync,
+  health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several
+  branches or agents need running dev servers at once.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: developer-tooling
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   frameworks: git-worktree
   tags:
     - git
@@ -22,7 +22,7 @@ metadata:
 ---
 # Git Worktree Manager
 
-Manage parallel development workflows using Git worktrees with deterministic naming, automatic port allocation, environment file synchronization, dependency installation, and cleanup automation. Optimized for multi-agent workflows where each agent or terminal session owns an isolated worktree with its own ports, environment, and running services.
+Plain `git worktree add/remove` is the easy part. The agent uses this skill for what git does not do: give every worktree its own port block so dev servers and Docker services do not collide, carry `.env` files across, spot worktrees that are stale, dirty or tracking deleted branches, and remove merged ones without losing uncommitted work. It suits multi-agent setups where each agent or terminal owns one worktree.
 
 ## Core Capabilities
 
@@ -49,15 +49,53 @@ Before managing worktrees, settle the inputs below. When one is missing or vague
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `worktree_manager.py` | List, create, remove, and clean up worktrees | `python scripts/worktree_manager.py list` |
-| `port_allocator.py` | Assign/check/release deterministic port blocks; sync registry | `python scripts/port_allocator.py status` |
-| `worktree_validator.py` | Validate worktree health (stale, missing branch, env parity, port conflicts, lockfile) | `python scripts/worktree_validator.py --stale-days 14` |
+1. **Create** the worktree with `worktree_manager.py create <branch> --base main`; it names the directory deterministically, copies `.env` files and installs dependencies from the lockfile it finds.
+2. **Assign ports** with `port_allocator.py assign <worktree-name>`: a block at `base + index * stride`, checked against listening processes and recorded in `.worktree-ports.json`. Use the Docker Compose override in [references/setup-and-ports.md](references/setup-and-ports.md) to apply it.
+3. **Work**: one branch and one agent per worktree, no shared mutable state.
+4. **Check health** with `worktree_validator.py` (stale trees, missing directories, deleted branches, `.env` parity, port conflicts, lockfile drift).
+5. **Clean up** with `worktree_manager.py cleanup --dry-run` first, then without `--dry-run`; dirty worktrees are reported, not deleted. Run `port_allocator.py sync` afterwards to free released blocks.
+6. **Verify** that `worktree_validator.py` reports no issues and `git worktree list` matches the port registry.
 
-## References
+## Quick Start
+
+Run inside any git repository:
+
+```bash
+python3 scripts/worktree_manager.py list                          # worktrees with clean/dirty and ahead/behind
+python3 scripts/port_allocator.py status                          # current port blocks
+python3 scripts/worktree_validator.py --stale-days 14 --json      # health report
+python3 scripts/worktree_manager.py cleanup --stale-days 30 --dry-run
+```
+
+## Tools Overview
+
+| Tool | Subcommands and flags | Exit codes |
+|------|-----------------------|------------|
+| `worktree_manager.py` | `list`, `create <branch> [--base]`, `remove <name>`, `cleanup [--stale-days N] [--dry-run]`; `--json` | 0, 1 git operation failed, 2 no subcommand or not inside a repository |
+| `port_allocator.py` | `status`, `assign <name> [--index] [--branch]`, `release <name>`, `check`, `sync`; `--json` | 0, 1 operation failed, 2 no subcommand or not inside a repository |
+| `worktree_validator.py` | `--checks stale,missing,branch,env,ports,lockfile`, `--stale-days`, `--json` | 0 no errors (warnings allowed), 1 errors found, 2 unknown check or not inside a repository |
+
+## Anti-Patterns
+
+**Mistake:** Deleting worktree directories with `rm -rf`.
+**Why it happens:** It looks like any other folder.
+**Instead:** Use `worktree_manager.py remove` (or `git worktree remove`); a raw delete leaves stale metadata and loses uncommitted work without warning.
+
+**Mistake:** Two worktrees on the same dev-server ports.
+**Why it happens:** Every checkout reads the same default `.env`.
+**Instead:** Assign a port block per worktree and generate the Compose override from it.
+
+**Mistake:** Two agents sharing one worktree.
+**Why it happens:** It saves a checkout.
+**Instead:** One agent per worktree and branch; shared working trees produce interleaved, unreviewable changes.
+
+## Files
+
+- `scripts/worktree_manager.py`, `scripts/port_allocator.py`, `scripts/worktree_validator.py` — the tools above. They read the current repository; there is no sample data.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -79,13 +117,4 @@ Load the reference that matches the task — keep this file lean and pull detail
 - CI/CD pipeline configuration or automated test orchestration (see `ci-cd-pipeline-builder`)
 - Monorepo package management, workspace linking, or cross-package dependency resolution (see `monorepo-navigator`)
 
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `env-secrets-manager` | Worktree setup copies `.env` files that contain secrets managed by this skill | `.env` files flow from main repo to each worktree; secret references remain consistent across all copies |
-| `ci-cd-pipeline-builder` | CI pipelines can spin up worktrees for parallel test matrix execution | Pipeline config triggers `setup-worktree.sh` per matrix job; port allocation prevents service collisions |
-| `release-manager` | Release branches get dedicated worktrees for stabilization while feature work continues | Release worktree is created from the release branch; merged status drives cleanup automation |
-| `monorepo-navigator` | In monorepo setups, worktrees must respect package boundaries and shared dependencies | Worktree creation inherits the monorepo root lockfile; package-level dev servers use allocated port blocks |
-| `pr-review-expert` | PR reviews can be performed in isolated worktrees with running code for manual validation | Reviewer creates a worktree at the PR branch, runs the dev server on allocated ports, and removes after review |
-| `tech-debt-tracker` | Stale worktrees and abandoned branches surface as tech debt indicators | Cleanup script output feeds into debt tracking; worktree age and merge status inform priority scores |
+Related skills: `engineering/env-secrets-manager` (the `.env` files copied into worktrees), `engineering/monorepo-navigator` (package boundaries inside a worktree).

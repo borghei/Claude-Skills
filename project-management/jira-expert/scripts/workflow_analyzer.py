@@ -18,8 +18,20 @@ from datetime import datetime, timedelta
 
 def load_data(path: str) -> dict:
     """Load issue data from JSON file."""
-    with open(path, "r") as f:
-        return json.load(f)
+    try:
+        with open(path, "r") as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        fail(f"cannot read {path}: {e}")
+    if not isinstance(data, dict):
+        fail(f"{path}: top level must be a JSON object (see --example)")
+    return data
+
+
+def fail(msg: str) -> None:
+    """Bad input: one line on stderr, exit 2."""
+    print(f"Error: {msg}", file=sys.stderr)
+    sys.exit(2)
 
 
 def parse_date(date_str: str) -> datetime:
@@ -205,6 +217,7 @@ def main():
     )
     parser.add_argument("--issues", type=str, help="Path to issues JSON file with transition data")
     parser.add_argument("--json", action="store_true", help="Output results as JSON")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (--json is the same as --format json)")
     parser.add_argument("--example", action="store_true", help="Print example input JSON and exit")
     args = parser.parse_args()
 
@@ -216,9 +229,12 @@ def main():
         parser.error("--issues is required (use --example to see the expected format)")
 
     data = load_data(args.issues)
-    result = analyze_workflow(data)
+    try:
+        result = analyze_workflow(data)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        fail(f"unexpected input shape ({type(e).__name__}: {e}); run --example for the format")
 
-    if args.json:
+    if args.json or args.format == "json":
         print(json.dumps(result, indent=2))
     else:
         print_report(result)

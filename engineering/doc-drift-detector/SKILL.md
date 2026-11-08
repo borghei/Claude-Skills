@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: documentation
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [documentation, staleness, api-docs, drift-analysis]
   python-tools: drift_analyzer.py, doc_staleness_scorer.py, api_doc_validator.py, link_checker.py
   tech-stack: python, git, markdown, documentation
@@ -46,18 +46,50 @@ Before running detection, settle the inputs below. When one is missing or vague 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `drift_analyzer.py` | Full drift analysis between code and docs | `python scripts/drift_analyzer.py <repo> --min-severity high --json` |
-| `doc_staleness_scorer.py` | Score documentation freshness 0-100 | `python scripts/doc_staleness_scorer.py <repo> --threshold 60` |
-| `api_doc_validator.py` | Validate API docs against Python source (AST) | `python scripts/api_doc_validator.py <src> <docs> --recursive` |
-| `link_checker.py` | Audit all markdown links and anchors | `python scripts/link_checker.py <repo> --broken-only` |
+1. **Links first** (fast, no git needed): `link_checker.py <docs-dir> --broken-only`. Fix broken files and anchors.
+2. **API docs** (Python): `api_doc_validator.py <src> <docs> --recursive` lists documented-but-missing and undocumented functions and classes, and signature mismatches.
+3. **Drift against history**: `drift_analyzer.py <repo>` compares doc and code change history (needs a git checkout; on very large repositories use `--scope` to limit it).
+4. **Score freshness**: `doc_staleness_scorer.py <repo> --threshold 60` for a 0-100 score per document and an aggregate gate.
+5. **Fix** in order: broken links and wrong API signatures (readers act on them), then stale how-tos, then completeness.
+6. **Verify** that all four tools exit 0 at the gates you chose before merging.
 
-All tools: Python 3.8+ stdlib only, `--json` and `--help`, non-zero exit codes for CI, any OS.
+## Quick Start
 
-## References
+```bash
+python3 scripts/link_checker.py . --broken-only                       # this skill's own docs: clean (exit 0)
+python3 scripts/api_doc_validator.py scripts references --recursive    # undocumented helpers are reported
+python3 scripts/drift_analyzer.py /path/to/repo --min-severity medium --fail-on high
+python3 scripts/doc_staleness_scorer.py /path/to/repo --threshold 60 --json
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `link_checker.py <path>` | Local files, anchors (GitHub slug rules), cross-doc anchors, images, case mismatches, duplicate anchors; ignores fenced and inline code | `--broken-only`, `--check-external`, `--json` | 0 clean, 1 broken links or duplicate anchors, 2 bad path |
+| `api_doc_validator.py <src> <docs>` | Python AST vs docs: missing, undocumented and mismatched functions/classes/parameters | `--recursive`, `--include-private`, `--json` | 0 no documented-but-missing items, 1 mismatches, 2 bad path |
+| `drift_analyzer.py <repo>` | Structural, factual, referential, temporal and semantic drift from git history | `--min-severity` (what to report), `--fail-on` (what fails, default high), `--scope`, `--doc-patterns`, `--json` | 0, 1 issue at/above `--fail-on`, 2 not a directory or not a git checkout |
+| `doc_staleness_scorer.py <repo>` | Weighted 0-100 freshness per doc (age, code alignment, links, completeness, accuracy) | `--threshold`, `--readme-focus`, `--required-sections`, `--weight-*`, `--json` | 0, 1 aggregate below threshold, 2 bad path |
+
+All tools are Python stdlib only; `drift_analyzer.py` and the scorer read git history through the `git` command.
+
+## Anti-Patterns
+
+**Mistake:** Gating CI on every low-severity drift finding.
+**Why it happens:** Strict gates look rigorous.
+**Instead:** Fail on high (the default) and report the rest; a gate that fails on cosmetic drift gets disabled.
+
+**Mistake:** Treating "recently edited" as "accurate".
+**Why it happens:** Age is the easiest signal to compute.
+**Instead:** Check alignment with the code that changed (drift analyzer, API validator); a doc edited yesterday can still describe last year's API.
+
+**Mistake:** Writing example links in docs as real links.
+**Why it happens:** It is the natural way to show syntax.
+**Instead:** Put examples in inline code or fenced blocks; the checker ignores them there and reports only real links.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -66,12 +98,10 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/documentation_standards.md](references/documentation_standards.md)** — README structure, API docs, changelogs, ADRs, docs-as-code standards.
 - **[references/drift_prevention_guide.md](references/drift_prevention_guide.md)** — coupling strategies, CI gates, review checklists, and prevention patterns.
 
-## Assets
+## Files
 
-| Asset | Description |
-|-------|-------------|
-| [Drift Report Template](assets/drift_report_template.md) | Template for drift analysis reports |
-| [Sample Drift Data](assets/sample_drift_data.json) | Sample JSON for testing and demonstration |
+- `scripts/link_checker.py`, `scripts/api_doc_validator.py`, `scripts/drift_analyzer.py`, `scripts/doc_staleness_scorer.py` — the tools above.
+- [assets/drift_report_template.md](assets/drift_report_template.md) — report template; [assets/sample_drift_data.json](assets/sample_drift_data.json) — example of a combined report's shape (illustrative data, not tool input).
 
 ## Scope & Limitations
 
@@ -89,13 +119,4 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Automatic documentation rewriting -- tools classify issues as `[AUTO]`, `[SEMI]`, or `[MANUAL]` but do not generate replacement text; use the **code-reviewer** skill for AI-assisted doc suggestions
 - Content quality or readability assessment -- staleness scoring measures freshness and structural completeness, not prose quality; see the **standards/communication** library for writing guidelines
 
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| **code-reviewer** | Include drift report in PR review comments | `drift_analyzer.py --json` output feeds into review checklists as a documentation health section |
-| **senior-devops** | Add staleness gate to CI/CD pipelines | `doc_staleness_scorer.py --threshold 50` returns exit code 1 on failure, blocking deploys |
-| **senior-qa** | Documentation quality as part of QA acceptance | `link_checker.py --json` output merges into QA dashboards alongside test coverage metrics |
-| **senior-fullstack** | Validate generated project docs post-scaffold | Run `api_doc_validator.py` against scaffolded `docs/` directory to confirm generated API docs match source |
-| **senior-secops** | Audit security documentation currency | `drift_analyzer.py --scope security/` detects when security docs fall behind policy changes |
-| **senior-architect** | Architecture decision record (ADR) freshness | `doc_staleness_scorer.py --required-sections "Status,Context,Decision,Consequences"` validates ADR completeness |
+Related skills: `engineering/code-reviewer` (attach the drift report to PR review), `engineering/senior-devops` (CI gates).

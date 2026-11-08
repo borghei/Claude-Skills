@@ -294,21 +294,44 @@ class DebtScanner:
             except Exception:
                 continue
         
-        # Report duplicates
-        for block_hash, occurrences in line_hashes.items():
-            if len(occurrences) > 1:
-                for file_path, line_num, block in occurrences:
-                    self._add_debt_item(
-                        "duplicate_code",
-                        f"Duplicate code block found in {len(occurrences)} files",
-                        file_path,
-                        "medium",
-                        {
-                            "line_number": line_num,
-                            "duplicate_count": len(occurrences),
-                            "other_files": [f[0] for f in occurrences if f[0] != file_path]
-                        }
-                    )
+        # Report duplicates. Consecutive windows of one duplicated region are merged into a
+        # single block, so a 12-line copy is one finding rather than ten overlapping ones.
+        window = self.config["min_duplicate_lines"]
+        groups = [sorted((f, n) for f, n, _ in occ) for occ in line_hashes.values() if len(occ) > 1]
+
+        def self_overlap(locs):
+            # Repetitive lines (a run of similar statements) match themselves one line down;
+            # that is not a copy of anything
+            return any(f1 == f2 and abs(n1 - n2) < window
+                       for i, (f1, n1) in enumerate(locs) for f2, n2 in locs[i + 1:])
+        groups = [g for g in groups if not self_overlap(g)]
+        open_blocks: Dict[tuple, Dict[str, Any]] = {}
+        blocks: List[Dict[str, Any]] = []
+        for locs in sorted(groups):
+            key = tuple(locs)
+            prev = tuple((f, n - 1) for f, n in locs)
+            if prev in open_blocks:
+                block = open_blocks.pop(prev)
+                block["length"] += 1
+            else:
+                block = {"locs": key, "length": window}
+                blocks.append(block)
+            open_blocks[key] = block
+        for block in blocks:
+            first_file, first_line = block["locs"][0]
+            others = [f"{f}:{n}" for f, n in block["locs"][1:]]
+            self._add_debt_item(
+                "duplicate_code",
+                f"Duplicate {block['length']}-line block in {len(block['locs'])} places",
+                first_file,
+                "medium",
+                {
+                    "line_number": first_line,
+                    "duplicate_count": len(block["locs"]),
+                    "block_lines": block["length"],
+                    "other_locations": others,
+                }
+            )
     
     def _calculate_priorities(self):
         """Calculate priority scores for debt items."""
@@ -370,10 +393,14 @@ class DebtScanner:
         priority_counts = Counter(item["priority"] for item in self.debt_items)
         type_counts = Counter(item["type"] for item in self.debt_items)
         
-        # Calculate health score (0-100, higher is better)
-        total_files = self.stats.get("files_scanned", 1)
+        # Calculate health score (0-100, higher is better) from severity-weighted debt per
+        # 1,000 lines, so it does not collapse to 0 on a few dense files
+        total_files = self.stats.get("files_scanned", 1) or 1
         debt_density = len(self.debt_items) / total_files
-        health_score = max(0, 100 - (debt_density * 10))
+        kloc = max(self.stats.get("total_lines", 0), 1) / 1000
+        weights = {"critical": 5, "high": 3, "medium": 1, "low": 0.5, "info": 0.1}
+        weighted = sum(weights.get(item["severity"], 1) for item in self.debt_items)
+        health_score = max(0, 100 - weighted / kloc)
         
         report = {
             "scan_metadata": {
@@ -644,15 +671,15 @@ def main():
                 config = json.load(f)
         except Exception as e:
             print(f"Error loading config: {e}")
-            sys.exit(1)
+            sys.exit(2)
     
     # Run scan
     scanner = DebtScanner(config)
     try:
         report = scanner.scan_directory(args.directory)
     except Exception as e:
-        print(f"Scan failed: {e}")
-        sys.exit(1)
+        print(f"error: scan failed: {e}", file=sys.stderr)
+        sys.exit(2)
     
     # Output results
     if args.format in ["json", "both"]:

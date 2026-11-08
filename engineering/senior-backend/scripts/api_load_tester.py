@@ -556,12 +556,15 @@ Examples:
         help='Output file path for results'
     )
 
+    parser.add_argument('--min-success', type=float, default=None,
+                        help='Exit 1 if any URL\'s success rate (%%) is below this, e.g. 99 (CI gate)')
+
     args = parser.parse_args()
 
     # Validate
     if args.compare and len(args.urls) < 2:
         print("Error: --compare requires two URLs", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Parse headers
     headers = parse_headers(args.headers)
@@ -597,11 +600,19 @@ Examples:
 
     except KeyboardInterrupt:
         print("\nTest interrupted by user")
-        sys.exit(1)
+        sys.exit(2)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
+        sys.exit(2)
+
+    # A run where every request failed must not exit 0
+    rates = [100.0 * r['successful_requests'] / r['total_requests'] if r.get('total_requests') else 0.0
+             for r in results.get('results', [])]
+    floor = args.min_success
+    if floor is not None and any(rate < floor for rate in rates):
+        print(f"FAIL: success rate {min(rates):.1f}% below --min-success {floor}%", file=sys.stderr)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

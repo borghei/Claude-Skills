@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "title": "Weekly Budget Summary",
+      "description": "When preparing my weekly budget, I want to see spending by category so I can adjust before overspending. The view should group transactions and highlight over-budget categories.",
+      "outcome": "Reduce time spent on budget review from 30 minutes to 5 minutes",
+      "acceptance_criteria": [
+        "Shows current month transactions grouped by category",
+        "Displays total spent and remaining budget per category",
+        "Over-budget categories are visually highlighted",
+        "Tapping a category shows individual transactions",
+        "Loads within 2 seconds on mobile"
+      ],
+      "dependencies": [],
+      "story_points": 5
+    },
+    {
+      "title": "Complete Platform Redesign",
+      "description": "Redesign the entire platform. Use React and implement with a new API.",
+      "acceptance_criteria": [
+        "It works"
+      ],
+      "dependencies": [
+        "Database migration",
+        "API v2 release"
+      ],
+      "story_points": 40
+    }
+  ]
+}

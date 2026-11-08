@@ -1,0 +1,36 @@
+# DQ suite for the orders table. `now` pins the freshness check so the demo
+# does not depend on today's date; drop it in production.
+checks:
+  - id: orders_pk_unique
+    type: unique
+    column: order_id
+  - id: email_not_null
+    type: not_null
+    column: email
+    threshold: 0.0
+  - id: email_format
+    type: matches_regex
+    column: email
+    regex: "^[^@ ]+@[^@ ]+[.][a-z]+$"
+  - id: status_enum
+    type: accepted_values
+    column: status
+    values: [paid, shipped, refunded, cancelled]
+  - id: amount_range
+    type: between
+    column: amount
+    min: 0
+    max: 10000
+  - id: customer_fk
+    type: reference_exists
+    column: customer_id
+    reference_values: [C01, C02, C03]
+  - id: row_volume
+    type: row_count_between
+    min: 1
+    max: 1000000
+  - id: orders_fresh
+    type: freshness
+    column: updated_at
+    max_age_min: 60
+    now: "2026-06-01T12:30:00Z"

@@ -3,8 +3,14 @@ User lifecycle management module for Microsoft 365.
 Handles user creation, modification, license assignment, and deprovisioning.
 """
 
+import re
 from typing import Dict, List, Any, Optional
 from datetime import datetime
+
+
+def _has_word(text: str, words: List[str]) -> bool:
+    """True when any of the words appears in text as a whole word (case-insensitive)."""
+    return any(re.search(rf"\b{re.escape(w)}\b", text or "", re.IGNORECASE) for w in words)
 
 
 class UserLifecycleManager:
@@ -72,7 +78,7 @@ $users = @(
         LicenseSku = "{license_sku}"
         UsageLocation = "US"
         PasswordProfile = @{{
-            Password = "ChangeMe@$(Get-Random -Minimum 1000 -Maximum 9999)"
+            Password = -join ((33..126) | Get-Random -Count 20 | ForEach-Object {{ [char]$_ }})
             ForceChangePasswordNextSignIn = $true
         }}
     }}
@@ -158,7 +164,10 @@ Write-Host "`nUser provisioning complete!" -ForegroundColor Green
     - Removes licenses
     - Archives OneDrive
     - Documents all actions
+    Run with -WhatIf first: cmdlets that support ShouldProcess report what they would change.
 #>
+[CmdletBinding(SupportsShouldProcess)]
+param()
 
 # Connect to services
 Connect-MgGraph -Scopes "User.ReadWrite.All", "Directory.ReadWrite.All"
@@ -277,7 +286,7 @@ Disconnect-ExchangeOnline -Confirm:$false
             License recommendations with justification
         """
         # License decision matrix
-        if any(keyword in user_role.lower() for keyword in ['ceo', 'cto', 'cfo', 'executive', 'director', 'vp']):
+        if _has_word(user_role, ['ceo', 'cto', 'cfo', 'executive', 'director', 'vp']):
             return {
                 'recommended_license': 'Microsoft 365 E5',
                 'justification': 'Executive level - requires advanced security, compliance, and full feature set',
@@ -290,7 +299,7 @@ Disconnect-ExchangeOnline -Confirm:$false
                 'monthly_cost': 57.00
             }
 
-        elif any(keyword in user_role.lower() for keyword in ['admin', 'it', 'security', 'compliance']):
+        elif _has_word(user_role, ['admin', 'it', 'security', 'compliance']):
             return {
                 'recommended_license': 'Microsoft 365 E5',
                 'justification': 'IT/Security role - requires full admin and security capabilities',
@@ -316,7 +325,7 @@ Disconnect-ExchangeOnline -Confirm:$false
                 'monthly_cost': 36.00
             }
 
-        elif any(keyword in user_role.lower() for keyword in ['manager', 'lead', 'supervisor']):
+        elif _has_word(user_role, ['manager', 'lead', 'supervisor']):
             return {
                 'recommended_license': 'Microsoft 365 Business Premium',
                 'justification': 'Management role - needs full productivity suite with security',
@@ -329,7 +338,7 @@ Disconnect-ExchangeOnline -Confirm:$false
                 'monthly_cost': 22.00
             }
 
-        elif any(keyword in user_role.lower() for keyword in ['part-time', 'contractor', 'temporary', 'intern']):
+        elif _has_word(user_role, ['part-time', 'contractor', 'temporary', 'intern']):
             return {
                 'recommended_license': 'Microsoft 365 Business Basic',
                 'justification': 'Temporary/part-time role - web apps and basic features sufficient',
@@ -381,10 +390,10 @@ Disconnect-ExchangeOnline -Confirm:$false
 
         # Role-based groups
         job_title = user.get('job_title', '').lower()
-        if any(keyword in job_title for keyword in ['manager', 'director', 'vp', 'executive']):
+        if _has_word(job_title, ['manager', 'director', 'vp', 'executive']):
             recommended_groups.append("SG-Management")
 
-        if any(keyword in job_title for keyword in ['admin', 'administrator']):
+        if _has_word(job_title, ['admin', 'administrator']):
             recommended_groups.append("SG-ITAdmins")
 
         # Functional groups

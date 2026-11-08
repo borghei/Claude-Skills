@@ -299,7 +299,7 @@ def main():
 
     if not args.command:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     db = load_db(args.db)
 

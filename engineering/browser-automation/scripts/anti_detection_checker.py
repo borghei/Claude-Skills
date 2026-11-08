@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """
-Anti-Detection Checker - Audit browser automation scripts for bot detection signatures.
+Automation Risk Checker - audit an automation script before it runs against a site.
 
-Analyzes automation code for patterns that trigger bot detection systems including
-fingerprinting tells, timing issues, and missing evasion techniques.
+Flags patterns that overload a site, break its rules or hide what the script is (spoofed
+browser identity, webdriver or fingerprint masking, IP rotation), and protections that are
+missing (rate limiting, robots.txt, backoff, an identifying User-Agent). The advice is for
+permitted automation: identify the bot honestly and stay inside the site's rules.
 
-Author: Claude Skills Engineering Team
-License: MIT
+The risk score counts both the signatures found and the protections that are
+missing, so a bare script with no delays, retries or robots.txt check cannot
+score as low risk. Use it on automation you are authorized to run.
+
+Exit codes: 0 risk score below 50, 1 risk score 50 or more, 2 unreadable input.
 """
 
 import argparse
@@ -46,103 +51,75 @@ SEVERITY_WEIGHTS = {"critical": 25, "high": 15, "medium": 8, "low": 3}
 
 # (pattern, category, severity, title, description, fix)
 DETECTION_PATTERNS = [
-    # Webdriver detection
     (r'navigator\.webdriver\s*=\s*false',
-     "fingerprint", "high",
-     "Naive webdriver override",
-     "Setting navigator.webdriver=false is easily detected by advanced bot systems that check the property descriptor.",
-     "Use CDP commands to remove webdriver property before page load, or use undetected-chromedriver."),
+     "concealment", "high",
+     "Webdriver flag masked",
+     "The script hides that it is automated. Sites use this flag to apply their automation policy.",
+     "Remove the override. If the site does not allow automation, ask for access or use its API."),
 
     (r'(?:headless|headless_mode)\s*[:=]\s*(?:True|true|1)',
-     "fingerprint", "critical",
-     "Headless mode enabled without evasion",
-     "Running in headless mode without anti-fingerprinting is the most common detection trigger.",
-     "Use --headless=new (Chrome 112+) or apply comprehensive anti-fingerprinting patches."),
+     "policy", "low",
+     "Headless browser",
+     "Fine for permitted automation; some sites block headless browsers as a matter of policy.",
+     "If the site blocks it, treat that as its answer: request access or an API rather than masking it."),
 
-    # Fixed timing
     (r'(?:sleep|wait|delay)\s*\(\s*(\d+(?:\.\d+)?)\s*\)',
      "timing", "medium",
-     "Fixed delay detected",
-     "Constant delays create predictable timing patterns that bot detectors recognize.",
-     "Use randomized delays: random.uniform(min_delay, max_delay)."),
+     "Fixed delay",
+     "A constant delay gives no back-pressure: the script keeps the same pace when the server slows.",
+     "Use a rate limiter with jitter and back off on 429/503 (honour Retry-After)."),
 
     (r'time\.sleep\s*\(\s*(?:0\.\d|0\.0)',
      "timing", "high",
-     "Very short fixed delay",
-     "Sub-second fixed delays are a strong bot indicator.",
-     "Use randomized delays of at least 1-3 seconds between actions."),
+     "Sub-second delay between requests",
+     "Requests this close together can overload small sites.",
+     "Wait at least 1-3 seconds between requests to a site you do not run, longer if it is slow."),
 
-    # User-Agent issues
-    (r'["\'](?:User-Agent|user-agent)["\']\s*:\s*["\'][^"\']+["\']',
-     "headers", "medium",
-     "Hardcoded User-Agent string",
-     "A single hardcoded User-Agent is easily fingerprinted and blocked.",
-     "Rotate User-Agent strings from a realistic pool matching the browser being automated."),
+    (r'["\'](?:User-Agent|user-agent)["\']\s*:\s*["\']Mozilla/',
+     "identity", "medium",
+     "User-Agent impersonates a browser",
+     "The script presents itself as a person's browser, so the site owner cannot tell who is crawling.",
+     "Use an identifying User-Agent: 'MyCrawler/1.0 (+https://example.com/bot; ops@example.com)'."),
 
-    (r'(?:HeadlessChrome|PhantomJS|Selenium|puppeteer)',
-     "fingerprint", "critical",
-     "Bot identifier in User-Agent or code",
-     "Bot-identifying strings in the User-Agent or runtime environment are trivially detected.",
-     "Remove all bot-identifying strings. Use realistic User-Agent rotation."),
-
-    # Missing protections
     (r'\.get\s*\(\s*["\']https?://',
      "request", "low",
-     "HTTP request without explicit headers",
-     "Requests without custom headers may use default library headers that identify automation.",
-     "Set realistic Accept, Accept-Language, Accept-Encoding, and Connection headers."),
+     "Request without a session or headers",
+     "Bare requests skip connection reuse and send no identification.",
+     "Use one session with an identifying User-Agent, timeouts and retry with backoff."),
 
-    # Cookie handling
     (r'(?:cookies|cookie_jar)\s*[:=]\s*(?:\{\}|\[\]|None)',
-     "session", "medium",
-     "Empty cookie initialization",
-     "Starting with empty cookies on a site you've 'visited' before is suspicious.",
-     "Persist and reuse cookies across sessions. Pre-load common cookies."),
+     "session", "low",
+     "Empty cookie jar on every run",
+     "Starting a new session each run repeats logins and redirects and adds load.",
+     "Reuse the session within a run; persist cookies only where the site's terms allow."),
 
-    # Viewport/resolution
-    (r'(?:window_size|viewport|set_window_size)\s*\(\s*(\d+)\s*,\s*(\d+)\s*\)',
-     "fingerprint", "low",
-     "Fixed viewport size",
-     "Using a fixed viewport without variation can be a fingerprinting signal.",
-     "Randomize viewport dimensions slightly around common resolutions."),
-
-    # Proxy patterns
     (r'(?:proxy|PROXY)\s*[:=]\s*["\'](?:http|socks)',
-     "network", "low",
-     "Single proxy configuration",
-     "Using a single proxy IP is easily blocked. Detected as automation if IP is in known ranges.",
-     "Use rotating residential proxies or a proxy pool with automatic rotation."),
+     "concealment", "medium",
+     "Proxy configured",
+     "Fine for your own network needs. Rotating IPs to get past a site's rate limits or blocks is evasion.",
+     "Do not rotate proxies to dodge limits; slow down or ask the site for higher limits or an API."),
 
-    # Selenium-specific
     (r'(?:execute_cdp_cmd|execute_script)\s*\(["\'].*(?:Object\.defineProperty|delete\s+)',
-     "fingerprint", "medium",
-     "JavaScript property manipulation for evasion",
-     "Manual JS property overrides can be detected by checking property descriptors and prototype chains.",
-     "Use comprehensive stealth plugins (e.g., selenium-stealth, puppeteer-extra-plugin-stealth)."),
+     "concealment", "high",
+     "Browser fingerprint spoofing",
+     "Rewriting browser properties to avoid detection breaks most sites' terms.",
+     "Remove it. Permitted automation does not need to look like a person."),
 
-    # No error handling
     (r'\.(?:click|send_keys|submit)\s*\([^)]*\)\s*$',
      "reliability", "low",
      "Action without explicit wait or error handling",
-     "Actions without waits may fail on slow pages, causing detectable error patterns.",
-     "Use explicit waits (WebDriverWait) before interactions. Add try/except for retries."),
-
-    # Referrer issues
-    (r'(?:Referer|referrer)\s*[:=]\s*(?:None|""|\'\')',
-     "headers", "medium",
-     "Missing or empty Referer header",
-     "Navigation without a Referer header is suspicious for internal page transitions.",
-     "Set appropriate Referer headers matching natural navigation flow."),
+     "Actions without waits fail on slow pages and retry loops then hammer the site.",
+     "Use explicit waits before interactions and bounded retries."),
 ]
 
-# Protections that SHOULD be present
+# Protections that SHOULD be present, with the risk each one's absence adds
 EXPECTED_PROTECTIONS = [
-    (r'(?:random|randint|uniform|randrange)', "Randomized timing/delays"),
-    (r'(?:User-Agent|user.agent).*(?:random|choice|rotate|pool|list)', "User-Agent rotation"),
-    (r'(?:cookie|session).*(?:save|persist|load|store)', "Cookie persistence"),
-    (r'(?:retry|backoff|exponential)', "Retry/backoff logic"),
-    (r'(?:robots\.txt|robotparser)', "robots.txt compliance"),
-    (r'(?:rate.limit|throttle|semaphore)', "Rate limiting"),
+    (r'(?:random|randint|uniform|randrange)', "Randomized timing/delays", 8),
+    (r'(?:User-Agent|USER_AGENT|user.agent).*(?:bot|crawler|spider|\+https?://|mailto:|@)', "Identifying User-Agent (bot name + contact)", 8),
+    (r'(?:requests\.Session|session\s*=|\.Session\()', "Reused HTTP session", 3),
+    (r'(?:retry|backoff|exponential)', "Retry/backoff logic", 8),
+    (r'(?:robots\.txt|robotparser)', "robots.txt compliance", 15),
+    (r'(?:rate.limit|throttle|semaphore)', "Rate limiting", 15),
 ]
 
 
@@ -152,9 +129,9 @@ def check_file(file_path: Path) -> CheckResult:
 
     try:
         content = file_path.read_text(encoding="utf-8", errors="ignore")
-    except (OSError, PermissionError) as e:
-        result.recommendations.append(f"Could not read file: {e}")
-        return result
+    except OSError as e:
+        print(f"Error: cannot read {file_path}: {e}", file=sys.stderr)
+        sys.exit(2)
 
     lines = content.split("\n")
 
@@ -179,26 +156,23 @@ def check_file(file_path: Path) -> CheckResult:
 
     result.total_signatures = len(result.signatures)
 
-    # Calculate risk score
-    risk = 0
-    for sig in result.signatures:
-        risk += SEVERITY_WEIGHTS.get(sig.severity, 0)
-    result.risk_score = min(100, risk)
-
-    # Check for missing protections
-    for pattern_str, protection_name in EXPECTED_PROTECTIONS:
+    # Risk = signatures found + protections missing
+    risk = sum(SEVERITY_WEIGHTS.get(sig.severity, 0) for sig in result.signatures)
+    for pattern_str, protection_name, weight in EXPECTED_PROTECTIONS:
         if not re.search(pattern_str, content, re.IGNORECASE):
             result.missing_protections.append(protection_name)
+            risk += weight
+    result.risk_score = min(100, risk)
 
     # Generate recommendations
     if result.risk_score >= 75:
-        result.recommendations.append("HIGH RISK: This script is very likely to be detected. Major refactoring needed.")
+        result.recommendations.append("HIGH RISK: likely to be blocked or to overload the target. Rework before running.")
     elif result.risk_score >= 40:
-        result.recommendations.append("MODERATE RISK: Several detection signatures found. Address high/critical items first.")
+        result.recommendations.append("MODERATE RISK: fix critical/high signatures and add the missing protections first.")
     elif result.risk_score > 0:
-        result.recommendations.append("LOW RISK: Minor signatures found. Script is reasonably stealthy.")
+        result.recommendations.append("LOW RISK: minor issues; review the items below.")
     else:
-        result.recommendations.append("MINIMAL RISK: No obvious detection signatures found.")
+        result.recommendations.append("MINIMAL RISK: no signatures found and all protections present.")
 
     if result.missing_protections:
         result.recommendations.append(f"Missing protections: {', '.join(result.missing_protections)}")
@@ -210,10 +184,10 @@ def format_human(result: CheckResult) -> str:
     """Format results for human reading."""
     lines = []
     lines.append("=" * 65)
-    lines.append("ANTI-DETECTION CHECK REPORT")
+    lines.append("AUTOMATION RISK REPORT")
     lines.append("=" * 65)
     lines.append(f"File: {result.file_path}")
-    lines.append(f"Detection Signatures Found: {result.total_signatures}")
+    lines.append(f"Risky patterns found: {result.total_signatures}")
     lines.append(f"Risk Score: {result.risk_score}/100")
     lines.append("")
 
@@ -258,7 +232,7 @@ def format_json(result: CheckResult) -> str:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Anti-Detection Checker - Audit browser automation scripts for bot detection signatures"
+        description="Automation Risk Checker - audit an automation script for overload, concealment and missing protections"
     )
     parser.add_argument("--file", required=True, help="Path to automation script to check")
     parser.add_argument("--format", choices=["human", "json"], default="human",
@@ -269,7 +243,7 @@ def main():
 
     if not path.exists():
         print(f"Error: File not found: {args.file}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     result = check_file(path)
 

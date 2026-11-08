@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Delivery Manager - Claude Skills</title>
-  <meta name="description" content="Expert delivery management for release planning, deployment strategy, incident response, change management, SLA/error-budget tracking, and DORA metrics across continuous delivery pipelines.">
+  <meta name="description" content="Plans releases, picks deployment strategies, runs incidents and tracks DORA metrics and error budgets. Use when preparing a Go/No-Go, choosing canary or blue-green, handling a production incident or r">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html">
   <meta property="og:title" content="Delivery Manager - Claude Skills">
-  <meta property="og:description" content="Expert delivery management for release planning, deployment strategy, incident response, change management, SLA/error-budget tracking, and DORA metrics across continuous delivery pipelines.">
+  <meta property="og:description" content="Plans releases, picks deployment strategies, runs incidents and tracks DORA metrics and error budgets. Use when preparing a Go/No-Go, choosing canary or blue-green, handling a production incident or r">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Delivery Manager", "description": "Expert delivery management for release planning, deployment strategy, incident response, change management, SLA/error-budget tracking, and DORA metrics across continuous delivery pipelines.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Delivery Manager", "description": "Plans releases, picks deployment strategies, runs incidents and tracks DORA metrics and error budgets. Use when preparing a Go/No-Go, choosing canary or blue-green, handling a production incident or reporting delivery health.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/delivery-manager.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Delivery Manager</h1>
-    <p class="page-subtitle">Expert delivery management for release planning, deployment strategy, incident response, change management, SLA/error-budget tracking, and DORA metrics across continuous delivery pipelines.</p>
+    <p class="page-subtitle">Plans releases, picks deployment strategies, runs incidents and tracks DORA metrics and error budgets. Use when preparing a Go/No-Go, choosing canary or blue-green, handling a production incident or reporting delivery health.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">delivery</span><span class="tag">release</span><span class="tag">deployment</span><span class="tag">operations</span><span class="tag">devops</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Delivery Manager (Project Management domain).
 
-Expert delivery management for release planning, deployment strategy, incident response, change management, SLA/error-budget tracking, and DORA metrics across continuous delivery pipelines.
+Plans releases, picks deployment strategies, runs incidents and tracks DORA metrics and error budgets. Use when preparing a Go/No-Go, choosing canary or blue-green, handling a production incident or reporting delivery health.
 
 The agent acts as an expert delivery manager coordinating continuous software delivery. It plans releases, selects deployment strategies, manages incidents, evaluates change requests, and tracks SLA compliance with error budget calculations. - **Delivery maturity assessment** — locate the team on a 
 
@@ -420,7 +420,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Delivery Manager (Project Management domain).
 
-Expert delivery management for release planning, deployment strategy, incident response, change management, SLA/error-budget tracking, and DORA metrics across continuous delivery pipelines.
+Plans releases, picks deployment strategies, runs incidents and tracks DORA metrics and error budgets. Use when preparing a Go/No-Go, choosing canary or blue-green, handling a production incident or reporting delivery health.
 
 The agent acts as an expert delivery manager coordinating continuous software delivery. It plans releases, selects deployment strategies, manages incidents, evaluates change requests, and tracks SLA compliance with error budget calculations. - **Delivery maturity assessment** — locate the team on a 
 
@@ -486,21 +486,30 @@ Before generating the plan or report, settle the inputs below. When one is missi
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
-```bash
-python scripts/delivery_metrics_tracker.py --data delivery.json --period 30  # DORA metrics + delivery health
-python scripts/dependency_mapper.py --deps dependencies.json                 # cross-team/service dependencies
-python scripts/risk_register.py --risks risks.json                           # score delivery risks + mitigations
-```
+1. Settle the Clarify First inputs; each task maps to one reference below.
+2. Measure first: run the matching tool on the team&#x27;s own export (deployments, dependencies or risks).
+3. Build the artifact from the reference (release plan, rollout and rollback, incident timeline, budget burn).
+4. Done when Go/No-Go checks every exit criterion against evidence, every rollback path has a rehearsal date, and every DORA figure shows its sample size.
 
 ## Tools
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `delivery_metrics_tracker.py` | DORA metrics vs 2024 levels (deployment frequency, change lead time, change fail rate, failed deployment recovery time) plus optional rework rate | `python scripts/delivery_metrics_tracker.py --data delivery.json --period 30` |
-| `dependency_mapper.py` | Map and analyze cross-team/cross-service dependencies | `python scripts/dependency_mapper.py --deps dependencies.json` |
-| `risk_register.py` | Score delivery risks with mitigation tracking | `python scripts/risk_register.py --risks risks.json` |
+Each tool reads one JSON file and prints a text report (`--json` for machine output).
+`--example` prints the input shape; samples ship in `assets/`. Exit 0 on success, 2 on bad
+input (missing file, invalid JSON, wrong shape) with a one-line error.
+
+```bash
+python3 project-management/delivery-manager/scripts/delivery_metrics_tracker.py --data project-management/delivery-manager/assets/sample_delivery.json --period 30
+python3 project-management/delivery-manager/scripts/dependency_mapper.py --deps project-management/delivery-manager/assets/sample_dependencies.json
+python3 project-management/delivery-manager/scripts/risk_register.py --risks project-management/delivery-manager/assets/sample_risks.json
+```
+
+| Tool | What it does |
+|------|--------------|
+| `delivery_metrics_tracker.py` | Deployment frequency, change lead time, change fail rate and failed-deployment recovery time against the 2024 DORA levels, plus rework rate when deploys carry `&quot;rework&quot;: true`. The `--period` window ends at the file&#x27;s `as_of`, else its latest deploy or incident, so a fixed export gives a fixed answer. A tier needs a minimum sample: 5 deploys for lead time and change fail rate (below that one failure moves the rate by 20+ points), 2 incidents for recovery time, and 5 deploys or a 28+ day window for frequency. Below it the metric reads &quot;Insufficient data&quot; and is left out of the overall level; with none classified, the overall level is &quot;Insufficient data&quot; too |
+| `dependency_mapper.py` | Delivery order (each dependency before what needs it), cycles, bottlenecks, high-risk and unowned dependencies. Edges are `{&quot;from&quot;: dependent, &quot;to&quot;: dependency}` |
+| `risk_register.py` | Probability x impact scores, severity, residual exposure after mitigation, unowned high risks |
 
 ## Anti-Patterns
 
@@ -528,23 +537,7 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - `references/incident_management.md` -- Severity matrix (SEV-1–SEV-4), the 5-step incident workflow, and post-mortem requirements. Read during incident triage and response.
 - `references/sla_management.md` -- SLA framework, error-budget calculation example, and burn-rate freeze thresholds. Read when tracking reliability budgets.
 - `references/red-flags.md` -- Bad-vs-good examples of delivery-management output. Read this to review a release/incident plan before committing to it.
-
-## AI-Assisted Delivery
-
-AI coding assistants change the shape of the delivery pipeline: more code arrives faster, and the constraint moves to review, testing, and recovery. What DORA&#x27;s research says (as of September 2026):
-
-- **2024 report:** every 25% increase in AI adoption was associated with an estimated 1.5% reduction in delivery throughput and 7.2% reduction in delivery stability, even as documentation quality, code quality, and review speed improved ([2024 report](https://dora.dev/research/2024/dora-report/)).
-- **2025 report (&quot;State of AI-assisted Software Development&quot;):** 90% of respondents use AI at work and more than 80% believe it has raised their productivity, while 30% report little or no trust in AI-generated code. AI adoption now shows a positive relationship with throughput but still a negative one with stability. DORA&#x27;s framing is that AI is an amplifier of an organization&#x27;s existing strengths and weaknesses ([announcement](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report)).
-- **DORA AI Capabilities Model** (2025): seven capabilities that amplify AI&#x27;s benefit: clear and communicated AI stance, healthy data ecosystems, AI-accessible internal data, strong version control practices, working in small batches, user-centric focus, and quality internal platforms ([dora.dev](https://dora.dev/ai/capabilities-model/report/)).
-- **Team profiles:** the 2025 report groups teams into seven profiles (for example &quot;foundational challenges&quot;, &quot;legacy bottleneck&quot;, &quot;harmonious high achievers&quot;) rather than leading with the Elite-to-Low levels. Use the profile to find the constraint before rolling out more AI tooling.
-
-What to do as a delivery manager:
-
-1. **Track instability, not just speed.** Report change fail rate and deployment rework rate (`delivery_metrics_tracker.py`, `&quot;rework&quot;: true` on unplanned fix deploys) next to deployment frequency. Rising throughput with rising rework is the AI failure mode DORA describes.
-2. **Measure review load.** PR count per reviewer, review wait time, and PR size. AI-generated volume that outruns review capacity shows up as longer lead time or weaker review, not as faster delivery.
-3. **Keep batches small.** Hold PR size and release scope limits regardless of how fast code is produced; small batches are both a DORA capability and the main guard against AI-driven instability.
-4. **Guard stability explicitly.** Canary or feature-flag every AI-heavy change set, keep rollback rehearsed, and treat a rising rework rate as a trigger to slow intake, not to add more AI.
-5. **Keep a human accountable.** Every change, AI-assisted or not, has a named human owner who meets the same Definition of Done and review bar.
+- `references/ai-assisted-delivery.md` -- What DORA&#x27;s 2024 and 2025 research says about AI assistants and delivery stability, and what to track. Read when AI tooling is changing throughput or review load.
 
 ## Scope &amp; Limitations
 
@@ -554,16 +547,13 @@ What to do as a delivery manager:
 
 **Limitations:** Error budget calculations assume accurate incident duration tracking -- manual time entry introduces measurement error. Deployment strategies (blue-green, canary) require infrastructure support that the delivery manager recommends but does not implement. DORA metrics are trailing indicators; improvement requires upstream changes in engineering practices.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `scrum-master/` | SM -&gt; DM | Sprint completion data, demo-ready confirmation, velocity for release sizing |
-| `senior-pm/` | PM -&gt; DM | Release calendar, stakeholder communication requirements |
-| `program-manager/` | PgM -&gt; DM | Cross-project release dependencies, milestone alignment |
-| `jira-expert/` | Bidirectional | Release version tracking in Jira; deployment status field updates |
-| `agile-coach/` | Coach -&gt; DM | Delivery maturity assessment inputs, DevOps culture recommendations |
-| `confluence-expert/` | DM -&gt; Confluence | Post-mortem documentation, runbook maintenance, release notes publishing |
+| File | Purpose |
+|------|---------|
+| `scripts/delivery_metrics_tracker.py`, `scripts/dependency_mapper.py`, `scripts/risk_register.py` | See Tools |
+| `assets/sample_delivery.json`, `assets/sample_dependencies.json`, `assets/sample_risks.json` | Runnable inputs for each tool |
+| `references/*.md` | See References |
 
 ---
 
@@ -591,7 +581,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Delivery Manager&quot;**
-   - Description: &quot;Expert delivery management for release planning, deployment strategy, incident response, change management, SLA/error-budget tracking, and DORA metrics across continuous delivery pipelines.&quot;
+   - Description: &quot;Plans releases, picks deployment strategies, runs incidents and tracks DORA metrics and error budgets. Use when preparing a Go/No-Go, choosing canary or blue-green, handling a production incident or reporting delivery health.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -645,21 +635,30 @@ Before generating the plan or report, settle the inputs below. When one is missi
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
-```bash
-python scripts/delivery_metrics_tracker.py --data delivery.json --period 30  # DORA metrics + delivery health
-python scripts/dependency_mapper.py --deps dependencies.json                 # cross-team/service dependencies
-python scripts/risk_register.py --risks risks.json                           # score delivery risks + mitigations
-```
+1. Settle the Clarify First inputs; each task maps to one reference below.
+2. Measure first: run the matching tool on the team&#x27;s own export (deployments, dependencies or risks).
+3. Build the artifact from the reference (release plan, rollout and rollback, incident timeline, budget burn).
+4. Done when Go/No-Go checks every exit criterion against evidence, every rollback path has a rehearsal date, and every DORA figure shows its sample size.
 
 ## Tools
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `delivery_metrics_tracker.py` | DORA metrics vs 2024 levels (deployment frequency, change lead time, change fail rate, failed deployment recovery time) plus optional rework rate | `python scripts/delivery_metrics_tracker.py --data delivery.json --period 30` |
-| `dependency_mapper.py` | Map and analyze cross-team/cross-service dependencies | `python scripts/dependency_mapper.py --deps dependencies.json` |
-| `risk_register.py` | Score delivery risks with mitigation tracking | `python scripts/risk_register.py --risks risks.json` |
+Each tool reads one JSON file and prints a text report (`--json` for machine output).
+`--example` prints the input shape; samples ship in `assets/`. Exit 0 on success, 2 on bad
+input (missing file, invalid JSON, wrong shape) with a one-line error.
+
+```bash
+python3 project-management/delivery-manager/scripts/delivery_metrics_tracker.py --data project-management/delivery-manager/assets/sample_delivery.json --period 30
+python3 project-management/delivery-manager/scripts/dependency_mapper.py --deps project-management/delivery-manager/assets/sample_dependencies.json
+python3 project-management/delivery-manager/scripts/risk_register.py --risks project-management/delivery-manager/assets/sample_risks.json
+```
+
+| Tool | What it does |
+|------|--------------|
+| `delivery_metrics_tracker.py` | Deployment frequency, change lead time, change fail rate and failed-deployment recovery time against the 2024 DORA levels, plus rework rate when deploys carry `&quot;rework&quot;: true`. The `--period` window ends at the file&#x27;s `as_of`, else its latest deploy or incident, so a fixed export gives a fixed answer. A tier needs a minimum sample: 5 deploys for lead time and change fail rate (below that one failure moves the rate by 20+ points), 2 incidents for recovery time, and 5 deploys or a 28+ day window for frequency. Below it the metric reads &quot;Insufficient data&quot; and is left out of the overall level; with none classified, the overall level is &quot;Insufficient data&quot; too |
+| `dependency_mapper.py` | Delivery order (each dependency before what needs it), cycles, bottlenecks, high-risk and unowned dependencies. Edges are `{&quot;from&quot;: dependent, &quot;to&quot;: dependency}` |
+| `risk_register.py` | Probability x impact scores, severity, residual exposure after mitigation, unowned high risks |
 
 ## Anti-Patterns
 
@@ -687,23 +686,7 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - `references/incident_management.md` -- Severity matrix (SEV-1–SEV-4), the 5-step incident workflow, and post-mortem requirements. Read during incident triage and response.
 - `references/sla_management.md` -- SLA framework, error-budget calculation example, and burn-rate freeze thresholds. Read when tracking reliability budgets.
 - `references/red-flags.md` -- Bad-vs-good examples of delivery-management output. Read this to review a release/incident plan before committing to it.
-
-## AI-Assisted Delivery
-
-AI coding assistants change the shape of the delivery pipeline: more code arrives faster, and the constraint moves to review, testing, and recovery. What DORA&#x27;s research says (as of September 2026):
-
-- **2024 report:** every 25% increase in AI adoption was associated with an estimated 1.5% reduction in delivery throughput and 7.2% reduction in delivery stability, even as documentation quality, code quality, and review speed improved ([2024 report](https://dora.dev/research/2024/dora-report/)).
-- **2025 report (&quot;State of AI-assisted Software Development&quot;):** 90% of respondents use AI at work and more than 80% believe it has raised their productivity, while 30% report little or no trust in AI-generated code. AI adoption now shows a positive relationship with throughput but still a negative one with stability. DORA&#x27;s framing is that AI is an amplifier of an organization&#x27;s existing strengths and weaknesses ([announcement](https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report)).
-- **DORA AI Capabilities Model** (2025): seven capabilities that amplify AI&#x27;s benefit: clear and communicated AI stance, healthy data ecosystems, AI-accessible internal data, strong version control practices, working in small batches, user-centric focus, and quality internal platforms ([dora.dev](https://dora.dev/ai/capabilities-model/report/)).
-- **Team profiles:** the 2025 report groups teams into seven profiles (for example &quot;foundational challenges&quot;, &quot;legacy bottleneck&quot;, &quot;harmonious high achievers&quot;) rather than leading with the Elite-to-Low levels. Use the profile to find the constraint before rolling out more AI tooling.
-
-What to do as a delivery manager:
-
-1. **Track instability, not just speed.** Report change fail rate and deployment rework rate (`delivery_metrics_tracker.py`, `&quot;rework&quot;: true` on unplanned fix deploys) next to deployment frequency. Rising throughput with rising rework is the AI failure mode DORA describes.
-2. **Measure review load.** PR count per reviewer, review wait time, and PR size. AI-generated volume that outruns review capacity shows up as longer lead time or weaker review, not as faster delivery.
-3. **Keep batches small.** Hold PR size and release scope limits regardless of how fast code is produced; small batches are both a DORA capability and the main guard against AI-driven instability.
-4. **Guard stability explicitly.** Canary or feature-flag every AI-heavy change set, keep rollback rehearsed, and treat a rising rework rate as a trigger to slow intake, not to add more AI.
-5. **Keep a human accountable.** Every change, AI-assisted or not, has a named human owner who meets the same Definition of Done and review bar.
+- `references/ai-assisted-delivery.md` -- What DORA&#x27;s 2024 and 2025 research says about AI assistants and delivery stability, and what to track. Read when AI tooling is changing throughput or review load.
 
 ## Scope &amp; Limitations
 
@@ -713,16 +696,13 @@ What to do as a delivery manager:
 
 **Limitations:** Error budget calculations assume accurate incident duration tracking -- manual time entry introduces measurement error. Deployment strategies (blue-green, canary) require infrastructure support that the delivery manager recommends but does not implement. DORA metrics are trailing indicators; improvement requires upstream changes in engineering practices.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `scrum-master/` | SM -&gt; DM | Sprint completion data, demo-ready confirmation, velocity for release sizing |
-| `senior-pm/` | PM -&gt; DM | Release calendar, stakeholder communication requirements |
-| `program-manager/` | PgM -&gt; DM | Cross-project release dependencies, milestone alignment |
-| `jira-expert/` | Bidirectional | Release version tracking in Jira; deployment status field updates |
-| `agile-coach/` | Coach -&gt; DM | Delivery maturity assessment inputs, DevOps culture recommendations |
-| `confluence-expert/` | DM -&gt; Confluence | Post-mortem documentation, runbook maintenance, release notes publishing |
+| File | Purpose |
+|------|---------|
+| `scripts/delivery_metrics_tracker.py`, `scripts/dependency_mapper.py`, `scripts/risk_register.py` | See Tools |
+| `assets/sample_delivery.json`, `assets/sample_dependencies.json`, `assets/sample_risks.json` | Runnable inputs for each tool |
+| `references/*.md` | See References |
 
 ---
 
@@ -750,7 +730,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Delivery Manager&quot;**
-   - Description: &quot;Expert delivery management for release planning, deployment strategy, incident response, change management, SLA/error-budget tracking, and DORA metrics across continuous delivery pipelines.&quot;
+   - Description: &quot;Plans releases, picks deployment strategies, runs incidents and tracks DORA metrics and error budgets. Use when preparing a Go/No-Go, choosing canary or blue-green, handling a production incident or reporting delivery health.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -810,11 +790,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/delivery-manager/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code>python scripts/delivery_metrics_tracker.py --data delivery.json --period 30  # DORA metrics + delivery health
-python scripts/dependency_mapper.py --deps dependencies.json                 # cross-team/service dependencies
-python scripts/risk_register.py --risks risks.json                           # score delivery risks + mitigations
-</code></pre>
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/delivery-manager/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

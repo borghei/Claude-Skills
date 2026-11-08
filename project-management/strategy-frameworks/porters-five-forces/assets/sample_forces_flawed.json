@@ -1,0 +1,11 @@
+{
+  "industry": "Software",
+  "as_of": "2026-05-27",
+  "forces": {
+    "new_entrants": {"intensity": "medium", "factors": ["lots of startups"]},
+    "supplier_power": {"intensity": "medium"},
+    "buyer_power": {"intensity": "strong", "factors": ["customers want discounts"]},
+    "competitive_rivalry": {"intensity": "medium", "factors": ["competition"]}
+  },
+  "strategy_implications": []
+}

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notion Pm - Claude Skills</title>
-  <meta name="description" content="Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and ">
+  <meta name="description" content="Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps and decisions, and writes REST API calls. Use when asked to &quot;design a PRD database&quot;, sync Notion with Jira or Linear, or scr">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/notion-pm.html">
   <meta property="og:title" content="Notion Pm - Claude Skills">
-  <meta property="og:description" content="Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and ">
+  <meta property="og:description" content="Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps and decisions, and writes REST API calls. Use when asked to &quot;design a PRD database&quot;, sync Notion with Jira or Linear, or scr">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/notion-pm.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Notion Pm", "description": "Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/notion-pm.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Notion Pm", "description": "Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps and decisions, and writes REST API calls. Use when asked to \"design a PRD database\", sync Notion with Jira or Linear, or script the Notion API.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/notion-pm.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Notion Pm</h1>
-    <p class="page-subtitle">Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.</p>
+    <p class="page-subtitle">Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps and decisions, and writes REST API calls. Use when asked to &quot;design a PRD database&quot;, sync Notion with Jira or Linear, or script the Notion API.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">notion</span><span class="tag">databases</span><span class="tag">prd</span><span class="tag">okr</span><span class="tag">roadmap</span><span class="tag">decisions</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Notion Pm (Project Management domain).
 
-Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.
+Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps and decisions, and writes REST API calls. Use when asked to &quot;design a PRD database&quot;, sync Notion with Jira or Linear, or script the Notion API.
 
 Master-level expertise in using Notion as the documentation and operational backbone for a product team: PRDs, OKRs, roadmaps, decision logs, sprint reviews, 1:1 notes, customer research, and sync patterns with Jira, Linear, and GitHub. Covers Notion&#x27;s database model, view design, formula and rollup
 
@@ -401,6 +401,12 @@ Master-level expertise in using Notion as the documentation and operational back
 - Ignoring API pagination
 - Cross-database links stored as text
 - PRDs as free-form pages
+
+## Frameworks &amp; Templates You Know
+- Reference files are described under Reference Documentation above. Templates:
+- | `assets/notion-okr-template.md` | Database template |
+- | `assets/notion-prd-template.md` | Database template |
+- | `assets/notion-roadmap-template.md` | Database template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -420,7 +426,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Notion Pm (Project Management domain).
 
-Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.
+Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps and decisions, and writes REST API calls. Use when asked to &quot;design a PRD database&quot;, sync Notion with Jira or Linear, or script the Notion API.
 
 Master-level expertise in using Notion as the documentation and operational backbone for a product team: PRDs, OKRs, roadmaps, decision logs, sprint reviews, 1:1 notes, customer research, and sync patterns with Jira, Linear, and GitHub. Covers Notion&#x27;s database model, view design, formula and rollup
 
@@ -428,6 +434,12 @@ Master-level expertise in using Notion as the documentation and operational back
 - Ignoring API pagination
 - Cross-database links stored as text
 - PRDs as free-form pages
+
+## Frameworks &amp; Templates You Know
+- Reference files are described under Reference Documentation above. Templates:
+- | `assets/notion-okr-template.md` | Database template |
+- | `assets/notion-prd-template.md` | Database template |
+- | `assets/notion-roadmap-template.md` | Database template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -511,7 +523,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Pull the reference that matches the task; keep this file lean and load detail on demand.
 
@@ -548,6 +560,16 @@ Pull the reference that matches the task; keep this file lean and load detail on
 | `senior-pm/` | Notion → Portfolio | OKR and Roadmap DBs feed portfolio reports |
 | `discovery/interview-synthesis/` | Research → Notion | Customer research database populated from interview synth output |
 
+## Files
+
+Reference files are described under Reference Documentation above. Templates:
+
+| File | Purpose |
+|------|---------|
+| `assets/notion-okr-template.md` | Database template |
+| `assets/notion-prd-template.md` | Database template |
+| `assets/notion-roadmap-template.md` | Database template |
+
 ---
 
 ## What I Need You to Do
@@ -574,7 +596,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Notion Pm&quot;**
-   - Description: &quot;Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.&quot;
+   - Description: &quot;Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps and decisions, and writes REST API calls. Use when asked to &quot;design a PRD database&quot;, sync Notion with Jira or Linear, or script the Notion API.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -653,7 +675,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Pull the reference that matches the task; keep this file lean and load detail on demand.
 
@@ -690,6 +712,16 @@ Pull the reference that matches the task; keep this file lean and load detail on
 | `senior-pm/` | Notion → Portfolio | OKR and Roadmap DBs feed portfolio reports |
 | `discovery/interview-synthesis/` | Research → Notion | Customer research database populated from interview synth output |
 
+## Files
+
+Reference files are described under Reference Documentation above. Templates:
+
+| File | Purpose |
+|------|---------|
+| `assets/notion-okr-template.md` | Database template |
+| `assets/notion-prd-template.md` | Database template |
+| `assets/notion-roadmap-template.md` | Database template |
+
 ---
 
 ## What I Need You to Do
@@ -716,7 +748,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Notion Pm&quot;**
-   - Description: &quot;Notion expert for product management workflows. Use for database design for PRDs/OKRs/Roadmaps/Decisions, property and view design, page architecture, Notion REST API, and sync with Jira, Linear, and GitHub.&quot;
+   - Description: &quot;Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps and decisions, and writes REST API calls. Use when asked to &quot;design a PRD database&quot;, sync Notion with Jira or Linear, or script the Notion API.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -775,7 +807,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/notion-pm/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

@@ -9,7 +9,7 @@ Workflow JSON format:
 {
   "name": "content-pipeline",
   "steps": [
-    {"id": "research", "agent": "researcher", "depends_on": [], "model": "claude-sonnet-5"},
+    {"id": "research", "agent": "researcher", "depends_on": [], "model": "claude-sonnet-5-5"},
     {"id": "write", "agent": "writer", "depends_on": ["research"]},
     {"id": "review", "agent": "reviewer", "depends_on": ["write"], "terminal": true}
   ]
@@ -54,18 +54,11 @@ AGENT_STYLES: dict[str, str] = {
 }
 
 MODEL_SHORT_NAMES: dict[str, str] = {
-    "claude-fable-5-1":  "Fable",
+    "claude-fable-5-1":  "Fable 5.1",
     "claude-opus-5-5":   "Opus 5.5",
-    "claude-opus-5":     "Opus",
-    "claude-sonnet-5":   "Sonnet",
-    "claude-haiku-4-5":  "Haiku",
-    "claude-opus":   "Opus",
-    "claude-sonnet": "Sonnet",
-    "claude-haiku":  "Haiku",
-    "gpt-4o":       "GPT-4o",
-    "gpt-4o-mini":  "GPT-4o-mini",
-    "gpt-4-turbo":  "GPT-4T",
-}
+    "claude-sonnet-5-5": "Sonnet 5.5",
+    "claude-haiku-5-5":  "Haiku 5.5",
+}  # any other id is shown with its 'claude-' prefix stripped
 
 
 def load_workflow(path: str | None, use_stdin: bool) -> dict[str, Any]:
@@ -115,7 +108,7 @@ def build_node_label(step: dict[str, Any], annotate_models: bool, annotate_cost:
 
     # Model annotation
     if annotate_models and model:
-        short = MODEL_SHORT_NAMES.get(model, model.split("/")[-1])
+        short = MODEL_SHORT_NAMES.get(model, model.split("/")[-1].replace("claude-", ""))
         parts.append(f"[{short}]")
 
     # Parallel branches

@@ -1,0 +1,42 @@
+{
+  "baseline": [
+    {
+      "name": "parse_invoice",
+      "iterations": 500,
+      "mean_ms": 10.0,
+      "median_ms": 9.8,
+      "min_ms": 8.9,
+      "max_ms": 14.0,
+      "p95_ms": 12.1
+    },
+    {
+      "name": "render_pdf",
+      "iterations": 200,
+      "mean_ms": 48.0,
+      "median_ms": 47.0,
+      "min_ms": 44.0,
+      "max_ms": 60.0,
+      "p95_ms": 55.0
+    }
+  ],
+  "current": [
+    {
+      "name": "parse_invoice",
+      "iterations": 500,
+      "mean_ms": 15.0,
+      "median_ms": 14.7,
+      "min_ms": 13.0,
+      "max_ms": 21.0,
+      "p95_ms": 18.2
+    },
+    {
+      "name": "render_pdf",
+      "iterations": 200,
+      "mean_ms": 41.0,
+      "median_ms": 40.5,
+      "min_ms": 38.0,
+      "max_ms": 52.0,
+      "p95_ms": 47.0
+    }
+  ]
+}

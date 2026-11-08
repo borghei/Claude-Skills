@@ -93,7 +93,7 @@ def convert_schema_property(spec: dict, prop_schema: dict) -> dict:
 
     prop_type = prop_schema.get("type", "string")
     if prop_type == "integer":
-        result["type"] = "number"
+        result["type"] = "integer"  # JSON Schema has integer; keep it so clients reject 2.5 for a page size
     elif prop_type == "array":
         result["type"] = "array"
         items = prop_schema.get("items", {})
@@ -311,12 +311,12 @@ def main():
 
     try:
         spec = load_spec(args.spec)
-    except (FileNotFoundError, ValueError, json.JSONDecodeError) as e:
+    except (OSError, ValueError, json.JSONDecodeError) as e:
         if args.json:
             json.dump({"error": str(e)}, sys.stdout, indent=2)
         else:
             print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)  # unusable input
 
     methods_filter = None
     if args.filter:

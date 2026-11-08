@@ -366,7 +366,7 @@ python scripts/codex_skill_converter.py engineering/code-reviewer/SKILL.md \
 
 ### cross_platform_validator.py
 
-**Purpose:** Validates that a skill directory is compatible with both Claude Code and Codex CLI by running 17 checks across three categories: Claude Code compatibility, Codex CLI compatibility, and cross-platform checks.
+**Purpose:** Validates that a skill directory is compatible with both Claude Code and Codex CLI by running up to 21 checks (13 when no `agents/openai.yaml` exists yet) across three categories: Claude Code compatibility, Codex CLI compatibility, and cross-platform checks.
 
 **Usage:**
 ```bash

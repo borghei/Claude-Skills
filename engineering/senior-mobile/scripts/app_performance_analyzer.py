@@ -28,7 +28,7 @@ import os
 import re
 import sys
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -602,7 +602,7 @@ def generate_report(project_dir: Path, platform: str, json_output: bool):
     result = {
         "project": str(project_dir),
         "platform": platform,
-        "analyzed_at": datetime.utcnow().isoformat() + "Z",
+        "analyzed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "performance_score": score,
         "summary": {
             "total_issues": len(all_issues),
@@ -738,7 +738,7 @@ def main(argv=None):
 
     if not project_dir.is_dir():
         sys.stderr.write(f"Error: '{project_dir}' is not a directory.\n")
-        sys.exit(1)
+        sys.exit(2)
 
     platform = args.platform
     if platform is None:
@@ -748,7 +748,7 @@ def main(argv=None):
                 "Error: Could not auto-detect platform. "
                 "Use --platform to specify.\n"
             )
-            sys.exit(1)
+            sys.exit(2)
         if not args.json:
             sys.stderr.write(f"Auto-detected platform: {platform}\n")
 

@@ -1,0 +1,52 @@
+{
+  "entries": [
+    {
+      "title": "Team Workspaces",
+      "description": "Create shared workspaces where your team can collaborate on projects in real time",
+      "type": "feature",
+      "ticket_id": "PROJ-201"
+    },
+    {
+      "title": "Bulk CSV Import",
+      "description": "Import up to 10,000 records at once using the new CSV bulk import tool",
+      "type": "feature",
+      "ticket_id": "PROJ-198"
+    },
+    {
+      "title": "Faster Dashboard Loading",
+      "description": "Dashboards now load up to 3x faster thanks to optimized data retrieval",
+      "type": "improvement",
+      "ticket_id": "PROJ-187"
+    },
+    {
+      "title": "Improved Search Relevance",
+      "description": "Search results now prioritize exact matches and recent items, making it easier to find what you need",
+      "type": "improvement",
+      "ticket_id": "PROJ-192"
+    },
+    {
+      "title": "Export Date Range Fix",
+      "description": "Report exports no longer fail when the selected date range includes days with no data",
+      "type": "bugfix",
+      "ticket_id": "PROJ-205"
+    },
+    {
+      "title": "Notification Delivery Fix",
+      "description": "Email notifications for overdue tasks are now delivered reliably within 5 minutes",
+      "type": "bugfix",
+      "ticket_id": "PROJ-210"
+    },
+    {
+      "title": "API v2 Migration",
+      "description": "The /v1/users endpoint has been replaced by /v2/users. Update your integrations before 30 June 2026.",
+      "type": "breaking",
+      "ticket_id": "PROJ-180"
+    },
+    {
+      "title": "Legacy CSV Import",
+      "description": "The single-record CSV import wizard will be removed in v4.0. Use the new bulk import tool instead.",
+      "type": "deprecation",
+      "ticket_id": "PROJ-199"
+    }
+  ]
+}

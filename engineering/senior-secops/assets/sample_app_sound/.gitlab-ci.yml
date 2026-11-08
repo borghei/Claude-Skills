@@ -1,0 +1,5 @@
+stages: [scan]
+semgrep:
+  stage: scan
+  image: semgrep/semgrep
+  script: semgrep --config .semgrep.yml --error

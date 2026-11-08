@@ -1,0 +1,64 @@
+{
+  "program": "Digital Transformation",
+  "as_of": "2026-03-25",
+  "milestones": [
+    {
+      "name": "Requirements Complete",
+      "project": "API Migration",
+      "planned_date": "2026-02-01",
+      "actual_date": "2026-02-03",
+      "status": "Complete",
+      "critical_path": true,
+      "dependencies": []
+    },
+    {
+      "name": "API v2 Released",
+      "project": "API Migration",
+      "planned_date": "2026-03-15",
+      "actual_date": "2026-03-14",
+      "status": "Complete",
+      "critical_path": true,
+      "dependencies": [
+        "Requirements Complete"
+      ]
+    },
+    {
+      "name": "Beta Launch",
+      "project": "Frontend Rebuild",
+      "planned_date": "2026-04-01",
+      "status": "In Progress",
+      "critical_path": true,
+      "dependencies": [
+        "API v2 Released"
+      ]
+    },
+    {
+      "name": "Data Schema Finalized",
+      "project": "Analytics Platform",
+      "planned_date": "2026-03-20",
+      "status": "In Progress",
+      "critical_path": false,
+      "dependencies": []
+    },
+    {
+      "name": "UAT Complete",
+      "project": "Frontend Rebuild",
+      "planned_date": "2026-04-15",
+      "status": "Not Started",
+      "critical_path": true,
+      "dependencies": [
+        "Beta Launch"
+      ]
+    },
+    {
+      "name": "Go Live",
+      "project": "Frontend Rebuild",
+      "planned_date": "2026-05-01",
+      "status": "Not Started",
+      "critical_path": true,
+      "dependencies": [
+        "UAT Complete"
+      ]
+    }
+  ]
+}

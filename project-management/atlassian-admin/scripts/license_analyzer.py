@@ -36,7 +36,11 @@ def analyze_licenses(data: dict) -> dict:
     """Analyze license usage and identify optimization opportunities."""
     org = data.get("organization", "Unknown")
     products = data.get("products", [])
-    today = datetime.now()
+    # "As of" is data-driven so results do not drift with the calendar: the export's
+    # "as_of" field, else the latest last_active date in the file, else today.
+    seen = [parse_date(u["last_active"]) for p in products for u in p.get("users", [])
+            if u.get("last_active")]
+    today = parse_date(data["as_of"]) if data.get("as_of") else (max(seen) if seen else datetime.now())
 
     product_results = []
     total_annual_cost = 0
@@ -71,7 +75,11 @@ def analyze_licenses(data: dict) -> dict:
             except ValueError:
                 active_users.append(user)
 
-        used_licenses = len(users)
+        # Seats in use come from the admin console count when given; a user export alone
+        # may be partial, and must not drive a downsize recommendation.
+        in_use = product.get("licenses_in_use")
+        used_licenses = in_use if isinstance(in_use, int) else len(users)
+        partial = in_use is None and total_licenses > 0 and len(users) < 0.5 * total_licenses
         utilization = round(used_licenses / total_licenses * 100, 1) if total_licenses > 0 else 0
         active_pct = round(len(active_users) / len(users) * 100, 1) if users else 0
 
@@ -96,6 +104,7 @@ def analyze_licenses(data: dict) -> dict:
             "annual_cost": round(annual_cost, 2),
             "recoverable_licenses": recoverable_licenses,
             "potential_annual_savings": round(potential_savings, 2),
+            "partial_export": partial,
             "inactive_details": [
                 {"name": u.get("name"), "email": u.get("email"), "days_inactive": u.get("days_inactive", "N/A")}
                 for u in sorted(inactive_users, key=lambda x: x.get("days_inactive", 0), reverse=True)[:10]
@@ -114,7 +123,12 @@ def analyze_licenses(data: dict) -> dict:
                 f"{pr['product']}: Recover {pr['recoverable_licenses']} unused license(s) "
                 f"for ${pr['potential_annual_savings']:,.0f}/year savings."
             )
-        if pr["utilization_pct"] < 70:
+        if pr["partial_export"]:
+            recs.append(
+                f"{pr['product']}: only {pr['used_licenses']} users listed for {pr['total_licenses']} licenses; "
+                f"the export looks partial. Add 'licenses_in_use' from the admin console before resizing."
+            )
+        elif pr["utilization_pct"] < 70:
             recs.append(
                 f"{pr['product']}: License utilization is {pr['utilization_pct']:.0f}%. "
                 f"Consider downsizing from {pr['total_licenses']} to {pr['used_licenses']} licenses at next renewal."
@@ -164,12 +178,14 @@ def print_example() -> None:
     """Print example usage data JSON."""
     example = {
         "organization": "Acme Corp",
+        "as_of": "2026-03-21",
         "products": [
             {
                 "name": "Jira",
                 "tier": "Premium",
                 "cost_per_user_month": 14,
                 "total_licenses": 100,
+                "licenses_in_use": 62,
                 "users": [
                     {"name": "Alice", "email": "alice@acme.com", "last_active": "2026-03-20"},
                     {"name": "Bob", "email": "bob@acme.com", "last_active": "2026-03-18"},
@@ -218,4 +234,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

@@ -9,6 +9,9 @@ Usage:
     python webhook_validator.py /path/to/project
     python webhook_validator.py /path/to/project --json
     python webhook_validator.py /path/to/project --strict
+
+Exit codes: 0 PASS, 1 FAIL (critical findings, or warnings with --strict; also when no
+webhook handler is found), 2 bad input (not a directory).
 """
 
 import argparse
@@ -255,7 +258,8 @@ def check_error_handling(webhook_files, all_contents):
     for fpath in webhook_files:
         content = all_contents.get(fpath, "")
         # Check for catch blocks that always return 200
-        if re.search(r"catch.*\{[^}]*200[^}]*\}", content, re.DOTALL):
+        if (re.search(r"catch\s*(?:\([^)]*\))?\s*\{[^}]*?\b200\b", content)
+                or re.search(r"except[^:\n]*:\s*\n\s*return[^\n]*\b200\b", content)):
             findings.append({
                 "severity": "warning",
                 "rule": "ERR-001",
@@ -337,6 +341,7 @@ def run_validation(project_dir, strict=False):
             "fix": "Create a webhook endpoint (e.g., /api/webhooks/stripe) to handle Stripe events.",
         })
         results["summary"]["critical"] = 1
+        results["status"] = "FAIL"
         return results
 
     # Scan all source files

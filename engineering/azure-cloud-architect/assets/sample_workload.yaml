@@ -1,0 +1,75 @@
+# Sample workload spec read by all three scripts. Field reference: references/workload-spec.md
+name: orders-api
+tier: 1
+compute:
+  type: app-service
+  sku: P1v3
+  instances: 2
+  zone_redundant: true
+  multi_region: true
+  autoscale: true
+data:
+  - service: sql-db
+    tier: general-purpose
+    vcores: 4
+    zone_redundant: true
+    backup_tested: true
+    public_access: false
+  - service: storage
+    tier: hot
+    size_gb: 500
+    zone_redundant: true
+    backup_tested: true
+  - service: redis
+    sku: C1
+    zone_redundant: true
+    backup_tested: true
+network:
+  vnet: true
+  private_endpoints: true
+  nsg_least_privilege: true
+  front_door:
+    request_millions_per_month: 40
+  egress_gb_per_month: 300
+identity:
+  managed_identity: true
+  rbac_scope: resource_group
+security:
+  key_vault: true
+  mfa_enforced: true
+  defender_for_cloud: true
+observability:
+  log_analytics: true
+  ingest_gb_per_day: 2
+  alerts: true
+  slo_alerts: true
+reliability:
+  rpo_minutes: 15
+  rto_minutes: 60
+operations:
+  iac: true
+  ci_cd: true
+  staging_env: true
+  runbooks: true
+  gradual_rollout: true
+  deployment_slots: true
+  on_call_defined: true
+  health_probes: true
+  retry_policies: true
+  azure_policy: true
+  blameless_pir: true
+cost:
+  right_sized: true
+  reservations_purchased: false
+  storage_tiered: true
+  budgets_configured: true
+  orphans_cleaned: true
+  db_throughput_right_sized: true
+  log_retention_tuned: true
+performance:
+  caching: true
+  cdn_assets: true
+  load_tested: true
+  slos_defined: true
+  async_io: true
+  db_optimized: true

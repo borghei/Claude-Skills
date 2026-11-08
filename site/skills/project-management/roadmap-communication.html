@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Roadmap Communication - Claude Skills</title>
-  <meta name="description" content="Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board pac">
+  <meta name="description" content="Produce executive, customer and internal versions of one roadmap with consistent framing and the right detail and risk language for each. Use when publishing the quarterly roadmap, a board packet or a">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/roadmap-communication.html">
   <meta property="og:title" content="Roadmap Communication - Claude Skills">
-  <meta property="og:description" content="Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board pac">
+  <meta property="og:description" content="Produce executive, customer and internal versions of one roadmap with consistent framing and the right detail and risk language for each. Use when publishing the quarterly roadmap, a board packet or a">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/roadmap-communication.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Roadmap Communication", "description": "Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/roadmap-communication.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Roadmap Communication", "description": "Produce executive, customer and internal versions of one roadmap with consistent framing and the right detail and risk language for each. Use when publishing the quarterly roadmap, a board packet or a customer or sales roadmap.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/roadmap-communication.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Roadmap Communication</h1>
-    <p class="page-subtitle">Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Produce executive, customer and internal versions of one roadmap with consistent framing and the right detail and risk language for each. Use when publishing the quarterly roadmap, a board packet or a customer or sales roadmap.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.2</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">roadmap</span><span class="tag">stakeholder-communication</span><span class="tag">executive-update</span><span class="tag">customer-roadmap</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Roadmap Communication (Project Management domain).
 
-Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.
+Produce executive, customer and internal versions of one roadmap with consistent framing and the right detail and risk language for each. Use when publishing the quarterly roadmap, a board packet or a customer or sales roadmap.
 
 A single roadmap cannot serve every audience. Executives need confidence and strategic framing. Customers need plausible promises with credible timelines. Internal teams need detail, dependency awareness, and honest risk. When PMs publish one roadmap to all three, one audience is always wrong -- eit
 
@@ -404,6 +404,8 @@ A single roadmap cannot serve every audience. Executives need confidence and str
 - An internal variant that hides bad news
 
 ## Frameworks &amp; Templates You Know
+- | `assets/executive_roadmap_template.md` | Executive variant |
+- | `assets/customer_roadmap_template.md` | Customer variant |
 - - Templates for each variant
 - - Backlog prioritization (use `prioritization-frameworks/`)
 
@@ -425,7 +427,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Roadmap Communication (Project Management domain).
 
-Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.
+Produce executive, customer and internal versions of one roadmap with consistent framing and the right detail and risk language for each. Use when publishing the quarterly roadmap, a board packet or a customer or sales roadmap.
 
 A single roadmap cannot serve every audience. Executives need confidence and strategic framing. Customers need plausible promises with credible timelines. Internal teams need detail, dependency awareness, and honest risk. When PMs publish one roadmap to all three, one audience is always wrong -- eit
 
@@ -436,6 +438,8 @@ A single roadmap cannot serve every audience. Executives need confidence and str
 - An internal variant that hides bad news
 
 ## Frameworks &amp; Templates You Know
+- | `assets/executive_roadmap_template.md` | Executive variant |
+- | `assets/customer_roadmap_template.md` | Customer variant |
 - - Templates for each variant
 - - Backlog prioritization (use `prioritization-frameworks/`)
 
@@ -504,12 +508,14 @@ Before generating the variants, settle the inputs below. When one is missing or 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. **Author the internal variant first** — it is the source of truth (owners, dates, dependencies, risks). Use `assets/internal_roadmap_template.md`.
 2. **Derive the executive variant** — promote each Now item to its parent outcome, add confidence ratings, cap at 1 page. Use `assets/executive_roadmap_template.md`.
 3. **Derive the customer variant** — translate features to benefits, strip dates beyond the current quarter, use &quot;exploring / in development / shipping soon.&quot; Use `assets/customer_roadmap_template.md`.
-4. **Run the triangulation check** — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
+4. **Run the triangulation check** [RECOMMENDED] — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
+
+**Done when** the same item reads consistently in all three, the customer variant carries no dates past the current quarter and no internal risks, and the internal variant shows the bad news the other two soften.
 
 ## Anti-Patterns
 
@@ -537,9 +543,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/roadmap-variants-playbook.md](references/roadmap-variants-playbook.md)** — the variant comparison tables, the &quot;right-size the roadmap&quot; principle, outcome-vs-feature framing, the detailed structure for each of the three variants, the authoring workflow, troubleshooting, and success criteria. Read when building or reviewing the variants.
 - **[references/roadmap-communication-guide.md](references/roadmap-communication-guide.md)** — the origin of Now/Next/Later (Bastow), Cagan&#x27;s right-size principle, the outcome-vs-feature debate (Cagan, Torres), and worked examples of all three variants for the same project. Read for theory and full examples.
 - **[references/red-flags.md](references/red-flags.md)** — common ways roadmap artifacts go wrong, each with bad/good examples. Read before publishing any variant.
-- **[assets/executive_roadmap_template.md](assets/executive_roadmap_template.md)** — fill-in template for the executive variant.
-- **[assets/customer_roadmap_template.md](assets/customer_roadmap_template.md)** — fill-in template for the customer variant.
-- **[assets/internal_roadmap_template.md](assets/internal_roadmap_template.md)** — fill-in template for the internal variant (the source of truth).
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/internal_roadmap_template.md` | Internal variant, the source of truth |
+| `assets/executive_roadmap_template.md` | Executive variant |
+| `assets/customer_roadmap_template.md` | Customer variant |
+| `examples/pylon-roadmap-three-ways.md` | One roadmap in all three variants |
 
 ## Scope &amp; Limitations
 
@@ -607,7 +619,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Roadmap Communication&quot;**
-   - Description: &quot;Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.&quot;
+   - Description: &quot;Produce executive, customer and internal versions of one roadmap with consistent framing and the right detail and risk language for each. Use when publishing the quarterly roadmap, a board packet or a customer or sales roadmap.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -669,12 +681,14 @@ Before generating the variants, settle the inputs below. When one is missing or 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. **Author the internal variant first** — it is the source of truth (owners, dates, dependencies, risks). Use `assets/internal_roadmap_template.md`.
 2. **Derive the executive variant** — promote each Now item to its parent outcome, add confidence ratings, cap at 1 page. Use `assets/executive_roadmap_template.md`.
 3. **Derive the customer variant** — translate features to benefits, strip dates beyond the current quarter, use &quot;exploring / in development / shipping soon.&quot; Use `assets/customer_roadmap_template.md`.
-4. **Run the triangulation check** — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
+4. **Run the triangulation check** [RECOMMENDED] — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
+
+**Done when** the same item reads consistently in all three, the customer variant carries no dates past the current quarter and no internal risks, and the internal variant shows the bad news the other two soften.
 
 ## Anti-Patterns
 
@@ -702,9 +716,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/roadmap-variants-playbook.md](references/roadmap-variants-playbook.md)** — the variant comparison tables, the &quot;right-size the roadmap&quot; principle, outcome-vs-feature framing, the detailed structure for each of the three variants, the authoring workflow, troubleshooting, and success criteria. Read when building or reviewing the variants.
 - **[references/roadmap-communication-guide.md](references/roadmap-communication-guide.md)** — the origin of Now/Next/Later (Bastow), Cagan&#x27;s right-size principle, the outcome-vs-feature debate (Cagan, Torres), and worked examples of all three variants for the same project. Read for theory and full examples.
 - **[references/red-flags.md](references/red-flags.md)** — common ways roadmap artifacts go wrong, each with bad/good examples. Read before publishing any variant.
-- **[assets/executive_roadmap_template.md](assets/executive_roadmap_template.md)** — fill-in template for the executive variant.
-- **[assets/customer_roadmap_template.md](assets/customer_roadmap_template.md)** — fill-in template for the customer variant.
-- **[assets/internal_roadmap_template.md](assets/internal_roadmap_template.md)** — fill-in template for the internal variant (the source of truth).
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/internal_roadmap_template.md` | Internal variant, the source of truth |
+| `assets/executive_roadmap_template.md` | Executive variant |
+| `assets/customer_roadmap_template.md` | Customer variant |
+| `examples/pylon-roadmap-three-ways.md` | One roadmap in all three variants |
 
 ## Scope &amp; Limitations
 
@@ -772,7 +792,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Roadmap Communication&quot;**
-   - Description: &quot;Same roadmap, three audiences. Produce executive, customer, and internal roadmap variants with audience-appropriate framing, detail, and risk language. Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.&quot;
+   - Description: &quot;Produce executive, customer and internal versions of one roadmap with consistent framing and the right detail and risk language for each. Use when publishing the quarterly roadmap, a board packet or a customer or sales roadmap.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -830,11 +850,8 @@ cp -r Claude-Skills/project-management/execution/roadmap-communication your-proj
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/execution/roadmap-communication</code></pre>
 </div>
   
-  <h2>Quick Start</h2>1. **Author the internal variant first** — it is the source of truth (owners, dates, dependencies, risks). Use `assets/internal_roadmap_template.md`.
-2. **Derive the executive variant** — promote each Now item to its parent outcome, add confidence ratings, cap at 1 page. Use `assets/executive_roadmap_template.md`.
-3. **Derive the customer variant** — translate features to benefits, strip dates beyond the current quarter, use "exploring / in development / shipping soon." Use `assets/customer_roadmap_template.md`.
-4. **Run the triangulation check** — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/roadmap-communication/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

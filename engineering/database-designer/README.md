@@ -47,51 +47,51 @@ chmod +x *.py
 
 **Analyze SQL DDL file:**
 ```bash
-python schema_analyzer.py --input assets/sample_schema.sql --output-format text
+python3 scripts/schema_analyzer.py --input assets/sample_schema.sql --output-format text
 ```
 
 **Generate ERD diagram:**
 ```bash
-python schema_analyzer.py --input assets/sample_schema.sql --generate-erd --output analysis.txt
+python3 scripts/schema_analyzer.py --input assets/sample_schema.sql --generate-erd --output analysis.txt
 ```
 
 **JSON schema analysis:**
 ```bash
-python schema_analyzer.py --input assets/sample_schema.json --output-format json --output results.json
+python3 scripts/schema_analyzer.py --input assets/sample_schema.json --output-format json --output results.json
 ```
 
 ### Index Optimization
 
 **Basic index analysis:**
 ```bash
-python index_optimizer.py --schema assets/sample_schema.json --queries assets/sample_query_patterns.json
+python3 scripts/index_optimizer.py --schema assets/sample_schema.json --queries assets/sample_query_patterns.json
 ```
 
 **High-priority recommendations only:**
 ```bash
-python index_optimizer.py --schema assets/sample_schema.json --queries assets/sample_query_patterns.json --min-priority 2
+python3 scripts/index_optimizer.py --schema assets/sample_schema.json --queries assets/sample_query_patterns.json --min-priority 2
 ```
 
 **JSON output with existing index analysis:**
 ```bash
-python index_optimizer.py --schema assets/sample_schema.json --queries assets/sample_query_patterns.json --format json --analyze-existing
+python3 scripts/index_optimizer.py --schema assets/sample_schema.json --queries assets/sample_query_patterns.json --format json --analyze-existing
 ```
 
 ### Migration Generation
 
 **Generate migration between schemas:**
 ```bash
-python migration_generator.py --current assets/current_schema.json --target assets/target_schema.json
+python3 scripts/migration_generator.py --current assets/current_schema.json --target assets/target_schema.json
 ```
 
 **Zero-downtime migration:**
 ```bash
-python migration_generator.py --current current.json --target target.json --zero-downtime --format sql
+python3 scripts/migration_generator.py --current current.json --target target.json --zero-downtime --format sql
 ```
 
 **Include validation queries:**
 ```bash
-python migration_generator.py --current current.json --target target.json --include-validations --output migration_plan.txt
+python3 scripts/migration_generator.py --current current.json --target target.json --include-validations --output migration_plan.txt
 ```
 
 ## Tool Documentation
@@ -113,7 +113,7 @@ python migration_generator.py --current current.json --target target.json --incl
 
 **Sample Command:**
 ```bash
-python schema_analyzer.py \
+python3 scripts/schema_analyzer.py \
   --input sample_schema.sql \
   --generate-erd \
   --output-format text \
@@ -142,7 +142,7 @@ python schema_analyzer.py \
 
 **Sample Command:**
 ```bash
-python index_optimizer.py \
+python3 scripts/index_optimizer.py \
   --schema schema.json \
   --queries query_patterns.json \
   --format text \
@@ -172,7 +172,7 @@ python index_optimizer.py \
 
 **Sample Command:**
 ```bash
-python migration_generator.py \
+python3 scripts/migration_generator.py \
   --current current_schema.json \
   --target target_schema.json \
   --zero-downtime \
@@ -193,9 +193,10 @@ python migration_generator.py \
 database-designer/
 ├── README.md                          # This file
 ├── SKILL.md                          # Comprehensive database design guide
-├── schema_analyzer.py                # Schema analysis tool
-├── index_optimizer.py                # Index optimization tool  
-├── migration_generator.py            # Migration generation tool
+├── scripts/
+│   ├── schema_analyzer.py            # Schema analysis tool
+│   ├── index_optimizer.py            # Index optimization tool
+│   └── migration_generator.py        # Migration generation tool
 ├── references/                       # Reference documentation
 │   ├── normalization_guide.md        # Normalization principles and patterns
 │   ├── index_strategy_patterns.md    # Index design and optimization guide
@@ -331,12 +332,12 @@ Integrate these tools into your deployment pipeline:
 
 ```bash
 # Schema validation in CI
-python schema_analyzer.py --input schema.sql --output-format json | \
+python3 scripts/schema_analyzer.py --input schema.sql --output-format json | \
   jq '.constraint_analysis.total_issues' | \
   test $(cat) -eq 0 || exit 1
 
 # Generate migrations automatically
-python migration_generator.py \
+python3 scripts/migration_generator.py \
   --current prod_schema.json \
   --target new_schema.json \
   --zero-downtime \

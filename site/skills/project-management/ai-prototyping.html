@@ -407,6 +407,7 @@ AI app builders, AI design tools and AI coding assistants turn an idea into a cl
 
 ## Frameworks &amp; Templates You Know
 - 3. Gate the handoff (JSON or the markdown template)
+- your own handoff: fill assets/handoff_template.md and pass it with --strict
 - - `assets/handoff_template.md` - markdown handoff the checker validates
 
 ## How to Help
@@ -441,6 +442,7 @@ AI app builders, AI design tools and AI coding assistants turn an idea into a cl
 
 ## Frameworks &amp; Templates You Know
 - 3. Gate the handoff (JSON or the markdown template)
+- your own handoff: fill assets/handoff_template.md and pass it with --strict
 - - `assets/handoff_template.md` - markdown handoff the checker validates
 
 ## How to Help
@@ -502,16 +504,24 @@ Ask about the two or three inputs that matter most for this request, not the who
 ```bash
 # 1. Plan: fidelity, method, sample, success + kill criteria per hypothesis
 python3 project-management/discovery/ai-prototyping/scripts/prototype_plan.py \
-  --input hypotheses.json                      # exit 2 = a hypothesis is untestable
+  --input project-management/discovery/ai-prototyping/assets/hypotheses_sample.json      # exit 0
+python3 project-management/discovery/ai-prototyping/scripts/prototype_plan.py \
+  --input project-management/discovery/ai-prototyping/assets/hypotheses_untestable.json  # exit 2 = a hypothesis is untestable
 
 # 2. Brief the tool with assets/prototype_brief_template.md, test, record findings
 
 # 3. Gate the handoff (JSON or the markdown template)
 python3 project-management/discovery/ai-prototyping/scripts/prototype_handoff_checker.py \
-  --input handoff.md --strict                  # exit 2 = handoff incomplete
+  --input project-management/discovery/ai-prototyping/assets/handoff_complete.json        # exit 0 (1 warning)
+python3 project-management/discovery/ai-prototyping/scripts/prototype_handoff_checker.py \
+  --input project-management/discovery/ai-prototyping/assets/handoff_incomplete.json      # exit 2 = handoff incomplete
+# your own handoff: fill assets/handoff_template.md and pass it with --strict
 ```
 
 ## Tools Overview
+
+Tags used below: [PROVEN] has published evidence or repeated practice behind it, [RECOMMENDED] is this skill&#x27;s default, [EXPERIMENTAL] is new practice to try with care.
+
 
 | Tool | Input | What it does | Gate (exit 2) |
 |------|-------|--------------|---------------|
@@ -647,7 +657,7 @@ A 0-16 health rubric for a team&#x27;s prototyping practice is in [references/te
 - The planner holds F4 at F3 until the input records real-data approval. It cannot confirm that the approval exists.
 - Whether a prototype is throwaway or a starting point, and whether a result passed the bar, stay team decisions.
 
-## Reference Documentation
+## Reference Documentation and Files
 
 - [references/prototype-decision-guide.md](references/prototype-decision-guide.md) - uncertainty test, fidelity ladder with traps, the seven-part brief, worked decisions, sample-size guidance stated honestly
 - [references/testing-handoff-governance.md](references/testing-handoff-governance.md) - running sessions, demo-ware bias, what must be written down, throwaway checklist, acceptance-criteria extraction, data/security/IP/accessibility governance, health rubric, sources
@@ -666,10 +676,7 @@ Self-contained; these sections elsewhere cover the same ground from their angle:
 - `project-management/discovery/identify-assumptions/` - surfacing and classifying the assumptions tested here
 - `project-management/execution/ai-feature-prd/` - when the prototype is itself an AI feature needing evals and guardrails
 
-## Sources
-
-- W3C, *Web Content Accessibility Guidelines (WCAG) 2.2*, W3C Recommendation - https://www.w3.org/TR/WCAG22/
-- OWASP GenAI Security Project, *LLM01:2025 Prompt Injection* - https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+Sources (WCAG 2.2, OWASP LLM01:2025) are listed in `references/testing-handoff-governance.md` section 6.
 
 ---
 
@@ -753,16 +760,24 @@ Ask about the two or three inputs that matter most for this request, not the who
 ```bash
 # 1. Plan: fidelity, method, sample, success + kill criteria per hypothesis
 python3 project-management/discovery/ai-prototyping/scripts/prototype_plan.py \
-  --input hypotheses.json                      # exit 2 = a hypothesis is untestable
+  --input project-management/discovery/ai-prototyping/assets/hypotheses_sample.json      # exit 0
+python3 project-management/discovery/ai-prototyping/scripts/prototype_plan.py \
+  --input project-management/discovery/ai-prototyping/assets/hypotheses_untestable.json  # exit 2 = a hypothesis is untestable
 
 # 2. Brief the tool with assets/prototype_brief_template.md, test, record findings
 
 # 3. Gate the handoff (JSON or the markdown template)
 python3 project-management/discovery/ai-prototyping/scripts/prototype_handoff_checker.py \
-  --input handoff.md --strict                  # exit 2 = handoff incomplete
+  --input project-management/discovery/ai-prototyping/assets/handoff_complete.json        # exit 0 (1 warning)
+python3 project-management/discovery/ai-prototyping/scripts/prototype_handoff_checker.py \
+  --input project-management/discovery/ai-prototyping/assets/handoff_incomplete.json      # exit 2 = handoff incomplete
+# your own handoff: fill assets/handoff_template.md and pass it with --strict
 ```
 
 ## Tools Overview
+
+Tags used below: [PROVEN] has published evidence or repeated practice behind it, [RECOMMENDED] is this skill&#x27;s default, [EXPERIMENTAL] is new practice to try with care.
+
 
 | Tool | Input | What it does | Gate (exit 2) |
 |------|-------|--------------|---------------|
@@ -898,7 +913,7 @@ A 0-16 health rubric for a team&#x27;s prototyping practice is in [references/te
 - The planner holds F4 at F3 until the input records real-data approval. It cannot confirm that the approval exists.
 - Whether a prototype is throwaway or a starting point, and whether a result passed the bar, stay team decisions.
 
-## Reference Documentation
+## Reference Documentation and Files
 
 - [references/prototype-decision-guide.md](references/prototype-decision-guide.md) - uncertainty test, fidelity ladder with traps, the seven-part brief, worked decisions, sample-size guidance stated honestly
 - [references/testing-handoff-governance.md](references/testing-handoff-governance.md) - running sessions, demo-ware bias, what must be written down, throwaway checklist, acceptance-criteria extraction, data/security/IP/accessibility governance, health rubric, sources
@@ -917,10 +932,7 @@ Self-contained; these sections elsewhere cover the same ground from their angle:
 - `project-management/discovery/identify-assumptions/` - surfacing and classifying the assumptions tested here
 - `project-management/execution/ai-feature-prd/` - when the prototype is itself an AI feature needing evals and guardrails
 
-## Sources
-
-- W3C, *Web Content Accessibility Guidelines (WCAG) 2.2*, W3C Recommendation - https://www.w3.org/TR/WCAG22/
-- OWASP GenAI Security Project, *LLM01:2025 Prompt Injection* - https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+Sources (WCAG 2.2, OWASP LLM01:2025) are listed in `references/testing-handoff-governance.md` section 6.
 
 ---
 
@@ -1010,15 +1022,20 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
   <h2>Python Tools</h2><div class="tool-item"><h4>Exit code contract [PROVEN]</h4><p>| Code | Meaning | Who fixes it |</p></div>
   <h2>Quick Start</h2><pre><code># 1. Plan: fidelity, method, sample, success + kill criteria per hypothesis
 python3 project-management/discovery/ai-prototyping/scripts/prototype_plan.py \
-  --input hypotheses.json                      # exit 2 = a hypothesis is untestable
+  --input project-management/discovery/ai-prototyping/assets/hypotheses_sample.json      # exit 0
+python3 project-management/discovery/ai-prototyping/scripts/prototype_plan.py \
+  --input project-management/discovery/ai-prototyping/assets/hypotheses_untestable.json  # exit 2 = a hypothesis is untestable
 
 # 2. Brief the tool with assets/prototype_brief_template.md, test, record findings
 
 # 3. Gate the handoff (JSON or the markdown template)
 python3 project-management/discovery/ai-prototyping/scripts/prototype_handoff_checker.py \
-  --input handoff.md --strict                  # exit 2 = handoff incomplete
+  --input project-management/discovery/ai-prototyping/assets/handoff_complete.json        # exit 0 (1 warning)
+python3 project-management/discovery/ai-prototyping/scripts/prototype_handoff_checker.py \
+  --input project-management/discovery/ai-prototyping/assets/handoff_incomplete.json      # exit 2 = handoff incomplete
+# your own handoff: fill assets/handoff_template.md and pass it with --strict
 </code></pre>
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/ai-prototyping/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

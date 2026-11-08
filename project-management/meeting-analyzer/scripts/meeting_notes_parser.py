@@ -16,6 +16,12 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+
+def _die(msg: str) -> None:
+    """Bad input: message on stderr, exit 2 (1 is reserved for findings)."""
+    print(msg, file=sys.stderr)
+    sys.exit(2)
+
 # Strong cues fire anywhere, including in prose paragraphs. Weak cues only fire
 # on list items or under a matching section heading, where the surrounding
 # structure already signals intent — this is what keeps discussion prose out of
@@ -65,9 +71,9 @@ def read_notes(path: Path) -> List[str]:
     try:
         raw = path.read_text(encoding="utf-8")
     except FileNotFoundError:
-        raise SystemExit(f"error: notes file not found: {path}")
+        _die(f"error: notes file not found: {path}")
     except UnicodeDecodeError:
-        raise SystemExit(f"error: {path} is not UTF-8 text. Export notes as .md or .txt.")
+        _die(f"error: {path} is not UTF-8 text. Export notes as .md or .txt.")
     return [ln.rstrip() for ln in raw.splitlines()]
 
 
@@ -262,9 +268,9 @@ def main() -> None:
             sys.exit(1)
     except SystemExit:
         raise
-    except (re.error, TypeError, ValueError) as exc:
+    except (re.error, AttributeError, TypeError, ValueError) as exc:
         print(f"error: could not parse the notes — {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

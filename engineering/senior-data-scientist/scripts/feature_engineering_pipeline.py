@@ -4,7 +4,6 @@
 Infers types, null rate, cardinality and distribution; flags constant, ID-like
 and highly correlated columns; with a target, scores features and flags leakage
 suspects. Every column gets a suggested action. Standard library only.
-
 Usage: python3 feature_engineering_pipeline.py --input data.csv --target churned --output out/
 """
 
@@ -20,6 +19,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 NULLS = {"", "na", "n/a", "null", "none", "nan"}
+fail = lambda msg: (print(msg, file=sys.stderr), sys.exit(2))  # bad input exits 2
 BOOL_WORDS = {"true", "false", "yes", "no", "y", "n", "t", "f"}
 LEAKAGE_R = 0.90
 EXAMPLE = """user_id,signup_date,plan,sessions,revenue,revenue_eur,converted
@@ -41,15 +41,15 @@ def load_csv(path: str) -> Tuple[List[str], List[Dict[str, str]]]:
             header, rows = next(reader, []), []
             for rec in reader:
                 if rec and len(rec) != len(header):
-                    sys.exit(f"ERROR: {path} line {reader.line_num} has {len(rec)} field(s) "
+                    fail(f"ERROR: {path} line {reader.line_num} has {len(rec)} field(s) "
                              f"but the header has {len(header)}")
                 rows += [dict(zip(header, rec))] if rec else []
     except FileNotFoundError:
-        sys.exit(f"ERROR: file not found: {path}")
+        fail(f"ERROR: file not found: {path}")
     except (UnicodeDecodeError, csv.Error) as exc:
-        sys.exit(f"ERROR: {path} is not a readable UTF-8 CSV: {exc}")
+        fail(f"ERROR: {path} is not a readable UTF-8 CSV: {exc}")
     if not header or not rows:
-        sys.exit(f"ERROR: {path} needs a header row and at least one data row")
+        fail(f"ERROR: {path} needs a header row and at least one data row")
     return header, rows
 
 
@@ -175,7 +175,7 @@ def build_plan(path: str, target: Optional[str], corr_threshold: float,
     """Profile every column, then add correlation, target and plan sections."""
     header, rows = load_csv(path)
     if target and target not in header:
-        sys.exit(f"ERROR: target column '{target}' not in {path}. Columns: {', '.join(header)}")
+        fail(f"ERROR: target column '{target}' not in {path}. Columns: {', '.join(header)}")
     cols = [profile_column(h, [r.get(h) or "" for r in rows]) for h in header]
     by_name = {c["name"]: c for c in cols}
     numeric = [c for c in cols if "values" in c and c["name"] != target and c["distinct"] > 1]
@@ -281,18 +281,18 @@ def main() -> None:
         p.error("--input is required (or use --example)")
     target = Path(args.output) / "feature_plan.json" if args.output else None
     if target and target.exists() and not args.force:
-        sys.exit(f"ERROR: {target} already exists; pass --force to overwrite")
+        fail(f"ERROR: {target} already exists; pass --force to overwrite")
     try:
         rep = build_plan(args.input, args.target, args.corr_threshold, args.max_onehot)
     except OverflowError:
-        sys.exit(f"ERROR: {args.input} has values too large to summarize (overflow); rescale them")
+        fail(f"ERROR: {args.input} has values too large to summarize (overflow); rescale them")
     output(rep, args.format)
     if target:
         try:
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(rep, indent=2) + "\n", encoding="utf-8")
         except OSError as exc:
-            sys.exit(f"ERROR: cannot write {target}: {exc}")
+            fail(f"ERROR: cannot write {target}: {exc}")
         print(f"Wrote {target}", file=sys.stderr)
 
 

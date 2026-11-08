@@ -39,9 +39,13 @@ Every production prompt has a layered structure. Order matters.
 | Anti-Patterns | State the actual failure mode | "Don't be wrong" (useless) |
 | Examples | Show edge cases, not just happy path | Only showing trivial examples |
 
-## 2. Chain-of-Thought (CoT) Patterns
+## 2. Reasoning: Goals for Reasoning Models, CoT for the Rest
 
-### Standard CoT
+Reasoning models (models with built-in thinking) already work through problems before answering. Telling them to "think step by step" adds tokens and little else. What improves their results is a clear goal, the relevant context, one or two examples of the wanted output, an explicit output contract, and a way to check the answer. Control depth with the platform's reasoning settings (reasoning effort, or a thinking budget) rather than with prompt text.
+
+The CoT patterns below are for non-reasoning models only.
+
+### Standard CoT (non-reasoning models)
 
 On current Claude models, reasoning happens in API-level thinking
 (`thinking: {type: "adaptive"}` plus `effort`); read it from thinking blocks rather
@@ -77,7 +81,7 @@ Then provide your final answer outside the scratchpad tags.
 **Advantage:** Model can reason messy, output is clean. On Claude models with
 thinking, the thinking block already gives you this separation; skip the tags.
 
-### Self-Consistency CoT
+### Self-Consistency (non-reasoning models; or sample N times in code)
 
 ```
 Solve this problem three different ways, then compare your answers.
@@ -150,7 +154,7 @@ Respond with a JSON object matching this exact schema:
         "issue": "string - description of the issue",
         "location": "string - file:line",
         "fix": "string - recommended fix",
-        "confidence": "number - 0.0 to 1.0"
+        "evidence": "string - the code or text that shows the issue, quoted"
       }
     ],
     "overall_score": "number - 0 to 100"
@@ -159,7 +163,7 @@ Respond with a JSON object matching this exact schema:
 
 Rules:
 - findings array must have at least one entry
-- confidence must reflect actual certainty, not optimism
+- every finding quotes its evidence; a finding without evidence is left out
 - overall_score: 90-100 (excellent), 70-89 (good), 50-69 (needs work), <50 (poor)
 ```
 
@@ -204,26 +208,22 @@ Each prompt is testable independently. A failure in Prompt 2 doesn't require re-
 
 ## 6. Calibration Techniques
 
-### Temperature Guidelines
+### Sampling Parameters
 
-| Task Type | Temperature | Rationale |
-|-----------|-------------|-----------|
-| Code generation | 0.0-0.2 | Correctness > creativity |
-| Classification | 0.0 | Deterministic expected |
-| Analysis/reasoning | 0.2-0.5 | Some flexibility in framing |
-| Creative writing | 0.7-1.0 | Diversity of expression |
-| Brainstorming | 0.8-1.2 | Maximum variety |
+Sampling knobs are model-dependent. Some reasoning models ignore or reject non-default `temperature` and
+`top_p`; check the model's API docs before setting them. Where they are supported, low values suit
+classification and extraction, higher values suit brainstorming. On reasoning models, steer behaviour with
+the prompt, examples, structured outputs and the reasoning-effort setting instead.
 
-### Confidence Calibration
+### Evidence Over Self-Ratings
 
+Asking the model to label its own confidence (VERIFIED / LIKELY / UNCERTAIN) produces labels, not
+calibration. Put evidence in the output contract instead, so a reader or a check can verify each claim:
+
+```json
+{"findings": [{"claim": "string", "evidence": "quote or source id from the provided context, or null",
+               "status": "supported | unsupported"}]}
 ```
-For each finding, rate your confidence:
 
-Confidence levels:
-- VERIFIED: I can point to specific evidence in the provided context
-- LIKELY: Strong inference from available information
-- UNCERTAIN: Reasonable guess, but limited evidence
-- SPECULATIVE: Possible but I'm reaching
-
-Never state SPECULATIVE findings as VERIFIED.
-```
+Then test it: a claim with `evidence: null` must be `unsupported`, and an eval case can assert that every
+`supported` claim quotes the context.

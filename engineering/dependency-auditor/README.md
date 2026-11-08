@@ -14,8 +14,8 @@ The Dependency Auditor skill consists of three main Python scripts that work tog
 
 ### 🔍 Vulnerability Scanning
 - Multi-language dependency parsing (JavaScript, Python, Go, Rust, Ruby, Java)
-- Built-in vulnerability database with common CVE patterns
-- CVSS scoring and risk assessment
+- Offline sample advisory table (about eight well-known CVEs, newest from 2024) for demos and as a cross-check; not a vulnerability database - use npm audit / pip-audit / osv-scanner / govulncheck for real data
+- CVSS score shown as recorded in each sample advisory (no scoring of its own)
 - JSON and human-readable output formats
 - CI/CD integration support
 
@@ -88,7 +88,7 @@ python upgrade_planner.py scan_results.json --security-only --format json
 
 ### Dependency Scanner (`dep_scanner.py`)
 
-The dependency scanner parses project files to extract dependencies and check them against a built-in vulnerability database.
+The dependency scanner parses project files to extract dependencies and matches them against an offline sample table of about eight well-known advisories (newest from 2024) - not a vulnerability database; a clean result proves nothing, so run npm audit / pip-audit / osv-scanner / govulncheck for real data.
 
 #### Supported File Formats
 - **JavaScript/Node.js**: package.json, package-lock.json, yarn.lock
@@ -276,10 +276,10 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
       
@@ -407,7 +407,7 @@ The `expected_outputs/` directory contains example reports showing the expected 
 
 ### Custom Vulnerability Database
 
-You can extend the built-in vulnerability database by modifying the `_load_vulnerability_database()` method in `dep_scanner.py`:
+You can extend the offline sample advisory table (it is not a full database) by modifying the `_load_vulnerability_database()` method in `dep_scanner.py`:
 
 ```python
 def _load_vulnerability_database(self):
@@ -504,7 +504,7 @@ python scripts/dep_scanner.py /your/project
 ## Contributing
 
 1. **Adding New Package Managers**: Extend the `supported_files` dictionary and add corresponding parsers
-2. **Vulnerability Database**: Add new CVE entries to the built-in database
+2. **Sample advisories**: Add CVE entries to the offline sample table (real audits should still use the ecosystem tools)
 3. **License Support**: Add new license types to the license database
 4. **Risk Assessment**: Improve risk scoring algorithms
 

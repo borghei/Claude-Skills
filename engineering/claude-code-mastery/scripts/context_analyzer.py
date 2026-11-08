@@ -320,8 +320,8 @@ def format_tokens(tokens: int) -> str:
 def print_human_readable(result: Dict) -> None:
     """Print analysis in human-readable format."""
     if not result["success"]:
-        print(f"ERROR: {result['error']}")
-        sys.exit(1)
+        print(f"ERROR: {result['error']}", file=sys.stderr)
+        sys.exit(2)
 
     s = result["summary"]
     cw = result["context_window"]
@@ -402,7 +402,7 @@ Examples:
         "--context-window",
         type=int,
         default=200_000,
-        help="Total context window size in tokens (default: 200000)",
+        help="Context window of the model you run, in tokens (default: 200000, a conservative floor; pass your model's real window)",
     )
     parser.add_argument(
         "--json",
@@ -424,7 +424,7 @@ Examples:
         print_human_readable(result)
 
     if not result["success"]:
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

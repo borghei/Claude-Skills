@@ -1,0 +1,25 @@
+# Deliberately flawed GitHub Actions workflow for pipeline_linter.py and cache_optimizer.py.
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm test
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist/
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: some-org/deploy-action@main
+        env:
+          API_TOKEN: "ghp_abcdefghijklmnopqrstuvwxyz0123456789"
+      - run: ./deploy.sh production

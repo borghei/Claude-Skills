@@ -44,7 +44,7 @@ python license_checker.py . --warn-conflicts
 
 ### `dep_scanner.py`
 
-**Purpose:** Scans a project directory for dependency manifest and lockfile files across 8+ ecosystems, extracts direct and transitive dependencies, matches them against a built-in vulnerability database, and produces a security report.
+**Purpose:** Scans a project directory for dependency manifest and lockfile files across 8+ ecosystems, extracts direct and transitive dependencies, matches them against an offline sample table of about eight well-known advisories (newest from 2024) - not a vulnerability database; a clean result proves nothing, so run npm audit / pip-audit / osv-scanner / govulncheck for real data, and produces a report.
 
 **Usage:**
 ```bash
@@ -147,7 +147,7 @@ python scripts/upgrade_planner.py scan.json --timeline 30 --risk-threshold mediu
 | Problem | Cause | Solution |
 |---------|-------|----------|
 | Scanner reports zero dependencies | Dependency files are nested in subdirectories or use non-standard names | Ensure manifest files (`package.json`, `requirements.txt`, `go.mod`, etc.) exist in the scanned path; the scanner uses `rglob` so subdirectories are included |
-| False-positive vulnerability match | Built-in CVE database uses simplified version-range matching without pre-release awareness | Verify the flagged version against the NVD entry; whitelist confirmed false positives in your CI pipeline |
+| False-positive vulnerability match | The offline sample table uses simplified version-range matching without pre-release awareness | Verify the flagged version against the NVD entry; whitelist confirmed false positives in your CI pipeline |
 | License detected as UNKNOWN | Package metadata lacks a `license` field and no LICENSE file is present in `node_modules` | Supply a dependency inventory JSON with explicit `license` fields, or manually verify and document the license |
 | Upgrade planner shows no available upgrades | The package name does not appear in the internal mock version registry | The planner uses a simulated registry; for real results, extend `_get_latest_version()` to query npm/PyPI/crates.io APIs |
 | `--fail-on-high` exits 1 unexpectedly | Transitive dependencies inherit vulnerability matches from lockfile parsing | Use `--quick-scan` to limit analysis to direct dependencies, then investigate transitive matches separately |

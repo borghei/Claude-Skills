@@ -397,6 +397,11 @@ Computer vision engineering for object detection, segmentation, and visual AI, c
 
 Design end-to-end computer vision pipelines for object detection, instance/semantic segmentation, and production deployment. Generates training configurations for YOLO/Detectron2/MMDetection, optimizes models for ONNX/TensorRT/OpenVINO runtimes, and builds dataset preparation workflows with format c
 
+## Your Key Capabilities
+- Benchmarking Without the Runtime
+- Quantizing Without an Accuracy Check
+- Splitting After Augmenting
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Computer vision engineering for object detection, segmentation, and visual AI, covering CNN and Vision Transformer architectures and ONNX/TensorRT deployment. Use when building detection pipelines, training models, or optimizing inference.
 
 Design end-to-end computer vision pipelines for object detection, instance/semantic segmentation, and production deployment. Generates training configurations for YOLO/Detectron2/MMDetection, optimizes models for ONNX/TensorRT/OpenVINO runtimes, and builds dataset preparation workflows with format c
+
+## Your Key Capabilities
+- Benchmarking Without the Runtime
+- Quantizing Without an Accuracy Check
+- Splitting After Augmenting
 
 ## How to Help
 When the user asks for help in this domain:
@@ -476,11 +486,25 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-| Tool | Purpose | Command |
+All three are stdlib-only CLIs. `inference_optimizer.py` needs the model&#x27;s runtime (torch for
+`.pt`, onnx/onnxruntime and numpy for `.onnx`) to analyse or benchmark; without it only
+format-based recommendations are produced and `--benchmark` exits 2.
+
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `vision_model_trainer.py` | Generate training configs for YOLO / Detectron2 / MMDetection | `python scripts/vision_model_trainer.py data/coco/ --task detection --arch yolov8m -o configs/train.yaml` |
-| `inference_optimizer.py` | Analyze, benchmark, and recommend optimizations for a model | `python scripts/inference_optimizer.py model.pt --analyze --benchmark --recommend --target edge` |
-| `dataset_pipeline_builder.py` | Analyze/convert/split/augment/validate CV datasets (subcommands) | `python scripts/dataset_pipeline_builder.py analyze --input data/coco/` |
+| `vision_model_trainer.py` | Analyse a COCO/YOLO dataset and generate a YOLO / Detectron2 / MMDetection training config (`--framework`, `--arch`, `--epochs`, `--batch`, `-o`, `--analyze-only`, `--json`) | `python scripts/vision_model_trainer.py assets/sample_coco_valid --analyze-only --json` |
+| `inference_optimizer.py` | Analyse, benchmark and recommend optimisations per target (`--analyze`, `--benchmark`, `--recommend`, `--target gpu/cpu/edge/mobile/apple/intel`, `--json`, `-o`) | `python scripts/inference_optimizer.py model.onnx --analyze --recommend --target edge` |
+| `dataset_pipeline_builder.py` | Subcommands `analyze`, `convert`, `split`, `augment-config`, `validate` | `python scripts/dataset_pipeline_builder.py validate --input assets/sample_coco_flawed` |
+
+Exit codes: `0` ok; `1` `validate` found errors (broken image references, malformed boxes);
+`2` bad input (missing path, unknown architecture or format) or a requested benchmark that
+could not run. `assets/sample_coco_valid/` validates clean (exit 0); `assets/sample_coco_flawed/`
+has an orphan annotation and a 3-value bbox (exit 1).
+
+Default recommendation: YOLO26 (Ultralytics&#x27; current family; COCO mAP50-95 yolo26n 40.9,
+yolo26s 48.6, yolo26m 53.1 per docs.ultralytics.com/models/yolo26/, checked November 2026),
+with YOLO11 kept for existing pipelines. The trainer&#x27;s table cites its source per entry;
+check the docs again before quoting figures, since families turn over yearly.
 
 ## References
 
@@ -509,16 +533,33 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Medical imaging regulatory compliance (DICOM, FDA 510(k)) -- see `ra-qm-team/` compliance skills
 - Real-time video streaming infrastructure (RTSP, WebRTC, GStreamer pipeline design) -- see `senior-devops` for infrastructure
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-ml-engineer` | Model serving and MLOps pipeline setup | Trained model artifacts (.pt, .onnx) flow into `model_deployment_pipeline.py` for containerized serving and monitoring |
-| `senior-data-engineer` | Dataset ETL and storage pipelines | Raw image data ingested via `pipeline_orchestrator.py`; cleaned datasets flow into `dataset_pipeline_builder.py` for CV formatting |
-| `senior-data-scientist` | Experiment design and statistical analysis | Experiment parameters from `experiment_designer.py` guide hyperparameter search; model metrics feed back for significance testing |
-| `senior-devops` | CI/CD and GPU infrastructure provisioning | Optimized model artifacts deployed via CI/CD pipelines; GPU node scaling managed through infrastructure-as-code |
-| `senior-prompt-engineer` | Multimodal RAG and vision-language integration | Vision model embeddings and detections feed into `rag_system_builder.py` for multimodal retrieval pipelines |
-| `senior-cloud-architect` | Cloud GPU resource planning and cost optimization | Benchmark results from `inference_optimizer.py` inform instance type selection and auto-scaling policies |
+### Benchmarking Without the Runtime
+**Mistake:** Reporting latency or speedup numbers from `inference_optimizer.py` when torch or onnxruntime is not installed.
+**Why it happens:** The recommendations print either way, so the run looks complete.
+**Instead:** Treat exit 2 from `--benchmark` as &quot;no measurement&quot;. Install the runtime, benchmark on the target hardware, and quote only measured numbers.
+
+### Quantizing Without an Accuracy Check
+**Mistake:** Shipping an INT8 model because it is 2-4x faster, without re-measuring mAP.
+**Why it happens:** Speed is visible immediately; accuracy loss shows up later, on rare classes first.
+**Instead:** Re-run validation on the held-out split after every precision change and accept the model only inside the agreed mAP budget.
+
+### Splitting After Augmenting
+**Mistake:** Augmenting the whole dataset, then splitting into train/val/test.
+**Why it happens:** It feels like one pipeline step.
+**Instead:** Split first (stratified), keep val/test untouched, and apply augmentation online during training. Otherwise near-duplicates leak into evaluation and inflate mAP.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/vision_model_trainer.py` | Dataset analysis and training-config generation |
+| `scripts/inference_optimizer.py` | Model analysis, benchmark and optimisation recommendations |
+| `scripts/dataset_pipeline_builder.py` | Dataset analyze / convert / split / augment-config / validate |
+| `assets/sample_coco_valid/annotations.json` | Sound COCO sample (validate exits 0) |
+| `assets/sample_coco_flawed/annotations.json` | Flawed COCO sample (validate exits 1) |
+| `references/*.md` | Workflows, command catalogs, architectures, optimisation and deployment detail |
 
 ---
 
@@ -600,11 +641,25 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-| Tool | Purpose | Command |
+All three are stdlib-only CLIs. `inference_optimizer.py` needs the model&#x27;s runtime (torch for
+`.pt`, onnx/onnxruntime and numpy for `.onnx`) to analyse or benchmark; without it only
+format-based recommendations are produced and `--benchmark` exits 2.
+
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `vision_model_trainer.py` | Generate training configs for YOLO / Detectron2 / MMDetection | `python scripts/vision_model_trainer.py data/coco/ --task detection --arch yolov8m -o configs/train.yaml` |
-| `inference_optimizer.py` | Analyze, benchmark, and recommend optimizations for a model | `python scripts/inference_optimizer.py model.pt --analyze --benchmark --recommend --target edge` |
-| `dataset_pipeline_builder.py` | Analyze/convert/split/augment/validate CV datasets (subcommands) | `python scripts/dataset_pipeline_builder.py analyze --input data/coco/` |
+| `vision_model_trainer.py` | Analyse a COCO/YOLO dataset and generate a YOLO / Detectron2 / MMDetection training config (`--framework`, `--arch`, `--epochs`, `--batch`, `-o`, `--analyze-only`, `--json`) | `python scripts/vision_model_trainer.py assets/sample_coco_valid --analyze-only --json` |
+| `inference_optimizer.py` | Analyse, benchmark and recommend optimisations per target (`--analyze`, `--benchmark`, `--recommend`, `--target gpu/cpu/edge/mobile/apple/intel`, `--json`, `-o`) | `python scripts/inference_optimizer.py model.onnx --analyze --recommend --target edge` |
+| `dataset_pipeline_builder.py` | Subcommands `analyze`, `convert`, `split`, `augment-config`, `validate` | `python scripts/dataset_pipeline_builder.py validate --input assets/sample_coco_flawed` |
+
+Exit codes: `0` ok; `1` `validate` found errors (broken image references, malformed boxes);
+`2` bad input (missing path, unknown architecture or format) or a requested benchmark that
+could not run. `assets/sample_coco_valid/` validates clean (exit 0); `assets/sample_coco_flawed/`
+has an orphan annotation and a 3-value bbox (exit 1).
+
+Default recommendation: YOLO26 (Ultralytics&#x27; current family; COCO mAP50-95 yolo26n 40.9,
+yolo26s 48.6, yolo26m 53.1 per docs.ultralytics.com/models/yolo26/, checked November 2026),
+with YOLO11 kept for existing pipelines. The trainer&#x27;s table cites its source per entry;
+check the docs again before quoting figures, since families turn over yearly.
 
 ## References
 
@@ -633,16 +688,33 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Medical imaging regulatory compliance (DICOM, FDA 510(k)) -- see `ra-qm-team/` compliance skills
 - Real-time video streaming infrastructure (RTSP, WebRTC, GStreamer pipeline design) -- see `senior-devops` for infrastructure
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-ml-engineer` | Model serving and MLOps pipeline setup | Trained model artifacts (.pt, .onnx) flow into `model_deployment_pipeline.py` for containerized serving and monitoring |
-| `senior-data-engineer` | Dataset ETL and storage pipelines | Raw image data ingested via `pipeline_orchestrator.py`; cleaned datasets flow into `dataset_pipeline_builder.py` for CV formatting |
-| `senior-data-scientist` | Experiment design and statistical analysis | Experiment parameters from `experiment_designer.py` guide hyperparameter search; model metrics feed back for significance testing |
-| `senior-devops` | CI/CD and GPU infrastructure provisioning | Optimized model artifacts deployed via CI/CD pipelines; GPU node scaling managed through infrastructure-as-code |
-| `senior-prompt-engineer` | Multimodal RAG and vision-language integration | Vision model embeddings and detections feed into `rag_system_builder.py` for multimodal retrieval pipelines |
-| `senior-cloud-architect` | Cloud GPU resource planning and cost optimization | Benchmark results from `inference_optimizer.py` inform instance type selection and auto-scaling policies |
+### Benchmarking Without the Runtime
+**Mistake:** Reporting latency or speedup numbers from `inference_optimizer.py` when torch or onnxruntime is not installed.
+**Why it happens:** The recommendations print either way, so the run looks complete.
+**Instead:** Treat exit 2 from `--benchmark` as &quot;no measurement&quot;. Install the runtime, benchmark on the target hardware, and quote only measured numbers.
+
+### Quantizing Without an Accuracy Check
+**Mistake:** Shipping an INT8 model because it is 2-4x faster, without re-measuring mAP.
+**Why it happens:** Speed is visible immediately; accuracy loss shows up later, on rare classes first.
+**Instead:** Re-run validation on the held-out split after every precision change and accept the model only inside the agreed mAP budget.
+
+### Splitting After Augmenting
+**Mistake:** Augmenting the whole dataset, then splitting into train/val/test.
+**Why it happens:** It feels like one pipeline step.
+**Instead:** Split first (stratified), keep val/test untouched, and apply augmentation online during training. Otherwise near-duplicates leak into evaluation and inflate mAP.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/vision_model_trainer.py` | Dataset analysis and training-config generation |
+| `scripts/inference_optimizer.py` | Model analysis, benchmark and optimisation recommendations |
+| `scripts/dataset_pipeline_builder.py` | Dataset analyze / convert / split / augment-config / validate |
+| `assets/sample_coco_valid/annotations.json` | Sound COCO sample (validate exits 0) |
+| `assets/sample_coco_flawed/annotations.json` | Flawed COCO sample (validate exits 1) |
+| `references/*.md` | Workflows, command catalogs, architectures, optimisation and deployment detail |
 
 ---
 
@@ -731,7 +803,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/senior-computer-vision/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-computer-vision/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

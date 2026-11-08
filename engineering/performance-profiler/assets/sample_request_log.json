@@ -1,0 +1,752 @@
+[
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 850,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 865,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 880,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 895,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 910,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 925,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 940,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 955,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 970,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /orders",
+  "duration_ms": 985,
+  "queries": [
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM order_items WHERE order_id = ?",
+    "duration_ms": 6
+   },
+   {
+    "template": "SELECT * FROM orders WHERE customer_id = ?",
+    "duration_ms": 9
+   }
+  ],
+  "spans": [
+   {
+    "name": "payments-api",
+    "type": "http",
+    "duration_ms": 420
+   }
+  ]
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 5,
+  "queries": []
+ },
+ {
+  "endpoint": "GET /health",
+  "duration_ms": 6,
+  "queries": []
+ }
+]

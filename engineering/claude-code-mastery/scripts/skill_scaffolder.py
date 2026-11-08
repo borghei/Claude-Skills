@@ -39,7 +39,7 @@ VALID_DOMAINS = [
 SKILL_MD_TEMPLATE = textwrap.dedent('''\
 ---
 name: {name}
-description: >-
+description: >
   {description}
 license: {license}
 metadata:
@@ -337,8 +337,8 @@ def create_skill_directory(
 def print_human_readable(result: Dict) -> None:
     """Print results in human-readable format."""
     if not result["success"]:
-        print(f"ERROR: {result['error']}")
-        sys.exit(1)
+        print(f"ERROR: {result['error']}", file=sys.stderr)
+        sys.exit(2)
 
     print(f"Skill scaffolded successfully!")
     print(f"")
@@ -426,8 +426,8 @@ Examples:
         if args.json:
             print(json.dumps({"success": False, "error": error}))
         else:
-            print(f"ERROR: {error}")
-        sys.exit(1)
+            print(f"ERROR: {error}", file=sys.stderr)
+        sys.exit(2)
 
     # Validate domain
     if args.domain not in VALID_DOMAINS:
@@ -439,10 +439,9 @@ Examples:
     description = args.description
     if not description:
         title = to_title_case(args.skill_name)
-        description = (
-            f'This skill should be used when the user asks about {title.lower()}. '
-            f'Use for {title.lower()} workflows, analysis, and automation.'
-        )
+        description = f'TODO: say what {title} does in one sentence. Use when <concrete trigger>.'
+    elif "use when" not in description.lower():
+        description = description.rstrip(". ") + ". Use when <concrete trigger>."
 
     # Validate output directory
     output_path = Path(args.output)
@@ -450,8 +449,8 @@ Examples:
         if args.json:
             print(json.dumps({"success": False, "error": f"Output directory does not exist: {args.output}"}))
         else:
-            print(f"ERROR: Output directory does not exist: {args.output}")
-        sys.exit(1)
+            print(f"ERROR: Output directory does not exist: {args.output}", file=sys.stderr)
+        sys.exit(2)
 
     # Create the skill
     result = create_skill_directory(
@@ -470,7 +469,7 @@ Examples:
         print_human_readable(result)
 
     if not result["success"]:
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

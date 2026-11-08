@@ -10,7 +10,7 @@
 
 ## 1. Summary
 
-[2-3 sentences. What the AI feature is, who it is for, why now. Name the model class explicitly (e.g., "a Claude Sonnet-4.5 based assistant"). Avoid marketing language.]
+[2-3 sentences. What the AI feature is, who it is for, why now. Name the model class explicitly (e.g., "a Claude Sonnet 5.5 based assistant"). Avoid marketing language.]
 
 ## 2. Contacts
 
@@ -96,10 +96,11 @@ Tools: <tool list with one-line descriptions>
 
 | Field | Value |
 |---|---|
-| Primary model | [vendor + model + version, e.g. `claude-sonnet-4.5` via Anthropic API] |
+| Primary model | [vendor + model + version, e.g. `claude-sonnet-5-5` via Anthropic API] |
 | Fallback model | [vendor + model + version] |
 | Reason for primary | [Eval performance, cost, safety profile, latency] |
 | Switch trigger to fallback | [Outage; cost overrun; eval regression] |
+| Reasoning effort / thinking budget | [Effort level or token budget, chosen on the golden set; latency and cost at that setting] |
 | Update / re-evaluation policy | Every 90 days against new releases |
 | Vendor / data-residency considerations | [DPA in place? Region? Training opt-out confirmed?] |
 
@@ -229,7 +230,8 @@ Refusal-policy ownership: [Safety reviewer name]. Policy reviewed every [cadence
 
 | Cost line | Formula | Estimate at scale |
 |---|---|---|
-| Inference (primary) | requests/mo x avg_tokens x $/token | $ |
+| Inference (primary) | requests/mo x (input + output + thinking tokens) x $/token | $ |
+| Prompt caching | cached share of input tokens x (full - cached rate) | -$ |
 | Inference (fallback) | <= 10% of primary | $ |
 | Vector store / retrieval | docs x dimension x $/GB-mo | $ |
 | Eval runs | golden_set x runs x $/call | $ |

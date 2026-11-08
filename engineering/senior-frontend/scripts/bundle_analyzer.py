@@ -379,12 +379,12 @@ def main():
 
     if not project_dir.exists():
         print(f"Error: Directory not found: {project_dir}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     package_json = load_package_json(project_dir)
     if not package_json:
         print("Error: No valid package.json found", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     analysis = {
         "project": str(project_dir),

@@ -11,7 +11,7 @@ troubleshooting tool behavior, or checking generated work against the quality ba
 Generates fullstack project structures with boilerplate code.
 
 **Supported Templates:**
-- `nextjs` - Next.js 14+ with App Router, TypeScript, Tailwind CSS
+- `nextjs` - Next.js 16 with App Router, React 19, TypeScript, Tailwind CSS v4
 - `fastapi-react` - FastAPI backend + React frontend + PostgreSQL
 - `mern` - MongoDB, Express, React, Node.js with TypeScript
 - `django-react` - Django REST Framework + React frontend

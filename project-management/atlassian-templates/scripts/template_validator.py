@@ -107,7 +107,9 @@ def validate_template(data: dict) -> dict:
     if last_updated:
         try:
             updated_dt = datetime.strptime(last_updated, "%Y-%m-%d")
-            days = (datetime.now() - updated_dt).days
+            # "as_of" in the file pins the reference date so a sample does not age out
+            as_of = datetime.strptime(data["as_of"], "%Y-%m-%d") if data.get("as_of") else datetime.now()
+            days = (as_of - updated_dt).days
             freshness_passed = days <= 365
         except ValueError:
             pass
@@ -179,6 +181,7 @@ def print_example() -> None:
         "description": "Standard template for sprint retrospective meetings. Covers what went well, challenges, and action items.",
         "version": "2.1",
         "last_updated": "2026-02-15",
+        "as_of": "2026-03-21",
         "labels": ["sprint", "retro", "agile"],
         "has_example": True,
         "has_dynamic_content": True,
@@ -211,7 +214,12 @@ def main():
         print(json.dumps(result, indent=2))
     else:
         print_report(result)
+    sys.exit(0 if result["checks_passed"] == result["checks_total"] else 1)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

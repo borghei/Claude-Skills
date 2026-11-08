@@ -1,17 +1,18 @@
 ---
 name: program-manager
 description: >
-  Program management for multi-project coordination, portfolio governance,
-  dependency tracking, benefits realization, charters, and steering-committee
-  reporting. Use to stand up or run a program and escalate program status.
+  Runs multi-project programs: charters, governance, cross-project dependencies,
+  benefits tracking and steering-committee reporting. Use when standing up a
+  program, tracking its milestones and people, or preparing a steering update.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-ops
   domain: program-management
-  updated: 2026-06-15
+  updated: 2026-11-08
   tags: [program, portfolio, governance, strategic, coordination]
+  python-tools: milestone_tracker.py, resource_allocator.py, portfolio_dashboard.py
 ---
 # Program Manager
 
@@ -45,12 +46,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+Each tool reads one JSON file, prints text or `--format json` (`--json` is the same), and `--example` prints a valid input. The files in `assets/` are those examples.
+
 ```bash
-python scripts/resource_allocator.py --resources resources.json    # resource allocation across projects
-python scripts/portfolio_dashboard.py --portfolio portfolio.json    # RAG dashboard
+# Milestones: complete / on track / at risk / overdue, variance, critical-path slips
+python3 project-management/program-manager/scripts/milestone_tracker.py \
+  --milestones project-management/program-manager/assets/sample_milestones.json
+# People: allocation per person and project, over- and under-allocation, FTE per project
+python3 project-management/program-manager/scripts/resource_allocator.py \
+  --resources project-management/program-manager/assets/sample_resources.json
+# Programs: RAG per program from schedule variance, budget burn and high risks; benefits to date
+python3 project-management/program-manager/scripts/portfolio_dashboard.py \
+  --portfolio project-management/program-manager/assets/sample_portfolio.json --format json
 ```
 
-Run the six-step workflow (structure → charter → dependencies → resources → benefits → status) — full procedure, tables, validation checkpoints, and dashboard format are in the operating guide below.
+- `milestone_tracker.py --as-of YYYY-MM-DD` sets the status date; it defaults to the file's `as_of`, then the latest `actual_date`, so the sample gives the same answer every day (as of 2026-03-25: one overdue, Beta Launch due within a week).
+- `resource_allocator.py` reports utilisation capped at 100% per person and the raw demand separately; on the sample Carol is allocated 130%, average utilisation is 85% and average demand 92%.
+- RAG rule in `portfolio_dashboard.py`: red when schedule slips more than 15 days, budget passes 110% or three or more high risks are open.
+
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. They report; none of them gates.
+
+Run the six-step workflow (structure → charter → dependencies → resources → benefits → status); the full procedure, tables, validation checkpoints and dashboard format are in the operating guide.
 
 ## Anti-Patterns
 
@@ -71,7 +87,7 @@ Run the six-step workflow (structure → charter → dependencies → resources 
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 - `references/program-operating-guide.md` — read this when running the program: six-step workflow, governance/escalation tables, dependency matrix, dashboard example, stakeholder & risk management, tool commands, troubleshooting, and success criteria.
 - `references/red-flags.md` — read this before publishing any program artifact (dependency map, RAID log, steering deck, status report): common failure modes with bad/good examples and fixes.
@@ -94,3 +110,13 @@ Seven more, each with a bad and a good example: `references/red-flags.md`.
 | `scrum-master/` | SM -> PgM | Team velocity and capacity data for resource forecasting |
 | `jira-expert/` | PgM -> Jira | Cross-project epic tracking, program-level dashboards, dependency issue types |
 | `confluence-expert/` | PgM -> Confluence | Program charter, governance docs, stakeholder communication archives |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/milestone_tracker.py` | Milestone status, variance, critical path |
+| `scripts/resource_allocator.py` | Allocation and conflicts across projects |
+| `scripts/portfolio_dashboard.py` | Program RAG and benefits dashboard |
+| `assets/sample_milestones.json`, `assets/sample_resources.json`, `assets/sample_portfolio.json` | Inputs for the three tools |
+| `examples/northwind-ga-launch-portfolio.md` | Worked program for a GA launch |

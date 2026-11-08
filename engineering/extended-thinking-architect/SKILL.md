@@ -1,27 +1,22 @@
 ---
 name: extended-thinking-architect
 description: >
-  This skill should be used when the user asks to "decide reasoning effort",
-  "set a thinking budget", "when to use extended thinking",
-  "tune reasoning vs cost", or "should this task use a reasoning model".
+  Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model
+  plus a better prompt, and split effort across agent-loop phases. Use when tuning
+  reasoning vs cost or latency, or setting thinking budgets.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: ai-engineering
-  updated: 2026-06-29
+  updated: 2026-11-08
   tags: [extended-thinking, reasoning-effort, llm, cost-optimization, agents]
 ---
 
 # Extended Thinking Architect
 
-> **Category:** Engineering
-> **Domain:** AI Engineering
-
-## Overview
-
-The **Extended Thinking Architect** skill helps you decide *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. It turns task signals — error cost, ambiguity, step count, latency budget — into a deterministic recommendation with a rough cost multiplier, and allocates effort across the phases of an agent loop so you front-load reasoning where it pays and avoid runaway budgets.
+The agent decides *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. It turns task signals — error cost, ambiguity, step count, latency budget — into a deterministic recommendation with a rough cost multiplier, and allocates effort across the phases of an agent loop so you front-load reasoning where it pays and avoid runaway budgets.
 
 ## Clarify First
 
@@ -54,10 +49,16 @@ python scripts/reasoning_loop_allocator.py --difficulty medium --steps 5 --realt
 
 ## Tools Overview
 
-| Tool | Purpose | Key Flags |
-|------|---------|-----------|
-| `reasoning_budget_advisor.py` | Recommend an effort level (none/low/medium/high) or "prompt-first / cheaper-model" for one task, with rationale + cost multiplier | `--task-type`, `--error-cost`, `--steps`, `--ambiguity`, `--latency-budget`, `--verifiable`, `--json` |
-| `reasoning_loop_allocator.py` | Allocate reasoning effort across agent-loop phases (plan/act/observe/recover/finalize) under a total budget cap | `--difficulty`, `--steps`, `--max-budget-multiplier`, `--realtime`, `--json` |
+| Tool | Purpose | Key Flags | Exit codes |
+|------|---------|-----------|------------|
+| `reasoning_budget_advisor.py` | Recommend an effort level (none/low/medium/high) or "prompt-first / cheaper-model" for one task, with rationale and an illustrative cost multiplier | `--task-type`, `--error-cost`, `--steps`, `--ambiguity`, `--latency-budget`, `--verifiable`, `--json` | 0, 2 bad arguments |
+| `reasoning_loop_allocator.py` | Allocate reasoning effort across agent-loop phases (plan/act/observe/recover/finalize) under a total budget cap | `--difficulty`, `--steps`, `--max-budget-multiplier`, `--realtime`, `--json` | 0, 2 bad arguments |
+
+The cost multipliers (for example ~3x-8x for medium) are illustrative rules of thumb, not measurements. Real thinking-token use varies by model, task and provider; run a 20-50 item eval at two effort levels and compare quality, tokens and latency before fixing a budget.
+
+## How effort maps to platforms
+
+Current reasoning models expose effort directly: a reasoning-effort setting (low/medium/high, sometimes more levels) or an explicit thinking-token budget, and some decide adaptively how long to think. Map this skill's levels onto whatever the provider offers, and keep prompts goal-first: state the goal, constraints, examples and output contract. Asking a reasoning model to "think step by step" or to print its reasoning adds tokens without improving the answer; that technique is for non-reasoning models.
 
 ## Workflows
 
@@ -99,19 +100,21 @@ python scripts/reasoning_loop_allocator.py --difficulty medium --steps 5 --realt
 - [When to Use Extended Thinking](references/when-to-use-extended-thinking.md) - Decision matrix of task classes where reasoning pays off vs. is wasted, interaction with tool use and agent loops, budget guards, overthinking failure modes, and eval signals.
 - [Reasoning Budget Patterns](references/reasoning-budget-patterns.md) - Allocation patterns, escalation ladders, caps and circuit breakers, and the cost/quality/latency tradeoff model.
 
-## Common Patterns
+## Anti-Patterns
 
-### When Reasoning Pays Off
-- Multi-step deduction with a verifiable answer (math, constraint solving, debugging from a stack trace)
-- Planning and decomposition before a long agent run — front-load thinking once, not on every tool call
-- High error-cost decisions where a wrong answer is expensive to detect or undo
+**Mistake:** Starting every task at high effort "to be safe".
+**Why it happens:** More thinking feels like more quality.
+**Instead:** Start at the recommended level and escalate one notch on a failed check. High effort on extraction or formatting costs more and can over-elaborate.
 
-### When Reasoning Is Wasted
-- Extraction, classification, and formatting — deterministic mappings, not deduction; a cheaper model usually wins
-- Underspecified requests — extra thinking confidently elaborates on the wrong goal; fix the prompt first
-- Realtime/latency-tight paths where thinking tokens blow the budget more than they improve quality
+**Mistake:** Spending reasoning on an underspecified request.
+**Why it happens:** It seems the model can work out what was meant.
+**Instead:** Extra thinking confidently elaborates on the wrong goal. When the advisor says prompt-first, fix the spec and examples, then re-run.
 
-### Guarding the Budget
-- Set a per-call effort cap *and* a loop-level total cap (e.g. a multiple of one no-thinking call)
-- Escalate effort only on failure (retry at higher effort), never start high "to be safe"
-- Treat reasoning spent on trivial sub-steps as a regression — alert on per-phase token spend
+**Mistake:** Budgeting from the multiplier table without measuring.
+**Why it happens:** The numbers look precise.
+**Instead:** Treat them as a starting estimate and measure real token use on your own eval.
+
+## Files
+
+- `scripts/reasoning_budget_advisor.py`, `scripts/reasoning_loop_allocator.py` — the two advisors above.
+- [references/when-to-use-extended-thinking.md](references/when-to-use-extended-thinking.md), [references/reasoning-budget-patterns.md](references/reasoning-budget-patterns.md) — where reasoning pays off, budget patterns, caps and circuit breakers.

@@ -58,6 +58,9 @@ ESCALATION_KEYWORDS = [
 ]
 
 
+SPECULATIVE = {"might", "could", "may", "maybe", "probably", "possibly", "think", "feel", "guess", "worry"}
+
+
 def validate_risk(risk: dict[str, Any], index: int) -> list[str]:
     """Validate a single risk entry. Returns list of error messages."""
     errors = []
@@ -121,6 +124,8 @@ def process_risks(risks: list[dict[str, Any]]) -> dict[str, Any]:
             urgency = risk.get("urgency", "track").lower()
             entry["urgency"] = urgency
             entry["urgency_label"] = URGENCY_LABELS.get(urgency, urgency)
+            entry["owner"] = risk.get("owner", "")
+            entry["decision_date"] = risk.get("decision_date", "")
             tigers.append(entry)
         elif category == "paper_tiger":
             paper_tigers.append(entry)
@@ -130,6 +135,21 @@ def process_risks(risks: list[dict[str, Any]]) -> dict[str, Any]:
             )
             entry["escalation_check"] = escalation
             elephants.append(entry)
+
+    # Checks a facilitator skips under time pressure: a launch-blocker nobody owns, and a
+    # "tiger" whose evidence is a guess (which makes it a paper tiger until shown otherwise).
+    findings = []
+    for risk in risks:
+        if risk["category"].lower() != "tiger":
+            continue
+        name = risk["description"][:60]
+        if risk.get("urgency", "").lower() == "launch_blocking":
+            missing = [f for f in ("owner", "decision_date") if not risk.get(f)]
+            if missing:
+                findings.append(f"launch-blocking tiger '{name}' has no {' or '.join(missing)}")
+        words = set(str(risk.get("evidence", "")).lower().replace(",", " ").split())
+        if words & SPECULATIVE:
+            findings.append(f"tiger '{name}' rests on speculative evidence; cite data or reclassify as paper tiger")
 
     # Sort tigers by urgency
     tigers.sort(key=lambda x: URGENCY_ORDER.get(x.get("urgency", "track"), 99))
@@ -146,6 +166,7 @@ def process_risks(risks: list[dict[str, Any]]) -> dict[str, Any]:
 
     return {
         "total_risks": len(risks),
+        "findings": findings,
         "summary": {
             "tigers": len(tigers),
             "tiger_urgency": {
@@ -186,6 +207,11 @@ def format_text(results: dict[str, Any]) -> str:
             f"    ** {s['elephants_needing_investigation']} elephant(s) flagged for investigation **"
         )
 
+    if results["findings"]:
+        lines.append("")
+        lines.append("FINDINGS (fix before the session closes):")
+        lines.extend(f"  - {f}" for f in results["findings"])
+
     # Launch-Blocking Tigers
     launch_blocking = [t for t in results["tigers"] if t.get("urgency") == "launch_blocking"]
     if launch_blocking:
@@ -197,7 +223,7 @@ def format_text(results: dict[str, Any]) -> str:
             lines.append("")
             lines.append(f"  {i}. {t['description']}")
             lines.append(f"     Evidence:   {t['evidence']}")
-            lines.append(f"     Action:     Assign owner, define mitigation, set decision date")
+            lines.append(f"     Owner:      {t['owner'] or 'MISSING'}  |  Decide by: {t['decision_date'] or 'MISSING'}")
 
     # Fast-Follow Tigers
     fast_follow = [t for t in results["tigers"] if t.get("urgency") == "fast_follow"]
@@ -265,6 +291,8 @@ def get_demo_data() -> dict[str, Any]:
                 "category": "tiger",
                 "evidence": "3 incident reports in the last 30 days (P1-level severity)",
                 "urgency": "launch_blocking",
+                "owner": "Platform lead",
+                "decision_date": "2026-06-10",
             },
             {
                 "description": "CSV export does not handle unicode characters correctly",
@@ -344,18 +372,18 @@ Urgency (tigers only): launch_blocking, fast_follow, track
                 data = json.load(f)
         except FileNotFoundError:
             print(f"Error: File not found: {args.input_file}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         except json.JSONDecodeError as e:
             print(f"Error: Invalid JSON in {args.input_file}: {e}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
     else:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     risks = data.get("risks", [])
     if not risks:
         print("Error: No risks found in input data.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Validate
     all_errors = []
@@ -367,7 +395,7 @@ Urgency (tigers only): launch_blocking, fast_follow, track
         print("Validation errors:", file=sys.stderr)
         for error in all_errors:
             print(f"  - {error}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     results = process_risks(risks)
 
@@ -375,7 +403,12 @@ Urgency (tigers only): launch_blocking, fast_follow, track
         print(json.dumps(results, indent=2))
     else:
         print(format_text(results))
+    sys.exit(1 if results["findings"] else 0)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

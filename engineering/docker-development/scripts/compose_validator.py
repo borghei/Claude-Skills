@@ -5,7 +5,6 @@ Docker Compose Validator - Validate docker-compose files for correctness and bes
 Checks service dependencies, port conflicts, volume configurations,
 network definitions, and common misconfigurations.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -44,6 +43,7 @@ class ComposeParser:
         indent_stack: List[Tuple[int, str]] = []
 
         for line in self.lines:
+            line = re.sub(r"\s+#.*$", "", line)  # trailing comment
             stripped = line.strip()
             if not stripped or stripped.startswith("#"):
                 continue
@@ -72,15 +72,26 @@ class ComposeParser:
                     value = ":".join(stripped.split(":")[1:]).strip()
                     current_sub_key = key
                     if value:
-                        svc[key] = value
+                        svc[key] = value.strip("\"'")
                     else:
                         svc.setdefault(key, [])
+                elif indent >= 6 and not stripped.startswith("- ") and ":" in stripped \
+                        and current_sub_key in ("environment", "labels"):
+                    # map form ("KEY: value") stored like the list form ("KEY=value")
+                    k, _, v = stripped.partition(":")
+                    if not isinstance(svc.get(current_sub_key), list):
+                        svc[current_sub_key] = []
+                    svc[current_sub_key].append(f"{k.strip()}={v.strip().strip(chr(34) + chr(39))}")
                 elif indent >= 6 and stripped.startswith("- "):
-                    item = stripped[2:].strip()
+                    item = stripped[2:].strip().strip("\"'")
                     if current_sub_key:
                         if not isinstance(svc.get(current_sub_key), list):
                             svc[current_sub_key] = []
                         svc[current_sub_key].append(item)
+                elif indent >= 6 and current_sub_key and isinstance(svc.get(current_sub_key), list):
+                    # nested mapping (deploy.resources.limits, healthcheck.test ...): keep the
+                    # lines so presence checks such as "resources" in deploy still work
+                    svc[current_sub_key].append(stripped)
 
         return result
 
@@ -309,19 +320,33 @@ class ComposeValidator:
                     recommendation="Add deploy.resources.limits for CPU and memory.",
                 ))
 
-            # Check image tags
+            # Check image tags: no tag and ":latest" both float
             image = svc.get("image", "")
-            if image and ":" not in image:
+            if image and "@sha256:" not in image and (":" not in image.split("/")[-1] or image.endswith(":latest")):
                 self.findings.append(Finding(
                     severity="warning",
                     category="best-practice",
                     service=name,
-                    message=f"Service '{name}' uses image '{image}' without version tag.",
-                    recommendation="Pin image to a specific version tag.",
+                    message=f"Service '{name}' uses floating image '{image}'.",
+                    recommendation="Pin image to a specific version tag (or digest).",
                 ))
 
+            # Literal secrets in environment (values that are not ${VAR} references)
+            env = svc.get("environment", [])
+            for entry in env if isinstance(env, list) else []:
+                key, sep, value = str(entry).partition("=")
+                if sep and value and not value.startswith("$") and \
+                        re.search(r"PASS|SECRET|TOKEN|API_KEY|PRIVATE_KEY", key, re.I):
+                    self.findings.append(Finding(
+                        severity="critical",
+                        category="security",
+                        service=name,
+                        message=f"Service '{name}' sets {key} to a literal value in the compose file.",
+                        recommendation="Use env_file (kept out of git), ${VAR} substitution or Compose secrets.",
+                    ))
 
-def format_text(findings: List[Finding], services: Dict) -> str:
+
+def format_text(findings: List[Finding], services: Dict, ports_only: bool = False) -> str:
     """Format results as human-readable text."""
     lines = []
     lines.append("=" * 60)
@@ -348,7 +373,8 @@ def format_text(findings: List[Finding], services: Dict) -> str:
             lines.append("")
 
     if not findings:
-        lines.append("\nNo issues found. Compose file follows best practices.")
+        lines.append("\nNo host port conflicts found (only the port check ran; rerun without --check-ports for the full validation)."
+                     if ports_only else "\nNo issues found by the structure, dependency, port, volume, security and best-practice checks.")
 
     lines.append("=" * 60)
     return "\n".join(lines)
@@ -374,7 +400,7 @@ def main():
     )
     parser.add_argument("--file", "-f", required=True, help="Path to docker-compose file")
     parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format")
-    parser.add_argument("--check-ports", action="store_true", help="Only check for port conflicts")
+    parser.add_argument("--check-ports", action="store_true", help="Run only the port-conflict check (skips every other check)")
     args = parser.parse_args()
 
     path = Path(args.file)
@@ -387,9 +413,12 @@ def main():
     findings = validator.validate()
 
     if args.format == "json":
-        print(format_json(findings, validator.services))
+        report = json.loads(format_json(findings, validator.services))
+        report["checks_run"] = (["ports"] if args.check_ports else
+                                ["structure", "dependencies", "ports", "volumes", "security", "best-practices"])
+        print(json.dumps(report, indent=2))
     else:
-        print(format_text(findings, validator.services))
+        print(format_text(findings, validator.services, ports_only=args.check_ports))
 
     if any(f.severity == "critical" for f in findings):
         sys.exit(1)

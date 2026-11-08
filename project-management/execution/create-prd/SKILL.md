@@ -1,16 +1,16 @@
 ---
 name: create-prd
 description: >
-  PRD scaffolding expert that generates structured product requirements
-  documents using an 8-section framework, problem framing canvas, and
-  working-backwards press release. Use to spec a new product or feature.
+  Write an 8-section product requirements document, framing the problem
+  before the solution. Use when specifying a new product or a large feature
+  that needs engineering, design and business aligned on one document.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: prd_scaffolder.py
   tech-stack: prd, product-requirements, documentation
   tags:
@@ -30,7 +30,7 @@ Structured product requirements document creation using a proven 8-section frame
 - **Pre-PRD framing** — Problem Framing Canvas (user-perspective narrative) and Working Backwards Press Release sharpen the problem before solutions.
 - **8-section PRD framework** — Summary, Contacts, Background, Objective (SMART KRs), Market Segments (JTBD), Value Proposition (Value Curve), Solution (P0/P1/P2), Release.
 - **Plain-language discipline** — one idea per sentence, specificity over abstraction, 10-second executive test.
-- **Scaffolder automation** — `prd_scaffolder.py` generates the skeleton with guided placeholders.
+- **Optional scaffolder** — `prd_scaffolder.py` prints the empty skeleton; the framework and problem framing do the work.
 
 ## When to Use
 
@@ -49,18 +49,22 @@ Before generating the PRD, settle the inputs below. When one is missing or vague
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Gather context: product name, target segment, core problem (Clarify First).
+2. Frame the problem before any solution, with the Problem Framing Canvas or a Working Backwards press release (`references/prd-framework.md`). This is where most of the PRD's value comes from.
+3. Write the 8 sections from `assets/prd_template.md`. Every KR needs a baseline and a target; every P0 item traces back to a stated pain.
+4. **Verify** [RECOMMENDED] against the checklist in `references/prd-writing-guide.md`: an exec gets the Summary in 10 seconds, nothing in Solution lacks a problem above it, and the scope boundary is explicit. Then share for feedback.
+
+Optional: the scaffolder prints the empty 8-section skeleton with your name, objective and segments filled in. Writing straight from the template is equally fine.
 
 ```bash
-python scripts/prd_scaffolder.py --product-name "MyProduct" \
-  --objective "Short description of the outcome" \
-  --segments "Segment A, Segment B"
+python3 project-management/execution/create-prd/scripts/prd_scaffolder.py --product-name "SearchBoost" \
+  --objective "Help shoppers find the right product in under a minute" \
+  --segments "Power users, New customers"   # add --output PRD.md to write a file
 ```
 
-1. Gather context: product name, target segment, core problem.
-2. (Optional) Frame the problem first with the Problem Framing Canvas or Working Backwards PR (see `references/prd-framework.md`).
-3. Run the scaffolder to generate the skeleton, then fill each of the 8 sections.
-4. Review against the checklist in `references/prd-writing-guide.md`, then share for feedback.
+**Exit codes:** 0 skeleton written; 2 missing or empty arguments, or an unwritable `--output` path.
 
 ## Prototype-First Path
 
@@ -107,7 +111,13 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - `references/prd-framework.md` — read this while writing: the two pre-PRD techniques, full 8-section framework with per-section guidance, writing principles, scaffolder flag reference, troubleshooting, and success criteria.
 - `references/prd-writing-guide.md` — read this when polishing a draft: section-by-section writing guide and the review checklist.
 - `references/red-flags.md` — read this before sharing the PRD: common ways PRDs go wrong with bad/good examples and fixes.
-- `assets/prd_template.md` — complete PRD template ready to fill in.
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/prd_scaffolder.py` | Optional skeleton generator |
+| `assets/prd_template.md` | Complete PRD template |
+| `examples/shared-dashboards-prd.md` | Worked PRD |
 
 ## Scope & Limitations
 

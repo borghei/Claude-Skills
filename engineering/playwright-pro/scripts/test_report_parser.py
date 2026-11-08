@@ -27,7 +27,7 @@ def parse_report(filepath):
         return json.loads(content)
     except (OSError, json.JSONDecodeError) as e:
         print(f"Error reading report: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 def extract_test_results(report):
@@ -343,7 +343,7 @@ def main():
     report_path = Path(args.report)
     if not report_path.exists():
         print(f"Error: Report file '{args.report}' not found.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     report = parse_report(report_path)
     results = extract_test_results(report)

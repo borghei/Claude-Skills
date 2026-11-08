@@ -3,7 +3,7 @@
 Prompt Optimizer - Static analysis tool for prompt engineering
 
 Features:
-- Token estimation (GPT-4/Claude approximation)
+- Token estimation (character-ratio approximation; not a real tokenizer)
 - Prompt structure analysis
 - Clarity scoring
 - Few-shot example extraction and management
@@ -11,7 +11,12 @@ Features:
 
 Usage:
     python prompt_optimizer.py prompt.txt --analyze
-    python prompt_optimizer.py prompt.txt --tokens --model gpt-4
+    python prompt_optimizer.py prompt.txt --tokens --model claude-sonnet-5-5 --price-per-1k 0.003  # example price
+
+Scores are heuristics (regex checks for vague wording, structure, output format, reasoning
+scaffolding and shouted emphasis), useful for spotting issues, not a measure of quality.
+Costs are only shown when you pass --price-per-1k from the provider's current pricing page.
+Exit codes: 0 analysis ran, 2 bad input (missing or empty prompt file).
     python prompt_optimizer.py prompt.txt --optimize --output optimized.txt
     python prompt_optimizer.py prompt.txt --extract-examples --output examples.json
 """
@@ -25,31 +30,31 @@ from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass, asdict
 
 
-# Token estimation ratios (chars per token approximation)
+# Characters per token by model family (rough; real tokenizers differ by language and content)
 TOKEN_RATIOS = {
-    'gpt-4': 4.0,
-    'gpt-3.5': 4.0,
     'claude': 3.5,
     'default': 4.0
 }
+# No price table on purpose: prices change. Pass --price-per-1k from the provider's pricing page.
 
-# Cost per 1K tokens (input)
-COST_PER_1K = {
-    'gpt-4': 0.03,
-    'gpt-4-turbo': 0.01,
-    'gpt-3.5-turbo': 0.0005,
-    'claude-opus-5': 0.005,
-    'claude-sonnet-5': 0.002,
-    'claude-haiku-4-5': 0.001,
-    'default': 0.01
-}
+# Explicit chain-of-thought scaffolding. Reasoning models think before answering, so these
+# phrases mostly add tokens; keep them only when targeting a non-reasoning model.
+REASONING_SCAFFOLD = [
+    r"\b(let'?s|please)?\s*think (it through )?step[- ]by[- ]step\b",
+    r'\bchain[- ]of[- ]thought\b',
+    r'\breason (carefully|step by step) before\b',
+    r'\bexplain your reasoning before\b',
+    r'\bshow your (work|reasoning)\b',
+    r'^\s*Thought\s*:',
+]
+SHOUTED = r'\b(MUST|NEVER|ALWAYS|CRITICAL|IMPORTANT|DO NOT|REQUIRED)\b'
 
 
 @dataclass
 class PromptAnalysis:
     """Results of prompt analysis"""
     token_count: int
-    estimated_cost: float
+    estimated_cost: Optional[float]
     model: str
     clarity_score: int
     structure_score: int
@@ -72,15 +77,38 @@ class FewShotExample:
 
 
 def estimate_tokens(text: str, model: str = 'default') -> int:
-    """Estimate token count based on character ratio"""
-    ratio = TOKEN_RATIOS.get(model, TOKEN_RATIOS['default'])
-    return int(len(text) / ratio)
+    """Estimate token count based on a per-family character ratio"""
+    family = 'claude' if model.lower().startswith('claude') else 'default'
+    return int(len(text) / TOKEN_RATIOS[family])
 
 
-def estimate_cost(token_count: int, model: str = 'default') -> float:
-    """Estimate cost based on token count"""
-    cost_per_1k = COST_PER_1K.get(model, COST_PER_1K['default'])
-    return round((token_count / 1000) * cost_per_1k, 6)
+def estimate_cost(token_count: int, price_per_1k: Optional[float] = None) -> Optional[float]:
+    """Input cost for the given price per 1K tokens, or None when no price was supplied"""
+    if price_per_1k is None:
+        return None
+    return round((token_count / 1000) * price_per_1k, 6)
+
+
+def find_reasoning_scaffolding(text: str) -> List[Dict[str, str]]:
+    """Flag forced chain-of-thought phrasing and heavy ALL-CAPS emphasis"""
+    issues = []
+    for i, line in enumerate(text.split('\n'), 1):
+        for pattern in REASONING_SCAFFOLD:
+            match = re.search(pattern, line, re.IGNORECASE)
+            if match:
+                issues.append({'type': 'reasoning_scaffold', 'line': i, 'text': match.group().strip(),
+                               'message': 'Forced chain-of-thought: reasoning models already think. State the goal, '
+                                          'constraints and output contract instead (keep only for non-reasoning models)',
+                               'context': line.strip()[:80]})
+                break
+    shouted = [(i, m.group()) for i, line in enumerate(text.split('\n'), 1) for m in re.finditer(SHOUTED, line)]
+    if len(shouted) >= 3:
+        line, word = shouted[0]
+        issues.append({'type': 'emphasis', 'line': line, 'text': word,
+                       'message': f'{len(shouted)} ALL-CAPS imperatives: heavy emphasis makes current models '
+                                  'over-apply rules. Use calm wording and give the reason instead',
+                       'context': ''})
+    return issues
 
 
 def find_ambiguous_instructions(text: str) -> List[Dict[str, str]]:
@@ -239,6 +267,7 @@ def calculate_clarity_score(text: str, issues: List[Dict]) -> int:
     # Deduct for issues
     score -= len([i for i in issues if i['type'] == 'ambiguity']) * 5
     score -= len([i for i in issues if i['type'] == 'redundancy']) * 3
+    score -= len([i for i in issues if i['type'] in ('reasoning_scaffold', 'emphasis')]) * 5
 
     # Check for structure
     if not re.search(r'^#+\s|^[A-Z][a-z]+:', text, re.MULTILINE):
@@ -292,26 +321,31 @@ def generate_suggestions(analysis: PromptAnalysis) -> List[str]:
     if analysis.token_count > 2000:
         suggestions.append(f'Prompt is {analysis.token_count} tokens - consider condensing for cost efficiency')
 
-    # Check for role prompting
-    if not re.search(r'you are|act as|as a\s+\w+', analysis.sections[0].get('content', [''])[0] if analysis.sections else '', re.IGNORECASE):
-        suggestions.append('Consider adding role context: "You are an expert..."')
+    if any(i['type'] == 'reasoning_scaffold' for i in analysis.issues):
+        suggestions.append('Remove "think step by step" style scaffolding for reasoning models; '
+                           'use the platform\'s reasoning effort / thinking budget setting if you need more depth')
+
+    # Context beats a generic persona
+    if not re.search(r'\b(audience|used (for|by)|so that|because|the goal|purpose)\b', analysis.raw_text, re.IGNORECASE):
+        suggestions.append('Say who the output is for and why it is needed; that context helps more than '
+                           '"You are an expert..."')
 
     return suggestions
 
 
-def analyze_prompt(text: str, model: str = 'gpt-4') -> PromptAnalysis:
+def analyze_prompt(text: str, model: str = 'generic', price_per_1k: Optional[float] = None) -> PromptAnalysis:
     """Perform comprehensive prompt analysis"""
 
     # Basic metrics
     token_count = estimate_tokens(text, model)
-    cost = estimate_cost(token_count, model)
+    cost = estimate_cost(token_count, price_per_1k)
     word_count = len(text.split())
     line_count = len(text.split('\n'))
 
     # Find issues
     ambiguity_issues = find_ambiguous_instructions(text)
     redundancy_issues = find_redundant_content(text)
-    all_issues = ambiguity_issues + redundancy_issues
+    all_issues = ambiguity_issues + redundancy_issues + find_reasoning_scaffolding(text)
 
     # Extract structure
     sections = extract_sections(text)
@@ -338,7 +372,16 @@ def analyze_prompt(text: str, model: str = 'gpt-4') -> PromptAnalysis:
         line_count=line_count
     )
 
-    analysis.suggestions = generate_suggestions(analysis) + format_suggestions
+    analysis.raw_text = text
+    # Both sources suggest adding an output format; keep the first of each topic
+    suggestions, topics = [], set()
+    for text_ in generate_suggestions(analysis) + format_suggestions:
+        topic = 'output format' if 'output format' in text_.lower() else text_
+        if topic not in topics:
+            topics.add(topic)
+            suggestions.append(text_)
+    analysis.suggestions = suggestions
+    del analysis.raw_text
 
     return analysis
 
@@ -368,12 +411,15 @@ def format_report(analysis: PromptAnalysis) -> str:
 
     report.append("📊 METRICS")
     report.append(f"  Token count:     {analysis.token_count:,}")
-    report.append(f"  Estimated cost:  ${analysis.estimated_cost:.4f} ({analysis.model})")
+    if analysis.estimated_cost is None:
+        report.append(f"  Estimated cost:  n/a (pass --price-per-1k)")
+    else:
+        report.append(f"  Estimated cost:  ${analysis.estimated_cost:.4f} input ({analysis.model})")
     report.append(f"  Word count:      {analysis.word_count:,}")
     report.append(f"  Line count:      {analysis.line_count}")
     report.append("")
 
-    report.append("📈 SCORES")
+    report.append("📈 SCORES (heuristic)")
     report.append(f"  Clarity:    {analysis.clarity_score}/100 {'✅' if analysis.clarity_score >= 70 else '⚠️'}")
     report.append(f"  Structure:  {analysis.structure_score}/100 {'✅' if analysis.structure_score >= 70 else '⚠️'}")
     report.append("")
@@ -417,7 +463,7 @@ def main():
         epilog="""
 Examples:
   %(prog)s prompt.txt --analyze
-  %(prog)s prompt.txt --tokens --model claude-sonnet-5
+  %(prog)s prompt.txt --tokens --model claude-sonnet-5-5 --price-per-1k 0.003  # example price
   %(prog)s prompt.txt --optimize --output optimized.txt
   %(prog)s prompt.txt --extract-examples --output examples.json
         """
@@ -428,9 +474,10 @@ Examples:
     parser.add_argument('--tokens', '-t', action='store_true', help='Count tokens only')
     parser.add_argument('--optimize', '-O', action='store_true', help='Generate optimized version')
     parser.add_argument('--extract-examples', '-e', action='store_true', help='Extract few-shot examples')
-    parser.add_argument('--model', '-m', default='gpt-4',
-                       choices=['gpt-4', 'gpt-4-turbo', 'gpt-3.5-turbo', 'claude-opus-5', 'claude-sonnet-5', 'claude-haiku-4-5'],
-                       help='Model for token/cost estimation')
+    parser.add_argument('--model', '-m', default='generic',
+                       help='Model id, used for the token ratio (claude* ~3.5 chars/token, others ~4)')
+    parser.add_argument('--price-per-1k', type=float,
+                       help="Input price per 1K tokens from the provider's pricing page (enables cost output)")
     parser.add_argument('--output', '-o', help='Output file path')
     parser.add_argument('--json', '-j', action='store_true', help='Output as JSON')
     parser.add_argument('--compare', '-c', help='Compare with baseline analysis JSON')
@@ -439,16 +486,22 @@ Examples:
 
     # Read prompt file
     prompt_path = Path(args.prompt)
-    if not prompt_path.exists():
-        print(f"Error: File not found: {args.prompt}", file=sys.stderr)
-        sys.exit(1)
-
-    text = prompt_path.read_text(encoding='utf-8')
+    if not prompt_path.is_file():
+        print(f"error: file not found: {args.prompt}", file=sys.stderr)
+        sys.exit(2)
+    try:
+        text = prompt_path.read_text(encoding='utf-8')
+    except (OSError, UnicodeDecodeError) as exc:
+        print(f"error: cannot read {args.prompt}: {exc}", file=sys.stderr)
+        sys.exit(2)
+    if not text.strip():
+        print(f"error: {args.prompt} is empty", file=sys.stderr)
+        sys.exit(2)
 
     # Tokens only
     if args.tokens:
         token_count = estimate_tokens(text, args.model)
-        cost = estimate_cost(token_count, args.model)
+        cost = estimate_cost(token_count, args.price_per_1k)
         if args.json:
             print(json.dumps({
                 'tokens': token_count,
@@ -457,7 +510,8 @@ Examples:
             }, indent=2))
         else:
             print(f"Tokens: {token_count:,}")
-            print(f"Estimated cost: ${cost:.4f} ({args.model})")
+            print(f"Estimated cost: ${cost:.4f} input ({args.model})" if cost is not None
+                  else "Estimated cost: n/a (pass --price-per-1k)")
         sys.exit(0)
 
     # Extract examples
@@ -490,7 +544,7 @@ Examples:
         sys.exit(0)
 
     # Default: full analysis
-    analysis = analyze_prompt(text, args.model)
+    analysis = analyze_prompt(text, args.model, args.price_per_1k)
 
     # Compare with baseline
     if args.compare:
@@ -515,5 +569,5 @@ Examples:
         print(f"\nAnalysis saved to {args.output}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

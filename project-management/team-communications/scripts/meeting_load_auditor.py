@@ -14,6 +14,12 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
+
+def _die(msg: str) -> None:
+    """Bad input: message on stderr, exit 2 (1 is reserved for findings)."""
+    print(msg, file=sys.stderr)
+    sys.exit(2)
+
 WORK_WEEK_HOURS = 40.0
 # Verdict thresholds, in decisions recorded per month for the whole meeting series.
 DECISION_FLOOR = 1.0
@@ -31,11 +37,11 @@ def load_calendar(path: Path) -> Dict[str, Any]:
     try:
         doc = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
-        raise SystemExit(f"error: calendar file not found: {path}")
+        _die(f"error: calendar file not found: {path}")
     except json.JSONDecodeError as exc:
-        raise SystemExit(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
+        _die(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
     if not isinstance(doc, dict) or "meetings" not in doc or "people" not in doc:
-        raise SystemExit("error: calendar JSON needs top-level 'people' and 'meetings' keys")
+        _die("error: calendar JSON needs top-level 'people' and 'meetings' keys")
     return doc
 
 
@@ -244,9 +250,9 @@ def main() -> None:
         output(build_report(doc, args.maker_hours_target), args.format)
     except SystemExit:
         raise
-    except (KeyError, TypeError, ValueError) as exc:
+    except (AttributeError, KeyError, TypeError, ValueError) as exc:
         print(f"error: malformed calendar data — {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

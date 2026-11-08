@@ -1,16 +1,16 @@
 ---
 name: north-star-metric
 description: >
-  Define a North Star Metric (NSM) and its input metric tree, with leading
-  indicators, anti-metrics, and counter-metrics. Includes a Python tool that
-  renders the metric tree as a Mermaid diagram.
+  Pick the one metric that tracks customer value, decompose it into inputs
+  with leading indicators and guardrail metrics. Use when defining the metric
+  a team optimises before writing OKRs, or when a dashboard has no headline.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: metric_tree_builder.py
   tech-stack: north-star, input-metrics, leading-indicators, counter-metrics, omtm
   tags:
@@ -58,12 +58,22 @@ Before defining the NSM, settle the inputs below. When one is missing or vague a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. **Choose the NSM** [RECOMMENDED] by scoring 2-4 candidates against the five tests (customer value, strategic alignment, leading, single number, movable). Details: `references/nsm-playbook.md`.
+2. **Decompose** into 3-5 inputs with a formula you can write down, and check the numbers multiply or add up to the NSM's current value.
+3. **Add** 2-3 leading indicators per input (each with how far ahead it moves), anti-metrics and counter-metrics with thresholds, and a baseline plus trend next to every target.
+4. **Render** the finished spec for a README, Confluence or Notion. The tool renders and checks shape; it does not choose the metric, so run it only once the spec exists:
 
 ```bash
-python scripts/metric_tree_builder.py --input nsm_spec.json --format mermaid   # render the metric tree
-python scripts/metric_tree_builder.py --demo --format markdown                 # worked SaaS productivity NSM
+python3 project-management/execution/north-star-metric/scripts/metric_tree_builder.py \
+  --input project-management/execution/north-star-metric/assets/sample_nsm_spec.json --format mermaid
+# --format markdown|json|confluence|notion|linear, --output FILE; --demo renders the same sample
 ```
+
+**Done when** the formula reproduces the NSM's current value from the inputs (the sample: 28,000 WAA x 0.44 publishers = about 12,400), every input has a leading indicator and every target has a baseline.
+
+**Exit codes:** 0 rendered; 2 missing file, invalid JSON, or a spec without an `nsm` object and an `inputs` list of named items.
 
 ## Anti-Patterns
 
@@ -91,7 +101,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/nsm-playbook.md](references/nsm-playbook.md)** — the five quality tests, Amplitude archetypes + real company examples, the metric-tree structure and input math, leading indicators, anti-/counter-metrics with thresholds, the step-by-step workflow, the `metric_tree_builder.py` reference (flags, input JSON, Mermaid sample), troubleshooting, and success criteria. Read when selecting an NSM or building the tree.
 - **[references/nsm-framework-guide.md](references/nsm-framework-guide.md)** — deep dive on three overlapping frameworks (Sean Ellis NSM, Amplitude NSM, Lean Analytics OMTM), input-metric math, and worked examples across five business archetypes. Read when comparing frameworks or working a specific archetype.
 - **[references/red-flags.md](references/red-flags.md)** — concrete examples of how NSM specs go wrong, why they're bad, and how to fix them. Read when reviewing an NSM or diagnosing a gamed/lagging metric.
-- **assets/nsm_spec_template.md** — fill-in template for an NSM specification matching the tool's JSON shape. Use when drafting a spec.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/metric_tree_builder.py` | Renders a finished NSM spec |
+| `assets/sample_nsm_spec.json` | SaaS productivity NSM with two inputs, indicators and guardrails |
+| `assets/nsm_spec_template.md` | Fill-in spec template matching the JSON shape |
+| `examples/acme-analytics-nsm.md` | Worked NSM |
 
 ## Scope & Limitations
 
@@ -112,4 +130,4 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `execution/prioritization-frameworks/` | Pairs with | NSM impact is one of the scoring criteria (e.g., RICE Impact, Weighted) |
 | `execution/status-update-generator/` | Feeds into | NSM and input movements feature in Highlights of weekly updates |
 | `data-analytics/` (domain) | Pairs with | NSM spec becomes the schema for dashboards and event taxonomies |
-| `executive-reporting/` (senior-pm) | Feeds into | Monthly board packets lead with NSM trend |
+| `senior-pm/` | Feeds into | Monthly board packets lead with NSM trend |

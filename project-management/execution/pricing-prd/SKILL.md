@@ -1,16 +1,16 @@
 ---
 name: pricing-prd
 description: >
-  Tactical PM PRD for pricing experiments and pricing-page launches. Pairs with
-  business-growth/pricing-strategy. Covers packaging, willingness-to-pay,
-  grandfathering, A/B design, rollback, regional pricing, and UX.
+  Write the PRD for a pricing change: model and packaging, experiment design,
+  grandfathering, communication and rollback thresholds. Use when turning a
+  pricing decision into an experiment, a pricing-page launch or a tier change.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: [pricing-prd, ab-testing, packaging, van-westendorp, monetizing-innovation]
   tags: [pricing, prd, packaging, ab-test, grandfathering, monetization]
 ---
@@ -20,7 +20,7 @@ metadata:
 
 A pricing PRD is the tactical artifact that converts a pricing strategy into a shipped change. Where `business-growth/pricing-strategy/` decides "we are moving from per-seat to per-usage and adding an enterprise tier", a pricing PRD decides "here is the page, the experiment, the rollout, and the rollback". Most PMs underinvest in this artifact — they treat pricing as a marketing problem until the rollout breaks revenue.
 
-This skill is opinionated about the structure of a pricing PRD (distinct from a feature PRD), the discipline of pricing experiments (small samples + revenue sensitivity == high risk of false-positive readouts), grandfathering and communication (the most-often-skipped sections that cause the most damage), A/B testing pricing without confusing customers or violating consumer-law principles, and rollback criteria written in advance rather than improvised under pressure. The frameworks behind it: Patrick Campbell's "Pricing as a feature", Ramanujam's *Monetizing Innovation*, Van Westendorp's Price Sensitivity Meter, controlled pricing-experiment discipline, and Stripe's pricing-page patterns.
+This skill is opinionated about the structure of a pricing PRD (distinct from a feature PRD), the discipline of pricing experiments (small samples + revenue sensitivity == high risk of false-positive readouts), grandfathering and communication (the most-often-skipped sections that cause the most damage), A/B testing pricing without confusing customers or violating consumer-law principles, and rollback criteria written in advance rather than improvised under pressure. Source frameworks are listed in `references/pricing-prd-playbook.md`.
 
 ## Core Capabilities
 
@@ -53,6 +53,17 @@ Before generating the pricing PRD, settle the inputs below. When one is missing 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. **Confirm the decision is made.** If "should we change pricing at all?" is still open, that belongs to `business-growth/pricing-strategy/`; this PRD ships a decision.
+2. **Write the model and packaging sections** from `assets/pricing_prd_template.md`: what changes, for whom, and which value carrier each tier sells.
+3. **Decide test or launch** [RECOMMENDED]. Pricing tests have small samples and revenue-sensitive readouts, so false positives are common. Run an A/B test only when the expected traffic reaches the sample size for your minimum detectable effect within the test window (worksheet: `assets/pricing_experiment_design.md`); otherwise launch to new customers only, with a holdout or a staged region, and say why. Use revenue per visitor or per account as the primary metric, not conversion alone.
+4. **Write grandfathering and the communication plan** before the launch date: who keeps the old price, for how long, and the message each segment receives (`assets/grandfathering_communication_template.md`).
+5. **Pre-write rollback thresholds**: the metric, the threshold, the window, and who decides.
+6. **Check the page** with `assets/pricing_page_checklist.md`.
+
+**Done when** the PRD names the primary metric and its sample-size calculation (or the reason there is no test), the grandfathering policy, and a rollback threshold someone has agreed to act on.
+
 ## Anti-Patterns
 
 ### Van Westendorp without segmentation
@@ -80,10 +91,16 @@ Pull the reference that matches the task; keep this file lean and load detail on
 - **[references/pricing-experimentation-guide.md](references/pricing-experimentation-guide.md)** — deep guide on pricing A/B tests, mix-shift detection, and readout windows. Read when designing or reading out a pricing experiment.
 - **[references/packaging-frameworks.md](references/packaging-frameworks.md)** — tier vs usage vs hybrid frameworks and Ramanujam-style packaging. Read when deciding what goes in which tier.
 - **[references/red-flags.md](references/red-flags.md)** — concrete examples of how pricing PRDs go wrong and how to fix them. Read when reviewing a draft for quality.
-- **assets/pricing_prd_template.md** — 13-section pricing PRD template. Use to author the artifact.
-- **assets/pricing_experiment_design.md** — A/B test design worksheet (hypothesis, MDE, holdout). Use when planning a test.
-- **assets/pricing_page_checklist.md** — UX review checklist for the pricing page. Use before shipping the page.
-- **assets/grandfathering_communication_template.md** — customer email for grandfathering communication. Use when drafting the comm plan.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/pricing_prd_template.md` | 13-section pricing PRD template |
+| `assets/pricing_experiment_design.md` | Test design worksheet: hypothesis, MDE, sample size, holdout |
+| `assets/pricing_page_checklist.md` | Pricing-page UX review |
+| `assets/grandfathering_communication_template.md` | Customer email for grandfathering |
+| `examples/usage-based-tier-pricing-prd.md` | Worked pricing PRD |
 
 ## Scope & Limitations
 

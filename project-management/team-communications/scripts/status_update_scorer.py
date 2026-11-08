@@ -14,6 +14,12 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
+
+def _die(msg: str) -> None:
+    """Bad input: message on stderr, exit 2 (1 is reserved for findings)."""
+    print(msg, file=sys.stderr)
+    sys.exit(2)
+
 # Cue phrases that mark each of the four load-bearing elements of a status update.
 ELEMENT_CUES: Dict[str, List[str]] = {
     "progress": [r"\bshipped\b", r"\blanded\b", r"\bcompleted?\b", r"\bdelivered\b",
@@ -40,17 +46,17 @@ def read_draft(args: argparse.Namespace) -> Dict[str, Any]:
         try:
             doc = json.loads(path.read_text(encoding="utf-8"))
         except FileNotFoundError:
-            raise SystemExit(f"error: file not found: {path}")
+            _die(f"error: file not found: {path}")
         except json.JSONDecodeError as exc:
-            raise SystemExit(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
+            _die(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
         if "body" not in doc:
-            raise SystemExit("error: status JSON needs a 'body' key holding the draft text")
+            _die("error: status JSON needs a 'body' key holding the draft text")
         return doc
     path = Path(args.text)
     try:
         return {"title": path.stem, "audience": args.audience, "body": path.read_text(encoding="utf-8")}
     except FileNotFoundError:
-        raise SystemExit(f"error: file not found: {path}")
+        _die(f"error: file not found: {path}")
 
 
 def sentences(body: str) -> List[str]:
@@ -221,9 +227,9 @@ def main() -> None:
         }, args.format)
     except SystemExit:
         raise
-    except (KeyError, TypeError, ValueError) as exc:
+    except (AttributeError, KeyError, TypeError, ValueError) as exc:
         print(f"error: could not score the draft — {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

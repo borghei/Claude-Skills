@@ -294,6 +294,8 @@ def validate_openai_function(func: dict, strict: bool = False) -> list[dict]:
 # ---------------------------------------------------------------------------
 def detect_protocol(data: dict) -> str:
     """Heuristically detect which protocol a schema belongs to."""
+    if data.get("type") == "function" and isinstance(data.get("function"), dict):
+        return "openai"  # single wrapped tool, as schema_generator.py --protocol openai writes
     if "inputSchema" in data:
         return "mcp"
     if "skills" in data or "defaultInputModes" in data or "defaultOutputModes" in data:
@@ -342,7 +344,10 @@ def validate_file(filepath: str, protocol: str, strict: bool) -> dict:
         result["issues"].extend(validate_a2a_agent_card(data, strict))
 
     elif detected == "openai":
-        funcs = [data] if "name" in data else [f.get("function", f) for f in data.get("tools", data.get("functions", [data]))]
+        if isinstance(data.get("function"), dict):
+            funcs = [data["function"]]
+        else:
+            funcs = [data] if "name" in data else [f.get("function", f) for f in data.get("tools", data.get("functions", [data]))]
         for idx, func in enumerate(funcs):
             func_issues = validate_openai_function(func, strict)
             for iss in func_issues:
@@ -440,17 +445,17 @@ def main() -> int:
                         help="Output results as JSON")
     args = parser.parse_args()
 
+    missing = [f for f in args.files if not os.path.isfile(f)]
+    if missing:
+        print(f"Error: file not found: {', '.join(missing)}", file=sys.stderr)
+        return 2
     results: list[dict] = []
     for filepath in args.files:
-        if not os.path.isfile(filepath):
-            results.append({
-                "file": filepath,
-                "protocol": args.protocol,
-                "issues": [_issue(SEVERITY_ERROR, "FILE_NOT_FOUND",
-                                  f"File not found: {filepath}")]
-            })
-            continue
-        results.append(validate_file(filepath, args.protocol, args.strict))
+        res = validate_file(filepath, args.protocol, args.strict)
+        if any(i.get("code") in ("INVALID_JSON", "FILE_READ_ERROR") for i in res["issues"]):
+            print(f"Error: cannot parse {filepath}: {res['issues'][0]['message']}", file=sys.stderr)
+            return 2
+        results.append(res)
 
     if args.json_output:
         print(json.dumps({"results": results, "file_count": len(results)}, indent=2))

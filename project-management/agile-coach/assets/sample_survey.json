@@ -1,0 +1,51 @@
+{
+  "team": "Team Alpha",
+  "date": "2026-03-21",
+  "respondents": [
+    {
+      "name": "Alice",
+      "scores": {
+        "psychological_safety": 4,
+        "delivery_pace": 3,
+        "code_quality": 4,
+        "learning": 3,
+        "collaboration": 5,
+        "fun": 4,
+        "mission_clarity": 4,
+        "autonomy": 3,
+        "support": 3,
+        "sustainable_pace": 2
+      }
+    },
+    {
+      "name": "Bob",
+      "scores": {
+        "psychological_safety": 3,
+        "delivery_pace": 4,
+        "code_quality": 3,
+        "learning": 2,
+        "collaboration": 4,
+        "fun": 3,
+        "mission_clarity": 3,
+        "autonomy": 2,
+        "support": 4,
+        "sustainable_pace": 3
+      }
+    },
+    {
+      "name": "Carol",
+      "scores": {
+        "psychological_safety": 5,
+        "delivery_pace": 3,
+        "code_quality": 4,
+        "learning": 4,
+        "collaboration": 4,
+        "fun": 5,
+        "mission_clarity": 5,
+        "autonomy": 4,
+        "support": 3,
+        "sustainable_pace": 2
+      }
+    }
+  ]
+}

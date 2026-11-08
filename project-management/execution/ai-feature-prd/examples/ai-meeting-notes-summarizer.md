@@ -29,7 +29,7 @@ The PM (Priya, Senior PM, Customer Workflows) needs an AI Feature PRD that survi
 6. **Wired the deployment ramp** to `feature-flag-strategy/` shape A (linear) with a shadow stage and an internal-only stage gated on acceptance >= 85%.
 7. **Pre-mortemed the AI-specific failure modes** with `discovery/pre-mortem/` (hallucinated action items, prompt-injection from a hostile transcript, model outage during a high-volume QBR week).
 
-Key decision quoted from the review: *"We name `claude-sonnet-4.5` as primary and `gpt-5-mini` as fallback. Switch trigger is acceptance regression > 5 points week-over-week, or vendor outage > 30 min."*
+Key decision quoted from the review: *"We name `claude-sonnet-5-5` as primary and a second vendor's small model as fallback. Switch trigger is acceptance regression > 5 points week-over-week, or vendor outage > 30 min."*
 
 ## The artifact
 
@@ -44,7 +44,7 @@ Key decision quoted from the review: *"We name `claude-sonnet-4.5` as primary an
 
 ## 1. Summary
 
-A Claude-Sonnet-4.5-based assistant integrated into Acme Analytics that converts a call transcript (Zoom / Meet / pasted) into a structured QBR summary, action items, sentiment snapshot, and draft follow-up email. Internal CSMs first, customer-facing export in v1.1.
+A Claude Sonnet 5.5-based assistant integrated into Acme Analytics that converts a call transcript (Zoom / Meet / pasted) into a structured QBR summary, action items, sentiment snapshot, and draft follow-up email. Internal CSMs first, customer-facing export in v1.1.
 
 ## 2. Contacts
 
@@ -128,9 +128,9 @@ Tools: cite_transcript_turn(turn_id), lookup_customer_record(customer_id).
 
 | Field | Value |
 |---|---|
-| Primary model | `claude-sonnet-4.5` (Anthropic, via Bedrock, eu-west-1 for EU tenants) |
-| Fallback model | `gpt-5-mini` (OpenAI, via Azure, EU regional) for outage; `claude-haiku-4` for cost cap |
-| Reason chosen | Highest acceptance on golden-set pilot (91% vs 84% for `gpt-5-mini`, 79% for `claude-haiku-4`); strong refusal behavior on PII-laden transcripts |
+| Primary model | `claude-sonnet-5-5` (Anthropic, via Bedrock, eu-west-1 for EU tenants) |
+| Fallback model | a second vendor's small model (OpenAI, via Azure, EU regional) for outage; `claude-haiku-5-5` for cost cap |
+| Reason chosen | Highest acceptance on golden-set pilot (91% vs 84% for a second vendor's small model, 79% for `claude-haiku-5-5`); strong refusal behavior on PII-laden transcripts |
 | Update policy | Re-evaluate primary every 90 days (next: 2026-08-22) |
 | Switch trigger | Acceptance regression > 5 points WoW, or vendor outage > 30 min |
 
@@ -146,7 +146,7 @@ Rejected:
 ### 9.3 Data flow
 
 ```
-Transcript (paste/Zoom) -> PII scrubber (regex + LlamaGuard 3) -> Retrieval (prior QBR summaries) -> Claude Sonnet 4.5 -> Output schema validator -> Sentiment classifier (post-pass) -> UI
+Transcript (paste/Zoom) -> PII scrubber (regex + LlamaGuard 3) -> Retrieval (prior QBR summaries) -> Claude Sonnet 5.5 -> Output schema validator -> Sentiment classifier (post-pass) -> UI
 ```
 
 - User data leaves boundary to Anthropic via Bedrock under existing DPA (EU residency for EU tenants).
@@ -184,7 +184,7 @@ In source control at `prompts/qbr_summarizer/v1.yaml`. Every prompt change is a 
 |---|---|
 | Input filter | Regex PII scrub + LlamaGuard 3 classifier; refuse if health/legal/minor flagged |
 | Pre-prompt | System prompt enforces "never invent attendees/dates/dollars"; refusal rules |
-| In-model | `claude-sonnet-4.5` chosen partly for refusal training |
+| In-model | `claude-sonnet-5-5` chosen partly for refusal training |
 | Output filter | Schema validator (rejects malformed JSON); citation check (every action item must map to a transcript turn) |
 | Post-response | Sentiment classifier as a separate pass (not in main prompt) |
 | Human-in-loop | CSM must click "Send" on the draft email; nothing auto-sends |
@@ -203,11 +203,11 @@ The summarizer redirects (does not refuse) when:
 
 | Failure | Detection | Response |
 |---|---|---|
-| Primary model outage | Bedrock health-check + error rate alert | Fail over to `gpt-5-mini`; banner in UI |
+| Primary model outage | Bedrock health-check + error rate alert | Fail over to a second vendor's small model; banner in UI |
 | Acceptance drops > 5 pts WoW | Weekly Langfuse eval CI | Roll back prompt version; on-call ML paged |
 | Hallucinated action item | Citation-check + user "incorrect" flag | Tighten prompt; add to golden set |
 | Prompt injection via transcript | Output filter + "instruction-leak" detector | Patch input scrubber; add to red-team set |
-| Cost spike per tenant | Per-tenant token meter | Throttle or downgrade to `claude-haiku-4` |
+| Cost spike per tenant | Per-tenant token meter | Throttle or downgrade to `claude-haiku-5-5` |
 | Latency > 2s on long transcripts | p95 alert | Chunk and parallelize |
 
 ### 10.6 Human-in-the-loop
@@ -262,7 +262,7 @@ Wired via LaunchDarkly flag `qbr_summarizer_v1`. Shape A (linear) with internal-
 
 ## Why this works
 
-- Names a primary model (`claude-sonnet-4.5`), a fallback (`gpt-5-mini`), and a numeric switch trigger -- exits the "use the best model" trap.
+- Names a primary model (`claude-sonnet-5-5`), a fallback (a second vendor's small model), and a numeric switch trigger -- exits the "use the best model" trap.
 - Eval thresholds (90% acceptance, 2% hallucination, $0.05/summary) are numeric and pre-locked, so quality cannot be rationalized after launch.
 - Declares EU AI Act risk tier on day 1, avoiding the "Legal vetoes at week 9" failure mode.
 - Cost model includes a 10x sensitivity and an auto-throttle, satisfying the CFO gate explicitly.

@@ -46,7 +46,7 @@ python scripts/okr_validator.py --input okrs.json
 
 The validator scores each OKR set and surfaces quality issues: disguised tasks, missing metrics, output-framed key results, or missing counter-metrics.
 
-**Validation checkpoint:** Any OKR set scoring below 70% must be revised before committing.
+**Validation checkpoint:** Any OKR set scoring below 80 (`okr_validator.py` exits 1) must be revised before committing.
 
 ## Example: Quarterly OKR Generation
 
@@ -137,7 +137,7 @@ Set 3: 85/100 - PASS
 
 | Symptom | Likely Cause | Resolution |
 |---------|-------------|------------|
-| OKR set scores below 70% consistently | Key results framed as tasks/outputs instead of outcomes, or objective contains numbers | Ask "So what?" for each KR until you reach a measurable outcome; remove numbers from objectives |
+| OKR set scores below 80 consistently | Key results framed as tasks/outputs instead of outcomes, or objective contains numbers | Ask "So what?" for each KR until you reach a measurable outcome; remove numbers from objectives |
 | Validator flags "output-oriented language" | KR description starts with verbs like "launch", "build", "implement", "ship" | Reframe: "Launch mobile app" becomes "Increase mobile-originated revenue from 0% to 15%" |
 | Team sets 5+ objectives per quarter | Lack of strategic focus or inability to say no | Enforce 1 theme per team per quarter; use the Radical Focus constraint: one objective, maybe two |
 | Key results hit 100% every quarter | Targets are sandbagged at 100% confidence | Stretch to 60-70% confidence; if you hit every KR, you are not being ambitious enough |

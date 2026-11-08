@@ -25,9 +25,9 @@ The cs-database-engineer agent is most valuable during (1) initial schema design
 
 ### Python Tools
 
-1. **Schema Analyzer** — `../../engineering/database-designer/schema_analyzer.py`
-2. **Index Optimizer** — `../../engineering/database-designer/index_optimizer.py`
-3. **Migration Generator** — `../../engineering/database-designer/migration_generator.py`
+1. **Schema Analyzer** — `../../engineering/database-designer/scripts/schema_analyzer.py`
+2. **Index Optimizer** — `../../engineering/database-designer/scripts/index_optimizer.py`
+3. **Migration Generator** — `../../engineering/database-designer/scripts/migration_generator.py`
 4. **ERD Generator** — `../../engineering/database-schema-designer/scripts/erd_generator.py`
 5. **Schema Validator** — `../../engineering/database-schema-designer/scripts/schema_validator.py`
 6. **Migration Diffr** — `../../engineering/database-schema-designer/scripts/migration_diffr.py`
@@ -50,8 +50,8 @@ The cs-database-engineer agent is most valuable during (1) initial schema design
 **Time Estimate:** 1-2 weeks for first schema.
 
 ### Workflow 2: Index Strategy Review
-1. Analyze schema: `python ../../engineering/database-designer/schema_analyzer.py db.sql`
-2. Optimize: `python ../../engineering/database-designer/index_optimizer.py db.sql`
+1. Analyze schema: `python3 ../../engineering/database-designer/scripts/schema_analyzer.py --input db.sql --output-format text`
+2. Optimize: `python3 ../../engineering/database-designer/scripts/index_optimizer.py --schema schema.json --queries queries.json --analyze-existing`
 3. Apply patterns from `index_strategy_patterns.md` (covering, partial, expression indexes)
 4. Validate against actual query plans in production
 5. Roll out with online index creation where supported
@@ -59,7 +59,7 @@ The cs-database-engineer agent is most valuable during (1) initial schema design
 **Time Estimate:** 0.5-1 day per query family.
 
 ### Workflow 3: Backward-Compatible Migration
-1. Generate migration: `python ../../engineering/database-designer/migration_generator.py change.yaml`
+1. Generate migration: `python3 ../../engineering/database-designer/scripts/migration_generator.py --current current.json --target target.json --format sql`
 2. Diff against production: `python ../../engineering/database-schema-designer/scripts/migration_diffr.py prod.sql proposed.sql`
 3. Use additive-then-deprecate pattern: add new column, dual-write, switch readers, drop old
 4. Notify downstream consumers; track migration window
@@ -71,7 +71,7 @@ The cs-database-engineer agent is most valuable during (1) initial schema design
 ```bash
 python ../../engineering/database-schema-designer/scripts/schema_validator.py schema.sql
 python ../../engineering/database-schema-designer/scripts/erd_generator.py schema.sql
-python ../../engineering/database-designer/index_optimizer.py db.sql
+python3 ../../engineering/database-designer/scripts/index_optimizer.py --schema schema.json --queries queries.json
 ```
 
 ## Success Metrics

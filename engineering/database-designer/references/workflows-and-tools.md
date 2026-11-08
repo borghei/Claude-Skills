@@ -7,13 +7,13 @@ the full CLI flags, usage, and output formats for the three scripts.
 
 ```bash
 # Analyze a schema for normalization issues and generate ERD
-python schema_analyzer.py --input schema.sql --generate-erd --output-format json
+python3 scripts/schema_analyzer.py --input schema.sql --generate-erd --output-format json
 
 # Recommend indexes based on query patterns
-python index_optimizer.py --schema schema.json --queries queries.json --analyze-existing
+python3 scripts/index_optimizer.py --schema schema.json --queries queries.json --analyze-existing
 
 # Generate migration scripts between schema versions
-python migration_generator.py --current current.json --target target.json --zero-downtime
+python3 scripts/migration_generator.py --current current.json --target target.json --zero-downtime
 ```
 
 ---
@@ -29,8 +29,8 @@ python migration_generator.py --current current.json --target target.json --zero
 5. **Validation checkpoint:** All 1NF-3NF violations addressed; foreign keys declared; no redundant indexes
 
 ```bash
-python schema_analyzer.py -i schema.sql -f json -e -o report.json
-python index_optimizer.py -s schema.json -q queries.json -e -p 2 -o index_report.json
+python3 scripts/schema_analyzer.py -i schema.sql -f json -e -o report.json
+python3 scripts/index_optimizer.py -s schema.json -q queries.json -e -p 2 -o index_report.json
 ```
 
 ### Workflow 2: Generate a Safe Migration
@@ -42,7 +42,7 @@ python index_optimizer.py -s schema.json -q queries.json -e -p 2 -o index_report
 5. **Validation checkpoint:** Every forward step has a rollback counterpart; validation queries pass on test data
 
 ```bash
-python migration_generator.py -c current.json -t target.json -z --include-validations -f json -o plan.json
+python3 scripts/migration_generator.py -c current.json -t target.json -z --include-validations -f json -o plan.json
 ```
 
 ### Workflow 3: Index Optimization for Query Patterns
@@ -63,10 +63,10 @@ python migration_generator.py -c current.json -t target.json -z --include-valida
 
 **Usage:**
 ```bash
-python schema_analyzer.py --input schema.sql --output-format json
-python schema_analyzer.py --input schema.json --output-format text
-python schema_analyzer.py --input schema.sql --generate-erd --output analysis.json
-python schema_analyzer.py --input schema.sql --erd-only
+python3 scripts/schema_analyzer.py --input schema.sql --output-format json
+python3 scripts/schema_analyzer.py --input schema.json --output-format text
+python3 scripts/schema_analyzer.py --input schema.sql --generate-erd --output analysis.json
+python3 scripts/schema_analyzer.py --input schema.sql --erd-only
 ```
 
 **Flags/Parameters:**
@@ -81,7 +81,7 @@ python schema_analyzer.py --input schema.sql --erd-only
 
 **Example:**
 ```bash
-python schema_analyzer.py -i my_schema.sql -f json -e -o report.json
+python3 scripts/schema_analyzer.py -i my_schema.sql -f json -e -o report.json
 ```
 
 **Output Formats:**
@@ -96,10 +96,10 @@ python schema_analyzer.py -i my_schema.sql -f json -e -o report.json
 
 **Usage:**
 ```bash
-python index_optimizer.py --schema schema.json --queries queries.json --format text
-python index_optimizer.py --schema schema.json --queries queries.json --output recommendations.json --format json
-python index_optimizer.py --schema schema.json --queries queries.json --analyze-existing
-python index_optimizer.py --schema schema.json --queries queries.json --min-priority 2
+python3 scripts/index_optimizer.py --schema schema.json --queries queries.json --format text
+python3 scripts/index_optimizer.py --schema schema.json --queries queries.json --output recommendations.json --format json
+python3 scripts/index_optimizer.py --schema schema.json --queries queries.json --analyze-existing
+python3 scripts/index_optimizer.py --schema schema.json --queries queries.json --min-priority 2
 ```
 
 **Flags/Parameters:**
@@ -115,7 +115,7 @@ python index_optimizer.py --schema schema.json --queries queries.json --min-prio
 
 **Example:**
 ```bash
-python index_optimizer.py -s schema.json -q queries.json -f json -e -p 2 -o index_report.json
+python3 scripts/index_optimizer.py -s schema.json -q queries.json -f json -e -p 2 -o index_report.json
 ```
 
 **Output Formats:**
@@ -130,10 +130,10 @@ python index_optimizer.py -s schema.json -q queries.json -f json -e -p 2 -o inde
 
 **Usage:**
 ```bash
-python migration_generator.py --current current.json --target target.json --format text
-python migration_generator.py --current current.json --target target.json --output migration.sql --format sql
-python migration_generator.py --current current.json --target target.json --zero-downtime --format json
-python migration_generator.py --current current.json --target target.json --validate-only
+python3 scripts/migration_generator.py --current current.json --target target.json --format text
+python3 scripts/migration_generator.py --current current.json --target target.json --output migration.sql --format sql
+python3 scripts/migration_generator.py --current current.json --target target.json --zero-downtime --format json
+python3 scripts/migration_generator.py --current current.json --target target.json --validate-only
 ```
 
 **Flags/Parameters:**
@@ -150,7 +150,7 @@ python migration_generator.py --current current.json --target target.json --vali
 
 **Example:**
 ```bash
-python migration_generator.py -c current.json -t target.json -z --include-validations -f json -o migration_plan.json
+python3 scripts/migration_generator.py -c current.json -t target.json -z --include-validations -f json -o migration_plan.json
 ```
 
 **Output Formats:**

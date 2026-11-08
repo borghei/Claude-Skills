@@ -8,7 +8,7 @@ Read this for framework command catalogs (YOLO, Detectron2, MMDetection, optimiz
 
 ```bash
 # Training
-yolo detect train data=coco.yaml model=yolov8m.pt epochs=100 imgsz=640
+yolo detect train data=coco.yaml model=yolo26m.pt epochs=100 imgsz=640
 
 # Validation
 yolo detect val model=best.pt data=coco.yaml
@@ -58,7 +58,7 @@ python -c "import torch; model = torch.load('model.pt'); torch.onnx.export(model
 python -m onnxsim model.onnx model_sim.onnx
 
 # TensorRT conversion
-trtexec --onnx=model.onnx --saveEngine=model.engine --fp16 --workspace=4096
+trtexec --onnx=model.onnx --saveEngine=model.engine --fp16 --memPoolSize=workspace:4096M
 
 # Benchmark
 trtexec --loadEngine=model.engine --batch=1 --iterations=1000 --avgRuns=100

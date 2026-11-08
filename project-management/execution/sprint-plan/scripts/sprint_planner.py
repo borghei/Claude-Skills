@@ -6,41 +6,15 @@ commit/stretch split, dependency clarity, and DoD coverage.
 Stdlib only. JSON or markdown output.
 
 Usage:
-    python3 sprint_planner.py --input sprint_plan.json
-    python3 sprint_planner.py --input sprint_plan.json --format markdown
+    python3 sprint_planner.py --input ../assets/sample_sprint_plan.json --format markdown
 
-Input schema:
-{
-  "sprint_name": "Sprint 12",
-  "dates": "2026-04-14 to 2026-04-25",
-  "goal": "Ship checkout flow MVP enabling first paid customers",
-  "capacity": {
-      "team_members": [
-          {"name": "Alice", "available_hours": 28, "notes": "on-call"}
-      ],
-      "total_available_hours": 196,
-      "commit_target_pct": 80,
-      "stretch_pct": 15
-  },
-  "velocity_history_pts": [32, 36, 34],
-  "items": [
-      {
-          "id": "A", "title": "Checkout backend",
-          "type": "commit",            # commit|stretch
-          "estimated_pts": 8,
-          "estimated_hours": 35,
-          "assignee": "Bob",
-          "dependencies": [
-              {"description": "...", "owner": "...", "needed_by": "...", "confirmed": true}
-          ],
-          "risks": [
-              {"description": "...", "mitigation": "...", "owner": "..."}
-          ],
-          "dod_items": ["code reviewed","tests","telemetry","docs"],
-          "refined": true
-      }
-  ]
-}
+Input: a JSON object with goal, capacity {team_members[{name, available_hours}],
+total_available_hours, commit_target_pct, stretch_pct}, velocity_history_pts and
+items[{id, title, type: commit|stretch, estimated_pts, estimated_hours, assignee,
+dependencies[{description, owner, needed_by, confirmed}], risks[{description,
+mitigation, owner}], dod_items[], refined}]. See assets/sample_sprint_plan.json.
+
+Exit codes: 0 no fail findings, 1 at least one fail finding, 2 bad input.
 """
 
 from __future__ import annotations
@@ -84,6 +58,11 @@ def check_capacity(plan: dict[str, Any]) -> list[Issue]:
     if not members:
         issues.append(Issue("warn", "(capacity)",
             "no per-member capacity breakdown — likely missing PTO / on-call"))
+    else:
+        member_sum = sum(float(m.get("available_hours", 0) or 0) for m in members)
+        if abs(member_sum - total) > 0.05 * total:
+            issues.append(Issue("warn", "(capacity)",
+                f"team_members sum to {member_sum:.0f}h but total_available_hours is {total:.0f}h — reconcile"))
     commit_pct = float(cap.get("commit_target_pct", 0) or 0)
     stretch_pct = float(cap.get("stretch_pct", 0) or 0)
     if commit_pct > 90:
@@ -91,7 +70,7 @@ def check_capacity(plan: dict[str, Any]) -> list[Issue]:
             f"commit target {commit_pct}% — too high; usually 75-85%"))
     if commit_pct + stretch_pct > 100:
         issues.append(Issue("warn", "(capacity)",
-            f"commit + stretch = {commit_pct + stretch_pct}% — leaves no reserve"))
+            f"commit_target_pct + stretch_pct = {commit_pct + stretch_pct:.0f}% — targets leave no reserve"))
     return issues
 
 
@@ -115,9 +94,20 @@ def check_items(plan: dict[str, Any]) -> list[Issue]:
         for i in items if (i.get("type") or "").lower() == "stretch"
     )
 
-    if commit_hrs > commit_target_hrs * 1.1:
+    # Fill bands from the SKILL.md commitment table: >100% always misses, 90-100% usually misses.
+    fill = (commit_hrs + stretch_hrs) / total_hrs if total_hrs else 0
+    if commit_hrs > total_hrs:
+        issues.append(Issue("fail", "(commits)",
+            f"commits {commit_hrs:.0f}h exceed capacity {total_hrs:.0f}h"))
+    elif commit_hrs > commit_target_hrs * 1.1:
         issues.append(Issue("warn", "(commits)",
             f"commits {commit_hrs:.0f}h > target {commit_target_hrs:.0f}h — over-committed"))
+    if fill > 1.0:
+        issues.append(Issue("fail", "(capacity)",
+            f"commit + stretch = {fill:.0%} of capacity — no reserve for unknowns"))
+    elif fill > 0.9:
+        issues.append(Issue("warn", "(capacity)",
+            f"commit + stretch = {fill:.0%} of capacity — plans above 90% usually miss"))
     if stretch_hrs > stretch_target_hrs * 1.5:
         issues.append(Issue("info", "(stretch)",
             f"stretch {stretch_hrs:.0f}h > target {stretch_target_hrs:.0f}h — stretch should be reserved"))
@@ -155,7 +145,7 @@ def check_items(plan: dict[str, Any]) -> list[Issue]:
         missing_std = STANDARD_DOD - dod
         if missing_std:
             issues.append(Issue("info", iid,
-                f"DoD missing standard items: {', '.join(missing_std)}"))
+                f"DoD missing standard items: {', '.join(sorted(missing_std))}"))
 
     return issues
 
@@ -258,6 +248,11 @@ def main() -> int:
     except json.JSONDecodeError as e:
         print(f"error: invalid JSON: {e}", file=sys.stderr)
         return 2
+    if not isinstance(plan, dict) or not isinstance(plan.get("items"), list) or not plan["items"] \
+            or not all(isinstance(i, dict) for i in plan["items"]) \
+            or not isinstance(plan.get("capacity", {}), dict):
+        print("error: input must be a JSON object with a 'capacity' object and a non-empty 'items' list", file=sys.stderr)
+        return 2
 
     report = audit(plan)
     out = render_markdown(report) if args.format == "markdown" else json.dumps(report, indent=2)
@@ -267,8 +262,12 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    return 1 if report["severity_counts"]["fail"] else 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except (TypeError, ValueError, AttributeError, KeyError) as exc:  # field of the wrong type
+        print(f"error: input has a field of the wrong type: {exc}", file=sys.stderr)
+        sys.exit(2)

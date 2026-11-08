@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Monorepo Navigator</h1>
     <p class="page-subtitle">Manage and optimize monorepos with Turborepo, Nx, pnpm workspaces, and Changesets. Use when working in monorepos, running impact analysis, optimizing build times with remote caching, migrating from multi-repo, or coordinating publishing.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">monorepo</span><span class="tag">turborepo</span><span class="tag">nx</span><span class="tag">pnpm</span><span class="tag">changesets</span></div>
   </div>
   <h2>How to Use</h2>
@@ -476,20 +476,54 @@ Before analyzing or configuring, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `dependency_graph.py` | Generate a Mermaid dependency graph of internal packages | `python scripts/dependency_graph.py . --focus @repo/ui --direction dependents` |
-| `impact_detector.py` | Detect which packages are affected by file changes | `python scripts/impact_detector.py . --ref origin/main --affected-only` |
-| `package_analyzer.py` | Analyze package structure, dependencies, and health | `python scripts/package_analyzer.py . --only-shared` |
+| `dependency_graph.py` | Mermaid dependency graph of internal packages, optionally focused on one package | `python3 scripts/dependency_graph.py &lt;root&gt; --focus @repo/ui --direction dependents` |
+| `impact_detector.py` | Packages affected (directly and transitively) by changed files | `python3 scripts/impact_detector.py &lt;root&gt; --ref origin/main --affected-only` |
+| `package_analyzer.py` | Package inventory, internal and shared external dependencies, version drift, orphans | `python3 scripts/package_analyzer.py &lt;root&gt; --only-shared` |
 
-## References
+Workspace detection order: `pnpm-workspace.yaml`, then the root `package.json` `workspaces` field (npm, Yarn), then `lerna.json`. **Exit codes:** 0 report; 2 no packages found or bad input (a directory that is not a workspace root must not look like an empty monorepo).
+
+## Quick Start
+
+```bash
+# from engineering/monorepo-navigator/ (a four-package pnpm workspace)
+python3 scripts/package_analyzer.py assets/sample_monorepo                    # 4 packages, 3 internal deps, date-fns drift
+python3 scripts/impact_detector.py assets/sample_monorepo --files packages/utils/src/index.ts --affected-only
+python3 scripts/dependency_graph.py assets/sample_monorepo --focus @acme/utils --direction dependents --mermaid-only
+```
+
+A change in `packages/utils` affects `@acme/ui`, `@acme/utils` and `@acme/web` (through `ui`), but not `@acme/docs`.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
 - **[references/tooling-and-configuration.md](references/tooling-and-configuration.md)** — tool selection decision matrix, recommended repo structure, full turbo.json and pnpm-workspace config, key Turborepo/pnpm commands, impact-analysis commands, remote-caching setup, affected-only CI workflow, Changesets publishing, and multi-repo→monorepo migration steps. Read when configuring or operating a monorepo.
 - **[references/operations-and-best-practices.md](references/operations-and-best-practices.md)** — common pitfalls, best practices, troubleshooting table, and success criteria. Read when something misbehaves or when validating a setup.
+
+## Anti-Patterns
+
+**Mistake:** Running every test and build on every change.
+**Why it matters:** CI time grows with the repo, not with the change, and teams start skipping checks.
+**Instead:** Use the affected set from `impact_detector.py` (or the build tool&#x27;s filter) and run the full suite on a schedule.
+
+**Mistake:** Letting shared dependencies drift between packages.
+**Why it matters:** Two versions of the same library ship twice, and bugs reproduce in one app but not another.
+**Instead:** Check `package_analyzer.py --only-shared` and pin shared versions in one place (catalog or root constraints).
+
+**Mistake:** Deep imports across package boundaries (`../../packages/ui/src/...`).
+**Why it matters:** The dependency never appears in `package.json`, so impact analysis and the build cache miss it.
+**Instead:** Import through the package name and declare it with `workspace:*`.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/package_analyzer.py`, `scripts/impact_detector.py`, `scripts/dependency_graph.py` | Stdlib CLIs |
+| `assets/sample_monorepo/` | pnpm workspace: `apps/web`, `apps/docs`, `packages/ui`, `packages/utils` |
 
 ## Scope &amp; Limitations
 
@@ -504,17 +538,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 - CI/CD pipeline design beyond monorepo-specific filters — see `ci-cd-pipeline-builder`
 - Git branching strategies and release flow — see `release-manager`
 - Dependency vulnerability scanning and license auditing — see `dependency-auditor`
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|------------|-----------|
-| `ci-cd-pipeline-builder` | Monorepo-aware CI workflows use `--filter` flags and remote caching tokens | Monorepo Navigator defines filter patterns and cache config that CI pipelines consume |
-| `release-manager` | Changesets versioning feeds into release orchestration and tag management | Release Manager triggers `changeset version` and `changeset publish` as part of release flow |
-| `dependency-auditor` | Workspace dependency graph informs vulnerability and license scanning scope | Monorepo Navigator exports the package dependency tree that Dependency Auditor analyzes |
-| `performance-profiler` | Build profiling data identifies slow packages for optimization | Performance Profiler measures per-package build times surfaced by Turborepo `--summarize` |
-| `changelog-generator` | Changesets produce per-package changelogs consumed by release notes | Changeset summaries flow into Changelog Generator for formatted release documentation |
-| `tech-debt-tracker` | Cross-package coupling and circular dependencies surface as tracked tech debt items | Monorepo Navigator&#x27;s impact analysis identifies coupling hotspots that Tech Debt Tracker records |
 
 ---
 
@@ -596,20 +619,54 @@ Before analyzing or configuring, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `dependency_graph.py` | Generate a Mermaid dependency graph of internal packages | `python scripts/dependency_graph.py . --focus @repo/ui --direction dependents` |
-| `impact_detector.py` | Detect which packages are affected by file changes | `python scripts/impact_detector.py . --ref origin/main --affected-only` |
-| `package_analyzer.py` | Analyze package structure, dependencies, and health | `python scripts/package_analyzer.py . --only-shared` |
+| `dependency_graph.py` | Mermaid dependency graph of internal packages, optionally focused on one package | `python3 scripts/dependency_graph.py &lt;root&gt; --focus @repo/ui --direction dependents` |
+| `impact_detector.py` | Packages affected (directly and transitively) by changed files | `python3 scripts/impact_detector.py &lt;root&gt; --ref origin/main --affected-only` |
+| `package_analyzer.py` | Package inventory, internal and shared external dependencies, version drift, orphans | `python3 scripts/package_analyzer.py &lt;root&gt; --only-shared` |
 
-## References
+Workspace detection order: `pnpm-workspace.yaml`, then the root `package.json` `workspaces` field (npm, Yarn), then `lerna.json`. **Exit codes:** 0 report; 2 no packages found or bad input (a directory that is not a workspace root must not look like an empty monorepo).
+
+## Quick Start
+
+```bash
+# from engineering/monorepo-navigator/ (a four-package pnpm workspace)
+python3 scripts/package_analyzer.py assets/sample_monorepo                    # 4 packages, 3 internal deps, date-fns drift
+python3 scripts/impact_detector.py assets/sample_monorepo --files packages/utils/src/index.ts --affected-only
+python3 scripts/dependency_graph.py assets/sample_monorepo --focus @acme/utils --direction dependents --mermaid-only
+```
+
+A change in `packages/utils` affects `@acme/ui`, `@acme/utils` and `@acme/web` (through `ui`), but not `@acme/docs`.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
 - **[references/tooling-and-configuration.md](references/tooling-and-configuration.md)** — tool selection decision matrix, recommended repo structure, full turbo.json and pnpm-workspace config, key Turborepo/pnpm commands, impact-analysis commands, remote-caching setup, affected-only CI workflow, Changesets publishing, and multi-repo→monorepo migration steps. Read when configuring or operating a monorepo.
 - **[references/operations-and-best-practices.md](references/operations-and-best-practices.md)** — common pitfalls, best practices, troubleshooting table, and success criteria. Read when something misbehaves or when validating a setup.
+
+## Anti-Patterns
+
+**Mistake:** Running every test and build on every change.
+**Why it matters:** CI time grows with the repo, not with the change, and teams start skipping checks.
+**Instead:** Use the affected set from `impact_detector.py` (or the build tool&#x27;s filter) and run the full suite on a schedule.
+
+**Mistake:** Letting shared dependencies drift between packages.
+**Why it matters:** Two versions of the same library ship twice, and bugs reproduce in one app but not another.
+**Instead:** Check `package_analyzer.py --only-shared` and pin shared versions in one place (catalog or root constraints).
+
+**Mistake:** Deep imports across package boundaries (`../../packages/ui/src/...`).
+**Why it matters:** The dependency never appears in `package.json`, so impact analysis and the build cache miss it.
+**Instead:** Import through the package name and declare it with `workspace:*`.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/package_analyzer.py`, `scripts/impact_detector.py`, `scripts/dependency_graph.py` | Stdlib CLIs |
+| `assets/sample_monorepo/` | pnpm workspace: `apps/web`, `apps/docs`, `packages/ui`, `packages/utils` |
 
 ## Scope &amp; Limitations
 
@@ -624,17 +681,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 - CI/CD pipeline design beyond monorepo-specific filters — see `ci-cd-pipeline-builder`
 - Git branching strategies and release flow — see `release-manager`
 - Dependency vulnerability scanning and license auditing — see `dependency-auditor`
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|------------|-----------|
-| `ci-cd-pipeline-builder` | Monorepo-aware CI workflows use `--filter` flags and remote caching tokens | Monorepo Navigator defines filter patterns and cache config that CI pipelines consume |
-| `release-manager` | Changesets versioning feeds into release orchestration and tag management | Release Manager triggers `changeset version` and `changeset publish` as part of release flow |
-| `dependency-auditor` | Workspace dependency graph informs vulnerability and license scanning scope | Monorepo Navigator exports the package dependency tree that Dependency Auditor analyzes |
-| `performance-profiler` | Build profiling data identifies slow packages for optimization | Performance Profiler measures per-package build times surfaced by Turborepo `--summarize` |
-| `changelog-generator` | Changesets produce per-package changelogs consumed by release notes | Changeset summaries flow into Changelog Generator for formatted release documentation |
-| `tech-debt-tracker` | Cross-package coupling and circular dependencies surface as tracked tech debt items | Monorepo Navigator&#x27;s impact analysis identifies coupling hotspots that Tech Debt Tracker records |
 
 ---
 
@@ -722,8 +768,14 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/monorepo-navigator/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Quick Start</h2><pre><code># from engineering/monorepo-navigator/ (a four-package pnpm workspace)
+python3 scripts/package_analyzer.py assets/sample_monorepo                    # 4 packages, 3 internal deps, date-fns drift
+python3 scripts/impact_detector.py assets/sample_monorepo --files packages/utils/src/index.ts --affected-only
+python3 scripts/dependency_graph.py assets/sample_monorepo --focus @acme/utils --direction dependents --mermaid-only
+</code></pre>
+
+A change in `packages/utils` affects `@acme/ui`, `@acme/utils` and `@acme/web` (through `ui`), but not `@acme/docs`.
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/monorepo-navigator/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

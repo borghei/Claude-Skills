@@ -206,7 +206,8 @@ def advise(
     lo, hi = COST_MULTIPLIER[effort]
     rationale.append(
         f"Effort '{effort}' implies roughly {lo:g}x-{hi:g}x the output cost & latency of a no-thinking call "
-        f"on the same model (thinking tokens are billed)."
+        f"on the same model (thinking tokens are billed). These are illustrative rule-of-thumb ranges: "
+        f"measure real thinking-token use on a small eval before budgeting."
     )
 
     return Recommendation(
@@ -238,7 +239,7 @@ def render_human(rec: Recommendation) -> str:
         lines.append(f"  (underlying effort if you proceed: {rec.effort})")
     lo, hi = rec.cost_multiplier_range
     lines.append(f"  Value score    : {rec.value_score}")
-    lines.append(f"  Cost vs no-think: ~{lo:g}x-{hi:g}x output cost & latency")
+    lines.append(f"  Cost vs no-think: ~{lo:g}x-{hi:g}x output cost & latency (illustrative; measure on your eval)")
     if rec.capped_by_latency:
         lines.append("  (effort was capped by the latency budget)")
     lines.append("")

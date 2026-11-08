@@ -1,0 +1,116 @@
+{
+  "items": [
+    {
+      "id": "FB-2026-0001",
+      "channel": "support",
+      "customer_id": "cust-1001",
+      "segment": "enterprise",
+      "received_at": "2026-05-10T09:00:00Z",
+      "submitter": "support-jane",
+      "raw_text": "We really need a way to export results to PDF for our weekly board pack.",
+      "opportunity_label": "Share results with people who have no login",
+      "decision": "will-build",
+      "customer_name": "Priya"
+    },
+    {
+      "id": "FB-2026-0002",
+      "channel": "support",
+      "customer_id": "cust-1002",
+      "segment": "mid_market",
+      "received_at": "2026-05-10T11:23:00Z",
+      "submitter": "support-rao",
+      "raw_text": "Can we share a dashboard with someone who doesn't have a login? PDF export would work.",
+      "opportunity_label": "Share results with people who have no login"
+    },
+    {
+      "id": "FB-2026-0003",
+      "channel": "sales",
+      "customer_id": "cust-1003",
+      "segment": "enterprise",
+      "received_at": "2026-05-11T15:00:00Z",
+      "submitter": "ae-priya",
+      "raw_text": "Customer asked for read-only sharing links for their CFO. Blocker for renewal."
+    },
+    {
+      "id": "FB-2026-0004",
+      "channel": "in_app",
+      "customer_id": "cust-1004",
+      "segment": "smb",
+      "received_at": "2026-05-12T08:30:00Z",
+      "submitter": "self-serve-widget",
+      "raw_text": "Login is broken on Safari. Keeps redirecting in a loop."
+    },
+    {
+      "id": "FB-2026-0005",
+      "channel": "support",
+      "customer_id": "cust-1005",
+      "segment": "smb",
+      "received_at": "2026-05-12T09:00:00Z",
+      "submitter": "support-jane",
+      "raw_text": "Safari login redirects forever. Cannot sign in."
+    },
+    {
+      "id": "FB-2026-0006",
+      "channel": "nps",
+      "customer_id": "cust-1006",
+      "segment": "mid_market",
+      "received_at": "2026-05-13T12:00:00Z",
+      "submitter": "nps-survey",
+      "raw_text": "Reports are slow to load. Sometimes takes 30 seconds."
+    },
+    {
+      "id": "FB-2026-0007",
+      "channel": "support",
+      "customer_id": "cust-1007",
+      "segment": "mid_market",
+      "received_at": "2026-05-13T14:00:00Z",
+      "submitter": "support-rao",
+      "raw_text": "Dashboard speed is a real problem on the analytics page. Faster please."
+    },
+    {
+      "id": "FB-2026-0008",
+      "channel": "exec_ask",
+      "customer_id": "cust-1008",
+      "segment": "enterprise",
+      "received_at": "2026-05-14T10:00:00Z",
+      "submitter": "ceo",
+      "raw_text": "Customer at lunch said they wished we had an AI-powered query assistant. Would love to see it."
+    },
+    {
+      "id": "FB-2026-0009",
+      "channel": "in_app",
+      "customer_id": "cust-1009",
+      "segment": "prosumer",
+      "received_at": "2026-05-14T16:00:00Z",
+      "submitter": "self-serve-widget",
+      "raw_text": "Could we get a dark theme? Pretty please."
+    },
+    {
+      "id": "FB-2026-0010",
+      "channel": "social",
+      "customer_id": "cust-1010",
+      "segment": "smb",
+      "received_at": "2026-05-15T09:00:00Z",
+      "submitter": "social-listening",
+      "raw_text": "The in-app chatbot is too chatty. Annoying. Please remove."
+    },
+    {
+      "id": "FB-2026-0011",
+      "channel": "sales",
+      "customer_id": "cust-1011",
+      "segment": "enterprise",
+      "received_at": "2026-05-15T11:00:00Z",
+      "submitter": "ae-priya",
+      "raw_text": "Big bank prospect wants a separate enterprise plan with SSO and audit logs at a higher price tier."
+    },
+    {
+      "id": "FB-2026-0012",
+      "channel": "support",
+      "customer_id": "cust-1012",
+      "segment": "mid_market",
+      "received_at": "2026-05-16T08:00:00Z",
+      "submitter": "support-jane",
+      "raw_text": "How do I export a single report to CSV? I can't find it in the docs."
+    }
+  ]
+}

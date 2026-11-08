@@ -68,6 +68,8 @@ python3 engineering/marketing-site-builder/scripts/access_links_check.py enginee
 
 ## Workflow
 
+Step tags: [PROVEN] means the step has held up across many projects; [RECOMMENDED] means a strong default you can depart from with a stated reason.
+
 ### Step 1 — Decide the kind [PROVEN]
 
 Write the kind on the plan's first line and on the page as `<html data-kind="...">`.

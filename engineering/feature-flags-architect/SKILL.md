@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: engineering
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [feature-flags, progressive-delivery, rollouts, kill-switches, release-engineering, experimentation, flag-governance]
 ---
 
@@ -47,7 +47,7 @@ Every flag belongs to exactly one of these four types. The type determines the l
 - Designing a flag system from scratch — start with the **flag taxonomy**.
 - Planning a risky release (DB migration, payment-provider swap, framework upgrade) — use the **rollout ramp** + **kill switch**.
 - Auditing a codebase with hundreds of growing flags — use **flag debt cleanup** + `scripts/flag_audit.py`.
-- Setting up an A/B test or hold-out — covers the flag side; pair with `engineering/experiment-design` for statistics.
+- Setting up an A/B test or hold-out — covers the flag side; use `data-analytics/statistical-analyst` for sample size and significance.
 - Building a kill switch for a third-party dependency outage — use the **kill switch runbook** generator.
 - Defining who in the org can flip production flags — use the **governance** matrix.
 - Building entitlements / paid-tier gating — use this for flag mechanics; `business-growth/paywall-upgrade-cro` for the UX.
@@ -62,17 +62,53 @@ Before designing or operating flags, settle the inputs below. When one is missin
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `flag_audit.py` | Scan a codebase for flag references, age, classification, and recommended action (optionally cross-reference a control-plane export) | `python scripts/flag_audit.py --path . --format markdown` |
-| `rollout_simulator.py` | Model a rollout: per-step blast radius, time-to-detect, recommended schedule | `python scripts/rollout_simulator.py --users 500000 --profile standard` |
-| `kill_switch_runbook.py` | Generate a kill-switch runbook (default state, flip procedure, validation, escalation) | `python scripts/kill_switch_runbook.py --flag ops.recs.kill_switch --feature Recommendations --dependency recs-svc` |
+1. **Name the type** of every new flag (release, ops, experiment, permission) and give it an owner and, for release and experiment flags, a removal date.
+2. **Plan the ramp** with `rollout_simulator.py` for the user count and risk profile; each step needs the metric that would stop it.
+3. **Build the kill switch** for risky dependencies with `kill_switch_runbook.py`, passing the real owner team, oncall rotation and flag-console URL so the runbook has no placeholders.
+4. **Audit debt** quarterly with `flag_audit.py` against a control-plane export: delete dead flags, remove stranded 100% release flags and their dead branches, investigate orphan references.
+5. **Verify** that the kill switch actually flips in staging (or under fault injection) and that the audit's debt list shrinks quarter over quarter.
 
-All scripts: standard library only, argparse CLI, JSON + human-readable output. Run `--help` for full usage.
+## Quick Start
 
-## References
+```bash
+python3 scripts/flag_audit.py --path assets --flag-export assets/sample_flag_export.json --as-of 2026-06-01   # 1 dead, 1 orphan, 1 stranded at 100%
+python3 scripts/rollout_simulator.py --users 500000 --profile standard
+python3 scripts/kill_switch_runbook.py --flag ops.recs.kill_switch --feature Recommendations --dependency recs-svc \
+  --owner-team recs-team --oncall recs-oncall --flag-console-url https://flags.example.com/flags/ops.recs.kill_switch
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `flag_audit.py` | Find flag reads in code, join with a control-plane export, classify each flag (dead, orphan, stranded at 0/100%, should-be-config, ghost owner, healthy) with an action | `--path`, `--flag-export`, `--as-of`, `--pattern <regex>` (repeatable), `--owner-team`, `--include-active`, `--format json|markdown|human` | 0 report, 2 bad path, export or pattern |
+| `rollout_simulator.py` | Per-step blast radius, time to detect, recommended schedule | `--users`, `--profile`, `--format` | 0, 2 bad arguments |
+| `kill_switch_runbook.py` | Runbook: default state, fail mode, flip procedure, validation, escalation | `--flag`, `--feature`, `--dependency`, `--owner-team`, `--oncall`, `--flag-console-url`, `--fail-mode open|closed`, thresholds | 0, 2 bad arguments |
+
+`flag_audit.py` recognises LaunchDarkly (`variation`, `boolVariation`), OpenFeature (`getBooleanValue`, `useBooleanFlagValue`), Statsig (`checkGate`), Unleash (`isEnabled`), generic `flags.isEnabled/evaluate/getVariant`, homegrown helpers (`getFlag`, `useFlag`, `isFeatureEnabled`, `get_feature_flag`) and flag decorators. For other SDKs pass `--pattern` with a regex whose first group is the flag key. Flags read through variables built at runtime are not found; grep for those by hand. The runbook defaults (`unknown-team`, a placeholder console URL) are there to be overridden.
+
+## Anti-Patterns
+
+**Mistake:** Release flags without a removal date.
+**Why it happens:** Once the feature is at 100%, removing the flag has no visible payoff.
+**Instead:** Set the date when the flag is created and let the quarterly audit enforce it; stranded flags double the code paths to test.
+
+**Mistake:** A kill switch that has never been flipped.
+**Why it happens:** It exists for emergencies, so nobody tries it.
+**Instead:** Flip it in staging on a schedule (or under fault injection) and record the time to effect.
+
+**Mistake:** One flag doing two jobs (a release ramp that later becomes a permission gate).
+**Why it happens:** Reusing an existing flag is quicker than creating one.
+**Instead:** Create a new flag of the right type. Mixed-type flags cannot be removed without breaking someone.
+
+## Files
+
+- `scripts/flag_audit.py`, `scripts/rollout_simulator.py`, `scripts/kill_switch_runbook.py` — the tools above.
+- `assets/sample_checkout.ts` (flag reads through three SDK shapes), `assets/sample_flag_export.json` (control-plane export).
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -85,11 +121,11 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **This skill covers:** flag taxonomy and lifecycle, rollout ramps with blast-radius math, kill-switch design and runbooks, governance/audit requirements, and flag-debt cleanup — provider-agnostic across LaunchDarkly, Statsig, Unleash, Flagsmith, ConfigCat, GrowthBook, OpenFeature, and homegrown systems.
 
-**This skill does NOT cover:** the statistical design of A/B tests (pair with `product-team/experiment-design`), the paywall/upgrade UX for entitlements (`business-growth/paywall-upgrade-cro`), or the metric instrumentation needed to make ramp decisions (`engineering/observability-designer`).
+**This skill does NOT cover:** the statistical design of A/B tests (`data-analytics/statistical-analyst`), the paywall/upgrade UX for entitlements (`business-growth/paywall-upgrade-cro`), or the metric instrumentation needed to make ramp decisions (`engineering/observability-designer`).
 
 ## Related skills
 
 - `engineering/observability-designer` — wire the metrics needed to make ramp decisions
 - `engineering/incident-commander` — flag-based rollback during incidents
 - `engineering/chaos-engineering` — verify kill switches actually work under fault injection
-- `product-team/experiment-design` (if available) — statistical design of A/B tests behind flags
+- `data-analytics/statistical-analyst` — sample size and significance for A/B tests behind flags

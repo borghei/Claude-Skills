@@ -11,18 +11,18 @@ class IntentRouter:
     """Route requests to specialized agents based on intent classification."""
 
     ROUTING_TABLE = {
-        "code_generation": {"agent": "coder", "model": "claude-sonnet-5"},
-        "code_review": {"agent": "reviewer", "model": "claude-sonnet-5"},
-        "research": {"agent": "researcher", "model": "claude-sonnet-5"},
-        "simple_question": {"agent": "assistant", "model": "claude-haiku-4-5"},
-        "creative_writing": {"agent": "writer", "model": "claude-sonnet-5"},
-        "complex_analysis": {"agent": "analyst", "model": "claude-sonnet-5"},
+        "code_generation": {"agent": "coder", "model": "claude-sonnet-5-5"},
+        "code_review": {"agent": "reviewer", "model": "claude-sonnet-5-5"},
+        "research": {"agent": "researcher", "model": "claude-sonnet-5-5"},
+        "simple_question": {"agent": "assistant", "model": "claude-haiku-5-5"},
+        "creative_writing": {"agent": "writer", "model": "claude-sonnet-5-5"},
+        "complex_analysis": {"agent": "analyst", "model": "claude-sonnet-5-5"},
     }
 
     async def route(self, message: str) -> dict:
         # Use a fast, cheap model for classification
         classification = await self.client.messages.create(
-            model="claude-haiku-4-5",
+            model="claude-haiku-5-5",
             max_tokens=50,
             system="Classify the user intent. Respond with ONLY one of: code_generation, code_review, research, simple_question, creative_writing, complex_analysis",
             messages=[{"role": "user", "content": message}],
@@ -34,16 +34,13 @@ class IntentRouter:
 ## Context Window Budgeting
 
 ```python
-MODEL_LIMITS = {
-    "claude-sonnet-5": 1_000_000,
-    "claude-haiku-4-5": 200_000,
-    "claude-opus-5": 1_000_000,
-    "gpt-4o": 128_000,
-}
+# Fill in the context window of each model you route to, from the provider's model docs.
+# Windows differ by model and plan, so the code never assumes one.
+MODEL_LIMITS: dict[str, int] = {}
 
 class ContextBudget:
     def __init__(self, model: str, pipeline_stages: int, reserve_pct: float = 0.15):
-        self.total = MODEL_LIMITS.get(model, 128_000)
+        self.total = MODEL_LIMITS.get(model, 128_000)  # conservative fallback
         self.reserve = int(self.total * reserve_pct)
         self.per_stage = (self.total - self.reserve) // pipeline_stages
         self.used = 0
@@ -67,13 +64,16 @@ class ContextBudget:
 
 ## Cost Optimization Matrix
 
-| Strategy | Cost Reduction | Quality Impact | When to Use |
+Savings are relative and depend on the provider's current rates; check them on its pricing
+page and model the workflow with `scripts/cost_estimator.py --prices` before deciding.
+
+| Strategy | Typical effect on cost | Quality Impact | When to Use |
 |----------|---------------|----------------|-------------|
-| Haiku for routing/classification | 85-90% | Minimal | Always for intent routing |
-| Haiku for editing/formatting | 60-70% | Low | Mechanical tasks |
-| Sonnet for most stages | Baseline | Baseline | Default choice |
-| Opus only for final synthesis | +50% on that stage | Higher quality | High-stakes output |
-| Prompt caching (system prompts) | 50-90% per call | None | Repeated system prompts |
+| Small tier (e.g. Haiku) for routing/classification | Large cut on those steps | Minimal | Always for intent routing |
+| Small tier for editing/formatting | Moderate cut | Low | Mechanical tasks |
+| Mid tier (e.g. Sonnet) for most stages | Baseline | Baseline | Default choice |
+| Large tier (e.g. Opus) only for final synthesis | Higher on that stage | Higher quality | High-stakes output |
+| Prompt caching (stable system prompt prefix) | Input billed at cache-read rate | None | Repeated system prompts |
 | Truncate intermediate outputs | 20-40% | May lose detail | Long pipelines |
 | Parallel + early termination | 30-50% | None if threshold met | Search/validation tasks |
 | Batch similar requests | Up to 50% | Increased latency | Non-real-time workloads |

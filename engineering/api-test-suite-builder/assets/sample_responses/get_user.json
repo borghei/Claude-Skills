@@ -1,0 +1,6 @@
+{
+  "_meta": {"method": "GET", "path": "/users/{id}", "status": "200"},
+  "id": 1,
+  "email": "ada@example.com",
+  "name": "Ada"
+}

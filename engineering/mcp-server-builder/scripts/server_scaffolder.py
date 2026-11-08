@@ -26,6 +26,9 @@ def load_config(config_path: str) -> dict:
         config = json.load(f)
 
     errors = []
+    if "name" not in config and isinstance(config.get("source"), dict) and config["source"].get("title"):
+        # openapi_converter.py output: derive the server name from the spec title
+        config["name"] = "-".join(config["source"]["title"].lower().split()) + "-mcp"
     if "name" not in config:
         errors.append("Missing required field: 'name'")
     if "tools" not in config or not isinstance(config.get("tools"), list):
@@ -301,12 +304,12 @@ def main():
 
     try:
         config = load_config(args.config)
-    except (FileNotFoundError, ValueError, json.JSONDecodeError) as e:
+    except (OSError, ValueError, json.JSONDecodeError) as e:
         if args.json:
             json.dump({"error": str(e)}, sys.stdout, indent=2)
         else:
             print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)  # unusable input
 
     if args.lang == "typescript":
         files = generate_typescript(config)

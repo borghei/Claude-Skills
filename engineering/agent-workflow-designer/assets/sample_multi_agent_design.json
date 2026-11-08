@@ -1,0 +1,10 @@
+{
+  "orchestrator": {"role": "lead", "tier": "frontier", "calls": 4, "input_tokens": 6000, "output_tokens": 1500, "effort": 1.5},
+  "subagents": [
+    {"role": "researcher", "tier": "economy", "calls": 3, "input_tokens": 4000, "output_tokens": 2000, "effort": 1.0},
+    {"role": "extractor", "tier": "economy", "calls": 5, "input_tokens": 2500, "output_tokens": 600, "effort": 0.5},
+    {"role": "reviewer", "tier": "standard", "calls": 1, "input_tokens": 8000, "output_tokens": 1200, "effort": 1.0}
+  ],
+  "baseline_tier": "frontier",
+  "baseline_context_multiplier": 1.3
+}

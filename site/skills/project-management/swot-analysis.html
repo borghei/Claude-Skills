@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Swot Analysis - Claude Skills</title>
-  <meta name="description" content="SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for strategic positioning. Use when assessing a new market entry, a strategic pivot, a competitive response, an org restructure, or as inp">
+  <meta name="description" content="Builds and audits an evidence-backed SWOT with TOWS actions for one explicit strategic question. Use when assessing a market entry, pivot, competitive response or restructure, or as input to annual pl">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/swot-analysis.html">
   <meta property="og:title" content="Swot Analysis - Claude Skills">
-  <meta property="og:description" content="SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for strategic positioning. Use when assessing a new market entry, a strategic pivot, a competitive response, an org restructure, or as inp">
+  <meta property="og:description" content="Builds and audits an evidence-backed SWOT with TOWS actions for one explicit strategic question. Use when assessing a market entry, pivot, competitive response or restructure, or as input to annual pl">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/swot-analysis.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Swot Analysis", "description": "SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for strategic positioning. Use when assessing a new market entry, a strategic pivot, a competitive response, an org restructure, or as input to annual strategic planning.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/swot-analysis.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Swot Analysis", "description": "Builds and audits an evidence-backed SWOT with TOWS actions for one explicit strategic question. Use when assessing a market entry, pivot, competitive response or restructure, or as input to annual planning.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/swot-analysis.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Swot Analysis</h1>
-    <p class="page-subtitle">SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for strategic positioning. Use when assessing a new market entry, a strategic pivot, a competitive response, an org restructure, or as input to annual strategic planning.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Builds and audits an evidence-backed SWOT with TOWS actions for one explicit strategic question. Use when assessing a market entry, pivot, competitive response or restructure, or as input to annual planning.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">swot</span><span class="tag">strategic-positioning</span><span class="tag">competitive-analysis</span><span class="tag">strategy</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,23 +393,19 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Swot Analysis (Project Management domain).
 
-SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for strategic positioning. Use when assessing a new market entry, a strategic pivot, a competitive response, an org restructure, or as input to annual strategic planning.
+Builds and audits an evidence-backed SWOT with TOWS actions for one explicit strategic question. Use when assessing a market entry, pivot, competitive response or restructure, or as input to annual planning.
 
-A grounded, evidence-backed SWOT — not the bullet-point ceremony most people perform at the start of a planning offsite. - **Annual strategic planning** input
+A grounded SWOT answers one strategic question with evidence, then turns the four lists into a few prioritised TOWS moves. The four quadrants are familiar; the value is in the discipline: scope, evidence per item, honest weaknesses, sized opportunities, scored threats and actions. **Done looks like:
 
 ## Your Key Capabilities
-- Internal vs external — the test
-- When to do a SWOT vs other frameworks
-- From SWOT to strategy
-- &quot;Run a SWOT for entering market X&quot;
-- &quot;Audit our existing SWOT&quot;
+- A SWOT for the whole company
+- Topics instead of opportunities
+- A SWOT with no TOWS
 
 ## Frameworks &amp; Templates You Know
-- Decision frameworks
-- When to do a SWOT vs other frameworks
-- | New market entry overview | Business model design → BMC / Lean Canvas |
-- SWOT is breadth. Other frameworks add depth on specific dimensions.
-- - `references/swot-framework.md` — categorization, evidence standards, TOWS
+- | `assets/swot_template.md` | Fill-in template |
+- - `project-management/strategy-frameworks/ansoff-matrix`: growth options
+- - `project-management/strategy-frameworks/lean-canvas`: startup view
 
 ## How to Help
 When the user asks for help in this domain:
@@ -429,23 +425,19 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Swot Analysis (Project Management domain).
 
-SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for strategic positioning. Use when assessing a new market entry, a strategic pivot, a competitive response, an org restructure, or as input to annual strategic planning.
+Builds and audits an evidence-backed SWOT with TOWS actions for one explicit strategic question. Use when assessing a market entry, pivot, competitive response or restructure, or as input to annual planning.
 
-A grounded, evidence-backed SWOT — not the bullet-point ceremony most people perform at the start of a planning offsite. - **Annual strategic planning** input
+A grounded SWOT answers one strategic question with evidence, then turns the four lists into a few prioritised TOWS moves. The four quadrants are familiar; the value is in the discipline: scope, evidence per item, honest weaknesses, sized opportunities, scored threats and actions. **Done looks like:
 
 ## Your Key Capabilities
-- Internal vs external — the test
-- When to do a SWOT vs other frameworks
-- From SWOT to strategy
-- &quot;Run a SWOT for entering market X&quot;
-- &quot;Audit our existing SWOT&quot;
+- A SWOT for the whole company
+- Topics instead of opportunities
+- A SWOT with no TOWS
 
 ## Frameworks &amp; Templates You Know
-- Decision frameworks
-- When to do a SWOT vs other frameworks
-- | New market entry overview | Business model design → BMC / Lean Canvas |
-- SWOT is breadth. Other frameworks add depth on specific dimensions.
-- - `references/swot-framework.md` — categorization, evidence standards, TOWS
+- | `assets/swot_template.md` | Fill-in template |
+- - `project-management/strategy-frameworks/ansoff-matrix`: growth options
+- - `project-management/strategy-frameworks/lean-canvas`: startup view
 
 ## How to Help
 When the user asks for help in this domain:
@@ -475,187 +467,103 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # SWOT Analysis
 
-A grounded, evidence-backed SWOT — not the bullet-point ceremony most
-people perform at the start of a planning offsite.
+A grounded SWOT answers one strategic question with evidence, then turns the four lists into a few prioritised TOWS moves. The four quadrants are familiar; the value is in the discipline: scope, evidence per item, honest weaknesses, sized opportunities, scored threats and actions.
 
-## When to use this skill
+**Done looks like:** a one-sentence scope; 3-6 items per quadrant, each with its evidence; opportunities with a trigger, window and size; threats with likelihood, severity and mitigation; 2-3 high-priority TOWS actions; `swot_scorer.py` exits 0 and its warnings have been read and either fixed or answered.
 
-- **Annual strategic planning** input
-- **New market entry** assessment
-- **Pivot conversations**
-- **Competitive response** decisions
-- **Org restructure** evaluation
-- **Pre-board** strategic review
-- **Pre-fundraise** investor narrative grounding
+## When to Use
 
-## The 2x2
+- Annual strategic planning input, or a pre-board or pre-fundraise review
+- A new market entry, pivot, competitive response or org restructure
+- Auditing an existing SWOT that produced no decisions
 
-|                | Helpful | Harmful |
-|----------------|---------|---------|
-| **Internal**   | Strengths | Weaknesses |
-| **External**   | Opportunities | Threats |
-
-Internal = within our control (people, IP, ops, brand, capital).
-External = outside our control (market, competition, regulation, tech shifts).
-
-The single most-common SWOT failure: confusing internal with external.
+Use `porters-five-forces` for industry structure, `ansoff-matrix` for growth options, and `business-model-canvas` / `lean-canvas` for the business model itself.
 
 ## Clarify First
 
 Before building the SWOT, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
 - **Explicit scope/subject:** e.g. &quot;entering market X&quot; or &quot;our position vs Competitor X&quot; (a SWOT for &quot;the company&quot; produces four lists pointing in four directions).
-- **Evidence per item:** the data/quote/benchmark behind each entry (strengths must be facts, not aspirations; a SWOT with no real weaknesses signals bias).
-- **Competitor/market reference frame:** what you&#x27;re comparing against (strengths and threats are relative, not absolute).
-- **TOWS actions wanted:** whether to cross-cut into SO/ST/WO/WT moves (converts the static SWOT into strategy rather than a wall of bullets).
+- **Evidence per item:** the data, quote or benchmark behind each entry (strengths must be facts, not aspirations).
+- **Reference frame:** who you compare against (strengths and threats are relative).
+- **TOWS wanted:** whether to cross-cut into SO/ST/WO/WT moves (it turns the SWOT into options).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Define the scope
-A SWOT must have an explicit subject:
-- &quot;Acme entering the European market&quot;
-- &quot;Our enterprise sales motion vs SMB&quot;
-- &quot;Our position vs Competitor X in vertical Y&quot;
-
-A SWOT without scope produces 4 lists of bullets that point in 4 directions.
-
-### Step 2 — Strengths (with evidence)
-For each strength:
-- What is it specifically?
-- What&#x27;s the evidence (data, customer quote, benchmark)?
-- How does it compare to competitors?
-- Does the market actually care?
-
-A strength no customer cares about isn&#x27;t a strength.
-
-### Step 3 — Weaknesses (with honesty)
-For each weakness:
-- What is it specifically?
-- What&#x27;s the evidence?
-- Are we fixing it? Why or why not?
-- What&#x27;s the cost of leaving it?
-
-A SWOT with no real weaknesses signals bias or low candor.
-
-### Step 4 — Opportunities (with sizing)
-For each opportunity:
-- What&#x27;s the trigger / shift creating this opportunity?
-- What&#x27;s the size (TAM/SAM/SOM if quantifiable)?
-- What&#x27;s the time window?
-- What&#x27;s our right to win?
-
-&quot;AI is hot&quot; is not an opportunity. &quot;Regulated industries replacing
-manual GDPR processes — $8B SAM, 36-month window&quot; is.
-
-### Step 5 — Threats (with severity)
-For each threat:
-- What is it specifically?
-- How likely (1-5)?
-- How severe if realized (1-5)?
-- What can we do to mitigate?
-
-### Step 6 — TOWS matrix (cross-cuts)
-The most-valuable post-SWOT step:
-
-|              | Opportunities | Threats |
-|--------------|---------------|---------|
-| **Strengths** | SO: leverage strength to capture opportunity | ST: leverage strength to defend against threat |
-| **Weaknesses** | WO: address weakness to capture opportunity | WT: minimize weakness to avoid threat |
-
-This converts a static SWOT into strategic actions.
-
-### Step 7 — Run `swot_scorer.py`
-Audit for: generic items, missing evidence, internal/external misclassification,
-no quantification, no TOWS actions, one-sided SWOT.
+## Quick Start
 
 ```bash
+# Sound SWOT: no findings, exit 0
 python3 project-management/strategy-frameworks/swot-analysis/scripts/swot_scorer.py \
-  --input swot.json --format markdown
+  --input project-management/strategy-frameworks/swot-analysis/assets/sample_swot.json --format markdown
 ```
 
-## Decision frameworks
+```bash
+# Generic, one-sided SWOT: exit 1 (no weaknesses) plus generic-term and missing-evidence warnings
+python3 project-management/strategy-frameworks/swot-analysis/scripts/swot_scorer.py \
+  --input project-management/strategy-frameworks/swot-analysis/assets/sample_swot_flawed.json --format markdown
+```
 
-### Internal vs external — the test
+```bash
+# Input schema and flags
+python3 project-management/strategy-frameworks/swot-analysis/scripts/swot_scorer.py --help
+```
 
-If the item depends on something we own (people, money, tech, brand,
-process, IP) → internal.
+## Tools Overview
 
-If the item depends on something we don&#x27;t own (market, customers,
-competitors, regulators, technology trends) → external.
+`swot_scorer.py` is the quality gate for this skill. **What the scorer checks:** scope present and specific; an empty quadrant (fail); generic phrases (&quot;great team&quot;, &quot;AI&quot;, &quot;growing market&quot;); items without evidence; strengths-to-weaknesses asymmetry; opportunities without trigger, window or size; threats without likelihood, severity or mitigation; TOWS present, cells covered and 1-5 high-priority actions. It cannot tell whether an item is internal or external, or whether the evidence is true; you check those.
 
-Common miscategorizations:
-- &quot;Strong brand recognition in segment X&quot; — internal (we own it)
-- &quot;Customers love our brand&quot; — external (customer behavior)
-- &quot;Strong eng team&quot; — internal
-- &quot;Hard to recruit eng talent&quot; — external
-- &quot;Our cloud bill is high&quot; — internal
-- &quot;Cloud prices rising&quot; — external
+**Exit codes:** `0` no fail findings (warnings may remain) · `1` at least one fail (an empty quadrant or no scope) · `2` unreadable file, invalid JSON or a top level that is not an object. Output is JSON by default, `--format markdown` for a table, `--output FILE` to write a file.
 
-### When to do a SWOT vs other frameworks
+## Workflow
 
-| Use SWOT | Use other |
-|----------|-----------|
-| Broad strategic positioning | Industry analysis → Porter&#x27;s Five Forces |
-| Multi-stakeholder alignment | Macro environment → PESTLE |
-| Annual planning input | Growth options → Ansoff Matrix |
-| New market entry overview | Business model design → BMC / Lean Canvas |
+1. **Scope.** One sentence naming the decision, for example &quot;Acme entering the German mid-market in 2027&quot;.
+2. **Strengths and weaknesses (internal).** Only what we control. Each needs evidence and a comparison to the alternative the buyer has; a strength no customer cares about is not one. Expect at least three real weaknesses; fewer usually means low candour.
+3. **Opportunities and threats (external).** Only what we do not control. Opportunities name the trigger that created them, the window and the size; threats get likelihood and severity (1-5) and a mitigation. Use the internal/external test in `references/swot-framework.md` when an item could sit either side.
+4. **TOWS.** Cross the quadrants into SO, ST, WO and WT actions and mark 2-3 as high priority.
+5. **Audit.** Write the SWOT as JSON (schema in `--help`; `assets/sample_swot.json` is a complete example) and run the scorer. Fix fails, then read every warning.
+6. **Hand off.** The SWOT is input: the high-priority TOWS actions go to prioritisation, resourcing and KPIs.
 
-SWOT is breadth. Other frameworks add depth on specific dimensions.
+## Anti-Patterns
 
-### From SWOT to strategy
+### A SWOT for the whole company
+**Mistake:** The SWOT has no scope, so each list points somewhere different and nothing follows from it.
+**Why it happens:** &quot;Do a SWOT&quot; arrives without a decision attached.
+**Instead:** Name the decision first. If nobody can, the SWOT is premature.
 
-A SWOT alone isn&#x27;t a strategy. It&#x27;s input. Strategy comes from:
+### Topics instead of opportunities
+**Mistake:** Opportunities read &quot;AI&quot;, &quot;globalisation&quot;, &quot;market growing&quot;.
+**Why it happens:** Trends are easy to list and hard to argue with.
+**Instead:** Each opportunity names what shifted, the window, the size and why we can win it. If you cannot fill those, it is a trend, not an opportunity.
 
-1. SWOT → identifies positioning realities
-2. TOWS → identifies strategic options
-3. Prioritization → which 2-3 options to pursue
-4. Resourcing → what we&#x27;ll fund + give up
-5. KPIs → how we&#x27;ll know it worked
+### A SWOT with no TOWS
+**Mistake:** Four tidy lists, no actions; the planning meeting ends where it started.
+**Why it happens:** The SWOT is treated as the deliverable.
+**Instead:** Cross-cut into TOWS and leave the session with 2-3 high-priority moves and owners.
 
-Skipping any step produces a wall of analysis without action.
+More failure modes with worked fixes: `references/swot-anti-patterns.md`.
 
-## Common engagements
+## Files
 
-### &quot;Run a SWOT for entering market X&quot;
-1. Scope: explicitly &quot;entering market X.&quot;
-2. List internal capabilities relevant to that market (Strengths, Weaknesses).
-3. List external factors specific to market X (Opportunities, Threats).
-4. Score evidence + materiality per item.
-5. Run TOWS.
-6. Recommend 2-3 strategic moves.
+| File | Purpose |
+|------|---------|
+| `scripts/swot_scorer.py` | SWOT audit (completeness, evidence, TOWS) |
+| `assets/sample_swot.json` | Complete market-entry SWOT; exits 0 |
+| `assets/sample_swot_flawed.json` | Generic, one-sided SWOT; exits 1 |
+| `assets/swot_template.md` | Fill-in template |
 
-### &quot;Audit our existing SWOT&quot;
-1. Pull current SWOT.
-2. Run `swot_scorer.py` for generic/ungrounded/miscategorized items.
-3. Surface bias: too many strengths, no real weaknesses, vague opportunities.
-4. Add TOWS if missing.
+## Reference Documentation
 
-## Anti-patterns to avoid
-
-- **No explicit scope.** SWOT for &quot;the company&quot; = SWOT for nothing.
-- **Generic items.** &quot;Great team, great product, growing market, competitors.&quot;
-- **Strengths = aspirations.** What you wish were true, not what is.
-- **No weaknesses.** Either bias or low candor.
-- **Opportunities = topics, not options.** &quot;AI&quot; isn&#x27;t an opportunity.
-- **Threats = abstract anxieties.** Quantify likelihood + severity.
-- **No TOWS.** SWOT without TOWS is just a wall.
-- **Internal/external confusion.** Common; check every item.
-- **SWOT replaces strategy.** SWOT is input, not output.
-
-## References
-
-- `references/swot-framework.md` — categorization, evidence standards, TOWS
-- `references/swot-anti-patterns.md` — common failures + worked fixes
+- [references/swot-framework.md](references/swot-framework.md): Categorisation, evidence standards, TOWS, internal/external test, SWOT to strategy
+- [references/swot-anti-patterns.md](references/swot-anti-patterns.md): Ten common failures with fixes
 
 ## Related skills
 
-- `project-management/strategy-frameworks/porters-five-forces` — competitive dynamics
-- `project-management/strategy-frameworks/ansoff-matrix` — growth options
-- `project-management/strategy-frameworks/business-model-canvas` — operational view
-- `project-management/strategy-frameworks/lean-canvas` — startup view
-- `c-level-advisor/ceo-advisor` — strategic context
+- `project-management/strategy-frameworks/porters-five-forces`: competitive dynamics
+- `project-management/strategy-frameworks/ansoff-matrix`: growth options
+- `project-management/strategy-frameworks/business-model-canvas`: operating model
+- `project-management/strategy-frameworks/lean-canvas`: startup view
+- `c-level-advisor/ceo-advisor`: strategic context
 
 ---
 
@@ -683,7 +591,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Swot Analysis&quot;**
-   - Description: &quot;SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for strategic positioning. Use when assessing a new market entry, a strategic pivot, a competitive response, an org restructure, or as input to annual strategic planning.&quot;
+   - Description: &quot;Builds and audits an evidence-backed SWOT with TOWS actions for one explicit strategic question. Use when assessing a market entry, pivot, competitive response or restructure, or as input to annual planning.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -708,187 +616,103 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # SWOT Analysis
 
-A grounded, evidence-backed SWOT — not the bullet-point ceremony most
-people perform at the start of a planning offsite.
+A grounded SWOT answers one strategic question with evidence, then turns the four lists into a few prioritised TOWS moves. The four quadrants are familiar; the value is in the discipline: scope, evidence per item, honest weaknesses, sized opportunities, scored threats and actions.
 
-## When to use this skill
+**Done looks like:** a one-sentence scope; 3-6 items per quadrant, each with its evidence; opportunities with a trigger, window and size; threats with likelihood, severity and mitigation; 2-3 high-priority TOWS actions; `swot_scorer.py` exits 0 and its warnings have been read and either fixed or answered.
 
-- **Annual strategic planning** input
-- **New market entry** assessment
-- **Pivot conversations**
-- **Competitive response** decisions
-- **Org restructure** evaluation
-- **Pre-board** strategic review
-- **Pre-fundraise** investor narrative grounding
+## When to Use
 
-## The 2x2
+- Annual strategic planning input, or a pre-board or pre-fundraise review
+- A new market entry, pivot, competitive response or org restructure
+- Auditing an existing SWOT that produced no decisions
 
-|                | Helpful | Harmful |
-|----------------|---------|---------|
-| **Internal**   | Strengths | Weaknesses |
-| **External**   | Opportunities | Threats |
-
-Internal = within our control (people, IP, ops, brand, capital).
-External = outside our control (market, competition, regulation, tech shifts).
-
-The single most-common SWOT failure: confusing internal with external.
+Use `porters-five-forces` for industry structure, `ansoff-matrix` for growth options, and `business-model-canvas` / `lean-canvas` for the business model itself.
 
 ## Clarify First
 
 Before building the SWOT, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
 - **Explicit scope/subject:** e.g. &quot;entering market X&quot; or &quot;our position vs Competitor X&quot; (a SWOT for &quot;the company&quot; produces four lists pointing in four directions).
-- **Evidence per item:** the data/quote/benchmark behind each entry (strengths must be facts, not aspirations; a SWOT with no real weaknesses signals bias).
-- **Competitor/market reference frame:** what you&#x27;re comparing against (strengths and threats are relative, not absolute).
-- **TOWS actions wanted:** whether to cross-cut into SO/ST/WO/WT moves (converts the static SWOT into strategy rather than a wall of bullets).
+- **Evidence per item:** the data, quote or benchmark behind each entry (strengths must be facts, not aspirations).
+- **Reference frame:** who you compare against (strengths and threats are relative).
+- **TOWS wanted:** whether to cross-cut into SO/ST/WO/WT moves (it turns the SWOT into options).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Define the scope
-A SWOT must have an explicit subject:
-- &quot;Acme entering the European market&quot;
-- &quot;Our enterprise sales motion vs SMB&quot;
-- &quot;Our position vs Competitor X in vertical Y&quot;
-
-A SWOT without scope produces 4 lists of bullets that point in 4 directions.
-
-### Step 2 — Strengths (with evidence)
-For each strength:
-- What is it specifically?
-- What&#x27;s the evidence (data, customer quote, benchmark)?
-- How does it compare to competitors?
-- Does the market actually care?
-
-A strength no customer cares about isn&#x27;t a strength.
-
-### Step 3 — Weaknesses (with honesty)
-For each weakness:
-- What is it specifically?
-- What&#x27;s the evidence?
-- Are we fixing it? Why or why not?
-- What&#x27;s the cost of leaving it?
-
-A SWOT with no real weaknesses signals bias or low candor.
-
-### Step 4 — Opportunities (with sizing)
-For each opportunity:
-- What&#x27;s the trigger / shift creating this opportunity?
-- What&#x27;s the size (TAM/SAM/SOM if quantifiable)?
-- What&#x27;s the time window?
-- What&#x27;s our right to win?
-
-&quot;AI is hot&quot; is not an opportunity. &quot;Regulated industries replacing
-manual GDPR processes — $8B SAM, 36-month window&quot; is.
-
-### Step 5 — Threats (with severity)
-For each threat:
-- What is it specifically?
-- How likely (1-5)?
-- How severe if realized (1-5)?
-- What can we do to mitigate?
-
-### Step 6 — TOWS matrix (cross-cuts)
-The most-valuable post-SWOT step:
-
-|              | Opportunities | Threats |
-|--------------|---------------|---------|
-| **Strengths** | SO: leverage strength to capture opportunity | ST: leverage strength to defend against threat |
-| **Weaknesses** | WO: address weakness to capture opportunity | WT: minimize weakness to avoid threat |
-
-This converts a static SWOT into strategic actions.
-
-### Step 7 — Run `swot_scorer.py`
-Audit for: generic items, missing evidence, internal/external misclassification,
-no quantification, no TOWS actions, one-sided SWOT.
+## Quick Start
 
 ```bash
+# Sound SWOT: no findings, exit 0
 python3 project-management/strategy-frameworks/swot-analysis/scripts/swot_scorer.py \
-  --input swot.json --format markdown
+  --input project-management/strategy-frameworks/swot-analysis/assets/sample_swot.json --format markdown
 ```
 
-## Decision frameworks
+```bash
+# Generic, one-sided SWOT: exit 1 (no weaknesses) plus generic-term and missing-evidence warnings
+python3 project-management/strategy-frameworks/swot-analysis/scripts/swot_scorer.py \
+  --input project-management/strategy-frameworks/swot-analysis/assets/sample_swot_flawed.json --format markdown
+```
 
-### Internal vs external — the test
+```bash
+# Input schema and flags
+python3 project-management/strategy-frameworks/swot-analysis/scripts/swot_scorer.py --help
+```
 
-If the item depends on something we own (people, money, tech, brand,
-process, IP) → internal.
+## Tools Overview
 
-If the item depends on something we don&#x27;t own (market, customers,
-competitors, regulators, technology trends) → external.
+`swot_scorer.py` is the quality gate for this skill. **What the scorer checks:** scope present and specific; an empty quadrant (fail); generic phrases (&quot;great team&quot;, &quot;AI&quot;, &quot;growing market&quot;); items without evidence; strengths-to-weaknesses asymmetry; opportunities without trigger, window or size; threats without likelihood, severity or mitigation; TOWS present, cells covered and 1-5 high-priority actions. It cannot tell whether an item is internal or external, or whether the evidence is true; you check those.
 
-Common miscategorizations:
-- &quot;Strong brand recognition in segment X&quot; — internal (we own it)
-- &quot;Customers love our brand&quot; — external (customer behavior)
-- &quot;Strong eng team&quot; — internal
-- &quot;Hard to recruit eng talent&quot; — external
-- &quot;Our cloud bill is high&quot; — internal
-- &quot;Cloud prices rising&quot; — external
+**Exit codes:** `0` no fail findings (warnings may remain) · `1` at least one fail (an empty quadrant or no scope) · `2` unreadable file, invalid JSON or a top level that is not an object. Output is JSON by default, `--format markdown` for a table, `--output FILE` to write a file.
 
-### When to do a SWOT vs other frameworks
+## Workflow
 
-| Use SWOT | Use other |
-|----------|-----------|
-| Broad strategic positioning | Industry analysis → Porter&#x27;s Five Forces |
-| Multi-stakeholder alignment | Macro environment → PESTLE |
-| Annual planning input | Growth options → Ansoff Matrix |
-| New market entry overview | Business model design → BMC / Lean Canvas |
+1. **Scope.** One sentence naming the decision, for example &quot;Acme entering the German mid-market in 2027&quot;.
+2. **Strengths and weaknesses (internal).** Only what we control. Each needs evidence and a comparison to the alternative the buyer has; a strength no customer cares about is not one. Expect at least three real weaknesses; fewer usually means low candour.
+3. **Opportunities and threats (external).** Only what we do not control. Opportunities name the trigger that created them, the window and the size; threats get likelihood and severity (1-5) and a mitigation. Use the internal/external test in `references/swot-framework.md` when an item could sit either side.
+4. **TOWS.** Cross the quadrants into SO, ST, WO and WT actions and mark 2-3 as high priority.
+5. **Audit.** Write the SWOT as JSON (schema in `--help`; `assets/sample_swot.json` is a complete example) and run the scorer. Fix fails, then read every warning.
+6. **Hand off.** The SWOT is input: the high-priority TOWS actions go to prioritisation, resourcing and KPIs.
 
-SWOT is breadth. Other frameworks add depth on specific dimensions.
+## Anti-Patterns
 
-### From SWOT to strategy
+### A SWOT for the whole company
+**Mistake:** The SWOT has no scope, so each list points somewhere different and nothing follows from it.
+**Why it happens:** &quot;Do a SWOT&quot; arrives without a decision attached.
+**Instead:** Name the decision first. If nobody can, the SWOT is premature.
 
-A SWOT alone isn&#x27;t a strategy. It&#x27;s input. Strategy comes from:
+### Topics instead of opportunities
+**Mistake:** Opportunities read &quot;AI&quot;, &quot;globalisation&quot;, &quot;market growing&quot;.
+**Why it happens:** Trends are easy to list and hard to argue with.
+**Instead:** Each opportunity names what shifted, the window, the size and why we can win it. If you cannot fill those, it is a trend, not an opportunity.
 
-1. SWOT → identifies positioning realities
-2. TOWS → identifies strategic options
-3. Prioritization → which 2-3 options to pursue
-4. Resourcing → what we&#x27;ll fund + give up
-5. KPIs → how we&#x27;ll know it worked
+### A SWOT with no TOWS
+**Mistake:** Four tidy lists, no actions; the planning meeting ends where it started.
+**Why it happens:** The SWOT is treated as the deliverable.
+**Instead:** Cross-cut into TOWS and leave the session with 2-3 high-priority moves and owners.
 
-Skipping any step produces a wall of analysis without action.
+More failure modes with worked fixes: `references/swot-anti-patterns.md`.
 
-## Common engagements
+## Files
 
-### &quot;Run a SWOT for entering market X&quot;
-1. Scope: explicitly &quot;entering market X.&quot;
-2. List internal capabilities relevant to that market (Strengths, Weaknesses).
-3. List external factors specific to market X (Opportunities, Threats).
-4. Score evidence + materiality per item.
-5. Run TOWS.
-6. Recommend 2-3 strategic moves.
+| File | Purpose |
+|------|---------|
+| `scripts/swot_scorer.py` | SWOT audit (completeness, evidence, TOWS) |
+| `assets/sample_swot.json` | Complete market-entry SWOT; exits 0 |
+| `assets/sample_swot_flawed.json` | Generic, one-sided SWOT; exits 1 |
+| `assets/swot_template.md` | Fill-in template |
 
-### &quot;Audit our existing SWOT&quot;
-1. Pull current SWOT.
-2. Run `swot_scorer.py` for generic/ungrounded/miscategorized items.
-3. Surface bias: too many strengths, no real weaknesses, vague opportunities.
-4. Add TOWS if missing.
+## Reference Documentation
 
-## Anti-patterns to avoid
-
-- **No explicit scope.** SWOT for &quot;the company&quot; = SWOT for nothing.
-- **Generic items.** &quot;Great team, great product, growing market, competitors.&quot;
-- **Strengths = aspirations.** What you wish were true, not what is.
-- **No weaknesses.** Either bias or low candor.
-- **Opportunities = topics, not options.** &quot;AI&quot; isn&#x27;t an opportunity.
-- **Threats = abstract anxieties.** Quantify likelihood + severity.
-- **No TOWS.** SWOT without TOWS is just a wall.
-- **Internal/external confusion.** Common; check every item.
-- **SWOT replaces strategy.** SWOT is input, not output.
-
-## References
-
-- `references/swot-framework.md` — categorization, evidence standards, TOWS
-- `references/swot-anti-patterns.md` — common failures + worked fixes
+- [references/swot-framework.md](references/swot-framework.md): Categorisation, evidence standards, TOWS, internal/external test, SWOT to strategy
+- [references/swot-anti-patterns.md](references/swot-anti-patterns.md): Ten common failures with fixes
 
 ## Related skills
 
-- `project-management/strategy-frameworks/porters-five-forces` — competitive dynamics
-- `project-management/strategy-frameworks/ansoff-matrix` — growth options
-- `project-management/strategy-frameworks/business-model-canvas` — operational view
-- `project-management/strategy-frameworks/lean-canvas` — startup view
-- `c-level-advisor/ceo-advisor` — strategic context
+- `project-management/strategy-frameworks/porters-five-forces`: competitive dynamics
+- `project-management/strategy-frameworks/ansoff-matrix`: growth options
+- `project-management/strategy-frameworks/business-model-canvas`: operating model
+- `project-management/strategy-frameworks/lean-canvas`: startup view
+- `c-level-advisor/ceo-advisor`: strategic context
 
 ---
 
@@ -916,7 +740,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Swot Analysis&quot;**
-   - Description: &quot;SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for strategic positioning. Use when assessing a new market entry, a strategic pivot, a competitive response, an org restructure, or as input to annual strategic planning.&quot;
+   - Description: &quot;Builds and audits an evidence-backed SWOT with TOWS actions for one explicit strategic question. Use when assessing a market entry, pivot, competitive response or restructure, or as input to annual planning.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -976,8 +800,20 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/strategy-frameworks/swot-analysis/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Quick Start</h2><pre><code># Sound SWOT: no findings, exit 0
+python3 project-management/strategy-frameworks/swot-analysis/scripts/swot_scorer.py \
+  --input project-management/strategy-frameworks/swot-analysis/assets/sample_swot.json --format markdown
+</code></pre>
+
+<pre><code># Generic, one-sided SWOT: exit 1 (no weaknesses) plus generic-term and missing-evidence warnings
+python3 project-management/strategy-frameworks/swot-analysis/scripts/swot_scorer.py \
+  --input project-management/strategy-frameworks/swot-analysis/assets/sample_swot_flawed.json --format markdown
+</code></pre>
+
+<pre><code># Input schema and flags
+python3 project-management/strategy-frameworks/swot-analysis/scripts/swot_scorer.py --help
+</code></pre>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/strategy-frameworks/swot-analysis/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

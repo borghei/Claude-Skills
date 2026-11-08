@@ -14,6 +14,12 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
+
+def _die(msg: str) -> None:
+    """Bad input: message on stderr, exit 2 (1 is reserved for findings)."""
+    print(msg, file=sys.stderr)
+    sys.exit(2)
+
 CHANNELS = {
     "written_decision": "Written decision record (doc + named approver + comment deadline)",
     "async_thread": "Async thread (Slack/Teams channel or issue comment)",
@@ -30,12 +36,12 @@ def load_messages(path: Path) -> List[Dict[str, Any]]:
     try:
         doc = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
-        raise SystemExit(f"error: file not found: {path}")
+        _die(f"error: file not found: {path}")
     except json.JSONDecodeError as exc:
-        raise SystemExit(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
+        _die(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
     messages = doc.get("messages") if isinstance(doc, dict) else doc
     if not isinstance(messages, list) or not messages:
-        raise SystemExit("error: expected a non-empty 'messages' list")
+        _die("error: expected a non-empty 'messages' list")
     return messages
 
 
@@ -168,9 +174,9 @@ def main() -> None:
         output(analyse(messages, args.core_overlap_hours), args.format)
     except SystemExit:
         raise
-    except (KeyError, TypeError, ValueError) as exc:
+    except (AttributeError, KeyError, TypeError, ValueError) as exc:
         print(f"error: malformed message data — {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

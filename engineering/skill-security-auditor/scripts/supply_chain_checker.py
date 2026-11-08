@@ -2,12 +2,15 @@
 """
 Supply Chain Checker - Detect typosquatting and dependency risks.
 
-Scans Python import statements and dependency declarations (requirements.txt,
-setup.py, pyproject.toml) for typosquatting risks, unpinned versions, and
-inline pip install commands in scripts.
+Scans Python imports, requirements*.txt and package.json for typosquatting
+risks (Python names), unpinned versions, and inline pip/npm install commands
+in scripts.
 
 Uses Levenshtein distance against a curated list of popular PyPI packages
-to flag suspicious package names.
+to flag suspicious package names. It does not check pinned versions against
+vulnerability advisories: run pip-audit, npm audit or OSV-Scanner for that.
+
+Exit codes: 0 PASS or WARN, 1 FAIL, 2 target does not exist.
 """
 
 import argparse
@@ -125,6 +128,10 @@ def check_typosquatting(package: str) -> Tuple[bool, str]:
     """Check if a package name is a potential typosquat."""
     normalized = normalize_package_name(package)
 
+    # Standard-library modules (urllib, json, ...) are never typosquats of PyPI packages
+    if package.split(".")[0] in getattr(sys, "stdlib_module_names", ()):
+        return False, ""
+
     # Check known typosquats first
     if normalized in KNOWN_TYPOSQUATS:
         return True, KNOWN_TYPOSQUATS[normalized]
@@ -189,21 +196,42 @@ def extract_deps_from_requirements(filepath: str) -> List[Tuple[int, str, bool]]
     return results
 
 
+def extract_deps_from_package_json(filepath: str) -> List[Tuple[int, str, bool]]:
+    """Extract (line, name, is_pinned) from package.json dependency blocks."""
+    try:
+        text = Path(filepath).read_text(encoding="utf-8", errors="replace")
+        data = json.loads(text)
+    except (OSError, json.JSONDecodeError):
+        return []
+    results: List[Tuple[int, str, bool]] = []
+    lines = text.splitlines()
+    for block in ("dependencies", "devDependencies", "optionalDependencies"):
+        for name, spec in (data.get(block) or {}).items():
+            line = next((i for i, l in enumerate(lines, 1) if f'"{name}"' in l), 0)
+            pinned = bool(re.match(r"^\d+\.\d+\.\d+", str(spec)))  # ^, ~, *, ranges, tags are not pins
+            results.append((line, name, pinned))
+    return results
+
+
 def scan_for_pip_install(filepath: str) -> List[Tuple[int, str]]:
-    """Scan a file for inline pip/pip3 install commands."""
+    """Scan a file for inline pip/pip3/npm install commands."""
     results: List[Tuple[int, str]] = []
     try:
         with open(filepath, "r", encoding="utf-8", errors="replace") as fh:
             for line_num, line in enumerate(fh, start=1):
-                if re.search(r"(pip3?|python3?\s+-m\s+pip)\s+install\b", line):
+                if re.search(r"(pip3?|python3?\s+-m\s+pip|npm|yarn|pnpm)\s+(install|add|i)\b", line):
                     results.append((line_num, line.strip()))
     except OSError:
         pass
     return results
 
 
+def is_requirements(name: str) -> bool:
+    return name.startswith("requirements") and name.endswith(".txt")
+
+
 def collect_files(target: str) -> Tuple[List[str], List[str], List[str]]:
-    """Collect Python files, requirements files, and all script files."""
+    """Collect Python files, dependency manifests, and all script files."""
     target_path = Path(target)
     py_files: List[str] = []
     req_files: List[str] = []
@@ -214,7 +242,7 @@ def collect_files(target: str) -> Tuple[List[str], List[str], List[str]]:
         if s.endswith(".py"):
             py_files.append(s)
             script_files.append(s)
-        elif target_path.name in ("requirements.txt", "requirements-dev.txt"):
+        elif is_requirements(target_path.name) or target_path.name == "package.json":
             req_files.append(s)
         return py_files, req_files, script_files
 
@@ -227,7 +255,7 @@ def collect_files(target: str) -> Tuple[List[str], List[str], List[str]]:
                     script_files.append(s)
                 elif s.endswith(".sh"):
                     script_files.append(s)
-                elif p.name in ("requirements.txt", "requirements-dev.txt"):
+                elif (is_requirements(p.name) or p.name == "package.json") and "node_modules" not in p.parts:
                     req_files.append(s)
 
     return py_files, req_files, script_files
@@ -238,6 +266,7 @@ def run_check(target: str, strict: bool) -> CheckReport:
     py_files, req_files, script_files = collect_files(target)
     findings: List[Finding] = []
     checked_packages: Set[str] = set()
+    typo_checked: Set[str] = set()
 
     # 1. Check imports in Python files for typosquatting
     for pf in py_files:
@@ -260,11 +289,15 @@ def run_check(target: str, strict: bool) -> CheckReport:
 
     # 2. Check requirements files
     for rf in req_files:
-        deps = extract_deps_from_requirements(rf)
+        is_npm = rf.endswith("package.json")
+        deps = extract_deps_from_package_json(rf) if is_npm else extract_deps_from_requirements(rf)
         for line_num, pkg, is_pinned in deps:
-            # Typosquatting check
-            if pkg not in checked_packages:
-                checked_packages.add(pkg)
+            declared = f"npm:{pkg}" if is_npm else pkg
+            # Typosquatting check (the reference list is PyPI, so Python manifests only)
+            if declared not in checked_packages:
+                checked_packages.add(declared)
+            if not is_npm and pkg not in typo_checked:
+                typo_checked.add(pkg)
                 is_typo, real_pkg = check_typosquatting(pkg)
                 if is_typo:
                     findings.append(Finding(
@@ -286,7 +319,8 @@ def run_check(target: str, strict: bool) -> CheckReport:
                     line=line_num,
                     package=pkg,
                     detail=f"Dependency '{pkg}' is not pinned to an exact version",
-                    fix=f"Pin to a specific version: {pkg}==<version>",
+                    fix=(f'Pin to an exact version ("{pkg}": "x.y.z") and commit the lockfile' if is_npm
+                         else f"Pin to a specific version: {pkg}==<version>"),
                 ))
 
     # 3. Scan scripts for inline pip install commands
@@ -300,7 +334,7 @@ def run_check(target: str, strict: bool) -> CheckReport:
                 line=line_num,
                 package="pip",
                 detail=f"Inline package installation found: {line_text[:60]}",
-                fix="Move dependencies to requirements.txt instead of installing inline",
+                fix="Declare dependencies in requirements.txt / package.json instead of installing inline",
             ))
 
     critical = sum(1 for f in findings if f.severity == "CRITICAL")

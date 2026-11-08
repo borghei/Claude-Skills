@@ -51,7 +51,7 @@ def get_repo_root():
     root = run_git(["rev-parse", "--show-toplevel"])
     if not root:
         print("Error: not inside a git repository.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     return root
 
 
@@ -429,7 +429,7 @@ def main():
     if invalid:
         print(f"Error: unknown check(s): {', '.join(invalid)}", file=sys.stderr)
         print(f"Available: {', '.join(ALL_CHECKS)}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     repo_root = get_repo_root()
     worktrees = parse_worktrees(repo_root)

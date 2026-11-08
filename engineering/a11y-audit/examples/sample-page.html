@@ -115,6 +115,9 @@
       <input type="text" name="q" placeholder="Search reports...">
       <input type="date" name="from">
       <input type="date" name="to">
+      <!-- VIOLATION (WCAG 2.2 3.3.8): paste blocked on a credential field -->
+      <label for="pin">Access PIN</label>
+      <input type="password" id="pin" name="pin" onpaste="return false">
       <select name="department">
         <option value="">Select department</option>
         <option value="eng">Engineering</option>

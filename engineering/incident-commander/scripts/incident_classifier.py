@@ -472,18 +472,17 @@ Target Resolution: {target_date}
     
     def _determine_teams(self, description: str, service: str) -> List[str]:
         """Determine which teams should respond based on affected systems."""
-        teams = set()
         text_to_analyze = f"{description} {service}".lower()
-        
-        for component, team_list in self.team_mappings.items():
-            if component in text_to_analyze:
-                teams.update(team_list)
-        
-        # Default teams if no specific match
-        if not teams:
-            teams = {"General Engineering", "SRE"}
-        
-        return list(teams)
+        # Rank components by first mention so the primary team follows the main symptom;
+        # whole-word match so "database" does not also match "data".
+        hits = sorted((m.start(), comp) for comp in self.team_mappings
+                      for m in [re.search(rf"\b{comp}\b", text_to_analyze)] if m)
+        teams: List[str] = []
+        for _, comp in hits:
+            for team in self.team_mappings[comp]:
+                if team not in teams:
+                    teams.append(team)
+        return teams[:5] or ["General Engineering", "SRE"]
     
     def _generate_initial_actions(self, severity: str, incident_data: Dict) -> List[Dict]:
         """Generate prioritized initial actions based on severity."""
@@ -616,7 +615,9 @@ Target Resolution: {target_date}
     
     def _calculate_confidence(self, description: str, affected_users: str, business_impact: str) -> float:
         """Calculate confidence score for the classification."""
-        confidence = 0.5  # Base confidence
+        # Measures how complete the input is, not how right the keyword match is,
+        # so it is capped below certainty: confirm against references/incident_severity_matrix.md.
+        confidence = 0.4
         
         # Higher confidence with more specific information
         if '%' in affected_users and any(char.isdigit() for char in affected_users):
@@ -626,9 +627,9 @@ Target Resolution: {target_date}
             confidence += 0.15
         
         if len(description.split()) > 5:  # Detailed description
-            confidence += 0.15
-        
-        return min(confidence, 1.0)
+            confidence += 0.1
+
+        return min(confidence, 0.85)
     
     def _explain_classification(self, severity: str, description: str, affected_users: str) -> str:
         """Provide explanation for the classification decision."""
@@ -675,7 +676,7 @@ def format_text_output(result: Dict) -> str:
     # Classification section
     output.append("CLASSIFICATION:")
     output.append(f"  Severity: {classification['severity']}")
-    output.append(f"  Confidence: {classification['confidence']:.1%}")
+    output.append(f"  Confidence: {classification['confidence']:.0%} (keyword heuristic - confirm with the severity matrix)")
     output.append(f"  Reasoning: {classification['reasoning']}")
     output.append(f"  Timestamp: {classification['timestamp']}")
     output.append("")
@@ -899,15 +900,12 @@ Input JSON format:
         else:
             print(output)
     
-    except FileNotFoundError as e:
-        print(f"Error: File not found - {e}", file=sys.stderr)
-        sys.exit(1)
-    except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON - {e}", file=sys.stderr)
-        sys.exit(1)
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"Error: cannot read input - {e}", file=sys.stderr)
+        sys.exit(2)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

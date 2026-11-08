@@ -179,7 +179,7 @@ Builds a Mermaid tree of the NSM + inputs + leading indicators + anti-metrics + 
     "formula": "WAA * (publishers / WAA)",
     "current": 12400,
     "target": 22000,
-    "due": "2026-09-30"
+    "due": "2027-06-30"
   },
   "inputs": [
     {
@@ -217,7 +217,7 @@ Builds a Mermaid tree of the NSM + inputs + leading indicators + anti-metrics + 
 
 ```mermaid
 graph TD
-    NSM["NSM: Weekly active accounts publishing >=1 deliverable<br/>Target: 22000 by 2026-09-30"]
+    NSM["NSM: Weekly active accounts publishing >=1 deliverable<br/>Target: 22000 by 2027-06-30"]
     NSM --> I1["Input: Weekly active accounts (WAA)"]
     NSM --> I2["Input: Publisher rate"]
     I1 --> L1a["Lead: Day-1 session count"]

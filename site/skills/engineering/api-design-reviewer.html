@@ -397,6 +397,11 @@ Review REST API designs for quality, consistency, and breaking changes. Lints Op
 
 Comprehensive analysis and review of REST API designs against conventions, best practices, and industry standards. Helps engineering teams build consistent, maintainable, well-designed APIs through automated linting, breaking-change detection, and design scorecards. - **API linting &amp; convention anal
 
+## Your Key Capabilities
+- Gating on the wrong score
+- Verbs in paths
+- Breaking changes in a minor release
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Review REST API designs for quality, consistency, and breaking changes. Lints OpenAPI specs, generates scorecards, and detects breaking changes between versions. Use when designing APIs, reviewing contracts, or managing API versioning.
 
 Comprehensive analysis and review of REST API designs against conventions, best practices, and industry standards. Helps engineering teams build consistent, maintainable, well-designed APIs through automated linting, breaking-change detection, and design scorecards. - **API linting &amp; convention anal
+
+## Your Key Capabilities
+- Gating on the wrong score
+- Verbs in paths
+- Breaking changes in a minor release
 
 ## How to Help
 When the user asks for help in this domain:
@@ -472,15 +482,68 @@ Before producing the review, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Quick Start Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `api_linter.py` | Lint an OpenAPI/Swagger JSON spec for REST conventions and best practices | `python scripts/api_linter.py openapi.json --format json` |
-| `breaking_change_detector.py` | Detect breaking changes between two spec versions (with migration guides) | `python scripts/breaking_change_detector.py v1.json v2.json --exit-on-breaking` |
-| `api_scorecard.py` | Score API design quality across 5 weighted dimensions (A–F grades) | `python scripts/api_scorecard.py openapi.json --min-grade B` |
+```bash
+# 1. Lint conventions (naming, methods, status codes, error format, docs coverage)
+python scripts/api_linter.py assets/sample_openapi_v1.json                 # 93/100, 0 errors, exit 0
 
-## References
+# 2. Diff two versions for breaking changes, with migration notes
+python scripts/breaking_change_detector.py assets/sample_openapi_v1.json assets/sample_openapi_v2.json --exit-on-breaking
+#    -&gt; 3 breaking (DELETE removed, User.id integer-&gt;string, new required field), exit 1
+
+# 3. Score overall design maturity across five weighted dimensions
+python scripts/api_scorecard.py assets/sample_openapi_v1.json --min-grade C   # F (51/100), exit 1
+```
+
+## Tools Overview
+
+| Tool | Measures | Gate with it? |
+|------|----------|---------------|
+| `api_linter.py` | Convention violations; starts at 100 and subtracts per issue, so a small clean spec scores high | Yes: exit 1 on any error-level issue. Use on every PR. |
+| `breaking_change_detector.py` | Removed endpoints/methods, type changes, new required fields, status-code changes between two versions | Yes: `--exit-on-breaking` on every PR that touches the spec. |
+| `api_scorecard.py` | Design maturity: documentation depth, examples, security coverage, pagination, error guidance; absent features cost points | As a ratchet: set `--min-grade` to today&#x27;s grade so it cannot drop, and review the recommendations at release time. |
+
+The linter and the scorecard disagree by design. On the sample spec the linter gives 93/100 (few
+violations) while the scorecard gives F (missing descriptions, examples, error schemas, rate-limit
+docs). Report both and say which question each answers: &quot;does it break our rules?&quot; versus &quot;is it
+a complete, well-documented API?&quot;.
+
+All three take `--format text|json` and `--output FILE`.
+
+**Exit codes.** `0` pass; `1` linter errors found, breaking changes found (with
+`--exit-on-breaking`) or grade below `--min-grade`; `2` missing or unreadable spec, invalid JSON,
+or a spec the tool cannot analyse.
+
+**Done when:**
+1. The linter reports no errors and every warning is fixed or accepted with a reason.
+2. The breaking-change diff against the last released spec is empty, or each breaking change has a version bump and a migration note.
+3. The scorecard grade did not drop, and its top recommendation is either done or ticketed.
+
+## Anti-Patterns
+
+### Gating on the wrong score
+**Mistake:** Blocking merges on a scorecard grade of B for an API that has never had examples or long descriptions.
+**Why it happens:** One number per PR looks tidy.
+**Instead:** Gate on linter errors and breaking changes; use the scorecard as a ratchet so it only improves.
+
+### Verbs in paths
+**Mistake:** `/getUsers`, `/createOrder`, `/users/delete/{id}`.
+**Why it happens:** RPC habits carry over into REST.
+**Instead:** Nouns for resources and HTTP methods for actions (`GET /users`, `POST /orders`, `DELETE /users/{id}`). The linter flags these.
+
+### Breaking changes in a minor release
+**Mistake:** Changing a field type or adding a required request field without a version bump.
+**Why it happens:** The change looks small from the server side.
+**Instead:** Run the detector against the last released spec in CI; a breaking change needs a new version or a compatibility shim.
+
+## Files
+
+- `scripts/api_linter.py`, `scripts/breaking_change_detector.py`, `scripts/api_scorecard.py` — the three CLIs above.
+- `assets/sample_openapi_v1.json` (Users API) and `assets/sample_openapi_v2.json` (same API with three breaking changes and a verb path).
+- `references/` — REST design patterns, rules, anti-patterns, tooling and CI integration.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -590,15 +653,68 @@ Before producing the review, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Quick Start Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `api_linter.py` | Lint an OpenAPI/Swagger JSON spec for REST conventions and best practices | `python scripts/api_linter.py openapi.json --format json` |
-| `breaking_change_detector.py` | Detect breaking changes between two spec versions (with migration guides) | `python scripts/breaking_change_detector.py v1.json v2.json --exit-on-breaking` |
-| `api_scorecard.py` | Score API design quality across 5 weighted dimensions (A–F grades) | `python scripts/api_scorecard.py openapi.json --min-grade B` |
+```bash
+# 1. Lint conventions (naming, methods, status codes, error format, docs coverage)
+python scripts/api_linter.py assets/sample_openapi_v1.json                 # 93/100, 0 errors, exit 0
 
-## References
+# 2. Diff two versions for breaking changes, with migration notes
+python scripts/breaking_change_detector.py assets/sample_openapi_v1.json assets/sample_openapi_v2.json --exit-on-breaking
+#    -&gt; 3 breaking (DELETE removed, User.id integer-&gt;string, new required field), exit 1
+
+# 3. Score overall design maturity across five weighted dimensions
+python scripts/api_scorecard.py assets/sample_openapi_v1.json --min-grade C   # F (51/100), exit 1
+```
+
+## Tools Overview
+
+| Tool | Measures | Gate with it? |
+|------|----------|---------------|
+| `api_linter.py` | Convention violations; starts at 100 and subtracts per issue, so a small clean spec scores high | Yes: exit 1 on any error-level issue. Use on every PR. |
+| `breaking_change_detector.py` | Removed endpoints/methods, type changes, new required fields, status-code changes between two versions | Yes: `--exit-on-breaking` on every PR that touches the spec. |
+| `api_scorecard.py` | Design maturity: documentation depth, examples, security coverage, pagination, error guidance; absent features cost points | As a ratchet: set `--min-grade` to today&#x27;s grade so it cannot drop, and review the recommendations at release time. |
+
+The linter and the scorecard disagree by design. On the sample spec the linter gives 93/100 (few
+violations) while the scorecard gives F (missing descriptions, examples, error schemas, rate-limit
+docs). Report both and say which question each answers: &quot;does it break our rules?&quot; versus &quot;is it
+a complete, well-documented API?&quot;.
+
+All three take `--format text|json` and `--output FILE`.
+
+**Exit codes.** `0` pass; `1` linter errors found, breaking changes found (with
+`--exit-on-breaking`) or grade below `--min-grade`; `2` missing or unreadable spec, invalid JSON,
+or a spec the tool cannot analyse.
+
+**Done when:**
+1. The linter reports no errors and every warning is fixed or accepted with a reason.
+2. The breaking-change diff against the last released spec is empty, or each breaking change has a version bump and a migration note.
+3. The scorecard grade did not drop, and its top recommendation is either done or ticketed.
+
+## Anti-Patterns
+
+### Gating on the wrong score
+**Mistake:** Blocking merges on a scorecard grade of B for an API that has never had examples or long descriptions.
+**Why it happens:** One number per PR looks tidy.
+**Instead:** Gate on linter errors and breaking changes; use the scorecard as a ratchet so it only improves.
+
+### Verbs in paths
+**Mistake:** `/getUsers`, `/createOrder`, `/users/delete/{id}`.
+**Why it happens:** RPC habits carry over into REST.
+**Instead:** Nouns for resources and HTTP methods for actions (`GET /users`, `POST /orders`, `DELETE /users/{id}`). The linter flags these.
+
+### Breaking changes in a minor release
+**Mistake:** Changing a field type or adding a required request field without a version bump.
+**Why it happens:** The change looks small from the server side.
+**Instead:** Run the detector against the last released spec in CI; a breaking change needs a new version or a compatibility shim.
+
+## Files
+
+- `scripts/api_linter.py`, `scripts/breaking_change_detector.py`, `scripts/api_scorecard.py` — the three CLIs above.
+- `assets/sample_openapi_v1.json` (Users API) and `assets/sample_openapi_v2.json` (same API with three breaking changes and a verb path).
+- `references/` — REST design patterns, rules, anti-patterns, tooling and CI integration.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -718,8 +834,17 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/api-design-reviewer/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Quick Start</h2><pre><code># 1. Lint conventions (naming, methods, status codes, error format, docs coverage)
+python scripts/api_linter.py assets/sample_openapi_v1.json                 # 93/100, 0 errors, exit 0
+
+# 2. Diff two versions for breaking changes, with migration notes
+python scripts/breaking_change_detector.py assets/sample_openapi_v1.json assets/sample_openapi_v2.json --exit-on-breaking
+#    -&gt; 3 breaking (DELETE removed, User.id integer-&gt;string, new required field), exit 1
+
+# 3. Score overall design maturity across five weighted dimensions
+python scripts/api_scorecard.py assets/sample_openapi_v1.json --min-grade C   # F (51/100), exit 1
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/api-design-reviewer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

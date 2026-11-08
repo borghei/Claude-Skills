@@ -1,9 +1,9 @@
 ---
 name: api-test-suite-builder
 description: >
-  Generate API test suites from route definitions across frameworks: auth, input validation,
-  contract, k6 load testing, mocking, and OpenAPI-driven generation. Use when adding new APIs,
-  auditing test coverage, or building regression suites.
+  Generates API test skeletons from an OpenAPI spec, measures which endpoints tests really assert
+  on, and checks response samples against the spec. Use when adding API tests, auditing API test
+  coverage, or catching contract drift.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: api-testing
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   frameworks: vitest, pytest, supertest, httpx, k6, pact
   tags:
     - api-testing
@@ -50,15 +50,64 @@ Before generating the suite, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Quick Start Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `test_generator.py` | Generate API test skeletons from an OpenAPI/Swagger spec | `python scripts/test_generator.py spec.json --framework vitest --output tests/` |
-| `coverage_analyzer.py` | Compare spec endpoints vs existing test files to find gaps | `python scripts/coverage_analyzer.py spec.json tests/ --threshold 95` |
-| `contract_validator.py` | Validate response samples against OpenAPI schema contracts | `python scripts/contract_validator.py spec.json samples/ --strict` |
+The scripts read OpenAPI 3.x / Swagger 2.0 **JSON** specs. Auth, validation, Pact and k6 patterns
+for the parts the scripts do not generate are in the references.
 
-## References
+```bash
+# 1. Generate skeletons (pytest+httpx or vitest+supertest) into a scratch dir, then move what you keep
+python scripts/test_generator.py assets/sample_openapi.json --framework vitest --output /tmp/api-tests
+
+# 2. Measure coverage: endpoints called by a test, and endpoints whose tests assert on the body
+python scripts/coverage_analyzer.py assets/sample_openapi.json assets/sample_tests --threshold 50 --show-covered
+python scripts/coverage_analyzer.py assets/sample_openapi.json /tmp/api-tests --threshold 95   # exit 1: skeletons only
+
+# 3. Validate recorded responses against the spec's response schemas
+python scripts/contract_validator.py assets/sample_openapi.json assets/sample_responses          # exit 0
+python scripts/contract_validator.py assets/sample_openapi.json assets/sample_responses_flawed   # exit 1, 3 violations
+```
+
+**Tools overview.**
+- `test_generator.py` writes one file per tag: 401 tests for secured operations, 422 tests per required field and wrong type, a success test that expects the spec's own 2xx code (201 for create, 204 for delete) on a URL with path parameters filled in, and a skipped placeholder for each declared error code. Every success test carries a TODO to assert on the body; a skeleton proves the route answers, not that it is right.
+- `coverage_analyzer.py` pairs each HTTP call with its own method and path, matches `{param}` segments, and ignores skipped tests. It reports two numbers: endpoints called, and endpoints with a body or header assertion. `--threshold` gates on the second, so a suite of status-only skeletons cannot pass a 95% gate.
+- `contract_validator.py` matches each sample by filename (`GET_users_200.json`) or a `_meta` block (`{"method", "path", "status"}`) and reports missing required fields, wrong types and disallowed properties; `--strict` also rejects extra properties where the schema does not forbid them.
+
+All three accept `--json`.
+
+**Exit codes.** `0` sound (or files generated); `1` coverage below `--threshold` or a sample violates its contract; `2` missing or unreadable spec, directory or sample set, invalid JSON, or a file that is not an OpenAPI spec.
+
+**Done when:**
+1. Every TODO in the generated files is replaced by a real assertion or deleted.
+2. The suite runs green against a local or mocked server, and red when you break the handler on purpose.
+3. `coverage_analyzer.py --threshold` passes at the bar your team agreed (asserted coverage, not call coverage).
+4. Each auth and validation rule in the spec has a negative test, and `contract_validator.py` passes on fresh recorded responses.
+
+## Anti-Patterns
+
+### Status-code-only tests
+**Mistake:** Every test asserts `status == 200` and nothing about the body.
+**Why it happens:** Generated skeletons look finished, and status checks are easy to write.
+**Instead:** Assert the fields the spec promises (ids, types, error messages). `coverage_analyzer.py` counts only these tests toward the gate.
+
+### Testing the happy path only
+**Mistake:** No test sends a missing field, a wrong type or an expired token.
+**Why it happens:** Negative cases need fixtures and feel like extra work.
+**Instead:** Start from the generated 401 and 422 cases and add one negative test per validation rule and per role boundary.
+
+### Contract checks on hand-made samples
+**Mistake:** Validating response samples someone typed, which match the spec by construction.
+**Why it happens:** Recording real traffic takes setup.
+**Instead:** Record responses from a running build (staging or a local server) and validate those. Drift only shows up in real output.
+
+## Files
+
+- `scripts/test_generator.py`, `scripts/coverage_analyzer.py`, `scripts/contract_validator.py` — the three CLIs above.
+- `assets/sample_openapi.json` — four-operation Users API; `assets/sample_tests/` — a small hand-written suite (75% called, 50% asserted).
+- `assets/sample_responses/` (valid) and `assets/sample_responses_flawed/` (three contract violations).
+- `references/` — route detection per framework, test matrices, Pact and k6 scripts, workflow and quality bar.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -69,10 +118,10 @@ Load the reference that matches the task — keep this file lean and pull detail
 ## Scope & Limitations
 
 **This skill covers:**
-- Generating test suites from route definitions for REST APIs across Node.js, Python, and Go frameworks
+- Generating test skeletons from OpenAPI JSON specs; route-detection recipes for Node.js, Python and Go codebases without a spec
 - Authentication, authorization, input validation, pagination, and error-path test generation
 - Consumer-driven contract testing with Pact and schema snapshot validation
-- Load and performance testing script generation with k6 and Artillery
+- Load and performance testing patterns with k6 (reference scripts, not generated)
 
 **This skill does NOT cover:**
 - GraphQL API testing (see `engineering/api-design-reviewer` for schema review patterns)
@@ -80,13 +129,9 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Database migration testing or schema validation (see `engineering/database-schema-designer`)
 - Security penetration testing beyond input sanitization checks (see `engineering/skill-security-auditor`)
 
-## Integration Points
+## See Also
 
-| Skill | Integration | Data Flow |
-|-------|------------|-----------|
-| `engineering/api-design-reviewer` | Validate API design before generating tests | Design review output defines the endpoint contracts that this skill generates tests for |
-| `engineering/ci-cd-pipeline-builder` | Embed generated tests into CI/CD pipelines | Generated test files and k6 scripts are added as pipeline stages with pass/fail gates |
-| `engineering/playwright-pro` | Complement API tests with E2E browser tests | API test suite validates backend behavior; Playwright tests validate the frontend consuming those APIs |
-| `engineering/database-schema-designer` | Align test fixtures with database schema | Schema definitions inform factory functions and seed data used in generated test helpers |
-| `engineering/observability-designer` | Monitor test-covered endpoints in production | Load test thresholds (P95, P99) feed into alerting rules for the same endpoints in production dashboards |
-| `engineering/performance-profiler` | Investigate endpoints that fail load test thresholds | k6 results identify slow endpoints; the profiler skill traces root causes at the code level |
+- `engineering/api-design-reviewer` — review the spec before generating tests from it.
+- `engineering/ci-cd-pipeline-builder` — run the suite and the coverage gate where your team gates merges.
+- `engineering/playwright-pro` — browser-level tests for the frontend that calls these APIs.
+- `engineering/performance-profiler` — follow up on endpoints that miss k6 thresholds.

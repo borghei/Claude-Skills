@@ -142,7 +142,11 @@ def analyze(doc: dict[str, Any], tolerance: float) -> dict[str, Any]:
               ratio(res["human"]["escaped_defects"], res["human"]["merged"]))]
     for name, a, h in pairs:
         if a is not None and h is not None and a - h > tolerance:
-            regressions.append(f"agent {name} {a} exceeds human {h} by more than {tolerance}")
+            if name.startswith("escaped"):  # report in the table's unit: per 10 merged PRs
+                regressions.append(f"agent escaped defects {round(a * 10, 2)} per 10 merged exceeds human "
+                                   f"{round(h * 10, 2)} by more than {round(tolerance * 10, 2)}")
+            else:
+                regressions.append(f"agent {name} {a} exceeds human {h} by more than {tolerance}")
     return {"period": doc.get("period", {}), "by_author": res, "dora": d,
             "regressions": regressions}
 

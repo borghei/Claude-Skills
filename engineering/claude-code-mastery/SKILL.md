@@ -1,27 +1,21 @@
 ---
 name: claude-code-mastery
 description: >
-  Use when the user asks to "optimize CLAUDE.md", "create a new skill",
-  "write a custom agent", "configure hooks", "manage context window",
-  "set up MCP servers", "scaffold a skill package", "analyze token budget",
-  "create subagents", "configure permissions", "set up worktrees", or
-  "integrate Claude Code with editors". Covers Claude Code CLI mastery,
-  skill authoring, context engineering, hooks automation, subagent creation,
-  and development workflow optimization.
+  Optimizes CLAUDE.md files, scaffolds skills and subagents, wires hooks and measures context
+  budget for Claude Code. Use when writing or trimming a CLAUDE.md, creating a skill, subagent
+  or hook, or auditing token usage.
 license: MIT
 metadata:
   version: 1.1.0
   author: borghei
   category: engineering
   domain: development-tools
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [claude-code, skill-authoring, subagents, hooks]
 ---
 # Claude Code Mastery
 
 Expert skill for Claude Code CLI -- CLAUDE.md optimization, skill authoring, subagent creation, hooks automation, and context engineering.
-
-**Keywords:** claude-code, claude-cli, CLAUDE.md, skill-authoring, subagents, hooks, context-window, token-budget, MCP-servers, worktrees, permission-modes, prompt-engineering, context-engineering, slash-commands
 
 ## Core Capabilities
 
@@ -48,31 +42,51 @@ Before scaffolding or optimizing, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 ```bash
-# Scaffold a new skill package
-python scripts/skill_scaffolder.py my-new-skill --domain engineering --description "Brief description"
+# Score a CLAUDE.md for structure, token cost and redundancy (default budget 6000 tokens)
+python scripts/claudemd_optimizer.py CLAUDE.md --token-limit 4000
 
-# Analyze and optimize an existing CLAUDE.md
-python scripts/claudemd_optimizer.py path/to/CLAUDE.md
+# Estimate how much of the context window a project's files would take, by category
+python scripts/context_analyzer.py . --max-depth 4 --context-window 200000
 
-# Estimate context window usage across a project
-python scripts/context_analyzer.py /path/to/project
-
-# All tools support JSON output
-python scripts/claudemd_optimizer.py CLAUDE.md --json
+# Scaffold a skill package into an existing parent directory
+python scripts/skill_scaffolder.py my-skill -d engineering -o /tmp --description "Scores API specs for breaking changes"
 ```
 
-## Tools
+All three accept `--json`. Full flags and output fields: [references/tool-reference.md](references/tool-reference.md).
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `skill_scaffolder.py` | Scaffold a new skill package with correct structure + frontmatter | `python scripts/skill_scaffolder.py my-skill -d engineering --description "Does X"` |
-| `claudemd_optimizer.py` | Score a CLAUDE.md for structure, tokens, and redundancy with recommendations | `python scripts/claudemd_optimizer.py CLAUDE.md --token-limit 4000` |
-| `context_analyzer.py` | Estimate context-window consumption by file category with a budget breakdown | `python scripts/context_analyzer.py /path/to/project --max-depth 4` |
+- `claudemd_optimizer.py` reports a 0–100 score, the token estimate against `--token-limit`, duplicated or vague sections, and concrete cuts.
+- `context_analyzer.py` defaults to a 200K window as a conservative floor. Pass the real window of the model you run, or the percentages will overstate the pressure.
+- `skill_scaffolder.py` creates `<-o DIR>/<skill-name>/` with `SKILL.md`, `scripts/`, `references/` and `assets/`. `-o` (`--output`) is the parent directory, which must already exist; it defaults to the current directory, so pass `-o` to keep the scaffold out of the repo you are standing in. If the description has no "Use when" clause it appends a placeholder so you fill in the triggers before shipping.
 
-All tools support `--json`. See **[references/tool-reference.md](references/tool-reference.md)** for full parameter tables and output formats.
+**Exit codes (all three):** `0` report or scaffold written; `2` missing file or path, output directory that does not exist, or a skill folder that already exists. They are advisory, not gates: an over-budget CLAUDE.md still exits 0.
+
+**Done when:** the CLAUDE.md fits its budget and every line is something the model could not infer from the code; a new skill's description says what it does and when to use it in under 240 characters; a hook has been triggered once on purpose and blocked or passed as intended.
+
+## Anti-Patterns
+
+### CLAUDE.md as a wiki
+**Mistake:** Pasting architecture essays, full style guides and onboarding notes into CLAUDE.md.
+**Why it happens:** It is the one file the agent always reads, so everything lands there.
+**Instead:** Keep commands, conventions and traps the code does not reveal; link to longer docs and let the agent read them when needed. Every line costs tokens on every turn.
+
+### Hooks that fail open
+**Mistake:** A PreToolUse guard that exits 1 on a violation and assumes the tool call was blocked.
+**Why it happens:** Exit 1 means "error" in most CLIs.
+**Instead:** A PreToolUse hook blocks only on exit 2 (stderr goes back to the model). Test the hook against a real violating command before relying on it. See [references/hooks-cookbook.md](references/hooks-cookbook.md).
+
+### Subagents with every tool
+**Mistake:** A review subagent with no `tools` allowlist, so it can edit files and run shell commands.
+**Why it happens:** Omitting `tools` is the shortest working file.
+**Instead:** Give each subagent the smallest tool list its job needs; a reviewer gets read and search tools only.
+
+## Files
+
+- `scripts/claudemd_optimizer.py`, `scripts/context_analyzer.py`, `scripts/skill_scaffolder.py` — the three CLIs above.
+- `assets/skill-template.md`, `assets/agent-template.md` — starting files for a skill and a subagent.
+- `references/` — playbooks, quick reference, tool reference, skill authoring, subagent patterns, hooks cookbook.
 
 ## References
 
@@ -101,13 +115,9 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Advanced prompt engineering techniques for LLM applications (see [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md))
 - CI/CD pipeline configuration or deployment automation (see [senior-devops](../senior-devops/SKILL.md), [ci-cd-pipeline-builder](../../engineering/ci-cd-pipeline-builder/SKILL.md))
 
-## Integration Points
+## See Also
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| [senior-architect](../senior-architect/SKILL.md) | Architecture decisions inform CLAUDE.md structure sections | Architecture diagrams and patterns feed into the Architecture Overview section of CLAUDE.md |
-| [code-reviewer](../code-reviewer/SKILL.md) | Subagent creation for automated code review | Claude Code Mastery creates the agent `.md` file; Code Reviewer provides the review logic |
-| [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) | Prompt optimization for skill descriptions and agent instructions | Prompt engineering techniques improve YAML frontmatter trigger phrases and agent system prompts (the agent file body) |
-| [doc-drift-detector](../doc-drift-detector/SKILL.md) | Detects when CLAUDE.md drifts out of sync with the codebase | Context Analyzer output feeds drift detection; drift findings trigger CLAUDE.md optimization |
-| [context-engine](../../engineering/context-engine/SKILL.md) | Advanced context management strategies | Context Analyzer provides token budgets; Context Engine applies compression and prioritization |
-| [senior-secops](../senior-secops/SKILL.md) | Security hooks and permission mode configuration | SecOps policies define which tools to deny; Claude Code Mastery configures the permission allowlists |
+- [context-engine](../context-engine/SKILL.md) — compression and prioritisation once you know the budget.
+- [doc-drift-detector](../doc-drift-detector/SKILL.md) — find where CLAUDE.md no longer matches the code.
+- [code-reviewer](../code-reviewer/SKILL.md) — review logic for a code-review subagent.
+- [senior-prompt-engineer](../senior-prompt-engineer/SKILL.md) — wording for skill descriptions and agent prompts.

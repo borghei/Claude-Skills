@@ -3,7 +3,6 @@
 
 Reports binary-classification or regression metrics side by side, fold stability, and
 pass/fail against config thresholds. Does not train models. Standard library only.
-
 Usage: python3 model_evaluation_suite.py --input preds.csv --folds 5 --config thresholds.json
 """
 
@@ -18,6 +17,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 NULLS = {"", "na", "n/a", "null", "none", "nan"}
+fail = lambda msg: (print(msg, file=sys.stderr), sys.exit(2))  # bad input exits 2
 CHECKS = {"min_accuracy": "accuracy", "min_precision": "precision", "min_recall": "recall",
           "min_f1": "f1", "min_auc": "auc", "max_log_loss": "log_loss", "max_brier": "brier",
           "min_r2": "r2", "max_rmse": "rmse", "max_mae": "mae", "max_mape": "mape"}
@@ -34,15 +34,15 @@ def load_csv(path: str) -> Tuple[List[str], List[Dict[str, str]]]:
             header, rows = next(reader, []), []
             for rec in reader:
                 if rec and len(rec) != len(header):
-                    sys.exit(f"ERROR: {path} line {reader.line_num} has {len(rec)} field(s) "
+                    fail(f"ERROR: {path} line {reader.line_num} has {len(rec)} field(s) "
                              f"but the header has {len(header)}")
                 rows += [dict(zip(header, rec))] if rec else []
     except FileNotFoundError:
-        sys.exit(f"ERROR: file not found: {path}")
+        fail(f"ERROR: file not found: {path}")
     except (UnicodeDecodeError, csv.Error) as exc:
-        sys.exit(f"ERROR: {path} is not a readable UTF-8 CSV: {exc}")
+        fail(f"ERROR: {path} is not a readable UTF-8 CSV: {exc}")
     if not header or not rows:
-        sys.exit(f"ERROR: {path} needs a header row and at least one data row")
+        fail(f"ERROR: {path} needs a header row and at least one data row")
     return header, rows
 
 
@@ -121,38 +121,38 @@ def evaluate(path: str, target: str, cols: Optional[List[str]], task: str, posit
     """Score every prediction column, run fold stability and readiness checks."""
     header, rows = load_csv(path)
     if target not in header:
-        sys.exit(f"ERROR: target column '{target}' not in {path}. Columns: {', '.join(header)}")
+        fail(f"ERROR: target column '{target}' not in {path}. Columns: {', '.join(header)}")
     rows, total = [r for r in rows if (r.get(target) or "").strip().lower() not in NULLS], len(rows)
     if not rows:
-        sys.exit(f"ERROR: every '{target}' value in {path} is missing")
+        fail(f"ERROR: every '{target}' value in {path} is missing")
     actual = [(r.get(target) or "").strip() for r in rows]
     auto = cols is None
     cols = [h for h in header if h != target] if auto else cols
     if [c for c in cols if c not in header] or not cols:
-        sys.exit(f"ERROR: prediction column(s) not found: "
+        fail(f"ERROR: prediction column(s) not found: "
                  f"{', '.join(c for c in cols if c not in header) or 'none besides the target'}")
     skipped = {c: why for c in cols if (why := why_unusable([r.get(c) for r in rows]))}
     if skipped and (not auto or len(skipped) == len(cols)):
-        sys.exit(("ERROR: no usable prediction column: " if auto else "ERROR: ")
+        fail(("ERROR: no usable prediction column: " if auto else "ERROR: ")
                  + "; ".join(f"column '{c}' {why}" for c, why in skipped.items()))
     cols = [c for c in cols if c not in skipped]
     if folds == 1 or folds < 0 or folds > len(rows):
-        sys.exit(f"ERROR: --folds must be 0 (off) or between 2 and the row count ({len(rows)})")
+        fail(f"ERROR: --folds must be 0 (off) or between 2 and the row count ({len(rows)})")
     labels = sorted(set(actual))
     if len(labels) < 2:
-        sys.exit(f"ERROR: '{target}' has a single value ({labels[0]!r}); "
+        fail(f"ERROR: '{target}' has a single value ({labels[0]!r}); "
                  "metrics need at least two classes or values")
     if task == "auto":
         task = "classification" if len(labels) == 2 else "regression"
     if task == "classification":
         if len(labels) != 2:
-            sys.exit(f"ERROR: binary classification needs 2 classes in '{target}', found {len(labels)}")
+            fail(f"ERROR: binary classification needs 2 classes in '{target}', found {len(labels)}")
         pos = positive if positive is not None else ("1" if "1" in labels else labels[1])
         if pos not in labels:
-            sys.exit(f"ERROR: positive class '{pos}' not among {labels}")
+            fail(f"ERROR: positive class '{pos}' not among {labels}")
         y: List[Any] = [1 if a == pos else 0 for a in actual]
     else:
-        y = numeric(actual) or sys.exit(f"ERROR: '{target}' must be numeric for regression")
+        y = numeric(actual) or fail(f"ERROR: '{target}' must be numeric for regression")
     models: Dict[str, Any] = {}
     for c in cols:
         p: List[float] = numeric([r.get(c) for r in rows]) or []
@@ -174,7 +174,7 @@ def evaluate(path: str, target: str, cols: Optional[List[str]], task: str, posit
         checks = []
         for key, limit in ((k, cfg[k]) for k in known):
             if isinstance(limit, bool) or not isinstance(limit, (int, float)):
-                sys.exit(f"ERROR: threshold {key} must be a number, got {limit!r}")
+                fail(f"ERROR: threshold {key} must be a number, got {limit!r}")
             value = (res.get("folds", {}).get("std") if key == "max_fold_std"
                      else res["metrics"].get(CHECKS[key]))
             ok = None if value is None else (value >= limit if key.startswith("min_") else value <= limit)
@@ -272,27 +272,27 @@ def main() -> None:
         try:
             config = json.loads(Path(args.config).read_text(encoding="utf-8"))
         except FileNotFoundError:
-            sys.exit(f"ERROR: file not found: {args.config}")
+            fail(f"ERROR: file not found: {args.config}")
         except (json.JSONDecodeError, UnicodeDecodeError) as exc:
-            sys.exit(f"ERROR: {args.config} is not valid JSON: {exc}")
+            fail(f"ERROR: {args.config} is not valid JSON: {exc}")
         if not isinstance(config, dict):
-            sys.exit(f"ERROR: {args.config} must hold a JSON object of thresholds")
+            fail(f"ERROR: {args.config} must hold a JSON object of thresholds")
     cols = [c.strip() for c in args.predictions.split(",")] if args.predictions else None
     target = Path(args.output) / "evaluation_report.json" if args.output else None
     if target and target.exists() and not args.force:
-        sys.exit(f"ERROR: {target} already exists; pass --force to overwrite")
+        fail(f"ERROR: {target} already exists; pass --force to overwrite")
     try:
         rep = evaluate(args.input, args.target, cols, args.task, args.positive, args.threshold,
                        args.folds, config)
     except OverflowError:
-        sys.exit(f"ERROR: {args.input} has values too large to score (overflow); rescale them first")
+        fail(f"ERROR: {args.input} has values too large to score (overflow); rescale them first")
     output(rep, args.format)
     if target:
         try:
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(rep, indent=2) + "\n", encoding="utf-8")
         except OSError as exc:
-            sys.exit(f"ERROR: cannot write {target}: {exc}")
+            fail(f"ERROR: cannot write {target}: {exc}")
         print(f"Wrote {target}", file=sys.stderr)
 
 

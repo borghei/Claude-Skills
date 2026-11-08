@@ -1,15 +1,16 @@
 ---
 name: brainstorm-ideas
 description: >
-  Product ideation expert using Product Trio approach and Opportunity Solution
-  Trees for both new and existing products.
+  Generates product ideas from PM, design and engineering angles, ties each to an
+  opportunity and ranks the top five. Use when brainstorming features for an outcome,
+  exploring a new product, or choosing which ideas to test first.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: product-discovery
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: product-trio, opportunity-solution-tree, scamper, hmw
   tags:
     - ideation
@@ -46,6 +47,31 @@ Before ideating, settle the inputs below. When one is missing or vague and would
 - **Hard constraints:** tech stack, timeline, budget limits (bound the feasibility and speed scores in prioritization).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+## Workflow
+
+1. Settle the Clarify First inputs and write the target outcome as one measurable sentence.
+2. Map opportunities first (`opportunity_tree_builder.py`), then generate ideas per opportunity from the three trio perspectives; `references/ideation-process.md` has the session plan.
+3. Score the ideas (`idea_scorer.py`) with a confidence value and riskiest assumption for each.
+4. Done when every top-5 idea names its opportunity, its riskiest assumption with a matching test, its confidence and an owner for the next step.
+
+## Tools
+
+Each tool prints a text report (`--json` for machine output). `--example` prints the input
+shape; samples ship in `assets/`. Exit 0 on success, 2 on bad input (missing file, invalid
+JSON, wrong shape, or no input given) with a one-line error.
+
+```bash
+python3 project-management/discovery/brainstorm-ideas/scripts/opportunity_tree_builder.py --tree project-management/discovery/brainstorm-ideas/assets/sample_opportunity_tree.json
+python3 project-management/discovery/brainstorm-ideas/scripts/idea_scorer.py --ideas project-management/discovery/brainstorm-ideas/assets/sample_ideas.json
+python3 project-management/discovery/brainstorm-ideas/scripts/scamper_generator.py --feature "team calendar"
+```
+
+| Tool | What it does |
+|------|--------------|
+| `opportunity_tree_builder.py` | Renders outcome -> opportunities -> solutions; flags opportunities with no evidence or no solutions and trees with under 3 solutions per opportunity |
+| `idea_scorer.py` | Weighted score over impact (0.30), alignment (0.25), feasibility (0.20), speed to validate (0.15), differentiation (0.10); override with `"weights"`. Classifies each riskiest assumption as value, usability, feasibility or viability risk (or takes `assumption_type`) and suggests the matching test; flags missing or low (<5) `confidence` |
+| `scamper_generator.py` | Prints the 35 SCAMPER question prompts with the feature name filled in. It is a checklist only: the ideas themselves must come from you, specific to the product |
 
 ## Anti-Patterns
 
@@ -88,13 +114,12 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Limitations:** Ideation quality is bounded by the diversity of perspectives in the room -- remote-only sessions may reduce creative energy. Scoring models provide structured comparison but are not objective truth; they encode the biases of the scorers. Opportunity Solution Trees require ongoing user research to populate -- they are not a substitute for customer interviews.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `identify-assumptions/` | Ideas -> Assumptions | Top 5 ideas feed into assumption mapping for risk assessment |
-| `brainstorm-experiments/` | Ideas -> Experiments | Riskiest assumptions from ideas become experiment candidates |
-| `pre-mortem/` | Ideas -> Risk | Selected ideas run through pre-mortem before build commitment |
-| `execution/create-prd/` | Ideas -> PRD | Validated ideas become PRD inputs with problem statement and success metrics |
-| `execution/brainstorm-okrs/` | OKRs -> Ideas | Team OKRs define the target outcomes that frame ideation sessions |
-| `execution/prioritization-frameworks/` | Ideas -> Prioritization | Scored ideas feed into RICE or other frameworks for backlog ordering |
+| File | Purpose |
+|------|---------|
+| `scripts/idea_scorer.py`, `scripts/opportunity_tree_builder.py`, `scripts/scamper_generator.py` | See Tools |
+| `assets/sample_ideas.json`, `assets/sample_opportunity_tree.json` | Runnable inputs |
+| `assets/ideation_workshop_template.md` | Session template to fill in |
+| `examples/b2b-onboarding-redesign-trio-session.md` | Worked trio session |
+| `references/*.md` | See References |

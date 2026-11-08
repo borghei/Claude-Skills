@@ -101,7 +101,9 @@ def topological_sort(graph: dict, all_nodes: set) -> list:
             if in_degree[target] == 0:
                 queue.append(target)
 
-    return result if len(result) == len(all_nodes) else []
+    # Edges point from dependent to dependency ("A depends_on B"), so Kahn's order lists
+    # dependents first; reverse it so every dependency is delivered before what needs it.
+    return result[::-1] if len(result) == len(all_nodes) else []
 
 
 def analyze_dependencies(data: dict) -> dict:
@@ -275,4 +277,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

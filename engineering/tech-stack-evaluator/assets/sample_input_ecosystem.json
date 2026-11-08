@@ -1,0 +1,33 @@
+{
+  "_note": "Illustrative numbers for a fictional library. Replace with figures you pulled from the registry and repository on the day you evaluate.",
+  "ecosystem": {
+    "technology": "example-ui-lib",
+    "github": {
+      "stars": 18000,
+      "forks": 1400,
+      "contributors": 210,
+      "commits_last_month": 85,
+      "open_issues": 320,
+      "issue_resolution_rate": 0.82,
+      "avg_issue_response_hours": 30,
+      "releases_per_year": 10,
+      "active_maintainers": 6
+    },
+    "npm": {
+      "weekly_downloads": 950000,
+      "version": "4.2.0",
+      "dependencies_count": 12,
+      "days_since_last_publish": 21
+    },
+    "community": {
+      "stackoverflow_questions": 6200,
+      "job_postings": 900,
+      "tutorials_count": 400,
+      "forum_members": 15000
+    },
+    "corporate_backing": {
+      "type": "company_sponsored",
+      "funding_millions": 20
+    }
+  }
+}

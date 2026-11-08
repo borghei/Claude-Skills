@@ -5,7 +5,6 @@ GWS Doctor - Diagnostic tool for common Google Workspace issues.
 Checks DNS record format, email configuration, and common integration
 patterns. Validates SPF, DKIM, DMARC records and provides fix guidance.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -59,13 +58,19 @@ class GWSDiagnostics:
             "consistency": self._check_consistency,
         }
 
-        for check_name in self.checks:
-            if check_name == "all":
-                for func in check_map.values():
-                    func()
-                break
-            elif check_name in check_map:
-                check_map[check_name]()
+        # A check whose config section is absent is skipped, not failed: missing data
+        # is unknown, and reporting it as a misconfiguration hides the real findings.
+        sections = {"dns": ("dns",), "email": ("email",), "security": ("security",),
+                    "integration": ("integrations",), "consistency": ("security", "drive")}
+        names = list(check_map) if "all" in self.checks else [c for c in self.checks if c in check_map]
+        for name in names:
+            if not any(isinstance(self.config.get(sec), dict) for sec in sections[name]):
+                self.results.append(DiagnosticResult(
+                    check=name, status="skip", category=name,
+                    message=f"Not provided: no '{'/'.join(sections[name])}' section in the config.",
+                    detail=None, fix=None))
+                continue
+            check_map[name]()
 
         return self.results
 
@@ -390,15 +395,17 @@ def format_text(results: List[DiagnosticResult]) -> str:
     warned = sum(1 for r in results if r.status == "warn")
 
     lines.append(f"\nChecks: {len(results)} total")
-    lines.append(f"  PASS: {passed}  |  FAIL: {failed}  |  WARN: {warned}")
+    skipped = sum(1 for r in results if r.status == "skip")
+    lines.append(f"  PASS: {passed}  |  FAIL: {failed}  |  WARN: {warned}  |  NOT PROVIDED: {skipped}")
     lines.append("-" * 60)
 
-    for status_label, status_key in [("FAILURES", "fail"), ("WARNINGS", "warn"), ("PASSED", "pass")]:
+    for status_label, status_key in [("FAILURES", "fail"), ("WARNINGS", "warn"), ("PASSED", "pass"),
+                                     ("NOT PROVIDED", "skip")]:
         group = [r for r in results if r.status == status_key]
         if not group:
             continue
 
-        icon = {"fail": "FAIL", "warn": "WARN", "pass": "PASS"}[status_key]
+        icon = {"fail": "FAIL", "warn": "WARN", "pass": "PASS", "skip": "SKIP"}[status_key]
         lines.append(f"\n[{status_label}]")
         for r in group:
             lines.append(f"  [{icon}] {r.check} ({r.category})")
@@ -410,7 +417,7 @@ def format_text(results: List[DiagnosticResult]) -> str:
             lines.append("")
 
     health = "HEALTHY" if failed == 0 else "NEEDS ATTENTION" if failed <= 2 else "CRITICAL"
-    lines.append(f"Overall Health: {health}")
+    lines.append(f"Overall Health: {health}" + (f" (partial: {skipped} check group(s) not provided)" if skipped else ""))
     lines.append("=" * 60)
     return "\n".join(lines)
 
@@ -424,6 +431,7 @@ def format_json(results: List[DiagnosticResult]) -> str:
             "pass": sum(1 for r in results if r.status == "pass"),
             "fail": sum(1 for r in results if r.status == "fail"),
             "warn": sum(1 for r in results if r.status == "warn"),
+            "not_provided": sum(1 for r in results if r.status == "skip"),
         }
     }, indent=2)
 
@@ -454,16 +462,26 @@ def main():
             sys.exit(2)
         try:
             config = json.loads(path.read_text())
-        except json.JSONDecodeError as e:
-            print(f"Error: Invalid JSON: {e}", file=sys.stderr)
+        except (json.JSONDecodeError, UnicodeDecodeError, OSError) as e:
+            print(f"Error: cannot read {args.config}: {e}", file=sys.stderr)
+            sys.exit(2)
+        if not isinstance(config, dict):
+            print("Error: config must be a JSON object (see --generate-sample)", file=sys.stderr)
             sys.exit(2)
     else:
         parser.error("Provide --config or --sample")
         return
 
     checks = [c.strip() for c in args.check.split(",")]
+    unknown = [c for c in checks if c not in ("all", "dns", "email", "security", "integration", "consistency")]
+    if unknown:
+        print(f"Error: unknown --check value(s): {', '.join(unknown)}", file=sys.stderr)
+        sys.exit(2)
     diagnostics = GWSDiagnostics(config, checks)
     results = diagnostics.run()
+    if results and all(r.status == "skip" for r in results):
+        print("Error: no checkable section in the config (see --generate-sample)", file=sys.stderr)
+        sys.exit(2)
 
     if args.format == "json":
         print(format_json(results))

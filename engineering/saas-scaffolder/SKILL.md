@@ -1,18 +1,18 @@
 ---
 name: saas-scaffolder
 description: >
-  Generate SaaS boilerplate with auth, database schemas, Stripe billing, multi-tenancy, API
-  routes, and dashboard UI on a Next.js/TypeScript/Tailwind stack. Use when starting a new
-  SaaS product, subscription app, or multi-tenant platform.
+  Lays down a Next.js SaaS skeleton (provider-specific deps, env, Drizzle tenancy schema,
+  middleware) and guides auth, billing and tenant isolation. Use when starting a SaaS,
+  subscription app or multi-tenant platform.
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: full-stack
   tier: POWERFUL
-  updated: 2026-06-17
-  frameworks: nextjs, drizzle, stripe, nextauth, tailwind, shadcn
+  updated: 2026-11-08
+  frameworks: nextjs, drizzle, stripe, authjs, clerk, tailwind
   tags:
     - saas
     - boilerplate
@@ -22,74 +22,101 @@ metadata:
 ---
 # SaaS Scaffolder
 
-Generate a complete, production-ready SaaS application boilerplate including authentication (NextAuth, Clerk, or Supabase Auth), database schemas with multi-tenancy, billing integration (Stripe or Lemon Squeezy), API routes with validation, dashboard UI with shadcn/ui, and deployment configuration. Produces a working application from a product specification in under 30 minutes.
+The agent stands up a Next.js App Router + TypeScript + Tailwind + Drizzle SaaS for the chosen auth, billing and tenancy providers, then implements auth, billing and tenant isolation from the reference code and checks isolation before anything ships.
 
-## Core Capabilities
-
-- **Spec-driven scaffolding** — produce a full Next.js App Router + TypeScript + Tailwind + shadcn/ui file tree from a short product spec (auth/db/payments/tenancy/features).
-- **Multi-tenant database schema** — Drizzle ORM schema with workspaces (tenancy boundary), users, members, OAuth accounts, and sessions, with proper indexes and cascade rules.
-- **Authentication** — NextAuth v5 with Drizzle adapter, OAuth (Google/GitHub) and magic-link (Resend) providers, route-protection middleware.
-- **Stripe billing** — checkout session, customer portal, and signature-verified webhook handler keeping subscription state in sync.
-- **Multi-tenancy patterns** — workspace-scoped queries and plan-based feature gating (free/pro/enterprise).
-- **Phased build + quality bar** — 5 ordered scaffolding phases with per-phase validation, pitfalls, best practices, troubleshooting, and success criteria.
-
-**Keywords:** SaaS, boilerplate, scaffolding, Next.js, authentication, Stripe, billing, multi-tenancy, subscription, starter template, NextAuth, Drizzle ORM, shadcn/ui
+**What the tool writes, and what it does not.** `saas_scaffolder.py` writes the file tree, a `package.json` whose dependencies follow `--auth`, `--db` and `--payments`, a provider-filtered `.env.example`, a Drizzle schema shaped by `--tenancy`, `drizzle.config.ts`, `tsconfig.json`, `next.config.ts`, Tailwind v4 PostCSS config, route protection (`proxy.ts` for Next.js 16+, which replaces `middleware.ts`; `--next-major 15` writes `middleware.ts`) and a health route. Every other file is a `// STUB` that names the reference section to implement it from. It does not write application logic, so the result does not build until the stubs are filled.
 
 ## When to Use
 
-- Starting a new SaaS product, subscription app, or multi-tenant platform.
-- Standing up auth + billing + tenancy boilerplate quickly before building product features.
-- Adding workspace/organization tenancy with role-based access and plan gating.
-- Generating a baseline `.env.example`, schema, and API routes for a Next.js stack.
+- Starting a new SaaS product, subscription app or multi-tenant platform.
+- Standing up auth, billing and tenancy before building product features.
+- Adding workspace or organization tenancy with roles and plan gating.
+- Auditing an existing app's tenant config or source for isolation leaks (`tenant_config_validator.py`).
 
 ## Clarify First
 
 Before scaffolding, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- **Auth provider:** NextAuth / Clerk / Supabase Auth (`--auth`; changes the auth config and middleware generated).
-- **Payments provider:** Stripe / Lemon Squeezy / none (`--payments`; determines the billing + webhook handler).
-- **Tenancy model:** workspace / organization / single-tenant (`--tenancy`; shapes the entire database schema and scoped queries).
-- **Database:** Neon / Supabase / other Postgres (`--db`; sets the Drizzle adapter and connection config).
+- **Auth provider:** NextAuth (Auth.js v5) / Clerk / Supabase Auth (`--auth`; changes dependencies, env and middleware).
+- **Payments provider:** Stripe / Lemon Squeezy / none (`--payments`; adds or removes billing routes, deps and schema columns).
+- **Tenancy model:** workspace / organization / none (`--tenancy`; shapes the schema and every query).
+- **Database host:** Neon / Supabase / other Postgres (`--db`; picks the driver). Only Postgres is supported: the schema uses `drizzle-orm/pg-core`.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `saas_scaffolder.py` | Generate a production-ready SaaS project structure (auth, billing, tenancy) | `python scripts/saas_scaffolder.py --name my-saas --auth nextauth --db neondb --payments stripe --tenancy workspace` |
-| `feature_flag_manager.py` | CRUD + evaluate feature flags on a JSON store | `python scripts/feature_flag_manager.py evaluate --key dark-mode --environment production --plan pro` |
-| `tenant_config_validator.py` | Validate multi-tenant config and scan source for missing tenant scoping / isolation issues | `python scripts/tenant_config_validator.py --config tenant_config.json --src ./app` |
+1. **Scaffold** into an empty directory: `saas_scaffolder.py --name <pkg> --auth ... --payments ... --tenancy ... --output <dir>`. It refuses a non-empty `--output` so it cannot overwrite work. Use `--dry-run` first to show the plan.
+2. **Install once and commit the lockfile.** `next`, `react` and Tailwind get `^` ranges for majors known to be current (Next.js 16, React 19, Tailwind 4); every other dependency uses an npm tag (`latest`, or `beta` for `next-auth`, whose v5 API the references use), because invented version numbers go stale. The lockfile from that first install is what makes later installs reproducible, so review it and commit it.
+   Auth.js notes it is now part of Better Auth; read its upgrade guide (authjs.dev) before choosing it for a new project. With Auth.js v5, `AUTH_URL` is optional and `AUTH_TRUST_HOST=true` is needed behind a reverse proxy.
+3. **Fill the stubs** in phase order (foundation, database, auth, billing, UI) from [references/workflow-and-quality.md](references/workflow-and-quality.md). `grep -rl "STUB generated" .` lists what remains.
+4. **Validate isolation:** run `tenant_config_validator.py --src <app dir>`. Fix every critical finding; unscoped queries are cross-tenant data leaks.
+5. Done when: `npm run build` passes, no `STUB generated` files remain, a test checkout updates the subscription row, a replayed webhook is a no-op, and the validator reports no critical findings.
 
-## References
+## Quick Start
 
-Load the reference that matches the task — keep this file lean and pull detail on demand:
+```bash
+# from engineering/saas-scaffolder/; scaffold outside the repo
+OUT=$(mktemp -d)
+python3 scripts/saas_scaffolder.py --name acme --auth clerk --payments none --tenancy none --output "$OUT/acme"
+python3 scripts/saas_scaffolder.py --name acme --dry-run --format json      # plan only, nothing written
+```
 
-- **[references/project-structure-and-schema.md](references/project-structure-and-schema.md)** — input spec format, the full generated file tree, the multi-tenant Drizzle schema, and the `.env.example` variables. Read when defining the spec, laying out files, or writing the schema/env config.
-- **[references/auth-billing-and-tenancy.md](references/auth-billing-and-tenancy.md)** — complete NextAuth config, Stripe checkout + webhook handlers, route-protection middleware, and workspace-scoped query / plan-gating code. Read when wiring auth, billing, or tenancy.
-- **[references/workflow-and-quality.md](references/workflow-and-quality.md)** — the 5 ordered scaffolding phases with per-phase validation, common pitfalls, best practices, the troubleshooting table, and success criteria. Read before scaffolding and before shipping.
+```bash
+python3 scripts/tenant_config_validator.py --config assets/sample_tenant_config.json                      # exit 0
+python3 scripts/tenant_config_validator.py --config assets/flawed_tenant_config.json --src assets/flawed_src  # exit 1, 5 critical
+python3 scripts/feature_flag_manager.py --store "$OUT/flags.json" create --key sso --enabled --allowed-plans pro enterprise
+python3 scripts/feature_flag_manager.py --store "$OUT/flags.json" evaluate --key sso --plan free           # INACTIVE
+```
+
+## Tools Overview
+
+| Tool | Purpose | Key flags | Exit codes |
+|------|---------|-----------|------------|
+| `scripts/saas_scaffolder.py` | Tree, provider-specific `package.json`, `.env.example`, schema, configs, `proxy.ts` (or `middleware.ts`); stubs for the rest | `--name`, `--auth nextauth\|clerk\|supabase`, `--db neondb\|supabase\|postgres`, `--payments stripe\|lemonsqueezy\|none`, `--tenancy workspace\|organization\|none`, `--features a,b`, `--next-major 16`, `--output`, `--dry-run`, `--format json` | 0 done; 2 invalid name or non-empty output |
+| `scripts/tenant_config_validator.py` | Tenant config (duplicate ids, slugs, domains; isolation settings; plans) and source scan (unscoped `db.*` queries, global tenant state, route handlers without `auth()`) | `--config FILE`, `--src DIR` (repeatable), `--severity`, `--json` | 0 no critical; 1 critical findings; 2 unreadable config, bad JSON or missing `--src` |
+| `scripts/feature_flag_manager.py` | Create, update, list and evaluate plan- and environment-gated flags in a JSON store | `--store FILE`, `create\|get\|update\|delete\|list\|evaluate` | 0 ok; 2 unreadable or malformed store |
+
+The source scan is line-based regex: it catches the common leaks, not every one. A clean result is not proof of isolation; review data access in code review too.
+
+## Anti-Patterns
+
+**Mistake:** Querying tenant-owned tables without the tenant id.
+**Why it matters:** One missing `where(eq(t.workspaceId, ...))` returns every customer's rows; it is the most common multi-tenant breach.
+**Instead:** Route all reads and writes through a workspace-scoped helper (see Multi-Tenancy Patterns in the auth reference) and run the validator on every PR.
+
+**Mistake:** Trusting the client for plan or subscription state.
+**Why it matters:** Feature gates checked only in the browser are bypassed by calling the API directly.
+**Instead:** Check the plan and current period end on the server, from the webhook-maintained row.
+
+**Mistake:** A webhook handler without signature verification or idempotency.
+**Why it matters:** Unsigned events can be forged, and providers retry, so duplicates double-apply changes.
+**Instead:** Verify the signature first, record `event.id`, and make each handler safe to replay.
+
+## Reference Documentation
+
+- **[references/project-structure-and-schema.md](references/project-structure-and-schema.md)**: input spec, full file tree, multi-tenant Drizzle schema and env variables. Read when laying out files or writing the schema.
+- **[references/auth-billing-and-tenancy.md](references/auth-billing-and-tenancy.md)**: Auth.js v5 config, Stripe checkout and webhook handlers, middleware, workspace-scoped queries and plan gating. Read when filling auth, billing or tenancy stubs.
+- **[references/workflow-and-quality.md](references/workflow-and-quality.md)**: the five phases with a validation step each, pitfalls, troubleshooting and success criteria. Read before scaffolding and before shipping.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/saas_scaffolder.py` | Skeleton generator (stdlib only) |
+| `scripts/tenant_config_validator.py` | Tenant config and source isolation checks |
+| `scripts/feature_flag_manager.py` | JSON-store feature flags with plan and environment gating |
+| `assets/sample_tenant_config.json` | Sound three-tenant config; validator exits 0 |
+| `assets/flawed_tenant_config.json` | Duplicate slug and domain, missing dedicated DB, unknown plan; exits 1 |
+| `assets/flawed_src/projects-route.ts` | Unscoped query and global tenant state; critical findings |
 
 ## Scope & Limitations
 
-**This skill covers:**
-- Full-stack SaaS scaffolding with Next.js App Router, TypeScript, Tailwind, and shadcn/ui
-- Authentication setup with NextAuth v5, Clerk, or Supabase Auth including OAuth and magic link providers
-- Stripe and Lemon Squeezy billing integration with checkout, webhooks, and customer portal
-- Multi-tenancy patterns (workspace/organization) with role-based access and plan-based feature gating
+**Covers:** Next.js SaaS skeletons for three auth providers, two billing providers and three tenancy models on Postgres; reference implementations for auth, billing and tenancy; tenant isolation checks; plan-gated feature flags.
 
-**This skill does NOT cover:**
-- Ongoing Stripe billing logic beyond initial integration (metered billing, usage-based pricing, invoicing customization) — see `stripe-integration-expert`
-- Database schema design decisions beyond the core tenancy model (complex relational modeling, indexing strategies) — see `database-schema-designer`
-- CI/CD pipeline configuration, deployment automation, or infrastructure provisioning — see `ci-cd-pipeline-builder`
-- API design standards, versioning, or OpenAPI specification generation — see `api-design-reviewer`
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `stripe-integration-expert` | Extends the scaffolded Stripe setup with advanced billing patterns (metered, tiered, usage-based) | Scaffolder outputs base Stripe config and webhook handler; Stripe expert refines pricing models and adds invoice customization |
-| `database-schema-designer` | Designs extended schemas beyond the core tenancy tables | Scaffolder provides baseline users/workspaces/members schema; schema designer adds domain-specific entities and optimizes indexes |
-| `api-design-reviewer` | Reviews and improves the generated API routes for consistency and standards compliance | Scaffolder generates initial API routes; reviewer audits naming, error handling, and response formats |
-| `ci-cd-pipeline-builder` | Creates deployment pipelines for the scaffolded project | Scaffolder outputs the application code; pipeline builder adds GitHub Actions, preview deployments, and production release workflows |
-| `env-secrets-manager` | Audits and secures the environment variable configuration | Scaffolder generates `.env.example`; secrets manager validates no secrets are hardcoded and recommends vault integration |
-| `observability-designer` | Adds logging, tracing, and monitoring to the scaffolded application | Scaffolder provides the application structure; observability designer instruments API routes, webhooks, and auth flows |
+**Does not cover:**
+- Metered or usage-based billing and invoicing (see `engineering/stripe-integration-expert`).
+- Domain schema design beyond the tenancy core (see `engineering/database-schema-designer`).
+- CI/CD and deployment (see `engineering/ci-cd-pipeline-builder`).
+- API standards review (see `engineering/api-design-reviewer`) and secrets management (see `engineering/env-secrets-manager`).
+- Non-Postgres databases.

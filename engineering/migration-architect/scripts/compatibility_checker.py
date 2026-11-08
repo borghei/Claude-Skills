@@ -870,13 +870,13 @@ def main():
             
     except FileNotFoundError as e:
         print(f"Error: File not found: {e}", file=sys.stderr)
-        return 1
+        return 2
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON: {e}", file=sys.stderr)
-        return 1
+        return 2
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        return 1
+        return 2
 
 
 if __name__ == "__main__":

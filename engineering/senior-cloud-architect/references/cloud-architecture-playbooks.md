@@ -43,7 +43,7 @@ python ../cloud-security/scripts/posture_auditor.py --input inventory.json --fai
    ```hcl
    module "vpc" {
      source  = "terraform-aws-modules/vpc/aws"
-     version = "~> 5.0"
+     version = "~> 6.0"   # module major that supports AWS provider v6
      name    = "${var.project}-${var.environment}"
      cidr    = var.vpc_cidr
      azs             = ["${var.region}a", "${var.region}b", "${var.region}c"]

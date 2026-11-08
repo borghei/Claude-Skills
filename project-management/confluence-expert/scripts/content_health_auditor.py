@@ -24,7 +24,9 @@ def load_data(path: str) -> dict:
 def analyze_content(data: dict) -> dict:
     space = data.get("space", "Unknown")
     pages = data.get("pages", [])
-    today = datetime.now()
+    # Reference date: the export's "as_of", else its newest last_updated (no calendar drift)
+    stamps = sorted(str(pg.get("last_updated")) for pg in pages if str(pg.get("last_updated", ""))[:2] in ("19", "20"))
+    today = datetime.strptime(data.get("as_of") or (stamps[-1] if stamps else datetime.now().strftime("%Y-%m-%d")), "%Y-%m-%d")
 
     stale = []
     orphaned = []
@@ -221,4 +223,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

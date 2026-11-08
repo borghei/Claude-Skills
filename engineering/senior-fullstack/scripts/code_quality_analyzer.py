@@ -667,7 +667,7 @@ Examples:
     project_path = Path(args.project_path).resolve()
     if not project_path.exists():
         print(f"Error: Path does not exist: {project_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     analysis = analyze_project(project_path)
 

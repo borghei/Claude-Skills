@@ -1,0 +1,10 @@
+{
+  "name": "orders-service",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "db:migrate": "prisma migrate dev"
+  }
+}

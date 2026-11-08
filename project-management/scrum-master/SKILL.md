@@ -1,17 +1,16 @@
 ---
 name: scrum-master
 description: >
-  Data-driven Scrum Master for sprint health scoring, Monte Carlo velocity
-  forecasting, retrospective analysis, capacity planning, and Tuckman team
-  coaching. Use when facilitating sprint planning, diagnosing velocity, or
-  running retrospectives.
+  Scores sprint health, forecasts velocity with Monte Carlo, analyses retros
+  and plans capacity from sprint data. Use when facilitating sprint planning,
+  diagnosing a velocity drop, or checking whether retro actions land.
 license: MIT + Commons Clause
 metadata:
   version: 2.0.1
   author: borghei
   category: project-management
   domain: agile-development
-  updated: 2026-06-15
+  updated: 2026-11-08
   tags: [scrum, agile, sprint, retrospective, impediments]
   python-tools: velocity_analyzer.py, sprint_health_scorer.py, retrospective_analyzer.py, sprint_capacity_calculator.py
   tech-stack: scrum, agile-coaching, team-dynamics, data-analysis
@@ -49,20 +48,25 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+Run from the skill folder (`project-management/scrum-master/`). Each tool prints text, or JSON with `--format json`.
+
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `velocity_analyzer.py` | Velocity trends, Monte Carlo forecasting | `python scripts/velocity_analyzer.py sprint_data.json --format text` |
-| `sprint_health_scorer.py` | 6-dimension health scoring | `python scripts/sprint_health_scorer.py sprint_data.json --format text` |
-| `retrospective_analyzer.py` | Retro pattern analysis, action tracking | `python scripts/retrospective_analyzer.py sprint_data.json --format text` |
-| `sprint_capacity_calculator.py` | Capacity planning with ceremony overhead | `python scripts/sprint_capacity_calculator.py team_data.json --format text` |
+| `velocity_analyzer.py` | Velocity trends, Monte Carlo forecast | `python3 scripts/velocity_analyzer.py assets/sample_sprint_data.json` |
+| `sprint_health_scorer.py` | 6-dimension health score | `python3 scripts/sprint_health_scorer.py assets/sample_sprint_data.json` |
+| `retrospective_analyzer.py` | Retro patterns, action completion | `python3 scripts/retrospective_analyzer.py assets/sample_sprint_data.json` |
+| `sprint_capacity_calculator.py` | Capacity with PTO, allocation, ceremonies | `python3 scripts/sprint_capacity_calculator.py assets/sample_team_data.json` |
 
-All tools accept JSON following `assets/sample_sprint_data.json`. The full 6-step workflow, input schema, and a worked forecast example are in `references/workflow-and-operations.md`.
+The first three read sprint history (`assets/sample_sprint_data.json`: six sprints with stories, blockers, ceremonies and retros). The capacity calculator reads a different shape, a team roster (`assets/sample_team_data.json`: `sprint_length_days`, `historical_velocity`, `team_members[]` with `available_days`, `hours_per_day`, `allocation_percent`, `planned_pto_days`); `--demo` runs the same roster. `assets/expected_output.json` holds the reference results (velocity average 20.2, health 78.3/100) to check a change against. The full workflow and input schema are in `references/workflow-and-operations.md`.
 
-## Templates & Assets
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, a top level that is not an object, or no usable data (no sprints, no retrospectives, no `team_members`). The tools report; they do not gate.
+
+## Files
 
 - `assets/sprint_report_template.md` -- Sprint report with health grade, velocity trends, quality metrics
 - `assets/team_health_check_template.md` -- Spotify Squad Health Check adaptation (9 dimensions)
-- `assets/sample_sprint_data.json` -- 6-sprint dataset for testing tools
+- `assets/sample_sprint_data.json` -- 6-sprint dataset for the velocity, health and retro tools
+- `assets/sample_team_data.json` -- team roster for the capacity calculator
 - `assets/expected_output.json` -- Reference outputs (velocity avg 20.2, health 78.3/100)
 - `assets/user_story_template.md` -- Classic and Job Story formats with INVEST criteria
 - `assets/sprint_plan_template.md` -- Sprint plan with capacity, commitments, risks
@@ -86,7 +90,7 @@ All tools accept JSON following `assets/sample_sprint_data.json`. The full 6-ste
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 

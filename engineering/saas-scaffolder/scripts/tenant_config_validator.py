@@ -215,8 +215,8 @@ def scan_source_for_issues(src_dir, extensions=None):
     file_count = 0
     for root, _dirs, files in os.walk(src_dir):
         # Skip node_modules and hidden directories
-        parts = root.split(os.sep)
-        if any(p.startswith(".") or p == "node_modules" for p in parts):
+        parts = os.path.relpath(root, src_dir).split(os.sep)  # relative, so "./app" is not skipped
+        if any((p.startswith(".") and p != ".") or p == "node_modules" for p in parts):
             continue
         for fname in files:
             if not any(fname.endswith(ext) for ext in extensions):
@@ -337,6 +337,22 @@ def main():
 
     if not args.config and not args.src:
         parser.error("Provide at least one of --config or --src to validate.")
+
+    # Unusable input is exit 2, distinct from findings (exit 1)
+    if args.config:
+        try:
+            with open(args.config, "r", encoding="utf-8") as f:
+                json.load(f)
+        except OSError as e:
+            print(f"error: cannot read config {args.config}: {e.strerror}", file=sys.stderr)
+            sys.exit(2)
+        except json.JSONDecodeError as e:
+            print(f"error: {args.config} is not valid JSON: {e}", file=sys.stderr)
+            sys.exit(2)
+    for src_dir in args.src or []:
+        if not os.path.isdir(src_dir):
+            print(f"error: --src {src_dir} is not a directory", file=sys.stderr)
+            sys.exit(2)
 
     all_findings = []
     min_sev = SEVERITY_ORDER.get(args.severity, 2)

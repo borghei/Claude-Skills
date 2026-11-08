@@ -1,0 +1,18 @@
+{
+  "organization": "Acme Corp",
+  "teams_assessed": 5,
+  "dimensions": {
+    "values_and_mindset": {
+      "score": 2,
+      "evidence": "Retro actions rarely change how work is planned"
+    },
+    "team_practices": {
+      "score": 3,
+      "evidence": "All 5 teams run sprint planning, review and retro"
+    },
+    "technical_excellence": 2,
+    "product_ownership": 2,
+    "leadership_support": 3,
+    "continuous_improvement": 2
+  }
+}

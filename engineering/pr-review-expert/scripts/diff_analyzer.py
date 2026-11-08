@@ -334,7 +334,7 @@ def main():
                 diff_text = fh.read()
         except FileNotFoundError:
             print(f"Error: File not found: {args.file}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
     else:
         if sys.stdin.isatty():
             print("Reading diff from stdin (pipe a diff or use --file)...", file=sys.stderr)
@@ -342,7 +342,7 @@ def main():
 
     if not diff_text.strip():
         print("Error: Empty diff input.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     result = analyze_diff(diff_text, file_threshold, pr_threshold)
 

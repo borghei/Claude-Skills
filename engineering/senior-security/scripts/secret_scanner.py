@@ -476,8 +476,8 @@ Examples:
 
     path = Path(args.path)
     if not path.exists():
-        print(f"Error: Path does not exist: {path}")
-        sys.exit(1)
+        print(f"error: path does not exist: {path}", file=sys.stderr)
+        sys.exit(2)
 
     # Filter patterns by severity
     patterns = SECRET_PATTERNS

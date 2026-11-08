@@ -1,0 +1,96 @@
+{
+  "canvas_name": "ShiftSwap, v2",
+  "as_of": "2026-05-27",
+  "problem": {
+    "top_problems": [
+      "Restaurant managers spend 4-6 hours a week rebuilding rotas after last-minute call-offs",
+      "Staff swap shifts in group chats, so the manager finds out at clock-in",
+      "Overtime costs spike when no-shows are covered by whoever is already on site"
+    ],
+    "existing_alternatives": [
+      "WhatsApp groups",
+      "Paper rota on the back-office wall",
+      "Generic scheduling apps without swap approval"
+    ]
+  },
+  "customer_segments": {
+    "target": "Independent restaurants with 15-60 hourly staff in UK cities",
+    "early_adopters_named": [
+      "Manager at a 3-site burger group who built a swap spreadsheet",
+      "Owner of a 40-cover bistro who pays a manager to rebuild the rota every Sunday",
+      "Ops lead at a 5-site pizza chain tracking call-offs in a shared Google Sheet",
+      "Owner of a 25-staff cafe who texts every swap approval by hand",
+      "GM at a hotel restaurant whose agency overtime bill doubled in 2025"
+    ]
+  },
+  "unique_value_proposition": {
+    "statement": "Independent restaurant managers stop rebuilding rotas: staff swap shifts in the app and you approve in one tap",
+    "names_segment": true,
+    "names_outcome": true,
+    "names_differentiator": true
+  },
+  "solution": {
+    "features": [
+      "Swap requests with one-tap manager approval",
+      "Call-off alert that offers the shift to qualified staff first",
+      "Weekly overtime report"
+    ]
+  },
+  "channels": [
+    {
+      "name": "Restaurant owner Facebook groups",
+      "test_plan": "Post the swap-spreadsheet story in 5 groups; target 30 demo requests in 4 weeks",
+      "cac_estimate_usd": 60
+    },
+    {
+      "name": "EPOS reseller referrals",
+      "test_plan": "Two resellers pilot with 10 sites each",
+      "cac_estimate_usd": 120
+    }
+  ],
+  "revenue_streams": {
+    "pricing_model": "subscription",
+    "price_point": "$79 per site per month",
+    "ltv_estimate_usd": 1900,
+    "first_10k_mrr_plan": "127 sites: 60 from groups, 67 from two resellers by month 9"
+  },
+  "cost_structure": {
+    "monthly_burn_usd": 38000,
+    "cac_estimate_usd": 90,
+    "fixed_pct": 80,
+    "top_lines": [
+      "Two engineers",
+      "Founder salaries",
+      "Hosting and SMS"
+    ]
+  },
+  "key_metrics": {
+    "north_star": "Shifts swapped without manager rework per week",
+    "input_metrics": [
+      "Sites with 5+ active staff",
+      "Median approval time",
+      "Call-offs filled within 2 hours"
+    ]
+  },
+  "unfair_advantage": {
+    "current": "None yet",
+    "honest_classification": "none-yet",
+    "plan_to_build": "Exclusive integration with the two largest UK hospitality EPOS resellers"
+  },
+  "assumptions": [
+    {
+      "block": "problem",
+      "statement": "Managers will move swaps out of WhatsApp",
+      "risk": "high",
+      "evidence": "low",
+      "test_planned": true
+    },
+    {
+      "block": "channels",
+      "statement": "Resellers will refer for a 20% first-year share",
+      "risk": "medium",
+      "evidence": "low",
+      "test_planned": true
+    }
+  ]
+}

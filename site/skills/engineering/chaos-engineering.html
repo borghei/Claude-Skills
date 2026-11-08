@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chaos Engineering - Claude Skills</title>
-  <meta name="description" content="Chaos engineering: hypothesis-driven fault injection to surface weakness before users do. Use when designing a chaos experiment, planning a gameday, choosing what to inject, computing blast radius, or">
+  <meta name="description" content="Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject, or building a ch">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/chaos-engineering.html">
   <meta property="og:title" content="Chaos Engineering - Claude Skills">
-  <meta property="og:description" content="Chaos engineering: hypothesis-driven fault injection to surface weakness before users do. Use when designing a chaos experiment, planning a gameday, choosing what to inject, computing blast radius, or">
+  <meta property="og:description" content="Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject, or building a ch">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/chaos-engineering.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Chaos Engineering", "description": "Chaos engineering: hypothesis-driven fault injection to surface weakness before users do. Use when designing a chaos experiment, planning a gameday, choosing what to inject, computing blast radius, or building a chaos maturity model.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/chaos-engineering.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Chaos Engineering", "description": "Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject, or building a chaos maturity model.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/chaos-engineering.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Chaos Engineering</h1>
-    <p class="page-subtitle">Chaos engineering: hypothesis-driven fault injection to surface weakness before users do. Use when designing a chaos experiment, planning a gameday, choosing what to inject, computing blast radius, or building a chaos maturity model.</p>
+    <p class="page-subtitle">Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject, or building a chaos maturity model.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">chaos-engineering</span><span class="tag">resilience</span><span class="tag">fault-injection</span><span class="tag">gameday</span><span class="tag">sre</span><span class="tag">reliability</span><span class="tag">blast-radius</span></div>
   </div>
@@ -393,9 +393,14 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Chaos Engineering (Engineering domain).
 
-Chaos engineering: hypothesis-driven fault injection to surface weakness before users do. Use when designing a chaos experiment, planning a gameday, choosing what to inject, computing blast radius, or building a chaos maturity model.
+Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject, or building a chaos maturity model.
 
 End-to-end chaos engineering: experiment design, fault injection catalog, gameday execution, and the maturity model that turns one-off &quot;let&#x27;s break stuff&quot; exercises into a reliable discipline. Provider-agnostic — works whether you use Litmus, Chaos Mesh, AWS FIS, Gremlin, ChaosToolkit, or hand-rolle
+
+## Your Key Capabilities
+- Breaking things without a hypothesis
+- Starting at full blast
+- Findings with no follow-up
 
 ## How to Help
 When the user asks for help in this domain:
@@ -415,9 +420,14 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Chaos Engineering (Engineering domain).
 
-Chaos engineering: hypothesis-driven fault injection to surface weakness before users do. Use when designing a chaos experiment, planning a gameday, choosing what to inject, computing blast radius, or building a chaos maturity model.
+Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject, or building a chaos maturity model.
 
 End-to-end chaos engineering: experiment design, fault injection catalog, gameday execution, and the maturity model that turns one-off &quot;let&#x27;s break stuff&quot; exercises into a reliable discipline. Provider-agnostic — works whether you use Litmus, Chaos Mesh, AWS FIS, Gremlin, ChaosToolkit, or hand-rolle
+
+## Your Key Capabilities
+- Breaking things without a hypothesis
+- Starting at full blast
+- Findings with no follow-up
 
 ## How to Help
 When the user asks for help in this domain:
@@ -482,13 +492,60 @@ Before designing the experiment, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `chaos_experiment_designer.py` | Scaffold a chaos experiment doc (hypothesis stub, steady-state template, abort criteria, checklist) | `python scripts/chaos_experiment_designer.py --target payments-svc --fault dependency-timeout --duration 5m` |
-| `blast_radius_calculator.py` | Compute worst-case affected users, recommended caps, and abort triggers | `python scripts/blast_radius_calculator.py --users 100000 --percent-targeted 1 --duration 60` |
-| `gameday_planner.py` | Generate a tailored gameday agenda with roles, timeline, and debrief template | `python scripts/gameday_planner.py --service search-api --duration full --scenarios region-failover,dep-outage` |
+The scripts write plans and documents only; they never touch a system.
+
+```bash
+# 1. Scaffold the experiment doc (hypothesis, steady state, abort criteria, checklist)
+python scripts/chaos_experiment_designer.py --target payments-svc --fault dependency-timeout --duration 5m
+python scripts/chaos_experiment_designer.py --list-faults          # the nine fault types
+
+# 2. Size the blast: worst-case affected users, recommended caps, abort timing
+python scripts/blast_radius_calculator.py --users 100000 --percent-targeted 1 --duration 60
+
+# 3. Plan a gameday from scenario ids
+python scripts/gameday_planner.py --service search-api --duration full --scenarios dep-timeout,partition,az-degraded
+python scripts/gameday_planner.py --list-scenarios                 # pod-kill, rolling-restart, latency, partition,
+                                                                   # dep-error, dep-timeout, cpu-stress, memory-pressure,
+                                                                   # disk-fill, cache-flush, traffic-spike, az-degraded
+```
+
+All three take `--format markdown|json` (`human|json` for the calculator) and `--output FILE`.
+**Exit codes:** `0` document written; `2` bad arguments (unknown fault or scenario id, out-of-range percent).
+
+**Go / no-go before any run.** Do not inject until every item is true, because a run without them produces risk and no learning:
+1. The steady-state metric and its normal range are written down and visible on a dashboard.
+2. The hypothesis names the expected behaviour under the fault (&quot;p99 stays under 800 ms, fallback serves cached prices&quot;).
+3. Abort criteria are numeric, agreed, and someone owns the abort command.
+4. The blast radius is within the calculator&#x27;s recommended cap for the current maturity level.
+5. On-call knows the window, and production runs have a rollback that was tested in staging.
+
+**Done when:** the run&#x27;s result is recorded against the hypothesis, any weakness found has a ticket with an owner, and the experiment is either promoted to a recurring run or retired with a reason.
+
+## Anti-Patterns
+
+### Breaking things without a hypothesis
+**Mistake:** Killing pods &quot;to see what happens&quot;, with no steady-state metric or expected outcome.
+**Why it happens:** Injection tools make faults easy; writing a hypothesis feels like paperwork.
+**Instead:** Write the hypothesis and steady state first. Without them you cannot tell a pass from a fail, so nothing is learned.
+
+### Starting at full blast
+**Mistake:** The first experiment on a service hits 50% of production traffic for 30 minutes.
+**Why it happens:** Small experiments feel too small to prove anything.
+**Instead:** Start at one pod, 1% or one minute and grow only after a pass. `blast_radius_calculator.py` shows the worst case before you commit.
+
+### Findings with no follow-up
+**Mistake:** The gameday surfaces three weaknesses, the debrief notes them, and nothing is ticketed.
+**Why it happens:** The exercise ends when the faults stop, and the action items have no owner.
+**Instead:** End every run with owned tickets and re-run the same fault after the fix lands to confirm it.
+
+## Files
+
+- `scripts/chaos_experiment_designer.py` — experiment document scaffold for nine fault types.
+- `scripts/blast_radius_calculator.py` — affected users, sessions, revenue at risk, caps and abort timing.
+- `scripts/gameday_planner.py` — half- or full-day agenda, roles, scenario blocks, debrief template.
+- `references/` — design loop, fault catalog, maturity model, gameday playbook (listed below).
 
 ## Scope &amp; Limitations
 
@@ -554,7 +611,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Chaos Engineering&quot;**
-   - Description: &quot;Chaos engineering: hypothesis-driven fault injection to surface weakness before users do. Use when designing a chaos experiment, planning a gameday, choosing what to inject, computing blast radius, or building a chaos maturity model.&quot;
+   - Description: &quot;Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject, or building a chaos maturity model.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -614,13 +671,60 @@ Before designing the experiment, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `chaos_experiment_designer.py` | Scaffold a chaos experiment doc (hypothesis stub, steady-state template, abort criteria, checklist) | `python scripts/chaos_experiment_designer.py --target payments-svc --fault dependency-timeout --duration 5m` |
-| `blast_radius_calculator.py` | Compute worst-case affected users, recommended caps, and abort triggers | `python scripts/blast_radius_calculator.py --users 100000 --percent-targeted 1 --duration 60` |
-| `gameday_planner.py` | Generate a tailored gameday agenda with roles, timeline, and debrief template | `python scripts/gameday_planner.py --service search-api --duration full --scenarios region-failover,dep-outage` |
+The scripts write plans and documents only; they never touch a system.
+
+```bash
+# 1. Scaffold the experiment doc (hypothesis, steady state, abort criteria, checklist)
+python scripts/chaos_experiment_designer.py --target payments-svc --fault dependency-timeout --duration 5m
+python scripts/chaos_experiment_designer.py --list-faults          # the nine fault types
+
+# 2. Size the blast: worst-case affected users, recommended caps, abort timing
+python scripts/blast_radius_calculator.py --users 100000 --percent-targeted 1 --duration 60
+
+# 3. Plan a gameday from scenario ids
+python scripts/gameday_planner.py --service search-api --duration full --scenarios dep-timeout,partition,az-degraded
+python scripts/gameday_planner.py --list-scenarios                 # pod-kill, rolling-restart, latency, partition,
+                                                                   # dep-error, dep-timeout, cpu-stress, memory-pressure,
+                                                                   # disk-fill, cache-flush, traffic-spike, az-degraded
+```
+
+All three take `--format markdown|json` (`human|json` for the calculator) and `--output FILE`.
+**Exit codes:** `0` document written; `2` bad arguments (unknown fault or scenario id, out-of-range percent).
+
+**Go / no-go before any run.** Do not inject until every item is true, because a run without them produces risk and no learning:
+1. The steady-state metric and its normal range are written down and visible on a dashboard.
+2. The hypothesis names the expected behaviour under the fault (&quot;p99 stays under 800 ms, fallback serves cached prices&quot;).
+3. Abort criteria are numeric, agreed, and someone owns the abort command.
+4. The blast radius is within the calculator&#x27;s recommended cap for the current maturity level.
+5. On-call knows the window, and production runs have a rollback that was tested in staging.
+
+**Done when:** the run&#x27;s result is recorded against the hypothesis, any weakness found has a ticket with an owner, and the experiment is either promoted to a recurring run or retired with a reason.
+
+## Anti-Patterns
+
+### Breaking things without a hypothesis
+**Mistake:** Killing pods &quot;to see what happens&quot;, with no steady-state metric or expected outcome.
+**Why it happens:** Injection tools make faults easy; writing a hypothesis feels like paperwork.
+**Instead:** Write the hypothesis and steady state first. Without them you cannot tell a pass from a fail, so nothing is learned.
+
+### Starting at full blast
+**Mistake:** The first experiment on a service hits 50% of production traffic for 30 minutes.
+**Why it happens:** Small experiments feel too small to prove anything.
+**Instead:** Start at one pod, 1% or one minute and grow only after a pass. `blast_radius_calculator.py` shows the worst case before you commit.
+
+### Findings with no follow-up
+**Mistake:** The gameday surfaces three weaknesses, the debrief notes them, and nothing is ticketed.
+**Why it happens:** The exercise ends when the faults stop, and the action items have no owner.
+**Instead:** End every run with owned tickets and re-run the same fault after the fix lands to confirm it.
+
+## Files
+
+- `scripts/chaos_experiment_designer.py` — experiment document scaffold for nine fault types.
+- `scripts/blast_radius_calculator.py` — affected users, sessions, revenue at risk, caps and abort timing.
+- `scripts/gameday_planner.py` — half- or full-day agenda, roles, scenario blocks, debrief template.
+- `references/` — design loop, fault catalog, maturity model, gameday playbook (listed below).
 
 ## Scope &amp; Limitations
 
@@ -686,7 +790,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Chaos Engineering&quot;**
-   - Description: &quot;Chaos engineering: hypothesis-driven fault injection to surface weakness before users do. Use when designing a chaos experiment, planning a gameday, choosing what to inject, computing blast radius, or building a chaos maturity model.&quot;
+   - Description: &quot;Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject, or building a chaos maturity model.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -747,7 +851,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/chaos-engineering/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/chaos-engineering/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

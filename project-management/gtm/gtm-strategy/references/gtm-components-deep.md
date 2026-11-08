@@ -269,3 +269,82 @@ Refresh GTM when:
 Don't refresh:
 - Just because it's been a year
 - Without diagnostic of what's broken
+
+## Appendix: motion, channel and metric tables
+
+_Moved from SKILL.md. Rules of thumb, not standards; the ACV bands in particular vary by market._
+
+### Motion by context
+
+| Motion | When | Cost structure |
+|--------|------|----------------|
+| **PLG (product-led)** | Self-serve product; low ACV ($0-$5K); strong activation | Low CAC; high product investment |
+| **Sales-led** | High ACV ($25K+); complex buying committees | High CAC; sales team needed |
+| **Marketing-led / inbound** | Mid-ACV ($5K-$25K); content-driven | Medium CAC; content + ops team |
+| **Channel-led** | Wide distribution via partners | Medium CAC; partner program needed |
+| **Community-led** | Strong category with passionate users | Long ramp; high ongoing investment |
+| **Hybrid (PLG + sales)** | PLG to capture; sales to expand | Most modern SaaS; complex to coordinate |
+
+Don't try to run all motions Day 1.
+
+### Channels per motion
+
+| Motion | Primary channels |
+|--------|------------------|
+| PLG | Web direct, SEO, viral, content, app stores |
+| Sales-led | Outbound SDR, AE outbound, events, account-based |
+| Marketing-led | SEO, paid, content syndication, webinar |
+| Channel-led | Partner program, marketplace |
+| Community-led | Open source, community events, integrations |
+
+### KPI focus by motion
+
+| Motion | KPI focus |
+|--------|-----------|
+| PLG | Signups, activation, free-to-paid conversion, NRR |
+| Sales-led | Pipeline coverage, win rate, ACV, cycle time, NRR |
+| Marketing-led | MQL → SQL conversion, CPA, content engagement |
+| Channel-led | Partner-sourced revenue, partner activity |
+
+Set targets; track weekly; tune.
+
+
+### Motion fit by ACV
+
+| ACV | Likely motion |
+|-----|---------------|
+| < $1K | PLG; consumer-style |
+| $1K-$10K | PLG-led; light sales-assist |
+| $10K-$50K | Marketing-led + inside sales |
+| $50K-$250K | Sales-led with marketing support |
+| $250K+ | Enterprise sales-led; long cycle |
+
+Cross these and economics break.
+
+### Beachhead vs broad
+
+Going broad Day 1:
+- Diluted messaging
+- No reference customers
+- Sales motion thinly stretched
+- No moat in any segment
+
+Beachhead first:
+- Win the segment
+- Build reference customers
+- Develop battle-tested motion
+- Then expand adjacent
+
+Geoffrey Moore: cross the chasm one bowling pin at a time.
+
+### Channel-product fit
+
+Each channel has product-fit assumptions:
+- SEO: long content; SERP-able problem
+- Paid: clear high-intent keywords; LTV > 2-3x CAC
+- Outbound: defined ICP; AE can articulate value in 30 seconds
+- Channel: partners economically incentivized; product fits their offering
+- Community: passionate users + room to participate
+- Viral: collaboration / sharing built into product
+
+If channel-product fit is off, channel won't deliver regardless of effort.

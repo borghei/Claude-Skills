@@ -583,6 +583,8 @@ python3 project-management/team-communications/scripts/status_update_scorer.py \
 
 ## Decision frameworks
 
+Tags on the headings below: **[PROVEN]** means the rule is well established in practice and the tool enforces it; **[RECOMMENDED]** means a sensible default threshold to tune to your team.
+
 ### Channel routing — first rule that fires wins [PROVEN]
 
 | Rank | Condition | Channel |
@@ -658,6 +660,8 @@ them ready to fill in.
 **Mistake:** A meeting created for a launch three years ago that still runs weekly with six attendees.
 **Why it happens:** Nobody has standing to cancel someone else&#x27;s meeting, and the original owner has left, so it has no one to defend or kill it.
 **Instead:** Give every recurring meeting an expiry date 3-6 months out at creation, plus a named owner. At expiry it is re-justified or it dies by default. Where one already exists with no owner, trial-cancel it for four weeks and ask what broke — roughly two-thirds never come back.
+
+**Exit codes (all three tools):** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. The tools report; they do not gate.
 
 ## Files
 
@@ -853,6 +857,8 @@ python3 project-management/team-communications/scripts/status_update_scorer.py \
 
 ## Decision frameworks
 
+Tags on the headings below: **[PROVEN]** means the rule is well established in practice and the tool enforces it; **[RECOMMENDED]** means a sensible default threshold to tune to your team.
+
 ### Channel routing — first rule that fires wins [PROVEN]
 
 | Rank | Condition | Channel |
@@ -928,6 +934,8 @@ them ready to fill in.
 **Mistake:** A meeting created for a launch three years ago that still runs weekly with six attendees.
 **Why it happens:** Nobody has standing to cancel someone else&#x27;s meeting, and the original owner has left, so it has no one to defend or kill it.
 **Instead:** Give every recurring meeting an expiry date 3-6 months out at creation, plus a named owner. At expiry it is re-justified or it dies by default. Where one already exists with no owner, trial-cancel it for four weeks and ask what broke — roughly two-thirds never come back.
+
+**Exit codes (all three tools):** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. The tools report; they do not gate.
 
 ## Files
 
@@ -1051,7 +1059,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python project-management/team-communications/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/team-communications/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

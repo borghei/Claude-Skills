@@ -1,16 +1,16 @@
 ---
 name: eol-communication
 description: >
-  End-of-life product messaging and sunset communication framework for clear,
-  empathetic EOL announcements that preserve customer trust. Use when sunsetting
-  a product, feature, service, API version, or pricing tier.
+  Plan and write end-of-life announcements with dated milestones, a working
+  migration path and per-segment messages. Use when sunsetting a product,
+  feature, API version or pricing tier.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: eol, product-lifecycle, change-communication
   tags:
     - end-of-life
@@ -26,17 +26,6 @@ Create clear, empathetic End-of-Life (EOL) communications that preserve customer
 
 The work runs in four phases: **(1) Pre-announcement planning** (what, why, who, when, what support, what risks), **(2) Craft the message** (transition narrative, customer impact, transition solution, timeline, one CTA), **(3) Segment and distribute** (different message and channel per segment), **(4) Support and monitor** (support FAQ, migration tracking, churn watch). See the playbook reference for the full framework, templates, and timeline guidance.
 
-## Clarify First
-
-Before crafting the EOL communication, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
-
-- **What is being sunset and why:** drives the transition narrative and Phase 1 planning; a vague "why" reads as abandonment.
-- **Replacement / migration path:** drives the transition solution and the single CTA; if it is broken or absent, do not announce yet.
-- **Timeline and key dates:** drives the timeline section and varies sharply by product type (API vs paid product vs free feature).
-- **Customer segments affected:** drives the Phase 3 segment/channel matrix; high-value accounts need different message and outreach than self-serve.
-
-Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
-
 ## When to Use
 
 - **Product sunset** -- Discontinuing an entire product or product line.
@@ -51,12 +40,33 @@ Ask about the two or three inputs that matter most for this request, not the who
 - Internal tooling changes with no customer impact.
 - Bug fixes or patches (use release notes instead).
 
+## Clarify First
+
+Before crafting the EOL communication, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+
+- **What is being sunset and why:** drives the transition narrative and Phase 1 planning; a vague "why" reads as abandonment.
+- **Replacement / migration path:** drives the transition solution and the single CTA; if it is broken or absent, do not announce yet.
+- **Timeline and key dates:** drives the timeline section and varies sharply by product type (API vs paid product vs free feature).
+- **Customer segments affected:** drives the Phase 3 segment/channel matrix; high-value accounts need different message and outreach than self-serve.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+## Workflow
+
+1. **Plan** (phase 1): what ends, why, who is affected, the replacement, the dated milestones, and the support plan.
+2. **Prove the migration path** before announcing: real customers have moved on the path you will recommend.
+3. **Write the message** (phase 2): transition narrative, customer impact, the migration path, the dated timeline, one call to action.
+4. **Segment** (phase 3): a different message and channel for high-value accounts, self-serve users and API consumers.
+5. **Brief customer-facing staff first**, then announce, then monitor migration and churn weekly (phase 4).
+
+**Verify** before sending: every milestone has a date; the draft has no "coming months" or "soon"; support, sales and CS have the internal FAQ; the CTA links to a path that works today. Templates and timelines by product type: `references/playbook.md`.
+
 ## Anti-Patterns
 
 ### Announcing before the migration path works
 **Mistake:** The EOL email goes out while the migration tool is still "coming soon". Customers try it at launch, it breaks, and the support queue floods.
 **Why it happens:** The shutdown date is set and the announcement feels urgent, so the tooling is assumed to catch up.
-**Instead:** Treat a working migration path as a gate. Announce only after at least 10 real customers have migrated in production on the path you are about to recommend.
+**Instead:** Treat a working migration path as a gate. A default [RECOMMENDED]: announce once about 10 real customers have migrated in production on the path you will recommend. Ten is enough to surface the common failure modes; for a product with a handful of enterprise accounts, use most of them instead.
 
 ### Vague timeline
 **Mistake:** The message says "in the coming months" or "later this year" with no dates.
@@ -66,9 +76,17 @@ Ask about the two or three inputs that matter most for this request, not the who
 ### Customer-facing staff learn from customers
 **Mistake:** Internal Slack hears about the EOL a minute after the public post, and a sales rep first hears of it from a customer on a call.
 **Why it happens:** Internal comms feel like a formality next to the external message.
-**Instead:** Brief sales, CS and support 7-10 business days before the external announcement, with the internal FAQ in hand. Before T-0, ask 3 customer-facing employees what the EOL message is. If they hesitate, hold the announcement.
+**Instead:** Brief sales, CS and support before the external announcement, with the internal FAQ in hand. 7-10 business days is a common default: long enough to rehearse answers and line up key-account calls, short enough not to leak. Before T-0, ask 3 customer-facing employees what the EOL message is. If they hesitate, hold the announcement.
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `references/playbook.md` | Four-phase framework, message template, segment matrix, internal FAQ, timelines |
+| `references/red-flags.md` | Bad/good announcements with fixes |
+| `examples/sunsetting-classic-reports.md` | Worked sunset |
 
 ## References
 

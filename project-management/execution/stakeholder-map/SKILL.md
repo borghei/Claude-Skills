@@ -1,17 +1,16 @@
 ---
 name: stakeholder-map
 description: >
-  Map stakeholders by power × interest and design a communication plan
-  that prevents surprise objections. Use when launching a major
-  initiative, navigating an enterprise deal, planning a re-org, or
-  pre-empting resistance to a roadmap change.
+  Maps stakeholders by power, interest and stance, then plans engagement and
+  blocker conversion so objections surface early. Use for a major initiative,
+  an enterprise deal, a re-org or a contested roadmap change.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: execution
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: stakeholder_analyzer.py
   tech-stack: stakeholder-mapping, power-interest, change-management
   tags:
@@ -23,31 +22,16 @@ metadata:
 
 # Stakeholder Map
 
-A 2x2 grid of stakeholders, plus a tactical engagement plan derived from
-the map. Used to pre-empt resistance, route decisions correctly, and
-match communication cadence to influence.
+The agent builds a power x interest map with each person's stance, then an engagement plan that matches cadence to influence and gives every blocker a conversion plan. The point is to have no surprise vetoes late in the initiative.
 
-## When to use this skill
+**Done looks like:** stakeholders listed broadly (sponsors, decision-makers, veto holders, implementers, users, external parties), each rated power and interest 1-5 with a stance from champion to blocker; quadrant cadences met (manage closely weekly or tighter with an owner, keep satisfied at least monthly); every skeptic and blocker with a conversion plan; `stakeholder_analyzer.py` exits 0.
 
-- **Major initiative launch** (re-platform, pricing change, market expansion)
-- **Enterprise deal navigation** (multiple buying-committee members)
-- **Org re-design / re-org planning**
-- **Roadmap change** affecting multiple stakeholders
-- **Pre-board / pre-exec strategic decisions**
-- **Post-mortem stakeholder map** (who didn't we engage that we should have?)
+## When to Use
 
-## The 2x2: Power × Interest
-
-|                 | **Low Power**     | **High Power**       |
-|-----------------|--------------------|----------------------|
-| **High Interest** | Keep informed    | Manage closely        |
-| **Low Interest**  | Monitor          | Keep satisfied        |
-
-### Quadrants
-- **Manage closely (HP/HI):** key decisions; influence + engaged. Highest investment.
-- **Keep satisfied (HP/LI):** authority but not engaged. Don't let them surprise you.
-- **Keep informed (LP/HI):** advocates and detractors who care. Use them.
-- **Monitor (LP/LI):** light touch.
+- Launching a major initiative (re-platform, pricing change, market expansion)
+- An enterprise deal with a buying committee, or a re-org
+- A roadmap change that hits several teams, or a pre-board decision
+- A post-mortem: who did we fail to engage?
 
 ## Clarify First
 
@@ -60,146 +44,61 @@ Before mapping, settle the inputs below. When one is missing or vague and would 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — List all stakeholders
-Brainstorm:
-- Executive sponsors
-- Decision-makers
-- Influencers
-- Implementers
-- Users / customers
-- Adjacent teams
-- External parties (vendors, regulators, partners)
-
-Don't filter yet. List broadly, prune later.
-
-### Step 2 — Rate Power + Interest (1-5)
-For each:
-- **Power:** can they kill or accelerate this? authority? budget? veto?
-- **Interest:** how much do they care about the outcome?
-
-### Step 3 — Add Support (stance)
-Each stakeholder is also somewhere on:
-- **Champion** (actively supports)
-- **Supporter** (positive but passive)
-- **Neutral**
-- **Skeptic**
-- **Blocker** (actively opposes)
-
-This complements Power×Interest with directionality.
-
-### Step 4 — Identify the matrix sweet spot
-The critical stakeholders: high power + high interest + not-yet-supporters.
-
-These are who you need to convert.
-
-### Step 5 — Design engagement plan per quadrant
-
-| Quadrant | Engagement pattern |
-|----------|---------------------|
-| Manage closely | Weekly 1:1, deep involvement, co-author key docs |
-| Keep satisfied | Monthly check-in, pre-brief major decisions |
-| Keep informed | Email updates, FYI inclusion, surface their concerns publicly |
-| Monitor | Quarterly newsletter; no proactive |
-
-### Step 6 — Address blockers explicitly
-For each blocker:
-- What's their objection?
-- What evidence might change their view?
-- Who do they listen to?
-- Can we convert, neutralize, or out-vote?
-
-Ignoring blockers = late surprise objection that derails the initiative.
-
-### Step 7 — Run `stakeholder_analyzer.py`
-Audit for: missing key stakeholders by role, blockers without plans,
-power-without-interest gaps, no engagement plan.
+## Quick Start
 
 ```bash
+# Six-person billing rollout map with cadences and a skeptic plan: exit 0
 python3 project-management/execution/stakeholder-map/scripts/stakeholder_analyzer.py \
-  --input stakeholders.json --format markdown
+  --input project-management/execution/stakeholder-map/assets/sample_stakeholders.json --format markdown
 ```
 
-## Decision frameworks
+```bash
+# High-power blocker with no plan, missing owners and cadences: exit 1
+python3 project-management/execution/stakeholder-map/scripts/stakeholder_analyzer.py \
+  --input project-management/execution/stakeholder-map/assets/sample_stakeholders_flawed.json --format markdown
+```
 
-### Power dimensions (be specific)
-- Hierarchical authority (CEO/board > VP > Director)
-- Budget control (who allocates $)
-- Veto power (legal, compliance, infosec)
-- Domain expertise (the one person who actually understands X)
-- Coalition power (who their faction follows)
-- External legitimacy (analyst, customer reference, regulator)
+```bash
+# Input schema and flags
+python3 project-management/execution/stakeholder-map/scripts/stakeholder_analyzer.py --help
+```
 
-A "low-hierarchy / high-veto" stakeholder (e.g., compliance lead) often
-has more power than a "high-hierarchy / low-domain" one.
+## Tools Overview
 
-### Interest dimensions
-- Outcome impact (will this affect their world?)
-- Personal stake (career, comp, ego)
-- Resource impact (their team, their budget)
-- Public visibility (their reputation tied to this)
+`stakeholder_analyzer.py` is the quality gate for this skill. **What the analyzer checks:** each stakeholder named, with power and interest in 1-5 and a valid stance; manage-closely people with weekly-or-tighter cadence and an owner; keep-satisfied people with at least monthly cadence and an owner; skeptics and blockers with a conversion plan (fail for a blocker with power 4-5); at least one manage-closely stakeholder; a thin list for an initiative labelled "major". It checks only the people listed and cannot find who is missing.
 
-### Common engagement patterns
+**Exit codes:** `0` no fail findings · `1` at least one fail (an unnamed stakeholder, no stakeholders, a high-power blocker without a plan) · `2` unreadable file, invalid JSON or a top level that is not an object. JSON by default, `--format markdown`, `--output FILE`.
 
-**For executive sponsor (HP/HI):**
-- Weekly 1:1 (you bring updates + asks)
-- Co-author the strategic narrative
-- Defend at board level
-- Veto power to be used selectively
+## Workflow
 
-**For powerful skeptic (HP/HI, low support):**
-- Discover the actual objection (often different than stated)
-- Find evidence that addresses it
-- Pre-brief before big decisions
-- Make their support visible to their peers
+1. **List broadly.** Sponsors, decision-makers, veto holders, influencers, implementers, users, adjacent teams, vendors, regulators. Prune later; the person you skip is usually the one who objects.
+2. **Rate power and interest (1-5).** Power is more than hierarchy: budget control, veto (legal, compliance, security), domain expertise, coalition and external legitimacy. A compliance lead with a veto often outranks a VP. Ratings of 4-5 count as high.
+3. **Add stance:** champion, supporter, neutral, skeptic, blocker.
+4. **Find the people to convert:** high power, high interest, not yet supporters.
+5. **Set engagement per quadrant.** Manage closely: weekly 1:1 and co-authoring. Keep satisfied: monthly pre-briefs so they do not tune in late and veto. Keep informed: updates and a visible place for their concerns. Monitor: light touch.
+6. **Plan each blocker.** The real objection (often not the stated one), the evidence that might move them, who they listen to, and whether to convert, neutralise or out-vote. Escalate when their authority is structurally needed; never route around legal, security, compliance or finance approvers.
+7. **Audit.** Write the map as JSON (schema in `--help`; `assets/sample_stakeholders.json`) and run the analyzer. It must pass with no fail findings; then verify that each warning is fixed. Refresh the map each quarter or project phase.
 
-**For powerless advocate (LP/HI, high support):**
-- Use them to influence others
-- Amplify their voice publicly
-- Don't burn them with surprise asks
+Engagement patterns for sponsors, powerful skeptics, powerless advocates and absent leaders are in the appendix of `references/stakeholder-mapping-framework.md`.
 
-**For powerful absent leader (HP/LI):**
-- Don't let them tune in late and veto
-- Pre-brief before key decisions
-- Make engagement low-friction (5-min readouts)
+## Anti-Patterns
 
-### When to escalate vs route around
-- Escalate when: stakeholder's authority is structurally needed
-- Route around when: stakeholder is tangential and adding friction
-- Never route around: legal, security, compliance, finance approvers
+### Power read off the org chart
+**Mistake:** Only VPs and above are rated high power.
+**Why it happens:** Hierarchy is visible; vetoes and expertise are not.
+**Instead:** Rate budget, veto, expertise and coalition power too. The security reviewer who can block go-live belongs in manage closely or keep satisfied.
 
-## Common engagements
+### The sleeping authority
+**Mistake:** A high-power, low-interest executive hears about the initiative at the final review and vetoes it.
+**Why it happens:** Low interest reads as low priority.
+**Instead:** Give every keep-satisfied stakeholder an owner and a monthly pre-brief; five-minute readouts are enough.
 
-### "Help me build a stakeholder map for the launch"
-1. Brainstorm 20+ stakeholders.
-2. Rate Power, Interest, Support per stakeholder.
-3. Plot the 2x2.
-4. Identify the critical 5-10 (HP/HI).
-5. For each blocker, design conversion plan.
-6. Document engagement cadence per quadrant.
+### A map with no plan
+**Mistake:** The 2x2 is drawn and filed.
+**Why it happens:** Mapping feels like the work.
+**Instead:** Every quadrant gets a cadence and an owner, and every blocker a conversion plan with a date.
 
-### "Audit a recent failed launch"
-1. Map the stakeholders involved.
-2. Identify who derailed it (often a HP/LI we missed).
-3. Identify who could have helped but wasn't engaged.
-4. Update default stakeholder template for next launch.
-
-### "Navigate an enterprise deal with 8 buying-committee members"
-1. Map all 8 + 4-5 unofficial influencers.
-2. Identify economic buyer, technical buyer, user, executive sponsor.
-3. Engagement plan per role.
-4. Address blockers (legal, security) early; don't wait for procurement.
-
-## Anti-patterns to avoid
-
-- **No stakeholder map.** Trust the org chart; surprised by lateral resistance.
-- **Map without engagement plan.** Knowing isn't acting.
-- **Ignoring blockers.** They surface at the worst moment.
-- **Treating power as just hierarchy.** Vetoes matter; expertise matters.
-- **No HP/LI engagement.** Sleeping authority becomes late veto.
-- **Static map.** Power + stance shift; refresh per quarter / per phase.
-- **Mapping without input from someone politically savvy.** Solo maps miss reality.
+More with fixes: `references/stakeholder-anti-patterns.md`.
 
 ## Scope & Limitations
 
@@ -207,7 +106,7 @@ has more power than a "high-hierarchy / low-domain" one.
 - A Power x Interest 2x2 with 1-5 ratings and four quadrants: manage closely, keep satisfied, keep informed and monitor
 - A support stance per stakeholder from champion to blocker, and the high-power, high-interest, not-yet-supportive group to convert
 - Engagement cadence per quadrant and conversion plans for blockers and skeptics
-- A map audit for missing roles, blockers without plans, high-power low-interest gaps and quadrant balance (`stakeholder_analyzer.py`)
+- A map audit for cadence and owners by quadrant, blockers and skeptics without plans, and missing decision-makers (`stakeholder_analyzer.py`)
 - Launch, re-org, enterprise buying-committee and failed-launch post-mortem maps
 
 **Out of Scope:**
@@ -222,10 +121,19 @@ has more power than a "high-hierarchy / low-domain" one.
 - Power and stance shift. The map goes stale unless it is refreshed each quarter or project phase.
 - The map can hold sensitive opinions about named colleagues. Who sees it is the team's call.
 
-## References
+## Files
 
-- `references/stakeholder-mapping-framework.md` — power dimensions, support spectrum, engagement plans
-- `references/stakeholder-anti-patterns.md` — common failures + worked fixes
+| File | Purpose |
+|------|---------|
+| `scripts/stakeholder_analyzer.py` | Stakeholder map audit |
+| `assets/sample_stakeholders.json` | Billing rollout map; exits 0 |
+| `assets/sample_stakeholders_flawed.json` | Map with an unplanned high-power blocker; exits 1 |
+| `assets/stakeholder_map_template.md` | Fill-in template |
+
+## Reference Documentation
+
+- [references/stakeholder-mapping-framework.md](references/stakeholder-mapping-framework.md): Power and interest dimensions, support spectrum, engagement patterns
+- [references/stakeholder-anti-patterns.md](references/stakeholder-anti-patterns.md): Common failures and fixes
 
 ## Related skills
 

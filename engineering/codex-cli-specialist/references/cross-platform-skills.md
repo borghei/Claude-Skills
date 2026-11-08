@@ -143,7 +143,6 @@ tools:
   - name: tool_b
     description: Generates Y artifacts
     command: python scripts/tool_b.py
-model: o4-mini
 version: 1.0.0
 ```
 

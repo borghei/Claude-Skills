@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Story Mapping - Claude Skills</title>
-  <meta name="description" content="Jeff Patton-style user story mapping for visualizing user journeys, MVP definition, release planning, backlog sequencing, and cross-team alignment.">
+  <meta name="description" content="Builds a user story map (journey backbone, ranked tasks, release lines) to agree an MVP and release order. Use when defining an MVP, slicing releases, or turning a flat backlog back into a user journe">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/story-mapping.html">
   <meta property="og:title" content="Story Mapping - Claude Skills">
-  <meta property="og:description" content="Jeff Patton-style user story mapping for visualizing user journeys, MVP definition, release planning, backlog sequencing, and cross-team alignment.">
+  <meta property="og:description" content="Builds a user story map (journey backbone, ranked tasks, release lines) to agree an MVP and release order. Use when defining an MVP, slicing releases, or turning a flat backlog back into a user journe">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/story-mapping.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Story Mapping", "description": "Jeff Patton-style user story mapping for visualizing user journeys, MVP definition, release planning, backlog sequencing, and cross-team alignment.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/story-mapping.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Story Mapping", "description": "Builds a user story map (journey backbone, ranked tasks, release lines) to agree an MVP and release order. Use when defining an MVP, slicing releases, or turning a flat backlog back into a user journey.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/story-mapping.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Story Mapping</h1>
-    <p class="page-subtitle">Jeff Patton-style user story mapping for visualizing user journeys, MVP definition, release planning, backlog sequencing, and cross-team alignment.</p>
+    <p class="page-subtitle">Builds a user story map (journey backbone, ranked tasks, release lines) to agree an MVP and release order. Use when defining an MVP, slicing releases, or turning a flat backlog back into a user journey.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">story-mapping</span><span class="tag">user-journey</span><span class="tag">mvp</span><span class="tag">release-planning</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Story Mapping (Project Management domain).
 
-Jeff Patton-style user story mapping for visualizing user journeys, MVP definition, release planning, backlog sequencing, and cross-team alignment.
+Builds a user story map (journey backbone, ranked tasks, release lines) to agree an MVP and release order. Use when defining an MVP, slicing releases, or turning a flat backlog back into a user journey.
 
 Visualize the user journey and translate strategy into prioritized, deliverable work using Jeff Patton&#x27;s user story mapping technique. Story maps shift teams from feature-first thinking to flow-first thinking -- understanding the complete user experience before deciding what to build and in what ord
 
@@ -421,7 +421,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Story Mapping (Project Management domain).
 
-Jeff Patton-style user story mapping for visualizing user journeys, MVP definition, release planning, backlog sequencing, and cross-team alignment.
+Builds a user story map (journey backbone, ranked tasks, release lines) to agree an MVP and release order. Use when defining an MVP, slicing releases, or turning a flat backlog back into a user journey.
 
 Visualize the user journey and translate strategy into prioritized, deliverable work using Jeff Patton&#x27;s user story mapping technique. Story maps shift teams from feature-first thinking to flow-first thinking -- understanding the complete user experience before deciding what to build and in what ord
 
@@ -465,6 +465,8 @@ Visualize the user journey and translate strategy into prioritized, deliverable 
 
 A story map is a 2D grid: the **backbone** (activities → steps) runs left-to-right in the order users experience the journey, the **body** (tasks) hangs below each step ranked top-to-bottom by priority, and a horizontal **MVP line** separates Release 1 from later. See the playbook reference for full anatomy and the 6-step build sequence.
 
+**Done looks like:** a backbone of user activities and steps in journey order; tasks under each step ranked by priority; a release-1 line that delivers a working end-to-end journey (a walking skeleton, not one finished column); later slices named by the outcome each adds; the map reviewed with the people who will build it.
+
 ## When to Use
 
 - **MVP definition** -- Draw a clear line between &quot;must ship&quot; and &quot;can wait.&quot;
@@ -517,9 +519,11 @@ Seven more, each with a bad and a good example: `references/red-flags.md`.
 
 **In Scope:** User story map creation, backbone and body decomposition, release slice definition, MVP scoping, facilitation guidance, workshop planning, template and pattern library.
 
-**Out of Scope:** Individual story writing and acceptance criteria (see `job-stories/` or agile-product-owner), technical architecture decisions, detailed effort estimation, sprint planning mechanics.
+**Out of Scope:** Individual story writing and acceptance criteria (see `job-stories/` or `product-team/agile-product-owner`), technical architecture decisions, detailed effort estimation, sprint planning mechanics.
 
 **Important Caveats:** Story maps are planning tools, not contracts. They should be updated as the team learns. A map created before building will always be wrong in details -- the value is in the shared understanding, not the artifact itself. Jeff Patton: &quot;The map is not the territory; the conversation is the territory.&quot;
+
+Story maps place the whole journey; to cut one oversized story use `story-splitting/`, and to write each task as a backlog item use `wwas/`.
 
 ## Integration Points
 
@@ -537,6 +541,14 @@ Seven more, each with a bad and a good example: `references/red-flags.md`.
 - Jeff Patton, *User Story Mapping* (2014)
 - Jeff Patton, &quot;The New User Story Backlog Is a Map&quot; (2005)
 - Inspired by Productside story mapping workshops
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `references/playbook.md` | Anatomy, build sequence, template, patterns, workshop guide |
+| `references/red-flags.md` | Common mapping failures with fixes |
+| `examples/wayfinder-mobile-onboarding-story-map.md` | Worked story map for a mobile onboarding flow |
 
 ---
 
@@ -564,7 +576,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Story Mapping&quot;**
-   - Description: &quot;Jeff Patton-style user story mapping for visualizing user journeys, MVP definition, release planning, backlog sequencing, and cross-team alignment.&quot;
+   - Description: &quot;Builds a user story map (journey backbone, ranked tasks, release lines) to agree an MVP and release order. Use when defining an MVP, slicing releases, or turning a flat backlog back into a user journey.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -595,6 +607,8 @@ Visualize the user journey and translate strategy into prioritized, deliverable 
 
 A story map is a 2D grid: the **backbone** (activities → steps) runs left-to-right in the order users experience the journey, the **body** (tasks) hangs below each step ranked top-to-bottom by priority, and a horizontal **MVP line** separates Release 1 from later. See the playbook reference for full anatomy and the 6-step build sequence.
 
+**Done looks like:** a backbone of user activities and steps in journey order; tasks under each step ranked by priority; a release-1 line that delivers a working end-to-end journey (a walking skeleton, not one finished column); later slices named by the outcome each adds; the map reviewed with the people who will build it.
+
 ## When to Use
 
 - **MVP definition** -- Draw a clear line between &quot;must ship&quot; and &quot;can wait.&quot;
@@ -647,9 +661,11 @@ Seven more, each with a bad and a good example: `references/red-flags.md`.
 
 **In Scope:** User story map creation, backbone and body decomposition, release slice definition, MVP scoping, facilitation guidance, workshop planning, template and pattern library.
 
-**Out of Scope:** Individual story writing and acceptance criteria (see `job-stories/` or agile-product-owner), technical architecture decisions, detailed effort estimation, sprint planning mechanics.
+**Out of Scope:** Individual story writing and acceptance criteria (see `job-stories/` or `product-team/agile-product-owner`), technical architecture decisions, detailed effort estimation, sprint planning mechanics.
 
 **Important Caveats:** Story maps are planning tools, not contracts. They should be updated as the team learns. A map created before building will always be wrong in details -- the value is in the shared understanding, not the artifact itself. Jeff Patton: &quot;The map is not the territory; the conversation is the territory.&quot;
+
+Story maps place the whole journey; to cut one oversized story use `story-splitting/`, and to write each task as a backlog item use `wwas/`.
 
 ## Integration Points
 
@@ -667,6 +683,14 @@ Seven more, each with a bad and a good example: `references/red-flags.md`.
 - Jeff Patton, *User Story Mapping* (2014)
 - Jeff Patton, &quot;The New User Story Backlog Is a Map&quot; (2005)
 - Inspired by Productside story mapping workshops
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `references/playbook.md` | Anatomy, build sequence, template, patterns, workshop guide |
+| `references/red-flags.md` | Common mapping failures with fixes |
+| `examples/wayfinder-mobile-onboarding-story-map.md` | Worked story map for a mobile onboarding flow |
 
 ---
 
@@ -694,7 +718,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Story Mapping&quot;**
-   - Description: &quot;Jeff Patton-style user story mapping for visualizing user journeys, MVP definition, release planning, backlog sequencing, and cross-team alignment.&quot;
+   - Description: &quot;Builds a user story map (journey backbone, ranked tasks, release lines) to agree an MVP and release order. Use when defining an MVP, slicing releases, or turning a flat backlog back into a user journey.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -753,7 +777,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/story-mapping/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

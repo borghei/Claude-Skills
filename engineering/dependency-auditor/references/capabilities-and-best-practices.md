@@ -13,11 +13,11 @@ In modern software development, dependencies form complex webs that can introduc
 ### 1. Vulnerability Scanning & CVE Matching
 
 **Comprehensive Security Analysis**
-- Scans dependencies against built-in vulnerability databases
+- Matches dependencies against an offline sample of about eight well-known advisories (a demo and cross-check, not a vulnerability database; use the ecosystem auditors for real data)
 - Matches Common Vulnerabilities and Exposures (CVE) patterns
 - Identifies known security issues across multiple ecosystems
 - Analyzes transitive dependency vulnerabilities
-- Provides CVSS scores and exploit assessments
+- Shows the CVSS score recorded in each matched sample advisory
 - Tracks vulnerability disclosure timelines
 - Maps vulnerabilities to dependency paths
 
@@ -138,7 +138,7 @@ In modern software development, dependencies form complex webs that can introduc
 
 ### Scanner Engine (`dep_scanner.py`)
 - Multi-format parser supporting 8+ package ecosystems
-- Built-in vulnerability database with 500+ CVE patterns
+- Offline sample advisory table (about eight entries, newest from 2024)
 - Transitive dependency resolution from lockfiles
 - JSON and human-readable output formats
 - Configurable scanning depth and exclusion patterns

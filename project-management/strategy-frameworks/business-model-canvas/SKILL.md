@@ -1,17 +1,16 @@
 ---
 name: business-model-canvas
 description: >
-  Build, evaluate, and stress-test a Business Model Canvas (Osterwalder)
-  across all 9 blocks. Use when designing or refreshing a business model,
-  auditing a canvas for gaps, exploring monetization, or aligning on the
-  model's assumptions.
+  Builds and audits a nine-block Business Model Canvas, tracing each segment
+  through value, channel and revenue and naming the riskiest assumptions. Use
+  when designing, refreshing or stress-testing a business model.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: strategy-frameworks
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: canvas_validator.py
   tech-stack: business-model-canvas, osterwalder, strategy
   tags:
@@ -23,30 +22,17 @@ metadata:
 
 # Business Model Canvas
 
-A working Business Model Canvas (BMC) — Alexander Osterwalder's 9-block
-strategic management template that captures how an organization creates,
-delivers, and captures value.
+The agent builds a canvas whose blocks connect: every customer segment traces to a value proposition, a channel, a relationship and a revenue stream, and the cost structure fits the chosen posture. The nine blocks and the model patterns are in `references/canvas-framework.md`.
 
-## When to use this skill
+**Done looks like:** all nine blocks specific to this business (no "everyone", no "better, faster, cheaper"); each segment's chain complete; value-driven or cost-driven chosen; the three riskiest assumptions rated on evidence, risk and testability with an experiment for each; `canvas_validator.py` exits 0.
 
-- Designing the **business model** for a new product or company
-- Refreshing the BMC after a strategic pivot
-- Stress-testing the **assumptions** in an existing model
-- Aligning leadership on **how value flows** through the business
-- Comparing two or more candidate business models
-- Onboarding a new exec / investor to the business
+## When to Use
 
-## The 9 building blocks
+- Designing the business model for a new product or company, or refreshing it after a pivot
+- Stress-testing the assumptions in an existing model, or comparing candidate models
+- Aligning leadership, a new executive or an investor on how value flows
 
-1. **Customer Segments** — Who do we serve? (mass market, niche, segmented, diversified, multi-sided)
-2. **Value Propositions** — What value do we deliver to each segment?
-3. **Channels** — How do we reach customers? (own, partner; direct, indirect; physical, digital)
-4. **Customer Relationships** — How do we acquire, keep, and grow each segment?
-5. **Revenue Streams** — How does the customer pay? (one-time, subscription, usage, licensing, advertising)
-6. **Key Resources** — What assets are required? (physical, intellectual, human, financial)
-7. **Key Activities** — What do we do to deliver value? (production, problem-solving, platform/network)
-8. **Key Partnerships** — Who helps us? (strategic alliances, JVs, supplier relationships)
-9. **Cost Structure** — Where do costs come from? (cost-driven vs value-driven; fixed vs variable)
+Pre-product-market-fit startups usually get more from `lean-canvas`.
 
 ## Clarify First
 
@@ -59,77 +45,58 @@ Before building the canvas, settle the inputs below. When one is missing or vagu
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Draft per block
-Start with **Customer Segments** and **Value Propositions** (these drive everything else).
-Then fill: Channels, Customer Relationships, Revenue Streams. Then: Key Resources,
-Activities, Partnerships. Finish with Cost Structure.
-
-### Step 2 — Validate the chain
-For each Customer Segment, trace: Segment → Value Prop → Channel → Relationship →
-Revenue. If you can't connect these, the model has a gap.
-
-### Step 3 — Stress-test assumptions
-For each block, list the top 2-3 assumptions and rate (high / medium / low) on:
-- Evidence (do we know this is true?)
-- Riskiness (what breaks if wrong?)
-- Testability (can we run a cheap experiment?)
-
-### Step 4 — Run `canvas_validator.py`
-Audit the canvas for: empty blocks, ungrounded value-prop / segment matches,
-revenue / cost imbalance, segment-channel-relationship coherence.
+## Quick Start
 
 ```bash
+# Two-segment HR analytics canvas: exit 0
 python3 project-management/strategy-frameworks/business-model-canvas/scripts/canvas_validator.py \
-  --input canvas.json --format markdown
+  --input project-management/strategy-frameworks/business-model-canvas/assets/sample_canvas.json --format markdown
 ```
 
-### Step 5 — Iterate
-Most first drafts are wrong in interesting ways. Plan to revise 3-5 times.
+```bash
+# "Everyone" segment, empty blocks, untargeted value proposition: exit 1
+python3 project-management/strategy-frameworks/business-model-canvas/scripts/canvas_validator.py \
+  --input project-management/strategy-frameworks/business-model-canvas/assets/sample_canvas_flawed.json --format markdown
+```
 
-## Decision frameworks
+```bash
+# Input schema and flags
+python3 project-management/strategy-frameworks/business-model-canvas/scripts/canvas_validator.py --help
+```
 
-### Which type of business model?
+## Tools Overview
 
-| Pattern | Examples | Characteristics |
-|---------|----------|-----------------|
-| **Unbundled** | Investment banking (advisor + product) | Different segments; different value props |
-| **Long Tail** | Netflix, Amazon | Niche x volume |
-| **Multi-sided platform** | Visa, Airbnb | Connects 2+ segments; network effects |
-| **Free / Freemium** | Spotify, LinkedIn | One segment pays for another's free use |
-| **Open** | Open-source + services | Free product, paid expertise/services |
+`canvas_validator.py` is the quality gate for this skill. **What the validator checks:** each block populated (fail when empty); generic wording ("everyone", "innovative", "best-in-class", "great service"); every segment matched by a value proposition (fail otherwise) and a channel; value propositions targeting undefined segments or lacking measurable outcomes; channel phase coverage; revenue streams without a pricing mechanism or unit; fewer than three cost lines; undeclared posture; missing or untested assumptions. Matching is by segment name text, and it checks wording, not truth.
 
-Most modern SaaS = multi-sided OR freemium variant.
+**Exit codes:** `0` no fail findings · `1` at least one fail (an empty block, a segment with no value proposition) · `2` unreadable file, invalid JSON or a top level that is not an object. JSON by default, `--format markdown`, `--output FILE`.
 
-### Cost-driven vs value-driven
+## Workflow
 
-| Cost-driven | Value-driven |
-|-------------|--------------|
-| Lean cost structure | Focus on premium value |
-| Low-price value prop | High-value, often high-price |
-| Maximum automation | High-touch service |
-| Extensive outsourcing | In-house excellence |
+1. **Draft per block.** Customer Segments and Value Propositions first; then Channels, Relationships, Revenue; then Resources, Activities, Partnerships; Cost Structure last.
+2. **Validate the chain.** For each segment trace segment → value proposition → channel → relationship → revenue. A segment you cannot trace is a gap, not a detail.
+3. **Pick the posture.** Cost-driven (lean, automated, low price) or value-driven (premium, high touch). Trying both usually produces a mediocre version of each.
+4. **Stress-test assumptions.** List the riskiest 2-3 and rate evidence, risk and testability; the high-risk, low-evidence ones get an experiment.
+5. **Audit.** Write the canvas as JSON (schema in `--help`; `assets/sample_canvas.json` is a complete example) and run the validator. It must pass with no fail findings; then verify that each warning is fixed or deliberately accepted.
+6. **Iterate.** First drafts are wrong in useful ways; expect 3-5 revisions.
 
-Most companies need to pick ONE — trying both produces mediocre everything.
+## Anti-Patterns
 
-### Common BMC anti-patterns
+### A value proposition that fits anyone
+**Mistake:** "Better, faster, cheaper" or "innovative platform".
+**Why it happens:** Specific claims feel risky to commit to.
+**Instead:** State the measurable change for one named segment, such as "monthly reporting from 3 days to 4 hours".
 
-- **Generic value proposition.** "Better, faster, cheaper" — applies to anything; means nothing.
-- **One segment listed as "everyone."** Forces commodity positioning.
-- **Revenue streams with no channel.** How does money flow?
-- **Costs that don't sum to revenue model.** Unit economics broken.
-- **Partnerships listed without specific roles.** What do they actually do?
-- **No coherent customer journey across blocks.** Segment doesn't connect to channel.
+### Revenue with no route to it
+**Mistake:** A revenue stream exists for a segment that has no channel or relationship.
+**Why it happens:** Blocks are filled one at a time rather than traced per segment.
+**Instead:** Walk the chain in step 2 for every segment before polishing any block.
 
-## Output expectations
+### Partners without a role
+**Mistake:** Key Partnerships lists logos.
+**Why it happens:** Partnerships signal credibility in a deck.
+**Instead:** Give each partner the activity or resource it provides; drop the ones that provide neither.
 
-After using this skill, you should have:
-
-1. A populated **9-block canvas** with specific (not generic) statements
-2. A **validation report** flagging gaps, ungrounded assumptions, coherence issues
-3. **2-3 prioritized experiments** to test the riskiest assumptions
-4. References to other strategy skills (lean canvas for startup-stage; value-proposition-canvas for the VP block)
+More, with worked examples: `references/examples-anti-patterns.md`.
 
 ## Scope & Limitations
 
@@ -152,10 +119,19 @@ After using this skill, you should have:
 - Evidence, risk and testability ratings are the team's own judgments.
 - First drafts are expected to be wrong. The skill plans for 3-5 revisions, and a canvas goes stale after a pivot.
 
-## References
+## Files
 
-- `references/canvas-framework.md` — the 9 blocks deep, patterns, examples
-- `references/examples-anti-patterns.md` — worked examples + common failures
+| File | Purpose |
+|------|---------|
+| `scripts/canvas_validator.py` | Canvas completeness and coherence audit |
+| `assets/sample_canvas.json` | Two-segment HR analytics canvas; exits 0 |
+| `assets/sample_canvas_flawed.json` | Generic, incomplete canvas; exits 1 |
+| `assets/canvas_template.md` | Fill-in template |
+
+## Reference Documentation
+
+- [references/canvas-framework.md](references/canvas-framework.md): The nine blocks, patterns, examples
+- [references/examples-anti-patterns.md](references/examples-anti-patterns.md): Worked examples and common failures
 
 ## Related skills
 

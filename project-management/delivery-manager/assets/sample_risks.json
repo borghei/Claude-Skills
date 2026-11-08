@@ -1,0 +1,56 @@
+{
+  "project": "Platform Migration",
+  "risks": [
+    {
+      "id": "RISK-001",
+      "title": "Database migration data loss",
+      "category": "Technical",
+      "description": "Complex schema migration may cause data corruption",
+      "trigger": "Migration script fails during production execution",
+      "probability": 3,
+      "impact": 5,
+      "mitigation": {
+        "status": "In Progress",
+        "owner": "Alice Chen",
+        "actions": [
+          "Run migration on staging with production data copy",
+          "Create rollback script"
+        ]
+      }
+    },
+    {
+      "id": "RISK-002",
+      "title": "Key engineer leaves during migration",
+      "category": "Resource",
+      "description": "Single point of failure on legacy system knowledge",
+      "trigger": "Resignation notice during critical phase",
+      "probability": 2,
+      "impact": 4,
+      "mitigation": {
+        "status": "Not Started",
+        "owner": "Unassigned",
+        "actions": [
+          "Document legacy system architecture",
+          "Cross-train second engineer"
+        ]
+      }
+    },
+    {
+      "id": "RISK-003",
+      "title": "Third-party API rate limit changes",
+      "category": "External",
+      "description": "Vendor may reduce API limits in next billing cycle",
+      "trigger": "Vendor announcement or unexpected 429 errors",
+      "probability": 2,
+      "impact": 3,
+      "mitigation": {
+        "status": "Complete",
+        "owner": "Bob Martinez",
+        "actions": [
+          "Implemented request caching",
+          "Added rate limit monitoring"
+        ]
+      }
+    }
+  ]
+}

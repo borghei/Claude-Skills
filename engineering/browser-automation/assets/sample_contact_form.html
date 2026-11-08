@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Contact</title></head>
+<body>
+  <form action="/contact" method="post" id="contact">
+    <input type="hidden" name="csrf_token" value="abc123">
+    <label>Name <input type="text" name="name" required maxlength="80"></label>
+    <label>Email <input type="email" name="email" required></label>
+    <label>Topic
+      <select name="topic">
+        <option value="sales">Sales</option>
+        <option value="support">Support</option>
+      </select>
+    </label>
+    <label>Message <textarea name="message" required></textarea></label>
+    <button type="submit">Send</button>
+  </form>
+</body>
+</html>

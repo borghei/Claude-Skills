@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: agent-evaluation
-  updated: 2026-07-21
+  updated: 2026-11-08
   tags: [agent-eval, regression-testing, harness, replay, llm-testing]
 ---
 
@@ -178,7 +178,7 @@ for aggregate movement, never for safety failures.
 ### Chasing regressions without a noise floor
 **Mistake:** Four scenarios flip after a prompt edit, so the team spends two days finding the cause.
 **Why it happens:** Nobody ever ran the identical configuration twice, so run-to-run variance is unmeasured and every flip looks causal.
-**Instead:** Before trusting any diff, score the same configuration twice and diff it against itself. That flip count is your noise floor. Then reduce it — temperature 0 where the product allows, replayed tool results rather than live backends, and re-runs of flipped scenarios to separate flaky from real.
+**Instead:** Before trusting any diff, score the same configuration twice and diff it against itself. That flip count is your noise floor. Then reduce it: pin the exact model id and sampling settings the product ships with (many reasoning models fix temperature, so do not rely on it), replay recorded tool results instead of live backends, and re-run flipped scenarios k times to separate flaky from real.
 
 ## Files
 
@@ -195,6 +195,11 @@ for aggregate movement, never for safety failures.
 | `assets/sample_candidate_report.json` | Scored candidate report — input for `eval_diff.py` |
 | `assets/eval_report_template.md` | Release-decision report template |
 | `assets/scenario_authoring_checklist.md` | Pre-merge checklist for any scenario joining a gating suite |
+
+**Exit codes (both scripts).** `0` pass; `1` input error (missing file, invalid JSON, a report
+without `results`); `2` gate failure (`scenario_runner.py --strict-critical` / `--fail-under`, or
+`eval_diff.py --fail-on-regression`). Gate failure is `2` here, not `1`, so CI can tell "the eval
+ran and the candidate regressed" from "the eval could not run".
 
 ## Scope & Limitations
 

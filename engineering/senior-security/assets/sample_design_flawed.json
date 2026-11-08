@@ -1,0 +1,14 @@
+{
+  "name": "Checkout service (flawed)",
+  "flows": [
+    {"from": "browser", "to": "api-gateway", "data": "card details and session token",
+     "crosses_boundary": true, "authenticated": true, "encrypted": true, "validated": false,
+     "rate_limited": false, "logged": true, "least_privilege": true},
+    {"from": "api-gateway", "to": "payments-worker", "data": "payment request",
+     "crosses_boundary": true, "authenticated": false, "encrypted": false, "validated": true,
+     "rate_limited": true, "logged": false, "least_privilege": false},
+    {"from": "payments-worker", "to": "ledger-db", "data": "transaction rows",
+     "crosses_boundary": false, "authenticated": true, "encrypted": true, "validated": true,
+     "rate_limited": true, "logged": true}
+  ]
+}

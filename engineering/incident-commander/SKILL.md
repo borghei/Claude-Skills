@@ -11,53 +11,104 @@ metadata:
   category: engineering
   domain: incident-response
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [incident-response, severity-classification, rca, postmortem]
-  python-tools: incident_classifier.py, severity_classifier.py, timeline_reconstructor.py, incident_timeline_builder.py, pir_generator.py, postmortem_generator.py
+  python-tools: severity_classifier.py, timeline_reconstructor.py, postmortem_generator.py, incident_classifier.py, incident_timeline_builder.py, pir_generator.py
   tech-stack: python, json, markdown
 ---
 # Incident Commander
 
-Classify incident severity, reconstruct timelines from heterogeneous event sources, and generate structured post-incident reviews with root cause analysis and action items. Codifies PagerDuty, Google SRE, and Atlassian incident-management practices into severity scoring, escalation matrices, communication templates, RCA frameworks, and SLA/error-budget tracking.
-
-## Core Capabilities
-
-- **Severity classification** — multi-dimensional scoring (revenue, user scope, data/security risk, service criticality, blast radius) into SEV-1 to SEV-4 with confidence and escalation paths.
-- **Timeline reconstruction** — chronological timelines from logs, alerts, Slack, and deploy events with phase detection and gap analysis.
-- **Post-incident review** — PIRs with 5 Whys, Fishbone, Timeline, or Bow Tie RCA plus categorized action items (owner, priority, deadline).
-- **Postmortem quality** — coverage-gap detection, action-item quality scoring, MTTD/MTTR benchmarking.
-- **Communication & escalation** — severity-specific internal/executive/customer/status-page templates; technical (L1-L4) and business escalation matrices with time-based triggers.
-- **SLA / error-budget tracking** — SLI/SLO/SLA hierarchy, error budgets, burn-rate alerting, and breach handling.
+Run a production incident from declaration to post-incident review: set severity, coordinate response and comms, rebuild the timeline, and write a review whose action items prevent a repeat. The agent's judgment drives the live incident; the scripts score, structure and draft.
 
 ## When to Use
 
-- Handling an active incident — classify severity, establish command, mitigate, communicate.
-- Running a post-incident review — reconstruct timeline, perform RCA, assign action items.
-- Managing escalation — apply technical and business escalation paths by severity and elapsed time.
-- Building or auditing response playbooks, comms templates, or SLA/error-budget policy.
+- An incident is active: decide severity, establish command, mitigate, communicate.
+- An incident is over: reconstruct the timeline, find root causes, assign action items.
+- Designing escalation paths, comms templates, response playbooks or SLA/error-budget policy.
 
 ## Clarify First
 
-Before producing the artifact, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
+Settle the inputs that change the work. When one is missing and would not change the result, use a sensible default and say which.
 
-- **Task & deliverable:** classify severity, reconstruct a timeline, or generate a PIR/postmortem (selects `severity_classifier.py` vs `timeline_reconstructor.py` vs `pir_generator.py`/`postmortem_generator.py`).
-- **Incident input data:** the incident/events JSON with severity dimensions (revenue, user scope, data/security risk, blast radius) (the input the scripts parse).
-- **RCA method:** 5 Whys, Fishbone, Timeline, or Bow Tie (sets `pir_generator.py --rca-method` and the postmortem structure).
+- **Active or post-incident?** Active: ask only for impact (who and how many are affected, revenue, data or security exposure) and what is already being done, then give severity and the first comms. Do not start an RCA during an active incident.
+- **Post-incident:** the event sources (alerts, chat, deploys) and the format the organisation uses for reviews.
+- **RCA method** (post-incident only): 5 Whys for a single causal chain, Fishbone for many contributing factors, Bow Tie for safety/security-style incidents.
 
-Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `incident_classifier.py` | Classify severity, recommend response teams and comms templates | `python scripts/incident_classifier.py --input incident.json --format text` |
-| `severity_classifier.py` | Multi-dimensional severity score with escalation path | `python scripts/severity_classifier.py incident.json --format markdown` |
-| `timeline_reconstructor.py` | Reconstruct timeline from timestamped events with phase + gap analysis | `python scripts/timeline_reconstructor.py --input events.json --detect-phases --gap-analysis --format markdown` |
-| `incident_timeline_builder.py` | Build structured timeline with MTTD/MTTR and comms templates | `python scripts/incident_timeline_builder.py incident_data.json --format markdown` |
-| `pir_generator.py` | Generate Post-Incident Review with RCA and action items | `python scripts/pir_generator.py --incident incident.json --rca-method fishbone --action-items` |
-| `postmortem_generator.py` | Generate postmortem with 5-Whys, benchmarks, coverage gaps | `python scripts/postmortem_generator.py incident_data.json --format markdown` |
+### Active incident
 
-## References
+1. Set severity from impact, using the matrix below. The scorer helps but does not decide; when in doubt, pick the higher severity and downgrade later.
+2. Name the incident commander, open the channel, post the first internal update and (SEV1/SEV2) the status page within the response window.
+3. Mitigate before diagnosing: roll back the last change, fail over, shed load. Record every action with a timestamp.
+4. Update on the cadence for the severity until resolved; then declare resolved and schedule the review.
+
+| Severity | Typical impact | First response | Update cadence |
+|----------|----------------|----------------|----------------|
+| SEV1 | Core service down, > 75% of users, data loss, or a security breach with customer data | Immediate; IC within 5 min; execs within 15 min | Every 15 min |
+| SEV2 | Major degradation, 25-75% of users, no workaround, high revenue impact | Within 15 min | Every 30 min |
+| SEV3 | Partial degradation, < 25% of users, workaround exists | Within 1 h | Every 2 h |
+| SEV4 | Cosmetic or internal, no customer impact | Next business day | As needed |
+
+Full criteria, escalation paths and examples: [references/incident_severity_matrix.md](references/incident_severity_matrix.md).
+
+### Post-incident review
+
+1. Rebuild the timeline from every source and check the gaps (no events for long stretches usually mean missing data, not inactivity).
+2. Compute MTTD / time to mitigate / MTTR and compare with your targets.
+3. Find root causes and contributing factors with the chosen RCA method; blameless, about systems and decisions.
+4. Write action items that would have prevented or shortened this incident, each with an owner, priority and deadline.
+5. Validate the review before sharing: every action item has an owner, every timeline gap is explained, and the root cause is a mechanism, not "human error".
+
+## Quick Start
+
+```bash
+# Severity: multi-dimensional score from the shared incident schema (SEV2 on the sample)
+python3 scripts/severity_classifier.py assets/sample_incident_data.json --format text
+# Quick triage from free text only (keyword heuristic; advisory)
+python3 scripts/incident_classifier.py --input assets/sample_incident_classification.json --format text
+# Timeline with lifecycle phases and gap analysis
+python3 scripts/timeline_reconstructor.py --input assets/sample_timeline_events.json --detect-phases --gap-analysis --format markdown
+# Review documents
+python3 scripts/postmortem_generator.py assets/sample_incident_data.json --format markdown
+python3 scripts/pir_generator.py --incident assets/sample_incident_pir_data.json --rca-method fishbone --action-items
+```
+
+## Tools Overview
+
+Use one tool per job. Two input schemas are in play; pick the tool that matches the data you have.
+
+| Job | Primary tool | Input | Alternative |
+|-----|--------------|-------|-------------|
+| Severity | `severity_classifier.py <file>` — weighted revenue, user scope, data/security, criticality, blast radius; escalation path | Shared incident schema (`assets/sample_incident_data.json`: `incident`, `impact`, `signals`, `context`, `events`, `resolution`, `action_items`) | `incident_classifier.py --input <file>` — keyword triage from `{description, service, affected_users, business_impact}`; its confidence reflects input completeness and is capped at 85% |
+| Timeline | `timeline_reconstructor.py --input <events.json>` — merge multi-source events, lifecycle phases (detection, triage, mitigation, resolution, review), gaps | List of `{timestamp, source, type, message, severity, actor}` (`assets/sample_timeline_events.json`) | `incident_timeline_builder.py <file>` — MTTD/MTTR and comms from the shared incident schema |
+| Review | `postmortem_generator.py <file>` — exec summary, metrics vs benchmarks, 5 Whys, coverage gaps; timeline taken from `timeline` or derived from typed `events` | Shared incident schema | `pir_generator.py --incident <file> --rca-method {five_whys,fishbone,timeline,bow_tie}` — PIR from the flat schema in `assets/sample_incident_pir_data.json` |
+
+Exit codes: 0 report produced, 2 bad input (missing file, invalid JSON, wrong shape). `severity_classifier.py` exits 0 for any classified severity; add `--fail-on SEV1|SEV2|SEV3` to exit 1 when the incident is at or above that level (for paging or CI gates). It also accepts `--format json|markdown`; each tool lists its flags under `--help`.
+
+## Anti-Patterns
+
+**Mistake:** Letting the keyword classifier set severity during a live incident.
+**Why it happens:** A number with a percentage looks authoritative.
+**Instead:** Decide from impact with the matrix; use the scorers to check yourself and to document why.
+
+**Mistake:** Root-causing while the service is still down.
+**Why it happens:** Engineers want to understand before they act.
+**Instead:** Mitigate first (rollback, failover, feature flag off); investigate once users are no longer affected.
+
+**Mistake:** Action items without owners or dates, or "be more careful".
+**Why it happens:** The review meeting runs out of time.
+**Instead:** Each item names an owner, a deadline and the mechanism it changes (a test, an alert, a guardrail). The review is not done until that is true.
+
+## Files
+
+- `scripts/` — the six tools above (three primary, three alternatives).
+- `assets/sample_incident_data.json` (shared schema), `assets/sample_incident_classification.json` and `assets/simple_incident.json` (triage input), `assets/sample_timeline_events.json` and `assets/simple_timeline_events.json` (events), `assets/sample_incident_pir_data.json` (PIR input), `assets/incident_report_template.md`, `assets/runbook_template.md`.
+- `expected_outputs/` — reference outputs for the samples.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -70,16 +121,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 ## Scope & Limitations
 
-**Covers:** severity classification, timeline reconstruction, PIR/postmortem generation, RCA frameworks, escalation matrices, communication templates, and SLA/error-budget tracking. Tools are deterministic stdlib Python (no ML/LLM calls), accepting JSON input and emitting text/JSON/markdown.
+**Covers:** severity classification, timeline reconstruction, post-incident reviews, RCA frameworks, escalation and communication templates, SLA/error-budget tracking. Tools are offline and deterministic; they read JSON and write text, JSON or Markdown.
 
-**Does NOT cover:** live monitoring/alerting infrastructure (feeds in from `senior-devops`), security forensics (see `senior-secops`), or deployment/rollback execution (see `release-orchestrator`).
-
-## Integration Points
-
-| Skill | Integration |
-|-------|-------------|
-| `senior-devops` | Monitoring alerts feed timeline; runbook templates inform playbooks |
-| `senior-secops` | Security incidents auto-escalate to SEV-1; breach indicators trigger SecOps response |
-| `release-orchestrator` | Deployment events feed timeline; rollback data informs release gates |
-| `senior-architect` | Architectural root causes escalate to architecture review |
-| `code-reviewer` | PIR action items route to code review workflows |
+**Does not cover:** monitoring and alerting setup (`engineering/observability-designer`), security forensics (`engineering/senior-secops`), deployment and rollback execution (`engineering/release-orchestrator`), or debugging the underlying fault (`engineering/bug-diagnosis`).

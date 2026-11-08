@@ -927,18 +927,18 @@ def main():
     elif args.files:
         success = dashboard.load_historical_data(args.files)
     else:
-        print("Error: Must specify either files or --input-dir")
-        sys.exit(1)
+        print("error: specify files or --input-dir", file=sys.stderr)
+        sys.exit(2)
     
     if not success:
-        sys.exit(1)
+        sys.exit(2)
     
     # Generate dashboard
     try:
         dashboard_data = dashboard.generate_dashboard(args.period)
     except Exception as e:
-        print(f"Dashboard generation failed: {e}")
-        sys.exit(1)
+        print(f"error: dashboard generation failed: {e}", file=sys.stderr)
+        sys.exit(2)
     
     # Output results
     if args.format in ["json", "both"]:

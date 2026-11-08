@@ -412,7 +412,7 @@ def main():
     root = os.path.abspath(args.root)
     if not os.path.isdir(root):
         print(f"Error: Root directory not found: {root}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if args.changed:
         changed_files = args.changed
@@ -423,7 +423,7 @@ def main():
 
     if not changed_files:
         print("Error: No changed files provided.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     result = generate_report(changed_files, root, args.depth)
 

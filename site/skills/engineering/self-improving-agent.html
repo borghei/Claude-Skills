@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Self Improving Agent - Claude Skills</title>
-  <meta name="description" content="Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self">
+  <meta name="description" content="Curates agent memory and turns repeated lessons into reviewed rules: memory health checks, pattern extraction, feedback and regression analysis. Use when managing auto-memory or building agents that l">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/self-improving-agent.html">
   <meta property="og:title" content="Self Improving Agent - Claude Skills">
-  <meta property="og:description" content="Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self">
+  <meta property="og:description" content="Curates agent memory and turns repeated lessons into reviewed rules: memory health checks, pattern extraction, feedback and regression analysis. Use when managing auto-memory or building agents that l">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/self-improving-agent.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Self Improving Agent", "description": "Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/self-improving-agent.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Self Improving Agent", "description": "Curates agent memory and turns repeated lessons into reviewed rules: memory health checks, pattern extraction, feedback and regression analysis. Use when managing auto-memory or building agents that learn from their own sessions.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/self-improving-agent.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Self Improving Agent</h1>
-    <p class="page-subtitle">Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v2.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 6 tools</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Curates agent memory and turns repeated lessons into reviewed rules: memory health checks, pattern extraction, feedback and regression analysis. Use when managing auto-memory or building agents that learn from their own sessions.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v2.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 6 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">self-improvement</span><span class="tag">ai-agents</span><span class="tag">feedback-loops</span><span class="tag">auto-memory</span><span class="tag">meta-learning</span><span class="tag">memory-curation</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Self Improving Agent (Engineering domain).
 
-Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.
+Curates agent memory and turns repeated lessons into reviewed rules: memory health checks, pattern extraction, feedback and regression analysis. Use when managing auto-memory or building agents that learn from their own sessions.
 
-Architectural patterns for AI agents that get better with use. Most agents are stateless -- they repeat mistakes because they cannot learn from their own execution. This skill closes that gap with patterns for feedback capture, memory curation, skill extraction, and regression detection. Key insight
+The agent captures what went wrong or right in a session, curates it in memory, and proposes promoting a lesson into a permanent rule only when it has recurred and a person has approved it. Rules compound: a wrong rule repeats its mistake in every later session, so promotion is a reviewed change, ne
 
 ## How to Help
 When the user asks for help in this domain:
@@ -415,9 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Self Improving Agent (Engineering domain).
 
-Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.
+Curates agent memory and turns repeated lessons into reviewed rules: memory health checks, pattern extraction, feedback and regression analysis. Use when managing auto-memory or building agents that learn from their own sessions.
 
-Architectural patterns for AI agents that get better with use. Most agents are stateless -- they repeat mistakes because they cannot learn from their own execution. This skill closes that gap with patterns for feedback capture, memory curation, skill extraction, and regression detection. Key insight
+The agent captures what went wrong or right in a session, curates it in memory, and proposes promoting a lesson into a permanent rule only when it has recurred and a person has approved it. Rules compound: a wrong rule repeats its mistake in every later session, so promotion is a reviewed change, ne
 
 ## How to Help
 When the user asks for help in this domain:
@@ -445,9 +445,9 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Complete Skill Definition
 
-# Self-Improving Agent - Autonomous Learning Patterns
+# Self-Improving Agent
 
-Architectural patterns for AI agents that get better with use. Most agents are stateless -- they repeat mistakes because they cannot learn from their own execution. This skill closes that gap with patterns for feedback capture, memory curation, skill extraction, and regression detection. Key insight: auto-memory captures everything, but **curation** turns noise into knowledge.
+The agent captures what went wrong or right in a session, curates it in memory, and proposes promoting a lesson into a permanent rule only when it has recurred and a person has approved it. Rules compound: a wrong rule repeats its mistake in every later session, so promotion is a reviewed change, never an automatic one.
 
 ## Core Capabilities
 
@@ -489,18 +489,52 @@ Compound sub-skill architecture — each file in `skills/` handles one step of t
 
 Flow: `Remember → Extract → Promote → Review`, with `Status` providing visibility back into the cycle.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
+1. **Check memory health:** `memory_health_checker.py --memory &lt;MEMORY.md&gt;`. It reads both layouts: `## ` section entries, and index files whose lines point at topic files (Claude Code auto-memory), where it reads each topic file&#x27;s frontmatter and age and flags pointers to missing files.
+2. **Find recurring lessons** in session or feedback logs with `pattern_extractor.py` and `feedback_analyzer.py patterns`.
+3. **Propose a promotion:** `rule_promoter.py --entry-title ... --dry-run` prints the rule text and whether it meets the bar (recurrence, confidence).
+4. **Get approval:** show the user the proposed rule and where it will land (CLAUDE.md or `.claude/rules/`), and apply with `--apply` only after an explicit yes.
+5. **Watch for regressions** after a rule change with `regression_detector.py compare`; roll the rule back if first-attempt success or corrections get worse.
+6. Done when memory has no broken pointers or over-limit files, every promoted rule was approved, and the regression check after the change is clean.
+
+## Quick Start
+
+```bash
+# from engineering/self-improving-agent/
+python3 scripts/memory_health_checker.py --memory assets/memory_index/MEMORY.md   # flags one broken pointer
+python3 scripts/feedback_analyzer.py analyze --input assets/sample_feedback.jsonl
+python3 scripts/regression_detector.py compare --input assets/sample_metrics.json  # REGRESSION DETECTED after a rule change
+```
+
+## Tools Overview
+
+| Tool | Purpose | Example |
 |------|---------|---------|
-| `pattern_extractor.py` | Extract reusable patterns from session logs | `python scripts/pattern_extractor.py --input sessions.jsonl --min-occurrences 3` |
-| `memory_health_checker.py` | Audit memory for line counts, stale, and promotable entries | `python scripts/memory_health_checker.py --memory ./MEMORY.md --rules ./.claude/rules/` |
-| `rule_promoter.py` | Validate and apply promotions from memory to rules | `python scripts/rule_promoter.py --memory ./MEMORY.md --list-candidates` |
-| `feedback_analyzer.py` | Analyze feedback logs for success rates and opportunities | `python scripts/feedback_analyzer.py analyze` |
-| `regression_detector.py` | Compare baseline vs current performance metrics | `python scripts/regression_detector.py compare` |
-| `rule_manager.py` | Manage a learned rules knowledge base with CRUD | `python scripts/rule_manager.py list` |
+| `pattern_extractor.py` | Recurring patterns in session logs (JSONL) | `python3 scripts/pattern_extractor.py --input sessions.jsonl --min-occurrences 3` |
+| `memory_health_checker.py` | Line limits, stale and duplicate entries, broken topic pointers, promotion candidates | `python3 scripts/memory_health_checker.py --memory ./MEMORY.md --rules ./.claude/rules/` |
+| `rule_promoter.py` | Validate and (after approval) apply a promotion from `## ` section memory to rules | `python3 scripts/rule_promoter.py --memory ./MEMORY.md --list-candidates` |
+| `feedback_analyzer.py` | Success rates, corrections, tool errors and opportunities from a feedback log | `python3 scripts/feedback_analyzer.py analyze --input feedback.jsonl` |
+| `regression_detector.py` | Baseline vs current session metrics around a rule or memory change | `python3 scripts/regression_detector.py compare --input metrics.json` |
+| `rule_manager.py` | CRUD over a JSON rules knowledge base | `python3 scripts/rule_manager.py --db rules_kb.json list` |
 
-## References
+**Exit codes:** 0 report produced; 2 unusable input (missing or unreadable file, no entries, no subcommand). A memory path that does not exist is an error, not a &quot;stateless&quot; result. `rule_promoter.py` handles section-style memory only; for an index-style MEMORY.md it says so and the promotion is done by hand.
+
+## Anti-Patterns
+
+**Mistake:** Promoting a lesson into CLAUDE.md or rules without asking.
+**Why it matters:** Rules apply to every later session; a rule learned from one bad day keeps steering the agent wrong long after.
+**Instead:** Show the dry-run rule text and target, and apply only after the user says yes.
+
+**Mistake:** Promoting after a single occurrence.
+**Why it matters:** One-off fixes are often context-specific; as rules they misfire elsewhere.
+**Instead:** Wait for the recurrence threshold (3 by default) or an explicit user instruction.
+
+**Mistake:** Letting memory grow without curation.
+**Why it matters:** Over-limit or duplicate memory crowds the context window and buries the lessons that matter.
+**Instead:** Run the health check on a schedule, consolidate duplicates, and delete pointers to topics that no longer hold.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -518,21 +552,20 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Skill extraction methodology for graduating proven patterns into reusable, standalone packages.
 
 **This skill does NOT cover:**
-- Runtime agent orchestration or multi-agent coordination -- see `agent-workflow-designer` and `agent-protocol`.
-- Prompt engineering, testing, or versioning of the prompts themselves -- see `prompt-engineer-toolkit`.
-- Infrastructure-level observability (logging, tracing, alerting dashboards) -- see `observability-designer`.
-- Initial agent architecture design, tool selection, or capability planning -- see `agent-designer`.
+- Runtime agent orchestration or multi-agent coordination -- see `engineering/agent-workflow-designer`.
+- Prompt engineering, testing, or versioning of the prompts themselves -- see `engineering/prompt-engineer-toolkit`.
+- Infrastructure-level observability (logging, tracing, alerting dashboards) -- see `engineering/observability-designer`.
+- Initial agent architecture design, tool selection, or capability planning -- see `engineering/agent-designer`.
 
-## Integration Points
+## Files
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| **context-engine** | Controls what the agent sees per session; this skill decides what is worth remembering long-term | Promoted rules and curated memory feed context retrieval; context relevance metrics flow back for regression tracking |
-| **agent-designer** | Defines the agent&#x27;s architecture and capabilities; this skill layers learning infrastructure on top | Architecture constraints inform possible feedback loops; extracted skills feed back as new capabilities |
-| **prompt-engineer-toolkit** | Prompts degrade as codebases evolve; this skill detects prompt regression via outcome tracking | Performance metrics flag underperforming prompts; prompt updates feed back as CLAUDE.md rule changes |
-| **observability-designer** | Provides system-level metrics; this skill provides agent-behavior-level metrics | System telemetry enriches regression diagnosis; agent metrics export to observability dashboards |
-| **tech-debt-tracker** | Stale rules and bloated memory are technical debt this can surface alongside code debt | Memory health metrics feed debt scoring; debt prioritization informs which stale rules to retire |
-| **agent-workflow-designer** | Multi-step workflows benefit from per-step feedback capture and cross-workflow pattern extraction | Per-step outcome data flows into feedback loops; extracted optimizations update workflow definitions |
+| File | Purpose |
+|------|---------|
+| `skills/*.md` | Sub-skills: remember, extract, promote, review, status |
+| `scripts/*.py` | Six stdlib CLIs (see Tools Overview) |
+| `assets/memory_index/` | Index-style MEMORY.md with two topic files and one broken pointer |
+| `assets/sample_feedback.jsonl` | Twelve feedback entries with a recurring npm/pnpm correction |
+| `assets/sample_metrics.json` | Baseline and current sessions around a rule change (regression) |
 
 ---
 
@@ -560,7 +593,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Self Improving Agent&quot;**
-   - Description: &quot;Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.&quot;
+   - Description: &quot;Curates agent memory and turns repeated lessons into reviewed rules: memory health checks, pattern extraction, feedback and regression analysis. Use when managing auto-memory or building agents that learn from their own sessions.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -583,9 +616,9 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Complete Skill Definition
 
-# Self-Improving Agent - Autonomous Learning Patterns
+# Self-Improving Agent
 
-Architectural patterns for AI agents that get better with use. Most agents are stateless -- they repeat mistakes because they cannot learn from their own execution. This skill closes that gap with patterns for feedback capture, memory curation, skill extraction, and regression detection. Key insight: auto-memory captures everything, but **curation** turns noise into knowledge.
+The agent captures what went wrong or right in a session, curates it in memory, and proposes promoting a lesson into a permanent rule only when it has recurred and a person has approved it. Rules compound: a wrong rule repeats its mistake in every later session, so promotion is a reviewed change, never an automatic one.
 
 ## Core Capabilities
 
@@ -627,18 +660,52 @@ Compound sub-skill architecture — each file in `skills/` handles one step of t
 
 Flow: `Remember → Extract → Promote → Review`, with `Status` providing visibility back into the cycle.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
+1. **Check memory health:** `memory_health_checker.py --memory &lt;MEMORY.md&gt;`. It reads both layouts: `## ` section entries, and index files whose lines point at topic files (Claude Code auto-memory), where it reads each topic file&#x27;s frontmatter and age and flags pointers to missing files.
+2. **Find recurring lessons** in session or feedback logs with `pattern_extractor.py` and `feedback_analyzer.py patterns`.
+3. **Propose a promotion:** `rule_promoter.py --entry-title ... --dry-run` prints the rule text and whether it meets the bar (recurrence, confidence).
+4. **Get approval:** show the user the proposed rule and where it will land (CLAUDE.md or `.claude/rules/`), and apply with `--apply` only after an explicit yes.
+5. **Watch for regressions** after a rule change with `regression_detector.py compare`; roll the rule back if first-attempt success or corrections get worse.
+6. Done when memory has no broken pointers or over-limit files, every promoted rule was approved, and the regression check after the change is clean.
+
+## Quick Start
+
+```bash
+# from engineering/self-improving-agent/
+python3 scripts/memory_health_checker.py --memory assets/memory_index/MEMORY.md   # flags one broken pointer
+python3 scripts/feedback_analyzer.py analyze --input assets/sample_feedback.jsonl
+python3 scripts/regression_detector.py compare --input assets/sample_metrics.json  # REGRESSION DETECTED after a rule change
+```
+
+## Tools Overview
+
+| Tool | Purpose | Example |
 |------|---------|---------|
-| `pattern_extractor.py` | Extract reusable patterns from session logs | `python scripts/pattern_extractor.py --input sessions.jsonl --min-occurrences 3` |
-| `memory_health_checker.py` | Audit memory for line counts, stale, and promotable entries | `python scripts/memory_health_checker.py --memory ./MEMORY.md --rules ./.claude/rules/` |
-| `rule_promoter.py` | Validate and apply promotions from memory to rules | `python scripts/rule_promoter.py --memory ./MEMORY.md --list-candidates` |
-| `feedback_analyzer.py` | Analyze feedback logs for success rates and opportunities | `python scripts/feedback_analyzer.py analyze` |
-| `regression_detector.py` | Compare baseline vs current performance metrics | `python scripts/regression_detector.py compare` |
-| `rule_manager.py` | Manage a learned rules knowledge base with CRUD | `python scripts/rule_manager.py list` |
+| `pattern_extractor.py` | Recurring patterns in session logs (JSONL) | `python3 scripts/pattern_extractor.py --input sessions.jsonl --min-occurrences 3` |
+| `memory_health_checker.py` | Line limits, stale and duplicate entries, broken topic pointers, promotion candidates | `python3 scripts/memory_health_checker.py --memory ./MEMORY.md --rules ./.claude/rules/` |
+| `rule_promoter.py` | Validate and (after approval) apply a promotion from `## ` section memory to rules | `python3 scripts/rule_promoter.py --memory ./MEMORY.md --list-candidates` |
+| `feedback_analyzer.py` | Success rates, corrections, tool errors and opportunities from a feedback log | `python3 scripts/feedback_analyzer.py analyze --input feedback.jsonl` |
+| `regression_detector.py` | Baseline vs current session metrics around a rule or memory change | `python3 scripts/regression_detector.py compare --input metrics.json` |
+| `rule_manager.py` | CRUD over a JSON rules knowledge base | `python3 scripts/rule_manager.py --db rules_kb.json list` |
 
-## References
+**Exit codes:** 0 report produced; 2 unusable input (missing or unreadable file, no entries, no subcommand). A memory path that does not exist is an error, not a &quot;stateless&quot; result. `rule_promoter.py` handles section-style memory only; for an index-style MEMORY.md it says so and the promotion is done by hand.
+
+## Anti-Patterns
+
+**Mistake:** Promoting a lesson into CLAUDE.md or rules without asking.
+**Why it matters:** Rules apply to every later session; a rule learned from one bad day keeps steering the agent wrong long after.
+**Instead:** Show the dry-run rule text and target, and apply only after the user says yes.
+
+**Mistake:** Promoting after a single occurrence.
+**Why it matters:** One-off fixes are often context-specific; as rules they misfire elsewhere.
+**Instead:** Wait for the recurrence threshold (3 by default) or an explicit user instruction.
+
+**Mistake:** Letting memory grow without curation.
+**Why it matters:** Over-limit or duplicate memory crowds the context window and buries the lessons that matter.
+**Instead:** Run the health check on a schedule, consolidate duplicates, and delete pointers to topics that no longer hold.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -656,21 +723,20 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Skill extraction methodology for graduating proven patterns into reusable, standalone packages.
 
 **This skill does NOT cover:**
-- Runtime agent orchestration or multi-agent coordination -- see `agent-workflow-designer` and `agent-protocol`.
-- Prompt engineering, testing, or versioning of the prompts themselves -- see `prompt-engineer-toolkit`.
-- Infrastructure-level observability (logging, tracing, alerting dashboards) -- see `observability-designer`.
-- Initial agent architecture design, tool selection, or capability planning -- see `agent-designer`.
+- Runtime agent orchestration or multi-agent coordination -- see `engineering/agent-workflow-designer`.
+- Prompt engineering, testing, or versioning of the prompts themselves -- see `engineering/prompt-engineer-toolkit`.
+- Infrastructure-level observability (logging, tracing, alerting dashboards) -- see `engineering/observability-designer`.
+- Initial agent architecture design, tool selection, or capability planning -- see `engineering/agent-designer`.
 
-## Integration Points
+## Files
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| **context-engine** | Controls what the agent sees per session; this skill decides what is worth remembering long-term | Promoted rules and curated memory feed context retrieval; context relevance metrics flow back for regression tracking |
-| **agent-designer** | Defines the agent&#x27;s architecture and capabilities; this skill layers learning infrastructure on top | Architecture constraints inform possible feedback loops; extracted skills feed back as new capabilities |
-| **prompt-engineer-toolkit** | Prompts degrade as codebases evolve; this skill detects prompt regression via outcome tracking | Performance metrics flag underperforming prompts; prompt updates feed back as CLAUDE.md rule changes |
-| **observability-designer** | Provides system-level metrics; this skill provides agent-behavior-level metrics | System telemetry enriches regression diagnosis; agent metrics export to observability dashboards |
-| **tech-debt-tracker** | Stale rules and bloated memory are technical debt this can surface alongside code debt | Memory health metrics feed debt scoring; debt prioritization informs which stale rules to retire |
-| **agent-workflow-designer** | Multi-step workflows benefit from per-step feedback capture and cross-workflow pattern extraction | Per-step outcome data flows into feedback loops; extracted optimizations update workflow definitions |
+| File | Purpose |
+|------|---------|
+| `skills/*.md` | Sub-skills: remember, extract, promote, review, status |
+| `scripts/*.py` | Six stdlib CLIs (see Tools Overview) |
+| `assets/memory_index/` | Index-style MEMORY.md with two topic files and one broken pointer |
+| `assets/sample_feedback.jsonl` | Twelve feedback entries with a recurring npm/pnpm correction |
+| `assets/sample_metrics.json` | Baseline and current sessions around a rule change (regression) |
 
 ---
 
@@ -698,7 +764,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Self Improving Agent&quot;**
-   - Description: &quot;Patterns for AI agents that learn from their own execution, detect failure modes, and improve autonomously. Use when building agents that get better over time, managing auto- memory, or designing self-correcting feedback loops.&quot;
+   - Description: &quot;Curates agent memory and turns repeated lessons into reviewed rules: memory health checks, pattern extraction, feedback and regression analysis. Use when managing auto-memory or building agents that learn from their own sessions.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -758,8 +824,12 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/self-improving-agent/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Quick Start</h2><pre><code># from engineering/self-improving-agent/
+python3 scripts/memory_health_checker.py --memory assets/memory_index/MEMORY.md   # flags one broken pointer
+python3 scripts/feedback_analyzer.py analyze --input assets/sample_feedback.jsonl
+python3 scripts/regression_detector.py compare --input assets/sample_metrics.json  # REGRESSION DETECTED after a rule change
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/self-improving-agent/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

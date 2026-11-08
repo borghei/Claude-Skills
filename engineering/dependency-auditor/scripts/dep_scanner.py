@@ -2,11 +2,13 @@
 """
 Dependency Scanner - Multi-language dependency vulnerability and analysis tool.
 
-This script parses dependency files from various package managers, extracts direct
-and transitive dependencies, checks against built-in vulnerability databases,
-and provides comprehensive security analysis with actionable recommendations.
+This script parses dependency files from various package managers and extracts
+direct and transitive dependencies. Vulnerability matching uses a small offline
+sample table (about eight well-known advisories, newest from 2024) with the CVSS
+score copied from each advisory. It is not a vulnerability database: a clean
+result proves nothing. Use npm audit, pip-audit, osv-scanner or govulncheck for
+real vulnerability data; use this tool for the dependency inventory.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -19,8 +21,9 @@ from typing import Dict, List, Set, Any, Optional, Tuple
 from pathlib import Path
 from dataclasses import dataclass, asdict
 from datetime import datetime
-import hashlib
-import subprocess
+
+OFFLINE_DB_NOTE = ("offline sample CVE table (about eight well-known advisories, not a live feed); "
+                   "a clean result proves nothing - run npm audit / pip-audit / osv-scanner / govulncheck")
 
 @dataclass
 class Vulnerability:
@@ -72,7 +75,7 @@ class DependencyScanner:
         }
     
     def _load_vulnerability_database(self) -> Dict[str, List[Vulnerability]]:
-        """Load built-in vulnerability database with common CVE patterns."""
+        """Load the offline sample advisory table (about eight CVEs; not a vulnerability database)."""
         return {
             # JavaScript/Node.js vulnerabilities
             'lodash': [
@@ -210,12 +213,17 @@ class DependencyScanner:
             'low_severity_count': 0,
             'ecosystems': set(),
             'scan_summary': {},
-            'recommendations': []
+            'recommendations': [],
+            'vulnerability_source': OFFLINE_DB_NOTE,
         }
         
-        # Find and parse dependency files
+        # Find and parse dependency files. A single file is matched by suffix,
+        # so assets/sample_package.json is parsed as a package.json.
         for file_pattern, parser in self.supported_files.items():
-            matching_files = list(project_path.rglob(file_pattern))
+            if project_path.is_file():
+                matching_files = [project_path] if project_path.name.endswith(file_pattern) else []
+            else:
+                matching_files = list(project_path.rglob(file_pattern))
             
             for dep_file in matching_files:
                 try:
@@ -240,7 +248,7 @@ class DependencyScanner:
                                 scan_results['low_severity_count'] += 1
                 
                 except Exception as e:
-                    print(f"Error parsing {dep_file}: {e}")
+                    print(f"warning: cannot parse {dep_file}: {e}", file=sys.stderr)
                     continue
         
         scan_results['ecosystems'] = list(scan_results['ecosystems'])
@@ -254,13 +262,13 @@ class DependencyScanner:
         vulnerabilities = []
         
         # Check package name (exact match and common variations)
-        package_names = [dependency.name, dependency.name.lower()]
-        
+        package_names = dict.fromkeys([dependency.name, dependency.name.lower()])  # de-duplicated, ordered
+        seen = set()
         for pkg_name in package_names:
-            if pkg_name in self.known_vulnerabilities:
-                for vuln in self.known_vulnerabilities[pkg_name]:
-                    if self._version_matches_vulnerability(dependency.version, vuln.affected_versions):
-                        vulnerabilities.append(vuln)
+            for vuln in self.known_vulnerabilities.get(pkg_name, []):
+                if vuln.id not in seen and self._version_matches_vulnerability(dependency.version, vuln.affected_versions):
+                    seen.add(vuln.id)
+                    vulnerabilities.append(vuln)
         
         return vulnerabilities
     
@@ -326,7 +334,7 @@ class DependencyScanner:
                         dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing package.json: {e}")
+            print(f"warning: cannot parse package.json: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -356,7 +364,7 @@ class DependencyScanner:
                     dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing package-lock.json: {e}")
+            print(f"warning: cannot parse package-lock.json: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -384,7 +392,7 @@ class DependencyScanner:
                 dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing yarn.lock: {e}")
+            print(f"warning: cannot parse yarn.lock: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -412,7 +420,7 @@ class DependencyScanner:
                         dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing requirements.txt: {e}")
+            print(f"warning: cannot parse requirements.txt: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -441,7 +449,7 @@ class DependencyScanner:
                             dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing pyproject.toml: {e}")
+            print(f"warning: cannot parse pyproject.toml: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -466,7 +474,7 @@ class DependencyScanner:
                         dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing Pipfile.lock: {e}")
+            print(f"warning: cannot parse Pipfile.lock: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -491,7 +499,7 @@ class DependencyScanner:
                 dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing poetry.lock: {e}")
+            print(f"warning: cannot parse poetry.lock: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -520,7 +528,7 @@ class DependencyScanner:
                         dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing go.mod: {e}")
+            print(f"warning: cannot parse go.mod: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -552,7 +560,7 @@ class DependencyScanner:
                         dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing Cargo.toml: {e}")
+            print(f"warning: cannot parse Cargo.toml: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -577,7 +585,7 @@ class DependencyScanner:
                 dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing Cargo.lock: {e}")
+            print(f"warning: cannot parse Cargo.lock: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -605,7 +613,7 @@ class DependencyScanner:
                 dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing Gemfile: {e}")
+            print(f"warning: cannot parse Gemfile: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -633,7 +641,7 @@ class DependencyScanner:
                     dependencies.append(dep)
         
         except Exception as e:
-            print(f"Error parsing Gemfile.lock: {e}")
+            print(f"warning: cannot parse Gemfile.lock: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -704,6 +712,7 @@ class DependencyScanner:
         report.append("=" * 60)
         report.append(f"Scan Date: {scan_results['timestamp']}")
         report.append(f"Project: {scan_results['project_path']}")
+        report.append(f"Note: {OFFLINE_DB_NOTE}")
         report.append("")
         
         # Summary
@@ -747,7 +756,7 @@ class DependencyScanner:
 def main():
     """Main entry point for the dependency scanner."""
     parser = argparse.ArgumentParser(
-        description='Scan project dependencies for vulnerabilities and security issues',
+        description='Inventory project dependencies and match them against an offline sample of known advisories (not a vulnerability database; use npm audit, pip-audit, osv-scanner or govulncheck for real data)',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -757,8 +766,8 @@ Examples:
         """
     )
     
-    parser.add_argument('project_path', 
-                       help='Path to the project directory to scan')
+    parser.add_argument('project_path',
+                       help='Project directory, or a single manifest file (name ending in package.json, requirements.txt, go.mod, ...)')
     parser.add_argument('--format', choices=['text', 'json'], default='text',
                        help='Output format (default: text)')
     parser.add_argument('--output', '-o',
@@ -770,9 +779,15 @@ Examples:
     
     args = parser.parse_args()
     
+    if not os.path.exists(args.project_path):
+        print(f"error: path not found: {args.project_path}", file=sys.stderr)
+        sys.exit(2)
     try:
         scanner = DependencyScanner()
         results = scanner.scan_project(args.project_path)
+        if not results['dependencies']:
+            print(f"error: no supported manifest or lockfile found under {args.project_path}", file=sys.stderr)
+            sys.exit(2)
         report = scanner.generate_report(results, args.format)
         
         if args.output:
@@ -787,8 +802,8 @@ Examples:
             sys.exit(1)
     
     except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

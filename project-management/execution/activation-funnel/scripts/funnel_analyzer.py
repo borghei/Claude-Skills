@@ -146,6 +146,10 @@ def analyze(data: dict[str, Any]) -> dict[str, Any]:
         worst_rate = min(transitions, key=lambda r: r["conversion_from_prev"])
     else:
         worst_abs = worst_rate = None
+    # Top-of-funnel stages almost always lose the most, which says little. The actionable
+    # bottleneck is the worst conversion once users are in the product (past acquisition).
+    inside = [r for r in transitions if r.get("stage") not in ("acquisition", "awareness")] or transitions[1:]
+    worst_inside = min(inside, key=lambda r: r["conversion_from_prev"]) if inside else None
 
     return {
         "name": data.get("name", "Funnel"),
@@ -154,6 +158,7 @@ def analyze(data: dict[str, Any]) -> dict[str, Any]:
         "stages": rows,
         "bottleneck_absolute": worst_abs,
         "bottleneck_rate": worst_rate,
+        "bottleneck_post_acquisition": worst_inside,
         "overall_top_to_bottom": rows[-1]["cumulative_conversion"] if rows else 0,
     }
 
@@ -211,6 +216,12 @@ def fmt_markdown(a: dict[str, Any]) -> str:
             f"- **Worst conversion rate:** stage {br['index']} "
             f"({br['name']}) -- only {_pct(br['conversion_from_prev'])} "
             f"converted from the prior stage."
+        )
+    if a.get("bottleneck_post_acquisition"):
+        bi = a["bottleneck_post_acquisition"]
+        lines.append(
+            f"- **Worst conversion past acquisition (start here):** stage {bi['index']} "
+            f"({bi['name']}) -- {_pct(bi['conversion_from_prev'])} converted from the prior stage."
         )
 
     lines += ["", "## Funnel diagram", "", _mermaid_block(a), ""]

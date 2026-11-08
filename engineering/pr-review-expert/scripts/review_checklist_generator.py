@@ -340,7 +340,7 @@ def main():
                 diff_text = fh.read()
         except FileNotFoundError:
             print(f"Error: File not found: {args.diff_file}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         file_paths = extract_files_from_diff(diff_text)
     else:
         if sys.stdin.isatty():
@@ -349,7 +349,7 @@ def main():
 
     if not file_paths:
         print("Error: No file paths provided.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     result = generate_report(file_paths)
 

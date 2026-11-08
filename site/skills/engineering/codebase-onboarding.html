@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Codebase Onboarding - Claude Skills</title>
-  <meta name="description" content="Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing, or documenting af">
+  <meta name="description" content="Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when onboarding enginee">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/codebase-onboarding.html">
   <meta property="og:title" content="Codebase Onboarding - Claude Skills">
-  <meta property="og:description" content="Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing, or documenting af">
+  <meta property="og:description" content="Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when onboarding enginee">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/codebase-onboarding.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Codebase Onboarding", "description": "Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing, or documenting after a major refactor.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/codebase-onboarding.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Codebase Onboarding", "description": "Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when onboarding engineers or re-documenting after a refactor.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/codebase-onboarding.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Codebase Onboarding</h1>
-    <p class="page-subtitle">Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing, or documenting after a major refactor.</p>
+    <p class="page-subtitle">Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when onboarding engineers or re-documenting after a refactor.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">onboarding</span><span class="tag">documentation</span><span class="tag">architecture</span><span class="tag">runbooks</span><span class="tag">developer-experience</span></div>
   </div>
@@ -393,9 +393,18 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Codebase Onboarding (Engineering domain).
 
-Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing, or documenting after a major refactor.
+Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when onboarding engineers or re-documenting after a refactor.
 
 Analyze any codebase and generate production-quality onboarding documentation tailored to the audience. Produces architecture overviews with system diagrams, annotated key file maps, step-by-step local setup guides, common developer task runbooks, debugging guides with real error solutions, and cont
+
+## Your Key Capabilities
+- Docs from heuristics alone
+- A setup guide nobody ran
+- Listing every file
+
+## Frameworks &amp; Templates You Know
+- templates in `references/documentation-templates.md`.
+- 1. Facts report: stack, frameworks, entry points, key files, file-type spread
 
 ## How to Help
 When the user asks for help in this domain:
@@ -415,9 +424,18 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Codebase Onboarding (Engineering domain).
 
-Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing, or documenting after a major refactor.
+Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when onboarding engineers or re-documenting after a refactor.
 
 Analyze any codebase and generate production-quality onboarding documentation tailored to the audience. Produces architecture overviews with system diagrams, annotated key file maps, step-by-step local setup guides, common developer task runbooks, debugging guides with real error solutions, and cont
+
+## Your Key Capabilities
+- Docs from heuristics alone
+- A setup guide nobody ran
+- Listing every file
+
+## Frameworks &amp; Templates You Know
+- templates in `references/documentation-templates.md`.
+- 1. Facts report: stack, frameworks, entry points, key files, file-type spread
 
 ## How to Help
 When the user asks for help in this domain:
@@ -475,21 +493,77 @@ Before generating the docs, settle the inputs below. When one is missing or vagu
 
 - **Target codebase path:** which project to analyze (the input all three scripts scan).
 - **Audience:** junior developer, senior engineer, or contractor (tailors which sections appear and at what depth).
-- **Output format:** Markdown, Notion, or Confluence (sets the generated document format).
+- **Where the docs live:** repo Markdown, Notion or Confluence (changes headings, links and how much goes in one page).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Quick Start Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `architecture_mapper.py` | Analyze project structure and generate a high-level architecture map | `python scripts/architecture_mapper.py /path/to/project --json` |
-| `onboarding_generator.py` | Scan a project directory and generate an onboarding guide | `python scripts/onboarding_generator.py /path/to/project --json` |
-| `setup_validator.py` | Validate a project&#x27;s development setup completeness | `python scripts/setup_validator.py /path/to/project --json` |
+The scripts gather facts. `onboarding_generator.py --format markdown` turns them into a draft guide:
+sections the repo can answer (README summary, stack, declared run commands, env variables, entry
+points, layout) are filled in, and everything it cannot know is a `&gt; **TODO (owner):**` line. The
+finished guide is yours: replace every TODO from reading the code and asking the owners, using the
+templates in `references/documentation-templates.md`.
 
-All tools accept an optional `directory` argument (default: current directory) and `--json` for machine-readable output.
+```bash
+# 1. Facts report: stack, frameworks, entry points, key files, file-type spread
+#    (manifests first; without one it counts source files by extension)
+python scripts/onboarding_generator.py /path/to/project
+#    Draft guide with TODO placeholders (sample: package.json scripts, .env keys, README summary)
+python scripts/onboarding_generator.py assets/sample_project --format markdown &gt; /tmp/ONBOARDING.md
 
-## References
+# 2. Architecture patterns and layers by directory, with dependency hints
+python scripts/architecture_mapper.py /path/to/project --json
+
+# 3. Setup completeness: README, .env template, lockfile, CI, lint config, tests, licence; 0-100 score
+python scripts/setup_validator.py /path/to/project
+```
+
+## Tools Overview
+
+| Tool | Gives you | Use it for |
+|------|-----------|------------|
+| `onboarding_generator.py` | Stack, frameworks, entry points, key files, top-level dirs, package.json scripts, Makefile targets, env-template keys, README summary; `--format text\|json\|markdown` | The draft guide (`markdown`) and the key file map |
+| `architecture_mapper.py` | Detected pattern (monorepo, microservices, MVC, layered) and per-directory layer roles | The architecture overview and its diagram |
+| `setup_validator.py` | Pass/warn/fail on README, .env template, lockfile, CI, lint config, tests, CONTRIBUTING and LICENSE, with fixes and a health score | The setup guide, and the gaps to fix before the guide is honest |
+
+All take a directory (default `.`) and `--json`. **Exit codes:** `0` report printed; `2` the
+directory does not exist. A low setup score does not change the exit code.
+
+For an ordered reading path through the code (stop-by-stop tour), use `engineering/code-tour`
+instead; this skill produces the reference documents a newcomer keeps open.
+
+**Done when:**
+1. No `TODO (owner)` line is left in the guide.
+2. A newcomer can go from clone to a passing local test run using only the setup guide (try it in a clean checkout or container).
+3. Every path in the key file map exists, and every command in the docs ran as written.
+4. The architecture overview names the real entry points and data stores, checked against the code, not only the scripts&#x27; heuristics.
+5. Setup gaps that `setup_validator.py` reports are fixed or listed as known issues.
+
+## Anti-Patterns
+
+### Docs from heuristics alone
+**Mistake:** Pasting the scripts&#x27; output as the onboarding guide.
+**Why it happens:** It looks complete and took seconds.
+**Instead:** Use the output as a checklist of facts to confirm, then read the entry points and write the guide in plain language.
+
+### A setup guide nobody ran
+**Mistake:** Setup steps written from memory, missing the one environment variable everyone already has.
+**Why it happens:** The author&#x27;s machine has been set up for years.
+**Instead:** Follow the guide in a clean container or fresh checkout and fix every step that fails.
+
+### Listing every file
+**Mistake:** A key file map with two hundred entries.
+**Why it happens:** Completeness feels safer than choosing.
+**Instead:** List the ten to twenty files a newcomer touches in the first week, each with one line on why it matters.
+
+## Files
+
+- `scripts/onboarding_generator.py`, `scripts/architecture_mapper.py`, `scripts/setup_validator.py` — the three fact-gathering CLIs above.
+- `assets/sample_project/` — small Node service (package.json scripts, `.env.example`, README) for the draft-guide demo.
+- `references/` — fact-gathering commands and pattern table, document templates, quality checklist.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -502,7 +576,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 **This skill covers:**
 - Generating architecture overviews, key file maps, setup guides, task runbooks, and debugging guides from codebase analysis
 - Audience-aware documentation tailored for junior developers, senior engineers, and contractors
-- Output in Markdown, Notion, and Confluence formats
+- Markdown documents that paste cleanly into Notion or Confluence
 - Quality verification checklists and freshness audit processes
 
 **This skill does NOT cover:**
@@ -511,16 +585,11 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Security-focused documentation such as threat models or access control matrices — see `engineering/skill-security-auditor` for security auditing
 - Runbook generation for incident response and production operations — see `engineering/runbook-generator` for operational runbooks
 
-## Integration Points
+## See Also
 
-| Skill | Integration | Data Flow |
-|-------|------------|-----------|
-| `engineering/runbook-generator` | Onboarding task runbooks can seed operational runbooks for production incident response | Onboarding runbook templates → Runbook Generator for ops-grade expansion |
-| `engineering/api-design-reviewer` | API route analysis from Phase 1 feeds into API design quality reviews | Discovered API endpoints → API Design Reviewer for consistency checks |
-| `engineering/database-schema-designer` | Database schema files identified during key file mapping inform schema design reviews | Schema file paths and ORM type → Schema Designer for migration planning |
-| `engineering/tech-debt-tracker` | Technical debt items surfaced during architecture analysis should be logged for tracking | Architecture analysis findings → Tech Debt Tracker backlog entries |
-| `engineering/ci-cd-pipeline-builder` | CI/CD config discovered in Phase 1 can be validated and improved by the pipeline builder | CI config paths and workflow list → Pipeline Builder for optimization |
-| `engineering/dependency-auditor` | Dependency counts and lockfiles gathered in Phase 1 feed directly into security and license audits | Package manifests and lockfiles → Dependency Auditor for vulnerability scanning |
+- `engineering/code-tour` — a guided, ordered walk through the code for a first read.
+- `engineering/runbook-generator` — production runbooks beyond onboarding tasks.
+- `engineering/ci-cd-pipeline-builder` — fix CI gaps that `setup_validator.py` reports.
 
 ---
 
@@ -548,7 +617,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Codebase Onboarding&quot;**
-   - Description: &quot;Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing, or documenting after a major refactor.&quot;
+   - Description: &quot;Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when onboarding engineers or re-documenting after a refactor.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -601,21 +670,77 @@ Before generating the docs, settle the inputs below. When one is missing or vagu
 
 - **Target codebase path:** which project to analyze (the input all three scripts scan).
 - **Audience:** junior developer, senior engineer, or contractor (tailors which sections appear and at what depth).
-- **Output format:** Markdown, Notion, or Confluence (sets the generated document format).
+- **Where the docs live:** repo Markdown, Notion or Confluence (changes headings, links and how much goes in one page).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Quick Start Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `architecture_mapper.py` | Analyze project structure and generate a high-level architecture map | `python scripts/architecture_mapper.py /path/to/project --json` |
-| `onboarding_generator.py` | Scan a project directory and generate an onboarding guide | `python scripts/onboarding_generator.py /path/to/project --json` |
-| `setup_validator.py` | Validate a project&#x27;s development setup completeness | `python scripts/setup_validator.py /path/to/project --json` |
+The scripts gather facts. `onboarding_generator.py --format markdown` turns them into a draft guide:
+sections the repo can answer (README summary, stack, declared run commands, env variables, entry
+points, layout) are filled in, and everything it cannot know is a `&gt; **TODO (owner):**` line. The
+finished guide is yours: replace every TODO from reading the code and asking the owners, using the
+templates in `references/documentation-templates.md`.
 
-All tools accept an optional `directory` argument (default: current directory) and `--json` for machine-readable output.
+```bash
+# 1. Facts report: stack, frameworks, entry points, key files, file-type spread
+#    (manifests first; without one it counts source files by extension)
+python scripts/onboarding_generator.py /path/to/project
+#    Draft guide with TODO placeholders (sample: package.json scripts, .env keys, README summary)
+python scripts/onboarding_generator.py assets/sample_project --format markdown &gt; /tmp/ONBOARDING.md
 
-## References
+# 2. Architecture patterns and layers by directory, with dependency hints
+python scripts/architecture_mapper.py /path/to/project --json
+
+# 3. Setup completeness: README, .env template, lockfile, CI, lint config, tests, licence; 0-100 score
+python scripts/setup_validator.py /path/to/project
+```
+
+## Tools Overview
+
+| Tool | Gives you | Use it for |
+|------|-----------|------------|
+| `onboarding_generator.py` | Stack, frameworks, entry points, key files, top-level dirs, package.json scripts, Makefile targets, env-template keys, README summary; `--format text\|json\|markdown` | The draft guide (`markdown`) and the key file map |
+| `architecture_mapper.py` | Detected pattern (monorepo, microservices, MVC, layered) and per-directory layer roles | The architecture overview and its diagram |
+| `setup_validator.py` | Pass/warn/fail on README, .env template, lockfile, CI, lint config, tests, CONTRIBUTING and LICENSE, with fixes and a health score | The setup guide, and the gaps to fix before the guide is honest |
+
+All take a directory (default `.`) and `--json`. **Exit codes:** `0` report printed; `2` the
+directory does not exist. A low setup score does not change the exit code.
+
+For an ordered reading path through the code (stop-by-stop tour), use `engineering/code-tour`
+instead; this skill produces the reference documents a newcomer keeps open.
+
+**Done when:**
+1. No `TODO (owner)` line is left in the guide.
+2. A newcomer can go from clone to a passing local test run using only the setup guide (try it in a clean checkout or container).
+3. Every path in the key file map exists, and every command in the docs ran as written.
+4. The architecture overview names the real entry points and data stores, checked against the code, not only the scripts&#x27; heuristics.
+5. Setup gaps that `setup_validator.py` reports are fixed or listed as known issues.
+
+## Anti-Patterns
+
+### Docs from heuristics alone
+**Mistake:** Pasting the scripts&#x27; output as the onboarding guide.
+**Why it happens:** It looks complete and took seconds.
+**Instead:** Use the output as a checklist of facts to confirm, then read the entry points and write the guide in plain language.
+
+### A setup guide nobody ran
+**Mistake:** Setup steps written from memory, missing the one environment variable everyone already has.
+**Why it happens:** The author&#x27;s machine has been set up for years.
+**Instead:** Follow the guide in a clean container or fresh checkout and fix every step that fails.
+
+### Listing every file
+**Mistake:** A key file map with two hundred entries.
+**Why it happens:** Completeness feels safer than choosing.
+**Instead:** List the ten to twenty files a newcomer touches in the first week, each with one line on why it matters.
+
+## Files
+
+- `scripts/onboarding_generator.py`, `scripts/architecture_mapper.py`, `scripts/setup_validator.py` — the three fact-gathering CLIs above.
+- `assets/sample_project/` — small Node service (package.json scripts, `.env.example`, README) for the draft-guide demo.
+- `references/` — fact-gathering commands and pattern table, document templates, quality checklist.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -628,7 +753,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 **This skill covers:**
 - Generating architecture overviews, key file maps, setup guides, task runbooks, and debugging guides from codebase analysis
 - Audience-aware documentation tailored for junior developers, senior engineers, and contractors
-- Output in Markdown, Notion, and Confluence formats
+- Markdown documents that paste cleanly into Notion or Confluence
 - Quality verification checklists and freshness audit processes
 
 **This skill does NOT cover:**
@@ -637,16 +762,11 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Security-focused documentation such as threat models or access control matrices — see `engineering/skill-security-auditor` for security auditing
 - Runbook generation for incident response and production operations — see `engineering/runbook-generator` for operational runbooks
 
-## Integration Points
+## See Also
 
-| Skill | Integration | Data Flow |
-|-------|------------|-----------|
-| `engineering/runbook-generator` | Onboarding task runbooks can seed operational runbooks for production incident response | Onboarding runbook templates → Runbook Generator for ops-grade expansion |
-| `engineering/api-design-reviewer` | API route analysis from Phase 1 feeds into API design quality reviews | Discovered API endpoints → API Design Reviewer for consistency checks |
-| `engineering/database-schema-designer` | Database schema files identified during key file mapping inform schema design reviews | Schema file paths and ORM type → Schema Designer for migration planning |
-| `engineering/tech-debt-tracker` | Technical debt items surfaced during architecture analysis should be logged for tracking | Architecture analysis findings → Tech Debt Tracker backlog entries |
-| `engineering/ci-cd-pipeline-builder` | CI/CD config discovered in Phase 1 can be validated and improved by the pipeline builder | CI config paths and workflow list → Pipeline Builder for optimization |
-| `engineering/dependency-auditor` | Dependency counts and lockfiles gathered in Phase 1 feed directly into security and license audits | Package manifests and lockfiles → Dependency Auditor for vulnerability scanning |
+- `engineering/code-tour` — a guided, ordered walk through the code for a first read.
+- `engineering/runbook-generator` — production runbooks beyond onboarding tasks.
+- `engineering/ci-cd-pipeline-builder` — fix CI gaps that `setup_validator.py` reports.
 
 ---
 
@@ -674,7 +794,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Codebase Onboarding&quot;**
-   - Description: &quot;Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing, or documenting after a major refactor.&quot;
+   - Description: &quot;Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when onboarding engineers or re-documenting after a refactor.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -734,8 +854,25 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/codebase-onboarding/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Quick Start</h2>The scripts gather facts. `onboarding_generator.py --format markdown` turns them into a draft guide:
+sections the repo can answer (README summary, stack, declared run commands, env variables, entry
+points, layout) are filled in, and everything it cannot know is a `> **TODO (owner):**` line. The
+finished guide is yours: replace every TODO from reading the code and asking the owners, using the
+templates in `references/documentation-templates.md`.
+
+<pre><code># 1. Facts report: stack, frameworks, entry points, key files, file-type spread
+#    (manifests first; without one it counts source files by extension)
+python scripts/onboarding_generator.py /path/to/project
+#    Draft guide with TODO placeholders (sample: package.json scripts, .env keys, README summary)
+python scripts/onboarding_generator.py assets/sample_project --format markdown &gt; /tmp/ONBOARDING.md
+
+# 2. Architecture patterns and layers by directory, with dependency hints
+python scripts/architecture_mapper.py /path/to/project --json
+
+# 3. Setup completeness: README, .env template, lockfile, CI, lint config, tests, licence; 0-100 score
+python scripts/setup_validator.py /path/to/project
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/codebase-onboarding/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

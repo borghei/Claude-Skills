@@ -1,0 +1,8 @@
+{
+  "name": "handy-formatter",
+  "version": "0.1.0",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "express": "*"
+  }
+}

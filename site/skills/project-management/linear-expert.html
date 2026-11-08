@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Linear Expert - Claude Skills</title>
-  <meta name="description" content="Linear expert for workspace/team admin, Cycles, Projects, Initiatives, Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk operations, and Jira-to-Linear migration.">
+  <meta name="description" content="Administers Linear teams, cycles, projects and triage, and writes GraphQL API calls. Use when setting up or fixing a Linear workspace, scripting bulk changes, or migrating from Jira to Linear.">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/linear-expert.html">
   <meta property="og:title" content="Linear Expert - Claude Skills">
-  <meta property="og:description" content="Linear expert for workspace/team admin, Cycles, Projects, Initiatives, Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk operations, and Jira-to-Linear migration.">
+  <meta property="og:description" content="Administers Linear teams, cycles, projects and triage, and writes GraphQL API calls. Use when setting up or fixing a Linear workspace, scripting bulk changes, or migrating from Jira to Linear.">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/linear-expert.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Linear Expert", "description": "Linear expert for workspace/team admin, Cycles, Projects, Initiatives, Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk operations, and Jira-to-Linear migration.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/linear-expert.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Linear Expert", "description": "Administers Linear teams, cycles, projects and triage, and writes GraphQL API calls. Use when setting up or fixing a Linear workspace, scripting bulk changes, or migrating from Jira to Linear.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/linear-expert.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Linear Expert</h1>
-    <p class="page-subtitle">Linear expert for workspace/team admin, Cycles, Projects, Initiatives, Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk operations, and Jira-to-Linear migration.</p>
+    <p class="page-subtitle">Administers Linear teams, cycles, projects and triage, and writes GraphQL API calls. Use when setting up or fixing a Linear workspace, scripting bulk changes, or migrating from Jira to Linear.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">linear</span><span class="tag">graphql</span><span class="tag">cycles</span><span class="tag">initiatives</span><span class="tag">roadmaps</span><span class="tag">triage</span><span class="tag">migration</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Linear Expert (Project Management domain).
 
-Linear expert for workspace/team admin, Cycles, Projects, Initiatives, Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk operations, and Jira-to-Linear migration.
+Administers Linear teams, cycles, projects and triage, and writes GraphQL API calls. Use when setting up or fixing a Linear workspace, scripting bulk changes, or migrating from Jira to Linear.
 
 Master-level expertise in Linear configuration, workflow design, GraphQL API mastery, Cycle and Project management, Initiative-level roadmaps, triage automation, GitHub integration, and migration from Jira. Covers everything from workspace setup to programmatic bulk operations against the Linear API
 
@@ -401,6 +401,11 @@ Master-level expertise in Linear configuration, workflow design, GraphQL API mas
 - Trusting unsigned webhooks
 - Migrating from Jira without a status map
 - Letting Triage pile up
+
+## Frameworks &amp; Templates You Know
+- Reference files are described under Reference Documentation above. Templates:
+- | `assets/linear-team-template.md` | Team setup template |
+- | `assets/linear-triage-workflow.md` | Triage workflow template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -420,7 +425,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Linear Expert (Project Management domain).
 
-Linear expert for workspace/team admin, Cycles, Projects, Initiatives, Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk operations, and Jira-to-Linear migration.
+Administers Linear teams, cycles, projects and triage, and writes GraphQL API calls. Use when setting up or fixing a Linear workspace, scripting bulk changes, or migrating from Jira to Linear.
 
 Master-level expertise in Linear configuration, workflow design, GraphQL API mastery, Cycle and Project management, Initiative-level roadmaps, triage automation, GitHub integration, and migration from Jira. Covers everything from workspace setup to programmatic bulk operations against the Linear API
 
@@ -428,6 +433,11 @@ Master-level expertise in Linear configuration, workflow design, GraphQL API mas
 - Trusting unsigned webhooks
 - Migrating from Jira without a status map
 - Letting Triage pile up
+
+## Frameworks &amp; Templates You Know
+- Reference files are described under Reference Documentation above. Templates:
+- | `assets/linear-team-template.md` | Team setup template |
+- | `assets/linear-triage-workflow.md` | Triage workflow template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -499,12 +509,20 @@ Ask about the two or three inputs that matter most for this request, not the who
 Linear&#x27;s API is GraphQL-only at `https://api.linear.app/graphql`; auth via personal API key (`Authorization: &lt;key&gt;`) or OAuth2.
 
 ```bash
+# $1 = GraphQL document, $2 = variables as JSON (optional). jq builds the body, so quotes
+# and newlines in the query are escaped correctly; pass values as variables, not by string splicing.
 linear_query() {
-  curl -s -X POST https://api.linear.app/graphql \
-    -H &quot;Authorization: $LINEAR_API_KEY&quot; \
-    -H &quot;Content-Type: application/json&quot; \
-    -d &quot;{\&quot;query\&quot;: \&quot;$1\&quot;}&quot;
+  local vars=&quot;${2:-}&quot;
+  [ -z &quot;$vars&quot; ] &amp;&amp; vars=&#x27;{}&#x27;
+  jq -n --arg q &quot;$1&quot; --argjson v &quot;$vars&quot; &#x27;{query: $q, variables: $v}&#x27; |
+    curl -s -X POST https://api.linear.app/graphql \
+      -H &quot;Authorization: $LINEAR_API_KEY&quot; \
+      -H &quot;Content-Type: application/json&quot; \
+      --data @-
 }
+
+linear_query &#x27;query { viewer { id name } }&#x27;
+linear_query &#x27;query($id: String!) { issue(id: $id) { title state { name } } }&#x27; &#x27;{&quot;id&quot;: &quot;ENG-123&quot;}&#x27;
 ```
 
 Cache team/label/state UUIDs locally, use nested selection to avoid N+1 calls, and prefer webhooks over polling. See the references below for the full query catalog and operating workflows.
@@ -528,7 +546,7 @@ Cache team/label/state UUIDs locally, use nested selection to avoid N+1 calls, a
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -565,6 +583,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `senior-pm/` | Linear → Portfolio | Initiative-level rollups feed project_health_dashboard.py |
 | `delivery-manager/` | Linear → Release | Project completion state and milestone dates feed release coordination |
 
+## Files
+
+Reference files are described under Reference Documentation above. Templates:
+
+| File | Purpose |
+|------|---------|
+| `assets/linear-team-template.md` | Team setup template |
+| `assets/linear-triage-workflow.md` | Triage workflow template |
+
 ---
 
 ## What I Need You to Do
@@ -591,7 +618,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Linear Expert&quot;**
-   - Description: &quot;Linear expert for workspace/team admin, Cycles, Projects, Initiatives, Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk operations, and Jira-to-Linear migration.&quot;
+   - Description: &quot;Administers Linear teams, cycles, projects and triage, and writes GraphQL API calls. Use when setting up or fixing a Linear workspace, scripting bulk changes, or migrating from Jira to Linear.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -658,12 +685,20 @@ Ask about the two or three inputs that matter most for this request, not the who
 Linear&#x27;s API is GraphQL-only at `https://api.linear.app/graphql`; auth via personal API key (`Authorization: &lt;key&gt;`) or OAuth2.
 
 ```bash
+# $1 = GraphQL document, $2 = variables as JSON (optional). jq builds the body, so quotes
+# and newlines in the query are escaped correctly; pass values as variables, not by string splicing.
 linear_query() {
-  curl -s -X POST https://api.linear.app/graphql \
-    -H &quot;Authorization: $LINEAR_API_KEY&quot; \
-    -H &quot;Content-Type: application/json&quot; \
-    -d &quot;{\&quot;query\&quot;: \&quot;$1\&quot;}&quot;
+  local vars=&quot;${2:-}&quot;
+  [ -z &quot;$vars&quot; ] &amp;&amp; vars=&#x27;{}&#x27;
+  jq -n --arg q &quot;$1&quot; --argjson v &quot;$vars&quot; &#x27;{query: $q, variables: $v}&#x27; |
+    curl -s -X POST https://api.linear.app/graphql \
+      -H &quot;Authorization: $LINEAR_API_KEY&quot; \
+      -H &quot;Content-Type: application/json&quot; \
+      --data @-
 }
+
+linear_query &#x27;query { viewer { id name } }&#x27;
+linear_query &#x27;query($id: String!) { issue(id: $id) { title state { name } } }&#x27; &#x27;{&quot;id&quot;: &quot;ENG-123&quot;}&#x27;
 ```
 
 Cache team/label/state UUIDs locally, use nested selection to avoid N+1 calls, and prefer webhooks over polling. See the references below for the full query catalog and operating workflows.
@@ -687,7 +722,7 @@ Cache team/label/state UUIDs locally, use nested selection to avoid N+1 calls, a
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -724,6 +759,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `senior-pm/` | Linear → Portfolio | Initiative-level rollups feed project_health_dashboard.py |
 | `delivery-manager/` | Linear → Release | Project completion state and milestone dates feed release coordination |
 
+## Files
+
+Reference files are described under Reference Documentation above. Templates:
+
+| File | Purpose |
+|------|---------|
+| `assets/linear-team-template.md` | Team setup template |
+| `assets/linear-triage-workflow.md` | Triage workflow template |
+
 ---
 
 ## What I Need You to Do
@@ -750,7 +794,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Linear Expert&quot;**
-   - Description: &quot;Linear expert for workspace/team admin, Cycles, Projects, Initiatives, Roadmaps, GraphQL API queries, triage workflows, GitHub integration, bulk operations, and Jira-to-Linear migration.&quot;
+   - Description: &quot;Administers Linear teams, cycles, projects and triage, and writes GraphQL API calls. Use when setting up or fixing a Linear workspace, scripting bulk changes, or migrating from Jira to Linear.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -810,16 +854,24 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
   
   <h2>Quick Start</h2>Linear's API is GraphQL-only at `https://api.linear.app/graphql`; auth via personal API key (`Authorization: <key>`) or OAuth2.
 
-<pre><code>linear_query() {
-  curl -s -X POST https://api.linear.app/graphql \
-    -H &quot;Authorization: $LINEAR_API_KEY&quot; \
-    -H &quot;Content-Type: application/json&quot; \
-    -d &quot;{\&quot;query\&quot;: \&quot;$1\&quot;}&quot;
+<pre><code># $1 = GraphQL document, $2 = variables as JSON (optional). jq builds the body, so quotes
+# and newlines in the query are escaped correctly; pass values as variables, not by string splicing.
+linear_query() {
+  local vars=&quot;${2:-}&quot;
+  [ -z &quot;$vars&quot; ] &amp;&amp; vars=&#x27;{}&#x27;
+  jq -n --arg q &quot;$1&quot; --argjson v &quot;$vars&quot; &#x27;{query: $q, variables: $v}&#x27; |
+    curl -s -X POST https://api.linear.app/graphql \
+      -H &quot;Authorization: $LINEAR_API_KEY&quot; \
+      -H &quot;Content-Type: application/json&quot; \
+      --data @-
 }
+
+linear_query &#x27;query { viewer { id name } }&#x27;
+linear_query &#x27;query($id: String!) { issue(id: $id) { title state { name } } }&#x27; &#x27;{&quot;id&quot;: &quot;ENG-123&quot;}&#x27;
 </code></pre>
 
 Cache team/label/state UUIDs locally, use nested selection to avoid N+1 calls, and prefer webhooks over polling. See the references below for the full query catalog and operating workflows.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/linear-expert/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

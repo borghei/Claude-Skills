@@ -177,7 +177,7 @@ Scan a draft OKR set before committing to the quarter. Each red flag shows the *
 
 **Symptom.** OKRs are set at quarter start. The next time the team reviews them is at quarter end.
 
-**Why it's bad.** OKRs without weekly check-ins drift. Teams forget the focus; work fills with non-OKR activities; the quarter ends in surprise. Wodtke and OKR practitioners observe a 30-45% completion-rate uplift from weekly confidence reviews.
+**Why it's bad.** OKRs without weekly check-ins drift. Teams forget the focus; work fills with non-OKR activities; the quarter ends in surprise. Weekly confidence reviews surface a drifting KR while there is still time to act on it.
 
 **Bad example:**
 > "OKR doc created Apr 1. Next review: Jun 25. (Mid-quarter activity: team works on roadmap items, some aligned with OKR, some not.)"

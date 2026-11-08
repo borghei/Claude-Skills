@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-09-21
+  updated: 2026-11-08
   python-tools: agent_delegation_scorer.py, agent_delivery_metrics.py
   tech-stack: ai-agents, delivery-management, dora-metrics, code-review, scrum
   tags:
@@ -54,11 +54,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 ```bash
 # Sprint planning: score tickets, check review capacity (exit 2 = over capacity or policy breach)
 python3 project-management/execution/agents-in-the-team/scripts/agent_delegation_scorer.py \
-  --input backlog.json
+  --input project-management/execution/agents-in-the-team/assets/backlog_within_capacity.json   # exit 0
+python3 project-management/execution/agents-in-the-team/scripts/agent_delegation_scorer.py \
+  --input project-management/execution/agents-in-the-team/assets/backlog_sample.json            # exit 2
 
 # Monthly: delivery metrics split human vs agent, DORA split, optional regression gate
 python3 project-management/execution/agents-in-the-team/scripts/agent_delivery_metrics.py \
-  --input records.json --gate --tolerance 0.05
+  --input project-management/execution/agents-in-the-team/assets/delivery_records_sample.json --gate --tolerance 0.05   # exit 2
 ```
 
 ## Tools Overview
@@ -224,13 +226,4 @@ Self-contained; these cover adjacent ground:
 
 ## Sources
 
-- Scrum Guide Expansion Pack, *AI and Scrum* (v2026.1) - https://scrumexpansion.org/ai-and-scrum/
-- DORA, *DORA's software delivery performance metrics* - https://dora.dev/guides/dora-metrics/
-- DORA, *State of AI-assisted Software Development 2025* - https://dora.dev/dora-report-2025/
-- Google Cloud Blog, *Announcing the 2025 DORA Report* - https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report
-- Google Cloud Blog, *Putting the DORA AI Capabilities Model to work* - https://cloud.google.com/blog/products/ai-machine-learning/from-adoption-to-impact-putting-the-dora-ai-capabilities-model-to-work
-- Linear Docs, *Agents in Linear* - https://linear.app/docs/agents-in-linear
-- Atlassian Support, *Collaborate on work items with AI agents* - https://support.atlassian.com/jira-software-cloud/docs/collaborate-on-work-items-with-ai-agents/
-- GitHub Docs, *About GitHub Copilot cloud agent* - https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent
-- GitHub Docs, *Risks and mitigations for GitHub Copilot cloud agent* - https://docs.github.com/en/copilot/concepts/agents/cloud-agent/risks-and-mitigations
-- OWASP GenAI Security Project, *LLM01:2025 Prompt Injection* - https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+The Scrum Guide Expansion Pack, DORA 2025, GitHub, Linear, Atlassian and OWASP sources behind this skill are listed at the end of each file in `references/`.
