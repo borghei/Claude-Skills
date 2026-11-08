@@ -5,6 +5,19 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.15.0] - 2026-11-08
+
+### Added
+
+- **Three skills for founders testing an idea before launch (5 standard-library tools).**
+  - Finance: `launch-economics` models unit economics, break-even, capacity and year-one cash from an input file, then gives a VIABLE, UNCONFIRMED or NOT YET verdict. It never returns VIABLE on simulated demand alone, and a plan that needs more units than capacity allows comes back NOT YET.
+  - Research ops: `synthetic-buyer-panel` deals seeded, reproducible persona cards from a customer profile, then tallies buy rates, objections and price corridors from the answers. It refuses to fill in missing answers and fails below 90% coverage. Results are directional and never count as demand evidence.
+  - Business growth: `offer-design` builds an offer from the buyer's obstacles and scores it, checking that the guarantee is affordable at the expected claim rate and that any urgency is real and verifiable.
+
+### Changed
+
+- Skill counts are updated to 400 skills and 939 tools everywhere, including the per-domain guides, plugin manifests and the website.
+
 ## [4.14.0] - 2026-11-08
 
 ### Added

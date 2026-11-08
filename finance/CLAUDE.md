@@ -6,6 +6,7 @@ This guide covers the finance skill and its Python automation tools.
 
 **Available Skills:**
 1. **financial-analyst/** - Financial statement analysis, ratio analysis, DCF valuation, budgeting, forecasting (4 Python tools)
+2. **launch-economics/** - Pre-launch unit economics, break-even, year-one cash need and a computed VIABLE / UNCONFIRMED / NOT YET verdict that refuses VIABLE on simulated demand alone (2 Python tools: `launch_economics.py`, `viability_verdict.py`)
 
 **Total Tools:** 4 Python automation tools, 3 knowledge bases, 5 templates
 

@@ -1,0 +1,36 @@
+{
+  "offer_name": "First Ascent, a six-week beginner bouldering course (example)",
+  "currency": "EUR",
+  "price": 189,
+  "core_unit_cost": 46,
+  "headline": "Climb your first V3 in six weeks",
+  "drivers": {"outcome": 8, "belief": 7, "days_to_result": 42, "effort": 4},
+  "proof": [
+    "71% of the spring cohort sent a V3 by week six (gym logbook)",
+    "Before-and-after videos from 12 past participants, shared with consent"
+  ],
+  "obstacles": [
+    {"id": "O1", "text": "I am not strong enough to start"},
+    {"id": "O2", "text": "I do not know the technique and feel watched"},
+    {"id": "O3", "text": "Shoes and chalk are an upfront cost before I know I like it"},
+    {"id": "O4", "text": "I will drop off after two sessions"},
+    {"id": "O5", "text": "I am afraid of falling and getting hurt"}
+  ],
+  "components": [
+    {"name": "Six coached small-group sessions", "kind": "core", "solves": ["O2", "O5"],
+     "buyer_value": 300, "delivery_cost": 54},
+    {"name": "Open-floor pass for the six weeks", "kind": "core", "solves": ["O1", "O4"],
+     "buyer_value": 240, "delivery_cost": 12},
+    {"name": "Shoe and chalk rental included", "kind": "bonus", "solves": ["O3"],
+     "buyer_value": 72, "delivery_cost": 9},
+    {"name": "Falling-safely session in week one", "kind": "bonus", "solves": ["O5"],
+     "buyer_value": 60, "delivery_cost": 6},
+    {"name": "Buddy matching and weekly progress check", "kind": "bonus", "solves": ["O4"],
+     "buyer_value": 50, "delivery_cost": 4}
+  ],
+  "guarantee": {"type": "conditional",
+                "terms": "Attend all six sessions; if you do not want to keep climbing, the course fee is refunded in full.",
+                "expected_claim_rate": 0.04},
+  "urgency": {"type": "cohort", "reason": "Each cohort is capped at 8 people per coach and starts on a fixed date.",
+              "verifiable": true}
+}

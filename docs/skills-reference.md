@@ -1,8 +1,18 @@
 # Skills Reference
 
-Complete reference for **397 skills across 21 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
+Complete reference for **400 skills across 21 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
 
 > **Note:** The per-domain tables below are the canonical listing and are generated against `cli/skills.json`. The dated *Additions* sections that follow are a historical changelog — the skills they mention also appear in their domain table.
+
+---
+
+## Nov 2026 Additions — founder toolkit (3 new skills)
+
+Testing a new business before spending on it: what each sale earns and how much cash the first year needs, how a simulated buyer panel reacts, and whether the offer gives buyers a reason to say yes.
+
+- Finance: [launch-economics](https://github.com/borghei/Claude-Skills/blob/main/finance/launch-economics/SKILL.md) — unit economics, break-even, year-one cash and a computed launch verdict that never reads VIABLE on simulated demand alone
+- Research Ops: [synthetic-buyer-panel](https://github.com/borghei/Claude-Skills/blob/main/research-ops/synthetic-buyer-panel/SKILL.md) — reproducible persona cards and a tally of buy rates, objections and price corridors
+- Business Growth: [offer-design](https://github.com/borghei/Claude-Skills/blob/main/business-growth/offer-design/SKILL.md) — offer stack from buyer obstacles, an affordable guarantee and honest urgency, scored before launch
 
 ---
 
@@ -559,12 +569,13 @@ Enterprise compliance across 18 frameworks.
 | [aims-audit](https://github.com/borghei/Claude-Skills/blob/main/ra-qm-team/audit-prep/aims-audit/SKILL.md) | ISO 42001 AIMS certification prep | 2 |
 | [compliance-readiness](https://github.com/borghei/Claude-Skills/blob/main/ra-qm-team/audit-prep/compliance-readiness/SKILL.md) | Multi-framework orchestrator with shared evidence | 3 |
 
-## Business Growth (20)
+## Business Growth (21)
 
 Revenue optimization, CRO, pricing strategy, and customer success.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [offer-design](https://github.com/borghei/Claude-Skills/blob/main/business-growth/offer-design/SKILL.md) ★ NEW | Offer stack from buyer obstacles, affordable guarantee, honest urgency, scored | 1 |
 | [customer-success-manager](https://github.com/borghei/Claude-Skills/blob/main/business-growth/customer-success-manager/SKILL.md) | Health scoring, churn prediction, expansion analysis | 3 |
 | [revenue-operations](https://github.com/borghei/Claude-Skills/blob/main/business-growth/revenue-operations/SKILL.md) | Pipeline analytics, forecast accuracy, GTM efficiency | 3 |
 | [sales-engineer](https://github.com/borghei/Claude-Skills/blob/main/business-growth/sales-engineer/SKILL.md) | RFP analysis, competitive positioning, POC planning | 3 |
@@ -586,12 +597,13 @@ Revenue optimization, CRO, pricing strategy, and customer success.
 | [partnerships-architect](https://github.com/borghei/Claude-Skills/blob/main/business-growth/partnerships-architect/SKILL.md) | Partnership types, deal structures, evaluation, ROI | 3 |
 | [commercial-policy](https://github.com/borghei/Claude-Skills/blob/main/business-growth/commercial-policy/SKILL.md) | Policy charter, compliance, deviation handling, generator | 3 |
 
-## Finance (3)
+## Finance (4)
 
 Financial analysis and valuation.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [launch-economics](https://github.com/borghei/Claude-Skills/blob/main/finance/launch-economics/SKILL.md) ★ NEW | Pre-launch unit economics, year-one cash model and a computed go/not-yet verdict | 2 |
 | [financial-analyst](https://github.com/borghei/Claude-Skills/blob/main/finance/financial-analyst/SKILL.md) | DCF valuation, ratio analysis, budget variance, forecasting | 4 |
 | [saas-metrics-coach](https://github.com/borghei/Claude-Skills/blob/main/finance/saas-metrics-coach/SKILL.md) | MRR, churn, cohort retention, LTV/CAC, unit economics | 3 |
 | [business-investment-advisor](https://github.com/borghei/Claude-Skills/blob/main/finance/business-investment-advisor/SKILL.md) | Investment screening, portfolio analysis, due diligence, ROI | 3 |
@@ -706,7 +718,7 @@ Internal operating machinery — capacity, process, vendors, spend, and internal
 
 ## Research (4)
 
-Academic and formal research work — systematic reviews, funding, IP, and intelligence briefings. Distinct from [Research Ops](#research-ops-4), which is the applied/operational side.
+Academic and formal research work — systematic reviews, funding, IP, and intelligence briefings. Distinct from [Research Ops](#research-ops-5), which is the applied/operational side.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
@@ -715,12 +727,13 @@ Academic and formal research work — systematic reviews, funding, IP, and intel
 | [patent](https://github.com/borghei/Claude-Skills/blob/main/research/patent/SKILL.md) | Prior-art search planning, claim landscape mapping, patentability scoring | 3 |
 | [dossier](https://github.com/borghei/Claude-Skills/blob/main/research/dossier/SKILL.md) | Dossier outlines, source triangulation, fact/inference separation | 3 |
 
-## Research Ops (4)
+## Research Ops (5)
 
 Applied and operational research — sizing markets, running discovery, and budgeting studies. Distinct from the academic [Research](#research-4) domain above.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [synthetic-buyer-panel](https://github.com/borghei/Claude-Skills/blob/main/research-ops/synthetic-buyer-panel/SKILL.md) ★ NEW | Reproducible simulated buyer panel: buy rates, objections, price corridors | 2 |
 | [market-research](https://github.com/borghei/Claude-Skills/blob/main/research-ops/market-research/SKILL.md) | TAM/SAM/SOM top-down and bottom-up reconciled, segmentation, survey design | 3 |
 | [product-research](https://github.com/borghei/Claude-Skills/blob/main/research-ops/product-research/SKILL.md) | Method selection, recruiting and screening, interview guides, evidence scoring | 3 |
 | [clinical-research](https://github.com/borghei/Claude-Skills/blob/main/research-ops/clinical-research/SKILL.md) | Protocol structure, endpoints, eligibility, power planning, site feasibility | 5 |

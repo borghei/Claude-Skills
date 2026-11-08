@@ -4,7 +4,7 @@ title: Skill Catalog
 
 # Skill Catalog
 
-397 production-ready skills across 21 domains, each with Python CLI tools, reference guides, and templates.
+400 production-ready skills across 21 domains, each with Python CLI tools, reference guides, and templates.
 
 ## Domains at a Glance
 
@@ -15,7 +15,7 @@ title: Skill Catalog
 | Marketing | 41 | 118+ | [View all](marketing.md) |
 | C-Level Advisory | 31 | 88+ | [View all](c-level.md) |
 | RA/QM & Compliance | 27 | 50+ | [View all](compliance.md) |
-| Business Growth | 20 | 60+ | [View all](business.md#business-growth) |
+| Business Growth | 21 | 61 | [View all](business.md#business-growth) |
 | Legal (Experimental) | 17 | 34 | [View all](legal.md) |
 | Product Team | 13 | 30+ | [View all](product.md) |
 | Research (new) | 4 | 13 | [View all](research.md) |
@@ -26,12 +26,12 @@ title: Skill Catalog
 | HR & Operations | 4 | 12 | [View all](other.md#hr--operations) |
 | Documents | 4 | — | [View all](other.md) |
 | Business Operations (new) | 6 | 18 | [View all](business-operations.md) |
-| Research Ops (new) | 4 | 12 | [View all](research-ops.md) |
+| Research Ops (new) | 5 | 16 | [View all](research-ops.md) |
 | Markdown & HTML (new) | 4 | 14 | [View all](markdown-html.md) |
 | Tools — LinkedIn suite (new) | 12 | 27 | [View all](tools.md) |
-| Finance | 3 | 10 | [View all](business.md#finance) |
+| Finance | 4 | 12 | [View all](business.md#finance) |
 | Workflow (meta-skills) | 3 | 4 | [View all](other.md) |
-| **Total** | **397** | **934** | |
+| **Total** | **400** | **939** | |
 
 ## Skill Package Structure
 

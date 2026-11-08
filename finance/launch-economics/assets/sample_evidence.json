@@ -1,0 +1,13 @@
+{
+  "funding_available": 45000,
+  "demand_evidence": [
+    {"kind": "simulated_panel", "reached": 60, "converted": 26, "price_shown": true,
+     "note": "Synthetic buyer panel, 60 personas; read as an upper bound"},
+    {"kind": "presale", "reached": 210, "converted": 23, "price_shown": true,
+     "note": "Prepaid tune-up vouchers at 48, sold at two weekend pop-up stands"},
+    {"kind": "interviews", "reached": 14, "converted": 11, "price_shown": false,
+     "note": "Commuter interviews; said they would use it"}
+  ],
+  "thresholds": {"min_real_conversion": 0.05, "min_panel_buy_rate": 0.25,
+                 "min_real_sample": 30, "funding_buffer": 1.2}
+}

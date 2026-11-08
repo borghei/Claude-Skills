@@ -1,0 +1,9 @@
+{
+  "funding_available": 20000,
+  "demand_evidence": [
+    {"kind": "simulated_panel", "reached": 100, "converted": 71, "price_shown": true,
+     "note": "Synthetic panel only; 71% buy rate is a warning sign, not a result"},
+    {"kind": "waitlist", "reached": 400, "converted": 120, "price_shown": false,
+     "note": "Free email waitlist, no price shown"}
+  ]
+}

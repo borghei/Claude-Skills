@@ -1,0 +1,22 @@
+{
+  "offer": "Glow Box, a skincare subscription (deliberately flawed example)",
+  "target": "Everyone who cares",
+  "currency": "USD",
+  "age_range": [18, 65],
+  "pitch": [
+    "The best, most revolutionary skincare box ever made.",
+    "Guaranteed to transform your skin. Join now."
+  ],
+  "segments": [
+    {"name": "Skincare fans", "share": 0.70, "income": [30000, 90000]},
+    {"name": "Gift buyers", "share": 0.50, "income": [80000, 40000]}
+  ],
+  "behaviours": [
+    {"name": "Impulse buyer", "share": 0.60, "description": "Buys what looks good on social media."},
+    {"name": "Researcher", "share": 0.40, "description": "Reads ingredient lists."}
+  ],
+  "objections": [
+    "Too expensive"
+  ],
+  "contexts": []
+}

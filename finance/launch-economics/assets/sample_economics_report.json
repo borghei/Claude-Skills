@@ -1,0 +1,140 @@
+{
+  "business": "Spoke & Chain, a walk-in bicycle repair counter (example)",
+  "unit": "repair",
+  "price": 48.0,
+  "volume_factor": 1.0,
+  "unit_cost": 12.0,
+  "fixed_monthly": 11700.0,
+  "startup_total": 28400.0,
+  "capacity_per_day": 30.0,
+  "plan_per_day": 22.0,
+  "estimate_share": 0.1334,
+  "contribution_per_unit": 36.0,
+  "contribution_margin": 0.75,
+  "break_even_per_day": 12.5,
+  "margin_at_plan": 0.3239,
+  "monthly_profit_at_plan": 8892.0,
+  "year1_operating_profit": 43992.0,
+  "year1_after_startup": 15592.0,
+  "cash_needed": 35420.0,
+  "payback_month": 11,
+  "months": [
+    {
+      "month": 1,
+      "units": 208,
+      "revenue": 9984.0,
+      "operating_profit": -4212.0,
+      "cumulative_cash": -32612.0
+    },
+    {
+      "month": 2,
+      "units": 260,
+      "revenue": 12480.0,
+      "operating_profit": -2340.0,
+      "cumulative_cash": -34952.0
+    },
+    {
+      "month": 3,
+      "units": 312,
+      "revenue": 14976.0,
+      "operating_profit": -468.0,
+      "cumulative_cash": -35420.0
+    },
+    {
+      "month": 4,
+      "units": 364,
+      "revenue": 17472.0,
+      "operating_profit": 1404.0,
+      "cumulative_cash": -34016.0
+    },
+    {
+      "month": 5,
+      "units": 390,
+      "revenue": 18720.0,
+      "operating_profit": 2340.0,
+      "cumulative_cash": -31676.0
+    },
+    {
+      "month": 6,
+      "units": 442,
+      "revenue": 21216.0,
+      "operating_profit": 4212.0,
+      "cumulative_cash": -27464.0
+    },
+    {
+      "month": 7,
+      "units": 468,
+      "revenue": 22464.0,
+      "operating_profit": 5148.0,
+      "cumulative_cash": -22316.0
+    },
+    {
+      "month": 8,
+      "units": 494,
+      "revenue": 23712.0,
+      "operating_profit": 6084.0,
+      "cumulative_cash": -16232.0
+    },
+    {
+      "month": 9,
+      "units": 520,
+      "revenue": 24960.0,
+      "operating_profit": 7020.0,
+      "cumulative_cash": -9212.0
+    },
+    {
+      "month": 10,
+      "units": 546,
+      "revenue": 26208.0,
+      "operating_profit": 7956.0,
+      "cumulative_cash": -1256.0
+    },
+    {
+      "month": 11,
+      "units": 546,
+      "revenue": 26208.0,
+      "operating_profit": 7956.0,
+      "cumulative_cash": 6700.0
+    },
+    {
+      "month": 12,
+      "units": 572,
+      "revenue": 27456.0,
+      "operating_profit": 8892.0,
+      "cumulative_cash": 15592.0
+    }
+  ],
+  "what_ifs": [
+    {
+      "case": "price -10%",
+      "margin_at_plan": 0.2487,
+      "year1_operating_profit": 19406.4,
+      "cash_needed": 39507.2,
+      "payback_month": null
+    },
+    {
+      "case": "volume -20%",
+      "margin_at_plan": 0.2173,
+      "year1_operating_profit": 7113.6,
+      "cash_needed": 42720.8,
+      "payback_month": null
+    },
+    {
+      "case": "unit costs +15%",
+      "margin_at_plan": 0.2864,
+      "year1_operating_profit": 34772.4,
+      "cash_needed": 36824.0,
+      "payback_month": 12
+    },
+    {
+      "case": "fixed costs +10%",
+      "margin_at_plan": 0.2812,
+      "year1_operating_profit": 29952.0,
+      "cash_needed": 38930.0,
+      "payback_month": 12
+    }
+  ],
+  "most_sensitive_driver": "volume -20%",
+  "findings": [],
+  "fail_count": 0
+}

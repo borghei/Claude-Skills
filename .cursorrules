@@ -6,7 +6,7 @@
 
 ## What This Repository Is
 
-This is the universal AI skills library — **397 production-ready skill packages across 21 professional domains** with **934 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
+This is the universal AI skills library — **400 production-ready skill packages across 21 professional domains** with **939 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
 
 This is NOT a traditional application. It's a library of self-contained skill packages meant to be extracted and deployed into user workflows.
 
@@ -17,7 +17,7 @@ This is NOT a traditional application. It's a library of self-contained skill pa
 - marketing/ — 39 skills (content, SEO/AEO, demand gen, brand, analytics)
 - c-level-advisor/ — 31 skills (CEO/CTO/CFO/CMO/CRO/CPO/COO/CHRO/CISO + CAIO/CDO/CCO/GC/VPE)
 - ra-qm-team/ — 27 skills (ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF)
-- business-growth/ — 20 skills (CRO, pricing, revenue ops, commercial)
+- business-growth/ — 21 skills (CRO, pricing, revenue ops, commercial)
 - legal/ — 17 skills (EXPERIMENTAL: contracts, NDA, privacy, DPIA, breach response)
 - product-team/ — 13 skills (RICE, OKRs, UX research, product analytics, Apple HIG)
 - personal-productivity/ — 14 skills (resume, leads, meetings, invoices, email triage)
@@ -27,7 +27,7 @@ This is NOT a traditional application. It's a library of self-contained skill pa
 - documents/ — 4 skills (docx, pdf, pptx, xlsx — stdlib OOXML)
 - hr-operations/ — 4 skills (talent, people analytics, HRBP)
 - research/ — 4 skills (litreview, grants, patent, dossier)
-- finance/ — 3 skills (financial analysis, DCF, forecasting)
+- finance/ — 4 skills (financial analysis, DCF, forecasting)
 - workflow/ — 3 skills (skill-router, handoff, session-retro — meta-skills for routing & context handoff)
 
 Supporting: `scripts/` (manifest builder + installer), `standards/` (best-practices library), `templates/` (reusable templates + sample workflows), `agents/` (cs-* domain agents + personas), `cli/skills.json` (machine-readable manifest).

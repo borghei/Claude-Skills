@@ -1,0 +1,28 @@
+{
+  "business": "Spoke & Chain, a walk-in bicycle repair counter (example)",
+  "unit": "repair",
+  "price": 48.00,
+  "variable_costs": [
+    {"item": "Average parts per repair", "cost": 9.50, "source": "quote"},
+    {"item": "Consumables (grease, cable ends, rags)", "cost": 1.10, "source": "estimate"},
+    {"item": "Card processing", "cost": 1.40, "source": "public"}
+  ],
+  "fixed_monthly": [
+    {"item": "Shop rent", "cost": 3200, "source": "quote"},
+    {"item": "Two technicians, loaded", "cost": 7800, "source": "quote"},
+    {"item": "Utilities", "cost": 350, "source": "estimate"},
+    {"item": "Insurance", "cost": 260, "source": "quote"},
+    {"item": "Booking and POS software", "cost": 90, "source": "public"}
+  ],
+  "startup": [
+    {"item": "Lease deposit", "cost": 6400, "source": "quote"},
+    {"item": "Workstands and tools", "cost": 9800, "source": "quote"},
+    {"item": "Fit-out and signage", "cost": 7200, "source": "quote"},
+    {"item": "Opening parts stock", "cost": 3500, "source": "estimate"},
+    {"item": "Launch promotion", "cost": 1500, "source": "estimate"}
+  ],
+  "operating_days_per_month": 26,
+  "plan_per_day": 22,
+  "capacity_per_day": 30,
+  "ramp_per_day": [8, 10, 12, 14, 15, 17, 18, 19, 20, 21, 21, 22]
+}

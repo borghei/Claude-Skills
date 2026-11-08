@@ -1,0 +1,24 @@
+{
+  "business": "Night Owl, a late-night dessert delivery kitchen (deliberately flawed example)",
+  "unit": "order",
+  "price": 14.00,
+  "variable_costs": [
+    {"item": "Ingredients", "cost": 4.20, "source": "estimate"},
+    {"item": "Packaging", "cost": 1.10, "source": "estimate"},
+    {"item": "Delivery platform commission (30%)", "cost": 4.20, "source": "public"},
+    {"item": "Courier subsidy", "cost": 2.50, "source": "estimate"}
+  ],
+  "fixed_monthly": [
+    {"item": "Kitchen rent", "cost": 4100, "source": "estimate"},
+    {"item": "Night staff", "cost": 9600, "source": "estimate"},
+    {"item": "Utilities", "cost": 700, "source": "estimate"}
+  ],
+  "startup": [
+    {"item": "Kitchen equipment", "cost": 18000, "source": "estimate"},
+    {"item": "Launch ads", "cost": 6000, "source": "estimate"}
+  ],
+  "operating_days_per_month": 30,
+  "plan_per_day": 160,
+  "capacity_per_day": 120,
+  "ramp_per_day": [150, 155, 160, 160, 160, 160, 160, 160, 160, 160, 160, 160]
+}

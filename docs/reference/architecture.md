@@ -27,7 +27,7 @@ Claude-Skills/
 │   └── execution/            # PRDs, OKRs, roadmaps, release notes
 ├── ra-qm-team/              # 21 compliance skills + 38 tools
 ├── business-growth/          # 16 growth skills + 48 tools
-├── finance/                  # 3 finance skills + 10 tools
+├── finance/                  # 4 finance skills + 12 tools
 ├── data-analytics/           # 5 analytics skills + 16 tools
 ├── sales-success/            # 5 sales skills + 15 tools
 ├── hr-operations/            # 4 HR skills + 12 tools
@@ -77,7 +77,7 @@ Personas combine skills from multiple domains. They define a professional identi
 
 | File | Purpose |
 |---|---|
-| `skills.json` | Machine-readable catalog of all 397 skills with metadata |
+| `skills.json` | Machine-readable catalog of all 400 skills with metadata |
 | `CHANGELOG.md` | Version history and release notes |
 | `CONTRIBUTING.md` | Contribution guidelines |
 | `LICENSE` | MIT + Commons Clause license |

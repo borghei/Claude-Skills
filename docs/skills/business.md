@@ -25,6 +25,7 @@ title: Business, Sales & Finance Skills
 
 | Skill | Description | Tools |
 |---|---|:---:|
+| [offer-design](https://github.com/borghei/Claude-Skills/blob/main/business-growth/offer-design/SKILL.md) ★ NEW | Offer stack from buyer obstacles, affordable guarantee, honest urgency, scored | 1 |
 | [pricing-strategy](https://github.com/borghei/Claude-Skills/blob/main/business-growth/pricing-strategy/SKILL.md) | Value metric selection, tier architecture, price point research | 3 |
 | [churn-prevention](https://github.com/borghei/Claude-Skills/blob/main/business-growth/churn-prevention/SKILL.md) | Cancel flow design, save offers, dunning sequences, win-back campaigns | 3 |
 | [referral-program](https://github.com/borghei/Claude-Skills/blob/main/business-growth/referral-program/SKILL.md) | Referral loop architecture, incentive design, viral coefficient modeling | 3 |
@@ -59,10 +60,11 @@ title: Business, Sales & Finance Skills
 
 ## Finance
 
-**3 skills** with **10 tools** for financial analysis, SaaS metrics, and investment evaluation.
+**4 skills** with **12 tools** for financial analysis, SaaS metrics, and investment evaluation.
 
 | Skill | Description | Tools |
 |---|---|:---:|
+| [launch-economics](https://github.com/borghei/Claude-Skills/blob/main/finance/launch-economics/SKILL.md) ★ NEW | Pre-launch unit economics, year-one cash model and a computed go/not-yet verdict | 2 |
 | [financial-analyst](https://github.com/borghei/Claude-Skills/blob/main/finance/financial-analyst/SKILL.md) | Financial ratio analysis, DCF valuation, budget variance, rolling forecasts | 4 |
 | [saas-metrics-coach](https://github.com/borghei/Claude-Skills/blob/main/finance/saas-metrics-coach/SKILL.md) | MRR/ARR calculation, cohort retention analysis, unit economics | 3 |
 | [business-investment-advisor](https://github.com/borghei/Claude-Skills/blob/main/finance/business-investment-advisor/SKILL.md) | Investment screening, portfolio analysis, due diligence checklists | 3 |

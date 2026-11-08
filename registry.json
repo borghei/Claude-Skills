@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T10:51:52+00:00",
+  "generated_at": "2026-11-08T13:35:57+00:00",
   "repository": "claude-skills",
-  "skill_count": 397,
+  "skill_count": 400,
   "domain_count": 21,
   "domains": [
     "business-growth",
@@ -3607,6 +3607,24 @@
       "has_references": false
     },
     {
+      "name": "offer-design",
+      "domain": "business-growth",
+      "description": "Build an offer from the buyer's obstacles: component stack, value drivers, an affordable guarantee and honest urgency, scored before launch. Use when buyers say no, packaging bonuses, choosing a guarantee, or naming an offer.",
+      "tags": [
+        "offer",
+        "value-proposition",
+        "guarantee",
+        "bonuses",
+        "conversion",
+        "packaging"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "business-growth/offer-design",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "onboarding-cro",
       "domain": "business-growth",
       "description": "Post-signup user onboarding optimization covering activation metrics, time-to-value reduction, onboarding flow design, empty state optimization, multi-channel coordination, and stalled user recovery.",
@@ -5825,6 +5843,24 @@
       "has_references": true
     },
     {
+      "name": "launch-economics",
+      "domain": "finance",
+      "description": "Pre-launch unit economics, year-one cash model and a computed go/not-yet verdict for a new business. Use when asking \"is this profitable\", finding break-even, sizing startup cash, or deciding whether to launch.",
+      "tags": [
+        "unit-economics",
+        "break-even",
+        "cash-runway",
+        "small-business",
+        "launch",
+        "viability"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "finance/launch-economics",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "saas-metrics-coach",
       "domain": "finance",
       "description": "This skill should be used when the user asks to \"calculate MRR\", \"analyze churn\", \"compute SaaS metrics\", \"do cohort retention analysis\", \"calculate LTV or CAC\", \"evaluate unit economics\", or \"track subscription revenue growth\".",
@@ -6412,6 +6448,24 @@
       "version": "1.0.0",
       "updated": "2026-07-21",
       "path": "research-ops/research-finance",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "synthetic-buyer-panel",
+      "domain": "research-ops",
+      "description": "Simulated buyer panel: deal reproducible persona cards, run one agent per buyer, tally buy rates, objections and price corridors. Use when asking \"would people buy this\", pre-testing a pitch, or finding objections fast.",
+      "tags": [
+        "synthetic-personas",
+        "concept-testing",
+        "objections",
+        "demand-validation",
+        "pricing-research",
+        "buyer-panel"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "research-ops/synthetic-buyer-panel",
       "has_scripts": true,
       "has_references": true
     },

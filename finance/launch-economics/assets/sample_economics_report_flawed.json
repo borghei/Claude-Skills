@@ -1,0 +1,169 @@
+{
+  "business": "Night Owl, a late-night dessert delivery kitchen (deliberately flawed example)",
+  "unit": "order",
+  "price": 14.0,
+  "volume_factor": 1.0,
+  "unit_cost": 12.0,
+  "fixed_monthly": 14400.0,
+  "startup_total": 24000.0,
+  "capacity_per_day": 120.0,
+  "plan_per_day": 160.0,
+  "estimate_share": 0.9999,
+  "contribution_per_unit": 2.0,
+  "contribution_margin": 0.1429,
+  "break_even_per_day": 240.0,
+  "margin_at_plan": -0.0714,
+  "monthly_profit_at_plan": -4800.0,
+  "year1_operating_profit": -58500.0,
+  "year1_after_startup": -82500.0,
+  "cash_needed": 82500.0,
+  "payback_month": null,
+  "months": [
+    {
+      "month": 1,
+      "units": 4500,
+      "revenue": 63000.0,
+      "operating_profit": -5400.0,
+      "cumulative_cash": -29400.0
+    },
+    {
+      "month": 2,
+      "units": 4650,
+      "revenue": 65100.0,
+      "operating_profit": -5100.0,
+      "cumulative_cash": -34500.0
+    },
+    {
+      "month": 3,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -39300.0
+    },
+    {
+      "month": 4,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -44100.0
+    },
+    {
+      "month": 5,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -48900.0
+    },
+    {
+      "month": 6,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -53700.0
+    },
+    {
+      "month": 7,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -58500.0
+    },
+    {
+      "month": 8,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -63300.0
+    },
+    {
+      "month": 9,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -68100.0
+    },
+    {
+      "month": 10,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -72900.0
+    },
+    {
+      "month": 11,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -77700.0
+    },
+    {
+      "month": 12,
+      "units": 4800,
+      "revenue": 67200.0,
+      "operating_profit": -4800.0,
+      "cumulative_cash": -82500.0
+    }
+  ],
+  "what_ifs": [
+    {
+      "case": "price -10%",
+      "margin_at_plan": -0.1905,
+      "year1_operating_profit": -138510.0,
+      "cash_needed": 162510.0,
+      "payback_month": null
+    },
+    {
+      "case": "volume -20%",
+      "margin_at_plan": -0.125,
+      "year1_operating_profit": -81360.0,
+      "cash_needed": 105360.0,
+      "payback_month": null
+    },
+    {
+      "case": "unit costs +15%",
+      "margin_at_plan": -0.2,
+      "year1_operating_profit": -161370.0,
+      "cash_needed": 185370.0,
+      "payback_month": null
+    },
+    {
+      "case": "fixed costs +10%",
+      "margin_at_plan": -0.0929,
+      "year1_operating_profit": -75780.0,
+      "cash_needed": 99780.0,
+      "payback_month": null
+    }
+  ],
+  "most_sensitive_driver": "unit costs +15%",
+  "findings": [
+    {
+      "severity": "fail",
+      "message": "year one runs at an operating loss of 58,500"
+    },
+    {
+      "severity": "fail",
+      "message": "break-even needs 240/day but capacity is 120/day"
+    },
+    {
+      "severity": "fail",
+      "message": "plan of 160/day exceeds capacity of 120/day"
+    },
+    {
+      "severity": "fail",
+      "message": "the ramp exceeds capacity in at least one month"
+    },
+    {
+      "severity": "warn",
+      "message": "startup spend is not earned back inside year one"
+    },
+    {
+      "severity": "warn",
+      "message": "month 1 volume is 94% of plan; ramps this fast need evidence"
+    },
+    {
+      "severity": "warn",
+      "message": "100% of cost lines by value are estimates; get quotes"
+    }
+  ],
+  "fail_count": 4
+}

@@ -8,6 +8,10 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.15.0** (November 2026)
+
+- 3 founder skills: launch economics with a computed VIABLE / UNCONFIRMED / NOT YET verdict, a reproducible synthetic buyer panel, and an offer-design scorer for guarantees and urgency
+
 **v4.14.0** (November 2026)
 
 - 12 new skills for working alongside coding agents: bug diagnosis, deep module design, domain glossaries, PR descriptions, git guardrails, human-step wizards, plan grilling, wayfinder decision maps, issue triage, decision questionnaires, a learning workspace and agent-session retros

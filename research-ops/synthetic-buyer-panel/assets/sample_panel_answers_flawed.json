@@ -1,0 +1,192 @@
+[
+ {
+  "buyer_id": "B001",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Remembering the bottle",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B002",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Does refill detergent clean as well?",
+  "would_change_mind": "Knowing which brand is in the tank",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B003",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Remembering the bottle",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B004",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Whether it cleans as well",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 9.0,
+   "bargain": 5.0,
+   "getting_expensive": 4.0,
+   "too_expensive": 3.0
+  }
+ },
+ {
+  "buyer_id": "B005",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Opening hours",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B006",
+  "decision": "maybe",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "I would forget to bring the bottle",
+  "would_change_mind": "Bottles I can leave at the shop and pick up full",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B007",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Another stop on a separate trip",
+  "would_change_mind": "Delivery or a pickup point at my tram stop",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B008",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Store-brand detergent is cheaper per wash",
+  "would_change_mind": "A price per wash that matches the supermarket own brand",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B009",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Opening hours clash with my work",
+  "would_change_mind": "Open until 21:00 one night a week",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B010",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Another stop on a separate trip",
+  "would_change_mind": "Open on Saturday mornings near the supermarket",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B011",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "What the product is",
+  "would_change_mind": "A recognised brand or a lab test on the label",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B012",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Sounds great, I would definitely try it.",
+  "main_objection": "Remembering the bottle",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B999",
+  "decision": "buy",
+  "units_first_month": 1,
+  "reason_code": "other",
+  "reason": "x",
+  "main_objection": "",
+  "would_change_mind": "",
+  "price_points": {}
+ }
+]

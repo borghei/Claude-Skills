@@ -1,0 +1,409 @@
+{
+  "offer": "Refill Corner, a household cleaning-product refill shop (example)",
+  "n": 40,
+  "seed": 7,
+  "dealt": 40,
+  "findings": [],
+  "cards": [
+    {
+      "id": "B001",
+      "segment": "Student or early career",
+      "income": 20000,
+      "age": 32,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Another stop on a separate trip"
+    },
+    {
+      "id": "B002",
+      "segment": "Student or early career",
+      "income": 19000,
+      "age": 26,
+      "behaviour": "Brand loyal",
+      "behaviour_how": "Has used the same detergent for years.",
+      "context": "you cycle everywhere and carry what fits in a pannier",
+      "doubt": "Store-brand detergent is cheaper per wash"
+    },
+    {
+      "id": "B003",
+      "segment": "Student or early career",
+      "income": 27000,
+      "age": 30,
+      "behaviour": "Eco-motivated",
+      "behaviour_how": "Avoids plastic where it is easy, pays a little more for it.",
+      "context": "you do the laundry for four people",
+      "doubt": "Opening hours clash with my work"
+    },
+    {
+      "id": "B004",
+      "segment": "Student or early career",
+      "income": 29000,
+      "age": 32,
+      "behaviour": "Eco-motivated",
+      "behaviour_how": "Avoids plastic where it is easy, pays a little more for it.",
+      "context": "you cycle everywhere and carry what fits in a pannier",
+      "doubt": "I would forget to bring the bottle"
+    },
+    {
+      "id": "B005",
+      "segment": "Student or early career",
+      "income": 31000,
+      "age": 26,
+      "behaviour": "Eco-motivated",
+      "behaviour_how": "Avoids plastic where it is easy, pays a little more for it.",
+      "context": "you walk past Market Street on the way to the tram",
+      "doubt": "Store-brand detergent is cheaper per wash"
+    },
+    {
+      "id": "B006",
+      "segment": "Student or early career",
+      "income": 33000,
+      "age": 32,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you walk past Market Street on the way to the tram",
+      "doubt": "Store-brand detergent is cheaper per wash"
+    },
+    {
+      "id": "B007",
+      "segment": "Student or early career",
+      "income": 19000,
+      "age": 29,
+      "behaviour": "Online orderer",
+      "behaviour_how": "Gets household goods delivered with the groceries.",
+      "context": "you cycle everywhere and carry what fits in a pannier",
+      "doubt": "Store-brand detergent is cheaper per wash"
+    },
+    {
+      "id": "B008",
+      "segment": "Student or early career",
+      "income": 34000,
+      "age": 32,
+      "behaviour": "Price comparer",
+      "behaviour_how": "Checks the unit price and buys store brands.",
+      "context": "you do the laundry for four people",
+      "doubt": "Opening hours clash with my work"
+    },
+    {
+      "id": "B009",
+      "segment": "Student or early career",
+      "income": 29000,
+      "age": 30,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you walk past Market Street on the way to the tram",
+      "doubt": "Opening hours clash with my work"
+    },
+    {
+      "id": "B010",
+      "segment": "Student or early career",
+      "income": 33000,
+      "age": 30,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you work late twice a week",
+      "doubt": "I would forget to bring the bottle"
+    },
+    {
+      "id": "B011",
+      "segment": "Student or early career",
+      "income": 28000,
+      "age": 32,
+      "behaviour": "Brand loyal",
+      "behaviour_how": "Has used the same detergent for years.",
+      "context": "you walk past Market Street on the way to the tram",
+      "doubt": "Does refill detergent clean as well?"
+    },
+    {
+      "id": "B012",
+      "segment": "Student or early career",
+      "income": 21000,
+      "age": 29,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you work late twice a week",
+      "doubt": "Does refill detergent clean as well?"
+    },
+    {
+      "id": "B013",
+      "segment": "Student or early career",
+      "income": 30000,
+      "age": 31,
+      "behaviour": "Online orderer",
+      "behaviour_how": "Gets household goods delivered with the groceries.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Another stop on a separate trip"
+    },
+    {
+      "id": "B014",
+      "segment": "Student or early career",
+      "income": 33000,
+      "age": 32,
+      "behaviour": "Eco-motivated",
+      "behaviour_how": "Avoids plastic where it is easy, pays a little more for it.",
+      "context": "you walk past Market Street on the way to the tram",
+      "doubt": "Another stop on a separate trip"
+    },
+    {
+      "id": "B015",
+      "segment": "Young family",
+      "income": 44000,
+      "age": 41,
+      "behaviour": "Brand loyal",
+      "behaviour_how": "Has used the same detergent for years.",
+      "context": "you cycle everywhere and carry what fits in a pannier",
+      "doubt": "I would forget to bring the bottle"
+    },
+    {
+      "id": "B016",
+      "segment": "Young family",
+      "income": 47000,
+      "age": 33,
+      "behaviour": "Eco-motivated",
+      "behaviour_how": "Avoids plastic where it is easy, pays a little more for it.",
+      "context": "you share a flat and split household costs",
+      "doubt": "I would forget to bring the bottle"
+    },
+    {
+      "id": "B017",
+      "segment": "Young family",
+      "income": 67000,
+      "age": 37,
+      "behaviour": "Price comparer",
+      "behaviour_how": "Checks the unit price and buys store brands.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Store-brand detergent is cheaper per wash"
+    },
+    {
+      "id": "B018",
+      "segment": "Young family",
+      "income": 72000,
+      "age": 41,
+      "behaviour": "Online orderer",
+      "behaviour_how": "Gets household goods delivered with the groceries.",
+      "context": "you work late twice a week",
+      "doubt": "Another stop on a separate trip"
+    },
+    {
+      "id": "B019",
+      "segment": "Young family",
+      "income": 43000,
+      "age": 34,
+      "behaviour": "Price comparer",
+      "behaviour_how": "Checks the unit price and buys store brands.",
+      "context": "you work late twice a week",
+      "doubt": "Opening hours clash with my work"
+    },
+    {
+      "id": "B020",
+      "segment": "Young family",
+      "income": 46000,
+      "age": 36,
+      "behaviour": "Price comparer",
+      "behaviour_how": "Checks the unit price and buys store brands.",
+      "context": "you walk past Market Street on the way to the tram",
+      "doubt": "Does refill detergent clean as well?"
+    },
+    {
+      "id": "B021",
+      "segment": "Young family",
+      "income": 54000,
+      "age": 34,
+      "behaviour": "Eco-motivated",
+      "behaviour_how": "Avoids plastic where it is easy, pays a little more for it.",
+      "context": "you do the laundry for four people",
+      "doubt": "Another stop on a separate trip"
+    },
+    {
+      "id": "B022",
+      "segment": "Young family",
+      "income": 48000,
+      "age": 33,
+      "behaviour": "Online orderer",
+      "behaviour_how": "Gets household goods delivered with the groceries.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Does refill detergent clean as well?"
+    },
+    {
+      "id": "B023",
+      "segment": "Young family",
+      "income": 56000,
+      "age": 39,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you work late twice a week",
+      "doubt": "Opening hours clash with my work"
+    },
+    {
+      "id": "B024",
+      "segment": "Young family",
+      "income": 61000,
+      "age": 45,
+      "behaviour": "Price comparer",
+      "behaviour_how": "Checks the unit price and buys store brands.",
+      "context": "you cycle everywhere and carry what fits in a pannier",
+      "doubt": "Store-brand detergent is cheaper per wash"
+    },
+    {
+      "id": "B025",
+      "segment": "Young family",
+      "income": 60000,
+      "age": 30,
+      "behaviour": "Brand loyal",
+      "behaviour_how": "Has used the same detergent for years.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Opening hours clash with my work"
+    },
+    {
+      "id": "B026",
+      "segment": "Young family",
+      "income": 69000,
+      "age": 41,
+      "behaviour": "Eco-motivated",
+      "behaviour_how": "Avoids plastic where it is easy, pays a little more for it.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Does refill detergent clean as well?"
+    },
+    {
+      "id": "B027",
+      "segment": "Young family",
+      "income": 52000,
+      "age": 32,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Another stop on a separate trip"
+    },
+    {
+      "id": "B028",
+      "segment": "Young family",
+      "income": 60000,
+      "age": 30,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you work late twice a week",
+      "doubt": "I would forget to bring the bottle"
+    },
+    {
+      "id": "B029",
+      "segment": "Young family",
+      "income": 40000,
+      "age": 35,
+      "behaviour": "Online orderer",
+      "behaviour_how": "Gets household goods delivered with the groceries.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Store-brand detergent is cheaper per wash"
+    },
+    {
+      "id": "B030",
+      "segment": "Young family",
+      "income": 44000,
+      "age": 39,
+      "behaviour": "Eco-motivated",
+      "behaviour_how": "Avoids plastic where it is easy, pays a little more for it.",
+      "context": "you cycle everywhere and carry what fits in a pannier",
+      "doubt": "Does refill detergent clean as well?"
+    },
+    {
+      "id": "B031",
+      "segment": "Established household",
+      "income": 63000,
+      "age": 38,
+      "behaviour": "Online orderer",
+      "behaviour_how": "Gets household goods delivered with the groceries.",
+      "context": "you cycle everywhere and carry what fits in a pannier",
+      "doubt": "Opening hours clash with my work"
+    },
+    {
+      "id": "B032",
+      "segment": "Established household",
+      "income": 68000,
+      "age": 41,
+      "behaviour": "Brand loyal",
+      "behaviour_how": "Has used the same detergent for years.",
+      "context": "you do the laundry for four people",
+      "doubt": "Does refill detergent clean as well?"
+    },
+    {
+      "id": "B033",
+      "segment": "Established household",
+      "income": 91000,
+      "age": 40,
+      "behaviour": "Price comparer",
+      "behaviour_how": "Checks the unit price and buys store brands.",
+      "context": "you work late twice a week",
+      "doubt": "Opening hours clash with my work"
+    },
+    {
+      "id": "B034",
+      "segment": "Established household",
+      "income": 91000,
+      "age": 42,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you do the laundry for four people",
+      "doubt": "Another stop on a separate trip"
+    },
+    {
+      "id": "B035",
+      "segment": "Established household",
+      "income": 108000,
+      "age": 49,
+      "behaviour": "Brand loyal",
+      "behaviour_how": "Has used the same detergent for years.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Does refill detergent clean as well?"
+    },
+    {
+      "id": "B036",
+      "segment": "Established household",
+      "income": 66000,
+      "age": 53,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you share a flat and split household costs",
+      "doubt": "Another stop on a separate trip"
+    },
+    {
+      "id": "B037",
+      "segment": "Established household",
+      "income": 84000,
+      "age": 47,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you walk past Market Street on the way to the tram",
+      "doubt": "I would forget to bring the bottle"
+    },
+    {
+      "id": "B038",
+      "segment": "Established household",
+      "income": 67000,
+      "age": 48,
+      "behaviour": "Price comparer",
+      "behaviour_how": "Checks the unit price and buys store brands.",
+      "context": "you do the laundry for four people",
+      "doubt": "I would forget to bring the bottle"
+    },
+    {
+      "id": "B039",
+      "segment": "Established household",
+      "income": 84000,
+      "age": 43,
+      "behaviour": "Weekly big shop",
+      "behaviour_how": "Buys everything in one supermarket trip on Saturday.",
+      "context": "you cycle everywhere and carry what fits in a pannier",
+      "doubt": "I would forget to bring the bottle"
+    },
+    {
+      "id": "B040",
+      "segment": "Established household",
+      "income": 61000,
+      "age": 54,
+      "behaviour": "Price comparer",
+      "behaviour_how": "Checks the unit price and buys store brands.",
+      "context": "you do the laundry for four people",
+      "doubt": "Store-brand detergent is cheaper per wash"
+    }
+  ]
+}
