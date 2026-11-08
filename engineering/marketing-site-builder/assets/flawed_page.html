@@ -1,0 +1,110 @@
+<!doctype html>
+<!-- Deliberately flawed sample: every checker in this skill should exit 1 on it. -->
+<html data-kind="service">
+<head>
+  <meta charset="utf-8">
+  <title>Nimbus Studio</title>
+  <meta name="description" content="Nimbus Studio">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display&family=Space+Grotesk&display=swap">
+  <script src="https://cdn.example.com/aos.js"></script>
+  <script src="https://cdn.example.com/three.min.js"></script>
+  <style>
+    body { font-family: 'Poppins', sans-serif; color: #000; margin: 0; }
+    .nav { position: fixed; top: 0; width: 100%; backdrop-filter: blur(12px); background: rgba(255,255,255,.6); }
+    .chat-bubble { position: fixed; bottom: 20px; right: 20px; border-radius: 50%; }
+    .promo { position: sticky; top: 0; }
+    .hero { padding: 130px 37px 90px; background: linear-gradient(135deg, #7b2ff7, #f107a3); color: #fff; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 72px; margin-bottom: 18px; }
+    .hero p { font-size: 21px; margin: 0 0 27px; }
+    .card { padding: 22px; margin: 13px; border-radius: 14px; box-shadow: 0 4px 6px rgba(0,0,0,.1); background: #f9f9ff; }
+    .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 23px; color: #3b82f6; }
+    .card p { font-size: 15px; color: #6b7280; }
+    .pricing { padding: 70px 45px; border-radius: 28px; box-shadow: 0 20px 40px rgba(124,58,237,.35); }
+    .badge { padding: 5px 11px; border-radius: 9999px; background: #10b981; color: #fff; font-size: 11px; }
+    .btn-primary { padding: 15px 33px; border-radius: 10px; background: #f59e0b; transition: all 900ms ease; }
+    .btn-ghost { padding: 14px 30px; border-radius: 6px; border: 2px solid #ef4444; transition: width .4s, height .4s; }
+    .btn-gradient { padding: 17px 41px; border-radius: 20px; background: linear-gradient(90deg, #06b6d4, #8b5cf6); box-shadow: 0 0 30px #8b5cf6; }
+    .stats span { font-size: 54px; font-weight: 800; color: #ec4899; }
+    .quote { font-size: 19px; margin: 60px 0; mix-blend-mode: multiply; }
+    .float { animation: float 4s ease-in-out infinite; }
+    @keyframes float { 50% { transform: translateY(-14px); } }
+    .glow { filter: blur(40px); }
+    .snap { scroll-snap-type: y mandatory; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .2em; font-size: 12px; }
+    .tag { text-transform: uppercase; }
+    .about { background: url(images/team-wide.jpg) center / cover; }
+    .faq p { line-height: 1.2; }
+    @font-face { font-family: "Brand Display"; src: url(fonts/brand.woff2) format("woff2"); }
+  </style>
+</head>
+<body>
+  <div class="nav"><button class="menu-toggle"><svg viewBox="0 0 24 24"></svg></button><a href="#">Nimbus</a> <a href="#">Home</a> <a href="javascript:void(0)">Menu</a></div>
+  <main>
+    <section class="hero">
+      <canvas id="particles"></canvas>
+      <h1>Unlock the power of next-level digital experiences that elevate your brand to new heights?</h1>
+      <p>In today's fast-paced world, we empower visionary brands with seamless, cutting-edge design — crafted with passion — ensuring every pixel tells your story!</p>
+      <a class="btn-primary" href="#">Get Started 🚀</a>
+      <a class="btn-ghost" href="#">Learn More</a>
+      <a class="btn-gradient" href="#">Explore</a>
+      <img src="hero.png">
+    </section>
+    <section data-aos="fade-up">
+      <div class="stats"><span>10,000+</span> happy clients <span>3x faster</span> launches <span>99% satisfaction</span></div>
+    </section>
+    <section class="features">
+      <h3>Why choose us?</h3>
+      <div class="card fade-in"><h3>✨ Seamless onboarding</h3><p>Our robust process is honest, thoughtful and truly transparent, allowing you to relax.</p></div>
+      <div class="card fade-in"><h3>⚡ Powerful results</h3><p>We are genuinely obsessed with craft, not just pixels — rather than templates, we build a tapestry of meticulous design.</p></div>
+      <div class="card fade-in"><h3>🎯 Holistic strategy</h3><p>Simply put, our dedicated team actually cares, instead of the usual agency approach, enabling growth.</p></div>
+      <figure><img src="team.jpg" alt=""><figcaption>Our amazing team at work</figcaption></figure>
+      <img src="office.jpg" width="800">
+      <img src="laptop.jpg">
+      <img src="coffee.jpg">
+    </section>
+    <section>
+      <h2>Fast. Beautiful. Yours.</h2>
+      <h2>Bold ideas. Real results.</h2>
+      <h2>Your vision. Our craft.</h2>
+      <p class="quote">"Nimbus completely transformed our business!" — Sarah J., CEO at Acme</p>
+      <p>The result? A brand ecosystem where strategy meets creativity. Say goodbye to boring websites. Join thousands of happy customers!</p>
+      <a class="btn-primary" href="">Click here</a>
+    </section>
+    <section class="about">
+      <p class="eyebrow">About us</p>
+      <h2>Four projects, four very different problems</h2>
+      <h2>Three founders, one shared obsession</h2>
+      <h2>Our process: simple <span class="muted">and fast</span></h2>
+      <p class="eyebrow">OUR PROCESS</p>
+      <p class="eyebrow">WHAT WE DO</p>
+      <p>01</p><p>Discovery workshop.</p>
+      <p>02</p><p>Design sprint.</p>
+      <p>03</p><p>Launch.</p>
+      <p>No forms, no back-and-forth. No contracts, no surprises.</p>
+      <blockquote>"They rebuilt our site in a week and bookings doubled overnight."</blockquote>
+      <blockquote>"The most thoughtful agency we have ever worked with, hands down."</blockquote>
+      <blockquote>"Every pixel had a reason. Our investors noticed straight away."</blockquote>
+      <p>We reply within 24 hours. Quotes go out within two working days.</p>
+      <p>Since 2015 we have shipped websites. Building brands since 2015.</p>
+      <p>Names and figures on this page are examples. Case studies coming soon.</p>
+      <div class="swiper"><img src="case-1.jpg" alt="Case study one" width="600" height="400" loading="lazy"></div>
+      <a class="btn-primary" href="pricing.html">See pricing</a> <a href="pricing.html">Compare plans</a>
+      <a href="#contact">Contact</a>
+    </section>
+    <section class="faq">
+      <h2>Questions</h2>
+      <form action="#"><input type="text" name="email" placeholder="Your email"><button tabindex="3">Pricing</button></form>
+      <iframe src="https://www.google.com/maps/embed?pb=studio" title="Map"></iframe>
+      <div class="newsletter-modal"><p>Join our newsletter.</p></div>
+    </section>
+    <section class="pricing">
+      <p>Lorem ipsum dolor sit amet. Contact [Company Name] for {{pricing_tier}} details.</p>
+      <span class="badge">Most popular</span>
+      <video src="reel.mp4" autoplay muted loop></video>
+    </section>
+  </main>
+  <script src="https://widget.intercom.io/widget/abc123" async></script>
+  <script>if (navigator.webdriver) { document.documentElement.classList.add('no-motion'); }</script>
+  <footer><p>&copy; 2023 Nimbus Studio. Made with love in Brooklyn.</p></footer>
+</body>
+</html>

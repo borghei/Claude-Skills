@@ -1,0 +1,136 @@
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("fonts/source-sans-3.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  --surface: #ffffff;
+  --surface-sunken: #f3f5f7;
+  --ink: #1b2430;
+  --ink-muted: #4d5a6a;
+  --action: #0b5cad;
+  --action-ink: #ffffff;
+  --danger: #a3261b;
+  --rule: #d5dbe2;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 40px;
+  --radius-control: 6px;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+body {
+  margin: 0;
+  font-family: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--surface);
+}
+
+.workspace {
+  max-width: 72rem;
+  padding: var(--space-6) var(--space-4) var(--space-8);
+}
+
+h1 {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-2);
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin: var(--space-8) 0 var(--space-3);
+}
+
+.lede {
+  color: var(--ink-muted);
+  max-width: 65ch;
+}
+
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.ledger th,
+.ledger td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+}
+
+.ledger .num {
+  text-align: right;
+}
+
+.status-overdue {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+.hint {
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+
+.action {
+  font: inherit;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-control);
+  border: 1px solid transparent;
+  transition: background-color 150ms var(--ease-out), box-shadow 150ms var(--ease-out);
+}
+
+.action-primary {
+  color: #ffffff;
+  background-color: #0b5cad;
+}
+
+.action:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: 2px;
+}
+
+/* Mouse clicks keep no ring; keyboard focus keeps the one above. */
+.action:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+}
+
+.skip-link:focus {
+  left: var(--space-4);
+}
+
+::selection {
+  background-color: #cfe3f7;
+}
+
+.region[data-updated] {
+  animation: settle 400ms var(--ease-out);
+}
+
+@keyframes settle {
+  from { opacity: 0.4; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .region[data-updated] {
+    animation: none;
+  }
+}

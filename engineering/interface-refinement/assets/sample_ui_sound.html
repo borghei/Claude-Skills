@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ledgerly - Invoices</title>
+  <link rel="stylesheet" href="sample_ui_sound.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to invoices</a>
+  <header class="shell-header">
+    <nav aria-label="Primary">
+      <a href="/invoices" aria-current="page">Invoices</a>
+      <a href="/clients">Clients</a>
+      <a href="/reports">Reports</a>
+    </nav>
+  </header>
+
+  <main id="main" class="workspace">
+    <h1>Invoices</h1>
+    <p class="lede">12 open, 3 overdue. Overdue invoices are listed first.</p>
+
+    <section aria-labelledby="overdue-heading" class="region">
+      <h2 id="overdue-heading">Overdue</h2>
+      <table class="ledger">
+        <thead>
+          <tr><th scope="col">Client</th><th scope="col">Invoice</th><th scope="col" class="num">Amount</th><th scope="col">Due</th><th scope="col">Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Harbour Bakery</td><td>INV-0412</td><td class="num">EUR 1,240.00</td><td>3 Oct</td><td><span class="status status-overdue">Overdue 36 days</span></td></tr>
+          <tr><td>North Pier Studio</td><td>INV-0418</td><td class="num">EUR 860.50</td><td>18 Oct</td><td><span class="status status-overdue">Overdue 21 days</span></td></tr>
+          <tr><td>Calder Joinery</td><td>INV-0421</td><td class="num">EUR 3,015.00</td><td>29 Oct</td><td><span class="status status-overdue">Overdue 10 days</span></td></tr>
+        </tbody>
+      </table>
+      <button type="button" class="action action-primary">Send 3 reminders</button>
+    </section>
+
+    <section aria-labelledby="draft-heading" class="region">
+      <h2 id="draft-heading">New invoice</h2>
+      <form class="invoice-form">
+        <label for="client">Client</label>
+        <select id="client" name="client">
+          <option>Harbour Bakery</option>
+          <option>North Pier Studio</option>
+        </select>
+        <label for="amount">Amount in EUR</label>
+        <input id="amount" name="amount" inputmode="decimal" autocomplete="off">
+        <p class="hint" id="amount-hint">Use a dot for cents, for example 1240.50.</p>
+        <button type="submit" class="action action-primary">Create draft invoice</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="empty-heading" class="region">
+      <h2 id="empty-heading">Disputed</h2>
+      <img src="empty-disputed.svg" alt="" width="160" height="96">
+      <p>No disputed invoices. When a client disputes one, it moves here with their note.</p>
+    </section>
+  </main>
+</body>
+</html>

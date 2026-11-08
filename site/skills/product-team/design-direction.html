@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Direction - Claude Skills</title>
+  <meta name="description" content="Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product&#x27;s UI, picking a palette or">
+  <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/product-team/design-direction.html">
+  <meta property="og:title" content="Design Direction - Claude Skills">
+  <meta property="og:description" content="Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product&#x27;s UI, picking a palette or">
+  <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/product-team/design-direction.html">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Design Direction", "description": "Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product's UI, picking a palette or fonts, or auditing a token file.", "applicationCategory": "Product", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/product-team/design-direction.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <style>
+:root {
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
+  --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+code { font-family: var(--font-mono); font-size: 0.875em; }
+
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
+
+/* Breadcrumbs */
+.breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
+
+/* Page header */
+.page-header { padding: 48px 0 32px; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
+
+/* Search + Filter */
+.filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+.search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+.filter-select {
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; cursor: pointer;
+}
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.skill-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.skill-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.skill-card h3 a { color: var(--text); }
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
+}
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Skill detail page */
+.skill-detail { padding-bottom: 80px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
+.skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+.skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
+.skill-detail li { margin-bottom: 6px; }
+.skill-detail pre {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
+  color: var(--text); margin: 12px 0 20px;
+}
+.skill-detail code {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
+}
+.skill-detail pre code { background: none; padding: 0; }
+
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font-sans);
+  background: var(--accent); color: var(--white);
+  border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.copy-btn:hover { background: var(--accent-deep); }
+.copy-btn:active { transform: scale(0.97); }
+.copy-btn.copied { background: #2d8a4e; }
+.prompt-preview {
+  max-height: 200px; overflow-y: auto; padding: 16px 18px;
+  font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap;
+  word-wrap: break-word; color: var(--text-muted);
+  background: var(--white); margin: 0; border: none;
+  font-family: var(--font-mono);
+}
+.prompt-hint {
+  padding: 10px 18px; font-size: 0.78rem; color: var(--text-muted);
+  background: var(--bg-secondary); margin: 0; border-top: 1px solid var(--border);
+}
+
+/* Tools list */
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+.tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+/* Related skills */
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+
+/* Agents grid */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.agent-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.agent-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Commands grid */
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
+.command-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.command-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
+
+/* Footer */
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
+.footer-credit a { color: var(--text); font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .commands-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
+}
+@media (max-width: 480px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-logo">Claude Skills</a>
+    <div class="nav-links">
+      <a href="https://borghei.github.io/Claude-Skills/skills/" class="active">Skills</a>
+      <a href="https://borghei.github.io/Claude-Skills/agents/">Agents</a>
+      <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener" class="gh-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+    </div>
+  </div>
+</nav>
+<div class="breadcrumbs container"><a href="https://borghei.github.io/Claude-Skills/">Home</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/">Skills</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/product-team/">Product</a><span class=sep>/</span><span>Design Direction</span></div>
+<main class="container">
+
+<article class="skill-detail">
+  <div class="page-header">
+    <h1 class="page-title">Design Direction</h1>
+    <p class="page-subtitle">Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product&#x27;s UI, picking a palette or fonts, or auditing a token file.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Product</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 5 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">design-system</span><span class="tag">ui-direction</span><span class="tag">color-palette</span><span class="tag">typography</span><span class="tag">wcag</span><span class="tag">design-tokens</span><span class="tag">ux-rules</span><span class="tag">chart-selection</span></div>
+  </div>
+  <h2>How to Use</h2>
+<div class="platform-tabs">
+  <button class="tab-btn active" data-tab="quickstart">Quick Start</button>
+  <button class="tab-btn" data-tab="claude">Claude Code</button>
+  <button class="tab-btn" data-tab="codex">Codex</button>
+  <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
+  <button class="tab-btn" data-tab="cursor">Cursor</button>
+  <button class="tab-btn" data-tab="manual">Manual</button>
+</div>
+<div class="tab-content active" id="tab-quickstart">
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
+      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Design Direction (Product domain).
+
+Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product&#x27;s UI, picking a palette or fonts, or auditing a token file.
+
+Most interface problems are decided before anyone draws a screen: the wrong style for the audience, a brand colour that fails contrast on every button, three webfonts, a spacing scale nobody chose. This skill makes those decisions from a written brief, in order, and
+
+## Your Key Capabilities
+- — Brief to spec
+- — Audit a token file or theme
+- — Structure pages and motion
+- — Pick charts and review order for a dashboard
+- — Before handing back built UI
+- — Extend the bundled data
+
+## Frameworks &amp; Templates You Know
+- `assets/design-spec-template.md` with the decisions, findings and owners.
+- Decision frameworks
+- **Why it happens:** The last page that converted becomes the template.
+- | `assets/design-spec-template.md` | Decision record and sign-off sheet |
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/design-direction
+
+---
+Start by asking the user what they need help with.">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Design Direction (Product domain).
+
+Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product&#x27;s UI, picking a palette or fonts, or auditing a token file.
+
+Most interface problems are decided before anyone draws a screen: the wrong style for the audience, a brand colour that fails contrast on every button, three webfonts, a spacing scale nobody chose. This skill makes those decisions from a written brief, in order, and
+
+## Your Key Capabilities
+- — Brief to spec
+- — Audit a token file or theme
+- — Structure pages and motion
+- — Pick charts and review order for a dashboard
+- — Before handing back built UI
+- — Extend the bundled data
+
+## Frameworks &amp; Templates You Know
+- `assets/design-spec-template.md` with the decisions, findings and owners.
+- Decision frameworks
+- **Why it happens:** The last page that converted becomes the template.
+- | `assets/design-spec-template.md` | Decision record and sign-off sheet |
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/design-direction
+
+---
+Start by asking the user what they need help with.</pre>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Design Direction&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Design Direction
+
+Most interface problems are decided before anyone draws a screen: the wrong style for the
+audience, a brand colour that fails contrast on every button, three webfonts, a spacing
+scale nobody chose. This skill makes those decisions from a written brief, in order, and
+shows its working. A recommender maps the product to one of 50 product types, adjusts
+for cues in the brief (pre-launch, enterprise buyer, outdoor use, beginners), and from
+there picks a style direction, a palette whose contrast is computed in both modes, a type
+pairing with roles, spacing/radius/icon/motion tokens, a landing pattern and the core
+screens with their section order, a duration per interaction, the UX rules to review
+first, and the right chart for each data question. A checker then audits any token file
+or CSS theme against the same rules, and a pre-delivery checklist covers what tokens
+cannot prove.
+
+The agent never states a contrast ratio it has not computed and never calls a spec
+consistent by hand: the tool&#x27;s verdict and findings go into the deliverable as printed.
+
+## When to use this skill
+
+- **Starting a new product or redesign** and the team needs one agreed direction
+  before building screens
+- **Choosing a palette or typefaces** for a product type, with the reasoning written down
+- **Fitting a brand colour into UI** without it failing contrast on buttons and links
+- **Auditing an inherited theme** (CSS custom properties or tokens JSON) before a release
+- **Picking a chart** for a dashboard from the question it must answer
+- **Structuring a landing page or core screen**: section order, where the primary action
+  sits, what evidence the page must carry
+- **Setting motion per interaction** (dialogs, toasts, lists, page changes) with the
+  reduced-motion replacement for each
+- **Final check before handing back built UI** against the pre-delivery checklist
+- **Setting the review order** for a design critique: which rules matter most for this product
+
+This skill decides *what* system to use. For building a finished marketing site from the
+spec, or for refining an existing interface screen by screen, use a frontend build or
+interface-refinement skill; for component APIs and governance, use a design-system
+programme skill.
+
+## Inputs the skill expects
+
+- A brief: one sentence on the product and who it is for (required); platform, mode,
+  contrast target, brand colour, stack, mood words, a forced direction or type pairing, data questions,
+  and directions to avoid (optional). Field list in `references/design-decision-guide.md`.
+- For an audit: a tokens JSON file, the recommender&#x27;s JSON output, or the `.css` files
+  that define the theme&#x27;s custom properties.
+
+## Clarify First
+
+The product type and the audience shape every downstream choice. Settle the inputs below
+before producing a spec. When one is missing and would change the result, ask; when it
+would not, use the default and say so at the top of the spec.
+
+- **Who uses it, where, and on what device:** decides platform, touch target, density
+  and whether low-vision or motion-sensitive defaults apply.
+- **Light, dark or both:** `both` doubles the palette work and the contrast checks;
+  agree it now, not after the build.
+- **Fixed brand inputs:** a brand colour or typeface that cannot change. The tool
+  adjusts colours for contrast and reports the shade it used.
+- **AA or AAA:** AAA narrows the palette set sharply (5 of 22 bundled palettes pass in
+  both modes).
+- **What the public page must do:** sell now, collect a waitlist, book a demo, or get an
+  app installed. Say it in the brief (&quot;pre-launch&quot;, &quot;enterprise&quot;, &quot;mobile app&quot;); it
+  changes the landing pattern.
+- **What the data must answer:** dashboards need questions in plain words (&quot;revenue
+  trend over 12 months&quot;), not chart names.
+
+Ask about the two or three that matter most for this request. If the user wants a result
+straight away, run quick mode (`--product &quot;...&quot;`) and list the assumed defaults.
+
+## Quick Start
+
+```bash
+# 1. Brief -&gt; spec (exit 1 if the brief contradicts itself)
+python3 product-team/design-direction/scripts/design_recommender.py \
+  --brief product-team/design-direction/assets/sample_brief.json
+
+# 2. Save the spec, then render it as a design-system document and a CSS theme
+python3 product-team/design-direction/scripts/design_recommender.py \
+  --brief product-team/design-direction/assets/sample_brief.json --format json &gt; spec.json
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format markdown &gt; DESIGN-SPEC.md
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format css &gt; theme.css
+
+# 3. Audit a CSS theme: extract its tokens, then check them (exit 1 on critical/high)
+python3 product-team/design-direction/scripts/css_token_extractor.py \
+  --css product-team/design-direction/assets/sample_theme_flawed.css --format json &gt; tokens.json
+python3 product-team/design-direction/scripts/design_spec_checker.py --tokens tokens.json
+
+# 4. Look up rules, charts, palettes, pairings or stack notes
+python3 product-team/design-direction/scripts/ux_rules_search.py --query &quot;form errors&quot;
+```
+
+## Tools Overview
+
+| Tool | Input | Output | Exit codes |
+|------|-------|--------|------------|
+| `design_recommender.py` | Brief JSON or `--product` sentence | Spec: product match, applied modifiers, direction, palette with computed contrast per mode, type pairing and scale, spacing/radius/elevation/motion/touch/focus/icon tokens, landing and screen patterns, motion per interaction, prioritised UX rules, charts, stack notes, avoid list, findings, verdict | 0 consistent, 1 conflicts, 2 bad input |
+| `spec_renderer.py` | Spec JSON | Markdown design-system document (with page patterns, motion table and delivery blockers), CSS theme (light, dark, reduced motion, focus ring, icon sizes), bare tokens JSON, or text summary | 0 consistent spec, 1 spec carries conflicts (rendered with a banner), 2 not a spec |
+| `css_token_extractor.py` | One or more `.css` files (hex, `rgb()`, `hsl()`, bare `H S% L%`, `oklch()`, `color-mix(in srgb)`, `var()` chains, nested `@layer`/`@media`) | Tokens JSON from custom properties: colour roles per mode, declared `color-scheme` modes, type, spacing, radius, motion, touch, focus, plus an `extraction` block of unresolved values | 0 complete, 1 gaps (missing roles, no dark block and no light-only declaration, a colour it cannot read, no spacing/radius/base size), 2 unreadable or no custom properties |
+| `design_spec_checker.py` | Tokens JSON or spec JSON (`-` for stdin); or `--palettes` | Findings tied to rule ids with severity, counts per severity; a token that is absent (touch target, focus width) is a `medium` &quot;check by hand&quot;, a token that is present and wrong takes the rule&#x27;s severity | 0 no critical/high, 1 critical/high (any with `--strict`), 2 bad input |
+| `ux_rules_search.py` | Query and filters | Ranked rules, charts, stack notes, directions, palettes, pairings, product types, page patterns, motion | 0 results, 1 none, 2 bad arguments |
+
+All five are standalone, stdlib-only, deterministic, offline, and support `--format`
+(`text|json`; the renderer `markdown|css|json|text`). Bundled data lives in
+`references/*.json`: 50 product types, 10 brief modifiers, 18 directions, 22 palettes
+(light and dark), 21 type pairings, 91 UX rules, 22 chart rules, 23 page patterns
+(13 landing, 10 screen), 12 motion interactions, 14 stacks, plus token presets.
+
+## Workflows
+
+### Workflow 1 — Brief to spec
+
+1. Write the brief. Copy `assets/sample_brief.json` and replace every field; delete the
+   optional fields you have no evidence for rather than guessing.
+2. Run the recommender in text mode and read the product match. If the top candidate is
+   wrong, or the tool reports `no-match` or `weak-match`, set `product_type` explicitly
+   and re-run (always for a brief not written in English). Read
+   each `info` finding: it names a modifier the brief triggered and what it changed.
+3. Resolve every `fail` finding by changing the brief, not the output:
+
+| Finding | Meaning | Fix in the brief |
+|---------|---------|------------------|
+| `no-match` | Nothing in the brief matched any product type (vague, or not in English) | Set `product_type`; keyword matching is English-only |
+| `direction-conflict` | Both directions excluded or cannot render the mode | Loosen `must_avoid`, change `mode`, or pick another `product_type` |
+| `palette-contrast` | No candidate palette reaches the target | Drop to AA, or supply a darker `brand_color` |
+| `motion-audience` | Expressive motion for a motion-sensitive audience | Set `motion` to `calm` |
+| `stack-platform` | Stack cannot run on the platform | Fix `platform` or `stack` |
+
+Warnings worth a sentence each: `weak-match` (product type is a guess), `unknown-field`
+(a misspelt brief key, such as `brand_colour`, that was ignored),
+`direction-risk` (a forced direction with high accessibility risk), `brand-adjusted`,
+`palette-fallback`, `chart-unmatched`.
+
+4. Each `warn` needs one sentence in the spec: accepted and why, or fixed.
+5. Make it the product&#x27;s own (see &quot;Defaults are a floor&quot; below), by changing the brief
+   and re-running, never by editing the output.
+6. Render the markdown document and the CSS theme from the saved spec, then fill
+   `assets/design-spec-template.md` with the decisions, findings and owners.
+
+```bash
+python3 product-team/design-direction/scripts/design_recommender.py --brief brief.json --format json &gt; spec.json
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format markdown &gt; DESIGN-SPEC.md
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format css &gt; theme.css
+```
+
+The CSS theme declares `color-scheme` for the modes it covers, puts light roles on `:root`
+(dark roles there for a dark-only product), dark roles under
+`prefers-color-scheme: dark` and `[data-theme=&quot;dark&quot;]`, zeroes durations under
+`prefers-reduced-motion`, and sets a `:focus-visible` ring from the focus tokens.
+
+### Workflow 2 — Audit a token file or theme
+
+1. Take the theme as it ships. For CSS, extract its tokens first; the extractor exits 1
+   and lists each gap (no dark block, missing roles, a colour value it cannot read) that
+   would leave the audit partial. Pass every file that defines the theme in cascade order
+   (`--css tokens.css theme.css`). A deliberately light-only theme declares
+   `color-scheme: light` on `:root`; without it the missing dark block is a gap.
+2. Run the checker. Fix every `critical` and `high` finding. Each names the rule, the
+   measured value and the threshold; the fix is usually the token, not the component.
+3. Re-run until it exits 0, then run with `--strict` and decide on each remaining medium
+   or low finding.
+4. Review the manual rules (those with `auto: null`) with the product open; a clean token
+   audit says nothing about whether components use the tokens.
+
+```bash
+python3 product-team/design-direction/scripts/css_token_extractor.py --css theme.css --format json &gt; tokens.json
+python3 product-team/design-direction/scripts/design_spec_checker.py --tokens tokens.json --target AA
+python3 product-team/design-direction/scripts/design_spec_checker.py --tokens spec.json --strict --format json
+```
+
+### Workflow 3 — Structure pages and motion
+
+1. Read `page_patterns` in the spec: one landing pattern (none for internal tools) and two
+   or three core screens, each with sections in order, the primary action, the evidence
+   it needs, and when not to use it. If the landing is wrong for the stage of the
+   product, add the cue to the brief (&quot;pre-launch&quot;, &quot;enterprise&quot;) rather than swapping
+   it by hand.
+2. Look up an alternative when a page does not fit:
+
+```bash
+python3 product-team/design-direction/scripts/ux_rules_search.py --domain patterns --query &quot;pricing page&quot;
+python3 product-team/design-direction/scripts/ux_rules_search.py --domain motion --query &quot;modal&quot;
+```
+
+3. Copy the motion table into the build ticket. Each row has one duration for the
+   spec&#x27;s tier, the only properties allowed to animate, and the reduced-motion
+   replacement. Calm products have no stagger, scroll reveal or celebration rows on
+   purpose.
+4. Every section the page needs evidence for (customer quotes, ratings, licences) needs
+   a real source before build starts; a placeholder becomes a fake in production.
+
+### Workflow 4 — Pick charts and review order for a dashboard
+
+1. Write each view as a question in plain words.
+2. Add them to the brief&#x27;s `data_questions`, or look each up directly:
+
+```bash
+python3 product-team/design-direction/scripts/ux_rules_search.py --domain charts --query &quot;share of revenue by plan&quot;
+python3 product-team/design-direction/scripts/ux_rules_search.py --domain rules --category data --min-severity medium
+```
+
+3. For each chart, copy its accessible fallback into the dashboard spec.
+4. Review in the order in `references/review-and-charts.md`: critical rules first, then
+   the product type&#x27;s priority categories.
+
+### Workflow 5 — Before handing back built UI
+
+1. Re-extract and re-check the shipped theme (Workflow 2); it must exit 0.
+2. Walk `references/pre-delivery-checklist.md` on the running build: process, colour,
+   type, icons, interaction, motion, layout and states, product-specific items.
+3. Mark each line pass, fail or not applicable with a reason. Any failing critical line
+   blocks delivery; the rendered spec lists those blockers under &quot;Before delivery&quot;.
+
+### Workflow 6 — Extend the bundled data
+
+1. Add the entry to the right `references/*.json` file with original wording; ids are
+   lower-case and hyphenated.
+2. For palettes, run `design_spec_checker.py --palettes`; every palette must pass AA in
+   both modes before it is offered.
+3. Page patterns, screens and modifier ids are cross-referenced from `product-types.json`
+   and `brief-modifiers.json`; keep `kind` right (`landing` vs `screen`).
+4. Run the tools on the sample assets; exit codes must stay 0 / 1 / 2.
+
+### Validation checkpoint before the spec is shared
+
+- [ ] Verdict pasted from the tool, with every finding and its resolution
+- [ ] Contrast tables come from the tool output, both modes when mode is `both`
+- [ ] Brand colour adjustments shown to the brand owner, original kept for decoration only
+- [ ] No more than two webfont families plus a mono
+- [ ] Each chart traces to a written data question
+- [ ] Token audit exits 0 on the shipped theme
+- [ ] Every `info` modifier finding read and accepted, or the brief changed
+- [ ] Each landing section that needs evidence has a real source named
+
+## Decision frameworks
+
+### Which direction for which product
+
+| Product family | Default direction | Why |
+|----------------|-------------------|-----|
+| B2B SaaS, docs, internal tools | **[RECOMMENDED]** Swiss Functional | Type and grid carry hierarchy; nothing competes with the work |
+| Admin, analytics, monitoring, logistics | **[PROVEN]** Dense Operational | Many rows, tabular figures, meaningful status colour |
+| Banking, insurance, government | **[PROVEN]** Trust Institutional | Predictability reads as safety; flourish reads as risk |
+| Patient apps, clinical tools | **[PROVEN]** Clinical Clear | Every state labelled; nothing decorative near critical values |
+| Publishing, law, research | **[RECOMMENDED]** Editorial | Reading comfort is the product |
+| Luxury, beauty, property | **[RECOMMENDED]** Premium Restraint | Space and imagery signal quality; watch thin-text contrast |
+| Retail, marketplaces, delivery | **[PROVEN]** Retail Merchandising | Product image as hero, price near the action |
+| Streaming, gaming | **[RECOMMENDED]** Dark Immersive | Artwork carries colour; chrome stays out of the way |
+| Kids, habit and language apps | **[RECOMMENDED]** Playful Tactile | Big targets and visible feedback; strict limits on looping motion |
+| Developer and security tools | **[RECOMMENDED]** Technical Mono | Keyboard-first, code-adjacent, dark-capable |
+| Clinics, trades, local services, dating | **[RECOMMENDED]** Warm Humanist | Real people and plain words; the booking or safety action is never more than one tap away |
+| Mobility, utilities, weather | **[RECOMMENDED]** Calm Utility | Used in motion or at a glance: big targets, one job per screen |
+| Smart home and device companions | **[RECOMMENDED]** Soft Depth | Tactile controls, but device state is always confirmed in text, never colour alone |
+
+Mood words choose between the product&#x27;s two directions; `direction` in the brief forces
+one. Translucent Layered and Bento Modular are never defaults: they are offered when
+asked for, with their risks reported.
+
+The escape hatch: when the audience contradicts the category (a bank for teenagers, a
+clinical tool used in the field), choose by audience and record the reason.
+
+### Contrast targets
+
+| Pair | AA minimum | AAA minimum |
+|------|-----------|-------------|
+| Body and muted text on background or surface | 4.5:1 | 7:1 |
+| Text on coloured fills (buttons, badges) | 4.5:1 | 4.5:1 (tool default) |
+| Controls, focus ring against background | 3:1 | 3:1 |
+| Error and success text on background | 4.5:1 | 4.5:1 |
+
+**[PROVEN]** Check both modes separately. Dark mode is where muted text and brand
+colours most often fail.
+
+### Defaults are a floor, not an identity
+
+A spec with no `brand_color`, no `mood` and no `direction` is the product type&#x27;s safest
+answer, and for software that means a neutral sans and a stock blue: correct, accessible
+and indistinguishable from its competitors. Before sharing the spec, pull at least two
+of these levers and record which:
+
+- **Brand colour.** Pass it as `brand_color`; without it the palette&#x27;s stock primary ships.
+- **Mood words.** Two or three words (`&quot;warm&quot;`, `&quot;precise&quot;`, `&quot;editorial&quot;`) decide between
+  the product type&#x27;s two directions and the pairing that follows.
+- **One signature.** Pick one item from the direction&#x27;s `signatures` list and make it the
+  thing people remember (a numbered grid, a display serif on headings only, tabular
+  figures as a visual motif). One, used consistently, not three.
+- **The type pairing.** When the pairing uses one family for display and body, a pairing
+  with a distinctive display face (`ux_rules_search.py --domain pairings`) is the cheapest
+  identity there is; set its id as `pairing` in the brief and re-run.
+
+A lever that would break a rule (a thin display face on a low-vision product, a second
+accent colour) is not identity, it is a defect; the checker and the checklist still apply.
+
+### Density
+
+**[RECOMMENDED]** Comfortable unless the product is operational (compact) or
+reading/luxury/calm (spacious). Compact changes gaps, never hit areas: touch targets stay
+at 44px web, 48dp Android.
+
+## Anti-Patterns
+
+### The Mood-Board Spec
+**Mistake:** Choosing a style because it looked good on a showcase site, then fitting the
+product to it.
+**Why it happens:** Showcase images are vivid; briefs are words.
+**Instead:** Start from the product type and audience, run the recommender, and only
+deviate with a written reason.
+
+### Contrast by Eye
+**Mistake:** Approving a palette because it &quot;looks readable&quot; on a calibrated monitor.
+**Why it happens:** Designers work on good screens in good light.
+**Instead:** Compute every pair in both modes. The tool prints ratios; paste them, do
+not paraphrase them.
+
+### The Logo Colour as Button Colour
+**Mistake:** Using the brand hex for links and button fills unchanged.
+**Why it happens:** Brand guidelines list one primary colour and nothing about UI use.
+**Instead:** Pass it as `brand_color`; use the adjusted shade the tool reports for text
+and controls and keep the original for large decorative use.
+
+### Dark Mode by Inversion
+**Mistake:** Flipping the light palette and calling it dark mode.
+**Why it happens:** It is one line of CSS.
+**Instead:** Use a palette&#x27;s own dark roles and check them; the checker flags a theme
+with no dark roles unless it declares itself light-only (`modes` or `color-scheme`).
+
+### Font Collecting
+**Mistake:** A display face, a body face, a UI face and a mono, each in four weights.
+**Why it happens:** Each was added for one screen.
+**Instead:** One pairing with roles, two families plus a mono at most. The checker flags
+more than three.
+
+### The Borrowed Landing Page
+**Mistake:** Reusing a launch-page layout (waitlist, countdown, logo wall) for a product
+that is live, or a sales-led page for a product people can just sign up to.
+**Why it happens:** The last page that converted becomes the template.
+**Instead:** State the page&#x27;s job in the brief and use the pattern the tool returns; the
+pattern&#x27;s &quot;not when&quot; line says when it misleads.
+
+### One Duration for Everything
+**Mistake:** Every transition at 300ms with the same easing, exits as slow as entries.
+**Why it happens:** A single `transition: all .3s` is quick to write.
+**Instead:** Use the motion table: one duration per interaction, exits faster than
+entries, only transform and opacity, and the listed reduced-motion replacement.
+
+### Fixing Output Instead of Brief
+**Mistake:** Hand-editing generated tokens to silence a finding.
+**Why it happens:** It is faster than re-running.
+**Instead:** Change the brief and re-run, so the spec and its reasoning stay in step.
+
+## Reference Documentation
+
+- `references/design-decision-guide.md` — the decision chain, why each default, when to
+  override, brief/tokens/CSS formats
+- `references/review-and-charts.md` — review order by severity and product priority,
+  writing findings, chart choice and chart colour rules
+- `references/pre-delivery-checklist.md` — the final pass on built UI, with the
+  critical lines that block delivery
+- `references/*.json` — the bundled decision data (product types, directions, palettes,
+  type pairings, UX rules, charts, stacks)
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/design_recommender.py` | Brief to spec, with findings and verdict |
+| `scripts/spec_renderer.py` | Spec to markdown document, CSS theme, tokens JSON or text |
+| `scripts/css_token_extractor.py` | CSS custom properties to tokens JSON |
+| `scripts/design_spec_checker.py` | Token audit against the rules; bundled palette self-check |
+| `scripts/ux_rules_search.py` | Search all bundled data |
+| `references/token-presets.json` | Spacing, motion and elevation presets; audience cues |
+| `references/product-types.json` | 50 product types with defaults, priorities, risks, landing and screens |
+| `references/brief-modifiers.json` | 10 cue-driven adjustments to landing, density, motion, mode, direction |
+| `references/page-patterns.json` | 13 landing and 10 screen patterns: sections, primary action, evidence, when not |
+| `references/motion.json` | 12 interactions with duration per tier, properties, reduced-motion replacement |
+| `references/pre-delivery-checklist.md` | Final pass on built UI |
+| `references/directions.json` | 18 style directions with tokens and pitfalls |
+| `references/palettes.json` | 22 palettes with light and dark roles |
+| `references/type-pairings.json` | 21 pairings with display/body/mono roles |
+| `references/ux-rules.json` | 91 rules with severity, platform, check method |
+| `references/charts.json` | 22 data questions mapped to charts |
+| `references/stacks.json` | 14 stacks with implementation notes |
+| `assets/sample_brief.json` | Sound brief: freelancer invoicing SaaS (exit 0) |
+| `assets/sample_brief_flawed.json` | Contradictory brief: meditation app (exit 1) |
+| `assets/sample_tokens.json` | Sound token file rendered from the sound brief (checker exit 0) |
+| `assets/sample_theme.css` | Sound CSS theme rendered from the sound brief (extractor and checker exit 0) |
+| `assets/sample_theme_flawed.css` | Flawed inherited theme (extractor exit 1, checker exit 1) |
+| `assets/sample_theme_framework.css` | Sound theme in component-library style: bare HSL channels, `oklch`, `color-mix`, `var()` chains, `@layer`, nested `.dark &amp;` (extractor and checker exit 0) |
+| `assets/design-spec-template.md` | Decision record and sign-off sheet |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Product-type matching and a full design-system spec from a brief
+- Computed WCAG 2.x contrast for the eleven role pairs that carry text, controls or status, both modes
+- Brand colour adjustment to reach contrast
+- Static audit of tokens JSON and CSS custom properties
+- Landing and screen structure, and motion per interaction
+- UX rule, chart, pattern and stack-note lookup
+- A manual pre-delivery checklist for built UI
+
+**Out of Scope:**
+- Rendering, screenshots or browser-based checks; the checker reads files, it does not
+  load pages
+- Logos, illustrations, imagery and any generated artwork
+- Component APIs, variants and design-system governance
+- Brand voice and messaging
+
+**Important Caveats:**
+- Contrast uses the WCAG 2.x formula. APCA or WCAG 3 results can differ, especially for
+  dark mode and thin type.
+- Token checks prove the tokens are sound, not that components use them.
+- Type pairings name typefaces; confirm each licence before shipping.
+- Product types are defaults, not rules: an unusual audience is a reason to override,
+  recorded in the spec.
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Design Direction&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Design Direction in the Product domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Design Direction&quot;**
+   - Description: &quot;Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product&#x27;s UI, picking a palette or fonts, or auditing a token file.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/product-team/design-direction/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Design Direction&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Design Direction
+
+Most interface problems are decided before anyone draws a screen: the wrong style for the
+audience, a brand colour that fails contrast on every button, three webfonts, a spacing
+scale nobody chose. This skill makes those decisions from a written brief, in order, and
+shows its working. A recommender maps the product to one of 50 product types, adjusts
+for cues in the brief (pre-launch, enterprise buyer, outdoor use, beginners), and from
+there picks a style direction, a palette whose contrast is computed in both modes, a type
+pairing with roles, spacing/radius/icon/motion tokens, a landing pattern and the core
+screens with their section order, a duration per interaction, the UX rules to review
+first, and the right chart for each data question. A checker then audits any token file
+or CSS theme against the same rules, and a pre-delivery checklist covers what tokens
+cannot prove.
+
+The agent never states a contrast ratio it has not computed and never calls a spec
+consistent by hand: the tool&#x27;s verdict and findings go into the deliverable as printed.
+
+## When to use this skill
+
+- **Starting a new product or redesign** and the team needs one agreed direction
+  before building screens
+- **Choosing a palette or typefaces** for a product type, with the reasoning written down
+- **Fitting a brand colour into UI** without it failing contrast on buttons and links
+- **Auditing an inherited theme** (CSS custom properties or tokens JSON) before a release
+- **Picking a chart** for a dashboard from the question it must answer
+- **Structuring a landing page or core screen**: section order, where the primary action
+  sits, what evidence the page must carry
+- **Setting motion per interaction** (dialogs, toasts, lists, page changes) with the
+  reduced-motion replacement for each
+- **Final check before handing back built UI** against the pre-delivery checklist
+- **Setting the review order** for a design critique: which rules matter most for this product
+
+This skill decides *what* system to use. For building a finished marketing site from the
+spec, or for refining an existing interface screen by screen, use a frontend build or
+interface-refinement skill; for component APIs and governance, use a design-system
+programme skill.
+
+## Inputs the skill expects
+
+- A brief: one sentence on the product and who it is for (required); platform, mode,
+  contrast target, brand colour, stack, mood words, a forced direction or type pairing, data questions,
+  and directions to avoid (optional). Field list in `references/design-decision-guide.md`.
+- For an audit: a tokens JSON file, the recommender&#x27;s JSON output, or the `.css` files
+  that define the theme&#x27;s custom properties.
+
+## Clarify First
+
+The product type and the audience shape every downstream choice. Settle the inputs below
+before producing a spec. When one is missing and would change the result, ask; when it
+would not, use the default and say so at the top of the spec.
+
+- **Who uses it, where, and on what device:** decides platform, touch target, density
+  and whether low-vision or motion-sensitive defaults apply.
+- **Light, dark or both:** `both` doubles the palette work and the contrast checks;
+  agree it now, not after the build.
+- **Fixed brand inputs:** a brand colour or typeface that cannot change. The tool
+  adjusts colours for contrast and reports the shade it used.
+- **AA or AAA:** AAA narrows the palette set sharply (5 of 22 bundled palettes pass in
+  both modes).
+- **What the public page must do:** sell now, collect a waitlist, book a demo, or get an
+  app installed. Say it in the brief (&quot;pre-launch&quot;, &quot;enterprise&quot;, &quot;mobile app&quot;); it
+  changes the landing pattern.
+- **What the data must answer:** dashboards need questions in plain words (&quot;revenue
+  trend over 12 months&quot;), not chart names.
+
+Ask about the two or three that matter most for this request. If the user wants a result
+straight away, run quick mode (`--product &quot;...&quot;`) and list the assumed defaults.
+
+## Quick Start
+
+```bash
+# 1. Brief -&gt; spec (exit 1 if the brief contradicts itself)
+python3 product-team/design-direction/scripts/design_recommender.py \
+  --brief product-team/design-direction/assets/sample_brief.json
+
+# 2. Save the spec, then render it as a design-system document and a CSS theme
+python3 product-team/design-direction/scripts/design_recommender.py \
+  --brief product-team/design-direction/assets/sample_brief.json --format json &gt; spec.json
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format markdown &gt; DESIGN-SPEC.md
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format css &gt; theme.css
+
+# 3. Audit a CSS theme: extract its tokens, then check them (exit 1 on critical/high)
+python3 product-team/design-direction/scripts/css_token_extractor.py \
+  --css product-team/design-direction/assets/sample_theme_flawed.css --format json &gt; tokens.json
+python3 product-team/design-direction/scripts/design_spec_checker.py --tokens tokens.json
+
+# 4. Look up rules, charts, palettes, pairings or stack notes
+python3 product-team/design-direction/scripts/ux_rules_search.py --query &quot;form errors&quot;
+```
+
+## Tools Overview
+
+| Tool | Input | Output | Exit codes |
+|------|-------|--------|------------|
+| `design_recommender.py` | Brief JSON or `--product` sentence | Spec: product match, applied modifiers, direction, palette with computed contrast per mode, type pairing and scale, spacing/radius/elevation/motion/touch/focus/icon tokens, landing and screen patterns, motion per interaction, prioritised UX rules, charts, stack notes, avoid list, findings, verdict | 0 consistent, 1 conflicts, 2 bad input |
+| `spec_renderer.py` | Spec JSON | Markdown design-system document (with page patterns, motion table and delivery blockers), CSS theme (light, dark, reduced motion, focus ring, icon sizes), bare tokens JSON, or text summary | 0 consistent spec, 1 spec carries conflicts (rendered with a banner), 2 not a spec |
+| `css_token_extractor.py` | One or more `.css` files (hex, `rgb()`, `hsl()`, bare `H S% L%`, `oklch()`, `color-mix(in srgb)`, `var()` chains, nested `@layer`/`@media`) | Tokens JSON from custom properties: colour roles per mode, declared `color-scheme` modes, type, spacing, radius, motion, touch, focus, plus an `extraction` block of unresolved values | 0 complete, 1 gaps (missing roles, no dark block and no light-only declaration, a colour it cannot read, no spacing/radius/base size), 2 unreadable or no custom properties |
+| `design_spec_checker.py` | Tokens JSON or spec JSON (`-` for stdin); or `--palettes` | Findings tied to rule ids with severity, counts per severity; a token that is absent (touch target, focus width) is a `medium` &quot;check by hand&quot;, a token that is present and wrong takes the rule&#x27;s severity | 0 no critical/high, 1 critical/high (any with `--strict`), 2 bad input |
+| `ux_rules_search.py` | Query and filters | Ranked rules, charts, stack notes, directions, palettes, pairings, product types, page patterns, motion | 0 results, 1 none, 2 bad arguments |
+
+All five are standalone, stdlib-only, deterministic, offline, and support `--format`
+(`text|json`; the renderer `markdown|css|json|text`). Bundled data lives in
+`references/*.json`: 50 product types, 10 brief modifiers, 18 directions, 22 palettes
+(light and dark), 21 type pairings, 91 UX rules, 22 chart rules, 23 page patterns
+(13 landing, 10 screen), 12 motion interactions, 14 stacks, plus token presets.
+
+## Workflows
+
+### Workflow 1 — Brief to spec
+
+1. Write the brief. Copy `assets/sample_brief.json` and replace every field; delete the
+   optional fields you have no evidence for rather than guessing.
+2. Run the recommender in text mode and read the product match. If the top candidate is
+   wrong, or the tool reports `no-match` or `weak-match`, set `product_type` explicitly
+   and re-run (always for a brief not written in English). Read
+   each `info` finding: it names a modifier the brief triggered and what it changed.
+3. Resolve every `fail` finding by changing the brief, not the output:
+
+| Finding | Meaning | Fix in the brief |
+|---------|---------|------------------|
+| `no-match` | Nothing in the brief matched any product type (vague, or not in English) | Set `product_type`; keyword matching is English-only |
+| `direction-conflict` | Both directions excluded or cannot render the mode | Loosen `must_avoid`, change `mode`, or pick another `product_type` |
+| `palette-contrast` | No candidate palette reaches the target | Drop to AA, or supply a darker `brand_color` |
+| `motion-audience` | Expressive motion for a motion-sensitive audience | Set `motion` to `calm` |
+| `stack-platform` | Stack cannot run on the platform | Fix `platform` or `stack` |
+
+Warnings worth a sentence each: `weak-match` (product type is a guess), `unknown-field`
+(a misspelt brief key, such as `brand_colour`, that was ignored),
+`direction-risk` (a forced direction with high accessibility risk), `brand-adjusted`,
+`palette-fallback`, `chart-unmatched`.
+
+4. Each `warn` needs one sentence in the spec: accepted and why, or fixed.
+5. Make it the product&#x27;s own (see &quot;Defaults are a floor&quot; below), by changing the brief
+   and re-running, never by editing the output.
+6. Render the markdown document and the CSS theme from the saved spec, then fill
+   `assets/design-spec-template.md` with the decisions, findings and owners.
+
+```bash
+python3 product-team/design-direction/scripts/design_recommender.py --brief brief.json --format json &gt; spec.json
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format markdown &gt; DESIGN-SPEC.md
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format css &gt; theme.css
+```
+
+The CSS theme declares `color-scheme` for the modes it covers, puts light roles on `:root`
+(dark roles there for a dark-only product), dark roles under
+`prefers-color-scheme: dark` and `[data-theme=&quot;dark&quot;]`, zeroes durations under
+`prefers-reduced-motion`, and sets a `:focus-visible` ring from the focus tokens.
+
+### Workflow 2 — Audit a token file or theme
+
+1. Take the theme as it ships. For CSS, extract its tokens first; the extractor exits 1
+   and lists each gap (no dark block, missing roles, a colour value it cannot read) that
+   would leave the audit partial. Pass every file that defines the theme in cascade order
+   (`--css tokens.css theme.css`). A deliberately light-only theme declares
+   `color-scheme: light` on `:root`; without it the missing dark block is a gap.
+2. Run the checker. Fix every `critical` and `high` finding. Each names the rule, the
+   measured value and the threshold; the fix is usually the token, not the component.
+3. Re-run until it exits 0, then run with `--strict` and decide on each remaining medium
+   or low finding.
+4. Review the manual rules (those with `auto: null`) with the product open; a clean token
+   audit says nothing about whether components use the tokens.
+
+```bash
+python3 product-team/design-direction/scripts/css_token_extractor.py --css theme.css --format json &gt; tokens.json
+python3 product-team/design-direction/scripts/design_spec_checker.py --tokens tokens.json --target AA
+python3 product-team/design-direction/scripts/design_spec_checker.py --tokens spec.json --strict --format json
+```
+
+### Workflow 3 — Structure pages and motion
+
+1. Read `page_patterns` in the spec: one landing pattern (none for internal tools) and two
+   or three core screens, each with sections in order, the primary action, the evidence
+   it needs, and when not to use it. If the landing is wrong for the stage of the
+   product, add the cue to the brief (&quot;pre-launch&quot;, &quot;enterprise&quot;) rather than swapping
+   it by hand.
+2. Look up an alternative when a page does not fit:
+
+```bash
+python3 product-team/design-direction/scripts/ux_rules_search.py --domain patterns --query &quot;pricing page&quot;
+python3 product-team/design-direction/scripts/ux_rules_search.py --domain motion --query &quot;modal&quot;
+```
+
+3. Copy the motion table into the build ticket. Each row has one duration for the
+   spec&#x27;s tier, the only properties allowed to animate, and the reduced-motion
+   replacement. Calm products have no stagger, scroll reveal or celebration rows on
+   purpose.
+4. Every section the page needs evidence for (customer quotes, ratings, licences) needs
+   a real source before build starts; a placeholder becomes a fake in production.
+
+### Workflow 4 — Pick charts and review order for a dashboard
+
+1. Write each view as a question in plain words.
+2. Add them to the brief&#x27;s `data_questions`, or look each up directly:
+
+```bash
+python3 product-team/design-direction/scripts/ux_rules_search.py --domain charts --query &quot;share of revenue by plan&quot;
+python3 product-team/design-direction/scripts/ux_rules_search.py --domain rules --category data --min-severity medium
+```
+
+3. For each chart, copy its accessible fallback into the dashboard spec.
+4. Review in the order in `references/review-and-charts.md`: critical rules first, then
+   the product type&#x27;s priority categories.
+
+### Workflow 5 — Before handing back built UI
+
+1. Re-extract and re-check the shipped theme (Workflow 2); it must exit 0.
+2. Walk `references/pre-delivery-checklist.md` on the running build: process, colour,
+   type, icons, interaction, motion, layout and states, product-specific items.
+3. Mark each line pass, fail or not applicable with a reason. Any failing critical line
+   blocks delivery; the rendered spec lists those blockers under &quot;Before delivery&quot;.
+
+### Workflow 6 — Extend the bundled data
+
+1. Add the entry to the right `references/*.json` file with original wording; ids are
+   lower-case and hyphenated.
+2. For palettes, run `design_spec_checker.py --palettes`; every palette must pass AA in
+   both modes before it is offered.
+3. Page patterns, screens and modifier ids are cross-referenced from `product-types.json`
+   and `brief-modifiers.json`; keep `kind` right (`landing` vs `screen`).
+4. Run the tools on the sample assets; exit codes must stay 0 / 1 / 2.
+
+### Validation checkpoint before the spec is shared
+
+- [ ] Verdict pasted from the tool, with every finding and its resolution
+- [ ] Contrast tables come from the tool output, both modes when mode is `both`
+- [ ] Brand colour adjustments shown to the brand owner, original kept for decoration only
+- [ ] No more than two webfont families plus a mono
+- [ ] Each chart traces to a written data question
+- [ ] Token audit exits 0 on the shipped theme
+- [ ] Every `info` modifier finding read and accepted, or the brief changed
+- [ ] Each landing section that needs evidence has a real source named
+
+## Decision frameworks
+
+### Which direction for which product
+
+| Product family | Default direction | Why |
+|----------------|-------------------|-----|
+| B2B SaaS, docs, internal tools | **[RECOMMENDED]** Swiss Functional | Type and grid carry hierarchy; nothing competes with the work |
+| Admin, analytics, monitoring, logistics | **[PROVEN]** Dense Operational | Many rows, tabular figures, meaningful status colour |
+| Banking, insurance, government | **[PROVEN]** Trust Institutional | Predictability reads as safety; flourish reads as risk |
+| Patient apps, clinical tools | **[PROVEN]** Clinical Clear | Every state labelled; nothing decorative near critical values |
+| Publishing, law, research | **[RECOMMENDED]** Editorial | Reading comfort is the product |
+| Luxury, beauty, property | **[RECOMMENDED]** Premium Restraint | Space and imagery signal quality; watch thin-text contrast |
+| Retail, marketplaces, delivery | **[PROVEN]** Retail Merchandising | Product image as hero, price near the action |
+| Streaming, gaming | **[RECOMMENDED]** Dark Immersive | Artwork carries colour; chrome stays out of the way |
+| Kids, habit and language apps | **[RECOMMENDED]** Playful Tactile | Big targets and visible feedback; strict limits on looping motion |
+| Developer and security tools | **[RECOMMENDED]** Technical Mono | Keyboard-first, code-adjacent, dark-capable |
+| Clinics, trades, local services, dating | **[RECOMMENDED]** Warm Humanist | Real people and plain words; the booking or safety action is never more than one tap away |
+| Mobility, utilities, weather | **[RECOMMENDED]** Calm Utility | Used in motion or at a glance: big targets, one job per screen |
+| Smart home and device companions | **[RECOMMENDED]** Soft Depth | Tactile controls, but device state is always confirmed in text, never colour alone |
+
+Mood words choose between the product&#x27;s two directions; `direction` in the brief forces
+one. Translucent Layered and Bento Modular are never defaults: they are offered when
+asked for, with their risks reported.
+
+The escape hatch: when the audience contradicts the category (a bank for teenagers, a
+clinical tool used in the field), choose by audience and record the reason.
+
+### Contrast targets
+
+| Pair | AA minimum | AAA minimum |
+|------|-----------|-------------|
+| Body and muted text on background or surface | 4.5:1 | 7:1 |
+| Text on coloured fills (buttons, badges) | 4.5:1 | 4.5:1 (tool default) |
+| Controls, focus ring against background | 3:1 | 3:1 |
+| Error and success text on background | 4.5:1 | 4.5:1 |
+
+**[PROVEN]** Check both modes separately. Dark mode is where muted text and brand
+colours most often fail.
+
+### Defaults are a floor, not an identity
+
+A spec with no `brand_color`, no `mood` and no `direction` is the product type&#x27;s safest
+answer, and for software that means a neutral sans and a stock blue: correct, accessible
+and indistinguishable from its competitors. Before sharing the spec, pull at least two
+of these levers and record which:
+
+- **Brand colour.** Pass it as `brand_color`; without it the palette&#x27;s stock primary ships.
+- **Mood words.** Two or three words (`&quot;warm&quot;`, `&quot;precise&quot;`, `&quot;editorial&quot;`) decide between
+  the product type&#x27;s two directions and the pairing that follows.
+- **One signature.** Pick one item from the direction&#x27;s `signatures` list and make it the
+  thing people remember (a numbered grid, a display serif on headings only, tabular
+  figures as a visual motif). One, used consistently, not three.
+- **The type pairing.** When the pairing uses one family for display and body, a pairing
+  with a distinctive display face (`ux_rules_search.py --domain pairings`) is the cheapest
+  identity there is; set its id as `pairing` in the brief and re-run.
+
+A lever that would break a rule (a thin display face on a low-vision product, a second
+accent colour) is not identity, it is a defect; the checker and the checklist still apply.
+
+### Density
+
+**[RECOMMENDED]** Comfortable unless the product is operational (compact) or
+reading/luxury/calm (spacious). Compact changes gaps, never hit areas: touch targets stay
+at 44px web, 48dp Android.
+
+## Anti-Patterns
+
+### The Mood-Board Spec
+**Mistake:** Choosing a style because it looked good on a showcase site, then fitting the
+product to it.
+**Why it happens:** Showcase images are vivid; briefs are words.
+**Instead:** Start from the product type and audience, run the recommender, and only
+deviate with a written reason.
+
+### Contrast by Eye
+**Mistake:** Approving a palette because it &quot;looks readable&quot; on a calibrated monitor.
+**Why it happens:** Designers work on good screens in good light.
+**Instead:** Compute every pair in both modes. The tool prints ratios; paste them, do
+not paraphrase them.
+
+### The Logo Colour as Button Colour
+**Mistake:** Using the brand hex for links and button fills unchanged.
+**Why it happens:** Brand guidelines list one primary colour and nothing about UI use.
+**Instead:** Pass it as `brand_color`; use the adjusted shade the tool reports for text
+and controls and keep the original for large decorative use.
+
+### Dark Mode by Inversion
+**Mistake:** Flipping the light palette and calling it dark mode.
+**Why it happens:** It is one line of CSS.
+**Instead:** Use a palette&#x27;s own dark roles and check them; the checker flags a theme
+with no dark roles unless it declares itself light-only (`modes` or `color-scheme`).
+
+### Font Collecting
+**Mistake:** A display face, a body face, a UI face and a mono, each in four weights.
+**Why it happens:** Each was added for one screen.
+**Instead:** One pairing with roles, two families plus a mono at most. The checker flags
+more than three.
+
+### The Borrowed Landing Page
+**Mistake:** Reusing a launch-page layout (waitlist, countdown, logo wall) for a product
+that is live, or a sales-led page for a product people can just sign up to.
+**Why it happens:** The last page that converted becomes the template.
+**Instead:** State the page&#x27;s job in the brief and use the pattern the tool returns; the
+pattern&#x27;s &quot;not when&quot; line says when it misleads.
+
+### One Duration for Everything
+**Mistake:** Every transition at 300ms with the same easing, exits as slow as entries.
+**Why it happens:** A single `transition: all .3s` is quick to write.
+**Instead:** Use the motion table: one duration per interaction, exits faster than
+entries, only transform and opacity, and the listed reduced-motion replacement.
+
+### Fixing Output Instead of Brief
+**Mistake:** Hand-editing generated tokens to silence a finding.
+**Why it happens:** It is faster than re-running.
+**Instead:** Change the brief and re-run, so the spec and its reasoning stay in step.
+
+## Reference Documentation
+
+- `references/design-decision-guide.md` — the decision chain, why each default, when to
+  override, brief/tokens/CSS formats
+- `references/review-and-charts.md` — review order by severity and product priority,
+  writing findings, chart choice and chart colour rules
+- `references/pre-delivery-checklist.md` — the final pass on built UI, with the
+  critical lines that block delivery
+- `references/*.json` — the bundled decision data (product types, directions, palettes,
+  type pairings, UX rules, charts, stacks)
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/design_recommender.py` | Brief to spec, with findings and verdict |
+| `scripts/spec_renderer.py` | Spec to markdown document, CSS theme, tokens JSON or text |
+| `scripts/css_token_extractor.py` | CSS custom properties to tokens JSON |
+| `scripts/design_spec_checker.py` | Token audit against the rules; bundled palette self-check |
+| `scripts/ux_rules_search.py` | Search all bundled data |
+| `references/token-presets.json` | Spacing, motion and elevation presets; audience cues |
+| `references/product-types.json` | 50 product types with defaults, priorities, risks, landing and screens |
+| `references/brief-modifiers.json` | 10 cue-driven adjustments to landing, density, motion, mode, direction |
+| `references/page-patterns.json` | 13 landing and 10 screen patterns: sections, primary action, evidence, when not |
+| `references/motion.json` | 12 interactions with duration per tier, properties, reduced-motion replacement |
+| `references/pre-delivery-checklist.md` | Final pass on built UI |
+| `references/directions.json` | 18 style directions with tokens and pitfalls |
+| `references/palettes.json` | 22 palettes with light and dark roles |
+| `references/type-pairings.json` | 21 pairings with display/body/mono roles |
+| `references/ux-rules.json` | 91 rules with severity, platform, check method |
+| `references/charts.json` | 22 data questions mapped to charts |
+| `references/stacks.json` | 14 stacks with implementation notes |
+| `assets/sample_brief.json` | Sound brief: freelancer invoicing SaaS (exit 0) |
+| `assets/sample_brief_flawed.json` | Contradictory brief: meditation app (exit 1) |
+| `assets/sample_tokens.json` | Sound token file rendered from the sound brief (checker exit 0) |
+| `assets/sample_theme.css` | Sound CSS theme rendered from the sound brief (extractor and checker exit 0) |
+| `assets/sample_theme_flawed.css` | Flawed inherited theme (extractor exit 1, checker exit 1) |
+| `assets/sample_theme_framework.css` | Sound theme in component-library style: bare HSL channels, `oklch`, `color-mix`, `var()` chains, `@layer`, nested `.dark &amp;` (extractor and checker exit 0) |
+| `assets/design-spec-template.md` | Decision record and sign-off sheet |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Product-type matching and a full design-system spec from a brief
+- Computed WCAG 2.x contrast for the eleven role pairs that carry text, controls or status, both modes
+- Brand colour adjustment to reach contrast
+- Static audit of tokens JSON and CSS custom properties
+- Landing and screen structure, and motion per interaction
+- UX rule, chart, pattern and stack-note lookup
+- A manual pre-delivery checklist for built UI
+
+**Out of Scope:**
+- Rendering, screenshots or browser-based checks; the checker reads files, it does not
+  load pages
+- Logos, illustrations, imagery and any generated artwork
+- Component APIs, variants and design-system governance
+- Brand voice and messaging
+
+**Important Caveats:**
+- Contrast uses the WCAG 2.x formula. APCA or WCAG 3 results can differ, especially for
+  dark mode and thin type.
+- Token checks prove the tokens are sound, not that components use them.
+- Type pairings name typefaces; confirm each licence before shipping.
+- Product types are defaults, not rules: an unusual audience is a reason to override,
+  recorded in the spec.
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Design Direction&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Design Direction in the Product domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Design Direction&quot;**
+   - Description: &quot;Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product&#x27;s UI, picking a palette or fonts, or auditing a token file.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/product-team/design-direction/SKILL.md</pre>
+      </details>
+    </div>
+  </div>
+</div>
+<div class="tab-content" id="tab-claude">
+  <pre><code># Add to your project
+cs install product-team/design-direction ./
+
+# Or copy directly
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/product-team/design-direction your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-codex">
+  <pre><code># The skill is available in your Codex workspace at:
+.codex/skills/design-direction/
+
+# Reference the SKILL.md in your Codex instructions
+# or copy it into your project:
+cp -r .codex/skills/design-direction your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-gemini">
+  <pre><code># The skill is available in your Gemini CLI workspace at:
+.gemini/skills/design-direction/
+
+# Reference the SKILL.md in your Gemini instructions
+# or copy it into your project:
+cp -r .gemini/skills/design-direction your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-cursor">
+  <pre><code># Add to your .cursorrules or workspace settings:
+# Reference: product-team/design-direction/SKILL.md
+
+# Or copy the skill folder into your project:
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/product-team/design-direction your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-manual">
+  <pre><code># Clone and copy
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/product-team/design-direction your-project/
+
+# Or download just this skill
+curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/product-team/design-direction</code></pre>
+</div>
+<h3>Run Python Tools</h3>
+<pre><code>python product-team/design-direction/scripts/tool_name.py --help</code></pre>
+  
+  <h2>Quick Start</h2><pre><code># 1. Brief -&gt; spec (exit 1 if the brief contradicts itself)
+python3 product-team/design-direction/scripts/design_recommender.py \
+  --brief product-team/design-direction/assets/sample_brief.json
+
+# 2. Save the spec, then render it as a design-system document and a CSS theme
+python3 product-team/design-direction/scripts/design_recommender.py \
+  --brief product-team/design-direction/assets/sample_brief.json --format json &gt; spec.json
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format markdown &gt; DESIGN-SPEC.md
+python3 product-team/design-direction/scripts/spec_renderer.py --spec spec.json --format css &gt; theme.css
+
+# 3. Audit a CSS theme: extract its tokens, then check them (exit 1 on critical/high)
+python3 product-team/design-direction/scripts/css_token_extractor.py \
+  --css product-team/design-direction/assets/sample_theme_flawed.css --format json &gt; tokens.json
+python3 product-team/design-direction/scripts/design_spec_checker.py --tokens tokens.json
+
+# 4. Look up rules, charts, palettes, pairings or stack notes
+python3 product-team/design-direction/scripts/ux_rules_search.py --query &quot;form errors&quot;
+</code></pre>
+  <h2>Related Skills in Product</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/product-team/ab-test-setup.html" class="skill-card" style="text-decoration:none"><h3>Ab Test Setup</h3><p>Design and run statistically rigorous A/B tests and experiments. Use when planning experiments,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/agile-product-owner.html" class="skill-card" style="text-decoration:none"><h3>Agile Product Owner</h3><p>Agile product ownership for backlog management and sprint execution. Use for writing user...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/apple-hig-expert.html" class="skill-card" style="text-decoration:none"><h3>Apple Hig Expert</h3><p>Apple Human Interface Guidelines expert across iOS, iPadOS, macOS, watchOS, tvOS, and visionOS....</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/design-system-lead.html" class="skill-card" style="text-decoration:none"><h3>Design System Lead</h3><p>Design systems leadership across component libraries, design tokens, and design-dev...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/product-analytics.html" class="skill-card" style="text-decoration:none"><h3>Product Analytics</h3><p>Product analytics for instrumenting products, defining metrics, and building retention funnels....</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/product-designer.html" class="skill-card" style="text-decoration:none"><h3>Product Designer</h3><p>Product design across UI/UX, design systems, prototyping, and user research. Use when creating...</p></a></div>
+  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/product-team/design-direction/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
+</article>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <span class="footer-sep">&middot;</span>
+      <span>MIT + Commons Clause</span>
+      <span class="footer-sep">&middot;</span>
+      <a href="https://buymeacoffee.com/borghei" target="_blank" rel="noopener">Buy Me a Coffee</a>
+    </div>
+    <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+function copyPrompt(btn){
+  var text=btn.getAttribute('data-prompt');
+  // Decode HTML entities
+  var ta=document.createElement('textarea');
+  ta.innerHTML=text;
+  text=ta.value;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent='Copied!';
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent='Copy Prompt';
+    },2000);
+  });
+}
+</script>
+</body>
+</html>

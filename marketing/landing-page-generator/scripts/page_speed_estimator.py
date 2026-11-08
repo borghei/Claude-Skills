@@ -7,7 +7,11 @@ against Core Web Vitals targets and conversion benchmarks.
 
 Usage:
     python page_speed_estimator.py page.html
-    python page_speed_estimator.py page.html --json
+    python page_speed_estimator.py page.html --format json
+
+Exit codes: 0 no FAIL check, 1 a FAIL check (page weight over 1MB, estimated LCP
+or CLS risk in the poor band), 2 missing, unreadable or non-HTML input.
+The estimates are rough source-based proxies; real timing needs a lab or field tool.
 """
 
 import argparse
@@ -30,24 +34,24 @@ def estimate_speed(html: str) -> dict:
     size_kb = size_bytes / 1024
 
     # Count resources
-    scripts = re.findall(r"<script[^>]*(?:src|>)", html, re.IGNORECASE)
-    external_scripts = [s for s in scripts if 'src=' in s.lower()]
-    inline_scripts = [s for s in scripts if 'src=' not in s.lower()]
-    stylesheets = re.findall(r'<link[^>]+rel\s*=\s*"stylesheet"', html, re.IGNORECASE)
+    scripts = re.findall(r"<script\b[^>]*>", html, re.IGNORECASE)
+    external_scripts = [s for s in scripts if re.search(r"\bsrc\s*=", s, re.IGNORECASE)]
+    inline_scripts = [s for s in scripts if s not in external_scripts and "application/ld+json" not in s.lower()]
+    stylesheets = re.findall(r"""<link\b[^>]*rel\s*=\s*["']?stylesheet""", html, re.IGNORECASE)
     images = re.findall(r"<img[^>]+>", html, re.IGNORECASE)
     videos = re.findall(r"<video[^>]+>", html, re.IGNORECASE)
     iframes = re.findall(r"<iframe[^>]+>", html, re.IGNORECASE)
     fonts = re.findall(r"font-family|@font-face|fonts\.googleapis", html, re.IGNORECASE)
 
     # Check for optimization patterns
-    has_lazy_loading = bool(re.search(r'loading\s*=\s*"lazy"', html, re.IGNORECASE))
-    has_async_scripts = bool(re.search(r'<script[^>]+async', html, re.IGNORECASE))
-    has_defer_scripts = bool(re.search(r'<script[^>]+defer', html, re.IGNORECASE))
-    has_preload = bool(re.search(r'rel\s*=\s*"preload"', html, re.IGNORECASE))
+    has_lazy_loading = bool(re.search(r"""loading\s*=\s*["']?lazy""", html, re.IGNORECASE))
+    has_async_scripts = bool(re.search(r"<script\b[^>]+\basync\b", html, re.IGNORECASE))
+    has_defer_scripts = bool(re.search(r"<script\b[^>]+(\bdefer\b|type\s*=\s*[\"']?module)", html, re.IGNORECASE))
+    has_preload = bool(re.search(r"""rel\s*=\s*["']?preload|fetchpriority\s*=\s*["']?high""", html, re.IGNORECASE))
     has_webp_avif = bool(re.search(r'\.(webp|avif)', html, re.IGNORECASE))
     has_srcset = bool(re.search(r'srcset\s*=', html, re.IGNORECASE))
-    has_viewport = bool(re.search(r'name\s*=\s*"viewport"', html, re.IGNORECASE))
-    images_with_dims = len(re.findall(r'<img[^>]+width[^>]+height', html, re.IGNORECASE))
+    has_viewport = bool(re.search(r"""<meta\b[^>]*name\s*=\s*["']?viewport""", html, re.IGNORECASE))
+    images_with_dims = sum(1 for i in images if re.search(r"\bwidth\s*=", i, re.I) and re.search(r"\bheight\s*=", i, re.I))
 
     # Estimate LCP (rough)
     lcp_estimate = 1.0  # base
@@ -200,23 +204,36 @@ def format_human(result: dict) -> str:
     return "\n".join(lines)
 
 
+def load(path: str) -> str:
+    """Read an HTML page; exit 2 on a missing, unreadable or non-HTML file."""
+    try:
+        html = Path(path).read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError) as exc:
+        print(f"Error: cannot read {path}: {exc}", file=sys.stderr)
+        sys.exit(2)
+    if not re.search(r"<(html|body|main|section|div|h1|p)\b", html, re.IGNORECASE):
+        print(f"Error: {path} does not look like an HTML page", file=sys.stderr)
+        sys.exit(2)
+    return html
+
+
 def main():
     parser = argparse.ArgumentParser(description="Estimate landing page speed and Core Web Vitals.")
     parser.add_argument("file", help="HTML file to analyze")
-    parser.add_argument("--json", action="store_true", dest="json_output")
+    parser.add_argument("--json", action="store_true", dest="json_output", help="same as --format json")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="output format")
     args = parser.parse_args()
+    if args.format == "json":
+        args.json_output = True
 
-    try:
-        html = Path(args.file).read_text()
-    except FileNotFoundError:
-        print(f"Error: {args.file} not found", file=sys.stderr)
-        sys.exit(1)
+    html = load(args.file)
 
     result = estimate_speed(html)
     if args.json_output:
         print(json.dumps(result, indent=2))
     else:
         print(format_human(result))
+    sys.exit(1 if any(c["status"] == "FAIL" for c in result["checks"]) else 0)
 
 
 if __name__ == "__main__":

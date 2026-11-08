@@ -1,0 +1,887 @@
+{
+ "version": 1,
+ "roles_note": "Contrast is computed by the tools, never stored.",
+ "palettes": [
+  {
+   "id": "harbor",
+   "name": "Harbor",
+   "summary": "Trust blue with a warm signal accent",
+   "tags": [
+    "trust",
+    "saas",
+    "b2b",
+    "calm"
+   ],
+   "light": {
+    "primary": "#1F4FD1",
+    "on_primary": "#FFFFFF",
+    "accent": "#C2410C",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F4F6FA",
+    "fg": "#111827",
+    "muted_fg": "#4B5563",
+    "border": "#D7DCE5",
+    "focus": "#1F4FD1",
+    "danger": "#B91C1C",
+    "on_danger": "#FFFFFF",
+    "success": "#15803D"
+   },
+   "dark": {
+    "primary": "#7AA2FF",
+    "on_primary": "#0E1422",
+    "accent": "#FB923C",
+    "on_accent": "#0E1422",
+    "bg": "#0E1422",
+    "surface": "#172033",
+    "fg": "#E8ECF4",
+    "muted_fg": "#A3ADBF",
+    "border": "#2B3650",
+    "focus": "#7AA2FF",
+    "danger": "#F87171",
+    "on_danger": "#0E1422",
+    "success": "#4ADE80"
+   }
+  },
+  {
+   "id": "ledger",
+   "name": "Ledger",
+   "summary": "Deep green and paper for money products",
+   "tags": [
+    "finance",
+    "trust",
+    "serious"
+   ],
+   "light": {
+    "primary": "#0F5E4C",
+    "on_primary": "#FFFFFF",
+    "accent": "#B45309",
+    "on_accent": "#FFFFFF",
+    "bg": "#FBFBF8",
+    "surface": "#F1F2EC",
+    "fg": "#14201C",
+    "muted_fg": "#4A5852",
+    "border": "#D5D9CF",
+    "focus": "#0F5E4C",
+    "danger": "#B42318",
+    "on_danger": "#FFFFFF",
+    "success": "#1A7F37"
+   },
+   "dark": {
+    "primary": "#4FD1A5",
+    "on_primary": "#0C1412",
+    "accent": "#F5A524",
+    "on_accent": "#0C1412",
+    "bg": "#0C1412",
+    "surface": "#15201C",
+    "fg": "#E6EEEA",
+    "muted_fg": "#9DB0A7",
+    "border": "#273833",
+    "focus": "#4FD1A5",
+    "danger": "#FF7A6E",
+    "on_danger": "#0C1412",
+    "success": "#5EDB8A"
+   }
+  },
+  {
+   "id": "clinic",
+   "name": "Clinic",
+   "summary": "Clean teal with a violet secondary for care settings",
+   "tags": [
+    "health",
+    "clinical",
+    "calm"
+   ],
+   "light": {
+    "primary": "#0B6E79",
+    "on_primary": "#FFFFFF",
+    "accent": "#6D28D9",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F2F7F8",
+    "fg": "#10292E",
+    "muted_fg": "#48606A",
+    "border": "#CFE0E3",
+    "focus": "#0B6E79",
+    "danger": "#B3261E",
+    "on_danger": "#FFFFFF",
+    "success": "#1B7F4B"
+   },
+   "dark": {
+    "primary": "#5CC8D3",
+    "on_primary": "#0B171A",
+    "accent": "#B79CFF",
+    "on_accent": "#0B171A",
+    "bg": "#0B171A",
+    "surface": "#132429",
+    "fg": "#E3F1F3",
+    "muted_fg": "#98B4BA",
+    "border": "#24393E",
+    "focus": "#5CC8D3",
+    "danger": "#FF8A80",
+    "on_danger": "#0B171A",
+    "success": "#6FD49A"
+   }
+  },
+  {
+   "id": "graphite",
+   "name": "Graphite",
+   "summary": "Neutral greys with one cool action colour",
+   "tags": [
+    "neutral",
+    "developer",
+    "productivity"
+   ],
+   "light": {
+    "primary": "#3B5BDB",
+    "on_primary": "#FFFFFF",
+    "accent": "#0E7C66",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F5F5F4",
+    "fg": "#18181B",
+    "muted_fg": "#52525B",
+    "border": "#E4E4E7",
+    "focus": "#3B5BDB",
+    "danger": "#C2261C",
+    "on_danger": "#FFFFFF",
+    "success": "#18794E"
+   },
+   "dark": {
+    "primary": "#8DA2FB",
+    "on_primary": "#0D0D10",
+    "accent": "#3DD6B5",
+    "on_accent": "#0D0D10",
+    "bg": "#0D0D10",
+    "surface": "#18181C",
+    "fg": "#ECECEE",
+    "muted_fg": "#A1A1AA",
+    "border": "#2E2E35",
+    "focus": "#8DA2FB",
+    "danger": "#FF8577",
+    "on_danger": "#0D0D10",
+    "success": "#4CD38A"
+   }
+  },
+  {
+   "id": "terminal",
+   "name": "Terminal",
+   "summary": "Dark-first green-on-near-black for technical tools",
+   "tags": [
+    "developer",
+    "technical",
+    "dark"
+   ],
+   "light": {
+    "primary": "#166534",
+    "on_primary": "#FFFFFF",
+    "accent": "#A16207",
+    "on_accent": "#FFFFFF",
+    "bg": "#FAFBF9",
+    "surface": "#EEF2EE",
+    "fg": "#0F1A13",
+    "muted_fg": "#4D5E53",
+    "border": "#D3DBD5",
+    "focus": "#166534",
+    "danger": "#B91C1C",
+    "on_danger": "#FFFFFF",
+    "success": "#166534"
+   },
+   "dark": {
+    "primary": "#4ADE80",
+    "on_primary": "#0A0F0C",
+    "accent": "#FACC15",
+    "on_accent": "#0A0F0C",
+    "bg": "#0A0F0C",
+    "surface": "#121A15",
+    "fg": "#DDE7E0",
+    "muted_fg": "#8FA396",
+    "border": "#23302A",
+    "focus": "#4ADE80",
+    "danger": "#F87171",
+    "on_danger": "#0A0F0C",
+    "success": "#4ADE80"
+   }
+  },
+  {
+   "id": "atelier",
+   "name": "Atelier",
+   "summary": "Ink, ivory and muted gold for premium goods",
+   "tags": [
+    "premium",
+    "luxury",
+    "editorial"
+   ],
+   "light": {
+    "primary": "#1C1A17",
+    "on_primary": "#FFFFFF",
+    "accent": "#8A6A2F",
+    "on_accent": "#FFFFFF",
+    "bg": "#FAF8F3",
+    "surface": "#F1EDE4",
+    "fg": "#1C1A17",
+    "muted_fg": "#5C564C",
+    "border": "#DDD6C8",
+    "focus": "#1C1A17",
+    "danger": "#A12A1F",
+    "on_danger": "#FFFFFF",
+    "success": "#3F6B3A"
+   },
+   "dark": {
+    "primary": "#E9DFC9",
+    "on_primary": "#12110F",
+    "accent": "#D4B072",
+    "on_accent": "#12110F",
+    "bg": "#12110F",
+    "surface": "#1C1A17",
+    "fg": "#EFEAE0",
+    "muted_fg": "#A9A194",
+    "border": "#34302A",
+    "focus": "#E9DFC9",
+    "danger": "#F08C7E",
+    "on_danger": "#12110F",
+    "success": "#9CCB8F"
+   }
+  },
+  {
+   "id": "pulse",
+   "name": "Pulse",
+   "summary": "Saturated violet and pink for creator and marketing products",
+   "tags": [
+    "vibrant",
+    "creator",
+    "bold"
+   ],
+   "light": {
+    "primary": "#6D28D9",
+    "on_primary": "#FFFFFF",
+    "accent": "#DB2777",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F7F3FF",
+    "fg": "#1A1033",
+    "muted_fg": "#57506B",
+    "border": "#E3DBF5",
+    "focus": "#6D28D9",
+    "danger": "#C81E1E",
+    "on_danger": "#FFFFFF",
+    "success": "#157F3C"
+   },
+   "dark": {
+    "primary": "#B794FF",
+    "on_primary": "#110A1F",
+    "accent": "#FF7AB8",
+    "on_accent": "#110A1F",
+    "bg": "#110A1F",
+    "surface": "#1B122E",
+    "fg": "#F1EBFF",
+    "muted_fg": "#ADA3C4",
+    "border": "#33284A",
+    "focus": "#B794FF",
+    "danger": "#FF8A8A",
+    "on_danger": "#110A1F",
+    "success": "#5FD68E"
+   }
+  },
+  {
+   "id": "meadow",
+   "name": "Meadow",
+   "summary": "Leaf green and clay on warm paper",
+   "tags": [
+    "organic",
+    "wellness",
+    "sustainability"
+   ],
+   "light": {
+    "primary": "#3F6B2F",
+    "on_primary": "#FFFFFF",
+    "accent": "#B5562B",
+    "on_accent": "#FFFFFF",
+    "bg": "#FBFAF5",
+    "surface": "#F1EFE5",
+    "fg": "#1F2619",
+    "muted_fg": "#565E4D",
+    "border": "#DAD7C8",
+    "focus": "#3F6B2F",
+    "danger": "#A8321F",
+    "on_danger": "#FFFFFF",
+    "success": "#3F6B2F"
+   },
+   "dark": {
+    "primary": "#9BCB7C",
+    "on_primary": "#12150F",
+    "accent": "#F09A6C",
+    "on_accent": "#12150F",
+    "bg": "#12150F",
+    "surface": "#1B2017",
+    "fg": "#ECEFE4",
+    "muted_fg": "#A9B19C",
+    "border": "#303826",
+    "focus": "#9BCB7C",
+    "danger": "#F49580",
+    "on_danger": "#12150F",
+    "success": "#9BCB7C"
+   }
+  },
+  {
+   "id": "sunbeam",
+   "name": "Sunbeam",
+   "summary": "Primary blue and magenta on cream for young audiences",
+   "tags": [
+    "playful",
+    "kids",
+    "education"
+   ],
+   "light": {
+    "primary": "#1D4ED8",
+    "on_primary": "#FFFFFF",
+    "accent": "#A21CAF",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFDF5",
+    "surface": "#FFF4D6",
+    "fg": "#1E1B16",
+    "muted_fg": "#5B5446",
+    "border": "#EADFB8",
+    "focus": "#1D4ED8",
+    "danger": "#B91C1C",
+    "on_danger": "#FFFFFF",
+    "success": "#15803D"
+   },
+   "dark": {
+    "primary": "#8AB4FF",
+    "on_primary": "#16130C",
+    "accent": "#F09BFF",
+    "on_accent": "#16130C",
+    "bg": "#16130C",
+    "surface": "#221D12",
+    "fg": "#FBF4E2",
+    "muted_fg": "#B7AD95",
+    "border": "#3A3220",
+    "focus": "#8AB4FF",
+    "danger": "#FF8A80",
+    "on_danger": "#16130C",
+    "success": "#6EE7A0"
+   }
+  },
+  {
+   "id": "civic",
+   "name": "Civic",
+   "summary": "Sober navy and gold for public services",
+   "tags": [
+    "government",
+    "trust",
+    "institutional"
+   ],
+   "light": {
+    "primary": "#1A4480",
+    "on_primary": "#FFFFFF",
+    "accent": "#936F38",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F0F0F0",
+    "fg": "#1B1B1B",
+    "muted_fg": "#565C65",
+    "border": "#DFE1E2",
+    "focus": "#1A4480",
+    "danger": "#B50909",
+    "on_danger": "#FFFFFF",
+    "success": "#00703C"
+   },
+   "dark": {
+    "primary": "#73B3E7",
+    "on_primary": "#111417",
+    "accent": "#E5C07B",
+    "on_accent": "#111417",
+    "bg": "#111417",
+    "surface": "#1B1F23",
+    "fg": "#F0F0F0",
+    "muted_fg": "#A9AEB1",
+    "border": "#33393F",
+    "focus": "#73B3E7",
+    "danger": "#F2938C",
+    "on_danger": "#111417",
+    "success": "#70E17B"
+   }
+  },
+  {
+   "id": "marquee",
+   "name": "Marquee",
+   "summary": "Cinema red and amber on deep charcoal",
+   "tags": [
+    "media",
+    "entertainment",
+    "dark"
+   ],
+   "light": {
+    "primary": "#C8102E",
+    "on_primary": "#FFFFFF",
+    "accent": "#9A6700",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F4F4F6",
+    "fg": "#121217",
+    "muted_fg": "#55555F",
+    "border": "#E1E1E6",
+    "focus": "#C8102E",
+    "danger": "#B3261E",
+    "on_danger": "#FFFFFF",
+    "success": "#1A7F37"
+   },
+   "dark": {
+    "primary": "#FF5A4E",
+    "on_primary": "#0B0B0F",
+    "accent": "#FFC857",
+    "on_accent": "#0B0B0F",
+    "bg": "#0B0B0F",
+    "surface": "#16161D",
+    "fg": "#F2F2F5",
+    "muted_fg": "#A0A0AE",
+    "border": "#2A2A35",
+    "focus": "#FF5A4E",
+    "danger": "#FF6B6B",
+    "on_danger": "#0B0B0F",
+    "success": "#4ADE80"
+   }
+  },
+  {
+   "id": "storefront",
+   "name": "Storefront",
+   "summary": "Black-and-white product stage with one hot accent",
+   "tags": [
+    "retail",
+    "commerce",
+    "neutral"
+   ],
+   "light": {
+    "primary": "#111827",
+    "on_primary": "#FFFFFF",
+    "accent": "#C2410C",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F7F7F5",
+    "fg": "#111827",
+    "muted_fg": "#4B5563",
+    "border": "#E5E7EB",
+    "focus": "#111827",
+    "danger": "#B91C1C",
+    "on_danger": "#FFFFFF",
+    "success": "#15803D"
+   },
+   "dark": {
+    "primary": "#F3F4F6",
+    "on_primary": "#0F1115",
+    "accent": "#FF8A4C",
+    "on_accent": "#0F1115",
+    "bg": "#0F1115",
+    "surface": "#191C22",
+    "fg": "#F3F4F6",
+    "muted_fg": "#9CA3AF",
+    "border": "#2D323B",
+    "focus": "#F3F4F6",
+    "danger": "#F87171",
+    "on_danger": "#0F1115",
+    "success": "#4ADE80"
+   }
+  },
+  {
+   "id": "scholar",
+   "name": "Scholar",
+   "summary": "Indigo and teal for learning products",
+   "tags": [
+    "education",
+    "calm",
+    "trust"
+   ],
+   "light": {
+    "primary": "#3730A3",
+    "on_primary": "#FFFFFF",
+    "accent": "#0F766E",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F5F6FB",
+    "fg": "#1E1B3A",
+    "muted_fg": "#514E6B",
+    "border": "#DCDDEE",
+    "focus": "#3730A3",
+    "danger": "#B42318",
+    "on_danger": "#FFFFFF",
+    "success": "#137A43"
+   },
+   "dark": {
+    "primary": "#A5A1FF",
+    "on_primary": "#0F0E1C",
+    "accent": "#5EEAD4",
+    "on_accent": "#0F0E1C",
+    "bg": "#0F0E1C",
+    "surface": "#191830",
+    "fg": "#ECEBFA",
+    "muted_fg": "#A7A5C6",
+    "border": "#2F2D50",
+    "focus": "#A5A1FF",
+    "danger": "#FF8B7E",
+    "on_danger": "#0F0E1C",
+    "success": "#67E3A0"
+   }
+  },
+  {
+   "id": "harvest",
+   "name": "Harvest",
+   "summary": "Paprika and olive on warm cream for food and hospitality",
+   "tags": [
+    "food",
+    "warm",
+    "hospitality"
+   ],
+   "light": {
+    "primary": "#9A3412",
+    "on_primary": "#FFFFFF",
+    "accent": "#3F6212",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFBF5",
+    "surface": "#FBF0E1",
+    "fg": "#2A1A10",
+    "muted_fg": "#66503F",
+    "border": "#EAD8C2",
+    "focus": "#9A3412",
+    "danger": "#A3201A",
+    "on_danger": "#FFFFFF",
+    "success": "#3F6212"
+   },
+   "dark": {
+    "primary": "#FB9B6B",
+    "on_primary": "#17110C",
+    "accent": "#A8D86E",
+    "on_accent": "#17110C",
+    "bg": "#17110C",
+    "surface": "#231A13",
+    "fg": "#F6EADF",
+    "muted_fg": "#BCA894",
+    "border": "#3A2C21",
+    "focus": "#FB9B6B",
+    "danger": "#FF8E80",
+    "on_danger": "#17110C",
+    "success": "#A8D86E"
+   }
+  },
+  {
+   "id": "nocturne",
+   "name": "Nocturne",
+   "summary": "Periwinkle and mint on ink for trading and crypto",
+   "tags": [
+    "fintech",
+    "dark",
+    "technical"
+   ],
+   "light": {
+    "primary": "#2B45C9",
+    "on_primary": "#FFFFFF",
+    "accent": "#0B7A5A",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F4F6FB",
+    "fg": "#0E1222",
+    "muted_fg": "#4A5168",
+    "border": "#DCE0EC",
+    "focus": "#2B45C9",
+    "danger": "#C0263B",
+    "on_danger": "#FFFFFF",
+    "success": "#0B7A5A"
+   },
+   "dark": {
+    "primary": "#7C9CFF",
+    "on_primary": "#090B12",
+    "accent": "#2EE6A6",
+    "on_accent": "#090B12",
+    "bg": "#090B12",
+    "surface": "#11141F",
+    "fg": "#E7EAF3",
+    "muted_fg": "#9AA1B5",
+    "border": "#232838",
+    "focus": "#7C9CFF",
+    "danger": "#FF6B7D",
+    "on_danger": "#090B12",
+    "success": "#2EE6A6"
+   }
+  },
+  {
+   "id": "studio",
+   "name": "Studio",
+   "summary": "Pure black and white with one signal red",
+   "tags": [
+    "brutalist",
+    "portfolio",
+    "bold"
+   ],
+   "light": {
+    "primary": "#000000",
+    "on_primary": "#FFFFFF",
+    "accent": "#C8133F",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F2F2F2",
+    "fg": "#000000",
+    "muted_fg": "#4A4A4A",
+    "border": "#000000",
+    "focus": "#000000",
+    "danger": "#C1121F",
+    "on_danger": "#FFFFFF",
+    "success": "#1B7A3A"
+   },
+   "dark": {
+    "primary": "#FFFFFF",
+    "on_primary": "#0A0A0A",
+    "accent": "#FF5C7A",
+    "on_accent": "#0A0A0A",
+    "bg": "#0A0A0A",
+    "surface": "#151515",
+    "fg": "#FAFAFA",
+    "muted_fg": "#A8A8A8",
+    "border": "#FAFAFA",
+    "focus": "#FFFFFF",
+    "danger": "#FF6B6B",
+    "on_danger": "#0A0A0A",
+    "success": "#5BD68A"
+   }
+  },
+  {
+   "id": "lagoon",
+   "name": "Lagoon",
+   "summary": "Sea teal and coral for travel and leisure",
+   "tags": [
+    "travel",
+    "hospitality",
+    "warm"
+   ],
+   "light": {
+    "primary": "#006D77",
+    "on_primary": "#FFFFFF",
+    "accent": "#E76F51",
+    "on_accent": "#102A2E",
+    "bg": "#FFFFFF",
+    "surface": "#EEF6F7",
+    "fg": "#102A2E",
+    "muted_fg": "#4A6266",
+    "border": "#CFE3E5",
+    "focus": "#006D77",
+    "danger": "#B3261E",
+    "on_danger": "#FFFFFF",
+    "success": "#2B7A3D"
+   },
+   "dark": {
+    "primary": "#63C7D0",
+    "on_primary": "#0A1719",
+    "accent": "#F4A284",
+    "on_accent": "#0A1719",
+    "bg": "#0A1719",
+    "surface": "#122326",
+    "fg": "#E2F1F2",
+    "muted_fg": "#9CB8BB",
+    "border": "#213A3D",
+    "focus": "#63C7D0",
+    "danger": "#FF8A80",
+    "on_danger": "#0A1719",
+    "success": "#7ED69A"
+   }
+  },
+  {
+   "id": "slate-ops",
+   "name": "Slate Ops",
+   "summary": "Quiet slate surfaces with a strong blue for dense operational screens",
+   "tags": [
+    "operational",
+    "dashboard",
+    "neutral"
+   ],
+   "light": {
+    "primary": "#2457C5",
+    "on_primary": "#FFFFFF",
+    "accent": "#A15C00",
+    "on_accent": "#FFFFFF",
+    "bg": "#F7F8FA",
+    "surface": "#FFFFFF",
+    "fg": "#1A1F2B",
+    "muted_fg": "#4E5768",
+    "border": "#D9DEE7",
+    "focus": "#2457C5",
+    "danger": "#C0262D",
+    "on_danger": "#FFFFFF",
+    "success": "#1C7C3A"
+   },
+   "dark": {
+    "primary": "#7EA6FF",
+    "on_primary": "#0C0F14",
+    "accent": "#F0A93B",
+    "on_accent": "#0C0F14",
+    "bg": "#0C0F14",
+    "surface": "#141922",
+    "fg": "#E3E7EE",
+    "muted_fg": "#98A2B3",
+    "border": "#273041",
+    "focus": "#7EA6FF",
+    "danger": "#FF7B80",
+    "on_danger": "#0C0F14",
+    "success": "#5BD683"
+   }
+  },
+  {
+   "id": "blossom",
+   "name": "Blossom",
+   "summary": "Raspberry and sand for beauty and lifestyle",
+   "tags": [
+    "beauty",
+    "lifestyle",
+    "warm"
+   ],
+   "light": {
+    "primary": "#9D174D",
+    "on_primary": "#FFFFFF",
+    "accent": "#7A5A2E",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFF9FA",
+    "surface": "#FBEFF2",
+    "fg": "#2B1720",
+    "muted_fg": "#6A4E59",
+    "border": "#EED7DE",
+    "focus": "#9D174D",
+    "danger": "#A61B1B",
+    "on_danger": "#FFFFFF",
+    "success": "#2F7A47"
+   },
+   "dark": {
+    "primary": "#F9A8C9",
+    "on_primary": "#170D11",
+    "accent": "#E2C08D",
+    "on_accent": "#170D11",
+    "bg": "#170D11",
+    "surface": "#22141A",
+    "fg": "#F8E9EE",
+    "muted_fg": "#C2A6B1",
+    "border": "#3D2630",
+    "focus": "#F9A8C9",
+    "danger": "#FF8E8E",
+    "on_danger": "#170D11",
+    "success": "#7FD69C"
+   }
+  },
+  {
+   "id": "aurora",
+   "name": "Aurora",
+   "summary": "Electric violet and cyan for AI and assistant products",
+   "tags": [
+    "ai",
+    "technical",
+    "modern"
+   ],
+   "light": {
+    "primary": "#5B3FD9",
+    "on_primary": "#FFFFFF",
+    "accent": "#0E7490",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F6F5FD",
+    "fg": "#17142B",
+    "muted_fg": "#524E66",
+    "border": "#E0DDF2",
+    "focus": "#5B3FD9",
+    "danger": "#C0262D",
+    "on_danger": "#FFFFFF",
+    "success": "#18794E"
+   },
+   "dark": {
+    "primary": "#A895FF",
+    "on_primary": "#0D0B18",
+    "accent": "#4FD4EE",
+    "on_accent": "#0D0B18",
+    "bg": "#0D0B18",
+    "surface": "#161327",
+    "fg": "#EDEBFA",
+    "muted_fg": "#A6A2C0",
+    "border": "#2C2845",
+    "focus": "#A895FF",
+    "danger": "#FF7E86",
+    "on_danger": "#0D0B18",
+    "success": "#4FD38E"
+   }
+  },
+  {
+   "id": "industrial",
+   "name": "Industrial",
+   "summary": "Safety amber and navy for logistics and field work",
+   "tags": [
+    "industrial",
+    "operational",
+    "bold"
+   ],
+   "light": {
+    "primary": "#B45309",
+    "on_primary": "#FFFFFF",
+    "accent": "#1E3A8A",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F4F4F2",
+    "fg": "#1C1A16",
+    "muted_fg": "#57534E",
+    "border": "#E2E0DB",
+    "focus": "#B45309",
+    "danger": "#B91C1C",
+    "on_danger": "#FFFFFF",
+    "success": "#166534"
+   },
+   "dark": {
+    "primary": "#FBBF24",
+    "on_primary": "#11100E",
+    "accent": "#93B4FF",
+    "on_accent": "#11100E",
+    "bg": "#11100E",
+    "surface": "#1C1A17",
+    "fg": "#EFEDE8",
+    "muted_fg": "#A8A29E",
+    "border": "#33302B",
+    "focus": "#FBBF24",
+    "danger": "#F87171",
+    "on_danger": "#11100E",
+    "success": "#4ADE80"
+   }
+  },
+  {
+   "id": "highcontrast",
+   "name": "High Contrast",
+   "summary": "AAA-ready palette for accessibility-first products",
+   "tags": [
+    "accessibility",
+    "government",
+    "aaa"
+   ],
+   "light": {
+    "primary": "#0040A8",
+    "on_primary": "#FFFFFF",
+    "accent": "#6B2C91",
+    "on_accent": "#FFFFFF",
+    "bg": "#FFFFFF",
+    "surface": "#F3F3F3",
+    "fg": "#000000",
+    "muted_fg": "#333333",
+    "border": "#595959",
+    "focus": "#0040A8",
+    "danger": "#A00000",
+    "on_danger": "#FFFFFF",
+    "success": "#00592C"
+   },
+   "dark": {
+    "primary": "#8FB8FF",
+    "on_primary": "#0A0A0A",
+    "accent": "#D9A8FF",
+    "on_accent": "#0A0A0A",
+    "bg": "#0A0A0A",
+    "surface": "#121212",
+    "fg": "#FFFFFF",
+    "muted_fg": "#D6D6D6",
+    "border": "#8C8C8C",
+    "focus": "#8FB8FF",
+    "danger": "#FF9C9C",
+    "on_danger": "#0A0A0A",
+    "success": "#7FE0A6"
+   }
+  }
+ ]
+}

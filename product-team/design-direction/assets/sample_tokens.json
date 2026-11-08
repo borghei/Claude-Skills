@@ -1,0 +1,99 @@
+{
+  "contrast_target": "AA",
+  "modes": [
+    "light",
+    "dark"
+  ],
+  "color": {
+    "light": {
+      "primary": "#2F5BEA",
+      "on_primary": "#FFFFFF",
+      "accent": "#C2410C",
+      "on_accent": "#FFFFFF",
+      "bg": "#FFFFFF",
+      "surface": "#F4F6FA",
+      "fg": "#111827",
+      "muted_fg": "#4B5563",
+      "border": "#D7DCE5",
+      "focus": "#2F5BEA",
+      "danger": "#B91C1C",
+      "on_danger": "#FFFFFF",
+      "success": "#15803D"
+    },
+    "dark": {
+      "primary": "#5479EE",
+      "on_primary": "#0E1422",
+      "accent": "#FB923C",
+      "on_accent": "#0E1422",
+      "bg": "#0E1422",
+      "surface": "#172033",
+      "fg": "#E8ECF4",
+      "muted_fg": "#A3ADBF",
+      "border": "#2B3650",
+      "focus": "#5479EE",
+      "danger": "#F87171",
+      "on_danger": "#0E1422",
+      "success": "#4ADE80"
+    }
+  },
+  "font": {
+    "families": [
+      "Inter",
+      "JetBrains Mono"
+    ],
+    "base_size": 16,
+    "line_height": 1.5,
+    "heading_line_height": 1.2,
+    "scale": [
+      13,
+      16,
+      20,
+      25,
+      31,
+      39,
+      49
+    ]
+  },
+  "space": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64
+  ],
+  "radius": {
+    "sm": 2,
+    "md": 4,
+    "lg": 6,
+    "full": 9999
+  },
+  "elevation": [
+    "none",
+    "0 0 0 1px var(--border)"
+  ],
+  "motion": {
+    "durations_ms": [
+      120,
+      180,
+      240
+    ],
+    "easing": "cubic-bezier(0.2, 0, 0, 1)",
+    "reduced_motion": true
+  },
+  "touch_target": 44,
+  "focus": {
+    "width": 2,
+    "offset": 2
+  },
+  "icon": {
+    "sizes": [
+      16,
+      20,
+      24
+    ],
+    "stroke": 1.5
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "target": "src/pages/invoices.tsx",
+  "mode": "operate",
+  "evidence": "detector report 2026-11-08: 14 findings, 5 high",
+  "steps": [
+    {
+      "command": "audit",
+      "changes": [],
+      "must_not_touch": [],
+      "verify": ["audit report scored on five dimensions with file:line for every P0/P1"]
+    },
+    {
+      "command": "harden",
+      "changes": ["restore a 2px focus-visible ring on row actions and the bulk-reminder button"],
+      "must_not_touch": ["table column order", "invoice copy", "reminder send logic"],
+      "verify": ["tab through the table with the keyboard; every control shows a ring with 3:1 contrast", "rerun detector: focus-ring-removed gone"]
+    },
+    {
+      "command": "distill",
+      "changes": ["turn the nested status cards inside each invoice card into one metadata row", "keep one status chip (overdue) and print the rest as text"],
+      "must_not_touch": ["amount and due-date columns", "the overdue-first sort"],
+      "verify": ["rerun detector: nested-cards and chip-soup gone", "screenshot at 375px and 1280px before/after"]
+    },
+    {
+      "command": "typeset",
+      "changes": ["raise row metadata from 11px to 14px", "set amounts in tabular numerals"],
+      "must_not_touch": ["the type family", "heading sizes"],
+      "verify": ["rerun detector: tiny-text gone", "zoom to 200% and confirm no row clips"]
+    },
+    {
+      "command": "polish",
+      "changes": ["align row paddings to the 8/12/16 steps", "theme text selection and the table scrollbar from the palette"],
+      "must_not_touch": ["anything outside src/pages/invoices.tsx and its stylesheet"],
+      "verify": ["rerun detector with --fail-on advisory: exit 0", "keyboard pass and screenshot pass at 375px and 1280px"]
+    }
+  ]
+}

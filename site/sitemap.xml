@@ -351,6 +351,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://borghei.github.io/Claude-Skills/skills/engineering/interface-refinement.html</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://borghei.github.io/Claude-Skills/skills/engineering/interview-system-designer.html</loc>
     <lastmod>2026-11-08</lastmod>
     <priority>0.7</priority>
@@ -362,6 +367,11 @@
   </url>
   <url>
     <loc>https://borghei.github.io/Claude-Skills/skills/engineering/llm-cost-optimizer.html</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://borghei.github.io/Claude-Skills/skills/engineering/marketing-site-builder.html</loc>
     <lastmod>2026-11-08</lastmod>
     <priority>0.7</priority>
   </url>
@@ -1672,6 +1682,11 @@
   </url>
   <url>
     <loc>https://borghei.github.io/Claude-Skills/skills/product-team/apple-hig-expert.html</loc>
+    <lastmod>2026-11-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://borghei.github.io/Claude-Skills/skills/product-team/design-direction.html</loc>
     <lastmod>2026-11-08</lastmod>
     <priority>0.7</priority>
   </url>

@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- Regression sample: a utility-class (Tailwind-style) service page whose stylesheet is not built yet.
+     page_gate.py exits 1 (backdrop-blur and gradient classes on a service page, animate-pulse with no
+     reduced-motion variant); finish_gate.py exits 1 and reports no-css instead of stopping with exit 2;
+     consistency_check.py and style_rules.py exit 2 on it alone, because there is no CSS to read. -->
+<html lang="en" data-kind="service">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marsh &amp; Pell: family solicitors in Leeds</title>
+  <meta name="description" content="Divorce, child arrangements and financial settlements, from a first call that costs nothing.">
+  <link rel="stylesheet" href="/dist/app.css">
+</head>
+<body class="bg-stone-50 text-stone-900">
+  <a href="#main" class="sr-only focus:not-sr-only">Skip to content</a>
+  <header class="sticky top-0 bg-white/70 backdrop-blur-md"><a href="/">Marsh &amp; Pell</a></header>
+  <main id="main">
+    <section class="bg-gradient-to-br from-stone-100 to-amber-50 px-6 py-24">
+      <h1 class="text-5xl">Family solicitors in Leeds</h1>
+      <p>Divorce, child arrangements and financial settlements. The first call is free and lasts 30 minutes.</p>
+      <a class="btn animate-pulse" href="tel:+441130000000">Call the office</a>
+    </section>
+    <section id="fees" class="px-6 py-24">
+      <h2>Fixed fees</h2>
+      <p>An uncontested divorce costs £650 plus the court fee. Every other matter is quoted in writing first.</p>
+      <a class="btn" href="tel:+441130000000">Call the office</a>
+    </section>
+  </main>
+</body>
+</html>

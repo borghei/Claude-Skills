@@ -15,6 +15,7 @@ title: Product Team Skills
 
 | Skill | Description | Tools |
 |---|---|:---:|
+| [design-direction](https://github.com/borghei/Claude-Skills/blob/main/product-team/design-direction/SKILL.md) ★ NEW | Brief to design-system spec: style direction, palette with computed contrast, type pairing, motion, page patterns, token audit | 5 |
 | [product-manager-toolkit](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-manager-toolkit/SKILL.md) | RICE prioritization, customer interview analysis, positioning statements, recommendation canvas | 2 |
 | [product-strategist](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-strategist/SKILL.md) | OKR cascade generation, PESTEL analysis, TAM-SAM-SOM market sizing, vision setting | 1 |
 | [agile-product-owner](https://github.com/borghei/Claude-Skills/blob/main/product-team/agile-product-owner/SKILL.md) | User story writing, story splitting (8-rule logic), acceptance criteria, sprint planning | 1 |

@@ -6,20 +6,20 @@
 
 ## What This Repository Is
 
-This is the universal AI skills library — **400 production-ready skill packages across 21 professional domains** with **939 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
+This is the universal AI skills library — **403 production-ready skill packages across 21 professional domains** with **961 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
 
 This is NOT a traditional application. It's a library of self-contained skill packages meant to be extracted and deployed into user workflows.
 
 ## Repository Structure (domain → skill count)
 
-- engineering/ — 98 skills (architecture, fullstack, DevOps, security, AI/ML, data, agent tooling)
+- engineering/ — 100 skills (architecture, fullstack, DevOps, security, AI/ML, data, agent tooling)
 - project-management/ — 74 skills (discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion)
 - marketing/ — 39 skills (content, SEO/AEO, demand gen, brand, analytics)
 - c-level-advisor/ — 31 skills (CEO/CTO/CFO/CMO/CRO/CPO/COO/CHRO/CISO + CAIO/CDO/CCO/GC/VPE)
 - ra-qm-team/ — 27 skills (ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF)
 - business-growth/ — 21 skills (CRO, pricing, revenue ops, commercial)
 - legal/ — 17 skills (EXPERIMENTAL: contracts, NDA, privacy, DPIA, breach response)
-- product-team/ — 13 skills (RICE, OKRs, UX research, product analytics, Apple HIG)
+- product-team/ — 14 skills (RICE, OKRs, UX research, product analytics, Apple HIG)
 - personal-productivity/ — 14 skills (resume, leads, meetings, invoices, email triage)
 - vertical-advisors/ — 7 skills (fintech, healthtech, edtech, ecommerce, proptech, climate-tech, marketplace)
 - data-analytics/ — 5 skills (analysis, BI, data science, ML ops)

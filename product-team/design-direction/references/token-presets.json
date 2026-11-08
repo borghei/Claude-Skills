@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "note": "Token presets used by design_recommender.py. spacing in px by density; motion durations in ms by tier; elevation shadows by direction elevation level; audience cues are lower-case whole words or phrases (a trailing plural s also matches) matched against the brief.",
+  "presets": {
+    "spacing": {
+      "compact": [2, 4, 8, 12, 16, 20, 24, 32, 40],
+      "comfortable": [4, 8, 12, 16, 24, 32, 48, 64],
+      "spacious": [4, 8, 16, 24, 32, 48, 64, 96, 128]
+    },
+    "motion": {
+      "calm": {"durations_ms": [120, 180, 240], "easing": "cubic-bezier(0.2, 0, 0, 1)", "movement": "fades and small shifts (8px or less)"},
+      "standard": {"durations_ms": [150, 220, 320], "easing": "cubic-bezier(0.2, 0, 0, 1)", "movement": "slides and scale for spatial continuity"},
+      "expressive": {"durations_ms": [180, 280, 420], "easing": "cubic-bezier(0.34, 1.3, 0.64, 1)", "movement": "springy entrances and celebration moments"}
+    },
+    "elevation": {
+      "flat": ["none", "0 0 0 1px var(--border)"],
+      "soft": ["0 1px 2px rgba(0,0,0,.06)", "0 4px 12px rgba(0,0,0,.08)"],
+      "raised": ["0 2px 0 rgba(0,0,0,.18)", "0 4px 0 rgba(0,0,0,.18)"],
+      "layered": ["0 1px 3px rgba(0,0,0,.10)", "0 8px 24px rgba(0,0,0,.14)", "0 16px 48px rgba(0,0,0,.18)"]
+    },
+    "audience_cues": {
+      "motion_sensitive": ["vestibular", "motion sensitive", "motion-sensitive", "motion sensitivity", "reduced motion", "older adult", "elderly", "senior", "migraine"],
+      "low_vision": ["low vision", "low-vision", "older adult", "older people", "older reader", "older user", "older customer", "elderly", "senior citizen", "seniors", "visually impaired", "dyslexia", "dyslexic", "large text"],
+      "multi_script": ["rtl", "arabic", "persian", "farsi", "hebrew", "urdu", "cjk", "chinese", "japanese", "korean", "multilingual"]
+    }
+  }
+}

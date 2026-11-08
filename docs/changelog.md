@@ -8,6 +8,11 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.16.0** (November 2026)
+
+- 3 interface-design skills: a design-direction recommender that turns a product brief into a design-system spec, a marketing-site builder with a static finish gate, and an interface-refinement skill with 19 commands and a detector for generic AI-looking UI
+- The landing-page generator no longer allows vague button labels or invented proof, and its tools are fixed
+
 **v4.15.0** (November 2026)
 
 - 3 founder skills: launch economics with a computed VIABLE / UNCONFIRMED / NOT YET verdict, a reproducible synthetic buyer panel, and an offer-design scorer for guarantees and urgency

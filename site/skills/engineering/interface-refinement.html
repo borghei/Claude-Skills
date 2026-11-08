@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interface Refinement - Claude Skills</title>
+  <meta name="description" content="Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks ">
+  <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/interface-refinement.html">
+  <meta property="og:title" content="Interface Refinement - Claude Skills">
+  <meta property="og:description" content="Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks ">
+  <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/interface-refinement.html">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Interface Refinement", "description": "Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks generic, cluttered or unfinished.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/interface-refinement.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <style>
+:root {
+  --bg: #faf9f5;
+  --bg-secondary: #f0eee6;
+  --text: #141413;
+  --text-muted: #5e5d59;
+  --accent: #d97757;
+  --accent-deep: #c6613f;
+  --border: rgba(20,20,19,0.1);
+  --border-strong: rgba(20,20,19,0.18);
+  --white: #ffffff;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', SFMono-Regular, ui-monospace, 'Cascadia Code', Menlo, monospace;
+  --max-width: 1200px;
+  --shadow-sm: 0 1px 2px rgba(20,20,19,0.04);
+  --shadow: 0 1px 3px rgba(20,20,19,0.06), 0 1px 2px rgba(20,20,19,0.04);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08), 0 1px 3px rgba(20,20,19,0.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--accent); text-decoration: none; transition: color 0.15s; }
+a:hover { color: var(--accent-deep); }
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+code { font-family: var(--font-mono); font-size: 0.875em; }
+
+/* Navbar */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,249,245,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: var(--font-serif); font-weight: 700; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.01em;
+}
+.nav-logo:hover { color: var(--text); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); font-size: 0.9rem; font-weight: 500;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active { color: var(--accent); }
+.nav-links a.gh-link { display: inline-flex; align-items: center; gap: 5px; }
+
+/* Breadcrumbs */
+.breadcrumbs { padding: 20px 0 0; font-size: 0.85rem; color: var(--text-muted); }
+.breadcrumbs a { color: var(--text-muted); }
+.breadcrumbs a:hover { color: var(--accent); }
+.breadcrumbs .sep { margin: 0 8px; opacity: 0.4; }
+
+/* Page header */
+.page-header { padding: 48px 0 32px; }
+.page-title {
+  font-family: var(--font-serif); font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.page-subtitle { color: var(--text-muted); max-width: 700px; font-size: 1.05rem; line-height: 1.6; }
+
+/* Count badge (inline with title) */
+.count-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.8rem;
+  color: var(--accent); background: rgba(217,119,87,0.08);
+  padding: 2px 10px; border-radius: 20px; margin-left: 8px;
+  vertical-align: middle; font-weight: 500;
+}
+
+/* Search + Filter */
+.filter-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.search-input {
+  flex: 1; min-width: 200px; padding: 10px 14px 10px 38px;
+  background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+.search-input::placeholder { color: var(--text-muted); }
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+.filter-select {
+  padding: 10px 14px; background: var(--white); border: 1px solid var(--border-strong);
+  border-radius: var(--radius); color: var(--text); font-family: var(--font-sans);
+  font-size: 0.9rem; outline: none; cursor: pointer;
+}
+.filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(217,119,87,0.1); }
+
+/* Card grid */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.skill-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.skill-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.skill-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; }
+.skill-card h3 a { color: var(--text); }
+.skill-card h3 a:hover { color: var(--accent); }
+.skill-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; flex: 1; }
+
+/* Badges */
+.badge-bar { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0 6px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; padding: 3px 9px;
+  border-radius: 5px; font-weight: 500; white-space: nowrap;
+}
+.badge-domain { background: rgba(217,119,87,0.1); border: 1px solid rgba(217,119,87,0.2); color: var(--accent-deep); }
+.badge-subdomain { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-version { background: rgba(20,20,19,0.03); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-tools { background: rgba(20,20,19,0.04); border: 1px solid var(--border); color: var(--text-muted); }
+.badge-refs { background: rgba(217,119,87,0.06); border: 1px solid rgba(217,119,87,0.15); color: var(--accent); }
+
+/* Tags */
+.skill-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.tag {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 8px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Example pills on domain summary cards */
+.example-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.example-pill {
+  font-family: var(--font-mono); font-size: 0.65rem; padding: 2px 7px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 4px; color: var(--text-muted);
+}
+
+/* Skill detail page */
+.skill-detail { padding-bottom: 80px; }
+.skill-detail h2 {
+  font-family: var(--font-serif); font-size: 1.4rem; font-weight: 700;
+  margin: 40px 0 16px; padding-top: 16px;
+  border-top: 1px solid var(--border); color: var(--text);
+}
+.skill-detail h3 { font-size: 1.05rem; font-weight: 600; margin: 20px 0 10px; }
+.skill-detail p, .skill-detail li { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+.skill-detail ul, .skill-detail ol { margin-left: 20px; margin-bottom: 16px; }
+.skill-detail li { margin-bottom: 6px; }
+.skill-detail pre {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 20px; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7;
+  color: var(--text); margin: 12px 0 20px;
+}
+.skill-detail code {
+  font-family: var(--font-mono); font-size: 0.85rem;
+  background: var(--bg-secondary); padding: 2px 6px; border-radius: 4px;
+}
+.skill-detail pre code { background: none; padding: 0; }
+
+/* Platform tabs */
+.platform-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+.tab-btn {
+  padding: 10px 18px; font-size: 0.85rem; font-weight: 500;
+  font-family: var(--font-sans); background: none; border: none;
+  border-bottom: 2px solid transparent; color: var(--text-muted);
+  cursor: pointer; transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+.tab-content pre {
+  border-top: none; border-radius: 0 0 var(--radius) var(--radius);
+  margin-top: 0;
+}
+
+/* Quick Start prompt cards */
+.prompt-cards {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 20px; background: var(--bg-secondary);
+  border: 1px solid var(--border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (max-width: 640px) { .prompt-cards { grid-template-columns: 1fr; } }
+.prompt-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.prompt-card-featured { border-color: var(--accent); border-width: 2px; }
+.prompt-card-header { display: flex; align-items: center; justify-content: space-between; }
+.prompt-card-header h3 { font-size: 1rem; font-weight: 700; margin: 0; color: var(--text); }
+.prompt-card-badge {
+  font-size: 0.7rem; font-weight: 600; padding: 3px 8px;
+  border-radius: 4px; background: var(--bg-secondary);
+  color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.badge-featured { background: rgba(217,119,87,0.12); color: var(--accent-deep); }
+.prompt-card-desc { font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.5; flex-grow: 1; }
+.copy-btn-featured { background: var(--accent-deep); }
+.prompt-details { margin-top: 4px; }
+.prompt-details summary {
+  font-size: 0.78rem; color: var(--text-muted); cursor: pointer;
+  padding: 4px 0; user-select: none;
+}
+.prompt-details summary:hover { color: var(--accent); }
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; font-size: 0.82rem; font-weight: 600;
+  font-family: var(--font-sans);
+  background: var(--accent); color: var(--white);
+  border: none; border-radius: 6px; cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.copy-btn:hover { background: var(--accent-deep); }
+.copy-btn:active { transform: scale(0.97); }
+.copy-btn.copied { background: #2d8a4e; }
+.prompt-preview {
+  max-height: 200px; overflow-y: auto; padding: 16px 18px;
+  font-size: 0.8rem; line-height: 1.5; white-space: pre-wrap;
+  word-wrap: break-word; color: var(--text-muted);
+  background: var(--white); margin: 0; border: none;
+  font-family: var(--font-mono);
+}
+.prompt-hint {
+  padding: 10px 18px; font-size: 0.78rem; color: var(--text-muted);
+  background: var(--bg-secondary); margin: 0; border-top: 1px solid var(--border);
+}
+
+/* Tools list */
+.tool-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px;
+}
+.tool-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+.tool-item p { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+/* Related skills */
+.related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+
+/* Agents grid */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 60px; }
+.agent-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.agent-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.agent-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.agent-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.agent-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Commands grid */
+.commands-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding-bottom: 60px; }
+.command-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px 22px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.command-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.command-card h3 {
+  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
+  margin-bottom: 6px; color: var(--accent);
+}
+.command-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.55; }
+.command-card .view-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; margin-top: 10px; color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius); font-size: 0.875rem;
+  font-weight: 500; font-family: var(--font-sans);
+  border: 1px solid transparent; cursor: pointer;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+.btn-primary:hover { background: #2a2a28; color: var(--bg); box-shadow: var(--shadow); }
+.btn-secondary { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-secondary:hover { background: var(--bg-secondary); color: var(--text); box-shadow: var(--shadow-sm); }
+
+/* Section heading */
+.section-heading {
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 700;
+  margin-bottom: 20px; color: var(--text);
+}
+
+/* Footer */
+.footer {
+  padding: 36px 0; border-top: 1px solid var(--border); margin-top: 40px;
+  background: var(--bg);
+}
+.footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-links {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.85rem; color: var(--text-muted);
+}
+.footer-links a { color: var(--text-muted); }
+.footer-links a:hover { color: var(--accent); }
+.footer-sep { color: var(--border-strong); }
+.footer-credit { font-size: 0.85rem; color: var(--text-muted); }
+.footer-credit a { color: var(--text); font-weight: 600; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .commands-grid { grid-template-columns: 1fr; }
+  .nav-links { gap: 16px; }
+  .platform-tabs { overflow-x: auto; }
+  .tab-btn { padding: 8px 12px; font-size: 0.8rem; white-space: nowrap; }
+}
+@media (max-width: 480px) {
+  .skills-grid, .agents-grid, .related-grid { grid-template-columns: 1fr; }
+  .filter-bar { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="container">
+    <a href="https://borghei.github.io/Claude-Skills/" class="nav-logo">Claude Skills</a>
+    <div class="nav-links">
+      <a href="https://borghei.github.io/Claude-Skills/skills/" class="active">Skills</a>
+      <a href="https://borghei.github.io/Claude-Skills/agents/">Agents</a>
+      <a href="https://borghei.github.io/Claude-Skills/commands/">Commands</a>
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener" class="gh-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+    </div>
+  </div>
+</nav>
+<div class="breadcrumbs container"><a href="https://borghei.github.io/Claude-Skills/">Home</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/">Skills</a><span class=sep>/</span><a href="https://borghei.github.io/Claude-Skills/skills/engineering/">Engineering</a><span class=sep>/</span><span>Interface Refinement</span></div>
+<main class="container">
+
+<article class="skill-detail">
+  <div class="page-header">
+    <h1 class="page-title">Interface Refinement</h1>
+    <p class="page-subtitle">Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks generic, cluttered or unfinished.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 10 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">ui-refinement</span><span class="tag">design-critique</span><span class="tag">design-review</span><span class="tag">generic-ui</span><span class="tag">typography</span><span class="tag">color</span><span class="tag">motion</span><span class="tag">accessibility</span></div>
+  </div>
+  <h2>How to Use</h2>
+<div class="platform-tabs">
+  <button class="tab-btn active" data-tab="quickstart">Quick Start</button>
+  <button class="tab-btn" data-tab="claude">Claude Code</button>
+  <button class="tab-btn" data-tab="codex">Codex</button>
+  <button class="tab-btn" data-tab="gemini">Gemini CLI</button>
+  <button class="tab-btn" data-tab="cursor">Cursor</button>
+  <button class="tab-btn" data-tab="manual">Manual</button>
+</div>
+<div class="tab-content active" id="tab-quickstart">
+  <div class="prompt-cards">
+    <div class="prompt-card">
+      <div class="prompt-card-header">
+        <h3>Try in Chat</h3>
+        <span class="prompt-card-badge">Quick</span>
+      </div>
+      <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
+      <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Interface Refinement (Engineering domain).
+
+Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks generic, cluttered or unfinished.
+
+A shared vocabulary for improving interfaces that already exist. Each command names one kind of change (`distill` removes, `typeset` fixes type, `colorize` gives colour a job, `harden` survives real content), says what it may change and what it must leave alone, and ends with a check that
+
+## Your Key Capabilities
+- Routing
+- — Refine a surface
+- — Critique with isolated assessments
+- — Write and lint the context file
+- Validation checkpoint before calling a refinement done
+- Which command first
+
+## Frameworks &amp; Templates You Know
+- `interface-context.md` from `assets/interface-context-template.md`.
+- Decision frameworks
+- | `assets/interface-context-template.md` | Blank context file |
+- | `assets/refinement-report-template.md` | Critique and plan report |
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/interface-refinement
+
+---
+Start by asking the user what they need help with.">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy Prompt</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview">You are an expert Interface Refinement (Engineering domain).
+
+Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks generic, cluttered or unfinished.
+
+A shared vocabulary for improving interfaces that already exist. Each command names one kind of change (`distill` removes, `typeset` fixes type, `colorize` gives colour a job, `harden` survives real content), says what it may change and what it must leave alone, and ends with a check that
+
+## Your Key Capabilities
+- Routing
+- — Refine a surface
+- — Critique with isolated assessments
+- — Write and lint the context file
+- Validation checkpoint before calling a refinement done
+- Which command first
+
+## Frameworks &amp; Templates You Know
+- `interface-context.md` from `assets/interface-context-template.md`.
+- Decision frameworks
+- | `assets/interface-context-template.md` | Blank context file |
+- | `assets/refinement-report-template.md` | Critique and plan report |
+
+## How to Help
+When the user asks for help in this domain:
+1. Ask clarifying questions to understand their context
+2. Apply the relevant framework or workflow from your expertise
+3. Provide actionable, specific output (not generic advice)
+4. Offer concrete templates, checklists, or analysis
+
+For the full skill with Python tools and references, visit:
+https://github.com/borghei/Claude-Skills/tree/main/interface-refinement
+
+---
+Start by asking the user what they need help with.</pre>
+      </details>
+    </div>
+    <div class="prompt-card prompt-card-featured">
+      <div class="prompt-card-header">
+        <h3>Add to My AI</h3>
+        <span class="prompt-card-badge badge-featured">Full Skill</span>
+      </div>
+      <p class="prompt-card-desc">Creates a permanent Claude Project or Custom GPT with the complete skill. The AI will guide you through setup step by step.</p>
+      <button class="copy-btn copy-btn-featured" onclick="copyPrompt(this)" data-prompt="# Create a &quot;Interface Refinement&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Interface Refinement
+
+A shared vocabulary for improving interfaces that already exist. Each command names one kind of
+change (`distill` removes, `typeset` fixes type, `colorize` gives colour a job, `harden` survives
+real content), says what it may change and what it must leave alone, and ends with a check that
+produces evidence. A context file records the product and its visual system so commands decide
+from facts. A static detector finds the patterns that make an interface look assembled from
+defaults: side stripes on rounded cards, gradient text, violet-to-cyan gradients, cream page
+grounds, eyebrow labels over headings, cards inside cards, chip soup, rows of identical cards,
+emoji icons, radial hazes, clip-path blobs, faint grey text, removed focus rings, broken images,
+template headlines and vague button labels. Given the context file, it also reports every literal
+colour, face, size and radius that has drifted outside the recorded system.
+
+The agent reads the context file and the craft floor before any edit, keeps every change inside
+the named target, and never calls a refinement done without the evidence its command reference
+asks for: a rerun scan, a contrast ratio, a keyboard pass, screenshots at real widths.
+
+Two rules hold across every command:
+
+- **Refinement preserves.** Identity, behaviour, copy and everything outside the named target stay
+  as they are. If the concept itself is wrong, say so and recommend a redesign; do not smuggle one
+  into a polish pass.
+- **Scope is the contract.** Every edit step lists what changes, what must not be touched, and how
+  the result is verified. `command_router.py --plan` refuses plans that skip any of the three.
+
+## When to use this skill
+
+- **&quot;This looks generic / AI-made / like every other SaaS page&quot;** on an existing page or app
+- **Critique or audit** a surface before release, with scores and a prioritised fix list
+- **A focused pass:** typography, colour and contrast, spacing and hierarchy, motion, UX copy,
+  edge cases and focus, responsive adaptation, first-run and empty states
+- **&quot;Tone it down&quot; / &quot;make it bolder&quot;** on a named section without restyling the rest
+- **Gate a pull request** that touches markup or styles on generic-pattern and quality findings
+- **Write or check the project context file** (product brief + design brief) that steers later work
+- **Native screens:** platform conformance review for iOS and Android
+
+Use `engineering/design-auditor` for letter grades and landing-page template detection,
+`engineering/a11y-audit` for a WCAG scan of alt text, labels and landmarks. To choose a visual
+direction or build a new site from nothing, use a design-direction or frontend-build skill; this
+one refines what exists.
+
+## Clarify First
+
+The target and its mode change every recommendation. Settle these before editing. When one is
+missing or vague and would change the result, ask; when it would not, use a sensible default and
+say which one you used.
+
+- **Target:** the file, component or route, and what is out of scope. Refinement edits only the
+  named target.
+- **Surface mode:** persuade, operate, read or showcase (see `references/surface-modes.md`).
+  &quot;Quieter&quot; on a dashboard and on a landing page are different jobs.
+- **Context file:** does `interface-context.md` exist and pass the linter? If not, offer `init`
+  for anything bigger than a one-line fix; do not block a narrow fix on it.
+- **Binding brand decisions:** faces, colours or devices the owner chose on purpose. They override
+  detector findings (waive with a reason).
+- **Platform:** web, iOS, Android or cross-platform; the web detector does not read native code.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the
+user wants a result straight away, produce it and state your assumptions at the top.
+
+## Quick Start
+
+```bash
+# 1. Scan for generic and quality patterns (exit 1 on findings at or above medium)
+python3 engineering/interface-refinement/scripts/ui_slop_detector.py \
+  engineering/interface-refinement/assets/sample_ui_flawed.* --format text
+
+# 2. Route the findings to the next commands (exit 1 when access-blocking work exists)
+python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/ --format json &gt; detector.json
+python3 engineering/interface-refinement/scripts/command_router.py --report detector.json --mode operate
+
+# 3. Validate the refinement plan before editing
+python3 engineering/interface-refinement/scripts/command_router.py \
+  --plan engineering/interface-refinement/assets/sample_refinement_plan.json
+
+# 4. Check shipped values against the recorded visual system (off-system-* rules, refusals fail)
+python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/ \
+  --context engineering/interface-refinement/assets/sample_context.md --format text
+
+# 5. Lint the project context file
+python3 engineering/interface-refinement/scripts/context_linter.py \
+  --input engineering/interface-refinement/assets/sample_context.md
+```
+
+## Tools Overview
+
+| Tool | Input | Output | Exit codes |
+|------|-------|--------|------------|
+| `ui_slop_detector.py` | files or directories (HTML, JSX, TSX, Vue, Svelte, Astro, CSS, SCSS, LESS); optional `--context` | findings with file:line, rule, severity, evidence, fix, owning command; summary by command | 0 clean at `--fail-on`, 1 findings, 2 bad input |
+| `command_router.py --report` | detector JSON + mode + platform | 2-3 next commands in triage order, then polish; a plan skeleton | 0 routed, 1 access-blocking work found, 2 bad input |
+| `command_router.py --plan` | refinement plan JSON | errors and warnings per step | 0 valid, 1 errors (warnings with `--strict`), 2 malformed |
+| `context_linter.py` | `interface-context.md` | errors and warnings by section | 0 pass, 1 errors (warnings with `--strict`), 2 not a context file |
+| `ui_rules.py` | `--list [--scope S]` or `--contrast FG BG` | rule catalog, or a WCAG ratio (translucent colours composited over white; pass the opaque ground for dark UIs) | 0 ok / ratio passes, 1 ratio fails, 2 bad colour, scope or catalog |
+| `system_checks.py` | `--context` file + files | off-system values only (drift report for `document` and `extract`) | 0 / 1 / 2 |
+| `css_checks.py`, `markup_checks.py`, `class_checks.py`, `extra_checks.py` | stylesheets, markup, or one class list | the detector&#x27;s layers run alone, for debugging a rule | 0 / 1 / 2 |
+| `css_parse.py` | one file | the CSS blocks and declarations the detector reads, for debugging a parse | 0 parsed, 2 bad input |
+
+All tools are stdlib-only, offline, deterministic, and support `--format text|json`. Waive a
+finding inline with `ui-refine-ignore &lt;rule&gt; -- &lt;reason&gt;`; waivers without a reason are rejected.
+
+## Commands
+
+| Group | Command | Job | Detector rules routed here | Reference |
+|-------|---------|-----|----------------------------|-----------|
+| Evaluate | `critique` | design review, heuristic scores, 3-5 priority issues | none (judgment) | `references/command-critique.md` |
+| Evaluate | `audit` | five-dimension technical score out of 20 | all, as evidence | `references/command-audit.md` |
+| Context | `init` | write the product half of the context file | none | `references/command-init.md` |
+| Context | `document` | record the shipped visual system | none | `references/command-document.md` |
+| Context | `extract` | turn drift into tokens and shared components | off-system-color, off-system-font, off-system-radius, off-system-font-size | `references/command-extract.md` |
+| Refine | `polish` | closing pass: states, alignment, browser surfaces | emoji-icon, skipped-heading, buried-raster | `references/command-polish.md` |
+| Refine | `distill` | remove what does not earn its place | nested-cards, chip-soup, numbered-section-labels, shape-assembled-illustration | `references/command-distill.md` |
+| Refine | `quieter` | lower the volume, keep the point of view | side-stripe-border, glow-shadow, radial-glow, organic-clip-path, hairline-wide-shadow, hard-offset-shadow, repeating-stripes, grid-line-background | `references/command-quieter.md` |
+| Refine | `bolder` | raise one flat section with the system&#x27;s own moves; &quot;all-out&quot; requests too | none (critique only) | `references/command-bolder.md` |
+| Refine | `harden` | focus, overflow, i18n, errors, edge content | focus-ring-removed, broken-image | `references/command-harden.md` |
+| Refine | `clarify` | labels, headlines, errors, empty states | vague-control-label, vague-headline | `references/command-clarify.md` |
+| Enhance | `typeset` | roles, scale, reading comfort, a type decision | gradient-text, kicker-above-heading, italic-serif-display, overused-face, default-font-stack, tiny-text, all-caps-body, oversized-headline, flat-type-hierarchy, tight-body-leading, wide-body-tracking, crushed-tracking, justified-text, everything-bold | `references/command-typeset.md` |
+| Enhance | `colorize` | colour roles, contrast, reflex palettes | low-contrast-pair, faint-gray-text, gray-on-color, ai-hue-gradient, cream-ground | `references/command-colorize.md` |
+| Enhance | `layout` | lead element, grouping, rhythm, order | identical-card-row, icon-tile-stack, monotonous-spacing | `references/command-layout.md` |
+| Enhance | `animate` | motion that explains, reduced-motion paths | missing-reduced-motion, transition-all, layout-property-motion, bounce-easing, decorative-pulse, marquee-scroll, blinking-cursor | `references/command-animate.md` |
+| Enhance | `optimize` | no layout jumps, readable before fonts load, smooth motion | image-missing-dimensions, font-display-missing (and the motion rules it shares with animate) | `references/command-optimize.md` |
+| Enhance | `adapt` | restructure for phone, tablet, print, email, other platforms | none (audit, critique) | `references/command-adapt.md` |
+| Enhance | `onboard` | first run, empty states, time to first value | none (critique) | `references/command-onboard.md` |
+| Enhance | `delight` | one considered, product-specific moment | none (owner request) | `references/command-delight.md` |
+
+### Routing
+
+- **No command named:** run the detector, then `command_router.py --report` and offer its two or
+  three picks with one-line reasons. Never auto-run; the user confirms the pick.
+- **A command named or clearly implied** (&quot;fix the type&quot;, &quot;it&#x27;s too loud&quot;): load that command&#x27;s
+  reference and follow it. If two fit, ask once.
+- **A clean scan:** recommend `critique`. The detector proves the floor, not the design.
+- **Missing context file:** a narrow fix proceeds on the existing code; offer `init` afterwards.
+  Anything wider (a redesign, a new surface, more than a few files) starts with `init`.
+- **Native platform:** `critique` and `audit` against `references/native-platforms.md`; skip the
+  web detector.
+
+## Workflows
+
+### Workflow 1 — Refine a surface
+
+1. Settle target, mode and scope (Clarify First). Read `interface-context.md` if it exists.
+2. Scan the target and the global styles together, so project-level rules (focus-visible,
+   reduced motion) see everything:
+   ```bash
+   python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/pages/invoices.tsx src/styles --format json &gt; detector.json
+   ```
+3. Route: `command_router.py --report detector.json --mode operate`. Access-blocking work
+   (contrast, tiny text, focus, reduced motion) comes first.
+4. Write the plan JSON: one step per command with `changes`, `must_not_touch`, `verify`; evaluate
+   steps first, `polish` last. Validate it:
+   ```bash
+   python3 engineering/interface-refinement/scripts/command_router.py --plan plan.json --strict
+   ```
+5. Read `references/craft-floor.md`, then execute each step from its command reference.
+6. Verify each step as its reference says, then rerun the detector on the target:
+   ```bash
+   python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/pages/invoices.tsx src/styles \
+     --context interface-context.md --fail-on advisory
+   ```
+7. Hand the diff and before/after screenshots to a fresh reviewer for the finish disposition
+   (`ship`, `fix`, `rework`, `re-evidence`; see `references/review-protocol.md`).
+
+### Workflow 2 — Critique with isolated assessments
+
+1. Resolve the target to a source path; read the context file; note the mode.
+2. Run Assessment A (design review) **before** looking at any detector output. With subagents,
+   run A and B in parallel as two subagents using the briefs in `references/review-protocol.md`.
+3. Run Assessment B: the detector, with every hit checked against its source line.
+4. Synthesize: agreements are strong findings; name detector false positives; keep A&#x27;s
+   judgments that B cannot see.
+5. Fill `assets/refinement-report-template.md`. The first line states the method. End with the
+   question to the owner; nothing follows it.
+
+### Workflow 3 — Write and lint the context file
+
+1. `init`: interview for the product half (three questions per round at most); write
+   `interface-context.md` from `assets/interface-context-template.md`.
+2. `document`: extract the visual system from shipped code; record reused values only; never
+   canonise a detector finding as a rule. Rescan with `--context interface-context.md`: each
+   `off-system-*` hit is a value you missed or drift that `extract` will fold back in.
+3. Lint until it passes:
+   ```bash
+   python3 engineering/interface-refinement/scripts/context_linter.py --input interface-context.md --strict
+   ```
+4. Put the refusals you agreed on (rule ids) in `### Refusals`. With `--context`, the detector
+   raises any refused advisory rule to medium, so it fails the default gate.
+
+### Validation checkpoint before calling a refinement done
+
+- [ ] Plan validated by `command_router.py --plan` with no errors
+- [ ] Detector on the target with `--context interface-context.md` exits 0 at `--fail-on medium`; every remaining hit has a waiver with a reason
+- [ ] Every contrast pair you touched proven with `ui_rules.py --contrast`
+- [ ] Keyboard walk of the primary task with a visible focus ring throughout
+- [ ] Screenshots at 360px and 1280px (or each native device class), before and after
+- [ ] Diff contains only the named target; no new colours, faces or radii unless approved
+- [ ] Context file still passes `context_linter.py`
+
+## Decision frameworks
+
+### Which command first
+
+| Symptom | Command | Confidence |
+|---------|---------|------------|
+| Contrast, tiny text, focus or reduced-motion findings | the owning command, before anything else | **[PROVEN]** access defects block people; style does not |
+| Many findings across five or more commands | `audit`, then plan | **[RECOMMENDED]** a score keeps the pass from fixing corners |
+| &quot;Cluttered&quot;, nested containers, chip soup | `distill` before `layout` | **[RECOMMENDED]** decide what stays before arranging it |
+| &quot;Generic&quot; with a clean scan | `critique` | **[PROVEN]** specificity is a judgment, not a pattern match |
+| &quot;Flat&quot; on a persuade page | `bolder` on one named section | **[RECOMMENDED]** amplify, never add primitives |
+| Any edit plan | ends with `polish` | **[PROVEN]** the closing pass catches the drift the other passes create |
+
+### When a detector finding is not a defect
+
+**[RECOMMENDED]** Waive, do not fix, when the context file or the owner chose the pattern on
+purpose (a print-heritage cream ground, a literal bouncing ball, a brutalist offset shadow, a
+bound typeface). Waive one line and one rule, with the evidence in the reason. **[EXPERIMENTAL]**
+For a project that refuses a pattern outright, list the rule id under `### Refusals` and gate CI
+with `--fail-on advisory --rules &lt;ids&gt;`.
+
+## Anti-Patterns
+
+### Polish as Disguised Redesign
+**Mistake:** A &quot;polish&quot; or &quot;quieter&quot; pass that swaps the palette, the face and the layout.
+**Why it happens:** The refiner dislikes the current look and the command name feels like permission.
+**Instead:** Refinement keeps the identity. If the concept is wrong, say so in a critique and let
+the owner decide on a redesign.
+
+### Fixing the Detector Instead of the Design
+**Mistake:** Renaming a `card` class or splitting a gradient until the rule stops firing.
+**Why it happens:** A green gate is the visible goal; the pattern is still on screen.
+**Instead:** Fix what the person sees, or waive with a named reason. Rerun the scan as
+verification, never as the objective.
+
+### Anchored Critique
+**Mistake:** Reading the detector report first and writing a critique that restates it.
+**Why it happens:** Deterministic output feels authoritative and saves effort.
+**Instead:** Finish the design review blind, then merge. Hierarchy, specificity and copy tone are
+invisible to a static scan.
+
+### Everything Gets Louder
+**Mistake:** A `bolder` pass that adds glows, gradients and a new accent colour.
+**Why it happens:** Effects are the fastest way to make a section look different.
+**Instead:** One decisive move in the system&#x27;s own vocabulary, then quiet its surroundings. The
+plan validator warns on new primitives without approval.
+
+### Canonising the Defect
+**Mistake:** Writing the eyebrow label or side stripe found in the code into the context file&#x27;s
+named rules.
+**Why it happens:** `document` records what ships, and the defect ships everywhere.
+**Instead:** Report it as drift. Named rules describe decisions, not accidents.
+
+## Reference Documentation
+
+- `references/command-*.md` — one file per command: job, mode notes, change, do not touch, steps, verify, hand-off
+- `references/surface-modes.md` — persuade, operate, read, showcase; what each mode allows
+- `references/craft-floor.md` — checks every edit meets and patterns refused by default
+- `references/detector-rules.md` — every rule&#x27;s signal, precision notes and blind spots
+- `references/detector-rules.json` — the catalog data the tools read
+- `references/review-protocol.md` — isolated assessments, subagent briefs, heuristics, personas, finish dispositions, waivers
+- `references/native-platforms.md` — iOS and Android checks, native audit, idiom translation, evidence capture
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/ui_slop_detector.py` | Entry point: scans paths, runs all layers, waivers, project-level rules, exit gate |
+| `scripts/css_parse.py` | Linear CSS reader: comments, SCSS nesting, JSX style objects, styled/css templates (nested ones too) |
+| `scripts/css_checks.py` | Declaration rules over the blocks `css_parse.py` reads from stylesheets, style blocks, inline styles and templates |
+| `scripts/class_checks.py` | Utility-class rules and the shape predicates (card, chip, icon tile, kicker, bold) |
+| `scripts/markup_checks.py` | Structural rules over the element tree |
+| `scripts/extra_checks.py` | Effects, image, type-scale and font-loading rules (declaration hook, raw markup, project-level hierarchy) |
+| `scripts/system_checks.py` | Reads the context file&#x27;s visual system; off-system drift; refusal escalation |
+| `scripts/ui_rules.py` | Rule catalog loader, colour parsing (hex/rgb/hsl/oklch), WCAG contrast |
+| `scripts/command_router.py` | Route findings to commands; validate refinement plans |
+| `scripts/context_linter.py` | Lint `interface-context.md` |
+| `assets/sample_ui_sound.{html,css,tsx}` | Sound invoice screen: detector exits 0 at `--fail-on advisory`, with or without `--context` |
+| `assets/sample_ui_flawed.{html,css,tsx}` | Deliberately generic landing page: all 54 rules fire with `--context assets/sample_context.md` (50 without), exit 1 |
+| `assets/sample_detector_report.json` / `_flawed.json` | Detector JSON for the two samples, router input |
+| `assets/sample_context.md` / `_flawed.md` | Context file that passes `--strict` / one with 13 errors |
+| `assets/sample_refinement_plan.json` / `_flawed.json` | Valid plan / plan breaking every ordering and scope rule |
+| `assets/interface-context-template.md` | Blank context file |
+| `assets/refinement-report-template.md` | Critique and plan report |
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `engineering/design-auditor` | Letter grades and landing-page template slop; run its detector alongside this one |
+| `engineering/a11y-audit` | WCAG HTML scan (alt, labels, landmarks) feeding `harden` and `audit` |
+| `engineering/senior-frontend` | Implements the plan&#x27;s steps in the component library |
+| `engineering/code-reviewer` | Attach detector JSON and the plan verdict to UI pull requests |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Refining existing web interfaces through 19 named commands with scope and verification rules
+- Static detection of 54 generic-pattern and quality rules in HTML, JSX/TSX, Vue, Svelte, Astro and CSS,
+  four of them checking shipped values against the context file&#x27;s visual system
+- Routing findings to commands and validating refinement plans before any edit
+- Writing and linting the product + design context file
+- Native iOS/Android review guidance (checks, audit dimensions, idiom translation)
+
+**Out of Scope:**
+- Choosing a new visual direction or building a site from nothing
+- Rendering pages, measuring layout or driving a browser; static source only
+- Native code scanning (Swift, Kotlin, Dart)
+- Performance measurement (paint timings, bundle size) beyond the static signals `optimize` reads,
+  and marketing copy analysis
+
+**Important Caveats:**
+- The detector cannot see inherited colours, runtime class names or rendered overflow; a clean
+  scan is the floor, not a verdict. Critique covers the rest.
+- Generic-family rules are judgments about defaults; the owner&#x27;s brief can earn any of them back.
+- Rows rendered with `.map()` appear once in source, so `identical-card-row` misses them.
+- Class names held in variables are invisible; string literals inside `cn()`, `clsx()`, Vue
+  `:class` and Svelte `class={...}` are read. Scan the layout or global stylesheet with a page so
+  the page ground (light or dark) is known.
+- Drift rules read literals only: values behind `var()`, `calc()`, em or named utility classes
+  cannot drift as far as the scan knows, so keep tokens as the single source.
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Interface Refinement&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Interface Refinement in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Interface Refinement&quot;**
+   - Description: &quot;Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks generic, cluttered or unfinished.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/interface-refinement/SKILL.md">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> <span>Copy &amp; Create Skill</span>
+      </button>
+      <details class="prompt-details">
+        <summary>Preview prompt</summary>
+        <pre class="prompt-preview"># Create a &quot;Interface Refinement&quot; AI Skill
+
+I want you to help me set up a reusable AI skill that I can use in future conversations. Read the complete skill definition below, then help me install it.
+
+## Complete Skill Definition
+
+# Interface Refinement
+
+A shared vocabulary for improving interfaces that already exist. Each command names one kind of
+change (`distill` removes, `typeset` fixes type, `colorize` gives colour a job, `harden` survives
+real content), says what it may change and what it must leave alone, and ends with a check that
+produces evidence. A context file records the product and its visual system so commands decide
+from facts. A static detector finds the patterns that make an interface look assembled from
+defaults: side stripes on rounded cards, gradient text, violet-to-cyan gradients, cream page
+grounds, eyebrow labels over headings, cards inside cards, chip soup, rows of identical cards,
+emoji icons, radial hazes, clip-path blobs, faint grey text, removed focus rings, broken images,
+template headlines and vague button labels. Given the context file, it also reports every literal
+colour, face, size and radius that has drifted outside the recorded system.
+
+The agent reads the context file and the craft floor before any edit, keeps every change inside
+the named target, and never calls a refinement done without the evidence its command reference
+asks for: a rerun scan, a contrast ratio, a keyboard pass, screenshots at real widths.
+
+Two rules hold across every command:
+
+- **Refinement preserves.** Identity, behaviour, copy and everything outside the named target stay
+  as they are. If the concept itself is wrong, say so and recommend a redesign; do not smuggle one
+  into a polish pass.
+- **Scope is the contract.** Every edit step lists what changes, what must not be touched, and how
+  the result is verified. `command_router.py --plan` refuses plans that skip any of the three.
+
+## When to use this skill
+
+- **&quot;This looks generic / AI-made / like every other SaaS page&quot;** on an existing page or app
+- **Critique or audit** a surface before release, with scores and a prioritised fix list
+- **A focused pass:** typography, colour and contrast, spacing and hierarchy, motion, UX copy,
+  edge cases and focus, responsive adaptation, first-run and empty states
+- **&quot;Tone it down&quot; / &quot;make it bolder&quot;** on a named section without restyling the rest
+- **Gate a pull request** that touches markup or styles on generic-pattern and quality findings
+- **Write or check the project context file** (product brief + design brief) that steers later work
+- **Native screens:** platform conformance review for iOS and Android
+
+Use `engineering/design-auditor` for letter grades and landing-page template detection,
+`engineering/a11y-audit` for a WCAG scan of alt text, labels and landmarks. To choose a visual
+direction or build a new site from nothing, use a design-direction or frontend-build skill; this
+one refines what exists.
+
+## Clarify First
+
+The target and its mode change every recommendation. Settle these before editing. When one is
+missing or vague and would change the result, ask; when it would not, use a sensible default and
+say which one you used.
+
+- **Target:** the file, component or route, and what is out of scope. Refinement edits only the
+  named target.
+- **Surface mode:** persuade, operate, read or showcase (see `references/surface-modes.md`).
+  &quot;Quieter&quot; on a dashboard and on a landing page are different jobs.
+- **Context file:** does `interface-context.md` exist and pass the linter? If not, offer `init`
+  for anything bigger than a one-line fix; do not block a narrow fix on it.
+- **Binding brand decisions:** faces, colours or devices the owner chose on purpose. They override
+  detector findings (waive with a reason).
+- **Platform:** web, iOS, Android or cross-platform; the web detector does not read native code.
+
+Ask about the two or three inputs that matter most for this request, not the whole list. If the
+user wants a result straight away, produce it and state your assumptions at the top.
+
+## Quick Start
+
+```bash
+# 1. Scan for generic and quality patterns (exit 1 on findings at or above medium)
+python3 engineering/interface-refinement/scripts/ui_slop_detector.py \
+  engineering/interface-refinement/assets/sample_ui_flawed.* --format text
+
+# 2. Route the findings to the next commands (exit 1 when access-blocking work exists)
+python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/ --format json &gt; detector.json
+python3 engineering/interface-refinement/scripts/command_router.py --report detector.json --mode operate
+
+# 3. Validate the refinement plan before editing
+python3 engineering/interface-refinement/scripts/command_router.py \
+  --plan engineering/interface-refinement/assets/sample_refinement_plan.json
+
+# 4. Check shipped values against the recorded visual system (off-system-* rules, refusals fail)
+python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/ \
+  --context engineering/interface-refinement/assets/sample_context.md --format text
+
+# 5. Lint the project context file
+python3 engineering/interface-refinement/scripts/context_linter.py \
+  --input engineering/interface-refinement/assets/sample_context.md
+```
+
+## Tools Overview
+
+| Tool | Input | Output | Exit codes |
+|------|-------|--------|------------|
+| `ui_slop_detector.py` | files or directories (HTML, JSX, TSX, Vue, Svelte, Astro, CSS, SCSS, LESS); optional `--context` | findings with file:line, rule, severity, evidence, fix, owning command; summary by command | 0 clean at `--fail-on`, 1 findings, 2 bad input |
+| `command_router.py --report` | detector JSON + mode + platform | 2-3 next commands in triage order, then polish; a plan skeleton | 0 routed, 1 access-blocking work found, 2 bad input |
+| `command_router.py --plan` | refinement plan JSON | errors and warnings per step | 0 valid, 1 errors (warnings with `--strict`), 2 malformed |
+| `context_linter.py` | `interface-context.md` | errors and warnings by section | 0 pass, 1 errors (warnings with `--strict`), 2 not a context file |
+| `ui_rules.py` | `--list [--scope S]` or `--contrast FG BG` | rule catalog, or a WCAG ratio (translucent colours composited over white; pass the opaque ground for dark UIs) | 0 ok / ratio passes, 1 ratio fails, 2 bad colour, scope or catalog |
+| `system_checks.py` | `--context` file + files | off-system values only (drift report for `document` and `extract`) | 0 / 1 / 2 |
+| `css_checks.py`, `markup_checks.py`, `class_checks.py`, `extra_checks.py` | stylesheets, markup, or one class list | the detector&#x27;s layers run alone, for debugging a rule | 0 / 1 / 2 |
+| `css_parse.py` | one file | the CSS blocks and declarations the detector reads, for debugging a parse | 0 parsed, 2 bad input |
+
+All tools are stdlib-only, offline, deterministic, and support `--format text|json`. Waive a
+finding inline with `ui-refine-ignore &lt;rule&gt; -- &lt;reason&gt;`; waivers without a reason are rejected.
+
+## Commands
+
+| Group | Command | Job | Detector rules routed here | Reference |
+|-------|---------|-----|----------------------------|-----------|
+| Evaluate | `critique` | design review, heuristic scores, 3-5 priority issues | none (judgment) | `references/command-critique.md` |
+| Evaluate | `audit` | five-dimension technical score out of 20 | all, as evidence | `references/command-audit.md` |
+| Context | `init` | write the product half of the context file | none | `references/command-init.md` |
+| Context | `document` | record the shipped visual system | none | `references/command-document.md` |
+| Context | `extract` | turn drift into tokens and shared components | off-system-color, off-system-font, off-system-radius, off-system-font-size | `references/command-extract.md` |
+| Refine | `polish` | closing pass: states, alignment, browser surfaces | emoji-icon, skipped-heading, buried-raster | `references/command-polish.md` |
+| Refine | `distill` | remove what does not earn its place | nested-cards, chip-soup, numbered-section-labels, shape-assembled-illustration | `references/command-distill.md` |
+| Refine | `quieter` | lower the volume, keep the point of view | side-stripe-border, glow-shadow, radial-glow, organic-clip-path, hairline-wide-shadow, hard-offset-shadow, repeating-stripes, grid-line-background | `references/command-quieter.md` |
+| Refine | `bolder` | raise one flat section with the system&#x27;s own moves; &quot;all-out&quot; requests too | none (critique only) | `references/command-bolder.md` |
+| Refine | `harden` | focus, overflow, i18n, errors, edge content | focus-ring-removed, broken-image | `references/command-harden.md` |
+| Refine | `clarify` | labels, headlines, errors, empty states | vague-control-label, vague-headline | `references/command-clarify.md` |
+| Enhance | `typeset` | roles, scale, reading comfort, a type decision | gradient-text, kicker-above-heading, italic-serif-display, overused-face, default-font-stack, tiny-text, all-caps-body, oversized-headline, flat-type-hierarchy, tight-body-leading, wide-body-tracking, crushed-tracking, justified-text, everything-bold | `references/command-typeset.md` |
+| Enhance | `colorize` | colour roles, contrast, reflex palettes | low-contrast-pair, faint-gray-text, gray-on-color, ai-hue-gradient, cream-ground | `references/command-colorize.md` |
+| Enhance | `layout` | lead element, grouping, rhythm, order | identical-card-row, icon-tile-stack, monotonous-spacing | `references/command-layout.md` |
+| Enhance | `animate` | motion that explains, reduced-motion paths | missing-reduced-motion, transition-all, layout-property-motion, bounce-easing, decorative-pulse, marquee-scroll, blinking-cursor | `references/command-animate.md` |
+| Enhance | `optimize` | no layout jumps, readable before fonts load, smooth motion | image-missing-dimensions, font-display-missing (and the motion rules it shares with animate) | `references/command-optimize.md` |
+| Enhance | `adapt` | restructure for phone, tablet, print, email, other platforms | none (audit, critique) | `references/command-adapt.md` |
+| Enhance | `onboard` | first run, empty states, time to first value | none (critique) | `references/command-onboard.md` |
+| Enhance | `delight` | one considered, product-specific moment | none (owner request) | `references/command-delight.md` |
+
+### Routing
+
+- **No command named:** run the detector, then `command_router.py --report` and offer its two or
+  three picks with one-line reasons. Never auto-run; the user confirms the pick.
+- **A command named or clearly implied** (&quot;fix the type&quot;, &quot;it&#x27;s too loud&quot;): load that command&#x27;s
+  reference and follow it. If two fit, ask once.
+- **A clean scan:** recommend `critique`. The detector proves the floor, not the design.
+- **Missing context file:** a narrow fix proceeds on the existing code; offer `init` afterwards.
+  Anything wider (a redesign, a new surface, more than a few files) starts with `init`.
+- **Native platform:** `critique` and `audit` against `references/native-platforms.md`; skip the
+  web detector.
+
+## Workflows
+
+### Workflow 1 — Refine a surface
+
+1. Settle target, mode and scope (Clarify First). Read `interface-context.md` if it exists.
+2. Scan the target and the global styles together, so project-level rules (focus-visible,
+   reduced motion) see everything:
+   ```bash
+   python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/pages/invoices.tsx src/styles --format json &gt; detector.json
+   ```
+3. Route: `command_router.py --report detector.json --mode operate`. Access-blocking work
+   (contrast, tiny text, focus, reduced motion) comes first.
+4. Write the plan JSON: one step per command with `changes`, `must_not_touch`, `verify`; evaluate
+   steps first, `polish` last. Validate it:
+   ```bash
+   python3 engineering/interface-refinement/scripts/command_router.py --plan plan.json --strict
+   ```
+5. Read `references/craft-floor.md`, then execute each step from its command reference.
+6. Verify each step as its reference says, then rerun the detector on the target:
+   ```bash
+   python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/pages/invoices.tsx src/styles \
+     --context interface-context.md --fail-on advisory
+   ```
+7. Hand the diff and before/after screenshots to a fresh reviewer for the finish disposition
+   (`ship`, `fix`, `rework`, `re-evidence`; see `references/review-protocol.md`).
+
+### Workflow 2 — Critique with isolated assessments
+
+1. Resolve the target to a source path; read the context file; note the mode.
+2. Run Assessment A (design review) **before** looking at any detector output. With subagents,
+   run A and B in parallel as two subagents using the briefs in `references/review-protocol.md`.
+3. Run Assessment B: the detector, with every hit checked against its source line.
+4. Synthesize: agreements are strong findings; name detector false positives; keep A&#x27;s
+   judgments that B cannot see.
+5. Fill `assets/refinement-report-template.md`. The first line states the method. End with the
+   question to the owner; nothing follows it.
+
+### Workflow 3 — Write and lint the context file
+
+1. `init`: interview for the product half (three questions per round at most); write
+   `interface-context.md` from `assets/interface-context-template.md`.
+2. `document`: extract the visual system from shipped code; record reused values only; never
+   canonise a detector finding as a rule. Rescan with `--context interface-context.md`: each
+   `off-system-*` hit is a value you missed or drift that `extract` will fold back in.
+3. Lint until it passes:
+   ```bash
+   python3 engineering/interface-refinement/scripts/context_linter.py --input interface-context.md --strict
+   ```
+4. Put the refusals you agreed on (rule ids) in `### Refusals`. With `--context`, the detector
+   raises any refused advisory rule to medium, so it fails the default gate.
+
+### Validation checkpoint before calling a refinement done
+
+- [ ] Plan validated by `command_router.py --plan` with no errors
+- [ ] Detector on the target with `--context interface-context.md` exits 0 at `--fail-on medium`; every remaining hit has a waiver with a reason
+- [ ] Every contrast pair you touched proven with `ui_rules.py --contrast`
+- [ ] Keyboard walk of the primary task with a visible focus ring throughout
+- [ ] Screenshots at 360px and 1280px (or each native device class), before and after
+- [ ] Diff contains only the named target; no new colours, faces or radii unless approved
+- [ ] Context file still passes `context_linter.py`
+
+## Decision frameworks
+
+### Which command first
+
+| Symptom | Command | Confidence |
+|---------|---------|------------|
+| Contrast, tiny text, focus or reduced-motion findings | the owning command, before anything else | **[PROVEN]** access defects block people; style does not |
+| Many findings across five or more commands | `audit`, then plan | **[RECOMMENDED]** a score keeps the pass from fixing corners |
+| &quot;Cluttered&quot;, nested containers, chip soup | `distill` before `layout` | **[RECOMMENDED]** decide what stays before arranging it |
+| &quot;Generic&quot; with a clean scan | `critique` | **[PROVEN]** specificity is a judgment, not a pattern match |
+| &quot;Flat&quot; on a persuade page | `bolder` on one named section | **[RECOMMENDED]** amplify, never add primitives |
+| Any edit plan | ends with `polish` | **[PROVEN]** the closing pass catches the drift the other passes create |
+
+### When a detector finding is not a defect
+
+**[RECOMMENDED]** Waive, do not fix, when the context file or the owner chose the pattern on
+purpose (a print-heritage cream ground, a literal bouncing ball, a brutalist offset shadow, a
+bound typeface). Waive one line and one rule, with the evidence in the reason. **[EXPERIMENTAL]**
+For a project that refuses a pattern outright, list the rule id under `### Refusals` and gate CI
+with `--fail-on advisory --rules &lt;ids&gt;`.
+
+## Anti-Patterns
+
+### Polish as Disguised Redesign
+**Mistake:** A &quot;polish&quot; or &quot;quieter&quot; pass that swaps the palette, the face and the layout.
+**Why it happens:** The refiner dislikes the current look and the command name feels like permission.
+**Instead:** Refinement keeps the identity. If the concept is wrong, say so in a critique and let
+the owner decide on a redesign.
+
+### Fixing the Detector Instead of the Design
+**Mistake:** Renaming a `card` class or splitting a gradient until the rule stops firing.
+**Why it happens:** A green gate is the visible goal; the pattern is still on screen.
+**Instead:** Fix what the person sees, or waive with a named reason. Rerun the scan as
+verification, never as the objective.
+
+### Anchored Critique
+**Mistake:** Reading the detector report first and writing a critique that restates it.
+**Why it happens:** Deterministic output feels authoritative and saves effort.
+**Instead:** Finish the design review blind, then merge. Hierarchy, specificity and copy tone are
+invisible to a static scan.
+
+### Everything Gets Louder
+**Mistake:** A `bolder` pass that adds glows, gradients and a new accent colour.
+**Why it happens:** Effects are the fastest way to make a section look different.
+**Instead:** One decisive move in the system&#x27;s own vocabulary, then quiet its surroundings. The
+plan validator warns on new primitives without approval.
+
+### Canonising the Defect
+**Mistake:** Writing the eyebrow label or side stripe found in the code into the context file&#x27;s
+named rules.
+**Why it happens:** `document` records what ships, and the defect ships everywhere.
+**Instead:** Report it as drift. Named rules describe decisions, not accidents.
+
+## Reference Documentation
+
+- `references/command-*.md` — one file per command: job, mode notes, change, do not touch, steps, verify, hand-off
+- `references/surface-modes.md` — persuade, operate, read, showcase; what each mode allows
+- `references/craft-floor.md` — checks every edit meets and patterns refused by default
+- `references/detector-rules.md` — every rule&#x27;s signal, precision notes and blind spots
+- `references/detector-rules.json` — the catalog data the tools read
+- `references/review-protocol.md` — isolated assessments, subagent briefs, heuristics, personas, finish dispositions, waivers
+- `references/native-platforms.md` — iOS and Android checks, native audit, idiom translation, evidence capture
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/ui_slop_detector.py` | Entry point: scans paths, runs all layers, waivers, project-level rules, exit gate |
+| `scripts/css_parse.py` | Linear CSS reader: comments, SCSS nesting, JSX style objects, styled/css templates (nested ones too) |
+| `scripts/css_checks.py` | Declaration rules over the blocks `css_parse.py` reads from stylesheets, style blocks, inline styles and templates |
+| `scripts/class_checks.py` | Utility-class rules and the shape predicates (card, chip, icon tile, kicker, bold) |
+| `scripts/markup_checks.py` | Structural rules over the element tree |
+| `scripts/extra_checks.py` | Effects, image, type-scale and font-loading rules (declaration hook, raw markup, project-level hierarchy) |
+| `scripts/system_checks.py` | Reads the context file&#x27;s visual system; off-system drift; refusal escalation |
+| `scripts/ui_rules.py` | Rule catalog loader, colour parsing (hex/rgb/hsl/oklch), WCAG contrast |
+| `scripts/command_router.py` | Route findings to commands; validate refinement plans |
+| `scripts/context_linter.py` | Lint `interface-context.md` |
+| `assets/sample_ui_sound.{html,css,tsx}` | Sound invoice screen: detector exits 0 at `--fail-on advisory`, with or without `--context` |
+| `assets/sample_ui_flawed.{html,css,tsx}` | Deliberately generic landing page: all 54 rules fire with `--context assets/sample_context.md` (50 without), exit 1 |
+| `assets/sample_detector_report.json` / `_flawed.json` | Detector JSON for the two samples, router input |
+| `assets/sample_context.md` / `_flawed.md` | Context file that passes `--strict` / one with 13 errors |
+| `assets/sample_refinement_plan.json` / `_flawed.json` | Valid plan / plan breaking every ordering and scope rule |
+| `assets/interface-context-template.md` | Blank context file |
+| `assets/refinement-report-template.md` | Critique and plan report |
+
+## Integration Points
+
+| Skill | Integration |
+|-------|-------------|
+| `engineering/design-auditor` | Letter grades and landing-page template slop; run its detector alongside this one |
+| `engineering/a11y-audit` | WCAG HTML scan (alt, labels, landmarks) feeding `harden` and `audit` |
+| `engineering/senior-frontend` | Implements the plan&#x27;s steps in the component library |
+| `engineering/code-reviewer` | Attach detector JSON and the plan verdict to UI pull requests |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Refining existing web interfaces through 19 named commands with scope and verification rules
+- Static detection of 54 generic-pattern and quality rules in HTML, JSX/TSX, Vue, Svelte, Astro and CSS,
+  four of them checking shipped values against the context file&#x27;s visual system
+- Routing findings to commands and validating refinement plans before any edit
+- Writing and linting the product + design context file
+- Native iOS/Android review guidance (checks, audit dimensions, idiom translation)
+
+**Out of Scope:**
+- Choosing a new visual direction or building a site from nothing
+- Rendering pages, measuring layout or driving a browser; static source only
+- Native code scanning (Swift, Kotlin, Dart)
+- Performance measurement (paint timings, bundle size) beyond the static signals `optimize` reads,
+  and marketing copy analysis
+
+**Important Caveats:**
+- The detector cannot see inherited colours, runtime class names or rendered overflow; a clean
+  scan is the floor, not a verdict. Critique covers the rest.
+- Generic-family rules are judgments about defaults; the owner&#x27;s brief can earn any of them back.
+- Rows rendered with `.map()` appear once in source, so `identical-card-row` misses them.
+- Class names held in variables are invisible; string literals inside `cn()`, `clsx()`, Vue
+  `:class` and Svelte `class={...}` are read. Scan the layout or global stylesheet with a page so
+  the page ground (light or dark) is known.
+- Drift rules read literals only: values behind `var()`, `calc()`, em or named utility classes
+  cannot drift as far as the scan knows, so keep tokens as the single source.
+
+---
+
+## What I Need You to Do
+
+First, detect which platform I&#x27;m using (Claude.ai, ChatGPT, etc.) and follow the matching instructions below.
+
+### If I&#x27;m on Claude.ai:
+
+Walk me through these exact steps:
+
+1. **Create the Project:** Tell me to go to **claude.ai &gt; Projects &gt; Create project** and name it **&quot;Interface Refinement&quot;**
+
+2. **Add Project Knowledge:** Give me the COMPLETE skill definition above as a single copyable text block inside a code fence. Tell me to click **&quot;Add content&quot; &gt; &quot;Add text content&quot;** inside the project, then paste that entire block. Do NOT say &quot;paste from above&quot; -- give me the actual text to copy right there.
+
+3. **Set Custom Instructions:** Tell me to open project settings and paste this exact instruction:
+   &quot;You are an expert Interface Refinement in the Engineering domain. Use the project knowledge as your expertise. Follow the workflows, frameworks, and templates defined there. Always provide specific, actionable output.&quot;
+
+4. **Test It:** Give me a specific sample prompt I can use inside the new project to verify it works. Pick a real task from the skill&#x27;s workflows.
+
+### If I&#x27;m on ChatGPT:
+
+Walk me through these exact steps:
+
+1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
+2. **Configure it:**
+   - Name: **&quot;Interface Refinement&quot;**
+   - Description: &quot;Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks generic, cluttered or unfinished.&quot;
+   - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
+3. **Test It:** Give me a sample prompt to verify it works.
+
+### If I&#x27;m on another platform:
+Ask which tool I&#x27;m using and adapt the instructions accordingly.
+
+## Important
+- Always provide the full skill text in a ready-to-copy code block -- never tell me to &quot;scroll up&quot; or &quot;copy from above&quot;
+- Keep the setup steps simple and numbered
+- After setup, test it with me using a real workflow from the skill
+
+Source: https://github.com/borghei/Claude-Skills/tree/main/engineering/interface-refinement/SKILL.md</pre>
+      </details>
+    </div>
+  </div>
+</div>
+<div class="tab-content" id="tab-claude">
+  <pre><code># Add to your project
+cs install engineering/interface-refinement ./
+
+# Or copy directly
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/engineering/interface-refinement your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-codex">
+  <pre><code># The skill is available in your Codex workspace at:
+.codex/skills/interface-refinement/
+
+# Reference the SKILL.md in your Codex instructions
+# or copy it into your project:
+cp -r .codex/skills/interface-refinement your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-gemini">
+  <pre><code># The skill is available in your Gemini CLI workspace at:
+.gemini/skills/interface-refinement/
+
+# Reference the SKILL.md in your Gemini instructions
+# or copy it into your project:
+cp -r .gemini/skills/interface-refinement your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-cursor">
+  <pre><code># Add to your .cursorrules or workspace settings:
+# Reference: engineering/interface-refinement/SKILL.md
+
+# Or copy the skill folder into your project:
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/engineering/interface-refinement your-project/</code></pre>
+</div>
+<div class="tab-content" id="tab-manual">
+  <pre><code># Clone and copy
+git clone https://github.com/borghei/Claude-Skills.git
+cp -r Claude-Skills/engineering/interface-refinement your-project/
+
+# Or download just this skill
+curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/engineering/interface-refinement</code></pre>
+</div>
+<h3>Run Python Tools</h3>
+<pre><code>python engineering/interface-refinement/scripts/tool_name.py --help</code></pre>
+  
+  <h2>Quick Start</h2><pre><code># 1. Scan for generic and quality patterns (exit 1 on findings at or above medium)
+python3 engineering/interface-refinement/scripts/ui_slop_detector.py \
+  engineering/interface-refinement/assets/sample_ui_flawed.* --format text
+
+# 2. Route the findings to the next commands (exit 1 when access-blocking work exists)
+python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/ --format json &gt; detector.json
+python3 engineering/interface-refinement/scripts/command_router.py --report detector.json --mode operate
+
+# 3. Validate the refinement plan before editing
+python3 engineering/interface-refinement/scripts/command_router.py \
+  --plan engineering/interface-refinement/assets/sample_refinement_plan.json
+
+# 4. Check shipped values against the recorded visual system (off-system-* rules, refusals fail)
+python3 engineering/interface-refinement/scripts/ui_slop_detector.py src/ \
+  --context engineering/interface-refinement/assets/sample_context.md --format text
+
+# 5. Lint the project context file
+python3 engineering/interface-refinement/scripts/context_linter.py \
+  --input engineering/interface-refinement/assets/sample_context.md
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/interface-refinement/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
+</article>
+</main>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/borghei/Claude-Skills" target="_blank" rel="noopener">GitHub</a>
+      <span class="footer-sep">&middot;</span>
+      <span>MIT + Commons Clause</span>
+      <span class="footer-sep">&middot;</span>
+      <a href="https://buymeacoffee.com/borghei" target="_blank" rel="noopener">Buy Me a Coffee</a>
+    </div>
+    <div class="footer-credit">Built by <a href="https://github.com/borghei" target="_blank" rel="noopener">borghei</a></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+  });
+});
+function copyPrompt(btn){
+  var text=btn.getAttribute('data-prompt');
+  // Decode HTML entities
+  var ta=document.createElement('textarea');
+  ta.innerHTML=text;
+  text=ta.value;
+  navigator.clipboard.writeText(text).then(function(){
+    btn.classList.add('copied');
+    btn.querySelector('span').textContent='Copied!';
+    setTimeout(function(){
+      btn.classList.remove('copied');
+      btn.querySelector('span').textContent='Copy Prompt';
+    },2000);
+  });
+}
+</script>
+</body>
+</html>
