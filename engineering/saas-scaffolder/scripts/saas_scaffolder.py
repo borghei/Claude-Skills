@@ -30,48 +30,13 @@ DB_DEPS = {"neondb": {"@neondatabase/serverless": "latest"}, "supabase": {"postg
 PAY_DEPS = {"stripe": {"stripe": "latest"}, "lemonsqueezy": {"@lemonsqueezy/lemonsqueezy.js": "latest"}, "none": {}}
 
 ENV_BLOCKS = {  # each value is a list of .env.example lines
-    'app': [
-        '# App',
-        'NEXT_PUBLIC_APP_URL=http://localhost:3000',
-    ],
-    'db': [
-        '# Database',
-        'DATABASE_URL=              # postgresql://user:pass@host/db?sslmode=require',
-    ],
-    'nextauth': [
-        '# Auth.js',
-        'AUTH_SECRET=               # openssl rand -base64 32',
-        '# AUTH_URL is optional (inferred from the request); set AUTH_TRUST_HOST=true behind a reverse proxy',
-        'AUTH_GOOGLE_ID=',
-        'AUTH_GOOGLE_SECRET=',
-        'AUTH_GITHUB_ID=',
-        'AUTH_GITHUB_SECRET=',
-        'RESEND_API_KEY=',
-    ],
-    'clerk': [
-        '# Clerk',
-        'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=',
-        'CLERK_SECRET_KEY=',
-    ],
-    'supabase': [
-        '# Supabase',
-        'NEXT_PUBLIC_SUPABASE_URL=',
-        'NEXT_PUBLIC_SUPABASE_ANON_KEY=',
-    ],
-    'stripe': [
-        '# Stripe',
-        'STRIPE_SECRET_KEY=',
-        'STRIPE_WEBHOOK_SECRET=',
-        'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=',
-        'STRIPE_PRO_MONTHLY_PRICE_ID=',
-        'STRIPE_PRO_YEARLY_PRICE_ID=',
-    ],
-    'lemonsqueezy': [
-        '# Lemon Squeezy',
-        'LEMONSQUEEZY_API_KEY=',
-        'LEMONSQUEEZY_STORE_ID=',
-        'LEMONSQUEEZY_WEBHOOK_SECRET=',
-    ],
+    'app': ['# App', 'NEXT_PUBLIC_APP_URL=http://localhost:3000'],
+    'db': ['# Database', 'DATABASE_URL=              # postgresql://user:pass@host/db?sslmode=require'],
+    'nextauth': ['# Auth.js', 'AUTH_SECRET=               # openssl rand -base64 32', '# AUTH_URL is optional (inferred from the request); set AUTH_TRUST_HOST=true behind a reverse proxy', 'AUTH_GOOGLE_ID=', 'AUTH_GOOGLE_SECRET=', 'AUTH_GITHUB_ID=', 'AUTH_GITHUB_SECRET=', 'RESEND_API_KEY='],
+    'clerk': ['# Clerk', 'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=', 'CLERK_SECRET_KEY='],
+    'supabase': ['# Supabase', 'NEXT_PUBLIC_SUPABASE_URL=', 'NEXT_PUBLIC_SUPABASE_ANON_KEY='],
+    'stripe': ['# Stripe', 'STRIPE_SECRET_KEY=', 'STRIPE_WEBHOOK_SECRET=', 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=', 'STRIPE_PRO_MONTHLY_PRICE_ID=', 'STRIPE_PRO_YEARLY_PRICE_ID='],
+    'lemonsqueezy': ['# Lemon Squeezy', 'LEMONSQUEEZY_API_KEY=', 'LEMONSQUEEZY_STORE_ID=', 'LEMONSQUEEZY_WEBHOOK_SECRET='],
 }
 
 MIDDLEWARE = {
