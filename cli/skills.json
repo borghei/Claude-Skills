@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T17:14:52+00:00",
+  "generated_at": "2026-11-08T17:20:06+00:00",
   "skill_count": 403,
   "domain_count": 21,
   "skills": [
@@ -2676,7 +2676,7 @@
         "scripts/saas_scaffolder.py",
         "scripts/tenant_config_validator.py"
       ],
-      "size_bytes": 77263,
+      "size_bytes": 77318,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -3804,11 +3804,10 @@
         "SKILL.md",
         "assets/sample_access_log.txt",
         "assets/sample_clean_log.txt",
-        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 40140,
+      "size_bytes": 32539,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
