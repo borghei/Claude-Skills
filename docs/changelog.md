@@ -8,6 +8,11 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.17.0** (November 2026)
+
+- 167 engineering and project-management skills reworked for reasoning-first models: goals and verification instead of step-by-step scaffolding, clearer descriptions, current model ids and versions
+- Tools fixed to give correct results on their own samples, exit cleanly on bad input and match their docs
+
 **v4.16.0** (November 2026)
 
 - 3 interface-design skills: a design-direction recommender that turns a product brief into a design-system spec, a marketing-site builder with a static finish gate, and an interface-refinement skill with 19 commands and a detector for generic AI-looking UI
