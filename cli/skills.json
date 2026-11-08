@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T11:03:56+00:00",
+  "generated_at": "2026-11-08T13:35:57+00:00",
   "skill_count": 400,
   "domain_count": 21,
   "skills": [
@@ -7053,7 +7053,7 @@
         "references/offer-construction.md",
         "scripts/offer_scorer.py"
       ],
-      "size_bytes": 34771,
+      "size_bytes": 35170,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -11443,7 +11443,7 @@
         "scripts/launch_economics.py",
         "scripts/viability_verdict.py"
       ],
-      "size_bytes": 60008,
+      "size_bytes": 61087,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
@@ -12598,7 +12598,7 @@
         "scripts/panel_deal.py",
         "scripts/panel_tally.py"
       ],
-      "size_bytes": 87916,
+      "size_bytes": 88653,
       "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
