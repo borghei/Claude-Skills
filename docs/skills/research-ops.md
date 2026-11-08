@@ -5,7 +5,7 @@ description: Applied, operational research — market sizing, product discovery 
 
 # Research Ops Skills
 
-**4 skills** with **12 stdlib-only Python tools** for running research as an operational function.
+**5 skills** with **16 stdlib-only Python tools** for running research as an operational function.
 
 This domain covers **applied, operational** research — research as something funded, staffed, and repeatable. It is deliberately distinct from the academic `research/` domain (litreview, grants, patent, dossier), which covers scholarly synthesis and intelligence work.
 
@@ -74,6 +74,13 @@ The money side of research operations: building a budget that funds what the stu
 - Prioritise the portfolio → `portfolio_prioritizer.py` (expected decision value, reversibility discount, zeroes out studies arriving after the decision, greedy allocation against `--budget`)
 
 **Use when:** costing a study before a funding request, answering "what does this cost per participant", tracking a programme mid-flight, forecasting an overrun early enough to descope, prioritising a portfolio that exceeds its budget, or defending a research budget to a finance partner.
+
+### synthetic-buyer-panel — Simulated buyer panel ★ NEW
+
+[:material-folder-open: Browse on GitHub](https://github.com/borghei/Claude-Skills/tree/main/research-ops/synthetic-buyer-panel){ .md-button }
+
+A reproducible panel of simulated buyers dealt from a customer profile: one agent per persona card, then a tally of buy rates, objections and acceptable price corridors. The tally refuses to impute missing answers and fails below 90% coverage, and a panel result is directional only — it never stands in for real demand evidence.
+**Use when:** asking "would people buy this" before any customer conversation, pre-testing a pitch or price, or surfacing objections to prepare for.
 
 ## Quality standard
 

@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 397 production-ready skills across 21 domains with 934 Python automation tools, 76 AI agents (68 cs-* agents + 8 personas), 26 slash commands, 21 compound sub-skills, and 6 CI/CD workflows. **Project Management is the most-used domain (74 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
+**Current Scope:** 400 production-ready skills across 21 domains with 939 Python automation tools, 76 AI agents (68 cs-* agents + 8 personas), 26 slash commands, 21 compound sub-skills, and 6 CI/CD workflows. **Project Management is the most-used domain (74 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 
@@ -62,16 +62,16 @@ claude-code-skills/
 ├── project-management/        # 74 PM skills (most-used domain) — role-based, discovery/, execution/, career/, strategy-frameworks/ (Tier 3), gtm/ (Tier 3), linear-expert, notion-pm
 ├── c-level-advisor/           # 31 C-level advisory skills + Python tools (Tier 2: CAIO, CDO, CCO, GC, VPE advisors)
 ├── research/                  # 4 research skills (Tier 2) — litreview, grants, patent, dossier
-├── research-ops/              # 4 applied research ops skills — market, product, clinical, research-finance
+├── research-ops/              # 5 applied research ops skills — market, product, clinical, research-finance, synthetic-buyer-panel
 ├── business-operations/       # 6 business ops skills — capacity, process, vendor, comms, knowledge, procurement
 ├── markdown-html/             # 4 markdown→HTML publishing skills — document, slides, review gate, design-system
 ├── tools/                     # 12 platform toolkit skills — the LinkedIn suite under tools/linkedin/ (offline, stdlib only)
 ├── ra-qm-team/                # 27 RA/QM compliance skills (incl. audit-prep/ subfolder)
-├── business-growth/           # 20 business & growth skills (incl. commercial: deal-desk, channel-economics, partnerships-architect, commercial-policy)
+├── business-growth/           # 21 business & growth skills (incl. offer-design; commercial: deal-desk, channel-economics, partnerships-architect, commercial-policy)
 ├── data-analytics/            # 5 data analytics skills + Python tools
 ├── hr-operations/             # 4 HR operations skills + Python tools
 ├── sales-success/             # 5 sales success skills + Python tools
-├── finance/                   # 3 finance skills + Python tools
+├── finance/                   # 4 finance skills + Python tools (incl. launch-economics)
 ├── legal/                     # 17 legal skills (EXPERIMENTAL) + 34 Python tools
 ├── personal-productivity/     # 14 personal-productivity skills (resume, leads, meetings, naming, invoices, email triage, calendar prep, investor update, pitch deck, weekly review)
 ├── documents/                 # 4 document automation skills (docx, pdf, pptx, xlsx) — stdlib only
@@ -147,7 +147,7 @@ mkdocs build                                  # 1. docs/ -> site/  (CLEANS site/
 git checkout HEAD -- site/index.html \
                      site/css/style.css \
                      site/js/main.js          # 2. restore the hand-maintained landing page
-python3 scripts/generate_site.py              # 3. skills.json -> 397 skill + 21 domain pages
+python3 scripts/generate_site.py              # 3. skills.json -> 400 skill + 21 domain pages
 ```
 
 - **`mkdocs build` wipes `site/` before writing.** It must run first, never last.
@@ -234,7 +234,8 @@ hand-maintained `site/index.html`.
 
 **Last Updated:** November 2026
 **Version:** 4.14.0
-**Status:** 397 skills, 68 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 21 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 21 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 74 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
+**Status:** 400 skills, 68 cs-* agents (+ 8 personas), 26 commands, 21 sub-skills, 21 domains (incl. workflow meta-skills), Gemini CLI support. Engineering domain adds 4 AI-modernization skills (extended-thinking-architect, batch-api-orchestrator, computer-use-automation, agentic-evaluation-framework) + memory-tool/context-editing/reasoning-effort/caching upgrades to context-engine, llm-cost-optimizer, agent-workflow-designer, mcp-server-builder. Cross-platform surface unified — one `build_manifest.py` run regenerates `cli/skills.json`, `registry.json`, `.gemini/skills-index.json`, and the website catalog `skills.json`; all 21 domains install as Claude Code plugins; Cursor `.cursor/rules/*.mdc` added. PM domain expanded to 74 skills with career track, AI/ML PRD, activation funnels, feature flags, post-mortems, customer feedback triage, pricing PRDs, Linear/Notion/Productboard integrations, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), and GTM (gtm-strategy/ICP).
+- **Recent additions (November 2026) — founder toolkit (3 skills, 5 stdlib tools):** `finance/launch-economics` (unit economics, break-even, year-one cash, VIABLE / UNCONFIRMED / NOT YET verdict that refuses VIABLE on simulated demand), `research-ops/synthetic-buyer-panel` (seeded persona cards, buy-rate/objection/price-corridor tally, no imputation, fails under 90% coverage), `business-growth/offer-design` (offer stack, guarantee affordability, verifiable urgency scorer).
 - **Recent additions (November 2026) — 12 agent-workflow skills (24 stdlib tools):** engineering `bug-diagnosis`, `deep-module-design`, `domain-modeling`, `pr-description-writer`, `git-guardrails` (PreToolUse hook that blocks destructive git, exit 2) and `human-step-wizard`; PM `discovery/plan-grilling`, `execution/wayfinder`, `execution/issue-triage`, `execution/decision-questionnaire`; personal-productivity `learning-workspace`; workflow `session-retro`. Fold-ins: two-axis spec-fidelity review in `code-reviewer`, conversation→spec and implement-from-spec loops in `spec-driven-workflow`, tracer-bullet slicing in `spec-to-repo` and `backlog-refinement`, writing-for-agents (`disable-model-invocation`) in `write-a-skill`, background-agent mode in `handoff`, repo research notes in `dossier`. Fixed `claude-code-mastery` hooks cookbook: PreToolUse blocks on exit 2, not exit 1.
 - **Recent additions (October 2026) — new `tools/` domain, LinkedIn suite (12 skills, 27 stdlib tools):** `tools/linkedin/` holds linkedin-story-interviewer, -content-planner, -post-writer, -hook-analyzer, -humanizer, -content-repurposer, -comment-writer, -reply-manager, -thread-tracker, -profile-optimizer, -employee-advocacy and -engagement-analytics. Offline by design: nothing posts, schedules or scrapes; drafts are pasted by the user and analysis runs on pasted text or exports. Gates exit 1 on their deliberately flawed samples.
 - **Recent additions (October 2026) — security audit:** engineering `security-audit` (6 stdlib tools, 14 references) and the `cs-security-auditor` agent that leads it. Six phases — reconnaissance, coverage-ledger-driven hunting, independent candidate validation, schema-checked `findings.json`, fresh record verification, reporting — with three run-time breadth tiers (`core`, `focused`, `full`). The agent asks for the tier before every full audit. Validators exit non-zero on an invalid ledger or findings file by design.

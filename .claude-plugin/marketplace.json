@@ -4,11 +4,11 @@
     "name": "borghei",
     "url": "https://borghei.me"
   },
-  "description": "Production-ready AI skill packages for every coding assistant — 397 expert skills across 21 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
+  "description": "Production-ready AI skill packages for every coding assistant — 400 expert skills across 21 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
   "homepage": "https://github.com/borghei/Claude-Skills",
   "repository": "https://github.com/borghei/Claude-Skills",
   "metadata": {
-    "description": "397 production-ready AI skill packages across 21 domains, installable per-domain as Claude Code plugins",
+    "description": "400 production-ready AI skill packages across 21 domains, installable per-domain as Claude Code plugins",
     "version": "3.0.0"
   },
   "plugins": [
@@ -115,7 +115,7 @@
     {
       "name": "business-growth-skills",
       "source": "./business-growth",
-      "description": "20 business growth skills: conversion-rate optimization, pricing, referrals, revenue operations, and commercial strategy (deal desk, channel economics, partnerships)",
+      "description": "21 business growth skills: conversion-rate optimization, pricing, referrals, revenue operations, and commercial strategy (deal desk, channel economics, partnerships)",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
@@ -291,7 +291,7 @@
     {
       "name": "finance-skills",
       "source": "./finance",
-      "description": "3 finance skills: financial analysis with ratio analysis, DCF valuation, budgeting, and forecasting",
+      "description": "4 finance skills: financial analysis with ratio analysis, DCF valuation, budgeting, and forecasting",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
@@ -344,7 +344,7 @@
     {
       "name": "research-ops-skills",
       "source": "./research-ops",
-      "description": "4 applied research operations skills: market research, product research, clinical research operations, and research finance",
+      "description": "5 applied research operations skills: market research, product research, clinical research operations, and research finance",
       "version": "1.0.0",
       "author": {
         "name": "borghei"

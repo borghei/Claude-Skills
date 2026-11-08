@@ -1,0 +1,26 @@
+{
+  "offer_name": "Inbox Zero Mastery, an online productivity course (deliberately flawed example)",
+  "currency": "USD",
+  "price": 97,
+  "core_unit_cost": 8,
+  "headline": "The ultimate complete life-changing system to finally master your email, time, focus and entire life forever",
+  "drivers": {"outcome": 7, "belief": 9, "days_to_result": 120, "effort": 8},
+  "proof": [],
+  "obstacles": [
+    {"id": "O1", "text": "I have tried systems before and fallen off"},
+    {"id": "O2", "text": "No time to watch hours of video"},
+    {"id": "O3", "text": "My job makes inbox volume impossible to control"},
+    {"id": "O4", "text": "I am not sure it works with my email client"}
+  ],
+  "components": [
+    {"name": "40 hours of video lessons", "kind": "core", "solves": ["O1"],
+     "buyer_value": 60, "delivery_cost": 2},
+    {"name": "Weekly live group coaching", "kind": "bonus", "solves": [],
+     "buyer_value": 40, "delivery_cost": 35},
+    {"name": "Private community access", "kind": "bonus", "solves": [],
+     "buyer_value": 20, "delivery_cost": 10}
+  ],
+  "guarantee": {"type": "unconditional", "terms": "60-day money back, no questions asked.",
+                "expected_claim_rate": 0.45},
+  "urgency": {"type": "deadline", "reason": "Price goes up at midnight!", "verifiable": false}
+}

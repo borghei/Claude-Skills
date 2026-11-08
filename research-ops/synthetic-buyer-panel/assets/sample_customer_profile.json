@@ -1,0 +1,40 @@
+{
+  "offer": "Refill Corner, a household cleaning-product refill shop (example)",
+  "target": "Renters aged 25 to 55 living within a 15-minute walk of Market Street who buy cleaning products at the supermarket today",
+  "currency": "EUR",
+  "price_unit": "per litre of laundry liquid",
+  "age_range": [25, 55],
+  "pitch": [
+    "Refill station for laundry liquid, dish soap and all-purpose cleaner.",
+    "Bring your own bottle or buy a glass one for 3.00.",
+    "Laundry liquid: 6.50 per litre (about 25 washes). Dish soap: 3.20 per 500 ml.",
+    "Open Tuesday to Sunday, 9:00 to 19:00, at Market Street 14.",
+    "Your first refill is free when you bring a bottle."
+  ],
+  "segments": [
+    {"name": "Student or early career", "share": 0.35, "income": [18000, 34000], "age": [25, 32]},
+    {"name": "Young family", "share": 0.40, "income": [38000, 72000], "age": [29, 45]},
+    {"name": "Established household", "share": 0.25, "income": [60000, 110000], "age": [38, 55]}
+  ],
+  "behaviours": [
+    {"name": "Weekly big shop", "share": 0.30, "description": "Buys everything in one supermarket trip on Saturday."},
+    {"name": "Eco-motivated", "share": 0.20, "description": "Avoids plastic where it is easy, pays a little more for it."},
+    {"name": "Price comparer", "share": 0.20, "description": "Checks the unit price and buys store brands."},
+    {"name": "Online orderer", "share": 0.15, "description": "Gets household goods delivered with the groceries."},
+    {"name": "Brand loyal", "share": 0.15, "description": "Has used the same detergent for years."}
+  ],
+  "objections": [
+    "Store-brand detergent is cheaper per wash",
+    "I would forget to bring the bottle",
+    "Another stop on a separate trip",
+    "Does refill detergent clean as well?",
+    "Opening hours clash with my work"
+  ],
+  "contexts": [
+    "you walk past Market Street on the way to the tram",
+    "you work late twice a week",
+    "you do the laundry for four people",
+    "you share a flat and split household costs",
+    "you cycle everywhere and carry what fits in a pannier"
+  ]
+}

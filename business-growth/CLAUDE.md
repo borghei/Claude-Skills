@@ -1,8 +1,8 @@
 # Business & Growth Skills - Claude Code Guidance
 
-This guide covers the 20 production-ready business and growth skills, organized into three clusters: **GTM operations** (customer success, sales engineering, revenue ops), **growth tactics** (CRO sub-skills, churn, referral, pricing, contracts, competitive teardown), and **commercial mechanics** (deal-desk, channel-economics, partnerships-architect, commercial-policy — added Apr 2026).
+This guide covers the 21 production-ready business and growth skills, organized into three clusters: **GTM operations** (customer success, sales engineering, revenue ops), **growth tactics** (CRO sub-skills, churn, referral, pricing, contracts, competitive teardown), and **commercial mechanics** (deal-desk, channel-economics, partnerships-architect, commercial-policy — added Apr 2026).
 
-## Business & Growth Skills Overview (20 skills)
+## Business & Growth Skills Overview (21 skills)
 
 ### GTM operations
 - **customer-success-manager/** - Customer health scoring, churn risk analysis, expansion opportunities (3 Python tools)
@@ -10,7 +10,7 @@ This guide covers the 20 production-ready business and growth skills, organized 
 - **revenue-operations/** - Pipeline analysis, forecast accuracy, GTM efficiency metrics (3 Python tools)
 
 ### Growth tactics
-- **churn-prevention** · **competitive-teardown** · **competitor-alternatives** · **contract-and-proposal-writer** · **form-cro** · **free-tool-strategy** · **onboarding-cro** · **page-cro** · **paywall-upgrade-cro** · **popup-cro** · **pricing-strategy** · **referral-program** · **signup-flow-cro**
+- **churn-prevention** · **competitive-teardown** · **competitor-alternatives** · **contract-and-proposal-writer** · **form-cro** · **free-tool-strategy** · **onboarding-cro** · **page-cro** · **paywall-upgrade-cro** · **popup-cro** · **offer-design** (offer stack, guarantee and urgency scorer; 1 Python tool) · **pricing-strategy** · **referral-program** · **signup-flow-cro**
 
 ### Commercial mechanics (Apr 2026 additions)
 - **deal-desk/** - Charter, approval matrix, deal-review packets, velocity analysis (3 Python tools)

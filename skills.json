@@ -1,17 +1,17 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 397 production-ready skills across 21 domains. Project Management is the most-used domain (74 skills).",
+  "description": "The Universal AI Skills Library — 400 production-ready skills across 21 domains. Project Management is the most-used domain (74 skills).",
   "version": "4.14.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 397,
+  "total_skills": 400,
   "updated": "2026-11-08",
   "domains": {
     "business-growth": {
-      "count": 20,
-      "tools": 60
+      "count": 21,
+      "tools": 61
     },
     "business-operations": {
       "count": 6,
@@ -34,8 +34,8 @@
       "tools": 281
     },
     "finance": {
-      "count": 3,
-      "tools": 10
+      "count": 4,
+      "tools": 12
     },
     "hr-operations": {
       "count": 4,
@@ -74,8 +74,8 @@
       "tools": 13
     },
     "research-ops": {
-      "count": 4,
-      "tools": 14
+      "count": 5,
+      "tools": 16
     },
     "sales-success": {
       "count": 5,
@@ -4295,6 +4295,27 @@
       "has_assets": false
     },
     {
+      "name": "offer-design",
+      "description": "Build an offer from the buyer's obstacles: component stack, value drivers, an affordable guarantee and honest urgency, scored before launch. Use when buyers say no, packaging bonuses, choosing a guarantee, or naming an offer.",
+      "path": "business-growth/offer-design/SKILL.md",
+      "domain": "business-growth",
+      "category": "business-growth",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "offer",
+        "value-proposition",
+        "guarantee",
+        "bonuses",
+        "conversion",
+        "packaging"
+      ],
+      "tools": 1,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "onboarding-cro",
       "description": "Post-signup user onboarding optimization covering activation metrics, time-to-value reduction, onboarding flow design, empty state optimization, multi-channel coordination, and stalled user recovery.",
       "path": "business-growth/onboarding-cro/SKILL.md",
@@ -6906,6 +6927,27 @@
       "has_assets": true
     },
     {
+      "name": "launch-economics",
+      "description": "Pre-launch unit economics, year-one cash model and a computed go/not-yet verdict for a new business. Use when asking \"is this profitable\", finding break-even, sizing startup cash, or deciding whether to launch.",
+      "path": "finance/launch-economics/SKILL.md",
+      "domain": "finance",
+      "category": "finance",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "unit-economics",
+        "break-even",
+        "cash-runway",
+        "small-business",
+        "launch",
+        "viability"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "saas-metrics-coach",
       "description": "This skill should be used when the user asks to \"calculate MRR\", \"analyze churn\", \"compute SaaS metrics\", \"do cohort retention analysis\", \"calculate LTV or CAC\", \"evaluate unit economics\", or \"track subscription revenue growth\".",
       "path": "finance/saas-metrics-coach/SKILL.md",
@@ -7595,6 +7637,27 @@
         "cost-per-insight"
       ],
       "tools": 3,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "synthetic-buyer-panel",
+      "description": "Simulated buyer panel: deal reproducible persona cards, run one agent per buyer, tally buy rates, objections and price corridors. Use when asking \"would people buy this\", pre-testing a pitch, or finding objections fast.",
+      "path": "research-ops/synthetic-buyer-panel/SKILL.md",
+      "domain": "research-ops",
+      "category": "research-ops",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "synthetic-personas",
+        "concept-testing",
+        "objections",
+        "demand-validation",
+        "pricing-research",
+        "buyer-panel"
+      ],
+      "tools": 2,
       "has_references": true,
       "has_assets": true
     },

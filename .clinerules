@@ -2,7 +2,7 @@
 
 ## What This Repository Is
 
-This is the **universal AI skills library** — **397 production-ready skill packages across 21 professional domains** with **934 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
+This is the **universal AI skills library** — **400 production-ready skill packages across 21 professional domains** with **939 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
 
 **This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed into user workflows.
 
@@ -13,10 +13,10 @@ This is the **universal AI skills library** — **397 production-ready skill pac
 - `marketing/` — 39 skills (content, SEO/AEO, demand gen, brand, analytics)
 - `c-level-advisor/` — 31 skills (CEO/CTO/CFO/CMO/CRO/CPO/COO/CHRO/CISO + CAIO/CDO/CCO/GC/VPE)
 - `ra-qm-team/` — 27 skills (ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF)
-- `business-growth/` — 20 skills · `legal/` — 17 skills (EXPERIMENTAL) · `product-team/` — 13 skills
+- `business-growth/` — 21 skills · `legal/` — 17 skills (EXPERIMENTAL) · `product-team/` — 13 skills
 - `personal-productivity/` — 14 skills · `vertical-advisors/` — 7 skills · `data-analytics/` — 5 skills
 - `sales-success/` — 5 skills · `documents/` — 4 skills · `hr-operations/` — 4 skills · `research/` — 4 skills
-- `finance/` — 3 skills · `workflow/` — 3 skills (skill-router, handoff, session-retro)
+- `finance/` — 4 skills · `workflow/` — 3 skills (skill-router, handoff, session-retro)
 - `scripts/` — manifest builder + skill installer · `standards/` — best-practices library · `cli/skills.json` — manifest
 
 ## Skill Package Pattern

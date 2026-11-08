@@ -8,7 +8,13 @@ scholarly synthesis and intelligence work.
 Rule of thumb: `research/` answers *what is known*; `research-ops/` answers
 *how we run studies to find out, and what they cost*.
 
-## Research Ops Skills Overview (4 skills)
+## Research Ops Skills Overview (5 skills)
+
+- **synthetic-buyer-panel/** — a reproducible simulated buyer panel: deal persona
+  cards from a customer profile, run one agent per buyer, then tally buy rates,
+  objections and price corridors (refuses to impute missing answers). Results are
+  directional and never count as real demand evidence. Use when pre-testing a
+  pitch or asking "would people buy this" before talking to customers.
 
 - **market-research/** — market sizing and structure: TAM/SAM/SOM built both
   top-down and bottom-up then reconciled, segmentation, demand-signal

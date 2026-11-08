@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Claude Skills</h1>
-<p align="center"><b>397 skills that turn your AI assistant into a specialist: board prep, product planning, compliance audits, code review, marketing and the rest of the business.</b></p>
+<p align="center"><b>400 skills that turn your AI assistant into a specialist: board prep, product planning, compliance audits, code review, marketing and the rest of the business.</b></p>
 
 <p align="center">
   <a href="https://github.com/borghei/Claude-Skills/stargazers"><img src="https://img.shields.io/github/stars/borghei/Claude-Skills?style=social" alt="GitHub Stars"></a>
@@ -12,10 +12,10 @@
   <img src="https://img.shields.io/badge/Works_with-11_AI_assistants-orange.svg" alt="Works with 11 AI assistants">
 </p>
 <p align="center">
-  <img src="https://img.shields.io/badge/Skills-397-brightgreen.svg" alt="397 Skills">
+  <img src="https://img.shields.io/badge/Skills-400-brightgreen.svg" alt="400 Skills">
   <img src="https://img.shields.io/badge/Domains-21-blue.svg" alt="21 Domains">
   <img src="https://img.shields.io/badge/Expert_Agents-76-purple.svg" alt="76 Expert Agents">
-  <img src="https://img.shields.io/badge/Python_Tools-934-informational.svg" alt="934 Python Tools">
+  <img src="https://img.shields.io/badge/Python_Tools-939-informational.svg" alt="939 Python Tools">
   <img src="https://img.shields.io/badge/Compliance_Frameworks-18-red.svg" alt="18 Compliance Frameworks">
 </p>
 
@@ -74,7 +74,7 @@ Install any of them with `/plugin install <name>@claude-code-skills`.
 
 ## What's inside
 
-**Leadership and business:** [C-Level Advisory (31)](c-level-advisor/) · [Business & Growth (20)](business-growth/) · [Business Operations (6)](business-operations/) · [Finance (3)](finance/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Vertical Advisors (7)](vertical-advisors/)
+**Leadership and business:** [C-Level Advisory (31)](c-level-advisor/) · [Business & Growth (21)](business-growth/) · [Business Operations (6)](business-operations/) · [Finance (3)](finance/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Vertical Advisors (7)](vertical-advisors/)
 
 **Product and engineering:** [Project Management (74)](project-management/) · [Product Team (13)](product-team/) · [Engineering (98)](engineering/) · [Data (6)](data-analytics/)
 
@@ -87,7 +87,7 @@ Install any of them with `/plugin install <name>@claude-code-skills`.
 What sets it apart:
 
 - **Regulated work, not just code.** SOC 2, ISO 13485, MDR, FDA, EU AI Act, NIS2, DORA, HIPAA and GDPR, with gap analyses and audit-ready output.
-- **Tools that compute.** 934 Python tools do the scoring, sizing and checking, using only the standard library, so you can also run them in CI.
+- **Tools that compute.** 939 Python tools do the scoring, sizing and checking, using only the standard library, so you can also run them in CI.
 - **Asks before it writes.** Skills that produce a deliverable confirm the two or three inputs that change it, so you don't get a polished document built on a guess.
 
 ## More ways to use it

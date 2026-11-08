@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T10:51:52+00:00",
-  "skill_count": 397,
+  "generated_at": "2026-11-08T11:03:56+00:00",
+  "skill_count": 400,
   "domain_count": 21,
   "skills": [
     {
@@ -3498,10 +3498,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 26886,
+      "size_bytes": 34487,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -7024,6 +7025,39 @@
       "has_scripts": true,
       "has_references": false,
       "has_assets": false
+    },
+    {
+      "name": "offer-design",
+      "domain": "business-growth",
+      "description": "Build an offer from the buyer's obstacles: component stack, value drivers, an affordable guarantee and honest urgency, scored before launch. Use when buyers say no, packaging bonuses, choosing a guarantee, or naming an offer.",
+      "tags": [
+        "offer",
+        "value-proposition",
+        "guarantee",
+        "bonuses",
+        "conversion",
+        "packaging"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "business-growth",
+      "subdomain": "",
+      "path": "business-growth/offer-design",
+      "files": [
+        "SKILL.md",
+        "assets/offer-sheet-template.md",
+        "assets/sample_offer.json",
+        "assets/sample_offer_flawed.json",
+        "references/offer-construction.md",
+        "scripts/offer_scorer.py"
+      ],
+      "size_bytes": 34771,
+      "tools_count": 1,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "onboarding-cro",
@@ -11377,6 +11411,45 @@
       "has_assets": true
     },
     {
+      "name": "launch-economics",
+      "domain": "finance",
+      "description": "Pre-launch unit economics, year-one cash model and a computed go/not-yet verdict for a new business. Use when asking \"is this profitable\", finding break-even, sizing startup cash, or deciding whether to launch.",
+      "tags": [
+        "unit-economics",
+        "break-even",
+        "cash-runway",
+        "small-business",
+        "launch",
+        "viability"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "finance",
+      "subdomain": "",
+      "path": "finance/launch-economics",
+      "files": [
+        "SKILL.md",
+        "assets/sample_economics_report.json",
+        "assets/sample_economics_report_flawed.json",
+        "assets/sample_evidence.json",
+        "assets/sample_evidence_flawed.json",
+        "assets/sample_launch_numbers.json",
+        "assets/sample_launch_numbers_flawed.json",
+        "assets/viability-memo-template.md",
+        "references/demand-evidence-ladder.md",
+        "references/pre-launch-unit-economics.md",
+        "scripts/launch_economics.py",
+        "scripts/viability_verdict.py"
+      ],
+      "size_bytes": 60008,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "saas-metrics-coach",
       "domain": "finance",
       "description": "This skill should be used when the user asks to \"calculate MRR\", \"analyze churn\", \"compute SaaS metrics\", \"do cohort retention analysis\", \"calculate LTV or CAC\", \"evaluate unit economics\", or \"track subscription revenue growth\".",
@@ -12489,6 +12562,44 @@
       ],
       "size_bytes": 94228,
       "tools_count": 3,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "synthetic-buyer-panel",
+      "domain": "research-ops",
+      "description": "Simulated buyer panel: deal reproducible persona cards, run one agent per buyer, tally buy rates, objections and price corridors. Use when asking \"would people buy this\", pre-testing a pitch, or finding objections fast.",
+      "tags": [
+        "synthetic-personas",
+        "concept-testing",
+        "objections",
+        "demand-validation",
+        "pricing-research",
+        "buyer-panel"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "research-ops",
+      "subdomain": "",
+      "path": "research-ops/synthetic-buyer-panel",
+      "files": [
+        "SKILL.md",
+        "assets/panel-readout-template.md",
+        "assets/sample_customer_profile.json",
+        "assets/sample_customer_profile_flawed.json",
+        "assets/sample_panel_answers.json",
+        "assets/sample_panel_answers_flawed.json",
+        "assets/sample_panel_cards.json",
+        "references/panel-design-and-bias.md",
+        "references/running-the-panel.md",
+        "scripts/panel_deal.py",
+        "scripts/panel_tally.py"
+      ],
+      "size_bytes": 87916,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true

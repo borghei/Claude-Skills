@@ -1,0 +1,602 @@
+[
+ {
+  "buyer_id": "B001",
+  "decision": "buy",
+  "units_first_month": 1,
+  "reason_code": "other",
+  "reason": "I walk past it anyway and want less plastic under the sink. We split cleaning costs in the flat, so it is a group call. I might mention it to a friend.",
+  "main_objection": "Remembering the bottle",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B002",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "habit",
+  "reason": "My detergent works and I do not want to experiment with my clothes. Glass bottles in a bike pannier are a worry. That is my honest first reaction.",
+  "main_objection": "Does refill detergent clean as well?",
+  "would_change_mind": "Knowing which brand is in the tank",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B003",
+  "decision": "buy",
+  "units_first_month": 1,
+  "reason_code": "other",
+  "reason": "I walk past it anyway and want less plastic under the sink. We go through a lot of detergent with four of us.",
+  "main_objection": "Remembering the bottle",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B004",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "The free first refill is enough to try it, and the price is close enough. Glass bottles in a bike pannier are a worry. I might mention it to a friend.",
+  "main_objection": "Whether it cleans as well",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B005",
+  "decision": "buy",
+  "units_first_month": 1,
+  "reason_code": "other",
+  "reason": "Glass bottle plus refills fits how I want to shop. I do pass Market Street most mornings, to be fair. That is my honest first reaction.",
+  "main_objection": "Opening hours",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B006",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "habit",
+  "reason": "I would forget the bottle every single time. I do pass Market Street most mornings, to be fair. I might mention it to a friend.",
+  "main_objection": "I would forget to bring the bottle",
+  "would_change_mind": "Bottles I can leave at the shop and pick up full",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B007",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "Everything comes with my grocery delivery; a separate shop trip is not happening. Glass bottles in a bike pannier are a worry. Hard to say more without seeing it.",
+  "main_objection": "Another stop on a separate trip",
+  "would_change_mind": "Delivery or a pickup point at my tram stop",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B008",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "price",
+  "reason": "Per wash it works out dearer than the store brand I already buy. We go through a lot of detergent with four of us. I might mention it to a friend.",
+  "main_objection": "Store-brand detergent is cheaper per wash",
+  "would_change_mind": "A price per wash that matches the supermarket own brand",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B009",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "The hours do not work around my job. I do pass Market Street most mornings, to be fair.",
+  "main_objection": "Opening hours clash with my work",
+  "would_change_mind": "Open until 21:00 one night a week",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B010",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "Saturday shop is one trip; I am not adding a second stop for soap. Two late nights a week leave little time for errands.",
+  "main_objection": "Another stop on a separate trip",
+  "would_change_mind": "Open on Saturday mornings near the supermarket",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B011",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "trust",
+  "reason": "I have no idea what is actually in the refill. I do pass Market Street most mornings, to be fair. I might mention it to a friend.",
+  "main_objection": "What the product is",
+  "would_change_mind": "A recognised brand or a lab test on the label",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B012",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "I walk past it anyway and want less plastic under the sink. Two late nights a week leave little time for errands. Hard to say more without seeing it.",
+  "main_objection": "Remembering the bottle",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B013",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "I do not go to shops for household stuff anymore. We split cleaning costs in the flat, so it is a group call. That is my honest first reaction.",
+  "main_objection": "Extra errand",
+  "would_change_mind": "If it came to my door every month",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B014",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "If the dish soap is good I will switch both. I do pass Market Street most mornings, to be fair. I might mention it to a friend.",
+  "main_objection": "Quality of dish soap",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B015",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "habit",
+  "reason": "My detergent works and I do not want to experiment with my clothes. Glass bottles in a bike pannier are a worry. That is my honest first reaction.",
+  "main_objection": "Does refill detergent clean as well?",
+  "would_change_mind": "Knowing which brand is in the tank",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B016",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "I walk past it anyway and want less plastic under the sink. We split cleaning costs in the flat, so it is a group call. Maybe in a few months.",
+  "main_objection": "Remembering the bottle",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B017",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "price",
+  "reason": "6.50 a litre is more than I pay now, and the saving on plastic is not worth it to me. We split cleaning costs in the flat, so it is a group call. I might mention it to a friend.",
+  "main_objection": "Paying more for the same job",
+  "would_change_mind": "A loyalty stamp that brings the litre price down",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B018",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "Everything comes with my grocery delivery; a separate shop trip is not happening. Two late nights a week leave little time for errands. That is my honest first reaction.",
+  "main_objection": "Another stop on a separate trip",
+  "would_change_mind": "Delivery or a pickup point at my tram stop",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B019",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "price",
+  "reason": "I would try the free refill, but I would not keep paying this. Two late nights a week leave little time for errands. Hard to say more without seeing it.",
+  "main_objection": "Cost over a year",
+  "would_change_mind": "Seeing the cost per wash printed next to the supermarket price",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B020",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "price",
+  "reason": "Per wash it works out dearer than the store brand I already buy. I do pass Market Street most mornings, to be fair. That is my honest first reaction.",
+  "main_objection": "Store-brand detergent is cheaper per wash",
+  "would_change_mind": "A price per wash that matches the supermarket own brand",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B021",
+  "decision": "buy",
+  "units_first_month": 1,
+  "reason_code": "other",
+  "reason": "The free first refill is enough to try it, and the price is close enough. We go through a lot of detergent with four of us. Hard to say more without seeing it.",
+  "main_objection": "Whether it cleans as well",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B022",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "I do not go to shops for household stuff anymore. We split cleaning costs in the flat, so it is a group call. Maybe in a few months.",
+  "main_objection": "Extra errand",
+  "would_change_mind": "If it came to my door every month",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B023",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "The hours do not work around my job. Two late nights a week leave little time for errands. Hard to say more without seeing it.",
+  "main_objection": "Opening hours clash with my work",
+  "would_change_mind": "Open until 21:00 one night a week",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B024",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "price",
+  "reason": "6.50 a litre is more than I pay now, and the saving on plastic is not worth it to me. Glass bottles in a bike pannier are a worry.",
+  "main_objection": "Paying more for the same job",
+  "would_change_mind": "A loyalty stamp that brings the litre price down",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B025",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "trust",
+  "reason": "I have no idea what is actually in the refill. We split cleaning costs in the flat, so it is a group call.",
+  "main_objection": "What the product is",
+  "would_change_mind": "A recognised brand or a lab test on the label",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B026",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "Glass bottle plus refills fits how I want to shop. We split cleaning costs in the flat, so it is a group call. That is my honest first reaction.",
+  "main_objection": "Opening hours",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B027",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "Saturday shop is one trip; I am not adding a second stop for soap. We split cleaning costs in the flat, so it is a group call. I might mention it to a friend.",
+  "main_objection": "Another stop on a separate trip",
+  "would_change_mind": "Open on Saturday mornings near the supermarket",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B028",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "habit",
+  "reason": "I would forget the bottle every single time. Two late nights a week leave little time for errands.",
+  "main_objection": "I would forget to bring the bottle",
+  "would_change_mind": "Bottles I can leave at the shop and pick up full",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B029",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "Everything comes with my grocery delivery; a separate shop trip is not happening. We split cleaning costs in the flat, so it is a group call.",
+  "main_objection": "Another stop on a separate trip",
+  "would_change_mind": "Delivery or a pickup point at my tram stop",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B030",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "If the dish soap is good I will switch both. Glass bottles in a bike pannier are a worry. Hard to say more without seeing it.",
+  "main_objection": "Quality of dish soap",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B031",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "I do not go to shops for household stuff anymore. Glass bottles in a bike pannier are a worry. Maybe in a few months.",
+  "main_objection": "Extra errand",
+  "would_change_mind": "If it came to my door every month",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B032",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "habit",
+  "reason": "My detergent works and I do not want to experiment with my clothes. We go through a lot of detergent with four of us. That is my honest first reaction.",
+  "main_objection": "Does refill detergent clean as well?",
+  "would_change_mind": "Knowing which brand is in the tank",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B033",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "price",
+  "reason": "I would try the free refill, but I would not keep paying this. Two late nights a week leave little time for errands.",
+  "main_objection": "Cost over a year",
+  "would_change_mind": "Seeing the cost per wash printed next to the supermarket price",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B034",
+  "decision": "buy",
+  "units_first_month": 2,
+  "reason_code": "other",
+  "reason": "I walk past it anyway and want less plastic under the sink. We go through a lot of detergent with four of us. I might mention it to a friend.",
+  "main_objection": "Remembering the bottle",
+  "would_change_mind": "Already buying",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B035",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "trust",
+  "reason": "I have no idea what is actually in the refill. We split cleaning costs in the flat, so it is a group call. Hard to say more without seeing it.",
+  "main_objection": "What the product is",
+  "would_change_mind": "A recognised brand or a lab test on the label",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B036",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "Saturday shop is one trip; I am not adding a second stop for soap. We split cleaning costs in the flat, so it is a group call. Maybe in a few months.",
+  "main_objection": "Another stop on a separate trip",
+  "would_change_mind": "Open on Saturday mornings near the supermarket",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ },
+ {
+  "buyer_id": "B037",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "habit",
+  "reason": "I would forget the bottle every single time. I do pass Market Street most mornings, to be fair. I might mention it to a friend.",
+  "main_objection": "I would forget to bring the bottle",
+  "would_change_mind": "Bottles I can leave at the shop and pick up full",
+  "price_points": {
+   "too_cheap": 2.5,
+   "bargain": 4.5,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.5
+  }
+ },
+ {
+  "buyer_id": "B038",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "price",
+  "reason": "Per wash it works out dearer than the store brand I already buy. We go through a lot of detergent with four of us. Maybe in a few months.",
+  "main_objection": "Store-brand detergent is cheaper per wash",
+  "would_change_mind": "A price per wash that matches the supermarket own brand",
+  "price_points": {
+   "too_cheap": 3.0,
+   "bargain": 4.0,
+   "getting_expensive": 6.0,
+   "too_expensive": 7.5
+  }
+ },
+ {
+  "buyer_id": "B039",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "access",
+  "reason": "The hours do not work around my job. Glass bottles in a bike pannier are a worry. Maybe in a few months.",
+  "main_objection": "Opening hours clash with my work",
+  "would_change_mind": "Open until 21:00 one night a week",
+  "price_points": {
+   "too_cheap": 2.0,
+   "bargain": 5.0,
+   "getting_expensive": 7.0,
+   "too_expensive": 9.0
+  }
+ },
+ {
+  "buyer_id": "B040",
+  "decision": "pass",
+  "units_first_month": 0,
+  "reason_code": "price",
+  "reason": "6.50 a litre is more than I pay now, and the saving on plastic is not worth it to me. We go through a lot of detergent with four of us. Hard to say more without seeing it.",
+  "main_objection": "Paying more for the same job",
+  "would_change_mind": "A loyalty stamp that brings the litre price down",
+  "price_points": {
+   "too_cheap": 3.5,
+   "bargain": 5.0,
+   "getting_expensive": 6.5,
+   "too_expensive": 8.0
+  }
+ }
+]

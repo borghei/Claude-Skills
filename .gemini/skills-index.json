@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-11-08T10:51:52+00:00",
-  "total_skills": 397,
+  "updated": "2026-11-08T11:03:56+00:00",
+  "total_skills": 400,
   "skills": [
     {
       "name": "a11y-audit",
@@ -3733,6 +3733,23 @@
       ]
     },
     {
+      "name": "offer-design",
+      "description": "Build an offer from the buyer's obstacles: component stack, value drivers, an affordable guarantee and honest urgency, scored before launch. Use when buyers say no, packaging bonuses, choosing a guarantee, or naming an offer.",
+      "domain": "business-growth",
+      "path": "business-growth/offer-design/SKILL.md",
+      "tools": [
+        "offer_scorer.py"
+      ],
+      "tags": [
+        "offer",
+        "value-proposition",
+        "guarantee",
+        "bonuses",
+        "conversion",
+        "packaging"
+      ]
+    },
+    {
       "name": "onboarding-cro",
       "description": "Post-signup user onboarding optimization covering activation metrics, time-to-value reduction, onboarding flow design, empty state optimization, multi-channel coordination, and stalled user recovery.",
       "domain": "business-growth",
@@ -5904,6 +5921,24 @@
       ]
     },
     {
+      "name": "launch-economics",
+      "description": "Pre-launch unit economics, year-one cash model and a computed go/not-yet verdict for a new business. Use when asking \"is this profitable\", finding break-even, sizing startup cash, or deciding whether to launch.",
+      "domain": "finance",
+      "path": "finance/launch-economics/SKILL.md",
+      "tools": [
+        "launch_economics.py",
+        "viability_verdict.py"
+      ],
+      "tags": [
+        "unit-economics",
+        "break-even",
+        "cash-runway",
+        "small-business",
+        "launch",
+        "viability"
+      ]
+    },
+    {
       "name": "saas-metrics-coach",
       "description": "This skill should be used when the user asks to \"calculate MRR\", \"analyze churn\", \"compute SaaS metrics\", \"do cohort retention analysis\", \"calculate LTV or CAC\", \"evaluate unit economics\", or \"track subscription revenue growth\".",
       "domain": "finance",
@@ -6484,6 +6519,24 @@
         "portfolio",
         "funding",
         "cost-per-insight"
+      ]
+    },
+    {
+      "name": "synthetic-buyer-panel",
+      "description": "Simulated buyer panel: deal reproducible persona cards, run one agent per buyer, tally buy rates, objections and price corridors. Use when asking \"would people buy this\", pre-testing a pitch, or finding objections fast.",
+      "domain": "research-ops",
+      "path": "research-ops/synthetic-buyer-panel/SKILL.md",
+      "tools": [
+        "panel_deal.py",
+        "panel_tally.py"
+      ],
+      "tags": [
+        "synthetic-personas",
+        "concept-testing",
+        "objections",
+        "demand-validation",
+        "pricing-research",
+        "buyer-panel"
       ]
     },
     {
