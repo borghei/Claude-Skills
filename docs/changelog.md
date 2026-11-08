@@ -8,6 +8,12 @@ For the complete version history and release notes, see [CHANGELOG.md](https://g
 
 ## Current Version
 
+**v4.14.0** (November 2026)
+
+- 12 new skills for working alongside coding agents: bug diagnosis, deep module design, domain glossaries, PR descriptions, git guardrails, human-step wizards, plan grilling, wayfinder decision maps, issue triage, decision questionnaires, a learning workspace and agent-session retros
+- Seven existing skills gained matching workflows: spec-fidelity code review, conversation-to-spec, tracer-bullet ticket slicing, writing for agents, background-agent handoff and cited repo research notes
+- The hooks cookbook now uses exit 2 to block a PreToolUse hook; exit 1 never blocked anything
+
 **v4.13.9** (October 2026)
 
 - Nine data-science, ML-engineering and DevOps tools that were placeholders now work: A/B test sizing, feature profiling, model evaluation, deployment manifests, RAG planning, drift monitoring, CI pipeline generation, Terraform scaffolding and deployment planning

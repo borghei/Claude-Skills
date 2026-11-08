@@ -1,0 +1,23 @@
+{
+  "topic": "Statistics for product A/B testing",
+  "why": "I run growth experiments every quarter and currently ship or kill them on gut feel. I want to size tests, read results and push back on bad calls without waiting for the data team.",
+  "success": [
+    "Size an experiment for a given baseline rate and minimum detectable effect, and defend the sample size in a review",
+    "Read a results table and state whether the effect is real, including the interval, in two sentences",
+    "Spot peeking, a mismatched sample ratio or a metric swapped after launch in a colleague's write-up"
+  ],
+  "constraints": {"minutes_per_session": 30, "sessions_per_week": 3, "deadline": "2027-01-31"},
+  "prior_knowledge": ["Comfortable with spreadsheets and averages", "Has heard of p-values but cannot define one"],
+  "modules": [
+    {"id": "M1", "title": "Variation and sampling", "outcome": "Simulate two samples from one population and explain why they differ", "depends_on": []},
+    {"id": "M2", "title": "Confidence intervals", "outcome": "Compute and interpret a 95% interval for a conversion rate", "depends_on": ["M1"]},
+    {"id": "M3", "title": "Hypothesis tests and p-values", "outcome": "State what a p-value is and is not, with an example", "depends_on": ["M2"]},
+    {"id": "M4", "title": "Power and sample size", "outcome": "Size a test from baseline, effect and power", "depends_on": ["M3"]},
+    {"id": "M5", "title": "Experiment pitfalls", "outcome": "Diagnose peeking, sample-ratio mismatch and metric switching in a write-up", "depends_on": ["M3"]}
+  ],
+  "resources": [
+    {"title": "An open statistics textbook (chapters on inference)", "kind": "book", "trust": "primary", "url": "", "use_for": "Definitions and worked examples"},
+    {"title": "Team experiment archive", "kind": "doc", "trust": "secondary", "url": "", "use_for": "Real results tables to practise on"},
+    {"title": "Internal analytics guild channel", "kind": "community", "trust": "secondary", "url": "", "use_for": "Testing judgment against practitioners"}
+  ]
+}

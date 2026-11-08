@@ -2,19 +2,19 @@
 
 ## What This Repository Is
 
-This is the **universal AI skills library** — **385 production-ready skill packages across 21 professional domains** with **906 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
+This is the **universal AI skills library** — **397 production-ready skill packages across 21 professional domains** with **934 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
 
 **This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed into user workflows.
 
 ## Repository Structure (domain → skill count)
 
-- `engineering/` — 82 skills (architecture, fullstack, DevOps, security, AI/ML, data, agent tooling)
-- `project-management/` — 66 skills (discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion)
+- `engineering/` — 98 skills (architecture, fullstack, DevOps, security, AI/ML, data, agent tooling)
+- `project-management/` — 74 skills (discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion)
 - `marketing/` — 39 skills · `c-level-advisor/` — 31 skills · `ra-qm-team/` — 27 skills
 - `business-growth/` — 20 skills · `legal/` — 17 skills (EXPERIMENTAL) · `product-team/` — 13 skills
-- `personal-productivity/` — 10 skills · `vertical-advisors/` — 7 skills · `data-analytics/` — 5 skills
+- `personal-productivity/` — 14 skills · `vertical-advisors/` — 7 skills · `data-analytics/` — 5 skills
 - `sales-success/` — 5 skills · `documents/` — 4 skills · `hr-operations/` — 4 skills · `research/` — 4 skills
-- `finance/` — 3 skills · `workflow/` — 2 skills (skill-router, handoff)
+- `finance/` — 3 skills · `workflow/` — 3 skills (skill-router, handoff, session-retro)
 - `scripts/` — manifest builder + skill installer · `cli/skills.json` — machine-readable manifest
 
 ## Skill Package Pattern

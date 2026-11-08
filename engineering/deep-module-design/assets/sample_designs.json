@@ -1,0 +1,61 @@
+{
+  "module": "Order intake (merging OrderService, OrderRepository and validation)",
+  "required_responsibilities": [
+    "validate order fields",
+    "price the order",
+    "persist the order",
+    "reject duplicate submissions",
+    "publish order-placed event",
+    "retry transient storage failures"
+  ],
+  "designs": [
+    {
+      "name": "A: single command",
+      "constraint": "smallest possible surface",
+      "entry_points": [
+        {"name": "place_order", "params": ["draft"], "errors": ["InvalidOrder", "DuplicateOrder"], "ordering": []},
+        {"name": "get_order", "params": ["order_id"], "errors": ["NotFound"], "ordering": []}
+      ],
+      "config_knobs": 0,
+      "hides": ["validate order fields", "price the order", "persist the order",
+                "reject duplicate submissions", "publish order-placed event", "retry transient storage failures"],
+      "leaks": [],
+      "common_case_calls": 1,
+      "seams": {"order storage": ["relational adapter", "in-memory adapter"],
+                "event publisher": ["queue adapter", "recording adapter"]},
+      "usage_example": "placed = intake.place_order(draft)"
+    },
+    {
+      "name": "B: step-by-step builder",
+      "constraint": "maximum flexibility",
+      "entry_points": [
+        {"name": "create_draft", "params": ["customer_id"], "errors": [], "ordering": []},
+        {"name": "add_line", "params": ["draft_id", "sku", "quantity"], "errors": ["UnknownSku"], "ordering": ["after create_draft"]},
+        {"name": "set_address", "params": ["draft_id", "address"], "errors": ["InvalidAddress"], "ordering": ["after create_draft"]},
+        {"name": "validate", "params": ["draft_id"], "errors": ["InvalidOrder"], "ordering": ["before commit"]},
+        {"name": "price", "params": ["draft_id", "currency"], "errors": [], "ordering": ["after validate"]},
+        {"name": "commit", "params": ["draft_id", "idempotency_key"], "errors": ["DuplicateOrder"], "ordering": ["last"]}
+      ],
+      "config_knobs": 3,
+      "hides": ["persist the order", "publish order-placed event", "retry transient storage failures"],
+      "leaks": ["validate order fields", "price the order", "reject duplicate submissions"],
+      "common_case_calls": 6,
+      "seams": {"order storage": ["relational adapter"]},
+      "usage_example": "d = intake.create_draft(c); intake.add_line(d, s, 2); intake.set_address(d, a); intake.validate(d); intake.price(d, 'EUR'); intake.commit(d, key)"
+    },
+    {
+      "name": "C: cart-first",
+      "constraint": "optimise for the checkout caller",
+      "entry_points": [
+        {"name": "place_order_from_cart", "params": ["cart_id", "customer_id"], "errors": ["InvalidOrder", "DuplicateOrder"], "ordering": []},
+        {"name": "get_order", "params": ["order_id"], "errors": ["NotFound"], "ordering": []}
+      ],
+      "config_knobs": 1,
+      "hides": ["validate order fields", "price the order", "persist the order", "reject duplicate submissions"],
+      "leaks": ["retry transient storage failures"],
+      "common_case_calls": 1,
+      "seams": {"order storage": ["relational adapter", "in-memory adapter"]},
+      "usage_example": "placed = intake.place_order_from_cart(cart_id, customer_id)"
+    }
+  ]
+}

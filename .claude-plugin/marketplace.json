@@ -4,18 +4,18 @@
     "name": "borghei",
     "url": "https://borghei.me"
   },
-  "description": "Production-ready AI skill packages for every coding assistant — 385 expert skills across 21 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
+  "description": "Production-ready AI skill packages for every coding assistant — 397 expert skills across 21 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
   "homepage": "https://github.com/borghei/Claude-Skills",
   "repository": "https://github.com/borghei/Claude-Skills",
   "metadata": {
-    "description": "385 production-ready AI skill packages across 21 domains, installable per-domain as Claude Code plugins",
+    "description": "397 production-ready AI skill packages across 21 domains, installable per-domain as Claude Code plugins",
     "version": "3.0.0"
   },
   "plugins": [
     {
       "name": "engineering-advanced-skills",
       "source": "./engineering",
-      "description": "92 engineering skills: architecture, fullstack, DevOps, security, AI/ML, data engineering, and agent tooling",
+      "description": "98 engineering skills: architecture, fullstack, DevOps, security, AI/ML, data engineering, and agent tooling",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
@@ -36,7 +36,7 @@
     {
       "name": "pm-skills",
       "source": "./project-management",
-      "description": "70 project management skills: discovery, delivery, career growth, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), GTM, and Jira/Linear/Notion/Confluence integration",
+      "description": "74 project management skills: discovery, delivery, career growth, strategy frameworks (BMC/lean/SWOT/Porter's/Ansoff), GTM, and Jira/Linear/Notion/Confluence integration",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
@@ -170,7 +170,7 @@
     {
       "name": "personal-productivity-skills",
       "source": "./personal-productivity",
-      "description": "13 personal productivity skills: resume, lead research, meeting insights, naming, invoices, email triage, calendar prep, investor updates, pitch decks, weekly review, capture, deep work, and reflection",
+      "description": "14 personal productivity skills: resume, lead research, meeting insights, naming, invoices, email triage, calendar prep, investor updates, pitch decks, weekly review, capture, deep work, reflection, and a multi-session learning workspace",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
@@ -308,7 +308,7 @@
     {
       "name": "workflow-skills",
       "source": "./workflow",
-      "description": "2 workflow skills: meta-skills for routing to the right skill (skill-router) and handing off context between skills (handoff)",
+      "description": "3 workflow skills: meta-skills for routing to the right skill (skill-router), handing off context between skills (handoff), and turning agent-session failures into environment fixes (session-retro)",
       "version": "1.0.0",
       "author": {
         "name": "borghei"

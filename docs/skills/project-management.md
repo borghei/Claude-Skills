@@ -1,12 +1,12 @@
 ---
 title: Project Management Skills
-description: 70 PM skills with worked examples, red-flag libraries, MCP tools, runnable pipelines, live data adapters, a deterministic eval harness, classic strategy frameworks (BMC / Lean / SWOT / Porter's / Ansoff), and full GTM (gtm-strategy / ICP). The most-used domain in Claude Skills.
+description: 74 PM skills with worked examples, red-flag libraries, MCP tools, runnable pipelines, live data adapters, a deterministic eval harness, classic strategy frameworks (BMC / Lean / SWOT / Porter's / Ansoff), and full GTM (gtm-strategy / ICP). The most-used domain in Claude Skills.
 ---
 
 # Project Management Skills
 
 !!! success "★ The most-visited domain in Claude Skills"
-    **70 production-ready PM skills** spanning discovery, execution, career growth, strategy frameworks, GTM, and tool integrations. PMs from APM to CPO use these daily to ship faster with fewer meetings.
+    **74 production-ready PM skills** spanning discovery, execution, career growth, strategy frameworks, GTM, and tool integrations. PMs from APM to CPO use these daily to ship faster with fewer meetings.
 
 The PM domain is a complete operating system for product and project work. Every artifact a PM produces (PRD, OKR, roadmap, status update, retro, decision log) has a skill that scaffolds it, with portable output to Jira, Linear, Notion, Productboard, or Confluence.
 
@@ -158,10 +158,11 @@ Pick your role and start with the 3-4 skills that match your daily work:
 | [notion-pm](https://github.com/borghei/Claude-Skills/tree/main/project-management/notion-pm) | Notion DBs for PRDs/OKRs/Roadmap/Decisions, API patterns |
 | [productboard-expert](https://github.com/borghei/Claude-Skills/tree/main/project-management/productboard-expert) ★ NEW | Productboard admin, Insight inbox triage, Driver scoring, REST API |
 
-### Discovery Skills (11) — `discovery/`
+### Discovery Skills (12) — `discovery/`
 
 | Skill | Focus | Framework |
 |---|---|---|
+| [plan-grilling](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/plan-grilling) ★ NEW | Interrogate a plan one round of questions at a time | Decision-tree questioning + coverage taxonomy |
 | [brainstorm-ideas](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-ideas) | Product Trio ideation | Opportunity Solution Tree (Torres) |
 | [brainstorm-experiments](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-experiments) | Lean experiment design | XYZ Hypothesis (Savoia) |
 | [identify-assumptions](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/identify-assumptions) | Assumption mapping | Torres 4-8 risk categories |
@@ -174,10 +175,13 @@ Pick your role and start with the 3-4 skills that match your daily work:
 | [metrics-dashboard](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/metrics-dashboard) | Decision-grade dashboard: North Star, inputs, guardrails | Metric layers + owners + cadence |
 | [ai-prototyping](https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/ai-prototyping) ★ NEW | Idea → AI prototype → user validation → handoff | Uncertainty-type decision + F0-F4 fidelity ladder |
 
-### Execution Skills (33) — `execution/`
+### Execution Skills (36) — `execution/`
 
 | Skill | Focus | Framework |
 |---|---|---|
+| [wayfinder](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/wayfinder) ★ NEW | Map oversized work as decision tickets | Decision map + tracer-bullet slicing |
+| [issue-triage](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/issue-triage) ★ NEW | Triage issues and external PRs; agent-ready briefs | Triage state machine |
+| [decision-questionnaire](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/decision-questionnaire) ★ NEW | Async questionnaire for a blocked decision | Options + trade-offs + deadline |
 | [create-prd](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/create-prd) | 8-section PRD scaffolding | PRD canonical |
 | [prfaq](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/prfaq) | Working Backwards PR/FAQ | Amazon Bezos PRFAQ |
 | [ai-feature-prd](https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/ai-feature-prd) ★ NEW | PRDs for AI/ML features | Karpathy + Anthropic RSP + AI eval practice |

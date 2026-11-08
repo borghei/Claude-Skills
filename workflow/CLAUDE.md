@@ -4,11 +4,12 @@ Cross-domain **process / meta-skills** that improve how you work with the librar
 rather than adding domain knowledge. They are orthogonal to the 16 content domains
 and multiply their value.
 
-## Skills (2)
+## Skills (3)
 
 | Skill | Type | Purpose |
 |-------|------|---------|
 | **handoff/** | user-invoked, generative | Package in-progress work into a self-contained context doc so a teammate or fresh agent can continue. Includes `handoff_context.py` (captures git state) + a fill-in template. |
+| **session-retro/** | user-invoked, analytical | Review a coding-agent session and turn retries, re-reads, failed commands and missed skills into ranked fixes to the agent's environment, each naming the file to edit. `session_log_analyzer.py` + `action_item_linter.py`. |
 | **skill-router/** | user-invoked, orchestrator | Match a vague/cross-domain intent against the whole catalog and recommend the best-fit skill(s). Reads `cli/skills.json` via `route_skill.py` (deterministic keyword + phrase scoring, no ML). |
 
 ## Design notes
@@ -24,5 +25,5 @@ Register the domain in `scripts/build_manifest.py` (`DOMAINS` list already inclu
 
 ---
 
-**Last Updated:** 2026-06-22
-**Skills:** 2 (handoff, skill-router)
+**Last Updated:** 2026-11-08
+**Skills:** 3 (handoff, session-retro, skill-router)

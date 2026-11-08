@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-10-23T14:53:45+00:00",
-  "total_skills": 385,
+  "updated": "2026-11-08T10:50:54+00:00",
+  "total_skills": 397,
   "skills": [
     {
       "name": "a11y-audit",
@@ -252,6 +252,25 @@
       ]
     },
     {
+      "name": "bug-diagnosis",
+      "description": "Find the root cause of hard bugs with a fast pass/fail repro, ranked falsifiable hypotheses and bisection. Use when a bug resists quick fixes, a failure is intermittent, or a regression needs tracing to its cause.",
+      "domain": "engineering",
+      "path": "engineering/bug-diagnosis/SKILL.md",
+      "tools": [
+        "hypothesis_log.py",
+        "redact_scan.py"
+      ],
+      "tags": [
+        "debugging",
+        "root-cause",
+        "bisection",
+        "reproduction",
+        "hypotheses",
+        "redaction",
+        "regression-test"
+      ]
+    },
+    {
       "name": "changelog-generator",
       "description": "Generate changelogs and release notes from Conventional Commits with semver bump detection, Keep a Changelog formatting, and monorepo scopes. Use when preparing releases, enforcing commit standards, or automating release notes.",
       "domain": "engineering",
@@ -351,13 +370,15 @@
       "tools": [
         "code_quality_checker.py",
         "pr_analyzer.py",
-        "review_report_generator.py"
+        "review_report_generator.py",
+        "review_scope.py"
       ],
       "tags": [
         "code-review",
         "pull-request",
         "code-quality",
-        "best-practices"
+        "best-practices",
+        "spec-fidelity"
       ]
     },
     {
@@ -504,6 +525,25 @@
       ]
     },
     {
+      "name": "deep-module-design",
+      "description": "Design deep modules with small interfaces and rank shallow, pass-through or leaky code for deepening. Use when designing a module interface, improving codebase architecture, or making code easier to test.",
+      "domain": "engineering",
+      "path": "engineering/deep-module-design/SKILL.md",
+      "tools": [
+        "interface_compare.py",
+        "module_depth.py"
+      ],
+      "tags": [
+        "module-design",
+        "deep-modules",
+        "information-hiding",
+        "seams",
+        "refactoring",
+        "testability",
+        "architecture-review"
+      ]
+    },
+    {
       "name": "dependency-auditor",
       "description": "Scan project dependencies for vulnerabilities, license issues, and upgrade opportunities across Python, Node.js, Go, and Rust. Use when auditing dependencies, checking licenses, planning upgrades, or assessing supply chain security.",
       "domain": "engineering",
@@ -589,6 +629,25 @@
         "devops",
         "compose",
         "dockerfile"
+      ]
+    },
+    {
+      "name": "domain-modeling",
+      "description": "Keep a project glossary of domain terms and lightweight decision records, and catch banned synonyms in docs and code. Use when terms are used inconsistently, writing a GLOSSARY.md, or recording a design decision.",
+      "domain": "engineering",
+      "path": "engineering/domain-modeling/SKILL.md",
+      "tools": [
+        "adr_lint.py",
+        "glossary_lint.py",
+        "term_extract.py"
+      ],
+      "tags": [
+        "domain-modeling",
+        "glossary",
+        "ubiquitous-language",
+        "adr",
+        "decision-records",
+        "naming"
       ]
     },
     {
@@ -684,6 +743,24 @@
       ]
     },
     {
+      "name": "git-guardrails",
+      "description": "Install a hook that blocks destructive git commands before an AI agent runs them. Use when an agent force-pushed or ran reset --hard, when adding git safety hooks, or when protecting main from agent pushes.",
+      "domain": "engineering",
+      "path": "engineering/git-guardrails/SKILL.md",
+      "tools": [
+        "guardrail_test.py",
+        "install_guardrails.py"
+      ],
+      "tags": [
+        "git",
+        "hooks",
+        "claude-code",
+        "safety",
+        "pretooluse",
+        "branch-protection"
+      ]
+    },
+    {
       "name": "git-worktree-manager",
       "description": "Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.",
       "domain": "engineering",
@@ -734,6 +811,24 @@
         "k8s",
         "charts",
         "devops"
+      ]
+    },
+    {
+      "name": "human-step-wizard",
+      "description": "Generate an interactive, resumable bash wizard that walks a person through steps only a human can do. Use when a task needs dashboard credentials, DNS or change approval, key rotation, or a manual traffic cutover.",
+      "domain": "engineering",
+      "path": "engineering/human-step-wizard/SKILL.md",
+      "tools": [
+        "wizard_generate.py",
+        "wizard_spec_validate.py"
+      ],
+      "tags": [
+        "wizard",
+        "bash",
+        "human-in-the-loop",
+        "credentials",
+        "cutover",
+        "runbook-automation"
       ]
     },
     {
@@ -938,6 +1033,24 @@
         "ci-integration",
         "visual-regression",
         "accessibility"
+      ]
+    },
+    {
+      "name": "pr-description-writer",
+      "description": "Write PR descriptions with evidence, verification steps and a one-way/two-way merge-risk call. Use when opening a PR, when asked to write or fix a PR body, or when checking a description before requesting review.",
+      "domain": "engineering",
+      "path": "engineering/pr-description-writer/SKILL.md",
+      "tools": [
+        "pr_body_lint.py",
+        "risk_classifier.py"
+      ],
+      "tags": [
+        "pull-request",
+        "pr-description",
+        "code-review",
+        "merge-risk",
+        "rollback",
+        "evidence"
       ]
     },
     {
@@ -1649,7 +1762,8 @@
         "meta-skill",
         "linting",
         "standards",
-        "packaging"
+        "packaging",
+        "agents-md"
       ]
     },
     {
@@ -4375,6 +4489,23 @@
       ]
     },
     {
+      "name": "plan-grilling",
+      "description": "Interrogate a plan, design or idea one round of questions at a time until every decision is settled. Use when stress-testing a plan before building, when a design feels underspecified, or turning a fuzzy workflow into a spec.",
+      "domain": "project-management",
+      "path": "project-management/discovery/plan-grilling/SKILL.md",
+      "tools": [
+        "question_log_checker.py",
+        "workflow_spec_checker.py"
+      ],
+      "tags": [
+        "grilling",
+        "decision-tree",
+        "plan-review",
+        "specification",
+        "discovery"
+      ]
+    },
+    {
       "name": "pre-mortem",
       "description": "Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.",
       "domain": "project-management",
@@ -4451,7 +4582,7 @@
     },
     {
       "name": "backlog-refinement",
-      "description": "Backlog refinement playbook covering INVEST quality, vertical story splitting, Definition of Ready, and Definition of Done -- with a Python scorer that grades each story against INVEST and emits a ready/not-ready verdict.",
+      "description": "Grade stories against INVEST, split them vertically or as tracer bullets, and enforce Definition of Ready and Done. Use when refining a backlog, splitting an oversized story, or checking sprint readiness.",
       "domain": "project-management",
       "path": "project-management/execution/backlog-refinement/SKILL.md",
       "tools": [
@@ -4461,6 +4592,7 @@
         "backlog",
         "invest",
         "story-splitting",
+        "tracer-bullet",
         "definition-of-ready",
         "definition-of-done"
       ]
@@ -4555,6 +4687,23 @@
       ]
     },
     {
+      "name": "decision-questionnaire",
+      "description": "Turn a blocked decision into an async questionnaire a stakeholder can answer without a meeting. Use when you need someone else's input to decide, a meeting would be overkill, or answers from several people must be consolidated.",
+      "domain": "project-management",
+      "path": "project-management/execution/decision-questionnaire/SKILL.md",
+      "tools": [
+        "answer_consolidator.py",
+        "questionnaire_linter.py"
+      ],
+      "tags": [
+        "decision-making",
+        "async",
+        "questionnaire",
+        "stakeholders",
+        "decision-record"
+      ]
+    },
+    {
       "name": "dependency-map",
       "description": "Cross-team dependency tracking with critical path analysis and Mermaid dependency graphs for program coordination.",
       "domain": "project-management",
@@ -4593,6 +4742,23 @@
         "phased-rollout",
         "kill-switch",
         "experiments"
+      ]
+    },
+    {
+      "name": "issue-triage",
+      "description": "Move engineering issues and external PRs through a triage state machine and write agent-ready briefs. Use when clearing a triage queue, deciding if a report is real or wanted, or handing an issue to a coding agent.",
+      "domain": "project-management",
+      "path": "project-management/execution/issue-triage/SKILL.md",
+      "tools": [
+        "agent_brief_linter.py",
+        "triage_state_validator.py"
+      ],
+      "tags": [
+        "triage",
+        "issue-tracking",
+        "agent-brief",
+        "pull-requests",
+        "labels"
       ]
     },
     {
@@ -4874,6 +5040,23 @@
         "qa",
         "test-coverage",
         "acceptance-testing"
+      ]
+    },
+    {
+      "name": "wayfinder",
+      "description": "Chart work too big for one sprint as a map of decision tickets, resolve them in dependency order, then turn answers into tracer-bullet tickets. Use when the route is unclear, open questions block each other, or estimates swing wildly.",
+      "domain": "project-management",
+      "path": "project-management/execution/wayfinder/SKILL.md",
+      "tools": [
+        "decision_map_validator.py",
+        "tracer_slice_checker.py"
+      ],
+      "tags": [
+        "planning",
+        "decision-tickets",
+        "tracer-bullets",
+        "dependencies",
+        "large-initiatives"
       ]
     },
     {
@@ -5367,14 +5550,15 @@
       "tools": [
         "branch_naming_validator.py",
         "pr_scope_analyzer.py",
-        "prd_to_tickets_decomposer.py"
+        "prd_to_tickets_decomposer.py",
+        "ticket_graph_validator.py"
       ],
       "tags": [
         "prd",
         "ticket-decomposition",
+        "tracer-bullet",
         "branch-strategy",
         "pr",
-        "definition-of-done",
         "delivery"
       ]
     },
@@ -5868,6 +6052,24 @@
       ]
     },
     {
+      "name": "learning-workspace",
+      "description": "Set up and run a multi-session study workspace with mission, curriculum, lessons and spaced review. Use when learning a topic over weeks, resuming study after a gap, checking real understanding, or planning reviews.",
+      "domain": "personal-productivity",
+      "path": "personal-productivity/learning-workspace/SKILL.md",
+      "tools": [
+        "review_scheduler.py",
+        "workspace_scaffolder.py"
+      ],
+      "tags": [
+        "learning",
+        "spaced-repetition",
+        "curriculum",
+        "retrieval-practice",
+        "self-study",
+        "tutoring"
+      ]
+    },
+    {
       "name": "meeting-insights",
       "description": "Analyze meeting transcripts to extract decisions, action items, owners, due dates, open questions, and risks. Use after recorded meetings, sales calls, customer interviews, or planning sessions, or to build a decision log.",
       "domain": "personal-productivity",
@@ -6133,15 +6335,16 @@
       "tools": [
         "dossier_outline_generator.py",
         "fact_inference_separator.py",
+        "research_note_checker.py",
         "source_triangulation_validator.py"
       ],
       "tags": [
         "dossier",
         "intelligence",
         "due-diligence",
-        "market-entry",
         "briefing",
-        "research"
+        "research-note",
+        "primary-sources"
       ]
     },
     {
@@ -6680,7 +6883,7 @@
     },
     {
       "name": "handoff",
-      "description": "This skill should be used when the user asks to \"write a handoff\", \"hand this off\", \"package this work for someone else\", \"summarize where we are so another person/agent can continue\", or \"create a context doc before I switch off this task\".",
+      "description": "Package in-progress work into a self-contained context doc or a background agent's prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.",
       "domain": "workflow",
       "path": "workflow/handoff/SKILL.md",
       "tools": [
@@ -6691,8 +6894,26 @@
         "delegation",
         "context",
         "continuity",
-        "onboarding",
+        "background-agent",
         "async"
+      ]
+    },
+    {
+      "name": "session-retro",
+      "description": "Review a coding-agent session and turn its failures and waste into ranked fixes to the agent's environment. Use when a session went slow or wrong, after a messy agent run, or to tune CLAUDE.md or AGENTS.md.",
+      "domain": "workflow",
+      "path": "workflow/session-retro/SKILL.md",
+      "tools": [
+        "action_item_linter.py",
+        "session_log_analyzer.py"
+      ],
+      "tags": [
+        "retrospective",
+        "agent-session",
+        "claude-md",
+        "agents-md",
+        "tool-calls",
+        "developer-experience"
       ]
     },
     {

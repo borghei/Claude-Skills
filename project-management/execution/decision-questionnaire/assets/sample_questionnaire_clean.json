@@ -1,0 +1,26 @@
+{
+  "title": "EU hosting region for the analytics add-on",
+  "purpose": "We launch the analytics add-on to EU customers in Q1 and must pick where its data lives before the infrastructure ticket is scheduled on 2026-11-24.",
+  "decision": "Which hosting option the analytics add-on uses for EU customers at launch.",
+  "from": "Lena Ortiz (Product Manager, Analytics)",
+  "to": ["Security Lead", "Finance Controller"],
+  "use_of_answers": "Answers go into the decision record on the Analytics wiki; both recipients see each other's answers before the record is signed off.",
+  "context": "The add-on stores event data per customer workspace. Today everything runs in our US region. Three enterprise prospects in Germany and France asked where their data will live, and two contracts in negotiation mention EU residency. Engineering estimates any EU region adds roughly four weeks of setup; the open question is which option is acceptable on compliance and cost grounds, not how to build it.",
+  "deadline": "2026-11-20",
+  "effort_minutes": 12,
+  "default_if_no_answer": "If no answer arrives by 2026-11-20 we proceed with option A (Frankfurt) and record that the choice was made without Security and Finance input.",
+  "options": [
+    {"id": "A", "label": "Dedicated EU region in Frankfurt", "tradeoffs": "Strongest residency story for German prospects; adds about EUR 3,800/month and a second on-call surface.", "recommended": true},
+    {"id": "B", "label": "Dedicated EU region in Dublin", "tradeoffs": "Same residency story, about EUR 3,200/month; latency to DACH customers is 10-15 ms higher."},
+    {"id": "C", "label": "Stay in the US region under contractual safeguards", "tradeoffs": "No extra cost or setup; at least two current deals may stall on residency clauses."},
+    {"id": "D", "label": "None of these / something else", "tradeoffs": "Describe the alternative in Q5 so we can cost it."}
+  ],
+  "questions": [
+    {"id": "Q1", "theme": "Approval", "critical": true, "format": "pick-one", "text": "Which hosting option would you approve for the EU launch?", "options": ["A", "B", "C", "D - none of these", "Don't know"]},
+    {"id": "Q2", "theme": "Approval", "critical": true, "format": "number", "unit": "EUR per month", "text": "What is the highest added monthly infrastructure cost you would sign off for this launch?"},
+    {"id": "Q3", "theme": "Compliance", "format": "yes-no", "condition_prompt": "If yes, under which condition could backups leave the EU?", "text": "Must backups of EU customer data also stay inside the EU?"},
+    {"id": "Q4", "theme": "Compliance", "format": "ranked", "text": "Rank these contract risks from most to least serious for this launch.", "options": ["Residency clause in open deals", "Sub-processor list change notice", "Cross-border transfer assessment"]},
+    {"id": "Q5", "theme": "Gaps", "format": "free-text", "max_words": 60, "why": "We only know the clauses in deals Sales flagged; older contracts may also name a region.", "text": "Which existing customer contracts name a hosting region explicitly?"}
+  ],
+  "closing_question": "Is there anything we did not ask that should change this decision?"
+}

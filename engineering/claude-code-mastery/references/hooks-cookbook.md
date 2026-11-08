@@ -53,7 +53,7 @@ everyone working on the project. User-level hooks apply to all projects.
 
 | Event | Fires When | Blocking | Use For |
 |-------|-----------|----------|---------|
-| `PreToolUse` | Before a tool executes | Yes (exit 1 blocks) | Validation, protection |
+| `PreToolUse` | Before a tool executes | Yes (exit 2 blocks) | Validation, protection |
 | `PostToolUse` | After a tool completes | No | Formatting, logging |
 | `Notification` | Claude sends a notification | No | Desktop alerts |
 | `Stop` | Claude finishes a response | No | Session logging, cleanup |
@@ -266,7 +266,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_FILE_PATH\" | grep -qiE '(\\.env$|\\.env\\.|credentials|secrets?|private.key|id_rsa)'; then echo 'BLOCKED: Cannot modify sensitive files' >&2; exit 1; fi"
+            "command": "if echo \"$CLAUDE_TOOL_ARG_FILE_PATH\" | grep -qiE '(\\.env$|\\.env\\.|credentials|secrets?|private.key|id_rsa)'; then echo 'BLOCKED: Cannot modify sensitive files' >&2; exit 2; fi"
           }
         ]
       }
@@ -286,7 +286,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE '(rm -rf /|rm -rf \\*|DROP TABLE|DROP DATABASE|--force push|git push.*(--force|-f)|> /dev/sd|mkfs\\.|dd if=)'; then echo 'BLOCKED: Potentially destructive command' >&2; exit 1; fi"
+            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE '(rm -rf /|rm -rf \\*|DROP TABLE|DROP DATABASE|--force push|git push.*(--force|-f)|> /dev/sd|mkfs\\.|dd if=)'; then echo 'BLOCKED: Potentially destructive command' >&2; exit 2; fi"
           }
         ]
       }
@@ -306,7 +306,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qiE '(production|prod\\.|prod-|PROD_|--prod)'; then echo 'BLOCKED: Production commands not allowed in development' >&2; exit 1; fi"
+            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qiE '(production|prod\\.|prod-|PROD_|--prod)'; then echo 'BLOCKED: Production commands not allowed in development' >&2; exit 2; fi"
           }
         ]
       }
@@ -326,7 +326,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_FILE_PATH\" | grep -qE '(generated|dist/|build/|\\.min\\.|vendor/|node_modules/)'; then echo 'BLOCKED: Cannot edit generated or vendored files' >&2; exit 1; fi"
+            "command": "if echo \"$CLAUDE_TOOL_ARG_FILE_PATH\" | grep -qE '(generated|dist/|build/|\\.min\\.|vendor/|node_modules/)'; then echo 'BLOCKED: Cannot edit generated or vendored files' >&2; exit 2; fi"
           }
         ]
       }
@@ -371,7 +371,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -q 'git commit'; then if ! echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE '(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\\(|:)'; then echo 'BLOCKED: Commit must use conventional commits (feat|fix|docs|...)' >&2; exit 1; fi; fi"
+            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -q 'git commit'; then if ! echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE '(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\\(|:)'; then echo 'BLOCKED: Commit must use conventional commits (feat|fix|docs|...)' >&2; exit 2; fi; fi"
           }
         ]
       }
@@ -451,7 +451,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE '^(rm |mv |cp |chmod|chown|kill|pkill|mkdir|touch|tee |>|>>)'; then echo 'BLOCKED: Only read commands allowed in this mode' >&2; exit 1; fi"
+            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE '^(rm |mv |cp |chmod|chown|kill|pkill|mkdir|touch|tee |>|>>)'; then echo 'BLOCKED: Only read commands allowed in this mode' >&2; exit 2; fi"
           }
         ]
       }
@@ -691,13 +691,13 @@ FILE="$CLAUDE_TOOL_ARG_FILE_PATH"
 # Check 1: Not a lock file
 if [[ "$FILE" =~ (lock|\.lock)$ ]]; then
     echo "BLOCKED: Cannot edit lock files" >&2
-    exit 1
+    exit 2
 fi
 
 # Check 2: Not in node_modules
 if [[ "$FILE" =~ node_modules/ ]]; then
     echo "BLOCKED: Cannot edit node_modules" >&2
-    exit 1
+    exit 2
 fi
 
 # Check 3: File size limit (prevent editing huge files)
@@ -740,7 +740,7 @@ exit 0
 2. **Keep hooks fast** -- Command hooks should complete in under 2 seconds.
    Slow hooks degrade the interactive experience.
 
-3. **Use exit codes correctly** -- Exit 1 in PreToolUse blocks the action.
+3. **Use exit codes correctly** -- Exit 2 in PreToolUse blocks the action (stderr is fed back to Claude); exit 1 is a non-blocking error and the tool still runs.
    Exit 0 (or any code) in PostToolUse is informational only.
 
 4. **Write messages to stderr** -- Hook output on stderr is shown to the user.
@@ -779,7 +779,7 @@ exit 0
 
 - Add `echo` debugging: `echo "DEBUG: PATH=$CLAUDE_TOOL_ARG_FILE_PATH" >&2`
 - Check that your grep patterns are not too broad
-- Verify that exit codes are correct (exit 0 = allow, exit 1 = block)
+- Verify that exit codes are correct (exit 0 = allow, exit 2 = block)
 
 ### Hook Running Too Slowly
 

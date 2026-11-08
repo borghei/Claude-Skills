@@ -1,0 +1,53 @@
+{
+  "bug": "Checkout total off by one cent for carts with three or more discounted items",
+  "status": "fixed",
+  "repro": {
+    "command": "pytest tests/checkout/test_totals.py -k three_discounted",
+    "runs": 2,
+    "red_runs": 2,
+    "runtime_seconds": 95,
+    "asserts_symptom": false,
+    "minimised": false
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "Something weird with rounding somewhere in the discount code",
+      "prediction": "Rounding is probably involved",
+      "experiment": "",
+      "prior": 0.5,
+      "cost_minutes": 20,
+      "status": "confirmed",
+      "evidence": ""
+    },
+    {
+      "id": "H2",
+      "statement": "Per-line discounts are rounded before summing instead of after",
+      "prediction": "If per-line rounding is the cause, then summing unrounded line discounts makes the total match the reference calculation",
+      "experiment": "Swap the order of round() and sum() in apply_discounts behind a flag; rerun the loop",
+      "prior": 0.4,
+      "cost_minutes": 15,
+      "status": "open"
+    }
+  ],
+  "experiments": [
+    {
+      "hypothesis": "H1",
+      "change": "Switched to decimal arithmetic and upgraded the currency library",
+      "variables_changed": ["numeric type", "currency library version"],
+      "result": "inconclusive"
+    },
+    {
+      "hypothesis": "H9",
+      "change": "Added logging everywhere",
+      "variables_changed": ["logging"],
+      "result": "inconclusive"
+    }
+  ],
+  "regression_test": {
+    "path": "tests/checkout/test_totals.py::test_three_discounted_items_total",
+    "seen_failing": false
+  },
+  "instrumentation_tag": "[DBG-7c1e]",
+  "instrumentation_removed": false
+}

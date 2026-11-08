@@ -4,7 +4,7 @@ title: Engineering Skills
 
 # Engineering Skills
 
-**92 skills** with **254+ Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
+**98 skills** with **281 Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
 
 ## AI & Agent Systems
 
@@ -39,6 +39,8 @@ title: Engineering Skills
 
 | Skill | Description | Tools |
 |---|---|:---:|
+| [deep-module-design](https://github.com/borghei/Claude-Skills/blob/main/engineering/deep-module-design/SKILL.md) ★ NEW | Small-interface deep modules; ranks shallow, pass-through and leaky code for deepening | 2 |
+| [domain-modeling](https://github.com/borghei/Claude-Skills/blob/main/engineering/domain-modeling/SKILL.md) ★ NEW | Project glossary, banned-synonym scan, lightweight decision records | 3 |
 | [senior-architect](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-architect/SKILL.md) | System architecture, microservices vs monolith, dependency analysis, ADRs | 3 |
 | [senior-cloud-architect](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-cloud-architect/SKILL.md) | Cloud architecture patterns for AWS, GCP, Azure with Terraform | 0 |
 | [aws-solution-architect](https://github.com/borghei/Claude-Skills/blob/main/engineering/aws-solution-architect/SKILL.md) | Serverless patterns, CloudFormation templates, cost optimization | 3 |
@@ -85,6 +87,8 @@ title: Engineering Skills
 
 | Skill | Description | Tools |
 |---|---|:---:|
+| [bug-diagnosis](https://github.com/borghei/Claude-Skills/blob/main/engineering/bug-diagnosis/SKILL.md) ★ NEW | Hard-bug root cause: pass/fail repro, ranked falsifiable hypotheses, bisection, log redaction | 2 |
+| [pr-description-writer](https://github.com/borghei/Claude-Skills/blob/main/engineering/pr-description-writer/SKILL.md) ★ NEW | PR bodies with evidence, verification steps and a one-way/two-way merge-risk call | 2 |
 | [code-reviewer](https://github.com/borghei/Claude-Skills/blob/main/engineering/code-reviewer/SKILL.md) | PR analysis for complexity and risk, SOLID violations, code smells | 3 |
 | [pr-review-expert](https://github.com/borghei/Claude-Skills/blob/main/engineering/pr-review-expert/SKILL.md) | Blast radius analysis, security scanning, breaking change detection | 3 |
 | [senior-qa](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-qa/SKILL.md) | Test generation, coverage analysis, Playwright, Jest, testing patterns | 3 |
@@ -112,6 +116,8 @@ title: Engineering Skills
 
 | Skill | Description | Tools |
 |---|---|:---:|
+| [git-guardrails](https://github.com/borghei/Claude-Skills/blob/main/engineering/git-guardrails/SKILL.md) ★ NEW | Hook that blocks destructive git commands before an AI agent runs them | 2 |
+| [human-step-wizard](https://github.com/borghei/Claude-Skills/blob/main/engineering/human-step-wizard/SKILL.md) ★ NEW | Interactive, resumable bash wizard for steps only a person can do | 2 |
 | [claude-code-mastery](https://github.com/borghei/Claude-Skills/blob/main/engineering/claude-code-mastery/SKILL.md) | CLAUDE.md optimization, skill authoring, subagents, hooks | 3 |
 | [codex-cli-specialist](https://github.com/borghei/Claude-Skills/blob/main/engineering/codex-cli-specialist/SKILL.md) | Codex CLI setup, cross-platform skill conversion, agents/openai.yaml | 3 |
 | [codebase-onboarding](https://github.com/borghei/Claude-Skills/blob/main/engineering/codebase-onboarding/SKILL.md) | Architecture overviews, key file maps, local setup guides, task runbooks | 3 |

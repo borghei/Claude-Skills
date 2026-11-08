@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Spec Driven Workflow</h1>
     <p class="page-subtitle">Run development from an executable specification with traceable requirement IDs and merge-time coverage gates. Use when starting a greenfield feature, reviving a stale spec, or gating merges on requirement coverage.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">specification</span><span class="tag">requirements</span><span class="tag">traceability</span><span class="tag">acceptance-criteria</span><span class="tag">process</span></div>
   </div>
   <h2>How to Use</h2>
@@ -398,12 +398,12 @@ Run development from an executable specification with traceable requirement IDs 
 Development where the specification is the source of truth and the code is its implementation, rather than a document that was true at kickoff and fiction by week three. The mechanism is unglamorous: every normative statement gets a stable ID, every
 
 ## Your Key Capabilities
-- — Write the spec, then prove it is precise
+- — Capture the spec from a conversation [RECOMMENDED]
 - — Extract requirement IDs and freeze the baseline
 - — Gate the merge on bidirectional coverage
+- — Implement from the spec, one ticket at a time [PROVEN]
 - How precise does the spec need to be? [PROVEN]
 - Requirement status ladder
-- Coverage floors by requirement modality [RECOMMENDED]
 
 ## Frameworks &amp; Templates You Know
 - Decision frameworks
@@ -431,12 +431,12 @@ Run development from an executable specification with traceable requirement IDs 
 Development where the specification is the source of truth and the code is its implementation, rather than a document that was true at kickoff and fiction by week three. The mechanism is unglamorous: every normative statement gets a stable ID, every
 
 ## Your Key Capabilities
-- — Write the spec, then prove it is precise
+- — Capture the spec from a conversation [RECOMMENDED]
 - — Extract requirement IDs and freeze the baseline
 - — Gate the merge on bidirectional coverage
+- — Implement from the spec, one ticket at a time [PROVEN]
 - How precise does the spec need to be? [PROVEN]
 - Requirement status ladder
-- Coverage floors by requirement modality [RECOMMENDED]
 
 ## Frameworks &amp; Templates You Know
 - Decision frameworks
@@ -483,6 +483,8 @@ mechanical link a spec is a memo, and memos do not survive contact with a sprint
 - **Auditing what actually shipped** ahead of a stakeholder review or a compliance obligation
 - **Handing a feature to another team** who need the intent, not just the code
 - **Generating an implementation** from a spec — which only works if the spec is precise enough that two engineers would build the same thing
+- **Capturing a spec from a conversation** — a chat thread, design call or agent session where the decisions already exist but nobody wrote them down
+- **Implementing ticket by ticket** from an approved spec, test-first, with a review and a commit per ticket
 
 ## Inputs the skill expects
 
@@ -504,9 +506,36 @@ Before writing or auditing a spec, settle the inputs below. When one is missing 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Quick Start
+
+```bash
+# Lint the spec, freeze IDs, then gate on coverage (lint and coverage exit 1 on the samples&#x27; deliberate flaws)
+python3 engineering/spec-driven-workflow/scripts/spec_lint.py --spec engineering/spec-driven-workflow/assets/sample_spec.md
+python3 engineering/spec-driven-workflow/scripts/spec_parse.py --spec engineering/spec-driven-workflow/assets/sample_spec.md --format text
+python3 engineering/spec-driven-workflow/scripts/trace_coverage.py --requirements engineering/spec-driven-workflow/assets/sample_requirements.json --index engineering/spec-driven-workflow/assets/sample_trace_index.json
+```
+
 ## Workflows
 
-### Workflow 1 — Write the spec, then prove it is precise
+### Workflow 0 — Capture the spec from a conversation [RECOMMENDED]
+
+Use when the decisions were made in a discussion — a chat thread, a call, a long session
+with a coding agent — and need to become a spec without being re-litigated. Detail and
+worked rules: `references/conversation-capture-and-implementation-loop.md`, Part 1.
+
+1. Read the whole conversation once before writing. Sort every substantive statement into
+   decision, constraint, example, deferred, or open. Discussion that fits no bin stays out.
+2. Write each decision as one normative statement with a modality keyword, keeping the
+   numbers people actually said. A decision the agent made alone and the user never
+   confirmed is open, not decided.
+3. Turn the examples people walked through into given/when/then acceptance criteria.
+4. Quote deferrals word for word in the out-of-scope list, and put open questions in their
+   own section with an owner — never as `TBD` inside a requirement.
+5. Ask only about gaps that would change a requirement, in one batch. Then read the
+   requirement and out-of-scope lists back and ask what is on them that was not decided.
+6. Run Workflow 1&#x27;s linter. Captured specs usually fail first on unquantified adjectives.
+
+ — Write the spec, then prove it is precise
 
 1. Draft requirements one statement at a time, each with exactly one obligation and a
    modality keyword. Two obligations in one sentence become two requirements.
@@ -562,6 +591,29 @@ python3 engineering/spec-driven-workflow/scripts/trace_coverage.py \
 Swap `--index` for `--code &lt;path&gt;` to scan a real tree. The index form exists so the
 gate can run against a trace index built by another tool, and so this workflow is
 runnable straight from a fresh clone.
+
+### Workflow 4 — Implement from the spec, one ticket at a time [PROVEN]
+
+Use once the spec is approved and broken into tickets with blocking links. The loop keeps
+code and spec in lockstep. Detail: `references/conversation-capture-and-implementation-loop.md`, Part 2.
+
+1. Pick a ticket from the **frontier** — one whose blocking tickets are all done. The agent
+   starts each ticket with fresh context: the ticket, its requirement IDs, and the spec
+   sections they live in.
+2. Write a failing test annotated with the requirement ID and watch it fail for the
+   expected reason.
+3. Write the minimum code to pass it, annotated with the same ID.
+4. Validate: run the test suite, then `spec_parse.py` against the baseline (no drift) and
+   `trace_coverage.py` (the ticket&#x27;s IDs now `covered`, no orphans).
+5. Refactor with the tests green, then review the ticket&#x27;s diff on two axes — repo
+   standards, and fidelity to the requirement (nothing missing, nothing extra).
+6. Commit once per ticket, naming the ticket and requirement IDs in the message. Close the
+   ticket and recompute the frontier.
+7. If the spec proves wrong mid-ticket, stop. Fix the spec in the same branch, re-lint,
+   update the baseline, then resume. Never code around a wrong requirement.
+
+The spec is done when every ticket is closed, the coverage gate passes at its floor, and a
+final whole-branch review against the spec finds no gap and no unrequested behaviour.
 
 ## Decision frameworks
 
@@ -636,6 +688,16 @@ gets waived twice stops being read.
 **Why it happens:** The forward direction answers &quot;did we build what we promised,&quot; which is the question stakeholders ask. Nobody asks the reverse question, so nobody builds the report.
 **Instead:** Run coverage in both directions and treat orphan annotations as errors. Orphans mark dead features whose requirement was deleted, typos in IDs, and scope that entered the codebase without ever entering the spec — all three are worth knowing.
 
+### The Re-Interview
+**Mistake:** Capturing a spec from a long discussion by asking the user every question again from scratch.
+**Why it happens:** Starting from a blank template feels thorough, and re-reading a long thread feels slow.
+**Instead:** Extract decisions, constraints, examples and deferrals from the conversation first, and ask only about gaps that would change a requirement. Re-asking settled questions costs trust and invites the answers to drift.
+
+### The Batched Commit
+**Mistake:** Implementing several tickets and landing them as one commit or one unreviewed push.
+**Why it happens:** It feels faster to keep coding while the context is warm.
+**Instead:** One loop per ticket — red test, code, gates, review, commit. Per-ticket commits keep each requirement&#x27;s implementation findable, reviewable and revertable on its own.
+
 ### The Merge Gate Nobody Believes
 **Mistake:** Setting a 100% coverage gate, waiving it under deadline, and waiving it again the following week.
 **Why it happens:** The gate was set at an aspirational number rather than the number the team will actually hold, so the first real deadline breaks it.
@@ -650,6 +712,7 @@ gets waived twice stops being read.
 | `scripts/trace_coverage.py` | Bidirectional spec-to-code coverage with orphan-annotation detection and a merge gate exit code |
 | `references/spec-writing-guide.md` | Requirement grammar, acceptance-criteria patterns, and worked ambiguous-to-precise rewrites |
 | `references/traceability-model.md` | ID schemes, annotation conventions per language, CI wiring, and drift handling |
+| `references/conversation-capture-and-implementation-loop.md` | Turning a conversation into a spec (five bins, drafting rules, read-back) and the per-ticket implementation loop (frontier, test-first, gates, review, commit) |
 | `assets/sample_spec.md` | Runnable sample spec containing both precise and deliberately ambiguous requirements |
 | `assets/sample_requirements.json` | Parsed baseline for the drift and coverage workflows |
 | `assets/sample_trace_index.json` | Prebuilt trace index exercising covered, untested, test-only, and orphan states |
@@ -662,10 +725,11 @@ gets waived twice stops being read.
 - Requirement extraction with stable IDs and content fingerprints with `spec_parse.py`, drift detection against a baseline, and a gate on missing acceptance criteria.
 - Two-way coverage between requirement IDs and annotated code and tests with `trace_coverage.py`, from a source tree or a prebuilt trace index, with orphan detection and a coverage floor.
 - Spec writing and traceability guidance in `references/`, plus a spec template and sample files in `assets/`.
+- Capturing a spec from a conversation or agent session, and the test-first, review-and-commit-per-ticket loop for implementing from it.
 
 **Out of Scope:**
-- Writing the implementation or the tests (see `engineering/tdd-guide/`).
-- Breaking a PRD into tickets, branches and PRs (see `product-team/spec-to-repo/`).
+- Teaching test-driven development itself (see `tdd-guide`).
+- Slicing the spec into tracer-bullet tickets with blocking links, and branch/PR planning (see `spec-to-repo`).
 - Running the test suite or measuring code coverage.
 - Product discovery and deciding which requirements matter.
 
@@ -673,6 +737,12 @@ gets waived twice stops being read.
 - Coverage means an annotation with the requirement ID was found. It does not show that the test passes or that the code meets the requirement.
 - The linter uses word and phrase rules. It can miss ambiguity phrased in other ways and can flag acceptable wording, so a high precision ratio still needs human review.
 - Stable IDs depend on section and order. Moving requirements between sections changes their IDs, which shows up as drift against the baseline.
+
+## Reference Documentation
+
+- `references/spec-writing-guide.md` — requirement grammar and ambiguous-to-precise rewrites.
+- `references/traceability-model.md` — ID schemes, annotations, CI wiring, drift.
+- `references/conversation-capture-and-implementation-loop.md` — conversation-to-spec capture and the per-ticket implementation loop.
 
 ---
 
@@ -739,6 +809,8 @@ mechanical link a spec is a memo, and memos do not survive contact with a sprint
 - **Auditing what actually shipped** ahead of a stakeholder review or a compliance obligation
 - **Handing a feature to another team** who need the intent, not just the code
 - **Generating an implementation** from a spec — which only works if the spec is precise enough that two engineers would build the same thing
+- **Capturing a spec from a conversation** — a chat thread, design call or agent session where the decisions already exist but nobody wrote them down
+- **Implementing ticket by ticket** from an approved spec, test-first, with a review and a commit per ticket
 
 ## Inputs the skill expects
 
@@ -760,9 +832,36 @@ Before writing or auditing a spec, settle the inputs below. When one is missing 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Quick Start
+
+```bash
+# Lint the spec, freeze IDs, then gate on coverage (lint and coverage exit 1 on the samples&#x27; deliberate flaws)
+python3 engineering/spec-driven-workflow/scripts/spec_lint.py --spec engineering/spec-driven-workflow/assets/sample_spec.md
+python3 engineering/spec-driven-workflow/scripts/spec_parse.py --spec engineering/spec-driven-workflow/assets/sample_spec.md --format text
+python3 engineering/spec-driven-workflow/scripts/trace_coverage.py --requirements engineering/spec-driven-workflow/assets/sample_requirements.json --index engineering/spec-driven-workflow/assets/sample_trace_index.json
+```
+
 ## Workflows
 
-### Workflow 1 — Write the spec, then prove it is precise
+### Workflow 0 — Capture the spec from a conversation [RECOMMENDED]
+
+Use when the decisions were made in a discussion — a chat thread, a call, a long session
+with a coding agent — and need to become a spec without being re-litigated. Detail and
+worked rules: `references/conversation-capture-and-implementation-loop.md`, Part 1.
+
+1. Read the whole conversation once before writing. Sort every substantive statement into
+   decision, constraint, example, deferred, or open. Discussion that fits no bin stays out.
+2. Write each decision as one normative statement with a modality keyword, keeping the
+   numbers people actually said. A decision the agent made alone and the user never
+   confirmed is open, not decided.
+3. Turn the examples people walked through into given/when/then acceptance criteria.
+4. Quote deferrals word for word in the out-of-scope list, and put open questions in their
+   own section with an owner — never as `TBD` inside a requirement.
+5. Ask only about gaps that would change a requirement, in one batch. Then read the
+   requirement and out-of-scope lists back and ask what is on them that was not decided.
+6. Run Workflow 1&#x27;s linter. Captured specs usually fail first on unquantified adjectives.
+
+ — Write the spec, then prove it is precise
 
 1. Draft requirements one statement at a time, each with exactly one obligation and a
    modality keyword. Two obligations in one sentence become two requirements.
@@ -818,6 +917,29 @@ python3 engineering/spec-driven-workflow/scripts/trace_coverage.py \
 Swap `--index` for `--code &lt;path&gt;` to scan a real tree. The index form exists so the
 gate can run against a trace index built by another tool, and so this workflow is
 runnable straight from a fresh clone.
+
+### Workflow 4 — Implement from the spec, one ticket at a time [PROVEN]
+
+Use once the spec is approved and broken into tickets with blocking links. The loop keeps
+code and spec in lockstep. Detail: `references/conversation-capture-and-implementation-loop.md`, Part 2.
+
+1. Pick a ticket from the **frontier** — one whose blocking tickets are all done. The agent
+   starts each ticket with fresh context: the ticket, its requirement IDs, and the spec
+   sections they live in.
+2. Write a failing test annotated with the requirement ID and watch it fail for the
+   expected reason.
+3. Write the minimum code to pass it, annotated with the same ID.
+4. Validate: run the test suite, then `spec_parse.py` against the baseline (no drift) and
+   `trace_coverage.py` (the ticket&#x27;s IDs now `covered`, no orphans).
+5. Refactor with the tests green, then review the ticket&#x27;s diff on two axes — repo
+   standards, and fidelity to the requirement (nothing missing, nothing extra).
+6. Commit once per ticket, naming the ticket and requirement IDs in the message. Close the
+   ticket and recompute the frontier.
+7. If the spec proves wrong mid-ticket, stop. Fix the spec in the same branch, re-lint,
+   update the baseline, then resume. Never code around a wrong requirement.
+
+The spec is done when every ticket is closed, the coverage gate passes at its floor, and a
+final whole-branch review against the spec finds no gap and no unrequested behaviour.
 
 ## Decision frameworks
 
@@ -892,6 +1014,16 @@ gets waived twice stops being read.
 **Why it happens:** The forward direction answers &quot;did we build what we promised,&quot; which is the question stakeholders ask. Nobody asks the reverse question, so nobody builds the report.
 **Instead:** Run coverage in both directions and treat orphan annotations as errors. Orphans mark dead features whose requirement was deleted, typos in IDs, and scope that entered the codebase without ever entering the spec — all three are worth knowing.
 
+### The Re-Interview
+**Mistake:** Capturing a spec from a long discussion by asking the user every question again from scratch.
+**Why it happens:** Starting from a blank template feels thorough, and re-reading a long thread feels slow.
+**Instead:** Extract decisions, constraints, examples and deferrals from the conversation first, and ask only about gaps that would change a requirement. Re-asking settled questions costs trust and invites the answers to drift.
+
+### The Batched Commit
+**Mistake:** Implementing several tickets and landing them as one commit or one unreviewed push.
+**Why it happens:** It feels faster to keep coding while the context is warm.
+**Instead:** One loop per ticket — red test, code, gates, review, commit. Per-ticket commits keep each requirement&#x27;s implementation findable, reviewable and revertable on its own.
+
 ### The Merge Gate Nobody Believes
 **Mistake:** Setting a 100% coverage gate, waiving it under deadline, and waiving it again the following week.
 **Why it happens:** The gate was set at an aspirational number rather than the number the team will actually hold, so the first real deadline breaks it.
@@ -906,6 +1038,7 @@ gets waived twice stops being read.
 | `scripts/trace_coverage.py` | Bidirectional spec-to-code coverage with orphan-annotation detection and a merge gate exit code |
 | `references/spec-writing-guide.md` | Requirement grammar, acceptance-criteria patterns, and worked ambiguous-to-precise rewrites |
 | `references/traceability-model.md` | ID schemes, annotation conventions per language, CI wiring, and drift handling |
+| `references/conversation-capture-and-implementation-loop.md` | Turning a conversation into a spec (five bins, drafting rules, read-back) and the per-ticket implementation loop (frontier, test-first, gates, review, commit) |
 | `assets/sample_spec.md` | Runnable sample spec containing both precise and deliberately ambiguous requirements |
 | `assets/sample_requirements.json` | Parsed baseline for the drift and coverage workflows |
 | `assets/sample_trace_index.json` | Prebuilt trace index exercising covered, untested, test-only, and orphan states |
@@ -918,10 +1051,11 @@ gets waived twice stops being read.
 - Requirement extraction with stable IDs and content fingerprints with `spec_parse.py`, drift detection against a baseline, and a gate on missing acceptance criteria.
 - Two-way coverage between requirement IDs and annotated code and tests with `trace_coverage.py`, from a source tree or a prebuilt trace index, with orphan detection and a coverage floor.
 - Spec writing and traceability guidance in `references/`, plus a spec template and sample files in `assets/`.
+- Capturing a spec from a conversation or agent session, and the test-first, review-and-commit-per-ticket loop for implementing from it.
 
 **Out of Scope:**
-- Writing the implementation or the tests (see `engineering/tdd-guide/`).
-- Breaking a PRD into tickets, branches and PRs (see `product-team/spec-to-repo/`).
+- Teaching test-driven development itself (see `tdd-guide`).
+- Slicing the spec into tracer-bullet tickets with blocking links, and branch/PR planning (see `spec-to-repo`).
 - Running the test suite or measuring code coverage.
 - Product discovery and deciding which requirements matter.
 
@@ -929,6 +1063,12 @@ gets waived twice stops being read.
 - Coverage means an annotation with the requirement ID was found. It does not show that the test passes or that the code meets the requirement.
 - The linter uses word and phrase rules. It can miss ambiguity phrased in other ways and can flag acceptable wording, so a high precision ratio still needs human review.
 - Stable IDs depend on section and order. Moving requirements between sections changes their IDs, which shows up as drift against the baseline.
+
+## Reference Documentation
+
+- `references/spec-writing-guide.md` — requirement grammar and ambiguous-to-precise rewrites.
+- `references/traceability-model.md` — ID schemes, annotations, CI wiring, drift.
+- `references/conversation-capture-and-implementation-loop.md` — conversation-to-spec capture and the per-ticket implementation loop.
 
 ---
 
@@ -1016,7 +1156,11 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/spec-driven-workflow/scripts/tool_name.py --help</code></pre>
   
-  
+  <h2>Quick Start</h2><pre><code># Lint the spec, freeze IDs, then gate on coverage (lint and coverage exit 1 on the samples&#x27; deliberate flaws)
+python3 engineering/spec-driven-workflow/scripts/spec_lint.py --spec engineering/spec-driven-workflow/assets/sample_spec.md
+python3 engineering/spec-driven-workflow/scripts/spec_parse.py --spec engineering/spec-driven-workflow/assets/sample_spec.md --format text
+python3 engineering/spec-driven-workflow/scripts/trace_coverage.py --requirements engineering/spec-driven-workflow/assets/sample_requirements.json --index engineering/spec-driven-workflow/assets/sample_trace_index.json
+</code></pre>
   <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/spec-driven-workflow/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>

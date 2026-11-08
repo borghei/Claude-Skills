@@ -294,6 +294,57 @@ If the team tries to deeply refine every story, the session runs 90+ minutes and
 
 ---
 
+## Part 7: Tracer-Bullet Slicing
+
+Vertical slicing says each slice should cross every layer. Tracer-bullet slicing adds an
+order and a shape to the set of slices: the **first** slice is the thinnest possible path
+through every layer, built to prove the path works, and every later slice widens that path.
+It is the right splitting technique when a story or epic is new territory — a new
+integration, a new data flow, a feature nobody on the team has built before — because the
+riskiest unknown is usually whether the layers connect at all.
+
+### How to cut a tracer bullet
+
+1. **Write the end-to-end behaviour in one sentence a user could check.** "A user saves the current search and sees it in the Saved list."
+2. **Strip everything optional.** One input type, the happy path, defaults instead of settings, no edge cases, minimal UI. Keep every layer: storage, service, interface and a test.
+3. **Check it is demoable.** If the slice cannot be shown working on its own, it is a layer, not a tracer bullet.
+4. **List the widening slices.** Each adds one dimension back: error handling, a second input type, permissions, performance. Most can then be split further with the Lawrence patterns (Part 3).
+5. **Give each slice its blocking links.** A slice is blocked only by slices it cannot be built or verified without. Everything else can run in parallel once the tracer bullet lands.
+
+### Example: saved searches
+
+| # | Slice | Blocked by |
+|---|-------|-----------|
+| 1 | Save the current search under a name; it appears in the Saved list (happy path, all layers) | — |
+| 2 | Run a saved search from the list | 1 |
+| 3 | Rename or delete a saved search | 1 |
+| 4 | Share a saved search with a teammate | 1 |
+| 5 | Email me when a saved search has new results | 2 |
+
+After slice 1, slices 2, 3 and 4 are all ready at once. A horizontal plan (tables, then API,
+then UI, then tests) would have produced nothing usable until its last ticket.
+
+### How it relates to INVEST
+
+- **Independent:** the tracer bullet is the one deliberate dependency; after it lands, the widening slices are mostly independent of each other.
+- **Valuable:** even the thinnest slice does something a user can see.
+- **Small:** the first slice is small by construction; if it is not, more has to be stripped.
+- **Testable:** the one-sentence behaviour is the first acceptance criterion.
+
+### When not to use it
+
+- **Well-trodden work.** When the team has built this shape many times, the path is not in doubt; split by the Lawrence patterns directly.
+- **Wide mechanical changes** (renaming a field used everywhere). These cannot land green as a thin slice. Split them as expand (add the new form beside the old), migrate (move callers over in batches), contract (remove the old form), each its own ticket.
+- **Pure research.** If the unknown is a question rather than a path, use a time-boxed spike (pattern 9) and slice after it answers.
+
+### Red flags in a tracer-bullet split
+
+- The first slice has a long acceptance list. It is not thin; strip it.
+- A slice touches one layer only and is not an expand/migrate/contract step. It is horizontal.
+- Every slice is blocked by the one before. The links are preferences, not gates; re-check which slices really need which.
+
+---
+
 ## Further reading
 
 - Bill Wake, "INVEST in Good Stories, and SMART Tasks" (XP Magazine 2003)

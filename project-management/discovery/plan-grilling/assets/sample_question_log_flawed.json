@@ -1,0 +1,28 @@
+{
+  "subject": "Launch a self-serve team workspace plan",
+  "mode": "single-session",
+  "questions": [
+    {"id": "Q1", "category": "goal", "kind": "decision", "round": 1, "status": "answered",
+     "question": "Is the goal new revenue or reducing sales-assisted onboarding?",
+     "recommended": "Reduce sales-assisted onboarding for teams under 10 seats.",
+     "answer": "Both, honestly.", "depends_on": []},
+    {"id": "Q2", "category": "users", "kind": "fact", "resolved_by": "user", "round": 1, "status": "answered",
+     "question": "How many accounts signed up with 2-9 seats last quarter?",
+     "answer": "Maybe 400?", "depends_on": []},
+    {"id": "Q3", "category": "constraints", "kind": "decision", "round": 1, "status": "answered",
+     "question": "Pricing per seat or flat?",
+     "answer": "Per seat.", "depends_on": ["Q5"]},
+    {"id": "Q4", "category": "sequencing", "kind": "decision", "round": 2, "status": "assumed",
+     "question": "Ship billing before the invite flow?",
+     "recommended": "Yes.", "depends_on": ["Q3"]},
+    {"id": "Q5", "category": "failure_modes", "kind": "decision", "round": 2, "status": "asked",
+     "question": "What happens when a card fails at seat 11?",
+     "recommended": "Grace period of 7 days, then read-only.", "depends_on": ["Q6"]},
+    {"id": "Q6", "category": "reversibility", "kind": "decision", "round": 2, "status": "open",
+     "question": "Can we roll back the plan without migrating accounts?",
+     "depends_on": ["Q5"]},
+    {"id": "Q7", "category": "unknowns", "kind": "decision", "round": 3, "status": "deferred",
+     "question": "Do we need SSO for the self-serve tier?",
+     "recommended": "No for launch.", "depends_on": ["Q9"]}
+  ]
+}

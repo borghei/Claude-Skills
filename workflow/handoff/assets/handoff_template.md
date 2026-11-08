@@ -32,3 +32,14 @@
 - Files: <…>
 - Tickets / docs / dashboards: <…>
 - People to ask: <…>
+
+<!-- The three sections below are required in background-agent mode, optional otherwise. -->
+
+## Stop and report when
+- <condition that means the agent should stop instead of improvising, e.g. a migration is needed, a test outside scope fails, the spec looks wrong>
+
+## Report back
+- <where the result goes: a PR, a file path, a comment on the ticket> — <what it must contain>
+
+## Suggested skills
+- <skill name> — <the step it covers>

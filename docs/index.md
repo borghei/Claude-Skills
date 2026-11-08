@@ -10,11 +10,11 @@ Production-ready skill packages that bundle domain expertise, best practices, an
 
 <div class="stats" markdown>
 <div class="stat">
-<div class="number">385</div>
+<div class="number">397</div>
 <div class="label">Skills</div>
 </div>
 <div class="stat">
-<div class="number">906</div>
+<div class="number">934</div>
 <div class="label">Python Tools</div>
 </div>
 <div class="stat">
@@ -95,7 +95,7 @@ ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF, PCI-DSS, plus
 
 <div class="card" markdown>
 ### :material-clipboard-check: ★ Project Management
-**70 skills** &middot; 82+ tools &middot; *most-used domain*
+**74 skills** &middot; 91 tools &middot; *most-used domain*
 
 PRDs (incl. AI features), OKRs, NSM, roadmaps, retros, story splitting, post-mortems, activation funnels, feature flags, career growth, strategy frameworks (BMC/Lean/SWOT/Porter's/Ansoff), GTM. Jira / Linear / Notion / Productboard / Confluence.
 
@@ -182,8 +182,8 @@ The LinkedIn suite: story interviews, planning, post writing, humanizing, commen
 
 | | |
 |---|---|
-| **385 Skills** | Production-ready expertise across 21 professional domains. Project Management is the most-used (70 skills). |
-| **906 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, capacity planning, statistical testing, clinical study sizing -- all standard library, no ML dependencies |
+| **397 Skills** | Production-ready expertise across 21 professional domains. Project Management is the most-used (74 skills). |
+| **934 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, capacity planning, statistical testing, clinical study sizing -- all standard library, no ML dependencies |
 | **25 Role-Based Agents** | Specialized AI personas (Tech Lead, CFO, CISO, Compliance Auditor, etc.) that orchestrate multiple skills |
 | **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
 | **12 CI/CD Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation |

@@ -1,6 +1,6 @@
 # Installation Guide - AI Skills Library
 
-Complete installation guide for all 385 production-ready skills across 21 domains, 906 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 18 compliance frameworks and 6 CI/CD workflows. Works with Claude Code, Claude.ai, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, ChatGPT and more.
+Complete installation guide for all 397 production-ready skills across 21 domains, 934 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 18 compliance frameworks and 6 CI/CD workflows. Works with Claude Code, Claude.ai, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, ChatGPT and more.
 
 ## Table of Contents
 
@@ -122,7 +122,7 @@ Install **one skill per domain group** into your project with built-in auto-upda
 ### List Available Skills
 
 ```bash
-# List all 385 skills across 21 domains
+# List all 397 skills across 21 domains
 python scripts/skill-installer.py list
 
 # List skills in a specific group
@@ -208,7 +208,7 @@ This adds the skills library to your available marketplaces.
 
 ```bash
 # Install by domain — one plugin per domain (skill counts as of September 2026)
-/plugin install pm-skills@claude-code-skills                   # 70 project management skills
+/plugin install pm-skills@claude-code-skills                   # 74 project management skills
 /plugin install engineering-advanced-skills@claude-code-skills # 91 engineering skills
 /plugin install marketings@claude-code-skills                  # 41 marketing skills
 /plugin install c-level-skills@claude-code-skills              # 31 C-level advisory skills
@@ -216,7 +216,7 @@ This adds the skills library to your available marketplaces.
 /plugin install business-growth-skills@claude-code-skills      # 20 business & growth skills
 /plugin install legal-skills@claude-code-skills                # 17 legal skills (experimental)
 /plugin install product-skills@claude-code-skills              # 13 product skills
-/plugin install personal-productivity-skills@claude-code-skills # 13 personal productivity skills
+/plugin install personal-productivity-skills@claude-code-skills # 14 personal productivity skills
 /plugin install vertical-advisor-skills@claude-code-skills     # 7 vertical advisors
 /plugin install data-analytics-skills@claude-code-skills       # 6 data analytics skills
 /plugin install business-operations-skills@claude-code-skills  # 6 business operations skills
@@ -228,7 +228,7 @@ This adds the skills library to your available marketplaces.
 /plugin install markdown-html-skills@claude-code-skills        # 4 markdown→HTML skills
 /plugin install tools-skills@claude-code-skills                # 12 LinkedIn suite skills
 /plugin install finance-skills@claude-code-skills              # 3 finance skills
-/plugin install workflow-skills@claude-code-skills             # 2 workflow meta-skills
+/plugin install workflow-skills@claude-code-skills             # 3 workflow meta-skills
 ```
 
 ### Install Individual Skills
@@ -963,6 +963,6 @@ See `.codex/skills-index.json` for the complete manifest with descriptions.
 
 ---
 
-**Last Updated:** October 2026
-**Skills Version:** 4.13.9 (385 production skills, 906 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 6 CI/CD workflows)
+**Last Updated:** November 2026
+**Skills Version:** 4.14.0 (397 production skills, 934 Python tools, 76 agents, 26 slash commands, 21 compound sub-skills, 6 CI/CD workflows)
 **Universal Installer:** [Agent Skills CLI](https://github.com/Karanjot786/agent-skills-cli)

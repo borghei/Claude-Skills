@@ -1,0 +1,27 @@
+{
+  "title": "Hosting question",
+  "purpose": "",
+  "decision": "Where to host the analytics add-on.",
+  "from": "Lena Ortiz",
+  "to": ["Security Lead"],
+  "context": "See the thread from last week.",
+  "deadline": "2026-11-01",
+  "effort_minutes": 30,
+  "options": [
+    {"id": "A", "label": "Frankfurt", "tradeoffs": "Best residency story.", "recommended": true},
+    {"id": "B", "label": "Dublin", "recommended": true}
+  ],
+  "questions": [
+    {"id": "Q1", "theme": "Approval", "format": "pick-one", "text": "Don't you think Frankfurt is the safest choice?", "options": ["Yes"]},
+    {"id": "Q2", "theme": "Approval", "format": "number", "text": "How much extra cost is acceptable?"},
+    {"id": "Q3", "format": "yes-no", "text": "Should backups stay in the EU and should logs stay there too?"},
+    {"id": "Q4", "theme": "Compliance", "text": "Which regulations apply to us?"},
+    {"id": "Q5", "theme": "Compliance", "format": "free-text", "text": "What does Legal say? What does the DPO say?"},
+    {"id": "Q6", "theme": "Gaps", "format": "free-text", "text": "Any feedback on the plan overall?"},
+    {"id": "Q7", "theme": "Gaps", "format": "free-text", "max_words": 50, "text": "Thoughts?"},
+    {"id": "Q8", "theme": "Gaps", "format": "yes-no", "text": "Obviously we need a DPA update, right?"},
+    {"id": "Q9", "theme": "Gaps", "format": "ranked", "text": "Rank the options.", "options": ["A"]},
+    {"id": "Q10", "theme": "Gaps", "format": "free-text", "max_words": 50, "text": "Which customers asked about residency?"},
+    {"id": "Q11", "theme": "Gaps", "format": "free-text", "max_words": 50, "text": "Which teams own the current US region?"}
+  ]
+}

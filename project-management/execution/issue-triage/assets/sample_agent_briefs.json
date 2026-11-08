@@ -1,0 +1,56 @@
+{
+  "_comment": "Three briefs; two are deliberately flawed, so the linter exits 1.",
+  "briefs": [
+    {
+      "id": "#231",
+      "target_state": "ready-for-agent",
+      "category": "bug",
+      "summary": "A webhook delivery that receives a 503 is retried twice instead of once",
+      "current_behavior": "When the receiving endpoint answers 503, the dispatcher schedules a retry from the failure callback and again from the timeout watchdog, so the receiver gets two identical retries about 30 seconds apart.",
+      "desired_behavior": "Each failed delivery attempt schedules exactly one retry, regardless of which failure path observes the error. Retries keep the existing backoff schedule and carry the same idempotency key as the original attempt.",
+      "key_interfaces": [
+        "`DeliveryAttempt` status transitions: an attempt may move to `retry_scheduled` at most once",
+        "`RetryPolicy.next_delay(attempt_number)` is unchanged"
+      ],
+      "acceptance_criteria": [
+        "A 503 response produces exactly one scheduled retry for that attempt",
+        "A timeout followed by a late 503 for the same attempt produces exactly one scheduled retry",
+        "Every retry carries the idempotency key of the original delivery",
+        "The existing backoff delays (10s, 30s, 90s) are unchanged"
+      ],
+      "out_of_scope": [
+        "Changing the retry schedule or maximum attempt count",
+        "Dead-letter queue behaviour after the final attempt"
+      ],
+      "verification": "`make test-integration TEST=webhook_retry`"
+    },
+    {
+      "id": "#244",
+      "target_state": "ready-for-agent",
+      "category": "enhancement",
+      "summary": "Fix the export",
+      "current_behavior": "Export is slow.",
+      "desired_behavior": "Open the file src/export/csv_writer.py and go to line 88, then add a buffer.",
+      "acceptance_criteria": [
+        "Export works correctly and is faster"
+      ],
+      "out_of_scope": [],
+      "verification": "check it"
+    },
+    {
+      "id": "#242",
+      "target_state": "ready-for-human",
+      "category": "bug",
+      "summary": "Rate-limit headers are missing from 429 responses on the public API",
+      "current_behavior": "429 responses from the public API carry no `Retry-After` or `X-RateLimit-Remaining` header, so clients cannot back off.",
+      "desired_behavior": "Every 429 response from the public API includes `Retry-After` in seconds and `X-RateLimit-Remaining: 0`.",
+      "key_interfaces": ["The rate-limit middleware's rejection response"],
+      "acceptance_criteria": [
+        "A request over the limit receives a 429 with a `Retry-After` header",
+        "The `Retry-After` value equals the seconds until the window resets"
+      ],
+      "out_of_scope": ["Changing the limits themselves"],
+      "verification": "`pytest tests/api -k rate_limit`"
+    }
+  ]
+}

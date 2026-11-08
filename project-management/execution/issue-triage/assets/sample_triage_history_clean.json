@@ -1,0 +1,62 @@
+{
+  "_comment": "Clean triage export: every item obeys the state machine and label scheme, so the validator exits 0.",
+  "out_of_scope_register": [
+    {
+      "concept": "per-user-themes",
+      "decision": "rejected",
+      "reason": "Rendering resolves one palette at build time; runtime theming would need a provider around every view and is a downstream concern for embedders.",
+      "prior_requests": ["#212", "#239"]
+    }
+  ],
+  "issues": [
+    {
+      "id": "#231", "kind": "issue", "title": "Webhook retries fire twice after a 503", "reporter": "dana-k",
+      "labels": ["type:bug", "state:ready-for-agent", "priority:p1"],
+      "brief": "comment-4 (Agent Brief)",
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-10-20", "actor": "dana-k", "note": "opened"},
+        {"from": "new", "to": "reproduced", "at": "2026-10-21", "actor": "maintainer", "note": "two deliveries logged per 503 in the integration suite"},
+        {"from": "reproduced", "to": "accepted", "at": "2026-10-21", "actor": "maintainer", "note": "p1: duplicate side effects for customers"},
+        {"from": "accepted", "to": "ready-for-agent", "at": "2026-10-22", "actor": "maintainer", "note": "brief posted"}
+      ]
+    },
+    {
+      "id": "#235", "kind": "issue", "title": "Search box loses focus on mobile", "reporter": "lee-w",
+      "labels": ["type:bug", "state:reproduced"],
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-10-30", "actor": "lee-w", "note": "opened"},
+        {"from": "new", "to": "needs-info", "at": "2026-10-31", "actor": "maintainer", "note": "asked for device and browser"},
+        {"from": "needs-info", "to": "new", "at": "2026-11-02", "actor": "lee-w", "note": "reporter replied: iOS 19 Safari"},
+        {"from": "new", "to": "reproduced", "at": "2026-11-03", "actor": "maintainer", "note": "reproduced on iOS simulator"}
+      ]
+    },
+    {
+      "id": "#238", "kind": "pr", "title": "Add --json to the list command", "reporter": "outside-contrib",
+      "labels": ["type:enhancement", "state:ready-for-human", "priority:p3"],
+      "brief": "comment-2 (Agent Brief)",
+      "human_reason": "The JSON shape becomes a public contract; a maintainer must approve it before merge.",
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-10-25", "actor": "outside-contrib", "note": "opened"},
+        {"from": "new", "to": "accepted", "at": "2026-10-27", "actor": "maintainer", "note": "wanted; diff matches command structure"},
+        {"from": "accepted", "to": "ready-for-human", "at": "2026-10-28", "actor": "maintainer", "note": "brief posted"}
+      ]
+    },
+    {
+      "id": "#239", "kind": "issue", "title": "Dark mode please", "reporter": "sam-r",
+      "labels": ["type:enhancement", "state:out-of-scope"],
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-10-29", "actor": "sam-r", "note": "opened"},
+        {"from": "new", "to": "out-of-scope", "at": "2026-10-30", "actor": "maintainer", "note": "matches register entry per-user-themes"}
+      ]
+    },
+    {
+      "id": "#241", "kind": "issue", "title": "Crash on empty project", "reporter": "kai-m",
+      "labels": ["type:bug", "state:duplicate"],
+      "duplicate_of": "#198",
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-11-01", "actor": "kai-m", "note": "opened"},
+        {"from": "new", "to": "duplicate", "at": "2026-11-02", "actor": "maintainer", "note": "same stack trace as #198"}
+      ]
+    }
+  ]
+}

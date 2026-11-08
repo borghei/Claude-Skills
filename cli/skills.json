@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-23T14:53:45+00:00",
-  "skill_count": 385,
+  "generated_at": "2026-11-08T10:50:54+00:00",
+  "skill_count": 397,
   "domain_count": 21,
   "skills": [
     {
@@ -491,6 +491,44 @@
       "has_assets": false
     },
     {
+      "name": "bug-diagnosis",
+      "domain": "engineering",
+      "description": "Find the root cause of hard bugs with a fast pass/fail repro, ranked falsifiable hypotheses and bisection. Use when a bug resists quick fixes, a failure is intermittent, or a regression needs tracing to its cause.",
+      "tags": [
+        "debugging",
+        "root-cause",
+        "bisection",
+        "reproduction",
+        "hypotheses",
+        "redaction",
+        "regression-test"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/bug-diagnosis",
+      "files": [
+        "SKILL.md",
+        "assets/diagnosis-log-template.md",
+        "assets/repro-script-template.sh",
+        "assets/sample_debug_log.txt",
+        "assets/sample_diagnosis_log.json",
+        "assets/sample_diagnosis_log_passing.json",
+        "references/bisection-instrumentation-redaction.md",
+        "references/reproduction-signals.md",
+        "scripts/hypothesis_log.py",
+        "scripts/redact_scan.py"
+      ],
+      "size_bytes": 58424,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "changelog-generator",
       "domain": "engineering",
       "description": "Generate changelogs and release notes from Conventional Commits with semver bump detection, Keep a Changelog formatting, and monorepo scopes. Use when preparing releases, enforcing commit standards, or automating release notes.",
@@ -623,7 +661,7 @@
         "scripts/context_analyzer.py",
         "scripts/skill_scaffolder.py"
       ],
-      "size_bytes": 131095,
+      "size_bytes": 131182,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -674,10 +712,11 @@
         "code-review",
         "pull-request",
         "code-quality",
-        "best-practices"
+        "best-practices",
+        "spec-fidelity"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "engineering",
@@ -685,19 +724,22 @@
       "path": "engineering/code-reviewer",
       "files": [
         "SKILL.md",
+        "assets/two-axis-review-template.md",
         "references/code_review_checklist.md",
         "references/coding_standards.md",
         "references/common_antipatterns.md",
         "references/tool_reference.md",
+        "references/two-axis-review.md",
         "scripts/code_quality_checker.py",
         "scripts/pr_analyzer.py",
-        "scripts/review_report_generator.py"
+        "scripts/review_report_generator.py",
+        "scripts/review_scope.py"
       ],
-      "size_bytes": 103602,
-      "tools_count": 3,
+      "size_bytes": 124378,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "code-tour",
@@ -984,6 +1026,43 @@
       "has_assets": false
     },
     {
+      "name": "deep-module-design",
+      "domain": "engineering",
+      "description": "Design deep modules with small interfaces and rank shallow, pass-through or leaky code for deepening. Use when designing a module interface, improving codebase architecture, or making code easier to test.",
+      "tags": [
+        "module-design",
+        "deep-modules",
+        "information-hiding",
+        "seams",
+        "refactoring",
+        "testability",
+        "architecture-review"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/deep-module-design",
+      "files": [
+        "SKILL.md",
+        "assets/architecture-review-template.md",
+        "assets/interface-design-brief-template.md",
+        "assets/sample_codebase.json",
+        "assets/sample_designs.json",
+        "references/architecture-review-playbook.md",
+        "references/depth-principles.md",
+        "scripts/interface_compare.py",
+        "scripts/module_depth.py"
+      ],
+      "size_bytes": 65935,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "dependency-auditor",
       "domain": "engineering",
       "description": "Scan project dependencies for vulnerabilities, license issues, and upgrade opportunities across Python, Node.js, Go, and Rust. Use when auditing dependencies, checking licenses, planning upgrades, or assessing supply chain security.",
@@ -1167,6 +1246,45 @@
       "has_assets": false
     },
     {
+      "name": "domain-modeling",
+      "domain": "engineering",
+      "description": "Keep a project glossary of domain terms and lightweight decision records, and catch banned synonyms in docs and code. Use when terms are used inconsistently, writing a GLOSSARY.md, or recording a design decision.",
+      "tags": [
+        "domain-modeling",
+        "glossary",
+        "ubiquitous-language",
+        "adr",
+        "decision-records",
+        "naming"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/domain-modeling",
+      "files": [
+        "SKILL.md",
+        "assets/GLOSSARY-template.md",
+        "assets/adr-template.md",
+        "assets/sample_GLOSSARY.md",
+        "assets/sample_adr_set.json",
+        "assets/sample_conversation.txt",
+        "assets/sample_feature_notes.md",
+        "references/decision-records.md",
+        "references/glossary-practice.md",
+        "scripts/adr_lint.py",
+        "scripts/glossary_lint.py",
+        "scripts/term_extract.py"
+      ],
+      "size_bytes": 67310,
+      "tools_count": 3,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "env-secrets-manager",
       "domain": "engineering",
       "description": "Environment and secrets management lifecycle: .env scaffolding, validation, leak detection, and rotation across Vault, AWS SSM, 1Password, and Doppler. Use when setting up projects, scanning for leaked secrets, or rotating credentials.",
@@ -1340,6 +1458,43 @@
       "has_assets": false
     },
     {
+      "name": "git-guardrails",
+      "domain": "engineering",
+      "description": "Install a hook that blocks destructive git commands before an AI agent runs them. Use when an agent force-pushed or ran reset --hard, when adding git safety hooks, or when protecting main from agent pushes.",
+      "tags": [
+        "git",
+        "hooks",
+        "claude-code",
+        "safety",
+        "pretooluse",
+        "branch-protection"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/git-guardrails",
+      "files": [
+        "SKILL.md",
+        "assets/git_guardrails_hook.py",
+        "assets/pre-push",
+        "assets/pre-rebase",
+        "assets/sample_command_corpus.json",
+        "assets/sample_guardrail_policy.json",
+        "references/hook-mechanics.md",
+        "references/rule-catalog.md",
+        "scripts/guardrail_test.py",
+        "scripts/install_guardrails.py"
+      ],
+      "size_bytes": 81365,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "git-worktree-manager",
       "domain": "engineering",
       "description": "Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.",
@@ -1434,6 +1589,41 @@
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "human-step-wizard",
+      "domain": "engineering",
+      "description": "Generate an interactive, resumable bash wizard that walks a person through steps only a human can do. Use when a task needs dashboard credentials, DNS or change approval, key rotation, or a manual traffic cutover.",
+      "tags": [
+        "wizard",
+        "bash",
+        "human-in-the-loop",
+        "credentials",
+        "cutover",
+        "runbook-automation"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/human-step-wizard",
+      "files": [
+        "SKILL.md",
+        "assets/sample_wizard_spec.json",
+        "assets/sample_wizard_spec_flawed.json",
+        "assets/wizard_runtime.sh",
+        "references/bash-wizard-safety.md",
+        "references/human-step-design.md",
+        "scripts/wizard_generate.py",
+        "scripts/wizard_spec_validate.py"
+      ],
+      "size_bytes": 61947,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "incident-commander",
@@ -1870,6 +2060,43 @@
       "has_scripts": true,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "pr-description-writer",
+      "domain": "engineering",
+      "description": "Write PR descriptions with evidence, verification steps and a one-way/two-way merge-risk call. Use when opening a PR, when asked to write or fix a PR body, or when checking a description before requesting review.",
+      "tags": [
+        "pull-request",
+        "pr-description",
+        "code-review",
+        "merge-risk",
+        "rollback",
+        "evidence"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "engineering",
+      "subdomain": "",
+      "path": "engineering/pr-description-writer",
+      "files": [
+        "SKILL.md",
+        "assets/pr-body-template.md",
+        "assets/sample_changed_files.json",
+        "assets/sample_migration.diff",
+        "assets/sample_pr_body_flawed.md",
+        "assets/sample_pr_body_good.md",
+        "references/merge-risk-classification.md",
+        "references/pr-body-anatomy.md",
+        "scripts/pr_body_lint.py",
+        "scripts/risk_classifier.py"
+      ],
+      "size_bytes": 56736,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "pr-review-expert",
@@ -2993,8 +3220,8 @@
         "acceptance-criteria",
         "process"
       ],
-      "version": "1.0.0",
-      "updated": "2026-07-21",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "engineering",
@@ -3006,13 +3233,14 @@
         "assets/sample_spec.md",
         "assets/sample_trace_index.json",
         "assets/spec-template.md",
+        "references/conversation-capture-and-implementation-loop.md",
         "references/spec-writing-guide.md",
         "references/traceability-model.md",
         "scripts/spec_lint.py",
         "scripts/spec_parse.py",
         "scripts/trace_coverage.py"
       ],
-      "size_bytes": 69578,
+      "size_bytes": 82160,
       "tools_count": 3,
       "has_scripts": true,
       "has_references": true,
@@ -3270,10 +3498,11 @@
       "path": "engineering/threat-detection",
       "files": [
         "SKILL.md",
+        "examples/access.log",
         "references/threat-indicators.md",
         "scripts/threat_signal_analyzer.py"
       ],
-      "size_bytes": 26886,
+      "size_bytes": 34487,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -3288,10 +3517,11 @@
         "meta-skill",
         "linting",
         "standards",
-        "packaging"
+        "packaging",
+        "agents-md"
       ],
-      "version": "1.0.0",
-      "updated": "2026-07-21",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "engineering",
@@ -3305,12 +3535,13 @@
         "assets/skill-review-checklist.md",
         "references/authoring-playbook.md",
         "references/pattern-checklist.md",
+        "references/writing-for-agents.md",
         "scripts/description_audit.py",
         "scripts/lint_checks.py",
         "scripts/skill_lint.py",
         "scripts/skill_scaffold.py"
       ],
-      "size_bytes": 81172,
+      "size_bytes": 93210,
       "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
@@ -8271,6 +8502,43 @@
       "has_assets": true
     },
     {
+      "name": "plan-grilling",
+      "domain": "project-management",
+      "description": "Interrogate a plan, design or idea one round of questions at a time until every decision is settled. Use when stress-testing a plan before building, when a design feels underspecified, or turning a fuzzy workflow into a spec.",
+      "tags": [
+        "grilling",
+        "decision-tree",
+        "plan-review",
+        "specification",
+        "discovery"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
+      "path": "project-management/discovery/plan-grilling",
+      "files": [
+        "SKILL.md",
+        "assets/question_log_template.md",
+        "assets/sample_question_log.json",
+        "assets/sample_question_log_flawed.json",
+        "assets/sample_workflow_spec.json",
+        "assets/sample_workflow_spec_flawed.json",
+        "assets/workflow_spec_template.md",
+        "references/question-taxonomy.md",
+        "references/running-the-grilling.md",
+        "scripts/question_log_checker.py",
+        "scripts/workflow_spec_checker.py"
+      ],
+      "size_bytes": 60758,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "pre-mortem",
       "domain": "project-management",
       "description": "Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.",
@@ -8450,16 +8718,17 @@
     {
       "name": "backlog-refinement",
       "domain": "project-management",
-      "description": "Backlog refinement playbook covering INVEST quality, vertical story splitting, Definition of Ready, and Definition of Done -- with a Python scorer that grades each story against INVEST and emits a ready/not-ready verdict.",
+      "description": "Grade stories against INVEST, split them vertically or as tracer bullets, and enforce Definition of Ready and Done. Use when refining a backlog, splitting an oversized story, or checking sprint readiness.",
       "tags": [
         "backlog",
         "invest",
         "story-splitting",
+        "tracer-bullet",
         "definition-of-ready",
         "definition-of-done"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "project-management",
@@ -8474,7 +8743,7 @@
         "references/refinement-playbook.md",
         "scripts/refinement_scorer.py"
       ],
-      "size_bytes": 81049,
+      "size_bytes": 86776,
       "tools_count": 1,
       "has_scripts": true,
       "has_references": true,
@@ -8678,6 +8947,43 @@
       "has_assets": false
     },
     {
+      "name": "decision-questionnaire",
+      "domain": "project-management",
+      "description": "Turn a blocked decision into an async questionnaire a stakeholder can answer without a meeting. Use when you need someone else's input to decide, a meeting would be overkill, or answers from several people must be consolidated.",
+      "tags": [
+        "decision-making",
+        "async",
+        "questionnaire",
+        "stakeholders",
+        "decision-record"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
+      "path": "project-management/execution/decision-questionnaire",
+      "files": [
+        "SKILL.md",
+        "assets/decision_record_template.md",
+        "assets/questionnaire_template.md",
+        "assets/sample_answers.json",
+        "assets/sample_answers_conflict.json",
+        "assets/sample_questionnaire_clean.json",
+        "assets/sample_questionnaire_flawed.json",
+        "references/question-design.md",
+        "references/sending-and-consolidating.md",
+        "scripts/answer_consolidator.py",
+        "scripts/questionnaire_linter.py"
+      ],
+      "size_bytes": 58312,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "dependency-map",
       "domain": "project-management",
       "description": "Cross-team dependency tracking with critical path analysis and Mermaid dependency graphs for program coordination.",
@@ -8771,6 +9077,46 @@
       "size_bytes": 92487,
       "tools_count": 0,
       "has_scripts": false,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "issue-triage",
+      "domain": "project-management",
+      "description": "Move engineering issues and external PRs through a triage state machine and write agent-ready briefs. Use when clearing a triage queue, deciding if a report is real or wanted, or handing an issue to a coding agent.",
+      "tags": [
+        "triage",
+        "issue-tracking",
+        "agent-brief",
+        "pull-requests",
+        "labels"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
+      "path": "project-management/execution/issue-triage",
+      "files": [
+        "SKILL.md",
+        "assets/agent_brief_template.md",
+        "assets/label_scheme_template.md",
+        "assets/out_of_scope_entry_template.md",
+        "assets/sample_agent_brief_clean.md",
+        "assets/sample_agent_briefs.json",
+        "assets/sample_triage_history.json",
+        "assets/sample_triage_history_clean.json",
+        "assets/triage_notes_template.md",
+        "references/agent-briefs.md",
+        "references/evidence-and-out-of-scope.md",
+        "references/state-machine-and-labels.md",
+        "scripts/agent_brief_linter.py",
+        "scripts/triage_state_validator.py"
+      ],
+      "size_bytes": 83842,
+      "tools_count": 2,
+      "has_scripts": true,
       "has_references": true,
       "has_assets": true
     },
@@ -9397,6 +9743,42 @@
       ],
       "size_bytes": 35722,
       "tools_count": 1,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "wayfinder",
+      "domain": "project-management",
+      "description": "Chart work too big for one sprint as a map of decision tickets, resolve them in dependency order, then turn answers into tracer-bullet tickets. Use when the route is unclear, open questions block each other, or estimates swing wildly.",
+      "tags": [
+        "planning",
+        "decision-tickets",
+        "tracer-bullets",
+        "dependencies",
+        "large-initiatives"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "project-management",
+      "subdomain": "",
+      "path": "project-management/execution/wayfinder",
+      "files": [
+        "SKILL.md",
+        "assets/decision_map_template.md",
+        "assets/sample_decision_map_clean.json",
+        "assets/sample_decision_map_flawed.json",
+        "assets/ticket_templates.md",
+        "references/charting-the-map.md",
+        "references/decisions-to-tracer-bullets.md",
+        "references/map-health-and-failure-modes.md",
+        "scripts/decision_map_validator.py",
+        "scripts/tracer_slice_checker.py"
+      ],
+      "size_bytes": 75594,
+      "tools_count": 2,
       "has_scripts": true,
       "has_references": true,
       "has_assets": true
@@ -10359,13 +10741,13 @@
       "tags": [
         "prd",
         "ticket-decomposition",
+        "tracer-bullet",
         "branch-strategy",
         "pr",
-        "definition-of-done",
         "delivery"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "product-team",
@@ -10373,18 +10755,21 @@
       "path": "product-team/spec-to-repo",
       "files": [
         "SKILL.md",
+        "assets/sample_tracer_tickets.json",
         "references/branch-strategy-for-features.md",
         "references/pr-discipline-and-conventions.md",
         "references/spec-to-ticket-decomposition.md",
+        "references/tracer-bullet-slicing.md",
         "scripts/branch_naming_validator.py",
         "scripts/pr_scope_analyzer.py",
-        "scripts/prd_to_tickets_decomposer.py"
+        "scripts/prd_to_tickets_decomposer.py",
+        "scripts/ticket_graph_validator.py"
       ],
-      "size_bytes": 52588,
-      "tools_count": 3,
+      "size_bytes": 74553,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "ui-design-system",
@@ -11276,6 +11661,45 @@
       "has_assets": true
     },
     {
+      "name": "learning-workspace",
+      "domain": "personal-productivity",
+      "description": "Set up and run a multi-session study workspace with mission, curriculum, lessons and spaced review. Use when learning a topic over weeks, resuming study after a gap, checking real understanding, or planning reviews.",
+      "tags": [
+        "learning",
+        "spaced-repetition",
+        "curriculum",
+        "retrieval-practice",
+        "self-study",
+        "tutoring"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "personal-productivity",
+      "subdomain": "",
+      "path": "personal-productivity/learning-workspace",
+      "files": [
+        "SKILL.md",
+        "assets/learning-record-entry-template.md",
+        "assets/lesson-template.md",
+        "assets/sample_learning_record.json",
+        "assets/sample_learning_record_clean.json",
+        "assets/sample_workspace_spec.json",
+        "assets/sample_workspace_spec_flawed.json",
+        "references/learning-science.md",
+        "references/session-playbook.md",
+        "references/workspace-formats.md",
+        "scripts/review_scheduler.py",
+        "scripts/workspace_scaffolder.py"
+      ],
+      "size_bytes": 71922,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "meeting-insights",
       "domain": "personal-productivity",
       "description": "Analyze meeting transcripts to extract decisions, action items, owners, due dates, open questions, and risks. Use after recorded meetings, sales calls, customer interviews, or planning sessions, or to build a decision log.",
@@ -11784,12 +12208,12 @@
         "dossier",
         "intelligence",
         "due-diligence",
-        "market-entry",
         "briefing",
-        "research"
+        "research-note",
+        "primary-sources"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "research",
@@ -11797,18 +12221,22 @@
       "path": "research/dossier",
       "files": [
         "SKILL.md",
+        "assets/research_note_template.md",
+        "assets/sample_research_note.md",
         "references/dossier-frameworks-and-structure.md",
         "references/fact-vs-inference-discipline.md",
+        "references/repo-research-notes.md",
         "references/source-triangulation-and-reliability.md",
         "scripts/dossier_outline_generator.py",
         "scripts/fact_inference_separator.py",
+        "scripts/research_note_checker.py",
         "scripts/source_triangulation_validator.py"
       ],
-      "size_bytes": 53229,
-      "tools_count": 3,
+      "size_bytes": 73678,
+      "tools_count": 4,
       "has_scripts": true,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "grants",
@@ -12873,17 +13301,17 @@
     {
       "name": "handoff",
       "domain": "workflow",
-      "description": "This skill should be used when the user asks to \"write a handoff\", \"hand this off\", \"package this work for someone else\", \"summarize where we are so another person/agent can continue\", or \"create a context doc before I switch off this task\".",
+      "description": "Package in-progress work into a self-contained context doc or a background agent's prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.",
       "tags": [
         "handoff",
         "delegation",
         "context",
         "continuity",
-        "onboarding",
+        "background-agent",
         "async"
       ],
-      "version": "1.0.0",
-      "updated": "2026-06-22",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "author": "borghei",
       "license": "MIT + Commons Clause",
       "category": "workflow",
@@ -12892,12 +13320,50 @@
       "files": [
         "SKILL.md",
         "assets/handoff_template.md",
+        "assets/sample_background_handoff.md",
+        "references/background-agent-handoff.md",
         "scripts/handoff_context.py"
       ],
-      "size_bytes": 9179,
+      "size_bytes": 24033,
       "tools_count": 1,
       "has_scripts": true,
-      "has_references": false,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "session-retro",
+      "domain": "workflow",
+      "description": "Review a coding-agent session and turn its failures and waste into ranked fixes to the agent's environment. Use when a session went slow or wrong, after a messy agent run, or to tune CLAUDE.md or AGENTS.md.",
+      "tags": [
+        "retrospective",
+        "agent-session",
+        "claude-md",
+        "agents-md",
+        "tool-calls",
+        "developer-experience"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "author": "borghei",
+      "license": "MIT + Commons Clause",
+      "category": "workflow",
+      "subdomain": "",
+      "path": "workflow/session-retro",
+      "files": [
+        "SKILL.md",
+        "assets/retro_template.md",
+        "assets/sample_action_items.json",
+        "assets/sample_session.jsonl",
+        "references/finding-categories.md",
+        "references/fix-placement-and-steering-style.md",
+        "references/transcript-sources.md",
+        "scripts/action_item_linter.py",
+        "scripts/session_log_analyzer.py"
+      ],
+      "size_bytes": 93199,
+      "tools_count": 2,
+      "has_scripts": true,
+      "has_references": true,
       "has_assets": true
     },
     {

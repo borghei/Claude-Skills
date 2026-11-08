@@ -1,0 +1,129 @@
+{
+  "title": "Move api.example.com to the new load balancer",
+  "slug": "api-lb-cutover",
+  "description": "DNS cutover with a scoped API token, a pre-cutover smoke test and a typed confirmation before the record changes.",
+  "env_file": ".env.cutover",
+  "steps": [
+    {
+      "id": "create-dns-token",
+      "title": "Create a scoped DNS API token",
+      "instructions": [
+        "Sign in to the DNS provider dashboard with an account that can edit the example.com zone.",
+        "Profile -> API Tokens -> Create token -> template 'Edit zone DNS'.",
+        "Limit the token to the example.com zone and set it to expire in 7 days.",
+        "Copy the token once; the dashboard will not show it again."
+      ],
+      "url": "https://dash.dns-provider.example/profile/api-tokens",
+      "inputs": [
+        {
+          "name": "DNS_API_TOKEN",
+          "prompt": "Paste the new token",
+          "secret": true,
+          "pattern": "^[A-Za-z0-9_-]{32,64}$",
+          "store": "env"
+        }
+      ],
+      "checks": [
+        {
+          "description": "token is stored and non-empty",
+          "command": "test -n \"$DNS_API_TOKEN\""
+        }
+      ]
+    },
+    {
+      "id": "lower-ttl",
+      "title": "Lower the TTL on api.example.com to 60 seconds",
+      "instructions": [
+        "DNS -> Records -> api.example.com (A) -> Edit.",
+        "Set TTL to 60 seconds and save. Leave the address unchanged.",
+        "Wait at least as long as the OLD TTL before the cutover step, so resolvers pick up the short TTL."
+      ],
+      "url": "https://dash.dns-provider.example/example.com/dns/records",
+      "pause": true,
+      "checks": [
+        {
+          "description": "public DNS now reports a TTL of 300 s or less",
+          "command": "ttl=\"$(dig +noall +answer api.example.com A | awk 'NR==1{print $2}')\"; [ -n \"$ttl\" ] && [ \"$ttl\" -le 300 ]"
+        }
+      ],
+      "allow_skip": true
+    },
+    {
+      "id": "capture-lb-address",
+      "title": "Record the new load balancer address",
+      "instructions": [
+        "Cloud console -> Load balancers -> api-prod-v2 -> Overview.",
+        "Copy the public IPv4 address (not the private one)."
+      ],
+      "url": "https://console.cloud.example/networking/load-balancers",
+      "inputs": [
+        {
+          "name": "NEW_LB_IP",
+          "prompt": "New load balancer IPv4 address",
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}$",
+          "store": "env"
+        },
+        {
+          "name": "OLD_LB_IP",
+          "prompt": "Current IPv4 address of api.example.com (for rollback)",
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}$",
+          "store": "env"
+        }
+      ]
+    },
+    {
+      "id": "smoke-test-new-lb",
+      "title": "Smoke-test the new load balancer before any traffic moves",
+      "instructions": [
+        "The check below calls /healthz on the new address while still sending the real hostname.",
+        "If it fails, fix the load balancer (certificate, target group health) and choose retry."
+      ],
+      "pause": false,
+      "checks": [
+        {
+          "description": "new LB answers /healthz for api.example.com over TLS",
+          "command": "curl -fsS --max-time 10 --resolve \"api.example.com:443:${NEW_LB_IP}\" https://api.example.com/healthz"
+        }
+      ]
+    },
+    {
+      "id": "cutover-dns",
+      "title": "Point api.example.com at the new load balancer",
+      "irreversible": true,
+      "rollback": "Set the A record back to the OLD_LB_IP saved in .env.cutover. With the 60 s TTL most clients return within 2 minutes; long-lived connections drain on their own.",
+      "instructions": [
+        "DNS -> Records -> api.example.com (A) -> Edit.",
+        "Replace the address with the NEW_LB_IP value you entered earlier and save.",
+        "Do not change the TTL yet."
+      ],
+      "url": "https://dash.dns-provider.example/example.com/dns/records",
+      "checks": [
+        {
+          "description": "public DNS returns the new address",
+          "command": "dig +short api.example.com A | grep -qxF \"$NEW_LB_IP\""
+        },
+        {
+          "description": "production health check passes through DNS",
+          "command": "curl -fsS --max-time 10 https://api.example.com/healthz"
+        }
+      ]
+    },
+    {
+      "id": "log-change",
+      "title": "Close the change ticket",
+      "instructions": [
+        "Add the old and new addresses and the cutover time to the change ticket.",
+        "Schedule a reminder to raise the TTL back to 3600 s after 24 quiet hours.",
+        "Revoke the DNS API token from step 1 once the TTL is raised."
+      ],
+      "inputs": [
+        {
+          "name": "CHANGE_TICKET",
+          "prompt": "Change ticket id (e.g. CHG-1042)",
+          "pattern": "^CHG-[0-9]{3,6}$",
+          "store": "env"
+        }
+      ]
+    }
+  ]
+}

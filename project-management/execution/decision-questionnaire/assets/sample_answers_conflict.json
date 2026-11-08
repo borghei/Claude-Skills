@@ -1,0 +1,8 @@
+{
+  "responses": [
+    {"respondent": "Security Lead", "submitted": "2026-11-17",
+     "answers": {"Q1": "A", "Q3": "yes", "Q5": "Don't know"}},
+    {"respondent": "Finance Controller", "submitted": "2026-11-18",
+     "answers": {"Q1": "C", "Q2": 1500, "Q3": "yes", "Q7": "Please loop in Legal."}}
+  ]
+}

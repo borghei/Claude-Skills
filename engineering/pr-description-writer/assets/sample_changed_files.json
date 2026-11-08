@@ -1,0 +1,12 @@
+{
+  "description": "Changed paths for the sample PR (git diff --name-only main...HEAD). Includes a schema migration, so the honest classification is one-way.",
+  "files": [
+    "db/migrations/20261102_split_customer_name.py",
+    "app/customers/models.py",
+    "app/customers/serializers.py",
+    "app/customers/views.py",
+    "api/openapi.yaml",
+    "tests/customers/test_name_split.py",
+    "docs/changelog.md"
+  ]
+}

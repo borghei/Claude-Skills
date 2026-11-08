@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-10-23T14:53:45+00:00",
+  "generated_at": "2026-11-08T10:50:54+00:00",
   "repository": "claude-skills",
-  "skill_count": 385,
+  "skill_count": 397,
   "domain_count": 21,
   "domains": [
     "business-growth",
@@ -271,6 +271,25 @@
       "has_references": true
     },
     {
+      "name": "bug-diagnosis",
+      "domain": "engineering",
+      "description": "Find the root cause of hard bugs with a fast pass/fail repro, ranked falsifiable hypotheses and bisection. Use when a bug resists quick fixes, a failure is intermittent, or a regression needs tracing to its cause.",
+      "tags": [
+        "debugging",
+        "root-cause",
+        "bisection",
+        "reproduction",
+        "hypotheses",
+        "redaction",
+        "regression-test"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "engineering/bug-diagnosis",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "changelog-generator",
       "domain": "engineering",
       "description": "Generate changelogs and release notes from Conventional Commits with semver bump detection, Keep a Changelog formatting, and monorepo scopes. Use when preparing releases, enforcing commit standards, or automating release notes.",
@@ -364,10 +383,11 @@
         "code-review",
         "pull-request",
         "code-quality",
-        "best-practices"
+        "best-practices",
+        "spec-fidelity"
       ],
-      "version": "1.1.0",
-      "updated": "2026-06-17",
+      "version": "1.2.0",
+      "updated": "2026-11-08",
       "path": "engineering/code-reviewer",
       "has_scripts": true,
       "has_references": true
@@ -512,6 +532,25 @@
       "has_references": true
     },
     {
+      "name": "deep-module-design",
+      "domain": "engineering",
+      "description": "Design deep modules with small interfaces and rank shallow, pass-through or leaky code for deepening. Use when designing a module interface, improving codebase architecture, or making code easier to test.",
+      "tags": [
+        "module-design",
+        "deep-modules",
+        "information-hiding",
+        "seams",
+        "refactoring",
+        "testability",
+        "architecture-review"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "engineering/deep-module-design",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "dependency-auditor",
       "domain": "engineering",
       "description": "Scan project dependencies for vulnerabilities, license issues, and upgrade opportunities across Python, Node.js, Go, and Rust. Use when auditing dependencies, checking licenses, planning upgrades, or assessing supply chain security.",
@@ -590,6 +629,24 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "path": "engineering/docker-development",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "domain-modeling",
+      "domain": "engineering",
+      "description": "Keep a project glossary of domain terms and lightweight decision records, and catch banned synonyms in docs and code. Use when terms are used inconsistently, writing a GLOSSARY.md, or recording a design decision.",
+      "tags": [
+        "domain-modeling",
+        "glossary",
+        "ubiquitous-language",
+        "adr",
+        "decision-records",
+        "naming"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "engineering/domain-modeling",
       "has_scripts": true,
       "has_references": true
     },
@@ -684,6 +741,24 @@
       "has_references": true
     },
     {
+      "name": "git-guardrails",
+      "domain": "engineering",
+      "description": "Install a hook that blocks destructive git commands before an AI agent runs them. Use when an agent force-pushed or ran reset --hard, when adding git safety hooks, or when protecting main from agent pushes.",
+      "tags": [
+        "git",
+        "hooks",
+        "claude-code",
+        "safety",
+        "pretooluse",
+        "branch-protection"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "engineering/git-guardrails",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "git-worktree-manager",
       "domain": "engineering",
       "description": "Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.",
@@ -731,6 +806,24 @@
       "version": "1.0.0",
       "updated": "2026-04-02",
       "path": "engineering/helm-chart-builder",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "human-step-wizard",
+      "domain": "engineering",
+      "description": "Generate an interactive, resumable bash wizard that walks a person through steps only a human can do. Use when a task needs dashboard credentials, DNS or change approval, key rotation, or a manual traffic cutover.",
+      "tags": [
+        "wizard",
+        "bash",
+        "human-in-the-loop",
+        "credentials",
+        "cutover",
+        "runbook-automation"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "engineering/human-step-wizard",
       "has_scripts": true,
       "has_references": true
     },
@@ -921,6 +1014,24 @@
       "version": "2.1.0",
       "updated": "2026-06-17",
       "path": "engineering/playwright-pro",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "pr-description-writer",
+      "domain": "engineering",
+      "description": "Write PR descriptions with evidence, verification steps and a one-way/two-way merge-risk call. Use when opening a PR, when asked to write or fix a PR body, or when checking a description before requesting review.",
+      "tags": [
+        "pull-request",
+        "pr-description",
+        "code-review",
+        "merge-risk",
+        "rollback",
+        "evidence"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "engineering/pr-description-writer",
       "has_scripts": true,
       "has_references": true
     },
@@ -1461,8 +1572,8 @@
         "acceptance-criteria",
         "process"
       ],
-      "version": "1.0.0",
-      "updated": "2026-07-21",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "engineering/spec-driven-workflow",
       "has_scripts": true,
       "has_references": true
@@ -1592,10 +1703,11 @@
         "meta-skill",
         "linting",
         "standards",
-        "packaging"
+        "packaging",
+        "agents-md"
       ],
-      "version": "1.0.0",
-      "updated": "2026-07-21",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "engineering/write-a-skill",
       "has_scripts": true,
       "has_references": true
@@ -4259,6 +4371,23 @@
       "has_references": true
     },
     {
+      "name": "plan-grilling",
+      "domain": "project-management",
+      "description": "Interrogate a plan, design or idea one round of questions at a time until every decision is settled. Use when stress-testing a plan before building, when a design feels underspecified, or turning a fuzzy workflow into a spec.",
+      "tags": [
+        "grilling",
+        "decision-tree",
+        "plan-review",
+        "specification",
+        "discovery"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "project-management/discovery/plan-grilling",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "pre-mortem",
       "domain": "project-management",
       "description": "Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.",
@@ -4344,16 +4473,17 @@
     {
       "name": "backlog-refinement",
       "domain": "project-management",
-      "description": "Backlog refinement playbook covering INVEST quality, vertical story splitting, Definition of Ready, and Definition of Done -- with a Python scorer that grades each story against INVEST and emits a ready/not-ready verdict.",
+      "description": "Grade stories against INVEST, split them vertically or as tracer bullets, and enforce Definition of Ready and Done. Use when refining a backlog, splitting an oversized story, or checking sprint readiness.",
       "tags": [
         "backlog",
         "invest",
         "story-splitting",
+        "tracer-bullet",
         "definition-of-ready",
         "definition-of-done"
       ],
-      "version": "1.0.1",
-      "updated": "2026-06-15",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "project-management/execution/backlog-refinement",
       "has_scripts": true,
       "has_references": true
@@ -4458,6 +4588,23 @@
       "has_references": true
     },
     {
+      "name": "decision-questionnaire",
+      "domain": "project-management",
+      "description": "Turn a blocked decision into an async questionnaire a stakeholder can answer without a meeting. Use when you need someone else's input to decide, a meeting would be overkill, or answers from several people must be consolidated.",
+      "tags": [
+        "decision-making",
+        "async",
+        "questionnaire",
+        "stakeholders",
+        "decision-record"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "project-management/execution/decision-questionnaire",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "dependency-map",
       "domain": "project-management",
       "description": "Cross-team dependency tracking with critical path analysis and Mermaid dependency graphs for program coordination.",
@@ -4503,6 +4650,23 @@
       "updated": "2026-06-15",
       "path": "project-management/execution/feature-flag-strategy",
       "has_scripts": false,
+      "has_references": true
+    },
+    {
+      "name": "issue-triage",
+      "domain": "project-management",
+      "description": "Move engineering issues and external PRs through a triage state machine and write agent-ready briefs. Use when clearing a triage queue, deciding if a report is real or wanted, or handing an issue to a coding agent.",
+      "tags": [
+        "triage",
+        "issue-tracking",
+        "agent-brief",
+        "pull-requests",
+        "labels"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "project-management/execution/issue-triage",
+      "has_scripts": true,
       "has_references": true
     },
     {
@@ -4816,6 +4980,23 @@
       "version": "1.0.0",
       "updated": "2026-05-27",
       "path": "project-management/execution/test-scenarios",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
+      "name": "wayfinder",
+      "domain": "project-management",
+      "description": "Chart work too big for one sprint as a map of decision tickets, resolve them in dependency order, then turn answers into tracer-bullet tickets. Use when the route is unclear, open questions block each other, or estimates swing wildly.",
+      "tags": [
+        "planning",
+        "decision-tickets",
+        "tracer-bullets",
+        "dependencies",
+        "large-initiatives"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "project-management/execution/wayfinder",
       "has_scripts": true,
       "has_references": true
     },
@@ -5309,13 +5490,13 @@
       "tags": [
         "prd",
         "ticket-decomposition",
+        "tracer-bullet",
         "branch-strategy",
         "pr",
-        "definition-of-done",
         "delivery"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "product-team/spec-to-repo",
       "has_scripts": true,
       "has_references": true
@@ -5797,6 +5978,24 @@
       "has_references": true
     },
     {
+      "name": "learning-workspace",
+      "domain": "personal-productivity",
+      "description": "Set up and run a multi-session study workspace with mission, curriculum, lessons and spaced review. Use when learning a topic over weeks, resuming study after a gap, checking real understanding, or planning reviews.",
+      "tags": [
+        "learning",
+        "spaced-repetition",
+        "curriculum",
+        "retrieval-practice",
+        "self-study",
+        "tutoring"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "personal-productivity/learning-workspace",
+      "has_scripts": true,
+      "has_references": true
+    },
+    {
       "name": "meeting-insights",
       "domain": "personal-productivity",
       "description": "Analyze meeting transcripts to extract decisions, action items, owners, due dates, open questions, and risks. Use after recorded meetings, sales calls, customer interviews, or planning sessions, or to build a decision log.",
@@ -6076,12 +6275,12 @@
         "dossier",
         "intelligence",
         "due-diligence",
-        "market-entry",
         "briefing",
-        "research"
+        "research-note",
+        "primary-sources"
       ],
-      "version": "1.0.0",
-      "updated": "2026-05-27",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "research/dossier",
       "has_scripts": true,
       "has_references": true
@@ -6599,20 +6798,38 @@
     {
       "name": "handoff",
       "domain": "workflow",
-      "description": "This skill should be used when the user asks to \"write a handoff\", \"hand this off\", \"package this work for someone else\", \"summarize where we are so another person/agent can continue\", or \"create a context doc before I switch off this task\".",
+      "description": "Package in-progress work into a self-contained context doc or a background agent's prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.",
       "tags": [
         "handoff",
         "delegation",
         "context",
         "continuity",
-        "onboarding",
+        "background-agent",
         "async"
       ],
-      "version": "1.0.0",
-      "updated": "2026-06-22",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "workflow/handoff",
       "has_scripts": true,
-      "has_references": false
+      "has_references": true
+    },
+    {
+      "name": "session-retro",
+      "domain": "workflow",
+      "description": "Review a coding-agent session and turn its failures and waste into ranked fixes to the agent's environment. Use when a session went slow or wrong, after a messy agent run, or to tune CLAUDE.md or AGENTS.md.",
+      "tags": [
+        "retrospective",
+        "agent-session",
+        "claude-md",
+        "agents-md",
+        "tool-calls",
+        "developer-experience"
+      ],
+      "version": "1.0.0",
+      "updated": "2026-11-08",
+      "path": "workflow/session-retro",
+      "has_scripts": true,
+      "has_references": true
     },
     {
       "name": "skill-router",

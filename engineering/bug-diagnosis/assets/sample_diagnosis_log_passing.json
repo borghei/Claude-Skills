@@ -1,0 +1,50 @@
+{
+  "bug": "Nightly export job hangs on accounts with more than 10k invoices",
+  "status": "investigating",
+  "repro": {
+    "command": "python -m export.cli --account fixtures/acct_10001.json --timeout 5",
+    "runs": 10,
+    "red_runs": 10,
+    "runtime_seconds": 4,
+    "asserts_symptom": true,
+    "minimised": true
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "The paginator re-requests the last page when the total is an exact multiple of the page size",
+      "prediction": "If the paginator loops on the final page, then a fixture with 10000 invoices hangs and one with 10001 completes",
+      "experiment": "Run the loop against fixtures with 10000 and 10001 invoices and compare",
+      "prior": 0.45,
+      "cost_minutes": 5,
+      "status": "open"
+    },
+    {
+      "id": "H2",
+      "statement": "A database lock taken by the invoice-total trigger blocks the export cursor",
+      "prediction": "If the trigger lock is the cause, then disabling the trigger in the test database makes the job finish",
+      "experiment": "Disable the trigger in the fixture database and rerun the loop",
+      "prior": 0.3,
+      "cost_minutes": 20,
+      "status": "open"
+    },
+    {
+      "id": "H3",
+      "statement": "The CSV writer buffers the whole export in memory and stalls in swap",
+      "prediction": "If memory pressure is the cause, then peak RSS climbs past 2 GB before the hang",
+      "experiment": "Record peak RSS during the loop with the standard resource module",
+      "prior": 0.15,
+      "cost_minutes": 10,
+      "status": "refuted",
+      "evidence": "Peak RSS stayed at 180 MB across 10 red runs"
+    }
+  ],
+  "experiments": [
+    {
+      "hypothesis": "H3",
+      "change": "Sampled peak RSS during the run",
+      "variables_changed": ["measurement only"],
+      "result": "refuted"
+    }
+  ]
+}

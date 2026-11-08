@@ -1,22 +1,23 @@
 ---
 name: backlog-refinement
 description: >
-  Backlog refinement playbook covering INVEST quality, vertical story splitting,
-  Definition of Ready, and Definition of Done -- with a Python scorer that grades
-  each story against INVEST and emits a ready/not-ready verdict.
+  Grade stories against INVEST, split them vertically or as tracer bullets, and enforce
+  Definition of Ready and Done. Use when refining a backlog, splitting an oversized story,
+  or checking sprint readiness.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: refinement_scorer.py
   tech-stack: invest, story-splitting, definition-of-ready, definition-of-done
   tags:
     - backlog
     - invest
     - story-splitting
+    - tracer-bullet
     - definition-of-ready
     - definition-of-done
 ---
@@ -34,6 +35,7 @@ This complements `wwas/` (Why-What-Acceptance format) and `job-stories/` (JTBD f
 
 - **INVEST grading** — score each story across Independent, Negotiable, Valuable, Estimable, Small, Testable (0-6) and triage by score.
 - **Vertical story splitting** — the 9 Lawrence recipes + SPIDR taxonomy; avoid horizontal (layer/team/sprint) splits.
+- **Tracer-bullet slicing** — for new territory, cut the thinnest end-to-end slice first, then widen it in slices with explicit blocking links.
 - **Definition of Ready / Done** — input and output quality gates with enforceable templates.
 - **Refinement session structure** — cadence, candidate volume, triage routing into discovery or planning.
 
@@ -66,6 +68,24 @@ python scripts/refinement_scorer.py --demo --format markdown                 # i
 
 Triage by score: **5-6** promote to Refined, **3-4** discuss and fix the failing criteria, **0-2** send back to discovery.
 
+## Tracer-Bullet Slicing [RECOMMENDED]
+
+Use this splitting technique when a story or epic is new territory — a new integration, data
+flow or feature type — where the biggest risk is whether the layers connect at all. Plain
+vertical slicing makes each slice cross every layer; tracer-bullet slicing also fixes the
+order: the first slice is the thinnest path through every layer, and each later slice widens
+it. Full guide with example and red flags: `references/invest-and-splitting-guide.md`, Part 7.
+
+1. Write the end-to-end behaviour as one sentence a user could check.
+2. Strip it to the happy path, one input, defaults, minimal UI — but keep every layer, including a test. That is slice 1.
+3. Verify slice 1 is demoable on its own; if not, it is a layer, not a slice.
+4. List the widening slices, each adding back one dimension (errors, inputs, roles, performance). Split those further with the Lawrence patterns.
+5. Give each slice blocking links only to slices it cannot be built or verified without. After slice 1 lands, most widening slices should be ready in parallel.
+6. Grade every slice with the scorer; slice 1 should score 5-6 on INVEST like any other story.
+
+Skip it for well-trodden work (split by the Lawrence patterns directly), for wide mechanical
+renames (split as expand, migrate, contract), and for pure unknowns (spike first).
+
 ## Anti-Patterns
 
 ### Acceptance criteria written as implementation steps
@@ -83,20 +103,35 @@ Triage by score: **5-6** promote to Refined, **3-4** discuss and fix the failing
 **Why it happens:** Discussing the story feels like progress, so nobody names the missing information as a discovery gap.
 **Instead:** Keep a session counter on each candidate. At session 3 without promotion, route it to `discovery/identify-assumptions/` with an owner for the assumption test, then re-enter it or kill it.
 
+### The fat first slice
+**Mistake:** The "thin" first slice of a new feature carries validation, error states, settings and three input types.
+**Why it happens:** The first slice feels like the foundation, so everything gets put in it.
+**Instead:** Strip slice 1 to the happy path through every layer and move each extra dimension into its own widening slice.
+
 Nine more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
 - **[references/refinement-playbook.md](references/refinement-playbook.md)** — full INVEST table, the 9 splitting recipes + SPIDR, DoR/DoD templates and anti-patterns, the step-by-step workflow, the `refinement_scorer.py` reference (flags, input JSON, scoring rubric), troubleshooting, and success criteria. Read when running a refinement session or wiring the scorer.
-- **[references/invest-and-splitting-guide.md](references/invest-and-splitting-guide.md)** — deep dive on INVEST (Wake), the 9 Lawrence patterns, SPIDR (Cohn), and worked horizontal-vs-vertical split examples. Read when a story is hard to split or a slice feels wrong.
+- **[references/invest-and-splitting-guide.md](references/invest-and-splitting-guide.md)** — deep dive on INVEST (Wake), the 9 Lawrence patterns, SPIDR (Cohn), worked horizontal-vs-vertical split examples, and tracer-bullet slicing (Part 7). Read when a story is hard to split or a slice feels wrong.
 - **[references/red-flags.md](references/red-flags.md)** — concrete examples of how refinement output goes wrong, why it's bad, and how to fix it. Read when reviewing a refined backlog or diagnosing recurring quality issues.
 - **assets/refinement_checklist.md** — ready-to-use DoR and DoD checklists plus a refinement session agenda. Use during a live session.
 
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/refinement_scorer.py` | INVEST scorer: 0-6 per story with a ready / refine / return verdict |
+| `references/refinement-playbook.md` | Session workflow, DoR/DoD templates, scorer reference |
+| `references/invest-and-splitting-guide.md` | INVEST, Lawrence patterns, SPIDR, tracer-bullet slicing |
+| `references/red-flags.md` | Refinement failures with bad and good examples |
+| `assets/refinement_checklist.md` | DoR and DoD checklists plus a session agenda |
+
 ## Scope & Limitations
 
-**In Scope:** INVEST grading of individual stories; vertical splitting (9 Lawrence patterns + SPIDR); DoR/DoD templates and enforcement; refinement session structure and cadence; the Python scorer.
+**In Scope:** INVEST grading of individual stories; vertical splitting (9 Lawrence patterns + SPIDR); tracer-bullet slicing with blocking links; DoR/DoD templates and enforcement; refinement session structure and cadence; the Python scorer.
 
 **Out of Scope:** authoring stories from scratch (`wwas/`, `job-stories/`); prioritization/sequencing (`prioritization-frameworks/`); sprint planning/capacity/velocity (`../scrum-master/`); discovery and problem framing (`discovery/`); estimation techniques (`agile-coach/`).
 

@@ -1,0 +1,31 @@
+{
+  "name": "Weekly dependency-update review",
+  "summary": "Each Monday, batch the open dependency-update pull requests, run the test suite on each, and ask one human to approve the safe ones in a single pass.",
+  "autonomous": false,
+  "trigger": {"type": "schedule", "detail": "Mondays 08:00 Europe/Berlin"},
+  "inputs": [
+    {"name": "open_update_prs", "source": "repository pull requests labelled 'dependencies'"},
+    {"name": "test_results", "source": "CI status checks on each pull request"}
+  ],
+  "steps": [
+    {"id": "collect", "actor": "script", "action": "List open pull requests labelled 'dependencies' older than 24 hours", "uses": ["open_update_prs"]},
+    {"id": "classify", "actor": "agent", "action": "Tag each update patch, minor or major from its version change and read its changelog for breaking-change notes", "uses": ["collect"]},
+    {"id": "verify", "actor": "script", "action": "Record pass or fail of the CI checks for each pull request", "uses": ["collect", "test_results"]},
+    {"id": "brief", "actor": "agent", "action": "Write a one-page brief: patch/minor updates with green checks first, majors and red checks listed separately with the reason", "uses": ["classify", "verify"]},
+    {"id": "merge", "actor": "script", "action": "Merge the pull requests the reviewer approved, one at a time, waiting for the main branch checks between merges", "uses": ["brief"]}
+  ],
+  "checkpoints": [
+    {"after_step": "brief", "decision": "Approve the listed safe updates as a batch; pick which majors to schedule", "brief": "The one-page brief with links to each pull request and its changelog excerpt"}
+  ],
+  "outputs": [
+    {"name": "weekly brief", "destination": "comment on the pinned 'Dependency updates' issue"},
+    {"name": "merged pull requests", "destination": "main branch"}
+  ],
+  "failure_handling": "If main goes red after a merge, stop merging, revert that merge and add it to next week's brief as failed.",
+  "done_definition": [
+    "Every open dependency pull request older than 24 hours appears in the brief",
+    "Each approved pull request is merged or listed with the reason it was not",
+    "The main branch checks are green after the last merge"
+  ],
+  "open_questions": []
+}

@@ -13,7 +13,7 @@ git clone https://github.com/borghei/Claude-Skills.git
 cd Claude-Skills
 ```
 
-This gives you all 385 skills, 906 tools, and 76 agents in one checkout.
+This gives you all 397 skills, 934 tools, and 76 agents in one checkout.
 
 ## Option B: Skill Installer CLI
 

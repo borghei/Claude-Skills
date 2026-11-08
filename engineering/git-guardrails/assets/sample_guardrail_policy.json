@@ -1,0 +1,14 @@
+{
+  "protected_branches": [
+    "main",
+    "master",
+    "develop",
+    "production",
+    "release/*"
+  ],
+  "allow_force_with_lease": true,
+  "disabled_rules": [],
+  "extra_block_regex": [
+    "git\\s+push\\s+\\S+\\s+--tags\\b"
+  ]
+}

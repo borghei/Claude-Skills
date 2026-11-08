@@ -19,6 +19,7 @@ Utility skills for individual workflows that don't fit cleanly into a single bus
 | Capture | `capture/` | `capture_triage.py` | Triage a capture log into actions/projects/reference/drop; audit habit health |
 | Deep Work | `deep-work/` | `calendar_fragmentation.py` | Measure calendar fragmentation, propose reschedules, track session trends |
 | Reflect | `reflect/` | `calibration_scorer.py` | Score prediction calibration (Brier); generate cadence-appropriate reflection prompts |
+| Learning Workspace | `learning-workspace/` | `workspace_scaffolder.py` | Scaffold a multi-session study workspace; schedule spaced reviews (`review_scheduler.py`) |
 
 ## Design Notes
 

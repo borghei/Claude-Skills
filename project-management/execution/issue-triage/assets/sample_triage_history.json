@@ -1,0 +1,78 @@
+{
+  "_comment": "Deliberately flawed triage export: the validator must exit 1. Each issue breaks one or more rules on purpose.",
+  "out_of_scope_register": [
+    {
+      "concept": "per-user-themes",
+      "decision": "rejected",
+      "reason": "Rendering resolves one palette at build time; runtime theming would need a provider around every view and is a downstream concern for embedders.",
+      "prior_requests": ["#212"]
+    },
+    {
+      "concept": "csv-export",
+      "decision": "already-implemented",
+      "reason": "Exists under Reports > Export.",
+      "prior_requests": ["#240"]
+    }
+  ],
+  "issues": [
+    {
+      "id": "#231", "kind": "issue", "title": "Webhook retries fire twice after a 503", "reporter": "dana-k",
+      "labels": ["type:bug", "state:accepted", "priority:p1"],
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-10-20", "actor": "dana-k", "note": "opened"},
+        {"from": "new", "to": "accepted", "at": "2026-10-21", "actor": "maintainer", "note": "looks real"}
+      ]
+    },
+    {
+      "id": "#235", "kind": "issue", "title": "Search box loses focus on mobile", "reporter": "lee-w",
+      "labels": ["type:bug", "state:needs-info"],
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-10-01", "actor": "lee-w", "note": "opened"},
+        {"from": "new", "to": "needs-info", "at": "2026-10-02", "actor": "maintainer", "note": "asked for device and browser"}
+      ]
+    },
+    {
+      "id": "#238", "kind": "pr", "title": "Add --json to the list command", "reporter": "outside-contrib",
+      "labels": ["type:enhancement", "state:ready-for-agent", "priority:p3"],
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-10-25", "actor": "outside-contrib", "note": "opened"},
+        {"from": "new", "to": "accepted", "at": "2026-10-27", "actor": "maintainer", "note": "wanted"},
+        {"from": "accepted", "to": "ready-for-agent", "at": "2026-10-28", "actor": "maintainer", "note": ""}
+      ]
+    },
+    {
+      "id": "#239", "kind": "issue", "title": "Dark mode please", "reporter": "sam-r",
+      "labels": ["type:enhancement", "state:out-of-scope"],
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-10-29", "actor": "sam-r", "note": "opened"},
+        {"from": "new", "to": "out-of-scope", "at": "2026-10-30", "actor": "maintainer", "note": "same as per-user-themes"}
+      ]
+    },
+    {
+      "id": "#240", "kind": "issue", "title": "Export reports to CSV", "reporter": "ana-p",
+      "labels": ["type:enhancement", "state:already-implemented"],
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-10-29", "actor": "ana-p", "note": "opened"},
+        {"from": "new", "to": "already-implemented", "at": "2026-10-30", "actor": "maintainer", "note": "lives under Reports > Export"}
+      ]
+    },
+    {
+      "id": "#241", "kind": "issue", "title": "Crash on empty project", "reporter": "kai-m",
+      "labels": ["type:bug", "type:question", "state:duplicate"],
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-11-01", "actor": "kai-m", "note": "opened"},
+        {"from": "new", "to": "duplicate", "at": "2026-11-02", "actor": "maintainer", "note": "seen before"}
+      ]
+    },
+    {
+      "id": "#242", "kind": "issue", "title": "Rate-limit headers missing", "reporter": "ola-b",
+      "labels": ["type:bug", "state:ready-for-human", "priority:p2"],
+      "brief": "see comment 3",
+      "transitions": [
+        {"from": null, "to": "new", "at": "2026-11-01", "actor": "ola-b", "note": "opened"},
+        {"from": "new", "to": "reproduced", "at": "2026-11-02", "actor": "maintainer", "note": "reproduced against staging"},
+        {"from": "reproduced", "to": "ready-for-human", "at": "2026-11-03", "actor": "maintainer", "note": ""}
+      ]
+    }
+  ]
+}

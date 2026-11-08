@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# git-guardrails pre-push hook (plain git, works without Claude Code).
+#
+# Blocks, for every ref being pushed:
+#   - deleting a protected branch on the remote
+#   - non-fast-forward (force) updates to any branch
+#   - direct pushes to a protected branch, when guardrails.blockDirectPush=true
+#
+# Protected branches: one `git config --add guardrails.protected <glob>` per
+# pattern; defaults to main, master, develop, production, release/*.
+# Exit 0 lets the push continue, exit 1 aborts it.
+# A human can still bypass with `git push --no-verify`; that is intended.
+set -euo pipefail
+
+zero="0000000000000000000000000000000000000000"
+remote_name="${1:-origin}"
+
+protected_patterns=()
+while IFS= read -r pattern; do
+  [ -n "$pattern" ] && protected_patterns+=("$pattern")
+done < <(git config --get-all guardrails.protected || true)
+if [ "${#protected_patterns[@]}" -eq 0 ]; then
+  protected_patterns=("main" "master" "develop" "production" "release/*")
+fi
+block_direct="$(git config --bool --get guardrails.blockDirectPush || echo false)"
+
+is_protected() {
+  local branch="$1" pattern
+  for pattern in "${protected_patterns[@]}"; do
+    # shellcheck disable=SC2053
+    if [[ "$branch" == $pattern ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+refuse() {
+  printf 'git-guardrails: push to %s refused: %s\n' "$remote_name" "$1" >&2
+  printf '  If this is really intended, a human can run: git push --no-verify ...\n' >&2
+  exit 1
+}
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ -z "${remote_ref:-}" ] && continue
+  case "$remote_ref" in
+    refs/heads/*) branch="${remote_ref#refs/heads/}" ;;
+    *) continue ;;
+  esac
+  # Normalise abbreviated or SHA-256 zero ids.
+  [[ "$local_sha" =~ ^0+$ ]] && local_sha="$zero"
+  [[ "$remote_sha" =~ ^0+$ ]] && remote_sha="$zero"
+
+  if [ "$local_sha" = "$zero" ]; then
+    if is_protected "$branch"; then
+      refuse "deleting protected branch '$branch'"
+    fi
+    continue
+  fi
+
+  if [ "$remote_sha" != "$zero" ]; then
+    if ! git cat-file -e "${remote_sha}^{commit}" 2>/dev/null; then
+      if is_protected "$branch"; then
+        refuse "remote '$branch' has commits you have not fetched; run git fetch first"
+      fi
+    elif ! git merge-base --is-ancestor "$remote_sha" "$local_sha"; then
+      refuse "non-fast-forward update to '$branch' (force push rewrites shared history)"
+    fi
+  fi
+
+  if [ "$block_direct" = "true" ] && is_protected "$branch"; then
+    refuse "direct push to protected branch '$branch'; open a pull request"
+  fi
+  : "$local_ref"
+done
+
+exit 0

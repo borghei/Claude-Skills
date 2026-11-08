@@ -1,0 +1,54 @@
+{
+  "session": "assets/sample_session.jsonl",
+  "note": "Items 1-4 pass. Items 5-6 are deliberately flawed so the linter exits 1 on this sample.",
+  "items": [
+    {
+      "rank": 1,
+      "category": "missing-check",
+      "change": "Add a `test` entry to the steering file: run `make test` (sets PYTHONPATH=src); bare `pytest` fails on import",
+      "file": "AGENTS.md",
+      "evidence": "calls #8-#12: three pytest variants failed with ModuleNotFoundError before the Makefile was read",
+      "severity": "high"
+    },
+    {
+      "rank": 2,
+      "category": "navigation",
+      "change": "Add a pointer: CLI flags for the exporter live in src/exporter/main.py (build_parser); config defaults in config.py",
+      "file": "CLAUDE.md",
+      "evidence": "calls #1-#3: three empty searches for dry_run/dryRun/cli*.py",
+      "severity": "high"
+    },
+    {
+      "rank": 3,
+      "category": "missing-check",
+      "change": "Wire `ruff check src` into the pre-commit hook so unused imports fail before the agent reports done",
+      "file": ".pre-commit-config.yaml",
+      "evidence": "call #22: ruff F401 found only at the very end of the session",
+      "severity": "medium"
+    },
+    {
+      "rank": 4,
+      "category": "permission-friction",
+      "change": "Allowlist `make clean` and remove the need for `rm -rf build` by adding a clean target",
+      "file": ".claude/settings.json",
+      "evidence": "calls #15-#16: rm -rf build denied twice, retried unchanged",
+      "severity": "medium"
+    },
+    {
+      "rank": 5,
+      "category": "tool-economy",
+      "change": "Be more careful with large git commands",
+      "file": "",
+      "evidence": "call #17",
+      "severity": "low"
+    },
+    {
+      "rank": 6,
+      "category": "process",
+      "change": "Remember to use the tdd skill next time",
+      "file": "CLAUDE.md",
+      "evidence": "",
+      "severity": "medium"
+    }
+  ]
+}
