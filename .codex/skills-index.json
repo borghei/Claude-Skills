@@ -3,7 +3,7 @@
   "name": "claude-code-skills",
   "description": "Production-ready skill packages for AI agents - Marketing, Engineering, Product, C-Level, PM, and RA/QM",
   "repository": "https://github.com/borghei/Claude-Skills",
-  "total_skills": 244,
+  "total_skills": 247,
   "skills": [
     {
       "name": "channel-economics",
@@ -600,6 +600,12 @@
       "description": ">"
     },
     {
+      "name": "interface-refinement",
+      "source": "../../engineering/interface-refinement",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
       "name": "interview-system-designer",
       "source": "../../engineering/interview-system-designer",
       "category": "engineering",
@@ -614,6 +620,12 @@
     {
       "name": "llm-cost-optimizer",
       "source": "../../engineering/llm-cost-optimizer",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
+      "name": "marketing-site-builder",
+      "source": "../../engineering/marketing-site-builder",
       "category": "engineering",
       "description": ">"
     },
@@ -1194,6 +1206,12 @@
       "description": ">"
     },
     {
+      "name": "design-direction",
+      "source": "../../product-team/design-direction",
+      "category": "product",
+      "description": ">"
+    },
+    {
       "name": "design-system-lead",
       "source": "../../product-team/design-system-lead",
       "category": "product",
@@ -1482,7 +1500,7 @@
       "description": "Executive leadership and advisory skills"
     },
     "engineering": {
-      "count": 98,
+      "count": 100,
       "source": "../../engineering",
       "description": "Software engineering and technical skills"
     },
@@ -1497,7 +1515,7 @@
       "description": "Marketing, content, and demand generation skills"
     },
     "product": {
-      "count": 13,
+      "count": 14,
       "source": "../../product-team",
       "description": "Product management and design skills"
     },
