@@ -3,7 +3,7 @@
   "name": "claude-code-skills",
   "description": "Production-ready skill packages for AI agents - Marketing, Engineering, Product, C-Level, PM, and RA/QM",
   "repository": "https://github.com/borghei/Claude-Skills",
-  "total_skills": 236,
+  "total_skills": 242,
   "skills": [
     {
       "name": "channel-economics",
@@ -396,6 +396,12 @@
       "description": ">"
     },
     {
+      "name": "bug-diagnosis",
+      "source": "../../engineering/bug-diagnosis",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
       "name": "changelog-generator",
       "source": "../../engineering/changelog-generator",
       "category": "engineering",
@@ -480,6 +486,12 @@
       "description": ">"
     },
     {
+      "name": "deep-module-design",
+      "source": "../../engineering/deep-module-design",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
       "name": "dependency-auditor",
       "source": "../../engineering/dependency-auditor",
       "category": "engineering",
@@ -506,6 +518,12 @@
     {
       "name": "docker-development",
       "source": "../../engineering/docker-development",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
+      "name": "domain-modeling",
+      "source": "../../engineering/domain-modeling",
       "category": "engineering",
       "description": ">"
     },
@@ -540,6 +558,12 @@
       "description": ">"
     },
     {
+      "name": "git-guardrails",
+      "source": "../../engineering/git-guardrails",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
       "name": "git-worktree-manager",
       "source": "../../engineering/git-worktree-manager",
       "category": "engineering",
@@ -554,6 +578,12 @@
     {
       "name": "helm-chart-builder",
       "source": "../../engineering/helm-chart-builder",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
+      "name": "human-step-wizard",
+      "source": "../../engineering/human-step-wizard",
       "category": "engineering",
       "description": ">"
     },
@@ -620,6 +650,12 @@
     {
       "name": "playwright-pro",
       "source": "../../engineering/playwright-pro",
+      "category": "engineering",
+      "description": ">"
+    },
+    {
+      "name": "pr-description-writer",
+      "source": "../../engineering/pr-description-writer",
       "category": "engineering",
       "description": ">"
     },
@@ -1434,7 +1470,7 @@
       "description": "Executive leadership and advisory skills"
     },
     "engineering": {
-      "count": 92,
+      "count": 98,
       "source": "../../engineering",
       "description": "Software engineering and technical skills"
     },
