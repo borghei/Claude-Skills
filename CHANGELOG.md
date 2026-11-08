@@ -5,6 +5,24 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.16.0] - 2026-11-08
+
+### Added
+
+- **Three skills for interface design (22 standard-library tools).**
+  - Product team: `design-direction` turns a product brief into a design-system spec: style direction, palette, type pairing, spacing and motion tokens, page patterns and UX rules. It covers 50 product types, 18 style directions and 22 palettes, and always computes contrast instead of storing it. It also reads a real CSS theme (hex, `rgb()`/`hsl()`, bare HSL channels, `oklch()`, `color-mix()`) and checks it against the rules. Briefs it can't match fail instead of quietly falling back to a default.
+  - Engineering: `marketing-site-builder` builds company and product sites that don't look generic: one system, a copy voice of the site's own, section rhythm and restrained motion. A static finish gate checks copy tells, the number of distinct spacing, colour and font values, type and contrast, access and links, and page weight. It allows a few waivers, each with a reason, and limits the number of fix rounds.
+  - Engineering: `interface-refinement` improves an existing interface through 19 named commands (critique, audit, polish, distill, clarify, harden, typeset and others), each saying what to change, what to leave alone and how to verify. It adds a product and design context file, and a 54-rule detector for generic AI-looking UI in HTML, CSS, JSX/TSX, Vue and Svelte. With the context file, the detector also flags fonts, colours and radii outside the project's system.
+
+### Changed
+
+- `landing-page-generator` bans vague button labels and proof that has no source. Its tools now exit 0, 1 or 2, count each call to action once, and no longer pass the testimonials check on almost any page.
+- Skill counts are updated to 403 skills and 961 tools everywhere.
+
+### Fixed
+
+- The docs homepage showed 91 engineering skills; it now shows 100.
+
 ## [4.15.0] - 2026-11-08
 
 ### Added
