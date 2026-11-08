@@ -1,0 +1,22 @@
+{
+  "summary": {
+    "files_scanned": 3,
+    "findings": 0,
+    "by_severity": {
+      "high": 0,
+      "medium": 0,
+      "advisory": 0
+    },
+    "by_command": {},
+    "fail_on": "advisory",
+    "blocking": 0,
+    "ignored": 0,
+    "rejected_waivers": 0,
+    "verdict": "PASS"
+  },
+  "files_scanned": 3,
+  "findings": [],
+  "ignored": 0,
+  "rejected_waivers": [],
+  "unreadable": []
+}

@@ -1,0 +1,37 @@
+{
+  "_about": "Default budgets for consistency_check.py and page_gate.py. Copy this file next to a project, tighten or loosen a number, and pass it with --budget. Every number here is a house choice, not a standard.",
+  "system": {
+    "spacing_values": 10,
+    "spacing_grid_px": 4,
+    "radius_values": 4,
+    "colour_values": 12,
+    "accent_hues": 2,
+    "font_families": 2,
+    "font_sizes": 9,
+    "shadow_styles": 2,
+    "durations": 6,
+    "button_variants": 2,
+    "max_ui_duration_ms": 700
+  },
+  "page": {
+    "max_sections": 10,
+    "max_words_per_section": 160,
+    "max_total_words": 1100,
+    "max_hero_actions": 2,
+    "eager_images": 2,
+    "max_font_families": 2,
+    "max_font_files": 4,
+    "image_warn_kib": 350,
+    "image_fail_kib": 700,
+    "images_total_warn_kib": 1200,
+    "images_total_fail_kib": 2400,
+    "inline_data_uri_kib": 40,
+    "max_fixed_elements": 1,
+    "effects_allowed": {
+      "tech": 1,
+      "product": 0,
+      "service": 0,
+      "place": 0
+    }
+  }
+}

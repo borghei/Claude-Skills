@@ -1,0 +1,43 @@
+/* Deliberately flawed theme for design_spec_checker.py (expect exit 1).
+   Typical inherited theme: pastel brand, grey-on-grey secondary text,
+   ad-hoc spacing, too many radii, slow motion and no reduced-motion block. */
+:root {
+  --color-bg: #FFFFFF;
+  --color-surface: #F3F4F6;
+  --color-fg: #374151;
+  --color-text-muted: #9CA3AF;
+  --color-primary: #60A5FA;
+  --color-on-primary: #FFFFFF;
+  --color-accent: #FDBA74;
+  --color-on-accent: #FFFFFF;
+  --color-danger: #F87171;
+  --color-focus: var(--color-primary);
+
+  --font-display: "Playfair Display", serif;
+  --font-body: "Open Sans", sans-serif;
+  --font-ui: "Poppins", sans-serif;
+  --font-mono: "Fira Code", monospace;
+  --font-size-base: 14px;
+  --font-size-sm: 11px;
+  --font-size-lg: 18px;
+  --font-size-xl: 40px;
+  --line-height-body: 1.25;
+
+  --space-1: 5px;
+  --space-2: 10px;
+  --space-3: 12px;
+  --space-4: 15px;
+  --space-5: 16px;
+  --space-6: 30px;
+
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  --duration-fast: 300ms;
+  --duration-slow: 0.8s;
+  --touch-target: 32px;
+  --focus-width: 1px;
+}

@@ -1,6 +1,6 @@
 # Product Team Skills Collection
 
-**13 product skills** covering product management, agile delivery, strategy, UX research, design systems, product analytics, Apple HIG, research synthesis, spec-to-repo and roadmap communication. This guide covers the 5 core skills in depth; the full list is in the [Product catalog](../docs/skills/product.md). Project management has its own domain: [project-management/](../project-management/).
+**14 product skills** covering product management, agile delivery, strategy, UX research, design systems, product analytics, Apple HIG, research synthesis, spec-to-repo and roadmap communication. This guide covers the 5 core skills in depth; the full list is in the [Product catalog](../docs/skills/product.md). Project management has its own domain: [project-management/](../project-management/).
 
 ---
 

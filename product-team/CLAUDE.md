@@ -1,6 +1,6 @@
 # Product Team Skills - Claude Code Guidance
 
-This guide covers the 13 production-ready product management skills and their Python automation tools.
+This guide covers the 14 production-ready product management skills and their Python automation tools.
 
 ## Product Skills Overview
 
@@ -20,8 +20,9 @@ This guide covers the 13 production-ready product management skills and their Py
 11. **research-summarizer/** - Research synthesis organizer, insight quality scorer, findings brief generator (3 tools)
 12. **spec-to-repo/** - PRD-to-tickets decomposer, branch-naming validator, PR scope analyzer (3 tools)
 13. **roadmap-communicator/** - Audience translator, confidence band generator, roadmap diff reporter (3 tools)
+14. **design-direction/** - Brief to design-system spec: product-type matching, style direction, palette with computed WCAG contrast, type pairing, motion map, page patterns, token audit of real CSS themes (5 tools)
 
-**Total Tools:** 30 Python automation tools (stdlib only)
+**Total Tools:** 35 Python automation tools (stdlib only)
 
 ## Python Automation Tools
 

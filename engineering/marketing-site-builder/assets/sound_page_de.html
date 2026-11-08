@@ -1,0 +1,51 @@
+<!doctype html>
+<!-- Regression sample: a sound German place page. Every checker exits 0 on it. It covers a page not
+     written in English (no English verb or skip-link wording expected), a root-relative stylesheet (/sound_page_de.css),
+     and a "#top" link, which browsers resolve without an id. -->
+<html lang="de" data-kind="place">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bäckerei Hölzl: Sauerteigbrot in der Grazer Annenstraße</title>
+  <meta name="description" content="Sauerteigbrot, Kipferl und Strudel aus dem Holzofen, Montag bis Samstag ab 6 Uhr in der Annenstraße 12.">
+  <meta property="og:title" content="Bäckerei Hölzl">
+  <meta property="og:description" content="Sauerteigbrot aus dem Holzofen in der Grazer Annenstraße.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="img/theke.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#faf7f2">
+  <link rel="icon" href="img/icon.svg">
+  <link rel="stylesheet" href="/sound_page_de.css">
+</head>
+<body>
+  <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+  <header class="wrap"><a href="#top" id="logo">Bäckerei Hölzl</a> <a class="btn" href="#besuch">Öffnungszeiten ansehen</a></header>
+  <main id="inhalt">
+    <section class="hero">
+      <div class="wrap">
+        <h1>Holzofenbäckerei in der Annenstraße</h1>
+        <p>Sauerteigbrot, Kipferl und Strudel, jeden Morgen ab 6 Uhr. Ein Laib Roggenbrot kostet 4,80 Euro.</p>
+        <a class="btn" href="#besuch">Öffnungszeiten ansehen</a>
+        <img src="img/theke.jpg" alt="Die Theke am Morgen mit Brotregal" width="1600" height="1000" fetchpriority="high">
+      </div>
+    </section>
+    <section id="besuch" class="alt">
+      <div class="wrap">
+        <h2>Öffnungszeiten und Adresse</h2>
+        <p>Annenstraße 12, 8020 Graz. Montag bis Freitag 6 bis 18 Uhr, Samstag 6 bis 13 Uhr. Sonntag geschlossen.</p>
+        <p class="note">Telefon 0316 123456. Vorbestellungen bis 16 Uhr für den nächsten Morgen.</p>
+        <img src="img/laden.jpg" alt="Der Laden von der Straße aus" width="1200" height="800" loading="lazy" decoding="async">
+      </div>
+    </section>
+    <section id="brot">
+      <div class="wrap">
+        <h2>Brot aus dem Holzofen</h2>
+        <p>Roggen, Dinkel und Weizen aus der Steiermark. Der Teig ruht 24 Stunden, gebacken wird ab 2 Uhr nachts.</p>
+        <img src="img/ofen.jpg" alt="Brote im Holzofen" width="1200" height="800" loading="lazy" decoding="async">
+        <a class="btn" href="#besuch">Öffnungszeiten ansehen</a>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><p>© 2026 Bäckerei Hölzl, Annenstraße 12, 8020 Graz. <a href="#top">Nach oben</a></p></footer>
+</body>
+</html>

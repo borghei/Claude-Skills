@@ -1,0 +1,22 @@
+/* Regression sample: linked root-relative from sound_page_de.html as /sound_page_de.css, the way a static export links it. */
+:root {
+  --ink: #1f1c18; --muted: #5c554c; --ground: #faf7f2; --ground-2: #f0ebe2; --line: #ddd5c8; --accent: #8a4b1f;
+  --s1: 8px; --s2: 16px; --s3: 24px; --s4: 48px; --s5: 96px;
+  --r1: 4px; --r2: 10px;
+  --serif: "Literata", Georgia, serif; --sans: "Work Sans", Arial, sans-serif;
+}
+body { margin: 0; color: var(--ink); background: var(--ground); font-family: var(--sans); font-size: 18px; line-height: 1.6; }
+h1, h2 { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; }
+h1 { font-size: 56px; margin: 0 0 var(--s3); }
+h2 { font-size: 36px; margin: 0 0 var(--s2); }
+.wrap { max-width: 72rem; margin: 0 auto; padding: 0 var(--s3); }
+section { padding: var(--s5) 0; }
+.alt { background: var(--ground-2); }
+.skip { position: absolute; left: var(--s2); top: -40px; }
+.skip:focus { top: var(--s2); }
+.note { color: var(--muted); font-size: 16px; }
+.btn { display: inline-block; padding: var(--s2) var(--s3); border-radius: var(--r1); background: var(--accent); color: #fff; text-decoration: none; transition: transform 150ms ease-out; }
+.btn:hover { transform: translateY(-1px); }
+img { display: block; width: 100%; height: auto; border-radius: var(--r2); }
+footer { border-top: 1px solid var(--line); padding: var(--s4) 0; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

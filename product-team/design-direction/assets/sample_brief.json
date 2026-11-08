@@ -1,0 +1,16 @@
+{
+  "product": "Invoicing and expense tracking SaaS for freelance designers and small studios",
+  "audience": "freelancers who check cash flow weekly on laptop and phone",
+  "platform": "web",
+  "mode": "both",
+  "contrast_target": "AA",
+  "brand_color": "#2F5BEA",
+  "stack": "tailwind",
+  "mood": ["calm", "trustworthy"],
+  "data_questions": [
+    "revenue trend over the last 12 months",
+    "share of expenses by category",
+    "progress against monthly income goal"
+  ],
+  "must_avoid": ["bold-block"]
+}

@@ -4,7 +4,7 @@ title: Engineering Skills
 
 # Engineering Skills
 
-**98 skills** with **281 Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
+**100 skills** with **298 Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
 
 ## AI & Agent Systems
 
@@ -26,6 +26,7 @@ title: Engineering Skills
 
 | Skill | Description | Tools |
 |---|---|:---:|
+| [marketing-site-builder](https://github.com/borghei/Claude-Skills/blob/main/engineering/marketing-site-builder/SKILL.md) ★ NEW | Company and product sites that don't look generic: one system, copy voice, section rhythm, static finish gate | 7 |
 | [senior-fullstack](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-fullstack/SKILL.md) | Project scaffolding for Next.js, FastAPI, MERN, Django stacks and code quality analysis | 2 |
 | [senior-backend](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-backend/SKILL.md) | REST APIs, database queries, authentication, microservices, GraphQL | 3 |
 | [senior-frontend](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-frontend/SKILL.md) | React, Next.js, TypeScript, Tailwind CSS patterns and performance optimization | 3 |
@@ -87,6 +88,7 @@ title: Engineering Skills
 
 | Skill | Description | Tools |
 |---|---|:---:|
+| [interface-refinement](https://github.com/borghei/Claude-Skills/blob/main/engineering/interface-refinement/SKILL.md) ★ NEW | Refine an existing UI with named commands (critique, polish, distill, harden…) and a 54-rule generic-design detector | 10 |
 | [bug-diagnosis](https://github.com/borghei/Claude-Skills/blob/main/engineering/bug-diagnosis/SKILL.md) ★ NEW | Hard-bug root cause: pass/fail repro, ranked falsifiable hypotheses, bisection, log redaction | 2 |
 | [pr-description-writer](https://github.com/borghei/Claude-Skills/blob/main/engineering/pr-description-writer/SKILL.md) ★ NEW | PR bodies with evidence, verification steps and a one-way/two-way merge-risk call | 2 |
 | [code-reviewer](https://github.com/borghei/Claude-Skills/blob/main/engineering/code-reviewer/SKILL.md) | PR analysis for complexity and risk, SOLID violations, code smells | 3 |

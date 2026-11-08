@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-kind="place">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Radwerk Eiche: bike repair on Kastanienallee</title>
+  <meta name="description" content="Bike servicing, wheel builds and brake repairs in Prenzlauer Berg. Service from 59 euros, booked online.">
+  <meta property="og:title" content="Radwerk Eiche: bike repair on Kastanienallee">
+  <meta property="og:description" content="Bike servicing, wheel builds and brake repairs in Prenzlauer Berg. Service from 59 euros.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="share.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#faf8f4">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&family=IBM+Plex+Sans:wght@400;500&display=swap">
+  <style>
+    :root {
+      --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+      --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+      --ink: #1f1c19; --muted: #5f5850; --bg: #faf8f4; --alt: #f0ebe3;
+      --line: #ddd5ca; --action: #1d5c4a; --on-action: #ffffff;
+      --r-sm: 2px; --r-md: 4px;
+      --display: "Source Serif 4", Georgia, serif;
+      --body: "IBM Plex Sans", system-ui, sans-serif;
+      --t-h1: 56px; --t-h2: 36px; --t-lead: 20px; --t-body: 16px; --t-small: 14px;
+      --m-in: 150ms; --m-out: 120ms; --m-image: 600ms;
+      --ease: cubic-bezier(.2, .8, .2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: var(--t-body); line-height: 1.6; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 var(--s-8); }
+    .nav { position: fixed; inset: 0 0 auto 0; background: var(--bg); border-bottom: 1px solid var(--line); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: var(--s-4); padding-bottom: var(--s-4); }
+    .skip-link { position: absolute; left: var(--s-4); top: calc(-1 * var(--s-9)); }
+    .skip-link:focus { top: var(--s-3); }
+    .nav a { color: var(--ink); text-decoration: none; margin-left: var(--s-5); }
+    h1, h2 { font-family: var(--display); font-weight: 600; line-height: 1.15; margin: 0 0 var(--s-5); }
+    h1 { font-size: var(--t-h1); }
+    h2 { font-size: var(--t-h2); }
+    .section { padding: var(--s-9) 0 var(--s-8); }
+    .section--alt { background: var(--alt); }
+    .lead { font-size: var(--t-lead); color: var(--muted); max-width: 40em; margin: 0 0 var(--s-6); }
+    .btn { display: inline-block; padding: var(--s-3) var(--s-5); border-radius: var(--r-sm); font-weight: 500;
+           text-decoration: none; transition: transform var(--m-in) var(--ease), background-color var(--m-in) var(--ease); }
+    .btn--primary { background: var(--action); color: var(--on-action); }
+    .btn--secondary { border: 1px solid var(--ink); color: var(--ink); margin-left: var(--s-3); }
+    @media (hover: hover) and (pointer: fine) {
+      .btn:hover { transform: translateY(-1px); }
+      a.frame:hover img { transform: scale(1.03); }
+    }
+    .btn:active { transform: translateY(1px) scale(.985); transition-duration: var(--m-out); }
+    .frame { overflow: hidden; border-radius: var(--r-md); }
+    .frame img { display: block; width: 100%; height: auto; transition: transform var(--m-image) var(--ease); }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-5); }
+    .rows { list-style: none; padding: 0; margin: 0; max-width: 720px; }
+    .rows li { display: flex; justify-content: space-between; padding: var(--s-4) 0; border-bottom: 1px solid var(--line); }
+    .hours dt { font-weight: 500; }
+    .hours dd { margin: 0 0 var(--s-3); color: var(--muted); }
+    footer { padding: var(--s-7) 0; font-size: var(--t-small); color: var(--muted); }
+    :focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 var(--s-5); }
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="skip-link" href="#top">Skip to content</a>
+      <a href="#top">Radwerk Eiche</a>
+      <nav aria-label="Main">
+        <a href="#prices">Prices</a>
+        <a href="#workshop">Workshop</a>
+        <a href="#visit">Visit</a>
+      </nav>
+    </div>
+  </header>
+  <main id="top">
+    <section class="section hero" id="hero">
+      <div class="wrap">
+        <h1>Bike repair workshop on Kastanienallee, Prenzlauer Berg</h1>
+        <p class="lead">A full service costs 59 euros and most bikes go home the same afternoon. City bikes, road bikes and cargo bikes up to 2.5 metres.</p>
+        <a class="btn btn--primary" href="#book">Book a service</a>
+        <a class="btn btn--secondary" href="#prices">See the price list</a>
+        <div class="frame">
+          <img src="images/workbench.jpg" alt="A road bike clamped in a repair stand with its rear wheel removed" width="1600" height="900" fetchpriority="high">
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="prices">
+      <div class="wrap">
+        <h2>Prices for the common jobs</h2>
+        <p class="lead">Parts are charged at the shop price. We call before any job grows past the quote.</p>
+        <ul class="rows">
+          <li><span>Full service, gears and brakes adjusted</span><span>59 €</span></li>
+          <li><span>Puncture repair, tube included</span><span>18 €</span></li>
+          <li><span>Hydraulic brake bleed, per wheel</span><span>32 €</span></li>
+          <li><span>Wheel true</span><span>21 €</span></li>
+          <li><span>Cargo bike service</span><span>89 €</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="workshop">
+      <div class="wrap">
+        <h2>The workshop and its three stands</h2>
+        <p class="lead">Two mechanics work at the front window. Drop the bike before ten and collect it after four.</p>
+        <div class="grid">
+          <a class="frame" href="#prices"><img src="images/stand.jpg" alt="Three repair stands in a row under the front window" width="800" height="600" loading="lazy" decoding="async"></a>
+          <a class="frame" href="#prices"><img src="images/wheel.jpg" alt="A mechanic truing a wheel on a truing stand" width="800" height="600" loading="lazy" decoding="async"></a>
+          <a class="frame" href="#prices"><img src="images/cargo.jpg" alt="A long-tail cargo bike waiting for collection by the door" width="800" height="600" loading="lazy" decoding="async"></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--alt" id="visit">
+      <div class="wrap">
+        <h2>Opening hours and the way in</h2>
+        <p class="lead">Kastanienallee, Prenzlauer Berg. The entrance is in the courtyard, step-free.</p>
+        <dl class="hours">
+          <dt>Tuesday to Friday</dt><dd>9:00 to 18:30</dd>
+          <dt>Saturday</dt><dd>10:00 to 15:00</dd>
+        </dl>
+        <a class="btn btn--primary" id="book" href="mailto:workshop@radwerk.example">Book a service</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 Radwerk Eiche. <a href="privacy.html">Privacy</a> <a href="terms.html">Terms</a></p>
+    </div>
+  </footer>
+</body>
+</html>

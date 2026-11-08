@@ -1,0 +1,39 @@
+{
+  "target": "src/pages/home.tsx",
+  "mode": "landing",
+  "steps": [
+    {
+      "command": "polish",
+      "changes": ["make it pop"],
+      "must_not_touch": [],
+      "verify": ["looks better"]
+    },
+    {
+      "command": "critique",
+      "changes": ["swap the hero font"],
+      "verify": []
+    },
+    {
+      "command": "bolder",
+      "changes": ["add a new color for the hero", "new font for headings"],
+      "must_not_touch": ["pricing section"],
+      "verify": ["feels bolder"]
+    },
+    {
+      "command": "quieter",
+      "changes": ["tone down the glow on cards"],
+      "must_not_touch": ["copy"],
+      "verify": ["rerun detector: glow-shadow gone"]
+    },
+    {
+      "command": "init",
+      "changes": ["write interface-context.md"],
+      "must_not_touch": [],
+      "verify": []
+    },
+    {
+      "command": "sparkle",
+      "changes": ["add confetti"]
+    }
+  ]
+}

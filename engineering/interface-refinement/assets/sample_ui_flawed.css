@@ -1,0 +1,139 @@
+:root {
+  --bg: #f6f1e7;
+  --accent: #7c3aed;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+}
+
+.hero h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  letter-spacing: -0.06em;
+}
+
+.hero-glow {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #06b6d4 100%);
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+}
+
+.callout {
+  border-left: 4px solid #8b5cf6;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px;
+}
+
+.fine-print {
+  font-size: 11px;
+  color: #a3a3a3;
+  background-color: #ffffff;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.15;
+  letter-spacing: 0.08em;
+  text-align: justify;
+}
+
+.button {
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  outline: none;
+  padding: 16px;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.panel {
+  transition: height 300ms ease;
+  padding: 16px;
+  margin: 16px;
+  gap: 16px;
+}
+
+.status-dot {
+  animation: pulse 1.5s infinite;
+}
+
+.badge-on-brand {
+  color: #6b7280;
+  background-color: #4f46e5;
+}
+
+.stripes {
+  background-image: repeating-linear-gradient(45deg, #eee 0 2px, transparent 2px 8px);
+}
+
+.card { padding: 16px; margin: 16px; }
+.card-row { gap: 16px; padding: 16px; }
+.footer { padding: 16px; margin: 16px; }
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes grow {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+h1 {
+  font-size: 22px;
+}
+
+h2 {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+}
+
+.pricing-tile {
+  box-shadow: 6px 6px 0 #111111;
+}
+
+.blueprint {
+  background-image: linear-gradient(#dddddd 1px, transparent 1px), linear-gradient(90deg, #dddddd 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.promo-band {
+  color: #b0b5bd;
+  background-color: #3730a3;
+}
+
+@font-face {
+  font-family: "Brand Display";
+  src: url("brand-display.woff2") format("woff2");
+}
+
+.hero-halo {
+  background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.45), transparent 60%);
+}
+
+.hero-blob {
+  clip-path: polygon(12% 3%, 38% 0%, 61% 8%, 83% 4%, 97% 22%, 92% 47%, 99% 71%, 81% 93%, 54% 98%, 27% 91%, 6% 77%, 1% 44%);
+}
+
+.paper-texture {
+  background: linear-gradient(rgba(246, 241, 231, 0.94), rgba(246, 241, 231, 0.96)), url("paper.jpg");
+}
+
+.plan-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12);
+}
+
+.hero-caret::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+}
+
+.legal p {
+  text-transform: uppercase;
+}

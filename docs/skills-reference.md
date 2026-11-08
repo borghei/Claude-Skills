@@ -1,8 +1,19 @@
 # Skills Reference
 
-Complete reference for **400 skills across 21 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
+Complete reference for **403 skills across 21 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
 
 > **Note:** The per-domain tables below are the canonical listing and are generated against `cli/skills.json`. The dated *Additions* sections that follow are a historical changelog — the skills they mention also appear in their domain table.
+
+---
+
+## Nov 2026 Additions — interface design (3 new skills)
+
+Choosing a design system, building sites that don't look generic, and refining an existing interface.
+
+- Product Team: [design-direction](https://github.com/borghei/Claude-Skills/blob/main/product-team/design-direction/SKILL.md) — turns a product brief into a design-system spec and audits real CSS themes against it
+- Engineering: [marketing-site-builder](https://github.com/borghei/Claude-Skills/blob/main/engineering/marketing-site-builder/SKILL.md) — builds company and product sites with one system and a voice of their own, checked by a static finish gate
+- Engineering: [interface-refinement](https://github.com/borghei/Claude-Skills/blob/main/engineering/interface-refinement/SKILL.md) — 19 refinement commands, a project context file and a static detector for generic AI-looking UI
+- Changed: [landing-page-generator](https://github.com/borghei/Claude-Skills/blob/main/marketing/landing-page-generator/SKILL.md) — bans vague button labels and invented proof; tools fixed and exit 0/1/2
 
 ---
 
@@ -153,7 +164,7 @@ Atomic PM skills covering classic strategy frameworks, GTM, and execution. Adds 
 
 ---
 
-## Engineering (98)
+## Engineering (100)
 
 Core software engineering expertise with Python automation tools.
 
@@ -273,10 +284,12 @@ Enterprise-grade skills with sophisticated analysis tooling.
 | [computer-use-automation](https://github.com/borghei/Claude-Skills/blob/main/engineering/computer-use-automation/SKILL.md) | Computer-use agents, screenshot-driven actions, GUI vs API tradeoffs | 2 |
 | [prompt-governance](https://github.com/borghei/Claude-Skills/blob/main/engineering/prompt-governance/SKILL.md) | Prompt catalog, versioning, injection audit, quality and compliance review | 2 |
 
-### Developer Workflow & Quality (14)
+### Developer Workflow & Quality (16)
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [marketing-site-builder](https://github.com/borghei/Claude-Skills/blob/main/engineering/marketing-site-builder/SKILL.md) ★ NEW | Company and product sites that don't look generic: one system, copy voice, section rhythm, static finish gate | 7 |
+| [interface-refinement](https://github.com/borghei/Claude-Skills/blob/main/engineering/interface-refinement/SKILL.md) ★ NEW | Refine an existing UI with named commands (critique, polish, distill, harden…) and a 54-rule generic-design detector | 10 |
 | [bug-diagnosis](https://github.com/borghei/Claude-Skills/blob/main/engineering/bug-diagnosis/SKILL.md) ★ NEW | Hard-bug root cause: pass/fail repro, ranked falsifiable hypotheses, bisection, log redaction | 2 |
 | [deep-module-design](https://github.com/borghei/Claude-Skills/blob/main/engineering/deep-module-design/SKILL.md) ★ NEW | Small-interface deep modules; ranks shallow, pass-through and leaky code for deepening | 2 |
 | [domain-modeling](https://github.com/borghei/Claude-Skills/blob/main/engineering/domain-modeling/SKILL.md) ★ NEW | Project glossary, banned-synonym scan, lightweight decision records | 3 |
@@ -378,12 +391,13 @@ Data-driven marketing with Python automation tools.
 | [ai-content-disclosure](https://github.com/borghei/Claude-Skills/blob/main/marketing/ai-content-disclosure/SKILL.md) ★ NEW | AI-content and review disclosure checks: EU AI Act Art. 50, FTC reviews rule, platform AI labels | 2 |
 | [conversational-ads](https://github.com/borghei/Claude-Skills/blob/main/marketing/conversational-ads/SKILL.md) ★ NEW | Ads in ChatGPT, Google AI Overviews / AI Mode and Copilot: placement mix, holdout tests, copy linting | 2 |
 
-## Product Team (13)
+## Product Team (14)
 
 User-centered product development with automation tools.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [design-direction](https://github.com/borghei/Claude-Skills/blob/main/product-team/design-direction/SKILL.md) ★ NEW | Brief to design-system spec: style direction, palette with computed contrast, type pairing, motion, page patterns, token audit | 5 |
 | [product-manager-toolkit](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-manager-toolkit/SKILL.md) | RICE prioritizer, interview analyzer, PRD templates | 2 |
 | [agile-product-owner](https://github.com/borghei/Claude-Skills/blob/main/product-team/agile-product-owner/SKILL.md) | User stories, sprint planning, velocity tracking | 1 |
 | [product-strategist](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-strategist/SKILL.md) | OKR cascade, market analysis, vision setting | 1 |

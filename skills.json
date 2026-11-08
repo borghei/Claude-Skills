@@ -1,12 +1,12 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 400 production-ready skills across 21 domains. Project Management is the most-used domain (74 skills).",
+  "description": "The Universal AI Skills Library — 403 production-ready skills across 21 domains. Project Management is the most-used domain (74 skills).",
   "version": "4.15.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 400,
+  "total_skills": 403,
   "updated": "2026-11-08",
   "domains": {
     "business-growth": {
@@ -30,8 +30,8 @@
       "tools": 4
     },
     "engineering": {
-      "count": 98,
-      "tools": 281
+      "count": 100,
+      "tools": 298
     },
     "finance": {
       "count": 4,
@@ -58,8 +58,8 @@
       "tools": 19
     },
     "product-team": {
-      "count": 13,
-      "tools": 31
+      "count": 14,
+      "tools": 36
     },
     "project-management": {
       "count": 74,
@@ -1052,6 +1052,29 @@
       "has_assets": true
     },
     {
+      "name": "interface-refinement",
+      "description": "Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks generic, cluttered or unfinished.",
+      "path": "engineering/interface-refinement/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "ui-refinement",
+        "design-critique",
+        "design-review",
+        "generic-ui",
+        "typography",
+        "color",
+        "motion",
+        "accessibility"
+      ],
+      "tools": 10,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "interview-system-designer",
       "description": "Design calibrated interview loops, competency-based question banks, and hiring calibration. Use when designing interview processes, creating hiring pipelines, generating scoring rubrics, analyzing interviewer bias, or building question banks.",
       "path": "engineering/interview-system-designer/SKILL.md",
@@ -1112,6 +1135,28 @@
       "tools": 3,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "marketing-site-builder",
+      "description": "Build company, product and landing sites that do not look generic: one system, plain copy, real imagery, restrained motion, a static finish gate. Use when building, restyling or reviewing a marketing site, or a page reads as templated.",
+      "path": "engineering/marketing-site-builder/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "frontend",
+        "web-design",
+        "landing-page",
+        "copywriting",
+        "design-system",
+        "performance",
+        "motion"
+      ],
+      "tools": 7,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "mcp-server-builder",
@@ -2504,7 +2549,7 @@
     },
     {
       "name": "landing-page-generator",
-      "description": "Generate high-converting landing pages with page structure, copy frameworks (PAS, AIDA, BAB), CTA strategy, SEO meta, and Core Web Vitals optimization. Use when creating landing pages, campaign pages, lead capture pages, or conversion pages.",
+      "description": "Plan and build landing pages: page structure, copy frameworks (PAS, AIDA, BAB), CTA strategy, SEO meta and Core Web Vitals. Use when creating landing, campaign, lead capture or conversion pages.",
       "path": "marketing/landing-page-generator/SKILL.md",
       "domain": "marketing",
       "category": "marketing",
@@ -2519,8 +2564,8 @@
         "core-web-vitals"
       ],
       "tools": 3,
-      "has_references": false,
-      "has_assets": false
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "launch-strategy",
@@ -6378,6 +6423,29 @@
       "tools": 3,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "design-direction",
+      "description": "Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product's UI, picking a palette or fonts, or auditing a token file.",
+      "path": "product-team/design-direction/SKILL.md",
+      "domain": "product-team",
+      "category": "product-team",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "design-system",
+        "ui-direction",
+        "color-palette",
+        "typography",
+        "wcag",
+        "design-tokens",
+        "ux-rules",
+        "chart-selection"
+      ],
+      "tools": 5,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "design-system-lead",

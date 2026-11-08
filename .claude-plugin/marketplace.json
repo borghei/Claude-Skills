@@ -4,18 +4,18 @@
     "name": "borghei",
     "url": "https://borghei.me"
   },
-  "description": "Production-ready AI skill packages for every coding assistant — 400 expert skills across 21 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
+  "description": "Production-ready AI skill packages for every coding assistant — 403 expert skills across 21 domains: engineering, project management, marketing, C-level advisory, regulatory compliance, business growth, business operations, legal, product, personal productivity, vertical advisors, data analytics, sales, documents, HR, research, research ops, finance, markdown-html publishing, and workflow meta-skills",
   "homepage": "https://github.com/borghei/Claude-Skills",
   "repository": "https://github.com/borghei/Claude-Skills",
   "metadata": {
-    "description": "400 production-ready AI skill packages across 21 domains, installable per-domain as Claude Code plugins",
+    "description": "403 production-ready AI skill packages across 21 domains, installable per-domain as Claude Code plugins",
     "version": "3.0.0"
   },
   "plugins": [
     {
       "name": "engineering-advanced-skills",
       "source": "./engineering",
-      "description": "98 engineering skills: architecture, fullstack, DevOps, security, AI/ML, data engineering, and agent tooling",
+      "description": "100 engineering skills: architecture, fullstack, DevOps, security, AI/ML, data engineering, and agent tooling",
       "version": "1.0.0",
       "author": {
         "name": "borghei"
@@ -152,7 +152,7 @@
     {
       "name": "product-skills",
       "source": "./product-team",
-      "description": "13 product team skills: product management, RICE/OKRs, UX research, product analytics, Apple HIG, research synthesis, and spec-to-repo",
+      "description": "14 product team skills: product management, RICE/OKRs, UX research, product analytics, Apple HIG, research synthesis, and spec-to-repo",
       "version": "1.0.0",
       "author": {
         "name": "borghei"

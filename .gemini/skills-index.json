@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updated": "2026-11-08T13:37:25+00:00",
-  "total_skills": 400,
+  "updated": "2026-11-08T15:30:18+00:00",
+  "total_skills": 403,
   "skills": [
     {
       "name": "a11y-audit",
@@ -852,6 +852,34 @@
       ]
     },
     {
+      "name": "interface-refinement",
+      "description": "Refine an existing interface with named commands (critique, polish, distill, typeset, colorize ...), a product and design context file, and a static detector of generic UI patterns. Use when UI looks generic, cluttered or unfinished.",
+      "domain": "engineering",
+      "path": "engineering/interface-refinement/SKILL.md",
+      "tools": [
+        "class_checks.py",
+        "command_router.py",
+        "context_linter.py",
+        "css_checks.py",
+        "css_parse.py",
+        "extra_checks.py",
+        "markup_checks.py",
+        "system_checks.py",
+        "ui_rules.py",
+        "ui_slop_detector.py"
+      ],
+      "tags": [
+        "ui-refinement",
+        "design-critique",
+        "design-review",
+        "generic-ui",
+        "typography",
+        "color",
+        "motion",
+        "accessibility"
+      ]
+    },
+    {
       "name": "interview-system-designer",
       "description": "Design calibrated interview loops, competency-based question banks, and hiring calibration. Use when designing interview processes, creating hiring pipelines, generating scoring rubrics, analyzing interviewer bias, or building question banks.",
       "domain": "engineering",
@@ -901,6 +929,30 @@
         "cost-optimization",
         "prompt-engineering",
         "pricing"
+      ]
+    },
+    {
+      "name": "marketing-site-builder",
+      "description": "Build company, product and landing sites that do not look generic: one system, plain copy, real imagery, restrained motion, a static finish gate. Use when building, restyling or reviewing a marketing site, or a page reads as templated.",
+      "domain": "engineering",
+      "path": "engineering/marketing-site-builder/SKILL.md",
+      "tools": [
+        "access_links_check.py",
+        "consistency_check.py",
+        "copy_devices.py",
+        "copy_lint.py",
+        "finish_gate.py",
+        "page_gate.py",
+        "style_rules.py"
+      ],
+      "tags": [
+        "frontend",
+        "web-design",
+        "landing-page",
+        "copywriting",
+        "design-system",
+        "performance",
+        "motion"
       ]
     },
     {
@@ -2157,7 +2209,7 @@
     },
     {
       "name": "landing-page-generator",
-      "description": "Generate high-converting landing pages with page structure, copy frameworks (PAS, AIDA, BAB), CTA strategy, SEO meta, and Core Web Vitals optimization. Use when creating landing pages, campaign pages, lead capture pages, or conversion pages.",
+      "description": "Plan and build landing pages: page structure, copy frameworks (PAS, AIDA, BAB), CTA strategy, SEO meta and Core Web Vitals. Use when creating landing, campaign, lead capture or conversion pages.",
       "domain": "marketing",
       "path": "marketing/landing-page-generator/SKILL.md",
       "tools": [
@@ -5428,6 +5480,29 @@
         "visionos",
         "design",
         "accessibility"
+      ]
+    },
+    {
+      "name": "design-direction",
+      "description": "Turns a product brief into a design-system spec: style direction, contrast-checked palette, type pairing, tokens, UX rules and chart choices. Use when starting a new product's UI, picking a palette or fonts, or auditing a token file.",
+      "domain": "product-team",
+      "path": "product-team/design-direction/SKILL.md",
+      "tools": [
+        "css_token_extractor.py",
+        "design_recommender.py",
+        "design_spec_checker.py",
+        "spec_renderer.py",
+        "ux_rules_search.py"
+      ],
+      "tags": [
+        "design-system",
+        "ui-direction",
+        "color-palette",
+        "typography",
+        "wcag",
+        "design-tokens",
+        "ux-rules",
+        "chart-selection"
       ]
     },
     {

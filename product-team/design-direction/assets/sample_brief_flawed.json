@@ -1,0 +1,19 @@
+{
+  "product": "Meditation and sleep app with guided breathing sessions",
+  "audience": "older adults managing anxiety, many with vestibular sensitivity",
+  "platform": "web",
+  "mode": "dark",
+  "motion": "expressive",
+  "density": "spacious",
+  "contrast_target": "AAA",
+  "brand_color": "#9FD8C2",
+  "stack": "swiftui",
+  "data_questions": [
+    "sleep hours trend",
+    "mood by day of week",
+    "streak calendar",
+    "session completion vs goal",
+    "favourite sounds pie"
+  ],
+  "must_avoid": ["calm-utility", "organic-natural"]
+}
