@@ -1,0 +1,59 @@
+{
+  "name": "Team Alpha Board",
+  "type": "kanban",
+  "team_size": 6,
+  "filter_jql": "project = ALPHA AND type in (Story, Bug, Task)",
+  "estimation_enabled": true,
+  "columns": [
+    {
+      "name": "Backlog",
+      "wip_limit": null,
+      "statuses": [
+        "Backlog"
+      ]
+    },
+    {
+      "name": "To Do",
+      "wip_limit": null,
+      "statuses": [
+        "To Do"
+      ]
+    },
+    {
+      "name": "In Progress",
+      "wip_limit": 4,
+      "statuses": [
+        "In Progress"
+      ]
+    },
+    {
+      "name": "In Review",
+      "wip_limit": null,
+      "statuses": [
+        "In Review"
+      ]
+    },
+    {
+      "name": "Done",
+      "wip_limit": null,
+      "auto_close": true,
+      "statuses": [
+        "Done"
+      ]
+    }
+  ],
+  "swimlanes": [
+    {
+      "name": "Expedite",
+      "jql": "priority = Blocker"
+    },
+    {
+      "name": "Standard",
+      "jql": ""
+    }
+  ],
+  "card_fields": [
+    "assignee",
+    "priority"
+  ]
+}

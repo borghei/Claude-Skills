@@ -1,0 +1,47 @@
+{
+  "name": "competitive-analysis",
+  "description": "Research competitors, collect pricing, analyse positioning, write a summary",
+  "agents": {
+    "researcher": {
+      "task": "Research competitor landscape and market size",
+      "inputs": ["product_description"],
+      "outputs": ["competitor_list", "market_size"],
+      "dependencies": [],
+      "config": {"timeout": 120}
+    },
+    "pricing_collector": {
+      "task": "Collect pricing tiers for each competitor",
+      "inputs": ["competitor_list"],
+      "outputs": ["pricing_data"],
+      "dependencies": ["researcher"],
+      "config": {"timeout": 90}
+    },
+    "feature_collector": {
+      "task": "Build a feature matrix for each competitor",
+      "inputs": ["competitor_list"],
+      "outputs": ["feature_matrix"],
+      "dependencies": ["researcher"],
+      "config": {"timeout": 150}
+    },
+    "analyst": {
+      "task": "Analyse positioning opportunities and pricing strategy",
+      "inputs": ["pricing_data", "feature_matrix", "market_size"],
+      "outputs": ["positioning_report", "pricing_recommendation"],
+      "dependencies": ["pricing_collector", "feature_collector"],
+      "config": {"timeout": 180}
+    },
+    "writer": {
+      "task": "Write an executive summary of the findings",
+      "inputs": ["positioning_report", "pricing_recommendation"],
+      "outputs": ["executive_summary"],
+      "dependencies": ["analyst"],
+      "config": {"timeout": 60}
+    }
+  },
+  "config": {
+    "max_parallel": 3,
+    "timeout_per_agent": 300,
+    "retry_on_failure": 1,
+    "quality_threshold": 0.7
+  }
+}

@@ -417,10 +417,9 @@ def parse_args() -> argparse.Namespace:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
-    p.add_argument("--target", required=True, help="Target service name (e.g., payment-svc)")
+    p.add_argument("--target", help="Target service name (e.g., payment-svc)")
     p.add_argument(
         "--fault",
-        required=True,
         choices=sorted(FAULT_CATALOG.keys()),
         help="Fault type to inject. Run --list-faults for catalog.",
     )
@@ -435,7 +434,10 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--format", choices=["markdown", "json"], default="markdown")
     p.add_argument("--output", help="Output file path")
     p.add_argument("--list-faults", action="store_true", help="List all fault types in catalog")
-    return p.parse_args()
+    args = p.parse_args()
+    if not args.list_faults and not (args.target and args.fault):
+        p.error("--target and --fault are required (or use --list-faults)")
+    return args
 
 
 def main() -> int:

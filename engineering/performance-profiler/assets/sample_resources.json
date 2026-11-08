@@ -1,0 +1,578 @@
+[
+ {
+  "timestamp": "2026-03-10T00:00:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 40
+  },
+  "disk": {
+   "percent": 62.0
+  }
+ },
+ {
+  "timestamp": "2026-03-10T00:30:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 41
+  },
+  "disk": {
+   "percent": 62.0
+  }
+ },
+ {
+  "timestamp": "2026-03-10T01:00:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 42
+  },
+  "disk": {
+   "percent": 62.1
+  }
+ },
+ {
+  "timestamp": "2026-03-10T01:30:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 43
+  },
+  "disk": {
+   "percent": 62.1
+  }
+ },
+ {
+  "timestamp": "2026-03-10T02:00:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 44
+  },
+  "disk": {
+   "percent": 62.2
+  }
+ },
+ {
+  "timestamp": "2026-03-10T02:30:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 45
+  },
+  "disk": {
+   "percent": 62.2
+  }
+ },
+ {
+  "timestamp": "2026-03-10T03:00:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 46
+  },
+  "disk": {
+   "percent": 62.3
+  }
+ },
+ {
+  "timestamp": "2026-03-10T03:30:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 47
+  },
+  "disk": {
+   "percent": 62.3
+  }
+ },
+ {
+  "timestamp": "2026-03-10T04:00:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 48
+  },
+  "disk": {
+   "percent": 62.4
+  }
+ },
+ {
+  "timestamp": "2026-03-10T04:30:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 49
+  },
+  "disk": {
+   "percent": 62.4
+  }
+ },
+ {
+  "timestamp": "2026-03-10T05:00:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 50
+  },
+  "disk": {
+   "percent": 62.5
+  }
+ },
+ {
+  "timestamp": "2026-03-10T05:30:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 51
+  },
+  "disk": {
+   "percent": 62.5
+  }
+ },
+ {
+  "timestamp": "2026-03-10T06:00:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 52
+  },
+  "disk": {
+   "percent": 62.6
+  }
+ },
+ {
+  "timestamp": "2026-03-10T06:30:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 53
+  },
+  "disk": {
+   "percent": 62.6
+  }
+ },
+ {
+  "timestamp": "2026-03-10T07:00:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 54
+  },
+  "disk": {
+   "percent": 62.7
+  }
+ },
+ {
+  "timestamp": "2026-03-10T07:30:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 55
+  },
+  "disk": {
+   "percent": 62.7
+  }
+ },
+ {
+  "timestamp": "2026-03-10T08:00:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 56
+  },
+  "disk": {
+   "percent": 62.8
+  }
+ },
+ {
+  "timestamp": "2026-03-10T08:30:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 57
+  },
+  "disk": {
+   "percent": 62.8
+  }
+ },
+ {
+  "timestamp": "2026-03-10T09:00:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 58
+  },
+  "disk": {
+   "percent": 62.9
+  }
+ },
+ {
+  "timestamp": "2026-03-10T09:30:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 59
+  },
+  "disk": {
+   "percent": 62.9
+  }
+ },
+ {
+  "timestamp": "2026-03-10T10:00:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 60
+  },
+  "disk": {
+   "percent": 63.0
+  }
+ },
+ {
+  "timestamp": "2026-03-10T10:30:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 61
+  },
+  "disk": {
+   "percent": 63.0
+  }
+ },
+ {
+  "timestamp": "2026-03-10T11:00:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 62
+  },
+  "disk": {
+   "percent": 63.1
+  }
+ },
+ {
+  "timestamp": "2026-03-10T11:30:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 63
+  },
+  "disk": {
+   "percent": 63.1
+  }
+ },
+ {
+  "timestamp": "2026-03-10T12:00:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 64
+  },
+  "disk": {
+   "percent": 63.2
+  }
+ },
+ {
+  "timestamp": "2026-03-10T12:30:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 65
+  },
+  "disk": {
+   "percent": 63.2
+  }
+ },
+ {
+  "timestamp": "2026-03-10T13:00:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 66
+  },
+  "disk": {
+   "percent": 63.3
+  }
+ },
+ {
+  "timestamp": "2026-03-10T13:30:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 67
+  },
+  "disk": {
+   "percent": 63.3
+  }
+ },
+ {
+  "timestamp": "2026-03-10T14:00:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 68
+  },
+  "disk": {
+   "percent": 63.4
+  }
+ },
+ {
+  "timestamp": "2026-03-10T14:30:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 69
+  },
+  "disk": {
+   "percent": 63.4
+  }
+ },
+ {
+  "timestamp": "2026-03-10T15:00:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 70
+  },
+  "disk": {
+   "percent": 63.5
+  }
+ },
+ {
+  "timestamp": "2026-03-10T15:30:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 71
+  },
+  "disk": {
+   "percent": 63.5
+  }
+ },
+ {
+  "timestamp": "2026-03-10T16:00:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 72
+  },
+  "disk": {
+   "percent": 63.6
+  }
+ },
+ {
+  "timestamp": "2026-03-10T16:30:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 73
+  },
+  "disk": {
+   "percent": 63.6
+  }
+ },
+ {
+  "timestamp": "2026-03-10T17:00:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 74
+  },
+  "disk": {
+   "percent": 63.7
+  }
+ },
+ {
+  "timestamp": "2026-03-10T17:30:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 75
+  },
+  "disk": {
+   "percent": 63.7
+  }
+ },
+ {
+  "timestamp": "2026-03-10T18:00:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 76
+  },
+  "disk": {
+   "percent": 63.8
+  }
+ },
+ {
+  "timestamp": "2026-03-10T18:30:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 77
+  },
+  "disk": {
+   "percent": 63.8
+  }
+ },
+ {
+  "timestamp": "2026-03-10T19:00:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 78
+  },
+  "disk": {
+   "percent": 63.9
+  }
+ },
+ {
+  "timestamp": "2026-03-10T19:30:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 79
+  },
+  "disk": {
+   "percent": 63.9
+  }
+ },
+ {
+  "timestamp": "2026-03-10T20:00:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 80
+  },
+  "disk": {
+   "percent": 64.0
+  }
+ },
+ {
+  "timestamp": "2026-03-10T20:30:00Z",
+  "cpu": {
+   "percent": 35
+  },
+  "memory": {
+   "percent": 81
+  },
+  "disk": {
+   "percent": 64.0
+  }
+ },
+ {
+  "timestamp": "2026-03-10T21:00:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 82
+  },
+  "disk": {
+   "percent": 64.1
+  }
+ },
+ {
+  "timestamp": "2026-03-10T21:30:00Z",
+  "cpu": {
+   "percent": 40
+  },
+  "memory": {
+   "percent": 83
+  },
+  "disk": {
+   "percent": 64.1
+  }
+ },
+ {
+  "timestamp": "2026-03-10T22:00:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 84
+  },
+  "disk": {
+   "percent": 64.2
+  }
+ },
+ {
+  "timestamp": "2026-03-10T22:30:00Z",
+  "cpu": {
+   "percent": 45
+  },
+  "memory": {
+   "percent": 85
+  },
+  "disk": {
+   "percent": 64.2
+  }
+ },
+ {
+  "timestamp": "2026-03-10T23:00:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 86
+  },
+  "disk": {
+   "percent": 64.3
+  }
+ },
+ {
+  "timestamp": "2026-03-10T23:30:00Z",
+  "cpu": {
+   "percent": 50
+  },
+  "memory": {
+   "percent": 87
+  },
+  "disk": {
+   "percent": 64.3
+  }
+ }
+]

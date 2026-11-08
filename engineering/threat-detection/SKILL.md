@@ -1,16 +1,16 @@
 ---
 name: threat-detection
 description: >
-  This skill should be used when the user asks to "analyze logs for threats",
-  "detect suspicious activity", "scan for brute force attempts",
-  "identify injection attacks", or "audit access patterns for anomalies".
+  Scan auth and access logs for brute force, injection, path traversal, admin probing and
+  request floods, with triage guidance. Use when analyzing logs for threats or reviewing
+  suspicious activity after an alert.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: security
-  updated: 2026-04-02
+  updated: 2026-11-08
   tags: [security, threat-detection, logs, monitoring, incident-response]
 ---
 # Threat Detection
@@ -21,6 +21,14 @@ metadata:
 ## Overview
 
 The **Threat Detection** skill provides automated analysis of log files for suspicious patterns including brute force attempts, injection attempts, path traversal, admin path probing and request flooding. It helps security teams triage log data and identify threats before they escalate.
+
+## When to Use
+
+- Triage after an alert: which IPs sent injection or traversal payloads, and did any succeed?
+- A periodic review of auth or access logs for brute force and probing.
+- Checking a log excerpt someone pasted for obvious attack patterns.
+
+For live monitoring and alert routing use a SIEM; this skill reads one file per run.
 
 ## Clarify First
 
@@ -35,8 +43,12 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Analyze a log file for threat signals
-python scripts/threat_signal_analyzer.py --file /var/log/auth.log
+# Bundled sample: SQLi (plain and URL-encoded), traversal, command injection, XSS,
+# admin probes and a brute-force run -> 10 signals, exit 1
+python scripts/threat_signal_analyzer.py --file assets/sample_access_log.txt
+
+# Clean traffic (including URL fragments and "--" in queries) -> no signals, exit 0
+python scripts/threat_signal_analyzer.py --file assets/sample_clean_log.txt
 
 # Analyze with specific threat category
 python scripts/threat_signal_analyzer.py --file access.log --category injection
@@ -48,6 +60,15 @@ python scripts/threat_signal_analyzer.py --file auth.log --format json
 python scripts/threat_signal_analyzer.py --file access.log --min-severity high
 ```
 
+Exit codes: `0` no critical signal; `1` at least one critical signal (SQL or command
+injection); `2` bad input (file missing or unreadable). High-severity signals alone exit 0,
+so gate on the JSON `summary` if you need to fail on them.
+
+Request lines are URL-decoded (twice) before matching, so `%27%20OR%20%271%27%3D%271` is
+caught as a quoted tautology; evidence keeps the raw line. Brute force and flooding counts
+cover the whole file, so for a long log slice it by time window first (for example one hour
+with `awk '$2 >= "09:00" && $2 < "10:00"'`) or every busy IP looks like a flood.
+
 ## Tools Overview
 
 ### threat_signal_analyzer.py
@@ -58,8 +79,8 @@ Analyzes log files for suspicious activity patterns across multiple threat categ
 |---------|-------------|
 | Brute force detection | Counts failed login lines per source IP across the whole file |
 | Injection scanning | Detects SQL injection, XSS, command injection in requests |
-| Path traversal | Detects `../` sequences and their URL-encoded forms |
-| Admin probing | Flags requests to admin and sensitive paths such as `/admin`, `/.env` and `/.git` |
+| Path traversal | Detects `../` sequences, their URL-encoded forms and direct requests for `/etc/passwd`, `/etc/shadow`, `win.ini` |
+| Admin probing | Flags requests to admin and sensitive paths such as `/admin`, `/.env` and `/.git` that returned 401, 403 or 404 |
 | Rate analysis | Counts requests per source IP across the whole file and flags high volumes |
 
 ## Workflows
@@ -122,7 +143,7 @@ python scripts/threat_signal_analyzer.py --file app.log --category injection --f
 | SQL injection | UNION SELECT, OR 1=1, DROP TABLE in requests | Critical |
 | XSS | script tags, javascript: URIs, event handlers in input | High |
 | Path traversal | ../ sequences, /etc/passwd access attempts | High |
-| Command injection | ; cat /etc/passwd, | nc, backtick usage | Critical |
+| Command injection | `; cat`, `| nc`, `$( )`, backticks | Critical |
 | Admin probing | /admin, /wp-admin, /phpmyadmin access attempts | Medium |
 | Rate flooding | More than 500 requests from a single IP in the file (more than 200 is Medium) | High |
 
@@ -139,3 +160,29 @@ python scripts/threat_signal_analyzer.py --file app.log --category injection --f
 | High | Rate limit, monitor | Review access, check damage |
 | Medium | Log and monitor | Weekly review |
 | Low | Log only | Monthly trend analysis |
+
+## Anti-Patterns
+
+### Blocking on a Single Regex Hit
+**Mistake:** Blocking every IP that produced a signal.
+**Why it happens:** The report says "Block source IP" next to each finding.
+**Instead:** Check whether the request succeeded (status code, response size, application logs) and whether the IP belongs to a scanner you run or a shared NAT. Block on confirmed malicious intent, not on one pattern match.
+
+### Reading a Quiet Report as "No Attack"
+**Mistake:** Closing an investigation because the analyzer found nothing.
+**Why it happens:** No output feels like a clean bill of health.
+**Instead:** The rules see common, single-line patterns. Obfuscated payloads, slow brute force spread across IPs and post-login abuse are invisible to it. Correlate with other sources before concluding.
+
+### Whole-Month Logs in One Run
+**Mistake:** Running the analyzer on 30 days of access logs and acting on the flooding and brute-force counts.
+**Why it happens:** It is one command.
+**Instead:** Counts are per file. Slice by hour or day first so thresholds mean "per window".
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/threat_signal_analyzer.py` | Log scanner for injection, traversal, auth failures, probes and floods |
+| `assets/sample_access_log.txt` | Hostile sample: 10 signals across six categories (exit 1) |
+| `assets/sample_clean_log.txt` | Benign traffic, including look-alikes such as `#` fragments and `--` in queries (exit 0) |
+| `references/threat-indicators.md` | Attack categories, log formats, scanner indicators and response playbook |

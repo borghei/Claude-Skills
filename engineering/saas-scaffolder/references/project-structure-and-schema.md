@@ -8,7 +8,7 @@ Read this when defining the product spec, laying out the file tree, writing the 
 Product: [name]
 Description: [1-3 sentences]
 Auth: nextauth | clerk | supabase
-Database: neondb | supabase | planetscale | turso
+Database: neondb | supabase | postgres   (Postgres only: the schema uses drizzle-orm/pg-core)
 Payments: stripe | lemonsqueezy | none
 Multi-tenancy: workspace | organization | none
 Features: [comma-separated list]
@@ -79,7 +79,7 @@ my-saas/
 ├── middleware.ts                      # Auth + rate limiting
 ├── .env.example
 ├── drizzle.config.ts
-├── tailwind.config.ts
+├── postcss.config.mjs        # Tailwind v4: @tailwindcss/postcss, no tailwind.config.ts needed
 └── next.config.ts
 ```
 
@@ -154,17 +154,16 @@ export const sessions = pgTable('sessions', {
 
 # ─── App ───
 NEXT_PUBLIC_APP_URL=http://localhost:3000
-NEXTAUTH_SECRET=           # openssl rand -base64 32
-NEXTAUTH_URL=http://localhost:3000
+AUTH_SECRET=               # Auth.js v5 name; openssl rand -base64 32
 
 # ─── Database ───
 DATABASE_URL=              # postgresql://user:pass@host/db?sslmode=require
 
 # ─── OAuth Providers ───
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-GITHUB_CLIENT_ID=
-GITHUB_CLIENT_SECRET=
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
+AUTH_GITHUB_ID=
+AUTH_GITHUB_SECRET=
 
 # ─── Stripe ───
 STRIPE_SECRET_KEY=sk_test_...

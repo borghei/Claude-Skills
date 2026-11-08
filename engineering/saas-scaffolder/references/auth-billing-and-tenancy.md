@@ -16,14 +16,8 @@ import { db } from './db'
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: DrizzleAdapter(db),
   providers: [
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    }),
-    GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-    }),
+    Google,   // reads AUTH_GOOGLE_ID / AUTH_GOOGLE_SECRET
+    GitHub,   // reads AUTH_GITHUB_ID / AUTH_GITHUB_SECRET
     Resend({
       from: 'noreply@myapp.com',
     }),
@@ -119,6 +113,8 @@ export async function POST(req: Request) {
     return new Response(`Webhook Error: ${err.message}`, { status: 400 })
   }
 
+  // Stripe API 2025-03-31 ("basil") and later moved current_period_end onto subscription
+  // items (subscription.items.data[0].current_period_end). Match the API version your SDK pins.
   switch (event.type) {
     case 'checkout.session.completed': {
       const session = event.data.object
@@ -159,7 +155,7 @@ export async function POST(req: Request) {
 ## Middleware (Auth + Rate Limiting)
 
 ```typescript
-// middleware.ts
+// proxy.ts (Next.js 16+; named middleware.ts with a `middleware` export before 16)
 import { auth } from '@/lib/auth'
 import { NextResponse } from 'next/server'
 

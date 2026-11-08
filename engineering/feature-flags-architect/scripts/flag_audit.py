@@ -43,6 +43,11 @@ SDK_CALL_PATTERNS = [
     re.compile(r"""unleash\.(?:is_?enabled|getVariant)\(\s*["']([\w\.\-_]+)["']""", re.IGNORECASE),
     # Generic decorator: @feature_flag("flag-key")
     re.compile(r"""@(?:feature_?flag|flag|require_?flag|require_?entitlement)\(\s*["']([\w\.\-_]+)["']""", re.IGNORECASE),
+    # Homegrown and hook helpers: getFlag("x"), isFeatureEnabled("x"), useFlag("x"), get_feature_flag("x")
+    re.compile(r"""\b(?:get|use|is|has)_?(?:feature_?)?flag(?:_?enabled|_?value)?\(\s*["']([\w\.\-_]+)["']""", re.IGNORECASE),
+    re.compile(r"""\bis_?feature_?enabled\(\s*["']([\w\.\-_]+)["']""", re.IGNORECASE),
+    # OpenFeature React hooks: useBooleanFlagValue("x", false)
+    re.compile(r"""\buse(?:Boolean|String|Number|Object)Flag(?:Value|Details)\(\s*["']([\w\.\-_]+)["']"""),
 ]
 
 # Patterns for flag-key constants: SIGNUP_V2_FLAG = "flag.key.here"
@@ -105,6 +110,13 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--owner-team",
         help="Filter results to a specific owner team (matches owner field in flag-export)",
+    )
+    p.add_argument(
+        "--as-of", help="Date (YYYY-MM-DD) to measure flag age from (default: today)",
+    )
+    p.add_argument(
+        "--pattern", action="append", default=[],
+        help="Extra regex for your SDK; group 1 must capture the flag key. Repeatable.",
     )
     p.add_argument(
         "--include-active",
@@ -201,6 +213,9 @@ def load_flag_export(export_path: Path) -> list[dict[str, Any]]:
     raise ValueError(f"Could not find flag list in export. Tried keys: flags, items, features, data, results.")
 
 
+AS_OF: datetime | None = None  # set by --as-of so ages are reproducible
+
+
 def normalize_flag_record(raw: dict[str, Any]) -> dict[str, Any]:
     """Normalize a flag-export entry into a canonical shape."""
     key = raw.get("key") or raw.get("name") or raw.get("id") or ""
@@ -234,7 +249,7 @@ def normalize_flag_record(raw: dict[str, Any]) -> dict[str, Any]:
             else:
                 # ISO 8601
                 dt = datetime.fromisoformat(str(last_mod).replace("Z", "+00:00"))
-            days = (datetime.now(timezone.utc) - dt).days
+            days = ((AS_OF or datetime.now(timezone.utc)) - dt).days
         except (ValueError, TypeError):
             days = None
     # Owner
@@ -471,6 +486,19 @@ def render_human(records: dict[str, FlagRecord], include_active: bool) -> str:
 def main() -> int:
     args = parse_args()
 
+    for extra in args.pattern:
+        try:
+            SDK_CALL_PATTERNS.append(re.compile(extra))
+        except re.error as exc:
+            print(f"error: invalid --pattern {extra!r}: {exc}", file=sys.stderr)
+            return 2
+    global AS_OF
+    if args.as_of:
+        try:
+            AS_OF = datetime.fromisoformat(args.as_of).replace(tzinfo=timezone.utc)
+        except ValueError:
+            print(f"error: invalid --as-of {args.as_of!r} (use YYYY-MM-DD)", file=sys.stderr)
+            return 2
     root = Path(args.path).resolve()
     if not root.exists():
         print(f"error: path not found: {root}", file=sys.stderr)

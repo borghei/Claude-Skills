@@ -397,6 +397,11 @@ Validate and score Claude Code skill packages for quality, completeness, and bes
 
 Validate skill packages for structure compliance, test Python scripts for syntax and stdlib-only imports, and score quality across four dimensions (documentation, code quality, completeness, usability) with letter grades and improvement recommendations. Supports BASIC, STANDARD, and POWERFUL tier cl
 
+## Your Key Capabilities
+- Padding a Skill to Pass a Length Check
+- Testing an Untrusted Skill by Running It
+- Gating Only on the Grade
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Validate and score Claude Code skill packages for quality, completeness, and best-practice compliance. Tests Python scripts, checks YAML frontmatter, and generates reports. Use when creating, validating, or auditing skill packages.
 
 Validate skill packages for structure compliance, test Python scripts for syntax and stdlib-only imports, and score quality across four dimensions (documentation, code quality, completeness, usability) with letter grades and improvement recommendations. Supports BASIC, STANDARD, and POWERFUL tier cl
+
+## Your Key Capabilities
+- Padding a Skill to Pass a Length Check
+- Testing an Untrusted Skill by Running It
+- Gating Only on the Grade
 
 ## How to Help
 When the user asks for help in this domain:
@@ -476,15 +486,18 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Validate skill structure and documentation
-python skill_validator.py engineering/my-skill --tier POWERFUL --json
+# Validate the bundled fixture skill, then score it
+python scripts/skill_validator.py assets/sample-skill --tier BASIC
+python scripts/quality_scorer.py assets/sample-skill --detailed --minimum-score 75
 
-# Test all Python scripts in a skill
-python script_tester.py engineering/my-skill --timeout 30
-
-# Score quality with improvement roadmap
-python quality_scorer.py engineering/my-skill --detailed --minimum-score 75
+# Run its scripts (this EXECUTES the target&#x27;s code; see the warning below)
+python scripts/script_tester.py assets/sample-skill --timeout 30
 ```
+
+**Warning: `script_tester.py` runs the target skill&#x27;s scripts** (`--help` and their sample
+inputs) as you. Never point it at a skill you have not read. For a third-party skill, run
+`skill-security-auditor` first, and run the tester in a disposable sandbox without
+credentials or network.
 
 ## Tools
 
@@ -494,7 +507,14 @@ python quality_scorer.py engineering/my-skill --detailed --minimum-score 75
 | `script_tester.py` | Static + runtime tests of scripts (syntax, imports, argparse, `--help`, samples) | `python scripts/script_tester.py engineering/my-skill --timeout 60 --json` |
 | `quality_scorer.py` | Score four quality dimensions with letter grade and improvement roadmap | `python scripts/quality_scorer.py engineering/my-skill --detailed --minimum-score 75 --json` |
 
-See **[references/tool-reference.md](references/tool-reference.md)** for full parameter tables, output formats, and exit codes.
+Exit codes: `skill_validator.py` 0 pass, 1 errors or score below 60, 2 skill path not found;
+`script_tester.py` 0 all pass, 1 failure (including a missing path), 2 partial pass;
+`quality_scorer.py` 0 grades A-C, 1 grade F, below `--minimum-score` or missing path,
+2 grade D. The length checks are bands, not minimums: SKILL.md passes at 40-500 non-blank
+lines and scores best at 60-500; scripts score best at 100-300 lines, because a lean
+SKILL.md with detail in `references/` is the goal.
+
+See **[references/tool-reference.md](references/tool-reference.md)** for full parameter tables and output formats.
 
 ## References
 
@@ -530,6 +550,34 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `engineering/pr-review-expert` | Attach validation report to pull request reviews | `skill_validator.py --json` output is posted as a PR comment for reviewer context |
 | `engineering/performance-profiler` | Complement structural testing with runtime profiling | After `script_tester.py` confirms execution succeeds, `performance-profiler` measures execution time and resource usage |
 | `engineering/tech-debt-tracker` | Track quality score trends over time | Periodic `quality_scorer.py --json` output is ingested to detect score degradation and flag technical debt |
+
+## Anti-Patterns
+
+### Padding a Skill to Pass a Length Check
+**Mistake:** Adding filler sections so SKILL.md looks &quot;comprehensive&quot;.
+**Why it happens:** Older scorers rewarded line count.
+**Instead:** Keep SKILL.md to goals, decision points, tools and verification; move reference tables to `references/`. The validator now checks a band, not a minimum.
+
+### Testing an Untrusted Skill by Running It
+**Mistake:** Running `script_tester.py` on a downloaded skill to see whether it is safe.
+**Why it happens:** &quot;Test&quot; sounds harmless.
+**Instead:** The tester executes the target&#x27;s code. Audit it statically first (`skill-security-auditor`), then test in a sandbox.
+
+### Gating Only on the Grade
+**Mistake:** Merging any skill that scores B or better.
+**Why it happens:** A single grade is easy to wire into CI.
+**Instead:** Also require `script_tester.py` to pass and read the validator&#x27;s warnings; a well-formatted skill can still ship a broken tool.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/skill_validator.py` | Structure, frontmatter, section and script checks per tier |
+| `scripts/script_tester.py` | Static and runtime checks of a skill&#x27;s scripts (executes them) |
+| `scripts/quality_scorer.py` | Four-dimension quality score, grade and roadmap |
+| `assets/sample-skill/` | Fixture skill for trying the tools |
+| `expected_outputs/` | Reference outputs for the fixture |
+| `references/*.md` | Tool reference, structure spec, tier matrix, scoring rubric, CI workflows |
 
 ---
 
@@ -611,15 +659,18 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Validate skill structure and documentation
-python skill_validator.py engineering/my-skill --tier POWERFUL --json
+# Validate the bundled fixture skill, then score it
+python scripts/skill_validator.py assets/sample-skill --tier BASIC
+python scripts/quality_scorer.py assets/sample-skill --detailed --minimum-score 75
 
-# Test all Python scripts in a skill
-python script_tester.py engineering/my-skill --timeout 30
-
-# Score quality with improvement roadmap
-python quality_scorer.py engineering/my-skill --detailed --minimum-score 75
+# Run its scripts (this EXECUTES the target&#x27;s code; see the warning below)
+python scripts/script_tester.py assets/sample-skill --timeout 30
 ```
+
+**Warning: `script_tester.py` runs the target skill&#x27;s scripts** (`--help` and their sample
+inputs) as you. Never point it at a skill you have not read. For a third-party skill, run
+`skill-security-auditor` first, and run the tester in a disposable sandbox without
+credentials or network.
 
 ## Tools
 
@@ -629,7 +680,14 @@ python quality_scorer.py engineering/my-skill --detailed --minimum-score 75
 | `script_tester.py` | Static + runtime tests of scripts (syntax, imports, argparse, `--help`, samples) | `python scripts/script_tester.py engineering/my-skill --timeout 60 --json` |
 | `quality_scorer.py` | Score four quality dimensions with letter grade and improvement roadmap | `python scripts/quality_scorer.py engineering/my-skill --detailed --minimum-score 75 --json` |
 
-See **[references/tool-reference.md](references/tool-reference.md)** for full parameter tables, output formats, and exit codes.
+Exit codes: `skill_validator.py` 0 pass, 1 errors or score below 60, 2 skill path not found;
+`script_tester.py` 0 all pass, 1 failure (including a missing path), 2 partial pass;
+`quality_scorer.py` 0 grades A-C, 1 grade F, below `--minimum-score` or missing path,
+2 grade D. The length checks are bands, not minimums: SKILL.md passes at 40-500 non-blank
+lines and scores best at 60-500; scripts score best at 100-300 lines, because a lean
+SKILL.md with detail in `references/` is the goal.
+
+See **[references/tool-reference.md](references/tool-reference.md)** for full parameter tables and output formats.
 
 ## References
 
@@ -665,6 +723,34 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `engineering/pr-review-expert` | Attach validation report to pull request reviews | `skill_validator.py --json` output is posted as a PR comment for reviewer context |
 | `engineering/performance-profiler` | Complement structural testing with runtime profiling | After `script_tester.py` confirms execution succeeds, `performance-profiler` measures execution time and resource usage |
 | `engineering/tech-debt-tracker` | Track quality score trends over time | Periodic `quality_scorer.py --json` output is ingested to detect score degradation and flag technical debt |
+
+## Anti-Patterns
+
+### Padding a Skill to Pass a Length Check
+**Mistake:** Adding filler sections so SKILL.md looks &quot;comprehensive&quot;.
+**Why it happens:** Older scorers rewarded line count.
+**Instead:** Keep SKILL.md to goals, decision points, tools and verification; move reference tables to `references/`. The validator now checks a band, not a minimum.
+
+### Testing an Untrusted Skill by Running It
+**Mistake:** Running `script_tester.py` on a downloaded skill to see whether it is safe.
+**Why it happens:** &quot;Test&quot; sounds harmless.
+**Instead:** The tester executes the target&#x27;s code. Audit it statically first (`skill-security-auditor`), then test in a sandbox.
+
+### Gating Only on the Grade
+**Mistake:** Merging any skill that scores B or better.
+**Why it happens:** A single grade is easy to wire into CI.
+**Instead:** Also require `script_tester.py` to pass and read the validator&#x27;s warnings; a well-formatted skill can still ship a broken tool.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/skill_validator.py` | Structure, frontmatter, section and script checks per tier |
+| `scripts/script_tester.py` | Static and runtime checks of a skill&#x27;s scripts (executes them) |
+| `scripts/quality_scorer.py` | Four-dimension quality score, grade and roadmap |
+| `assets/sample-skill/` | Fixture skill for trying the tools |
+| `expected_outputs/` | Reference outputs for the fixture |
+| `references/*.md` | Tool reference, structure spec, tier matrix, scoring rubric, CI workflows |
 
 ---
 
@@ -752,16 +838,19 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/skill-tester/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Validate skill structure and documentation
-python skill_validator.py engineering/my-skill --tier POWERFUL --json
+  <h2>Quick Start</h2><pre><code># Validate the bundled fixture skill, then score it
+python scripts/skill_validator.py assets/sample-skill --tier BASIC
+python scripts/quality_scorer.py assets/sample-skill --detailed --minimum-score 75
 
-# Test all Python scripts in a skill
-python script_tester.py engineering/my-skill --timeout 30
-
-# Score quality with improvement roadmap
-python quality_scorer.py engineering/my-skill --detailed --minimum-score 75
+# Run its scripts (this EXECUTES the target&#x27;s code; see the warning below)
+python scripts/script_tester.py assets/sample-skill --timeout 30
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+
+**Warning: `script_tester.py` runs the target skill's scripts** (`--help` and their sample
+inputs) as you. Never point it at a skill you have not read. For a third-party skill, run
+`skill-security-auditor` first, and run the tester in a disposable sandbox without
+credentials or network.
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/skill-tester/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

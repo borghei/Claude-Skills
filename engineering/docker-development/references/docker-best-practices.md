@@ -18,7 +18,8 @@
 
 ### Builder Pattern
 ```dockerfile
-FROM golang:1.22 AS builder
+# Pin to the Go release you build with
+FROM golang:1.25 AS builder
 WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
@@ -32,7 +33,7 @@ CMD ["/server"]
 
 ### Testing Pattern
 ```dockerfile
-FROM node:20-slim AS base
+FROM node:24-slim AS base
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci

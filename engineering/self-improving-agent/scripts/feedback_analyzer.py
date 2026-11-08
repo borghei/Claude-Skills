@@ -415,11 +415,11 @@ def main():
 
     if not args.command:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     if not os.path.exists(args.input):
         print(f"Error: Input file '{args.input}' not found", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     entries = load_feedback(args.input)
 

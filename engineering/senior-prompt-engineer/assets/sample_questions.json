@@ -1,0 +1,4 @@
+[
+  {"id": "q1", "question": "How long do refunds take?", "answer": "Refunds are issued to the original payment method within 5 business days of approval."},
+  {"id": "q2", "question": "What is the API rate limit?", "answer": "The rate limit is 500 requests per second, and enterprise plans have no limit at all."}
+]

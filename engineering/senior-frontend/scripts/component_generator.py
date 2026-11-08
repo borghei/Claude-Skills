@@ -142,8 +142,9 @@ export type {{ {name}Props }} from './{name}';
 def to_pascal_case(name: str) -> str:
     """Convert string to PascalCase."""
     # Handle kebab-case and snake_case
-    words = name.replace('-', '_').split('_')
-    return ''.join(word.capitalize() for word in words)
+    words = name.replace('-', '_').replace(' ', '_').split('_')
+    # Upper-case only the first letter so existing caps survive: ProductCard stays ProductCard
+    return ''.join(word[:1].upper() + word[1:] for word in words if word)
 
 
 def to_kebab_case(name: str) -> str:
@@ -322,7 +323,7 @@ def main():
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

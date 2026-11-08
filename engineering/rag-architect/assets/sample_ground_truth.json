@@ -1,0 +1,14 @@
+{
+  "q1": [
+    "refund-policy"
+  ],
+  "q2": [
+    "password-reset"
+  ],
+  "q3": [
+    "api-rate-limits"
+  ],
+  "q4": [
+    "invoice-export"
+  ]
+}

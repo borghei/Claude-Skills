@@ -5,7 +5,6 @@ Accessibility Scanner - Scan HTML files for WCAG 2.1 violations.
 Checks for missing alt text, heading hierarchy, form labels, ARIA usage,
 link text quality, language attributes, and landmark regions.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -269,6 +268,14 @@ def scan_file(filepath: Path) -> List[Finding]:
     except Exception:
         pass
     parser.finalize()
+    # WCAG 2.2 SC 3.3.8 Accessible Authentication (AA): blocking paste stops password managers.
+    for m in re.finditer(r'<input[^>]*\bonpaste\s*=\s*["\'][^"\']*(?:return\s+false|preventDefault)', content, re.I):
+        parser.findings.append(Finding(
+            severity="warning", wcag_level="AA", criterion="3.3.8 (WCAG 2.2)",
+            file=str(filepath), line=content.count("\n", 0, m.start()) + 1,
+            element=m.group(0)[:80], message="Input blocks paste, which defeats password managers.",
+            recommendation="Remove the onpaste handler so users can paste or autofill credentials.",
+        ))
     return parser.findings
 
 
@@ -276,7 +283,7 @@ def format_text(all_findings: Dict[str, List[Finding]]) -> str:
     """Format as human-readable text."""
     lines = []
     lines.append("=" * 60)
-    lines.append("ACCESSIBILITY SCAN REPORT (WCAG 2.1)")
+    lines.append("ACCESSIBILITY SCAN REPORT (WCAG 2.1, plus 2.2 SC 3.3.8)")
     lines.append("=" * 60)
 
     total = sum(len(f) for f in all_findings.values())
@@ -304,7 +311,7 @@ def format_text(all_findings: Dict[str, List[Finding]]) -> str:
                 lines.append(f"      Fix: {f.recommendation}")
 
     if total == 0:
-        lines.append("\nNo accessibility issues found.")
+        lines.append("\nNo issues found for the checks this scanner runs; manual review is still needed.")
 
     lines.append("\n" + "=" * 60)
     return "\n".join(lines)
@@ -351,6 +358,10 @@ def main():
         path = Path(args.file)
         if not path.exists():
             print(f"Error: File not found: {args.file}", file=sys.stderr)
+            sys.exit(2)
+        head = path.read_text(errors="replace")[:4096].lower()
+        if path.suffix.lower() not in (".html", ".htm") and not re.search(r"<(!doctype html|html|body|div|main)\b", head):
+            print(f"Error: {args.file} does not look like HTML", file=sys.stderr)
             sys.exit(2)
         findings = scan_file(path)
         all_findings[str(path)] = [f for f in findings if f.severity in include_severities]

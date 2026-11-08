@@ -1,0 +1,14 @@
+{
+  "icp_name": "Mid-market HR analytics, North America",
+  "scoring_weights": {
+    "industry_fit": 15, "size_fit": 15, "geography": 10,
+    "tech_stack_fit": 15, "buyer_role_match": 15,
+    "trigger_event_present": 15, "budget_authority": 10, "timeline": 5
+  },
+  "accounts": [
+    {"name": "Northwind Software (650 staff, new VP People)", "industry_fit": 3, "size_fit": 3, "geography": 3, "tech_stack_fit": 3, "buyer_role_match": 3, "trigger_event_present": 3, "budget_authority": 2, "timeline": 2},
+    {"name": "Contoso Logistics (1,800 staff, Workday, no trigger)", "industry_fit": 2, "size_fit": 3, "geography": 3, "tech_stack_fit": 3, "buyer_role_match": 2, "trigger_event_present": 0, "budget_authority": 2, "timeline": 1},
+    {"name": "Fabrikam Retail (4,500 staff, in-house BI team)", "industry_fit": 1, "size_fit": 1, "geography": 3, "tech_stack_fit": 1, "buyer_role_match": 2, "trigger_event_present": 1, "budget_authority": 1, "timeline": 1},
+    {"name": "Tailspin Studio (60 staff)", "industry_fit": 2, "size_fit": 0, "geography": 3, "tech_stack_fit": 0, "buyer_role_match": 0, "trigger_event_present": 0, "budget_authority": 0, "timeline": 0}
+  ]
+}

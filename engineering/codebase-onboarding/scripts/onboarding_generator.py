@@ -7,6 +7,7 @@ and produces a structured onboarding document for new developers.
 
 import argparse
 import json
+import re
 import os
 import sys
 from pathlib import Path
@@ -100,13 +101,26 @@ def scan_directory_tree(root, max_depth=3):
     return tree
 
 
+SOURCE_EXTENSIONS = {".py": "Python", ".js": "JavaScript", ".ts": "TypeScript", ".tsx": "TypeScript",
+                     ".go": "Go", ".rs": "Rust", ".java": "Java", ".rb": "Ruby", ".php": "PHP",
+                     ".swift": "Swift", ".kt": "Kotlin", ".cs": "C#", ".c": "C", ".cpp": "C++", ".sh": "Shell"}
+
+
 def detect_stack(root):
-    """Identify tech stack from manifest and config files."""
+    """Identify tech stack from manifests; fall back to counting source files by extension."""
     root_path = Path(root).resolve()
     detected = []
     for indicator, stack in STACK_INDICATORS.items():
         if (root_path / indicator).exists():
             detected.append({"file": indicator, "stack": stack})
+    if not detected:
+        counts = {}
+        for entry in scan_directory_tree(root_path, max_depth=4):
+            lang = SOURCE_EXTENSIONS.get(Path(entry["path"]).suffix) if entry["type"] == "file" else None
+            if lang:
+                counts[lang] = counts.get(lang, 0) + 1
+        for lang, n in sorted(counts.items(), key=lambda kv: -kv[1])[:3]:
+            detected.append({"file": f"{n} source file(s), no manifest", "stack": lang})
     return detected
 
 
@@ -184,6 +198,73 @@ def count_source_lines(root, extensions=None):
     return {"total_lines": total, "source_files": file_count}
 
 
+def find_run_commands(root):
+    """Commands the repo itself declares: package.json scripts, Makefile targets, .env keys."""
+    root_path = Path(root).resolve()
+    cmds, env_keys, readme_title, readme_summary = [], [], None, None
+    try:
+        scripts = json.loads((root_path / "package.json").read_text()).get("scripts", {})
+        cmds += [f"npm run {name}  # {body}" for name, body in list(scripts.items())[:12]]
+    except (OSError, ValueError, AttributeError):
+        pass
+    try:
+        text = (root_path / "Makefile").read_text(errors="ignore")
+        cmds += [f"make {t}" for t in re.findall(r"(?m)^([A-Za-z0-9_-]+):(?!=)", text)]
+    except OSError:
+        pass
+    for name in (".env.example", ".env.sample"):
+        try:
+            env_keys = [l.split("=")[0].strip() for l in (root_path / name).read_text().splitlines()
+                        if "=" in l and not l.lstrip().startswith("#")]
+            break
+        except OSError:
+            continue
+    for name in ("README.md", "README"):
+        try:
+            lines = (root_path / name).read_text().splitlines()
+            readme_title = next((l.lstrip("# ").strip() for l in lines if l.startswith("#")), None)
+            readme_summary = next((l.strip() for l in lines if l.strip() and not l.startswith(("#", "!", "[", "<"))), None)
+            break
+        except OSError:
+            continue
+    return {"commands": cmds[:20], "env_keys": env_keys[:30], "readme_title": readme_title,
+            "readme_summary": readme_summary}
+
+
+TODO = "> **TODO (owner):**"
+
+
+def render_markdown(r):
+    """Draft onboarding doc: sections filled from gathered facts, placeholders where facts end."""
+    f = r["run_facts"]
+    stack = ", ".join(sorted({i["stack"] for i in r["tech_stack"]})) or None
+    out = [f"# Onboarding: {f['readme_title'] or r['project_name']}", ""]
+    out += ["## What this is", f"From the README: {f['readme_summary']}" if f["readme_summary"] else "",
+            f"{TODO} who uses it and what breaks for them if it is down.", ""]
+    out += ["## Stack", f"- Languages/build: {stack}" if stack else f"{TODO} no manifest found; name the stack."]
+    out += [f"- Tools: {', '.join(x['framework'] for x in r['frameworks'])}"] if r["frameworks"] else []
+    st = r["source_code_stats"]
+    out += [f"- Size: {st['source_files']} source files, {st['total_lines']} lines", ""]
+    out += ["## Run it locally"]
+    if f["commands"]:
+        out += ["Commands declared in the repo (check which ones a newcomer needs, in order):", "```bash"]
+        out += f["commands"] + ["```"]
+    else:
+        out += [f"{TODO} no package.json scripts or Makefile targets found; write the install, run and test commands."]
+    if f["env_keys"]:
+        out += ["", "Environment variables from the env template (say where each value comes from):"]
+        out += [f"- `{k}`: {TODO.strip('> ')} source" for k in f["env_keys"]]
+    out += ["", "## Where to start reading"]
+    out += [f"- `{e}`: {TODO.strip('> ')} what starts here" for e in r["entry_points"][:8]] or \
+           [f"{TODO} no standard entry point found; name the file where execution starts."]
+    out += ["", "## Layout"]
+    out += [f"- `{d}/`: {TODO.strip('> ')} purpose" for d in r["top_level_directories"][:15]]
+    out += ["", "## Key files"] + [f"- `{k}`" for k in r["key_files"]] or []
+    out += ["", "## Not derivable from the code", f"{TODO} deploy process, owners and on-call, "
+            "where logs and dashboards live, known traps."]
+    return "\n".join(out) + "\n"
+
+
 def generate_report(root):
     """Generate the full onboarding analysis report."""
     root_path = Path(root).resolve()
@@ -210,6 +291,7 @@ def generate_report(root):
         "file_type_distribution": file_types,
         "source_code_stats": source_stats,
         "directory_tree_sample": tree[:60],
+        "run_facts": find_run_commands(root),
     }
 
 
@@ -267,11 +349,7 @@ def format_human(report):
         lines.append(f"  {indent}{name}{suffix}")
 
     lines.append(f"\n{'=' * 60}")
-    lines.append("  Next steps:")
-    lines.append("  1. Read the key files listed above")
-    lines.append("  2. Follow the setup guide (README or CONTRIBUTING)")
-    lines.append("  3. Explore entry points to understand the main flow")
-    lines.append("  4. Run the test suite to verify your local setup")
+    lines.append("  Use --format markdown for a draft guide built from these facts.")
     lines.append(f"{'=' * 60}")
 
     return "\n".join(lines)
@@ -300,17 +378,22 @@ def main():
         dest="json_output",
         help="Output results as JSON instead of human-readable format",
     )
+    parser.add_argument("--format", choices=["text", "json", "markdown"], default=None,
+                        help="text (fact report), json, or markdown (draft onboarding guide with TODOs)")
     args = parser.parse_args()
+    fmt = args.format or ("json" if args.json_output else "text")
 
     target = Path(args.directory).resolve()
     if not target.is_dir():
         print(f"Error: '{args.directory}' is not a valid directory.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     report = generate_report(str(target))
 
-    if args.json_output:
+    if fmt == "json":
         print(json.dumps(report, indent=2))
+    elif fmt == "markdown":
+        print(render_markdown(report), end="")
     else:
         print(format_human(report))
 

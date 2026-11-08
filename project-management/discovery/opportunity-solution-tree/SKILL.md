@@ -1,17 +1,16 @@
 ---
 name: opportunity-solution-tree
 description: >
-  Opportunity Solution Tree (Teresa Torres) mapping outcomes →
-  opportunities → solutions → assumption tests. Use when prioritizing
-  discovery work, mapping solutions to a problem, or checking whether
-  a roadmap moves outcomes.
+  Maps one outcome to customer opportunities, 3+ solutions each and assumption tests,
+  then audits the tree. Use when prioritizing discovery work, mapping solutions to a
+  problem, or checking whether a roadmap moves outcomes.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: project-management
   domain: product-discovery
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: ost_validator.py
   tech-stack: opportunity-solution-tree, continuous-discovery, teresa-torres
   tags:
@@ -73,167 +72,49 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Workflow
 
-### Step 1 — Pick ONE outcome
-A good outcome is:
-- Behavioral (something users do) or business (revenue, retention)
-- Measurable (specific metric, baseline, target)
-- Bounded (this quarter / half)
-- Within team's influence
+Layer definitions, good and bad examples, the weekly rhythm and stuck-tree symptoms are in
+`references/ost-fundamentals.md`; this section is the procedure.
 
-Examples:
-- "Increase week-1 activation rate from 28% to 40% by end of Q3"
-- "Reduce admin-panel time-on-task by 30%"
-- "Lift NRR from 105% to 115% by end of year"
+1. **One outcome.** Measurable, behavioral or business, bounded to a quarter or half, and within the team's influence ("Lift week-1 activation from 28% to 40% by end of Q3"). "Ship X" is an output; "hit $20M ARR" is too high for one team.
+2. **Opportunities from evidence.** Pull them from interviews, tickets, sales objections, analytics and survey text, phrased as the customer's need ("Admins want to invite their whole team at once"), never as a build ("Add CSV import"). Cluster to 3-7 per outcome.
+3. **Three or more solutions per opportunity.** A single solution means the team is defending a favourite; ask "what if we couldn't build that?" and look at analogous problems.
+4. **Assumption tests.** For each solution, name the riskiest of value, usability, feasibility and viability, and the cheapest test with a time box and a pass criterion. Climb the ladder only as needed: interview, landing page or smoke test, Wizard-of-Oz or concierge, low-fi prototype, high-fi prototype, production A/B. AI-built prototypes make the prototype rungs cheap, not the earlier rungs unnecessary.
+5. **Audit the tree** with `ost_validator.py` (below), and fix every fail.
+6. **Iterate weekly.** Add opportunities from new interviews, record test results, kill failed solutions, promote validated ones to the roadmap.
 
-NOT outcomes:
-- "Build [feature]" (output, not outcome)
-- "Improve user experience" (vague)
-- "Hit revenue target" (too high; needs to decompose)
+To audit an existing roadmap, map each roadmap item to an opportunity and the outcome; items with no opportunity are orphans, and opportunities with no item are gaps.
 
-### Step 2 — Generate opportunities (from research)
-Opportunities come from **customer evidence**, not the team's imagination:
-- Interview transcripts
-- Support ticket themes
-- Sales objection patterns
-- Behavioral analytics
-- Survey free-text
+## Tool
 
-Opportunities are **customer problems/needs**, not solutions:
-- ✓ "Users abandon during email-verification step"
-- ✓ "Admins want to bulk-invite from CSV"
-- ✗ "Add a CSV import feature" (that's a solution)
-
-### Step 3 — Cluster + dedupe opportunities
-Group similar opportunities. Aim for 3-7 distinct opportunity clusters
-per outcome.
-
-### Step 4 — Generate multiple solutions per opportunity
-For each opportunity, brainstorm 3-5 solutions. Resist jumping to one.
-
-Multiple solutions matter because:
-- It surfaces underlying assumption: which solution best solves this?
-- Allows comparison of cost/effort
-- Reveals the team has bias toward a specific approach
-
-### Step 5 — Identify assumptions + tests
-For each candidate solution, list:
-- **Value assumption** — will users want this?
-- **Usability assumption** — can users use it?
-- **Feasibility assumption** — can we build it?
-- **Viability assumption** — is it good for the business?
-
-For each top assumption, design a cheap test (interview, prototype, A/B,
-landing page, prefab Wizard-of-Oz).
-
-### Step 6 — Run `ost_validator.py`
-Audit for: missing outcome, opportunities written as solutions,
-single-solution branches, no assumption tests, tree without recent updates.
+`ost_validator.py` reads a JSON tree (schema in its `--help`; JSON is the default output, `--format markdown` for a table, `--output` to write a file).
 
 ```bash
 python3 project-management/discovery/opportunity-solution-tree/scripts/ost_validator.py \
-  --input ost.json --format markdown
+  --input project-management/discovery/opportunity-solution-tree/assets/sample_ost.json --format markdown         # exit 0
+python3 project-management/discovery/opportunity-solution-tree/scripts/ost_validator.py \
+  --input project-management/discovery/opportunity-solution-tree/assets/sample_ost_flawed.json --format markdown  # exit 1
 ```
 
-### Step 7 — Iterate weekly
-OST is a living artifact. Each week:
-- Add opportunities from new interviews
-- Move opportunities up/down based on evidence
-- Add solutions
-- Track assumption test results
-- Kill solutions that failed tests
-- Promote validated solutions to roadmap
+It fails a tree with no outcome or opportunities, an outcome not marked measurable or behavioral, or no update in 30+ days (measured from `as_of`, so a fixed file gives a fixed answer). It warns on output language in the outcome, opportunities that start with a build verb (add, build, create, implement and similar, checked against the text whatever the `is_customer_phrased` flag says), missing evidence, fewer than 3 solutions, solutions without tests or pass criteria, and no update in 14+ days. Exit codes: 0 no fail, 1 at least one fail, 2 bad input.
 
-## Decision frameworks
+## Anti-Patterns
 
-### Choosing the outcome
+### Outcome that is an output
+**Mistake:** The root reads "Ship the new onboarding".
+**Why it happens:** Roadmaps are written in features, and the tree gets copied from the roadmap.
+**Instead:** Name the behavior or business number that the onboarding should move, with a baseline and a target. The validator fails an outcome not marked measurable and behavioral.
 
-Wrong: "Build the new dashboard" (output)
-Wrong: "Make customers happy" (vague)
-Wrong: "Hit $20M ARR" (too high; many teams)
+### Solutions in the opportunity layer
+**Mistake:** Opportunities read "Add bulk CSV import", "Build SSO".
+**Why it happens:** Teams think in solutions, and a solution feels more concrete than a need.
+**Instead:** Ask "why would a customer want that?" and write the answer as the opportunity; the import becomes one of three solutions under it.
 
-Right: One number a team can move. Decompose company OKRs to team-level
-outcome. See `project-management/execution/north-star-metric`.
+### The static tree
+**Mistake:** The tree was built in a planning offsite and not touched since.
+**Why it happens:** Building it felt like the deliverable.
+**Instead:** Update it weekly from new interviews and test results; a tree older than 30 days fails the audit.
 
-### Opportunity vs solution test
-
-If the statement is a thing to build → solution.
-If the statement is a customer pain / desire / need → opportunity.
-
-| Statement | Type |
-|-----------|------|
-| "Add bulk CSV import" | Solution |
-| "Admins want to invite many users at once" | Opportunity |
-| "Build SAML SSO" | Solution |
-| "Enterprise IT requires SSO to approve purchase" | Opportunity |
-| "Replace the onboarding video" | Solution |
-| "New users can't find the start button" | Opportunity |
-
-### Sizing opportunities
-
-For each opportunity:
-- How many customers experience it (% of base)?
-- How severe (workaround cost in time/$)?
-- How often (frequency per user)?
-- Strategic fit with outcome?
-
-Score = impact × frequency × strategic fit. Prioritize accordingly.
-
-### Multiple solutions discipline
-
-Don't allow single-solution branches. If only one solution comes up:
-- Ask: "What if we couldn't build that?"
-- Borrow from analogous problems
-- Get team brainstorm input
-- Look at how competitors solve it
-
-Goal: at least 3 candidate solutions per opportunity worth pursuing.
-
-### Assumption test ladder
-
-For each solution, the cheapest test first:
-1. Customer interview / desirability test (~$0)
-2. Landing page / smoke test (~hours)
-3. Wizard-of-Oz / concierge MVP (~days)
-4. Low-fidelity prototype (~1 week)
-5. High-fidelity prototype (~2 weeks)
-6. A/B test in production (~weeks-months)
-
-Spend the minimum to learn the most.
-
-**AI-generated prototypes compress rungs 4-5.** With AI app builders, AI design tools, and AI coding assistants, a clickable or working prototype can take hours rather than weeks. That makes it tempting to skip rungs 1-3 — don't: a polished prototype of the wrong opportunity is still waste. Use a generated prototype when the assumption under test is usability or desirability, generate 2-3 variants (one per candidate solution) rather than one, and test with real target users against a pre-set threshold. Record the result on the tree node; the winning solution then goes to `execution/create-prd/` (see its Prototype-First Path) for the problem, metrics, constraints, non-goals, and risks the prototype cannot carry.
-
-## Common engagements
-
-### "Help me set up an OST for our team this quarter"
-1. Confirm the outcome (1 number).
-2. Pull existing discovery evidence; cluster into opportunities.
-3. Brainstorm 3-5 solutions per top opportunity.
-4. Identify top 3 assumption tests for the quarter.
-5. Schedule weekly OST update rhythm.
-
-### "Our roadmap is full of features but outcomes aren't moving"
-1. Map current roadmap to OST.
-2. Identify orphan solutions (no opportunity → no outcome).
-3. Identify gaps (opportunities without solutions in roadmap).
-4. Reshape roadmap around outcome-supporting solutions.
-
-### "Audit our discovery practice"
-1. Look at the OST: when last updated?
-2. How many interviews per week feed it?
-3. Are opportunities written as needs (not solutions)?
-4. How many solutions per opportunity (1 = under-divergent)?
-5. How many assumption tests in progress?
-
-## Anti-patterns to avoid
-
-- **Outcome = output.** "Ship X" is not an outcome.
-- **Opportunities = solutions.** Strip solutions out of the opportunity layer.
-- **Single solution per opportunity.** Force 3+ alternatives.
-- **No assumption tests.** Tree without tests = wishful thinking.
-- **Static tree.** Update weekly or it dies.
-- **Tree built without customer input.** Designed in vacuum; full of bias.
-- **One huge outcome.** Decompose to team-level.
-- **All opportunities equally important.** Prioritize explicitly.
+More failures and fixes: `references/ost-anti-patterns.md`.
 
 ## Scope & Limitations
 
@@ -253,11 +134,11 @@ Spend the minimum to learn the most.
 **Important Caveats:**
 - `ost_validator.py` reads a hand-built JSON tree. Flags such as `is_customer_phrased` and `has_evidence` are self-reported, so the tool checks structure, not the quality of the evidence.
 - Opportunity scoring (impact, frequency, strategic fit) is an estimate the team makes. The tool does not compute it from data.
-- The tree goes stale without weekly updates. The validator warns when `last_updated` is more than 14 days old.
+- The tree goes stale without weekly updates. The validator warns when `last_updated` is more than 14 days before `as_of` and fails it past 30.
 
 ## References
 
-- `references/ost-fundamentals.md` — Teresa Torres framework deep
+- `references/ost-fundamentals.md` — layers, outcome/opportunity/solution examples, assumption tests, weekly rhythm, stuck trees
 - `references/ost-anti-patterns.md` — common failures + fixes
 
 ## Related skills
@@ -269,3 +150,12 @@ Spend the minimum to learn the most.
 - `project-management/execution/north-star-metric` — outcome definition
 - `project-management/strategy-frameworks/lean-canvas` — strategic context
 - `product-team/research-summarizer` — interview synthesis
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/ost_validator.py` | Audits a JSON tree for outcome quality, opportunity phrasing, solution diversity, test coverage and freshness |
+| `assets/sample_ost.json`, `assets/sample_ost_flawed.json` | Runnable trees: sound (exit 0) and flawed (exit 1) |
+| `assets/ost_template.md` | Tree worksheet to fill in |
+| `references/ost-fundamentals.md`, `references/ost-anti-patterns.md` | Framework detail; failures and fixes |

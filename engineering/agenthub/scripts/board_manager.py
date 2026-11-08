@@ -56,20 +56,28 @@ def load_session(path):
     """Load session state from JSON file."""
     try:
         with open(path, "r") as f:
-            return json.load(f)
+            data = json.load(f)
     except (json.JSONDecodeError, OSError) as e:
         print(f"Error loading session: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
+    if not isinstance(data, dict) or not isinstance(data.get("agents"), dict):
+        print(f"Error: {path} is not a session file (no 'agents' object)", file=sys.stderr)
+        sys.exit(2)
+    return data
 
 
 def compute_elapsed(session):
-    """Compute elapsed time since session start."""
+    """Seconds from session start to now while an agent runs, else to the last event."""
     started = session.get("started_at", "")
     if not started:
         return 0
     try:
         start_dt = datetime.fromisoformat(started)
-        return (datetime.now() - start_dt).total_seconds()
+        if any(a.get("state") == "RUNNING" for a in session.get("agents", {}).values()):
+            return (datetime.now() - start_dt).total_seconds()
+        stamps = [h.get("timestamp", "") for h in session.get("history", [])] + [session.get("completed_at") or ""]
+        last = max((datetime.fromisoformat(t) for t in stamps if t), default=start_dt)
+        return (last - start_dt).total_seconds()
     except ValueError:
         return 0
 
@@ -276,7 +284,7 @@ def main():
     session_path = Path(args.session)
     if not session_path.exists():
         print(f"Error: Session file '{args.session}' not found.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     session = load_session(session_path)
 

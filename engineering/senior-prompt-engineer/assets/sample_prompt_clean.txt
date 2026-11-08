@@ -1,0 +1,19 @@
+Goal: classify one piece of customer feedback so the support lead can route it the same day.
+
+Context: feedback comes from the in-app form of a project-management SaaS. The support lead
+reads these labels each morning, so a wrong "urgent" costs them time and a missed one costs a
+customer.
+
+Task: assign exactly one category from: bug, billing, feature_request, praise, other.
+Mark urgent as true only when the customer reports data loss, a payment failure or a full
+outage, because those are the cases the lead escalates.
+
+Output format: respond in JSON with keys "category" (one of the five values), "urgent"
+(true or false) and "evidence" (the shortest quote from the feedback that justifies the label).
+
+Example:
+Input: "I was charged twice this month and can't reach anyone."
+Output: {"category": "billing", "urgent": true, "evidence": "charged twice"}
+
+Feedback:
+{feedback}

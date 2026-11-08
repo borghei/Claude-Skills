@@ -739,8 +739,12 @@ def main() -> None:
         path = Path(args.html_file)
         if not path.exists():
             print(f"Error: File not found: {args.html_file}", file=sys.stderr)
-            sys.exit(1)
-        html_content = path.read_text(encoding="utf-8")
+            sys.exit(2)
+        try:
+            html_content = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as exc:
+            print(f"Error: cannot read {args.html_file}: {exc}", file=sys.stderr)
+            sys.exit(2)
 
     # Run audit
     result = run_audit(html_content, level=args.level)

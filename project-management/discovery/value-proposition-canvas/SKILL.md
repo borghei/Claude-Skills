@@ -1,16 +1,16 @@
 ---
 name: value-proposition-canvas
 description: >
-  Strategyzer Value Proposition Canvas (Customer Profile + Value Map) with fit
-  validation across problem-solution, product-market, and business-model
-  dimensions. Use for jobs-to-be-done, pains/gains, and product-market-fit framing.
+  Maps one segment's jobs, pains and gains against your product's relievers and creators
+  and checks fit. Use when testing whether an offer matches what customers care about,
+  or positioning a product for one segment.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-discovery
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: value-proposition, jobs-to-be-done, strategyzer, product-market-fit
   tags:
     - value-proposition-canvas
@@ -24,7 +24,7 @@ metadata:
 
 The Value Proposition Canvas (VPC) is the canonical Strategyzer tool for designing and testing the fit between what customers care about and what your product offers. It is the "zoom-in" companion to the Business Model Canvas, focused on the two most failure-prone blocks: Customer Segments and Value Propositions. Where the Business Model Canvas asks "is this a viable business?", the VPC asks "are we building something customers actually want?"
 
-The canvas has two sides. The **Customer Profile** describes the customer's world in their language -- jobs they are trying to do, pains they experience, and gains they aspire to. The **Value Map** describes the product's response -- the products and services offered, the pain relievers they include, and the gain creators they enable. Fit is achieved when the Value Map mirrors the Customer Profile element-by-element. The method follows Alexander Osterwalder and Yves Pigneur's *Value Proposition Design* (2014).
+Fit is reached when every top-ranked job, pain and gain in the Customer Profile has a matching reliever or creator in the Value Map. This skill owns the offer-design step; discovering why customers switch belongs to `jtbd-workshop`, and running the interviews to `customer-interview-script`.
 
 ## Core Capabilities
 
@@ -53,9 +53,12 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+The workflow, start to finish:
+
 1. Pick one segment; run 5-7 interviews via `discovery/customer-interview-script/`.
 2. Fill the Customer Profile (jobs/pains/gains, ranked) from `discovery/interview-synthesis/` themes; then draft the Value Map so each top item has a pain reliever or gain creator.
 3. Run `assets/fit_validation_checklist.md`, list the top unaddressed pains/gains, and feed the canvas into `execution/create-prd/` Sections 5-6.
+4. Verify that every profile item comes from interview evidence in the customer's words, each top-3 pain and gain has a reliever or creator, and the unaddressed items are listed rather than dropped before calling it done.
 
 See `references/canvas-construction-playbook.md` for the full two-side method, three fit levels, template, worked example, and troubleshooting.
 
@@ -96,15 +99,10 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 **Caveats:** the VPC is a thinking aid, not a roadmap -- solutions still need experimentation (`discovery/brainstorm-experiments/`). Problem-solution fit is the minimum bar, necessary but not sufficient for product-market fit. Strategyzer methodology is CC-BY-SA; attribute to Strategyzer / Osterwalder when sharing externally. A beautifully filled canvas with no customer interviews is fiction.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/customer-interview-script/` | Receives from | Verbatim customer quotes populate the Customer Profile |
-| `discovery/interview-synthesis/` | Receives from | Themed insights become jobs, pains, and gains |
-| `discovery/jtbd-workshop/` | Complementary | JTBD workshop produces the job hierarchy; VPC adds pains and gains |
-| `discovery/identify-assumptions/` | Bidirectional | Unaddressed pains become risk assumptions; assumptions inform validation focus |
-| `execution/create-prd/` | Feeds into | Canvas populates PRD Section 5 (Market Segments) and Section 6 (Value Propositions) |
-| `execution/product-vision/` | Bidirectional | Vision defines the long-term promise; VPC validates current-day delivery |
-| `execution/prioritization-frameworks/` | Feeds into | Unaddressed top pains and gains become candidate features |
-| `marketing/` | Feeds into | Pain relievers and gain creators become marketing talking points and proof points |
+| File | Purpose |
+|------|---------|
+| `assets/vpc_template.md`, `assets/customer_profile_worksheet.md`, `assets/value_map_worksheet.md`, `assets/fit_validation_checklist.md` | Canvas, worksheets, fit checklist |
+| `references/canvas-construction-playbook.md`, `references/value-proposition-design-guide.md`, `references/red-flags.md` | Method, background, failure modes |
+| `examples/dev-tools-platform-engineer-vpc.md` | Worked canvas |

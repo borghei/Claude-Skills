@@ -1,0 +1,14 @@
+{
+  "variants": ["prompt-v1", "prompt-v2", "prompt-v3"],
+  "matches": [
+    {"a": "prompt-v1", "b": "prompt-v2", "winner": "prompt-v2"},
+    {"a": "prompt-v2", "b": "prompt-v1", "winner": "prompt-v2"},
+    {"a": "prompt-v1", "b": "prompt-v2", "winner": "tie"},
+    {"a": "prompt-v1", "b": "prompt-v3", "winner": "prompt-v3"},
+    {"a": "prompt-v3", "b": "prompt-v1", "winner": "prompt-v1"},
+    {"a": "prompt-v2", "b": "prompt-v3", "winner": "prompt-v2"},
+    {"a": "prompt-v3", "b": "prompt-v2", "winner": "prompt-v2"},
+    {"a": "prompt-v2", "b": "prompt-v3", "winner": "prompt-v3"},
+    {"a": "prompt-v1", "b": "prompt-v3", "winner": "prompt-v3"}
+  ]
+}

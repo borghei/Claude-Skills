@@ -134,7 +134,7 @@ See `scripts/release_notes_generator.py --help` for full usage.
 
 | Symptom | Likely Cause | Resolution |
 |---------|-------------|------------|
-| Tool flags too many entries as "technical language" | TECHNICAL_PATTERNS regex is broad, catching common words like "update" or "add" | Review the flagged entries; the tool provides suggestions, not mandates -- ignore false positives for user-facing descriptions |
+| Tool flags too many entries as "technical language" | TECHNICAL_PATTERNS is a keyword heuristic (jargon verbs like "refactor", acronyms such as API or SSO, code identifiers) | Review the flagged entries; the tool provides suggestions, not mandates -- ignore false positives for user-facing descriptions |
 | All entries classified as same type | Input JSON uses wrong type values or inconsistent casing | Use exact lowercase types: `feature`, `improvement`, `bugfix`, `breaking`, `deprecation` |
 | Empty sections appear in output | No entries of that type exist but template still renders the section | The tool only renders sections with entries; empty sections indicate a data issue in input |
 | Breaking changes not highlighted prominently | Entries marked as `improvement` instead of `breaking` | Review classification rules: if users must change behavior, config, or integration, it is `breaking`, not `improvement` |

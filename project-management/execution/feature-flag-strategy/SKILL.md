@@ -1,16 +1,16 @@
 ---
 name: feature-flag-strategy
 description: >
-  PM-facing playbook for phased rollouts with feature flags -- taxonomy
-  (release / experiment / ops / permission), rollout shapes, kill-switch
-  decision tree, holdouts, flag debt retirement, and naming conventions.
+  Plan a flag-gated rollout: classify the flag, pick a rollout shape, set
+  kill-switch thresholds and retire the flag. Use when planning a phased
+  rollout, a kill switch, a holdout or a cleanup of old flags.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: feature-flags, dark-launch, kill-switch, rollout, holdout, ab-test, launchdarkly, statsig
   tags:
     - feature-flags
@@ -56,11 +56,13 @@ Before drafting the rollout plan, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
-1. Classify the flag, pick a rollout shape, and define the kill-switch threshold + authority.
-2. Set a retirement date (release/experiment toggles), name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
-3. Ramp through stages with a "green pass" gate metric per step; retire the flag at stable GA; audit inventory quarterly.
+1. Classify the flag (release, experiment, ops, permission), pick a rollout shape, and set the kill-switch threshold and who may flip it, before the first ramp.
+2. Set a retirement date for release and experiment flags, name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
+3. Ramp through stages with a "green pass" gate metric per step [RECOMMENDED]; retire the flag at stable GA; audit the inventory quarterly.
+
+**Done when** the plan names each stage's gate metric and threshold, the kill-switch owner, and the date the flag is deleted from code.
 
 See `references/rollout-execution-playbook.md` for the full taxonomy, shape catalog, kill-switch tree, holdout governance, naming, workflow, troubleshooting, and success criteria.
 
@@ -89,10 +91,16 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - `references/fowler-feature-toggle-taxonomy-guide.md` -- read this for the deep dive on Martin Fowler's "Feature Toggles" essay, lifespans, ownership patterns, and the operational discipline behind them.
 - `references/rollout-shape-comparison-guide.md` -- read this for the worked comparison of the 7 rollout shapes with example use cases and risk profiles.
 - `references/red-flags.md` -- read this when reviewing a rollout plan for anti-patterns and failure modes before sign-off.
-- `assets/rollout_plan_template.md` -- per-feature rollout plan with stages, gates, owners, dates.
-- `assets/kill_switch_decision_tree.md` -- pre-incident kill-switch thresholds + authority + flip steps.
-- `assets/flag_debt_retirement_checklist.md` -- retirement workflow + quarterly audit.
-- `assets/flag_naming_convention.md` -- team naming sheet.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/rollout_plan_template.md` | Per-feature rollout plan: stages, gates, owners, dates |
+| `assets/kill_switch_decision_tree.md` | Kill-switch thresholds, authority and flip steps |
+| `assets/flag_debt_retirement_checklist.md` | Retirement workflow and quarterly audit |
+| `assets/flag_naming_convention.md` | Naming sheet |
+| `examples/pricing-page-redesign-rollout.md` | Worked rollout |
 
 ## Scope & Limitations
 

@@ -48,7 +48,8 @@ Audit a triage export against the state machine (exit 1 = violations):
 
 ```bash
 python3 project-management/execution/issue-triage/scripts/triage_state_validator.py \
-  --input project-management/execution/issue-triage/assets/sample_triage_history.json --today 2026-11-08
+  --input project-management/execution/issue-triage/assets/sample_triage_history_clean.json --today 2026-11-08
+# assets/sample_triage_history.json is the flawed export: exits 1 with 10 errors
 ```
 
 Lint briefs before an item moves to `ready-for-*` (exit 1 = not hand-off ready):

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Agentic Evaluation Framework - Claude Skills</title>
-  <meta name="description" content="This skill should be used when the user asks to &quot;evaluate LLM output quality&quot;, &quot;set up LLM-as-judge&quot;, &quot;build an eval rubric&quot;, &quot;compare model outputs pairwise&quot;, or &quot;measure agent quality&quot;.">
+  <meta name="description" content="Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge, scoring outputs">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/agentic-evaluation-framework.html">
   <meta property="og:title" content="Agentic Evaluation Framework - Claude Skills">
-  <meta property="og:description" content="This skill should be used when the user asks to &quot;evaluate LLM output quality&quot;, &quot;set up LLM-as-judge&quot;, &quot;build an eval rubric&quot;, &quot;compare model outputs pairwise&quot;, or &quot;measure agent quality&quot;.">
+  <meta property="og:description" content="Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge, scoring outputs">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/agentic-evaluation-framework.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Agentic Evaluation Framework", "description": "This skill should be used when the user asks to \"evaluate LLM output quality\", \"set up LLM-as-judge\", \"build an eval rubric\", \"compare model outputs pairwise\", or \"measure agent quality\".", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/agentic-evaluation-framework.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Agentic Evaluation Framework", "description": "Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge, scoring outputs, or comparing model or prompt variants.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/agentic-evaluation-framework.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Agentic Evaluation Framework</h1>
-    <p class="page-subtitle">This skill should be used when the user asks to &quot;evaluate LLM output quality&quot;, &quot;set up LLM-as-judge&quot;, &quot;build an eval rubric&quot;, &quot;compare model outputs pairwise&quot;, or &quot;measure agent quality&quot;.</p>
+    <p class="page-subtitle">Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge, scoring outputs, or comparing model or prompt variants.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">evaluation</span><span class="tag">llm-as-judge</span><span class="tag">rubrics</span><span class="tag">agents</span><span class="tag">quality</span></div>
   </div>
@@ -393,13 +393,16 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Agentic Evaluation Framework (Engineering domain).
 
-This skill should be used when the user asks to &quot;evaluate LLM output quality&quot;, &quot;set up LLM-as-judge&quot;, &quot;build an eval rubric&quot;, &quot;compare model outputs pairwise&quot;, or &quot;measure agent quality&quot;.
+Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge, scoring outputs, or comparing model or prompt variants.
 
 &gt; **Category:** Engineering &gt; **Domain:** AI Engineering Design and run trustworthy evaluations for LLM and agent outputs: pick the right grading method (programmatic check, LLM-as-judge, or human review), write a scoring rubric that judges can apply consistently, rank competing variants by pairwise
 
 ## Your Key Capabilities
 - 1. Build and calibrate an absolute-scoring rubric
 - 2. Rank model/prompt variants by pairwise comparison
+- Trusting an uncalibrated judge
+- One order, one judge
+- Averaging away disagreement
 
 ## Frameworks &amp; Templates You Know
 - Agentic Evaluation Framework
@@ -423,13 +426,16 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Agentic Evaluation Framework (Engineering domain).
 
-This skill should be used when the user asks to &quot;evaluate LLM output quality&quot;, &quot;set up LLM-as-judge&quot;, &quot;build an eval rubric&quot;, &quot;compare model outputs pairwise&quot;, or &quot;measure agent quality&quot;.
+Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge, scoring outputs, or comparing model or prompt variants.
 
 &gt; **Category:** Engineering &gt; **Domain:** AI Engineering Design and run trustworthy evaluations for LLM and agent outputs: pick the right grading method (programmatic check, LLM-as-judge, or human review), write a scoring rubric that judges can apply consistently, rank competing variants by pairwise
 
 ## Your Key Capabilities
 - 1. Build and calibrate an absolute-scoring rubric
 - 2. Rank model/prompt variants by pairwise comparison
+- Trusting an uncalibrated judge
+- One order, one judge
+- Averaging away disagreement
 
 ## Frameworks &amp; Templates You Know
 - Agentic Evaluation Framework
@@ -486,14 +492,18 @@ Ask about the two or three inputs that matter most for this request. If the user
 cd engineering/agentic-evaluation-framework
 
 # 1. Score outputs against a weighted rubric + check inter-rater agreement
-python scripts/rubric_scorer.py --data rubric_scores.json
+python scripts/rubric_scorer.py --data assets/sample_rubric_scores.json      # 4 items, 50% pass
 
 # 2. Rank competing variants from pairwise (A-vs-B) judgements
-python scripts/pairwise_ranking.py --data pairwise_matches.json
+python scripts/pairwise_ranking.py --data assets/sample_pairwise_matches.json  # prompt-v2 first
 
 # JSON output for piping into a dashboard or CI gate
-python scripts/rubric_scorer.py --data rubric_scores.json --json
+python scripts/rubric_scorer.py --data assets/sample_rubric_scores.json --json
 ```
+
+Input shapes are in each script&#x27;s docstring and in the two sample files. In the rubric sample the
+two judges disagree sharply on `medical-advice-q` (accuracy 4 vs 2): low agreement on an item is a
+signal to fix the rubric wording or add an anchor example before trusting the score.
 
 ## Tools Overview
 
@@ -503,6 +513,9 @@ python scripts/rubric_scorer.py --data rubric_scores.json --json
 | `scripts/pairwise_ranking.py` | Turn head-to-head win/loss records into a ranking via Elo + Bradley-Terry, plus a win-rate matrix | `--data`, `--k`, `--base`, `--json` |
 
 Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-readable output. They compute over scores you provide and never call a model. Run `--help` for full usage.
+
+**Exit codes.** `0` report printed; `2` missing or unreadable `--data`, invalid JSON, or a file
+without the expected keys. Neither script gates on the scores; read the pass rate and agreement.
 
 ## Workflows
 
@@ -541,6 +554,29 @@ Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-r
 - An LLM judge is only trustworthy after its scores agree with human labels on a held-out set. Agreement can drift when the judge model or prompt changes.
 - Elo depends on match order and the K-factor. With few matches per pair, rankings from either method are unstable.
 - The skill is vendor-agnostic and names no model. Judge model choice and pricing are left to the user.
+
+## Anti-Patterns
+
+### Trusting an uncalibrated judge
+**Mistake:** Shipping on LLM-judge scores that were never compared with human labels.
+**Why it happens:** The judge produces confident numbers immediately.
+**Instead:** Label a held-out set by hand, measure the judge&#x27;s agreement with it, and re-check when the judge model or prompt changes.
+
+### One order, one judge
+**Mistake:** Running each pairwise comparison once with the same variant always in position A.
+**Why it happens:** Doubling the comparisons doubles the cost.
+**Instead:** Run both orders and count only wins that survive the swap; position bias is large enough to flip rankings.
+
+### Averaging away disagreement
+**Mistake:** Reporting the mean score while two graders disagree by two points on the same item.
+**Why it happens:** The mean looks stable.
+**Instead:** Read `rubric_scorer.py`&#x27;s agreement numbers and fix the rubric where graders split, usually by adding anchor examples for each score.
+
+## Files
+
+- `scripts/rubric_scorer.py`, `scripts/pairwise_ranking.py` — the two CLIs above.
+- `assets/sample_rubric_scores.json` — four items, three criteria, two judges; `assets/sample_pairwise_matches.json` — nine matches across three prompt variants.
+- `references/llm-judge-methodology.md`, `references/eval-pitfalls.md` — judge design, bias mitigations, pitfalls.
 
 ## Reference Documentation
 
@@ -584,7 +620,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Agentic Evaluation Framework&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;evaluate LLM output quality&quot;, &quot;set up LLM-as-judge&quot;, &quot;build an eval rubric&quot;, &quot;compare model outputs pairwise&quot;, or &quot;measure agent quality&quot;.&quot;
+   - Description: &quot;Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge, scoring outputs, or comparing model or prompt variants.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -632,14 +668,18 @@ Ask about the two or three inputs that matter most for this request. If the user
 cd engineering/agentic-evaluation-framework
 
 # 1. Score outputs against a weighted rubric + check inter-rater agreement
-python scripts/rubric_scorer.py --data rubric_scores.json
+python scripts/rubric_scorer.py --data assets/sample_rubric_scores.json      # 4 items, 50% pass
 
 # 2. Rank competing variants from pairwise (A-vs-B) judgements
-python scripts/pairwise_ranking.py --data pairwise_matches.json
+python scripts/pairwise_ranking.py --data assets/sample_pairwise_matches.json  # prompt-v2 first
 
 # JSON output for piping into a dashboard or CI gate
-python scripts/rubric_scorer.py --data rubric_scores.json --json
+python scripts/rubric_scorer.py --data assets/sample_rubric_scores.json --json
 ```
+
+Input shapes are in each script&#x27;s docstring and in the two sample files. In the rubric sample the
+two judges disagree sharply on `medical-advice-q` (accuracy 4 vs 2): low agreement on an item is a
+signal to fix the rubric wording or add an anchor example before trusting the score.
 
 ## Tools Overview
 
@@ -649,6 +689,9 @@ python scripts/rubric_scorer.py --data rubric_scores.json --json
 | `scripts/pairwise_ranking.py` | Turn head-to-head win/loss records into a ranking via Elo + Bradley-Terry, plus a win-rate matrix | `--data`, `--k`, `--base`, `--json` |
 
 Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-readable output. They compute over scores you provide and never call a model. Run `--help` for full usage.
+
+**Exit codes.** `0` report printed; `2` missing or unreadable `--data`, invalid JSON, or a file
+without the expected keys. Neither script gates on the scores; read the pass rate and agreement.
 
 ## Workflows
 
@@ -687,6 +730,29 @@ Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-r
 - An LLM judge is only trustworthy after its scores agree with human labels on a held-out set. Agreement can drift when the judge model or prompt changes.
 - Elo depends on match order and the K-factor. With few matches per pair, rankings from either method are unstable.
 - The skill is vendor-agnostic and names no model. Judge model choice and pricing are left to the user.
+
+## Anti-Patterns
+
+### Trusting an uncalibrated judge
+**Mistake:** Shipping on LLM-judge scores that were never compared with human labels.
+**Why it happens:** The judge produces confident numbers immediately.
+**Instead:** Label a held-out set by hand, measure the judge&#x27;s agreement with it, and re-check when the judge model or prompt changes.
+
+### One order, one judge
+**Mistake:** Running each pairwise comparison once with the same variant always in position A.
+**Why it happens:** Doubling the comparisons doubles the cost.
+**Instead:** Run both orders and count only wins that survive the swap; position bias is large enough to flip rankings.
+
+### Averaging away disagreement
+**Mistake:** Reporting the mean score while two graders disagree by two points on the same item.
+**Why it happens:** The mean looks stable.
+**Instead:** Read `rubric_scorer.py`&#x27;s agreement numbers and fix the rubric where graders split, usually by adding anchor examples for each score.
+
+## Files
+
+- `scripts/rubric_scorer.py`, `scripts/pairwise_ranking.py` — the two CLIs above.
+- `assets/sample_rubric_scores.json` — four items, three criteria, two judges; `assets/sample_pairwise_matches.json` — nine matches across three prompt variants.
+- `references/llm-judge-methodology.md`, `references/eval-pitfalls.md` — judge design, bias mitigations, pitfalls.
 
 ## Reference Documentation
 
@@ -730,7 +796,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Agentic Evaluation Framework&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;evaluate LLM output quality&quot;, &quot;set up LLM-as-judge&quot;, &quot;build an eval rubric&quot;, &quot;compare model outputs pairwise&quot;, or &quot;measure agent quality&quot;.&quot;
+   - Description: &quot;Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge, scoring outputs, or comparing model or prompt variants.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -793,15 +859,19 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
   <h2>Quick Start</h2><pre><code>cd engineering/agentic-evaluation-framework
 
 # 1. Score outputs against a weighted rubric + check inter-rater agreement
-python scripts/rubric_scorer.py --data rubric_scores.json
+python scripts/rubric_scorer.py --data assets/sample_rubric_scores.json      # 4 items, 50% pass
 
 # 2. Rank competing variants from pairwise (A-vs-B) judgements
-python scripts/pairwise_ranking.py --data pairwise_matches.json
+python scripts/pairwise_ranking.py --data assets/sample_pairwise_matches.json  # prompt-v2 first
 
 # JSON output for piping into a dashboard or CI gate
-python scripts/rubric_scorer.py --data rubric_scores.json --json
+python scripts/rubric_scorer.py --data assets/sample_rubric_scores.json --json
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+
+Input shapes are in each script's docstring and in the two sample files. In the rubric sample the
+two judges disagree sharply on `medical-advice-q` (accuracy 4 vs 2): low agreement on an item is a
+signal to fix the rubric wording or add an anchor example before trusting the score.
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/agentic-evaluation-framework/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

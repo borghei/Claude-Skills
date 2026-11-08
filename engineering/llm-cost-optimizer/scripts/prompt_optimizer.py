@@ -5,7 +5,6 @@ Prompt Optimizer - Analyze prompts for token reduction opportunities.
 Identifies verbose patterns, redundancies, and optimization opportunities
 in LLM prompts to reduce token usage while preserving intent.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -84,6 +83,10 @@ REDUNDANT_PATTERNS = [
      "Unnecessary meta-instruction - state the requirement directly"),
     (r'(?:the following|below)\s+(?:is|are)\s+(?:the|a)\s+',
      "Verbose introduction to content - just present the content"),
+    (r'(?:think|reason|work)\s+(?:it\s+)?(?:through\s+)?step[- ]by[- ]step|let\'?s think|chain[- ]of[- ]thought',
+     "Reasoning scaffold - reasoning models already think; use the reasoning-effort setting instead"),
+    (r'(?-i:\b(?:MUST|NEVER|ALWAYS|CRITICAL|IMPORTANT)\b)',  # case-sensitive: only shouted words
+     "All-caps emphasis - state the rule calmly with its reason; shouting causes over-triggering"),
 ]
 
 
@@ -366,7 +369,7 @@ def main():
         path = Path(args.file)
         if not path.exists():
             print(f"Error: File not found: {args.file}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         text = path.read_text(encoding="utf-8", errors="ignore")
     elif args.text:
         text = args.text
@@ -375,7 +378,7 @@ def main():
 
     if not text.strip():
         print("Error: Empty input", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     report = analyze_prompt(text, args.target_reduction)
 

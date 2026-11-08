@@ -4,12 +4,9 @@
 Generates a complete PRD markdown file with all 8 sections pre-filled with
 placeholder guidance. Uses a proven 8-section framework: Summary, Contacts,
 Background, Objective, Market Segments, Value Propositions, Solution, Release.
-
 Usage:
-    python prd_scaffolder.py --product-name "MyProduct" --objective "Short description" --segments "Segment A, Segment B"
-    python prd_scaffolder.py --product-name "MyProduct" --objective "..." --segments "..." --output PRD-MyProduct.md
-
-Standard library only. No external dependencies.
+    python prd_scaffolder.py --product-name "MyProduct" --objective "..." --segments "A, B" [--output PRD.md]
+Standard library only.
 """
 
 import argparse
@@ -38,7 +35,9 @@ def generate_prd(product_name: str, objective: str, segments: list[str]) -> str:
 
 <!-- Write 2-3 sentences. Answer: What is this? Who is it for? Why now? -->
 
-{product_name} is [what it is] designed for [target users]. {objective}. This initiative is timely because [reason this matters now].
+{product_name} is [what it is] designed for [target users]. This initiative is timely because [reason this matters now].
+
+**Objective as stated:** {objective}
 
 ---
 
@@ -210,7 +209,6 @@ v1 is successful when:
 
 
 def _build_segments_section(segments: list[str]) -> str:
-    """Build the market segments section."""
     lines = []
     for i, segment in enumerate(segments, 1):
         lines.append(f"### Segment {i}: {segment}")
@@ -225,7 +223,6 @@ def _build_segments_section(segments: list[str]) -> str:
 
 
 def _build_value_props_section(segments: list[str]) -> str:
-    """Build the value propositions section."""
     lines = []
     for i, segment in enumerate(segments, 1):
         lines.append(f"### {segment}")
@@ -239,7 +236,6 @@ def _build_value_props_section(segments: list[str]) -> str:
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
         description="Generate a structured PRD markdown skeleton with 8 sections.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -247,6 +243,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             Examples:
               python prd_scaffolder.py --product-name "SearchBoost" --objective "Help users find products 50%% faster" --segments "Power users, New customers"
               python prd_scaffolder.py --product-name "SearchBoost" --objective "..." --segments "Power users, New customers" --output PRD-SearchBoost.md
+            Exit codes: 0 skeleton written, 2 bad arguments or unwritable --output.
         """),
     )
     parser.add_argument(
@@ -273,19 +270,22 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def main(argv: list[str] | None = None) -> None:
-    """Main entry point."""
     args = parse_args(argv)
     segments = [s.strip() for s in args.segments.split(",") if s.strip()]
 
     if not segments:
-        print("Error: At least one market segment is required.", file=sys.stderr)
-        sys.exit(1)
+        print("error: --segments needs at least one non-empty segment", file=sys.stderr)
+        sys.exit(2)
 
     prd = generate_prd(args.product_name, args.objective, segments)
 
     if args.output:
-        with open(args.output, "w", encoding="utf-8") as f:
-            f.write(prd)
+        try:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(prd)
+        except OSError as e:
+            print(f"error: cannot write {args.output}: {e.strerror or e}", file=sys.stderr)
+            sys.exit(2)
         print(f"PRD written to {args.output}", file=sys.stderr)
     else:
         print(prd)

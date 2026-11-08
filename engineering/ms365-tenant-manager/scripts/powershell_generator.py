@@ -239,7 +239,7 @@ $delegationReport = @()
 
 foreach ($mailbox in $mailboxes) {
     $permissions = Get-MailboxPermission -Identity $mailbox.Identity |
-                   Where-Object { $_.User -ne "NT AUTHORITY\SELF" -and $_.IsInherited -eq $false }
+                   Where-Object { $_.User -ne "NT AUTHORITY\\SELF" -and $_.IsInherited -eq $false }
 
     foreach ($perm in $permissions) {
         $delegationReport += [PSCustomObject]@{

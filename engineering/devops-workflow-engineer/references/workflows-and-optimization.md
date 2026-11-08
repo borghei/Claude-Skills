@@ -17,7 +17,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: make lint
 
   test:
@@ -26,7 +26,7 @@ jobs:
       matrix:
         python-version: ['3.10', '3.11', '3.12']
     steps:
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with: { python-version: "${{ matrix.python-version }}", cache: pip }
       - run: pip install -r requirements.txt
       - run: pytest --junitxml=results.xml
@@ -107,7 +107,7 @@ concurrency:
 
 **Dependency caching:**
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: ~/.cache/pip
     key: ${{ runner.os }}-deps-${{ hashFiles('**/requirements.txt') }}

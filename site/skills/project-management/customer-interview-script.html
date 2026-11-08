@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Interview Script - Claude Skills</title>
-  <meta name="description" content="Run high-signal customer discovery interviews using a scripted question hierarchy, behavior-over-opinion probes, and rapport techniques drawn from Portigal, Torres, Fitzpatrick (Mom Test), and Lewis L">
+  <meta name="description" content="Writes and times a customer interview script that collects past-behavior stories, not opinions. Use when preparing a discovery, solution-validation, journey, churn or win-loss interview, or when inter">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/customer-interview-script.html">
   <meta property="og:title" content="Customer Interview Script - Claude Skills">
-  <meta property="og:description" content="Run high-signal customer discovery interviews using a scripted question hierarchy, behavior-over-opinion probes, and rapport techniques drawn from Portigal, Torres, Fitzpatrick (Mom Test), and Lewis L">
+  <meta property="og:description" content="Writes and times a customer interview script that collects past-behavior stories, not opinions. Use when preparing a discovery, solution-validation, journey, churn or win-loss interview, or when inter">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/customer-interview-script.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Customer Interview Script", "description": "Run high-signal customer discovery interviews using a scripted question hierarchy, behavior-over-opinion probes, and rapport techniques drawn from Portigal, Torres, Fitzpatrick (Mom Test), and Lewis Lin.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/customer-interview-script.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Customer Interview Script", "description": "Writes and times a customer interview script that collects past-behavior stories, not opinions. Use when preparing a discovery, solution-validation, journey, churn or win-loss interview, or when interviews keep producing compliments.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/customer-interview-script.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Customer Interview Script</h1>
-    <p class="page-subtitle">Run high-signal customer discovery interviews using a scripted question hierarchy, behavior-over-opinion probes, and rapport techniques drawn from Portigal, Torres, Fitzpatrick (Mom Test), and Lewis Lin.</p>
+    <p class="page-subtitle">Writes and times a customer interview script that collects past-behavior stories, not opinions. Use when preparing a discovery, solution-validation, journey, churn or win-loss interview, or when interviews keep producing compliments.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">customer-interviews</span><span class="tag">interview-script</span><span class="tag">discovery</span><span class="tag">user-research</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Customer Interview Script (Project Management domain).
 
-Run high-signal customer discovery interviews using a scripted question hierarchy, behavior-over-opinion probes, and rapport techniques drawn from Portigal, Torres, Fitzpatrick (Mom Test), and Lewis Lin.
+Writes and times a customer interview script that collects past-behavior stories, not opinions. Use when preparing a discovery, solution-validation, journey, churn or win-loss interview, or when interviews keep producing compliments.
 
 Running a customer interview is harder than it looks. The difference between a 60-minute conversation that produces three actionable insights and one that produces zero is almost entirely method: what you ask, when you ask it, and what you do *not* ask. This skill is the live-interview companion to 
 
@@ -420,7 +420,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Customer Interview Script (Project Management domain).
 
-Run high-signal customer discovery interviews using a scripted question hierarchy, behavior-over-opinion probes, and rapport techniques drawn from Portigal, Torres, Fitzpatrick (Mom Test), and Lewis Lin.
+Writes and times a customer interview script that collects past-behavior stories, not opinions. Use when preparing a discovery, solution-validation, journey, churn or win-loss interview, or when interviews keep producing compliments.
 
 Running a customer interview is harder than it looks. The difference between a 60-minute conversation that produces three actionable insights and one that produces zero is almost entirely method: what you ask, when you ask it, and what you do *not* ask. This skill is the live-interview companion to 
 
@@ -461,7 +461,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Running a customer interview is harder than it looks. The difference between a 60-minute conversation that produces three actionable insights and one that produces zero is almost entirely method: what you ask, when you ask it, and what you do *not* ask. This skill is the live-interview companion to `discovery/interview-synthesis/` (post-interview analysis) and `discovery/identify-assumptions/` (which produces the questions you go in to test).
 
-The script structure draws from four canonical sources: Steve Portigal&#x27;s *Interviewing Users* (rapport, listening, &quot;tell me about the last time&quot;), Teresa Torres&#x27; *Continuous Discovery Habits* (story-based probing, weekly cadence), Rob Fitzpatrick&#x27;s *The Mom Test* (avoiding compliments, opinions, and futures), and Lewis Lin&#x27;s behavioral interviewing patterns (concrete-recent-relevant). The goal is to leave each interview with at least one story, one contradiction, and one surprise.
+The interviewing method itself is well known; what this skill adds is the 5-phase timing for 45/60/90-minute slots, the bad-to-good question conversions, the type-specific question banks, and two thresholds: the interviewer talks under 25% of the time, and stories come from the last ~90 days. The goal is to leave each interview with at least one story, one contradiction, and one surprise.
 
 ## Core Capabilities
 
@@ -492,9 +492,12 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+The workflow, start to finish:
+
 1. Pull top assumptions from `discovery/identify-assumptions/`; write 2-3 must-answer questions and pick the interview type.
 2. Customize `assets/interview_script_template.md` and pull type-specific prompts from `assets/question_bank.md`.
 3. Run the 5-phase script (rapport first, stories in the middle, contradictions at the end); debrief within 30 minutes; hand the transcript to `discovery/interview-synthesis/`.
+4. Verify that the script fits the slot, every must-answer question has a story prompt about a recent, real event, and no question asks about the future or invites a compliment before calling it done.
 
 See `references/interview-execution-playbook.md` for the full method, scripts, question banks, pacing, and troubleshooting.
 
@@ -533,17 +536,13 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 **Caveats:** this skill produces interview *technique*, not research operations. Story-based interviewing is bounded by participant memory -- events older than 90 days are reconstructions. B2B enterprise interviews often need procurement-style approval; build 2-4 weeks into recruiting. Continuous discovery assumes weekly touchpoints; one-off rounds produce shallower evidence -- weight findings accordingly.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/identify-assumptions/` | Receives from | Top assumptions become the must-answer questions for each interview |
-| `discovery/interview-synthesis/` | Feeds into | Transcripts and debrief notes are the input for theme clustering |
-| `discovery/brainstorm-ideas/` | Bidirectional | Pre-interview hypotheses; post-interview ideas seeded by themes |
-| `discovery/brainstorm-experiments/` | Feeds into | Validated pains become experiment hypotheses |
-| `discovery/jtbd-workshop/` | Complementary | Switch interviews use this script structure as their foundation |
-| `discovery/value-proposition-canvas/` | Feeds into | Jobs, pains, and gains captured in stories populate the Customer Profile |
-| `execution/create-prd/` | Feeds into | Direct quotes strengthen PRD Background and Market Segments |
+| File | Purpose |
+|------|---------|
+| `assets/interview_script_template.md`, `assets/question_bank.md` | Script to customize; prompts by interview type |
+| `references/interview-execution-playbook.md`, `references/interviewing-methodology-guide.md`, `references/red-flags.md` | Method and pacing, background, failure modes |
+| `examples/churn-investigation-filled-script.md` | Filled churn script |
 
 ---
 
@@ -571,7 +570,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Customer Interview Script&quot;**
-   - Description: &quot;Run high-signal customer discovery interviews using a scripted question hierarchy, behavior-over-opinion probes, and rapport techniques drawn from Portigal, Torres, Fitzpatrick (Mom Test), and Lewis Lin.&quot;
+   - Description: &quot;Writes and times a customer interview script that collects past-behavior stories, not opinions. Use when preparing a discovery, solution-validation, journey, churn or win-loss interview, or when interviews keep producing compliments.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -600,7 +599,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Running a customer interview is harder than it looks. The difference between a 60-minute conversation that produces three actionable insights and one that produces zero is almost entirely method: what you ask, when you ask it, and what you do *not* ask. This skill is the live-interview companion to `discovery/interview-synthesis/` (post-interview analysis) and `discovery/identify-assumptions/` (which produces the questions you go in to test).
 
-The script structure draws from four canonical sources: Steve Portigal&#x27;s *Interviewing Users* (rapport, listening, &quot;tell me about the last time&quot;), Teresa Torres&#x27; *Continuous Discovery Habits* (story-based probing, weekly cadence), Rob Fitzpatrick&#x27;s *The Mom Test* (avoiding compliments, opinions, and futures), and Lewis Lin&#x27;s behavioral interviewing patterns (concrete-recent-relevant). The goal is to leave each interview with at least one story, one contradiction, and one surprise.
+The interviewing method itself is well known; what this skill adds is the 5-phase timing for 45/60/90-minute slots, the bad-to-good question conversions, the type-specific question banks, and two thresholds: the interviewer talks under 25% of the time, and stories come from the last ~90 days. The goal is to leave each interview with at least one story, one contradiction, and one surprise.
 
 ## Core Capabilities
 
@@ -631,9 +630,12 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+The workflow, start to finish:
+
 1. Pull top assumptions from `discovery/identify-assumptions/`; write 2-3 must-answer questions and pick the interview type.
 2. Customize `assets/interview_script_template.md` and pull type-specific prompts from `assets/question_bank.md`.
 3. Run the 5-phase script (rapport first, stories in the middle, contradictions at the end); debrief within 30 minutes; hand the transcript to `discovery/interview-synthesis/`.
+4. Verify that the script fits the slot, every must-answer question has a story prompt about a recent, real event, and no question asks about the future or invites a compliment before calling it done.
 
 See `references/interview-execution-playbook.md` for the full method, scripts, question banks, pacing, and troubleshooting.
 
@@ -672,17 +674,13 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 **Caveats:** this skill produces interview *technique*, not research operations. Story-based interviewing is bounded by participant memory -- events older than 90 days are reconstructions. B2B enterprise interviews often need procurement-style approval; build 2-4 weeks into recruiting. Continuous discovery assumes weekly touchpoints; one-off rounds produce shallower evidence -- weight findings accordingly.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/identify-assumptions/` | Receives from | Top assumptions become the must-answer questions for each interview |
-| `discovery/interview-synthesis/` | Feeds into | Transcripts and debrief notes are the input for theme clustering |
-| `discovery/brainstorm-ideas/` | Bidirectional | Pre-interview hypotheses; post-interview ideas seeded by themes |
-| `discovery/brainstorm-experiments/` | Feeds into | Validated pains become experiment hypotheses |
-| `discovery/jtbd-workshop/` | Complementary | Switch interviews use this script structure as their foundation |
-| `discovery/value-proposition-canvas/` | Feeds into | Jobs, pains, and gains captured in stories populate the Customer Profile |
-| `execution/create-prd/` | Feeds into | Direct quotes strengthen PRD Background and Market Segments |
+| File | Purpose |
+|------|---------|
+| `assets/interview_script_template.md`, `assets/question_bank.md` | Script to customize; prompts by interview type |
+| `references/interview-execution-playbook.md`, `references/interviewing-methodology-guide.md`, `references/red-flags.md` | Method and pacing, background, failure modes |
+| `examples/churn-investigation-filled-script.md` | Filled churn script |
 
 ---
 
@@ -710,7 +708,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Customer Interview Script&quot;**
-   - Description: &quot;Run high-signal customer discovery interviews using a scripted question hierarchy, behavior-over-opinion probes, and rapport techniques drawn from Portigal, Torres, Fitzpatrick (Mom Test), and Lewis Lin.&quot;
+   - Description: &quot;Writes and times a customer interview script that collects past-behavior stories, not opinions. Use when preparing a discovery, solution-validation, journey, churn or win-loss interview, or when interviews keep producing compliments.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -768,12 +766,15 @@ cp -r Claude-Skills/project-management/discovery/customer-interview-script your-
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/discovery/customer-interview-script</code></pre>
 </div>
   
-  <h2>Quick Start</h2>1. Pull top assumptions from `discovery/identify-assumptions/`; write 2-3 must-answer questions and pick the interview type.
+  <h2>Quick Start</h2>The workflow, start to finish:
+
+1. Pull top assumptions from `discovery/identify-assumptions/`; write 2-3 must-answer questions and pick the interview type.
 2. Customize `assets/interview_script_template.md` and pull type-specific prompts from `assets/question_bank.md`.
 3. Run the 5-phase script (rapport first, stories in the middle, contradictions at the end); debrief within 30 minutes; hand the transcript to `discovery/interview-synthesis/`.
+4. Verify that the script fits the slot, every must-answer question has a story prompt about a recent, real event, and no question asks about the future or invites a compliment before calling it done.
 
 See `references/interview-execution-playbook.md` for the full method, scripts, question banks, pacing, and troubleshooting.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/customer-interview-script/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

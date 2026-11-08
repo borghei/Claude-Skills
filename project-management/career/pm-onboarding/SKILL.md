@@ -1,16 +1,16 @@
 ---
 name: pm-onboarding
 description: >
-  30-60-90 day plan for a new PM joining a company or team, grounded in Michael
-  Watkins' First 90 Days framework and the STARS situational diagnosis. Includes
-  week-by-week plan, stakeholder map, 1:1 question bank, and first-PRD template.
+  Builds a new PM's 30-60-90 day plan from a situation diagnosis: stakeholder map, 1:1
+  questions, early wins and a first PRD. Use when starting a PM job, moving to a new
+  team, or taking on new scope.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-career
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: pm-onboarding, 30-60-90, first-90-days, stars-framework
   tags:
     - pm-onboarding
@@ -25,7 +25,7 @@ metadata:
 
 A new PM's first 90 days are disproportionately important. Trust earned in the first quarter compounds; missteps in the first quarter haunt for the next year. This skill is a structured 30-60-90 day plan that helps a new PM diagnose the situation, build relationships, identify early wins, and arrive at the end of the quarter with credibility and a clear point of view.
 
-The skill draws on Michael Watkins' *The First 90 Days*, the STARS situational diagnosis (Start-up / Turnaround / Accelerated growth / Realignment / Sustaining success), and the public PM onboarding patterns popularized by senior product leaders.
+It applies the STARS situation diagnosis (Start-up / Turnaround / Accelerated growth / Realignment / Sustaining success) to set how long to listen before acting.
 
 ### The arc in brief
 
@@ -46,6 +46,15 @@ Diagnose the STARS situation first — a Sustaining-success area rewards 60+ day
 
 - First week of a routine role (no major scope change) -- this is overkill.
 - Interim leadership (acting role <60 days) -- run a stability-focused playbook instead.
+
+## Quick Start
+
+The workflow, start to finish:
+
+1. Settle the Clarify First inputs; the STARS call and the manager's expectations come first.
+2. Fill `assets/30_60_90_plan.md` and `assets/stakeholder_map.md`; run the intro meetings with `assets/onboarding_1on1_questions.md`.
+3. Day 30: write the 1-page learning memo. Day 60: first PRD (`assets/first_prd_template.md`) or strategy memo. Day 90: retro memo.
+4. Verify that each phase ends with its memo, the manager has confirmed the early win, and every tier-1 stakeholder has had a 1:1 before calling it done. Tactics: `references/30-60-90-plan-and-tactics.md`.
 
 ## Clarify First
 
@@ -99,13 +108,12 @@ External: Watkins, M. *The First 90 Days* (HBR Press, 2013); Bock, L. *Work Rule
 
 **Caveats:** The 90-day plan is a planning artifact, not a contract — adjust as you learn. Calibrate "early wins" to the company's pace (a startup's 90-day win may be an enterprise's 180-day win). Your manager's expectations matter most: align in week 1, do not surprise them in week 6.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `pm-1on1s/` | Feeds into | The 1:1 question banks here are designed for first-90-day conversations; ongoing 1:1s use the broader skill |
-| `pm-career-ladder/` | Feeds into | End-of-90-day retro becomes the baseline self-score on the ladder |
-| `pm-interview-prep/` | Receives from | Pre-offer "Can you do the job?" stories often map to early wins delivered in past 90-day windows |
-| `senior-pm/stakeholder-mapper/` | Reuses | The stakeholder mapping technique scales beyond onboarding into steady-state |
-| `execution/create-prd/` | Feeds into | First-PRD template is a tighter version of the full PRD skill |
-| `discovery/interview-synthesis/` | Reuses | Customer interviews in week 5 use the same synthesis discipline as steady-state discovery |
+| File | Purpose |
+|------|---------|
+| `assets/30_60_90_plan.md`, `assets/stakeholder_map.md`, `assets/onboarding_1on1_questions.md`, `assets/first_prd_template.md` | Plan, stakeholder tiers, intro questions, first PRD |
+| `references/first-90-days-playbook.md`, `references/30-60-90-plan-and-tactics.md`, `references/red-flags.md` | Playbook, phase tactics, failure modes |
+| `examples/fintech-series-b-new-pm-30-60-90.md` | Worked plan |
+
+Related skills: `pm-1on1s` after day 90, `senior-pm` (`stakeholder_mapper.py`) for steady-state stakeholder mapping, `execution/create-prd` for the full PRD.

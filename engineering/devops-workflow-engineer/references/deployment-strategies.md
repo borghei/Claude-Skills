@@ -99,7 +99,7 @@ jobs:
     environment: production-green
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Deploy to green
         run: ./scripts/deploy.sh green ${{ github.sha }}
       - name: Validate green
@@ -569,7 +569,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Backup database
         run: ./scripts/db-backup.sh ${{ inputs.environment }}

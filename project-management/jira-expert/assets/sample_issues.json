@@ -1,0 +1,31 @@
+{
+  "project": "PROJ",
+  "issues": [
+    {
+      "key": "PROJ-101",
+      "type": "Story",
+      "summary": "Add user onboarding wizard for new signups",
+      "description": "## Acceptance Criteria\n- [ ] Wizard appears on first login\n- [ ] User can skip at any step\n- [ ] Progress is saved if user leaves",
+      "assignee": "alice",
+      "priority": "High",
+      "story_points": 5,
+      "labels": [
+        "onboarding"
+      ],
+      "epic_link": "PROJ-50",
+      "sprint": "Sprint 24"
+    },
+    {
+      "key": "PROJ-102",
+      "type": "Bug",
+      "summary": "fix stuff",
+      "description": "",
+      "assignee": "",
+      "priority": "",
+      "story_points": null,
+      "labels": [],
+      "epic_link": "",
+      "sprint": ""
+    }
+  ]
+}

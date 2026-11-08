@@ -5,7 +5,6 @@ Terraform Security Scanner - Scan Terraform configs for security misconfiguratio
 Detects open ports, public buckets, missing encryption, overly broad IAM,
 and other common security anti-patterns in Terraform code.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 

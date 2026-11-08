@@ -5,7 +5,16 @@ Threat Modeler
 Performs STRIDE threat analysis on system components.
 Generates threat model documentation with risk scores.
 
+Two modes. --component returns the STRIDE checklist for a component type (the same list for
+any design). --design reads a JSON data-flow model and derives threats from what each flow
+actually lacks (authentication, encryption, validation, logging, rate limiting), so the
+result changes with the design.
+
+Exit codes: 0 no High/Critical threat in --design mode (checklist modes always 0),
+1 --design found High or Critical threats, 2 bad input.
+
 Usage:
+    python threat_modeler.py --design design.json
     python threat_modeler.py --component "User Authentication"
     python threat_modeler.py --component "API Gateway" --assets "user_data,sessions"
     python threat_modeler.py --interactive
@@ -526,6 +535,65 @@ def list_all_threats():
             print(f"  - {threat.category}: {threat.name} (Risk: {threat.risk_level})")
 
 
+SENSITIVE_WORDS = ("password", "credential", "token", "secret", "pii", "payment", "card", "health", "ssn")
+FLOW_CHECKS = [
+    # (flag that must be true, applies only across a trust boundary, STRIDE, name, likelihood, severity, fix)
+    ("authenticated", True, STRIDECategory.SPOOFING.value, "Unauthenticated flow across a trust boundary",
+     4, 4, ["Authenticate the caller (mTLS, signed tokens, OIDC)", "Reject anonymous requests at the edge"]),
+    ("encrypted", True, STRIDECategory.INFORMATION_DISCLOSURE.value, "Plaintext data across a trust boundary",
+     4, 4, ["TLS 1.2+ on every hop that leaves the boundary", "Encrypt sensitive fields end to end"]),
+    ("validated", True, STRIDECategory.TAMPERING.value, "Unvalidated input crossing a trust boundary",
+     3, 4, ["Schema-validate and size-limit input at the receiver", "Parameterised queries, no shell"]),
+    ("rate_limited", True, STRIDECategory.DENIAL_OF_SERVICE.value, "No rate limiting on an exposed flow",
+     3, 3, ["Per-client rate limits and quotas", "Timeouts and circuit breakers downstream"]),
+    ("logged", False, STRIDECategory.REPUDIATION.value, "Flow is not audit-logged",
+     3, 3, ["Log actor, action, target and result to tamper-evident storage"]),
+    ("least_privilege", False, STRIDECategory.ELEVATION_OF_PRIVILEGE.value, "Receiver runs with broad privileges",
+     2, 5, ["Scope the receiver's credentials to this flow", "Separate admin paths"]),
+]
+
+
+def analyze_design(design: Dict) -> List[Dict]:
+    """Derive threats from the flows in a design model."""
+    found = []
+    for i, flow in enumerate(design["flows"], 1):
+        label = f"{flow.get('from', '?')} -> {flow.get('to', '?')} ({flow.get('data', 'data')})"
+        crosses = bool(flow.get("crosses_boundary"))
+        sensitive = any(w in str(flow.get("data", "")).lower() for w in SENSITIVE_WORDS)
+        for flag, boundary_only, category, name, likelihood, severity, fixes in FLOW_CHECKS:
+            if flag not in flow or flow[flag] or (boundary_only and not crosses):
+                continue  # unspecified flags are reported as gaps below, not as threats
+            sev = min(5, severity + (1 if sensitive and category != STRIDECategory.DENIAL_OF_SERVICE.value else 0))
+            threat = Threat(category, name, f"Flow {i}: {label}", f"{flag} = false", "Depends on the data carried",
+                            likelihood, sev, fixes)
+            found.append({"flow": i, "flow_label": label, "category": category, "threat": name,
+                          "risk_score": threat.risk_score, "risk_level": threat.risk_level, "mitigations": fixes})
+        missing = [flag for flag, *_ in FLOW_CHECKS if flag not in flow]
+        if missing:
+            found.append({"flow": i, "flow_label": label, "category": "Unknown", "threat": "Unspecified controls",
+                          "risk_score": 0, "risk_level": "Unknown",
+                          "mitigations": [f"State whether the flow is {', '.join(missing)}"]})
+    return sorted(found, key=lambda t: t["risk_score"], reverse=True)
+
+
+def load_design(path: str) -> Dict:
+    try:
+        with open(path, encoding="utf-8") as fh:
+            design = json.load(fh)
+    except FileNotFoundError:
+        sys.exit(_bad(f"design file not found: {path}"))
+    except (OSError, json.JSONDecodeError) as exc:
+        sys.exit(_bad(f"cannot read design {path}: {exc}"))
+    if not isinstance(design, dict) or not isinstance(design.get("flows"), list) or not design["flows"]:
+        sys.exit(_bad(f"{path} needs a non-empty 'flows' list of objects (from, to, data, crosses_boundary, ...)"))
+    return design
+
+
+def _bad(message: str) -> int:
+    print(f"error: {message}", file=sys.stderr)
+    return 2
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="STRIDE Threat Modeler - Analyze security threats",
@@ -549,6 +617,10 @@ Examples:
         """
     )
 
+    parser.add_argument(
+        "--design", "-d",
+        help="JSON data-flow model; threats are derived per flow (see assets/sample_design_*.json)"
+    )
     parser.add_argument(
         "--component", "-c",
         help="Component to analyze (e.g., 'User Authentication', 'API Gateway')"
@@ -587,8 +659,28 @@ Examples:
         list_all_threats()
         return
 
+    if args.design:
+        design = load_design(args.design)
+        threats = analyze_design(design)
+        if args.json:
+            output = json.dumps({"design": design.get("name", args.design), "threats": threats}, indent=2)
+        else:
+            lines = [f"Design threat model: {design.get('name', args.design)}", "=" * 60]
+            for t in threats:
+                lines.append(f"[{t['risk_level']}] {t['category']}: {t['threat']}  (flow {t['flow']}: {t['flow_label']})")
+                lines += [f"    - {m}" for m in t["mitigations"]]
+            if not threats:
+                lines.append("No missing controls on the modelled flows.")
+            output = "\n".join(lines)
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as fh:
+                fh.write(output)
+        else:
+            print(output)
+        sys.exit(1 if any(t["risk_level"] in ("High", "Critical") for t in threats) else 0)
+
     if not args.component:
-        parser.error("--component is required (or use --interactive)")
+        parser.error("--component or --design is required (or use --interactive)")
 
     threats = get_threats_for_component(args.component)
 

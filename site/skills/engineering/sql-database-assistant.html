@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sql Database Assistant - Claude Skills</title>
-  <meta name="description" content="This skill should be used when the user asks to &quot;optimize SQL queries&quot;, &quot;explore database schemas&quot;, &quot;generate migration SQL&quot;, &quot;analyze query performance&quot;, or &quot;document database structure&quot;.">
+  <meta name="description" content="Review SQL queries for index and scan problems, document schemas from DDL, and generate migrations with rollback and destructive-change flags. Use when tuning a query, documenting a schema, or diffing">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/sql-database-assistant.html">
   <meta property="og:title" content="Sql Database Assistant - Claude Skills">
-  <meta property="og:description" content="This skill should be used when the user asks to &quot;optimize SQL queries&quot;, &quot;explore database schemas&quot;, &quot;generate migration SQL&quot;, &quot;analyze query performance&quot;, or &quot;document database structure&quot;.">
+  <meta property="og:description" content="Review SQL queries for index and scan problems, document schemas from DDL, and generate migrations with rollback and destructive-change flags. Use when tuning a query, documenting a schema, or diffing">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/sql-database-assistant.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Sql Database Assistant", "description": "This skill should be used when the user asks to \"optimize SQL queries\", \"explore database schemas\", \"generate migration SQL\", \"analyze query performance\", or \"document database structure\".", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/sql-database-assistant.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Sql Database Assistant", "description": "Review SQL queries for index and scan problems, document schemas from DDL, and generate migrations with rollback and destructive-change flags. Use when tuning a query, documenting a schema, or diffing two schemas.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/sql-database-assistant.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Sql Database Assistant</h1>
-    <p class="page-subtitle">This skill should be used when the user asks to &quot;optimize SQL queries&quot;, &quot;explore database schemas&quot;, &quot;generate migration SQL&quot;, &quot;analyze query performance&quot;, or &quot;document database structure&quot;.</p>
+    <p class="page-subtitle">Review SQL queries for index and scan problems, document schemas from DDL, and generate migrations with rollback and destructive-change flags. Use when tuning a query, documenting a schema, or diffing two schemas.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">sql</span><span class="tag">database</span><span class="tag">optimization</span><span class="tag">migration</span><span class="tag">schema</span></div>
   </div>
@@ -393,17 +393,17 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Sql Database Assistant (Engineering domain).
 
-This skill should be used when the user asks to &quot;optimize SQL queries&quot;, &quot;explore database schemas&quot;, &quot;generate migration SQL&quot;, &quot;analyze query performance&quot;, or &quot;document database structure&quot;.
+Review SQL queries for index and scan problems, document schemas from DDL, and generate migrations with rollback and destructive-change flags. Use when tuning a query, documenting a schema, or diffing two schemas.
 
 &gt; **Category:** Engineering &gt; **Domain:** Database Development &amp; Optimization The **SQL Database Assistant** skill provides tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. It helps teams write efficient queri
 
 ## Your Key Capabilities
-- query_optimizer.py
-- schema_explorer.py
-- migration_generator.py
 - Query Optimization Workflow
 - Schema Documentation Workflow
 - Migration Workflow
+- CI Integration
+- Query Anti-Patterns
+- Index Guidelines
 
 ## How to Help
 When the user asks for help in this domain:
@@ -423,17 +423,17 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Sql Database Assistant (Engineering domain).
 
-This skill should be used when the user asks to &quot;optimize SQL queries&quot;, &quot;explore database schemas&quot;, &quot;generate migration SQL&quot;, &quot;analyze query performance&quot;, or &quot;document database structure&quot;.
+Review SQL queries for index and scan problems, document schemas from DDL, and generate migrations with rollback and destructive-change flags. Use when tuning a query, documenting a schema, or diffing two schemas.
 
 &gt; **Category:** Engineering &gt; **Domain:** Database Development &amp; Optimization The **SQL Database Assistant** skill provides tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. It helps teams write efficient queri
 
 ## Your Key Capabilities
-- query_optimizer.py
-- schema_explorer.py
-- migration_generator.py
 - Query Optimization Workflow
 - Schema Documentation Workflow
 - Migration Workflow
+- CI Integration
+- Query Anti-Patterns
+- Index Guidelines
 
 ## How to Help
 When the user asks for help in this domain:
@@ -470,6 +470,12 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The **SQL Database Assistant** skill provides tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. It helps teams write efficient queries, maintain clean schemas, and manage database evolution safely.
 
+## When to Use
+
+- A query is slow and you want the likely text-level causes before reading its plan.
+- You need schema documentation (tables, columns, keys) from DDL.
+- You have a current and a target schema and need the migration SQL and its rollback.
+
 ## Clarify First
 
 Before analyzing or generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
@@ -483,61 +489,36 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Analyze a SQL query for performance issues
-python scripts/query_optimizer.py --file slow_query.sql
+# Review a file of queries (bundled sample: 8 findings; --strict exits 1 on any finding)
+python scripts/query_optimizer.py --file examples/queries.sql --strict
 
-# Analyze inline SQL
+# Review one inline query
 python scripts/query_optimizer.py --query &quot;SELECT * FROM users WHERE name LIKE &#x27;%john%&#x27;&quot;
 
-# Explore schema from DDL file
-python scripts/schema_explorer.py --file schema.sql
+# Document a schema
+python scripts/schema_explorer.py --file examples/schema.sql --format markdown
 
-# Generate migration from schema diff
-python scripts/migration_generator.py --from old_schema.sql --to new_schema.sql
-
-# JSON output
-python scripts/query_optimizer.py --file query.sql --format json
+# Diff two schemas: additive change exits 0, drops exit 1 until reviewed
+python scripts/migration_generator.py --from examples/schema.sql --to examples/schema_additive.sql
+python scripts/migration_generator.py --from examples/schema.sql --to examples/schema_v2.sql
 ```
 
 ## Tools Overview
 
-### query_optimizer.py
+| Tool | What it checks or produces | Key flags |
+|------|---------------------------|-----------|
+| `query_optimizer.py` | `SELECT *`, leading-wildcard `LIKE`, missing `WHERE`, correlated subqueries, join and `OR` patterns, `DISTINCT`, unbounded `ORDER BY`, `= NULL`; comments are ignored | `--file` or `--query`, `--format text/json`, `--strict` |
+| `schema_explorer.py` | Table catalog, columns with types/nullability/defaults, indexes, foreign keys | `--file`, `--format text/json/markdown` |
+| `migration_generator.py` | UP and commented DOWN SQL for added/dropped tables and columns and type changes, with a destructive-change banner | `--from`, `--to`, `--format`, `--allow-destructive` |
 
-Analyzes SQL queries for performance issues and optimization opportunities.
+Exit codes: `0` ok; `1` `query_optimizer.py --strict` found something, or
+`migration_generator.py` produced destructive steps (drops or type changes) without
+`--allow-destructive`; `2` bad input (file not found). Index changes are not diffed.
 
-| Feature | Description |
-|---------|-------------|
-| SELECT * detection | Flags queries selecting all columns |
-| Missing index hints | Identifies WHERE/JOIN columns likely needing indexes |
-| N+1 detection | Flags correlated subquery patterns |
-| Full table scan | Detects queries without WHERE clauses on large tables |
-| JOIN analysis | Checks join conditions and types |
-| LIKE optimization | Flags leading wildcard LIKE patterns |
-
-### schema_explorer.py
-
-Generates documentation from SQL DDL (CREATE TABLE) files.
-
-| Feature | Description |
-|---------|-------------|
-| Table catalog | Lists all tables with column counts |
-| Column details | Documents types, nullability, defaults |
-| Index listing | Catalogs indexes and their columns |
-| Relationship mapping | Identifies foreign key relationships |
-| Markdown output | Generates schema documentation |
-
-### migration_generator.py
-
-Generates migration SQL by comparing two schema DDL files.
-
-| Feature | Description |
-|---------|-------------|
-| Column additions | ALTER TABLE ADD COLUMN for new columns |
-| Column removals | ALTER TABLE DROP COLUMN for removed columns |
-| Type changes | ALTER TABLE ALTER COLUMN for type modifications |
-| New tables | CREATE TABLE for entirely new tables |
-| Dropped tables | DROP TABLE for removed tables |
-| Index changes | CREATE/DROP INDEX for index differences |
+The optimizer reads query text only. For a real diagnosis ask for the plan
+(`EXPLAIN (ANALYZE, BUFFERS)` in PostgreSQL, `EXPLAIN ANALYZE` in MySQL 8) and trust it over
+the script when they disagree: look for sequential scans on large tables, row-estimate
+errors and sorts or hashes spilling to disk.
 
 ## Workflows
 
@@ -560,10 +541,10 @@ Generates migration SQL by comparing two schema DDL files.
 
 1. **Capture current** - Export current schema DDL
 2. **Define target** - Write desired schema DDL
-3. **Generate migration** - Run migration_generator.py
-4. **Review SQL** - Check generated migration for safety
-5. **Test** - Apply to staging database first
-6. **Deploy** - Apply to production with rollback plan
+3. **Generate migration** - Run migration_generator.py; exit 1 means it drops or retypes something
+4. **Review SQL** - For every `[DESTRUCTIVE]` step, decide how the data is preserved (backup, copy column, expand-and-contract) before passing `--allow-destructive`
+5. **Test** - Apply UP, then the DOWN script, then UP again on a copy of production data
+6. **Deploy** - Done when UP and DOWN both ran cleanly on the copy, data in kept columns is unchanged, and the backup of dropped data is verified
 
 ### CI Integration
 
@@ -629,6 +610,35 @@ python scripts/schema_explorer.py --file schema.sql --format markdown &gt; SCHEM
 - Add columns as nullable first, then backfill, then add constraints
 - Never rename columns directly; add new, migrate data, drop old
 
+## Anti-Patterns
+
+### Trusting DOWN to Restore Data
+**Mistake:** Running a migration that drops a column because &quot;there is a rollback script&quot;.
+**Why it happens:** The DOWN section looks like an undo button.
+**Instead:** DOWN recreates the column empty. Copy or back up the data first, and prefer expand-and-contract (add new, backfill, switch reads, drop later).
+
+### Adding Indexes From Text Alone
+**Mistake:** Creating every index the optimizer suggests.
+**Why it happens:** Each suggestion looks cheap.
+**Instead:** Indexes cost writes and storage. Confirm with the query plan and the column&#x27;s selectivity, and check for an existing composite index that already covers it.
+
+### Renames as Drop and Add
+**Mistake:** Applying a generated drop-plus-add for what is really a renamed column.
+**Why it happens:** A schema diff cannot tell a rename from a replacement.
+**Instead:** Replace the pair with `ALTER TABLE ... RENAME COLUMN` (or a staged copy for zero downtime) before running it.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/query_optimizer.py` | Static SQL query review |
+| `scripts/schema_explorer.py` | Schema documentation from DDL |
+| `scripts/migration_generator.py` | Schema diff to UP/DOWN migration with destructive flags |
+| `examples/queries.sql` | Queries with deliberate anti-patterns |
+| `examples/schema.sql` | Six-table e-commerce schema |
+| `examples/schema_additive.sql`, `schema_v2.sql` | Target schemas: additive (exit 0) and destructive (exit 1) |
+| `references/sql-optimization.md` | Index strategies, query patterns, anti-patterns |
+
 ---
 
 ## What I Need You to Do
@@ -655,7 +665,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Sql Database Assistant&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;optimize SQL queries&quot;, &quot;explore database schemas&quot;, &quot;generate migration SQL&quot;, &quot;analyze query performance&quot;, or &quot;document database structure&quot;.&quot;
+   - Description: &quot;Review SQL queries for index and scan problems, document schemas from DDL, and generate migrations with rollback and destructive-change flags. Use when tuning a query, documenting a schema, or diffing two schemas.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -687,6 +697,12 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The **SQL Database Assistant** skill provides tools for analyzing SQL query performance, exploring database schemas from DDL files, and generating migration SQL from schema differences. It helps teams write efficient queries, maintain clean schemas, and manage database evolution safely.
 
+## When to Use
+
+- A query is slow and you want the likely text-level causes before reading its plan.
+- You need schema documentation (tables, columns, keys) from DDL.
+- You have a current and a target schema and need the migration SQL and its rollback.
+
 ## Clarify First
 
 Before analyzing or generating, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
@@ -700,61 +716,36 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Analyze a SQL query for performance issues
-python scripts/query_optimizer.py --file slow_query.sql
+# Review a file of queries (bundled sample: 8 findings; --strict exits 1 on any finding)
+python scripts/query_optimizer.py --file examples/queries.sql --strict
 
-# Analyze inline SQL
+# Review one inline query
 python scripts/query_optimizer.py --query &quot;SELECT * FROM users WHERE name LIKE &#x27;%john%&#x27;&quot;
 
-# Explore schema from DDL file
-python scripts/schema_explorer.py --file schema.sql
+# Document a schema
+python scripts/schema_explorer.py --file examples/schema.sql --format markdown
 
-# Generate migration from schema diff
-python scripts/migration_generator.py --from old_schema.sql --to new_schema.sql
-
-# JSON output
-python scripts/query_optimizer.py --file query.sql --format json
+# Diff two schemas: additive change exits 0, drops exit 1 until reviewed
+python scripts/migration_generator.py --from examples/schema.sql --to examples/schema_additive.sql
+python scripts/migration_generator.py --from examples/schema.sql --to examples/schema_v2.sql
 ```
 
 ## Tools Overview
 
-### query_optimizer.py
+| Tool | What it checks or produces | Key flags |
+|------|---------------------------|-----------|
+| `query_optimizer.py` | `SELECT *`, leading-wildcard `LIKE`, missing `WHERE`, correlated subqueries, join and `OR` patterns, `DISTINCT`, unbounded `ORDER BY`, `= NULL`; comments are ignored | `--file` or `--query`, `--format text/json`, `--strict` |
+| `schema_explorer.py` | Table catalog, columns with types/nullability/defaults, indexes, foreign keys | `--file`, `--format text/json/markdown` |
+| `migration_generator.py` | UP and commented DOWN SQL for added/dropped tables and columns and type changes, with a destructive-change banner | `--from`, `--to`, `--format`, `--allow-destructive` |
 
-Analyzes SQL queries for performance issues and optimization opportunities.
+Exit codes: `0` ok; `1` `query_optimizer.py --strict` found something, or
+`migration_generator.py` produced destructive steps (drops or type changes) without
+`--allow-destructive`; `2` bad input (file not found). Index changes are not diffed.
 
-| Feature | Description |
-|---------|-------------|
-| SELECT * detection | Flags queries selecting all columns |
-| Missing index hints | Identifies WHERE/JOIN columns likely needing indexes |
-| N+1 detection | Flags correlated subquery patterns |
-| Full table scan | Detects queries without WHERE clauses on large tables |
-| JOIN analysis | Checks join conditions and types |
-| LIKE optimization | Flags leading wildcard LIKE patterns |
-
-### schema_explorer.py
-
-Generates documentation from SQL DDL (CREATE TABLE) files.
-
-| Feature | Description |
-|---------|-------------|
-| Table catalog | Lists all tables with column counts |
-| Column details | Documents types, nullability, defaults |
-| Index listing | Catalogs indexes and their columns |
-| Relationship mapping | Identifies foreign key relationships |
-| Markdown output | Generates schema documentation |
-
-### migration_generator.py
-
-Generates migration SQL by comparing two schema DDL files.
-
-| Feature | Description |
-|---------|-------------|
-| Column additions | ALTER TABLE ADD COLUMN for new columns |
-| Column removals | ALTER TABLE DROP COLUMN for removed columns |
-| Type changes | ALTER TABLE ALTER COLUMN for type modifications |
-| New tables | CREATE TABLE for entirely new tables |
-| Dropped tables | DROP TABLE for removed tables |
-| Index changes | CREATE/DROP INDEX for index differences |
+The optimizer reads query text only. For a real diagnosis ask for the plan
+(`EXPLAIN (ANALYZE, BUFFERS)` in PostgreSQL, `EXPLAIN ANALYZE` in MySQL 8) and trust it over
+the script when they disagree: look for sequential scans on large tables, row-estimate
+errors and sorts or hashes spilling to disk.
 
 ## Workflows
 
@@ -777,10 +768,10 @@ Generates migration SQL by comparing two schema DDL files.
 
 1. **Capture current** - Export current schema DDL
 2. **Define target** - Write desired schema DDL
-3. **Generate migration** - Run migration_generator.py
-4. **Review SQL** - Check generated migration for safety
-5. **Test** - Apply to staging database first
-6. **Deploy** - Apply to production with rollback plan
+3. **Generate migration** - Run migration_generator.py; exit 1 means it drops or retypes something
+4. **Review SQL** - For every `[DESTRUCTIVE]` step, decide how the data is preserved (backup, copy column, expand-and-contract) before passing `--allow-destructive`
+5. **Test** - Apply UP, then the DOWN script, then UP again on a copy of production data
+6. **Deploy** - Done when UP and DOWN both ran cleanly on the copy, data in kept columns is unchanged, and the backup of dropped data is verified
 
 ### CI Integration
 
@@ -846,6 +837,35 @@ python scripts/schema_explorer.py --file schema.sql --format markdown &gt; SCHEM
 - Add columns as nullable first, then backfill, then add constraints
 - Never rename columns directly; add new, migrate data, drop old
 
+## Anti-Patterns
+
+### Trusting DOWN to Restore Data
+**Mistake:** Running a migration that drops a column because &quot;there is a rollback script&quot;.
+**Why it happens:** The DOWN section looks like an undo button.
+**Instead:** DOWN recreates the column empty. Copy or back up the data first, and prefer expand-and-contract (add new, backfill, switch reads, drop later).
+
+### Adding Indexes From Text Alone
+**Mistake:** Creating every index the optimizer suggests.
+**Why it happens:** Each suggestion looks cheap.
+**Instead:** Indexes cost writes and storage. Confirm with the query plan and the column&#x27;s selectivity, and check for an existing composite index that already covers it.
+
+### Renames as Drop and Add
+**Mistake:** Applying a generated drop-plus-add for what is really a renamed column.
+**Why it happens:** A schema diff cannot tell a rename from a replacement.
+**Instead:** Replace the pair with `ALTER TABLE ... RENAME COLUMN` (or a staged copy for zero downtime) before running it.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/query_optimizer.py` | Static SQL query review |
+| `scripts/schema_explorer.py` | Schema documentation from DDL |
+| `scripts/migration_generator.py` | Schema diff to UP/DOWN migration with destructive flags |
+| `examples/queries.sql` | Queries with deliberate anti-patterns |
+| `examples/schema.sql` | Six-table e-commerce schema |
+| `examples/schema_additive.sql`, `schema_v2.sql` | Target schemas: additive (exit 0) and destructive (exit 1) |
+| `references/sql-optimization.md` | Index strategies, query patterns, anti-patterns |
+
 ---
 
 ## What I Need You to Do
@@ -872,7 +892,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Sql Database Assistant&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;optimize SQL queries&quot;, &quot;explore database schemas&quot;, &quot;generate migration SQL&quot;, &quot;analyze query performance&quot;, or &quot;document database structure&quot;.&quot;
+   - Description: &quot;Review SQL queries for index and scan problems, document schemas from DDL, and generate migrations with rollback and destructive-change flags. Use when tuning a query, documenting a schema, or diffing two schemas.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -931,23 +951,21 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/sql-database-assistant/scripts/tool_name.py --help</code></pre>
-  <h2>Python Tools</h2><div class="tool-item"><h4>query_optimizer.py</h4><p>Analyzes SQL queries for performance issues and optimization opportunities.</p></div><div class="tool-item"><h4>schema_explorer.py</h4><p>Generates documentation from SQL DDL (CREATE TABLE) files.</p></div><div class="tool-item"><h4>migration_generator.py</h4><p>Generates migration SQL by comparing two schema DDL files.</p></div>
-  <h2>Quick Start</h2><pre><code># Analyze a SQL query for performance issues
-python scripts/query_optimizer.py --file slow_query.sql
+  
+  <h2>Quick Start</h2><pre><code># Review a file of queries (bundled sample: 8 findings; --strict exits 1 on any finding)
+python scripts/query_optimizer.py --file examples/queries.sql --strict
 
-# Analyze inline SQL
+# Review one inline query
 python scripts/query_optimizer.py --query &quot;SELECT * FROM users WHERE name LIKE &#x27;%john%&#x27;&quot;
 
-# Explore schema from DDL file
-python scripts/schema_explorer.py --file schema.sql
+# Document a schema
+python scripts/schema_explorer.py --file examples/schema.sql --format markdown
 
-# Generate migration from schema diff
-python scripts/migration_generator.py --from old_schema.sql --to new_schema.sql
-
-# JSON output
-python scripts/query_optimizer.py --file query.sql --format json
+# Diff two schemas: additive change exits 0, drops exit 1 until reviewed
+python scripts/migration_generator.py --from examples/schema.sql --to examples/schema_additive.sql
+python scripts/migration_generator.py --from examples/schema.sql --to examples/schema_v2.sql
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/sql-database-assistant/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

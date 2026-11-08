@@ -174,6 +174,8 @@ def score_accounts(state: dict[str, Any]) -> dict[str, Any]:
     return {
         "icp_name": state.get("icp_name", ""),
         "mode": "score",
+        # No accounts is a broken input, not an empty pipeline: gate on it.
+        "severity_counts": {"fail": 0 if accounts else 1, "warn": 0, "info": 0},
         "account_count": len(accounts),
         "weights": weights,
         "band_counts": band_counts,
@@ -237,7 +239,14 @@ def main() -> int:
         print(f"error: invalid JSON: {e}", file=sys.stderr)
         return 2
 
-    report = validate_icp(state) if args.mode == "validate" else score_accounts(state)
+    if not isinstance(state, dict):
+        print("error: top level must be a JSON object (see the schema in --help)", file=sys.stderr)
+        return 2
+    try:
+        report = validate_icp(state) if args.mode == "validate" else score_accounts(state)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        print(f"error: unexpected input shape ({type(e).__name__}: {e})", file=sys.stderr)
+        return 2
     out = render_markdown(report) if args.format == "markdown" else json.dumps(report, indent=2)
 
     if args.output:
@@ -245,7 +254,8 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    # Gate: 1 when any finding has severity "fail", else 0.
+    return 1 if report.get("severity_counts", {}).get("fail") else 0
 
 
 if __name__ == "__main__":

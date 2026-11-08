@@ -327,7 +327,16 @@ class TimelineReconstructor:
         
         for event in events:
             detected_phase = self._identify_phase(event)
-            
+            # Phases follow the lifecycle (detection -> triage -> mitigation -> resolution
+            # -> review). Triage and escalation interleave in practice, so they form one
+            # "triage" phase; a step backwards (a follow-up alert during mitigation) stays
+            # in the phase already in progress instead of opening a new one.
+            tier = {"detection": 1, "triage": 2, "escalation": 2, "mitigation": 3, "resolution": 4, "review": 5}
+            if tier.get(detected_phase) == 2:
+                detected_phase = "triage"
+            if current_phase and tier.get(detected_phase, 2) < tier.get(current_phase, 2):
+                detected_phase = current_phase
+
             if detected_phase != current_phase:
                 # End current phase if exists
                 if current_phase and phase_events:
@@ -994,13 +1003,13 @@ Input JSON format:
     
     except FileNotFoundError as e:
         print(f"Error: File not found - {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON - {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

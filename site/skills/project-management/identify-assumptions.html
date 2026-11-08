@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Identify Assumptions - Claude Skills</title>
-  <meta name="description" content="Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.">
+  <meta name="description" content="Surfaces the assumptions behind a product bet, scores impact against confidence and picks the few to test first. Use when an idea feels right but is unproven, the team disagrees on risk, or before des">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/identify-assumptions.html">
   <meta property="og:title" content="Identify Assumptions - Claude Skills">
-  <meta property="og:description" content="Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.">
+  <meta property="og:description" content="Surfaces the assumptions behind a product bet, scores impact against confidence and picks the few to test first. Use when an idea feels right but is unproven, the team disagrees on risk, or before des">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/identify-assumptions.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Identify Assumptions", "description": "Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil's advocate analysis.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/identify-assumptions.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Identify Assumptions", "description": "Surfaces the assumptions behind a product bet, scores impact against confidence and picks the few to test first. Use when an idea feels right but is unproven, the team disagrees on risk, or before designing experiments.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/identify-assumptions.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Identify Assumptions</h1>
-    <p class="page-subtitle">Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.</p>
+    <p class="page-subtitle">Surfaces the assumptions behind a product bet, scores impact against confidence and picks the few to test first. Use when an idea feels right but is unproven, the team disagrees on risk, or before designing experiments.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">assumption-mapping</span><span class="tag">risk</span><span class="tag">devils-advocate</span><span class="tag">discovery</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Identify Assumptions (Project Management domain).
 
-Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.
+Surfaces the assumptions behind a product bet, scores impact against confidence and picks the few to test first. Use when an idea feels right but is unproven, the team disagrees on risk, or before designing experiments.
 
 Systematically identify, categorize, and prioritize the assumptions underlying your product decisions. This skill extends Teresa Torres&#x27; four risk categories with four additional categories for new products, and uses a devil&#x27;s advocate approach from PM, Designer, and Engineer perspectives to surface
 
@@ -401,6 +401,9 @@ Systematically identify, categorize, and prioritize the assumptions underlying y
 - Everything rated risky
 - Beliefs marked as facts
 - Testing the easiest assumption first
+
+## Frameworks &amp; Templates You Know
+- | `assets/assumption_map_template.md` | Assumption map to fill in |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -420,7 +423,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Identify Assumptions (Project Management domain).
 
-Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.
+Surfaces the assumptions behind a product bet, scores impact against confidence and picks the few to test first. Use when an idea feels right but is unproven, the team disagrees on risk, or before designing experiments.
 
 Systematically identify, categorize, and prioritize the assumptions underlying your product decisions. This skill extends Teresa Torres&#x27; four risk categories with four additional categories for new products, and uses a devil&#x27;s advocate approach from PM, Designer, and Engineer perspectives to surface
 
@@ -428,6 +431,9 @@ Systematically identify, categorize, and prioritize the assumptions underlying y
 - Everything rated risky
 - Beliefs marked as facts
 - Testing the easiest assumption first
+
+## Frameworks &amp; Templates You Know
+- | `assets/assumption_map_template.md` | Assumption map to fill in |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -486,15 +492,20 @@ Before mapping assumptions, settle the inputs below. When one is missing or vagu
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Settle the Clarify First inputs, then surface assumptions from PM, design and engineering angles (prompts in `references/methodology-and-tools.md`).
+2. Rate each with `impact` (1-10) and `confidence`, citing the evidence behind every `high`.
+3. Run `assumption_tracker.py`; it ranks by `Risk Score = Impact x (1 - Confidence)` and places each in a quadrant.
+4. Done when Test Now holds about 20% of the map, each Test Now item has an owner, a date and a test, and the tool exits 0.
 
 ```bash
-python3 scripts/assumption_tracker.py --demo            # built-in sample (8 assumptions)
-python3 scripts/assumption_tracker.py input.json        # score &amp; prioritize your assumptions
-python3 scripts/assumption_tracker.py input.json --format json
+python3 project-management/discovery/identify-assumptions/scripts/assumption_tracker.py project-management/discovery/identify-assumptions/assets/sample_assumptions.json             # exit 0
+python3 project-management/discovery/identify-assumptions/scripts/assumption_tracker.py project-management/discovery/identify-assumptions/assets/sample_assumptions_overloaded.json  # exit 1
+python3 project-management/discovery/identify-assumptions/scripts/assumption_tracker.py --demo --format json
 ```
 
-Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
+Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Confidence maps to fixed values (high 0.8, medium 0.5, low 0.2) and drives every ranking; impact 7+ counts as high. Quadrants: Test Now (high impact, low or medium confidence), Proceed (high impact, high confidence), Investigate (lower impact, low confidence), Defer (the rest). Exit codes: 0 sound map, 1 Test Now holds more than about 20% (round(0.2 x n), minimum 1), 2 bad input. Document with `assets/assumption_map_template.md`.
 
 ## Anti-Patterns
 
@@ -531,16 +542,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Important Caveats:** confidence levels map to fixed numeric values (0.8/0.5/0.2) — a simplification of continuous confidence; the &quot;high impact&quot; threshold is 7/10, adjustable for your risk tolerance; assumption mapping works best collaboratively (Product Trio), not solo.
 
-## Integration Points
+## Files
 
-| Integration | Direction | Description |
-|------------|-----------|-------------|
-| `brainstorm-ideas/` | Receives from | Ideas generated become the subjects whose assumptions are mapped |
-| `brainstorm-experiments/` | Feeds into | &quot;Test Now&quot; assumptions become hypotheses for experiment design |
-| `pre-mortem/` | Complements | Pre-mortem catches risks that assumption mapping may miss (especially elephants) |
-| `execution/create-prd/` | Feeds into | Validated assumptions populate the PRD Assumptions section (Section 7) |
-| `execution/brainstorm-okrs/` | Feeds into | Viability assumptions inform OKR key result selection and confidence levels |
-| `senior-pm/` | Feeds into | High-impact assumptions feed into portfolio risk registers |
+| File | Purpose |
+|------|---------|
+| `scripts/assumption_tracker.py` | Risk score, quadrant, suggested test per assumption; Test Now overload gate |
+| `assets/sample_assumptions.json`, `assets/sample_assumptions_overloaded.json` | Runnable inputs: balanced map (exit 0) and overloaded map (exit 1) |
+| `assets/assumption_map_template.md` | Assumption map to fill in |
+| `examples/shared-dashboards-assumption-mapping.md` | Worked example |
+| `references/*.md` | See References |
 
 ---
 
@@ -568,7 +578,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Identify Assumptions&quot;**
-   - Description: &quot;Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.&quot;
+   - Description: &quot;Surfaces the assumptions behind a product bet, scores impact against confidence and picks the few to test first. Use when an idea feels right but is unproven, the team disagrees on risk, or before designing experiments.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -622,15 +632,20 @@ Before mapping assumptions, settle the inputs below. When one is missing or vagu
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Settle the Clarify First inputs, then surface assumptions from PM, design and engineering angles (prompts in `references/methodology-and-tools.md`).
+2. Rate each with `impact` (1-10) and `confidence`, citing the evidence behind every `high`.
+3. Run `assumption_tracker.py`; it ranks by `Risk Score = Impact x (1 - Confidence)` and places each in a quadrant.
+4. Done when Test Now holds about 20% of the map, each Test Now item has an owner, a date and a test, and the tool exits 0.
 
 ```bash
-python3 scripts/assumption_tracker.py --demo            # built-in sample (8 assumptions)
-python3 scripts/assumption_tracker.py input.json        # score &amp; prioritize your assumptions
-python3 scripts/assumption_tracker.py input.json --format json
+python3 project-management/discovery/identify-assumptions/scripts/assumption_tracker.py project-management/discovery/identify-assumptions/assets/sample_assumptions.json             # exit 0
+python3 project-management/discovery/identify-assumptions/scripts/assumption_tracker.py project-management/discovery/identify-assumptions/assets/sample_assumptions_overloaded.json  # exit 1
+python3 project-management/discovery/identify-assumptions/scripts/assumption_tracker.py --demo --format json
 ```
 
-Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
+Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Confidence maps to fixed values (high 0.8, medium 0.5, low 0.2) and drives every ranking; impact 7+ counts as high. Quadrants: Test Now (high impact, low or medium confidence), Proceed (high impact, high confidence), Investigate (lower impact, low confidence), Defer (the rest). Exit codes: 0 sound map, 1 Test Now holds more than about 20% (round(0.2 x n), minimum 1), 2 bad input. Document with `assets/assumption_map_template.md`.
 
 ## Anti-Patterns
 
@@ -667,16 +682,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Important Caveats:** confidence levels map to fixed numeric values (0.8/0.5/0.2) — a simplification of continuous confidence; the &quot;high impact&quot; threshold is 7/10, adjustable for your risk tolerance; assumption mapping works best collaboratively (Product Trio), not solo.
 
-## Integration Points
+## Files
 
-| Integration | Direction | Description |
-|------------|-----------|-------------|
-| `brainstorm-ideas/` | Receives from | Ideas generated become the subjects whose assumptions are mapped |
-| `brainstorm-experiments/` | Feeds into | &quot;Test Now&quot; assumptions become hypotheses for experiment design |
-| `pre-mortem/` | Complements | Pre-mortem catches risks that assumption mapping may miss (especially elephants) |
-| `execution/create-prd/` | Feeds into | Validated assumptions populate the PRD Assumptions section (Section 7) |
-| `execution/brainstorm-okrs/` | Feeds into | Viability assumptions inform OKR key result selection and confidence levels |
-| `senior-pm/` | Feeds into | High-impact assumptions feed into portfolio risk registers |
+| File | Purpose |
+|------|---------|
+| `scripts/assumption_tracker.py` | Risk score, quadrant, suggested test per assumption; Test Now overload gate |
+| `assets/sample_assumptions.json`, `assets/sample_assumptions_overloaded.json` | Runnable inputs: balanced map (exit 0) and overloaded map (exit 1) |
+| `assets/assumption_map_template.md` | Assumption map to fill in |
+| `examples/shared-dashboards-assumption-mapping.md` | Worked example |
+| `references/*.md` | See References |
 
 ---
 
@@ -704,7 +718,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Identify Assumptions&quot;**
-   - Description: &quot;Assumption mapping expert that identifies, categorizes, and prioritizes product assumptions across 4-8 risk categories using devil&#x27;s advocate analysis.&quot;
+   - Description: &quot;Surfaces the assumptions behind a product bet, scores impact against confidence and picks the few to test first. Use when an idea feels right but is unproven, the team disagrees on risk, or before designing experiments.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -764,13 +778,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/discovery/identify-assumptions/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code>python3 scripts/assumption_tracker.py --demo            # built-in sample (8 assumptions)
-python3 scripts/assumption_tracker.py input.json        # score &amp; prioritize your assumptions
-python3 scripts/assumption_tracker.py input.json --format json
-</code></pre>
-
-Each assumption needs `description`, `category` (`value`/`usability`/`viability`/`feasibility`/`ethics`/`gtm`/`strategy`/`team`), `confidence` (`high`/`medium`/`low`), and `impact` (1-10). Document with `assets/assumption_map_template.md`.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/identify-assumptions/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

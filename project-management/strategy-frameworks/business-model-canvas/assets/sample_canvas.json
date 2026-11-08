@@ -1,0 +1,39 @@
+{
+  "canvas_name": "Acme HR Analytics, v3",
+  "as_of": "2026-05-27",
+  "orientation": "value-driven",
+  "customer_segments": [
+    {"name": "Mid-market HR teams (200-2,000 employees)", "primary": true, "segment_archetype": "niche"},
+    {"name": "HR consultancies serving mid-market clients", "primary": false, "segment_archetype": "segmented"}
+  ],
+  "value_propositions": [
+    {"target_segment": "Mid-market HR teams (200-2,000 employees)", "statement": "Cut monthly HR reporting from 3 days to 4 hours and reduce headcount-report errors 80%", "value_types": ["performance", "cost reduction"]},
+    {"target_segment": "HR consultancies serving mid-market clients", "statement": "Benchmark a client's attrition against 400 peer firms in one click", "value_types": ["newness", "performance"]}
+  ],
+  "channels": [
+    {"target_segment": "Mid-market HR teams (200-2,000 employees)", "channel": "Web direct with free trial", "phases_covered": ["awareness", "evaluation", "purchase", "delivery"]},
+    {"target_segment": "HR consultancies serving mid-market clients", "channel": "Partner programme", "phases_covered": ["awareness", "evaluation", "purchase", "delivery"]}
+  ],
+  "customer_relationships": [
+    {"target_segment": "Mid-market HR teams (200-2,000 employees)", "type": "Self-service, with a named CSM above $20K ARR"},
+    {"target_segment": "HR consultancies serving mid-market clients", "type": "Dedicated partner manager"}
+  ],
+  "revenue_streams": [
+    {"target_segment": "Mid-market HR teams (200-2,000 employees)", "type": "subscription", "mechanism": "tiered fixed list price", "per_unit": "per employee per month"},
+    {"target_segment": "HR consultancies serving mid-market clients", "type": "licensing", "mechanism": "annual partner licence", "per_unit": "per client workspace"}
+  ],
+  "key_resources": ["Engineering team of 14", "Anonymised benchmark dataset from 400 firms", "Certified HRIS integrations"],
+  "key_activities": ["Product development", "Integration maintenance", "Customer success and onboarding"],
+  "key_partnerships": [
+    {"partner": "HRIS vendors", "role": "Data integration and co-marketing"},
+    {"partner": "HR consultancies", "role": "Resale and implementation"}
+  ],
+  "cost_structure": {
+    "fixed_pct_estimate": 70,
+    "top_lines": ["People (engineering, sales, CS)", "Cloud infrastructure", "Integration maintenance"]
+  },
+  "assumptions": [
+    {"block": "value_propositions", "statement": "HR teams will pay for time saved on reporting", "evidence": "medium", "risk": "high", "testability": "high"},
+    {"block": "channels", "statement": "Consultancies will resell rather than build their own dashboards", "evidence": "low", "risk": "medium", "testability": "high"}
+  ]
+}

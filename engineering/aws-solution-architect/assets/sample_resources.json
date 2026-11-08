@@ -1,0 +1,52 @@
+{
+  "ec2_instances": [
+    {
+      "type": "t3.large",
+      "cpu_utilization": 8,
+      "monthly_cost": 60,
+      "pricing": "on-demand"
+    },
+    {
+      "type": "m5.xlarge",
+      "cpu_utilization": 55,
+      "monthly_cost": 140,
+      "pricing": "on-demand"
+    }
+  ],
+  "rds_instances": [
+    {
+      "engine": "postgres",
+      "monthly_cost": 220,
+      "connections_per_day": 40
+    }
+  ],
+  "s3_buckets": [
+    {
+      "size_gb": 800,
+      "storage_class": "STANDARD",
+      "has_lifecycle_policy": false
+    }
+  ],
+  "nat_gateways": [
+    {
+      "monthly_cost": 32
+    },
+    {
+      "monthly_cost": 32
+    }
+  ],
+  "multi_az_required": false,
+  "elastic_ips": [
+    {
+      "attached": false
+    }
+  ],
+  "cloudwatch_log_groups": [
+    {
+      "retention_days": 0,
+      "size_gb": 50
+    }
+  ],
+  "has_budget_alerts": false,
+  "has_cost_explorer": true
+}

@@ -6,7 +6,6 @@ This script analyzes dependency licenses from package metadata, classifies them
 into risk categories, detects license conflicts, and generates compliance
 reports with actionable recommendations for legal risk management.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -345,14 +344,22 @@ class LicenseChecker:
             ]
         }
     
-    def analyze_project(self, project_path: str, dependency_inventory: Optional[str] = None) -> Dict[str, Any]:
-        """Analyze license compliance for a project."""
+    def analyze_project(self, project_path: str, dependency_inventory: Optional[str] = None,
+                        project_license: Optional[str] = None) -> Dict[str, Any]:
+        """Analyze license compliance for a project (a directory or a single package.json)."""
         project_path = Path(project_path)
-        
+        manifest = project_path if project_path.is_file() else project_path / 'package.json'
+        if not project_license and manifest.is_file() and manifest.name.endswith('package.json'):
+            try:
+                project_license = json.loads(manifest.read_text()).get('license')
+            except (OSError, ValueError, AttributeError):
+                project_license = None
+        root = project_path.parent if project_path.is_file() else project_path
+
         analysis_results = {
             'timestamp': datetime.now().isoformat(),
             'project_path': str(project_path),
-            'project_license': self._detect_project_license(project_path),
+            'project_license': project_license or self._detect_project_license(root),
             'dependencies': [],
             'license_summary': {},
             'conflicts': [],
@@ -365,12 +372,17 @@ class LicenseChecker:
         if dependency_inventory:
             dependencies = self._load_dependency_inventory(dependency_inventory)
         else:
-            dependencies = self._scan_project_dependencies(project_path)
-        
+            dependencies = self._scan_project_dependencies(manifest)
+        if not dependencies:
+            raise ValueError(f"no dependencies found (looked for {manifest} / --inventory)")
+
         # Analyze each dependency's license
         for dep in dependencies:
-            license_info = self._analyze_dependency_license(dep, project_path)
+            license_info = self._analyze_dependency_license(dep, root)
             analysis_results['dependencies'].append(license_info)
+        # A license we could not resolve is missing data, not a conflict: list it separately.
+        analysis_results['unresolved'] = [d.name for d in analysis_results['dependencies']
+                                          if d.license_detected.license_type == LicenseType.UNKNOWN]
         
         # Generate license summary
         analysis_results['license_summary'] = self._generate_license_summary(
@@ -418,7 +430,7 @@ class LicenseChecker:
                     if detected_license:
                         return detected_license
                 except Exception as e:
-                    print(f"Error reading license file {license_path}: {e}")
+                    print(f"warning: reading license file {license_path}: {e}", file=sys.stderr)
         
         return None
     
@@ -445,25 +457,20 @@ class LicenseChecker:
     
     def _load_dependency_inventory(self, inventory_path: str) -> List[Dict[str, Any]]:
         """Load dependencies from JSON inventory file."""
-        try:
-            with open(inventory_path, 'r') as f:
-                data = json.load(f)
-            
-            if 'dependencies' in data:
-                return data['dependencies']
-            else:
-                return data if isinstance(data, list) else []
-        except Exception as e:
-            print(f"Error loading dependency inventory: {e}")
-            return []
+        with open(inventory_path, 'r') as f:
+            data = json.load(f)
+        deps = data.get('dependencies') if isinstance(data, dict) else data
+        if not isinstance(deps, list) or not all(isinstance(d, dict) and 'name' in d for d in deps):
+            raise ValueError("inventory must be a list (or {'dependencies': [...]}) of objects with 'name'")
+        return deps
     
     def _scan_project_dependencies(self, project_path: Path) -> List[Dict[str, Any]]:
         """Basic dependency scanning - in practice, would integrate with dep_scanner.py."""
         dependencies = []
         
-        # Simple package.json parsing as example
-        package_json = project_path / 'package.json'
-        if package_json.exists():
+        # Manifests carry no per-dependency license; use --inventory for real results.
+        package_json = project_path
+        if package_json.is_file():
             try:
                 with open(package_json, 'r') as f:
                     data = json.load(f)
@@ -478,7 +485,7 @@ class LicenseChecker:
                                 'direct': True
                             })
             except Exception as e:
-                print(f"Error parsing package.json: {e}")
+                print(f"warning: parsing package.json: {e}", file=sys.stderr)
         
         return dependencies
     
@@ -629,7 +636,8 @@ class LicenseChecker:
         if not project_license:
             # If no project license detected, flag as potential issue
             for dep in dependencies:
-                if dep.license_detected.risk_level in [RiskLevel.HIGH, RiskLevel.CRITICAL]:
+                if (dep.license_detected.license_type != LicenseType.UNKNOWN
+                        and dep.license_detected.risk_level in [RiskLevel.HIGH, RiskLevel.CRITICAL]):
                     conflicts.append(LicenseConflict(
                         dependency1='Project',
                         license1='Unknown',
@@ -649,6 +657,8 @@ class LicenseChecker:
         # Check compatibility with project license
         for dep in dependencies:
             dep_license_id = dep.license_detected.spdx_id or 'UNKNOWN'
+            if dep.license_detected.license_type == LicenseType.UNKNOWN:
+                continue  # reported under 'unresolved', not as a conflict
             
             # Check compatibility matrix
             if project_license in self.compatibility_matrix:
@@ -740,8 +750,9 @@ class LicenseChecker:
         base_score -= (unknown_count / len(dependencies)) * 30
         
         # Deduct points for high-risk licenses
-        high_risk_count = sum(1 for dep in dependencies 
-                             if dep.license_detected.risk_level in [RiskLevel.HIGH, RiskLevel.CRITICAL])
+        high_risk_count = sum(1 for dep in dependencies
+                             if dep.license_detected.license_type != LicenseType.UNKNOWN
+                             and dep.license_detected.risk_level in [RiskLevel.HIGH, RiskLevel.CRITICAL])
         base_score -= (high_risk_count / len(dependencies)) * 20
         
         # Deduct points for conflicts
@@ -771,7 +782,11 @@ class LicenseChecker:
     
     def _calculate_overall_risk(self, dependencies: List[DependencyLicense], 
                                conflicts: List[LicenseConflict]) -> str:
-        """Calculate overall project risk level."""
+        """Calculate overall project risk level. Unresolved licenses are reported separately."""
+        resolved = [d for d in dependencies if d.license_detected.license_type != LicenseType.UNKNOWN]
+        if dependencies and len(resolved) < len(dependencies) / 2 and not conflicts:
+            return 'UNKNOWN (most licenses unresolved)'
+        dependencies = resolved
         if any(c.severity == RiskLevel.CRITICAL for c in conflicts):
             return 'CRITICAL'
         elif any(dep.license_detected.risk_level == RiskLevel.CRITICAL for dep in dependencies):
@@ -893,6 +908,9 @@ class LicenseChecker:
         report.append(f"  Compliance Score: {analysis_results['compliance_score']:.1f}/100")
         report.append(f"  Overall Risk: {analysis_results['risk_assessment']['overall_risk']}")
         report.append(f"  License Conflicts: {len(analysis_results['conflicts'])}")
+        unresolved = analysis_results.get('unresolved', [])
+        report.append(f"  Unresolved (no license data): {len(unresolved)}"
+                      + (" - pass --inventory with a 'license' per dependency" if unresolved else ""))
         report.append("")
         
         # License distribution
@@ -924,7 +942,7 @@ class LicenseChecker:
         if high_risk_deps:
             report.append("HIGH-RISK DEPENDENCIES:")
             report.append("-" * 30)
-            for dep in high_risk_deps[:10]:  # Top 10
+            for dep in [d for d in high_risk_deps if d.license_detected.license_type != LicenseType.UNKNOWN][:10]:
                 license_name = dep.license_detected.spdx_id or dep.license_detected.name
                 report.append(f"  {dep.name} v{dep.version}: {license_name} ({dep.license_detected.risk_level.value.upper()})")
             report.append("")
@@ -964,13 +982,16 @@ Examples:
     parser.add_argument('--policy', choices=['permissive', 'strict'], default='permissive',
                        help='License policy strictness (default: permissive)')
     parser.add_argument('--warn-conflicts', action='store_true',
-                       help='Show warnings for potential conflicts')
-    
+                       help='Exit 1 when any license conflict is found')
+    parser.add_argument('--project-license', help='SPDX id of the project license (default: package.json "license" or LICENSE file)')
+
     args = parser.parse_args()
-    
+    if not os.path.exists(args.project_path) or (args.inventory and not os.path.isfile(args.inventory)):
+        print(f"error: path not found: {args.inventory if os.path.exists(args.project_path) else args.project_path}", file=sys.stderr)
+        sys.exit(2)
     try:
         checker = LicenseChecker()
-        results = checker.analyze_project(args.project_path, args.inventory)
+        results = checker.analyze_project(args.project_path, args.inventory, args.project_license)
         report = checker.generate_report(results, args.format)
         
         if args.output:
@@ -985,12 +1006,12 @@ Examples:
             sys.exit(1)
         
         if args.warn_conflicts and results['conflicts']:
-            print("\nWARNING: License conflicts detected!")
-            sys.exit(2)
-    
-    except Exception as e:
-        print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+            print("WARNING: License conflicts detected!", file=sys.stderr)
+            sys.exit(1)
 
-if __name__ == '__main__':
+    except Exception as e:
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
+
+if __name__ == "__main__":
     main()

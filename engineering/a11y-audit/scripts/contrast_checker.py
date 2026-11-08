@@ -5,7 +5,6 @@ Contrast Checker - Check color contrast ratios against WCAG AA/AAA standards.
 Calculates relative luminance contrast ratios between foreground and background
 colors and validates against WCAG 2.1 thresholds for normal and large text.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 

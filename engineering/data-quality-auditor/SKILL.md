@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: engineering
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [data-quality, freshness, schema-drift, great-expectations, dbt-tests, soda, data-observability, data-engineering]
 ---
 
@@ -73,13 +73,56 @@ Checks group into five categories applied per dataset — **Volume**, **Freshnes
 
 ## Tools
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `dq_check_runner.py` | Run/profile DQ checks against tabular data; per-table pass/fail/warning with value vs threshold | `python scripts/dq_check_runner.py --data t.json --checks checks.json --format json` |
-| `schema_drift_detector.py` | Diff a current schema against a baseline snapshot (added/removed/changed columns, types, ordinals) | `python scripts/schema_drift_detector.py --baseline base.json --current cur.json` |
-| `freshness_monitor.py` | Check a freshness SLA: current age vs max-age budget, alerting-ready output | `python scripts/freshness_monitor.py --data t.json --column updated_at --max-age-min 60` |
+| Tool | Purpose | Exit codes |
+|------|---------|------------|
+| `dq_check_runner.py` | Run a checks file (YAML or JSON, top-level `checks:` list) against CSV/JSON rows; `--profile` adds per-column null rate, distinct count, min/max | 0 all pass, 1 a check failed/errored, 2 bad input or zero checks loaded |
+| `schema_drift_detector.py` | Diff a current schema against a baseline (added/removed columns, type, nullability, ordinal); `--snapshot` infers a baseline from data; `--fail-on` sets the gate severity (default `critical`) | 0 no drift at/above `--fail-on`, 1 drift, 2 bad input |
+| `freshness_monitor.py` | Age of the newest timestamp vs a max-age budget; `--now` pins the clock | 0 within SLA, 1 breach, 2 bad input |
 
-All scripts: stdlib only, argparse CLI, JSON or human-readable output (see Scope re: live DB integration).
+Supported check types: `not_null` (`threshold` = max null rate), `unique`, `accepted_values` (`values`), `matches_regex` (`regex`), `between` (`min`/`max`), `row_count_between`, `freshness` (`max_age_min`, optional `now`), `length_between` (`min_len`/`max_len`), `reference_exists` (`reference_values`). The YAML reader handles block maps, block lists and flow lists (`[a, b]`); anything fancier, use JSON.
+
+## Workflow
+
+Run from the skill folder. The samples pin `now` so the demo gives the same result on any date.
+
+```bash
+# 1. Profile, then run the suite: sound data passes (exit 0), flawed data fails 7 of 8 checks (exit 1)
+python3 scripts/dq_check_runner.py --profile --data assets/sample_orders.json
+python3 scripts/dq_check_runner.py --data assets/sample_orders.json --checks assets/checks.yaml
+python3 scripts/dq_check_runner.py --data assets/sample_orders_flawed.json --checks assets/checks.yaml --format json
+
+# 2. Snapshot a baseline, then diff: the drifted schema has a type change and a NOT NULL tightening (exit 1)
+python3 scripts/schema_drift_detector.py --snapshot assets/sample_orders.json --output "$(mktemp -d)/baseline.json"
+python3 scripts/schema_drift_detector.py --baseline assets/baseline_schema.json --current assets/current_schema_drifted.json
+
+# 3. Freshness SLA: newest row 30 min old against a 60 min budget (exit 0)
+python3 scripts/freshness_monitor.py --data assets/sample_orders.json --column updated_at --max-age-min 60 --now 2026-06-01T12:30:00Z --table-name orders
+```
+
+The tools read exported rows or schema JSON; they do not query a database. To audit a live table, export a sample (`SELECT ... LIMIT n` to JSON/CSV) or the `information_schema.columns` rows, then run the same commands. A result is only as good as the export: say what was sampled.
+
+Done means: every production-critical table has at least one check per relevant dimension, the suite exits 0 on current data, and any failure has an owner and a ticket.
+
+## Anti-Patterns
+
+**Mistake:** Treating a run that loaded zero checks as a pass.
+**Why it happens:** A typo in the checks file or the wrong format silently produces an empty suite.
+**Instead:** The runner exits 2 when no checks load. In CI, gate on the exit code, not on the absence of failures in the report.
+
+**Mistake:** Checks that alert but never block.
+**Why it happens:** Wiring the exit code into the pipeline feels risky, so failures only post to a channel.
+**Instead:** Fail the load on exit 1 for critical checks and route warnings by severity. Unenforced checks let bad data reach consumers anyway.
+
+**Mistake:** `not_null` on every column of a wide table.
+**Why it happens:** Coverage looks good on a dashboard.
+**Instead:** Check the columns the business needs, with thresholds tuned from the profile. Noise trains people to ignore the real alerts.
+
+More in [references/dq-anti-patterns.md](references/dq-anti-patterns.md).
+
+## Files
+
+- `scripts/dq_check_runner.py`, `scripts/schema_drift_detector.py`, `scripts/freshness_monitor.py` — the three tools above.
+- `assets/sample_orders.json` (sound), `assets/sample_orders_flawed.json` (duplicate key, empty and malformed email, unknown status, negative amount, orphan customer, stale), `assets/checks.yaml`, `assets/baseline_schema.json`, `assets/current_schema_drifted.json`.
 
 ## References
 
@@ -102,7 +145,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **This skill does NOT cover:**
 - Pipeline design, ETL, dbt/Spark implementation — use `engineering/senior-data-engineer`.
-- Live database querying; scripts are stdlib-only and read JSON inputs or simulate. For production, integrate your DB driver of choice (psycopg / mysqlclient / google-cloud-bigquery / etc.).
+- Live database querying; the scripts read exported CSV/JSON rows and schema JSON. Export first, or run the same checks in your warehouse tool (dbt tests, Great Expectations, Soda).
 
 ## Related skills
 

@@ -21,8 +21,12 @@ Usage:
     python compliance_checker.py /path/to/project
     python compliance_checker.py /path/to/project --framework soc2
     python compliance_checker.py /path/to/project --framework pci-dss --output report.json
+
+Static code-evidence check: it cannot see policies or operational controls.
+Exit codes: 0 score >= 70, 1 score < 70 (NON_COMPLIANT / CRITICAL_GAPS), 2 bad input.
 """
 
+import contextlib
 import os
 import sys
 import json
@@ -124,7 +128,10 @@ class ComplianceChecker:
                 "not_applicable": na,
                 "total": len(self.controls)
             },
-            "controls": [asdict(c) for c in self.controls]
+            "controls": [asdict(c) for c in self.controls],
+            "evidence_note": ("Static code-evidence check. 'failed' means no evidence was found in "
+                              "the repository, not that the control is absent; policies, HR, vendor "
+                              "and operational controls must be evidenced outside the code."),
         }
 
         self._print_summary(result)
@@ -1013,7 +1020,8 @@ class ComplianceChecker:
         print(f"Target: {result['target']}")
         print(f"Framework: {result['framework'].upper()}")
         print(f"Scan duration: {result['scan_duration_seconds']}s")
-        print(f"Compliance score: {result['compliance_score']}% ({result['compliance_level']})")
+        print(f"Code-evidence score: {result['compliance_score']}% ({result['compliance_level']})")
+        print(f"Note: {result['evidence_note']}")
         print()
 
         summary = result['summary']
@@ -1081,7 +1089,11 @@ Examples:
         verbose=args.verbose
     )
 
-    result = checker.check()
+    with contextlib.redirect_stdout(sys.stderr if args.json else sys.stdout):
+        result = checker.check()
+    if result.get('status') == 'error':
+        print(f"error: {result.get('message')}", file=sys.stderr)
+        sys.exit(2)
 
     if args.json:
         output = json.dumps(result, indent=2)
@@ -1096,10 +1108,8 @@ Examples:
             json.dump(result, f, indent=2)
         print(f"\nResults written to {args.output}")
 
-    # Exit with error code based on compliance level
-    if result.get('compliance_level') == 'CRITICAL_GAPS':
-        sys.exit(2)
-    if result.get('compliance_level') == 'NON_COMPLIANT':
+    # Exit 1 when evidence is missing for enough controls to score below 70 (exit 2 = bad input)
+    if result.get('compliance_level') in ('NON_COMPLIANT', 'CRITICAL_GAPS'):
         sys.exit(1)
 
 

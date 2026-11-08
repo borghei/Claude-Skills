@@ -14,6 +14,12 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
+
+def _die(msg: str) -> None:
+    """Bad input: message on stderr, exit 2 (1 is reserved for findings)."""
+    print(msg, file=sys.stderr)
+    sys.exit(2)
+
 # Decisions per person-hour. Below the floor a series is not deciding anything.
 DENSITY_FLOOR = 0.15
 DENSITY_HEALTHY = 0.35
@@ -24,11 +30,11 @@ def load_series(path: Path) -> Dict[str, Any]:
     try:
         doc = json.loads(path.read_text(encoding="utf-8"))
     except FileNotFoundError:
-        raise SystemExit(f"error: file not found: {path}")
+        _die(f"error: file not found: {path}")
     except json.JSONDecodeError as exc:
-        raise SystemExit(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
+        _die(f"error: {path} is not valid JSON ({exc.msg}, line {exc.lineno})")
     if not isinstance(doc, dict) or not doc.get("occurrences"):
-        raise SystemExit("error: series JSON needs a non-empty 'occurrences' list")
+        _die("error: series JSON needs a non-empty 'occurrences' list")
     return doc
 
 
@@ -217,9 +223,9 @@ def main() -> None:
         output(diagnose(doc, rows, args.churn_threshold), args.format)
     except SystemExit:
         raise
-    except (KeyError, TypeError, ValueError, ZeroDivisionError) as exc:
+    except (AttributeError, KeyError, TypeError, ValueError, ZeroDivisionError) as exc:
         print(f"error: malformed series data — {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

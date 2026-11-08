@@ -1,0 +1,40 @@
+{
+  "initiatives": [
+    {
+      "title": "Build advanced search",
+      "quarter": "Q2 2026",
+      "type": "feature",
+      "description": "Full-text search with filters, autocomplete and relevance ranking."
+    },
+    {
+      "title": "Improve onboarding flow",
+      "quarter": "Q2 2026",
+      "type": "improvement",
+      "description": "Redesign the first-run experience with fewer steps.",
+      "outcome": "Redesign onboarding with a checklist",
+      "metric": {
+        "name": "Day-7 activation",
+        "baseline": null,
+        "target": "45%"
+      }
+    },
+    {
+      "title": "Migrate to new database",
+      "quarter": "Q2 2026",
+      "type": "infrastructure",
+      "description": "PostgreSQL upgrade with pooling and read replicas."
+    },
+    {
+      "title": "Launch mobile app",
+      "quarter": "Q2 2026",
+      "type": "feature",
+      "description": "iOS and Android apps with core web functionality."
+    },
+    {
+      "title": "Add team collaboration",
+      "quarter": "Q4 2026",
+      "type": "feature",
+      "description": "Shared workspaces, comments and real-time editing."
+    }
+  ]
+}

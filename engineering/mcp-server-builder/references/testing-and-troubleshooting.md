@@ -47,8 +47,8 @@ npx @modelcontextprotocol/inspector
 # Test stdio server
 npx @modelcontextprotocol/inspector node dist/index.js
 
-# Test SSE server
-npx @modelcontextprotocol/inspector --url http://localhost:3001/sse
+# Test a Streamable HTTP server (legacy SSE servers use their /sse URL)
+npx @modelcontextprotocol/inspector --url http://localhost:3001/mcp
 ```
 
 ## Common Pitfalls
@@ -78,7 +78,7 @@ npx @modelcontextprotocol/inspector --url http://localhost:3001/sse
 |---------|-------|----------|
 | LLM never selects my tool | Tool description is too vague or missing usage guidance | Rewrite the description using the template: "[What it does]. [What it returns]. [When to use it]." Ensure at least 30 characters and include "Use when..." phrasing |
 | Tool call returns empty or `null` | Handler returns raw `undefined` instead of a content array | Always return `{ content: [{ type: "text", text: "..." }] }` even for empty results — never return bare `null` or `undefined` |
-| `ECONNREFUSED` when connecting to remote server | SSE/HTTP server not running or wrong port in client config | Verify the server process is listening (`curl http://localhost:<port>/sse`), check `url` in `claude_desktop_config.json`, and confirm no firewall rules block the port |
+| `ECONNREFUSED` when connecting to remote server | HTTP server not running or wrong port in client config | Verify the server process is listening (`curl -i http://localhost:<port>/mcp`), check `url` in the client config (`.mcp.json` or `claude_desktop_config.json`), and confirm no firewall rules block the port |
 | `spawn ENOENT` on stdio server startup | The `command` path in client config points to a missing binary | Use absolute paths for `command` (e.g., `/usr/local/bin/node`) or ensure the binary is on the shell PATH that the MCP host process inherits |
 | Client connects but lists zero tools | `list_tools` handler not registered or returns an empty array | Confirm `@server.list_tools()` (Python) or `server.tool()` (TypeScript) is called before `server.connect()`. Test with MCP Inspector to verify the handshake |
 | Tool execution times out | No timeout set on subprocess or HTTP calls inside the handler | Add explicit `timeout` to every `subprocess.run()`, `execSync()`, and `fetch()` call. 10-30 seconds for queries, 120 seconds max for builds |

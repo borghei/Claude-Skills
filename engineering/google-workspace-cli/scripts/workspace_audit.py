@@ -4,8 +4,11 @@ Google Workspace Audit - Audit GWS configurations for security best practices.
 
 Analyzes exported Workspace configuration JSON for security gaps including
 2FA enforcement, password policies, sharing settings, and admin roles.
+Settings absent from the file are reported as "not provided", never as failures.
 
-Author: Claude Skills Engineering Team
+Exit codes: 0 no critical/high findings, 1 critical or high finding,
+2 bad input (missing file, invalid JSON, not an object, nothing auditable).
+
 License: MIT
 """
 
@@ -140,6 +143,8 @@ class WorkspaceAuditor:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.findings: List[Finding] = []
+        self.not_provided: List[str] = []
+        self.checked: List[str] = []
 
     def audit(self) -> List[Finding]:
         """Run full security audit."""
@@ -156,16 +161,9 @@ class WorkspaceAuditor:
             current = get_nested_value(self.config, path)
 
             if current is None:
-                self.findings.append(Finding(
-                    severity=policy["severity"],
-                    category=policy["category"],
-                    setting=path,
-                    current_value="not configured",
-                    expected_value=str(policy.get("expected", policy.get("expected_min", policy.get("expected_max", "")))),
-                    message=policy["message"],
-                    recommendation=policy["recommendation"],
-                ))
+                self.not_provided.append(path)  # missing data, not a misconfiguration
                 continue
+            self.checked.append(path)
 
             # Boolean check
             if "expected" in policy and isinstance(policy["expected"], bool):
@@ -227,8 +225,11 @@ class WorkspaceAuditor:
 
     def _audit_admin_roles(self):
         """Audit admin role assignments."""
-        admins = get_nested_value(self.config, "admin.super_admins", [])
+        admins = get_nested_value(self.config, "admin.super_admins")
+        if admins is None:
+            self.not_provided.append("admin.super_admins")
         if isinstance(admins, list):
+            self.checked.append("admin.super_admins")
             if len(admins) > 5:
                 self.findings.append(Finding(
                     severity="high",
@@ -332,12 +333,15 @@ def generate_sample_config() -> Dict[str, Any]:
     }
 
 
-def format_text(findings: List[Finding]) -> str:
+def format_text(findings: List[Finding], auditor: "WorkspaceAuditor") -> str:
     """Format as human-readable text."""
     lines = []
     lines.append("=" * 60)
     lines.append("GOOGLE WORKSPACE SECURITY AUDIT REPORT")
     lines.append("=" * 60)
+    lines.append(f"Settings checked: {len(auditor.checked)} | not provided: {len(auditor.not_provided)}")
+    if auditor.not_provided:
+        lines.append("  Not provided (unknown, export these): " + ", ".join(auditor.not_provided))
 
     by_severity = {}
     for f in findings:
@@ -364,16 +368,19 @@ def format_text(findings: List[Finding]) -> str:
             lines.append("")
 
     if not findings:
-        lines.append("\nNo security issues found. Configuration follows best practices.")
+        lines.append(f"\nNo issues in the {len(auditor.checked)} settings provided."
+                     + (" Settings not provided were not assessed." if auditor.not_provided else ""))
 
     lines.append("=" * 60)
     return "\n".join(lines)
 
 
-def format_json(findings: List[Finding]) -> str:
+def format_json(findings: List[Finding], auditor: "WorkspaceAuditor") -> str:
     """Format as JSON."""
     return json.dumps({
         "findings": [asdict(f) for f in findings],
+        "checked": auditor.checked,
+        "not_provided": auditor.not_provided,
         "summary": {
             "total": len(findings),
             "critical": sum(1 for f in findings if f.severity == "critical"),
@@ -408,8 +415,11 @@ def main():
             sys.exit(2)
         try:
             config = json.loads(path.read_text())
-        except json.JSONDecodeError as e:
-            print(f"Error: Invalid JSON: {e}", file=sys.stderr)
+        except (json.JSONDecodeError, UnicodeDecodeError, OSError) as e:
+            print(f"Error: cannot read {args.config}: {e}", file=sys.stderr)
+            sys.exit(2)
+        if not isinstance(config, dict):
+            print("Error: config must be a JSON object (see --generate-sample)", file=sys.stderr)
             sys.exit(2)
     else:
         parser.error("Provide --config or --sample")
@@ -417,13 +427,17 @@ def main():
 
     auditor = WorkspaceAuditor(config)
     findings = auditor.audit()
+    if not auditor.checked:
+        print("Error: none of the audited settings are present in the config (see --generate-sample)",
+              file=sys.stderr)
+        sys.exit(2)
 
     if args.format == "json":
-        print(format_json(findings))
+        print(format_json(findings, auditor))
     else:
-        print(format_text(findings))
+        print(format_text(findings, auditor))
 
-    if any(f.severity == "critical" for f in findings):
+    if any(f.severity in ("critical", "high") for f in findings):
         sys.exit(1)
 
 

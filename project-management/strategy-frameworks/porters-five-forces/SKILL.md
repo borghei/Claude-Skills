@@ -1,17 +1,16 @@
 ---
 name: porters-five-forces
 description: >
-  Porter's Five Forces — analyze the competitive intensity and
-  attractiveness of an industry. Use when evaluating a new market entry,
-  diagnosing margin pressure, designing a defensive strategy, or auditing
-  industry-level positioning.
+  Rates the five competitive forces of one precisely defined industry with
+  evidence and turns the dominant forces into moves. Use when weighing market
+  entry, diagnosing margin pressure or auditing industry positioning.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: strategy-frameworks
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: five_forces_scorer.py
   tech-stack: porters-five-forces, industry-analysis, competitive-strategy
   tags:
@@ -27,70 +26,15 @@ Michael Porter's framework for analyzing the structural attractiveness
 of an industry. Reveals where profit pools form, why some markets are
 chronically unprofitable, and where strategic positioning has leverage.
 
-## When to use this skill
+**Done looks like:** an industry named by segment and geography; each force rated low, medium or high with at least two factors and cited evidence; the one or two dominant forces named; 2-3 high-priority moves that counter them; `five_forces_scorer.py` exits 0.
 
-- **Market entry** decision (which industry to play in)
-- Diagnosing **chronic margin pressure** (why are we squeezed?)
-- **Strategic positioning** (where to invest, where to defend)
-- **Competitive response** planning
-- **M&A target evaluation** (industry attractiveness)
-- **Pre-fundraise** industry framing
+## When to Use
 
-## The 5 forces
+- A market-entry or M&A decision that turns on industry attractiveness
+- Margins keep falling and nobody can say which force moved
+- Planning a defensive strategy or competitive response
 
-1. **Threat of new entrants** — how easily can newcomers join?
-2. **Bargaining power of suppliers** — how concentrated/critical are inputs?
-3. **Bargaining power of buyers** — how concentrated/price-sensitive are customers?
-4. **Threat of substitute products** — what alternatives could replace the category?
-5. **Competitive rivalry** — how intense is competition between existing players?
-
-Plus (Porter's later addition):
-6. **Complementors** (the "sixth force") — do partners increase total industry value?
-
-## Scoring rubric
-
-Each force is rated **low / medium / high** based on specific factors:
-
-### 1. Threat of new entrants — high when:
-- Low capital requirements
-- No regulatory barriers
-- No proprietary tech / patents
-- Low switching costs
-- No economies of scale
-- No brand loyalty
-- Access to distribution is easy
-- Network effects absent
-
-### 2. Supplier power — high when:
-- Few suppliers / concentrated supply base
-- Suppliers are critical / cannot be substituted
-- Switching cost is high
-- Suppliers can forward-integrate
-- Industry is not a large customer for supplier
-
-### 3. Buyer power — high when:
-- Few buyers / concentrated demand
-- Buyers purchase in large volumes
-- Product is undifferentiated
-- Switching cost is low
-- Buyers can backward-integrate
-- Buyers have full information
-- Buyers face thin margins (price pressure)
-
-### 4. Threat of substitutes — high when:
-- Many substitutes exist
-- Substitutes have favorable price-performance
-- Switching cost to substitute is low
-- Buyer propensity to substitute is high
-- Substitute industry is growing fast
-
-### 5. Competitive rivalry — high when:
-- Many similar-sized competitors
-- Low growth industry (zero-sum)
-- High fixed costs (drive volume)
-- Low differentiation
-- High exit barriers
-- Strategic stakes high
+Firm-level strengths and weaknesses belong in `swot-analysis`; the forces, their sub-factors and examples are in `references/five-forces-deep.md` (the complementors "sixth force" is optional).
 
 ## Clarify First
 
@@ -102,70 +46,55 @@ Before scoring the forces, settle the inputs below. When one is missing or vague
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Define the industry
-Industry definition is the most-frequent source of error.
-- "Software" is too broad
-- "B2B SaaS" is too broad
-- "Mid-market HR analytics SaaS" is workable
-- "Enterprise revenue intelligence tools (Gong, Outreach, Salesloft-tier)" is precise
-
-### Step 2 — Score each force
-Use the rubric. Each force gets low / medium / high + evidence.
-
-### Step 3 — Identify the dominant force(s)
-Usually 1-2 forces dominate. They drive the industry's profit pool.
-
-### Step 4 — Translate to strategy
-Each force suggests strategic moves:
-
-| Force | High = unfavorable | Strategy implications |
-|-------|---------------------|------------------------|
-| New entrants | Easy entry | Build barriers (brand, scale, network, switching cost) |
-| Supplier power | Concentrated | Diversify, integrate backward, build alternative supply |
-| Buyer power | Concentrated | Diversify customer base, differentiate, integrate forward |
-| Substitutes | Strong substitutes | Differentiate, raise switching cost, defend value prop |
-| Rivalry | Intense | Differentiate, niche down, exit, consolidate |
-
-### Step 5 — Run `five_forces_scorer.py`
-Audit for: missing evidence, generic factors, missed sub-factors, no
-strategy implications drawn.
+## Quick Start
 
 ```bash
+# Sound analysis: two dominant forces, three moves, exit 0
 python3 project-management/strategy-frameworks/porters-five-forces/scripts/five_forces_scorer.py \
-  --input forces.json --format markdown
+  --input project-management/strategy-frameworks/porters-five-forces/assets/sample_forces.json --format markdown
 ```
 
-## Common engagements
+```bash
+# "Software", a missing force and an invalid rating: exit 1
+python3 project-management/strategy-frameworks/porters-five-forces/scripts/five_forces_scorer.py \
+  --input project-management/strategy-frameworks/porters-five-forces/assets/sample_forces_flawed.json --format markdown
+```
 
-### "Should we enter market X?"
-1. Define X precisely.
-2. Score each force.
-3. Identify dominant force.
-4. Assess: can we differentiate against the dominant force?
-5. If yes, structure entry to counter that force; if no, don't enter.
+```bash
+# Input schema and flags
+python3 project-management/strategy-frameworks/porters-five-forces/scripts/five_forces_scorer.py --help
+```
 
-### "Why are our margins under pressure?"
-1. Score industry today vs 3-5 years ago.
-2. Identify the force(s) that shifted (usually buyer power or rivalry).
-3. Identify which factor specifically caused the shift.
-4. Address: product differentiation, switching cost, customer concentration, etc.
+## Tools Overview
 
-### "Audit our strategic position"
-1. Score industry forces.
-2. For each high force, identify how we currently counter it.
-3. Identify weak counters; recommend reinforcement.
+`five_forces_scorer.py` is the quality gate for this skill. **What the scorer checks:** an industry definition of useful length; all five forces rated with a valid intensity (fail otherwise); at least two factors and some evidence per force; all-medium ratings; strategy implications present with 1-5 high-priority moves. It sums intensities (low 1, medium 2, high 3) into an attractiveness band and reports "Not rated" while any force is missing. It does not judge whether the factors or evidence are right.
 
-## Anti-patterns to avoid
+**Exit codes:** `0` no fail findings · `1` at least one fail (missing industry, an unscored force, an invalid intensity) · `2` unreadable file, invalid JSON or a top level that is not an object. JSON by default, `--format markdown`, `--output FILE`.
 
-- **Industry defined too broadly.** Yields generic analysis.
-- **Industry defined too narrowly.** Misses substitute threats.
-- **Each force = "medium".** No analysis happened.
-- **No evidence cited.** Just opinion.
-- **No strategy implications.** Just a score; not actionable.
-- **Static analysis.** Industries evolve; refresh every 12-18 months.
-- **Mixing internal capabilities with industry analysis.** Five Forces is industry-level; capabilities are firm-level (see SWOT).
+## Workflow
+
+1. **Define the industry** by segment, buyer and geography. "Software" and "B2B SaaS" are too broad; "mid-market HR analytics SaaS in North America" works. Too narrow misses substitutes.
+2. **Rate each force** low, medium or high using the sub-factors in `references/five-forces-deep.md`, with at least two factors and the evidence behind them. Rating everything medium usually means the factors were not weighed.
+3. **Name the dominant forces** (usually one or two): they set the profit pool.
+4. **Translate to moves.** For each high force, pick the counter from `references/five-forces-and-strategy.md` (barriers, diversifying supply or buyers, defending the value proposition, niching or consolidating) and mark 2-3 as high priority. For margin diagnosis, rate the industry then and now and name the force that shifted.
+5. **Audit.** Write the analysis as JSON (schema in `--help`; `assets/sample_forces.json` is a complete example) and run the scorer.
+
+## Anti-Patterns
+
+### The industry is "software"
+**Mistake:** The industry is defined so broadly that every force is "it depends".
+**Why it happens:** A broad label feels safe and avoids choosing a segment.
+**Instead:** Name segment, buyer and geography; check that the substitutes you care about still fall inside.
+
+### Ratings without evidence
+**Mistake:** Each force gets a colour and no factors or data.
+**Why it happens:** The ratings feel obvious to people inside the industry.
+**Instead:** Two factors and one piece of evidence per force; the scorer warns when either is missing.
+
+### Scores with no moves
+**Mistake:** The analysis ends at "unattractive, 12/15".
+**Why it happens:** The scoring feels like the work.
+**Instead:** Turn each dominant force into a move with an owner, and refresh the analysis every 12-18 months.
 
 ## Scope & Limitations
 
@@ -173,7 +102,7 @@ python3 project-management/strategy-frameworks/porters-five-forces/scripts/five_
 - Industry analysis across Porter's five forces: new entrants, supplier power, buyer power, substitutes and competitive rivalry, plus complementors as an optional sixth force
 - A low, medium or high rating per force from a factor rubric, with evidence
 - Identifying the one or two dominant forces and translating each high force into strategic moves
-- A scorer that flags missing evidence, generic factors, missed sub-factors and absent strategy implications (`five_forces_scorer.py`)
+- A scorer that flags unscored forces, thin factors, missing evidence, all-medium ratings and absent strategy implications (`five_forces_scorer.py`)
 - Market entry, margin pressure and strategic position engagements
 
 **Out of Scope:**
@@ -188,10 +117,19 @@ python3 project-management/strategy-frameworks/porters-five-forces/scripts/five_
 - Ratings are judgments. Without cited evidence they are opinion.
 - Industries change. The skill recommends a refresh every 12-18 months.
 
-## References
+## Files
 
-- `references/five-forces-deep.md` — each force, factors, examples
-- `references/five-forces-and-strategy.md` — translating to strategic moves
+| File | Purpose |
+|------|---------|
+| `scripts/five_forces_scorer.py` | Five Forces audit and attractiveness band |
+| `assets/sample_forces.json` | HR analytics SaaS analysis; exits 0 |
+| `assets/sample_forces_flawed.json` | Broad industry, missing force, invalid rating; exits 1 |
+| `assets/five_forces_template.md` | Fill-in template |
+
+## Reference Documentation
+
+- [references/five-forces-deep.md](references/five-forces-deep.md): Each force, sub-factors, examples
+- [references/five-forces-and-strategy.md](references/five-forces-and-strategy.md): Translating forces into strategic moves
 
 ## Related skills
 

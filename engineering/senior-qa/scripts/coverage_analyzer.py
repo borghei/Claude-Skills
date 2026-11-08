@@ -11,6 +11,7 @@ Usage:
     python coverage_analyzer.py coverage/ --critical-paths
 """
 
+import contextlib
 import os
 import sys
 import json
@@ -407,7 +408,8 @@ class CoverageAnalyzer:
                 lines=[],
                 severity=severity,
                 description=f"Branch coverage at {coverage.branch_pct:.1f}%",
-                recommendation=f"Add tests for conditional logic. {len(coverage.uncovered_branches)} uncovered branches."
+                recommendation="Add tests for conditional logic." + (
+                    f" {len(coverage.uncovered_branches)} uncovered branches." if coverage.uncovered_branches else "")
             ))
 
         # Check function coverage
@@ -737,11 +739,8 @@ class CoverageAnalyzerTool:
             'critical_gaps': analysis['stats']['critical_gaps']
         }
 
-        # Exit with error if strict mode and below threshold
         if self.strict and not analysis['stats']['meets_threshold']:
             print(f"\nFailed: Coverage {analysis['stats']['overall_line_pct']:.1f}% below threshold {self.threshold}%")
-            sys.exit(1)
-
         return results
 
 
@@ -808,6 +807,9 @@ Examples:
 
     args = parser.parse_args()
 
+    if not os.path.exists(args.coverage):
+        print(f"error: coverage path not found: {args.coverage}", file=sys.stderr)
+        sys.exit(2)
     try:
         tool = CoverageAnalyzerTool(
             coverage_path=args.coverage,
@@ -819,18 +821,21 @@ Examples:
             verbose=args.verbose
         )
 
-        results = tool.run()
-
-        if args.json:
-            print(json.dumps(results, indent=2))
-
+        with contextlib.redirect_stdout(sys.stderr if args.json else sys.stdout):
+            results = tool.run()
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"error: {e}", file=sys.stderr)
         if args.verbose:
             import traceback
             traceback.print_exc()
+        sys.exit(2)
+
+    if args.json:
+        print(json.dumps(results, indent=2))
+    # --strict turns a below-threshold result into a failing exit code for CI
+    if args.strict and results['status'] == 'fail':
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

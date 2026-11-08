@@ -1,16 +1,16 @@
 ---
 name: status-update-generator
 description: >
-  Generate weekly executive status updates from Jira/Linear data exports.
-  Produces a structured "highlights / blockers / risks / asks / what's next"
-  briefing in markdown, Confluence, Notion, Linear, JSON, or Mermaid.
+  Renders a weekly executive status update (highlights, blockers, risks, asks,
+  next) from Jira or Linear data. Use when preparing a sponsor or steering
+  update, or standardising a team's weekly report.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: status_generator.py
   tech-stack: jira, linear, weekly-status, executive-reporting, sbnr, r-y-g
   tags:
@@ -28,7 +28,7 @@ Weekly status updates eat 30-90 minutes of every PM's Friday afternoon and they 
 
 ## Core Capabilities
 
-- **Six-section template** — Header, Highlights, Blockers, Risks, Asks, What's Next, in a fixed order so exec readers scan in under 5 seconds (full section definitions in `references/status-structure-and-workflow.md`).
+- **Header plus five sections** — Header (project, period, author, R/Y/G and rationale), then Highlights, Blockers, Risks, Asks, What's Next, in a fixed order so exec readers scan in under 5 seconds (full section definitions in `references/status-structure-and-workflow.md`).
 - **Traffic-light discipline** — Green / Yellow / Red rules plus anti-patterns (watermelon status, always-yellow, color creep).
 - **Multi-format rendering** — `status_generator.py` emits all six SHARED_OUTPUT_SCHEMA formats: `markdown`, `confluence`, `notion`, `linear`, `json`, `mermaid`.
 - **SBNR mapping** — compressed async-standup variant mapped to the weekly sections.
@@ -56,12 +56,20 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `status_generator.py` | Generate a structured weekly status update | `python scripts/status_generator.py --input data.json --format markdown` |
-| `status_generator.py --demo` | Inspect demo input and output formats | `python scripts/status_generator.py --demo --format markdown` |
+```bash
+# Render the sample week (status yellow, one blocker, two risks) as markdown
+python3 project-management/execution/status-update-generator/scripts/status_generator.py \
+  --input project-management/execution/status-update-generator/assets/sample_status.json --format markdown
+# Same data as a Confluence page body; --status overrides the file's R/Y/G
+python3 project-management/execution/status-update-generator/scripts/status_generator.py \
+  --input project-management/execution/status-update-generator/assets/sample_status.json --format confluence --status red
+```
 
-The traffic-light status is a human judgment, not a calculation — set it and document the rationale. See `references/tool-and-troubleshooting.md` for flags and the input JSON shape.
+Formats: `markdown` (default), `confluence`, `notion`, `linear`, `json`, `mermaid`; `--output FILE` writes a file, `--period` overrides the period label, `--demo` uses the built-in copy of the sample. Input shape and flags: `references/tool-and-troubleshooting.md`.
+
+The traffic-light status is a human judgment, not a calculation: the tool refuses to run without one (`status` in the file or `--status`) rather than defaulting to green. Write the rationale next to it.
+
+**Exit codes:** `0` update rendered · `2` missing or unreadable file, invalid JSON, a top level that is not an object, or no valid `status`.
 
 ## Anti-Patterns
 
@@ -82,11 +90,11 @@ The traffic-light status is a human judgment, not a calculation — set it and d
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
-- **[references/status-structure-and-workflow.md](references/status-structure-and-workflow.md)** — full definition of each of the six sections, R/Y/G rules and anti-patterns, SBNR shorthand mapping, and the 6-step authoring workflow. Read when writing or standardizing an update.
+- **[references/status-structure-and-workflow.md](references/status-structure-and-workflow.md)** — full definition of the header and the five sections, R/Y/G rules and anti-patterns, SBNR shorthand mapping, and the 6-step authoring workflow. Read when writing or standardizing an update.
 - **[references/status-update-style-guide.md](references/status-update-style-guide.md)** — voice, structural rules, traffic-light discipline, and 5 worked examples (Green / Yellow / Red across team types). Read when coaching writing quality or seeing full examples.
 - **[references/red-flags.md](references/red-flags.md)** — warning signs and failure modes in status reporting practice. Read when an update process feels performative or untrusted.
 - **[references/tool-and-troubleshooting.md](references/tool-and-troubleshooting.md)** — `status_generator.py` flags, input JSON shape, Mermaid output, troubleshooting table, and success criteria. Read when running the tool or diagnosing a problem.
@@ -96,7 +104,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **In Scope:**
 - Generating weekly executive status updates from structured input
-- Five-section template (Highlights / Blockers / Risks / Asks / What's Next) with R/Y/G traffic light
+- Header plus five sections (Highlights / Blockers / Risks / Asks / What's Next) with an R/Y/G traffic light
 - Output in all six SHARED_OUTPUT_SCHEMA formats (json, markdown, mermaid, confluence, notion, linear)
 - Aggregating ticket data from Jira-shaped or Linear-shaped JSON dumps
 - SBNR shorthand mapping for async standup variants
@@ -125,3 +133,11 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `sprint-retrospective/` | Feeds into | Four weeks of status archives become retrospective input |
 | `../program-manager/` | Feeds into | Cross-team status aggregation rolls up multiple team updates |
 | `../delivery-manager/` | Pairs with | Release windows and incident references show up in Highlights and Risks |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/status_generator.py` | Renders the update in six output formats |
+| `assets/sample_status.json` | One week of status data (same as `--demo`) |
+| `assets/weekly_status_template.md` | Fill-in template matching the input JSON |

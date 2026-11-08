@@ -25,6 +25,35 @@ MEMORY_LINE_LIMIT = 200
 TOPIC_FILE_LINE_LIMIT = 100
 STALE_AGE_DAYS = 90
 PROMOTION_THRESHOLD = 3
+# Index-style memory (Claude Code auto-memory): "- [Title](topic.md) — hook", one pointer per line
+INDEX_LINE = re.compile(r"^\s*[-*]\s*\[([^\]]+)\]\(([^)\s]+\.md)\)")
+
+
+def load_topic_entries(path, lines):
+    """Turn index pointer lines into entries read from the linked topic files (frontmatter + body)."""
+    entries, base = [], Path(path).parent
+    for i, line in enumerate(lines, 1):
+        m = INDEX_LINE.match(line)
+        if not m:
+            continue
+        target = base / m.group(2)
+        entry = {"title": m.group(1).strip(), "start_line": i, "end_line": i, "content_lines": [],
+                 "metadata": {}, "topic_file": str(target)}
+        if not target.is_file():
+            entry["metadata"]["broken_pointer"] = m.group(2)
+        else:
+            body = target.read_text(encoding="utf-8").split("\n")
+            if body and body[0].strip() == "---" and "---" in [b.strip() for b in body[1:]]:
+                end = 1 + [b.strip() for b in body[1:]].index("---")
+                for fm in body[1:end]:
+                    key, _, value = fm.partition(":")
+                    if value:
+                        entry["metadata"][key.strip().lower()] = value.strip()
+                body = body[end + 1:]
+            entry["content_lines"] = body
+            entry["age_days"] = (datetime.now() - datetime.fromtimestamp(target.stat().st_mtime)).days
+        entries.append(entry)
+    return entries
 
 
 def load_memory_file(path):
@@ -62,6 +91,7 @@ def load_memory_file(path):
     if current_entry:
         current_entry["end_line"] = len(lines)
         entries.append(current_entry)
+    entries += load_topic_entries(path, lines)
 
     return {
         "path": str(path),
@@ -116,6 +146,13 @@ def classify_entry(entry, existing_rules, all_entries):
         classification = "PROMOTE"
     elif action == "EXTRACT":
         classification = "EXTRACT"
+
+    # Index pointers: a missing topic file is stale; an old one is worth a re-check
+    if metadata.get("broken_pointer"):
+        issues.append(f"Pointer to missing topic file: {metadata['broken_pointer']}")
+        classification = "STALE"
+    elif entry.get("age_days", 0) > STALE_AGE_DAYS:
+        issues.append(f"Topic file unchanged for {entry['age_days']} days; check it still holds")
 
     # Check for stale entries (references to deleted files, old dates)
     confidence = metadata.get("confidence", "").lower()
@@ -318,6 +355,9 @@ def main():
 
     args = parser.parse_args()
 
+    if not os.path.isfile(args.memory):
+        print(f"Error: memory file not found: {args.memory}", file=sys.stderr)
+        sys.exit(2)  # a path the user named must exist; "no memory" is not a healthy state
     result = run_health_check(args.memory, args.rules, args.topics)
 
     if args.json_output:

@@ -1,55 +1,159 @@
 {
-  "recommended_architecture": {
+  "pattern": {
     "pattern_name": "Modern Three-Tier Application",
     "description": "Classic architecture with containers and managed services",
-    "estimated_monthly_cost": 1450,
+    "use_case": "Traditional web apps, e-commerce, content management",
+    "services": {
+      "load_balancer": {
+        "service": "Application Load Balancer (ALB)",
+        "purpose": "Distribute traffic across instances",
+        "configuration": {
+          "scheme": "internet-facing",
+          "target_type": "ECS tasks or EC2 instances",
+          "health_checks": "/health endpoint, 30s interval",
+          "ssl": "ACM certificate for HTTPS"
+        }
+      },
+      "compute": {
+        "service": "ECS Fargate or EC2 Auto Scaling",
+        "purpose": "Run containerized applications",
+        "configuration": {
+          "container_platform": "ECS Fargate (serverless containers)",
+          "task_definition": "512 MB memory, 0.25 vCPU (start small)",
+          "auto_scaling": "2-10 tasks",
+          "deployment": "Rolling update, 50% at a time"
+        }
+      },
+      "database": {
+        "service": "RDS Aurora (MySQL/PostgreSQL)",
+        "purpose": "Managed relational database",
+        "configuration": {
+          "instance_class": "db.t3.medium or db.t4g.medium",
+          "multi_az": "Yes (high availability)",
+          "read_replicas": "1-2 for read scaling",
+          "backup_retention": "7 days",
+          "encryption": "KMS encryption enabled"
+        }
+      },
+      "cache": {
+        "service": "ElastiCache Redis",
+        "purpose": "Session storage, application caching",
+        "configuration": {
+          "node_type": "cache.t3.micro or cache.t4g.micro",
+          "replication": "Multi-AZ with automatic failover",
+          "eviction_policy": "allkeys-lru"
+        }
+      },
+      "cdn": {
+        "service": "CloudFront",
+        "purpose": "Cache static assets globally",
+        "configuration": {
+          "origins": "ALB (dynamic), S3 (static)",
+          "caching": "Cache based on headers/cookies",
+          "compression": "Gzip compression enabled"
+        }
+      },
+      "storage": {
+        "service": "S3",
+        "purpose": "User uploads, backups, logs",
+        "configuration": {
+          "storage_class": "S3 Standard with lifecycle policies",
+          "versioning": "Enabled for important buckets",
+          "lifecycle": "Transition to IA after 30 days"
+        }
+      }
+    },
+    "estimated_cost": {
+      "monthly_usd": 515,
+      "breakdown": {
+        "ALB": "20-30 USD",
+        "ECS Fargate": "50-200 USD",
+        "RDS Aurora": "100-300 USD",
+        "ElastiCache": "30-80 USD",
+        "CloudFront": "10-50 USD",
+        "S3": "10-30 USD"
+      }
+    },
+    "pros": [
+      "Proven architecture pattern",
+      "Easy to understand and debug",
+      "Flexible scaling options",
+      "Support for complex applications",
+      "Managed services reduce operational burden"
+    ],
+    "cons": [
+      "Higher baseline costs",
+      "More complex than serverless",
+      "Requires more operational knowledge",
+      "Manual scaling configuration needed"
+    ],
     "scaling_characteristics": {
       "users_supported": "10k - 500k",
-      "requests_per_second": "1,000 - 50,000"
+      "requests_per_second": "1,000 - 50,000",
+      "scaling_method": "Auto Scaling based on CPU/memory/requests"
     }
   },
-  "services": {
-    "load_balancer": "Application Load Balancer (ALB)",
-    "compute": "ECS Fargate",
-    "database": "RDS Aurora (MySQL/PostgreSQL)",
-    "cache": "ElastiCache Redis",
-    "cdn": "CloudFront",
-    "storage": "S3",
-    "authentication": "Cognito"
-  },
-  "cost_breakdown": {
-    "ALB": "20-30 USD",
-    "ECS_Fargate": "50-200 USD",
-    "RDS_Aurora": "100-300 USD",
-    "ElastiCache": "30-80 USD",
-    "CloudFront": "10-50 USD",
-    "S3": "10-30 USD"
-  },
-  "implementation_phases": [
+  "checklist": [
+    {
+      "phase": "Planning",
+      "tasks": [
+        "Review architecture pattern and services",
+        "Estimate costs using AWS Pricing Calculator",
+        "Define environment strategy (dev, staging, prod)",
+        "Set up AWS Organization and accounts",
+        "Define tagging strategy for resources"
+      ]
+    },
     {
       "phase": "Foundation",
-      "duration": "1 week",
-      "tasks": ["VPC setup", "IAM roles", "CloudTrail", "AWS Config"]
+      "tasks": [
+        "Create VPC with public/private subnets",
+        "Configure NAT Gateway or VPC endpoints",
+        "Set up IAM roles and policies",
+        "Enable CloudTrail for audit logging",
+        "Configure AWS Config for compliance"
+      ]
     },
     {
       "phase": "Core Services",
-      "duration": "2 weeks",
-      "tasks": ["Deploy ALB", "ECS Fargate", "RDS Aurora", "ElastiCache"]
+      "tasks": [
+        "Deploy Application Load Balancer (ALB)",
+        "Deploy ECS Fargate or EC2 Auto Scaling",
+        "Deploy RDS Aurora (MySQL/PostgreSQL)",
+        "Deploy ElastiCache Redis",
+        "Deploy CloudFront",
+        "Deploy S3"
+      ]
     },
     {
-      "phase": "Security & Monitoring",
-      "duration": "1 week",
-      "tasks": ["WAF rules", "CloudWatch dashboards", "Alarms", "X-Ray"]
+      "phase": "Security",
+      "tasks": [
+        "Configure security groups and NACLs",
+        "Enable encryption (KMS) for all services",
+        "Set up AWS WAF rules",
+        "Configure Secrets Manager",
+        "Enable GuardDuty for threat detection"
+      ]
+    },
+    {
+      "phase": "Monitoring",
+      "tasks": [
+        "Create CloudWatch dashboards",
+        "Set up alarms for critical metrics",
+        "Configure SNS topics for notifications",
+        "Enable X-Ray for distributed tracing",
+        "Set up log aggregation and retention"
+      ]
     },
     {
       "phase": "CI/CD",
-      "duration": "1 week",
-      "tasks": ["CodePipeline", "Blue/Green deployment", "Rollback procedures"]
+      "tasks": [
+        "Set up CodePipeline or GitHub Actions",
+        "Configure automated testing",
+        "Implement blue/green deployment",
+        "Set up rollback procedures",
+        "Document deployment process"
+      ]
     }
-  ],
-  "iac_templates_generated": [
-    "CloudFormation template (YAML)",
-    "AWS CDK stack (TypeScript)",
-    "Terraform configuration (HCL)"
   ]
 }

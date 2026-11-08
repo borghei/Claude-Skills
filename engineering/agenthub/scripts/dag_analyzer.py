@@ -20,13 +20,19 @@ from pathlib import Path
 
 
 def load_workflow(path):
-    """Load workflow definition from JSON file."""
+    """Load a workflow JSON object with an 'agents' map; exit 2 on any input error."""
     try:
         with open(path, "r") as f:
-            return json.load(f)
+            data = json.load(f)
     except (json.JSONDecodeError, OSError) as e:
         print(f"Error loading workflow: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
+    if not isinstance(data, dict) or not isinstance(data.get("agents"), dict) or not data["agents"]:
+        hint = (" (this looks like an agent-workflow-designer 'steps' file)"
+                if isinstance(data, dict) and "steps" in data else "")
+        print(f"Error: {path} needs a non-empty 'agents' object{hint}", file=sys.stderr)
+        sys.exit(2)
+    return data
 
 
 def build_graph(workflow):
@@ -371,7 +377,7 @@ def main():
     wf_path = Path(args.workflow)
     if not wf_path.exists():
         print(f"Error: Workflow file '{args.workflow}' not found.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     workflow = load_workflow(wf_path)
     result = validate_workflow(workflow)

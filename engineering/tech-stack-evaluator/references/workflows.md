@@ -42,11 +42,13 @@ Use this workflow when comparing frontend/backend frameworks or libraries.
 ### Step 2: Run Comparison
 
 ```bash
-python scripts/stack_comparator.py \
-  --technologies "React,Vue,Angular" \
-  --use-case "enterprise-saas" \
-  --weights "performance:20,ecosystem:25,scalability:20,developer_experience:35"
+# Input: {"comparison": {"use_case", "weights", "technologies": [{"name", "<category>": {"score", "evidence"}}]}}
+# Every score needs an evidence note; see assets/sample_compare_evidenced.json for the shape.
+python scripts/evaluate.py compare comparison.json
 ```
+
+Exit 1 means either a score has no evidence (`UNSUPPORTED`) or the top two are within
+`--margin` points (`TOO_CLOSE`); in both cases do not present a winner.
 
 ### Step 3: Analyze Results
 
@@ -98,11 +100,10 @@ Use this workflow for comprehensive cost analysis over multiple years.
 ### Step 2: Run TCO Calculator
 
 ```bash
-python scripts/tco_calculator.py \
-  --input assets/sample_input_tco.json \
-  --years 5 \
-  --output tco_report.json
+python scripts/evaluate.py tco assets/sample_input_tco.json --format json > tco_report.json
 ```
+
+Set `timeline_years` in the input to change the horizon.
 
 ### Step 3: Analyze Cost Breakdown
 
@@ -160,12 +161,7 @@ Use this workflow when planning technology migrations.
 ### Step 4: Run Migration Analysis
 
 ```bash
-python scripts/migration_analyzer.py \
-  --from "angular-1.x" \
-  --to "react" \
-  --codebase-size 50000 \
-  --components 200 \
-  --team-size 6
+python scripts/evaluate.py migration assets/sample_input_migration.json
 ```
 
 ### Step 5: Review Risk Assessment
@@ -239,10 +235,7 @@ For each technology:
 ### Step 3: Run Security Assessment
 
 ```bash
-python scripts/security_assessor.py \
-  --technology "express-js" \
-  --compliance "soc2,gdpr" \
-  --output security_report.json
+python scripts/evaluate.py security assets/sample_input_security.json --format json > security_report.json
 ```
 
 ### Step 4: Analyze Results
@@ -308,11 +301,13 @@ For each provider, verify:
 ### Step 3: Run Cost Comparison
 
 ```bash
-python scripts/tco_calculator.py \
-  --providers "aws,azure,gcp" \
-  --workload-config workload.json \
-  --years 3
+# One TCO input file per provider (same shape as assets/sample_input_tco.json), then compare totals
+python scripts/evaluate.py tco tco_aws.json --format json
+python scripts/evaluate.py tco tco_gcp.json --format json
 ```
+
+Price each provider from its own pricing calculator on the day you evaluate; do not reuse
+hosting figures from these references.
 
 ### Step 4: Assess Ecosystem Fit
 

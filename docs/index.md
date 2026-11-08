@@ -14,7 +14,7 @@ Production-ready skill packages that bundle domain expertise, best practices, an
 <div class="label">Skills</div>
 </div>
 <div class="stat">
-<div class="number">961</div>
+<div class="number">966</div>
 <div class="label">Python Tools</div>
 </div>
 <div class="stat">
@@ -59,7 +59,7 @@ See [Installation](getting-started/installation.md) for per-skill install, auto-
 
 <div class="card" markdown>
 ### :material-cog: Engineering
-**100 skills** &middot; 298 tools
+**100 skills** &middot; 303 tools
 
 Fullstack, DevOps, security, mobile, ML, cloud (AWS/Azure/GCP), MCP servers, CI/CD, observability, chaos engineering, feature flags, kubernetes operators, data quality.
 
@@ -183,7 +183,7 @@ The LinkedIn suite: story interviews, planning, post writing, humanizing, commen
 | | |
 |---|---|
 | **403 Skills** | Production-ready expertise across 21 professional domains. Project Management is the most-used (74 skills). |
-| **961 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, capacity planning, statistical testing, clinical study sizing -- all standard library, no ML dependencies |
+| **966 Python Tools** | CLI scripts for code quality, SEO, DCF valuation, compliance auditing, flow metrics, capacity planning, statistical testing, clinical study sizing -- all standard library, no ML dependencies |
 | **25 Role-Based Agents** | Specialized AI personas (Tech Lead, CFO, CISO, Compliance Auditor, etc.) that orchestrate multiple skills |
 | **6 Subagents** | Autonomous Claude Code agents for code review, security audit, QA, docs, changelog, and git workflows |
 | **12 CI/CD Workflows** | Ready-to-use GitHub Actions for quality gates, release drafting, skill validation |

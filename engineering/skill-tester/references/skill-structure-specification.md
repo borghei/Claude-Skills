@@ -2,7 +2,6 @@
 
 **Version**: 1.0.0  
 **Last Updated**: 2026-02-16  
-**Authority**: Claude Skills Engineering Team  
 
 ## Overview
 
@@ -101,9 +100,8 @@ concept and accepts any of the headings that express it (H2 or H3, outside code 
 - **References** — when `references/` exists, SKILL.md should point to it
 
 #### Content Requirements by Tier
-- **BASIC**: Minimum 100 lines of substantial content
-- **STANDARD**: Minimum 200 lines of substantial content  
-- **POWERFUL**: Minimum 300 lines of substantial content
+- **All tiers**: 40-500 non-blank lines; tiers differ by scripts, folders and features, not by length.
+  Put long tables and examples in `references/` so SKILL.md stays lean.
 
 ### README.md Requirements
 
@@ -336,7 +334,7 @@ Skills created before this specification should be updated to comply within:
 ### Minimal BASIC Tier Example
 ```
 basic-skill/
-├── SKILL.md              # 100+ lines
+├── SKILL.md              # 40-500 lines
 ├── README.md             # Basic usage instructions
 └── scripts/              
     └── main.py           # 100-300 lines with argparse
@@ -345,7 +343,7 @@ basic-skill/
 ### Complete POWERFUL Tier Example
 ```
 powerful-skill/
-├── SKILL.md              # 300+ lines with comprehensive sections
+├── SKILL.md              # 40-500 lines, detail in references/
 ├── README.md             # Detailed usage and setup
 ├── scripts/              # Multiple sophisticated scripts
 │   ├── main_processor.py # 500-800 lines

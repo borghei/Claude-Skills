@@ -1,9 +1,9 @@
 ---
 name: database-schema-designer
 description: >
-  Design relational schemas from requirements with normalization, migrations, ERDs, RLS
-  policies, and indexes for PostgreSQL, MySQL, and SQLite. Use when designing new features,
-  reviewing schemas, or adding multi-tenancy.
+  Design a new relational schema from product requirements: tables, ORM models, RLS,
+  indexes, migrations and an ERD. Use when modelling a new feature, adding multi-tenancy
+  or soft deletes, or writing Drizzle/Prisma/Alembic schemas.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: data-architecture
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   frameworks: drizzle, prisma, alembic, typeorm
   tags:
     - schema-design
@@ -22,11 +22,7 @@ metadata:
 ---
 # Database Schema Designer
 
-Design normalized relational database schemas from requirements and generate migrations, TypeScript/Python types, seed data, Row-Level Security policies, index strategies, and ERD diagrams. Handles multi-tenancy, soft deletes, audit trails, optimistic locking, polymorphic associations, and temporal data patterns. Supports PostgreSQL, MySQL, and SQLite with Drizzle, Prisma, TypeORM, and Alembic.
-
-## Keywords
-
-database schema, schema design, normalization, migration, ERD, row-level security, indexing, multi-tenancy, soft deletes, audit trail, Drizzle, Prisma, PostgreSQL
+The agent turns product requirements into a normalized relational schema with the cross-cutting columns, constraints, Row-Level Security, indexes, migrations and generated types the application needs, for PostgreSQL, MySQL or SQLite with Drizzle, Prisma, TypeORM or Alembic.
 
 ## Core Capabilities
 
@@ -39,7 +35,7 @@ database schema, schema design, normalization, migration, ERD, row-level securit
 ## When to Use
 
 - Designing tables for a new feature
-- Reviewing an existing schema for normalization or performance issues
+- Checking a schema you are designing for missing indexes and conventions (for deep analysis of an existing schema and index tuning, use `engineering/database-designer`)
 - Adding multi-tenancy to a single-tenant schema
 - Planning a breaking schema migration
 - Generating ERD documentation for a service
@@ -54,15 +50,52 @@ Before designing the schema, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `erd_generator.py` | Parse SQL DDL and generate a Mermaid ER diagram | `python scripts/erd_generator.py schema.sql -o erd.mmd` |
-| `migration_diffr.py` | Diff two SQL schemas into migration ALTER statements (with rollback) | `python scripts/migration_diffr.py old.sql new.sql` |
-| `schema_validator.py` | Validate DDL for normalization violations, missing indexes, naming | `python scripts/schema_validator.py schema.sql --strict` |
+1. **Model.** List the entities, their relationships and cardinalities from the requirements; normalize to 3NF, then denormalize only where a read path needs it and say why.
+2. **Add the cross-cutting columns** each table needs: `id`, `created_at`, `updated_at`, and where required `deleted_at`, `organization_id`, `version`.
+   - Primary keys: UUIDv7 (time-ordered, so B-tree inserts stay local) stored in the native `uuid` type, or CUID2 where IDs are generated in the app. PostgreSQL 18+ can generate UUIDv7 with `uuidv7()`. Use integer identity keys only for internal tables whose IDs never leave the database.
+3. **Write the DDL or ORM schema**, with a foreign-key index on every FK column, partial indexes for soft-deleted tables, and RLS policies for multi-tenant tables (see `references/schema-design-and-security.md`).
+4. **Validate** with `schema_validator.py` and fix every error; then render the ERD with `erd_generator.py` and check that it matches the requirements.
+5. **Migrate.** For a change to an existing schema, diff the two DDL versions with `migration_diffr.py`, review the forward and rollback SQL, and use the zero-downtime patterns in `references/indexes-and-migrations.md` for large tables.
 
-## References
+## Quick Start
+
+```bash
+python3 scripts/schema_validator.py assets/sample_schema_v1.sql               # warnings only (exit 0)
+python3 scripts/schema_validator.py assets/sample_schema_v2.sql               # new table without FK indexes (exit 1)
+python3 scripts/migration_diffr.py assets/sample_schema_v1.sql assets/sample_schema_v2.sql   # forward + rollback SQL
+python3 scripts/erd_generator.py assets/sample_schema_v2.sql                  # Mermaid ERD
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `scripts/schema_validator.py <file.sql>` | Missing PK, sequential PK, FK without index, nullable FK, missing timestamps, soft deletes without a partial index, tables with no index, naming | `--json`, `--strict` (warnings fail too) | 0 clean, 1 errors (or warnings with `--strict`), 2 bad input |
+| `scripts/migration_diffr.py <old.sql> <new.sql>` | Added/removed tables and columns, type and nullability changes, index changes, with rollback | `--json`, `--no-rollback`, `-o <file>` | 0 no differences, 1 differences found, 2 bad input |
+| `scripts/erd_generator.py <file.sql>` | Mermaid `erDiagram` with PK/FK markers and a table summary | `-o <file.mmd>`, `--json` | 0, 2 bad input |
+
+## Anti-Patterns
+
+**Mistake:** Exposing sequential integer IDs in URLs and APIs.
+**Why it happens:** `SERIAL` is the default in most tutorials.
+**Instead:** Use UUIDv7 or CUID2 for anything that leaves the database; sequential IDs leak volume and invite enumeration.
+
+**Mistake:** Multi-tenant tables that rely on the application to filter by tenant.
+**Why it happens:** A `WHERE organization_id = ?` in the repository layer feels sufficient.
+**Instead:** Add RLS policies keyed on the tenant column so a missed filter returns nothing instead of another tenant's rows.
+
+**Mistake:** Foreign keys without an index.
+**Why it happens:** PostgreSQL does not create one automatically.
+**Instead:** Index every FK column; joins and cascading deletes scan the child table otherwise. `schema_validator.py` reports each one.
+
+## Files
+
+- `scripts/schema_validator.py`, `scripts/migration_diffr.py`, `scripts/erd_generator.py` — the tools above.
+- `assets/sample_schema_v1.sql` and `assets/sample_schema_v2.sql` — two versions of a small multi-tenant schema (v2 adds soft deletes, due dates and a comments table without FK indexes).
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -84,13 +117,4 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Database infrastructure provisioning, replication, or failover configuration — see `senior-cloud-architect` for cloud database setup
 - Application-layer ORM patterns, connection pooling, or caching strategies — see `senior-backend` for backend architecture decisions
 
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `migration-architect` | Hands off generated DDL and migration files for sequencing across services | Schema Designer produces migrations, Migration Architect orchestrates cross-service rollout order |
-| `api-design-reviewer` | Schema entities map directly to API resource models and endpoint structure | Schema entities and relationships feed into REST/GraphQL resource definitions and validation rules |
-| `senior-backend` | Generated types and ORM schemas plug into repository and service layers | TypeScript interfaces and Pydantic models from schema become the backend's data access contracts |
-| `performance-profiler` | Index strategy recommendations are validated against real query execution plans | Schema Designer proposes indexes, Performance Profiler confirms effectiveness with `EXPLAIN ANALYZE` data |
-| `senior-secops` | RLS policies and column encryption align with security compliance requirements | Security requirements flow in, RLS policies and encryption specifications flow out for audit verification |
-| `observability-designer` | Audit log schema provides the foundation for operational dashboards and alerting | Audit log table structure feeds into observability pipelines for change tracking and anomaly detection |
+Related skills: `engineering/database-designer` (analysis and index tuning of existing schemas), `engineering/migration-architect` (cross-service rollout), `engineering/api-design-reviewer` (API resources from the schema).

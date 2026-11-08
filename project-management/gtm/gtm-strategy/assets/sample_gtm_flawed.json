@@ -1,0 +1,26 @@
+{
+  "gtm_name": "Big launch",
+  "as_of": "2026-05-27",
+  "icp": {
+    "vertical": "All industries",
+    "role": "Anyone who manages people"
+  },
+  "motion": "sales-led",
+  "avg_acv_usd": 4000,
+  "channels": [
+    {"name": "Social media"},
+    {"name": "SEO"},
+    {"name": "Events"},
+    {"name": "Paid search"},
+    {"name": "Partners"},
+    {"name": "Outbound"},
+    {"name": "Podcasts"}
+  ],
+  "messaging": {
+    "hero_message": "The AI-powered, best-in-class people platform for everyone"
+  },
+  "metrics": [],
+  "launch_sequence": {
+    "lighthouse_customers_count": 0
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "security": {
+    "2fa_enforcement": true,
+    "password_policy": {"min_length": 14, "require_numbers": true, "require_symbols": true},
+    "third_party_app_access": "restricted",
+    "session_duration_hours": 12,
+    "admin_recovery_options": true,
+    "api_clients": [{"name": "backup-tool", "scopes": ["https://www.googleapis.com/auth/drive.readonly"]}]
+  },
+  "drive": {"external_sharing": "restricted", "link_sharing_default": "restricted"},
+  "devices": {"mobile_management": "advanced"},
+  "admin": {"super_admins": ["ops-admin@example.com", "breakglass@example.com"]},
+  "gmail": {"spoofing_protection": true, "restrict_delivery": false},
+  "dns": {"dmarc_policy": "reject"}
+}

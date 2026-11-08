@@ -87,7 +87,7 @@ def generate_test_scenarios(story, action_key, pattern):
 
     # Happy path
     scenarios.append({
-        "name": f"successfully {action_key}s",
+        "name": f"completes {action_key} successfully",  # "completes log in", not "log ins"
         "type": "happy_path",
         "description": f"Verify that the user can {action_key} under normal conditions",
         "assertions": pattern["assertions"],
@@ -194,8 +194,11 @@ def load_stories_file(path):
         ...
     ]
     """
-    with open(path, "r") as f:
-        return json.load(f)
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, json.JSONDecodeError) as exc:
+        sys.exit(print(f"Error: cannot read stories file '{path}': {exc}", file=sys.stderr) or 2)
 
 
 def format_human(results):
@@ -250,13 +253,13 @@ def main():
     if args.story:
         if not args.page:
             print("Error: --page is required when using --story", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         results.append(process_story(args.story, args.page, args.route))
     else:
         stories_path = Path(args.stories)
         if not stories_path.exists():
             print(f"Error: Stories file '{args.stories}' not found.", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         stories = load_stories_file(stories_path)
         for s in stories:
             results.append(process_story(s["story"], s["page"], s.get("route", "/")))

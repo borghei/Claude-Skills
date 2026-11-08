@@ -5,7 +5,6 @@ Rotation Planner - Plan and schedule secret rotation cycles.
 Reads a secrets inventory and generates rotation schedules based on
 classification, compliance requirements, and organizational policy.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -151,8 +150,16 @@ def create_schedule(entry: SecretEntry, policy: Optional[Dict] = None) -> Rotati
 
 
 def load_inventory(path: Path) -> List[SecretEntry]:
-    """Load secrets inventory from JSON file."""
-    data = json.loads(path.read_text(encoding="utf-8"))
+    """Load secrets inventory from JSON file; exit 2 with a one-line message if unusable."""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"Error: cannot load inventory {path}: {e}", file=sys.stderr)
+        sys.exit(2)
+    items = data.get("secrets") if isinstance(data, dict) else data
+    if not isinstance(items, list) or not all(isinstance(i, dict) and i.get("name") for i in items):
+        print(f"Error: {path} must hold a 'secrets' list of objects, each with a 'name'", file=sys.stderr)
+        sys.exit(2)
     entries = []
     for item in data.get("secrets", data if isinstance(data, list) else []):
         entries.append(SecretEntry(
@@ -168,6 +175,10 @@ def load_inventory(path: Path) -> List[SecretEntry]:
     return entries
 
 
+def _days_ago(days: int) -> str:
+    return (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+
+
 def generate_sample_inventory() -> str:
     """Generate a sample inventory file."""
     sample = {
@@ -177,7 +188,7 @@ def generate_sample_inventory() -> str:
                 "classification": "critical",
                 "secret_type": "database",
                 "owner": "dba-team",
-                "last_rotated": "2026-02-15",
+                "last_rotated": _days_ago(20),
                 "auto_rotation": False,
                 "compliance_tags": ["soc2", "pci-dss"],
                 "description": "Production database root credentials"
@@ -187,7 +198,7 @@ def generate_sample_inventory() -> str:
                 "classification": "high",
                 "secret_type": "api-key",
                 "owner": "platform-team",
-                "last_rotated": "2026-03-01",
+                "last_rotated": _days_ago(75),
                 "auto_rotation": True,
                 "compliance_tags": ["soc2"],
                 "description": "API gateway master key"
@@ -197,7 +208,7 @@ def generate_sample_inventory() -> str:
                 "classification": "high",
                 "secret_type": "api-key",
                 "owner": "payments-team",
-                "last_rotated": "2026-01-10",
+                "last_rotated": _days_ago(400),
                 "auto_rotation": False,
                 "compliance_tags": ["pci-dss"],
                 "description": "Stripe payment processing API key"
@@ -207,7 +218,7 @@ def generate_sample_inventory() -> str:
                 "classification": "high",
                 "secret_type": "certificate",
                 "owner": "infra-team",
-                "last_rotated": "2025-12-01",
+                "last_rotated": _days_ago(120),
                 "auto_rotation": True,
                 "compliance_tags": [],
                 "description": "Wildcard TLS certificate for *.example.com"
@@ -217,7 +228,7 @@ def generate_sample_inventory() -> str:
                 "classification": "medium",
                 "secret_type": "token",
                 "owner": "devops-team",
-                "last_rotated": "2026-03-15",
+                "last_rotated": _days_ago(10),
                 "auto_rotation": False,
                 "compliance_tags": [],
                 "description": "CI/CD deployment token"
@@ -306,12 +317,12 @@ def main():
 
     if not args.inventory:
         print("Error: --inventory required (or use --generate-sample)", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     inv_path = Path(args.inventory)
     if not inv_path.exists():
         print(f"Error: File not found: {args.inventory}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     entries = load_inventory(inv_path)
 

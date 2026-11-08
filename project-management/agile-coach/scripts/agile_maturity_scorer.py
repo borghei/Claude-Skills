@@ -102,6 +102,18 @@ def load_assessment(path: str) -> dict:
         return json.load(f)
 
 
+def normalize_dimensions(data: dict) -> dict:
+    """Accept {dim: score} or {dim: {"score": n, "evidence": "..."}}; return {dim: evidence}."""
+    dims = data.get("dimensions") if isinstance(data, dict) else None
+    evidence = {}
+    if isinstance(dims, dict):
+        for dim, value in list(dims.items()):
+            if isinstance(value, dict):
+                evidence[dim] = str(value.get("evidence", "")).strip()
+                dims[dim] = value.get("score")
+    return evidence
+
+
 def validate_assessment(data: dict) -> list:
     """Validate assessment structure."""
     errors = []
@@ -222,6 +234,8 @@ def print_report(result: dict) -> None:
         print(f"  [{r['dimension']}]")
         print(f"    {r['action']}")
 
+    for w in result.get("warnings", []):
+        print(f"  WARNING: {w}")
     print()
 
 
@@ -231,8 +245,8 @@ def print_example() -> None:
         "organization": "Acme Corp",
         "teams_assessed": 5,
         "dimensions": {
-            "values_and_mindset": 2,
-            "team_practices": 3,
+            "values_and_mindset": {"score": 2, "evidence": "Retro actions rarely change how work is planned"},
+            "team_practices": {"score": 3, "evidence": "All 5 teams run sprint planning, review and retro"},
             "technical_excellence": 2,
             "product_ownership": 2,
             "leadership_support": 3,
@@ -259,14 +273,18 @@ def main():
         parser.error("--assessment is required (use --example to see the expected format)")
 
     data = load_assessment(args.assessment)
+    evidence = normalize_dimensions(data)
     errors = validate_assessment(data)
     if errors:
         print("Validation errors:", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     result = score_maturity(data)
+    result["evidence"] = evidence
+    result["warnings"] = [f"no evidence statement for '{d}' - treat its score as unverified"
+                          for d in DIMENSIONS if not evidence.get(d)]
 
     if args.json:
         print(json.dumps(result, indent=2))
@@ -275,4 +293,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

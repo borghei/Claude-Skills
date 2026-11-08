@@ -19,7 +19,7 @@ python scripts/vision_model_trainer.py <data_dir> [options]
 | `data_dir` | positional | (required) | Path to dataset directory |
 | `--task` | choice | `detection` | Task type: `detection`, `segmentation` |
 | `--framework` | choice | `ultralytics` | Training framework: `ultralytics`, `detectron2`, `mmdetection` |
-| `--arch` | string | `yolov8m` | Model architecture (e.g., `yolov8n`, `yolov8s`, `yolov8m`, `yolov8l`, `yolov8x`, `yolov5n`-`yolov5x`, `faster_rcnn_R_50_FPN`, `mask_rcnn_R_50_FPN`, `retinanet_R_50_FPN`, `detr_r50`, `dino_r50`, `yolox_s`/`m`/`l`) |
+| `--arch` | string | `yolo26m` | Model architecture (e.g., `yolo26n`-`yolo26m`, `yolo11n`-`yolo11x`, `yolov8n`-`yolov8x`, `yolov5n`-`yolov5x`, `faster_rcnn_R_50_FPN`, `mask_rcnn_R_50_FPN`, `retinanet_R_50_FPN`, `detr_r50`, `dino_r50`, `yolox_s`/`m`/`l`) |
 | `--epochs` | int | `100` | Number of training epochs |
 | `--batch` | int | `16` | Batch size |
 | `--imgsz` | int | `640` | Input image size (Ultralytics only) |
@@ -31,7 +31,7 @@ python scripts/vision_model_trainer.py <data_dir> [options]
 
 ```bash
 # Generate Ultralytics YOLO training config
-python scripts/vision_model_trainer.py data/coco/ --task detection --arch yolov8m --epochs 100 --batch 16 --output configs/train.yaml
+python scripts/vision_model_trainer.py data/coco/ --task detection --arch yolo26m --epochs 100 --batch 16 --output configs/train.yaml
 
 # Analyze dataset only
 python scripts/vision_model_trainer.py data/coco/ --analyze-only --json
@@ -162,7 +162,7 @@ python scripts/dataset_pipeline_builder.py split --input data/coco/ --train 0.8 
 | `--output`, `-o` | string | None | Output file path |
 
 ```bash
-python scripts/dataset_pipeline_builder.py augment-config --task detection --intensity heavy --output augmentations.yaml
+python scripts/dataset_pipeline_builder.py augment-config --task detection --intensity heavy --output augmentations.json
 ```
 
 ### `validate` -- Validate dataset integrity

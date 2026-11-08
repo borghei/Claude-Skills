@@ -17,6 +17,7 @@ No external dependencies - uses only Python standard library.
 
 import argparse
 import json
+import sys
 import math
 import os
 import re
@@ -567,9 +568,9 @@ def main():
             print(f"  Poor recall queries: {fa['poor_recall_count']}")
             print(f"  Zero result queries: {fa['zero_results_count']}")
         
-    except Exception as e:
-        print(f"Error: {e}")
-        return 1
+    except (OSError, ValueError, KeyError, TypeError) as e:  # unusable input
+        print(f"Error: {e}", file=sys.stderr)
+        return 2
     
     return 0
 

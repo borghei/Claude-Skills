@@ -1,0 +1,46 @@
+{
+  "sprint_length_days": 10,
+  "historical_velocity": 42,
+  "team_members": [
+    {
+      "name": "Alice Chen",
+      "role": "Senior Developer",
+      "available_days": 10,
+      "hours_per_day": 6,
+      "allocation_percent": 100,
+      "planned_pto_days": 0
+    },
+    {
+      "name": "Bob Martinez",
+      "role": "Developer",
+      "available_days": 10,
+      "hours_per_day": 6,
+      "allocation_percent": 100,
+      "planned_pto_days": 2
+    },
+    {
+      "name": "Carol Johnson",
+      "role": "Developer",
+      "available_days": 10,
+      "hours_per_day": 6,
+      "allocation_percent": 80,
+      "planned_pto_days": 0
+    },
+    {
+      "name": "David Kim",
+      "role": "QA Engineer",
+      "available_days": 10,
+      "hours_per_day": 6,
+      "allocation_percent": 100,
+      "planned_pto_days": 1
+    },
+    {
+      "name": "Eva Patel",
+      "role": "Tech Lead",
+      "available_days": 10,
+      "hours_per_day": 6,
+      "allocation_percent": 50,
+      "planned_pto_days": 0
+    }
+  ]
+}

@@ -18,8 +18,20 @@ from collections import defaultdict
 
 def load_data(path: str) -> dict:
     """Load resource data from JSON file."""
-    with open(path, "r") as f:
-        return json.load(f)
+    try:
+        with open(path, "r") as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        fail(f"cannot read {path}: {e}")
+    if not isinstance(data, dict):
+        fail(f"{path}: top level must be a JSON object (see --example)")
+    return data
+
+
+def fail(msg: str) -> None:
+    """Bad input: one line on stderr, exit 2."""
+    print(f"Error: {msg}", file=sys.stderr)
+    sys.exit(2)
 
 
 def analyze_resources(data: dict) -> dict:
@@ -113,7 +125,9 @@ def analyze_resources(data: dict) -> dict:
     # Summary metrics
     total_people = len(person_allocations)
     total_fte = sum(p["total_allocation_pct"] for p in person_results) / 100
-    avg_utilization = sum(p["total_allocation_pct"] for p in person_results) / total_people if total_people > 0 else 0
+    # Utilisation caps each person at 100% (nobody delivers 130%); demand keeps the raw total.
+    avg_utilization = sum(min(100, p["total_allocation_pct"]) for p in person_results) / total_people if total_people > 0 else 0
+    avg_demand = sum(p["total_allocation_pct"] for p in person_results) / total_people if total_people > 0 else 0
     avg_projects_per_person = sum(p["project_count"] for p in person_results) / total_people if total_people > 0 else 0
 
     # Recommendations
@@ -142,6 +156,7 @@ def analyze_resources(data: dict) -> dict:
             "total_people": total_people,
             "total_fte": round(total_fte, 1),
             "avg_utilization_pct": round(avg_utilization, 1),
+            "avg_demand_pct": round(avg_demand, 1),
             "avg_projects_per_person": round(avg_projects_per_person, 1),
             "over_allocated_count": len(over_allocated),
             "under_utilized_count": len(under_allocated),
@@ -157,7 +172,7 @@ def print_report(result: dict) -> None:
     s = result["summary"]
     print(f"\nResource Allocation: {result['program']}")
     print("=" * 70)
-    print(f"People: {s['total_people']}  |  Total FTE: {s['total_fte']}  |  Avg Utilization: {s['avg_utilization_pct']:.0f}%")
+    print(f"People: {s['total_people']}  |  Total FTE: {s['total_fte']}  |  Avg Utilization: {s['avg_utilization_pct']:.0f}% (demand {s['avg_demand_pct']:.0f}%)")
     print(f"Avg Projects/Person: {s['avg_projects_per_person']:.1f}  |  Over-allocated: {s['over_allocated_count']}  |  Under-utilized: {s['under_utilized_count']}")
 
     print(f"\nPerson Allocation:")
@@ -202,6 +217,7 @@ def main():
     )
     parser.add_argument("--resources", type=str, help="Path to resource allocation JSON file")
     parser.add_argument("--json", action="store_true", help="Output results as JSON")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (--json is the same as --format json)")
     parser.add_argument("--example", action="store_true", help="Print example resource data and exit")
     args = parser.parse_args()
 
@@ -213,9 +229,12 @@ def main():
         parser.error("--resources is required (use --example to see the expected format)")
 
     data = load_data(args.resources)
-    result = analyze_resources(data)
+    try:
+        result = analyze_resources(data)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        fail(f"unexpected input shape ({type(e).__name__}: {e}); run --example for the format")
 
-    if args.json:
+    if args.json or args.format == "json":
         print(json.dumps(result, indent=2))
     else:
         print_report(result)

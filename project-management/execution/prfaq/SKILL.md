@@ -1,16 +1,16 @@
 ---
 name: prfaq
 description: >
-  Amazon Working Backwards PR/FAQ generator that forces customer-outcome
-  thinking before any code is written. Produces a press release, an internal
-  FAQ, and an external FAQ as a single decision artifact.
+  Write a Working Backwards press release with internal and external FAQs
+  before anything is built. Use when a funding or go/no-go decision needs the
+  customer outcome made concrete first; write the PRD after it passes.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: working-backwards, pr-faq, amazon-method, narrative-memo
   tags:
     - prfaq
@@ -54,12 +54,14 @@ Before generating the PR/FAQ, settle the inputs below. When one is missing or va
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. Complete the one-liner: "We are announcing \[product\] for \[customer\] that does \[outcome\]."
 2. Draft the press release first; do not write any FAQ until it passes the Press Release Test with one outside reader.
 3. Write the internal FAQ in question/answer pairs (PM asks, sponsor/finance/eng answers), then the external FAQ last.
 4. Run the "5 readers" rule, date and save the artifact, then hand off to `create-prd/`.
+
+**Done when** an outside reader can say what the customer gets and why it beats today's alternative from the press release alone, and the internal FAQ answers the hardest cost, risk and "why not" questions rather than the easy ones.
 
 Use `assets/prfaq_template.md` as the fill-in scaffold. See `references/prfaq-playbook.md` for the full structure, FAQ categories, sample questions, workflow, and troubleshooting.
 
@@ -87,7 +89,13 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - **[references/prfaq-playbook.md](references/prfaq-playbook.md)** — the Working Backwards method, the 9-part press-release structure and test, internal/external FAQ category requirements and sample questions, the authoring workflow, troubleshooting, and success criteria. Read when drafting or reviewing a PR/FAQ.
 - **[references/working-backwards-guide.md](references/working-backwards-guide.md)** — deep dive on the Amazon method, its origin/intent, and the review choreography that makes it effective. Read for context on why the discipline works.
 - **[references/red-flags.md](references/red-flags.md)** — common ways a PR/FAQ goes wrong, with concrete fixes. Read before circulating a draft for review.
-- `assets/prfaq_template.md` — complete fill-in PR/FAQ template (PR + internal FAQ + external FAQ).
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/prfaq_template.md` | Fill-in PR, internal FAQ and external FAQ |
+| `examples/shared-dashboards-prfaq.md` | Worked PR/FAQ |
 
 ## Scope & Limitations
 

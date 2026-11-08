@@ -26,7 +26,7 @@ Read this when diagnosing experiment/model/pipeline problems, defining the quali
 
 ## Tool Reference
 
-All three tools use the Python standard library only, make no network calls, and are deterministic. Run them from the skill folder. Each prints a sample input with `--example`, prints JSON with `--format json`, and writes a JSON file only when given `--output DIR`. If that file already exists the tool stops with an error before doing any work, unless you pass `--force`. A missing or unreadable input file, a CSV row whose field count differs from the header (the error names the line), a missing column or an invalid value gives a one-line `ERROR:` message and exit code 1 (argparse usage errors exit 2). A successful run exits 0, whatever the verdict.
+All three tools use the Python standard library only, make no network calls, and are deterministic. Run them from the skill folder. Each prints a sample input with `--example`, prints JSON with `--format json`, and writes a JSON file only when given `--output DIR`. If that file already exists the tool stops with an error before doing any work, unless you pass `--force`. A missing or unreadable input file, a CSV row whose field count differs from the header (the error names the line), a missing column or an invalid value gives a one-line `ERROR:` message on stderr and exit code 2, the same as argparse usage errors. A successful run exits 0, whatever the verdict.
 
 ### experiment_designer.py
 

@@ -1,0 +1,38 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "Tasks API", "version": "1.0.0"},
+  "paths": {
+    "/tasks": {
+      "get": {
+        "operationId": "listTasks",
+        "summary": "List tasks in a project, newest first. Returns at most `limit` tasks and a `next_cursor` for the next page.",
+        "parameters": [
+          {"name": "project_id", "in": "query", "required": true, "schema": {"type": "string"}, "description": "Project to list tasks from"},
+          {"name": "limit", "in": "query", "schema": {"type": "integer", "default": 25, "maximum": 100}, "description": "Page size (max 100)"},
+          {"name": "cursor", "in": "query", "schema": {"type": "string"}, "description": "Cursor from a previous page"}
+        ],
+        "responses": {"200": {"description": "A page of tasks"}}
+      },
+      "post": {
+        "operationId": "createTask",
+        "summary": "Create a task in a project. Use when the user asks to add or track a new piece of work.",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {
+          "type": "object", "required": ["project_id", "title"],
+          "properties": {
+            "project_id": {"type": "string", "description": "Project that owns the task"},
+            "title": {"type": "string", "description": "Short task title"},
+            "due_date": {"type": "string", "format": "date", "description": "Optional due date (YYYY-MM-DD)"}
+          }}}}},
+        "responses": {"201": {"description": "The created task"}}
+      }
+    },
+    "/tasks/{task_id}": {
+      "delete": {
+        "operationId": "deleteTask",
+        "summary": "Permanently delete a task. Cannot be undone.",
+        "parameters": [{"name": "task_id", "in": "path", "required": true, "schema": {"type": "string"}, "description": "Task to delete"}],
+        "responses": {"204": {"description": "Deleted"}}
+      }
+    }
+  }
+}

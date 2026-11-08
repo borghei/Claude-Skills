@@ -1,0 +1,50 @@
+{
+  "service": "payment-api",
+  "deployments": [
+    {
+      "date": "2026-03-18",
+      "commit_time": "2026-03-18T09:00:00",
+      "deploy_time": "2026-03-18T11:30:00",
+      "failed": false
+    },
+    {
+      "date": "2026-03-15",
+      "commit_time": "2026-03-14T14:00:00",
+      "deploy_time": "2026-03-15T10:00:00",
+      "failed": false
+    },
+    {
+      "date": "2026-03-12",
+      "commit_time": "2026-03-11T16:00:00",
+      "deploy_time": "2026-03-12T09:30:00",
+      "rolled_back": true
+    },
+    {
+      "date": "2026-03-12",
+      "commit_time": "2026-03-12T10:15:00",
+      "deploy_time": "2026-03-12T12:00:00",
+      "failed": false,
+      "rework": true
+    },
+    {
+      "date": "2026-03-08",
+      "commit_time": "2026-03-07T10:00:00",
+      "deploy_time": "2026-03-08T14:00:00",
+      "failed": false
+    }
+  ],
+  "incidents": [
+    {
+      "id": "INC-001",
+      "severity": "SEV-2",
+      "detected": "2026-03-12T10:00:00",
+      "resolved": "2026-03-12T12:30:00"
+    },
+    {
+      "id": "INC-002",
+      "severity": "SEV-3",
+      "detected": "2026-03-05T15:00:00",
+      "resolved": "2026-03-05T16:00:00"
+    }
+  ]
+}

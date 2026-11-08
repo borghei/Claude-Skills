@@ -329,6 +329,44 @@ def cost_egress(c: dict[str, Any]) -> CostLine:
     return CostLine("Internet Egress", f"{gb}GB", gb, monthly, opt)
 
 
+# Keys this estimator (and the sibling validator/CAF scorer, which share the spec) read.
+# Anything else in these sections is probably a typo that silently falls back to a default.
+KNOWN_KEYS = {
+    "compute": {"type", "sku", "count", "cud_purchased", "preemptible_used", "workload_type", "mode",
+                "pods", "avg_pod_cpu", "avg_pod_memory_gib", "node_sku", "node_count", "avg_instances",
+                "vcpu_per_instance", "memory_gib_per_instance", "requests_millions_per_month",
+                "multi_region", "multi_zone", "regional", "autoscale", "public_ip"},
+    "data": {"service", "name", "vcpus", "memory_gb", "storage_gb", "ha", "cud_purchased", "nodes",
+             "multi_region", "tier", "pricing_model", "monthly_scan_tb", "slots", "storage_class",
+             "size_gb", "avg_access_days", "backup_tested", "public_ip", "public_access", "all_users_access"},
+    "observability": {"cloud_logging", "ingest_gb_per_day", "alerts", "slo_alerts", "audit_log_export"},
+    "network": {"egress_gb_per_month", "vpc", "private_service_connect", "default_vpc_in_use",
+                "firewall_least_privilege"},
+}
+COMPUTE_TYPES = {"gce", "compute-engine", "gke", "cloud-run"}
+DATA_SERVICES = {"cloud-sql", "spanner", "bigquery", "gcs", "memorystore"}
+
+
+def spec_warnings(spec: dict[str, Any]) -> list[str]:
+    """Unknown keys and unsupported types, which would otherwise be ignored silently."""
+    warns: list[str] = []
+    for section, known in KNOWN_KEYS.items():
+        blocks = spec.get(section) or []
+        for i, block in enumerate(blocks if isinstance(blocks, list) else [blocks]):
+            if not isinstance(block, dict):
+                continue
+            where = f"{section}[{i}]" if isinstance(blocks, list) else section
+            for key in sorted(set(block) - known):
+                warns.append(f"{where}.{key}: unknown key, ignored (default used instead)")
+    ctype = str((spec.get("compute") or {}).get("type", "")).lower()
+    if ctype and ctype not in COMPUTE_TYPES:
+        warns.append(f"compute.type '{ctype}' is not priced (supported: {', '.join(sorted(COMPUTE_TYPES))})")
+    for ds in spec.get("data", []) or []:
+        if isinstance(ds, dict) and str(ds.get("service", "")).lower() not in DATA_SERVICES:
+            warns.append(f"data service '{ds.get('service')}' is not priced (supported: {', '.join(sorted(DATA_SERVICES))})")
+    return warns
+
+
 def estimate(spec: dict[str, Any]) -> tuple[list[CostLine], list[str]]:
     lines: list[CostLine] = []
     compute = spec.get("compute", {}) or {}
@@ -413,13 +451,23 @@ def main() -> int:
     except OSError as e:
         print(f"error: {e}", file=sys.stderr)
         return 2
+    if not isinstance(spec, dict) or not spec:
+        print("error: workload spec is empty or not a mapping (see assets/sample_workload.yaml)", file=sys.stderr)
+        return 2
+    warnings = spec_warnings(spec)
+    for w in warnings:
+        print(f"warning: {w}", file=sys.stderr)
     lines, suggestions = estimate(spec)
+    if not lines:
+        print("error: nothing to price - no supported compute, data, logging or egress entries", file=sys.stderr)
+        return 2
     if args.format == "json":
         out = json.dumps(
             {
                 "lines": [asdict(l) for l in lines],
                 "total_monthly_usd": sum(l.monthly_usd for l in lines),
                 "suggestions": suggestions,
+                "warnings": warnings,
             },
             indent=2,
         )

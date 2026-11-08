@@ -1,0 +1,144 @@
+{
+  "feature_name": "Signup form",
+  "feature_type": "form",
+  "supported_locales": [
+    "en",
+    "de"
+  ],
+  "supports_collaboration": false,
+  "scenarios": [
+    {
+      "id": "S-001",
+      "name": "User signs up with a valid email and password and lands on the welcome screen",
+      "category": "happy_path",
+      "priority": "P0",
+      "automated": true
+    },
+    {
+      "id": "S-002",
+      "name": "User signs up with Google SSO and the account is linked to the same email",
+      "category": "happy_path",
+      "priority": "P0",
+      "automated": true
+    },
+    {
+      "id": "S-003",
+      "name": "Email with plus-addressing (ana+test@example.com) is accepted",
+      "category": "edge",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-004",
+      "name": "Password of exactly the 12-character minimum is accepted; 11 is rejected",
+      "category": "edge",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-005",
+      "name": "Name with apostrophe and diacritics (O'Brien, Zo\u00eb) is stored and displayed unchanged",
+      "category": "edge",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-006",
+      "name": "Pasting an email with leading and trailing spaces trims it before validation",
+      "category": "edge",
+      "priority": "P2",
+      "automated": true
+    },
+    {
+      "id": "S-007",
+      "name": "Email already registered shows a sign-in link instead of a duplicate account",
+      "category": "error",
+      "priority": "P0",
+      "automated": true
+    },
+    {
+      "id": "S-008",
+      "name": "Network drop on submit keeps the form values and shows a retry message",
+      "category": "error",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-009",
+      "name": "Server 500 on submit shows a non-technical error and logs a correlation id",
+      "category": "error",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-010",
+      "name": "Expired verification link offers to resend instead of a dead end",
+      "category": "error",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-011",
+      "name": "First visit with no saved draft shows placeholder hints, not validation errors",
+      "category": "empty",
+      "priority": "P2",
+      "automated": false
+    },
+    {
+      "id": "S-012",
+      "name": "Every field has a programmatic label read by a screen reader",
+      "category": "a11y",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-013",
+      "name": "Whole form can be completed by keyboard alone in a logical tab order",
+      "category": "a11y",
+      "priority": "P1",
+      "automated": false
+    },
+    {
+      "id": "S-014",
+      "name": "Error messages are announced and linked to their field",
+      "category": "a11y",
+      "priority": "P2",
+      "automated": true
+    },
+    {
+      "id": "S-015",
+      "name": "Password is never echoed in logs, analytics events or error payloads",
+      "category": "security",
+      "priority": "P0",
+      "automated": true
+    },
+    {
+      "id": "S-016",
+      "name": "Ten failed submits from one IP within a minute trigger rate limiting",
+      "category": "security",
+      "priority": "P0",
+      "automated": true
+    },
+    {
+      "id": "S-017",
+      "name": "Script tags in the name field are rendered as text, not executed",
+      "category": "security",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-018",
+      "name": "German labels fit the layout without truncation",
+      "category": "localization",
+      "priority": "P2",
+      "automated": false
+    },
+    {
+      "id": "S-019",
+      "name": "Form works on the latest Safari iOS and Chrome Android",
+      "category": "cross_platform",
+      "priority": "P2",
+      "automated": false
+    }
+  ]
+}

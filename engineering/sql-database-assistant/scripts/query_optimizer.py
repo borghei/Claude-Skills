@@ -5,7 +5,6 @@ SQL Query Optimizer - Analyze SQL queries for performance issues.
 Detects common anti-patterns like SELECT *, leading wildcards in LIKE,
 missing indexes, N+1 patterns, and full table scans.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -38,6 +37,10 @@ class SQLQueryAnalyzer:
         """Analyze a SQL query or batch of queries."""
         self.findings = []
 
+        # Drop comments first: a statement preceded by "-- note" lines must still be analysed
+        # (quoted strings containing "--" are rare in query files; they would be cut short)
+        sql = re.sub(r"/\*.*?\*/", " ", sql, flags=re.S)
+        sql = re.sub(r"--[^\n]*", "", sql)
         # Split on semicolons to handle multiple statements
         statements = [s.strip() for s in sql.split(";") if s.strip()]
 

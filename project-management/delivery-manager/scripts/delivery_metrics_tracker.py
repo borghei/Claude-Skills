@@ -70,6 +70,14 @@ DORA_BENCHMARKS = {
 DORA_BENCHMARKS["mttr_hours"] = DORA_BENCHMARKS["failed_deployment_recovery_hours"]
 
 
+NO_DATA = "Insufficient data"
+# Minimum samples before a tier is given. Below 5 deploys one failure moves change fail rate
+# by 20+ points and one slow deploy sets the lead time, so a tier would be noise. A single
+# incident is an anecdote, so recovery time needs 2. Deployment frequency can still be rated
+# from a window of 28+ days, where "few or no deploys" is itself the finding.
+MIN_DEPLOYS, MIN_INCIDENTS, MIN_FREQ_WINDOW_DAYS = 5, 2, 28
+
+
 def load_data(path: str) -> dict:
     """Load delivery data from JSON file."""
     with open(path, "r") as f:
@@ -113,7 +121,16 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
     deployments = data.get("deployments", [])
     incidents = data.get("incidents", [])
 
-    now = datetime.now()
+    # Window end: the file's "as_of", else its latest deploy/incident date, so a fixed
+    # sample gives the same answer on any day. Falls back to now only for empty files.
+    stamps = []
+    for rec, key in [(d, "date") for d in deployments] + [(i, "detected") for i in incidents]:
+        try:
+            stamps.append(parse_dt(rec[key]))
+        except (ValueError, KeyError, TypeError):
+            pass
+    now = parse_dt(data["as_of"]) if data.get("as_of") else (max(stamps) if stamps else datetime.now())
+    now = now.replace(hour=23, minute=59, second=59) if now.time() == datetime.min.time() else now
     cutoff = now - timedelta(days=period_days)
 
     # Filter to period
@@ -191,28 +208,29 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
             "value": deploys_per_week,
             "unit": "deploys/week",
             "total_in_period": deploy_count,
-            "classification": classify("deployment_frequency", deploys_per_week),
+            "classification": classify("deployment_frequency", deploys_per_week)
+                              if stamps and (deploy_count >= MIN_DEPLOYS or period_days >= MIN_FREQ_WINDOW_DAYS) else NO_DATA,
         },
         "lead_time": {
             "value": avg_lead_time,
             "median": median_lead_time,
             "unit": "hours",
             "sample_size": len(lead_times),
-            "classification": classify("lead_time_hours", avg_lead_time),
+            "classification": classify("lead_time_hours", avg_lead_time) if len(lead_times) >= MIN_DEPLOYS else NO_DATA,
         },
         "change_failure_rate": {
             "value": cfr,
             "unit": "%",
             "failed_deploys": failed,
             "total_deploys": deploy_count,
-            "classification": classify("change_failure_rate_pct", cfr),
+            "classification": classify("change_failure_rate_pct", cfr) if deploy_count >= MIN_DEPLOYS else NO_DATA,
         },
         "failed_deployment_recovery_time": {
             "value": avg_mttr,
             "unit": "hours",
             "incidents_in_period": len(period_incidents),
             "sample_size": len(recovery_times),
-            "classification": classify("failed_deployment_recovery_hours", avg_mttr),
+            "classification": classify("failed_deployment_recovery_hours", avg_mttr) if len(recovery_times) >= MIN_INCIDENTS else NO_DATA,
         },
     }
     # Legacy alias: same object under the old key for existing consumers.
@@ -223,10 +241,13 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
     # Overall classification (the four classified metrics only)
     classified = ["deployment_frequency", "lead_time", "change_failure_rate",
                   "failed_deployment_recovery_time"]
-    classifications = [metrics[k]["classification"] for k in classified]
+    # Metrics with no data in the window are left out rather than scored as Elite.
+    classifications = [metrics[k]["classification"] for k in classified if metrics[k]["classification"] != NO_DATA]
     class_scores = {"Elite": 4, "High": 3, "Medium": 2, "Low": 1}
-    avg_class = sum(class_scores.get(c, 1) for c in classifications) / len(classifications)
-    if avg_class >= 3.5:
+    avg_class = sum(class_scores[c] for c in classifications) / len(classifications) if classifications else 0
+    if not classifications:
+        overall = NO_DATA
+    elif avg_class >= 3.5:
         overall = "Elite"
     elif avg_class >= 2.5:
         overall = "High"
@@ -249,9 +270,15 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
             elif name == "failed_deployment_recovery_time":
                 recs.append("Improve failed deployment recovery time (formerly MTTR) by investing in observability (logging, tracing, alerting) and pre-defined runbooks.")
 
+    warnings = [f"{k}: below the minimum sample ({MIN_DEPLOYS} deploys, {MIN_INCIDENTS} incidents), not classified" for k in classified
+                if metrics[k]["classification"] == NO_DATA]
+    if deploy_count == 0:
+        warnings.append(f"no deployments between {cutoff:%Y-%m-%d} and {now:%Y-%m-%d}; widen --period or set as_of")
     return {
         "service": service,
         "period_days": period_days,
+        "window": [cutoff.strftime("%Y-%m-%d"), now.strftime("%Y-%m-%d")],
+        "warnings": warnings,
         "overall_classification": overall,
         "metrics": metrics,
         "recommendations": recs,
@@ -261,7 +288,7 @@ def analyze_delivery(data: dict, period_days: int = 30) -> dict:
 def print_report(result: dict) -> None:
     """Print human-readable DORA metrics report."""
     print(f"\nDORA Metrics Report: {result['service']}")
-    print(f"Period: Last {result['period_days']} days")
+    print(f"Period: {result['period_days']} days ({result['window'][0]} to {result['window'][1]})")
     print("=" * 60)
     print(f"Overall Classification: {result['overall_classification']}")
     print()
@@ -289,6 +316,8 @@ def print_report(result: dict) -> None:
         print(f"Deployment Rework Rate: {rw['value']}% ({rw['rework_deploys']}/{rw['total_deploys']} unplanned fix deploys)")
         print(f"  Classification: {rw['classification']}")
 
+    for w in result["warnings"]:
+        print(f"WARNING: {w}")
     if result["recommendations"]:
         print(f"\nRecommendations:")
         for i, r in enumerate(result["recommendations"], 1):
@@ -342,4 +371,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

@@ -868,12 +868,12 @@ Examples:
     try:
         with open(args.input_file, 'r') as f:
             input_data = json.load(f)
-    except FileNotFoundError:
+    except OSError:
         print(f"Error: Input file '{args.input_file}' not found.", file=sys.stderr)
-        return 1
+        return 2
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in '{args.input_file}': {e}", file=sys.stderr)
-        return 1
+        return 2
     
     # Initialize linter and run analysis
     linter = APILinter()
@@ -885,7 +885,7 @@ Examples:
             report = linter.lint_openapi_spec(input_data)
     except Exception as e:
         print(f"Error during linting: {e}", file=sys.stderr)
-        return 1
+        return 2
     
     # Generate report
     if args.format == 'json':
@@ -901,7 +901,7 @@ Examples:
             print(f"Report written to {args.output}")
         except IOError as e:
             print(f"Error writing to '{args.output}': {e}", file=sys.stderr)
-            return 1
+            return 2
     else:
         print(output)
     
@@ -910,5 +910,5 @@ Examples:
     return 1 if error_count > 0 else 0
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

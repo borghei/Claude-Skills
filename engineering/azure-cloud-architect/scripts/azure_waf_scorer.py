@@ -407,8 +407,11 @@ def main() -> int:
     args = parse_args()
     try:
         spec = parse_yaml(Path(args.workload_config).read_text())
-    except OSError as e:
-        print(f"error: {e}", file=sys.stderr)
+    except (OSError, ValueError, IndexError) as e:
+        print(f"error: cannot read {args.workload_config}: {e}", file=sys.stderr)
+        return 2
+    if not isinstance(spec, dict) or not spec:
+        print(f"error: {args.workload_config} is not a workload spec (expected a YAML mapping)", file=sys.stderr)
         return 2
 
     pillars = {

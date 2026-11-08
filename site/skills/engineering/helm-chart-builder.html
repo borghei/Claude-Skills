@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Helm Chart Builder - Claude Skills</title>
-  <meta name="description" content="This skill should be used when the user asks to &quot;analyze Helm charts&quot;, &quot;validate Helm values&quot;, &quot;review chart structure&quot;, &quot;check Kubernetes Helm templates&quot;, or &quot;audit chart dependencies and configurati">
+  <meta name="description" content="Review an existing Helm chart and its values files: metadata, structure, dependency pinning, resources, security context, image tags, probes and plaintext secrets. Use when auditing a chart before rel">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/helm-chart-builder.html">
   <meta property="og:title" content="Helm Chart Builder - Claude Skills">
-  <meta property="og:description" content="This skill should be used when the user asks to &quot;analyze Helm charts&quot;, &quot;validate Helm values&quot;, &quot;review chart structure&quot;, &quot;check Kubernetes Helm templates&quot;, or &quot;audit chart dependencies and configurati">
+  <meta property="og:description" content="Review an existing Helm chart and its values files: metadata, structure, dependency pinning, resources, security context, image tags, probes and plaintext secrets. Use when auditing a chart before rel">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/helm-chart-builder.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Helm Chart Builder", "description": "This skill should be used when the user asks to \"analyze Helm charts\", \"validate Helm values\", \"review chart structure\", \"check Kubernetes Helm templates\", or \"audit chart dependencies and configuration\".", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/helm-chart-builder.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Helm Chart Builder", "description": "Review an existing Helm chart and its values files: metadata, structure, dependency pinning, resources, security context, image tags, probes and plaintext secrets. Use when auditing a chart before release or adding chart checks to CI.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/helm-chart-builder.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Helm Chart Builder</h1>
-    <p class="page-subtitle">This skill should be used when the user asks to &quot;analyze Helm charts&quot;, &quot;validate Helm values&quot;, &quot;review chart structure&quot;, &quot;check Kubernetes Helm templates&quot;, or &quot;audit chart dependencies and configuration&quot;.</p>
+    <p class="page-subtitle">Review an existing Helm chart and its values files: metadata, structure, dependency pinning, resources, security context, image tags, probes and plaintext secrets. Use when auditing a chart before release or adding chart checks to CI.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">helm</span><span class="tag">kubernetes</span><span class="tag">k8s</span><span class="tag">charts</span><span class="tag">devops</span></div>
   </div>
@@ -393,24 +393,12 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Helm Chart Builder (Engineering domain).
 
-This skill should be used when the user asks to &quot;analyze Helm charts&quot;, &quot;validate Helm values&quot;, &quot;review chart structure&quot;, &quot;check Kubernetes Helm templates&quot;, or &quot;audit chart dependencies and configuration&quot;.
+Review an existing Helm chart and its values files: metadata, structure, dependency pinning, resources, security context, image tags, probes and plaintext secrets. Use when auditing a chart before release or adding chart checks to CI.
 
-&gt; **Category:** Engineering &gt; **Domain:** Kubernetes &amp; Helm The **Helm Chart Builder** skill provides automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. It helps teams maintain high-quality charts with correct configurations
-
-## Your Key Capabilities
-- chart_analyzer.py
-- values_validator.py
-- Chart Review Workflow
-- Pre-Release Workflow
-- CI Integration
-- Required Chart Structure
+The agent reviews Helm charts that already exist: is the chart well-formed, are its dependencies pinned, and are its values safe to run in production. Despite the name, the tools analyse rather than generate; when a new chart is needed, start from `helm create`, then run this review. - Reviewing a c
 
 ## Frameworks &amp; Templates You Know
-- Analyzes Helm chart structure, metadata, templates, and dependencies.
-- | Template review | Inspects templates for common patterns and issues |
 - - Generating new charts or templates. The scripts review existing files.
-- templates/          # Required: template directory
-- _helpers.tpl      # Recommended: template helpers
 
 ## How to Help
 When the user asks for help in this domain:
@@ -430,24 +418,12 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Helm Chart Builder (Engineering domain).
 
-This skill should be used when the user asks to &quot;analyze Helm charts&quot;, &quot;validate Helm values&quot;, &quot;review chart structure&quot;, &quot;check Kubernetes Helm templates&quot;, or &quot;audit chart dependencies and configuration&quot;.
+Review an existing Helm chart and its values files: metadata, structure, dependency pinning, resources, security context, image tags, probes and plaintext secrets. Use when auditing a chart before release or adding chart checks to CI.
 
-&gt; **Category:** Engineering &gt; **Domain:** Kubernetes &amp; Helm The **Helm Chart Builder** skill provides automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. It helps teams maintain high-quality charts with correct configurations
-
-## Your Key Capabilities
-- chart_analyzer.py
-- values_validator.py
-- Chart Review Workflow
-- Pre-Release Workflow
-- CI Integration
-- Required Chart Structure
+The agent reviews Helm charts that already exist: is the chart well-formed, are its dependencies pinned, and are its values safe to run in production. Despite the name, the tools analyse rather than generate; when a new chart is needed, start from `helm create`, then run this review. - Reviewing a c
 
 ## Frameworks &amp; Templates You Know
-- Analyzes Helm chart structure, metadata, templates, and dependencies.
-- | Template review | Inspects templates for common patterns and issues |
 - - Generating new charts or templates. The scripts review existing files.
-- templates/          # Required: template directory
-- _helpers.tpl      # Recommended: template helpers
 
 ## How to Help
 When the user asks for help in this domain:
@@ -477,12 +453,13 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Helm Chart Builder
 
-&gt; **Category:** Engineering
-&gt; **Domain:** Kubernetes &amp; Helm
+The agent reviews Helm charts that already exist: is the chart well-formed, are its dependencies pinned, and are its values safe to run in production. Despite the name, the tools analyse rather than generate; when a new chart is needed, start from `helm create`, then run this review.
 
-## Overview
+## When to Use
 
-The **Helm Chart Builder** skill provides automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. It helps teams maintain high-quality charts with correct configurations, proper security contexts, and complete documentation.
+- Reviewing a chart or its per-environment values files before a release.
+- Adding chart checks to CI.
+- Auditing third-party charts and values overrides for security defaults.
 
 ## Clarify First
 
@@ -494,79 +471,56 @@ Before analyzing the chart, settle the inputs below. When one is missing or vagu
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. **Analyse the chart** with `chart_analyzer.py --path &lt;chart&gt;`: required files, `apiVersion: v2`, SemVer version, appVersion, dependency pinning and `Chart.lock`, NOTES.txt, `_helpers.tpl`, README.
+2. **Validate every values file** with `values_validator.py`: resources, security context, image tag, replicas, service type, ingress TLS, probes, autoscaling and plaintext secrets.
+3. **Fix critical findings first** (missing required files, plaintext secrets), then warnings.
+4. **Render and dry-run** with `helm lint`, `helm template` and `helm install --dry-run` (or `helm upgrade --install --dry-run=server` against a cluster). The analysers read text; only rendering proves the manifests.
+5. **Verify** that both tools report no critical findings for every environment&#x27;s values file and that the rendered manifests pass your policy checks.
+
+Helm 4 (released late 2025) keeps chart `apiVersion: v2`, so v2 charts work with both Helm 3 and Helm 4. Check the Helm 4 release notes for changed CLI flags and plugin behaviour before upgrading CI.
+
 ## Quick Start
 
 ```bash
-# Analyze chart structure and quality
-python scripts/chart_analyzer.py --path ./charts/my-app
+python3 scripts/chart_analyzer.py --path examples                                  # apiVersion v1, loose dependency range, missing files
+python3 scripts/values_validator.py --values examples/values.yaml                  # latest tag, plaintext passwords, no resources (exit 1)
+python3 scripts/values_validator.py --values examples/values-production.yaml       # passes (exit 0)
+```
 
-# Validate a values file against best-practice rules (--chart only helps locate the file)
-python scripts/values_validator.py --chart ./charts/my-app --values values-prod.yaml
+For CI, write one JSON report per tool:
 
-# JSON output for CI
-python scripts/chart_analyzer.py --path ./charts/my-app --format json
-
-# Validate multiple values files
-python scripts/values_validator.py --chart ./charts/my-app --values values-dev.yaml values-prod.yaml
+```bash
+python3 scripts/chart_analyzer.py --path ./charts/my-app --format json --strict &gt; chart-report.json
+python3 scripts/values_validator.py --chart ./charts/my-app --values values-dev.yaml values-prod.yaml --format json &gt; values-report.json
 ```
 
 ## Tools Overview
 
-### chart_analyzer.py
+| Tool | What it checks | Key flags | Exit codes |
+|------|----------------|-----------|------------|
+| `chart_analyzer.py` | Required files and dirs, Chart.yaml fields, `apiVersion: v2`, SemVer, appVersion, dependency version ranges and `Chart.lock`, template helpers, NOTES.txt, README | `--path`, `--strict` (warnings fail), `--format text|json` | 0, 1 critical (or warning with `--strict`), 2 not a chart directory |
+| `values_validator.py` | Resources, security context, image tag (`latest` or empty), pull policy, replicaCount, service type, ingress TLS/class, probes, autoscaling, plaintext passwords/secrets/tokens and credentialed URLs | `--values &lt;files...&gt;`, `--chart` (only to locate relative paths), `--format text|json` | 0, 1 critical finding, 2 a values file not found |
 
-Analyzes Helm chart structure, metadata, templates, and dependencies.
+## Anti-Patterns
 
-| Feature | Description |
-|---------|-------------|
-| Structure validation | Checks required files exist (Chart.yaml, values.yaml, templates/) |
-| Metadata check | Validates Chart.yaml fields, version format, appVersion |
-| Template review | Inspects templates for common patterns and issues |
-| Dependency analysis | Reviews subchart dependencies and version constraints |
-| Documentation check | Verifies NOTES.txt and README presence |
+**Mistake:** Passwords and API keys in `values.yaml`.
+**Why it happens:** It is the quickest way to make a chart install.
+**Instead:** Values end up in git and in the release history Helm stores in the cluster. Reference an existing Secret (`existingSecret`), or use External Secrets or SOPS.
 
-### values_validator.py
+**Mistake:** Broad dependency ranges such as `12.x.x` without a committed `Chart.lock`.
+**Why it happens:** Ranges feel like they keep the chart current.
+**Instead:** Pin dependency versions, commit `Chart.lock`, and update deliberately.
 
-Validates values files against fixed Kubernetes best-practice rules. `--chart` is only used to find a values file given as a path relative to the chart directory; values are not compared with what the chart&#x27;s templates use.
+**Mistake:** Treating a clean analyser run as a working chart.
+**Why it happens:** No findings looks like a pass.
+**Instead:** Template logic and `--set` overrides are not evaluated. Render with `helm template` and dry-run the install.
 
-| Feature | Description |
-|---------|-------------|
-| Resource limits | Checks for CPU/memory requests and limits |
-| Security context | Validates runAsNonRoot, readOnlyRootFilesystem |
-| Replica count | Checks for production-appropriate replica counts |
-| Image tags | Flags use of latest or missing image tags |
-| Ingress config | Validates ingress annotations and TLS settings |
+## Files
 
-## Workflows
-
-### Chart Review Workflow
-
-1. **Analyze structure** - Run chart_analyzer.py to check chart organization
-2. **Validate defaults** - Run values_validator.py against default values.yaml
-3. **Check environments** - Validate each environment&#x27;s values file
-4. **Review findings** - Address critical issues first, then warnings
-5. **Re-check** - Confirm fixes pass validation
-
-### Pre-Release Workflow
-
-1. **Bump version** - Update Chart.yaml version and appVersion
-2. **Lint chart** - Run chart_analyzer.py in strict mode
-3. **Validate all values** - Check every environment&#x27;s values file
-4. **Check dependencies** - Ensure subchart versions are pinned
-5. **Package** - Chart is ready for helm package
-
-### CI Integration
-
-```bash
-# Structure check
-python scripts/chart_analyzer.py --path ./charts/my-app --format json --strict
-
-# Values validation for all environments
-for env in dev staging production; do
-  python scripts/values_validator.py \
-    --chart ./charts/my-app \
-    --values &quot;values-${env}.yaml&quot;
-done
-```
+- `scripts/chart_analyzer.py`, `scripts/values_validator.py` — the tools above.
+- `examples/Chart.yaml`, `examples/values.yaml` — deliberately flawed chart metadata and values; `examples/values-production.yaml` — values that pass.
 
 ## Scope &amp; Limitations
 
@@ -589,51 +543,7 @@ done
 
 ## Reference Documentation
 
-- [Helm Best Practices](references/helm-best-practices.md) - Chart structure, templates, security, dependencies
-
-## Common Patterns Quick Reference
-
-### Required Chart Structure
-```
-my-chart/
-  Chart.yaml          # Required: chart metadata
-  values.yaml         # Required: default values
-  templates/          # Required: template directory
-    deployment.yaml
-    service.yaml
-    _helpers.tpl      # Recommended: template helpers
-    NOTES.txt         # Recommended: post-install notes
-  charts/             # Optional: subchart dependencies
-```
-
-### Values Best Practices
-| Setting | Requirement | Why |
-|---------|------------|-----|
-| resources.limits | Required | Prevents resource exhaustion |
-| resources.requests | Required | Enables proper scheduling |
-| securityContext.runAsNonRoot | Required | Security baseline |
-| image.tag | Required (not latest) | Reproducible deployments |
-| replicaCount &gt;= 2 | Recommended for prod | High availability |
-| ingress.tls | Recommended | Encrypted traffic |
-
-### Chart.yaml Required Fields
-| Field | Description |
-|-------|-------------|
-| apiVersion | v2 for Helm 3 |
-| name | Chart name (lowercase) |
-| version | SemVer chart version |
-| appVersion | Application version |
-| description | Brief chart description |
-
-### Common Issues
-| Issue | Severity | Fix |
-|-------|----------|-----|
-| Missing Chart.yaml | Critical | Add required chart metadata |
-| No resource limits | Warning | Set CPU/memory limits |
-| Latest image tag | Warning | Pin specific version |
-| No security context | Warning | Add runAsNonRoot: true |
-| Missing NOTES.txt | Info | Add post-install notes |
-| Unpinned dependencies | Warning | Pin subchart versions |
+- [references/helm-best-practices.md](references/helm-best-practices.md) — chart structure, template patterns, security defaults, values design and dependency management. Read when restructuring a chart or writing templates.
 
 ---
 
@@ -661,7 +571,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Helm Chart Builder&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;analyze Helm charts&quot;, &quot;validate Helm values&quot;, &quot;review chart structure&quot;, &quot;check Kubernetes Helm templates&quot;, or &quot;audit chart dependencies and configuration&quot;.&quot;
+   - Description: &quot;Review an existing Helm chart and its values files: metadata, structure, dependency pinning, resources, security context, image tags, probes and plaintext secrets. Use when auditing a chart before release or adding chart checks to CI.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -686,12 +596,13 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Helm Chart Builder
 
-&gt; **Category:** Engineering
-&gt; **Domain:** Kubernetes &amp; Helm
+The agent reviews Helm charts that already exist: is the chart well-formed, are its dependencies pinned, and are its values safe to run in production. Despite the name, the tools analyse rather than generate; when a new chart is needed, start from `helm create`, then run this review.
 
-## Overview
+## When to Use
 
-The **Helm Chart Builder** skill provides automated analysis of Helm charts including structure validation, values checking, template inspection, and dependency review. It helps teams maintain high-quality charts with correct configurations, proper security contexts, and complete documentation.
+- Reviewing a chart or its per-environment values files before a release.
+- Adding chart checks to CI.
+- Auditing third-party charts and values overrides for security defaults.
 
 ## Clarify First
 
@@ -703,79 +614,56 @@ Before analyzing the chart, settle the inputs below. When one is missing or vagu
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. **Analyse the chart** with `chart_analyzer.py --path &lt;chart&gt;`: required files, `apiVersion: v2`, SemVer version, appVersion, dependency pinning and `Chart.lock`, NOTES.txt, `_helpers.tpl`, README.
+2. **Validate every values file** with `values_validator.py`: resources, security context, image tag, replicas, service type, ingress TLS, probes, autoscaling and plaintext secrets.
+3. **Fix critical findings first** (missing required files, plaintext secrets), then warnings.
+4. **Render and dry-run** with `helm lint`, `helm template` and `helm install --dry-run` (or `helm upgrade --install --dry-run=server` against a cluster). The analysers read text; only rendering proves the manifests.
+5. **Verify** that both tools report no critical findings for every environment&#x27;s values file and that the rendered manifests pass your policy checks.
+
+Helm 4 (released late 2025) keeps chart `apiVersion: v2`, so v2 charts work with both Helm 3 and Helm 4. Check the Helm 4 release notes for changed CLI flags and plugin behaviour before upgrading CI.
+
 ## Quick Start
 
 ```bash
-# Analyze chart structure and quality
-python scripts/chart_analyzer.py --path ./charts/my-app
+python3 scripts/chart_analyzer.py --path examples                                  # apiVersion v1, loose dependency range, missing files
+python3 scripts/values_validator.py --values examples/values.yaml                  # latest tag, plaintext passwords, no resources (exit 1)
+python3 scripts/values_validator.py --values examples/values-production.yaml       # passes (exit 0)
+```
 
-# Validate a values file against best-practice rules (--chart only helps locate the file)
-python scripts/values_validator.py --chart ./charts/my-app --values values-prod.yaml
+For CI, write one JSON report per tool:
 
-# JSON output for CI
-python scripts/chart_analyzer.py --path ./charts/my-app --format json
-
-# Validate multiple values files
-python scripts/values_validator.py --chart ./charts/my-app --values values-dev.yaml values-prod.yaml
+```bash
+python3 scripts/chart_analyzer.py --path ./charts/my-app --format json --strict &gt; chart-report.json
+python3 scripts/values_validator.py --chart ./charts/my-app --values values-dev.yaml values-prod.yaml --format json &gt; values-report.json
 ```
 
 ## Tools Overview
 
-### chart_analyzer.py
+| Tool | What it checks | Key flags | Exit codes |
+|------|----------------|-----------|------------|
+| `chart_analyzer.py` | Required files and dirs, Chart.yaml fields, `apiVersion: v2`, SemVer, appVersion, dependency version ranges and `Chart.lock`, template helpers, NOTES.txt, README | `--path`, `--strict` (warnings fail), `--format text|json` | 0, 1 critical (or warning with `--strict`), 2 not a chart directory |
+| `values_validator.py` | Resources, security context, image tag (`latest` or empty), pull policy, replicaCount, service type, ingress TLS/class, probes, autoscaling, plaintext passwords/secrets/tokens and credentialed URLs | `--values &lt;files...&gt;`, `--chart` (only to locate relative paths), `--format text|json` | 0, 1 critical finding, 2 a values file not found |
 
-Analyzes Helm chart structure, metadata, templates, and dependencies.
+## Anti-Patterns
 
-| Feature | Description |
-|---------|-------------|
-| Structure validation | Checks required files exist (Chart.yaml, values.yaml, templates/) |
-| Metadata check | Validates Chart.yaml fields, version format, appVersion |
-| Template review | Inspects templates for common patterns and issues |
-| Dependency analysis | Reviews subchart dependencies and version constraints |
-| Documentation check | Verifies NOTES.txt and README presence |
+**Mistake:** Passwords and API keys in `values.yaml`.
+**Why it happens:** It is the quickest way to make a chart install.
+**Instead:** Values end up in git and in the release history Helm stores in the cluster. Reference an existing Secret (`existingSecret`), or use External Secrets or SOPS.
 
-### values_validator.py
+**Mistake:** Broad dependency ranges such as `12.x.x` without a committed `Chart.lock`.
+**Why it happens:** Ranges feel like they keep the chart current.
+**Instead:** Pin dependency versions, commit `Chart.lock`, and update deliberately.
 
-Validates values files against fixed Kubernetes best-practice rules. `--chart` is only used to find a values file given as a path relative to the chart directory; values are not compared with what the chart&#x27;s templates use.
+**Mistake:** Treating a clean analyser run as a working chart.
+**Why it happens:** No findings looks like a pass.
+**Instead:** Template logic and `--set` overrides are not evaluated. Render with `helm template` and dry-run the install.
 
-| Feature | Description |
-|---------|-------------|
-| Resource limits | Checks for CPU/memory requests and limits |
-| Security context | Validates runAsNonRoot, readOnlyRootFilesystem |
-| Replica count | Checks for production-appropriate replica counts |
-| Image tags | Flags use of latest or missing image tags |
-| Ingress config | Validates ingress annotations and TLS settings |
+## Files
 
-## Workflows
-
-### Chart Review Workflow
-
-1. **Analyze structure** - Run chart_analyzer.py to check chart organization
-2. **Validate defaults** - Run values_validator.py against default values.yaml
-3. **Check environments** - Validate each environment&#x27;s values file
-4. **Review findings** - Address critical issues first, then warnings
-5. **Re-check** - Confirm fixes pass validation
-
-### Pre-Release Workflow
-
-1. **Bump version** - Update Chart.yaml version and appVersion
-2. **Lint chart** - Run chart_analyzer.py in strict mode
-3. **Validate all values** - Check every environment&#x27;s values file
-4. **Check dependencies** - Ensure subchart versions are pinned
-5. **Package** - Chart is ready for helm package
-
-### CI Integration
-
-```bash
-# Structure check
-python scripts/chart_analyzer.py --path ./charts/my-app --format json --strict
-
-# Values validation for all environments
-for env in dev staging production; do
-  python scripts/values_validator.py \
-    --chart ./charts/my-app \
-    --values &quot;values-${env}.yaml&quot;
-done
-```
+- `scripts/chart_analyzer.py`, `scripts/values_validator.py` — the tools above.
+- `examples/Chart.yaml`, `examples/values.yaml` — deliberately flawed chart metadata and values; `examples/values-production.yaml` — values that pass.
 
 ## Scope &amp; Limitations
 
@@ -798,51 +686,7 @@ done
 
 ## Reference Documentation
 
-- [Helm Best Practices](references/helm-best-practices.md) - Chart structure, templates, security, dependencies
-
-## Common Patterns Quick Reference
-
-### Required Chart Structure
-```
-my-chart/
-  Chart.yaml          # Required: chart metadata
-  values.yaml         # Required: default values
-  templates/          # Required: template directory
-    deployment.yaml
-    service.yaml
-    _helpers.tpl      # Recommended: template helpers
-    NOTES.txt         # Recommended: post-install notes
-  charts/             # Optional: subchart dependencies
-```
-
-### Values Best Practices
-| Setting | Requirement | Why |
-|---------|------------|-----|
-| resources.limits | Required | Prevents resource exhaustion |
-| resources.requests | Required | Enables proper scheduling |
-| securityContext.runAsNonRoot | Required | Security baseline |
-| image.tag | Required (not latest) | Reproducible deployments |
-| replicaCount &gt;= 2 | Recommended for prod | High availability |
-| ingress.tls | Recommended | Encrypted traffic |
-
-### Chart.yaml Required Fields
-| Field | Description |
-|-------|-------------|
-| apiVersion | v2 for Helm 3 |
-| name | Chart name (lowercase) |
-| version | SemVer chart version |
-| appVersion | Application version |
-| description | Brief chart description |
-
-### Common Issues
-| Issue | Severity | Fix |
-|-------|----------|-----|
-| Missing Chart.yaml | Critical | Add required chart metadata |
-| No resource limits | Warning | Set CPU/memory limits |
-| Latest image tag | Warning | Pin specific version |
-| No security context | Warning | Add runAsNonRoot: true |
-| Missing NOTES.txt | Info | Add post-install notes |
-| Unpinned dependencies | Warning | Pin subchart versions |
+- [references/helm-best-practices.md](references/helm-best-practices.md) — chart structure, template patterns, security defaults, values design and dependency management. Read when restructuring a chart or writing templates.
 
 ---
 
@@ -870,7 +714,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Helm Chart Builder&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;analyze Helm charts&quot;, &quot;validate Helm values&quot;, &quot;review chart structure&quot;, &quot;check Kubernetes Helm templates&quot;, or &quot;audit chart dependencies and configuration&quot;.&quot;
+   - Description: &quot;Review an existing Helm chart and its values files: metadata, structure, dependency pinning, resources, security context, image tags, probes and plaintext secrets. Use when auditing a chart before release or adding chart checks to CI.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -929,20 +773,18 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/helm-chart-builder/scripts/tool_name.py --help</code></pre>
-  <h2>Python Tools</h2><div class="tool-item"><h4>chart_analyzer.py</h4><p>Analyzes Helm chart structure, metadata, templates, and dependencies.</p></div><div class="tool-item"><h4>values_validator.py</h4><p>Validates values files against fixed Kubernetes best-practice rules. `--chart` is only used to find a values file given as a path relative to the chart directory; values are not compared with what the chart&#x27;s templates use.</p></div>
-  <h2>Quick Start</h2><pre><code># Analyze chart structure and quality
-python scripts/chart_analyzer.py --path ./charts/my-app
-
-# Validate a values file against best-practice rules (--chart only helps locate the file)
-python scripts/values_validator.py --chart ./charts/my-app --values values-prod.yaml
-
-# JSON output for CI
-python scripts/chart_analyzer.py --path ./charts/my-app --format json
-
-# Validate multiple values files
-python scripts/values_validator.py --chart ./charts/my-app --values values-dev.yaml values-prod.yaml
+  
+  <h2>Quick Start</h2><pre><code>python3 scripts/chart_analyzer.py --path examples                                  # apiVersion v1, loose dependency range, missing files
+python3 scripts/values_validator.py --values examples/values.yaml                  # latest tag, plaintext passwords, no resources (exit 1)
+python3 scripts/values_validator.py --values examples/values-production.yaml       # passes (exit 0)
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+
+For CI, write one JSON report per tool:
+
+<pre><code>python3 scripts/chart_analyzer.py --path ./charts/my-app --format json --strict &gt; chart-report.json
+python3 scripts/values_validator.py --chart ./charts/my-app --values values-dev.yaml values-prod.yaml --format json &gt; values-report.json
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/helm-chart-builder/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

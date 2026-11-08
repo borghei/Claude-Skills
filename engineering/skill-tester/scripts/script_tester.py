@@ -9,7 +9,6 @@ It ensures scripts meet quality standards and function correctly.
 Usage:
     python script_tester.py <skill_path> [--timeout SECONDS] [--json] [--verbose]
 
-Author: Claude Skills Engineering Team
 Version: 1.0.0
 Dependencies: Python Standard Library Only
 """

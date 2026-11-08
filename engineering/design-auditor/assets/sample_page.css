@@ -1,0 +1,7 @@
+body { font-family: Inter, sans-serif; color: #333333; margin: 0; }
+.hero { padding: 96px 48px; text-align: center; color: #fff; }
+.hero h1 { font-size: 56px; }
+.cta { padding: 14px 32px; border-radius: 9999px; background: #7c3aed; color: #fff; box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4); }
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 64px 48px; }
+.card { padding: 30px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.7); }
+.card p { color: #999; font-size: 15px; }

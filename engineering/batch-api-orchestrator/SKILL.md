@@ -1,16 +1,16 @@
 ---
 name: batch-api-orchestrator
 description: >
-  This skill should be used when the user asks to "batch LLM requests", "should I use
-  the batch API", "estimate batch vs realtime cost", "design a bulk LLM job", or
-  "process thousands of prompts cheaply".
+  Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys
+  and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction
+  through a provider batch API.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: ai-engineering
-  updated: 2026-06-29
+  updated: 2026-11-08
   tags: [batch-api, llm, cost-optimization, throughput, async]
 ---
 
@@ -22,6 +22,12 @@ metadata:
 ## Overview
 
 Decide when to run LLM work through an asynchronous batch API versus realtime/streaming, then design the job so it is cheap, idempotent, and resilient to partial failure. Batch APIs typically cost roughly half of realtime in exchange for higher latency (results arrive over minutes to hours, not milliseconds), which makes them ideal for evals, backfills, embeddings, and bulk classification/extraction — and wrong for anything a human is waiting on. This skill is model- and vendor-agnostic: it reasons about the batch *pattern*, not any one provider's API.
+
+## When to Use
+
+- A job of thousands of LLM requests where no person waits on each answer (evals, backfills, embeddings, bulk classification).
+- Choosing between a provider's batch API and realtime calls on cost and latency.
+- Designing chunk sizes, retries and reconciliation for a batch job before writing client code.
 
 ## Clarify First
 
@@ -57,6 +63,27 @@ python scripts/batch_job_planner.py \
 | `scripts/batch_job_planner.py` | Produce a chunking + idempotency + partial-failure plan for a bulk job | `--total-items`, `--max-batch-size`, `--retry-policy`, `--max-retries`, `--json` |
 
 Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-readable output. Run `--help` for full usage.
+
+**Exit codes (both).** `0` estimate or plan printed; `2` invalid arguments (negative or zero counts,
+discount outside 0-1, unknown latency tolerance or retry policy).
+
+### Provider limits to check (as of 2026-11, from the providers' batch API docs; confirm before sizing a job)
+
+| | Anthropic Message Batches | OpenAI Batch API |
+|---|---|---|
+| Discount vs realtime | 50% | 50% |
+| Max per batch | 100,000 requests or 256 MB | 50,000 requests per input file, input file up to 200 MB |
+| Completion window | most finish within an hour; expire after 24 h | 24 h window |
+| Result retention | 29 days | output file deleted 30 days after the batch completes (set 1 hour to 30 days with `output_expires_after`) |
+| Prompt caching | stacks with the batch discount | check current docs |
+
+Use these to set `--max-batch-size` and `--batch-discount`. Limits change, so read the provider's
+batch documentation before sizing a production job.
+
+**Done when:**
+1. The cost comparison used your provider's current prices and discount, not the placeholders.
+2. Every request carries an idempotency key and every result is joined back to its request by id.
+3. A small pilot batch (a few hundred items) completed, and failed items were retried on their own.
 
 ## Workflows
 
@@ -94,6 +121,29 @@ Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-r
 - The default prices in `batch_cost_estimator.py` are neutral placeholders, not real prices. Estimates mean something only after the user supplies current vendor prices and discount.
 - The roughly half-price batch discount is a rule of thumb. Discounts, maximum batch sizes, completion windows and result retention differ by vendor and change over time.
 - Estimates assume every request costs the average token count. Long-tail inputs, retries and failed items add cost the model does not show.
+
+## Anti-Patterns
+
+### Batching interactive work
+**Mistake:** Sending user-facing requests through the batch API to save money.
+**Why it happens:** The discount is large and the latency cost is invisible in a spreadsheet.
+**Instead:** Batch only work nobody waits on. `batch_cost_estimator.py` recommends realtime whenever `--latency-tolerance realtime` is set.
+
+### One giant batch
+**Mistake:** Submitting a whole backfill as a single maximum-size batch.
+**Why it happens:** Fewer jobs feel simpler to track.
+**Instead:** Chunk below the provider limit so a bad prompt or schema error costs one chunk, not the run. Pilot a small chunk first.
+
+### Trusting output order
+**Mistake:** Zipping results to inputs by position.
+**Why it happens:** Small tests come back in order.
+**Instead:** Join on the request id you set (`custom_id` or equivalent) and send unmatched results to a dead-letter set.
+
+## Files
+
+- `scripts/batch_cost_estimator.py` — realtime vs batch cost and a batch/realtime verdict from latency tolerance.
+- `scripts/batch_job_planner.py` — chunk plan, idempotency-key scheme and retry plan.
+- `references/` — decision tree and job design; cost and throughput economics.
 
 ## Reference Documentation
 

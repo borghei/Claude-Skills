@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Tdd Guide</h1>
     <p class="page-subtitle">Guide red-green-refactor TDD with test generation, coverage-gap analysis, and multi- framework support. Use when writing tests first, analyzing coverage, generating test stubs, or converting tests between Jest, Pytest, JUnit, and Vitest.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 8 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 9 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">tdd</span><span class="tag">test-driven-development</span><span class="tag">testing</span><span class="tag">red-green-refactor</span></div>
   </div>
   <h2>How to Use</h2>
@@ -397,10 +397,14 @@ Guide red-green-refactor TDD with test generation, coverage-gap analysis, and mu
 
 The agent guides red-green-refactor TDD workflows, generates framework-specific test stubs from requirements, parses coverage reports to identify prioritized gaps, and calculates test quality metrics including smell detection and assertion density. Supports Jest, Pytest, JUnit, Vitest, and Mocha. - 
 
+## Your Key Capabilities
+- Tests Written After the Code
+- Chasing the Coverage Number
+- Committing Generated Stubs Unfilled
+
 ## Frameworks &amp; Templates You Know
 - - Converting tests between frameworks or scaffolding fixtures/mocks
-- from test_generator import TestGenerator, TestFramework
-- gen = TestGenerator(framework=TestFramework.PYTEST, language=&quot;python&quot;)
+- boundary values and mocks, `framework_adapter.py` cross-framework conversion,
 
 ## How to Help
 When the user asks for help in this domain:
@@ -424,10 +428,14 @@ Guide red-green-refactor TDD with test generation, coverage-gap analysis, and mu
 
 The agent guides red-green-refactor TDD workflows, generates framework-specific test stubs from requirements, parses coverage reports to identify prioritized gaps, and calculates test quality metrics including smell detection and assertion density. Supports Jest, Pytest, JUnit, Vitest, and Mocha. - 
 
+## Your Key Capabilities
+- Tests Written After the Code
+- Chasing the Coverage Number
+- Committing Generated Stubs Unfilled
+
 ## Frameworks &amp; Templates You Know
 - - Converting tests between frameworks or scaffolding fixtures/mocks
-- from test_generator import TestGenerator, TestFramework
-- gen = TestGenerator(framework=TestFramework.PYTEST, language=&quot;python&quot;)
+- boundary values and mocks, `framework_adapter.py` cross-framework conversion,
 
 ## How to Help
 When the user asks for help in this domain:
@@ -487,23 +495,42 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+`scripts/tdd.py` is the command-line entry point. Its most useful job is the coverage gate:
+it parses LCOV, Istanbul JSON or Cobertura XML, lists every file below the threshold with
+its uncovered lines, and exits 1 while any gap remains.
+
 ```bash
-# Generate test cases from requirements (Python API)
-from test_generator import TestGenerator, TestFramework
-gen = TestGenerator(framework=TestFramework.PYTEST, language=&quot;python&quot;)
-cases = gen.generate_from_requirements(requirements)
-
-# Analyze coverage gaps from LCOV report
-from coverage_analyzer import CoverageAnalyzer
-analyzer = CoverageAnalyzer()
-analyzer.parse_coverage_report(content, &quot;lcov&quot;)
-gaps = analyzer.identify_gaps(threshold=80.0)
-
-# Guide TDD cycle
-from tdd_workflow import TDDWorkflow
-wf = TDDWorkflow()
-wf.start_cycle(&quot;User can reset password via email&quot;)
+python scripts/tdd.py coverage assets/sample_coverage_gaps.lcov --threshold 80     # exit 1, lists gaps
+python scripts/tdd.py coverage assets/sample_coverage_report.lcov --threshold 80   # exit 0
+python scripts/tdd.py generate assets/sample_input_python.json --module discount  # pytest stubs
+python scripts/tdd.py quality tests/test_discount.py --format json               # assertion density, smells
 ```
+
+## Tools Overview
+
+| Subcommand | What it does | Key flags |
+|------------|--------------|-----------|
+| `coverage &lt;report&gt;` | Per-file line/branch gaps, uncovered lines, prioritised P0-P2 recommendations | `--threshold` (default 80), `--format text/json` |
+| `generate &lt;input.json&gt;` | Test stubs from user stories, acceptance criteria, error and edge cases (Jest, Vitest, Pytest, JUnit, Mocha) | `--framework`, `--module`, `-o`, `--format` |
+| `quality &lt;test file&gt;` | Test count, assertions per test, isolation, naming, smells, quality score | `--format` |
+
+Generated stubs raise or throw until you write the real assertion, so they start RED by
+design; a stub that passes before the code exists proves nothing.
+
+Exit codes: `0` ok (coverage: every file meets the threshold); `1` coverage gaps found;
+`2` bad input (missing or empty file, unknown report format, invalid JSON, unknown framework).
+
+The other modules (`tdd_workflow.py` phase validation, `fixture_generator.py`
+boundary values and mocks, `framework_adapter.py` cross-framework conversion,
+`output_formatter.py`) are libraries; import them with `PYTHONPATH=scripts` as shown in
+`references/tool-reference.md`.
+
+## Workflow
+
+1. RED: write or generate a failing test for the next behaviour; run it and confirm it fails for the expected reason.
+2. GREEN: write the least code that passes; run the suite.
+3. REFACTOR: clean up with the suite green; run it again.
+4. Validate coverage with the project&#x27;s own test runner producing a report, then `tdd.py coverage` on it. Done when it exits 0 at the agreed threshold and every new branch has a test that failed before the code existed.
 
 ## References
 
@@ -530,16 +557,35 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Visual/snapshot testing or browser-based test workflows -- use Playwright, Cypress, or Storybook for UI-level testing
 - Security-focused test generation (fuzz testing, penetration testing) -- see `senior-security` and `senior-secops` skills
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-qa` | Generated test stubs feed into QA review workflows; QA coverage standards inform threshold settings | `test_generator.py` output → QA review → approved test suite |
-| `code-reviewer` | Metrics calculator output provides quantitative data for code review checklists | `metrics_calculator.py` quality report → code review scoring |
-| `senior-fullstack` | Scaffolded projects include test infrastructure; TDD guide generates tests for scaffolded modules | `project_scaffolder.py` output → `test_generator.py` input |
-| `senior-devops` | Coverage reports from CI pipelines are parsed by coverage analyzer; recommendations feed back into pipeline gates | CI coverage artifact → `coverage_analyzer.py` → pass/fail gate |
-| `senior-security` | Edge-case fixtures for auth and API scenarios complement security-focused test plans | `fixture_generator.py` auth/API edge cases → security test plan |
-| `tech-stack-evaluator` | Framework detection informs stack evaluation; test quality metrics feed into technology assessment | `format_detector.py` analysis → stack evaluation input |
+### Tests Written After the Code
+**Mistake:** Writing the implementation first, then adding tests that mirror it.
+**Why it happens:** It feels faster, and the tests pass on the first run.
+**Instead:** Watch each test fail before the code exists. A test that never failed may not be able to fail.
+
+### Chasing the Coverage Number
+**Mistake:** Adding assertion-free tests to push a file over the threshold.
+**Why it happens:** The gate checks lines executed, not behaviour verified.
+**Instead:** Run `tdd.py quality` alongside `coverage`; low assertions per test with high coverage is the signature of this mistake.
+
+### Committing Generated Stubs Unfilled
+**Mistake:** Leaving generated stubs in the suite with placeholder bodies.
+**Why it happens:** They look like progress.
+**Instead:** The stubs fail until filled in, on purpose. Fill each one or delete it before merging.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/tdd.py` | CLI: `coverage`, `generate`, `quality` |
+| `scripts/coverage_analyzer.py`, `test_generator.py`, `metrics_calculator.py`, `format_detector.py` | Libraries behind the CLI |
+| `scripts/tdd_workflow.py`, `fixture_generator.py`, `framework_adapter.py`, `output_formatter.py` | Import-only libraries |
+| `assets/sample_coverage_report.lcov` | Fully covered report (coverage exits 0) |
+| `assets/sample_coverage_gaps.lcov` | Report with an untested function and branches (exits 1) |
+| `assets/sample_input_python.json`, `sample_input_typescript.json` | Requirements inputs for `generate` |
+| `assets/expected_output.json` | Example combined output |
+| `references/*.md` | Workflows, API reference, practices, frameworks, CI, troubleshooting |
 
 ---
 
@@ -622,23 +668,42 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+`scripts/tdd.py` is the command-line entry point. Its most useful job is the coverage gate:
+it parses LCOV, Istanbul JSON or Cobertura XML, lists every file below the threshold with
+its uncovered lines, and exits 1 while any gap remains.
+
 ```bash
-# Generate test cases from requirements (Python API)
-from test_generator import TestGenerator, TestFramework
-gen = TestGenerator(framework=TestFramework.PYTEST, language=&quot;python&quot;)
-cases = gen.generate_from_requirements(requirements)
-
-# Analyze coverage gaps from LCOV report
-from coverage_analyzer import CoverageAnalyzer
-analyzer = CoverageAnalyzer()
-analyzer.parse_coverage_report(content, &quot;lcov&quot;)
-gaps = analyzer.identify_gaps(threshold=80.0)
-
-# Guide TDD cycle
-from tdd_workflow import TDDWorkflow
-wf = TDDWorkflow()
-wf.start_cycle(&quot;User can reset password via email&quot;)
+python scripts/tdd.py coverage assets/sample_coverage_gaps.lcov --threshold 80     # exit 1, lists gaps
+python scripts/tdd.py coverage assets/sample_coverage_report.lcov --threshold 80   # exit 0
+python scripts/tdd.py generate assets/sample_input_python.json --module discount  # pytest stubs
+python scripts/tdd.py quality tests/test_discount.py --format json               # assertion density, smells
 ```
+
+## Tools Overview
+
+| Subcommand | What it does | Key flags |
+|------------|--------------|-----------|
+| `coverage &lt;report&gt;` | Per-file line/branch gaps, uncovered lines, prioritised P0-P2 recommendations | `--threshold` (default 80), `--format text/json` |
+| `generate &lt;input.json&gt;` | Test stubs from user stories, acceptance criteria, error and edge cases (Jest, Vitest, Pytest, JUnit, Mocha) | `--framework`, `--module`, `-o`, `--format` |
+| `quality &lt;test file&gt;` | Test count, assertions per test, isolation, naming, smells, quality score | `--format` |
+
+Generated stubs raise or throw until you write the real assertion, so they start RED by
+design; a stub that passes before the code exists proves nothing.
+
+Exit codes: `0` ok (coverage: every file meets the threshold); `1` coverage gaps found;
+`2` bad input (missing or empty file, unknown report format, invalid JSON, unknown framework).
+
+The other modules (`tdd_workflow.py` phase validation, `fixture_generator.py`
+boundary values and mocks, `framework_adapter.py` cross-framework conversion,
+`output_formatter.py`) are libraries; import them with `PYTHONPATH=scripts` as shown in
+`references/tool-reference.md`.
+
+## Workflow
+
+1. RED: write or generate a failing test for the next behaviour; run it and confirm it fails for the expected reason.
+2. GREEN: write the least code that passes; run the suite.
+3. REFACTOR: clean up with the suite green; run it again.
+4. Validate coverage with the project&#x27;s own test runner producing a report, then `tdd.py coverage` on it. Done when it exits 0 at the agreed threshold and every new branch has a test that failed before the code existed.
 
 ## References
 
@@ -665,16 +730,35 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Visual/snapshot testing or browser-based test workflows -- use Playwright, Cypress, or Storybook for UI-level testing
 - Security-focused test generation (fuzz testing, penetration testing) -- see `senior-security` and `senior-secops` skills
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-qa` | Generated test stubs feed into QA review workflows; QA coverage standards inform threshold settings | `test_generator.py` output → QA review → approved test suite |
-| `code-reviewer` | Metrics calculator output provides quantitative data for code review checklists | `metrics_calculator.py` quality report → code review scoring |
-| `senior-fullstack` | Scaffolded projects include test infrastructure; TDD guide generates tests for scaffolded modules | `project_scaffolder.py` output → `test_generator.py` input |
-| `senior-devops` | Coverage reports from CI pipelines are parsed by coverage analyzer; recommendations feed back into pipeline gates | CI coverage artifact → `coverage_analyzer.py` → pass/fail gate |
-| `senior-security` | Edge-case fixtures for auth and API scenarios complement security-focused test plans | `fixture_generator.py` auth/API edge cases → security test plan |
-| `tech-stack-evaluator` | Framework detection informs stack evaluation; test quality metrics feed into technology assessment | `format_detector.py` analysis → stack evaluation input |
+### Tests Written After the Code
+**Mistake:** Writing the implementation first, then adding tests that mirror it.
+**Why it happens:** It feels faster, and the tests pass on the first run.
+**Instead:** Watch each test fail before the code exists. A test that never failed may not be able to fail.
+
+### Chasing the Coverage Number
+**Mistake:** Adding assertion-free tests to push a file over the threshold.
+**Why it happens:** The gate checks lines executed, not behaviour verified.
+**Instead:** Run `tdd.py quality` alongside `coverage`; low assertions per test with high coverage is the signature of this mistake.
+
+### Committing Generated Stubs Unfilled
+**Mistake:** Leaving generated stubs in the suite with placeholder bodies.
+**Why it happens:** They look like progress.
+**Instead:** The stubs fail until filled in, on purpose. Fill each one or delete it before merging.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/tdd.py` | CLI: `coverage`, `generate`, `quality` |
+| `scripts/coverage_analyzer.py`, `test_generator.py`, `metrics_calculator.py`, `format_detector.py` | Libraries behind the CLI |
+| `scripts/tdd_workflow.py`, `fixture_generator.py`, `framework_adapter.py`, `output_formatter.py` | Import-only libraries |
+| `assets/sample_coverage_report.lcov` | Fully covered report (coverage exits 0) |
+| `assets/sample_coverage_gaps.lcov` | Report with an untested function and branches (exits 1) |
+| `assets/sample_input_python.json`, `sample_input_typescript.json` | Requirements inputs for `generate` |
+| `assets/expected_output.json` | Example combined output |
+| `references/*.md` | Workflows, API reference, practices, frameworks, CI, troubleshooting |
 
 ---
 
@@ -762,23 +846,16 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/tdd-guide/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Generate test cases from requirements (Python API)
-from test_generator import TestGenerator, TestFramework
-gen = TestGenerator(framework=TestFramework.PYTEST, language=&quot;python&quot;)
-cases = gen.generate_from_requirements(requirements)
+  <h2>Quick Start</h2>`scripts/tdd.py` is the command-line entry point. Its most useful job is the coverage gate:
+it parses LCOV, Istanbul JSON or Cobertura XML, lists every file below the threshold with
+its uncovered lines, and exits 1 while any gap remains.
 
-# Analyze coverage gaps from LCOV report
-from coverage_analyzer import CoverageAnalyzer
-analyzer = CoverageAnalyzer()
-analyzer.parse_coverage_report(content, &quot;lcov&quot;)
-gaps = analyzer.identify_gaps(threshold=80.0)
-
-# Guide TDD cycle
-from tdd_workflow import TDDWorkflow
-wf = TDDWorkflow()
-wf.start_cycle(&quot;User can reset password via email&quot;)
+<pre><code>python scripts/tdd.py coverage assets/sample_coverage_gaps.lcov --threshold 80     # exit 1, lists gaps
+python scripts/tdd.py coverage assets/sample_coverage_report.lcov --threshold 80   # exit 0
+python scripts/tdd.py generate assets/sample_input_python.json --module discount  # pytest stubs
+python scripts/tdd.py quality tests/test_discount.py --format json               # assertion density, smells
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/tdd-guide/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

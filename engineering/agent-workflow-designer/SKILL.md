@@ -1,9 +1,9 @@
 ---
 name: agent-workflow-designer
 description: >
-  Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state
-  management. Use when building pipelines of specialized agents, designing fan-out/fan-in
-  patterns, or implementing fault-tolerant workflows.
+  Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs
+  them before build. Use when planning a pipeline of specialised agents, fan-out/fan-in, or a
+  lead with subagents.
 license: MIT + Commons Clause
 metadata:
   version: 1.2.0
@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: ai-orchestration
   tier: POWERFUL
-  updated: 2026-06-29
+  updated: 2026-11-08
   frameworks: langgraph, crewai, autogen, claude-agent-teams
   tags:
     - multi-agent
@@ -76,7 +76,7 @@ What does the workflow look like?
       Best for: high-stakes decisions, code review, fact checking, safety-critical output
 ```
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -85,13 +85,72 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/reliability-and-troubleshooting.md](references/reliability-and-troubleshooting.md)** — circuit breaker, common pitfalls, best practices, troubleshooting table, and success criteria. Read when hardening for production or diagnosing failures.
 - **[references/subagent-scoping-and-orchestration.md](references/subagent-scoping-and-orchestration.md)** — when to split work into scoped subagents vs one loop; scoping a subagent (minimal tool allow-list, focused instructions, isolated context, return contract); the lead→parallel-specialists→merge pattern on a shared workspace; failure isolation/retries; and multi-agent vs single-agent cost/latency tradeoffs. Read when designing a lead that delegates to specialist subagents.
 
-## Tools Overview
+## Quick Start Workflow
 
-Stdlib-only Python CLIs in `scripts/` (run with `python3`, support `--json` and human-readable output):
+Design time only: these tools check and price a workflow file; they run no agents. To track a
+live multi-agent run (spawned agents, a board, ranked results) use `engineering/agenthub`, which
+reads its own `agents`/`dependencies` format rather than the `steps`/`depends_on` format below.
 
-- **`cost_estimator.py`** — per-step token/cost estimate for a workflow DAG with model-tier what-ifs.
-- **`multi_agent_cost_estimator.py`** — compares a **lead + scoped subagents** design (per-role price tier, call counts, token sizes, reasoning-effort multiplier) against a **single strong agent** baseline, with a per-role breakdown and total-cost projection. Prices are user-supplied with neutral placeholder defaults — pass `--price tier=input/output` or a JSON `price_tiers` block with your real rates.
-- **`workflow_validator.py`** / **`workflow_visualizer.py`** — validate and render workflow DAGs.
+```bash
+# 1. Validate the DAG: cycles, missing dependencies, unreachable steps, dead ends, duplicate ids
+python3 scripts/workflow_validator.py assets/sample_workflow.json            # exit 0, VALID
+python3 scripts/workflow_validator.py assets/sample_workflow_flawed.json     # exit 1, 4 errors
+
+# 2. Draw it (Mermaid) with detected patterns; --annotate-models / --annotate-cost add labels
+python3 scripts/workflow_visualizer.py assets/sample_workflow.json --annotate-models
+
+# 3a. Price the step DAG per run and over N runs, with what-if model swaps
+python3 scripts/cost_estimator.py assets/sample_workflow.json --runs 1000 --prices assets/sample_prices.json
+python3 scripts/cost_estimator.py assets/sample_workflow.json --override-model claude-haiku-5-5
+
+# 3b. Or compare a lead + scoped subagents topology against one strong agent
+python3 scripts/multi_agent_cost_estimator.py --file assets/sample_multi_agent_design.json
+```
+
+**Tools overview: which estimator.** Use `cost_estimator.py` when you have the step DAG and per-step token
+estimates (`estimated_input_tokens`, `estimated_output_tokens`, optional `cached_input_tokens`,
+`parallel_branches`, `retry_probability`). Use `multi_agent_cost_estimator.py` earlier, when the
+question is whether to split into subagents at all; it works on roles, call counts and price tiers.
+
+**Prices.** Neither tool ships a provider price list, because prices change faster than the skill.
+`cost_estimator.py` prices each model at your `--prices` rate (JSON `{"model-id": {"input", "output",
+"cached_input"}}` per 1M tokens; `assets/sample_prices.json` holds illustrative numbers only) and
+otherwise at a placeholder rate for the tier its name suggests, and says so in the output.
+`multi_agent_cost_estimator.py` takes `--price tier=input/output`. Copy current rates from the
+provider's pricing page before quoting a dollar figure.
+
+**Exit codes.** `workflow_validator.py`: `0` valid, `1` structural errors, `2` unreadable or
+malformed input. The other three: `0` report printed, `2` unreadable or malformed input. All
+accept `--json` and `--stdin`.
+
+**Done when** this checklist holds:
+1. `workflow_validator.py` exits 0 on the final workflow file.
+2. Every step has an owner agent, a timeout and a retry or fallback rule.
+3. The hand-off contract between steps (fields, types, done condition) is written down.
+4. The cost for the expected run volume, at real rates, is within budget.
+
+## Anti-Patterns
+
+### Agents for every verb
+**Mistake:** A pipeline of seven agents where three would do, each hand-off losing context.
+**Why it happens:** Splitting by verb ("research", "outline", "draft", "edit") feels like good design.
+**Instead:** Split only where tools, permissions or parallelism differ. Run `multi_agent_cost_estimator.py`; keep the single loop if the split is not clearly cheaper or faster.
+
+### Hand-offs as free text
+**Mistake:** Each agent passes the next one a paragraph of prose and hopes it contains what is needed.
+**Why it happens:** Free text works in the demo.
+**Instead:** Define a small return contract per step (fields, types, what "done" means) and validate it before the next step runs.
+
+### No failure path
+**Mistake:** A fan-out with no timeout, so one hung branch stalls the whole run, and no rule for partial results.
+**Why it happens:** Happy-path demos never hang.
+**Instead:** Give every step a timeout, a bounded retry and a fallback; decide up front whether fan-in proceeds with N-1 results.
+
+## Files
+
+- `scripts/workflow_validator.py`, `scripts/workflow_visualizer.py`, `scripts/cost_estimator.py`, `scripts/multi_agent_cost_estimator.py` — the four CLIs above.
+- `assets/sample_workflow.json` (valid), `assets/sample_workflow_flawed.json` (cycle + missing dependency), `assets/sample_multi_agent_design.json`, `assets/sample_prices.json`.
+- `references/` — pattern implementations, routing and cost, reliability, subagent scoping.
 
 ## Common Patterns
 
@@ -107,18 +166,15 @@ Stdlib-only Python CLIs in `scripts/` (run with `python3`, support `--json` and 
 - Context window budgeting, cost optimization, and framework-specific implementations (LangGraph, CrewAI, AutoGen)
 
 **This skill does NOT cover:**
-- Training or fine-tuning the underlying LLMs used by agents (see `engineering/ml-pipeline-architect` for ML training workflows)
-- Infrastructure provisioning, container orchestration, or deployment pipelines (see `engineering/cloud-infrastructure-designer` for cloud architecture)
-- Human-in-the-loop approval workflows or UI design for agent dashboards (see `product-team/ux-researcher` for user-facing workflow design)
-- Long-term agent memory, vector database setup, or RAG pipeline construction (see `engineering/rag-pipeline-architect` for retrieval-augmented generation)
+- Running or tracking live agent sessions (see `engineering/agenthub`)
+- Choosing agent roles, architecture pattern and tool schemas from requirements (see `engineering/agent-designer`)
+- Training or fine-tuning the underlying models (see `engineering/senior-ml-engineer`)
+- Retrieval pipelines and vector stores for research agents (see `engineering/rag-architect`)
+- Infrastructure for hosting the workflow (see `engineering/senior-cloud-architect`)
 
-## Integration Points
+## See Also
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `engineering/ml-pipeline-architect` | Agent workflows that include ML inference stages use ML Pipeline Architect for model serving and batch prediction design | Workflow DAG exports stage specs to ML pipeline; ML pipeline returns inference endpoints for agent consumption |
-| `engineering/rag-pipeline-architect` | Research and retrieval agents within workflows rely on RAG pipelines for grounded knowledge access | Agent sends queries to RAG pipeline; RAG returns ranked document chunks with citations for agent context |
-| `engineering/cloud-infrastructure-designer` | Production deployment of agent workflows requires infrastructure design for scaling, queuing, and monitoring | Workflow resource requirements feed into infrastructure specs; infra returns endpoint URLs, queue ARNs, and scaling policies |
-| `engineering/api-design-architect` | Inter-agent communication contracts and external API boundaries follow API design standards | Agent handoff schemas are validated against API design specs; API architect provides OpenAPI definitions for external integrations |
-| `engineering/system-design-architect` | Overall system architecture decisions (sync vs async, monolith vs distributed) shape workflow topology choices | System design constraints (latency budgets, availability targets) inform pattern selection; workflow requirements feed back into system capacity planning |
-| `project-management/technical-project-planning` | Complex multi-agent projects require structured planning for phased rollout, risk management, and milestone tracking | Workflow complexity estimates feed into project plans; PM skill provides sprint boundaries and dependency timelines for staged deployment |
+- `engineering/agent-designer` — architecture pattern and roles that feed this DAG.
+- `engineering/agenthub` — run-time board and result ranking for the agents designed here.
+- `engineering/agent-protocol` — message and tool schema formats for the hand-offs.
+- `engineering/batch-api-orchestrator` — when a step is a large offline batch rather than a live call.

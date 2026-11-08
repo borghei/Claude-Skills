@@ -1,27 +1,28 @@
 ---
 name: secrets-vault-manager
 description: >
-  This skill should be used when the user asks to "generate Vault configurations",
-  "plan secret rotation", "analyze vault audit logs", "manage secrets lifecycle",
-  or "set up HashiCorp Vault".
+  Generates HashiCorp Vault configs, plans secret rotation from an inventory, and flags
+  suspicious access in Vault audit logs. Use when setting up Vault, scheduling rotation,
+  or investigating secret access.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: engineering
   domain: secrets-management
-  updated: 2026-04-02
+  updated: 2026-11-08
   tags: [secrets, vault, hashicorp, rotation, audit, security]
 ---
 
 # Secrets Vault Manager
 
-> **Category:** Engineering
-> **Domain:** Secrets Management & Security
+The agent generates reviewed HashiCorp Vault configuration, turns a secrets inventory into a rotation schedule, and screens Vault audit logs for root-token use, off-hours access, bulk reads, failed authentication and sensitive paths. Nothing here talks to a live Vault: the tools read local files and print or write files.
 
-## Overview
+## When to Use
 
-The **Secrets Vault Manager** skill provides tools for generating HashiCorp Vault configurations, planning and scheduling secret rotation cycles, and analyzing vault audit logs for suspicious access patterns. Essential for teams managing secrets at scale.
+- Setting up Vault for an environment: server config, secrets engines, auth methods and a policy.
+- Building or reviewing a rotation schedule for an inventory of secrets.
+- Investigating an exported audit log after an alert or as a periodic review.
 
 ## Clarify First
 
@@ -37,13 +38,16 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ```bash
 # Generate Vault configuration
-python scripts/vault_config_generator.py --env production --secrets-engines kv,database,transit
+python3 scripts/vault_config_generator.py --env production --secrets-engines kv,database,transit
 
-# Plan secret rotation schedule
-python scripts/rotation_planner.py --inventory secrets_inventory.json
+# Plan secret rotation schedule (the sample's dates are relative to today, so the plan always mixes states)
+INV="$(mktemp -d)/inventory.json"
+python3 scripts/rotation_planner.py --generate-sample > "$INV"
+python3 scripts/rotation_planner.py --inventory "$INV"          # exit 1: two secrets overdue
 
 # Analyze vault audit logs
-python scripts/audit_log_analyzer.py --log-file vault_audit.log --format json
+python3 scripts/audit_log_analyzer.py --log-file assets/sample_audit_sound.log    # exit 0: no alerts
+python3 scripts/audit_log_analyzer.py --log-file assets/sample_audit_flawed.log   # exit 1: root token at 03:00, policy change
 ```
 
 ## Tools Overview
@@ -51,8 +55,10 @@ python scripts/audit_log_analyzer.py --log-file vault_audit.log --format json
 | Tool | Purpose | Key Flags |
 |------|---------|-----------|
 | `vault_config_generator.py` | Generate HashiCorp Vault configurations | `--env`, `--secrets-engines`, `--auth-methods` |
-| `rotation_planner.py` | Plan and schedule secret rotation cycles | `--inventory`, `--policy`, `--format` |
+| `rotation_planner.py` | Plan and schedule secret rotation cycles | `--inventory`, `--generate-sample`, `--policy`, `--filter-priority`, `--filter-owner`, `--format` |
 | `audit_log_analyzer.py` | Analyze vault audit logs for anomalies | `--log-file`, `--bulk-threshold`, `--auth-threshold`, `--format` |
+
+**Exit codes:** `vault_config_generator.py` 0 written, 2 bad option. `rotation_planner.py` 0 nothing overdue, 1 overdue secrets, 2 unreadable or malformed inventory. `audit_log_analyzer.py` 0 no alerts, 1 alerts (critical ones are marked in the report), 2 missing file or no parseable audit entries. A log with nothing parseable is an error, not a clean result; skipped lines are counted on stderr.
 
 ## Workflows
 
@@ -69,10 +75,10 @@ python scripts/audit_log_analyzer.py --log-file vault_audit.log --format json
 4. Implement automated rotation where possible
 
 ### Audit Log Investigation
-1. Export vault audit logs
-2. Run `audit_log_analyzer.py` for anomaly detection
-3. Review flagged events
-4. Investigate suspicious access patterns
+1. Export the file audit device log (one JSON entry per line).
+2. Run `audit_log_analyzer.py`; read the skipped-line count on stderr, because skipped lines are events nobody screened.
+3. Review each alert against change records and on-call notes.
+4. Validation checkpoint: every high alert is explained or escalated; root-token use outside a documented break-glass event is an incident.
 
 ## Scope & Limitations
 
@@ -98,10 +104,26 @@ python scripts/audit_log_analyzer.py --log-file vault_audit.log --format json
 
 - [Secrets Management Guide](references/secrets-management-guide.md) - Best practices, rotation policies, and compliance requirements
 
-## Common Patterns
+## Anti-Patterns
 
-### Secret Classification
-- **Critical**: Database credentials, API master keys, encryption keys
-- **High**: Service account tokens, OAuth secrets, TLS certificates
-- **Medium**: Third-party API keys, webhook secrets
-- **Low**: Public API keys, non-sensitive configuration
+**Mistake:** Treating a quiet analyzer report as proof nothing happened.
+**Why it matters:** The rules are fixed thresholds; misuse below them, or in lines the parser skipped, does not raise an alert.
+**Instead:** Check the skipped-line count and the event totals, and sample the raw log for the paths that matter.
+
+**Mistake:** Using the root token for routine work.
+**Why it matters:** Root bypasses every policy and its use cannot be scoped or easily attributed.
+**Instead:** Generate a root token only for break-glass tasks, revoke it straight after, and alert on any root-policy event.
+
+**Mistake:** Applying generated HCL as is.
+**Why it matters:** Storage, TLS, network and policy paths are placeholders for your environment; `--no-tls` configs leak secrets in transit.
+**Instead:** Review every block against the deployed Vault version's documentation and apply through code review.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/vault_config_generator.py` | Vault server, engine, auth and policy HCL per environment |
+| `scripts/rotation_planner.py` | Rotation schedule from a JSON inventory |
+| `scripts/audit_log_analyzer.py` | Rule-based screening of Vault audit logs |
+| `assets/sample_audit_sound.log` | Ten business-hours reads by a service token; no alerts |
+| `assets/sample_audit_flawed.log` | Root-token reads at 03:00, failed logins, a policy change; exits 1 |

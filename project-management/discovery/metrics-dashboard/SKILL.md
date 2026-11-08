@@ -1,17 +1,16 @@
 ---
 name: metrics-dashboard
 description: >
-  Design a product metrics dashboard — North Star, input metrics, and
-  guardrails — that a team actually uses to make decisions. Use when
-  building dashboard architecture: layers, owners, cadence, and
-  visualization.
+  Designs a product metrics dashboard in four layers (North Star, inputs, guardrails,
+  operational) with owners, comparisons and cadence, and audits the spec. Use when
+  building a launch dashboard or pruning one nobody uses.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: project-management
   domain: product-discovery
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: dashboard_designer.py
   tech-stack: metrics, dashboard, north-star, hexagonal-metrics
   tags:
@@ -52,7 +51,7 @@ for fast decision-making.
 Before designing the dashboard, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
 - **North Star metric:** defined or not (it is the root of all 4 layers; if undefined, define it first via `north-star-metric`).
-- **Audience:** board/exec / functional team / all-hands / IC (sets the max top-level metric count, 5-8 down to 1-3).
+- **Audience:** `exec` (board), `team`, `all-hands`, `partner` or `ic` (sets the max top-level metric count, from 12 for a team down to 3 for an IC).
 - **Team structure:** which teams act on this (operational metrics are 4-8 per team with named owners).
 - **Available instrumentation:** what data you actually capture (you can't show a metric you don't measure; bounds refresh cadence).
 
@@ -102,96 +101,53 @@ Each metric needs:
 - **Refresh cadence:** real-time / hourly / daily / weekly / monthly
 - **Owner:** named team
 
-### Step 6 — Run `dashboard_designer.py`
-Audit: too many top-level metrics, no guardrails, vanity metrics, missing
-owners, missing comparisons.
+### Step 6 — Audit the spec with `dashboard_designer.py`
+Write the spec as JSON (shape in the script's `--help`; a sound and a flawed sample ship in
+`assets/`) and run the audit. Done when it exits 0 and the remaining warnings are either fixed
+or accepted with a reason.
 
 ```bash
 python3 project-management/discovery/metrics-dashboard/scripts/dashboard_designer.py \
-  --input dashboard_spec.json --format markdown
+  --input project-management/discovery/metrics-dashboard/assets/sample_dashboard_spec.json --format markdown   # exit 0
+python3 project-management/discovery/metrics-dashboard/scripts/dashboard_designer.py \
+  --input project-management/discovery/metrics-dashboard/assets/sample_dashboard_spec_flawed.json --format markdown   # exit 1
 ```
 
+Findings: **fail** for no North Star, no input metrics or no guardrails; **warn** for vanity terms
+(page views, total signups, total users, session count, time on site), missing owners,
+definitions or comparisons, guardrails without threshold alerts, over 6 inputs, more than 3
+real-time metrics, too many top-level or per-team metrics; **info** for missing targets, under 3
+inputs or guardrails, unconfirmed actionability. Exit codes: 0 no fail, 1 at least one fail,
+2 bad input (missing file, invalid JSON).
+
 ### Step 7 — Sunset stale metrics
-Quarterly: kill metrics no team looked at. Dashboards rot; pruning is
-healthy.
+Quarterly: remove metrics no team looked at; a dashboard nobody prunes stops being read.
 
 ## Decision frameworks
 
-### Top-level metric count
+Top-level limits per `audience` (`exec`/`board` 8, `team` 12 plus 8 operational per team, `all-hands` 5, `partner` 6, `ic` 3) and the vanity test ("if this moved 10% next week, what would we do?") are in `references/dashboard-architecture.md` section 14.
 
-| Audience | Max top-level | Why |
-|----------|---------------|-----|
-| Board / exec | 5-8 | Limited attention; high signal/noise |
-| Functional team | 4-8 | Actionable; weekly review |
-| All-hands | 3-5 | Communicable; team rallies |
-| Individual contributor | 1-3 | Their direct impact |
+## Anti-Patterns
 
-### Visualization fit
+### The wall of metrics
+**Mistake:** 30+ metrics on one screen, shown to every audience.
+**Why it happens:** Adding a chart is cheap and removing one feels like losing information.
+**Instead:** Keep to the audience limit above, give each audience its own view, and let the audit's top-level count check enforce it.
 
-| Question | Best visualization |
-|----------|---------------------|
-| Is it changing over time? | Line chart |
-| How much vs target? | Gauge / bullet |
-| Drop-off at each step? | Funnel |
-| Retention over time? | Cohort heatmap |
-| Distribution? | Histogram |
-| Composition? | Stacked area / pie (rare) |
-| Comparison across groups? | Grouped bar |
-| Relationship? | Scatter |
+### A North Star with no counterweight
+**Mistake:** The dashboard has a North Star and inputs but no guardrails.
+**Why it happens:** Guardrails measure what you do not want, so nobody asks for them.
+**Instead:** Add 3-5 guardrails with threshold alerts, each tied to a way the North Star could be gamed (more messages could mean more spam). The audit fails a spec with none.
 
-Avoid pie charts beyond 3 slices. Avoid 3D charts always.
+### Orphan metrics
+**Mistake:** Metrics with no owner and no review cadence.
+**Why it happens:** The dashboard is built as a project and handed to nobody.
+**Instead:** Name an owning team per metric and a review meeting per layer; the audit warns on every missing owner.
 
-### Vanity vs actionable test
-
-For each candidate metric: "If this moved up 10% next week, what would we do?"
-
-- Have answer → actionable; keep
-- No answer → vanity; cut
-
-### Comparison discipline
-
-Every chart needs a comparison anchor:
-- vs prior period (week / month / quarter)
-- vs target
-- vs cohort baseline
-- vs competitor benchmark (rare; usually unreliable)
-
-A chart with no comparison is a number floating in space.
-
-## Common engagements
-
-### "Build us a dashboard for the new product line"
-1. Confirm North Star.
-2. Decompose to 3-5 inputs.
-3. Identify 3-5 guardrails.
-4. Per team: 4-8 operational metrics.
-5. Spec viz + cadence + owner per metric.
-6. Pilot for 4 weeks; cut what nobody opens.
-
-### "Audit our existing dashboard"
-1. List every metric currently shown.
-2. Tag each: NS / input / guardrail / operational / vanity.
-3. Cut all vanity.
-4. Cut operational that no team looks at.
-5. Add missing guardrails.
-6. Limit each audience to its max.
-
-### "Help us track an OKR"
-1. Map OKR to metric: KR → metric.
-2. KR should be the metric.
-3. Inputs = what moves the KR.
-4. Guardrails = what we won't sacrifice.
-
-## Anti-patterns to avoid
-
-- **30+ metrics on one screen.** Decision-making dies.
-- **No guardrails.** NS optimization without counter-balance.
-- **All metrics for all audiences.** Exec doesn't need eng team metrics.
-- **No comparisons.** Numbers without context.
-- **Real-time everything.** Most metrics don't need it (and it's expensive).
-- **No owner per metric.** Orphan metrics rot.
-- **Vanity metrics (page views, signups alone).** Not action-driving.
-- **No cadence on review.** Dashboard exists; team doesn't use it.
+### Real-time everything
+**Mistake:** Every metric refreshes in real time.
+**Why it happens:** Real time feels more serious.
+**Instead:** Reserve real time for triage metrics (3 or fewer); most decisions run weekly. More detail and fixes: `references/dashboard-anti-patterns.md`.
 
 ## Scope & Limitations
 
@@ -225,3 +181,12 @@ A chart with no comparison is a number floating in space.
 - `product-team/product-analytics` — metric tree + cohort + funnel
 - `product-team/ab-test-setup` — experimentation
 - `c-level-advisor/chief-data-officer-advisor` — platform context
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/dashboard_designer.py` | Audits a dashboard spec for layering, owners, comparisons and vanity terms |
+| `assets/sample_dashboard_spec.json`, `assets/sample_dashboard_spec_flawed.json` | Runnable specs: sound (exit 0) and flawed (exit 1) |
+| `assets/dashboard_spec_template.md` | Spec worksheet to fill in |
+| `references/dashboard-architecture.md`, `references/dashboard-anti-patterns.md` | Layers, cadence, visualization; failures and fixes |

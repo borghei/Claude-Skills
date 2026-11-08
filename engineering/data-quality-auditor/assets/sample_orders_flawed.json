@@ -1,0 +1,6 @@
+[
+  {"order_id": 1001, "customer_id": "C01", "status": "paid", "amount": 42.50, "email": "ana@example.com", "updated_at": "2026-06-01T09:10:00Z"},
+  {"order_id": 1001, "customer_id": "C02", "status": "shipped", "amount": 18.00, "email": "", "updated_at": "2026-06-01T09:40:00Z"},
+  {"order_id": 1003, "customer_id": "C09", "status": "pending_review", "amount": -5.00, "email": "not-an-email", "updated_at": "2026-06-01T09:55:00Z"},
+  {"order_id": 1004, "customer_id": "C03", "status": "paid", "amount": 7.25, "email": "cy@example.com", "updated_at": "2026-06-01T10:00:00Z"}
+]

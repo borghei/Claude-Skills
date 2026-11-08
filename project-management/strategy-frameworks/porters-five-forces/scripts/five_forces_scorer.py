@@ -125,11 +125,17 @@ def analyze(state: dict[str, Any]) -> dict[str, Any]:
         force_intensities["complementors"] = (forces["complementors"].get("intensity") or "").lower() or "—"
 
     all_issues.extend(check_strategy_implications(implications))
+    if all(force_intensities.get(f) == "medium" for f in FORCE_NAMES):
+        all_issues.append(Issue("warn", "forces",
+            "every force rated medium; usually a sign the factors were not weighed"))
 
     # Industry attractiveness: sum of all NEGATIVE forces (high=unfavorable for incumbents)
     total = sum(force_scores.get(f, 0) for f in FORCE_NAMES)
     # Max would be 5×3 = 15. Lower = more attractive.
-    if total <= 7:
+    unscored = [f for f in FORCE_NAMES if not force_scores.get(f)]
+    if unscored:
+        attractiveness = f"Not rated ({len(unscored)} of 5 forces unscored)"
+    elif total <= 7:
         attractiveness = "Attractive (low overall force intensity)"
     elif total <= 10:
         attractiveness = "Moderate"
@@ -215,7 +221,14 @@ def main() -> int:
         print(f"error: invalid JSON: {e}", file=sys.stderr)
         return 2
 
-    report = analyze(state)
+    if not isinstance(state, dict):
+        print("error: top level must be a JSON object (see the schema in --help)", file=sys.stderr)
+        return 2
+    try:
+        report = analyze(state)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        print(f"error: unexpected input shape ({type(e).__name__}: {e})", file=sys.stderr)
+        return 2
     out = render_markdown(report) if args.format == "markdown" else json.dumps(report, indent=2)
 
     if args.output:
@@ -223,7 +236,8 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    # Gate: 1 when any finding has severity "fail", else 0.
+    return 1 if report.get("severity_counts", {}).get("fail") else 0
 
 
 if __name__ == "__main__":

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Git Worktree Manager - Claude Skills</title>
-  <meta name="description" content="Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validati">
+  <meta name="description" content="Run parallel Git worktrees without collisions: a port block per worktree, .env sync, health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several branches or agents need r">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/git-worktree-manager.html">
   <meta property="og:title" content="Git Worktree Manager - Claude Skills">
-  <meta property="og:description" content="Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validati">
+  <meta property="og:description" content="Run parallel Git worktrees without collisions: a port block per worktree, .env sync, health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several branches or agents need r">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/git-worktree-manager.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Git Worktree Manager", "description": "Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/git-worktree-manager.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Git Worktree Manager", "description": "Run parallel Git worktrees without collisions: a port block per worktree, .env sync, health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several branches or agents need running dev servers at once.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/git-worktree-manager.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Git Worktree Manager</h1>
-    <p class="page-subtitle">Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.</p>
+    <p class="page-subtitle">Run parallel Git worktrees without collisions: a port block per worktree, .env sync, health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several branches or agents need running dev servers at once.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">git</span><span class="tag">worktrees</span><span class="tag">parallel-development</span><span class="tag">branching</span><span class="tag">developer-tooling</span></div>
   </div>
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Git Worktree Manager (Engineering domain).
 
-Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.
+Run parallel Git worktrees without collisions: a port block per worktree, .env sync, health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several branches or agents need running dev servers at once.
 
-Manage parallel development workflows using Git worktrees with deterministic naming, automatic port allocation, environment file synchronization, dependency installation, and cleanup automation. Optimized for multi-agent workflows where each agent or terminal session owns an isolated worktree with i
+Plain `git worktree add/remove` is the easy part. The agent uses this skill for what git does not do: give every worktree its own port block so dev servers and Docker services do not collide, carry `.env` files across, spot worktrees that are stale, dirty or tracking deleted branches, and remove mer
 
 ## How to Help
 When the user asks for help in this domain:
@@ -415,9 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Git Worktree Manager (Engineering domain).
 
-Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.
+Run parallel Git worktrees without collisions: a port block per worktree, .env sync, health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several branches or agents need running dev servers at once.
 
-Manage parallel development workflows using Git worktrees with deterministic naming, automatic port allocation, environment file synchronization, dependency installation, and cleanup automation. Optimized for multi-agent workflows where each agent or terminal session owns an isolated worktree with i
+Plain `git worktree add/remove` is the easy part. The agent uses this skill for what git does not do: give every worktree its own port block so dev servers and Docker services do not collide, carry `.env` files across, spot worktrees that are stale, dirty or tracking deleted branches, and remove mer
 
 ## How to Help
 When the user asks for help in this domain:
@@ -447,7 +447,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Git Worktree Manager
 
-Manage parallel development workflows using Git worktrees with deterministic naming, automatic port allocation, environment file synchronization, dependency installation, and cleanup automation. Optimized for multi-agent workflows where each agent or terminal session owns an isolated worktree with its own ports, environment, and running services.
+Plain `git worktree add/remove` is the easy part. The agent uses this skill for what git does not do: give every worktree its own port block so dev servers and Docker services do not collide, carry `.env` files across, spot worktrees that are stale, dirty or tracking deleted branches, and remove merged ones without losing uncommitted work. It suits multi-agent setups where each agent or terminal owns one worktree.
 
 ## Core Capabilities
 
@@ -474,15 +474,53 @@ Before managing worktrees, settle the inputs below. When one is missing or vague
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `worktree_manager.py` | List, create, remove, and clean up worktrees | `python scripts/worktree_manager.py list` |
-| `port_allocator.py` | Assign/check/release deterministic port blocks; sync registry | `python scripts/port_allocator.py status` |
-| `worktree_validator.py` | Validate worktree health (stale, missing branch, env parity, port conflicts, lockfile) | `python scripts/worktree_validator.py --stale-days 14` |
+1. **Create** the worktree with `worktree_manager.py create &lt;branch&gt; --base main`; it names the directory deterministically, copies `.env` files and installs dependencies from the lockfile it finds.
+2. **Assign ports** with `port_allocator.py assign &lt;worktree-name&gt;`: a block at `base + index * stride`, checked against listening processes and recorded in `.worktree-ports.json`. Use the Docker Compose override in [references/setup-and-ports.md](references/setup-and-ports.md) to apply it.
+3. **Work**: one branch and one agent per worktree, no shared mutable state.
+4. **Check health** with `worktree_validator.py` (stale trees, missing directories, deleted branches, `.env` parity, port conflicts, lockfile drift).
+5. **Clean up** with `worktree_manager.py cleanup --dry-run` first, then without `--dry-run`; dirty worktrees are reported, not deleted. Run `port_allocator.py sync` afterwards to free released blocks.
+6. **Verify** that `worktree_validator.py` reports no issues and `git worktree list` matches the port registry.
 
-## References
+## Quick Start
+
+Run inside any git repository:
+
+```bash
+python3 scripts/worktree_manager.py list                          # worktrees with clean/dirty and ahead/behind
+python3 scripts/port_allocator.py status                          # current port blocks
+python3 scripts/worktree_validator.py --stale-days 14 --json      # health report
+python3 scripts/worktree_manager.py cleanup --stale-days 30 --dry-run
+```
+
+## Tools Overview
+
+| Tool | Subcommands and flags | Exit codes |
+|------|-----------------------|------------|
+| `worktree_manager.py` | `list`, `create &lt;branch&gt; [--base]`, `remove &lt;name&gt;`, `cleanup [--stale-days N] [--dry-run]`; `--json` | 0, 1 git operation failed, 2 no subcommand or not inside a repository |
+| `port_allocator.py` | `status`, `assign &lt;name&gt; [--index] [--branch]`, `release &lt;name&gt;`, `check`, `sync`; `--json` | 0, 1 operation failed, 2 no subcommand or not inside a repository |
+| `worktree_validator.py` | `--checks stale,missing,branch,env,ports,lockfile`, `--stale-days`, `--json` | 0 no errors (warnings allowed), 1 errors found, 2 unknown check or not inside a repository |
+
+## Anti-Patterns
+
+**Mistake:** Deleting worktree directories with `rm -rf`.
+**Why it happens:** It looks like any other folder.
+**Instead:** Use `worktree_manager.py remove` (or `git worktree remove`); a raw delete leaves stale metadata and loses uncommitted work without warning.
+
+**Mistake:** Two worktrees on the same dev-server ports.
+**Why it happens:** Every checkout reads the same default `.env`.
+**Instead:** Assign a port block per worktree and generate the Compose override from it.
+
+**Mistake:** Two agents sharing one worktree.
+**Why it happens:** It saves a checkout.
+**Instead:** One agent per worktree and branch; shared working trees produce interleaved, unreviewable changes.
+
+## Files
+
+- `scripts/worktree_manager.py`, `scripts/port_allocator.py`, `scripts/worktree_validator.py` — the tools above. They read the current repository; there is no sample data.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -504,16 +542,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 - CI/CD pipeline configuration or automated test orchestration (see `ci-cd-pipeline-builder`)
 - Monorepo package management, workspace linking, or cross-package dependency resolution (see `monorepo-navigator`)
 
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `env-secrets-manager` | Worktree setup copies `.env` files that contain secrets managed by this skill | `.env` files flow from main repo to each worktree; secret references remain consistent across all copies |
-| `ci-cd-pipeline-builder` | CI pipelines can spin up worktrees for parallel test matrix execution | Pipeline config triggers `setup-worktree.sh` per matrix job; port allocation prevents service collisions |
-| `release-manager` | Release branches get dedicated worktrees for stabilization while feature work continues | Release worktree is created from the release branch; merged status drives cleanup automation |
-| `monorepo-navigator` | In monorepo setups, worktrees must respect package boundaries and shared dependencies | Worktree creation inherits the monorepo root lockfile; package-level dev servers use allocated port blocks |
-| `pr-review-expert` | PR reviews can be performed in isolated worktrees with running code for manual validation | Reviewer creates a worktree at the PR branch, runs the dev server on allocated ports, and removes after review |
-| `tech-debt-tracker` | Stale worktrees and abandoned branches surface as tech debt indicators | Cleanup script output feeds into debt tracking; worktree age and merge status inform priority scores |
+Related skills: `engineering/env-secrets-manager` (the `.env` files copied into worktrees), `engineering/monorepo-navigator` (package boundaries inside a worktree).
 
 ---
 
@@ -541,7 +570,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Git Worktree Manager&quot;**
-   - Description: &quot;Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.&quot;
+   - Description: &quot;Run parallel Git worktrees without collisions: a port block per worktree, .env sync, health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several branches or agents need running dev servers at once.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -566,7 +595,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Git Worktree Manager
 
-Manage parallel development workflows using Git worktrees with deterministic naming, automatic port allocation, environment file synchronization, dependency installation, and cleanup automation. Optimized for multi-agent workflows where each agent or terminal session owns an isolated worktree with its own ports, environment, and running services.
+Plain `git worktree add/remove` is the easy part. The agent uses this skill for what git does not do: give every worktree its own port block so dev servers and Docker services do not collide, carry `.env` files across, spot worktrees that are stale, dirty or tracking deleted branches, and remove merged ones without losing uncommitted work. It suits multi-agent setups where each agent or terminal owns one worktree.
 
 ## Core Capabilities
 
@@ -593,15 +622,53 @@ Before managing worktrees, settle the inputs below. When one is missing or vague
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `worktree_manager.py` | List, create, remove, and clean up worktrees | `python scripts/worktree_manager.py list` |
-| `port_allocator.py` | Assign/check/release deterministic port blocks; sync registry | `python scripts/port_allocator.py status` |
-| `worktree_validator.py` | Validate worktree health (stale, missing branch, env parity, port conflicts, lockfile) | `python scripts/worktree_validator.py --stale-days 14` |
+1. **Create** the worktree with `worktree_manager.py create &lt;branch&gt; --base main`; it names the directory deterministically, copies `.env` files and installs dependencies from the lockfile it finds.
+2. **Assign ports** with `port_allocator.py assign &lt;worktree-name&gt;`: a block at `base + index * stride`, checked against listening processes and recorded in `.worktree-ports.json`. Use the Docker Compose override in [references/setup-and-ports.md](references/setup-and-ports.md) to apply it.
+3. **Work**: one branch and one agent per worktree, no shared mutable state.
+4. **Check health** with `worktree_validator.py` (stale trees, missing directories, deleted branches, `.env` parity, port conflicts, lockfile drift).
+5. **Clean up** with `worktree_manager.py cleanup --dry-run` first, then without `--dry-run`; dirty worktrees are reported, not deleted. Run `port_allocator.py sync` afterwards to free released blocks.
+6. **Verify** that `worktree_validator.py` reports no issues and `git worktree list` matches the port registry.
 
-## References
+## Quick Start
+
+Run inside any git repository:
+
+```bash
+python3 scripts/worktree_manager.py list                          # worktrees with clean/dirty and ahead/behind
+python3 scripts/port_allocator.py status                          # current port blocks
+python3 scripts/worktree_validator.py --stale-days 14 --json      # health report
+python3 scripts/worktree_manager.py cleanup --stale-days 30 --dry-run
+```
+
+## Tools Overview
+
+| Tool | Subcommands and flags | Exit codes |
+|------|-----------------------|------------|
+| `worktree_manager.py` | `list`, `create &lt;branch&gt; [--base]`, `remove &lt;name&gt;`, `cleanup [--stale-days N] [--dry-run]`; `--json` | 0, 1 git operation failed, 2 no subcommand or not inside a repository |
+| `port_allocator.py` | `status`, `assign &lt;name&gt; [--index] [--branch]`, `release &lt;name&gt;`, `check`, `sync`; `--json` | 0, 1 operation failed, 2 no subcommand or not inside a repository |
+| `worktree_validator.py` | `--checks stale,missing,branch,env,ports,lockfile`, `--stale-days`, `--json` | 0 no errors (warnings allowed), 1 errors found, 2 unknown check or not inside a repository |
+
+## Anti-Patterns
+
+**Mistake:** Deleting worktree directories with `rm -rf`.
+**Why it happens:** It looks like any other folder.
+**Instead:** Use `worktree_manager.py remove` (or `git worktree remove`); a raw delete leaves stale metadata and loses uncommitted work without warning.
+
+**Mistake:** Two worktrees on the same dev-server ports.
+**Why it happens:** Every checkout reads the same default `.env`.
+**Instead:** Assign a port block per worktree and generate the Compose override from it.
+
+**Mistake:** Two agents sharing one worktree.
+**Why it happens:** It saves a checkout.
+**Instead:** One agent per worktree and branch; shared working trees produce interleaved, unreviewable changes.
+
+## Files
+
+- `scripts/worktree_manager.py`, `scripts/port_allocator.py`, `scripts/worktree_validator.py` — the tools above. They read the current repository; there is no sample data.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -623,16 +690,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 - CI/CD pipeline configuration or automated test orchestration (see `ci-cd-pipeline-builder`)
 - Monorepo package management, workspace linking, or cross-package dependency resolution (see `monorepo-navigator`)
 
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `env-secrets-manager` | Worktree setup copies `.env` files that contain secrets managed by this skill | `.env` files flow from main repo to each worktree; secret references remain consistent across all copies |
-| `ci-cd-pipeline-builder` | CI pipelines can spin up worktrees for parallel test matrix execution | Pipeline config triggers `setup-worktree.sh` per matrix job; port allocation prevents service collisions |
-| `release-manager` | Release branches get dedicated worktrees for stabilization while feature work continues | Release worktree is created from the release branch; merged status drives cleanup automation |
-| `monorepo-navigator` | In monorepo setups, worktrees must respect package boundaries and shared dependencies | Worktree creation inherits the monorepo root lockfile; package-level dev servers use allocated port blocks |
-| `pr-review-expert` | PR reviews can be performed in isolated worktrees with running code for manual validation | Reviewer creates a worktree at the PR branch, runs the dev server on allocated ports, and removes after review |
-| `tech-debt-tracker` | Stale worktrees and abandoned branches surface as tech debt indicators | Cleanup script output feeds into debt tracking; worktree age and merge status inform priority scores |
+Related skills: `engineering/env-secrets-manager` (the `.env` files copied into worktrees), `engineering/monorepo-navigator` (package boundaries inside a worktree).
 
 ---
 
@@ -660,7 +718,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Git Worktree Manager&quot;**
-   - Description: &quot;Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.&quot;
+   - Description: &quot;Run parallel Git worktrees without collisions: a port block per worktree, .env sync, health checks for stale or dirty trees, and safe cleanup of merged ones. Use when several branches or agents need running dev servers at once.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -720,8 +778,14 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/git-worktree-manager/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Quick Start</h2>Run inside any git repository:
+
+<pre><code>python3 scripts/worktree_manager.py list                          # worktrees with clean/dirty and ahead/behind
+python3 scripts/port_allocator.py status                          # current port blocks
+python3 scripts/worktree_validator.py --stale-days 14 --json      # health report
+python3 scripts/worktree_manager.py cleanup --stale-days 30 --dry-run
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/git-worktree-manager/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

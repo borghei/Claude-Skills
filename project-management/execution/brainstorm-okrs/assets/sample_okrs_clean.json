@@ -1,0 +1,50 @@
+{
+  "okr_sets": [
+    {
+      "objective": "Become the most trusted onboarding experience in our category",
+      "key_results": [
+        {
+          "description": "Reduce time-to-first-value for new users",
+          "metric": "minutes to first completed task",
+          "target_value": 5,
+          "current_value": 18
+        },
+        {
+          "description": "Increase onboarding completion rate",
+          "metric": "percent of users completing onboarding",
+          "target_value": 85,
+          "current_value": 52
+        },
+        {
+          "description": "Improve new user satisfaction score",
+          "metric": "CSAT score (1-5) at day 7",
+          "target_value": 4.5,
+          "current_value": 3.2
+        }
+      ]
+    },
+    {
+      "objective": "Make our platform the fastest way for teams to collaborate on documents",
+      "key_results": [
+        {
+          "description": "Reduce average document collaboration cycle time",
+          "metric": "hours from draft to final version",
+          "target_value": 4,
+          "current_value": 24
+        },
+        {
+          "description": "Increase concurrent editing adoption",
+          "metric": "percent of documents with 2+ simultaneous editors",
+          "target_value": 40,
+          "current_value": 12
+        },
+        {
+          "description": "Reduce context-switching during collaboration",
+          "metric": "average tool switches per collaboration session",
+          "target_value": 1,
+          "current_value": 4
+        }
+      ]
+    }
+  ]
+}

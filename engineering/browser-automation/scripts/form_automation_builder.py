@@ -5,7 +5,6 @@ Form Automation Builder - Generate form automation scripts from HTML analysis.
 Parses HTML forms, identifies field types and validation requirements, and generates
 ready-to-use automation scripts with proper field handling and submission logic.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -354,22 +353,25 @@ def main():
         path = Path(args.html_file)
         if not path.exists():
             print(f"Error: File not found: {args.html_file}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         html_content = path.read_text(encoding="utf-8", errors="ignore")
         base_url = args.base_url
     else:
         print("Error: --url requires fetching which is not supported. Use --html-file instead.", file=sys.stderr)
         print("Save the HTML page locally first, then use --html-file.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     forms = parse_html(html_content)
     if not forms:
         print("No forms found in the HTML content.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     analysis = generate_analysis(forms)
 
     script = None
+    if not 0 <= args.form_index < len(forms):
+        print(f"Error: --form-index {args.form_index} out of range ({len(forms)} form(s) found)", file=sys.stderr)
+        sys.exit(2)
     if args.form_index < len(forms):
         script = generate_requests_script(forms[args.form_index], base_url)
         if args.output:

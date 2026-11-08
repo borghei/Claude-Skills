@@ -36,7 +36,7 @@ DEMO_SPEC: dict[str, Any] = {
         "formula": "WAA * (publishers / WAA)",
         "current": 12400,
         "target": 22000,
-        "due": "2026-09-30",
+        "due": "2027-06-30",
     },
     "inputs": [
         {
@@ -402,8 +402,8 @@ def main(argv: list[str] | None = None) -> int:
         try:
             with open(args.input, "r", encoding="utf-8") as f:
                 spec = json.load(f)
-        except FileNotFoundError:
-            print(f"ERROR: input file not found: {args.input}", file=sys.stderr)
+        except OSError as e:
+            print(f"ERROR: cannot read {args.input}: {e.strerror or e}", file=sys.stderr)
             return 2
         except json.JSONDecodeError as e:
             print(f"ERROR: invalid JSON in {args.input}: {e}", file=sys.stderr)

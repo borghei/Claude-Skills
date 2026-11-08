@@ -11,7 +11,7 @@ metadata:
   author: borghei
   category: project-management
   domain: agile-ceremonies
-  updated: 2026-06-15
+  updated: 2026-11-08
   tags: [retrospective, agile, continuous-improvement, team]
   python-tools: velocity_analyzer.py, contributor_insights.py, code_churn_analyzer.py, retro_report_generator.py
   tech-stack: python, git, agile, scrum, analytics
@@ -25,7 +25,7 @@ The agent acts as a data-driven retrospective facilitator that mines git history
 ## Core Capabilities
 
 - **Velocity analysis** — throughput, cycle/lead time, deploy frequency, commit-type breakdown, work-session detection (deep/focused/micro)
-- **Contributor deep dive** — per-person LOC, peak hours, specialization (frontend/backend/infra/docs/tests/data), consistency, collaboration
+- **Team work patterns** — specialization spread, knowledge silos, review and collaboration patterns across the team. The contributor output has per-person numbers for spotting bus-factor risk; report them at team level by default and never as a performance score
 - **Code quality trends** — churn hotspots, oscillation, test-to-production ratio, refactor frequency, healthy-range indicators
 - **Team health** — review coverage, bus factor / knowledge-silo detection, cross-boundary work
 - **Report generation & trend tracking** — narrative markdown reports, sprint snapshots, sprint-over-sprint deltas, action-item carry-over
@@ -52,15 +52,29 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+Three tools read git history (`velocity_analyzer.py`, `contributor_insights.py`, `code_churn_analyzer.py`: each takes `--days N` or `--since/--until YYYY-MM-DD`, `--repo PATH`, `-f text|json`). `retro_report_generator.py` reads their JSON output and writes the markdown report (`-v` velocity JSON, required; `-c` contributors; `-u` churn; `--previous-retro` last report for action-item carry-over; `--previous-velocity` for deltas; `-s` sprint name; `-o` output file; `--save DIR` snapshot).
+
 ```bash
-# Full pipeline (last 14 days) → markdown report
-python scripts/velocity_analyzer.py --days 14 -f json > /tmp/v.json && \
-python scripts/contributor_insights.py --days 14 -f json > /tmp/c.json && \
-python scripts/code_churn_analyzer.py --days 14 -f json > /tmp/ch.json && \
-python scripts/retro_report_generator.py -v /tmp/v.json -c /tmp/c.json -u /tmp/ch.json -s "Sprint 23"
+# Try the report without a repo: the samples are the three tools' JSON for a 3-person sprint
+python3 project-management/sprint-retrospective/scripts/retro_report_generator.py \
+  -v project-management/sprint-retrospective/assets/sample_velocity.json \
+  -c project-management/sprint-retrospective/assets/sample_contributors.json \
+  -u project-management/sprint-retrospective/assets/sample_churn.json \
+  --previous-retro project-management/sprint-retrospective/assets/sample_previous_retro.md -s "Sprint 23"
 ```
 
-All tools support `--format text|json`, `--days N`, `--since/--until YYYY-MM-DD`, and `--repo /path`.
+```bash
+# Full pipeline on a real repo, last 14 days (JSON goes to a temp dir, not the repo)
+S=project-management/sprint-retrospective/scripts; OUT=$(mktemp -d)
+python3 $S/velocity_analyzer.py --days 14 --repo . -f json > $OUT/v.json
+python3 $S/contributor_insights.py --days 14 --repo . -f json > $OUT/c.json
+python3 $S/code_churn_analyzer.py --days 14 --repo . -f json > $OUT/ch.json
+python3 $S/retro_report_generator.py -v $OUT/v.json -c $OUT/c.json -u $OUT/ch.json -s "Sprint 23" -o $OUT/retro.md
+```
+
+On the sample the report flags churn rate 0.34 and hotspot concentration 0.32 as attention areas, one single-owner directory, and two of three previous action items still open.
+
+**Exit codes:** `0` report produced · `2` not a repository, an invalid `--since`/`--until` date, or a report input that is missing, unreadable or not the tools' JSON. The tools report; they do not gate.
 
 ## Anti-Patterns
 
@@ -81,7 +95,7 @@ All tools support `--format text|json`, `--days N`, `--since/--until YYYY-MM-DD`
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -109,3 +123,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `execution/release-notes/` | Feeds into | Sprint commit data and type distribution inform release note generation |
 | CI/CD Workflows | Automated | GitHub Actions runs the 4-tool pipeline on a cron schedule (see workflows reference) |
 | `.retro-history/` | Bidirectional | Save sprint snapshots for trend tracking; load previous snapshots for comparison |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/velocity_analyzer.py` | Throughput, cycle/lead time, commit types, sessions |
+| `scripts/contributor_insights.py` | Specialization, sessions, collaboration and bus-factor data |
+| `scripts/code_churn_analyzer.py` | Hotspots, directory churn, health indicators, refactoring candidates |
+| `scripts/retro_report_generator.py` | Markdown retro report from the three JSON outputs |
+| `assets/sample_velocity.json`, `assets/sample_contributors.json`, `assets/sample_churn.json` | Tool-shaped outputs for a sample sprint |
+| `assets/sample_previous_retro.md` | Previous retro with action items for carry-over |
+| `assets/retro_report_template.md` | Report template |

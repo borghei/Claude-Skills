@@ -5,7 +5,6 @@ Audit Log Analyzer - Analyze vault audit logs for suspicious access patterns.
 Parses Vault audit log files (JSON format) and detects anomalies including
 off-hours access, bulk reads, failed auth attempts, root token use, and access to unusual paths.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -67,6 +66,8 @@ def parse_vault_log_line(line: str) -> Optional[AuditEvent]:
         data = json.loads(line)
     except json.JSONDecodeError:
         return None
+    if not isinstance(data, dict) or not ("request" in data or "type" in data):
+        return None  # valid JSON but not a Vault audit entry
 
     event_type = data.get("type", "")
     request = data.get("request", {})
@@ -88,21 +89,23 @@ def parse_vault_log_line(line: str) -> Optional[AuditEvent]:
     )
 
 
-def parse_log_file(path: Path) -> List[AuditEvent]:
-    """Parse entire log file."""
-    events = []
+def parse_log_file(path: Path):
+    """Parse a log file; return (events, skipped_line_count). Exits 2 if the file cannot be read."""
+    events, skipped = [], 0
     try:
         content = path.read_text(encoding="utf-8", errors="ignore")
-    except (OSError, PermissionError) as e:
+    except OSError as e:
         print(f"Error reading log file: {e}", file=sys.stderr)
-        return events
+        sys.exit(2)
 
     for line in content.split("\n"):
         event = parse_vault_log_line(line)
         if event:
             events.append(event)
+        elif line.strip():
+            skipped += 1
 
-    return events
+    return events, skipped
 
 
 def detect_off_hours_access(events: List[AuditEvent]) -> List[Alert]:
@@ -375,12 +378,17 @@ def main():
 
     if not path.exists():
         print(f"Error: File not found: {args.log_file}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
-    events = parse_log_file(path)
+    events, skipped = parse_log_file(path)
 
+    # A file with nothing parseable must not read as a quiet, clean log
     if not events:
-        print("Warning: No audit events parsed from log file.", file=sys.stderr)
+        print(f"Error: no Vault audit events parsed from {args.log_file} "
+              f"({skipped} non-audit line(s)); expected one JSON audit entry per line", file=sys.stderr)
+        sys.exit(2)
+    if skipped:
+        print(f"Warning: skipped {skipped} line(s) that are not Vault audit entries", file=sys.stderr)
 
     report = analyze_logs(events, args.log_file)
 
@@ -389,8 +397,8 @@ def main():
     else:
         print(format_human(report))
 
-    critical_alerts = sum(1 for a in report.alerts if a.severity == "critical")
-    sys.exit(2 if critical_alerts > 0 else (1 if report.alerts else 0))
+    # 0 = no alerts, 1 = alerts (critical ones are flagged in the report), 2 = unusable input
+    sys.exit(1 if report.alerts else 0)
 
 
 if __name__ == "__main__":

@@ -1,16 +1,16 @@
 ---
 name: chaos-engineering
 description: >
-  Chaos engineering: hypothesis-driven fault injection to surface weakness before users do.
-  Use when designing a chaos experiment, planning a gameday, choosing what to inject,
-  computing blast radius, or building a chaos maturity model.
+  Designs hypothesis-driven fault-injection experiments, sizes their blast radius and plans
+  gamedays. Use when designing a chaos experiment, planning a gameday, choosing what to inject,
+  or building a chaos maturity model.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
   author: borghei
   category: engineering
   domain: engineering
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [chaos-engineering, resilience, fault-injection, gameday, sre, reliability, blast-radius]
 ---
 
@@ -51,13 +51,60 @@ Before designing the experiment, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `chaos_experiment_designer.py` | Scaffold a chaos experiment doc (hypothesis stub, steady-state template, abort criteria, checklist) | `python scripts/chaos_experiment_designer.py --target payments-svc --fault dependency-timeout --duration 5m` |
-| `blast_radius_calculator.py` | Compute worst-case affected users, recommended caps, and abort triggers | `python scripts/blast_radius_calculator.py --users 100000 --percent-targeted 1 --duration 60` |
-| `gameday_planner.py` | Generate a tailored gameday agenda with roles, timeline, and debrief template | `python scripts/gameday_planner.py --service search-api --duration full --scenarios region-failover,dep-outage` |
+The scripts write plans and documents only; they never touch a system.
+
+```bash
+# 1. Scaffold the experiment doc (hypothesis, steady state, abort criteria, checklist)
+python scripts/chaos_experiment_designer.py --target payments-svc --fault dependency-timeout --duration 5m
+python scripts/chaos_experiment_designer.py --list-faults          # the nine fault types
+
+# 2. Size the blast: worst-case affected users, recommended caps, abort timing
+python scripts/blast_radius_calculator.py --users 100000 --percent-targeted 1 --duration 60
+
+# 3. Plan a gameday from scenario ids
+python scripts/gameday_planner.py --service search-api --duration full --scenarios dep-timeout,partition,az-degraded
+python scripts/gameday_planner.py --list-scenarios                 # pod-kill, rolling-restart, latency, partition,
+                                                                   # dep-error, dep-timeout, cpu-stress, memory-pressure,
+                                                                   # disk-fill, cache-flush, traffic-spike, az-degraded
+```
+
+All three take `--format markdown|json` (`human|json` for the calculator) and `--output FILE`.
+**Exit codes:** `0` document written; `2` bad arguments (unknown fault or scenario id, out-of-range percent).
+
+**Go / no-go before any run.** Do not inject until every item is true, because a run without them produces risk and no learning:
+1. The steady-state metric and its normal range are written down and visible on a dashboard.
+2. The hypothesis names the expected behaviour under the fault ("p99 stays under 800 ms, fallback serves cached prices").
+3. Abort criteria are numeric, agreed, and someone owns the abort command.
+4. The blast radius is within the calculator's recommended cap for the current maturity level.
+5. On-call knows the window, and production runs have a rollback that was tested in staging.
+
+**Done when:** the run's result is recorded against the hypothesis, any weakness found has a ticket with an owner, and the experiment is either promoted to a recurring run or retired with a reason.
+
+## Anti-Patterns
+
+### Breaking things without a hypothesis
+**Mistake:** Killing pods "to see what happens", with no steady-state metric or expected outcome.
+**Why it happens:** Injection tools make faults easy; writing a hypothesis feels like paperwork.
+**Instead:** Write the hypothesis and steady state first. Without them you cannot tell a pass from a fail, so nothing is learned.
+
+### Starting at full blast
+**Mistake:** The first experiment on a service hits 50% of production traffic for 30 minutes.
+**Why it happens:** Small experiments feel too small to prove anything.
+**Instead:** Start at one pod, 1% or one minute and grow only after a pass. `blast_radius_calculator.py` shows the worst case before you commit.
+
+### Findings with no follow-up
+**Mistake:** The gameday surfaces three weaknesses, the debrief notes them, and nothing is ticketed.
+**Why it happens:** The exercise ends when the faults stop, and the action items have no owner.
+**Instead:** End every run with owned tickets and re-run the same fault after the fix lands to confirm it.
+
+## Files
+
+- `scripts/chaos_experiment_designer.py` — experiment document scaffold for nine fault types.
+- `scripts/blast_radius_calculator.py` — affected users, sessions, revenue at risk, caps and abort timing.
+- `scripts/gameday_planner.py` — half- or full-day agenda, roles, scenario blocks, debrief template.
+- `references/` — design loop, fault catalog, maturity model, gameday playbook (listed below).
 
 ## Scope & Limitations
 

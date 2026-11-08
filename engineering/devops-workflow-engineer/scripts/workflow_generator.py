@@ -18,7 +18,7 @@ import argparse
 import json
 import sys
 import textwrap
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 # ---------------------------------------------------------------------------
@@ -27,10 +27,10 @@ from datetime import datetime
 
 LANGUAGE_CONFIGS = {
     "python": {
-        "setup_action": "actions/setup-python@v5",
+        "setup_action": "actions/setup-python@v7",
         "setup_key": "python-version",
-        "default_version": "3.12",
-        "matrix_versions": ["3.10", "3.11", "3.12"],
+        "default_version": "3.14",
+        "matrix_versions": ["3.11", "3.12", "3.13", "3.14", "3.15"],  # supported CPython releases, Nov 2026
         "cache_type": "pip",
         "install_cmd": "pip install -r requirements.txt",
         "lint_cmd": "ruff check . && ruff format --check .",
@@ -51,10 +51,10 @@ LANGUAGE_CONFIGS = {
         "publish_cmd": "twine upload dist/*",
     },
     "node": {
-        "setup_action": "actions/setup-node@v4",
+        "setup_action": "actions/setup-node@v7",
         "setup_key": "node-version",
-        "default_version": "20",
-        "matrix_versions": ["18", "20", "22"],
+        "default_version": "24",
+        "matrix_versions": ["22", "24", "26"],  # Node LTS lines, Nov 2026 (26 is LTS since 2026-10-28)
         "cache_type": "npm",
         "install_cmd": "npm ci",
         "lint_cmd": "npm run lint",
@@ -79,10 +79,10 @@ LANGUAGE_CONFIGS = {
         "publish_cmd": "npm publish",
     },
     "go": {
-        "setup_action": "actions/setup-go@v5",
+        "setup_action": "actions/setup-go@v7",
         "setup_key": "go-version",
-        "default_version": "1.22",
-        "matrix_versions": ["1.21", "1.22"],
+        "default_version": "stable",
+        "matrix_versions": ["oldstable", "stable"],  # setup-go aliases: the two supported Go releases
         "cache_type": "",
         "install_cmd": "go mod download",
         "lint_cmd": "go vet ./...",
@@ -239,8 +239,8 @@ def generate_ci(lang_key, test_framework, output_format):
     header = _header(
         name=f"CI ({lang_key})",
         triggers={
-            "push": {"branches": ["main", "dev"]},
-            "pull_request": {"branches": ["main"]},
+            "push": {"branches": BRANCHES},
+            "pull_request": {"branches": BRANCHES},
         },
         permissions={"contents": "read"},
     )
@@ -248,7 +248,7 @@ def generate_ci(lang_key, test_framework, output_format):
     # Lint job
     lint_steps = [
         "    steps:",
-        "      - uses: actions/checkout@v4",
+        "      - uses: actions/checkout@v7",
     ]
     if lang["setup_action"]:
         lint_steps.append(f"      - uses: {lang['setup_action']}")
@@ -272,7 +272,7 @@ def generate_ci(lang_key, test_framework, output_format):
     versions_yaml = "\n".join(f"          - '{v}'" for v in lang["matrix_versions"])
     test_steps = [
         "    steps:",
-        "      - uses: actions/checkout@v4",
+        "      - uses: actions/checkout@v7",
         f"      - uses: {lang['setup_action']}",
         "        with:",
         f"          {lang['setup_key']}: ${{{{ matrix.version }}}}",
@@ -288,7 +288,7 @@ def generate_ci(lang_key, test_framework, output_format):
     test_steps.append("      - name: Run tests")
     test_steps.append(f"        run: {tf['run']}")
     test_steps.extend([
-        "      - uses: actions/upload-artifact@v4",
+        "      - uses: actions/upload-artifact@v7",
         "        if: always()",
         "        with:",
         "          name: test-results-${{ matrix.version }}",
@@ -314,7 +314,7 @@ def generate_ci(lang_key, test_framework, output_format):
     # Build job
     build_steps = [
         "    steps:",
-        "      - uses: actions/checkout@v4",
+        "      - uses: actions/checkout@v7",
         f"      - uses: {lang['setup_action']}",
         "        with:",
         f"          {lang['setup_key']}: '{lang['default_version']}'",
@@ -335,7 +335,10 @@ def generate_ci(lang_key, test_framework, output_format):
         "    timeout-minutes: 10",
     ] + build_steps)
 
-    workflow = header + "jobs:\n" + lint_job + "\n\n" + test_job + "\n\n" + build_job + "\n"
+    if SKIP_TESTS:  # tests run locally; CI lints and builds only
+        workflow = header + "jobs:\n" + lint_job + "\n\n" + build_job + "\n"
+    else:
+        workflow = header + "jobs:\n" + lint_job + "\n\n" + test_job + "\n\n" + build_job + "\n"
 
     if output_format == "json":
         return {
@@ -343,7 +346,7 @@ def generate_ci(lang_key, test_framework, output_format):
             "language": lang_key,
             "test_framework": tf_key,
             "yaml": workflow,
-            "generated_at": datetime.utcnow().isoformat() + "Z",
+            "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         }
     return workflow
 
@@ -416,7 +419,7 @@ def generate_cd(lang_key, deploy_target, output_format):
         outputs:
           image_tag: ${{{{ github.sha }}}}
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v7
 
           - name: Log in to Container Registry
             uses: docker/login-action@v3
@@ -446,7 +449,7 @@ def generate_cd(lang_key, deploy_target, output_format):
         timeout-minutes: 15
         environment: ${{{{ inputs.environment || 'staging' }}}}
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v7
 
     {deploy_steps_indented}
 
@@ -465,7 +468,7 @@ def generate_cd(lang_key, deploy_target, output_format):
             "language": lang_key,
             "deploy_target": target_key,
             "yaml": workflow,
-            "generated_at": datetime.utcnow().isoformat() + "Z",
+            "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         }
     return workflow
 
@@ -498,7 +501,7 @@ def generate_security_scan(lang_key, output_format):
         runs-on: ubuntu-latest
         timeout-minutes: 10
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v7
 
           - uses: {lang["setup_action"]}
             with:
@@ -517,7 +520,7 @@ def generate_security_scan(lang_key, output_format):
           security-events: write
           contents: read
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v7
 
           - name: Initialize CodeQL
             uses: github/codeql-action/init@v3
@@ -534,7 +537,7 @@ def generate_security_scan(lang_key, output_format):
         runs-on: ubuntu-latest
         timeout-minutes: 5
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v7
             with:
               fetch-depth: 0
 
@@ -551,7 +554,7 @@ def generate_security_scan(lang_key, output_format):
             "workflow_type": "security-scan",
             "language": lang_key,
             "yaml": workflow,
-            "generated_at": datetime.utcnow().isoformat() + "Z",
+            "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         }
     return workflow
 
@@ -588,7 +591,7 @@ def generate_release(lang_key, output_format):
         runs-on: ubuntu-latest
         timeout-minutes: 15
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v7
 
           - uses: {lang["setup_action"]}
             with:
@@ -615,7 +618,7 @@ def generate_release(lang_key, output_format):
             "workflow_type": "release",
             "language": lang_key,
             "yaml": workflow,
-            "generated_at": datetime.utcnow().isoformat() + "Z",
+            "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         }
     return workflow
 
@@ -636,7 +639,7 @@ def generate_docs_check(output_format):
         runs-on: ubuntu-latest
         timeout-minutes: 5
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v7
 
           - name: Check for broken links
             uses: lycheeverse/lychee-action@v1
@@ -671,7 +674,7 @@ def generate_docs_check(output_format):
         return {
             "workflow_type": "docs-check",
             "yaml": workflow,
-            "generated_at": datetime.utcnow().isoformat() + "Z",
+            "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         }
     return workflow
 
@@ -679,6 +682,10 @@ def generate_docs_check(output_format):
 # ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
+
+
+BRANCHES = ["main"]
+SKIP_TESTS = False
 
 
 def main():
@@ -727,8 +734,19 @@ def main():
         "--output", "-o",
         help="Write output to file instead of stdout.",
     )
+    parser.add_argument(
+        "--branches", default="main",
+        help="Comma-separated branches that trigger CI (default: main).",
+    )
+    parser.add_argument(
+        "--no-tests", action="store_true",
+        help="CI without the test job, for teams that run tests locally before pushing.",
+    )
 
     args = parser.parse_args()
+    global BRANCHES, SKIP_TESTS
+    BRANCHES = [b.strip() for b in args.branches.split(",") if b.strip()]
+    SKIP_TESTS = args.no_tests
 
     # Validate language requirement
     if args.type in ("ci", "cd", "release", "security-scan") and not args.language:
@@ -748,7 +766,7 @@ def main():
     # Handle errors
     if isinstance(result, dict) and "error" in result:
         print(f"Error: {result['error']}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Output
     if isinstance(result, dict):

@@ -1,0 +1,51 @@
+{
+  "space": "Engineering Team",
+  "pages": [
+    {
+      "title": "Onboarding Guide",
+      "owner": "Alice",
+      "last_updated": "2026-03-01",
+      "labels": [
+        "onboarding",
+        "guide"
+      ],
+      "has_parent": true,
+      "views_30d": 45,
+      "word_count": 500,
+      "has_links": true
+    },
+    {
+      "title": "Old Architecture Doc",
+      "owner": "",
+      "last_updated": "2024-06-15",
+      "labels": [],
+      "has_parent": true,
+      "views_30d": 2,
+      "word_count": 1200,
+      "has_links": true
+    },
+    {
+      "title": "Untitled Draft",
+      "owner": "Bob",
+      "last_updated": "2026-01-10",
+      "labels": [],
+      "has_parent": false,
+      "views_30d": 0,
+      "word_count": 30,
+      "has_links": false
+    },
+    {
+      "title": "API Reference",
+      "owner": "Carol",
+      "last_updated": "2026-02-20",
+      "labels": [
+        "api",
+        "reference"
+      ],
+      "has_parent": true,
+      "views_30d": 120,
+      "word_count": 2000,
+      "has_links": true
+    }
+  ]
+}

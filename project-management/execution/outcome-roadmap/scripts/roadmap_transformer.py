@@ -1,400 +1,236 @@
 #!/usr/bin/env python3
-"""Roadmap Transformer - Convert output-based roadmap items to outcome-driven ones.
+"""Roadmap Transformer - bucket initiatives into Now/Next/Later and check that
+each one is stated as an outcome, not an output.
 
-Takes a list of feature/project initiatives and generates outcome statement
-templates, suggested metrics, and strategic questions for each. Helps teams
-shift from "what are we building?" to "what customer outcome are we enabling?"
+Writing the outcome is the model's or PM's job; this tool does the parts a
+script does reliably: horizon placement from the quarter, the Now-column cap,
+and per-item checks that Now/Next items carry an outcome statement, a metric
+with baseline and target, and (for Now) a counter-metric. Items with no outcome
+get the "so what?" prompts for their type.
 
 Usage:
-    python roadmap_transformer.py --input roadmap.json
-    python roadmap_transformer.py --input roadmap.json --format json
-    python roadmap_transformer.py --demo
-    python roadmap_transformer.py --demo --format json
+    python roadmap_transformer.py --input ../assets/sample_roadmap_clean.json
+    python roadmap_transformer.py --demo --format markdown
+    python roadmap_transformer.py --input roadmap.json --as-of "Q4 2026" --format json
 
-Input JSON format:
-    {
-        "initiatives": [
-            {
-                "title": "Build advanced search",
-                "description": "Add filters, autocomplete, and relevance ranking",
-                "quarter": "Q2 2026",
-                "type": "feature"
-            }
-        ]
-    }
+Input: {"initiatives": [{"title", "description", "quarter": "Q3 2026",
+         "type": "feature|improvement|infrastructure", "outcome": "Enable ... so that ...",
+         "metric": {"name", "baseline", "target"}, "counter_metric": "..."}]}
+"As of" defaults to the earliest quarter in the data, so a sample reads the
+same on any day; pass --as-of with the current quarter for a live roadmap.
 
-Standard library only. No external dependencies.
+Exit codes: 0 no errors, 1 at least one error finding, 2 bad input.
+Standard library only.
 """
 
 import argparse
 import json
+import re
 import sys
-import textwrap
-from datetime import date
 
+NOW_CAP = 3  # more Now items than this means the commitment level is not real
+OUTPUT_VERBS = ("build", "launch", "ship", "add", "migrate", "implement", "release",
+                "create", "develop", "redesign", "integrate", "deliver")
 
-# Mapping of initiative types to relevant outcome prompts and metric suggestions
-TYPE_GUIDANCE = {
-    "feature": {
-        "outcome_prompts": [
-            "What customer problem does this feature solve?",
-            "How will the customer's workflow change after this ships?",
-            "What would the customer do if this feature did not exist?",
-        ],
-        "metric_categories": [
-            "Adoption (% of target users who use this within 30 days)",
-            "Efficiency (time saved or steps reduced for the core task)",
-            "Satisfaction (NPS/CSAT change among users of this feature)",
-        ],
-    },
-    "improvement": {
-        "outcome_prompts": [
-            "What specific friction point does this improvement address?",
-            "How much time/effort does the current experience cost users?",
-            "What is the measurable gap between current and desired performance?",
-        ],
-        "metric_categories": [
-            "Performance (speed, reliability, or accuracy improvement)",
-            "Retention (churn reduction or engagement increase)",
-            "Support (reduction in related support tickets or complaints)",
-        ],
-    },
-    "infrastructure": {
-        "outcome_prompts": [
-            "What user-facing capability does this infrastructure enable?",
-            "What becomes possible for customers that was not possible before?",
-            "How does this reduce risk or cost for the business?",
-        ],
-        "metric_categories": [
-            "Reliability (uptime, error rate, or recovery time)",
-            "Scalability (capacity headroom or performance under load)",
-            "Velocity (team shipping speed or deployment frequency)",
-        ],
-    },
+SO_WHAT = {
+    "feature": ["What customer problem does this solve?",
+                "How does the customer's workflow change after it ships?",
+                "Which number moves: adoption, time on task, or satisfaction?"],
+    "improvement": ["Which friction point does it remove, and what does it cost users today?",
+                    "Which number moves: speed, retention, or related support tickets?"],
+    "infrastructure": ["What becomes possible for customers that is not possible today?",
+                       "Which number moves: reliability, headroom, or shipping speed?"],
 }
 
 DEMO_DATA = {
     "initiatives": [
-        {
-            "title": "Build advanced search",
-            "description": "Add full-text search with filters, autocomplete, and relevance ranking to the product catalog.",
-            "quarter": "Q2 2026",
-            "type": "feature",
-        },
-        {
-            "title": "Improve onboarding flow",
-            "description": "Redesign the first-time user experience to reduce steps and add contextual guidance.",
-            "quarter": "Q2 2026",
-            "type": "improvement",
-        },
-        {
-            "title": "Migrate to new database",
-            "description": "Move from PostgreSQL 12 to PostgreSQL 16 with connection pooling and read replicas.",
-            "quarter": "Q3 2026",
-            "type": "infrastructure",
-        },
-        {
-            "title": "Launch mobile app",
-            "description": "Build iOS and Android apps with core functionality from the web platform.",
-            "quarter": "Q3 2026",
-            "type": "feature",
-        },
-        {
-            "title": "Add team collaboration features",
-            "description": "Shared workspaces, commenting, and real-time editing for team plans.",
-            "quarter": "Q4 2026",
-            "type": "feature",
-        },
+        {"title": "Build advanced search", "quarter": "Q2 2026", "type": "feature",
+         "description": "Full-text search with filters, autocomplete and relevance ranking."},
+        {"title": "Improve onboarding flow", "quarter": "Q2 2026", "type": "improvement",
+         "description": "Redesign the first-run experience with fewer steps.",
+         "outcome": "Redesign onboarding with a checklist",
+         "metric": {"name": "Day-7 activation", "baseline": None, "target": "45%"}},
+        {"title": "Migrate to new database", "quarter": "Q2 2026", "type": "infrastructure",
+         "description": "PostgreSQL upgrade with pooling and read replicas."},
+        {"title": "Launch mobile app", "quarter": "Q2 2026", "type": "feature",
+         "description": "iOS and Android apps with core web functionality."},
+        {"title": "Add team collaboration", "quarter": "Q4 2026", "type": "feature",
+         "description": "Shared workspaces, comments and real-time editing."},
     ]
 }
 
 
-def _quarter_to_horizon(quarter: str) -> str:
-    """Map a quarter string to Now/Next/Later based on current date.
+def parse_quarter(text):
+    """'Q3 2026' -> (2026, 3), or None."""
+    m = re.fullmatch(r"\s*Q([1-4])\s+(\d{4})\s*", str(text or ""), re.IGNORECASE)
+    return (int(m.group(2)), int(m.group(1))) if m else None
 
-    Heuristic: current quarter = Now, next quarter = Next, everything else = Later.
-    If quarter is empty or unparseable, returns 'Later'.
-    """
-    today = date.today()
-    current_q = (today.month - 1) // 3 + 1
-    current_year = today.year
 
-    # Parse quarter like "Q2 2026"
-    parts = quarter.strip().upper().split()
-    if len(parts) != 2 or not parts[0].startswith("Q"):
-        return "Later"
+def horizon(q, as_of):
+    distance = (q[0] - as_of[0]) * 4 + (q[1] - as_of[1])
+    return "Now" if distance <= 0 else "Next" if distance == 1 else "Later"
 
-    try:
-        q_num = int(parts[0][1:])
-        q_year = int(parts[1])
-    except (ValueError, IndexError):
-        return "Later"
 
-    # Calculate distance in quarters
-    distance = (q_year - current_year) * 4 + (q_num - current_q)
-
-    if distance <= 0:
-        return "Now"
-    elif distance == 1:
-        return "Next"
+def check_item(item, h):
+    """Return a list of (severity, message) for one initiative."""
+    out = []
+    outcome = str(item.get("outcome") or "").strip()
+    metric = item.get("metric") if isinstance(item.get("metric"), dict) else {}
+    if h == "Later":
+        if not outcome:
+            out.append(("info", "no outcome yet; fine for Later, required before it moves to Next"))
+        return out
+    if not outcome:
+        out.append(("error", "no outcome statement"))
     else:
-        return "Later"
+        first = outcome.split()[0].lower()
+        if first in OUTPUT_VERBS:
+            out.append(("error", f"outcome starts with '{first}' and reads like an output; "
+                                 "say what changes for the customer"))
+        if "so that" not in outcome.lower():
+            out.append(("warn", "outcome has no 'so that ...' business impact"))
+    if not metric.get("name"):
+        out.append(("error", "no success metric"))
+    else:
+        for key in ("baseline", "target"):
+            if metric.get(key) in (None, ""):
+                out.append(("error", f"metric '{metric['name']}' has no {key}"))
+    if h == "Now" and not item.get("counter_metric"):
+        out.append(("warn", "no counter-metric to catch the outcome being gamed"))
+    return out
 
 
-def transform_initiative(initiative: dict) -> dict:
-    """Transform a single initiative from output to outcome format."""
-    title = initiative.get("title", "Untitled")
-    description = initiative.get("description", "")
-    quarter = initiative.get("quarter", "")
-    init_type = initiative.get("type", "feature")
-
-    guidance = TYPE_GUIDANCE.get(init_type, TYPE_GUIDANCE["feature"])
-    horizon = _quarter_to_horizon(quarter)
-
-    # Generate outcome statement template
-    outcome_template = (
-        f'Enable [customer segment] to [desired outcome from "{title}"] '
-        f"so that [business impact]"
-    )
-
-    # Generate "so what?" chain
-    so_what_chain = [
-        f'"{title}"',
-        f"-> So what? [What changes for the user?]",
-        f"-> So what? [What behavior or metric shifts?]",
-        f"-> So what? [What business value results?]",
-    ]
-
-    return {
-        "original": {
-            "title": title,
-            "description": description,
-            "quarter": quarter,
-            "type": init_type,
-        },
-        "transformed": {
-            "horizon": horizon,
-            "outcome_statement_template": outcome_template,
-            "so_what_chain": so_what_chain,
-            "strategic_questions": guidance["outcome_prompts"],
-            "suggested_metrics": guidance["metric_categories"],
-            "dependencies": [
-                "[What technical prerequisites must be in place?]",
-                "[What organizational alignment is needed?]",
-                "[What market conditions must hold true?]",
-            ],
-        },
-    }
+def analyze(data, as_of_text):
+    items = data["initiatives"]
+    quarters = [parse_quarter(i.get("quarter")) for i in items]
+    if as_of_text:
+        as_of = parse_quarter(as_of_text)
+        if not as_of:
+            raise ValueError(f"--as-of must look like 'Q3 2026', got {as_of_text!r}")
+    else:
+        valid = [q for q in quarters if q]
+        if not valid:
+            raise ValueError("no initiative has a quarter like 'Q3 2026'; pass --as-of")
+        as_of = min(valid)
+    results = []
+    for item, q in zip(items, quarters):
+        h = horizon(q, as_of) if q else "Later"
+        issues = check_item(item, h)
+        if not q:
+            issues.insert(0, ("error", f"quarter {item.get('quarter')!r} is not 'Q[1-4] YYYY'"))
+        elif q < as_of:
+            issues.insert(0, ("warn", f"{item.get('quarter')} is before {as_of_text}: shipped, slipped, or re-plan?"))
+        entry = {"title": item.get("title", "Untitled"), "quarter": item.get("quarter", ""),
+                 "type": item.get("type", "feature"), "horizon": h,
+                 "outcome": item.get("outcome") or None,
+                 "issues": [{"severity": s, "message": m} for s, m in issues]}
+        if not item.get("outcome"):
+            entry["so_what_prompts"] = SO_WHAT.get(entry["type"], SO_WHAT["feature"])
+        results.append(entry)
+    roadmap_issues = []
+    now = [r["title"] for r in results if r["horizon"] == "Now"]
+    if len(now) > NOW_CAP:
+        roadmap_issues.append({"severity": "error", "message":
+                               f"{len(now)} Now items (cap {NOW_CAP}); move the rest to Next"})
+    errors = sum(1 for r in results for i in r["issues"] if i["severity"] == "error")
+    errors += sum(1 for i in roadmap_issues if i["severity"] == "error")
+    counts = {h: sum(1 for r in results if r["horizon"] == h) for h in ("Now", "Next", "Later")}
+    return {"as_of": f"Q{as_of[1]} {as_of[0]}", "horizon_counts": counts, "errors": errors,
+            "roadmap_issues": roadmap_issues, "initiatives": results}
 
 
-def format_markdown(results: list[dict]) -> str:
-    """Format transformed roadmap as markdown."""
-    lines = []
-    today = date.today().isoformat()
-
-    lines.append("# Outcome Roadmap")
-    lines.append("")
-    lines.append(f"**Generated:** {today}")
-    lines.append(f"**Initiatives Transformed:** {len(results)}")
-    lines.append("")
-
-    # Group by horizon
-    horizons = {"Now": [], "Next": [], "Later": []}
-    for r in results:
-        h = r["transformed"]["horizon"]
-        horizons.setdefault(h, []).append(r)
-
-    for horizon_name in ["Now", "Next", "Later"]:
-        items = horizons.get(horizon_name, [])
+def format_text(report):
+    lines = [f"Outcome roadmap check (as of {report['as_of']})",
+             "  " + " | ".join(f"{k}: {v}" for k, v in report["horizon_counts"].items()),
+             f"  Errors: {report['errors']}", ""]
+    for i in report["roadmap_issues"]:
+        lines.append(f"  [{i['severity'].upper()}] roadmap: {i['message']}")
+    for h in ("Now", "Next", "Later"):
+        items = [r for r in report["initiatives"] if r["horizon"] == h]
         if not items:
             continue
-
-        lines.append(f"## {horizon_name}")
-        lines.append("")
-
-        commitment = {
-            "Now": "High -- team assigned, scope defined",
-            "Next": "Medium -- direction set, scope flexible",
-            "Later": "Low -- strategic intent only",
-        }
-        lines.append(f"**Commitment Level:** {commitment.get(horizon_name, 'TBD')}")
-        lines.append("")
-
-        for item in items:
-            orig = item["original"]
-            trans = item["transformed"]
-
-            lines.append(f"### {orig['title']}")
-            lines.append("")
-            lines.append(f"**Original:** {orig['description']}")
-            lines.append(f"**Type:** {orig['type']}  |  **Quarter:** {orig['quarter']}")
-            lines.append("")
-
-            lines.append("**Outcome Statement (fill in):**")
-            lines.append(f"> {trans['outcome_statement_template']}")
-            lines.append("")
-
-            lines.append("**\"So What?\" Chain:**")
-            for step in trans["so_what_chain"]:
-                lines.append(f"- {step}")
-            lines.append("")
-
-            lines.append("**Strategic Questions to Answer:**")
-            for q in trans["strategic_questions"]:
-                lines.append(f"- [ ] {q}")
-            lines.append("")
-
-            lines.append("**Suggested Success Metrics:**")
-            for m in trans["suggested_metrics"]:
-                lines.append(f"- {m}")
-            lines.append("")
-
-            lines.append("**Dependencies:**")
-            for d in trans["dependencies"]:
-                lines.append(f"- {d}")
-            lines.append("")
-
-        lines.append("---")
-        lines.append("")
-
+        lines.append(f"\n{h}")
+        for r in items:
+            lines.append(f"  - {r['title']} ({r['quarter']})")
+            if r["outcome"]:
+                lines.append(f"      outcome: {r['outcome']}")
+            for i in r["issues"]:
+                lines.append(f"      [{i['severity'].upper()}] {i['message']}")
+            for p in r.get("so_what_prompts", []) if h != "Later" else []:
+                lines.append(f"      ? {p}")
     return "\n".join(lines)
 
 
-def format_text(results: list[dict]) -> str:
-    """Format transformed roadmap as plain text report."""
-    lines = []
-    lines.append("=" * 60)
-    lines.append("OUTCOME ROADMAP TRANSFORMATION")
-    lines.append("=" * 60)
-    lines.append("")
-
-    for i, item in enumerate(results, 1):
-        orig = item["original"]
-        trans = item["transformed"]
-
-        lines.append(f"--- Initiative {i}: {orig['title']} ---")
-        lines.append(f"  Original: {orig['description']}")
-        lines.append(f"  Type: {orig['type']}  |  Quarter: {orig['quarter']}  |  Horizon: {trans['horizon']}")
-        lines.append("")
-        lines.append("  Outcome Statement Template:")
-        wrapped = textwrap.fill(trans["outcome_statement_template"], width=70, initial_indent="    ", subsequent_indent="    ")
-        lines.append(wrapped)
-        lines.append("")
-        lines.append("  'So What?' Chain:")
-        for step in trans["so_what_chain"]:
-            lines.append(f"    {step}")
-        lines.append("")
-        lines.append("  Strategic Questions:")
-        for q in trans["strategic_questions"]:
-            lines.append(f"    - {q}")
-        lines.append("")
-        lines.append("  Suggested Metrics:")
-        for m in trans["suggested_metrics"]:
-            lines.append(f"    - {m}")
-        lines.append("")
-
-    lines.append("=" * 60)
-    lines.append(f"Total initiatives transformed: {len(results)}")
-
-    horizons = {}
-    for r in results:
-        h = r["transformed"]["horizon"]
-        horizons[h] = horizons.get(h, 0) + 1
-    summary = " | ".join(f"{k}: {v}" for k, v in sorted(horizons.items()))
-    lines.append(f"By horizon: {summary}")
-    lines.append("=" * 60)
-
+def format_markdown(report):
+    lines = ["# Outcome Roadmap", "", f"**As of:** {report['as_of']}  |  **Errors:** {report['errors']}", ""]
+    for i in report["roadmap_issues"]:
+        lines.append(f"> **{i['severity']}:** {i['message']}")
+    commitment = {"Now": "High: team assigned, scope defined", "Next": "Medium: direction set",
+                  "Later": "Low: strategic intent only"}
+    for h in ("Now", "Next", "Later"):
+        items = [r for r in report["initiatives"] if r["horizon"] == h]
+        if not items:
+            continue
+        lines += ["", f"## {h}", "", f"_Commitment: {commitment[h]}_", ""]
+        for r in items:
+            lines.append(f"### {r['title']} ({r['quarter']})")
+            lines.append(f"**Outcome:** {r['outcome'] or '_to write_'}")
+            for i in r["issues"]:
+                lines.append(f"- {i['severity']}: {i['message']}")
+            for p in r.get("so_what_prompts", []) if h != "Later" else []:
+                lines.append(f"- [ ] {p}")
+            lines.append("")
     return "\n".join(lines)
 
 
-def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    """Parse command-line arguments."""
+def load(path):
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except OSError as e:
+        raise SystemExit(_fail(f"cannot read {path}: {e.strerror or e}"))
+    except ValueError as e:
+        raise SystemExit(_fail(f"invalid JSON in {path}: {e}"))
+    items = data.get("initiatives") if isinstance(data, dict) else None
+    if not isinstance(items, list) or not items or not all(isinstance(i, dict) for i in items):
+        raise SystemExit(_fail("input must be a JSON object with a non-empty 'initiatives' list of objects"))
+    return data
+
+
+def _fail(msg):
+    print(f"error: {msg}", file=sys.stderr)
+    return 2
+
+
+def main(argv=None):
     parser = argparse.ArgumentParser(
-        description="Transform output-based roadmap items into outcome-driven initiatives.",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=textwrap.dedent("""\
-            Examples:
-              python roadmap_transformer.py --demo
-              python roadmap_transformer.py --input roadmap.json
-              python roadmap_transformer.py --input roadmap.json --format json
-              python roadmap_transformer.py --demo --format markdown --output roadmap-outcomes.md
+        description="Place roadmap initiatives in Now/Next/Later and check each is outcome-ready. "
+                    "Exit 0 no errors, 1 errors found, 2 bad input.")
+    src = parser.add_mutually_exclusive_group(required=True)
+    src.add_argument("--input", help="JSON file with an 'initiatives' list")
+    src.add_argument("--demo", action="store_true", help="Run on built-in output-style roadmap (exits 1)")
+    parser.add_argument("--as-of", help="Current quarter, e.g. 'Q4 2026' (default: earliest quarter in the data)")
+    parser.add_argument("--format", choices=["text", "json", "markdown"], default="text")
+    parser.add_argument("--output", help="Write to this file instead of stdout")
+    args = parser.parse_args(argv)
 
-            Input JSON format:
-              {
-                "initiatives": [
-                  {
-                    "title": "Build advanced search",
-                    "description": "Full-text search with filters",
-                    "quarter": "Q2 2026",
-                    "type": "feature"
-                  }
-                ]
-              }
-            Supported types: feature, improvement, infrastructure
-        """),
-    )
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument(
-        "--input",
-        help="Path to JSON file containing roadmap initiatives",
-    )
-    group.add_argument(
-        "--demo",
-        action="store_true",
-        help="Run transformation on built-in demo data",
-    )
-    parser.add_argument(
-        "--format",
-        choices=["text", "json", "markdown"],
-        default="text",
-        help="Output format: text (default), json, or markdown",
-    )
-    parser.add_argument(
-        "--output",
-        default=None,
-        help="Output file path. If omitted, prints to stdout.",
-    )
-    return parser.parse_args(argv)
-
-
-def main(argv: list[str] | None = None) -> None:
-    """Main entry point."""
-    args = parse_args(argv)
-
-    if args.demo:
-        data = DEMO_DATA
-    else:
-        try:
-            with open(args.input, "r", encoding="utf-8") as f:
-                data = json.load(f)
-        except FileNotFoundError:
-            print(f"Error: File not found: {args.input}", file=sys.stderr)
-            sys.exit(1)
-        except json.JSONDecodeError as e:
-            print(f"Error: Invalid JSON in {args.input}: {e}", file=sys.stderr)
-            sys.exit(1)
-
-    initiatives = data.get("initiatives", [])
-    if not initiatives:
-        print("Error: No initiatives found in input data.", file=sys.stderr)
-        sys.exit(1)
-
-    results = [transform_initiative(init) for init in initiatives]
-
-    if args.format == "json":
-        output = json.dumps(results, indent=2)
-    elif args.format == "markdown":
-        output = format_markdown(results)
-    else:
-        output = format_text(results)
-
+    data = DEMO_DATA if args.demo else load(args.input)
+    try:
+        report = analyze(data, args.as_of)
+    except ValueError as e:
+        return _fail(str(e))
+    render = {"json": lambda r: json.dumps(r, indent=2), "markdown": format_markdown, "text": format_text}
+    out = render[args.format](report)
     if args.output:
-        with open(args.output, "w", encoding="utf-8") as f:
-            f.write(output)
-        print(f"Output written to {args.output}", file=sys.stderr)
+        try:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(out + "\n")
+        except OSError as e:
+            return _fail(f"cannot write {args.output}: {e.strerror or e}")
     else:
-        print(output)
+        print(out)
+    return 1 if report["errors"] else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

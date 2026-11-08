@@ -383,8 +383,10 @@ def format_human_readable(results: dict[str, Any]) -> str:
     lines.append(f"  Missing:      {summary['missing_pages']}")
     lines.append("")
 
-    overall = "PASS" if summary["failed"] == 0 else "FAIL"
+    overall = "PASS" if summary["failed"] == 0 and summary["total_compared"] else "FAIL"
     lines.append(f"  Result:       {overall}")
+    if not summary["total_compared"]:
+        lines.append("  Nothing was compared: run --init and --register on the baseline directory first.")
     lines.append("")
 
     # Page details
@@ -498,7 +500,7 @@ def main() -> None:
     if args.init:
         if not args.baseline_dir:
             print("Error: --baseline-dir required with --init", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         baseline_dir = Path(args.baseline_dir)
         manifest = init_baseline_dir(baseline_dir)
         if args.json_output:
@@ -513,7 +515,7 @@ def main() -> None:
         register_dir = Path(args.register)
         if not register_dir.exists():
             print(f"Error: Directory not found: {args.register}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         result = register_baselines(register_dir)
         if args.json_output:
             print(json.dumps({"action": "register", **result}, indent=2))
@@ -525,13 +527,13 @@ def main() -> None:
     if args.update_baseline:
         if not args.baseline_dir or not args.current:
             print("Error: --baseline-dir and --current required with --update-baseline", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         baseline_dir = Path(args.baseline_dir)
         current_dir = Path(args.current)
         result = update_baselines(baseline_dir, current_dir)
         if "error" in result:
             print(f"Error: {result['error']}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         if args.json_output:
             print(json.dumps({"action": "update_baseline", **result}, indent=2))
         else:
@@ -542,17 +544,17 @@ def main() -> None:
     if not args.baseline_dir or not args.current:
         print("Error: --baseline-dir and --current required for comparison", file=sys.stderr)
         print("Use --help for usage information", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     baseline_dir = Path(args.baseline_dir)
     current_dir = Path(args.current)
 
     if not baseline_dir.exists():
         print(f"Error: Baseline directory not found: {baseline_dir}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     if not current_dir.exists():
         print(f"Error: Current directory not found: {current_dir}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     results = run_comparison(baseline_dir, current_dir, args.threshold)
 
@@ -561,8 +563,8 @@ def main() -> None:
     else:
         print(format_human_readable(results))
 
-    # Exit code: non-zero if regressions found
-    if results["summary"]["failed"] > 0:
+    # Exit code: 1 on regressions, or when nothing was compared (a silent pass hides a missing baseline)
+    if results["summary"]["failed"] > 0 or results["summary"]["total_compared"] == 0:
         sys.exit(1)
 
 

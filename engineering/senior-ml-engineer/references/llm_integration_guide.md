@@ -33,31 +33,41 @@ class LLMProvider(ABC):
     def chat(self, messages: List[Dict], **kwargs) -> str:
         pass
 
+# Model ids are configuration, not code: read them from settings so a model upgrade is a
+# config change. Check each provider's models page for current ids.
+
 class OpenAIProvider(LLMProvider):
-    def __init__(self, api_key: str, model: str = "gpt-4"):
+    def __init__(self, api_key: str, model: str):
         self.client = OpenAI(api_key=api_key)
         self.model = model
 
-    def complete(self, prompt: str, **kwargs) -> str:
-        response = self.client.completions.create(
-            model=self.model,
-            prompt=prompt,
-            **kwargs
-        )
-        return response.choices[0].text
-
-class AnthropicProvider(LLMProvider):
-    def __init__(self, api_key: str, model: str = "claude-opus-5"):
-        self.client = Anthropic(api_key=api_key)
-        self.model = model
-
     def chat(self, messages: List[Dict], **kwargs) -> str:
-        response = self.client.messages.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             **kwargs
         )
+        return response.choices[0].message.content
+
+    def complete(self, prompt: str, **kwargs) -> str:
+        return self.chat([{"role": "user", "content": prompt}], **kwargs)
+
+class AnthropicProvider(LLMProvider):
+    def __init__(self, api_key: str, model: str = "claude-sonnet-5-5"):
+        self.client = Anthropic(api_key=api_key)
+        self.model = model
+
+    def chat(self, messages: List[Dict], max_tokens: int = 1024, **kwargs) -> str:
+        response = self.client.messages.create(
+            model=self.model,
+            max_tokens=max_tokens,  # required by the Messages API
+            messages=messages,
+            **kwargs
+        )
         return response.content[0].text
+
+    def complete(self, prompt: str, **kwargs) -> str:
+        return self.chat([{"role": "user", "content": prompt}], **kwargs)
 ```
 
 ### Retry and Fallback Strategy
@@ -97,7 +107,7 @@ def call_with_fallback(
 |---------|----------|-----------|
 | Zero-shot | Simple tasks | Task description + input |
 | Few-shot | Complex tasks | Examples + task + input |
-| Chain-of-thought | Reasoning | On Claude: adaptive thinking + `effort` (API); elsewhere "Think step by step" + task |
+| Chain-of-thought | Reasoning | Reasoning models: state goal and output, raise the reasoning/effort setting; "think step by step" only for non-reasoning models |
 | Role-based | Specialized output | System role + task |
 
 ### Few-Shot Template
@@ -122,7 +132,9 @@ Output:"""
 
 def classify_sentiment(text: str, provider: LLMProvider) -> str:
     prompt = FEW_SHOT_TEMPLATE.format(user_input=text)
-    response = provider.complete(prompt, max_tokens=10, temperature=0)
+    # Constrain the output with the label list (or structured outputs), not sampling settings:
+    # several current models fix or ignore temperature.
+    response = provider.complete(prompt, max_tokens=10)
     return response.strip().lower()
 ```
 
@@ -156,32 +168,30 @@ def create_chat_messages(user_query: str, context: str) -> List[Dict]:
 ### Token Counting
 
 ```python
-import tiktoken
+# Tokenizers differ by provider and model family. Use the provider's own counter:
+#   OpenAI models: tiktoken (tiktoken.encoding_for_model(model_id))
+#   Claude models: the Messages API token-counting endpoint (client.messages.count_tokens)
+#   Open-weight models: the model's tokenizer from its repository
+# For budgeting before a call, ~4 characters per token (English) is a usable estimate.
 
-def count_tokens(text: str, model: str = "gpt-4") -> int:
-    """Count tokens for a given text and model."""
-    encoding = tiktoken.encoding_for_model(model)
-    return len(encoding.encode(text))
+def estimate_tokens(text: str) -> int:
+    """Rough, provider-neutral estimate; replace with the provider counter for hard limits."""
+    return len(text) // 4
 
-def truncate_to_token_limit(text: str, max_tokens: int, model: str = "gpt-4") -> str:
-    """Truncate text to fit within token limit."""
-    encoding = tiktoken.encoding_for_model(model)
-    tokens = encoding.encode(text)
-
-    if len(tokens) <= max_tokens:
-        return text
-
-    return encoding.decode(tokens[:max_tokens])
+def truncate_to_budget(text: str, max_tokens: int) -> str:
+    """Trim text to an approximate token budget, keeping the start."""
+    return text[: max_tokens * 4]
 ```
 
 ### Context Window Management
 
-| Model | Context Window | Effective Limit |
-|-------|----------------|-----------------|
-| GPT-4 | 8,192 | ~6,000 (leave room for response) |
-| GPT-4-32k | 32,768 | ~28,000 |
-| Claude 3 | 200,000 | ~180,000 |
-| Llama 3 | 8,192 | ~6,000 |
+Context windows differ by model and change with releases; read the limit from the model
+card rather than hard-coding it. Rules that hold across providers:
+
+- Budget input as window minus the maximum output you request, minus a safety margin.
+- Long windows are not free: cost scales with input tokens and quality can drop for facts
+  buried mid-context, so retrieve and rank instead of pasting everything.
+- Put stable content (instructions, reference docs) first so prompt caching can reuse it.
 
 ### Chunking Strategy
 
@@ -206,12 +216,9 @@ def chunk_text(text: str, chunk_size: int = 1000, overlap: int = 100) -> List[st
 
 ### Cost Calculation
 
-| Provider | Input Cost | Output Cost | Example (1K tokens) |
-|----------|------------|-------------|---------------------|
-| GPT-4 | $0.03/1K | $0.06/1K | $0.09 |
-| GPT-3.5 | $0.0005/1K | $0.0015/1K | $0.002 |
-| Claude 3 Opus | $0.015/1K | $0.075/1K | $0.09 |
-| Claude 3 Haiku | $0.00025/1K | $0.00125/1K | $0.0015 |
+Prices change several times a year, so keep them in configuration with an as-of date and
+take them from each provider's pricing page. Output tokens usually cost several times more
+than input tokens, and cached input is usually discounted, so measure both separately.
 
 ### Cost Tracking
 
@@ -231,14 +238,8 @@ def calculate_cost(
     output_tokens: int,
     model: str
 ) -> float:
-    """Calculate cost based on token usage."""
-    PRICING = {
-        "gpt-4": {"input": 0.03, "output": 0.06},
-        "gpt-3.5-turbo": {"input": 0.0005, "output": 0.0015},
-        "claude-opus-5": {"input": 0.005, "output": 0.025},
-    }
-
-    prices = PRICING.get(model, {"input": 0.01, "output": 0.03})
+    """Calculate cost from a per-1K-token price table loaded from config (with an as-of date)."""
+    prices = PRICING[model]  # e.g. load_pricing("pricing.yaml"); fail loudly on unknown models
 
     input_cost = (input_tokens / 1000) * prices["input"]
     output_cost = (output_tokens / 1000) * prices["output"]

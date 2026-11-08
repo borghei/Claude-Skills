@@ -1,0 +1,8 @@
+{
+  "name": "@acme/ui",
+  "version": "1.0.0",
+  "dependencies": {
+    "@acme/utils": "workspace:*",
+    "react": "^18.3.0"
+  }
+}

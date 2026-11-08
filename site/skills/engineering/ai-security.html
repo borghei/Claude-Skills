@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ai Security - Claude Skills</title>
-  <meta name="description" content="This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check for prompt injection vulnerabilities&quot;, &quot;assess model security posture&quot;, &quot;detect data poisoning risks&quot;, or">
+  <meta name="description" content="Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model extraction and insecure serving, plus an agent and tool-use threat checklist. Use when reviewing an LLM app,">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html">
   <meta property="og:title" content="Ai Security - Claude Skills">
-  <meta property="og:description" content="This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check for prompt injection vulnerabilities&quot;, &quot;assess model security posture&quot;, &quot;detect data poisoning risks&quot;, or">
+  <meta property="og:description" content="Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model extraction and insecure serving, plus an agent and tool-use threat checklist. Use when reviewing an LLM app,">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Ai Security", "description": "This skill should be used when the user asks to \"scan AI systems for security threats\", \"check for prompt injection vulnerabilities\", \"assess model security posture\", \"detect data poisoning risks\", or \"audit AI/ML pipeline security\".", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Ai Security", "description": "Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model extraction and insecure serving, plus an agent and tool-use threat checklist. Use when reviewing an LLM app, model API or ML pipeline for security.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/ai-security.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Ai Security</h1>
-    <p class="page-subtitle">This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check for prompt injection vulnerabilities&quot;, &quot;assess model security posture&quot;, &quot;detect data poisoning risks&quot;, or &quot;audit AI/ML pipeline security&quot;.</p>
+    <p class="page-subtitle">Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model extraction and insecure serving, plus an agent and tool-use threat checklist. Use when reviewing an LLM app, model API or ML pipeline for security.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">ai-security</span><span class="tag">prompt-injection</span><span class="tag">data-poisoning</span><span class="tag">model-extraction</span><span class="tag">adversarial-ml</span></div>
   </div>
@@ -393,17 +393,17 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Ai Security (Engineering domain).
 
-This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check for prompt injection vulnerabilities&quot;, &quot;assess model security posture&quot;, &quot;detect data poisoning risks&quot;, or &quot;audit AI/ML pipeline security&quot;.
+Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model extraction and insecure serving, plus an agent and tool-use threat checklist. Use when reviewing an LLM app, model API or ML pipeline for security.
 
 &gt; **Category:** Engineering &gt; **Domain:** AI/ML Security The **AI Security** skill provides specialized threat scanning for AI and machine learning systems. It identifies vulnerabilities unique to AI workloads including prompt injection, data poisoning, model extraction, adversarial inputs, and inse
 
 ## Your Key Capabilities
 - ai_threat_scanner.py
+- Agent and tool-use threats (review by hand)
 - Full AI Security Audit
 - Pre-Deployment Security Gate
-- Prompt Injection Prevention
-- Secure Model Loading
-- Rate-Limited Inference API
+- Delimiters as the only injection defence
+- Loading pickles from anywhere
 
 ## How to Help
 When the user asks for help in this domain:
@@ -423,17 +423,17 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Ai Security (Engineering domain).
 
-This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check for prompt injection vulnerabilities&quot;, &quot;assess model security posture&quot;, &quot;detect data poisoning risks&quot;, or &quot;audit AI/ML pipeline security&quot;.
+Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model extraction and insecure serving, plus an agent and tool-use threat checklist. Use when reviewing an LLM app, model API or ML pipeline for security.
 
 &gt; **Category:** Engineering &gt; **Domain:** AI/ML Security The **AI Security** skill provides specialized threat scanning for AI and machine learning systems. It identifies vulnerabilities unique to AI workloads including prompt injection, data poisoning, model extraction, adversarial inputs, and inse
 
 ## Your Key Capabilities
 - ai_threat_scanner.py
+- Agent and tool-use threats (review by hand)
 - Full AI Security Audit
 - Pre-Deployment Security Gate
-- Prompt Injection Prevention
-- Secure Model Loading
-- Rate-Limited Inference API
+- Delimiters as the only injection defence
+- Loading pickles from anywhere
 
 ## How to Help
 When the user asks for help in this domain:
@@ -470,6 +470,13 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The **AI Security** skill provides specialized threat scanning for AI and machine learning systems. It identifies vulnerabilities unique to AI workloads including prompt injection, data poisoning, model extraction, adversarial inputs, and insecure model serving configurations.
 
+## When to Use
+
+- Reviewing an LLM feature, RAG app, agent or model-serving API before release.
+- Auditing an ML pipeline&#x27;s data sources and model loading.
+- Adding a pre-deployment gate for AI-specific code risks.
+- Threat-modelling an agent that calls tools or MCP servers.
+
 ## Clarify First
 
 Before running the scan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
@@ -492,15 +499,21 @@ python scripts/ai_threat_scanner.py --path ./my-ai-project --format json
 # Scan only for prompt injection vulnerabilities
 python scripts/ai_threat_scanner.py --path ./src --category prompt-injection
 
-# Scan with severity threshold
-python scripts/ai_threat_scanner.py --path ./src --min-severity high
+# Scan with severity threshold, skipping tests and fixtures
+python scripts/ai_threat_scanner.py --path ./src --min-severity high --exclude &#x27;tests/*&#x27; --exclude &#x27;*_fixture.py&#x27;
+
+# Bundled vulnerable sample: 8 findings (2 critical), exit 1
+python scripts/ai_threat_scanner.py --path assets/sample_vulnerable_app.py
 ```
+
+**Exit codes.** `0` no critical or high finding; `1` at least one critical or high finding; `2` the
+path does not exist.
 
 ## Tools Overview
 
 | Tool | Purpose | Key Flags |
 |------|---------|-----------|
-| `ai_threat_scanner.py` | Scan code for AI-specific security threats | `--path`, `--category`, `--min-severity`, `--format` |
+| `ai_threat_scanner.py` | Scan code for AI-specific security threats | `--path`, `--category`, `--min-severity`, `--exclude GLOB`, `--format` |
 
 ### ai_threat_scanner.py
 
@@ -511,6 +524,19 @@ Performs static analysis of source code by matching regular expressions one line
 - **Model Extraction**: Flags confidence scores or logits returned from inference, inference routes (`@app.post(&quot;/predict&quot;)` and similar) so you can confirm rate limiting and authentication exist, model weights returned through an API, and error handling that mentions model internals
 - **Adversarial Input**: Flags `predict`/`classify`/`detect` calls with no validation keyword on the same line, request data converted straight to arrays or tensors, and images opened from uploads or requests
 - **Insecure Model Serving**: Flags `pickle.load`/`loads` on file, request or body data, permissive CORS, debug mode left on, and `eval`/`exec` with user-controlled input
+
+### Agent and tool-use threats (review by hand)
+
+The scanner sees single lines of code; the highest-impact risks in agents are about data flow and
+authority, so check these yourself for any system where a model calls tools:
+
+- **Indirect prompt injection.** Tool results, retrieved documents, web pages, emails and file contents are untrusted input. Does the agent treat instructions inside them as data? Can a fetched page make it call another tool?
+- **Tool and MCP server trust.** Tool descriptions are part of the prompt. Is every MCP server from a source you trust, pinned to a version, and reviewed for descriptions that try to steer the model? Do two servers expose confusingly similar tool names?
+- **Excessive agency.** Does each tool have the narrowest scope it needs (read-only where possible, per-user credentials, no shell)? Are irreversible actions (send, pay, delete, deploy) behind a human confirmation?
+- **Data exfiltration paths.** Can the model put secrets or user data into a URL, image link, email or outbound tool call? Is outbound network access limited?
+- **Output handling.** Is model output escaped before it reaches HTML, SQL, shell or code execution?
+
+Check the current OWASP Top 10 for LLM Applications for the latest categories before a formal review.
 
 ## Workflows
 
@@ -548,6 +574,29 @@ Performs static analysis of source code by matching regular expressions one line
 - It never runs a model, calls an inference endpoint or attacks a live system. It is not a penetration test or a red-team exercise.
 - Zero findings means no pattern matched. It does not show that a system resists prompt injection or model extraction.
 - Attacks on LLM systems change quickly. The pattern set and the reference reflect the skill&#x27;s last update and need periodic review.
+
+## Anti-Patterns
+
+### Delimiters as the only injection defence
+**Mistake:** Wrapping user text in tags and telling the model to ignore instructions inside, then giving the same model shell or email tools.
+**Why it happens:** Delimiters reduce casual injection, so they feel sufficient.
+**Instead:** Limit what a successful injection can do: least-privilege tools, confirmation for irreversible actions, and no secrets in the context.
+
+### Loading pickles from anywhere
+**Mistake:** `torch.load` or `pickle.load` on a model downloaded from a hub or uploaded by a user.
+**Why it happens:** It is the default save format in many tutorials.
+**Instead:** Use safetensors or another non-executable format, pin model hashes, and load untrusted artefacts only in a sandbox.
+
+### Treating a clean scan as a pass
+**Mistake:** Shipping because the scanner found nothing.
+**Why it happens:** Zero findings reads like a verdict.
+**Instead:** The scanner cannot see missing controls or multi-line data flow. Walk the agent and tool-use checklist above and test injection against a staging deployment.
+
+## Files
+
+- `scripts/ai_threat_scanner.py` — the regex scanner described above.
+- `assets/sample_vulnerable_app.py` — deliberately vulnerable Flask model API (pickle, CORS *, debug, prompt f-string, eval).
+- `references/ai-threat-landscape.md` — threats, attack vectors and mitigations in depth.
 
 ## Reference Documentation
 
@@ -615,7 +664,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Ai Security&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check for prompt injection vulnerabilities&quot;, &quot;assess model security posture&quot;, &quot;detect data poisoning risks&quot;, or &quot;audit AI/ML pipeline security&quot;.&quot;
+   - Description: &quot;Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model extraction and insecure serving, plus an agent and tool-use threat checklist. Use when reviewing an LLM app, model API or ML pipeline for security.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -647,6 +696,13 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 The **AI Security** skill provides specialized threat scanning for AI and machine learning systems. It identifies vulnerabilities unique to AI workloads including prompt injection, data poisoning, model extraction, adversarial inputs, and insecure model serving configurations.
 
+## When to Use
+
+- Reviewing an LLM feature, RAG app, agent or model-serving API before release.
+- Auditing an ML pipeline&#x27;s data sources and model loading.
+- Adding a pre-deployment gate for AI-specific code risks.
+- Threat-modelling an agent that calls tools or MCP servers.
+
 ## Clarify First
 
 Before running the scan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
@@ -669,15 +725,21 @@ python scripts/ai_threat_scanner.py --path ./my-ai-project --format json
 # Scan only for prompt injection vulnerabilities
 python scripts/ai_threat_scanner.py --path ./src --category prompt-injection
 
-# Scan with severity threshold
-python scripts/ai_threat_scanner.py --path ./src --min-severity high
+# Scan with severity threshold, skipping tests and fixtures
+python scripts/ai_threat_scanner.py --path ./src --min-severity high --exclude &#x27;tests/*&#x27; --exclude &#x27;*_fixture.py&#x27;
+
+# Bundled vulnerable sample: 8 findings (2 critical), exit 1
+python scripts/ai_threat_scanner.py --path assets/sample_vulnerable_app.py
 ```
+
+**Exit codes.** `0` no critical or high finding; `1` at least one critical or high finding; `2` the
+path does not exist.
 
 ## Tools Overview
 
 | Tool | Purpose | Key Flags |
 |------|---------|-----------|
-| `ai_threat_scanner.py` | Scan code for AI-specific security threats | `--path`, `--category`, `--min-severity`, `--format` |
+| `ai_threat_scanner.py` | Scan code for AI-specific security threats | `--path`, `--category`, `--min-severity`, `--exclude GLOB`, `--format` |
 
 ### ai_threat_scanner.py
 
@@ -688,6 +750,19 @@ Performs static analysis of source code by matching regular expressions one line
 - **Model Extraction**: Flags confidence scores or logits returned from inference, inference routes (`@app.post(&quot;/predict&quot;)` and similar) so you can confirm rate limiting and authentication exist, model weights returned through an API, and error handling that mentions model internals
 - **Adversarial Input**: Flags `predict`/`classify`/`detect` calls with no validation keyword on the same line, request data converted straight to arrays or tensors, and images opened from uploads or requests
 - **Insecure Model Serving**: Flags `pickle.load`/`loads` on file, request or body data, permissive CORS, debug mode left on, and `eval`/`exec` with user-controlled input
+
+### Agent and tool-use threats (review by hand)
+
+The scanner sees single lines of code; the highest-impact risks in agents are about data flow and
+authority, so check these yourself for any system where a model calls tools:
+
+- **Indirect prompt injection.** Tool results, retrieved documents, web pages, emails and file contents are untrusted input. Does the agent treat instructions inside them as data? Can a fetched page make it call another tool?
+- **Tool and MCP server trust.** Tool descriptions are part of the prompt. Is every MCP server from a source you trust, pinned to a version, and reviewed for descriptions that try to steer the model? Do two servers expose confusingly similar tool names?
+- **Excessive agency.** Does each tool have the narrowest scope it needs (read-only where possible, per-user credentials, no shell)? Are irreversible actions (send, pay, delete, deploy) behind a human confirmation?
+- **Data exfiltration paths.** Can the model put secrets or user data into a URL, image link, email or outbound tool call? Is outbound network access limited?
+- **Output handling.** Is model output escaped before it reaches HTML, SQL, shell or code execution?
+
+Check the current OWASP Top 10 for LLM Applications for the latest categories before a formal review.
 
 ## Workflows
 
@@ -725,6 +800,29 @@ Performs static analysis of source code by matching regular expressions one line
 - It never runs a model, calls an inference endpoint or attacks a live system. It is not a penetration test or a red-team exercise.
 - Zero findings means no pattern matched. It does not show that a system resists prompt injection or model extraction.
 - Attacks on LLM systems change quickly. The pattern set and the reference reflect the skill&#x27;s last update and need periodic review.
+
+## Anti-Patterns
+
+### Delimiters as the only injection defence
+**Mistake:** Wrapping user text in tags and telling the model to ignore instructions inside, then giving the same model shell or email tools.
+**Why it happens:** Delimiters reduce casual injection, so they feel sufficient.
+**Instead:** Limit what a successful injection can do: least-privilege tools, confirmation for irreversible actions, and no secrets in the context.
+
+### Loading pickles from anywhere
+**Mistake:** `torch.load` or `pickle.load` on a model downloaded from a hub or uploaded by a user.
+**Why it happens:** It is the default save format in many tutorials.
+**Instead:** Use safetensors or another non-executable format, pin model hashes, and load untrusted artefacts only in a sandbox.
+
+### Treating a clean scan as a pass
+**Mistake:** Shipping because the scanner found nothing.
+**Why it happens:** Zero findings reads like a verdict.
+**Instead:** The scanner cannot see missing controls or multi-line data flow. Walk the agent and tool-use checklist above and test injection against a staging deployment.
+
+## Files
+
+- `scripts/ai_threat_scanner.py` — the regex scanner described above.
+- `assets/sample_vulnerable_app.py` — deliberately vulnerable Flask model API (pickle, CORS *, debug, prompt f-string, eval).
+- `references/ai-threat-landscape.md` — threats, attack vectors and mitigations in depth.
 
 ## Reference Documentation
 
@@ -792,7 +890,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Ai Security&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;scan AI systems for security threats&quot;, &quot;check for prompt injection vulnerabilities&quot;, &quot;assess model security posture&quot;, &quot;detect data poisoning risks&quot;, or &quot;audit AI/ML pipeline security&quot;.&quot;
+   - Description: &quot;Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model extraction and insecure serving, plus an agent and tool-use threat checklist. Use when reviewing an LLM app, model API or ML pipeline for security.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -851,7 +949,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/ai-security/scripts/tool_name.py --help</code></pre>
-  <h2>Python Tools</h2><div class="tool-item"><h4>ai_threat_scanner.py</h4><p>Performs static analysis of source code by matching regular expressions one line at a time. A finding means a line matched a known risky pattern. The scanner cannot see that something is absent (for example rate limiting, authentication, integrity checks or signature verification), so it flags the places where those controls belong and leaves the confirmation to you:</p></div>
+  <h2>Python Tools</h2><div class="tool-item"><h4>ai_threat_scanner.py</h4><p>Performs static analysis of source code by matching regular expressions one line at a time. A finding means a line matched a known risky pattern. The scanner cannot see that something is absent (for example rate limiting, authentication, integrity checks or signature verification), so it flags the places where those controls belong and leaves the confirmation to you:</p></div><div class="tool-item"><h4>Agent and tool-use threats (review by hand)</h4><p>The scanner sees single lines of code; the highest-impact risks in agents are about data flow and</p></div>
   <h2>Quick Start</h2><pre><code># Scan a codebase for AI-specific security threats
 python scripts/ai_threat_scanner.py --path ./my-ai-project
 
@@ -861,10 +959,16 @@ python scripts/ai_threat_scanner.py --path ./my-ai-project --format json
 # Scan only for prompt injection vulnerabilities
 python scripts/ai_threat_scanner.py --path ./src --category prompt-injection
 
-# Scan with severity threshold
-python scripts/ai_threat_scanner.py --path ./src --min-severity high
+# Scan with severity threshold, skipping tests and fixtures
+python scripts/ai_threat_scanner.py --path ./src --min-severity high --exclude &#x27;tests/*&#x27; --exclude &#x27;*_fixture.py&#x27;
+
+# Bundled vulnerable sample: 8 findings (2 critical), exit 1
+python scripts/ai_threat_scanner.py --path assets/sample_vulnerable_app.py
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+
+**Exit codes.** `0` no critical or high finding; `1` at least one critical or high finding; `2` the
+path does not exist.
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/ai-security/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

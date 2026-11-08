@@ -41,7 +41,6 @@ VALUE_KEYWORDS = re.compile(
 
 
 def score_invest(story: dict[str, Any]) -> dict[str, Any]:
-    """Score one story against the six INVEST criteria."""
     why = (story.get("why") or "").strip()
     what = (story.get("what") or story.get("description") or "").strip()
     acs = story.get("acceptance_criteria") or []
@@ -136,7 +135,6 @@ def score_invest(story: dict[str, Any]) -> dict[str, Any]:
 
 
 def verdict_for_score(score: int, threshold: int) -> str:
-    """Return a single-word verdict for a score."""
     if score >= threshold:
         return "READY"
     if score >= 3:
@@ -145,7 +143,6 @@ def verdict_for_score(score: int, threshold: int) -> str:
 
 
 def grade_backlog(stories: list[dict[str, Any]], threshold: int) -> dict[str, Any]:
-    """Grade an entire backlog and return per-story + aggregate results."""
     graded = [score_invest(s) for s in stories]
     for g in graded:
         g["verdict"] = verdict_for_score(g["score"], threshold)
@@ -311,7 +308,6 @@ def fmt_json(graded: dict[str, Any]) -> str:
 
 
 def fmt_mermaid(graded: dict[str, Any]) -> str:
-    """Render a quadrant-style bar of score buckets as a Mermaid pie chart."""
     s = graded["summary"]
     return "\n".join(
         [
@@ -459,16 +455,16 @@ def main(argv: list[str] | None = None) -> int:
         try:
             with open(args.input, "r", encoding="utf-8") as f:
                 backlog = json.load(f)
-        except FileNotFoundError:
+        except OSError:
             print(f"ERROR: input file not found: {args.input}", file=sys.stderr)
             return 2
         except json.JSONDecodeError as e:
             print(f"ERROR: invalid JSON in {args.input}: {e}", file=sys.stderr)
             return 2
 
-    stories = backlog.get("stories", [])
-    if not isinstance(stories, list):
-        print("ERROR: input must contain a 'stories' array", file=sys.stderr)
+    stories = backlog.get("stories") if isinstance(backlog, dict) else None
+    if not isinstance(stories, list) or not all(isinstance(s, dict) for s in stories):
+        print("error: input must be a JSON object with a 'stories' list of objects", file=sys.stderr)
         return 2
 
     graded = grade_backlog(stories, threshold=args.threshold)
@@ -488,4 +484,8 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except (TypeError, ValueError, AttributeError, KeyError) as exc:  # field of the wrong type
+        print(f"error: input has a field of the wrong type: {exc}", file=sys.stderr)
+        sys.exit(2)

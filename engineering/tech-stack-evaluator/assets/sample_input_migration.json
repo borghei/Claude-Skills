@@ -1,0 +1,26 @@
+{
+  "migration": {
+    "source_technology": "AngularJS 1.x",
+    "target_technology": "React",
+    "codebase_stats": {
+      "lines_of_code": 50000,
+      "num_files": 420,
+      "num_components": 200,
+      "architecture_change_level": "significant",
+      "has_database": false,
+      "breaking_api_changes": 12,
+      "num_dependencies": 45,
+      "dependencies_to_replace": 18,
+      "current_test_coverage": 0.45,
+      "num_tests": 600
+    },
+    "constraints": {
+      "downtime_tolerance": "none"
+    },
+    "team": {
+      "team_size": 6,
+      "hours_per_week": 30,
+      "target_tech_experience": "medium"
+    }
+  }
+}

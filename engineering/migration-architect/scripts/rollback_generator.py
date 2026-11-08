@@ -1063,7 +1063,7 @@ def main():
         # Validate required fields
         if "migration_id" not in migration_plan and "source" not in migration_plan:
             print("Error: Migration plan must contain migration_id or source field", file=sys.stderr)
-            return 1
+            return 2
         
         # Generate rollback runbook
         generator = RollbackGenerator()
@@ -1094,13 +1094,13 @@ def main():
         
     except FileNotFoundError:
         print(f"Error: Input file '{args.input}' not found", file=sys.stderr)
-        return 1
+        return 2
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in input file: {e}", file=sys.stderr)
-        return 1
+        return 2
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        return 1
+        return 2
     
     return 0
 

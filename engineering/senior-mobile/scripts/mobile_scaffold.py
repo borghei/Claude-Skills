@@ -25,7 +25,7 @@ import json
 import os
 import sys
 import textwrap
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -187,20 +187,24 @@ def _rn_store_redux(ts: bool) -> str:
     """)
 
 
+# The core trio tracks one Expo SDK release (SDK 58: React Native 0.88, React 19.3). Native
+# companion packages are not pinned here: `npm run setup` installs them with `npx expo install`,
+# which picks the versions that SDK was tested with. After any upgrade run
+# `npx expo install --fix`, and move SDKs deliberately with `npx expo install expo@latest --fix`.
+EXPO_MANAGED = ["expo-router", "@expo/vector-icons", "react-native-reanimated",
+                "react-native-safe-area-context", "react-native-screens"]
+
+
 def _rn_package_json(name: str, state: str) -> str:
     deps = {
-        "expo": "~50.0.0",
-        "expo-router": "~3.4.0",
-        "react": "18.2.0",
-        "react-native": "0.73.0",
-        "@expo/vector-icons": "^14.0.0",
-        "react-native-reanimated": "~3.6.0",
-        "react-native-safe-area-context": "4.8.0",
-        "react-native-screens": "~3.29.0",
+        "expo": "~58.0.0",
+        "react": "19.3.0",
+        "react-native": "0.88.0",
     }
+    managed = list(EXPO_MANAGED)
     if state == "zustand":
-        deps["zustand"] = "^4.5.0"
-        deps["@react-native-async-storage/async-storage"] = "1.21.0"
+        deps["zustand"] = "^5.0.0"
+        managed.append("@react-native-async-storage/async-storage")
     elif state == "redux":
         deps["@reduxjs/toolkit"] = "^2.0.0"
         deps["react-redux"] = "^9.0.0"
@@ -212,6 +216,7 @@ def _rn_package_json(name: str, state: str) -> str:
         "version": "1.0.0",
         "main": "expo-router/entry",
         "scripts": {
+            "setup": "expo install " + " ".join(managed),
             "start": "expo start",
             "android": "expo start --android",
             "ios": "expo start --ios",
@@ -221,8 +226,8 @@ def _rn_package_json(name: str, state: str) -> str:
         },
         "dependencies": deps,
         "devDependencies": {
-            "typescript": "^5.3.0",
-            "@types/react": "~18.2.0",
+            "typescript": "~5.9.0",
+            "@types/react": "^19.0.0",
             "jest": "^29.7.0",
             "eslint": "^8.56.0",
         },
@@ -854,18 +859,21 @@ def _android_build_gradle(name: str) -> str:
         plugins {{
             id 'com.android.application'
             id 'org.jetbrains.kotlin.android'
+            id 'org.jetbrains.kotlin.plugin.compose'   // Kotlin 2.x Compose compiler plugin
             id 'com.google.dagger.hilt.android'
-            id 'kotlin-kapt'
+            id 'com.google.devtools.ksp'                // KSP replaces kapt for Hilt
         }}
 
         android {{
             namespace 'com.example.{name.replace("-", "").lower()}'
-            compileSdk 34
+            // Google Play raises the minimum targetSdk every year; check the current
+            // requirement before release (API 36 / Android 16 required since 2026-08-31).
+            compileSdk 36
 
             defaultConfig {{
                 applicationId "com.example.{name.replace("-", "").lower()}"
                 minSdk 26
-                targetSdk 34
+                targetSdk 36
                 versionCode 1
                 versionName "1.0"
             }}
@@ -874,17 +882,14 @@ def _android_build_gradle(name: str) -> str:
                 compose true
             }}
 
-            composeOptions {{
-                kotlinCompilerExtensionVersion '1.5.0'
-            }}
-
             kotlinOptions {{
                 jvmTarget = '17'
             }}
         }}
 
         dependencies {{
-            // Compose
+            // Library versions are a known-good baseline; run the IDE's dependency update check
+        // Compose
             implementation platform('androidx.compose:compose-bom:2024.01.00')
             implementation 'androidx.compose.ui:ui'
             implementation 'androidx.compose.material3:material3'
@@ -895,7 +900,7 @@ def _android_build_gradle(name: str) -> str:
 
             // Hilt
             implementation 'com.google.dagger:hilt-android:2.50'
-            kapt 'com.google.dagger:hilt-compiler:2.50'
+            ksp 'com.google.dagger:hilt-compiler:2.50'
             implementation 'androidx.hilt:hilt-navigation-compose:1.1.0'
 
             // Networking
@@ -1054,6 +1059,19 @@ def parse_args(argv=None):
     return parser.parse_args(argv)
 
 
+def _dispatch(platform, root, name, ts, state):
+    """Run the platform scaffolder; None for an unknown platform."""
+    if platform == "react-native":
+        return scaffold_react_native(root, name, ts, state)
+    if platform == "flutter":
+        return scaffold_flutter(root, name, state)
+    if platform == "ios-native":
+        return scaffold_ios_native(root, name)
+    if platform == "android-native":
+        return scaffold_android_native(root, name)
+    return None
+
+
 def main(argv=None):
     args = parse_args(argv)
 
@@ -1071,26 +1089,21 @@ def main(argv=None):
             f"Error: --state '{state}' is not supported for {platform}. "
             f"Valid options: {', '.join(valid_states)}\n"
         )
-        sys.exit(1)
+        sys.exit(2)
 
     if root.exists():
         sys.stderr.write(f"Error: Directory '{root}' already exists.\n")
-        sys.exit(1)
+        sys.exit(2)
 
-    root.mkdir(parents=True, exist_ok=True)
-
-    # Dispatch to platform scaffolder
-    if platform == "react-native":
-        created = scaffold_react_native(root, name, ts, state)
-    elif platform == "flutter":
-        created = scaffold_flutter(root, name, state)
-    elif platform == "ios-native":
-        created = scaffold_ios_native(root, name)
-    elif platform == "android-native":
-        created = scaffold_android_native(root, name)
-    else:
+    try:
+        root.mkdir(parents=True, exist_ok=True)
+        created = _dispatch(platform, root, name, ts, state)
+    except OSError as exc:
+        sys.stderr.write(f"error: cannot write project: {exc}\n")
+        sys.exit(2)
+    if created is None:
         sys.stderr.write(f"Error: Unknown platform '{platform}'.\n")
-        sys.exit(1)
+        sys.exit(2)
 
     result = {
         "project_name": name,
@@ -1100,7 +1113,7 @@ def main(argv=None):
         "output_directory": str(root),
         "files_created": len(created),
         "files": created,
-        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
 
     if args.json:
@@ -1126,6 +1139,8 @@ def main(argv=None):
             print("Next steps:")
             print(f"  cd {name}")
             print("  npm install")
+            print("  npm run setup            # expo install the SDK-matched native packages")
+            print("  npx expo install --fix   # align native packages with the installed Expo SDK")
             print("  npx expo start")
         elif platform == "flutter":
             print("Next steps:")

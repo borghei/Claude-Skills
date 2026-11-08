@@ -1,0 +1,19 @@
+{
+  "canvas_name": "New idea",
+  "as_of": "2026-05-27",
+  "customer_segments": [
+    {"name": "Everyone"}
+  ],
+  "value_propositions": [
+    {"statement": "Innovative, best-in-class platform"}
+  ],
+  "channels": [],
+  "customer_relationships": [],
+  "revenue_streams": [
+    {"type": "subscription"}
+  ],
+  "key_resources": ["Team"],
+  "key_activities": [],
+  "key_partnerships": [],
+  "cost_structure": {}
+}

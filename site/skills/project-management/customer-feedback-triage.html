@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Feedback Triage - Claude Skills</title>
-  <meta name="description" content="Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal int">
+  <meta name="description" content="Cluster, score and route inbound feature requests from support, sales, NPS and exec asks, and draft honest replies. Use when a feedback queue needs triaging or a customer needs a defensible yes, no or">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/customer-feedback-triage.html">
   <meta property="og:title" content="Customer Feedback Triage - Claude Skills">
-  <meta property="og:description" content="Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal int">
+  <meta property="og:description" content="Cluster, score and route inbound feature requests from support, sales, NPS and exec asks, and draft honest replies. Use when a feedback queue needs triaging or a customer needs a defensible yes, no or">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/customer-feedback-triage.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Customer Feedback Triage", "description": "Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/customer-feedback-triage.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Customer Feedback Triage", "description": "Cluster, score and route inbound feature requests from support, sales, NPS and exec asks, and draft honest replies. Use when a feedback queue needs triaging or a customer needs a defensible yes, no or exploring answer.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/customer-feedback-triage.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Customer Feedback Triage</h1>
-    <p class="page-subtitle">Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Cluster, score and route inbound feature requests from support, sales, NPS and exec asks, and draft honest replies. Use when a feedback queue needs triaging or a customer needs a defensible yes, no or exploring answer.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">feedback</span><span class="tag">triage</span><span class="tag">kano</span><span class="tag">requests</span><span class="tag">voice-of-customer</span><span class="tag">intake</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Customer Feedback Triage (Project Management domain).
 
-Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.
+Cluster, score and route inbound feature requests from support, sales, NPS and exec asks, and draft honest replies. Use when a feedback queue needs triaging or a customer needs a defensible yes, no or exploring answer.
 
 Most PMs sit on a chaotic inbound stream — Slack DMs, support tickets, sales call notes, CSAT comments, NPS verbatims, in-app feedback widgets, partner emails, exec one-liners — and have no system for converting that stream into prioritization signal. The default mode is reactive: whoever shouts lou
 
@@ -421,7 +421,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Customer Feedback Triage (Project Management domain).
 
-Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.
+Cluster, score and route inbound feature requests from support, sales, NPS and exec asks, and draft honest replies. Use when a feedback queue needs triaging or a customer needs a defensible yes, no or exploring answer.
 
 Most PMs sit on a chaotic inbound stream — Slack DMs, support tickets, sales call notes, CSAT comments, NPS verbatims, in-app feedback widgets, partner emails, exec one-liners — and have no system for converting that stream into prioritization signal. The default mode is reactive: whoever shouts lou
 
@@ -501,17 +501,28 @@ Before triaging the feedback, settle the inputs below. When one is missing or va
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+The tool does the counting; you do the judgement. It deduplicates by distinct customer, guesses Kano and category from keywords, scores, and routes. It does not name the opportunity or decide what to build.
+
+1. **Normalize intake** into the input schema (`references/tool-reference.md`), one verbatim per ask.
+2. **Run the tool** for clusters, scores and routing:
 
 ```bash
-# Triage a JSON queue of inbound feedback
-python scripts/feedback_triage.py --input queue.json --format markdown
-
-# See a sample triage queue across all 6 output formats
-python scripts/feedback_triage.py --demo --format markdown
+python3 project-management/execution/customer-feedback-triage/scripts/feedback_triage.py \
+  --input project-management/execution/customer-feedback-triage/assets/sample_feedback_queue.json --format markdown
 ```
 
-The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`. The 6-phase workflow (intake → triage → categorize → score → respond → feed forward) and the scoring formula live in the workflow guide reference.
+3. **Write the job for each cluster** you act on. Clusters show `[write the job] keywords: ...` until an item carries `opportunity_label`; replace it with the need (&quot;share results with people who have no login&quot;), not the request (&quot;PDF export&quot;).
+4. **Check the guesses.** Override Kano or category where the keywords misread the ask; confirm that bug-like clusters (errors, slowness) went to the bug tracker with a `bug-acknowledged` reply.
+5. **Decide in the triage meeting** [RECOMMENDED], then record `decision: will-build | won&#x27;t-build` on the items. Until then every reply is drafted as **exploring**; `suggested_tier` is the score&#x27;s hint, not a commitment. This keeps to &quot;always acknowledge, sometimes commit, rarely promise&quot;.
+6. **Feed forward** clusters routed to prioritization with their volume and Kano context; re-run to regenerate replies.
+
+**Done when** every routed cluster has a human-written job label, every reply is exploring or backed by a recorded decision, and no Performance or Basic cluster sits in `to_archive` (the tool never archives them).
+
+`--demo` runs a built-in 12-item queue; `--format` takes `json|markdown|mermaid|confluence|notion|linear`; `--segment-weights &#x27;enterprise=4,smb=1&#x27;` and `--threshold 4.0` tune scoring. Formula, cadence and meeting agenda: `references/customer-feedback-triage-guide.md`.
+
+**Exit codes:** 0 report written; 2 missing file, invalid JSON, wrong shape, empty queue or missing required fields.
 
 ## Anti-Patterns
 
@@ -531,6 +542,15 @@ The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` pe
 **Instead:** Cluster related requests and write the `opportunity_label` as a job, such as &quot;share results with people who don&#x27;t have a login&quot;. If the label is a verb plus a file type, rewrite it before scoring.
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/feedback_triage.py` | Cluster, score, route, draft replies |
+| `assets/sample_feedback_queue.json` | 12-item queue; one cluster carries a human label and one item a will-build decision |
+| `assets/triage_template.md`, `response_templates.md`, `kano_quick_reference.md` | Manual worksheet, reply templates, Kano card |
+| `examples/triaging-30-requests.md` | Worked triage of 30 requests |
 
 ## References
 
@@ -562,7 +582,7 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 | `wwas/` | Feeds into | Backlog-ready items move into Why-What-Acceptance format |
 | `job-stories/` | Feeds into | Final backlog items use Job Stories format if team prefers JTBD framing |
 | `senior-pm/` | Bidirectional | Stakeholder map informs segment weights; triage output informs stakeholder updates |
-| `business-growth/customer-success/` | Bidirectional | CS team is the primary intake source via support tickets and CSAT |
+| `business-growth/customer-success-manager/` | Bidirectional | CS team is the primary intake source via support tickets and CSAT |
 | `sales-success/` | Bidirectional | Sales is the intake source for sales-channel asks; receives won&#x27;t-build rationale |
 
 ---
@@ -591,7 +611,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Customer Feedback Triage&quot;**
-   - Description: &quot;Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.&quot;
+   - Description: &quot;Cluster, score and route inbound feature requests from support, sales, NPS and exec asks, and draft honest replies. Use when a feedback queue needs triaging or a customer needs a defensible yes, no or exploring answer.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -658,17 +678,28 @@ Before triaging the feedback, settle the inputs below. When one is missing or va
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+The tool does the counting; you do the judgement. It deduplicates by distinct customer, guesses Kano and category from keywords, scores, and routes. It does not name the opportunity or decide what to build.
+
+1. **Normalize intake** into the input schema (`references/tool-reference.md`), one verbatim per ask.
+2. **Run the tool** for clusters, scores and routing:
 
 ```bash
-# Triage a JSON queue of inbound feedback
-python scripts/feedback_triage.py --input queue.json --format markdown
-
-# See a sample triage queue across all 6 output formats
-python scripts/feedback_triage.py --demo --format markdown
+python3 project-management/execution/customer-feedback-triage/scripts/feedback_triage.py \
+  --input project-management/execution/customer-feedback-triage/assets/sample_feedback_queue.json --format markdown
 ```
 
-The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`. The 6-phase workflow (intake → triage → categorize → score → respond → feed forward) and the scoring formula live in the workflow guide reference.
+3. **Write the job for each cluster** you act on. Clusters show `[write the job] keywords: ...` until an item carries `opportunity_label`; replace it with the need (&quot;share results with people who have no login&quot;), not the request (&quot;PDF export&quot;).
+4. **Check the guesses.** Override Kano or category where the keywords misread the ask; confirm that bug-like clusters (errors, slowness) went to the bug tracker with a `bug-acknowledged` reply.
+5. **Decide in the triage meeting** [RECOMMENDED], then record `decision: will-build | won&#x27;t-build` on the items. Until then every reply is drafted as **exploring**; `suggested_tier` is the score&#x27;s hint, not a commitment. This keeps to &quot;always acknowledge, sometimes commit, rarely promise&quot;.
+6. **Feed forward** clusters routed to prioritization with their volume and Kano context; re-run to regenerate replies.
+
+**Done when** every routed cluster has a human-written job label, every reply is exploring or backed by a recorded decision, and no Performance or Basic cluster sits in `to_archive` (the tool never archives them).
+
+`--demo` runs a built-in 12-item queue; `--format` takes `json|markdown|mermaid|confluence|notion|linear`; `--segment-weights &#x27;enterprise=4,smb=1&#x27;` and `--threshold 4.0` tune scoring. Formula, cadence and meeting agenda: `references/customer-feedback-triage-guide.md`.
+
+**Exit codes:** 0 report written; 2 missing file, invalid JSON, wrong shape, empty queue or missing required fields.
 
 ## Anti-Patterns
 
@@ -688,6 +719,15 @@ The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` pe
 **Instead:** Cluster related requests and write the `opportunity_label` as a job, such as &quot;share results with people who don&#x27;t have a login&quot;. If the label is a verb plus a file type, rewrite it before scoring.
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/feedback_triage.py` | Cluster, score, route, draft replies |
+| `assets/sample_feedback_queue.json` | 12-item queue; one cluster carries a human label and one item a will-build decision |
+| `assets/triage_template.md`, `response_templates.md`, `kano_quick_reference.md` | Manual worksheet, reply templates, Kano card |
+| `examples/triaging-30-requests.md` | Worked triage of 30 requests |
 
 ## References
 
@@ -719,7 +759,7 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 | `wwas/` | Feeds into | Backlog-ready items move into Why-What-Acceptance format |
 | `job-stories/` | Feeds into | Final backlog items use Job Stories format if team prefers JTBD framing |
 | `senior-pm/` | Bidirectional | Stakeholder map informs segment weights; triage output informs stakeholder updates |
-| `business-growth/customer-success/` | Bidirectional | CS team is the primary intake source via support tickets and CSAT |
+| `business-growth/customer-success-manager/` | Bidirectional | CS team is the primary intake source via support tickets and CSAT |
 | `sales-success/` | Bidirectional | Sales is the intake source for sales-channel asks; receives won&#x27;t-build rationale |
 
 ---
@@ -748,7 +788,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Customer Feedback Triage&quot;**
-   - Description: &quot;Inbound customer-feedback triage system. Categorize, deduplicate, score, and respond to feature requests from support, sales, NPS, in-app feedback, and exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.&quot;
+   - Description: &quot;Cluster, score and route inbound feature requests from support, sales, NPS and exec asks, and draft honest replies. Use when a feedback queue needs triaging or a customer needs a defensible yes, no or exploring answer.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -808,15 +848,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/execution/customer-feedback-triage/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code># Triage a JSON queue of inbound feedback
-python scripts/feedback_triage.py --input queue.json --format markdown
-
-# See a sample triage queue across all 6 output formats
-python scripts/feedback_triage.py --demo --format markdown
-</code></pre>
-
-The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`. The 6-phase workflow (intake → triage → categorize → score → respond → feed forward) and the scoring formula live in the workflow guide reference.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/customer-feedback-triage/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

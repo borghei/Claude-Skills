@@ -2,7 +2,6 @@
 
 **Version**: 1.0.0  
 **Last Updated**: 2026-02-16  
-**Authority**: Claude Skills Engineering Team  
 
 ## Overview
 
@@ -39,7 +38,7 @@ Advanced skills that provide comprehensive functionality with sophisticated impl
 ### BASIC Tier Requirements
 
 #### Documentation Requirements
-- **SKILL.md**: Minimum 100 lines of substantial content
+- **SKILL.md**: 40-500 non-blank lines (detail in references/)
 - **Required Sections**: a section on what the skill is for (When to Use, Overview, Core Capabilities) or how to use it (Quick Start, Workflows, Tools) — see `skill-structure-specification.md`
 - **README.md**: Basic usage instructions (200+ characters)
 - **Content Quality**: Clear and functional documentation
@@ -68,7 +67,7 @@ Advanced skills that provide comprehensive functionality with sophisticated impl
 ### STANDARD Tier Requirements
 
 #### Documentation Requirements
-- **SKILL.md**: Minimum 200 lines with comprehensive coverage
+- **SKILL.md**: 40-500 non-blank lines with complete workflows (detail in references/)
 - **Recommended Sections**: Clarify First and Scope & Limitations (reported as warnings)
 - **README.md**: Detailed usage instructions (500+ characters)
 - **References**: Technical documentation in `references/` directory
@@ -99,7 +98,7 @@ Advanced skills that provide comprehensive functionality with sophisticated impl
 ### POWERFUL Tier Requirements
 
 #### Documentation Requirements
-- **SKILL.md**: Minimum 300 lines with expert-level comprehensiveness
+- **SKILL.md**: 40-500 non-blank lines with expert decision guidance (detail in references/)
 - **Recommended Sections**: also an Anti-Patterns section (the authoring standard, P5, asks for 3+ entries; the validator checks that the section exists)
 - **README.md**: Comprehensive guide with installation and setup (1000+ characters)
 - **References**: Multiple technical documents with specifications

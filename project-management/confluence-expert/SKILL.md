@@ -1,17 +1,16 @@
 ---
 name: confluence-expert
 description: >
-  Confluence expert for spaces, knowledge bases, documentation, page layouts,
-  macros, templates, and Jira-Confluence integration. Use for documentation
-  strategy, space architecture, content organization, and collaborative
-  knowledge management.
+  Designs and audits Confluence spaces: page trees, labels, permissions, page ownership
+  and stale content. Use when setting up or restructuring a space, a wiki has gone stale
+  or duplicated, or labels are a mess.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: atlassian
-  updated: 2026-06-15
+  updated: 2026-11-08
   tags: [confluence, knowledge-management, wiki, documentation]
 ---
 # Atlassian Confluence Expert
@@ -44,6 +43,33 @@ Confluence advice depends most on which Confluence the user runs and how much of
 - **What the space is for:** A team workspace, an operational space of runbooks and a published knowledge base need different hierarchies, permissions and review cadences. Operational pages need a named owner and a review date; a scratch team space can be looser.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+## Workflow
+
+1. Settle the Clarify First inputs and get a page export of the space (or the planned tree for a new one).
+2. Run the three tools below on the export to measure structure, content health and labels before proposing changes.
+3. Design the target tree, ownership and review cadence from `references/confluence-playbook.md`; check it against `references/red-flags.md`.
+4. Done when the re-run on the restructured export shows no root sprawl, every operational page has an owner, and no top topic has duplicate pages.
+
+## Tools
+
+Each tool reads one JSON export and prints a text report (`--json` for machine output).
+`--example` prints the input shape; samples ship in `assets/`. Exit 0 on success, 2 on bad
+input (missing file, invalid JSON, wrong shape) with a one-line error.
+
+```bash
+python3 project-management/confluence-expert/scripts/space_structure_analyzer.py --space project-management/confluence-expert/assets/sample_space.json
+python3 project-management/confluence-expert/scripts/content_health_auditor.py --pages project-management/confluence-expert/assets/sample_pages.json
+python3 project-management/confluence-expert/scripts/label_taxonomy_analyzer.py --labels project-management/confluence-expert/assets/sample_labels.json
+```
+
+| Tool | What it does |
+|------|--------------|
+| `space_structure_analyzer.py` | Depth distribution, root-page count, short and duplicate titles; structure score |
+| `content_health_auditor.py` | Per-page score for stale (>12 months) or aging (>6 months), orphaned, ownerless and unlabelled pages. Age is measured from the export's `as_of`, else its newest `last_updated` |
+| `label_taxonomy_analyzer.py` | Label coverage, top and single-use labels, case conflicts (`Engineering` vs `engineering`), labels with spaces or underscores |
+
+Template design and template governance belong to `atlassian-templates`; this skill decides where pages and templates live in a space.
 
 ## Anti-Patterns
 
@@ -80,13 +106,10 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Limitations:** Confluence Cloud has storage limits per plan tier that affect attachment-heavy spaces. Advanced analytics (page view trends, contributor activity) require Confluence Premium or marketplace apps. Space-level permissions cannot override more restrictive org-wide security policies set by `atlassian-admin/`. Content migration between spaces can break internal links and require manual fixup. Confluence Data Center reaches end of life on 28 Mar 2029 (read-only; no new/expanded DC licenses after 30 Mar 2028) -- plan space restructuring around a Cloud migration rather than on DC ([timeline](https://www.atlassian.com/licensing/data-center-end-of-life); see `atlassian-admin/`).
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `jira-expert/` | Bidirectional | Jira macros in Confluence pages; Confluence page links in Jira issue descriptions |
-| `atlassian-admin/` | Admin -> Confluence | Global templates, space permission schemes, blueprint configuration |
-| `atlassian-templates/` | Templates -> Confluence | Designed templates deployed to spaces; template usage guidelines |
-| `scrum-master/` | SM -> Confluence | Sprint ceremony documentation needs, team working agreement pages |
-| `senior-pm/` | PM -> Confluence | Executive report pages, portfolio documentation, stakeholder communication |
-| `delivery-manager/` | DM -> Confluence | Post-mortem documentation, runbooks, release notes pages |
+| File | Purpose |
+|------|---------|
+| `scripts/space_structure_analyzer.py`, `scripts/content_health_auditor.py`, `scripts/label_taxonomy_analyzer.py` | See Tools |
+| `assets/sample_space.json`, `assets/sample_pages.json`, `assets/sample_labels.json` | Runnable inputs for each tool |
+| `references/*.md` | See References |

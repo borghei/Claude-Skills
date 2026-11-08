@@ -2,6 +2,11 @@
 
 Detailed metrics and calculations used in technology stack evaluation.
 
+> All cost, salary, hosting and benchmark figures in this file are illustrative, not current
+> market data. The tools never fetch data: supply your own inputs (from your payroll, the
+> provider's pricing calculator, the project's registry and advisory pages) and cite where each
+> number came from.
+
 ---
 
 ## Table of Contents

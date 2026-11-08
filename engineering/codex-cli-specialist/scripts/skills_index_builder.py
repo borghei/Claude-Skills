@@ -427,7 +427,7 @@ def main() -> None:
 
     if not Path(args.skills_dir).is_dir():
         print(f"Error: '{args.skills_dir}' is not a directory", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     index = build_index(args.skills_dir, category_filter=args.category)
 

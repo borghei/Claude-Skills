@@ -11,8 +11,13 @@ Features:
 
 Usage:
     python rag_evaluator.py --contexts contexts.json --questions questions.json
-    python rag_evaluator.py --contexts ctx.json --questions q.json --metrics relevance,faithfulness
+    python rag_evaluator.py --contexts ctx.json --questions q.json --min-faithfulness 0.7
     python rag_evaluator.py --contexts ctx.json --questions q.json --output report.json --verbose
+
+Scores are lexical (word overlap, ROUGE-L), not semantic: a paraphrased but correct answer
+scores low and a fluent answer that copies context words scores high. Use them to triage,
+then read the flagged answers.
+Exit codes: 0 ok, 1 average faithfulness below --min-faithfulness, 2 bad input.
 """
 
 import argparse
@@ -200,7 +205,13 @@ def check_claim_support(claim: str, context: str) -> Tuple[bool, float]:
     # Combined support score
     support_score = 0.5 * support_ratio + 0.5 * rouge_score
 
-    return support_score > 0.3, support_score
+    # A number in the claim that the context never states is a fabricated specific
+    # (the most common harmful hallucination), whatever the word overlap says.
+    number = r'\d+(?:[.,]\d+)?'
+    if set(re.findall(number, claim)) - set(re.findall(number, context)):
+        return False, round(min(support_score, 0.2), 3)
+
+    return support_score > 0.4, support_score
 
 
 def evaluate_answer_faithfulness(
@@ -517,6 +528,8 @@ contexts.json:
 
     parser.add_argument('--contexts', '-c', required=True, help='JSON file with retrieved contexts')
     parser.add_argument('--questions', '-q', required=True, help='JSON file with questions and answers')
+    parser.add_argument('--min-faithfulness', type=float,
+                        help='Exit 1 when average faithfulness is below this value (0-1)')
     parser.add_argument('--k', type=int, default=5, help='Number of top contexts to evaluate (default: 5)')
     parser.add_argument('--output', '-o', help='Output file for detailed report (JSON)')
     parser.add_argument('--json', '-j', action='store_true', help='Output as JSON instead of text')
@@ -529,20 +542,30 @@ contexts.json:
     contexts_path = Path(args.contexts)
     questions_path = Path(args.questions)
 
-    if not contexts_path.exists():
-        print(f"Error: Contexts file not found: {args.contexts}", file=sys.stderr)
-        sys.exit(1)
+    if not contexts_path.is_file():
+        print(f"error: contexts file not found: {args.contexts}", file=sys.stderr)
+        sys.exit(2)
 
-    if not questions_path.exists():
-        print(f"Error: Questions file not found: {args.questions}", file=sys.stderr)
-        sys.exit(1)
+    if not questions_path.is_file():
+        print(f"error: questions file not found: {args.questions}", file=sys.stderr)
+        sys.exit(2)
 
     try:
         contexts = json.loads(contexts_path.read_text(encoding='utf-8'))
         questions = json.loads(questions_path.read_text(encoding='utf-8'))
-    except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON format: {e}", file=sys.stderr)
-        sys.exit(1)
+    except (json.JSONDecodeError, UnicodeDecodeError, OSError) as e:
+        print(f"error: invalid JSON input: {e}", file=sys.stderr)
+        sys.exit(2)
+
+    # Both files must be lists of objects (see the expected keys in --help)
+    for label, data, keys in (("contexts", contexts, "content/text, question_id"),
+                              ("questions", questions, "id, question, answer")):
+        if not isinstance(data, list) or not all(isinstance(item, dict) for item in data):
+            print(f"error: {label} must be a JSON array of objects with keys like {keys}", file=sys.stderr)
+            sys.exit(2)
+        if not data:
+            print(f"error: {label} file is empty", file=sys.stderr)
+            sys.exit(2)
 
     # Run evaluation
     report = evaluate_rag_system(questions, contexts, k=args.k, verbose=args.verbose)
@@ -567,8 +590,12 @@ contexts.json:
     # Save to file
     if args.output:
         Path(args.output).write_text(json.dumps(asdict(report), indent=2))
-        print(f"\nDetailed report saved to {args.output}")
+        print(f"\nDetailed report saved to {args.output}", file=sys.stderr)
+
+    # Gate: below the faithfulness floor means answers make claims the contexts do not support
+    if args.min_faithfulness is not None and report.avg_faithfulness < args.min_faithfulness:
+        sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

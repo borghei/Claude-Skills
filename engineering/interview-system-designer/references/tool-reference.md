@@ -11,7 +11,7 @@ unexpected output, or checking results against the quality bar.
 
 **Usage:**
 ```bash
-python loop_designer.py --role "Senior Software Engineer" --level senior --team platform --output loops/
+python3 scripts/loop_designer.py --role "Senior Software Engineer" --level senior --team platform --output loops/
 ```
 
 **Flags/Parameters:**
@@ -28,13 +28,13 @@ python loop_designer.py --role "Senior Software Engineer" --level senior --team 
 
 **Example:**
 ```bash
-python loop_designer.py --role "Staff Data Scientist" --level staff --competencies ml,statistics,leadership --format json --output loops/ds-staff.json
+python3 scripts/loop_designer.py --role "Staff Data Scientist" --level staff --competencies ml,statistics,leadership --format json --output loops/ds-staff.json
 ```
 
 **Output Formats:**
 - **JSON:** Structured loop definition with rounds array, competency mappings, time allocations, and scorecard templates suitable for programmatic consumption.
 - **Text:** Human-readable interview guide with formatted round descriptions, interviewer requirements, and evaluation criteria.
-- **Both (default):** Writes both JSON and text outputs to the specified directory.
+- **Both (default):** With `--output`, writes JSON and text files there; without `--output`, prints the text report to stdout and writes nothing.
 
 ### question_bank_generator.py
 
@@ -42,7 +42,7 @@ python loop_designer.py --role "Staff Data Scientist" --level staff --competenci
 
 **Usage:**
 ```bash
-python question_bank_generator.py --role "Frontend Engineer" --competencies react,typescript,system-design --output questions/
+python3 scripts/question_bank_generator.py --role "Frontend Engineer" --competencies react,typescript,system-design --output questions/
 ```
 
 **Flags/Parameters:**
@@ -60,13 +60,13 @@ python question_bank_generator.py --role "Frontend Engineer" --competencies reac
 
 **Example:**
 ```bash
-python question_bank_generator.py --role "Product Manager" --level mid --question-types behavioral,situational --num-questions 30 --format text
+python3 scripts/question_bank_generator.py --role "Product Manager" --level mid --question-types behavioral,situational --num-questions 30 --format text
 ```
 
 **Output Formats:**
 - **JSON:** Array of question objects each containing the question text, competency area, difficulty level, scoring rubric (1-4 scale), follow-up probes, and calibration examples (poor/good/great answers).
 - **Text:** Formatted question bank grouped by competency with inline scoring guidance and example answers for interviewer reference.
-- **Both (default):** Writes both JSON and text outputs to the specified directory.
+- **Both (default):** With `--output`, writes JSON and text files there; without `--output`, prints the text report to stdout and writes nothing.
 
 ### hiring_calibrator.py
 
@@ -74,7 +74,7 @@ python question_bank_generator.py --role "Product Manager" --level mid --questio
 
 **Usage:**
 ```bash
-python hiring_calibrator.py --input interview_results.json --analysis-type comprehensive --output report.json
+python3 scripts/hiring_calibrator.py --input interview_results.json --analysis-type comprehensive --output report.json
 ```
 
 **Flags/Parameters:**
@@ -91,20 +91,20 @@ python hiring_calibrator.py --input interview_results.json --analysis-type compr
 
 **Example:**
 ```bash
-python hiring_calibrator.py --input q1_interviews.json --analysis-type bias --competencies technical,leadership --trend-analysis --period quarterly --format json --output calibration/q1_bias.json
+python3 scripts/hiring_calibrator.py --input q1_interviews.json --analysis-type bias --competencies technical,leadership --trend-analysis --period quarterly --format json --output calibration/q1_bias.json
 ```
 
 **Output Formats:**
 - **JSON:** Structured calibration report containing score distributions, interviewer deviation metrics, bias indicators, trend data (if enabled), and prioritized coaching recommendations.
 - **Text:** Human-readable report with summary statistics, flagged interviewers, bias findings, and actionable improvement recommendations formatted for management review.
-- **Both (default):** Writes both JSON and text outputs to the specified path.
+- **Both (default):** With `--output`, writes JSON and text files there; without `--output`, prints the text report to stdout and writes nothing.
 
 ## Troubleshooting
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
 | Loop designer produces generic rounds with no role-specific focus | The `--competencies` flag was omitted, so the tool falls back to default competency mapping for the role family | Re-run with explicit `--competencies` listing the 3-5 most critical skills for the position |
-| Question bank output has too many behavioral questions and too few technical ones | The `--question-types` flag was not provided, causing the generator to use a balanced default split | Supply `--question-types technical,system-design` (or whichever mix is needed) to control the ratio |
+| Question bank output has too many behavioral questions and too few technical ones | The `--question-types` flag was not provided, causing the generator to use a balanced default split | Supply `--question-types technical,situational` (or whichever mix is needed) to control the ratio |
 | Hiring calibrator reports "insufficient data" for bias detection | The input JSON contains fewer than 10 interview records, which is below the statistical minimum | Collect more interview data before running bias analysis; use `--analysis-type scoring` for small datasets |
 | Calibrator trend analysis returns empty results | The input data lacks date fields or all records fall within a single period | Ensure each interview record has a valid date field and that the dataset spans multiple periods matching `--period` |
 | Loop designer ignores the `--team` flag | The team value does not match any of the predefined team mappings in the tool | Check supported team names in the tool's `TEAM_CONFIGS` dictionary, or omit `--team` and rely on competency overrides |

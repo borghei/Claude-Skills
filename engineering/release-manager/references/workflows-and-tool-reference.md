@@ -149,7 +149,7 @@ git log --oneline v1.2.0..HEAD | python changelog_generator.py \
 ```
 
 **Output Formats:**
-- **markdown**: Keep a Changelog format with sections for Breaking Changes, Added, Changed, Deprecated, Removed, Fixed, Security. Commits grouped by scope within each section.
+- **markdown**: Keep a Changelog format with sections for Breaking Changes, Added, Changed, Deprecated, Removed, Fixed, Security. Breaking commits appear once, under Breaking Changes; within a section, entries sort by scope and carry a bold `scope:` prefix. `perf` commits go under Changed.
 - **json**: Structured object with `version`, `date`, `summary` (counts by type, by author, scopes, issue references), and `categories` (arrays of commit objects per category).
 - **both**: Markdown changelog followed by JSON output, each with a heading separator.
 
@@ -221,6 +221,7 @@ python release_planner.py -i plan.json -f markdown --include-checklist --include
 | `--include-communication` | | flag | false | Include stakeholder communication plan with timeline and message templates |
 | `--include-rollback` | | flag | false | Include rollback runbook with step-by-step procedures, triggers, and verification checks |
 | `--min-coverage` | | float | `80.0` | Minimum test coverage threshold percentage for quality gate validation |
+| `--as-of` | | string | plan `as_of`, else today | Date the timeline check measures from (YYYY-MM-DD); pin it for reproducible reports |
 
 **Example:**
 ```bash
@@ -235,7 +236,7 @@ python release_planner.py \
 ```
 
 **Input JSON Structure:**
-The input file expects a JSON object with keys: `release_name`, `version`, `target_date` (ISO format), `features` (array of feature objects with `id`, `title`, `type`, `status`, `risk_level`, approvals, etc.), `quality_gates` (optional array), `stakeholders` (optional array), and `rollback_steps` (optional array). When `quality_gates` or `rollback_steps` are omitted, sensible defaults are generated automatically.
+The input file expects a JSON object with keys: `release_name`, `version`, `target_date` (ISO format), optional `as_of` (ISO date the timeline is measured from), `features` (array of feature objects with `id`, `title`, `type`, `status`, `risk_level`, approvals, etc.), `quality_gates` (optional array), `stakeholders` (optional array), and `rollback_steps` (optional array). When `quality_gates` or `rollback_steps` are omitted, sensible defaults are generated automatically.
 
 **Output Formats:**
 - **text**: Plain text report with status, readiness score, blocking issues, warnings, recommendations, feature summary, and quality gate summary.

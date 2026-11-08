@@ -13,6 +13,7 @@ Output: release readiness report + checklist + rollback runbook + announcement d
 
 import argparse
 import json
+import re
 import sys
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any, Union
@@ -58,7 +59,7 @@ class Feature:
     qa_approved: bool = False
     security_approved: bool = False
     pm_approved: bool = False
-    
+
     def __post_init__(self):
         if self.breaking_changes is None:
             self.breaking_changes = []
@@ -100,41 +101,44 @@ class RollbackStep:
 
 class ReleasePlanner:
     """Main release planning and assessment logic."""
-    
+
     def __init__(self):
         self.release_name: str = ""
         self.version: str = ""
         self.target_date: Optional[datetime] = None
+        self.as_of: Optional[datetime] = None  # 'now' for the timeline check
         self.features: List[Feature] = []
         self.quality_gates: List[QualityGate] = []
         self.stakeholders: List[Stakeholder] = []
         self.rollback_steps: List[RollbackStep] = []
-        
+
         # Configuration
         self.min_test_coverage = 80.0
         self.required_approvals = ['pm_approved', 'qa_approved']
         self.high_risk_approval_requirements = ['pm_approved', 'qa_approved', 'security_approved']
-        
+
     def load_release_plan(self, plan_data: Union[str, Dict]):
         """Load release plan from JSON."""
         if isinstance(plan_data, str):
             data = json.loads(plan_data)
         else:
             data = plan_data
-        
+
         self.release_name = data.get('release_name', 'Unnamed Release')
         self.version = data.get('version', '1.0.0')
-        
+
+        if 'as_of' in data and self.as_of is None:
+            self.as_of = datetime.fromisoformat(data['as_of'].replace('Z', '+00:00'))
         if 'target_date' in data:
             self.target_date = datetime.fromisoformat(data['target_date'].replace('Z', '+00:00'))
-        
+
         # Load features
         self.features = []
         for feature_data in data.get('features', []):
             try:
                 status = ComponentStatus(feature_data.get('status', 'pending'))
                 risk_level = RiskLevel(feature_data.get('risk_level', 'medium'))
-                
+
                 feature = Feature(
                     id=feature_data['id'],
                     title=feature_data['title'],
@@ -157,9 +161,9 @@ class ReleasePlanner:
                 )
                 self.features.append(feature)
             except Exception as e:
-                print(f"Warning: Error parsing feature {feature_data.get('id', 'unknown')}: {e}", 
+                print(f"Warning: Error parsing feature {feature_data.get('id', 'unknown')}: {e}",
                       file=sys.stderr)
-        
+
         # Load quality gates
         self.quality_gates = []
         for gate_data in data.get('quality_gates', []):
@@ -175,9 +179,9 @@ class ReleasePlanner:
                 )
                 self.quality_gates.append(gate)
             except Exception as e:
-                print(f"Warning: Error parsing quality gate {gate_data.get('name', 'unknown')}: {e}", 
+                print(f"Warning: Error parsing quality gate {gate_data.get('name', 'unknown')}: {e}",
                       file=sys.stderr)
-        
+
         # Load stakeholders
         self.stakeholders = []
         for stakeholder_data in data.get('stakeholders', []):
@@ -189,11 +193,11 @@ class ReleasePlanner:
                 critical_path=stakeholder_data.get('critical_path', False)
             )
             self.stakeholders.append(stakeholder)
-        
+
         # Load or generate default quality gates if none provided
         if not self.quality_gates:
             self._generate_default_quality_gates()
-        
+
         # Load or generate default rollback steps
         if 'rollback_steps' in data:
             self.rollback_steps = []
@@ -210,7 +214,7 @@ class ReleasePlanner:
                 self.rollback_steps.append(step)
         else:
             self._generate_default_rollback_steps()
-    
+
     def _generate_default_quality_gates(self):
         """Generate default quality gates."""
         default_gates = [
@@ -246,7 +250,7 @@ class ReleasePlanner:
                 'details': 'All dependencies scanned for vulnerabilities'
             }
         ]
-        
+
         self.quality_gates = []
         for gate_data in default_gates:
             gate = QualityGate(
@@ -257,7 +261,7 @@ class ReleasePlanner:
                 threshold=gate_data.get('threshold')
             )
             self.quality_gates.append(gate)
-    
+
     def _generate_default_rollback_steps(self):
         """Generate default rollback procedure."""
         default_steps = [
@@ -301,7 +305,7 @@ class ReleasePlanner:
                 'verification': 'All stakeholders acknowledge rollback completion'
             }
         ]
-        
+
         self.rollback_steps = []
         for step_data in default_steps:
             risk_level = RiskLevel(step_data.get('risk_level', 'low'))
@@ -314,7 +318,7 @@ class ReleasePlanner:
                 verification=step_data.get('verification', '')
             )
             self.rollback_steps.append(step)
-    
+
     def assess_release_readiness(self) -> Dict:
         """Assess overall release readiness."""
         assessment = {
@@ -327,10 +331,10 @@ class ReleasePlanner:
             'quality_gate_summary': {},
             'timeline_assessment': {}
         }
-        
+
         total_score = 0
         max_score = 0
-        
+
         # Assess features
         feature_stats = {
             'total': len(self.features),
@@ -343,10 +347,10 @@ class ReleasePlanner:
             'missing_approvals': 0,
             'low_test_coverage': 0
         }
-        
+
         for feature in self.features:
             max_score += 10  # Each feature worth 10 points
-            
+
             if feature.status == ComponentStatus.READY:
                 feature_stats['ready'] += 1
                 total_score += 10
@@ -366,15 +370,15 @@ class ReleasePlanner:
                 assessment['warnings'].append(
                     f"Feature '{feature.title}' ({feature.id}) is pending"
                 )
-            
+
             # Check risk level
             if feature.risk_level in [RiskLevel.HIGH, RiskLevel.CRITICAL]:
                 feature_stats['high_risk'] += 1
-            
+
             # Check breaking changes
             if feature.breaking_changes:
                 feature_stats['breaking_changes'] += 1
-            
+
             # Check approvals
             missing_approvals = self._check_feature_approvals(feature)
             if missing_approvals:
@@ -382,18 +386,18 @@ class ReleasePlanner:
                 assessment['blocking_issues'].append(
                     f"Feature '{feature.title}' missing approvals: {', '.join(missing_approvals)}"
                 )
-            
+
             # Check test coverage
-            if (feature.test_coverage_actual is not None and 
+            if (feature.test_coverage_actual is not None and
                 feature.test_coverage_actual < feature.test_coverage_required):
                 feature_stats['low_test_coverage'] += 1
                 assessment['warnings'].append(
                     f"Feature '{feature.title}' has low test coverage: "
                     f"{feature.test_coverage_actual}% < {feature.test_coverage_required}%"
                 )
-        
+
         assessment['feature_summary'] = feature_stats
-        
+
         # Assess quality gates
         gate_stats = {
             'total': len(self.quality_gates),
@@ -402,10 +406,10 @@ class ReleasePlanner:
             'pending': 0,
             'required_failed': 0
         }
-        
+
         for gate in self.quality_gates:
             max_score += 5  # Each gate worth 5 points
-            
+
             if gate.status == ComponentStatus.READY:
                 gate_stats['passed'] += 1
                 total_score += 5
@@ -422,29 +426,33 @@ class ReleasePlanner:
                     assessment['warnings'].append(
                         f"Required quality gate '{gate.name}' is pending"
                     )
-        
+
         assessment['quality_gate_summary'] = gate_stats
-        
+
         # Timeline assessment
         if self.target_date:
             # Handle timezone-aware datetime comparison
-            now = datetime.now(self.target_date.tzinfo) if self.target_date.tzinfo else datetime.now()
+            now = self.as_of or datetime.now()
+            if self.target_date.tzinfo and not now.tzinfo:
+                now = now.replace(tzinfo=self.target_date.tzinfo)
+            elif now.tzinfo and not self.target_date.tzinfo:
+                now = now.replace(tzinfo=None)
             days_until_release = (self.target_date - now).days
             assessment['timeline_assessment'] = {
                 'target_date': self.target_date.isoformat(),
                 'days_remaining': days_until_release,
                 'timeline_status': 'on_track' if days_until_release > 0 else 'overdue'
             }
-            
+
             if days_until_release < 0:
                 assessment['blocking_issues'].append(f"Release is {abs(days_until_release)} days overdue")
             elif days_until_release < 3 and feature_stats['blocked'] > 0:
                 assessment['blocking_issues'].append("Not enough time to resolve blocked features")
-        
+
         # Calculate overall readiness score
         if max_score > 0:
             assessment['readiness_score'] = (total_score / max_score) * 100
-        
+
         # Determine overall status
         if assessment['blocking_issues']:
             assessment['overall_status'] = 'blocked'
@@ -452,46 +460,46 @@ class ReleasePlanner:
             assessment['overall_status'] = 'at_risk'
         else:
             assessment['overall_status'] = 'ready'
-        
+
         # Generate recommendations
         if feature_stats['missing_approvals'] > 0:
             assessment['recommendations'].append("Obtain required approvals for pending features")
-        
+
         if feature_stats['low_test_coverage'] > 0:
             assessment['recommendations'].append("Improve test coverage for features below threshold")
-        
+
         if gate_stats['pending'] > 0:
             assessment['recommendations'].append("Complete pending quality gate validations")
-        
+
         if feature_stats['high_risk'] > 0:
             assessment['recommendations'].append("Review high-risk features for additional validation")
-        
+
         return assessment
-    
+
     def _check_feature_approvals(self, feature: Feature) -> List[str]:
         """Check which approvals are missing for a feature."""
         missing = []
-        
+
         # Determine required approvals based on risk level
         required = self.required_approvals.copy()
         if feature.risk_level in [RiskLevel.HIGH, RiskLevel.CRITICAL]:
             required = self.high_risk_approval_requirements.copy()
-        
+
         if 'pm_approved' in required and not feature.pm_approved:
             missing.append('PM approval')
-        
+
         if 'qa_approved' in required and not feature.qa_approved:
             missing.append('QA approval')
-        
+
         if 'security_approved' in required and not feature.security_approved:
             missing.append('Security approval')
-        
+
         return missing
-    
+
     def generate_release_checklist(self) -> List[Dict]:
         """Generate comprehensive release checklist."""
         checklist = []
-        
+
         # Pre-release validation
         checklist.extend([
             {
@@ -501,7 +509,7 @@ class ReleasePlanner:
                 'details': f"{len([f for f in self.features if f.status == ComponentStatus.READY])}/{len(self.features)} features ready"
             },
             {
-                'category': 'Pre-Release Validation', 
+                'category': 'Pre-Release Validation',
                 'item': 'Breaking changes documented',
                 'status': 'ready' if self._check_breaking_change_docs() else 'pending',
                 'details': f"{len([f for f in self.features if f.breaking_changes])} features have breaking changes"
@@ -513,7 +521,7 @@ class ReleasePlanner:
                 'details': f"{len([f for f in self.features if f.requires_migration])} features require migrations"
             }
         ])
-        
+
         # Quality gates
         for gate in self.quality_gates:
             checklist.append({
@@ -523,37 +531,37 @@ class ReleasePlanner:
                 'details': gate.details,
                 'required': gate.required
             })
-        
+
         # Approvals
         approval_items = [
             ('Product Manager sign-off', self._check_pm_approvals()),
-            ('QA validation complete', self._check_qa_approvals()), 
+            ('QA validation complete', self._check_qa_approvals()),
             ('Security team clearance', self._check_security_approvals())
         ]
-        
+
         for item, status in approval_items:
             checklist.append({
                 'category': 'Approvals',
                 'item': item,
                 'status': 'ready' if status else 'pending'
             })
-        
+
         # Documentation
         doc_items = [
             'CHANGELOG.md updated',
-            'API documentation updated', 
+            'API documentation updated',
             'User documentation updated',
             'Migration guide written',
             'Rollback procedure documented'
         ]
-        
+
         for item in doc_items:
             checklist.append({
                 'category': 'Documentation',
                 'item': item,
                 'status': 'pending'  # Would need integration with docs system to check
             })
-        
+
         # Deployment preparation
         deployment_items = [
             'Database migrations prepared',
@@ -562,39 +570,39 @@ class ReleasePlanner:
             'Rollback plan tested',
             'Stakeholders notified'
         ]
-        
+
         for item in deployment_items:
             checklist.append({
                 'category': 'Deployment',
                 'item': item,
                 'status': 'pending'
             })
-        
+
         return checklist
-    
+
     def _check_breaking_change_docs(self) -> bool:
         """Check if breaking changes are properly documented."""
         features_with_breaking_changes = [f for f in self.features if f.breaking_changes]
         return all(len(f.breaking_changes) > 0 for f in features_with_breaking_changes)
-    
+
     def _check_migrations(self) -> bool:
         """Check migration readiness."""
         features_with_migrations = [f for f in self.features if f.requires_migration]
         return all(f.status == ComponentStatus.READY for f in features_with_migrations)
-    
+
     def _check_pm_approvals(self) -> bool:
         """Check PM approvals."""
         return all(f.pm_approved for f in self.features if f.risk_level != RiskLevel.LOW)
-    
+
     def _check_qa_approvals(self) -> bool:
-        """Check QA approvals.""" 
+        """Check QA approvals."""
         return all(f.qa_approved for f in self.features)
-    
+
     def _check_security_approvals(self) -> bool:
         """Check security approvals."""
         high_risk_features = [f for f in self.features if f.risk_level in [RiskLevel.HIGH, RiskLevel.CRITICAL]]
         return all(f.security_approved for f in high_risk_features)
-    
+
     def generate_communication_plan(self) -> Dict:
         """Generate stakeholder communication plan."""
         plan = {
@@ -604,13 +612,13 @@ class ReleasePlanner:
             'channels': {},
             'templates': {}
         }
-        
+
         # Group stakeholders by type
-        internal_stakeholders = [s for s in self.stakeholders if s.role in 
+        internal_stakeholders = [s for s in self.stakeholders if s.role in
                                ['developer', 'qa', 'pm', 'devops', 'security']]
-        external_stakeholders = [s for s in self.stakeholders if s.role in 
+        external_stakeholders = [s for s in self.stakeholders if s.role in
                                ['customer', 'partner', 'support']]
-        
+
         # Internal notifications
         for stakeholder in internal_stakeholders:
             plan['internal_notifications'].append({
@@ -620,7 +628,7 @@ class ReleasePlanner:
                 'content_type': 'technical_details',
                 'timing': 'T-24h and T-0'
             })
-        
+
         # External notifications
         for stakeholder in external_stakeholders:
             plan['external_notifications'].append({
@@ -630,7 +638,7 @@ class ReleasePlanner:
                 'content_type': 'user_facing_changes',
                 'timing': 'T-48h and T+1h'
             })
-        
+
         # Communication timeline
         if self.target_date:
             timeline_items = [
@@ -641,7 +649,7 @@ class ReleasePlanner:
                 (timedelta(hours=1), 'Post-deployment status update'),
                 (timedelta(hours=24), 'Post-release summary')
             ]
-            
+
             for delta, description in timeline_items:
                 notification_time = self.target_date + delta
                 plan['timeline'].append({
@@ -649,7 +657,7 @@ class ReleasePlanner:
                     'description': description,
                     'recipients': 'all' if 'all' in description.lower() else 'internal'
                 })
-        
+
         # Communication channels
         channels = {}
         for stakeholder in self.stakeholders:
@@ -657,18 +665,18 @@ class ReleasePlanner:
                 channels[stakeholder.notification_type] = []
             channels[stakeholder.notification_type].append(stakeholder.contact)
         plan['channels'] = channels
-        
+
         # Message templates
         plan['templates'] = self._generate_message_templates()
-        
+
         return plan
-    
+
     def _generate_message_templates(self) -> Dict:
         """Generate message templates for different audiences."""
         breaking_changes = [f for f in self.features if f.breaking_changes]
         new_features = [f for f in self.features if f.type == 'feature']
         bug_fixes = [f for f in self.features if f.type == 'bugfix']
-        
+
         templates = {
             'internal_pre_release': {
                 'subject': f'Release {self.version} - Pre-deployment Notification',
@@ -727,9 +735,9 @@ Incident Commander: [TO BE FILLED]
 Status page: [TO BE FILLED]"""
             }
         }
-        
+
         return templates
-    
+
     def generate_rollback_runbook(self) -> Dict:
         """Generate detailed rollback runbook."""
         runbook = {
@@ -748,7 +756,7 @@ Status page: [TO BE FILLED]"""
             },
             'prerequisites': [
                 'Confirm rollback is necessary (check with incident commander)',
-                'Notify stakeholders of rollback decision', 
+                'Notify stakeholders of rollback decision',
                 'Ensure database backups are available',
                 'Verify monitoring systems are operational',
                 'Have communication channels ready'
@@ -781,7 +789,7 @@ Status page: [TO BE FILLED]"""
             ],
             'emergency_contacts': []
         }
-        
+
         # Convert rollback steps to detailed format
         for step in sorted(self.rollback_steps, key=lambda x: x.order):
             step_data = {
@@ -795,7 +803,7 @@ Status page: [TO BE FILLED]"""
                 'rollback_possible': step.risk_level != RiskLevel.CRITICAL
             }
             runbook['steps'].append(step_data)
-        
+
         # Add emergency contacts
         critical_stakeholders = [s for s in self.stakeholders if s.critical_path]
         for stakeholder in critical_stakeholders:
@@ -805,9 +813,9 @@ Status page: [TO BE FILLED]"""
                 'contact': stakeholder.contact,
                 'method': stakeholder.notification_type
             })
-        
+
         return runbook
-    
+
     def _calculate_rollback_time(self) -> str:
         """Calculate estimated total rollback time."""
         total_minutes = 0
@@ -823,7 +831,7 @@ Status page: [TO BE FILLED]"""
             elif 'second' in time_str:
                 # Round up seconds to minutes
                 total_minutes += 1
-        
+
         if total_minutes < 60:
             return f"{total_minutes} minutes"
         else:
@@ -832,53 +840,86 @@ Status page: [TO BE FILLED]"""
             return f"{hours}h {minutes}m"
 
 
+def render_extras(checklist, rollback, communication, md: bool) -> List[str]:
+    """Render the optional sections for text or markdown output (JSON includes them as data)."""
+    h = (lambda t: f"## {t}") if md else (lambda t: f"{t.upper()}:")
+    out: List[str] = []
+    if checklist and not md:  # markdown renders the checklist itself
+        out += [h("Release checklist"), ""]
+        out += [f"  [{'x' if i['status'] == 'ready' else ' '}] {i['category']}: {i['item']}" for i in checklist]
+        out.append("")
+    if rollback:
+        ov = rollback.get("overview", {})
+        out += [h("Rollback runbook"), "", f"Estimated total time: {ov.get('estimated_total_time', '?')}",
+                "Triggers: " + "; ".join(ov.get("triggers", [])), ""]
+        for st in rollback.get("steps", []):
+            out.append(f"{st['order']}. {st['title']} ({st['estimated_time']}, risk {st['risk_level']})")
+            if st.get("command"):
+                out.append(f"   $ {st['command']}")
+            out.append(f"   Verify: {st.get('verification', '')}")
+        out.append("")
+    if communication:
+        out += [h("Communication timeline"), ""]
+        out += [f"- {t['time']} [{t['recipients']}] {t['description']}" for t in communication.get("timeline", [])]
+        out.append("")
+    return out
+
+
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(description="Assess release readiness and generate release plans")
     parser.add_argument('--input', '-i', required=True,
                        help='Release plan JSON file')
     parser.add_argument('--output-format', '-f',
-                       choices=['json', 'markdown', 'text'], 
+                       choices=['json', 'markdown', 'text'],
                        default='text', help='Output format')
     parser.add_argument('--output', '-o', type=str,
                        help='Output file (default: stdout)')
     parser.add_argument('--include-checklist', action='store_true',
                        help='Include release checklist in output')
-    parser.add_argument('--include-communication', action='store_true', 
+    parser.add_argument('--include-communication', action='store_true',
                        help='Include communication plan')
     parser.add_argument('--include-rollback', action='store_true',
                        help='Include rollback runbook')
+    parser.add_argument('--as-of', type=str,
+                       help="Date to measure the timeline from (YYYY-MM-DD); default: plan 'as_of', else today")
     parser.add_argument('--min-coverage', type=float, default=80.0,
                        help='Minimum test coverage threshold')
-    
+
     args = parser.parse_args()
-    
+
     # Load release plan
     try:
         with open(args.input, 'r', encoding='utf-8') as f:
             plan_data = f.read()
     except Exception as e:
-        print(f"Error reading input file: {e}", file=sys.stderr)
-        sys.exit(1)
-    
+        print(f"error: cannot read input file: {e}", file=sys.stderr)
+        sys.exit(2)
+
     # Initialize planner
     planner = ReleasePlanner()
     planner.min_test_coverage = args.min_coverage
-    
+    if args.as_of:
+        try:
+            planner.as_of = datetime.fromisoformat(args.as_of)
+        except ValueError:
+            print(f"error: --as-of must be YYYY-MM-DD, got {args.as_of!r}", file=sys.stderr)
+            sys.exit(2)
+
     try:
         planner.load_release_plan(plan_data)
     except Exception as e:
-        print(f"Error loading release plan: {e}", file=sys.stderr)
-        sys.exit(1)
-    
+        print(f"error: cannot load release plan: {e}", file=sys.stderr)
+        sys.exit(2)
+
     # Generate assessment
     assessment = planner.assess_release_readiness()
-    
+
     # Generate optional components
     checklist = planner.generate_release_checklist() if args.include_checklist else None
     communication = planner.generate_communication_plan() if args.include_communication else None
     rollback = planner.generate_rollback_runbook() if args.include_rollback else None
-    
+
     # Generate output
     if args.output_format == 'json':
         output_data = {
@@ -888,7 +929,7 @@ def main():
             'rollback_runbook': rollback
         }
         output_text = json.dumps(output_data, indent=2, default=str)
-    
+
     elif args.output_format == 'markdown':
         output_lines = [
             f"# Release Readiness Report - {planner.release_name} v{planner.version}",
@@ -897,7 +938,7 @@ def main():
             f"**Readiness Score:** {assessment['readiness_score']:.1f}%",
             ""
         ]
-        
+
         if assessment['blocking_issues']:
             output_lines.extend([
                 "## 🚫 Blocking Issues",
@@ -906,7 +947,7 @@ def main():
             for issue in assessment['blocking_issues']:
                 output_lines.append(f"- {issue}")
             output_lines.append("")
-        
+
         if assessment['warnings']:
             output_lines.extend([
                 "## ⚠️ Warnings",
@@ -915,7 +956,7 @@ def main():
             for warning in assessment['warnings']:
                 output_lines.append(f"- {warning}")
             output_lines.append("")
-        
+
         # Feature summary
         fs = assessment['feature_summary']
         output_lines.extend([
@@ -928,7 +969,7 @@ def main():
             f"- **Breaking Changes:** {fs['breaking_changes']}",
             ""
         ])
-        
+
         if checklist:
             output_lines.extend([
                 "## Release Checklist",
@@ -940,13 +981,14 @@ def main():
                     current_category = item['category']
                     output_lines.append(f"### {current_category}")
                     output_lines.append("")
-                
+
                 status_icon = "✅" if item['status'] == 'ready' else "❌" if item['status'] == 'failed' else "⏳"
                 output_lines.append(f"- {status_icon} {item['item']}")
             output_lines.append("")
-        
+
+        output_lines += render_extras(checklist, rollback, communication, md=True)
         output_text = '\n'.join(output_lines)
-    
+
     else:  # text format
         output_lines = [
             f"Release Readiness Report",
@@ -956,29 +998,29 @@ def main():
             f"Readiness Score: {assessment['readiness_score']:.1f}%",
             ""
         ]
-        
+
         if assessment['blocking_issues']:
             output_lines.extend(["BLOCKING ISSUES:", ""])
             for issue in assessment['blocking_issues']:
                 output_lines.append(f"  ❌ {issue}")
             output_lines.append("")
-        
+
         if assessment['warnings']:
             output_lines.extend(["WARNINGS:", ""])
             for warning in assessment['warnings']:
                 output_lines.append(f"  ⚠️  {warning}")
             output_lines.append("")
-        
+
         if assessment['recommendations']:
             output_lines.extend(["RECOMMENDATIONS:", ""])
             for rec in assessment['recommendations']:
                 output_lines.append(f"  💡 {rec}")
             output_lines.append("")
-        
+
         # Summary stats
         fs = assessment['feature_summary']
         gs = assessment['quality_gate_summary']
-        
+
         output_lines.extend([
             f"FEATURE SUMMARY:",
             f"  Total: {fs['total']} | Ready: {fs['ready']} | Blocked: {fs['blocked']}",
@@ -988,9 +1030,10 @@ def main():
             f"  Total: {gs['total']} | Passed: {gs['passed']} | Failed: {gs['failed']}",
             ""
         ])
-        
+
+        output_lines += render_extras(checklist, rollback, communication, md=False)
         output_text = '\n'.join(output_lines)
-    
+
     # Write output
     if args.output:
         with open(args.output, 'w', encoding='utf-8') as f:

@@ -1,16 +1,16 @@
 ---
 name: jtbd-workshop
 description: >
-  Run a full Jobs-To-Be-Done discovery workshop with switch interviews,
-  forces-of-progress mapping, ODI outcome scoring, and opportunity statements
-  across 2hr, 4hr, and 8hr formats.
+  Plans and runs a 2, 4 or 8-hour Jobs-To-Be-Done workshop: switch interviews, forces of
+  progress, scored outcome statements. Use when you need to know why customers switch,
+  or to ground strategy in jobs before writing PRDs.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-discovery
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: jobs-to-be-done, switch-interviews, forces-of-progress, odi
   tags:
     - jobs-to-be-done
@@ -25,7 +25,7 @@ metadata:
 
 Run a Jobs-To-Be-Done (JTBD) workshop end-to-end. This skill is the workshop facilitation companion to the `execution/job-stories/` skill (the *writing format* for backlog stories). Where `job-stories/` produces When/Want/So statements for individual backlog items, this skill produces the *upstream discovery output* -- the job hierarchy, the forces driving switching behavior, and the desired-outcome statements that anchor product strategy.
 
-The workshop synthesizes four JTBD schools: Christensen's *milkshake* hiring frame, Ulwick's Outcome-Driven Innovation (ODI) with importance/satisfaction scoring, Klement's situation-motivation-outcome canvas (the *job story* format), and Moesta's switch interview method surfacing the four forces of progress (push, pull, anxiety, habit). A well-run workshop produces three artifacts: a ranked job hierarchy with measurable outcome statements, a forces-of-progress map, and a prioritized opportunity list ready to feed PRDs, OKRs, or roadmap themes.
+It combines switch interviews (four forces: push, pull, anxiety, habit) with importance/satisfaction outcome scoring; the theory is in `references/jtbd-method-guide.md`. A well-run workshop produces three artifacts: a ranked job hierarchy with measurable outcome statements, a forces-of-progress map, and a prioritized opportunity list ready to feed PRDs, OKRs, or roadmap themes.
 
 ## Core Capabilities
 
@@ -56,11 +56,14 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+The workflow, start to finish:
+
 1. Pick a format (2h validation / 4h half-day / 8h full-day) by stakes and availability; define the segment.
 2. Recruit 6-12 recent (90-day) switchers and run pre-work switch interviews.
 3. Facilitate the agenda; build the job hierarchy, score outcomes (Importance x Satisfaction), fill the forces canvas.
 4. Convert top-scored outcomes into opportunity statements (`<verb> <object> <context>`) with named owners.
 5. Hand off to `identify-assumptions/`, `brainstorm-experiments/`, or `create-prd/`. Revisit quarterly.
+6. Verify that every top outcome statement is scored by real switchers, each force on the canvas cites an interview, and each opportunity has an owner before calling it done.
 
 ## Anti-Patterns
 
@@ -99,16 +102,13 @@ Workshop templates live in `assets/`: `workshop_agenda_2hr.md`, `workshop_agenda
 
 **Caveats:** switch interviews require *recent* (90-day) switchers; the 2-hour format is for validation, not primary discovery; ODI scoring is sensitive to who is in the room (internal scores are hypotheses, customer-derived scores are truth); a workshop without customer voice produces team-aligned fiction.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/customer-interview-script/` | Receives from | Switch interviews use the base interview script structure |
-| `discovery/interview-synthesis/` | Receives from | Synthesized themes seed the snippet wall on workshop day |
-| `discovery/identify-assumptions/` | Feeds into | Top outcomes become assumptions to test |
-| `discovery/brainstorm-experiments/` | Feeds into | Forces-of-progress weaknesses become experiment hypotheses |
-| `discovery/value-proposition-canvas/` | Feeds into | Jobs, pains, gains populate the Customer Profile |
-| `execution/job-stories/` | Feeds into | Job + outcome decomposition becomes When/Want/So backlog stories |
-| `execution/create-prd/` | Feeds into | Job hierarchy populates PRD Section 5; outcomes populate Section 6 |
-| `execution/outcome-roadmap/` | Feeds into | Top desired outcomes become roadmap themes |
-| `execution/north-star-metric/` | Feeds into | The highest-priority outcome often becomes the input metric tree root |
+| File | Purpose |
+|------|---------|
+| `assets/workshop_agenda_2hr.md`, `assets/workshop_agenda_4hr.md`, `assets/workshop_agenda_8hr.md` | Agendas by format |
+| `assets/pre_work_email.md`, `assets/switch_interview_script.md`, `assets/forces_of_progress_canvas.md` | Pre-work, interview script, forces canvas |
+| `references/facilitation-playbook.md`, `references/jtbd-method-guide.md`, `references/red-flags.md` | Facilitation, method, failure modes |
+| `examples/calendar-tool-4hr-workshop-output.md` | Worked 4-hour workshop output |
+
+Use `value-proposition-canvas` once the jobs are known and you are designing the offer against them.

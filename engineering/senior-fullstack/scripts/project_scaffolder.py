@@ -24,7 +24,7 @@ from typing import Dict, List, Optional
 TEMPLATES = {
     "nextjs": {
         "name": "Next.js Full Stack",
-        "description": "Next.js 14+ with App Router, TypeScript, Tailwind CSS",
+        "description": "Next.js 16 with App Router, React 19, TypeScript, Tailwind CSS v4",
         "structure": {
             "src/app": ["layout.tsx", "page.tsx", "globals.css", "api/health/route.ts"],
             "src/components/ui": ["Button.tsx", "Card.tsx", "Input.tsx"],
@@ -32,8 +32,8 @@ TEMPLATES = {
             "src/lib": ["utils.ts", "db.ts"],
             "src/types": ["index.ts"],
             "public": [],
-            "": ["package.json", "tsconfig.json", "tailwind.config.ts", "next.config.js",
-                 ".env.example", ".gitignore", "README.md"]
+            "": ["package.json", "tsconfig.json", "tailwind.config.ts", "postcss.config.mjs", "eslint.config.mjs",
+                 "next.config.js", ".env.example", ".gitignore", "README.md"]
         }
     },
     "fastapi-react": {
@@ -119,9 +119,8 @@ export default function RootLayout({{
   );
 }}
 ''',
-        "globals.css": '''@tailwind base;
-@tailwind components;
-@tailwind utilities;
+        "globals.css": '''@import "tailwindcss";
+@config "../../tailwind.config.ts";
 ''',
         "route.ts": '''import { NextResponse } from "next/server";
 
@@ -230,7 +229,7 @@ export const db = {
   // Placeholder - configure your database
 };
 ''',
-        "index.ts": '''export interface User {
+        "types_index.ts": '''export interface User {
   id: string;
   email: string;
   name: string | null;
@@ -331,7 +330,7 @@ class User(Base):
         "requirements.txt": '''fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
 sqlalchemy>=2.0.0
-pydantic>=2.0.0
+pydantic[email]>=2.0.0
 pydantic-settings>=2.0.0
 alembic>=1.12.0
 psycopg2-binary>=2.9.0
@@ -343,7 +342,7 @@ script_location = alembic
 sqlalchemy.url = driver://user:pass@localhost/dbname
 ''',
         # Express files
-        "index.ts": '''import express from "express";
+        "server_index.ts": '''import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import routes from "./routes";
@@ -440,9 +439,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><App /></React.StrictMode>
 );
 ''',
-        "index.css": '''@tailwind base;
-@tailwind components;
-@tailwind utilities;
+        "index.css": '''@import "tailwindcss";
 ''',
         "Layout.tsx": f'''import {{ ReactNode }} from "react";
 
@@ -507,9 +504,10 @@ export const api = {
 ''',
         "vite.config.ts": '''import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   server: {
     port: 5173,
     proxy: { "/api": { target: "http://localhost:8000", changeOrigin: true } },
@@ -614,10 +612,18 @@ if __name__ == "__main__":
 ''',
         # Config files
         "package.json": f'''{{"name": "{project_name}", "version": "0.1.0", "private": true,
-  "scripts": {{"dev": "next dev", "build": "next build", "start": "next start", "lint": "next lint"}},
-  "dependencies": {{"next": "^14.0.0", "react": "^18.2.0", "react-dom": "^18.2.0"}},
-  "devDependencies": {{"@types/node": "^20.0.0", "@types/react": "^18.2.0", "typescript": "^5.0.0", "tailwindcss": "^3.3.0", "autoprefixer": "^10.4.0", "postcss": "^8.4.0"}}
+  "scripts": {{"dev": "next dev", "build": "next build", "start": "next start", "lint": "eslint ."}},
+  "dependencies": {{"next": "^16.0.0", "react": "^19.0.0", "react-dom": "^19.0.0"}},
+  "devDependencies": {{"@types/node": "^22.0.0", "@types/react": "^19.0.0", "typescript": "^5.0.0", "tailwindcss": "^4.0.0", "@tailwindcss/postcss": "^4.0.0", "postcss": "^8.4.0", "eslint": "^9.0.0", "eslint-config-next": "^16.0.0"}}
 }}''',
+        "eslint.config.mjs": '''// Next 16 removed `next lint`; ESLint 9 flat config
+import nextVitals from "eslint-config-next/core-web-vitals";
+
+export default [...nextVitals];
+''',
+        "postcss.config.mjs": '''// Tailwind v4 PostCSS plugin (handles vendor prefixes itself)
+export default { plugins: { "@tailwindcss/postcss": {} } };
+''',
         "tsconfig.json": '''{"compilerOptions": {"target": "ES2020", "lib": ["dom", "dom.iterable", "esnext"], "allowJs": true, "skipLibCheck": true, "strict": true, "noEmit": true, "esModuleInterop": true, "module": "esnext", "moduleResolution": "bundler", "resolveJsonModule": true, "isolatedModules": true, "jsx": "preserve", "incremental": true, "baseUrl": ".", "paths": {"@/*": ["./src/*"]}}, "include": ["**/*.ts", "**/*.tsx"], "exclude": ["node_modules"]}''',
         "tailwind.config.ts": '''import type { Config } from "tailwindcss";
 const config: Config = { content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"], theme: { extend: {} }, plugins: [] };
@@ -640,10 +646,9 @@ __pycache__/
 .venv/
 .DS_Store
 ''',
-        "docker-compose.yml": f'''version: "3.8"
-services:
+        "docker-compose.yml": f'''services:
   db:
-    image: postgres:15-alpine
+    image: postgres:17-alpine
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
@@ -655,7 +660,7 @@ services:
 volumes:
   postgres_data:
 ''',
-        "Dockerfile": '''FROM node:20-alpine
+        "Dockerfile": '''FROM node:22-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -680,6 +685,47 @@ Open http://localhost:3000.
     }
 
     # Handle special cases
+    top = Path(filepath).parts[0] if Path(filepath).parts else ""
+    if filename == "package.json" and top in ("frontend", "client"):
+        return f'''{{"name": "{project_name}-{top}", "version": "0.1.0", "private": true, "type": "module",
+  "scripts": {{"dev": "vite", "build": "tsc -b && vite build", "preview": "vite preview"}},
+  "dependencies": {{"react": "^19.0.0", "react-dom": "^19.0.0"}},
+  "devDependencies": {{"@types/react": "^19.0.0", "@types/react-dom": "^19.0.0", "@vitejs/plugin-react": "latest", "@tailwindcss/vite": "^4.0.0", "tailwindcss": "^4.0.0", "typescript": "^5.0.0", "vite": "^8.0.0"}}
+}}'''
+    if filename == "docker-compose.yml" and template == "mern":
+        return f'''services:
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+volumes:
+  mongo_data:
+'''
+    if filename == "Dockerfile" and top == "backend":
+        cmd = ('["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]' if template == "fastapi-react"
+               else '["python", "manage.py", "runserver", "0.0.0.0:8000"]')
+        return f'''FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+EXPOSE 8000
+CMD {cmd}
+'''
+    if filename == "package.json" and top == "server":
+        return f'''{{"name": "{project_name}-server", "version": "0.1.0", "private": true,
+  "scripts": {{"dev": "tsx watch src/index.ts", "build": "tsc", "start": "node dist/index.js"}},
+  "dependencies": {{"express": "^5.0.0", "mongoose": "^8.0.0", "cors": "^2.8.5", "helmet": "^8.0.0"}},
+  "devDependencies": {{"@types/express": "^5.0.0", "@types/cors": "^2.8.17", "@types/node": "^22.0.0", "tsx": "^4.0.0", "typescript": "^5.0.0"}}
+}}'''
+    # Several templates have an index.ts; pick by location (a shared key once wrote the
+    # Express server into the Next.js src/types/index.ts)
+    if filename == "index.ts" and Path(filepath).parent.name == "types":
+        return contents["types_index.ts"]
+    if filename == "index.ts" and Path(filepath).parent == Path("server/src"):
+        return contents["server_index.ts"]
     if "routes" in filepath and filename == "index.ts":
         return '''import { Router } from "express";
 import usersRouter from "./users";
@@ -751,7 +797,7 @@ def create_project(template_name: str, project_name: str, output_dir: Path) -> D
         for filename in files:
             filepath = full_dir / filename
             filepath.parent.mkdir(parents=True, exist_ok=True)
-            content = get_file_content(template_name, str(dir_path / filename), project_name)
+            content = get_file_content(template_name, str(Path(dir_path) / filename), project_name)
             filepath.write_text(content)
             created_files.append(str(filepath))
 
@@ -854,13 +900,17 @@ def main():
 
     if not args.template or not args.project_name:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
-    result = create_project(args.template, args.project_name, Path(args.output).resolve())
+    try:
+        result = create_project(args.template, args.project_name, Path(args.output).resolve())
+    except OSError as exc:
+        print(f"error: cannot write project: {exc}", file=sys.stderr)
+        sys.exit(2)
     print_result(result, args.json)
 
     if not result.get("success"):
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

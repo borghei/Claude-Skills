@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.3",
+  "info": {"title": "Users API", "version": "1.0.0"},
+  "components": {
+    "securitySchemes": {"bearer": {"type": "http", "scheme": "bearer"}},
+    "schemas": {
+      "User": {
+        "type": "object",
+        "required": ["id", "email"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "integer"},
+          "email": {"type": "string", "format": "email"},
+          "name": {"type": "string", "maxLength": 80}
+        }
+      },
+      "NewUser": {
+        "type": "object",
+        "required": ["email"],
+        "properties": {
+          "email": {"type": "string", "format": "email"},
+          "name": {"type": "string", "maxLength": 80}
+        }
+      }
+    }
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "operationId": "listUsers", "tags": ["users"],
+        "responses": {"200": {"description": "List", "content": {"application/json": {"schema": {"type": "array", "items": {"$ref": "#/components/schemas/User"}}}}}}
+      },
+      "post": {
+        "operationId": "createUser", "tags": ["users"],
+        "security": [{"bearer": []}],
+        "requestBody": {"content": {"application/json": {"schema": {"$ref": "#/components/schemas/NewUser"}}}},
+        "responses": {
+          "201": {"description": "Created", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/User"}}}},
+          "409": {"description": "Email already registered"}
+        }
+      }
+    },
+    "/users/{id}": {
+      "parameters": [],
+      "get": {
+        "operationId": "getUser", "tags": ["users"],
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {
+          "200": {"description": "One user", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/User"}}}},
+          "404": {"description": "Not found"}
+        }
+      },
+      "delete": {
+        "operationId": "deleteUser", "tags": ["users"],
+        "security": [{"bearer": []}],
+        "parameters": [{"name": "id", "in": "path", "required": true, "schema": {"type": "integer"}}],
+        "responses": {"204": {"description": "Deleted"}, "404": {"description": "Not found"}}
+      }
+    }
+  }
+}

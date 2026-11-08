@@ -2,6 +2,28 @@
 
 Specific prompt techniques with example inputs and expected outputs.
 
+## Start Here: Reasoning Models Change the Defaults
+
+Current frontier models (Claude with extended or adaptive thinking, and other providers'
+reasoning models) think before they answer. For them:
+
+- **State the goal, the constraints and what "done" looks like.** Give the context a capable
+  colleague would need: who the output is for, what it is used for, what to avoid and why.
+- **Show the output contract.** A schema, a filled-in example, or the provider's structured
+  output feature beats prose instructions about format.
+- **Do not script the thinking.** "Think step by step", forced `Thought:` blocks and
+  "explain your reasoning before answering" add tokens and can make the visible answer worse.
+  If a task needs more depth, raise the platform's reasoning control (Claude's `effort` /
+  thinking budget, or the provider's equivalent) instead.
+- **Use calm emphasis and give reasons.** ALL-CAPS MUST/NEVER makes current models apply a
+  rule too broadly; one sentence of "because" lets them handle the edge cases.
+- **Verify with evals, not intuition.** Keep a small set of real inputs with expected outputs
+  and re-run it on every prompt change.
+
+Patterns 3, 6 and 8 below (explicit chain-of-thought, self-consistency, tree of thoughts)
+were designed for models without native reasoning. Use them as written only for those
+models, or when the reasoning steps are themselves part of the required output.
+
 ## Patterns Index
 
 1. [Zero-Shot Prompting](#1-zero-shot-prompting)
@@ -119,9 +141,11 @@ Expected Output:
 
 ## 3. Chain-of-Thought (CoT)
 
-**When to use:** Math problems, logical reasoning, multi-step analysis.
+**When to use:** Non-reasoning models on math, logic or multi-step analysis, or any model when
+the numbered steps are part of the deliverable (an auditable calculation, a worked example).
+For reasoning models, skip the trigger phrase and state the problem and the output you want.
 
-**Pattern:**
+**Pattern (non-reasoning models):**
 ```
 [Problem]
 
@@ -158,14 +182,14 @@ The 7 apples cost $11.20
 **Variations:**
 | Variation | Trigger Phrase | Use Case |
 |-----------|----------------|----------|
-| Basic CoT | "Think step by step" | General reasoning |
-| Explicit steps | "Break this into numbered steps" | Complex procedures |
-| Show work | "Show your calculations" | Math problems |
-| Reasoning chain | "Explain your reasoning" | Justification needed |
+| Basic CoT | "Think step by step" | Non-reasoning models only |
+| Explicit steps | "Break this into numbered steps" | When the steps are the output |
+| Show work | "Show your calculations" | Auditable maths in the answer |
+| Reasoning chain | "Explain your reasoning" | When the reader needs the justification |
 
 **On current Claude models:** reasoning is built in and set through the API
-(`thinking: {type: "adaptive"}` plus `effort`; on Claude Opus 5.5 thinking is
-always on). Appending "Let's think step by step" is redundant there; raise
+(extended or adaptive thinking plus an effort setting; check the current API docs for the
+exact parameters on your model). Appending "Let's think step by step" is redundant there; raise
 `effort` for harder problems instead. Keep explicit step prompts for models
 without native thinking, or when the numbered steps are part of the required
 output.
@@ -306,7 +330,9 @@ type Output = { name: string; age: number; active: boolean }"
 
 ## 6. Self-Consistency
 
-**When to use:** Complex reasoning where multiple valid paths exist.
+**When to use:** Answers you can check for agreement (a number, a label) where one run is not
+reliable enough. With reasoning models, try raising the reasoning setting first; sample
+several runs only when measured accuracy is still short.
 
 **Pattern:**
 1. Generate multiple reasoning paths (temperature > 0)
@@ -316,10 +342,10 @@ type Output = { name: string; age: number; active: boolean }"
 **Example approach:**
 
 ```
-# Run this prompt 5 times with default sampling (Claude Opus 4.7+ and
-# Sonnet 5 reject non-default temperature; vary the prompt instead)
+# Run this prompt 5 times with default sampling. Some current models fix or ignore
+# temperature (check the model docs); vary the prompt wording if runs come back identical.
 
-Solve this logic puzzle. Think through it step by step.
+Solve this logic puzzle. Give the final assignment as "Name: pet" lines.
 
 Three friends (Alice, Bob, Carol) each have a different pet (cat, dog, bird).
 - Alice doesn't have the dog
@@ -405,7 +431,9 @@ Final Answer: The population of France is approximately 5.79 times the populatio
 
 ## 8. Tree of Thoughts
 
-**When to use:** Complex problems requiring exploration of multiple solution paths.
+**When to use:** When you need the alternatives themselves in the output (an options memo), or
+with non-reasoning models. Reasoning models already explore internally; asking for "3
+approaches" is useful when a human must see and compare them.
 
 **Pattern:**
 ```
@@ -569,11 +597,11 @@ Return ONLY the JSON array, no additional text.
 |-----------|---------------------|
 | Simple classification | Zero-shot |
 | Consistent formatting needed | Few-shot |
-| Math/logic problems | Chain-of-Thought |
-| Need expertise/perspective | Role Prompting |
+| Math/logic problems | Clear problem + output contract (reasoning models); Chain-of-Thought (non-reasoning) |
+| Need expertise/perspective | Context on audience and purpose; Role Prompting adds little on its own |
 | API integration | Structured Output |
-| High-stakes decisions | Self-Consistency |
+| High-stakes decisions | Higher reasoning setting, then Self-Consistency if evals still fall short |
 | Tool use required | ReAct |
-| Complex problem solving | Tree of Thoughts |
+| Complex problem solving | Goal + constraints + success criteria; Tree of Thoughts when options must be shown |
 | Factual Q&A | RAG |
 | Prompt generation | Meta-Prompting |

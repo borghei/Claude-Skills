@@ -1,0 +1,36 @@
+{
+  "_note": "Illustrative figures. Pull real CVE counts and patch times from the project's advisories (GitHub Security Advisories, OSV) on the day you evaluate.",
+  "security": {
+    "technology": "express-js",
+    "compliance_requirements": ["SOC2", "GDPR"],
+    "vulnerabilities": {
+      "critical_last_12m": 0,
+      "high_last_12m": 2,
+      "medium_last_12m": 4,
+      "low_last_12m": 3,
+      "critical_last_3y": 1,
+      "high_last_3y": 6,
+      "medium_last_3y": 11,
+      "low_last_3y": 8,
+      "avg_critical_patch_days": 4,
+      "avg_high_patch_days": 12,
+      "has_security_team": true,
+      "has_security_certifications": false,
+      "has_bug_bounty_program": false,
+      "security_audits_per_year": 1,
+      "years_since_major_incident": 3,
+      "common_vulnerability_types": ["prototype pollution", "ReDoS"]
+    },
+    "security_features": {
+      "access_controls": true,
+      "encryption_at_rest": true,
+      "encryption_in_transit": true,
+      "audit_logging": true,
+      "backup_recovery": true,
+      "data_privacy": true,
+      "consent_management": false,
+      "data_portability": false,
+      "right_to_deletion": true
+    }
+  }
+}

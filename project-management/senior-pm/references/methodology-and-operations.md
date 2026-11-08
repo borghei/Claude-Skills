@@ -461,6 +461,7 @@ Aggregates project metrics across timeline, budget, scope, quality, and risk dim
 |------|------|---------|-------------|
 | `data_file` | positional | (required) | Path to JSON file containing project portfolio data |
 | `--format` | choice | `text` | Output format: `text` or `json` |
+| `--as-of` | date | `portfolio_metadata.generated_on`, else latest date in the data | Evaluation date for schedule, milestone and overdue checks |
 
 ### risk_matrix_analyzer.py
 
@@ -470,6 +471,7 @@ Builds probability/impact matrices, calculates weighted risk scores by category,
 |------|------|---------|-------------|
 | `data_file` | positional | (required) | Path to JSON file containing risk register data |
 | `--format` | choice | `text` | Output format: `text` or `json` |
+| `--as-of` | date | `portfolio_metadata.generated_on`, else latest date in the data | Evaluation date for schedule, milestone and overdue checks |
 
 ### resource_capacity_planner.py
 
@@ -479,6 +481,7 @@ Models team capacity across projects, identifies utilization imbalances, and pro
 |------|------|---------|-------------|
 | `data_file` | positional | (required) | Path to JSON file containing resource and project capacity data |
 | `--format` | choice | `text` | Output format: `text` or `json` |
+| `--as-of` | date | `portfolio_metadata.generated_on`, else latest date in the data | Evaluation date for schedule, milestone and overdue checks |
 
 ### stakeholder_mapper.py
 

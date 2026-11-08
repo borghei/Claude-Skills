@@ -46,10 +46,10 @@ Reason: Consistent with codebase convention; types are more flexible for unions.
 
 ### Step 4: Apply Promotion
 
-Use `rule_promoter.py` to validate and apply:
+Preview with `rule_promoter.py`, show the user the rule text and target, and apply only after an explicit yes (a promoted rule shapes every later session):
 ```bash
-python scripts/rule_promoter.py --memory-entry <id> --target claude-md --dry-run
-python scripts/rule_promoter.py --memory-entry <id> --target claude-md --apply
+python3 scripts/rule_promoter.py --memory ./MEMORY.md --entry-title "Use pnpm" --target claude-md --target-path ./CLAUDE.md --dry-run
+python3 scripts/rule_promoter.py --memory ./MEMORY.md --entry-title "Use pnpm" --target claude-md --target-path ./CLAUDE.md --apply
 ```
 
 ### Step 5: Clean Up Memory
@@ -63,7 +63,7 @@ After promotion:
 
 | Input | Required | Description |
 |-------|----------|-------------|
-| Memory entry ID | Yes | The pattern/entry to promote |
+| Entry title | Yes | Title (or part of it) of the `## ` memory entry to promote |
 | Target | Yes | CLAUDE.md or .claude/rules/<name>.md |
 | Dry run | No | Preview without applying (default: true) |
 

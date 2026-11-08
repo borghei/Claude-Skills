@@ -73,7 +73,7 @@ The three dominant Go frameworks (and others):
    kubebuilder init --domain example.com --repo example.com/db-operator
    kubebuilder create api --group example.com --version v1alpha1 --kind Database
    ```
-   Or use `scripts/operator_scaffold.py --name db-operator --group example.com --kind Database` for our pre-templated structure including stricter RBAC, observability, and finalizer scaffolding.
+   Or use `scripts/operator_scaffold.py --name db-operator --group example.com --kind Database` for a pre-templated skeleton (stricter RBAC, observability, finalizer handling); follow it with `go mod tidy && make generate manifests build`.
 3. **Design CRD.** Write the spec/status schema; validate with `scripts/crd_validator.py`.
 4. **Implement controller.** Start with: fetch → handle delete (finalizer) → reconcile children → update status.
 5. **Add tests.** Use envtest (sets up a real K8s API server for tests).

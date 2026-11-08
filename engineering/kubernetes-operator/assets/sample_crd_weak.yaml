@@ -1,0 +1,26 @@
+# Deliberately weak CRD for crd_validator.py (exit 1): no status subresource,
+# an untyped spec, no printer columns, no descriptions.
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: caches.example.com
+spec:
+  group: example.com
+  names:
+    kind: Cache
+    plural: caches
+  scope: Cluster
+  versions:
+  - name: v1alpha1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true
+          status:
+            type: object
+            x-kubernetes-preserve-unknown-fields: true

@@ -1,0 +1,22 @@
+# Deliberately flawed workflow for pipeline_analyzer.py (exit 1).
+# The credential below is a fake placeholder, not a real secret.
+name: Legacy CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      api_key: "fake-placeholder-not-a-real-key"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install
+      - run: npm test
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./deploy.sh

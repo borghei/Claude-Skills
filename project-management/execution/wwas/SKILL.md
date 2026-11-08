@@ -1,13 +1,17 @@
 ---
 name: wwas
-description: Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.
+description: >
+  Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR
+  and passes INVEST before a sprint. Use when writing backlog items, checking sprint
+  readiness, or finding work that serves no objective.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
+  python-tools: invest_gate_checker.py, wwas_quality_scorer.py, backlog_alignment_checker.py
   tech-stack: backlog-management, invest-criteria, strategic-alignment
   tags:
     - backlog
@@ -52,6 +56,31 @@ Before writing the item, settle the inputs below. When one is missing or vague a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Tools
+
+All three read a backlog JSON (`items[]` with `title`, `why`, `what`, `acceptance_criteria`, optional `design_link`, `okr_ref`; the alignment checker also reads `okrs[]` with `id`, `name`, `keywords`). Each prints text or `--format json` (`--json` is the same), and `--example` prints a valid input.
+
+| Tool | Flag | Checks |
+|------|------|--------|
+| `invest_gate_checker.py` | `--items FILE` | Six INVEST gates per item. Testable needs at least half the criteria to name an observable behaviour or threshold; Estimable needs 4+ criteria. **Gate:** exits 1 if any item is FAIL or CONDITIONAL. |
+| `wwas_quality_scorer.py` | `--items FILE` | 0-100 per item for Why (metric, objective), What (length, design link) and criteria (count, edge cases). |
+| `backlog_alignment_checker.py` | `--backlog FILE` | Which items map to which OKR (by `okr_ref` or keywords), unaligned items, OKRs with no items. |
+
+```bash
+# Sprint-ready backlog: all tools report clean, the gate exits 0
+python3 project-management/execution/wwas/scripts/invest_gate_checker.py \
+  --items project-management/execution/wwas/assets/sample_backlog_ready.json
+# Mixed backlog: two items with a feature-as-Why and vague criteria; the gate exits 1
+python3 project-management/execution/wwas/scripts/invest_gate_checker.py \
+  --items project-management/execution/wwas/assets/sample_backlog.json
+python3 project-management/execution/wwas/scripts/backlog_alignment_checker.py \
+  --backlog project-management/execution/wwas/assets/sample_backlog.json
+```
+
+**Exit codes:** `0` report produced (for the INVEST checker: every item sprint-ready) · `1` INVEST checker only: at least one item not ready · `2` missing or unreadable file, invalid JSON, or the wrong shape.
+
+The checks are keyword heuristics. A pass means the item has the right parts, not that the Why is true or the criteria are the right ones; read the items too.
+
 ## Anti-Patterns
 
 ### A Why that names the feature
@@ -71,7 +100,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task; keep this file lean and pull detail on demand.
 
@@ -79,13 +108,6 @@ Load the reference that matches the task; keep this file lean and pull detail on
 - **[references/backlog-management-guide.md](references/backlog-management-guide.md)** — format comparison (WWAS vs user stories vs job stories), INVEST deep dive, Definition of Ready, and refinement best practices. Read when choosing a format or running refinement.
 - **[references/red-flags.md](references/red-flags.md)** — bad-vs-good quoted examples of WWAS items. Scan every item before it enters refinement.
 - `assets/wwas_template.md` — ready-to-use WWAS templates.
-
-## Integration with Other Skills
-
-- Use `job-stories/` for situation-driven stories focused on user context rather than strategic alignment.
-- Use `brainstorm-okrs/` to define the objectives that WWAS items connect to.
-- Use `summarize-meeting/` to capture refinement discussions that inform the What.
-- Feed WWAS items into `../jira-expert/` for ticket creation with structured fields.
 
 ## Scope & Limitations
 
@@ -105,3 +127,15 @@ Load the reference that matches the task; keep this file lean and pull detail on
 | `execution/brainstorm-okrs/` | OKRs -> WWAS | Team OKRs provide the strategic objectives that Why statements reference |
 | `execution/prioritization-frameworks/` | WWAS -> Prioritization | WWAS items scored via RICE or other frameworks for backlog ordering |
 | `discovery/brainstorm-ideas/` | Ideas -> WWAS | Validated ideas decompose into WWAS backlog items with strategic traceability |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/invest_gate_checker.py` | INVEST gate (exit 1 when not sprint-ready) |
+| `scripts/wwas_quality_scorer.py` | Per-item WWAS quality score |
+| `scripts/backlog_alignment_checker.py` | Item-to-OKR alignment and coverage |
+| `assets/sample_backlog_ready.json` | Two sprint-ready items; gate exits 0 |
+| `assets/sample_backlog.json` | Four items, two not ready; gate exits 1 |
+| `assets/wwas_template.md` | Item templates |
+| `examples/northwind-backlog-rewritten.md` | Worked rewrite of a weak backlog |

@@ -82,7 +82,7 @@ jobs:
     outputs:
       should_run: ${{ steps.check.outputs.should_run }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 2
       - id: check
@@ -146,7 +146,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: make build
 
       - name: Publish (release only)
@@ -167,19 +167,19 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: make lint
 
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: make test
 
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: make security-scan
 
   gate:
@@ -222,7 +222,7 @@ jobs:
       version: ${{ steps.version.outputs.version }}
       sha_short: ${{ steps.sha.outputs.sha_short }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: version
         run: echo "version=$(cat VERSION)" >> "$GITHUB_OUTPUT"
       - id: sha
@@ -245,7 +245,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Run flaky integration test (with retry)
         uses: nick-fields/retry@v3
         with:
@@ -272,8 +272,8 @@ jobs:
         python-version: ['3.10', '3.11', '3.12']
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
       - run: python -m pytest
@@ -310,7 +310,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - id: set
         run: |
           # Read from file, API, or compute dynamically
@@ -338,7 +338,7 @@ jobs:
         shard: [1, 2, 3, 4]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-project
       - name: Run test shard
         run: pytest --shard-id=${{ matrix.shard }} --num-shards=4
@@ -354,19 +354,19 @@ Use built-in cache support in setup actions.
 
 ```yaml
 # Python
-- uses: actions/setup-python@v5
+- uses: actions/setup-python@v7
   with:
     python-version: '3.12'
     cache: pip
 
 # Node.js
-- uses: actions/setup-node@v4
+- uses: actions/setup-node@v7
   with:
     node-version: 20
     cache: npm
 
 # Go
-- uses: actions/setup-go@v5
+- uses: actions/setup-go@v7
   with:
     go-version: '1.22'
     cache: true
@@ -377,7 +377,7 @@ Use built-in cache support in setup actions.
 Cache multiple directories with a composite key.
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: |
       ~/.cache/pip
@@ -409,7 +409,7 @@ Cache Docker build layers using GitHub Actions cache backend.
 Cache build outputs for monorepo build systems.
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: node_modules/.cache/turbo
     key: turbo-${{ runner.os }}-${{ hashFiles('**/turbo.json', '**/package-lock.json') }}
@@ -429,9 +429,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - run: npm ci && npm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist/
@@ -441,7 +441,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist/
@@ -452,7 +452,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist/
@@ -464,7 +464,7 @@ jobs:
 Aggregate test results across matrix jobs.
 
 ```yaml
-- uses: actions/upload-artifact@v4
+- uses: actions/upload-artifact@v7
   if: always()
   with:
     name: test-results-${{ matrix.os }}-${{ matrix.version }}
@@ -551,7 +551,7 @@ jobs:
   dependency-review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/dependency-review-action@v4
         with:
           fail-on-severity: high
@@ -585,8 +585,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ inputs.python-version }}
           cache: pip
@@ -654,7 +654,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/setup-python@v5
+    - uses: actions/setup-python@v7
       with:
         python-version: ${{ inputs.python-version }}
         cache: pip
@@ -801,7 +801,7 @@ jobs:
       backend: ${{ steps.filter.outputs.backend }}
       infra: ${{ steps.filter.outputs.infra }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dorny/paths-filter@v3
         id: filter
         with:

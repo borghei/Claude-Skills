@@ -239,26 +239,21 @@ TEMPLATES[("nextjs", "usage")] = textwrap.dedent('''\
     import { stripe } from "@/lib/stripe";
     import { db } from "@/lib/db";
 
-    export async function reportUsage(subscriptionItemId: string, quantity: number, idempotencyKey?: string) {
-      return stripe.subscriptionItems.createUsageRecord(
-        subscriptionItemId,
-        { quantity, timestamp: Math.floor(Date.now() / 1000), action: "increment" },
-        { idempotencyKey },
-      );
+    // Usage is reported as Billing Meter events (legacy usage records were removed from
+    // current API versions). Create the meter once in the Dashboard or API with
+    // event_name "api_requests" and attach a metered price that references it.
+    export async function reportUsage(stripeCustomerId: string, value: number, identifier: string) {
+      return stripe.billing.meterEvents.create({
+        event_name: "api_requests",
+        payload: { stripe_customer_id: stripeCustomerId, value: String(value) },
+        identifier, // unique per event; Stripe dedupes repeats of the same identifier
+      });
     }
 
-    export async function trackApiUsage(userId: string) {
+    export async function trackApiUsage(userId: string, requestId: string) {
       const user = await db.user.findUnique({ where: { id: userId } });
-      if (!user?.stripeSubscriptionId) return;
-
-      const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
-      const meteredItem = subscription.items.data.find(
-        (item) => item.price.recurring?.usage_type === "metered",
-      );
-
-      if (meteredItem) {
-        await reportUsage(meteredItem.id, 1, `${userId}-${Date.now()}`);
-      }
+      if (!user?.stripeCustomerId) return;
+      await reportUsage(user.stripeCustomerId, 1, `${userId}-${requestId}`);
     }
 ''')
 
@@ -540,13 +535,14 @@ TEMPLATES[("django", "usage")] = textwrap.dedent('''\
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    def report_usage(subscription_item_id: str, quantity: int, idempotency_key: str = None):
-        return stripe.SubscriptionItem.create_usage_record(
-            subscription_item_id,
-            quantity=quantity,
+    # Usage is reported as Billing Meter events (legacy usage records were removed from
+    # current API versions). The meter "api_requests" must exist with a metered price on it.
+    def report_usage(stripe_customer_id: str, value: int, identifier: str):
+        return stripe.billing.MeterEvent.create(
+            event_name="api_requests",
+            payload={"stripe_customer_id": stripe_customer_id, "value": str(value)},
+            identifier=identifier,  # unique per event; repeats are deduplicated
             timestamp=int(time.time()),
-            action="increment",
-            idempotency_key=idempotency_key,
         )
 ''')
 

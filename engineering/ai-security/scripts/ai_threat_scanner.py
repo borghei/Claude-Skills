@@ -5,11 +5,11 @@ AI Threat Scanner - Detect AI-specific security vulnerabilities in source code.
 Scans codebases for prompt injection risks, data poisoning vectors, model extraction
 vulnerabilities, adversarial input handling gaps, and insecure model serving patterns.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
 import argparse
+import fnmatch
 import json
 import os
 import re
@@ -256,7 +256,11 @@ def scan_file(file_path: Path, categories: List[str]) -> List[Finding]:
 
             for i, line in enumerate(lines, 1):
                 stripped = line.strip()
-                if stripped.startswith("#") or stripped.startswith("//") or stripped.startswith("*"):
+                if stripped.startswith(("#", "//", "*")):
+                    continue
+                # Lines that are only a string literal (docstrings, rule tables, messages) are
+                # text about code, not code; skipping them stops the scanner flagging itself.
+                if stripped.lstrip("rRbBuUfF").startswith(('"', "'")):
                     continue
                 if pattern.search(line):
                     snippet = line.strip()[:120]
@@ -274,8 +278,8 @@ def scan_file(file_path: Path, categories: List[str]) -> List[Finding]:
     return findings
 
 
-def collect_files(path: Path) -> List[Path]:
-    """Collect all scannable files under the given path."""
+def collect_files(path: Path, excludes: List[str] = ()) -> List[Path]:
+    """Collect all scannable files under the given path, minus --exclude globs."""
     files = []
     if path.is_file():
         if path.suffix in SCAN_EXTENSIONS:
@@ -290,13 +294,15 @@ def collect_files(path: Path) -> List[Path]:
                 fp = Path(root) / fname
                 if fp.suffix in SCAN_EXTENSIONS:
                     files.append(fp)
-    return files
+    rel = lambda f: str(f.relative_to(path)) if path.is_dir() else f.name
+    return [f for f in files if not any(fnmatch.fnmatch(rel(f), g) or fnmatch.fnmatch(f.name, g)
+                                        for g in excludes)]
 
 
-def run_scan(path: Path, categories: List[str], min_severity: str) -> ScanResult:
+def run_scan(path: Path, categories: List[str], min_severity: str, excludes: List[str] = ()) -> ScanResult:
     """Run the full scan and aggregate results."""
     result = ScanResult()
-    files = collect_files(path)
+    files = collect_files(path, excludes)
     result.total_files_scanned = len(files)
     min_sev_val = SEVERITY_ORDER.get(min_severity, 3)
 
@@ -348,7 +354,7 @@ def format_human(result: ScanResult) -> str:
         lines.append("")
 
     if result.total_findings == 0:
-        lines.append("No AI security findings detected. Good job!")
+        lines.append("No pattern matched. This is not evidence the system resists these attacks; review the controls by hand.")
 
     lines.append("=" * 70)
     return "\n".join(lines)
@@ -377,26 +383,26 @@ def main():
                         default="low", help="Minimum severity to report (default: low)")
     parser.add_argument("--format", choices=["human", "json"], default="human",
                         help="Output format (default: human)")
+    parser.add_argument("--exclude", action="append", default=[], metavar="GLOB",
+                        help="Skip files matching this glob (relative path or name); repeatable")
 
     args = parser.parse_args()
     path = Path(args.path)
     if not path.exists():
         print(f"Error: Path not found: {args.path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     categories = [args.category] if args.category else list(CATEGORY_MAP.keys())
-    result = run_scan(path, categories, args.min_severity)
+    result = run_scan(path, categories, args.min_severity, args.exclude)
 
     if args.format == "json":
         print(format_json(result))
     else:
         print(format_human(result))
 
-    if result.findings_by_severity.get("critical", 0) > 0:
-        sys.exit(2)
-    elif result.findings_by_severity.get("high", 0) > 0:
-        sys.exit(1)
-    sys.exit(0)
+    # 0 = no critical/high finding, 1 = at least one, 2 = bad input (above)
+    sev = result.findings_by_severity
+    sys.exit(1 if sev.get("critical", 0) or sev.get("high", 0) else 0)
 
 
 if __name__ == "__main__":

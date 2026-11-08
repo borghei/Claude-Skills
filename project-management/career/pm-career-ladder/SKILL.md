@@ -1,16 +1,16 @@
 ---
 name: pm-career-ladder
 description: >
-  PM career ladder rubrics from APM through VP/CPO across product sense,
-  execution, leadership, strategy, and communication. Includes gap analysis,
-  growth planning, and promotion packet templates.
+  Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis,
+  6-month growth plan or promotion packet. Use when preparing for promotion, calibrating
+  your level, or turning manager feedback into a plan.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-career
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: pm-rubric, promotion-packet, growth-plan, career-ladder
   tags:
     - career-ladder
@@ -27,7 +27,7 @@ A consolidated, opinionated PM career ladder for ICs from APM to Group PM and ma
 
 ## Core Capabilities
 
-- **Level rubric** -- five dimensions x seven levels (APM, PM, Sr PM, Group PM, Director, VP/CPO) with observable behaviors and promotion signals per level
+- **Level rubric** -- five dimensions x six levels (APM, PM, Sr PM, Group PM, Director, VP/CPO) with observable behaviors and promotion signals per level
 - **Gap analysis** -- self-score vs. independent manager-score, surface calibration gaps, prioritize 2-3 dimensions to develop
 - **Growth planning** -- translate gaps into a 6-month plan of experiments, evidence, and manager support
 - **Promo packet** -- scope statement, quantified impact, rubric mapping, partner quotes, growth narrative
@@ -55,10 +55,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
-1. Self-score the 5x6 rubric for your current and next level; have your manager score independently.
+The workflow, start to finish:
+
+1. Self-score the 5x6 rubric (`references/ladder-rubric-detail.md`) for your current and next level in `assets/gap_analysis.md`; have your manager score independently.
 2. Pick 2-3 dimensions where you are below bar.
-3. Write a 6-month growth plan (experiments + evidence) and review monthly in your 1:1.
-4. Maintain a quarterly written impact summary; assemble the promo packet by the 3-month mark of the cycle.
+3. Write a 6-month growth plan (`assets/growth_plan.md`: experiments + evidence) and review monthly in your 1:1.
+4. Maintain a quarterly written impact summary; assemble `assets/promo_packet.md` by the 3-month mark of the cycle.
+5. Verify that every claimed level maps to a rubric behavior with dated evidence and a partner quote, and the self and manager scores differ by no more than one level per dimension (or the gap is discussed) before calling it done.
 
 See `references/ladder-playbook.md` for the full ladder table, rubric detail, gap-analysis steps, growth-plan and promo-packet structures, and troubleshooting.
 
@@ -100,12 +103,12 @@ External: Square's published PM ladder; Wodtke, C. *Radical Focus*.
 
 **Caveats:** Every company calibrates differently — a startup "Sr PM" != a 5,000-person "Sr PM"; adjust for context. Promotion is part meritocratic, part political; the rubric covers the meritocratic half. Growth is non-linear — continuous investment matters more than even-paced advancement.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `pm-interview-prep/` | Bidirectional | The rubric calibrates the bar for external interviews and internal calibration the same way |
-| `pm-onboarding/` | Feeds into | New-role onboarding ends with the first ladder self-score |
-| `pm-1on1s/` | Bidirectional | Quarterly 1:1s review ladder progress; the ladder structures the conversation |
-| `senior-pm/stakeholder-mapper/` | Reuses | Promotion requires stakeholder support; the stakeholder mapper helps map the calibration room |
-| `personal-productivity/weekly-review/` | Feeds into | Weekly review captures evidence that aggregates into the monthly impact summary |
+| File | Purpose |
+|------|---------|
+| `assets/gap_analysis.md`, `assets/growth_plan.md`, `assets/promo_packet.md` | The three artifacts |
+| `references/ladder-rubric-detail.md`, `references/ladder-playbook.md`, `references/red-flags.md` | Rubric by level, playbook, failure modes |
+| `examples/maria-chen-apm-to-pm-promo-packet.md` | Worked promo packet |
+
+Related skills: `pm-1on1s` for growth 1:1s, `pm-interview-prep` for external levelling, `senior-pm` (`stakeholder_mapper.py`) to map the calibration room.

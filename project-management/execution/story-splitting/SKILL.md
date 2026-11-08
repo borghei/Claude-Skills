@@ -1,16 +1,16 @@
 ---
 name: story-splitting
 description: >
-  Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting
-  epics into shippable user stories without losing user value. Use when a story
-  is too big, exceeds cycle time, or fails INVEST-S.
+  Splits oversized epics and stories into thin vertical slices with nine named
+  patterns and a decision tree. Use when a story is too big, overruns cycle
+  time, or fails the Small test of INVEST.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: story-splitting, vertical-slicing, lawrence-flowchart, invest
   tags:
     - story-splitting
@@ -83,7 +83,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -102,7 +102,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of Scope:**
 - User story format itself (use `wwas/`, `job-stories/`)
-- Sprint capacity calculation (use `scrum-master/sprint_capacity_calculator.py`)
+- Sprint capacity calculation (use `project-management/scrum-master/`)
 - Backlog prioritization (use `prioritization-frameworks/`)
 - Story mapping at the release level (use `story-mapping/`)
 
@@ -111,22 +111,12 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Slicing has limits. A story may be at the smallest useful size and still feel large because the team has not done the work before. Treat the first few of any new kind of story as a learning tax.
 - The "right" split depends on what ships next. The same epic can be split differently for a beta cohort (Pattern 3: happy path only) vs general availability (Pattern 2: full business rules). Choose based on the next release context, not in the abstract.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `wwas/` | Output format | Split slices are written as WWAS items |
-| `job-stories/` | Output format | Alternative format for situation-driven slices |
-| `create-prd/` | Receives from | Epic-level scope from PRD feeds splitting |
-| `story-mapping/` | Complementary | Story map identifies the slices that need splitting |
-| `prioritization-frameworks/` | Feeds into | Split slices get individually scored (RICE/ICE) for ordering |
-| `cycle-time-analyzer/` | Diagnostic for | Long cycle times indicate stories that should have been split |
-| `backlog-refinement/` | Used in | Splitting is the core activity in refinement sessions |
-| `scrum-master/` | Improves | Predictability improves dramatically when stories are uniformly small |
-
-## Further Reading
-
-- Lawrence, Richard. "Patterns for Splitting User Stories." 2009. (The original 9-pattern catalog.)
-- Lawrence, Richard. *Story Splitting Flowchart*, 2012. (The canonical visual decision tree.)
-- Cohn, Mike. *User Stories Applied for Agile Software Development*. Addison-Wesley, 2004. (INVEST criteria.)
-- Patton, Jeff. *User Story Mapping*. O'Reilly, 2014. (Vertical slicing in release planning.)
+| File | Purpose |
+|------|---------|
+| `references/story-splitting-procedure.md` | Slicing procedure, the nine patterns, decision tree, worked example |
+| `references/splitting-patterns-guide.md` | Deep pattern catalogue and post-split INVEST check |
+| `references/red-flags.md` | Ways splits go wrong, with fixes |
+| `assets/before-after-examples.md` | 15+ before/after splits to copy from |
+| `examples/import-data-epic-nine-patterns.md` | One epic split nine ways |

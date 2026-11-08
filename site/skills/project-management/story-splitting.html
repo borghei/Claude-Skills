@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Story Splitting - Claude Skills</title>
-  <meta name="description" content="Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting epics into shippable user stories without losing user value. Use when a story is too big, exceeds cycle time, or fails INVEST">
+  <meta name="description" content="Splits oversized epics and stories into thin vertical slices with nine named patterns and a decision tree. Use when a story is too big, overruns cycle time, or fails the Small test of INVEST.">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/story-splitting.html">
   <meta property="og:title" content="Story Splitting - Claude Skills">
-  <meta property="og:description" content="Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting epics into shippable user stories without losing user value. Use when a story is too big, exceeds cycle time, or fails INVEST">
+  <meta property="og:description" content="Splits oversized epics and stories into thin vertical slices with nine named patterns and a decision tree. Use when a story is too big, overruns cycle time, or fails the Small test of INVEST.">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/story-splitting.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Story Splitting", "description": "Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting epics into shippable user stories without losing user value. Use when a story is too big, exceeds cycle time, or fails INVEST-S.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/story-splitting.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Story Splitting", "description": "Splits oversized epics and stories into thin vertical slices with nine named patterns and a decision tree. Use when a story is too big, overruns cycle time, or fails the Small test of INVEST.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/story-splitting.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Story Splitting</h1>
-    <p class="page-subtitle">Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting epics into shippable user stories without losing user value. Use when a story is too big, exceeds cycle time, or fails INVEST-S.</p>
+    <p class="page-subtitle">Splits oversized epics and stories into thin vertical slices with nine named patterns and a decision tree. Use when a story is too big, overruns cycle time, or fails the Small test of INVEST.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">story-splitting</span><span class="tag">vertical-slicing</span><span class="tag">epics</span><span class="tag">user-stories</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Story Splitting (Project Management domain).
 
-Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting epics into shippable user stories without losing user value. Use when a story is too big, exceeds cycle time, or fails INVEST-S.
+Splits oversized epics and stories into thin vertical slices with nine named patterns and a decision tree. Use when a story is too big, overruns cycle time, or fails the Small test of INVEST.
 
 A pattern catalog for splitting epics and large stories into smaller, shippable, end-to-end slices that still deliver user value. Built on Richard Lawrence&#x27;s canonical story-splitting flowchart (the 9 patterns most product teams converge on) with worked before/after examples and a quick-reference de
 
@@ -424,7 +424,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Story Splitting (Project Management domain).
 
-Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting epics into shippable user stories without losing user value. Use when a story is too big, exceeds cycle time, or fails INVEST-S.
+Splits oversized epics and stories into thin vertical slices with nine named patterns and a decision tree. Use when a story is too big, overruns cycle time, or fails the Small test of INVEST.
 
 A pattern catalog for splitting epics and large stories into smaller, shippable, end-to-end slices that still deliver user value. Built on Richard Lawrence&#x27;s canonical story-splitting flowchart (the 9 patterns most product teams converge on) with worked before/after examples and a quick-reference de
 
@@ -528,7 +528,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -547,7 +547,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of Scope:**
 - User story format itself (use `wwas/`, `job-stories/`)
-- Sprint capacity calculation (use `scrum-master/sprint_capacity_calculator.py`)
+- Sprint capacity calculation (use `project-management/scrum-master/`)
 - Backlog prioritization (use `prioritization-frameworks/`)
 - Story mapping at the release level (use `story-mapping/`)
 
@@ -556,25 +556,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Slicing has limits. A story may be at the smallest useful size and still feel large because the team has not done the work before. Treat the first few of any new kind of story as a learning tax.
 - The &quot;right&quot; split depends on what ships next. The same epic can be split differently for a beta cohort (Pattern 3: happy path only) vs general availability (Pattern 2: full business rules). Choose based on the next release context, not in the abstract.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `wwas/` | Output format | Split slices are written as WWAS items |
-| `job-stories/` | Output format | Alternative format for situation-driven slices |
-| `create-prd/` | Receives from | Epic-level scope from PRD feeds splitting |
-| `story-mapping/` | Complementary | Story map identifies the slices that need splitting |
-| `prioritization-frameworks/` | Feeds into | Split slices get individually scored (RICE/ICE) for ordering |
-| `cycle-time-analyzer/` | Diagnostic for | Long cycle times indicate stories that should have been split |
-| `backlog-refinement/` | Used in | Splitting is the core activity in refinement sessions |
-| `scrum-master/` | Improves | Predictability improves dramatically when stories are uniformly small |
-
-## Further Reading
-
-- Lawrence, Richard. &quot;Patterns for Splitting User Stories.&quot; 2009. (The original 9-pattern catalog.)
-- Lawrence, Richard. *Story Splitting Flowchart*, 2012. (The canonical visual decision tree.)
-- Cohn, Mike. *User Stories Applied for Agile Software Development*. Addison-Wesley, 2004. (INVEST criteria.)
-- Patton, Jeff. *User Story Mapping*. O&#x27;Reilly, 2014. (Vertical slicing in release planning.)
+| File | Purpose |
+|------|---------|
+| `references/story-splitting-procedure.md` | Slicing procedure, the nine patterns, decision tree, worked example |
+| `references/splitting-patterns-guide.md` | Deep pattern catalogue and post-split INVEST check |
+| `references/red-flags.md` | Ways splits go wrong, with fixes |
+| `assets/before-after-examples.md` | 15+ before/after splits to copy from |
+| `examples/import-data-epic-nine-patterns.md` | One epic split nine ways |
 
 ---
 
@@ -602,7 +592,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Story Splitting&quot;**
-   - Description: &quot;Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting epics into shippable user stories without losing user value. Use when a story is too big, exceeds cycle time, or fails INVEST-S.&quot;
+   - Description: &quot;Splits oversized epics and stories into thin vertical slices with nine named patterns and a decision tree. Use when a story is too big, overruns cycle time, or fails the Small test of INVEST.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -690,7 +680,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -709,7 +699,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of Scope:**
 - User story format itself (use `wwas/`, `job-stories/`)
-- Sprint capacity calculation (use `scrum-master/sprint_capacity_calculator.py`)
+- Sprint capacity calculation (use `project-management/scrum-master/`)
 - Backlog prioritization (use `prioritization-frameworks/`)
 - Story mapping at the release level (use `story-mapping/`)
 
@@ -718,25 +708,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Slicing has limits. A story may be at the smallest useful size and still feel large because the team has not done the work before. Treat the first few of any new kind of story as a learning tax.
 - The &quot;right&quot; split depends on what ships next. The same epic can be split differently for a beta cohort (Pattern 3: happy path only) vs general availability (Pattern 2: full business rules). Choose based on the next release context, not in the abstract.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `wwas/` | Output format | Split slices are written as WWAS items |
-| `job-stories/` | Output format | Alternative format for situation-driven slices |
-| `create-prd/` | Receives from | Epic-level scope from PRD feeds splitting |
-| `story-mapping/` | Complementary | Story map identifies the slices that need splitting |
-| `prioritization-frameworks/` | Feeds into | Split slices get individually scored (RICE/ICE) for ordering |
-| `cycle-time-analyzer/` | Diagnostic for | Long cycle times indicate stories that should have been split |
-| `backlog-refinement/` | Used in | Splitting is the core activity in refinement sessions |
-| `scrum-master/` | Improves | Predictability improves dramatically when stories are uniformly small |
-
-## Further Reading
-
-- Lawrence, Richard. &quot;Patterns for Splitting User Stories.&quot; 2009. (The original 9-pattern catalog.)
-- Lawrence, Richard. *Story Splitting Flowchart*, 2012. (The canonical visual decision tree.)
-- Cohn, Mike. *User Stories Applied for Agile Software Development*. Addison-Wesley, 2004. (INVEST criteria.)
-- Patton, Jeff. *User Story Mapping*. O&#x27;Reilly, 2014. (Vertical slicing in release planning.)
+| File | Purpose |
+|------|---------|
+| `references/story-splitting-procedure.md` | Slicing procedure, the nine patterns, decision tree, worked example |
+| `references/splitting-patterns-guide.md` | Deep pattern catalogue and post-split INVEST check |
+| `references/red-flags.md` | Ways splits go wrong, with fixes |
+| `assets/before-after-examples.md` | 15+ before/after splits to copy from |
+| `examples/import-data-epic-nine-patterns.md` | One epic split nine ways |
 
 ---
 
@@ -764,7 +744,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Story Splitting&quot;**
-   - Description: &quot;Vertical-slicing playbook with 9 canonical Lawrence patterns for splitting epics into shippable user stories without losing user value. Use when a story is too big, exceeds cycle time, or fails INVEST-S.&quot;
+   - Description: &quot;Splits oversized epics and stories into thin vertical slices with nine named patterns and a decision tree. Use when a story is too big, overruns cycle time, or fails the Small test of INVEST.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -826,7 +806,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 2. **Walk the decision tree** (in `references/story-splitting-procedure.md`); stop at the first pattern that applies.
 3. **Draft slices** in `wwas/` or `job-stories/` format; verify each is vertical (crosses all layers, independently demoable).
 4. **Order slices** smallest-value-first, run the INVEST check, and replace the original story in the backlog.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/story-splitting/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

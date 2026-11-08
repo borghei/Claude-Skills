@@ -148,14 +148,17 @@ Always use DynamoDB (or equivalent) for state locking to prevent concurrent modi
 
 ```hcl
 terraform {
-  required_version = ">= 1.5.0"
+  required_version = "~> 1.9"     # the minor line you test with
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.0"
+      version = "~> 6.0"          # the provider major you tested; read its upgrade guide before bumping
     }
   }
 }
 ```
+
+Replace the numbers with the versions you actually run (`terraform version`,
+`terraform providers`), and commit `.terraform.lock.hcl` so every run resolves the same builds.
 
 Always pin at least the minor version to prevent breaking changes.

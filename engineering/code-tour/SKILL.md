@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: developer-experience
-  updated: 2026-07-21
+  updated: 2026-11-08
   tags: [onboarding, code-reading, documentation, developer-experience, handoff]
 ---
 
@@ -111,7 +111,9 @@ python3 engineering/code-tour/scripts/tour_validate.py \
 Stop paths are relative to the tour's own `repo` root, so `--repo` points at the
 package the tour describes — here, this skill itself. Exit code is 1 when any stop is
 broken, which is what lets a tour live in CI. The shipped sample exits 1 on purpose:
-stop 6 points at a `scripts/tour_export.py` that was never shipped.
+stop 6 points at a `scripts/tour_export.py` that was never shipped. All three scripts exit
+2 on input errors (missing or invalid tour file, missing repo directory, bad flags), so CI can
+tell a broken tour (1) from a tour that could not be checked (2).
 
 ## Decision frameworks
 

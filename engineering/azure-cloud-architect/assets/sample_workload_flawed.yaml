@@ -1,0 +1,29 @@
+# A tier-1 workload with the usual gaps: single zone, public data, shared keys, no budgets.
+name: payments-legacy
+tier: 1
+compute:
+  type: aks
+  sku_tier: free
+  node_pool:
+    sku: D8s_v5
+    count: 6
+    reserved: false
+  zone_redundant: false
+data:
+  - service: cosmos
+    mode: manual
+    max_ru_per_sec: 20000
+    avg_utilization: 0.2
+    storage_gb: 200
+    public_access: true
+    backup_tested: false
+network:
+  vnet: false
+identity:
+  managed_identity: false
+  rbac_scope: subscription
+security:
+  mfa_enforced: false
+observability:
+  log_analytics: true
+  ingest_gb_per_day: 40

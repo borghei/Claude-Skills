@@ -103,7 +103,10 @@ def _parse_map(lines: list[tuple[int, str]], idx: int, indent: int) -> tuple[dic
         else:
             # nested block
             idx += 1
-            if idx < len(lines) and lines[idx][0] > indent:
+            # A block is indented deeper, or is a "- " sequence at the same indent
+            # (the compact style controller-gen and kubectl emit).
+            if idx < len(lines) and (lines[idx][0] > indent
+                                     or (lines[idx][0] == indent and lines[idx][1].startswith("- "))):
                 value, idx = _parse_block(lines, idx, lines[idx][0])
                 out[key] = value if value is not None else {}
             else:
@@ -313,6 +316,11 @@ def validate_crd(doc: dict[str, Any], file_path: str) -> CrdReport:
         spec_schema = props.get("spec") or {}
         status_schema = props.get("status") or {}
 
+        if spec_schema.get("x-kubernetes-preserve-unknown-fields") and not spec_schema.get("properties"):
+            findings.append(Finding(severity="critical", crd_name=name, version=vname,
+                                    path=f".spec.versions[{vname}].schema.properties.spec",
+                                    issue="spec is untyped (preserve-unknown-fields with no properties)",
+                                    recommendation="Declare spec properties; the API server cannot validate an untyped spec."))
         if not spec_schema:
             findings.append(Finding(severity="warning", crd_name=name, version=vname,
                                     path=f".spec.versions[{vname}].schema.properties.spec",
@@ -434,7 +442,7 @@ def main() -> int:
             text = Path(f).read_text()
         except OSError as e:
             print(f"error reading {f}: {e}", file=sys.stderr)
-            continue
+            return 2
         docs = parse_yaml(text)
         for d in docs:
             if d.get("kind") != "CustomResourceDefinition":
@@ -442,7 +450,7 @@ def main() -> int:
             reports.append(validate_crd(d, f))
     if not reports:
         print("error: no CRDs found in input files", file=sys.stderr)
-        return 1
+        return 2
     if args.format == "json":
         out = json.dumps(
             {"reports": [asdict(r) for r in reports]},
@@ -456,7 +464,7 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    return 1 if any(f.severity == "critical" for r in reports for f in r.findings) else 0
 
 
 if __name__ == "__main__":

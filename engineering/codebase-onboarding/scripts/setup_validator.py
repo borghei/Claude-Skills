@@ -371,7 +371,7 @@ def main():
     target = Path(args.directory).resolve()
     if not target.is_dir():
         print(f"Error: '{args.directory}' is not a valid directory.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     results = run_checks(str(target))
     score = compute_score(results)

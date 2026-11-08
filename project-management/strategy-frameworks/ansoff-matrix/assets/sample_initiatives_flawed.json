@@ -1,0 +1,9 @@
+{
+  "company_stage": "growth",
+  "as_of": "2026-05-27",
+  "initiatives": [
+    {"name": "Launch a hardware device", "quadrant": "product_development", "investment_usd": 6000000, "expected_return_usd": 4000000, "risk_score": 5},
+    {"name": "Acquire a consulting firm", "quadrant": "diversification", "investment_usd": 5000000, "expected_return_usd": 7000000, "risk_score": 2, "owner": "CFO"},
+    {"name": "Grow the core", "quadrant": "core", "investment_usd": 1000000}
+  ]
+}

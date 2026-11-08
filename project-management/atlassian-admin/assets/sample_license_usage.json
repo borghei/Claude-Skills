@@ -1,0 +1,53 @@
+{
+  "organization": "Acme Corp",
+  "as_of": "2026-03-21",
+  "products": [
+    {
+      "name": "Jira",
+      "tier": "Premium",
+      "cost_per_user_month": 14,
+      "total_licenses": 100,
+      "licenses_in_use": 62,
+      "users": [
+        {
+          "name": "Alice",
+          "email": "alice@acme.com",
+          "last_active": "2026-03-20"
+        },
+        {
+          "name": "Bob",
+          "email": "bob@acme.com",
+          "last_active": "2026-03-18"
+        },
+        {
+          "name": "Carol",
+          "email": "carol@acme.com",
+          "last_active": "2025-11-01"
+        },
+        {
+          "name": "Dave",
+          "email": "dave@acme.com",
+          "last_active": null
+        }
+      ]
+    },
+    {
+      "name": "Confluence",
+      "tier": "Standard",
+      "cost_per_user_month": 6,
+      "total_licenses": 100,
+      "users": [
+        {
+          "name": "Alice",
+          "email": "alice@acme.com",
+          "last_active": "2026-03-19"
+        },
+        {
+          "name": "Eve",
+          "email": "eve@acme.com",
+          "last_active": "2025-09-15"
+        }
+      ]
+    }
+  ]
+}

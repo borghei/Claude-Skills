@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Metrics Dashboard - Claude Skills</title>
-  <meta name="description" content="Design a product metrics dashboard — North Star, input metrics, and guardrails — that a team actually uses to make decisions. Use when building dashboard architecture: layers, owners, cadence, and vis">
+  <meta name="description" content="Designs a product metrics dashboard in four layers (North Star, inputs, guardrails, operational) with owners, comparisons and cadence, and audits the spec. Use when building a launch dashboard or prun">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/metrics-dashboard.html">
   <meta property="og:title" content="Metrics Dashboard - Claude Skills">
-  <meta property="og:description" content="Design a product metrics dashboard — North Star, input metrics, and guardrails — that a team actually uses to make decisions. Use when building dashboard architecture: layers, owners, cadence, and vis">
+  <meta property="og:description" content="Designs a product metrics dashboard in four layers (North Star, inputs, guardrails, operational) with owners, comparisons and cadence, and audits the spec. Use when building a launch dashboard or prun">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/metrics-dashboard.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Metrics Dashboard", "description": "Design a product metrics dashboard — North Star, input metrics, and guardrails — that a team actually uses to make decisions. Use when building dashboard architecture: layers, owners, cadence, and visualization.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/metrics-dashboard.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Metrics Dashboard", "description": "Designs a product metrics dashboard in four layers (North Star, inputs, guardrails, operational) with owners, comparisons and cadence, and audits the spec. Use when building a launch dashboard or pruning one nobody uses.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/metrics-dashboard.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Metrics Dashboard</h1>
-    <p class="page-subtitle">Design a product metrics dashboard — North Star, input metrics, and guardrails — that a team actually uses to make decisions. Use when building dashboard architecture: layers, owners, cadence, and visualization.</p>
+    <p class="page-subtitle">Designs a product metrics dashboard in four layers (North Star, inputs, guardrails, operational) with owners, comparisons and cadence, and audits the spec. Use when building a launch dashboard or pruning one nobody uses.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">metrics</span><span class="tag">dashboard</span><span class="tag">north-star</span><span class="tag">guardrail-metrics</span><span class="tag">product-analytics</span></div>
   </div>
@@ -393,20 +393,19 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Metrics Dashboard (Project Management domain).
 
-Design a product metrics dashboard — North Star, input metrics, and guardrails — that a team actually uses to make decisions. Use when building dashboard architecture: layers, owners, cadence, and visualization.
+Designs a product metrics dashboard in four layers (North Star, inputs, guardrails, operational) with owners, comparisons and cadence, and audits the spec. Use when building a launch dashboard or pruning one nobody uses.
 
 A dashboard architecture skill: which metrics go where, at which cadence, for which audience, with which visualization. Focused on producing the ONE artifact a team uses to make decisions — not the 30-chart dashboard
 
 ## Your Key Capabilities
-- Top-level metric count
-- Visualization fit
-- Vanity vs actionable test
-- Comparison discipline
-- &quot;Build us a dashboard for the new product line&quot;
-- &quot;Audit our existing dashboard&quot;
+- The wall of metrics
+- A North Star with no counterweight
+- Orphan metrics
+- Real-time everything
 
 ## Frameworks &amp; Templates You Know
 - Decision frameworks
+- | `assets/dashboard_spec_template.md` | Spec worksheet to fill in |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -426,20 +425,19 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Metrics Dashboard (Project Management domain).
 
-Design a product metrics dashboard — North Star, input metrics, and guardrails — that a team actually uses to make decisions. Use when building dashboard architecture: layers, owners, cadence, and visualization.
+Designs a product metrics dashboard in four layers (North Star, inputs, guardrails, operational) with owners, comparisons and cadence, and audits the spec. Use when building a launch dashboard or pruning one nobody uses.
 
 A dashboard architecture skill: which metrics go where, at which cadence, for which audience, with which visualization. Focused on producing the ONE artifact a team uses to make decisions — not the 30-chart dashboard
 
 ## Your Key Capabilities
-- Top-level metric count
-- Visualization fit
-- Vanity vs actionable test
-- Comparison discipline
-- &quot;Build us a dashboard for the new product line&quot;
-- &quot;Audit our existing dashboard&quot;
+- The wall of metrics
+- A North Star with no counterweight
+- Orphan metrics
+- Real-time everything
 
 ## Frameworks &amp; Templates You Know
 - Decision frameworks
+- | `assets/dashboard_spec_template.md` | Spec worksheet to fill in |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -497,7 +495,7 @@ for fast decision-making.
 Before designing the dashboard, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
 - **North Star metric:** defined or not (it is the root of all 4 layers; if undefined, define it first via `north-star-metric`).
-- **Audience:** board/exec / functional team / all-hands / IC (sets the max top-level metric count, 5-8 down to 1-3).
+- **Audience:** `exec` (board), `team`, `all-hands`, `partner` or `ic` (sets the max top-level metric count, from 12 for a team down to 3 for an IC).
 - **Team structure:** which teams act on this (operational metrics are 4-8 per team with named owners).
 - **Available instrumentation:** what data you actually capture (you can&#x27;t show a metric you don&#x27;t measure; bounds refresh cadence).
 
@@ -547,96 +545,53 @@ Each metric needs:
 - **Refresh cadence:** real-time / hourly / daily / weekly / monthly
 - **Owner:** named team
 
-### Step 6 — Run `dashboard_designer.py`
-Audit: too many top-level metrics, no guardrails, vanity metrics, missing
-owners, missing comparisons.
+### Step 6 — Audit the spec with `dashboard_designer.py`
+Write the spec as JSON (shape in the script&#x27;s `--help`; a sound and a flawed sample ship in
+`assets/`) and run the audit. Done when it exits 0 and the remaining warnings are either fixed
+or accepted with a reason.
 
 ```bash
 python3 project-management/discovery/metrics-dashboard/scripts/dashboard_designer.py \
-  --input dashboard_spec.json --format markdown
+  --input project-management/discovery/metrics-dashboard/assets/sample_dashboard_spec.json --format markdown   # exit 0
+python3 project-management/discovery/metrics-dashboard/scripts/dashboard_designer.py \
+  --input project-management/discovery/metrics-dashboard/assets/sample_dashboard_spec_flawed.json --format markdown   # exit 1
 ```
 
+Findings: **fail** for no North Star, no input metrics or no guardrails; **warn** for vanity terms
+(page views, total signups, total users, session count, time on site), missing owners,
+definitions or comparisons, guardrails without threshold alerts, over 6 inputs, more than 3
+real-time metrics, too many top-level or per-team metrics; **info** for missing targets, under 3
+inputs or guardrails, unconfirmed actionability. Exit codes: 0 no fail, 1 at least one fail,
+2 bad input (missing file, invalid JSON).
+
 ### Step 7 — Sunset stale metrics
-Quarterly: kill metrics no team looked at. Dashboards rot; pruning is
-healthy.
+Quarterly: remove metrics no team looked at; a dashboard nobody prunes stops being read.
 
 ## Decision frameworks
 
-### Top-level metric count
+Top-level limits per `audience` (`exec`/`board` 8, `team` 12 plus 8 operational per team, `all-hands` 5, `partner` 6, `ic` 3) and the vanity test (&quot;if this moved 10% next week, what would we do?&quot;) are in `references/dashboard-architecture.md` section 14.
 
-| Audience | Max top-level | Why |
-|----------|---------------|-----|
-| Board / exec | 5-8 | Limited attention; high signal/noise |
-| Functional team | 4-8 | Actionable; weekly review |
-| All-hands | 3-5 | Communicable; team rallies |
-| Individual contributor | 1-3 | Their direct impact |
+## Anti-Patterns
 
-### Visualization fit
+### The wall of metrics
+**Mistake:** 30+ metrics on one screen, shown to every audience.
+**Why it happens:** Adding a chart is cheap and removing one feels like losing information.
+**Instead:** Keep to the audience limit above, give each audience its own view, and let the audit&#x27;s top-level count check enforce it.
 
-| Question | Best visualization |
-|----------|---------------------|
-| Is it changing over time? | Line chart |
-| How much vs target? | Gauge / bullet |
-| Drop-off at each step? | Funnel |
-| Retention over time? | Cohort heatmap |
-| Distribution? | Histogram |
-| Composition? | Stacked area / pie (rare) |
-| Comparison across groups? | Grouped bar |
-| Relationship? | Scatter |
+### A North Star with no counterweight
+**Mistake:** The dashboard has a North Star and inputs but no guardrails.
+**Why it happens:** Guardrails measure what you do not want, so nobody asks for them.
+**Instead:** Add 3-5 guardrails with threshold alerts, each tied to a way the North Star could be gamed (more messages could mean more spam). The audit fails a spec with none.
 
-Avoid pie charts beyond 3 slices. Avoid 3D charts always.
+### Orphan metrics
+**Mistake:** Metrics with no owner and no review cadence.
+**Why it happens:** The dashboard is built as a project and handed to nobody.
+**Instead:** Name an owning team per metric and a review meeting per layer; the audit warns on every missing owner.
 
-### Vanity vs actionable test
-
-For each candidate metric: &quot;If this moved up 10% next week, what would we do?&quot;
-
-- Have answer → actionable; keep
-- No answer → vanity; cut
-
-### Comparison discipline
-
-Every chart needs a comparison anchor:
-- vs prior period (week / month / quarter)
-- vs target
-- vs cohort baseline
-- vs competitor benchmark (rare; usually unreliable)
-
-A chart with no comparison is a number floating in space.
-
-## Common engagements
-
-### &quot;Build us a dashboard for the new product line&quot;
-1. Confirm North Star.
-2. Decompose to 3-5 inputs.
-3. Identify 3-5 guardrails.
-4. Per team: 4-8 operational metrics.
-5. Spec viz + cadence + owner per metric.
-6. Pilot for 4 weeks; cut what nobody opens.
-
-### &quot;Audit our existing dashboard&quot;
-1. List every metric currently shown.
-2. Tag each: NS / input / guardrail / operational / vanity.
-3. Cut all vanity.
-4. Cut operational that no team looks at.
-5. Add missing guardrails.
-6. Limit each audience to its max.
-
-### &quot;Help us track an OKR&quot;
-1. Map OKR to metric: KR → metric.
-2. KR should be the metric.
-3. Inputs = what moves the KR.
-4. Guardrails = what we won&#x27;t sacrifice.
-
-## Anti-patterns to avoid
-
-- **30+ metrics on one screen.** Decision-making dies.
-- **No guardrails.** NS optimization without counter-balance.
-- **All metrics for all audiences.** Exec doesn&#x27;t need eng team metrics.
-- **No comparisons.** Numbers without context.
-- **Real-time everything.** Most metrics don&#x27;t need it (and it&#x27;s expensive).
-- **No owner per metric.** Orphan metrics rot.
-- **Vanity metrics (page views, signups alone).** Not action-driving.
-- **No cadence on review.** Dashboard exists; team doesn&#x27;t use it.
+### Real-time everything
+**Mistake:** Every metric refreshes in real time.
+**Why it happens:** Real time feels more serious.
+**Instead:** Reserve real time for triage metrics (3 or fewer); most decisions run weekly. More detail and fixes: `references/dashboard-anti-patterns.md`.
 
 ## Scope &amp; Limitations
 
@@ -671,6 +626,15 @@ A chart with no comparison is a number floating in space.
 - `product-team/ab-test-setup` — experimentation
 - `c-level-advisor/chief-data-officer-advisor` — platform context
 
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/dashboard_designer.py` | Audits a dashboard spec for layering, owners, comparisons and vanity terms |
+| `assets/sample_dashboard_spec.json`, `assets/sample_dashboard_spec_flawed.json` | Runnable specs: sound (exit 0) and flawed (exit 1) |
+| `assets/dashboard_spec_template.md` | Spec worksheet to fill in |
+| `references/dashboard-architecture.md`, `references/dashboard-anti-patterns.md` | Layers, cadence, visualization; failures and fixes |
+
 ---
 
 ## What I Need You to Do
@@ -697,7 +661,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Metrics Dashboard&quot;**
-   - Description: &quot;Design a product metrics dashboard — North Star, input metrics, and guardrails — that a team actually uses to make decisions. Use when building dashboard architecture: layers, owners, cadence, and visualization.&quot;
+   - Description: &quot;Designs a product metrics dashboard in four layers (North Star, inputs, guardrails, operational) with owners, comparisons and cadence, and audits the spec. Use when building a launch dashboard or pruning one nobody uses.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -750,7 +714,7 @@ for fast decision-making.
 Before designing the dashboard, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
 - **North Star metric:** defined or not (it is the root of all 4 layers; if undefined, define it first via `north-star-metric`).
-- **Audience:** board/exec / functional team / all-hands / IC (sets the max top-level metric count, 5-8 down to 1-3).
+- **Audience:** `exec` (board), `team`, `all-hands`, `partner` or `ic` (sets the max top-level metric count, from 12 for a team down to 3 for an IC).
 - **Team structure:** which teams act on this (operational metrics are 4-8 per team with named owners).
 - **Available instrumentation:** what data you actually capture (you can&#x27;t show a metric you don&#x27;t measure; bounds refresh cadence).
 
@@ -800,96 +764,53 @@ Each metric needs:
 - **Refresh cadence:** real-time / hourly / daily / weekly / monthly
 - **Owner:** named team
 
-### Step 6 — Run `dashboard_designer.py`
-Audit: too many top-level metrics, no guardrails, vanity metrics, missing
-owners, missing comparisons.
+### Step 6 — Audit the spec with `dashboard_designer.py`
+Write the spec as JSON (shape in the script&#x27;s `--help`; a sound and a flawed sample ship in
+`assets/`) and run the audit. Done when it exits 0 and the remaining warnings are either fixed
+or accepted with a reason.
 
 ```bash
 python3 project-management/discovery/metrics-dashboard/scripts/dashboard_designer.py \
-  --input dashboard_spec.json --format markdown
+  --input project-management/discovery/metrics-dashboard/assets/sample_dashboard_spec.json --format markdown   # exit 0
+python3 project-management/discovery/metrics-dashboard/scripts/dashboard_designer.py \
+  --input project-management/discovery/metrics-dashboard/assets/sample_dashboard_spec_flawed.json --format markdown   # exit 1
 ```
 
+Findings: **fail** for no North Star, no input metrics or no guardrails; **warn** for vanity terms
+(page views, total signups, total users, session count, time on site), missing owners,
+definitions or comparisons, guardrails without threshold alerts, over 6 inputs, more than 3
+real-time metrics, too many top-level or per-team metrics; **info** for missing targets, under 3
+inputs or guardrails, unconfirmed actionability. Exit codes: 0 no fail, 1 at least one fail,
+2 bad input (missing file, invalid JSON).
+
 ### Step 7 — Sunset stale metrics
-Quarterly: kill metrics no team looked at. Dashboards rot; pruning is
-healthy.
+Quarterly: remove metrics no team looked at; a dashboard nobody prunes stops being read.
 
 ## Decision frameworks
 
-### Top-level metric count
+Top-level limits per `audience` (`exec`/`board` 8, `team` 12 plus 8 operational per team, `all-hands` 5, `partner` 6, `ic` 3) and the vanity test (&quot;if this moved 10% next week, what would we do?&quot;) are in `references/dashboard-architecture.md` section 14.
 
-| Audience | Max top-level | Why |
-|----------|---------------|-----|
-| Board / exec | 5-8 | Limited attention; high signal/noise |
-| Functional team | 4-8 | Actionable; weekly review |
-| All-hands | 3-5 | Communicable; team rallies |
-| Individual contributor | 1-3 | Their direct impact |
+## Anti-Patterns
 
-### Visualization fit
+### The wall of metrics
+**Mistake:** 30+ metrics on one screen, shown to every audience.
+**Why it happens:** Adding a chart is cheap and removing one feels like losing information.
+**Instead:** Keep to the audience limit above, give each audience its own view, and let the audit&#x27;s top-level count check enforce it.
 
-| Question | Best visualization |
-|----------|---------------------|
-| Is it changing over time? | Line chart |
-| How much vs target? | Gauge / bullet |
-| Drop-off at each step? | Funnel |
-| Retention over time? | Cohort heatmap |
-| Distribution? | Histogram |
-| Composition? | Stacked area / pie (rare) |
-| Comparison across groups? | Grouped bar |
-| Relationship? | Scatter |
+### A North Star with no counterweight
+**Mistake:** The dashboard has a North Star and inputs but no guardrails.
+**Why it happens:** Guardrails measure what you do not want, so nobody asks for them.
+**Instead:** Add 3-5 guardrails with threshold alerts, each tied to a way the North Star could be gamed (more messages could mean more spam). The audit fails a spec with none.
 
-Avoid pie charts beyond 3 slices. Avoid 3D charts always.
+### Orphan metrics
+**Mistake:** Metrics with no owner and no review cadence.
+**Why it happens:** The dashboard is built as a project and handed to nobody.
+**Instead:** Name an owning team per metric and a review meeting per layer; the audit warns on every missing owner.
 
-### Vanity vs actionable test
-
-For each candidate metric: &quot;If this moved up 10% next week, what would we do?&quot;
-
-- Have answer → actionable; keep
-- No answer → vanity; cut
-
-### Comparison discipline
-
-Every chart needs a comparison anchor:
-- vs prior period (week / month / quarter)
-- vs target
-- vs cohort baseline
-- vs competitor benchmark (rare; usually unreliable)
-
-A chart with no comparison is a number floating in space.
-
-## Common engagements
-
-### &quot;Build us a dashboard for the new product line&quot;
-1. Confirm North Star.
-2. Decompose to 3-5 inputs.
-3. Identify 3-5 guardrails.
-4. Per team: 4-8 operational metrics.
-5. Spec viz + cadence + owner per metric.
-6. Pilot for 4 weeks; cut what nobody opens.
-
-### &quot;Audit our existing dashboard&quot;
-1. List every metric currently shown.
-2. Tag each: NS / input / guardrail / operational / vanity.
-3. Cut all vanity.
-4. Cut operational that no team looks at.
-5. Add missing guardrails.
-6. Limit each audience to its max.
-
-### &quot;Help us track an OKR&quot;
-1. Map OKR to metric: KR → metric.
-2. KR should be the metric.
-3. Inputs = what moves the KR.
-4. Guardrails = what we won&#x27;t sacrifice.
-
-## Anti-patterns to avoid
-
-- **30+ metrics on one screen.** Decision-making dies.
-- **No guardrails.** NS optimization without counter-balance.
-- **All metrics for all audiences.** Exec doesn&#x27;t need eng team metrics.
-- **No comparisons.** Numbers without context.
-- **Real-time everything.** Most metrics don&#x27;t need it (and it&#x27;s expensive).
-- **No owner per metric.** Orphan metrics rot.
-- **Vanity metrics (page views, signups alone).** Not action-driving.
-- **No cadence on review.** Dashboard exists; team doesn&#x27;t use it.
+### Real-time everything
+**Mistake:** Every metric refreshes in real time.
+**Why it happens:** Real time feels more serious.
+**Instead:** Reserve real time for triage metrics (3 or fewer); most decisions run weekly. More detail and fixes: `references/dashboard-anti-patterns.md`.
 
 ## Scope &amp; Limitations
 
@@ -924,6 +845,15 @@ A chart with no comparison is a number floating in space.
 - `product-team/ab-test-setup` — experimentation
 - `c-level-advisor/chief-data-officer-advisor` — platform context
 
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/dashboard_designer.py` | Audits a dashboard spec for layering, owners, comparisons and vanity terms |
+| `assets/sample_dashboard_spec.json`, `assets/sample_dashboard_spec_flawed.json` | Runnable specs: sound (exit 0) and flawed (exit 1) |
+| `assets/dashboard_spec_template.md` | Spec worksheet to fill in |
+| `references/dashboard-architecture.md`, `references/dashboard-anti-patterns.md` | Layers, cadence, visualization; failures and fixes |
+
 ---
 
 ## What I Need You to Do
@@ -950,7 +880,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Metrics Dashboard&quot;**
-   - Description: &quot;Design a product metrics dashboard — North Star, input metrics, and guardrails — that a team actually uses to make decisions. Use when building dashboard architecture: layers, owners, cadence, and visualization.&quot;
+   - Description: &quot;Designs a product metrics dashboard in four layers (North Star, inputs, guardrails, operational) with owners, comparisons and cadence, and audits the spec. Use when building a launch dashboard or pruning one nobody uses.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1011,7 +941,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python project-management/discovery/metrics-dashboard/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/metrics-dashboard/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Senior Data Scientist - Claude Skills</title>
-  <meta name="description" content="Use when the user asks to &quot;design an experiment&quot;, &quot;build a predictive model&quot;, &quot;run A/B test analysis&quot;, &quot;perform causal inference&quot;, &quot;engineer features&quot;, &quot;evaluate model performance&quot;, &quot;set up MLOps pipe">
+  <meta name="description" content="Experiment sizing, feature profiling with leakage checks, and model evaluation from saved predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features, or scoring a mode">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/senior-data-scientist.html">
   <meta property="og:title" content="Senior Data Scientist - Claude Skills">
-  <meta property="og:description" content="Use when the user asks to &quot;design an experiment&quot;, &quot;build a predictive model&quot;, &quot;run A/B test analysis&quot;, &quot;perform causal inference&quot;, &quot;engineer features&quot;, &quot;evaluate model performance&quot;, &quot;set up MLOps pipe">
+  <meta property="og:description" content="Experiment sizing, feature profiling with leakage checks, and model evaluation from saved predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features, or scoring a mode">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/senior-data-scientist.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Senior Data Scientist", "description": "Use when the user asks to \"design an experiment\", \"build a predictive model\", \"run A/B test analysis\", \"perform causal inference\", \"engineer features\", \"evaluate model performance\", \"set up MLOps pipeline\", \"analyze time series\", \"calculate sample size\", or \"deploy a model to production\". Expert data science covering statistical modeling, experimentation, causal inference, feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/senior-data-scientist.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Senior Data Scientist", "description": "Experiment sizing, feature profiling with leakage checks, and model evaluation from saved predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features, or scoring a model before release.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/senior-data-scientist.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Senior Data Scientist</h1>
-    <p class="page-subtitle">Use when the user asks to &quot;design an experiment&quot;, &quot;build a predictive model&quot;, &quot;run A/B test analysis&quot;, &quot;perform causal inference&quot;, &quot;engineer features&quot;, &quot;evaluate model performance&quot;, &quot;set up MLOps pipeline&quot;, &quot;analyze time series&quot;, &quot;calculate sample size&quot;, or &quot;deploy a model to production&quot;. Expert data science covering statistical modeling, experimentation, causal inference, feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.</p>
+    <p class="page-subtitle">Experiment sizing, feature profiling with leakage checks, and model evaluation from saved predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features, or scoring a model before release.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">data-science</span><span class="tag">ml</span><span class="tag">statistics</span><span class="tag">experimentation</span><span class="tag">python</span><span class="tag">mlops</span></div>
   </div>
@@ -393,9 +393,14 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Senior Data Scientist (Engineering domain).
 
-Use when the user asks to &quot;design an experiment&quot;, &quot;build a predictive model&quot;, &quot;run A/B test analysis&quot;, &quot;perform causal inference&quot;, &quot;engineer features&quot;, &quot;evaluate model performance&quot;, &quot;set up MLOps pipeline&quot;, &quot;analyze time series&quot;, &quot;calculate sample size&quot;, or &quot;deploy a model to production&quot;. Expert data science covering statistical modeling, experimentation, causal inference, feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.
+Experiment sizing, feature profiling with leakage checks, and model evaluation from saved predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features, or scoring a model before release.
 
 Expert data science for statistical modeling, experimentation, ML deployment, and data-driven decision making — A/B test design and analysis, feature engineering, model training/evaluation, production deployment, and causal inference. data-science, machine-learning, statistics, a-b-testing, causal-i
+
+## Your Key Capabilities
+- Peeking and Stopping Early
+- Features That Know the Answer
+- One Metric on One Split
 
 ## How to Help
 When the user asks for help in this domain:
@@ -415,9 +420,14 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Senior Data Scientist (Engineering domain).
 
-Use when the user asks to &quot;design an experiment&quot;, &quot;build a predictive model&quot;, &quot;run A/B test analysis&quot;, &quot;perform causal inference&quot;, &quot;engineer features&quot;, &quot;evaluate model performance&quot;, &quot;set up MLOps pipeline&quot;, &quot;analyze time series&quot;, &quot;calculate sample size&quot;, or &quot;deploy a model to production&quot;. Expert data science covering statistical modeling, experimentation, causal inference, feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.
+Experiment sizing, feature profiling with leakage checks, and model evaluation from saved predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features, or scoring a model before release.
 
 Expert data science for statistical modeling, experimentation, ML deployment, and data-driven decision making — A/B test design and analysis, feature engineering, model training/evaluation, production deployment, and causal inference. data-science, machine-learning, statistics, a-b-testing, causal-i
+
+## Your Key Capabilities
+- Peeking and Stopping Early
+- Features That Know the Answer
+- One Metric on One Split
 
 ## How to Help
 When the user asks for help in this domain:
@@ -490,6 +500,8 @@ Three standard-library Python tools. Each takes `--format text|json`, prints a s
 | `scripts/feature_engineering_pipeline.py` | Profiles a CSV (types, nulls, cardinality, quantiles, skew), flags constant, ID-like and highly correlated columns, scores features against a target, flags leakage suspects, and drafts a keep/transform/drop plan | `python scripts/feature_engineering_pipeline.py --input assets/customers_sample.csv --target churned` |
 | `scripts/model_evaluation_suite.py` | Scores saved predictions: classification (confusion matrix, precision, recall, F1, ROC AUC, log loss, Brier) or regression (MAE, RMSE, R², MAPE), side by side, with a fold stability check and pass/fail against thresholds | `python scripts/model_evaluation_suite.py --input assets/predictions_sample.csv --folds 5 --config assets/eval_thresholds.json` |
 
+Exit codes: `0` the run completed (a NOT READY verdict or an underpowered warning is still exit 0; read the verdict); `2` bad input (missing or malformed file, unknown column, invalid value, existing output without `--force`).
+
 &gt; For hypothesis testing, causal inference, and regression analysis, use inline scipy/statsmodels — see [references/statistical_methods_advanced.md](references/statistical_methods_advanced.md).
 
 ## References
@@ -524,14 +536,39 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 ## Integration Points
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-data-engineer` | Feature pipeline ingests data from ETL outputs; shares data quality validation patterns | Raw data stores --&gt; feature engineering pipeline --&gt; feature store |
-| `senior-ml-engineer` | Trained models handed off for MLOps deployment; shares model registry and serving configs | Evaluated model artifacts --&gt; deployment pipeline --&gt; production serving |
-| `senior-prompt-engineer` | Embedding features from LLMs feed into ML pipelines; experiment frameworks apply to prompt A/B tests | LLM embeddings --&gt; feature vectors; experiment designs --&gt; prompt evaluation |
-| `senior-architect` | Model serving architecture reviewed for scalability; data platform design aligned with training infrastructure | Architecture specs --&gt; deployment topology --&gt; monitoring dashboards |
-| `senior-backend` | Model inference endpoints integrated into backend services; API contracts defined for prediction requests | REST/gRPC model API --&gt; backend service layer --&gt; client applications |
-| `senior-devops` | CI/CD pipelines extended for model retraining triggers; containerized model images deployed via infrastructure-as-code | Docker images --&gt; Kubernetes manifests --&gt; production clusters |
+| Skill | Use for |
+|-------|---------|
+| `senior-data-engineer` | Upstream data pipelines and data-quality checks |
+| `senior-ml-engineer` | Serving, monitoring and retraining after evaluation |
+
+## Anti-Patterns
+
+### Peeking and Stopping Early
+**Mistake:** Checking an A/B test daily and stopping the first time p &lt; 0.05.
+**Why it happens:** Early wins are exciting and traffic is expensive.
+**Instead:** Fix the sample size with `experiment_designer.py` before launch and analyse once it is reached, or use a sequential design built for interim looks. Repeated peeking inflates the false-positive rate far above the nominal 5%.
+
+### Features That Know the Answer
+**Mistake:** Training on columns recorded after the outcome (refund issued, account closed date).
+**Why it happens:** They correlate strongly, so models built on them look excellent offline.
+**Instead:** Check every feature&#x27;s timestamp against the prediction time. `feature_engineering_pipeline.py` flags statistical suspects; the timing review is still yours.
+
+### One Metric on One Split
+**Mistake:** Shipping on a single AUC from one random split.
+**Why it happens:** It is the default output of most tutorials.
+**Instead:** Evaluate on a temporal holdout that mirrors production, report calibration and the business threshold metrics, and check stability across folds (`--folds`).
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/experiment_designer.py` | Sample size, power and duration for two-arm or multi-arm tests |
+| `scripts/feature_engineering_pipeline.py` | CSV profiling, leakage suspects and a keep/transform/drop plan |
+| `scripts/model_evaluation_suite.py` | Classification/regression metrics, fold stability, readiness verdict |
+| `assets/customers_sample.csv` | Features with a planted leak (`refund_issued`) and a duplicate column |
+| `assets/predictions_sample.csv`, `regression_sample.csv` | Saved predictions for the evaluation suite |
+| `assets/eval_thresholds.json`, `experiment_design.json` | Threshold config and experiment input |
+| `references/*.md` | Workflows, operations and CLI reference, statistics, experiment design, feature patterns |
 
 ---
 
@@ -559,7 +596,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Senior Data Scientist&quot;**
-   - Description: &quot;Use when the user asks to &quot;design an experiment&quot;, &quot;build a predictive model&quot;, &quot;run A/B test analysis&quot;, &quot;perform causal inference&quot;, &quot;engineer features&quot;, &quot;evaluate model performance&quot;, &quot;set up MLOps pipeline&quot;, &quot;analyze time series&quot;, &quot;calculate sample size&quot;, or &quot;deploy a model to production&quot;. Expert data science covering statistical modeling, experimentation, causal inference, feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.&quot;
+   - Description: &quot;Experiment sizing, feature profiling with leakage checks, and model evaluation from saved predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features, or scoring a model before release.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -627,6 +664,8 @@ Three standard-library Python tools. Each takes `--format text|json`, prints a s
 | `scripts/feature_engineering_pipeline.py` | Profiles a CSV (types, nulls, cardinality, quantiles, skew), flags constant, ID-like and highly correlated columns, scores features against a target, flags leakage suspects, and drafts a keep/transform/drop plan | `python scripts/feature_engineering_pipeline.py --input assets/customers_sample.csv --target churned` |
 | `scripts/model_evaluation_suite.py` | Scores saved predictions: classification (confusion matrix, precision, recall, F1, ROC AUC, log loss, Brier) or regression (MAE, RMSE, R², MAPE), side by side, with a fold stability check and pass/fail against thresholds | `python scripts/model_evaluation_suite.py --input assets/predictions_sample.csv --folds 5 --config assets/eval_thresholds.json` |
 
+Exit codes: `0` the run completed (a NOT READY verdict or an underpowered warning is still exit 0; read the verdict); `2` bad input (missing or malformed file, unknown column, invalid value, existing output without `--force`).
+
 &gt; For hypothesis testing, causal inference, and regression analysis, use inline scipy/statsmodels — see [references/statistical_methods_advanced.md](references/statistical_methods_advanced.md).
 
 ## References
@@ -661,14 +700,39 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 ## Integration Points
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-data-engineer` | Feature pipeline ingests data from ETL outputs; shares data quality validation patterns | Raw data stores --&gt; feature engineering pipeline --&gt; feature store |
-| `senior-ml-engineer` | Trained models handed off for MLOps deployment; shares model registry and serving configs | Evaluated model artifacts --&gt; deployment pipeline --&gt; production serving |
-| `senior-prompt-engineer` | Embedding features from LLMs feed into ML pipelines; experiment frameworks apply to prompt A/B tests | LLM embeddings --&gt; feature vectors; experiment designs --&gt; prompt evaluation |
-| `senior-architect` | Model serving architecture reviewed for scalability; data platform design aligned with training infrastructure | Architecture specs --&gt; deployment topology --&gt; monitoring dashboards |
-| `senior-backend` | Model inference endpoints integrated into backend services; API contracts defined for prediction requests | REST/gRPC model API --&gt; backend service layer --&gt; client applications |
-| `senior-devops` | CI/CD pipelines extended for model retraining triggers; containerized model images deployed via infrastructure-as-code | Docker images --&gt; Kubernetes manifests --&gt; production clusters |
+| Skill | Use for |
+|-------|---------|
+| `senior-data-engineer` | Upstream data pipelines and data-quality checks |
+| `senior-ml-engineer` | Serving, monitoring and retraining after evaluation |
+
+## Anti-Patterns
+
+### Peeking and Stopping Early
+**Mistake:** Checking an A/B test daily and stopping the first time p &lt; 0.05.
+**Why it happens:** Early wins are exciting and traffic is expensive.
+**Instead:** Fix the sample size with `experiment_designer.py` before launch and analyse once it is reached, or use a sequential design built for interim looks. Repeated peeking inflates the false-positive rate far above the nominal 5%.
+
+### Features That Know the Answer
+**Mistake:** Training on columns recorded after the outcome (refund issued, account closed date).
+**Why it happens:** They correlate strongly, so models built on them look excellent offline.
+**Instead:** Check every feature&#x27;s timestamp against the prediction time. `feature_engineering_pipeline.py` flags statistical suspects; the timing review is still yours.
+
+### One Metric on One Split
+**Mistake:** Shipping on a single AUC from one random split.
+**Why it happens:** It is the default output of most tutorials.
+**Instead:** Evaluate on a temporal holdout that mirrors production, report calibration and the business threshold metrics, and check stability across folds (`--folds`).
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/experiment_designer.py` | Sample size, power and duration for two-arm or multi-arm tests |
+| `scripts/feature_engineering_pipeline.py` | CSV profiling, leakage suspects and a keep/transform/drop plan |
+| `scripts/model_evaluation_suite.py` | Classification/regression metrics, fold stability, readiness verdict |
+| `assets/customers_sample.csv` | Features with a planted leak (`refund_issued`) and a duplicate column |
+| `assets/predictions_sample.csv`, `regression_sample.csv` | Saved predictions for the evaluation suite |
+| `assets/eval_thresholds.json`, `experiment_design.json` | Threshold config and experiment input |
+| `references/*.md` | Workflows, operations and CLI reference, statistics, experiment design, feature patterns |
 
 ---
 
@@ -696,7 +760,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Senior Data Scientist&quot;**
-   - Description: &quot;Use when the user asks to &quot;design an experiment&quot;, &quot;build a predictive model&quot;, &quot;run A/B test analysis&quot;, &quot;perform causal inference&quot;, &quot;engineer features&quot;, &quot;evaluate model performance&quot;, &quot;set up MLOps pipeline&quot;, &quot;analyze time series&quot;, &quot;calculate sample size&quot;, or &quot;deploy a model to production&quot;. Expert data science covering statistical modeling, experimentation, causal inference, feature engineering, ML deployment, and advanced analytics with Python, R, and SQL.&quot;
+   - Description: &quot;Experiment sizing, feature profiling with leakage checks, and model evaluation from saved predictions, plus causal-inference workflows. Use when sizing an A/B test, vetting features, or scoring a model before release.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -757,7 +821,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/senior-data-scientist/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-data-scientist/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

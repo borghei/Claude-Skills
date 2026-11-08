@@ -1,0 +1,15 @@
+{
+  "images": [
+    {"id": 1, "file_name": "street_001.jpg", "width": 1280, "height": 720},
+    {"id": 2, "file_name": "street_002.jpg", "width": 1280, "height": 720}
+  ],
+  "categories": [
+    {"id": 1, "name": "car"},
+    {"id": 2, "name": "person"}
+  ],
+  "annotations": [
+    {"id": 1, "image_id": 1, "category_id": 1, "bbox": [100, 220, 300, 160], "area": 48000, "iscrowd": 0},
+    {"id": 2, "image_id": 1, "category_id": 2, "bbox": [640, 300, 60, 180], "area": 10800, "iscrowd": 0},
+    {"id": 3, "image_id": 2, "category_id": 1, "bbox": [420, 260, 280, 150], "area": 42000, "iscrowd": 0}
+  ]
+}

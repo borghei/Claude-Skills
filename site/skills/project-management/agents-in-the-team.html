@@ -494,11 +494,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 ```bash
 # Sprint planning: score tickets, check review capacity (exit 2 = over capacity or policy breach)
 python3 project-management/execution/agents-in-the-team/scripts/agent_delegation_scorer.py \
-  --input backlog.json
+  --input project-management/execution/agents-in-the-team/assets/backlog_within_capacity.json   # exit 0
+python3 project-management/execution/agents-in-the-team/scripts/agent_delegation_scorer.py \
+  --input project-management/execution/agents-in-the-team/assets/backlog_sample.json            # exit 2
 
 # Monthly: delivery metrics split human vs agent, DORA split, optional regression gate
 python3 project-management/execution/agents-in-the-team/scripts/agent_delivery_metrics.py \
-  --input records.json --gate --tolerance 0.05
+  --input project-management/execution/agents-in-the-team/assets/delivery_records_sample.json --gate --tolerance 0.05   # exit 2
 ```
 
 ## Tools Overview
@@ -664,16 +666,7 @@ Self-contained; these cover adjacent ground:
 
 ## Sources
 
-- Scrum Guide Expansion Pack, *AI and Scrum* (v2026.1) - https://scrumexpansion.org/ai-and-scrum/
-- DORA, *DORA&#x27;s software delivery performance metrics* - https://dora.dev/guides/dora-metrics/
-- DORA, *State of AI-assisted Software Development 2025* - https://dora.dev/dora-report-2025/
-- Google Cloud Blog, *Announcing the 2025 DORA Report* - https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report
-- Google Cloud Blog, *Putting the DORA AI Capabilities Model to work* - https://cloud.google.com/blog/products/ai-machine-learning/from-adoption-to-impact-putting-the-dora-ai-capabilities-model-to-work
-- Linear Docs, *Agents in Linear* - https://linear.app/docs/agents-in-linear
-- Atlassian Support, *Collaborate on work items with AI agents* - https://support.atlassian.com/jira-software-cloud/docs/collaborate-on-work-items-with-ai-agents/
-- GitHub Docs, *About GitHub Copilot cloud agent* - https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent
-- GitHub Docs, *Risks and mitigations for GitHub Copilot cloud agent* - https://docs.github.com/en/copilot/concepts/agents/cloud-agent/risks-and-mitigations
-- OWASP GenAI Security Project, *LLM01:2025 Prompt Injection* - https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+The Scrum Guide Expansion Pack, DORA 2025, GitHub, Linear, Atlassian and OWASP sources behind this skill are listed at the end of each file in `references/`.
 
 ---
 
@@ -757,11 +750,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 ```bash
 # Sprint planning: score tickets, check review capacity (exit 2 = over capacity or policy breach)
 python3 project-management/execution/agents-in-the-team/scripts/agent_delegation_scorer.py \
-  --input backlog.json
+  --input project-management/execution/agents-in-the-team/assets/backlog_within_capacity.json   # exit 0
+python3 project-management/execution/agents-in-the-team/scripts/agent_delegation_scorer.py \
+  --input project-management/execution/agents-in-the-team/assets/backlog_sample.json            # exit 2
 
 # Monthly: delivery metrics split human vs agent, DORA split, optional regression gate
 python3 project-management/execution/agents-in-the-team/scripts/agent_delivery_metrics.py \
-  --input records.json --gate --tolerance 0.05
+  --input project-management/execution/agents-in-the-team/assets/delivery_records_sample.json --gate --tolerance 0.05   # exit 2
 ```
 
 ## Tools Overview
@@ -927,16 +922,7 @@ Self-contained; these cover adjacent ground:
 
 ## Sources
 
-- Scrum Guide Expansion Pack, *AI and Scrum* (v2026.1) - https://scrumexpansion.org/ai-and-scrum/
-- DORA, *DORA&#x27;s software delivery performance metrics* - https://dora.dev/guides/dora-metrics/
-- DORA, *State of AI-assisted Software Development 2025* - https://dora.dev/dora-report-2025/
-- Google Cloud Blog, *Announcing the 2025 DORA Report* - https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report
-- Google Cloud Blog, *Putting the DORA AI Capabilities Model to work* - https://cloud.google.com/blog/products/ai-machine-learning/from-adoption-to-impact-putting-the-dora-ai-capabilities-model-to-work
-- Linear Docs, *Agents in Linear* - https://linear.app/docs/agents-in-linear
-- Atlassian Support, *Collaborate on work items with AI agents* - https://support.atlassian.com/jira-software-cloud/docs/collaborate-on-work-items-with-ai-agents/
-- GitHub Docs, *About GitHub Copilot cloud agent* - https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent
-- GitHub Docs, *Risks and mitigations for GitHub Copilot cloud agent* - https://docs.github.com/en/copilot/concepts/agents/cloud-agent/risks-and-mitigations
-- OWASP GenAI Security Project, *LLM01:2025 Prompt Injection* - https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+The Scrum Guide Expansion Pack, DORA 2025, GitHub, Linear, Atlassian and OWASP sources behind this skill are listed at the end of each file in `references/`.
 
 ---
 
@@ -1026,13 +1012,15 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
   <h2>Python Tools</h2><div class="tool-item"><h4>Exit code contract [PROVEN]</h4><p>| Code | Meaning | Who fixes it |</p></div>
   <h2>Quick Start</h2><pre><code># Sprint planning: score tickets, check review capacity (exit 2 = over capacity or policy breach)
 python3 project-management/execution/agents-in-the-team/scripts/agent_delegation_scorer.py \
-  --input backlog.json
+  --input project-management/execution/agents-in-the-team/assets/backlog_within_capacity.json   # exit 0
+python3 project-management/execution/agents-in-the-team/scripts/agent_delegation_scorer.py \
+  --input project-management/execution/agents-in-the-team/assets/backlog_sample.json            # exit 2
 
 # Monthly: delivery metrics split human vs agent, DORA split, optional regression gate
 python3 project-management/execution/agents-in-the-team/scripts/agent_delivery_metrics.py \
-  --input records.json --gate --tolerance 0.05
+  --input project-management/execution/agents-in-the-team/assets/delivery_records_sample.json --gate --tolerance 0.05   # exit 2
 </code></pre>
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/agents-in-the-team/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

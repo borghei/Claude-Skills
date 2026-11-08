@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: data-engineering
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [airflow, spark, data-pipelines, warehousing, etl]
   python-tools: pipeline_orchestrator.py, data_quality_validator.py, etl_performance_optimizer.py
   tech-stack: python, sql, spark, airflow, dbt, kafka
@@ -47,26 +47,37 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Generate an Airflow DAG for incremental PostgreSQL -> Snowflake
+# Generate an Airflow DAG for incremental PostgreSQL -> Snowflake. Targets Airflow 3 (`airflow.sdk`,
+# current 3.4) with import fallbacks for 2.7+; --output creates missing parent folders
 python scripts/pipeline_orchestrator.py generate \
   --type airflow --source postgres --destination snowflake \
-  --tables orders,customers --mode incremental --schedule "0 5 * * *"
+  --tables orders,customers --mode incremental --schedule "0 5 * * *" --output dags/orders_etl.py
 
-# Validate data quality against a schema
-python scripts/data_quality_validator.py validate data.csv \
-  --schema schema.json --detect-anomalies --json
+# Validate data against a schema (sample schema and data ship in assets/)
+python scripts/data_quality_validator.py validate assets/sample_orders_flawed.csv \
+  --schema assets/sample_schema.json --detect-anomalies
 
-# Profile a dataset
-python scripts/data_quality_validator.py profile data.csv --json
+# Draft a schema from existing data, then tighten it by hand
+python scripts/data_quality_validator.py schema assets/sample_orders_clean.csv --output schema.json
 
-# Optimize a slow SQL query
-python scripts/etl_performance_optimizer.py analyze-sql query.sql \
-  --warehouse snowflake --json
-
-# Estimate query cost
-python scripts/etl_performance_optimizer.py estimate-cost query.sql \
-  --warehouse bigquery --stats data_stats.json --json
+# Review a SQL query (static analysis; read the warehouse's query profile for ground truth)
+python scripts/etl_performance_optimizer.py analyze-sql assets/sample_query.sql --warehouse snowflake
 ```
+
+Schema file format (`--schema`): a JSON object with `name`, `version`, optional
+`primary_key` (list of columns), `row_count_min`/`row_count_max`, and `columns`, each with
+`name`, `type` (`string`, `integer`, `float`, `boolean`, `date`, `datetime`, `email`, `uuid`),
+and optional `nullable`, `unique`, `min_value`, `max_value`, `min_length`, `max_length`,
+`pattern` (regex) and `allowed_values`. See `assets/sample_schema.json`. A schema generated
+by the `schema` subcommand only records types and observed ranges, so validating the same
+data against it finds nothing by construction; add the real business rules before using it
+as a gate. The report's check counts list failed checks, so a clean run shows 0.
+
+Exit codes: `0` ok; `1` `validate`/`contract` found error-severity failures, or
+`pipeline_orchestrator.py validate` found issues; `2` bad input (missing file, invalid JSON
+or schema). `assets/sample_orders_clean.csv` validates clean (exit 0);
+`assets/sample_orders_flawed.csv` has a duplicate key, a null and a malformed email, a
+negative amount, an unknown status and a bad date (exit 1).
 
 ## Tools
 
@@ -108,12 +119,32 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Cost estimates use per-credit and per-TB prices built into the script. Warehouse pricing changes and varies by contract and region, so estimates are for comparison, not budgeting.
 - The YAML used for configs and contracts is read with a small stdlib parser, so complex YAML may not load as expected.
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration |
-|-------|-------------|
-| `senior-data-scientist` | Feature engineering consumes curated mart data |
-| `senior-ml-engineer` | ML pipelines depend on feature store tables |
-| `senior-devops` | CI/CD for dbt, Airflow deployment, container orchestration |
-| `senior-architect` | Architecture reviews for lakehouse vs warehouse decisions |
-| `code-reviewer` | Pipeline code reviews for DAGs, dbt models, Spark jobs |
+### Validating Against an Inferred Schema
+**Mistake:** Generating a schema from today's data with `schema`, then gating tomorrow's loads on it.
+**Why it happens:** It is one command and the first run passes.
+**Instead:** An inferred schema encodes whatever the data already is, including its errors. Add the business rules (keys, allowed values, ranges) by hand and review them with the data owner.
+
+### Non-Idempotent Loads
+**Mistake:** Appending each run's rows without a merge key, so retries and backfills duplicate data.
+**Why it happens:** Appends are simpler and work on the happy path.
+**Instead:** Load by partition or `MERGE` on a business key so re-running any date gives the same result; test by running the same date twice.
+
+### Relative Start Dates in DAGs
+**Mistake:** `start_date=days_ago(1)` or `datetime.now()` in a DAG.
+**Why it happens:** Older tutorials used it.
+**Instead:** A fixed, timezone-aware `start_date` with `catchup` set deliberately. Relative dates shift every parse, break backfills, and the helper is gone in Airflow 3.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/pipeline_orchestrator.py` | Airflow / Prefect / Dagster code generation and DAG validation |
+| `scripts/data_quality_validator.py` | Schema validation, profiling, anomalies, contracts, schema inference, GE suites |
+| `scripts/etl_performance_optimizer.py` | SQL and Spark analysis, partition strategy, cost estimates |
+| `assets/sample_schema.json` | Schema with keys, types, ranges and allowed values |
+| `assets/sample_orders_clean.csv` | Data that passes the schema (exit 0) |
+| `assets/sample_orders_flawed.csv` | Data with six rule violations (exit 1) |
+| `assets/sample_query.sql` | Query for `analyze-sql` (SELECT *, function on a filter column, ORDER BY without LIMIT) |
+| `references/*.md` | Worked pipelines, decisions and troubleshooting, architecture, modeling, DataOps |

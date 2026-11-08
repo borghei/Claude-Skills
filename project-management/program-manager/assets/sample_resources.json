@@ -1,0 +1,47 @@
+{
+  "program": "Digital Transformation",
+  "allocations": [
+    {
+      "person": "Alice Chen",
+      "project": "API Migration",
+      "allocation_pct": 80,
+      "role": "Tech Lead"
+    },
+    {
+      "person": "Alice Chen",
+      "project": "Frontend Rebuild",
+      "allocation_pct": 20,
+      "role": "Advisor"
+    },
+    {
+      "person": "Bob Martinez",
+      "project": "Frontend Rebuild",
+      "allocation_pct": 100,
+      "role": "Engineer"
+    },
+    {
+      "person": "Carol Davis",
+      "project": "API Migration",
+      "allocation_pct": 50,
+      "role": "Engineer"
+    },
+    {
+      "person": "Carol Davis",
+      "project": "Analytics Platform",
+      "allocation_pct": 50,
+      "role": "Engineer"
+    },
+    {
+      "person": "Carol Davis",
+      "project": "DevOps Modernization",
+      "allocation_pct": 30,
+      "role": "Consultant"
+    },
+    {
+      "person": "Dave Wilson",
+      "project": "Analytics Platform",
+      "allocation_pct": 40,
+      "role": "Data Engineer"
+    }
+  ]
+}

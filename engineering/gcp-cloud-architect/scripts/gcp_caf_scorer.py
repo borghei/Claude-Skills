@@ -382,10 +382,16 @@ def check_performance(spec: dict[str, Any]) -> list[Check]:
     return cb
 
 
-def score(checks: list[Check]) -> int:
+def is_unknown(c: Check) -> bool:
+    """A check whose spec field is absent is unknown, not failed (detail reads "path=None")."""
+    return c.detail.endswith("=None")
+
+
+def score(checks: list[Check]) -> int | None:
+    checks = [c for c in checks if not is_unknown(c)]
     total_weight = sum(SEVERITY_WEIGHT[c.severity] for c in checks)
     if total_weight == 0:
-        return 0
+        return None
     passed_weight = sum(SEVERITY_WEIGHT[c.severity] for c in checks if c.pass_)
     return int(100 * passed_weight / total_weight)
 
@@ -416,9 +422,14 @@ def main() -> int:
         "Cost": check_cost(spec),
         "Performance": check_performance(spec),
     }
+    if not spec:
+        print("error: workload spec is empty or not a mapping", file=sys.stderr)
+        return 2
     scores = {name: score(checks) for name, checks in pillars.items()}
-    overall = sum(scores.values()) // len(scores)
-    failed = [c for checks in pillars.values() for c in checks if not c.pass_]
+    known = [s for s in scores.values() if s is not None]
+    overall = sum(known) // len(known) if known else None
+    unknown = [c for checks in pillars.values() for c in checks if is_unknown(c)]
+    failed = [c for checks in pillars.values() for c in checks if not c.pass_ and not is_unknown(c)]
     failed.sort(key=lambda c: -SEVERITY_WEIGHT[c.severity])
     if args.format == "json":
         out = json.dumps(
@@ -428,6 +439,7 @@ def main() -> int:
                 "scores": scores,
                 "overall_score": overall,
                 "failed_checks": [asdict(c) for c in failed],
+                "unknown_checks": [c.id for c in unknown],
             },
             indent=2,
         )
@@ -436,12 +448,15 @@ def main() -> int:
         lines.append(f"**Workload:** {spec.get('name', 'unnamed')}  ")
         lines.append(f"**Tier:** {spec.get('tier', 2)}")
         lines.append("")
-        lines.append(f"## Overall Score: {overall}/100")
+        lines.append(f"## Overall Score: {overall if overall is not None else 'n/a'}/100")
+        lines.append("")
+        lines.append(f"Scored on the {50 - len(unknown)} of 50 checks the spec answers; "
+                     f"{len(unknown)} not provided (listed below, not counted as failures).")
         lines.append("")
         lines.append("| Pillar | Score |")
         lines.append("|--------|-------|")
         for name, sc in scores.items():
-            lines.append(f"| {name} | {sc}/100 |")
+            lines.append(f"| {name} | {str(sc) + '/100' if sc is not None else 'n/a (no data)'} |")
         lines.append("")
         if failed:
             lines.append(f"## Failed Checks ({len(failed)})")
@@ -450,6 +465,11 @@ def main() -> int:
             lines.append("|----|--------|----------|----------|----------------|")
             for c in failed:
                 lines.append(f"| {c.id} | {c.pillar} | {c.severity} | {c.question} | {c.recommendation[:80]} |")
+        if unknown:
+            lines.append("")
+            lines.append(f"## Not Provided ({len(unknown)})")
+            lines.append("")
+            lines.append(", ".join(f"{c.id} ({c.detail.split('=')[0]})" for c in unknown))
         out = "\n".join(lines)
     if args.output:
         Path(args.output).write_text(out)

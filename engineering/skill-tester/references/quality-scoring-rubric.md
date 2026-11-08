@@ -2,7 +2,6 @@
 
 **Version**: 1.0.0  
 **Last Updated**: 2026-02-16  
-**Authority**: Claude Skills Engineering Team  
 
 ## Overview
 

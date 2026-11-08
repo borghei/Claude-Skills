@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Extended Thinking Architect - Claude Skills</title>
-  <meta name="description" content="This skill should be used when the user asks to &quot;decide reasoning effort&quot;, &quot;set a thinking budget&quot;, &quot;when to use extended thinking&quot;, &quot;tune reasoning vs cost&quot;, or &quot;should this task use a reasoning mode">
+  <meta name="description" content="Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model plus a better prompt, and split effort across agent-loop phases. Use when tuning reasoning vs cost or latency,">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/extended-thinking-architect.html">
   <meta property="og:title" content="Extended Thinking Architect - Claude Skills">
-  <meta property="og:description" content="This skill should be used when the user asks to &quot;decide reasoning effort&quot;, &quot;set a thinking budget&quot;, &quot;when to use extended thinking&quot;, &quot;tune reasoning vs cost&quot;, or &quot;should this task use a reasoning mode">
+  <meta property="og:description" content="Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model plus a better prompt, and split effort across agent-loop phases. Use when tuning reasoning vs cost or latency,">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/extended-thinking-architect.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Extended Thinking Architect", "description": "This skill should be used when the user asks to \"decide reasoning effort\", \"set a thinking budget\", \"when to use extended thinking\", \"tune reasoning vs cost\", or \"should this task use a reasoning model\".", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/extended-thinking-architect.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Extended Thinking Architect", "description": "Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model plus a better prompt, and split effort across agent-loop phases. Use when tuning reasoning vs cost or latency, or setting thinking budgets.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/extended-thinking-architect.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Extended Thinking Architect</h1>
-    <p class="page-subtitle">This skill should be used when the user asks to &quot;decide reasoning effort&quot;, &quot;set a thinking budget&quot;, &quot;when to use extended thinking&quot;, &quot;tune reasoning vs cost&quot;, or &quot;should this task use a reasoning model&quot;.</p>
+    <p class="page-subtitle">Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model plus a better prompt, and split effort across agent-loop phases. Use when tuning reasoning vs cost or latency, or setting thinking budgets.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">extended-thinking</span><span class="tag">reasoning-effort</span><span class="tag">llm</span><span class="tag">cost-optimization</span><span class="tag">agents</span></div>
   </div>
@@ -393,16 +393,13 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Extended Thinking Architect (Engineering domain).
 
-This skill should be used when the user asks to &quot;decide reasoning effort&quot;, &quot;set a thinking budget&quot;, &quot;when to use extended thinking&quot;, &quot;tune reasoning vs cost&quot;, or &quot;should this task use a reasoning model&quot;.
+Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model plus a better prompt, and split effort across agent-loop phases. Use when tuning reasoning vs cost or latency, or setting thinking budgets.
 
-&gt; **Category:** Engineering &gt; **Domain:** AI Engineering The **Extended Thinking Architect** skill helps you decide *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. 
+The agent decides *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. It turns task signals — error cost, ambiguity, step count, latency budget — into a deterministic r
 
 ## Your Key Capabilities
 - Choosing Effort for a New Task
 - Budgeting Reasoning Across an Agent Loop
-- When Reasoning Pays Off
-- When Reasoning Is Wasted
-- Guarding the Budget
 
 ## How to Help
 When the user asks for help in this domain:
@@ -422,16 +419,13 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Extended Thinking Architect (Engineering domain).
 
-This skill should be used when the user asks to &quot;decide reasoning effort&quot;, &quot;set a thinking budget&quot;, &quot;when to use extended thinking&quot;, &quot;tune reasoning vs cost&quot;, or &quot;should this task use a reasoning model&quot;.
+Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model plus a better prompt, and split effort across agent-loop phases. Use when tuning reasoning vs cost or latency, or setting thinking budgets.
 
-&gt; **Category:** Engineering &gt; **Domain:** AI Engineering The **Extended Thinking Architect** skill helps you decide *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. 
+The agent decides *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. It turns task signals — error cost, ambiguity, step count, latency budget — into a deterministic r
 
 ## Your Key Capabilities
 - Choosing Effort for a New Task
 - Budgeting Reasoning Across an Agent Loop
-- When Reasoning Pays Off
-- When Reasoning Is Wasted
-- Guarding the Budget
 
 ## How to Help
 When the user asks for help in this domain:
@@ -461,12 +455,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Extended Thinking Architect
 
-&gt; **Category:** Engineering
-&gt; **Domain:** AI Engineering
-
-## Overview
-
-The **Extended Thinking Architect** skill helps you decide *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. It turns task signals — error cost, ambiguity, step count, latency budget — into a deterministic recommendation with a rough cost multiplier, and allocates effort across the phases of an agent loop so you front-load reasoning where it pays and avoid runaway budgets.
+The agent decides *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. It turns task signals — error cost, ambiguity, step count, latency budget — into a deterministic recommendation with a rough cost multiplier, and allocates effort across the phases of an agent loop so you front-load reasoning where it pays and avoid runaway budgets.
 
 ## Clarify First
 
@@ -499,10 +488,16 @@ python scripts/reasoning_loop_allocator.py --difficulty medium --steps 5 --realt
 
 ## Tools Overview
 
-| Tool | Purpose | Key Flags |
-|------|---------|-----------|
-| `reasoning_budget_advisor.py` | Recommend an effort level (none/low/medium/high) or &quot;prompt-first / cheaper-model&quot; for one task, with rationale + cost multiplier | `--task-type`, `--error-cost`, `--steps`, `--ambiguity`, `--latency-budget`, `--verifiable`, `--json` |
-| `reasoning_loop_allocator.py` | Allocate reasoning effort across agent-loop phases (plan/act/observe/recover/finalize) under a total budget cap | `--difficulty`, `--steps`, `--max-budget-multiplier`, `--realtime`, `--json` |
+| Tool | Purpose | Key Flags | Exit codes |
+|------|---------|-----------|------------|
+| `reasoning_budget_advisor.py` | Recommend an effort level (none/low/medium/high) or &quot;prompt-first / cheaper-model&quot; for one task, with rationale and an illustrative cost multiplier | `--task-type`, `--error-cost`, `--steps`, `--ambiguity`, `--latency-budget`, `--verifiable`, `--json` | 0, 2 bad arguments |
+| `reasoning_loop_allocator.py` | Allocate reasoning effort across agent-loop phases (plan/act/observe/recover/finalize) under a total budget cap | `--difficulty`, `--steps`, `--max-budget-multiplier`, `--realtime`, `--json` | 0, 2 bad arguments |
+
+The cost multipliers (for example ~3x-8x for medium) are illustrative rules of thumb, not measurements. Real thinking-token use varies by model, task and provider; run a 20-50 item eval at two effort levels and compare quality, tokens and latency before fixing a budget.
+
+## How effort maps to platforms
+
+Current reasoning models expose effort directly: a reasoning-effort setting (low/medium/high, sometimes more levels) or an explicit thinking-token budget, and some decide adaptively how long to think. Map this skill&#x27;s levels onto whatever the provider offers, and keep prompts goal-first: state the goal, constraints, examples and output contract. Asking a reasoning model to &quot;think step by step&quot; or to print its reasoning adds tokens without improving the answer; that technique is for non-reasoning models.
 
 ## Workflows
 
@@ -544,22 +539,24 @@ python scripts/reasoning_loop_allocator.py --difficulty medium --steps 5 --realt
 - [When to Use Extended Thinking](references/when-to-use-extended-thinking.md) - Decision matrix of task classes where reasoning pays off vs. is wasted, interaction with tool use and agent loops, budget guards, overthinking failure modes, and eval signals.
 - [Reasoning Budget Patterns](references/reasoning-budget-patterns.md) - Allocation patterns, escalation ladders, caps and circuit breakers, and the cost/quality/latency tradeoff model.
 
-## Common Patterns
+## Anti-Patterns
 
-### When Reasoning Pays Off
-- Multi-step deduction with a verifiable answer (math, constraint solving, debugging from a stack trace)
-- Planning and decomposition before a long agent run — front-load thinking once, not on every tool call
-- High error-cost decisions where a wrong answer is expensive to detect or undo
+**Mistake:** Starting every task at high effort &quot;to be safe&quot;.
+**Why it happens:** More thinking feels like more quality.
+**Instead:** Start at the recommended level and escalate one notch on a failed check. High effort on extraction or formatting costs more and can over-elaborate.
 
-### When Reasoning Is Wasted
-- Extraction, classification, and formatting — deterministic mappings, not deduction; a cheaper model usually wins
-- Underspecified requests — extra thinking confidently elaborates on the wrong goal; fix the prompt first
-- Realtime/latency-tight paths where thinking tokens blow the budget more than they improve quality
+**Mistake:** Spending reasoning on an underspecified request.
+**Why it happens:** It seems the model can work out what was meant.
+**Instead:** Extra thinking confidently elaborates on the wrong goal. When the advisor says prompt-first, fix the spec and examples, then re-run.
 
-### Guarding the Budget
-- Set a per-call effort cap *and* a loop-level total cap (e.g. a multiple of one no-thinking call)
-- Escalate effort only on failure (retry at higher effort), never start high &quot;to be safe&quot;
-- Treat reasoning spent on trivial sub-steps as a regression — alert on per-phase token spend
+**Mistake:** Budgeting from the multiplier table without measuring.
+**Why it happens:** The numbers look precise.
+**Instead:** Treat them as a starting estimate and measure real token use on your own eval.
+
+## Files
+
+- `scripts/reasoning_budget_advisor.py`, `scripts/reasoning_loop_allocator.py` — the two advisors above.
+- [references/when-to-use-extended-thinking.md](references/when-to-use-extended-thinking.md), [references/reasoning-budget-patterns.md](references/reasoning-budget-patterns.md) — where reasoning pays off, budget patterns, caps and circuit breakers.
 
 ---
 
@@ -587,7 +584,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Extended Thinking Architect&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;decide reasoning effort&quot;, &quot;set a thinking budget&quot;, &quot;when to use extended thinking&quot;, &quot;tune reasoning vs cost&quot;, or &quot;should this task use a reasoning model&quot;.&quot;
+   - Description: &quot;Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model plus a better prompt, and split effort across agent-loop phases. Use when tuning reasoning vs cost or latency, or setting thinking budgets.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -612,12 +609,7 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Extended Thinking Architect
 
-&gt; **Category:** Engineering
-&gt; **Domain:** AI Engineering
-
-## Overview
-
-The **Extended Thinking Architect** skill helps you decide *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. It turns task signals — error cost, ambiguity, step count, latency budget — into a deterministic recommendation with a rough cost multiplier, and allocates effort across the phases of an agent loop so you front-load reasoning where it pays and avoid runaway budgets.
+The agent decides *when* an LLM task should spend a reasoning/thinking budget, *how much* (no-thinking / low / medium / high), and when the better move is a cheaper model with a sharper prompt instead. It turns task signals — error cost, ambiguity, step count, latency budget — into a deterministic recommendation with a rough cost multiplier, and allocates effort across the phases of an agent loop so you front-load reasoning where it pays and avoid runaway budgets.
 
 ## Clarify First
 
@@ -650,10 +642,16 @@ python scripts/reasoning_loop_allocator.py --difficulty medium --steps 5 --realt
 
 ## Tools Overview
 
-| Tool | Purpose | Key Flags |
-|------|---------|-----------|
-| `reasoning_budget_advisor.py` | Recommend an effort level (none/low/medium/high) or &quot;prompt-first / cheaper-model&quot; for one task, with rationale + cost multiplier | `--task-type`, `--error-cost`, `--steps`, `--ambiguity`, `--latency-budget`, `--verifiable`, `--json` |
-| `reasoning_loop_allocator.py` | Allocate reasoning effort across agent-loop phases (plan/act/observe/recover/finalize) under a total budget cap | `--difficulty`, `--steps`, `--max-budget-multiplier`, `--realtime`, `--json` |
+| Tool | Purpose | Key Flags | Exit codes |
+|------|---------|-----------|------------|
+| `reasoning_budget_advisor.py` | Recommend an effort level (none/low/medium/high) or &quot;prompt-first / cheaper-model&quot; for one task, with rationale and an illustrative cost multiplier | `--task-type`, `--error-cost`, `--steps`, `--ambiguity`, `--latency-budget`, `--verifiable`, `--json` | 0, 2 bad arguments |
+| `reasoning_loop_allocator.py` | Allocate reasoning effort across agent-loop phases (plan/act/observe/recover/finalize) under a total budget cap | `--difficulty`, `--steps`, `--max-budget-multiplier`, `--realtime`, `--json` | 0, 2 bad arguments |
+
+The cost multipliers (for example ~3x-8x for medium) are illustrative rules of thumb, not measurements. Real thinking-token use varies by model, task and provider; run a 20-50 item eval at two effort levels and compare quality, tokens and latency before fixing a budget.
+
+## How effort maps to platforms
+
+Current reasoning models expose effort directly: a reasoning-effort setting (low/medium/high, sometimes more levels) or an explicit thinking-token budget, and some decide adaptively how long to think. Map this skill&#x27;s levels onto whatever the provider offers, and keep prompts goal-first: state the goal, constraints, examples and output contract. Asking a reasoning model to &quot;think step by step&quot; or to print its reasoning adds tokens without improving the answer; that technique is for non-reasoning models.
 
 ## Workflows
 
@@ -695,22 +693,24 @@ python scripts/reasoning_loop_allocator.py --difficulty medium --steps 5 --realt
 - [When to Use Extended Thinking](references/when-to-use-extended-thinking.md) - Decision matrix of task classes where reasoning pays off vs. is wasted, interaction with tool use and agent loops, budget guards, overthinking failure modes, and eval signals.
 - [Reasoning Budget Patterns](references/reasoning-budget-patterns.md) - Allocation patterns, escalation ladders, caps and circuit breakers, and the cost/quality/latency tradeoff model.
 
-## Common Patterns
+## Anti-Patterns
 
-### When Reasoning Pays Off
-- Multi-step deduction with a verifiable answer (math, constraint solving, debugging from a stack trace)
-- Planning and decomposition before a long agent run — front-load thinking once, not on every tool call
-- High error-cost decisions where a wrong answer is expensive to detect or undo
+**Mistake:** Starting every task at high effort &quot;to be safe&quot;.
+**Why it happens:** More thinking feels like more quality.
+**Instead:** Start at the recommended level and escalate one notch on a failed check. High effort on extraction or formatting costs more and can over-elaborate.
 
-### When Reasoning Is Wasted
-- Extraction, classification, and formatting — deterministic mappings, not deduction; a cheaper model usually wins
-- Underspecified requests — extra thinking confidently elaborates on the wrong goal; fix the prompt first
-- Realtime/latency-tight paths where thinking tokens blow the budget more than they improve quality
+**Mistake:** Spending reasoning on an underspecified request.
+**Why it happens:** It seems the model can work out what was meant.
+**Instead:** Extra thinking confidently elaborates on the wrong goal. When the advisor says prompt-first, fix the spec and examples, then re-run.
 
-### Guarding the Budget
-- Set a per-call effort cap *and* a loop-level total cap (e.g. a multiple of one no-thinking call)
-- Escalate effort only on failure (retry at higher effort), never start high &quot;to be safe&quot;
-- Treat reasoning spent on trivial sub-steps as a regression — alert on per-phase token spend
+**Mistake:** Budgeting from the multiplier table without measuring.
+**Why it happens:** The numbers look precise.
+**Instead:** Treat them as a starting estimate and measure real token use on your own eval.
+
+## Files
+
+- `scripts/reasoning_budget_advisor.py`, `scripts/reasoning_loop_allocator.py` — the two advisors above.
+- [references/when-to-use-extended-thinking.md](references/when-to-use-extended-thinking.md), [references/reasoning-budget-patterns.md](references/reasoning-budget-patterns.md) — where reasoning pays off, budget patterns, caps and circuit breakers.
 
 ---
 
@@ -738,7 +738,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Extended Thinking Architect&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;decide reasoning effort&quot;, &quot;set a thinking budget&quot;, &quot;when to use extended thinking&quot;, &quot;tune reasoning vs cost&quot;, or &quot;should this task use a reasoning model&quot;.&quot;
+   - Description: &quot;Recommend a reasoning-effort level or thinking budget for an LLM task, or a cheaper model plus a better prompt, and split effort across agent-loop phases. Use when tuning reasoning vs cost or latency, or setting thinking budgets.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -813,7 +813,7 @@ python scripts/reasoning_loop_allocator.py --difficulty high --steps 8 \
 # Tight-latency loop — see effort capped per phase
 python scripts/reasoning_loop_allocator.py --difficulty medium --steps 5 --realtime --json
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/extended-thinking-architect/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

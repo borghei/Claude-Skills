@@ -67,14 +67,15 @@ and state your assumptions at the top of the body.
 
 ```bash
 # 1. Classify the change from its real file list and diff
-git diff --name-only main...HEAD > /tmp/changed.txt
-git diff main...HEAD > /tmp/pr.diff
+T=$(mktemp -d)
+git diff --name-only main...HEAD > "$T/changed.txt"
+git diff main...HEAD > "$T/pr.diff"
 python3 engineering/pr-description-writer/scripts/risk_classifier.py \
-  --files /tmp/changed.txt --diff /tmp/pr.diff --emit-section
+  --files "$T/changed.txt" --diff "$T/pr.diff" --emit-section
 
 # 2. Write the body from assets/pr-body-template.md, then lint it against the same files
 python3 engineering/pr-description-writer/scripts/pr_body_lint.py \
-  --body pr.md --files /tmp/changed.txt --diff /tmp/pr.diff
+  --body pr.md --files "$T/changed.txt" --diff "$T/pr.diff"
 
 # 3. Open the PR only when the lint passes
 gh pr create --base main --body-file pr.md

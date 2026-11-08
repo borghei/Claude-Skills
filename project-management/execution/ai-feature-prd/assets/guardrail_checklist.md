@@ -39,7 +39,7 @@ The model choice itself is a control.
 
 - [ ] **Primary model** is a well-aligned, frontier-tier model with known refusal training (Claude family, GPT family, Gemini family at the comparable tier).
 - [ ] **Fallback model** is also a well-aligned model (do not fail over to a less-safe model just to save cost).
-- [ ] **Temperature** is set to the lowest value that produces acceptable variance for the task (high temperature widens both quality and safety distributions).
+- [ ] **Variance control** fits the model: where temperature is exposed, set the lowest value that gives acceptable variance; reasoning models often fix sampling, so use the output schema, the prompt contract and the effort setting instead.
 - [ ] **Max tokens** capped to prevent runaway generation.
 - [ ] **Stop sequences** set to prevent leak of system prompt or tool outputs.
 - [ ] **Safety-policy headers / params** set on the API (e.g., Anthropic's safety classifiers, OpenAI's moderation hooks).

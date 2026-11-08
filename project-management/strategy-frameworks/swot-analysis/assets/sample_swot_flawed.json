@@ -1,0 +1,21 @@
+{
+  "swot_scope": "The company",
+  "as_of": "2026-05-27",
+  "strengths": [
+    {"text": "Great team"},
+    {"text": "Great product"},
+    {"text": "Strong brand"},
+    {"text": "Innovative culture"},
+    {"text": "Best-in-class support"},
+    {"text": "World-class engineering"}
+  ],
+  "weaknesses": [],
+  "opportunities": [
+    {"text": "AI"},
+    {"text": "Growing market"}
+  ],
+  "threats": [
+    {"text": "Competition"}
+  ],
+  "tows_actions": []
+}

@@ -17,7 +17,7 @@ import argparse
 import json
 import sys
 import textwrap
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 # ---------------------------------------------------------------------------
@@ -415,7 +415,7 @@ def generate_plan(project_type_key, environment_names, strategy_key, output_form
             "phases": strategy["phases"],
             "rollback_time": strategy["rollback_time"],
         },
-        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
     }
 
     if output_format == "json":
@@ -656,7 +656,7 @@ def main():
     # Handle errors
     if isinstance(result, dict) and "error" in result:
         print(f"Error: {result['error']}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Output
     if isinstance(result, dict):

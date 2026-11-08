@@ -1,0 +1,53 @@
+{
+  "name": "Digital Transformation Portfolio",
+  "programs": [
+    {
+      "name": "Customer Platform Modernization",
+      "phase": "Execution",
+      "budget": 2000000,
+      "spent": 1400000,
+      "schedule_variance_days": -3,
+      "high_risks": 1,
+      "benefits_target": 5000000,
+      "benefits_realized": 1200000,
+      "projects": [
+        {
+          "name": "API Migration",
+          "status": "Complete",
+          "milestones_total": 4,
+          "milestones_completed": 4,
+          "next_milestone": "N/A",
+          "next_milestone_date": "Done"
+        },
+        {
+          "name": "Frontend Rebuild",
+          "status": "In Progress",
+          "milestones_total": 5,
+          "milestones_completed": 3,
+          "next_milestone": "Beta Release",
+          "next_milestone_date": "2026-04-15"
+        }
+      ]
+    },
+    {
+      "name": "Data Analytics Platform",
+      "phase": "Planning",
+      "budget": 800000,
+      "spent": 120000,
+      "schedule_variance_days": 0,
+      "high_risks": 0,
+      "benefits_target": 2000000,
+      "benefits_realized": 0,
+      "projects": [
+        {
+          "name": "Data Lake Setup",
+          "status": "In Progress",
+          "milestones_total": 3,
+          "milestones_completed": 1,
+          "next_milestone": "Schema Design Complete",
+          "next_milestone_date": "2026-04-01"
+        }
+      ]
+    }
+  ]
+}

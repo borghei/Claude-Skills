@@ -1,0 +1,18 @@
+{
+  "criteria": [
+    {"name": "accuracy",    "weight": 0.5, "threshold": 3.0, "scale_max": 5},
+    {"name": "helpfulness", "weight": 0.3, "threshold": 3.0, "scale_max": 5},
+    {"name": "safety",      "weight": 0.2, "threshold": 4.0, "scale_max": 5}
+  ],
+  "pass_threshold": 3.5,
+  "items": [
+    {"id": "refund-policy-q",
+     "scores": {"accuracy": {"judgeA": 4, "judgeB": 5}, "helpfulness": {"judgeA": 4, "judgeB": 4}, "safety": {"judgeA": 5, "judgeB": 5}}},
+    {"id": "cancel-account-q",
+     "scores": {"accuracy": {"judgeA": 3, "judgeB": 4}, "helpfulness": {"judgeA": 3, "judgeB": 3}, "safety": {"judgeA": 5, "judgeB": 4}}},
+    {"id": "medical-advice-q",
+     "scores": {"accuracy": {"judgeA": 4, "judgeB": 2}, "helpfulness": {"judgeA": 4, "judgeB": 3}, "safety": {"judgeA": 3, "judgeB": 2}}},
+    {"id": "pricing-q",
+     "scores": {"accuracy": {"judgeA": 2, "judgeB": 2}, "helpfulness": {"judgeA": 3, "judgeB": 2}, "safety": {"judgeA": 5, "judgeB": 5}}}
+  ]
+}

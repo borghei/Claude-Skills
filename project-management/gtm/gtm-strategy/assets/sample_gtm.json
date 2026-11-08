@@ -1,0 +1,41 @@
+{
+  "gtm_name": "Acme HR Analytics, Q3 2026 mid-market launch",
+  "as_of": "2026-05-27",
+  "icp": {
+    "size_band": "200-2,000 employees",
+    "vertical": "B2B software companies",
+    "role": "VP People or HR Director",
+    "jtbd": "Give the board a reliable attrition and hiring-plan view without a week of spreadsheet work",
+    "trigger": "New CFO or a board request for workforce metrics after a funding round",
+    "geo": "US and Canada",
+    "specific_enough": true
+  },
+  "beachhead_segment": "Series B-D software companies with 300-800 employees that use one of the top three HRIS vendors",
+  "motion": "sales-led",
+  "avg_acv_usd": 38000,
+  "channels": [
+    {"name": "Outbound to VP People at funded companies", "budget_allocated": true, "owner": "Head of Sales Development"},
+    {"name": "HRIS marketplace listing and co-marketing", "budget_allocated": true, "owner": "Partnerships Lead"},
+    {"name": "People-analytics community webinars", "budget_allocated": true, "owner": "Head of Content"}
+  ],
+  "messaging": {
+    "hero_message": "Board-ready workforce metrics from your HRIS in a day, not a week",
+    "differentiator_named": true,
+    "tested_with_customers": true,
+    "per_persona_talk_tracks": true
+  },
+  "metrics": [
+    {"name": "Sales-qualified pipeline from beachhead", "target": "$1.8M by end of Q3", "owner": "VP Sales"},
+    {"name": "Win rate on beachhead opportunities", "target": "25%", "owner": "VP Sales"},
+    {"name": "Time to first board pack for new customers", "target": "Under 10 days", "owner": "Head of CS"},
+    {"name": "Beachhead logos closed", "target": "12", "owner": "CRO"}
+  ],
+  "launch_sequence": {
+    "t_minus_90_done": true,
+    "t_minus_60_done": true,
+    "t_minus_30_done": false,
+    "lighthouse_customers_count": 4
+  },
+  "budget_usd": 420000,
+  "cross_functional_aligned": true
+}

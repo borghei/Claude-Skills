@@ -1,0 +1,53 @@
+{
+  "project": "Platform Migration",
+  "dependencies": [
+    {
+      "from": "Auth Service",
+      "to": "User Database",
+      "type": "depends_on",
+      "risk": "High",
+      "owner": "Alice",
+      "description": "Auth requires user DB schema migration first"
+    },
+    {
+      "from": "API Gateway",
+      "to": "Auth Service",
+      "type": "depends_on",
+      "risk": "Medium",
+      "owner": "Bob",
+      "description": "Gateway needs auth endpoints available"
+    },
+    {
+      "from": "Web App",
+      "to": "API Gateway",
+      "type": "depends_on",
+      "risk": "Low",
+      "owner": "Carol",
+      "description": "Frontend depends on gateway routes"
+    },
+    {
+      "from": "Mobile App",
+      "to": "API Gateway",
+      "type": "depends_on",
+      "risk": "Low",
+      "owner": "Dave",
+      "description": "Mobile depends on gateway routes"
+    },
+    {
+      "from": "Analytics",
+      "to": "User Database",
+      "type": "depends_on",
+      "risk": "Medium",
+      "owner": "Unassigned",
+      "description": "Analytics reads from user DB"
+    },
+    {
+      "from": "Analytics",
+      "to": "API Gateway",
+      "type": "depends_on",
+      "risk": "High",
+      "owner": "Unassigned",
+      "description": "Analytics collects API usage data"
+    }
+  ]
+}

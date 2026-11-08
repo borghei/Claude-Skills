@@ -1,17 +1,16 @@
 ---
 name: gtm-strategy
 description: >
-  Integrated go-to-market strategy spanning ICP, motion, channels,
-  messaging, success metrics, and launch plan. Use when launching a
-  new product, entering a new segment, or auditing why an existing
-  GTM isn't working.
+  Builds and audits a go-to-market plan: beachhead, motion matched to ACV,
+  funded channels, tested messaging, owned metrics and a T-90 launch sequence.
+  Use when launching a product, entering a segment or fixing a stalled GTM.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: go-to-market
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: gtm_strategy_validator.py
   tech-stack: gtm, go-to-market, motion, launch, beachhead
   tags:
@@ -24,27 +23,17 @@ metadata:
 
 # GTM Strategy
 
-A complete go-to-market strategy is the integrated cross-functional plan:
-ICP, motion, channels, messaging, success metrics, and launch sequence.
+The agent produces one integrated plan across seven components: ICP, beachhead, motion, channels, messaging, metrics and launch sequence. Each choice has to fit the others; most stalled launches fail at a seam (a sales-led motion on a $4K ACV, channels with no budget, a message nobody tested).
 
-## When to use this skill
+**Done looks like:** an ICP specific enough to build a list from, and one beachhead inside it; a motion that fits the ACV; 2-4 channels, each with budget and an owner; a hero message under 120 characters that names the differentiator and was tested with ICP buyers; 3-6 metrics with targets and owners; three or more lighthouse customers before launch; `gtm_strategy_validator.py` exits 0 with no warnings left unanswered.
 
-- **New product launch** (full product or major feature)
-- **New segment entry** (SMB → ENT; new geography; new vertical)
-- **GTM refresh** (current motion stalling)
-- **Repositioning** after pivot
-- **Pre-fundraise** GTM narrative for investors
-- **Post-mortem** on why a launch didn't take
+## When to Use
 
-## The 7 components
+- Launching a product or major feature, or entering a new segment, geography or vertical
+- A GTM that is stalling, or a repositioning after a pivot
+- A pre-fundraise GTM narrative, or a post-mortem on a launch that did not take
 
-1. **ICP (Ideal Customer Profile)** — who specifically, why now
-2. **Beachhead segment** — first concentrated market
-3. **Motion** — PLG / sales-led / hybrid / channel-led
-4. **Channels** — how customers find + buy
-5. **Messaging + positioning** — what we say
-6. **Success metrics** — what we measure
-7. **Launch sequence** — what happens in what order
+Build the ICP itself with `project-management/gtm/ideal-customer-profile`; this skill starts from it.
 
 ## Clarify First
 
@@ -57,173 +46,71 @@ Before building the GTM strategy, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Define ICP precisely
-- Industry / vertical
-- Size band (employees / revenue)
-- Geography
-- Buyer persona (role, level)
-- Tech stack signals
-- Job-to-be-done
-- Trigger event (why now)
-
-See `project-management/gtm/ideal-customer-profile`.
-
-### Step 2 — Pick the beachhead
-Start narrow:
-- 1 segment, 1 vertical, 1 geography
-- Concentrated enough to develop reference customers
-- Reachable via clear channels
-- Big enough to learn from but small enough to dominate
-
-Reference: Crossing the Chasm. Don't try to sell to everyone Day 1.
-
-### Step 3 — Pick the motion
-
-| Motion | When | Cost structure |
-|--------|------|----------------|
-| **PLG (product-led)** | Self-serve product; low ACV ($0-$5K); strong activation | Low CAC; high product investment |
-| **Sales-led** | High ACV ($25K+); complex buying committees | High CAC; sales team needed |
-| **Marketing-led / inbound** | Mid-ACV ($5K-$25K); content-driven | Medium CAC; content + ops team |
-| **Channel-led** | Wide distribution via partners | Medium CAC; partner program needed |
-| **Community-led** | Strong category with passionate users | Long ramp; high ongoing investment |
-| **Hybrid (PLG + sales)** | PLG to capture; sales to expand | Most modern SaaS; complex to coordinate |
-
-Don't try to run all motions Day 1.
-
-### Step 4 — Channels per motion
-
-| Motion | Primary channels |
-|--------|------------------|
-| PLG | Web direct, SEO, viral, content, app stores |
-| Sales-led | Outbound SDR, AE outbound, events, account-based |
-| Marketing-led | SEO, paid, content syndication, webinar |
-| Channel-led | Partner program, marketplace |
-| Community-led | Open source, community events, integrations |
-
-### Step 5 — Messaging + positioning
-- **Positioning:** "[Product] is [category] for [target] who [JTBD], unlike [alternative]"
-- **Hero message:** outcome customers want (not feature)
-- **Differentiation:** clear "why us vs them"
-- **Talk track per segment:** different ICPs need different framing
-
-### Step 6 — Success metrics
-
-| Motion | KPI focus |
-|--------|-----------|
-| PLG | Signups, activation, free-to-paid conversion, NRR |
-| Sales-led | Pipeline coverage, win rate, ACV, cycle time, NRR |
-| Marketing-led | MQL → SQL conversion, CPA, content engagement |
-| Channel-led | Partner-sourced revenue, partner activity |
-
-Set targets; track weekly; tune.
-
-### Step 7 — Launch sequence
-- **T-90:** ICP locked; positioning v1; channels chosen; team aligned
-- **T-60:** Sales/marketing collateral ready; pilot customers identified
-- **T-30:** Internal training; lighthouse customer commitments
-- **T-7:** Launch comms prepped; press / analyst briefed
-- **T-0:** Launch
-- **T+30:** Iterate based on early signal
-- **T+90:** GTM v2 incorporating learnings
-
-### Step 8 — Run `gtm_strategy_validator.py`
-Audit GTM doc for: ICP specificity, motion fit, channel coherence,
-messaging clarity, metric definition, sequence realism.
+## Quick Start
 
 ```bash
+# Mid-market sales-led launch: exit 0, no findings
 python3 project-management/gtm/gtm-strategy/scripts/gtm_strategy_validator.py \
-  --input gtm.json --format markdown
+  --input project-management/gtm/gtm-strategy/assets/sample_gtm.json --format markdown
 ```
 
-## Decision frameworks
+```bash
+# "Everyone" ICP, sales-led at $4K ACV, seven unfunded channels, no metrics: exit 1
+python3 project-management/gtm/gtm-strategy/scripts/gtm_strategy_validator.py \
+  --input project-management/gtm/gtm-strategy/assets/sample_gtm_flawed.json --format markdown
+```
 
-### Motion fit by ACV
+```bash
+# Input schema and flags
+python3 project-management/gtm/gtm-strategy/scripts/gtm_strategy_validator.py --help
+```
 
-| ACV | Likely motion |
-|-----|---------------|
-| < $1K | PLG; consumer-style |
-| $1K-$10K | PLG-led; light sales-assist |
-| $10K-$50K | Marketing-led + inside sales |
-| $50K-$250K | Sales-led with marketing support |
-| $250K+ | Enterprise sales-led; long cycle |
+## Tools Overview
 
-Cross these and economics break.
+`gtm_strategy_validator.py` is the quality gate for this skill. **What the validator checks:** an ICP with size, vertical, role, job and trigger; a beachhead; motion-ACV fit (sales-led under $10K, PLG over $100K); 1-6 channels with budget and owners; a hero message that exists (fail otherwise), is short and avoids generic terms; the self-reported `differentiator_named` / `tested_with_customers` flags; metrics present (fail otherwise) with targets and owners; lighthouse customers; alignment and budget. It checks that the parts exist and fit each other; it cannot judge whether the strategy will work, and the boolean flags are only as honest as whoever set them.
 
-### Beachhead vs broad
+**Exit codes:** `0` no fail findings · `1` at least one fail (no ICP, channels, hero message or metrics) · `2` unreadable file, invalid JSON or a top level that is not an object. JSON by default, `--format markdown`, `--output FILE`.
 
-Going broad Day 1:
-- Diluted messaging
-- No reference customers
-- Sales motion thinly stretched
-- No moat in any segment
+## Workflow
 
-Beachhead first:
-- Win the segment
-- Build reference customers
-- Develop battle-tested motion
-- Then expand adjacent
+1. **ICP.** Take it from `ideal-customer-profile` (size, vertical, geography, role, job, trigger). If it would fit "everyone who manages people", stop and sharpen it first.
+2. **Beachhead.** One segment, one vertical, one geography: concentrated enough to produce reference customers, reachable through clear channels, small enough to win.
+3. **Motion.** Fit it to ACV and buying complexity: self-serve and low ACV point to PLG, committee buying and $25K+ to sales-led, the middle to marketing-led or inside sales. Run one motion well before adding another. ACV bands and motion tables: `references/gtm-components-deep.md` (appendix).
+4. **Channels.** 2-4 that fit the motion and the product (an SEO channel needs a searchable problem; outbound needs a value line an AE can say in 30 seconds). Each gets budget and an owner.
+5. **Messaging.** Positioning: "[product] is [category] for [target] who [job], unlike [alternative]". A hero message about the outcome, a named differentiator, talk tracks per persona, tested with ICP buyers.
+6. **Metrics.** 3-6 covering pipeline, conversion and quality, each with a target and an owner, reviewed weekly.
+7. **Launch sequence.** T-90 ICP and positioning locked; T-60 collateral and pilots; T-30 training and lighthouse commitments; T-7 comms; T+30 and T+90 revisions. Detail: `references/launch-sequence-playbook.md`.
+8. **Audit.** Write the plan as JSON (schema in `--help`; `assets/sample_gtm.json` is a complete example) and run the validator. It must pass with no fail findings; then verify that each warning is fixed or has a stated reason.
 
-Geoffrey Moore: cross the chasm one bowling pin at a time.
+For a stalling GTM, audit the current plan first and fix the first broken seam (ICP, motion fit, channels, message, metrics) before touching the next.
 
-### Channel-product fit
+## Anti-Patterns
 
-Each channel has product-fit assumptions:
-- SEO: long content; SERP-able problem
-- Paid: clear high-intent keywords; LTV > 2-3x CAC
-- Outbound: defined ICP; AE can articulate value in 30 seconds
-- Channel: partners economically incentivized; product fits their offering
-- Community: passionate users + room to participate
-- Viral: collaboration / sharing built into product
+### Motion mismatched with ACV
+**Mistake:** A field-sales motion sells a $4K-a-year product.
+**Why it happens:** The team copies the motion of a company it admires.
+**Instead:** Pick the motion from ACV and buying complexity, and check CAC payback before hiring for it.
 
-If channel-product fit is off, channel won't deliver regardless of effort.
+### Channels listed, not funded
+**Mistake:** Seven channels in the plan, none with budget or an owner.
+**Why it happens:** Listing channels feels like coverage.
+**Instead:** Fund 2-4 channels properly and name who runs each; the rest wait for evidence.
 
-## Common engagements
+### Launch as a moment
+**Mistake:** "Ship and announce", with no lighthouse customers or sequence.
+**Why it happens:** The launch date is fixed before the GTM work starts.
+**Instead:** Work back from T-90 and secure three or more lighthouse customers before the announcement.
 
-### "Help us launch product X in market Y"
-1. Confirm ICP precision (or sharpen).
-2. Pick beachhead segment.
-3. Choose motion based on ACV + product complexity.
-4. Map channels to motion.
-5. Draft positioning + messaging.
-6. Define success metrics + targets.
-7. Build T-90 → T+90 launch sequence.
-
-### "Our GTM is stalling — what's wrong?"
-1. Audit each component for clarity + execution.
-2. Common failures:
-   - ICP too broad
-   - Motion mismatch with ACV
-   - Channels not delivering pipeline
-   - Messaging not differentiated
-   - Metrics not tracked
-3. Identify the breakpoint; fix one at a time.
-
-### "Should we move from PLG to sales-led?"
-1. Look at ACV trend: rising with enterprise = yes
-2. Look at pipeline: enterprise inquiries unanswered = yes
-3. Look at unit economics: PLG CAC payback < sales CAC payback?
-4. Plan hybrid: PLG capture + sales expansion (most common path)
-
-## Anti-patterns to avoid
-
-- **ICP = "everyone."** Diluted strategy.
-- **Motion mismatched with ACV.** Sales motion on $50/mo = unit economics broken.
-- **Channels listed; not invested.** Knowing channels doesn't activate them.
-- **Generic messaging.** "Faster, better, cheaper."
-- **No success metrics.** Can't tune what you can't measure.
-- **Launch sequence = "ship and see."** Predictable underperformance.
-- **All motions at once.** Try one; succeed before adding.
+More with fixes: `references/gtm-anti-patterns.md`.
 
 ## Scope & Limitations
 
 **In Scope:**
 - A go-to-market strategy across seven components: ICP, beachhead segment, motion, channels, messaging and positioning, success metrics and launch sequence
 - Motion choice by ACV across PLG, sales-led, marketing-led, channel-led, community-led and hybrid
-- Channel mapping per motion, channel-product fit checks and KPI focus per motion
+- Channel mapping per motion, channel-product fit checks and KPI focus per motion (tables in the reference appendix)
 - A T-90 to T+90 launch sequence
-- A strategy audit for ICP specificity, motion fit, channel coherence, messaging clarity, metric definition and sequence realism (`gtm_strategy_validator.py`)
+- A plan audit for ICP completeness, beachhead, motion-ACV fit, funded and owned channels, message basics, metric targets and lighthouse customers (`gtm_strategy_validator.py`)
 
 **Out of Scope:**
 - Building and scoring the ICP in depth (see `project-management/gtm/ideal-customer-profile/`)
@@ -238,11 +125,20 @@ If channel-product fit is off, channel won't deliver regardless of effort.
 - The tool uses no market data. Segment size, channel performance and competitor positioning come from the team's own research.
 - Beachhead choice, motion and budget stay leadership decisions, and the plan needs a refresh after launch data arrives.
 
-## References
+## Files
 
-- `references/gtm-components-deep.md` — ICP, motion, channels, messaging deep
-- `references/launch-sequence-playbook.md` — T-90 → T+90 playbook
-- `references/gtm-anti-patterns.md` — common failures + fixes
+| File | Purpose |
+|------|---------|
+| `scripts/gtm_strategy_validator.py` | GTM plan audit |
+| `assets/sample_gtm.json` | Mid-market HR analytics launch; exits 0 |
+| `assets/sample_gtm_flawed.json` | Unfocused launch plan; exits 1 |
+| `assets/gtm_strategy_template.md` | Fill-in template |
+
+## Reference Documentation
+
+- [references/gtm-components-deep.md](references/gtm-components-deep.md): ICP, motion, channels, messaging; appendix with motion/ACV, channel and KPI tables
+- [references/launch-sequence-playbook.md](references/launch-sequence-playbook.md): T-90 to T+90 playbook
+- [references/gtm-anti-patterns.md](references/gtm-anti-patterns.md): Common failures and fixes
 
 ## Related skills
 

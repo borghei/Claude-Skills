@@ -29,7 +29,7 @@ def parse_input(source):
     raw = raw.strip()
     if not raw:
         print("Error: empty input", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Support both JSON array and newline-delimited JSON
     if raw.startswith("["):
@@ -290,11 +290,11 @@ def main():
         entries = parse_input(args.input)
     except (json.JSONDecodeError, FileNotFoundError) as e:
         print(f"Error reading input: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if not entries:
         print("Error: no log entries found in input", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     slow = detect_slow_endpoints(entries, args.latency_threshold)
     n1 = detect_n_plus_one(entries, args.query_threshold)

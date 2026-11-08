@@ -11,7 +11,6 @@ Usage:
     python text_processor.py transform <file> --mode <mode> [options]
     python text_processor.py batch <directory> [options]
 
-Author: Claude Skills Engineering Team
 Version: 1.0.0
 Dependencies: Python Standard Library Only
 """

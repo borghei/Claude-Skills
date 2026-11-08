@@ -401,7 +401,7 @@ The meta-skill for building skill packages. It turns `standards/skill-authoring-
 - — Scaffold a new package
 - — Audit descriptions for activation and collision
 - — Lint before review
-- — Write for the agent that reads it [RECOMMENDED]
+- — Write for the agent that reads it
 - Where does this content go?
 - Description budget allocation [PROVEN]
 
@@ -434,7 +434,7 @@ The meta-skill for building skill packages. It turns `standards/skill-authoring-
 - — Scaffold a new package
 - — Audit descriptions for activation and collision
 - — Lint before review
-- — Write for the agent that reads it [RECOMMENDED]
+- — Write for the agent that reads it
 - Where does this content go?
 - Description budget allocation [PROVEN]
 
@@ -485,14 +485,7 @@ description nothing matches, and a SKILL.md carrying content that belonged in `r
 - **Onboarding a new author** who needs the standard operationalised rather than explained
 - **Writing for an agent reader** — deciding whether a skill is user-only, building a thin skill that chains others, or tightening `AGENTS.md` / `CLAUDE.md`
 
-## Inputs the skill expects
-
-- The skill&#x27;s one-sentence purpose and the domain directory it belongs in
-- The three to five user sentences that should activate it (these become the description)
-- Which existing skills sit closest to it in trigger space
-- Whether it emits a deliverable (drives the Pattern 11 Clarify First gate) or only advises
-- The analysis each script will perform, and the sample input each will run against
-- Any deep knowledge that will exceed the SKILL.md budget and belongs in `references/`
+## Scope rule
 
 Under Pattern 9 this skill is self-contained except for one permitted outbound
 reference: `standards/skill-authoring-standard.md`. Standards apply library-wide, so
@@ -552,9 +545,11 @@ python3 engineering/write-a-skill/scripts/description_audit.py \
   --min-score 70 --collision-threshold 0.5 --format text
 ```
 
-Exit code is 1 when any description scores below `--min-score`, which makes this
-usable as a CI gate. Point `--domain engineering` at a whole directory to audit
-every shipped description at once.
+Exit codes: 0 all pass, 1 any description scores below `--min-score` (the CI gate),
+2 bad input (missing file or directory, invalid JSON, wrong shape). Point
+`--domain engineering` at a whole directory to audit every shipped description at
+once; it walks nested skill folders and reads folded (`&gt;`, `&gt;-`), literal (`|`),
+quoted and plain `description` values.
 
 ### Workflow 3 — Lint before review
 
@@ -584,29 +579,19 @@ built-in fixtures before shipping a linter change:
 python3 engineering/write-a-skill/scripts/skill_lint.py --selftest
 ```
 
-### Workflow 4 — Write for the agent that reads it [RECOMMENDED]
+### Workflow 4 — Write for the agent that reads it
 
 Every file in a package, and every steering file in a repo, is read first by a model that
-pays for each token and acts on each line. Detail and examples:
-`references/writing-for-agents.md`.
+pays for each token and acts on each line. Read `references/writing-for-agents.md` before
+deciding three things:
 
-1. **Decide who invokes it.** If the skill has side effects the user must choose (publish,
-   deploy, open tickets), is a ritual with a user-chosen moment (retro, handoff), or is
-   expensive, add `disable-model-invocation: true` to the frontmatter so only the user can
-   run it. Its description then becomes a label for the command list; add a one-line pointer
-   in the steering file so people remember it exists. The linter rejects any value other
-   than `true` or `false`.
-2. **Decide whether it is a composing skill.** When the same sequence of skills runs often
-   and steps get skipped, write a thin skill that names each step by skill, states what each
-   must produce, passes artifacts by path rather than by copy, and stops on a failed step.
-   It holds no domain content of its own, and refers to other skills by name only, so the
-   package stays self-contained.
-3. **Write steering lines as a checklist.** In `AGENTS.md` / `CLAUDE.md`: one short
-   imperative line per fact, the situation first, the positive action stated, no filler,
-   pointers instead of pasted procedures, nothing one command could reveal. Prefer a lint
-   rule to a sentence for anything with a fixed shape, and move review-only rules to the
-   standards document the reviewer reads.
-4. **Prune while adding.** Every edit to a steering file looks for a line to delete.
+1. **Who invokes it.** Side effects the user must choose (publish, deploy, open tickets), a
+   ritual with a user-chosen moment, or an expensive run: add `disable-model-invocation: true`.
+   The linter rejects any value other than `true` or `false`.
+2. **Whether it is a composing skill** that chains other skills by name and passes artifacts
+   by path, holding no domain content of its own.
+3. **How the steering lines read.** One short imperative line per fact; prune a line every
+   time you add one.
 
 ## Decision frameworks
 
@@ -640,7 +625,7 @@ Never spend budget on: the skill&#x27;s own name, feature enumerations (those ar
 is resident in context for every session in which the skill is installed — it is the
 most expensive text in the package per byte.
 
-### Does this deserve to be a skill? [RECOMMENDED]
+### Does this deserve to be a skill?
 
 | Signal | Build it | Do not build it |
 |--------|----------|-----------------|
@@ -656,7 +641,8 @@ Two &quot;do not build it&quot; columns is a rejection. One is a warning worth a
 
 Two to three scripts, 150-300 lines each. Under 150 lines means the tool does not
 justify a file; over 300 means it is two tools. Every script takes `--format
-{text,json}` with text as the default, exits 1 on findings so CI can gate on it, and
+{text,json}` with text as the default, exits 1 on findings so CI can gate on it and 2 on
+bad input so a tool error is never mistaken for a finding, and
 ships a `sample_*.json` in `assets/` so the workflow block in SKILL.md is runnable by
 someone who just cloned the repo.
 
@@ -701,10 +687,10 @@ someone who just cloned the repo.
 
 | File | Purpose |
 |------|---------|
-| `scripts/skill_lint.py` | Lint a skill folder against all 11 patterns; per-pattern findings, exit 1 on error. `--selftest` runs the built-in helper/dependency fixtures |
+| `scripts/skill_lint.py` | Lint a skill folder against all 11 patterns; per-pattern findings; exit 0 pass, 1 error findings (or warnings with `--strict`), 2 bad `--skill` path or rules file. `--selftest` runs the built-in helper/dependency fixtures |
 | `scripts/lint_checks.py` | Helper library for `skill_lint.py` — rule set, frontmatter parser, SKILL.md and structure checks. No CLI by design |
-| `scripts/skill_scaffold.py` | Generate a compliant package skeleton from a JSON spec, with every required section stubbed |
-| `scripts/description_audit.py` | Score descriptions on budget and trigger quality; flag colliding skill pairs |
+| `scripts/skill_scaffold.py` | Generate a compliant package skeleton from a JSON spec, with every required section stubbed; exit 2 on a bad or refused spec |
+| `scripts/description_audit.py` | Score descriptions on budget and trigger quality; flag colliding skill pairs; exit 0 pass, 1 below bar, 2 bad input |
 | `references/authoring-playbook.md` | Section-by-section guidance, worked description rewrites, and the content-routing rules |
 | `references/writing-for-agents.md` | User-only skills (`disable-model-invocation`), thin composing skills, and steering-file style with a before/after rewrite |
 | `references/pattern-checklist.md` | The 11 patterns as concrete pass/fail criteria with common failure modes and fixes |
@@ -806,14 +792,7 @@ description nothing matches, and a SKILL.md carrying content that belonged in `r
 - **Onboarding a new author** who needs the standard operationalised rather than explained
 - **Writing for an agent reader** — deciding whether a skill is user-only, building a thin skill that chains others, or tightening `AGENTS.md` / `CLAUDE.md`
 
-## Inputs the skill expects
-
-- The skill&#x27;s one-sentence purpose and the domain directory it belongs in
-- The three to five user sentences that should activate it (these become the description)
-- Which existing skills sit closest to it in trigger space
-- Whether it emits a deliverable (drives the Pattern 11 Clarify First gate) or only advises
-- The analysis each script will perform, and the sample input each will run against
-- Any deep knowledge that will exceed the SKILL.md budget and belongs in `references/`
+## Scope rule
 
 Under Pattern 9 this skill is self-contained except for one permitted outbound
 reference: `standards/skill-authoring-standard.md`. Standards apply library-wide, so
@@ -873,9 +852,11 @@ python3 engineering/write-a-skill/scripts/description_audit.py \
   --min-score 70 --collision-threshold 0.5 --format text
 ```
 
-Exit code is 1 when any description scores below `--min-score`, which makes this
-usable as a CI gate. Point `--domain engineering` at a whole directory to audit
-every shipped description at once.
+Exit codes: 0 all pass, 1 any description scores below `--min-score` (the CI gate),
+2 bad input (missing file or directory, invalid JSON, wrong shape). Point
+`--domain engineering` at a whole directory to audit every shipped description at
+once; it walks nested skill folders and reads folded (`&gt;`, `&gt;-`), literal (`|`),
+quoted and plain `description` values.
 
 ### Workflow 3 — Lint before review
 
@@ -905,29 +886,19 @@ built-in fixtures before shipping a linter change:
 python3 engineering/write-a-skill/scripts/skill_lint.py --selftest
 ```
 
-### Workflow 4 — Write for the agent that reads it [RECOMMENDED]
+### Workflow 4 — Write for the agent that reads it
 
 Every file in a package, and every steering file in a repo, is read first by a model that
-pays for each token and acts on each line. Detail and examples:
-`references/writing-for-agents.md`.
+pays for each token and acts on each line. Read `references/writing-for-agents.md` before
+deciding three things:
 
-1. **Decide who invokes it.** If the skill has side effects the user must choose (publish,
-   deploy, open tickets), is a ritual with a user-chosen moment (retro, handoff), or is
-   expensive, add `disable-model-invocation: true` to the frontmatter so only the user can
-   run it. Its description then becomes a label for the command list; add a one-line pointer
-   in the steering file so people remember it exists. The linter rejects any value other
-   than `true` or `false`.
-2. **Decide whether it is a composing skill.** When the same sequence of skills runs often
-   and steps get skipped, write a thin skill that names each step by skill, states what each
-   must produce, passes artifacts by path rather than by copy, and stops on a failed step.
-   It holds no domain content of its own, and refers to other skills by name only, so the
-   package stays self-contained.
-3. **Write steering lines as a checklist.** In `AGENTS.md` / `CLAUDE.md`: one short
-   imperative line per fact, the situation first, the positive action stated, no filler,
-   pointers instead of pasted procedures, nothing one command could reveal. Prefer a lint
-   rule to a sentence for anything with a fixed shape, and move review-only rules to the
-   standards document the reviewer reads.
-4. **Prune while adding.** Every edit to a steering file looks for a line to delete.
+1. **Who invokes it.** Side effects the user must choose (publish, deploy, open tickets), a
+   ritual with a user-chosen moment, or an expensive run: add `disable-model-invocation: true`.
+   The linter rejects any value other than `true` or `false`.
+2. **Whether it is a composing skill** that chains other skills by name and passes artifacts
+   by path, holding no domain content of its own.
+3. **How the steering lines read.** One short imperative line per fact; prune a line every
+   time you add one.
 
 ## Decision frameworks
 
@@ -961,7 +932,7 @@ Never spend budget on: the skill&#x27;s own name, feature enumerations (those ar
 is resident in context for every session in which the skill is installed — it is the
 most expensive text in the package per byte.
 
-### Does this deserve to be a skill? [RECOMMENDED]
+### Does this deserve to be a skill?
 
 | Signal | Build it | Do not build it |
 |--------|----------|-----------------|
@@ -977,7 +948,8 @@ Two &quot;do not build it&quot; columns is a rejection. One is a warning worth a
 
 Two to three scripts, 150-300 lines each. Under 150 lines means the tool does not
 justify a file; over 300 means it is two tools. Every script takes `--format
-{text,json}` with text as the default, exits 1 on findings so CI can gate on it, and
+{text,json}` with text as the default, exits 1 on findings so CI can gate on it and 2 on
+bad input so a tool error is never mistaken for a finding, and
 ships a `sample_*.json` in `assets/` so the workflow block in SKILL.md is runnable by
 someone who just cloned the repo.
 
@@ -1022,10 +994,10 @@ someone who just cloned the repo.
 
 | File | Purpose |
 |------|---------|
-| `scripts/skill_lint.py` | Lint a skill folder against all 11 patterns; per-pattern findings, exit 1 on error. `--selftest` runs the built-in helper/dependency fixtures |
+| `scripts/skill_lint.py` | Lint a skill folder against all 11 patterns; per-pattern findings; exit 0 pass, 1 error findings (or warnings with `--strict`), 2 bad `--skill` path or rules file. `--selftest` runs the built-in helper/dependency fixtures |
 | `scripts/lint_checks.py` | Helper library for `skill_lint.py` — rule set, frontmatter parser, SKILL.md and structure checks. No CLI by design |
-| `scripts/skill_scaffold.py` | Generate a compliant package skeleton from a JSON spec, with every required section stubbed |
-| `scripts/description_audit.py` | Score descriptions on budget and trigger quality; flag colliding skill pairs |
+| `scripts/skill_scaffold.py` | Generate a compliant package skeleton from a JSON spec, with every required section stubbed; exit 2 on a bad or refused spec |
+| `scripts/description_audit.py` | Score descriptions on budget and trigger quality; flag colliding skill pairs; exit 0 pass, 1 below bar, 2 bad input |
 | `references/authoring-playbook.md` | Section-by-section guidance, worked description rewrites, and the content-routing rules |
 | `references/writing-for-agents.md` | User-only skills (`disable-model-invocation`), thin composing skills, and steering-file style with a before/after rewrite |
 | `references/pattern-checklist.md` | The 11 patterns as concrete pass/fail criteria with common failure modes and fixes |
@@ -1149,7 +1121,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
   <h2>Quick Start</h2><pre><code>python3 engineering/write-a-skill/scripts/skill_lint.py --skill &lt;domain&gt;/&lt;skill&gt; --strict
 python3 engineering/write-a-skill/scripts/description_audit.py --domain &lt;domain&gt; --min-score 70
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/write-a-skill/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

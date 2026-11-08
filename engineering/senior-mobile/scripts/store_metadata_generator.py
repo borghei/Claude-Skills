@@ -26,7 +26,7 @@ import json
 import re
 import sys
 import textwrap
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -654,7 +654,7 @@ def generate_metadata(app_name: str, category: str, description: str, features: 
         "input_category": category,
         "input_description": description,
         "input_features": features,
-        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "titles": generate_titles(app_name, category, features),
         "keywords": generate_keywords(app_name, category, features),
         "categories": recommend_categories(category, features),
@@ -869,11 +869,11 @@ def main(argv=None):
 
     if not app_name:
         sys.stderr.write("Error: --app-name cannot be empty.\n")
-        sys.exit(1)
+        sys.exit(2)
 
     if not features:
         sys.stderr.write("Error: --features must contain at least one feature.\n")
-        sys.exit(1)
+        sys.exit(2)
 
     metadata = generate_metadata(app_name, category, description, features)
 

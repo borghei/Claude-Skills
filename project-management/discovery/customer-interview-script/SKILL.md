@@ -1,16 +1,16 @@
 ---
 name: customer-interview-script
 description: >
-  Run high-signal customer discovery interviews using a scripted question
-  hierarchy, behavior-over-opinion probes, and rapport techniques drawn from
-  Portigal, Torres, Fitzpatrick (Mom Test), and Lewis Lin.
+  Writes and times a customer interview script that collects past-behavior stories, not
+  opinions. Use when preparing a discovery, solution-validation, journey, churn or
+  win-loss interview, or when interviews keep producing compliments.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-discovery
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: customer-interviews, discovery, jobs-to-be-done, mom-test
   tags:
     - customer-interviews
@@ -24,7 +24,7 @@ metadata:
 
 Running a customer interview is harder than it looks. The difference between a 60-minute conversation that produces three actionable insights and one that produces zero is almost entirely method: what you ask, when you ask it, and what you do *not* ask. This skill is the live-interview companion to `discovery/interview-synthesis/` (post-interview analysis) and `discovery/identify-assumptions/` (which produces the questions you go in to test).
 
-The script structure draws from four canonical sources: Steve Portigal's *Interviewing Users* (rapport, listening, "tell me about the last time"), Teresa Torres' *Continuous Discovery Habits* (story-based probing, weekly cadence), Rob Fitzpatrick's *The Mom Test* (avoiding compliments, opinions, and futures), and Lewis Lin's behavioral interviewing patterns (concrete-recent-relevant). The goal is to leave each interview with at least one story, one contradiction, and one surprise.
+The interviewing method itself is well known; what this skill adds is the 5-phase timing for 45/60/90-minute slots, the bad-to-good question conversions, the type-specific question banks, and two thresholds: the interviewer talks under 25% of the time, and stories come from the last ~90 days. The goal is to leave each interview with at least one story, one contradiction, and one surprise.
 
 ## Core Capabilities
 
@@ -55,9 +55,12 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+The workflow, start to finish:
+
 1. Pull top assumptions from `discovery/identify-assumptions/`; write 2-3 must-answer questions and pick the interview type.
 2. Customize `assets/interview_script_template.md` and pull type-specific prompts from `assets/question_bank.md`.
 3. Run the 5-phase script (rapport first, stories in the middle, contradictions at the end); debrief within 30 minutes; hand the transcript to `discovery/interview-synthesis/`.
+4. Verify that the script fits the slot, every must-answer question has a story prompt about a recent, real event, and no question asks about the future or invites a compliment before calling it done.
 
 See `references/interview-execution-playbook.md` for the full method, scripts, question banks, pacing, and troubleshooting.
 
@@ -96,14 +99,10 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 
 **Caveats:** this skill produces interview *technique*, not research operations. Story-based interviewing is bounded by participant memory -- events older than 90 days are reconstructions. B2B enterprise interviews often need procurement-style approval; build 2-4 weeks into recruiting. Continuous discovery assumes weekly touchpoints; one-off rounds produce shallower evidence -- weight findings accordingly.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/identify-assumptions/` | Receives from | Top assumptions become the must-answer questions for each interview |
-| `discovery/interview-synthesis/` | Feeds into | Transcripts and debrief notes are the input for theme clustering |
-| `discovery/brainstorm-ideas/` | Bidirectional | Pre-interview hypotheses; post-interview ideas seeded by themes |
-| `discovery/brainstorm-experiments/` | Feeds into | Validated pains become experiment hypotheses |
-| `discovery/jtbd-workshop/` | Complementary | Switch interviews use this script structure as their foundation |
-| `discovery/value-proposition-canvas/` | Feeds into | Jobs, pains, and gains captured in stories populate the Customer Profile |
-| `execution/create-prd/` | Feeds into | Direct quotes strengthen PRD Background and Market Segments |
+| File | Purpose |
+|------|---------|
+| `assets/interview_script_template.md`, `assets/question_bank.md` | Script to customize; prompts by interview type |
+| `references/interview-execution-playbook.md`, `references/interviewing-methodology-guide.md`, `references/red-flags.md` | Method and pacing, background, failure modes |
+| `examples/churn-investigation-filled-script.md` | Filled churn script |

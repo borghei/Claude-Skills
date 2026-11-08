@@ -268,3 +268,66 @@ For inbound qualification:
 - High-churn customers cluster in your stated ICP → tighten
 - New product capability opens new ICP → add as a segment
 - Market shift (regulation, recession) → re-evaluate
+
+## Appendix: worked example and tests
+
+_Moved from SKILL.md._
+
+### Worked example: HR analytics SaaS
+
+| Dimension | Definition |
+|-----------|------------|
+| Firmographics | US, mid-market (200-2000 EE), SaaS or services vertical, > $20M revenue, 5+ years old |
+| Tech-stack | Workday or BambooHR + ADP or Gusto. Bonus: existing BI tool (Looker / Tableau / Mode) |
+| Buyer persona | HR Director or VP People; 5+ years tenure; built career on people analytics |
+| JTBD | "I need to be a strategic partner to the CFO/CEO; I'm stuck doing reports manually" |
+| Existing alternatives | Excel + analyst (often resigned to it); occasionally hired contractor |
+| Trigger events | Annual reporting cycle just done; new CFO joined; HR analyst departed; board asking for better data |
+| Budget authority | Director can recommend; VP People approves $50K; CHRO approves $200K+ |
+| Reachability | SHRM events, HR Tech podcast, LinkedIn (HR Director groups), HR Brew newsletter |
+
+### Firmographic specificity test
+
+For each dimension, ask:
+- Could I send a list of companies matching this to my BDR tomorrow?
+- If not, sharpen.
+
+Vague: "growing SaaS companies"
+Sharp: "US-headquartered B2B SaaS companies, $10M-$100M ARR, post-Series B, that have hired their first VP of Sales in last 12 months"
+
+### Tech-stack signals
+
+Tech stack reveals readiness:
+- Have a CRM = likely structured sales process
+- Have an HRIS = HR team beyond founder/HR-of-1
+- Use a specific vendor = open to category
+- Built in-house = NIH (Not Invented Here) bias risk
+
+Tools like BuiltWith, G2, Crunchbase + scraping can reveal stack.
+
+### Trigger event types
+
+Strongest triggers (cause buying activity):
+- New executive in role (60-day window)
+- Funding round closed (have budget; want to spend strategically)
+- M&A activity (integration needs)
+- Regulatory deadline (compliance pressure)
+- Major incident (urgent need)
+- Vendor consolidation push
+- Annual planning cycle (Q4)
+- Reorg / department restructure
+
+Weaker triggers:
+- "They might want it"
+- "They have the budget"
+
+### Reachability test
+
+For each ICP, can you:
+- Find them via paid acquisition? (size of audience; CPC)
+- Find them via outbound? (LinkedIn search, ZoomInfo, Apollo)
+- Find them at events? (SHRM, RSA, AWS reInvent, etc.)
+- Find them via content? (SEO keywords they search)
+- Find them via partners? (which adjacent vendors)
+
+If unreachable, ICP is academic.

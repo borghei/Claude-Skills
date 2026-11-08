@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: meta-skills
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags:
     - skill-validation
     - quality-scoring
@@ -50,15 +50,18 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Validate skill structure and documentation
-python skill_validator.py engineering/my-skill --tier POWERFUL --json
+# Validate the bundled fixture skill, then score it
+python scripts/skill_validator.py assets/sample-skill --tier BASIC
+python scripts/quality_scorer.py assets/sample-skill --detailed --minimum-score 75
 
-# Test all Python scripts in a skill
-python script_tester.py engineering/my-skill --timeout 30
-
-# Score quality with improvement roadmap
-python quality_scorer.py engineering/my-skill --detailed --minimum-score 75
+# Run its scripts (this EXECUTES the target's code; see the warning below)
+python scripts/script_tester.py assets/sample-skill --timeout 30
 ```
+
+**Warning: `script_tester.py` runs the target skill's scripts** (`--help` and their sample
+inputs) as you. Never point it at a skill you have not read. For a third-party skill, run
+`skill-security-auditor` first, and run the tester in a disposable sandbox without
+credentials or network.
 
 ## Tools
 
@@ -68,7 +71,14 @@ python quality_scorer.py engineering/my-skill --detailed --minimum-score 75
 | `script_tester.py` | Static + runtime tests of scripts (syntax, imports, argparse, `--help`, samples) | `python scripts/script_tester.py engineering/my-skill --timeout 60 --json` |
 | `quality_scorer.py` | Score four quality dimensions with letter grade and improvement roadmap | `python scripts/quality_scorer.py engineering/my-skill --detailed --minimum-score 75 --json` |
 
-See **[references/tool-reference.md](references/tool-reference.md)** for full parameter tables, output formats, and exit codes.
+Exit codes: `skill_validator.py` 0 pass, 1 errors or score below 60, 2 skill path not found;
+`script_tester.py` 0 all pass, 1 failure (including a missing path), 2 partial pass;
+`quality_scorer.py` 0 grades A-C, 1 grade F, below `--minimum-score` or missing path,
+2 grade D. The length checks are bands, not minimums: SKILL.md passes at 40-500 non-blank
+lines and scores best at 60-500; scripts score best at 100-300 lines, because a lean
+SKILL.md with detail in `references/` is the goal.
+
+See **[references/tool-reference.md](references/tool-reference.md)** for full parameter tables and output formats.
 
 ## References
 
@@ -104,3 +114,31 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `engineering/pr-review-expert` | Attach validation report to pull request reviews | `skill_validator.py --json` output is posted as a PR comment for reviewer context |
 | `engineering/performance-profiler` | Complement structural testing with runtime profiling | After `script_tester.py` confirms execution succeeds, `performance-profiler` measures execution time and resource usage |
 | `engineering/tech-debt-tracker` | Track quality score trends over time | Periodic `quality_scorer.py --json` output is ingested to detect score degradation and flag technical debt |
+
+## Anti-Patterns
+
+### Padding a Skill to Pass a Length Check
+**Mistake:** Adding filler sections so SKILL.md looks "comprehensive".
+**Why it happens:** Older scorers rewarded line count.
+**Instead:** Keep SKILL.md to goals, decision points, tools and verification; move reference tables to `references/`. The validator now checks a band, not a minimum.
+
+### Testing an Untrusted Skill by Running It
+**Mistake:** Running `script_tester.py` on a downloaded skill to see whether it is safe.
+**Why it happens:** "Test" sounds harmless.
+**Instead:** The tester executes the target's code. Audit it statically first (`skill-security-auditor`), then test in a sandbox.
+
+### Gating Only on the Grade
+**Mistake:** Merging any skill that scores B or better.
+**Why it happens:** A single grade is easy to wire into CI.
+**Instead:** Also require `script_tester.py` to pass and read the validator's warnings; a well-formatted skill can still ship a broken tool.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/skill_validator.py` | Structure, frontmatter, section and script checks per tier |
+| `scripts/script_tester.py` | Static and runtime checks of a skill's scripts (executes them) |
+| `scripts/quality_scorer.py` | Four-dimension quality score, grade and roadmap |
+| `assets/sample-skill/` | Fixture skill for trying the tools |
+| `expected_outputs/` | Reference outputs for the fixture |
+| `references/*.md` | Tool reference, structure spec, tier matrix, scoring rubric, CI workflows |

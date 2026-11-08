@@ -154,8 +154,9 @@ def check_value_props(c: dict[str, Any]) -> list[Issue]:
     # Segments without VP
     for s in segs:
         sname = s.get("name", "")
-        matched = any(sname in vp.get("target_segment", "") or
-                     vp.get("target_segment", "") in sname for vp in vps)
+        # An empty target_segment must not match every segment.
+        matched = any(vp.get("target_segment") and (sname in vp["target_segment"] or
+                     vp["target_segment"] in sname) for vp in vps)
         if not matched:
             issues.append(Issue("fail", "value_propositions",
                 f"segment '{sname}' has no matching VP"))
@@ -187,7 +188,7 @@ def check_channels(c: dict[str, Any]) -> list[Issue]:
     for ch in chans:
         target = ch.get("target_segment", "")
         for sn in seg_names:
-            if sn in target or target in sn:
+            if target and (sn in target or target in sn):
                 covered.add(sn)
     missing = seg_names - covered
     for sn in missing:
@@ -407,7 +408,14 @@ def main() -> int:
         print(f"error: invalid JSON: {e}", file=sys.stderr)
         return 2
 
-    report = validate(canvas)
+    if not isinstance(canvas, dict):
+        print("error: top level must be a JSON object (see the schema in --help)", file=sys.stderr)
+        return 2
+    try:
+        report = validate(canvas)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        print(f"error: unexpected input shape ({type(e).__name__}: {e})", file=sys.stderr)
+        return 2
     out = render_markdown(report) if args.format == "markdown" else json.dumps(report, indent=2)
 
     if args.output:
@@ -415,7 +423,8 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    # Gate: 1 when any finding has severity "fail", else 0.
+    return 1 if report.get("severity_counts", {}).get("fail") else 0
 
 
 if __name__ == "__main__":

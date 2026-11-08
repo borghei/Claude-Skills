@@ -1,0 +1,6 @@
+{
+  "_meta": {"method": "POST", "path": "/users", "status": "201"},
+  "id": "u_17",
+  "name": "Grace",
+  "role": "admin"
+}

@@ -1,0 +1,8 @@
+{
+  "flags": [
+    {"key": "release.new_checkout", "tags": ["release"], "value": "25%", "owner": "payments-team", "lastModified": "2026-05-20T10:00:00Z"},
+    {"key": "release.old_banner", "tags": ["release"], "value": "100%", "owner": "growth-team", "lastModified": "2025-11-02T09:00:00Z"},
+    {"key": "ops.recs.kill_switch", "tags": ["ops"], "value": "off", "owner": "recs-team", "lastModified": "2025-08-14T12:00:00Z"},
+    {"key": "release.holiday_theme", "tags": ["release"], "value": "off", "owner": "web-team", "lastModified": "2025-12-28T08:00:00Z"}
+  ]
+}

@@ -1,0 +1,6 @@
+/* Uses only values from sample_tokens.json */
+body { color: #1f2933; background: #ffffff; margin: 0; font-size: 16px; }
+.intro { padding: 40px 24px; }
+.intro h1 { font-size: 28px; margin-bottom: 16px; }
+.note { color: #52606d; font-size: 14px; padding: 8px; border-radius: 4px; }
+.button { background: #2563eb; color: #ffffff; padding: 8px 16px; border-radius: 8px; }

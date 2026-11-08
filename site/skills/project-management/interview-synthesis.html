@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interview Synthesis - Claude Skills</title>
-  <meta name="description" content="Customer interview synthesis: raw transcripts to themed insights, an opportunity solution tree, and follow-up questions (Teresa Torres continuous discovery). Use for post-interview synthesis, opportun">
+  <meta name="description" content="Turns customer interview notes into evidenced themes, an opportunity tree and follow-up questions. Use when you have just run interviews, need to show what customers said, or must find evidence gaps b">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/interview-synthesis.html">
   <meta property="og:title" content="Interview Synthesis - Claude Skills">
-  <meta property="og:description" content="Customer interview synthesis: raw transcripts to themed insights, an opportunity solution tree, and follow-up questions (Teresa Torres continuous discovery). Use for post-interview synthesis, opportun">
+  <meta property="og:description" content="Turns customer interview notes into evidenced themes, an opportunity tree and follow-up questions. Use when you have just run interviews, need to show what customers said, or must find evidence gaps b">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/interview-synthesis.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Interview Synthesis", "description": "Customer interview synthesis: raw transcripts to themed insights, an opportunity solution tree, and follow-up questions (Teresa Torres continuous discovery). Use for post-interview synthesis, opportunity mapping, and evidence gap analysis.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/interview-synthesis.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Interview Synthesis", "description": "Turns customer interview notes into evidenced themes, an opportunity tree and follow-up questions. Use when you have just run interviews, need to show what customers said, or must find evidence gaps before the next round.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/interview-synthesis.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Interview Synthesis</h1>
-    <p class="page-subtitle">Customer interview synthesis: raw transcripts to themed insights, an opportunity solution tree, and follow-up questions (Teresa Torres continuous discovery). Use for post-interview synthesis, opportunity mapping, and evidence gap analysis.</p>
+    <p class="page-subtitle">Turns customer interview notes into evidenced themes, an opportunity tree and follow-up questions. Use when you have just run interviews, need to show what customers said, or must find evidence gaps before the next round.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">interview-synthesis</span><span class="tag">insights</span><span class="tag">continuous-discovery</span><span class="tag">opportunity-solution-tree</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Interview Synthesis (Project Management domain).
 
-Customer interview synthesis: raw transcripts to themed insights, an opportunity solution tree, and follow-up questions (Teresa Torres continuous discovery). Use for post-interview synthesis, opportunity mapping, and evidence gap analysis.
+Turns customer interview notes into evidenced themes, an opportunity tree and follow-up questions. Use when you have just run interviews, need to show what customers said, or must find evidence gaps before the next round.
 
 Turn customer interview transcripts into actionable product opportunities. This skill takes raw question-and-answer transcripts and produces three artifacts: (1) themed insight clusters, (2) an opportunity solution tree mapping outcomes to opportunities and candidate solutions, and (3) a prioritized
 
@@ -403,6 +403,9 @@ Turn customer interview transcripts into actionable product opportunities. This 
 - Synthesis that confirms the starting hypothesis
 - One theme pooled across segments
 - Percentages from a handful of interviews
+
+## Frameworks &amp; Templates You Know
+- | `assets/opportunity_tree_template.md` | Tree worksheet |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -422,7 +425,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Interview Synthesis (Project Management domain).
 
-Customer interview synthesis: raw transcripts to themed insights, an opportunity solution tree, and follow-up questions (Teresa Torres continuous discovery). Use for post-interview synthesis, opportunity mapping, and evidence gap analysis.
+Turns customer interview notes into evidenced themes, an opportunity tree and follow-up questions. Use when you have just run interviews, need to show what customers said, or must find evidence gaps before the next round.
 
 Turn customer interview transcripts into actionable product opportunities. This skill takes raw question-and-answer transcripts and produces three artifacts: (1) themed insight clusters, (2) an opportunity solution tree mapping outcomes to opportunities and candidate solutions, and (3) a prioritized
 
@@ -432,6 +435,9 @@ Turn customer interview transcripts into actionable product opportunities. This 
 - Synthesis that confirms the starting hypothesis
 - One theme pooled across segments
 - Percentages from a handful of interviews
+
+## Frameworks &amp; Templates You Know
+- | `assets/opportunity_tree_template.md` | Tree worksheet |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -499,14 +505,19 @@ Before synthesizing, settle the inputs below. When one is missing or vague and w
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Put each interview in the shape of `assets/interview_input_template.json` (participant id, role, segment, q/a pairs), verbatim where you can.
+2. Run the synthesizer; it codes sentences against pain, gain and emotion lexicons, clusters them into themes, and rates each theme 1-3 (1 = one participant, 2 = two or more, 3 = two or more plus a story).
+3. Read every theme against its quotes. The coding is keyword-based, so rename or merge themes the lexicon got wrong; a quote marked `[shared]` is one sentence counted under several themes, not several sources.
+4. Done when every opportunity rests on a strength-2+ theme and the follow-up questions are scheduled for the next interviews. To audit the resulting tree, use `discovery/opportunity-solution-tree`.
 
 ```bash
-python scripts/interview_synthesizer.py --input interviews.json --format markdown --output synthesis.md
-python scripts/interview_synthesizer.py --input interviews.json --format mermaid   # tree only
+python3 project-management/discovery/interview-synthesis/scripts/interview_synthesizer.py --input project-management/discovery/interview-synthesis/assets/interview_input_template.json --format markdown
+python3 project-management/discovery/interview-synthesis/scripts/interview_synthesizer.py --demo --format mermaid --min-strength 2
 ```
 
-Prepare input per `assets/interview_input_template.json` (one entry per interview: participant id, role, q/a pairs). See the references for the full framework and flag reference.
+Formats: `markdown` (default), `json`, `mermaid`, `confluence`, `notion`, `linear`; `--output` writes a file, `--outcome` overrides the tree root, `--min-strength` drops weaker themes. Exit 0 on success, 2 on bad input (missing file, invalid JSON, wrong shape).
 
 ## Anti-Patterns
 
@@ -558,16 +569,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 - The opportunity solution tree is a thinking aid, not a roadmap. Solutions still need experiment validation.
 - Teresa Torres&#x27; methodology assumes continuous discovery (weekly touchpoints). One-off interview rounds produce shallower trees.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/brainstorm-experiments/` | Feeds into | Validated opportunities become hypotheses for lean experiments |
-| `discovery/identify-assumptions/` | Bidirectional | Assumptions inform follow-up questions; interview evidence resolves assumptions |
-| `discovery/brainstorm-ideas/` | Feeds into | Themed insights seed Product Trio ideation sessions |
-| `discovery/pre-mortem/` | Feeds into | Pain themes surface candidate risks for pre-mortem analysis |
-| `execution/create-prd/` | Feeds into | Top opportunities + supporting evidence populate PRD Background and Market Segments sections |
-| `execution/job-stories/` | Feeds into | Klement-format job codes convert directly into When/Want/So job stories |
+| File | Purpose |
+|------|---------|
+| `scripts/interview_synthesizer.py` | Interview notes to themes, opportunity tree and follow-ups in six formats |
+| `assets/interview_input_template.json` | Input shape and runnable sample (3 interviews) |
+| `assets/opportunity_tree_template.md` | Tree worksheet |
+| `examples/wayfinder-8-interview-synthesis.md` | Worked synthesis |
+| `references/*.md` | See References |
 
 ---
 
@@ -595,7 +605,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Interview Synthesis&quot;**
-   - Description: &quot;Customer interview synthesis: raw transcripts to themed insights, an opportunity solution tree, and follow-up questions (Teresa Torres continuous discovery). Use for post-interview synthesis, opportunity mapping, and evidence gap analysis.&quot;
+   - Description: &quot;Turns customer interview notes into evidenced themes, an opportunity tree and follow-up questions. Use when you have just run interviews, need to show what customers said, or must find evidence gaps before the next round.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -658,14 +668,19 @@ Before synthesizing, settle the inputs below. When one is missing or vague and w
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Put each interview in the shape of `assets/interview_input_template.json` (participant id, role, segment, q/a pairs), verbatim where you can.
+2. Run the synthesizer; it codes sentences against pain, gain and emotion lexicons, clusters them into themes, and rates each theme 1-3 (1 = one participant, 2 = two or more, 3 = two or more plus a story).
+3. Read every theme against its quotes. The coding is keyword-based, so rename or merge themes the lexicon got wrong; a quote marked `[shared]` is one sentence counted under several themes, not several sources.
+4. Done when every opportunity rests on a strength-2+ theme and the follow-up questions are scheduled for the next interviews. To audit the resulting tree, use `discovery/opportunity-solution-tree`.
 
 ```bash
-python scripts/interview_synthesizer.py --input interviews.json --format markdown --output synthesis.md
-python scripts/interview_synthesizer.py --input interviews.json --format mermaid   # tree only
+python3 project-management/discovery/interview-synthesis/scripts/interview_synthesizer.py --input project-management/discovery/interview-synthesis/assets/interview_input_template.json --format markdown
+python3 project-management/discovery/interview-synthesis/scripts/interview_synthesizer.py --demo --format mermaid --min-strength 2
 ```
 
-Prepare input per `assets/interview_input_template.json` (one entry per interview: participant id, role, q/a pairs). See the references for the full framework and flag reference.
+Formats: `markdown` (default), `json`, `mermaid`, `confluence`, `notion`, `linear`; `--output` writes a file, `--outcome` overrides the tree root, `--min-strength` drops weaker themes. Exit 0 on success, 2 on bad input (missing file, invalid JSON, wrong shape).
 
 ## Anti-Patterns
 
@@ -717,16 +732,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 - The opportunity solution tree is a thinking aid, not a roadmap. Solutions still need experiment validation.
 - Teresa Torres&#x27; methodology assumes continuous discovery (weekly touchpoints). One-off interview rounds produce shallower trees.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `discovery/brainstorm-experiments/` | Feeds into | Validated opportunities become hypotheses for lean experiments |
-| `discovery/identify-assumptions/` | Bidirectional | Assumptions inform follow-up questions; interview evidence resolves assumptions |
-| `discovery/brainstorm-ideas/` | Feeds into | Themed insights seed Product Trio ideation sessions |
-| `discovery/pre-mortem/` | Feeds into | Pain themes surface candidate risks for pre-mortem analysis |
-| `execution/create-prd/` | Feeds into | Top opportunities + supporting evidence populate PRD Background and Market Segments sections |
-| `execution/job-stories/` | Feeds into | Klement-format job codes convert directly into When/Want/So job stories |
+| File | Purpose |
+|------|---------|
+| `scripts/interview_synthesizer.py` | Interview notes to themes, opportunity tree and follow-ups in six formats |
+| `assets/interview_input_template.json` | Input shape and runnable sample (3 interviews) |
+| `assets/opportunity_tree_template.md` | Tree worksheet |
+| `examples/wayfinder-8-interview-synthesis.md` | Worked synthesis |
+| `references/*.md` | See References |
 
 ---
 
@@ -754,7 +768,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Interview Synthesis&quot;**
-   - Description: &quot;Customer interview synthesis: raw transcripts to themed insights, an opportunity solution tree, and follow-up questions (Teresa Torres continuous discovery). Use for post-interview synthesis, opportunity mapping, and evidence gap analysis.&quot;
+   - Description: &quot;Turns customer interview notes into evidenced themes, an opportunity tree and follow-up questions. Use when you have just run interviews, need to show what customers said, or must find evidence gaps before the next round.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -814,12 +828,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/discovery/interview-synthesis/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code>python scripts/interview_synthesizer.py --input interviews.json --format markdown --output synthesis.md
-python scripts/interview_synthesizer.py --input interviews.json --format mermaid   # tree only
-</code></pre>
-
-Prepare input per `assets/interview_input_template.json` (one entry per interview: participant id, role, q/a pairs). See the references for the full framework and flag reference.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/interview-synthesis/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

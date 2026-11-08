@@ -87,6 +87,6 @@
 
 ### Data Modeling Anti-Patterns
 - Overly normalized schemas (Snowflake prefers denormalized/star schemas)
-- Missing clustering keys on large tables
+- Clustering keys on tables that prune well already (micro-partitioning is automatic; cluster only very large, poorly pruned tables)
 - Not using Time Travel for data recovery
 - Storing staging data in permanent tables (use transient)

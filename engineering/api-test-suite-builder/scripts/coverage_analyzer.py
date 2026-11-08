@@ -25,16 +25,16 @@ def load_spec(spec_path: str) -> dict:
     path = Path(spec_path)
     if not path.exists():
         print(f"Error: spec file not found: {spec_path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     try:
         with open(path, "r", encoding="utf-8") as f:
             spec = json.load(f)
     except json.JSONDecodeError as e:
         print(f"Error: invalid JSON in spec file: {e}", file=sys.stderr)
-        sys.exit(1)
-    if "openapi" not in spec and "swagger" not in spec:
+        sys.exit(2)
+    if not isinstance(spec, dict) or ("openapi" not in spec and "swagger" not in spec):
         print("Error: file does not appear to be an OpenAPI or Swagger spec", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     return spec
 
 
@@ -64,7 +64,7 @@ def scan_test_files(test_dir: str) -> list:
     test_dir_path = Path(test_dir)
     if not test_dir_path.exists():
         print(f"Error: test directory not found: {test_dir}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Common test file patterns
     patterns = ["test_*.py", "*_test.py", "*.test.ts", "*.test.js", "*.spec.ts", "*.spec.js"]
@@ -73,79 +73,50 @@ def scan_test_files(test_dir: str) -> list:
     return sorted(set(test_files))
 
 
+CALL_RE = re.compile(
+    r'\.(get|post|put|patch|delete)\(\s*f?["\'](?:\{\w+\})?(/[^"\'\s]*)', re.IGNORECASE)
+# Assertions on the response body, not just its status code
+BODY_ASSERT_RE = re.compile(
+    r'\.json\(\)\s*[\[.=!]|\.body\b|toMatchObject|toHaveProperty|toEqual\(|matchesSchema|\.headers\[',
+    re.IGNORECASE)
+COMMENT_RE = re.compile(r'(?m)^\s*(#|//).*$')
+TEST_START_RE = re.compile(r'^\s*(?:async\s+)?def test_|^\s*(?:it|test)\(', re.MULTILINE)
+
+
 def extract_tested_endpoints(test_files: list) -> list:
-    """Parse test files to find which endpoints are being tested."""
+    """Find each HTTP call in test files, with its method, path and body-assertion flag.
+
+    A call counts only when a method and a literal path appear together, so a file
+    calling GET /a and DELETE /b never credits DELETE /a. A call is "asserted" when
+    the test that contains it also checks the response body or headers.
+    """
     tested = []
-
-    # Patterns to match endpoint references in test code
-    patterns = [
-        # Python httpx/requests: httpx.get(f"{BASE_URL}/api/v1/users")
-        re.compile(r'httpx\.(get|post|put|patch|delete)\(\s*f?"[^"]*(/[^\s"{}]+)', re.IGNORECASE),
-        # Python httpx/requests with variable: client.get("/api/v1/users")
-        re.compile(r'(?:client|requests?)\.(get|post|put|patch|delete)\(\s*[f]?["\']([^"\']+)', re.IGNORECASE),
-        # Supertest: request(app).get('/api/v1/users')
-        re.compile(r'\.(?:get|post|put|patch|delete)\(\s*["\']([^"\']+)', re.IGNORECASE),
-        # Generic URL path pattern in test strings: 'GET /api/v1/users'
-        re.compile(r'["\'](?:GET|POST|PUT|PATCH|DELETE)\s+(/[^\s"\']+)', re.IGNORECASE),
-        # describe block: describe('GET /api/v1/users'
-        re.compile(r'describe\(\s*["\'](?:GET|POST|PUT|PATCH|DELETE)\s+(/[^\s"\']+)', re.IGNORECASE),
-    ]
-
-    method_patterns = [
-        re.compile(r'httpx\.(get|post|put|patch|delete)', re.IGNORECASE),
-        re.compile(r'(?:client|requests?)\.(get|post|put|patch|delete)', re.IGNORECASE),
-        re.compile(r'\.(get|post|put|patch|delete)\(\s*["\']/', re.IGNORECASE),
-        re.compile(r'["\'](?P<method>GET|POST|PUT|PATCH|DELETE)\s+/', re.IGNORECASE),
-    ]
-
     for test_file in test_files:
         try:
             content = test_file.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
-
-        found_paths = set()
-
-        # Extract path references
-        for pattern in patterns:
-            for match in pattern.finditer(content):
-                groups = match.groups()
-                # The path is the last group that starts with /
-                path = None
-                for g in reversed(groups):
-                    if g and g.startswith("/"):
-                        path = g
-                        break
-                if path:
-                    # Normalize: strip query params, replace specific IDs with {id}
-                    path = re.sub(r'\?.*$', '', path)
-                    path = re.sub(r'/[0-9a-f]{8,}', '/{id}', path)
-                    path = re.sub(r'/\d+', '/{id}', path)
-                    found_paths.add(path)
-
-        # Extract methods used in the file
-        methods_found = set()
-        for mp in method_patterns:
-            for match in mp.finditer(content):
-                m = match.group(1) if match.lastindex else match.group("method")
-                methods_found.add(m.upper())
-
-        for path in found_paths:
-            if methods_found:
-                for method in methods_found:
-                    tested.append({
-                        "path": path,
-                        "method": method,
-                        "test_file": str(test_file),
-                    })
-            else:
-                tested.append({
-                    "path": path,
-                    "method": "UNKNOWN",
-                    "test_file": str(test_file),
-                })
-
+        starts = [m.start() for m in TEST_START_RE.finditer(content)] + [len(content)]
+        for match in CALL_RE.finditer(content):
+            path = re.sub(r'\?.*$', '', match.group(2))
+            begin = max([0] + [x for x in starts if x <= match.start()])
+            end = min(x for x in starts if x > match.start())
+            if "skip(" in content[begin:end] or "pass\n" in content[begin:end]:
+                continue
+            tested.append({
+                "path": path,
+                "method": match.group(1).upper(),
+                "test_file": str(test_file),
+                "asserted": bool(BODY_ASSERT_RE.search(COMMENT_RE.sub("", content[match.end():end]))),
+            })
     return tested
+
+
+def _path_regex(spec_path: str):
+    """Regex matching concrete paths for a spec path: {id} or :id matches one segment."""
+    parts = re.split(r'(\{[^}]+\}|:[A-Za-z_]+)', spec_path.rstrip("/").lower())
+    body = "".join("[^/]+" if (x.startswith("{") or x.startswith(":")) else re.escape(x) for x in parts)
+    return re.compile("^" + body + "/?$")
 
 
 def _normalize_path(path: str) -> str:
@@ -161,36 +132,29 @@ def _normalize_path(path: str) -> str:
 
 
 def compute_coverage(spec_endpoints: list, tested_endpoints: list) -> dict:
-    """Compare spec endpoints against tested endpoints to find gaps."""
-    # Build a set of tested (normalized_path, method) pairs
-    tested_set = set()
-    tested_files_map = {}
-    for te in tested_endpoints:
-        key = (_normalize_path(te["path"]), te["method"])
-        tested_set.add(key)
-        tested_files_map.setdefault(key, []).append(te["test_file"])
-
+    """Compare spec endpoints against tested calls to find gaps."""
     covered = []
     uncovered = []
     deprecated_skipped = 0
-
+    asserted = 0
     for ep in spec_endpoints:
         if ep["deprecated"]:
             deprecated_skipped += 1
             continue
-        norm_path = _normalize_path(ep["path"])
-        key = (norm_path, ep["method"])
-
-        if key in tested_set:
-            covered.append({
-                **ep,
-                "test_files": list(set(tested_files_map.get(key, []))),
-            })
+        rx = _path_regex(ep["path"])
+        hits = [te for te in tested_endpoints
+                if te["method"] == ep["method"] and rx.match(te["path"].rstrip("/").lower() or "/")]
+        if hits:
+            deep = any(te["asserted"] for te in hits)
+            asserted += deep
+            covered.append({**ep, "asserted": deep,
+                            "test_files": sorted({te["test_file"] for te in hits})})
         else:
             uncovered.append(ep)
 
     active_total = len(spec_endpoints) - deprecated_skipped
     coverage_pct = (len(covered) / active_total * 100) if active_total > 0 else 0.0
+    asserted_pct = (asserted / active_total * 100) if active_total > 0 else 0.0
 
     # Coverage by method
     method_stats = {}
@@ -225,6 +189,8 @@ def compute_coverage(spec_endpoints: list, tested_endpoints: list) -> dict:
         "covered": len(covered),
         "uncovered_count": len(uncovered),
         "coverage_percent": round(coverage_pct, 1),
+        "asserted": asserted,
+        "asserted_percent": round(asserted_pct, 1),
         "covered_endpoints": covered,
         "uncovered_endpoints": uncovered,
         "by_method": method_stats,
@@ -244,7 +210,8 @@ def main():
         "--threshold",
         type=float,
         default=0.0,
-        help="Minimum coverage %%. Exit code 1 if below threshold (default: 0 = no threshold)",
+        help="Minimum %% of endpoints whose tests assert on the response body "
+             "(exit 1 if below; default 0 = no gate)",
     )
     parser.add_argument(
         "--json",
@@ -263,8 +230,8 @@ def main():
     spec_endpoints = extract_spec_endpoints(spec)
 
     if not spec_endpoints:
-        print("Warning: no endpoints found in spec.", file=sys.stderr)
-        sys.exit(1)
+        print("Error: no endpoints found in spec.", file=sys.stderr)
+        sys.exit(2)
 
     test_files = scan_test_files(args.test_dir)
     tested_endpoints = extract_tested_endpoints(test_files)
@@ -273,6 +240,8 @@ def main():
     if args.json_output:
         output = {
             "coverage_percent": report["coverage_percent"],
+            "asserted_percent": report["asserted_percent"],
+            "status_only": [f'{e["method"]} {e["path"]}' for e in report["covered_endpoints"] if not e["asserted"]],
             "total_endpoints": report["active_endpoints"],
             "covered": report["covered"],
             "uncovered_count": report["uncovered_count"],
@@ -300,7 +269,9 @@ def main():
         print("=== API Test Coverage Report ===")
         print()
         print(f"Coverage: [{bar}] {pct}%")
-        print(f"  {report['covered']}/{report['active_endpoints']} endpoints covered")
+        print(f"  {report['covered']}/{report['active_endpoints']} endpoints called by a test")
+        print(f"  {report['asserted']}/{report['active_endpoints']} endpoints with a body/header assertion "
+              f"({report['asserted_percent']}%) <- gated by --threshold")
         if report["deprecated_skipped"]:
             print(f"  {report['deprecated_skipped']} deprecated endpoints skipped")
         print(f"  {report['test_files_scanned']} test files scanned")
@@ -341,8 +312,8 @@ def main():
             print()
 
     # Threshold check
-    if args.threshold > 0 and report["coverage_percent"] < args.threshold:
-        msg = f"Coverage {report['coverage_percent']}% is below threshold {args.threshold}%"
+    if args.threshold > 0 and report["asserted_percent"] < args.threshold:
+        msg = f"Asserted coverage {report['asserted_percent']}% is below threshold {args.threshold}%"
         if not args.json_output:
             print(f"FAIL: {msg}")
         sys.exit(1)

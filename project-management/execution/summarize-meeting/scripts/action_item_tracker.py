@@ -18,8 +18,20 @@ from collections import defaultdict
 
 
 def load_data(path: str) -> dict:
-    with open(path, "r") as f:
-        return json.load(f)
+    try:
+        with open(path, "r") as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        fail(f"cannot read {path}: {e}")
+    if not isinstance(data, dict):
+        fail(f"{path}: top level must be a JSON object (see --example)")
+    return data
+
+
+def fail(msg: str) -> None:
+    """Bad input: one line on stderr, exit 2."""
+    print(f"Error: {msg}", file=sys.stderr)
+    sys.exit(2)
 
 
 def parse_date(s: str) -> datetime:
@@ -31,9 +43,17 @@ def parse_date(s: str) -> datetime:
     return None
 
 
-def analyze_actions(data: dict) -> dict:
+def analyze_actions(data: dict, as_of: str = None) -> dict:
     meetings = data.get("meetings", [])
-    today = datetime.now()
+    if not isinstance(meetings, list) or not meetings:
+        raise ValueError("'meetings' must be a non-empty list")
+    if as_of:
+        today = parse_date(as_of)
+        if not today:
+            raise ValueError(f"--as-of must be YYYY-MM-DD, got {as_of!r}")
+    else:  # latest meeting date, so a report on old notes does not drift with the calendar
+        dates = [parse_date(m.get("date", "")) for m in meetings]
+        today = max([d for d in dates if d] or [datetime.now()])
 
     all_actions = []
     for meeting in meetings:
@@ -53,7 +73,7 @@ def analyze_actions(data: dict) -> dict:
     person_stats = defaultdict(lambda: {"total": 0, "completed": 0, "overdue": 0})
 
     for action in all_actions:
-        owner = action.get("owner", "Unassigned")
+        owner = action.get("owner") or "(unassigned)"
         status = action.get("status", "open").lower()
         due_str = action.get("due_date", "")
         due_dt = parse_date(due_str) if due_str else None
@@ -173,6 +193,8 @@ def main():
     parser = argparse.ArgumentParser(description="Track meeting action items.")
     parser.add_argument("--meetings", type=str, help="Path to meetings JSON file")
     parser.add_argument("--json", action="store_true", help="Output as JSON")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (--json is the same as --format json)")
+    parser.add_argument("--as-of", help="Date for overdue checks, YYYY-MM-DD (default: latest meeting date)")
     parser.add_argument("--example", action="store_true", help="Print example and exit")
     args = parser.parse_args()
 
@@ -183,8 +205,11 @@ def main():
         parser.error("--meetings is required")
 
     data = load_data(args.meetings)
-    result = analyze_actions(data)
-    if args.json:
+    try:
+        result = analyze_actions(data, args.as_of)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        fail(f"unexpected input shape ({type(e).__name__}: {e}); run --example for the format")
+    if args.json or args.format == "json":
         print(json.dumps(result, indent=2))
     else:
         print_report(result)

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Focused Fix - Claude Skills</title>
-  <meta name="description" content="This skill should be used when the user asks to &quot;fix a bug with minimal changes&quot;, &quot;analyze change scope for a bugfix&quot;, &quot;find the minimal set of files to change&quot;, &quot;do a focused bugfix&quot;, or &quot;scope a min">
+  <meta name="description" content="Constrain a bugfix to the smallest reviewable change: reproduce, patch, add a regression test, check the diff for scope creep. Use when asked for a minimal fix, hotfix or release-blocker; diagnose unk">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/focused-fix.html">
   <meta property="og:title" content="Focused Fix - Claude Skills">
-  <meta property="og:description" content="This skill should be used when the user asks to &quot;fix a bug with minimal changes&quot;, &quot;analyze change scope for a bugfix&quot;, &quot;find the minimal set of files to change&quot;, &quot;do a focused bugfix&quot;, or &quot;scope a min">
+  <meta property="og:description" content="Constrain a bugfix to the smallest reviewable change: reproduce, patch, add a regression test, check the diff for scope creep. Use when asked for a minimal fix, hotfix or release-blocker; diagnose unk">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/focused-fix.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Focused Fix", "description": "This skill should be used when the user asks to \"fix a bug with minimal changes\", \"analyze change scope for a bugfix\", \"find the minimal set of files to change\", \"do a focused bugfix\", or \"scope a minimal repair\".", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/focused-fix.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Focused Fix", "description": "Constrain a bugfix to the smallest reviewable change: reproduce, patch, add a regression test, check the diff for scope creep. Use when asked for a minimal fix, hotfix or release-blocker; diagnose unknown causes with bug-diagnosis.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/focused-fix.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Focused Fix</h1>
-    <p class="page-subtitle">This skill should be used when the user asks to &quot;fix a bug with minimal changes&quot;, &quot;analyze change scope for a bugfix&quot;, &quot;find the minimal set of files to change&quot;, &quot;do a focused bugfix&quot;, or &quot;scope a minimal repair&quot;.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Constrain a bugfix to the smallest reviewable change: reproduce, patch, add a regression test, check the diff for scope creep. Use when asked for a minimal fix, hotfix or release-blocker; diagnose unknown causes with bug-diagnosis.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">bugfix</span><span class="tag">minimal-change</span><span class="tag">scope-analysis</span><span class="tag">debugging</span><span class="tag">focused-fix</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,14 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Focused Fix (Engineering domain).
 
-This skill should be used when the user asks to &quot;fix a bug with minimal changes&quot;, &quot;analyze change scope for a bugfix&quot;, &quot;find the minimal set of files to change&quot;, &quot;do a focused bugfix&quot;, or &quot;scope a minimal repair&quot;.
+Constrain a bugfix to the smallest reviewable change: reproduce, patch, add a regression test, check the diff for scope creep. Use when asked for a minimal fix, hotfix or release-blocker; diagnose unknown causes with bug-diagnosis.
 
-&gt; **Category:** Engineering &gt; **Domain:** Debugging &amp; Maintenance The **Focused Fix** skill enforces a disciplined minimal-change approach to bug fixing. Instead of refactoring or improving code during a bugfix, it identifies the smallest possible change set that resolves the issue. This reduces ris
-
-## Your Key Capabilities
-- change_scope_analyzer.py
-- Focused Bugfix Workflow
-- Scope Validation
+The agent fixes the reported bug and nothing else: a reproduction, the smallest change that makes it pass, a regression test, and a diff that a reviewer can read in a minute. Small fixes are easier to review, safer to roll back and less likely to hide a second regression. This skill starts once the 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -420,14 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Focused Fix (Engineering domain).
 
-This skill should be used when the user asks to &quot;fix a bug with minimal changes&quot;, &quot;analyze change scope for a bugfix&quot;, &quot;find the minimal set of files to change&quot;, &quot;do a focused bugfix&quot;, or &quot;scope a minimal repair&quot;.
+Constrain a bugfix to the smallest reviewable change: reproduce, patch, add a regression test, check the diff for scope creep. Use when asked for a minimal fix, hotfix or release-blocker; diagnose unknown causes with bug-diagnosis.
 
-&gt; **Category:** Engineering &gt; **Domain:** Debugging &amp; Maintenance The **Focused Fix** skill enforces a disciplined minimal-change approach to bug fixing. Instead of refactoring or improving code during a bugfix, it identifies the smallest possible change set that resolves the issue. This reduces ris
-
-## Your Key Capabilities
-- change_scope_analyzer.py
-- Focused Bugfix Workflow
-- Scope Validation
+The agent fixes the reported bug and nothing else: a reproduction, the smallest change that makes it pass, a regression test, and a diff that a reviewer can read in a minute. Small fixes are easier to review, safer to roll back and less likely to hide a second regression. This skill starts once the 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -457,108 +447,96 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Focused Fix
 
-&gt; **Category:** Engineering
-&gt; **Domain:** Debugging &amp; Maintenance
+The agent fixes the reported bug and nothing else: a reproduction, the smallest change that makes it pass, a regression test, and a diff that a reviewer can read in a minute. Small fixes are easier to review, safer to roll back and less likely to hide a second regression.
 
-## Overview
+This skill starts once the cause is known or close to known. When the cause is still a mystery (intermittent failures, no stack trace), run `engineering/bug-diagnosis` first and come back with a confirmed cause.
 
-The **Focused Fix** skill enforces a disciplined minimal-change approach to bug fixing. Instead of refactoring or improving code during a bugfix, it identifies the smallest possible change set that resolves the issue. This reduces risk, simplifies code review, and prevents scope creep.
+## When to Use
 
-## Use when
-
-- The user asks to &quot;fix a bug with minimal changes&quot;, &quot;do a focused bugfix&quot;, or &quot;scope a minimal repair&quot;
-- A bug report needs triage to identify the smallest set of files to touch
-- A PR is at risk of scope creep (unrelated refactors, style changes, &quot;nearby&quot; fixes)
-- A hotfix or release-blocker needs a low-risk, reviewable change set
-- The user asks &quot;what is the minimal change to fix X?&quot; or &quot;which files do I need to touch for this bug?&quot;
+- &quot;Fix this bug with minimal changes&quot;, &quot;do a focused fix&quot;, &quot;what is the smallest change for X?&quot;
+- A hotfix or release-blocker that must be low-risk and quick to review.
+- A fix PR at risk of scope creep (refactors, style changes, &quot;nearby&quot; fixes).
 
 ## Clarify First
 
 Before scoping the fix, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- **Observable failure:** the exact symptom, repro steps, and expected vs actual behavior (the bug description the analyzer matches against, and what the fix must resolve — not a guess at the cause).
-- **Codebase path &amp; file types:** which directory and extensions to search (sets `--path`/`--extensions`).
-- **Minimal vs structural:** confirm this is a focused fix, not a refactor (determines whether out-of-scope &quot;while I&#x27;m here&quot; changes are rejected).
+- **Observable failure:** exact symptom, repro steps, expected vs actual behaviour. This is what the fix must resolve, not a guess at the cause.
+- **Expected scope:** which files or module the fix should touch, if known (becomes `--allow` for the scope check).
+- **Minimal vs structural:** confirm a focused fix is wanted. If the honest fix spans several modules, stop and say so instead of forcing it into a &quot;minimal&quot; patch.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. **Reproduce.** Write the failing test first, from the bug report&#x27;s inputs. It must fail for the reported reason before you change any code.
+2. **Locate.** Use the stack trace, `grep` for the failing function and its callers, and `git log -p` on the suspect file. `change_scope_analyzer.py` can suggest candidate files from the bug text when there is nothing better to go on; treat its list as a hint.
+3. **Patch** the root layer with the smallest change that makes the test pass. No renames, reformatting, or &quot;while I&#x27;m here&quot; edits.
+4. **Check the diff** with `diff_scope_check.py`: file and line budget, files outside the expected scope, whitespace-only hunks, bundled dependency changes, and whether a test changed.
+5. **Verify** that the new test passes and the existing suite still passes; both must pass before the PR opens. The scope check exits 0, or every finding has a one-line justification in the PR. The commit message names the bug and why the fix works.
+6. **Stop and escalate** if the fix needs more than the budget (default 3 files / 60 lines outside tests) or crosses module boundaries: propose a separate, scoped refactor instead.
+
 ## Quick Start
 
+Check a fix before opening the PR, from a saved diff:
+
 ```bash
-# Analyze a bug description to identify minimal change scope
-python scripts/change_scope_analyzer.py --bug &quot;Login fails when email has + character&quot; --path ./src
+python3 scripts/diff_scope_check.py --diff assets/sample_focused.diff --allow &#x27;src/auth/*&#x27;     # focused (exit 0)
+python3 scripts/diff_scope_check.py --diff assets/sample_sprawling.diff --allow &#x27;src/auth/*&#x27;   # 5 findings (exit 1)
+```
 
-# Analyze with JSON output
-python scripts/change_scope_analyzer.py --bug &quot;API returns 500 on empty array input&quot; --path ./src --format json
+Or straight from git, as a pre-PR checklist step:
 
-# Analyze with specific file extensions
-python scripts/change_scope_analyzer.py --bug &quot;CSS overflow on mobile&quot; --path ./src --extensions .css .scss .html
+```bash
+git diff main...HEAD | python3 scripts/diff_scope_check.py --diff - --format json
+```
+
+Optional, when there is no stack trace to start from:
+
+```bash
+python3 scripts/change_scope_analyzer.py --bug &quot;Login fails when email has + character&quot; --path ./src
 ```
 
 ## Tools Overview
 
-| Tool | Purpose | Key Flags |
-|------|---------|-----------|
-| `change_scope_analyzer.py` | Identify minimal files to change for a bugfix | `--bug`, `--path`, `--extensions`, `--format` |
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `diff_scope_check.py` | Reads a unified diff; flags non-test files over budget, lines over budget, files outside `--allow`, whitespace-only hunks, lockfile/manifest changes bundled with code, and a missing test change | `--diff &lt;file or -&gt;`, `--allow &lt;globs&gt;`, `--max-files`, `--max-lines`, `--no-test-required`, `--format text|json` | 0 focused, 1 findings, 2 unreadable or not a diff |
+| `change_scope_analyzer.py` | Keyword and import heuristics from the bug text to rank candidate files, estimate scope and risk | `--bug`, `--path`, `--extensions`, `--format human|json` | 0, 2 bad arguments |
 
-### change_scope_analyzer.py
+`change_scope_analyzer.py` matches words in the bug text against file names and contents. It misses dynamic dispatch, reflection and config-driven paths, and it can rank files on generic words (&quot;fails&quot;). Prefer evidence (traces, tests, git history) over its ranking.
 
-Analyzes a bug description against a codebase to identify:
-- Files most likely related to the bug (keyword matching, import tracing)
-- Estimated change scope (number of files, lines)
-- Risk assessment for the change
-- Recommended fix approach (minimal vs. structural)
+## Anti-Patterns
 
-## Workflows
+**Mistake:** &quot;While I&#x27;m here&quot; refactors in the bugfix PR.
+**Why it happens:** The surrounding code is in view and looks improvable.
+**Instead:** Note it and open a separate `refactor:` PR. Mixed PRs multiply review time and mask regressions behind the real fix.
 
-### Focused Bugfix Workflow
-1. **Write a clear bug description** — reproduction steps, expected vs actual behavior
-   - *Validate:* the description names the observable failure, not a guess at the cause
-2. **Run `change_scope_analyzer.py` to identify scope**
-   - *Validate:* analyzer output lists concrete files and an estimated line count
-3. **Review the recommended files and approach**
-   - *Validate:* recommended approach is &quot;minimal&quot; — if it says &quot;structural&quot;, stop and scope a refactor PR separately
-4. **Make ONLY the changes needed to fix the bug**
-   - *Validate:* `git diff --stat` matches (or is smaller than) the analyzer&#x27;s recommendation
-5. **Verify no unrelated changes leaked in**
-   - *Validate:* `git diff` shows no formatting-only changes, no unrelated imports, no &quot;while I&#x27;m here&quot; edits
-6. **Submit PR with focused change set**
-   - *Validate:* commit message states the exact bug fixed, and a regression test is included
+**Mistake:** Reformatting the files you touch.
+**Why it happens:** Format-on-save or habit.
+**Instead:** Revert formatting-only hunks before committing; `diff_scope_check.py` lists them.
 
-### Scope Validation
-1. After making changes, re-run analyzer
-2. Compare actual changes against recommended scope
-3. Flag any out-of-scope modifications for separate PRs
-   - *Validate:* any file touched that was not in the analyzer recommendation has a one-line justification or is reverted
+**Mistake:** Skipping the regression test because the fix is obvious.
+**Why it happens:** A one-line change feels self-evidently right.
+**Instead:** Every fix ships a test that failed before it. Obvious bugs come back during later refactors.
+
+**Mistake:** Fixing the symptom in the wrong layer.
+**Why it happens:** The first place the error shows is the easiest to patch.
+**Instead:** Trace to where the bad value is produced and fix it there; otherwise the bug returns in a new form.
+
+**Mistake:** Bundling the fix with a dependency upgrade.
+**Why it happens:** The upgrade seemed related.
+**Instead:** Land the upgrade separately so either change can be rolled back alone.
+
+## Files
+
+- `scripts/diff_scope_check.py`, `scripts/change_scope_analyzer.py` — the tools above.
+- `assets/sample_focused.diff` (one source file plus a test), `assets/sample_sprawling.diff` (five files, formatting noise, a dependency bump, no test).
+- `evals/` — prompt cases and a grader for this skill&#x27;s behaviour.
 
 ## Reference Documentation
 
-- [Focused Fix Methodology](references/focused-fix-methodology.md) - Principles, anti-patterns, and decision framework
-
-## Common Patterns
-
-### Do
-- Fix the exact bug reported
-- Add a regression test for the fix
-- Document why the fix works in the commit message
-- Keep the diff as small as possible
-
-### Don&#x27;t
-- Refactor surrounding code during a bugfix
-- Fix &quot;nearby&quot; issues in the same PR
-- Change formatting or style in touched files
-- Add features disguised as bugfixes
-
-## Anti-patterns
-
-| Anti-pattern | Failure mode | Fix |
-|--------------|--------------|-----|
-| &quot;While I&#x27;m here&quot; refactors in the bugfix PR | Blast radius explodes; review time multiplies; unrelated regressions masked by the real fix | Open a separate PR for the refactor, tagged as `refactor:` not `fix:` |
-| Reformatting or auto-save style changes in touched files | Diff becomes unreadable; real fix hidden in 200 lines of whitespace | Revert style changes before committing; configure the editor to format-on-save only for new files |
-| Fixing the symptom in the wrong layer | Bug returns in a new form; accumulates workaround debt | Trace to the root layer — analyzer&#x27;s keyword-match output is a hint, not an answer |
-| Skipping the regression test &quot;because the fix is obvious&quot; | Bug silently returns on a refactor 6 months later | Every `fix:` commit adds at least one failing-then-passing test |
-| Treating `change_scope_analyzer.py` output as authoritative | Analyzer is keyword/import-based, not semantic — misses dynamic dispatch, reflection, config-driven paths | Use it as a starting set; grep for callers and tests before committing to the scope |
-| Bundling the fix with a dependency upgrade | Two risk profiles in one PR; if rollback is needed, both are lost | Land the upgrade separately, then the fix against the upgraded baseline |
+- [references/focused-fix-methodology.md](references/focused-fix-methodology.md) — principles, decision framework for minimal vs structural fixes, and more anti-patterns.
 
 ---
 
@@ -586,7 +564,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Focused Fix&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;fix a bug with minimal changes&quot;, &quot;analyze change scope for a bugfix&quot;, &quot;find the minimal set of files to change&quot;, &quot;do a focused bugfix&quot;, or &quot;scope a minimal repair&quot;.&quot;
+   - Description: &quot;Constrain a bugfix to the smallest reviewable change: reproduce, patch, add a regression test, check the diff for scope creep. Use when asked for a minimal fix, hotfix or release-blocker; diagnose unknown causes with bug-diagnosis.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -611,108 +589,96 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Focused Fix
 
-&gt; **Category:** Engineering
-&gt; **Domain:** Debugging &amp; Maintenance
+The agent fixes the reported bug and nothing else: a reproduction, the smallest change that makes it pass, a regression test, and a diff that a reviewer can read in a minute. Small fixes are easier to review, safer to roll back and less likely to hide a second regression.
 
-## Overview
+This skill starts once the cause is known or close to known. When the cause is still a mystery (intermittent failures, no stack trace), run `engineering/bug-diagnosis` first and come back with a confirmed cause.
 
-The **Focused Fix** skill enforces a disciplined minimal-change approach to bug fixing. Instead of refactoring or improving code during a bugfix, it identifies the smallest possible change set that resolves the issue. This reduces risk, simplifies code review, and prevents scope creep.
+## When to Use
 
-## Use when
-
-- The user asks to &quot;fix a bug with minimal changes&quot;, &quot;do a focused bugfix&quot;, or &quot;scope a minimal repair&quot;
-- A bug report needs triage to identify the smallest set of files to touch
-- A PR is at risk of scope creep (unrelated refactors, style changes, &quot;nearby&quot; fixes)
-- A hotfix or release-blocker needs a low-risk, reviewable change set
-- The user asks &quot;what is the minimal change to fix X?&quot; or &quot;which files do I need to touch for this bug?&quot;
+- &quot;Fix this bug with minimal changes&quot;, &quot;do a focused fix&quot;, &quot;what is the smallest change for X?&quot;
+- A hotfix or release-blocker that must be low-risk and quick to review.
+- A fix PR at risk of scope creep (refactors, style changes, &quot;nearby&quot; fixes).
 
 ## Clarify First
 
 Before scoping the fix, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- **Observable failure:** the exact symptom, repro steps, and expected vs actual behavior (the bug description the analyzer matches against, and what the fix must resolve — not a guess at the cause).
-- **Codebase path &amp; file types:** which directory and extensions to search (sets `--path`/`--extensions`).
-- **Minimal vs structural:** confirm this is a focused fix, not a refactor (determines whether out-of-scope &quot;while I&#x27;m here&quot; changes are rejected).
+- **Observable failure:** exact symptom, repro steps, expected vs actual behaviour. This is what the fix must resolve, not a guess at the cause.
+- **Expected scope:** which files or module the fix should touch, if known (becomes `--allow` for the scope check).
+- **Minimal vs structural:** confirm a focused fix is wanted. If the honest fix spans several modules, stop and say so instead of forcing it into a &quot;minimal&quot; patch.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. **Reproduce.** Write the failing test first, from the bug report&#x27;s inputs. It must fail for the reported reason before you change any code.
+2. **Locate.** Use the stack trace, `grep` for the failing function and its callers, and `git log -p` on the suspect file. `change_scope_analyzer.py` can suggest candidate files from the bug text when there is nothing better to go on; treat its list as a hint.
+3. **Patch** the root layer with the smallest change that makes the test pass. No renames, reformatting, or &quot;while I&#x27;m here&quot; edits.
+4. **Check the diff** with `diff_scope_check.py`: file and line budget, files outside the expected scope, whitespace-only hunks, bundled dependency changes, and whether a test changed.
+5. **Verify** that the new test passes and the existing suite still passes; both must pass before the PR opens. The scope check exits 0, or every finding has a one-line justification in the PR. The commit message names the bug and why the fix works.
+6. **Stop and escalate** if the fix needs more than the budget (default 3 files / 60 lines outside tests) or crosses module boundaries: propose a separate, scoped refactor instead.
+
 ## Quick Start
 
+Check a fix before opening the PR, from a saved diff:
+
 ```bash
-# Analyze a bug description to identify minimal change scope
-python scripts/change_scope_analyzer.py --bug &quot;Login fails when email has + character&quot; --path ./src
+python3 scripts/diff_scope_check.py --diff assets/sample_focused.diff --allow &#x27;src/auth/*&#x27;     # focused (exit 0)
+python3 scripts/diff_scope_check.py --diff assets/sample_sprawling.diff --allow &#x27;src/auth/*&#x27;   # 5 findings (exit 1)
+```
 
-# Analyze with JSON output
-python scripts/change_scope_analyzer.py --bug &quot;API returns 500 on empty array input&quot; --path ./src --format json
+Or straight from git, as a pre-PR checklist step:
 
-# Analyze with specific file extensions
-python scripts/change_scope_analyzer.py --bug &quot;CSS overflow on mobile&quot; --path ./src --extensions .css .scss .html
+```bash
+git diff main...HEAD | python3 scripts/diff_scope_check.py --diff - --format json
+```
+
+Optional, when there is no stack trace to start from:
+
+```bash
+python3 scripts/change_scope_analyzer.py --bug &quot;Login fails when email has + character&quot; --path ./src
 ```
 
 ## Tools Overview
 
-| Tool | Purpose | Key Flags |
-|------|---------|-----------|
-| `change_scope_analyzer.py` | Identify minimal files to change for a bugfix | `--bug`, `--path`, `--extensions`, `--format` |
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `diff_scope_check.py` | Reads a unified diff; flags non-test files over budget, lines over budget, files outside `--allow`, whitespace-only hunks, lockfile/manifest changes bundled with code, and a missing test change | `--diff &lt;file or -&gt;`, `--allow &lt;globs&gt;`, `--max-files`, `--max-lines`, `--no-test-required`, `--format text|json` | 0 focused, 1 findings, 2 unreadable or not a diff |
+| `change_scope_analyzer.py` | Keyword and import heuristics from the bug text to rank candidate files, estimate scope and risk | `--bug`, `--path`, `--extensions`, `--format human|json` | 0, 2 bad arguments |
 
-### change_scope_analyzer.py
+`change_scope_analyzer.py` matches words in the bug text against file names and contents. It misses dynamic dispatch, reflection and config-driven paths, and it can rank files on generic words (&quot;fails&quot;). Prefer evidence (traces, tests, git history) over its ranking.
 
-Analyzes a bug description against a codebase to identify:
-- Files most likely related to the bug (keyword matching, import tracing)
-- Estimated change scope (number of files, lines)
-- Risk assessment for the change
-- Recommended fix approach (minimal vs. structural)
+## Anti-Patterns
 
-## Workflows
+**Mistake:** &quot;While I&#x27;m here&quot; refactors in the bugfix PR.
+**Why it happens:** The surrounding code is in view and looks improvable.
+**Instead:** Note it and open a separate `refactor:` PR. Mixed PRs multiply review time and mask regressions behind the real fix.
 
-### Focused Bugfix Workflow
-1. **Write a clear bug description** — reproduction steps, expected vs actual behavior
-   - *Validate:* the description names the observable failure, not a guess at the cause
-2. **Run `change_scope_analyzer.py` to identify scope**
-   - *Validate:* analyzer output lists concrete files and an estimated line count
-3. **Review the recommended files and approach**
-   - *Validate:* recommended approach is &quot;minimal&quot; — if it says &quot;structural&quot;, stop and scope a refactor PR separately
-4. **Make ONLY the changes needed to fix the bug**
-   - *Validate:* `git diff --stat` matches (or is smaller than) the analyzer&#x27;s recommendation
-5. **Verify no unrelated changes leaked in**
-   - *Validate:* `git diff` shows no formatting-only changes, no unrelated imports, no &quot;while I&#x27;m here&quot; edits
-6. **Submit PR with focused change set**
-   - *Validate:* commit message states the exact bug fixed, and a regression test is included
+**Mistake:** Reformatting the files you touch.
+**Why it happens:** Format-on-save or habit.
+**Instead:** Revert formatting-only hunks before committing; `diff_scope_check.py` lists them.
 
-### Scope Validation
-1. After making changes, re-run analyzer
-2. Compare actual changes against recommended scope
-3. Flag any out-of-scope modifications for separate PRs
-   - *Validate:* any file touched that was not in the analyzer recommendation has a one-line justification or is reverted
+**Mistake:** Skipping the regression test because the fix is obvious.
+**Why it happens:** A one-line change feels self-evidently right.
+**Instead:** Every fix ships a test that failed before it. Obvious bugs come back during later refactors.
+
+**Mistake:** Fixing the symptom in the wrong layer.
+**Why it happens:** The first place the error shows is the easiest to patch.
+**Instead:** Trace to where the bad value is produced and fix it there; otherwise the bug returns in a new form.
+
+**Mistake:** Bundling the fix with a dependency upgrade.
+**Why it happens:** The upgrade seemed related.
+**Instead:** Land the upgrade separately so either change can be rolled back alone.
+
+## Files
+
+- `scripts/diff_scope_check.py`, `scripts/change_scope_analyzer.py` — the tools above.
+- `assets/sample_focused.diff` (one source file plus a test), `assets/sample_sprawling.diff` (five files, formatting noise, a dependency bump, no test).
+- `evals/` — prompt cases and a grader for this skill&#x27;s behaviour.
 
 ## Reference Documentation
 
-- [Focused Fix Methodology](references/focused-fix-methodology.md) - Principles, anti-patterns, and decision framework
-
-## Common Patterns
-
-### Do
-- Fix the exact bug reported
-- Add a regression test for the fix
-- Document why the fix works in the commit message
-- Keep the diff as small as possible
-
-### Don&#x27;t
-- Refactor surrounding code during a bugfix
-- Fix &quot;nearby&quot; issues in the same PR
-- Change formatting or style in touched files
-- Add features disguised as bugfixes
-
-## Anti-patterns
-
-| Anti-pattern | Failure mode | Fix |
-|--------------|--------------|-----|
-| &quot;While I&#x27;m here&quot; refactors in the bugfix PR | Blast radius explodes; review time multiplies; unrelated regressions masked by the real fix | Open a separate PR for the refactor, tagged as `refactor:` not `fix:` |
-| Reformatting or auto-save style changes in touched files | Diff becomes unreadable; real fix hidden in 200 lines of whitespace | Revert style changes before committing; configure the editor to format-on-save only for new files |
-| Fixing the symptom in the wrong layer | Bug returns in a new form; accumulates workaround debt | Trace to the root layer — analyzer&#x27;s keyword-match output is a hint, not an answer |
-| Skipping the regression test &quot;because the fix is obvious&quot; | Bug silently returns on a refactor 6 months later | Every `fix:` commit adds at least one failing-then-passing test |
-| Treating `change_scope_analyzer.py` output as authoritative | Analyzer is keyword/import-based, not semantic — misses dynamic dispatch, reflection, config-driven paths | Use it as a starting set; grep for callers and tests before committing to the scope |
-| Bundling the fix with a dependency upgrade | Two risk profiles in one PR; if rollback is needed, both are lost | Land the upgrade separately, then the fix against the upgraded baseline |
+- [references/focused-fix-methodology.md](references/focused-fix-methodology.md) — principles, decision framework for minimal vs structural fixes, and more anti-patterns.
 
 ---
 
@@ -740,7 +706,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Focused Fix&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;fix a bug with minimal changes&quot;, &quot;analyze change scope for a bugfix&quot;, &quot;find the minimal set of files to change&quot;, &quot;do a focused bugfix&quot;, or &quot;scope a minimal repair&quot;.&quot;
+   - Description: &quot;Constrain a bugfix to the smallest reviewable change: reproduce, patch, add a regression test, check the diff for scope creep. Use when asked for a minimal fix, hotfix or release-blocker; diagnose unknown causes with bug-diagnosis.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -799,17 +765,23 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/focused-fix/scripts/tool_name.py --help</code></pre>
-  <h2>Python Tools</h2><div class="tool-item"><h4>change_scope_analyzer.py</h4><p>Analyzes a bug description against a codebase to identify:</p></div>
-  <h2>Quick Start</h2><pre><code># Analyze a bug description to identify minimal change scope
-python scripts/change_scope_analyzer.py --bug &quot;Login fails when email has + character&quot; --path ./src
+  
+  <h2>Quick Start</h2>Check a fix before opening the PR, from a saved diff:
 
-# Analyze with JSON output
-python scripts/change_scope_analyzer.py --bug &quot;API returns 500 on empty array input&quot; --path ./src --format json
-
-# Analyze with specific file extensions
-python scripts/change_scope_analyzer.py --bug &quot;CSS overflow on mobile&quot; --path ./src --extensions .css .scss .html
+<pre><code>python3 scripts/diff_scope_check.py --diff assets/sample_focused.diff --allow &#x27;src/auth/*&#x27;     # focused (exit 0)
+python3 scripts/diff_scope_check.py --diff assets/sample_sprawling.diff --allow &#x27;src/auth/*&#x27;   # 5 findings (exit 1)
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+
+Or straight from git, as a pre-PR checklist step:
+
+<pre><code>git diff main...HEAD | python3 scripts/diff_scope_check.py --diff - --format json
+</code></pre>
+
+Optional, when there is no stack trace to start from:
+
+<pre><code>python3 scripts/change_scope_analyzer.py --bug &quot;Login fails when email has + character&quot; --path ./src
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/focused-fix/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

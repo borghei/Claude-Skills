@@ -1,5 +1,7 @@
 # Tool Reference
 
+From a shell, use `python scripts/tdd.py coverage|generate|quality` (see SKILL.md). The Python examples below need `PYTHONPATH=scripts` (or run from `scripts/`).
+
 Complete API reference for the eight TDD Guide scripts. Read this when you need exact module names, constructor parameters, method signatures, or worked usage examples for any script.
 
 ## Tools Summary

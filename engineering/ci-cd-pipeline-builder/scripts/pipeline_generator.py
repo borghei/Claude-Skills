@@ -37,7 +37,27 @@ STACK_SIGNALS = [
     ("Cargo.lock",           "rust",   "cargo",  None),
     ("Gemfile.lock",         "ruby",   "bundler", None),
     ("composer.lock",        "php",    "composer", None),
+    # Manifests without a lockfile (checked after lockfiles, so a lockfile wins)
+    ("package.json",         "node",   "npm",    None),
+    ("Cargo.toml",           "rust",   "cargo",  None),
+    ("Gemfile",              "ruby",   "bundler", None),
+    ("composer.json",        "php",    "composer", None),
+    ("setup.py",             "python", "pip",    None),
 ]
+BRANCHES = ["main"]  # set from --branches or the repo's default branch in main()
+
+
+def detect_default_branch(project_dir):
+    """Read the default branch from .git without running git; None if unknown."""
+    git = Path(project_dir) / ".git"
+    for ref in (git / "refs" / "remotes" / "origin" / "HEAD", git / "HEAD"):
+        try:
+            text = ref.read_text().strip()
+        except OSError:
+            continue
+        if text.startswith("ref: refs/"):
+            return text.rsplit("/", 1)[-1]
+    return None
 
 FRAMEWORK_SIGNALS = [
     ("next.config.js",      "nextjs"),
@@ -100,6 +120,8 @@ def detect_stack(project_dir):
             detected["has_tests"] = True
             break
 
+    if detected["language"] == "python" and detected["package_manager"] is None:
+        detected["package_manager"] = "pip"  # pyproject.toml without a lockfile
     return detected
 
 
@@ -116,13 +138,13 @@ def _github_node(stack, deploy):
         "bun": "bun install --frozen-lockfile",
     }.get(pm, "npm ci")
 
-    setup_steps = "      - uses: actions/checkout@v4\n"
+    setup_steps = "      - uses: actions/checkout@v7\n"
     if pm == "pnpm":
         setup_steps += "      - uses: pnpm/action-setup@v4\n        with:\n          version: '9'\n"
     setup_steps += (
-        "      - uses: actions/setup-node@v4\n"
+        "      - uses: actions/setup-node@v7\n"
         "        with:\n"
-        f"          node-version: '20'\n"
+        f"          node-version: '24'\n"
     )
     if pm in ("npm", "pnpm", "yarn"):
         setup_steps += f"          cache: '{pm}'\n"
@@ -132,7 +154,7 @@ def _github_node(stack, deploy):
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-{setup_steps}      - run: npx eslint . || true
+{setup_steps}      - run: npx eslint .
 
   test:
     runs-on: ubuntu-latest
@@ -152,7 +174,7 @@ def _github_node(stack, deploy):
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v6
         with:
@@ -170,7 +192,7 @@ def _github_node(stack, deploy):
     needs: test
     steps:
 {setup_steps}      - run: npm run build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: build-output
           path: dist/
@@ -187,7 +209,7 @@ def _github_node(stack, deploy):
     environment:
       name: staging
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Deploy to staging
         run: echo "Add your staging deploy command here"
         env:
@@ -201,7 +223,7 @@ def _github_node(stack, deploy):
     environment:
       name: production
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Deploy to production
         run: echo "Add your production deploy command here"
         env:
@@ -221,18 +243,18 @@ def _github_python(stack, deploy):
     }.get(pm, "      - run: pip install -r requirements.txt")
 
     setup_steps = (
-        "      - uses: actions/checkout@v4\n"
-        "      - uses: actions/setup-python@v5\n"
+        "      - uses: actions/checkout@v7\n"
+        "      - uses: actions/setup-python@v7\n"
         "        with:\n"
         "          python-version: '3.12'\n"
     )
     if pm != "uv":
         setup_steps += install_block + "\n"
     else:
-        setup_steps = "      - uses: actions/checkout@v4\n" + install_block + "\n"
+        setup_steps = "      - uses: actions/checkout@v7\n" + install_block + "\n"
 
     test_cmd = "uv run pytest -v" if pm == "uv" else "pytest -v"
-    lint_cmd = "uv run ruff check ." if pm == "uv" else "ruff check . || true"
+    lint_cmd = "uv run ruff check ." if pm == "uv" else "ruff check ."
 
     jobs = f"""  lint:
     runs-on: ubuntu-latest
@@ -248,8 +270,8 @@ def _github_python(stack, deploy):
       matrix:
         python-version: ['3.11', '3.12', '3.13']
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{{{ matrix.python-version }}}}
 {install_block}
@@ -266,7 +288,7 @@ def _github_python(stack, deploy):
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v3
       - uses: docker/build-push-action@v6
         with:
@@ -287,7 +309,7 @@ def _github_python(stack, deploy):
     environment:
       name: staging
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Deploy to staging
         run: echo "Add your staging deploy command here"
 
@@ -299,7 +321,7 @@ def _github_python(stack, deploy):
     environment:
       name: production
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Deploy to production
         run: echo "Add your production deploy command here"
 """
@@ -312,8 +334,8 @@ def _github_go(stack, deploy):
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
       - run: go vet ./...
@@ -323,8 +345,8 @@ def _github_go(stack, deploy):
     timeout-minutes: 15
     needs: lint
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
       - run: go test -race -coverprofile=coverage.out ./...
@@ -334,12 +356,12 @@ def _github_go(stack, deploy):
     timeout-minutes: 10
     needs: test
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
       - run: go build -o bin/app ./...
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: binary
           path: bin/
@@ -349,13 +371,14 @@ def _github_go(stack, deploy):
 
 
 def _github_wrapper(jobs_block):
+    branches = ", ".join(BRANCHES)
     return f"""name: CI/CD
 
 on:
   push:
-    branches: [main, dev]
+    branches: [{branches}]
   pull_request:
-    branches: [main, dev]
+    branches: [{branches}]
 
 concurrency:
   group: ${{{{ github.workflow }}}}-${{{{ github.ref }}}}
@@ -373,7 +396,7 @@ def _github_generic():
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build
         run: echo "Configure your build steps here"
       - name: Test
@@ -435,7 +458,7 @@ lint:
   before_script:
     - {install}
   script:
-    - npx eslint . || true
+    - npx eslint .
   timeout: 10m
 
 test:
@@ -484,7 +507,7 @@ lint:
   before_script:
     - {install}
   script:
-    - ruff check . || true
+    - ruff check .
   timeout: 10m
 
 test:
@@ -526,6 +549,9 @@ def generate_pipeline(project_dir, platform="github", deploy=False):
     else:
         yaml_content = "# Could not detect stack. Add pipeline configuration manually.\n"
 
+    default = BRANCHES[0]
+    yaml_content = (yaml_content.replace("refs/heads/main", f"refs/heads/{default}")
+                    .replace('$CI_COMMIT_BRANCH == "main"', f'$CI_COMMIT_BRANCH == "{default}"'))
     return {
         "stack": stack,
         "platform": platform,
@@ -556,12 +582,16 @@ def main():
                         help="Output results as JSON (includes detected stack info)")
     parser.add_argument("--detect-only", action="store_true",
                         help="Only detect stack, do not generate pipeline")
+    parser.add_argument("--branches", default=None,
+                        help="Comma-separated trigger branches (default: the repo's default branch, else main)")
     args = parser.parse_args()
 
     project_dir = os.path.abspath(args.project_dir)
     if not os.path.isdir(project_dir):
         print(f"Error: '{project_dir}' is not a valid directory.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
+    BRANCHES[:] = ([b.strip() for b in args.branches.split(",") if b.strip()] if args.branches
+                   else [detect_default_branch(project_dir) or "main"])
 
     if args.detect_only:
         stack = detect_stack(project_dir)

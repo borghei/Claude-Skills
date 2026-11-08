@@ -1,17 +1,16 @@
 ---
 name: atlassian-admin
 description: >
-  Administer the Atlassian suite (Jira/Confluence): user provisioning, groups,
-  SSO/SAML, permissions, security policies, marketplace apps, backups, and
-  org-wide governance. Use for admin config, access management, and system
-  optimization.
+  Plans and audits Atlassian Cloud or Data Center administration: users, SSO,
+  permissions, licences and instance health. Use when onboarding or offboarding users,
+  auditing access, cutting licence cost or planning a DC exit.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: atlassian
-  updated: 2026-06-15
+  updated: 2026-11-08
   tags: [atlassian, jira, confluence, administration, permissions]
 ---
 # Atlassian Administrator Expert
@@ -59,12 +58,37 @@ What most shapes this skill's output is the deployment type, the plan tier and t
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. Settle the Clarify First inputs, then pick the procedure in `references/administration-playbook.md`.
+2. Measure before changing: run the tool that matches the request (below) on an export from the admin console.
+3. For any bulk or org-wide change, write the change record (JQL preview, sample check, backup, rollback) before running it.
+4. Done when the tool's findings are either fixed or accepted in writing with an owner, and a re-run shows the change.
+
+## Tools
+
+Each tool reads one JSON export and prints a text report (`--json` for machine output).
+`--example` prints the input shape; the same samples ship in `assets/`. Exit 0 on success,
+2 on bad input (missing file, invalid JSON, wrong shape) with a one-line error.
+
+```bash
+python3 project-management/atlassian-admin/scripts/license_analyzer.py --usage project-management/atlassian-admin/assets/sample_license_usage.json
+python3 project-management/atlassian-admin/scripts/permission_auditor.py --config project-management/atlassian-admin/assets/sample_permissions.json
+python3 project-management/atlassian-admin/scripts/system_health_checker.py --health project-management/atlassian-admin/assets/sample_health.json
+```
+
+| Tool | What it does |
+|------|--------------|
+| `license_analyzer.py` | Inactive (90d+) and never-active seats, recoverable cost, utilisation. "As of" is the file's `as_of`, else its latest `last_active`, so results do not drift. Give `licenses_in_use` from the admin console: without it, a user list under half the licence count is flagged as a partial export and no downsize is suggested |
+| `permission_auditor.py` | Compliance score and findings: MFA not enforced, admins without MFA, inactive users with access, individual grants, `everyone` with write access |
+| `system_health_checker.py` | Storage, API rate, response time, error rate and automation-allowance usage against warning thresholds |
+
 ## Anti-Patterns
 
 ### Admin rights as the default
 **Mistake:** Dozens of users hold org or site admin "because they sometimes need to change things."
 **Why it happens:** Granting admin is faster than working out the narrower permission someone needs.
-**Instead:** Keep org admins to 5 or 1% of users, whichever is larger. Above that, audit and remove. Every extra admin widens the blast radius, and SOC 2 and ISO 27001 auditors will flag it.
+**Instead:** As a working heuristic (not an Atlassian rule), keep org admins to 5 or 1% of users, whichever is larger. Above that, audit and remove. Every extra admin widens the blast radius, and SOC 2 and ISO 27001 auditors will flag it.
 
 ### SSO with password login still on
 **Mistake:** SAML SSO is enabled, but Atlassian-account password login stays on "as a backup."
@@ -93,13 +117,10 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Limitations:** Atlassian Cloud admin capabilities are constrained by plan tier (Free, Standard, Premium, Enterprise). Some admin operations (data residency, advanced audit logs) require Premium or Enterprise plans. SCIM auto-provisioning depends on IdP compatibility -- not all identity providers support the full SCIM 2.0 spec. Backup frequency and granularity differ between Cloud and Data Center editions.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `jira-expert/` | Admin -> Jira | Global workflow schemes, custom field creation, permission scheme deployment |
-| `confluence-expert/` | Admin -> Confluence | Global templates, space permission schemes, blueprint configuration |
-| `atlassian-templates/` | Admin -> Templates | Template governance policies, global template deployment approval |
-| `senior-pm/` | Admin -> PM | Usage analytics, capacity planning data, cost optimization recommendations |
-| `scrum-master/` | Admin -> SM | Team access provisioning, board configuration capabilities |
-| `agile-coach/` | Admin -> Coach | Organizational user data for team structure mapping |
+| File | Purpose |
+|------|---------|
+| `scripts/license_analyzer.py`, `scripts/permission_auditor.py`, `scripts/system_health_checker.py` | See Tools |
+| `assets/sample_license_usage.json`, `assets/sample_permissions.json`, `assets/sample_health.json` | Runnable inputs for each tool |
+| `references/administration-playbook.md`, `references/red-flags.md` | See References |

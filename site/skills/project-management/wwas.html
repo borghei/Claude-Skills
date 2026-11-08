@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wwas - Claude Skills</title>
-  <meta name="description" content="Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.">
+  <meta name="description" content="Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR and passes INVEST before a sprint. Use when writing backlog items, checking sprint readiness, or finding work that serv">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/wwas.html">
   <meta property="og:title" content="Wwas - Claude Skills">
-  <meta property="og:description" content="Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.">
+  <meta property="og:description" content="Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR and passes INVEST before a sprint. Use when writing backlog items, checking sprint readiness, or finding work that serv">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/wwas.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Wwas", "description": "Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/wwas.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Wwas", "description": "Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR and passes INVEST before a sprint. Use when writing backlog items, checking sprint readiness, or finding work that serves no objective.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/wwas.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Wwas</h1>
-    <p class="page-subtitle">Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.</p>
+    <p class="page-subtitle">Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR and passes INVEST before a sprint. Use when writing backlog items, checking sprint readiness, or finding work that serves no objective.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">backlog</span><span class="tag">acceptance-criteria</span><span class="tag">invest</span><span class="tag">strategic-alignment</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Wwas (Project Management domain).
 
-Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.
+Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR and passes INVEST before a sprint. Use when writing backlog items, checking sprint readiness, or finding work that serves no objective.
 
 Create backlog items using the Why-What-Acceptance (WWAS) format. This format ensures every piece of work connects to strategic context, includes a concise description that serves as a &quot;reminder of the discussion&quot; rather than a detailed specification, and defines high-level acceptance criteria focus
 
@@ -406,6 +406,7 @@ Create backlog items using the Why-What-Acceptance (WWAS) format. This format en
 
 ## Frameworks &amp; Templates You Know
 - - `assets/wwas_template.md` — ready-to-use WWAS templates.
+- | `assets/wwas_template.md` | Item templates |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -425,7 +426,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Wwas (Project Management domain).
 
-Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.
+Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR and passes INVEST before a sprint. Use when writing backlog items, checking sprint readiness, or finding work that serves no objective.
 
 Create backlog items using the Why-What-Acceptance (WWAS) format. This format ensures every piece of work connects to strategic context, includes a concise description that serves as a &quot;reminder of the discussion&quot; rather than a detailed specification, and defines high-level acceptance criteria focus
 
@@ -438,6 +439,7 @@ Create backlog items using the Why-What-Acceptance (WWAS) format. This format en
 
 ## Frameworks &amp; Templates You Know
 - - `assets/wwas_template.md` — ready-to-use WWAS templates.
+- | `assets/wwas_template.md` | Item templates |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -502,6 +504,31 @@ Before writing the item, settle the inputs below. When one is missing or vague a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Tools
+
+All three read a backlog JSON (`items[]` with `title`, `why`, `what`, `acceptance_criteria`, optional `design_link`, `okr_ref`; the alignment checker also reads `okrs[]` with `id`, `name`, `keywords`). Each prints text or `--format json` (`--json` is the same), and `--example` prints a valid input.
+
+| Tool | Flag | Checks |
+|------|------|--------|
+| `invest_gate_checker.py` | `--items FILE` | Six INVEST gates per item. Testable needs at least half the criteria to name an observable behaviour or threshold; Estimable needs 4+ criteria. **Gate:** exits 1 if any item is FAIL or CONDITIONAL. |
+| `wwas_quality_scorer.py` | `--items FILE` | 0-100 per item for Why (metric, objective), What (length, design link) and criteria (count, edge cases). |
+| `backlog_alignment_checker.py` | `--backlog FILE` | Which items map to which OKR (by `okr_ref` or keywords), unaligned items, OKRs with no items. |
+
+```bash
+# Sprint-ready backlog: all tools report clean, the gate exits 0
+python3 project-management/execution/wwas/scripts/invest_gate_checker.py \
+  --items project-management/execution/wwas/assets/sample_backlog_ready.json
+# Mixed backlog: two items with a feature-as-Why and vague criteria; the gate exits 1
+python3 project-management/execution/wwas/scripts/invest_gate_checker.py \
+  --items project-management/execution/wwas/assets/sample_backlog.json
+python3 project-management/execution/wwas/scripts/backlog_alignment_checker.py \
+  --backlog project-management/execution/wwas/assets/sample_backlog.json
+```
+
+**Exit codes:** `0` report produced (for the INVEST checker: every item sprint-ready) · `1` INVEST checker only: at least one item not ready · `2` missing or unreadable file, invalid JSON, or the wrong shape.
+
+The checks are keyword heuristics. A pass means the item has the right parts, not that the Why is true or the criteria are the right ones; read the items too.
+
 ## Anti-Patterns
 
 ### A Why that names the feature
@@ -521,7 +548,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task; keep this file lean and pull detail on demand.
 
@@ -529,13 +556,6 @@ Load the reference that matches the task; keep this file lean and pull detail on
 - **[references/backlog-management-guide.md](references/backlog-management-guide.md)** — format comparison (WWAS vs user stories vs job stories), INVEST deep dive, Definition of Ready, and refinement best practices. Read when choosing a format or running refinement.
 - **[references/red-flags.md](references/red-flags.md)** — bad-vs-good quoted examples of WWAS items. Scan every item before it enters refinement.
 - `assets/wwas_template.md` — ready-to-use WWAS templates.
-
-## Integration with Other Skills
-
-- Use `job-stories/` for situation-driven stories focused on user context rather than strategic alignment.
-- Use `brainstorm-okrs/` to define the objectives that WWAS items connect to.
-- Use `summarize-meeting/` to capture refinement discussions that inform the What.
-- Feed WWAS items into `../jira-expert/` for ticket creation with structured fields.
 
 ## Scope &amp; Limitations
 
@@ -555,6 +575,18 @@ Load the reference that matches the task; keep this file lean and pull detail on
 | `execution/brainstorm-okrs/` | OKRs -&gt; WWAS | Team OKRs provide the strategic objectives that Why statements reference |
 | `execution/prioritization-frameworks/` | WWAS -&gt; Prioritization | WWAS items scored via RICE or other frameworks for backlog ordering |
 | `discovery/brainstorm-ideas/` | Ideas -&gt; WWAS | Validated ideas decompose into WWAS backlog items with strategic traceability |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/invest_gate_checker.py` | INVEST gate (exit 1 when not sprint-ready) |
+| `scripts/wwas_quality_scorer.py` | Per-item WWAS quality score |
+| `scripts/backlog_alignment_checker.py` | Item-to-OKR alignment and coverage |
+| `assets/sample_backlog_ready.json` | Two sprint-ready items; gate exits 0 |
+| `assets/sample_backlog.json` | Four items, two not ready; gate exits 1 |
+| `assets/wwas_template.md` | Item templates |
+| `examples/northwind-backlog-rewritten.md` | Worked rewrite of a weak backlog |
 
 ---
 
@@ -582,7 +614,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Wwas&quot;**
-   - Description: &quot;Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.&quot;
+   - Description: &quot;Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR and passes INVEST before a sprint. Use when writing backlog items, checking sprint readiness, or finding work that serves no objective.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -642,6 +674,31 @@ Before writing the item, settle the inputs below. When one is missing or vague a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Tools
+
+All three read a backlog JSON (`items[]` with `title`, `why`, `what`, `acceptance_criteria`, optional `design_link`, `okr_ref`; the alignment checker also reads `okrs[]` with `id`, `name`, `keywords`). Each prints text or `--format json` (`--json` is the same), and `--example` prints a valid input.
+
+| Tool | Flag | Checks |
+|------|------|--------|
+| `invest_gate_checker.py` | `--items FILE` | Six INVEST gates per item. Testable needs at least half the criteria to name an observable behaviour or threshold; Estimable needs 4+ criteria. **Gate:** exits 1 if any item is FAIL or CONDITIONAL. |
+| `wwas_quality_scorer.py` | `--items FILE` | 0-100 per item for Why (metric, objective), What (length, design link) and criteria (count, edge cases). |
+| `backlog_alignment_checker.py` | `--backlog FILE` | Which items map to which OKR (by `okr_ref` or keywords), unaligned items, OKRs with no items. |
+
+```bash
+# Sprint-ready backlog: all tools report clean, the gate exits 0
+python3 project-management/execution/wwas/scripts/invest_gate_checker.py \
+  --items project-management/execution/wwas/assets/sample_backlog_ready.json
+# Mixed backlog: two items with a feature-as-Why and vague criteria; the gate exits 1
+python3 project-management/execution/wwas/scripts/invest_gate_checker.py \
+  --items project-management/execution/wwas/assets/sample_backlog.json
+python3 project-management/execution/wwas/scripts/backlog_alignment_checker.py \
+  --backlog project-management/execution/wwas/assets/sample_backlog.json
+```
+
+**Exit codes:** `0` report produced (for the INVEST checker: every item sprint-ready) · `1` INVEST checker only: at least one item not ready · `2` missing or unreadable file, invalid JSON, or the wrong shape.
+
+The checks are keyword heuristics. A pass means the item has the right parts, not that the Why is true or the criteria are the right ones; read the items too.
+
 ## Anti-Patterns
 
 ### A Why that names the feature
@@ -661,7 +718,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task; keep this file lean and pull detail on demand.
 
@@ -669,13 +726,6 @@ Load the reference that matches the task; keep this file lean and pull detail on
 - **[references/backlog-management-guide.md](references/backlog-management-guide.md)** — format comparison (WWAS vs user stories vs job stories), INVEST deep dive, Definition of Ready, and refinement best practices. Read when choosing a format or running refinement.
 - **[references/red-flags.md](references/red-flags.md)** — bad-vs-good quoted examples of WWAS items. Scan every item before it enters refinement.
 - `assets/wwas_template.md` — ready-to-use WWAS templates.
-
-## Integration with Other Skills
-
-- Use `job-stories/` for situation-driven stories focused on user context rather than strategic alignment.
-- Use `brainstorm-okrs/` to define the objectives that WWAS items connect to.
-- Use `summarize-meeting/` to capture refinement discussions that inform the What.
-- Feed WWAS items into `../jira-expert/` for ticket creation with structured fields.
 
 ## Scope &amp; Limitations
 
@@ -695,6 +745,18 @@ Load the reference that matches the task; keep this file lean and pull detail on
 | `execution/brainstorm-okrs/` | OKRs -&gt; WWAS | Team OKRs provide the strategic objectives that Why statements reference |
 | `execution/prioritization-frameworks/` | WWAS -&gt; Prioritization | WWAS items scored via RICE or other frameworks for backlog ordering |
 | `discovery/brainstorm-ideas/` | Ideas -&gt; WWAS | Validated ideas decompose into WWAS backlog items with strategic traceability |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/invest_gate_checker.py` | INVEST gate (exit 1 when not sprint-ready) |
+| `scripts/wwas_quality_scorer.py` | Per-item WWAS quality score |
+| `scripts/backlog_alignment_checker.py` | Item-to-OKR alignment and coverage |
+| `assets/sample_backlog_ready.json` | Two sprint-ready items; gate exits 0 |
+| `assets/sample_backlog.json` | Four items, two not ready; gate exits 1 |
+| `assets/wwas_template.md` | Item templates |
+| `examples/northwind-backlog-rewritten.md` | Worked rewrite of a weak backlog |
 
 ---
 
@@ -722,7 +784,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Wwas&quot;**
-   - Description: &quot;Why-What-Acceptance backlog format that connects every work item to strategic business objectives, with INVEST quality gates and observable acceptance criteria.&quot;
+   - Description: &quot;Writes and grades Why-What-Acceptance backlog items so each one traces to an OKR and passes INVEST before a sprint. Use when writing backlog items, checking sprint readiness, or finding work that serves no objective.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -783,7 +845,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python project-management/execution/wwas/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/wwas/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

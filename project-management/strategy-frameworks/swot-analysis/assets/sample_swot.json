@@ -1,0 +1,28 @@
+{
+  "swot_scope": "Acme Compliance entering the German mid-market (200-2,000 staff) in 2027",
+  "as_of": "2026-05-27",
+  "strengths": [
+    {"text": "Automated GDPR record-of-processing export already used by 140 EU customers", "evidence": "Product analytics: 140 accounts ran the export in Q1 2026", "specificity": "high"},
+    {"text": "Median onboarding of 9 days versus 35 for the two incumbent vendors", "evidence": "Implementation logs for 60 onboardings in 2025; incumbent figures from public reviews", "specificity": "high"},
+    {"text": "Two in-house data-protection lawyers who write the product's policy templates", "evidence": "Templates cited as the deciding factor in 3 lost-deal reversals", "specificity": "medium"}
+  ],
+  "weaknesses": [
+    {"text": "No German-language UI or support team", "evidence": "Support staffed in English only; 4 German trials churned citing language", "specificity": "high"},
+    {"text": "No ISO 27001 certificate, which German procurement asks for by default", "evidence": "Requested in 7 of 9 German RFPs in 2025", "specificity": "high"},
+    {"text": "Sales cycle with regulated buyers averages 5 months", "evidence": "CRM, 2025 closed-won deals in EU finance", "specificity": "medium"}
+  ],
+  "opportunities": [
+    {"text": "NIS2 transposition makes supplier security reviews mandatory for mid-sized German firms", "evidence": "National NIS2 implementation law and regulator guidance", "trigger": "NIS2 national law", "time_window_months": 24, "size_estimate": "About 29,000 newly in-scope firms (regulator estimate)"},
+    {"text": "The main incumbent raised mid-market prices 30% in 2026", "evidence": "Published price list and 3 prospect emails", "trigger": "Competitor price change", "time_window_months": 12, "size_estimate": "Their roughly 1,800 mid-market accounts"}
+  ],
+  "threats": [
+    {"text": "A German-first local vendor is bundling with a large payroll provider", "evidence": "Partnership press release, March 2026", "likelihood": 4, "severity": 4, "mitigation": "Partner with a works-council tooling vendor before launch"},
+    {"text": "Data-residency demands could require a German hosting region we do not run yet", "evidence": "2 RFPs required German hosting", "likelihood": 3, "severity": 5, "mitigation": "Price a Frankfurt region before committing to a launch date"}
+  ],
+  "tows_actions": [
+    {"type": "SO", "action": "Lead with NIS2 supplier-review automation built on the existing export", "priority": "high"},
+    {"type": "WO", "action": "Get ISO 27001 before the NIS2 deadline wave", "priority": "high"},
+    {"type": "ST", "action": "Use the 9-day onboarding as the proof point against the bundled local vendor", "priority": "medium"},
+    {"type": "WT", "action": "Do not launch until German support is staffed; a delay costs less than churn", "priority": "medium"}
+  ]
+}

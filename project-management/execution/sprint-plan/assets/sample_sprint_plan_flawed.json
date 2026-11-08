@@ -1,0 +1,36 @@
+{
+  "sprint_name": "Sprint 24 (flawed)",
+  "dates": "2026-11-16 to 2026-11-27",
+  "goal": "Customers can pay for an order with a saved card at checkout",
+  "capacity": {
+    "team_members": [
+      {"name": "Ana", "available_hours": 36, "notes": "1 day PTO"},
+      {"name": "Ben", "available_hours": 32, "notes": "on-call week 2"},
+      {"name": "Chen", "available_hours": 40},
+      {"name": "Dee", "available_hours": 36}
+    ],
+    "total_available_hours": 180,
+    "commit_target_pct": 95,
+    "stretch_pct": 15
+  },
+  "velocity_history_pts": [24, 27, 25],
+  "items": [
+    {"id": "PAY-101", "title": "Saved-card token storage", "type": "commit", "estimated_pts": 8, "estimated_hours": 60,
+     "assignee": "Chen", "refined": true,
+     "dependencies": [{"description": "Vault sandbox credentials", "owner": "Platform team", "needed_by": "2026-11-17", "confirmed": true}],
+     "risks": [{"description": "Vault rate limits in sandbox", "mitigation": "Request raised quota on day 1", "owner": "Chen"}],
+     "dod_items": ["code reviewed", "tests", "telemetry", "docs"]},
+    {"id": "PAY-102", "title": "Pay-with-saved-card checkout step", "type": "commit", "estimated_pts": 13, "estimated_hours": 70,
+     "assignee": "Ana", "refined": true, "dependencies": [], "risks": [],
+     "dod_items": ["code reviewed", "tests"]},
+    {"id": "PAY-103", "title": "Card management page", "type": "commit", "estimated_pts": 5, "estimated_hours": 28,
+     "assignee": "Dee", "refined": false,
+     "dependencies": [{"description": "Design sign-off", "owner": "", "needed_by": "2026-11-18", "confirmed": false}],
+     "risks": [], "dod_items": ["code reviewed", "tests", "telemetry", "docs"]},
+    {"id": "PAY-104", "title": "Expiring-card reminder email", "type": "stretch", "estimated_pts": 3, "estimated_hours": 12,
+     "assignee": "Ben", "refined": true, "dependencies": [], "risks": [],
+     "dod_items": ["code reviewed", "tests", "telemetry", "docs"]},
+    {"id": "PAY-105", "title": "Wallet support", "type": "stretch", "estimated_pts": 8, "estimated_hours": 40,
+     "assignee": "", "refined": false, "dependencies": [], "risks": [], "dod_items": ["tests"]}
+  ]
+}

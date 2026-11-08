@@ -1,0 +1,12 @@
+{
+  "initiative": "Major rollout of usage-based billing to all mid-market customers",
+  "as_of": "2026-05-27",
+  "stakeholders": [
+    {"name": "Priya Raman", "title": "CFO", "role": "approver", "power": 5, "interest": 5, "support": "supporter", "engagement_cadence": "weekly", "engagement_owner": "VP Product"},
+    {"name": "Tom Okafor", "title": "VP Sales", "role": "veto", "power": 4, "interest": 5, "support": "skeptic", "engagement_cadence": "weekly", "engagement_owner": "VP Product", "blocker_conversion_plan_present": true},
+    {"name": "Lena Fischer", "title": "General Counsel", "role": "approver", "power": 5, "interest": 2, "support": "neutral", "engagement_cadence": "monthly", "engagement_owner": "Product Ops Lead"},
+    {"name": "Marco Ruiz", "title": "Head of Billing Engineering", "role": "builder", "power": 3, "interest": 5, "support": "champion", "engagement_cadence": "weekly", "engagement_owner": "Eng Manager"},
+    {"name": "Aisha Bello", "title": "Director of Customer Success", "role": "user", "power": 2, "interest": 4, "support": "supporter", "engagement_cadence": "bi-weekly", "engagement_owner": "PM"},
+    {"name": "Sam Whitaker", "title": "CISO", "role": "approver", "power": 4, "interest": 2, "support": "neutral", "engagement_cadence": "monthly", "engagement_owner": "Security Partner"}
+  ]
+}

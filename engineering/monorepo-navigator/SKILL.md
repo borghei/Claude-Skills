@@ -6,12 +6,12 @@ description: >
   migrating from multi-repo, or coordinating publishing.
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: monorepo-architecture
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   frameworks: turborepo, nx, pnpm-workspaces, changesets
   tags:
     - monorepo
@@ -51,20 +51,54 @@ Before analyzing or configuring, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `dependency_graph.py` | Generate a Mermaid dependency graph of internal packages | `python scripts/dependency_graph.py . --focus @repo/ui --direction dependents` |
-| `impact_detector.py` | Detect which packages are affected by file changes | `python scripts/impact_detector.py . --ref origin/main --affected-only` |
-| `package_analyzer.py` | Analyze package structure, dependencies, and health | `python scripts/package_analyzer.py . --only-shared` |
+| `dependency_graph.py` | Mermaid dependency graph of internal packages, optionally focused on one package | `python3 scripts/dependency_graph.py <root> --focus @repo/ui --direction dependents` |
+| `impact_detector.py` | Packages affected (directly and transitively) by changed files | `python3 scripts/impact_detector.py <root> --ref origin/main --affected-only` |
+| `package_analyzer.py` | Package inventory, internal and shared external dependencies, version drift, orphans | `python3 scripts/package_analyzer.py <root> --only-shared` |
 
-## References
+Workspace detection order: `pnpm-workspace.yaml`, then the root `package.json` `workspaces` field (npm, Yarn), then `lerna.json`. **Exit codes:** 0 report; 2 no packages found or bad input (a directory that is not a workspace root must not look like an empty monorepo).
+
+## Quick Start
+
+```bash
+# from engineering/monorepo-navigator/ (a four-package pnpm workspace)
+python3 scripts/package_analyzer.py assets/sample_monorepo                    # 4 packages, 3 internal deps, date-fns drift
+python3 scripts/impact_detector.py assets/sample_monorepo --files packages/utils/src/index.ts --affected-only
+python3 scripts/dependency_graph.py assets/sample_monorepo --focus @acme/utils --direction dependents --mermaid-only
+```
+
+A change in `packages/utils` affects `@acme/ui`, `@acme/utils` and `@acme/web` (through `ui`), but not `@acme/docs`.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
 - **[references/tooling-and-configuration.md](references/tooling-and-configuration.md)** — tool selection decision matrix, recommended repo structure, full turbo.json and pnpm-workspace config, key Turborepo/pnpm commands, impact-analysis commands, remote-caching setup, affected-only CI workflow, Changesets publishing, and multi-repo→monorepo migration steps. Read when configuring or operating a monorepo.
 - **[references/operations-and-best-practices.md](references/operations-and-best-practices.md)** — common pitfalls, best practices, troubleshooting table, and success criteria. Read when something misbehaves or when validating a setup.
+
+## Anti-Patterns
+
+**Mistake:** Running every test and build on every change.
+**Why it matters:** CI time grows with the repo, not with the change, and teams start skipping checks.
+**Instead:** Use the affected set from `impact_detector.py` (or the build tool's filter) and run the full suite on a schedule.
+
+**Mistake:** Letting shared dependencies drift between packages.
+**Why it matters:** Two versions of the same library ship twice, and bugs reproduce in one app but not another.
+**Instead:** Check `package_analyzer.py --only-shared` and pin shared versions in one place (catalog or root constraints).
+
+**Mistake:** Deep imports across package boundaries (`../../packages/ui/src/...`).
+**Why it matters:** The dependency never appears in `package.json`, so impact analysis and the build cache miss it.
+**Instead:** Import through the package name and declare it with `workspace:*`.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/package_analyzer.py`, `scripts/impact_detector.py`, `scripts/dependency_graph.py` | Stdlib CLIs |
+| `assets/sample_monorepo/` | pnpm workspace: `apps/web`, `apps/docs`, `packages/ui`, `packages/utils` |
 
 ## Scope & Limitations
 
@@ -79,14 +113,3 @@ Load the reference that matches the task — keep this file lean and pull detail
 - CI/CD pipeline design beyond monorepo-specific filters — see `ci-cd-pipeline-builder`
 - Git branching strategies and release flow — see `release-manager`
 - Dependency vulnerability scanning and license auditing — see `dependency-auditor`
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|------------|-----------|
-| `ci-cd-pipeline-builder` | Monorepo-aware CI workflows use `--filter` flags and remote caching tokens | Monorepo Navigator defines filter patterns and cache config that CI pipelines consume |
-| `release-manager` | Changesets versioning feeds into release orchestration and tag management | Release Manager triggers `changeset version` and `changeset publish` as part of release flow |
-| `dependency-auditor` | Workspace dependency graph informs vulnerability and license scanning scope | Monorepo Navigator exports the package dependency tree that Dependency Auditor analyzes |
-| `performance-profiler` | Build profiling data identifies slow packages for optimization | Performance Profiler measures per-package build times surfaced by Turborepo `--summarize` |
-| `changelog-generator` | Changesets produce per-package changelogs consumed by release notes | Changeset summaries flow into Changelog Generator for formatted release documentation |
-| `tech-debt-tracker` | Cross-package coupling and circular dependencies surface as tracked tech debt items | Monorepo Navigator's impact analysis identifies coupling hotspots that Tech Debt Tracker records |

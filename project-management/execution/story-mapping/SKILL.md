@@ -1,15 +1,16 @@
 ---
 name: story-mapping
 description: >
-  Jeff Patton-style user story mapping for visualizing user journeys, MVP
-  definition, release planning, backlog sequencing, and cross-team alignment.
+  Builds a user story map (journey backbone, ranked tasks, release lines) to
+  agree an MVP and release order. Use when defining an MVP, slicing releases,
+  or turning a flat backlog back into a user journey.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: story-mapping, user-stories, release-planning, jeff-patton
   tags:
     - story-mapping
@@ -24,6 +25,8 @@ metadata:
 Visualize the user journey and translate strategy into prioritized, deliverable work using Jeff Patton's user story mapping technique. Story maps shift teams from feature-first thinking to flow-first thinking -- understanding the complete user experience before deciding what to build and in what order.
 
 A story map is a 2D grid: the **backbone** (activities → steps) runs left-to-right in the order users experience the journey, the **body** (tasks) hangs below each step ranked top-to-bottom by priority, and a horizontal **MVP line** separates Release 1 from later. See the playbook reference for full anatomy and the 6-step build sequence.
+
+**Done looks like:** a backbone of user activities and steps in journey order; tasks under each step ranked by priority; a release-1 line that delivers a working end-to-end journey (a walking skeleton, not one finished column); later slices named by the outcome each adds; the map reviewed with the people who will build it.
 
 ## When to Use
 
@@ -77,9 +80,11 @@ Seven more, each with a bad and a good example: `references/red-flags.md`.
 
 **In Scope:** User story map creation, backbone and body decomposition, release slice definition, MVP scoping, facilitation guidance, workshop planning, template and pattern library.
 
-**Out of Scope:** Individual story writing and acceptance criteria (see `job-stories/` or agile-product-owner), technical architecture decisions, detailed effort estimation, sprint planning mechanics.
+**Out of Scope:** Individual story writing and acceptance criteria (see `job-stories/` or `product-team/agile-product-owner`), technical architecture decisions, detailed effort estimation, sprint planning mechanics.
 
 **Important Caveats:** Story maps are planning tools, not contracts. They should be updated as the team learns. A map created before building will always be wrong in details -- the value is in the shared understanding, not the artifact itself. Jeff Patton: "The map is not the territory; the conversation is the territory."
+
+Story maps place the whole journey; to cut one oversized story use `story-splitting/`, and to write each task as a backlog item use `wwas/`.
 
 ## Integration Points
 
@@ -97,3 +102,11 @@ Seven more, each with a bad and a good example: `references/red-flags.md`.
 - Jeff Patton, *User Story Mapping* (2014)
 - Jeff Patton, "The New User Story Backlog Is a Map" (2005)
 - Inspired by Productside story mapping workshops
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `references/playbook.md` | Anatomy, build sequence, template, patterns, workshop guide |
+| `references/red-flags.md` | Common mapping failures with fixes |
+| `examples/wayfinder-mobile-onboarding-story-map.md` | Worked story map for a mobile onboarding flow |

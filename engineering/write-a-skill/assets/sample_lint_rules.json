@@ -7,7 +7,7 @@
   "min_anti_patterns": 3,
   "required_sections": [
     "when to use",
-    "inputs the skill expects",
+    "clarify first",
     "workflow",
     "decision framework",
     "anti-pattern",

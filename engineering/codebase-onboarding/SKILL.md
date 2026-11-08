@@ -1,9 +1,9 @@
 ---
 name: codebase-onboarding
 description: >
-  Analyze a codebase and generate onboarding docs: architecture overviews, file maps, setup
-  guides, runbooks, and debugging guides. Use when onboarding new team members, open-sourcing,
-  or documenting after a major refactor.
+  Gathers facts about a codebase (stack, layers, entry points, setup gaps) and turns them into
+  onboarding docs: architecture overview, file map, setup guide, debugging guide. Use when
+  onboarding engineers or re-documenting after a refactor.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
@@ -11,7 +11,7 @@ metadata:
   category: engineering
   domain: developer-experience
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   frameworks: markdown, notion, confluence
   tags:
     - onboarding
@@ -50,21 +50,77 @@ Before generating the docs, settle the inputs below. When one is missing or vagu
 
 - **Target codebase path:** which project to analyze (the input all three scripts scan).
 - **Audience:** junior developer, senior engineer, or contractor (tailors which sections appear and at what depth).
-- **Output format:** Markdown, Notion, or Confluence (sets the generated document format).
+- **Where the docs live:** repo Markdown, Notion or Confluence (changes headings, links and how much goes in one page).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Quick Start Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `architecture_mapper.py` | Analyze project structure and generate a high-level architecture map | `python scripts/architecture_mapper.py /path/to/project --json` |
-| `onboarding_generator.py` | Scan a project directory and generate an onboarding guide | `python scripts/onboarding_generator.py /path/to/project --json` |
-| `setup_validator.py` | Validate a project's development setup completeness | `python scripts/setup_validator.py /path/to/project --json` |
+The scripts gather facts. `onboarding_generator.py --format markdown` turns them into a draft guide:
+sections the repo can answer (README summary, stack, declared run commands, env variables, entry
+points, layout) are filled in, and everything it cannot know is a `> **TODO (owner):**` line. The
+finished guide is yours: replace every TODO from reading the code and asking the owners, using the
+templates in `references/documentation-templates.md`.
 
-All tools accept an optional `directory` argument (default: current directory) and `--json` for machine-readable output.
+```bash
+# 1. Facts report: stack, frameworks, entry points, key files, file-type spread
+#    (manifests first; without one it counts source files by extension)
+python scripts/onboarding_generator.py /path/to/project
+#    Draft guide with TODO placeholders (sample: package.json scripts, .env keys, README summary)
+python scripts/onboarding_generator.py assets/sample_project --format markdown > /tmp/ONBOARDING.md
 
-## References
+# 2. Architecture patterns and layers by directory, with dependency hints
+python scripts/architecture_mapper.py /path/to/project --json
+
+# 3. Setup completeness: README, .env template, lockfile, CI, lint config, tests, licence; 0-100 score
+python scripts/setup_validator.py /path/to/project
+```
+
+## Tools Overview
+
+| Tool | Gives you | Use it for |
+|------|-----------|------------|
+| `onboarding_generator.py` | Stack, frameworks, entry points, key files, top-level dirs, package.json scripts, Makefile targets, env-template keys, README summary; `--format text\|json\|markdown` | The draft guide (`markdown`) and the key file map |
+| `architecture_mapper.py` | Detected pattern (monorepo, microservices, MVC, layered) and per-directory layer roles | The architecture overview and its diagram |
+| `setup_validator.py` | Pass/warn/fail on README, .env template, lockfile, CI, lint config, tests, CONTRIBUTING and LICENSE, with fixes and a health score | The setup guide, and the gaps to fix before the guide is honest |
+
+All take a directory (default `.`) and `--json`. **Exit codes:** `0` report printed; `2` the
+directory does not exist. A low setup score does not change the exit code.
+
+For an ordered reading path through the code (stop-by-stop tour), use `engineering/code-tour`
+instead; this skill produces the reference documents a newcomer keeps open.
+
+**Done when:**
+1. No `TODO (owner)` line is left in the guide.
+2. A newcomer can go from clone to a passing local test run using only the setup guide (try it in a clean checkout or container).
+3. Every path in the key file map exists, and every command in the docs ran as written.
+4. The architecture overview names the real entry points and data stores, checked against the code, not only the scripts' heuristics.
+5. Setup gaps that `setup_validator.py` reports are fixed or listed as known issues.
+
+## Anti-Patterns
+
+### Docs from heuristics alone
+**Mistake:** Pasting the scripts' output as the onboarding guide.
+**Why it happens:** It looks complete and took seconds.
+**Instead:** Use the output as a checklist of facts to confirm, then read the entry points and write the guide in plain language.
+
+### A setup guide nobody ran
+**Mistake:** Setup steps written from memory, missing the one environment variable everyone already has.
+**Why it happens:** The author's machine has been set up for years.
+**Instead:** Follow the guide in a clean container or fresh checkout and fix every step that fails.
+
+### Listing every file
+**Mistake:** A key file map with two hundred entries.
+**Why it happens:** Completeness feels safer than choosing.
+**Instead:** List the ten to twenty files a newcomer touches in the first week, each with one line on why it matters.
+
+## Files
+
+- `scripts/onboarding_generator.py`, `scripts/architecture_mapper.py`, `scripts/setup_validator.py` — the three fact-gathering CLIs above.
+- `assets/sample_project/` — small Node service (package.json scripts, `.env.example`, README) for the draft-guide demo.
+- `references/` — fact-gathering commands and pattern table, document templates, quality checklist.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -77,7 +133,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 **This skill covers:**
 - Generating architecture overviews, key file maps, setup guides, task runbooks, and debugging guides from codebase analysis
 - Audience-aware documentation tailored for junior developers, senior engineers, and contractors
-- Output in Markdown, Notion, and Confluence formats
+- Markdown documents that paste cleanly into Notion or Confluence
 - Quality verification checklists and freshness audit processes
 
 **This skill does NOT cover:**
@@ -86,13 +142,8 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Security-focused documentation such as threat models or access control matrices — see `engineering/skill-security-auditor` for security auditing
 - Runbook generation for incident response and production operations — see `engineering/runbook-generator` for operational runbooks
 
-## Integration Points
+## See Also
 
-| Skill | Integration | Data Flow |
-|-------|------------|-----------|
-| `engineering/runbook-generator` | Onboarding task runbooks can seed operational runbooks for production incident response | Onboarding runbook templates → Runbook Generator for ops-grade expansion |
-| `engineering/api-design-reviewer` | API route analysis from Phase 1 feeds into API design quality reviews | Discovered API endpoints → API Design Reviewer for consistency checks |
-| `engineering/database-schema-designer` | Database schema files identified during key file mapping inform schema design reviews | Schema file paths and ORM type → Schema Designer for migration planning |
-| `engineering/tech-debt-tracker` | Technical debt items surfaced during architecture analysis should be logged for tracking | Architecture analysis findings → Tech Debt Tracker backlog entries |
-| `engineering/ci-cd-pipeline-builder` | CI/CD config discovered in Phase 1 can be validated and improved by the pipeline builder | CI config paths and workflow list → Pipeline Builder for optimization |
-| `engineering/dependency-auditor` | Dependency counts and lockfiles gathered in Phase 1 feed directly into security and license audits | Package manifests and lockfiles → Dependency Auditor for vulnerability scanning |
+- `engineering/code-tour` — a guided, ordered walk through the code for a first read.
+- `engineering/runbook-generator` — production runbooks beyond onboarding tasks.
+- `engineering/ci-cd-pipeline-builder` — fix CI gaps that `setup_validator.py` reports.

@@ -1,6 +1,7 @@
 {
   "release_name": "Winter 2024 Release",
   "version": "2.3.0",
+  "as_of": "2024-02-08T10:00:00Z",
   "target_date": "2024-02-15T10:00:00Z",
   "features": [
     {

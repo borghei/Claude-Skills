@@ -1,17 +1,17 @@
 ---
 name: rag-architect
 description: >
-  Design RAG pipelines: chunking, retrieval evaluation, and architecture. Use when building a
-  RAG system, selecting a chunking strategy, choosing a vector database, optimizing retrieval
-  quality, or evaluating with RAGAS metrics.
+  Designs and evaluates RAG pipelines: chunking analysis, retrieval metrics on your
+  queries, first-pass designs with costs. Use when building a RAG system, choosing
+  chunking, embeddings or a vector store, or fixing poor retrieval.
 license: MIT + Commons Clause
 metadata:
-  version: 1.1.0
+  version: 1.2.0
   author: borghei
   category: engineering
   domain: ai-ml
   tier: POWERFUL
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags:
     - rag
     - retrieval
@@ -21,77 +21,107 @@ metadata:
 ---
 # RAG Architect
 
-The agent designs, implements, and optimizes production-grade RAG pipelines, from document chunking through evaluation.
+The agent designs, implements and tunes retrieval-augmented generation pipelines from chunking through evaluation, and makes every choice (chunking, embedding model, vector store, retrieval mode, reranking) answer to a measured retrieval score on the user's own queries.
 
 ## Core Capabilities
 
-- **Chunking strategy selection** — match corpus characteristics to fixed-size, sentence, paragraph, semantic, recursive, or document-aware chunking with sized parameters.
-- **Embedding & vector-DB choice** — pick an embedding model (local vs API) and vector store (Pinecone, Weaviate, Qdrant, Chroma, pgvector) by scale, latency, and cost.
-- **Retrieval design** — dense, sparse (BM25), or hybrid retrieval with Reciprocal Rank Fusion plus cross-encoder reranking when precision must exceed 0.85.
-- **Query transformations** — HyDE, multi-query, and step-back techniques for style mismatch and ambiguous queries.
-- **Guardrails** — PII detection, hallucination/NLI checks, source attribution, confidence scoring, and injection prevention.
-- **Evaluation** — RAGAS faithfulness/relevance plus IR metrics (Precision@K, Recall@K, MRR, NDCG) with failure analysis.
-- **Production patterns** — caching, streaming, fallbacks, incremental re-indexing, and cost control.
+- **Chunking strategy selection:** fixed-size, sentence, paragraph, semantic, recursive or document-aware chunking, sized to the corpus.
+- **Embedding and vector-store choice:** local vs API models and Pinecone, Weaviate, Qdrant, Chroma or pgvector by scale, latency, cost and data residency.
+- **Retrieval design:** dense, sparse (BM25) or hybrid retrieval with Reciprocal Rank Fusion, plus cross-encoder reranking when precision matters most.
+- **Query transformations:** HyDE, multi-query and step-back for style mismatch and ambiguous queries.
+- **Guardrails and evaluation:** source attribution, groundedness checks, injection defences; IR metrics (Precision@K, Recall@K, MRR, NDCG) and RAGAS-style generation metrics.
 
 ## When to Use
 
-- Building a RAG system end to end.
-- Selecting a chunking strategy or choosing a vector database.
-- Optimizing retrieval quality or adding reranking.
-- Evaluating a pipeline with RAGAS or IR metrics.
+- Building a RAG system end to end, or replacing one component.
+- Selecting a chunking strategy, embedding model or vector database.
+- Diagnosing poor answers: deciding whether retrieval or generation is at fault.
+- Setting up a retrieval regression test before changing the pipeline.
 
 ## Clarify First
 
 Before designing the pipeline, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- **Corpus characteristics:** size, document structure, and domain (drives the chunking-strategy selection and parameters).
-- **Scale / latency / cost constraints:** query volume and budget (selects the embedding model and vector DB).
-- **Retrieval precision target:** the accuracy bar (precision >0.85 forces hybrid retrieval + cross-encoder reranking).
-- **Query types:** ambiguous, multi-hop, or style-mismatched (decides which query transforms: HyDE / multi-query / step-back).
+- **Corpus characteristics:** size, structure, languages and domain (drive chunking and the embedding shortlist).
+- **Scale, latency and cost constraints:** query volume, budget, and whether data may leave the infrastructure.
+- **Retrieval quality target:** the bar to meet (a high precision target usually means hybrid retrieval plus reranking).
+- **Query types:** ambiguous, multi-hop or style-mismatched (decides which query transforms to try).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-Python tools live at the skill root (no `scripts/` dir). Full flags/output formats: [references/tool-cli-reference.md](references/tool-cli-reference.md).
+1. **Build the ground truth first:** 50 or more real queries with the documents that answer them. Without it no choice below can be verified.
+2. **Draft the design** with `rag_pipeline_designer.py` from a requirements file; treat its picks as a starting point.
+3. **Choose chunking** with `chunking_optimizer.py` on a sample of the real corpus.
+4. **Shortlist embedding models** using [references/embedding_model_benchmark.md](references/embedding_model_benchmark.md), embed the same chunks with each, and compare.
+5. **Measure** with `retrieval_evaluator.py`. Validation checkpoint: the chosen configuration beats the TF-IDF baseline and meets the agreed target on Recall@k and MRR; read the worst queries by hand.
+6. Done when the design, model ids and versions, chunk parameters and the evaluation scores are written down, and the evaluation runs as a regression test before any pipeline change.
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `chunking_optimizer.py` | Analyze a corpus and recommend the optimal chunking strategy with parameters | `python chunking_optimizer.py ./docs --output results.json` |
-| `retrieval_evaluator.py` | Evaluate retrieval with Precision@K, Recall@K, MRR, NDCG + failure analysis | `python retrieval_evaluator.py queries.json ./corpus ground_truth.json` |
-| `rag_pipeline_designer.py` | Generate a full pipeline design, cost projection, and Mermaid diagram from requirements | `python rag_pipeline_designer.py requirements.json --output pipeline_design.json` |
+## Quick Start
 
-## References
+```bash
+# from engineering/rag-architect/ (the tools live at the skill root)
+python3 rag_pipeline_designer.py assets/sample_requirements.json
+python3 chunking_optimizer.py assets/corpus
+python3 retrieval_evaluator.py assets/sample_queries.json assets/corpus assets/sample_ground_truth.json
+```
 
-Load the reference that matches the task — keep this file lean and pull detail on demand:
+```bash
+python3 rag_pipeline_designer.py assets/flawed_requirements.json   # exit 2: accuracy_priority must be a number
+```
 
-- **[references/rag-design-guide.md](references/rag-design-guide.md)** — the 8-step workflow, every selection matrix (chunking, embedding, vector DB, retrieval, query transforms), context-window optimization, RAGAS targets, guardrails, a worked YAML pipeline example, production patterns, common pitfalls, troubleshooting table, and success criteria. Read when designing or debugging a pipeline.
-- **[references/tool-cli-reference.md](references/tool-cli-reference.md)** — full flag/parameter tables, examples, and output formats for `chunking_optimizer.py`, `retrieval_evaluator.py`, and `rag_pipeline_designer.py`. Read before running the scripts.
-- **[references/chunking_strategies_comparison.md](references/chunking_strategies_comparison.md)** — deep comparison of the five chunking strategies with size distributions, quality metrics, and domain recommendations. Read when choosing a chunking strategy.
-- **[references/embedding_model_benchmark.md](references/embedding_model_benchmark.md)** — benchmark of OpenAI, open-source, specialized, and domain-specific embedding models. Read when selecting an embedding model.
-- **[references/rag_evaluation_framework.md](references/rag_evaluation_framework.md)** — full evaluation framework: retrieval/generation/end-to-end dimensions, offline/online/human methodologies, metric implementations. Read when building an evaluation harness.
+The evaluator's built-in TF-IDF baseline gets Precision@1 of 0.50 on the sample: two of four plain-language queries miss on wording, which is the gap dense or hybrid retrieval should close.
+
+## Tools Overview
+
+| Tool | Purpose | Key flags | Exit codes |
+|------|---------|-----------|------------|
+| `chunking_optimizer.py` | Runs 12 chunking configurations over a document directory and recommends one with parameters | `directory`, `--config`, `--extensions`, `--output`, `--verbose` | 0 report; 2 missing directory or unreadable input |
+| `retrieval_evaluator.py` | Precision@K, Recall@K, MRR, NDCG and failure analysis for a query set against a corpus (TF-IDF baseline retriever) | `queries corpus ground_truth`, `--k-values 1 5 10`, `--output`, `--verbose` | 0 report; 2 unreadable input |
+| `rag_pipeline_designer.py` | Component picks, monthly cost estimate, Mermaid diagram and config templates from requirements | `requirements`, `--output`, `--verbose` | 0 design; 2 invalid requirements |
+
+Requirements fields: `document_types` (list), `document_count`, `avg_document_size` (characters), `queries_per_day` (integers), `query_patterns` (list), `latency_requirement`, `budget_monthly` (number), `accuracy_priority` and `cost_priority` (numbers from 0 to 1), `maintenance_complexity` (`low`, `medium` or `high`). Embedding prices in the designer are OpenAI's published rates as of 2026-11 ($0.02 per 1M tokens for `text-embedding-3-small`, $0.13 per 1M for `text-embedding-3-large`); check the provider's pricing page before quoting a cost. Full flags: [references/tool-cli-reference.md](references/tool-cli-reference.md).
+
+## Anti-Patterns
+
+**Mistake:** Choosing the embedding model from a leaderboard.
+**Why it matters:** Generic benchmark rank often does not hold on a specific corpus, and a wrong pick means re-embedding everything later.
+**Instead:** Shortlist from the leaderboard, then decide with `retrieval_evaluator.py` on your own queries.
+
+**Mistake:** Tuning prompts when answers are wrong, before checking retrieval.
+**Why it matters:** If the right chunk is not in the context, no prompt can recover it.
+**Instead:** Check Recall@k first; fix retrieval, then generation.
+
+**Mistake:** Changing chunking or the model without re-running the evaluation.
+**Why it matters:** Retrieval quality regresses silently, and users notice before the team does.
+**Instead:** Keep the ground truth in the repo and gate pipeline changes on the evaluator's scores.
+
+## Reference Documentation
+
+- **[references/rag-design-guide.md](references/rag-design-guide.md)**: the design workflow, selection matrices (chunking, embedding, vector DB, retrieval, query transforms), context-window optimization and production patterns.
+- **[references/embedding_model_benchmark.md](references/embedding_model_benchmark.md)**: embedding model families, selection criteria, and how to decide on your own data.
+- **[references/chunking_strategies_comparison.md](references/chunking_strategies_comparison.md)**: the chunking strategies compared, with domain recommendations.
+- **[references/rag_evaluation_framework.md](references/rag_evaluation_framework.md)**: retrieval, generation and end-to-end evaluation methods.
+- **[references/tool-cli-reference.md](references/tool-cli-reference.md)**: full flag tables and output formats for the three tools.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `chunking_optimizer.py`, `retrieval_evaluator.py`, `rag_pipeline_designer.py` | Stdlib CLIs at the skill root |
+| `assets/corpus/` | Four short help-center articles |
+| `assets/sample_queries.json`, `assets/sample_ground_truth.json` | Four queries and their relevant documents |
+| `assets/sample_requirements.json` | Valid requirements for a 12,000-document help center |
+| `assets/flawed_requirements.json` | `accuracy_priority` given as text; the designer exits 2 |
 
 ## Scope & Limitations
 
-**This skill covers:**
-- End-to-end RAG pipeline architecture design: chunking, embedding, vector storage, retrieval, reranking, and evaluation.
-- Quantitative chunking analysis across four strategy families (fixed-size, sentence, paragraph, semantic).
-- Retrieval quality evaluation using standard IR metrics (Precision@K, Recall@K, MRR, NDCG) with a built-in TF-IDF baseline.
-- Automated pipeline design with component selection, cost projection, and Mermaid architecture diagrams.
+**Covers:** RAG architecture from chunking to evaluation; quantitative chunking analysis; IR-metric evaluation with a TF-IDF baseline; automated first-pass designs with cost estimates.
 
-**This skill does NOT cover:**
-- LLM prompt engineering or generation-side optimization -- see `engineering/prompt-engineer-toolkit`.
-- Database schema design for metadata stores alongside vector databases -- see `engineering/database-designer`.
-- Production observability, alerting, and SLO dashboards for deployed pipelines -- see `engineering/observability-designer`.
-- Agent orchestration or multi-step reasoning workflows that sit on top of RAG retrieval -- see `engineering/agent-workflow-designer`.
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `engineering/prompt-engineer-toolkit` | Optimize system prompts and few-shot examples fed alongside retrieved chunks | Pipeline design output --> prompt templates that reference chunk format and metadata |
-| `engineering/database-designer` | Design relational metadata stores (tags, access control, source tracking) paired with the vector database | Vector DB recommendation --> metadata schema for hybrid storage |
-| `engineering/observability-designer` | Set up latency, throughput, and accuracy monitoring for the deployed RAG pipeline | Evaluation metrics and SLO targets --> dashboards and alerting rules |
-| `engineering/agent-workflow-designer` | Embed the RAG retrieval step inside multi-agent reasoning workflows | Retrieval config --> agent tool definition with top-K and threshold parameters |
-| `engineering/ci-cd-pipeline-builder` | Automate embedding re-indexing, evaluation regression tests, and deployment on document changes | Evaluation thresholds --> CI gate that blocks deploys when metrics regress |
-| `engineering/api-design-reviewer` | Review the query and ingestion API surface exposed by the RAG service | Pipeline config --> OpenAPI spec review for search and ingest endpoints |
+**Does not cover:**
+- Prompt design for the generation step (see `engineering/prompt-engineer-toolkit`).
+- Metadata store schema design (see `engineering/database-designer`).
+- Production monitoring (see `engineering/observability-designer`).
+- Agent workflows built on retrieval (see `engineering/agent-workflow-designer`).
+- Running embeddings: the tools make no model or network calls, so dense retrieval must be evaluated with your own embedding code.

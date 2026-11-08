@@ -389,13 +389,13 @@ spark.catalog.clearCache()  # Clear all caches
 
 ```python
 # Always design idempotent tasks
-from airflow.decorators import dag, task
-from airflow.utils.dates import days_ago
+from airflow.decorators import dag, task  # Airflow 3: from airflow.sdk import dag, task
+import pendulum
 from datetime import timedelta
 
 @dag(
-    schedule_interval="@daily",
-    start_date=days_ago(7),
+    schedule="@daily",
+    start_date=pendulum.datetime(2026, 1, 1, tz="UTC"),
     catchup=True,
     default_args={
         "retries": 3,
@@ -446,8 +446,7 @@ dag = idempotent_etl()
 
 ```python
 from airflow import DAG
-from airflow.operators.python import PythonOperator
-from airflow.utils.dates import days_ago
+from airflow.operators.python import PythonOperator  # Airflow 3: airflow.providers.standard.operators.python
 from datetime import datetime, timedelta
 
 def process_date(ds, **kwargs):
@@ -463,7 +462,7 @@ def process_date(ds, **kwargs):
 
 with DAG(
     "backfillable_etl",
-    schedule_interval="@daily",
+    schedule="@daily",
     start_date=datetime(2024, 1, 1),
     catchup=True,  # Enable backfill
     max_active_runs=3,  # Limit parallel backfills
@@ -995,7 +994,7 @@ class BulkIngester:
 
 ```python
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.python import PythonOperator  # Airflow 3: airflow.providers.standard.operators.python
 from airflow.sensors.external_task import ExternalTaskSensor
 from airflow.utils.task_group import TaskGroup
 from datetime import timedelta
@@ -1054,7 +1053,7 @@ with DAG("complex_pipeline") as dag:
 
 ```python
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.python import PythonOperator  # Airflow 3: airflow.providers.standard.operators.python
 from datetime import datetime
 import yaml
 
@@ -1063,7 +1062,7 @@ def create_etl_dag(config: dict) -> DAG:
 
     dag = DAG(
         dag_id=f"etl_{config['source']}_{config['destination']}",
-        schedule_interval=config.get('schedule', '@daily'),
+        schedule=config.get('schedule', '@daily'),
         start_date=datetime(2024, 1, 1),
         catchup=False,
         tags=['etl', 'auto-generated'],

@@ -303,7 +303,7 @@ def main() -> None:
                 (root / rel).write_text(content, encoding="utf-8")
     except (ValueError, OSError) as exc:
         print(f"error: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     report = {"target": str(root), "provider": args.provider, "backend": PROVIDERS[args.provider]["backend"],
               "name": args.name, "environments": envs, "dry_run": args.dry_run, "files": sorted(files),
               "overwritten": sorted(existing), "kept_existing": kept,

@@ -1,16 +1,16 @@
 ---
 name: customer-feedback-triage
 description: >
-  Inbound customer-feedback triage system. Categorize, deduplicate, score, and
-  respond to feature requests from support, sales, NPS, in-app feedback, and
-  exec asks (Kano + Cagan). Feeds clean signal into prioritization-frameworks.
+  Cluster, score and route inbound feature requests from support, sales, NPS
+  and exec asks, and draft honest replies. Use when a feedback queue needs
+  triaging or a customer needs a defensible yes, no or exploring answer.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: feedback_triage.py
   tech-stack: [kano-model, jtbd, rice, request-management, marty-cagan]
   tags: [feedback, triage, kano, requests, voice-of-customer, intake]
@@ -59,17 +59,28 @@ Before triaging the feedback, settle the inputs below. When one is missing or va
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+The tool does the counting; you do the judgement. It deduplicates by distinct customer, guesses Kano and category from keywords, scores, and routes. It does not name the opportunity or decide what to build.
+
+1. **Normalize intake** into the input schema (`references/tool-reference.md`), one verbatim per ask.
+2. **Run the tool** for clusters, scores and routing:
 
 ```bash
-# Triage a JSON queue of inbound feedback
-python scripts/feedback_triage.py --input queue.json --format markdown
-
-# See a sample triage queue across all 6 output formats
-python scripts/feedback_triage.py --demo --format markdown
+python3 project-management/execution/customer-feedback-triage/scripts/feedback_triage.py \
+  --input project-management/execution/customer-feedback-triage/assets/sample_feedback_queue.json --format markdown
 ```
 
-The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` per `SHARED_OUTPUT_SCHEMA.md`. The 6-phase workflow (intake → triage → categorize → score → respond → feed forward) and the scoring formula live in the workflow guide reference.
+3. **Write the job for each cluster** you act on. Clusters show `[write the job] keywords: ...` until an item carries `opportunity_label`; replace it with the need ("share results with people who have no login"), not the request ("PDF export").
+4. **Check the guesses.** Override Kano or category where the keywords misread the ask; confirm that bug-like clusters (errors, slowness) went to the bug tracker with a `bug-acknowledged` reply.
+5. **Decide in the triage meeting** [RECOMMENDED], then record `decision: will-build | won't-build` on the items. Until then every reply is drafted as **exploring**; `suggested_tier` is the score's hint, not a commitment. This keeps to "always acknowledge, sometimes commit, rarely promise".
+6. **Feed forward** clusters routed to prioritization with their volume and Kano context; re-run to regenerate replies.
+
+**Done when** every routed cluster has a human-written job label, every reply is exploring or backed by a recorded decision, and no Performance or Basic cluster sits in `to_archive` (the tool never archives them).
+
+`--demo` runs a built-in 12-item queue; `--format` takes `json|markdown|mermaid|confluence|notion|linear`; `--segment-weights 'enterprise=4,smb=1'` and `--threshold 4.0` tune scoring. Formula, cadence and meeting agenda: `references/customer-feedback-triage-guide.md`.
+
+**Exit codes:** 0 report written; 2 missing file, invalid JSON, wrong shape, empty queue or missing required fields.
 
 ## Anti-Patterns
 
@@ -89,6 +100,15 @@ The tool ships with `--format json|markdown|mermaid|confluence|notion|linear` pe
 **Instead:** Cluster related requests and write the `opportunity_label` as a job, such as "share results with people who don't have a login". If the label is a verb plus a file type, rewrite it before scoring.
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/feedback_triage.py` | Cluster, score, route, draft replies |
+| `assets/sample_feedback_queue.json` | 12-item queue; one cluster carries a human label and one item a will-build decision |
+| `assets/triage_template.md`, `response_templates.md`, `kano_quick_reference.md` | Manual worksheet, reply templates, Kano card |
+| `examples/triaging-30-requests.md` | Worked triage of 30 requests |
 
 ## References
 
@@ -120,5 +140,5 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 | `wwas/` | Feeds into | Backlog-ready items move into Why-What-Acceptance format |
 | `job-stories/` | Feeds into | Final backlog items use Job Stories format if team prefers JTBD framing |
 | `senior-pm/` | Bidirectional | Stakeholder map informs segment weights; triage output informs stakeholder updates |
-| `business-growth/customer-success/` | Bidirectional | CS team is the primary intake source via support tickets and CSAT |
+| `business-growth/customer-success-manager/` | Bidirectional | CS team is the primary intake source via support tickets and CSAT |
 | `sales-success/` | Bidirectional | Sales is the intake source for sales-channel asks; receives won't-build rationale |

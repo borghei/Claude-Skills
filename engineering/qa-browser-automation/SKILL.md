@@ -1,23 +1,30 @@
 ---
 name: qa-browser-automation
 description: >
-  Browser-based QA combining Chrome MCP control with Python analysis tools. Use when
-  performing browser QA testing, visual regression tracking, WCAG accessibility auditing,
-  performance profiling, or health-scoring web applications.
+  Live browser QA through Chrome MCP plus Python tools for health scoring, static WCAG
+  checks, screenshot baselines and reports. Use when running a QA sweep on a web app,
+  auditing accessibility, or tracking visual regressions.
 license: MIT + Commons Clause
 metadata:
-  version: 2.1.0
+  version: 2.2.0
   author: borghei
   category: engineering
   domain: quality-assurance
-  updated: 2026-04-02
+  updated: 2026-11-08
   tags: [browser-qa, wcag, visual-regression, health-scoring]
   python-tools: qa_health_scorer.py, accessibility_auditor.py, visual_regression_tracker.py, test_report_generator.py
-  tech-stack: python, chrome-mcp, accessibility, wcag, performance
+  tech-stack: python, chrome-mcp, accessibility, wcag
 ---
 # QA Browser Automation
 
 The agent drives Chrome MCP for live browser testing and uses four Python tools for deterministic health scoring, accessibility auditing, visual regression tracking, and report generation.
+
+## When to Use
+
+- Running a structured QA sweep on a web app before a release, with evidence for every finding.
+- Auditing saved HTML for common WCAG failures.
+- Tracking screenshot changes between releases.
+- Turning a QA session into a scored, comparable report.
 
 ---
 
@@ -35,19 +42,21 @@ Ask about the two or three inputs that matter most for this request, not the who
 ## Quick Start
 
 ```bash
-# Score QA findings (0-100 weighted across 10 categories)
-python scripts/qa_health_scorer.py findings.json --threshold 85 --baseline .qa-baselines/latest.json --save-baseline --json
+# Score QA findings (0-100 weighted across 10 categories); the sample scores 87.1 but fails on its P0
+python3 scripts/qa_health_scorer.py assets/sample_findings.json --threshold 85
 
-# Audit HTML for WCAG 2.1 violations
-python scripts/accessibility_auditor.py page.html --level AA --json
+# Static WCAG checks: sound page exits 0, flawed page exits 1 with 6 violations
+python3 scripts/accessibility_auditor.py assets/sound_page.html --level AA
+python3 scripts/accessibility_auditor.py assets/flawed_page.html --level AA
 
-# Track visual regressions
-python scripts/visual_regression_tracker.py --init --baseline-dir ./baselines
-python scripts/visual_regression_tracker.py --register ./baselines
-python scripts/visual_regression_tracker.py --baseline ./baselines --current ./screenshots --threshold 5
+# Track visual regressions (screenshots come from the browser session; empty dirs here)
+VR=$(mktemp -d); mkdir -p "$VR/baselines" "$VR/screenshots"
+python3 scripts/visual_regression_tracker.py --init --baseline-dir "$VR/baselines"
+python3 scripts/visual_regression_tracker.py --register "$VR/baselines"
+python3 scripts/visual_regression_tracker.py --baseline "$VR/baselines" --current "$VR/screenshots" --threshold 5   # exit 1: nothing compared yet
 
-# Generate full QA report
-python scripts/test_report_generator.py session_data.json --format markdown -o report.md
+# Generate the QA report (computes the health score from the findings when the session has none)
+python3 scripts/test_report_generator.py assets/sample_findings.json --format markdown -o "$VR/report.md"
 ```
 
 ## Tools Overview
@@ -59,7 +68,9 @@ python scripts/test_report_generator.py session_data.json --format markdown -o r
 | `visual_regression_tracker.py` | Baseline + current screenshot dirs | Pass/fail per page, change percentages |
 | `test_report_generator.py` | Session data JSON | Markdown or JSON report with recommendations |
 
-The health scorer, accessibility auditor and regression tracker take `--json` for machine output; the report generator uses `--format json`. Health scorer and regression tracker return exit code 1 on failure (CI-friendly).
+The health scorer, accessibility auditor and regression tracker take `--json` for machine output; the report generator uses `--format json`.
+
+**Exit codes:** 0 pass; 1 gate failed (scorer: below `--threshold` or any P0; auditor: must-fix violations; tracker: regressions, or nothing compared); 2 unreadable input (missing file, bad JSON, missing directory).
 
 ---
 
@@ -87,34 +98,35 @@ The health scorer, accessibility auditor and regression tracker take `--json` fo
 **Phase 7-8: Document and score.**
 - Record every finding with screenshot evidence. No finding without evidence.
 - Classify by severity (P0-P4) and category (10 categories).
-- Run: `python scripts/qa_health_scorer.py findings.json --baseline .qa-baselines/latest.json`
+- Run: `python3 scripts/qa_health_scorer.py findings.json --baseline .qa-baselines/latest.json`
 
 **Phase 9: Triage and fix loop.**
-- P3/P4: AUTO-FIX, commit atomically, verify.
-- P0/P1/P2: ASK, present evidence, propose fix, wait for approval.
+- P3/P4: fix directly only if the user chose auto-fix in Clarify First; commit atomically and verify.
+- P0/P1/P2: present the evidence and a proposed fix, and wait for approval before changing code.
 - After each fix: re-run check. If fail: `git revert`.
 - Hard stop at 50 fixes.
 
 **Phase 10-11: Regression check and report.**
 - Re-visit fixed pages. Verify no new errors.
-- Save the score as the next baseline: `python scripts/qa_health_scorer.py findings.json --save-baseline` (writes `.qa-baselines/{date}.json` and `.qa-baselines/latest.json`)
-- Generate report: `python scripts/test_report_generator.py session.json -o report.md`
+- Save the score as the next baseline: `python3 scripts/qa_health_scorer.py findings.json --save-baseline` (writes `.qa-baselines/{date}.json` and `.qa-baselines/latest.json`)
+- Generate report: `python3 scripts/test_report_generator.py session.json -o report.md`
 
-**Validation checkpoint:** Health score >= 85. Zero P0 findings. WCAG AA >= 95%.
+**Validation checkpoint:** `qa_health_scorer.py --threshold 85` exits 0, which requires a score of at least 85 and zero P0 findings. `accessibility_auditor.py --level AA` reports no must-fix violations; contrast and anything rendered by JavaScript still need a manual check, because the auditor reads static HTML.
 
 ---
 
 ## Workflow 2: Visual Regression Testing
 
 ```bash
-# Set up baseline
-python scripts/visual_regression_tracker.py --init --baseline-dir ./baselines
-# Capture and register screenshots
-python scripts/visual_regression_tracker.py --register ./baselines
-# After changes, compare
-python scripts/visual_regression_tracker.py --baseline ./baselines --current ./screenshots --threshold 5 --json
+# Where the browser session saves screenshots (outside the repo); both must exist
+BASE="${QA_DIR:-$(mktemp -d)}/baselines"; SHOTS="$(dirname "$BASE")/screenshots"; mkdir -p "$BASE" "$SHOTS"
+# Set up baseline, then save the reference screenshots into $BASE and register them
+python3 scripts/visual_regression_tracker.py --init --baseline-dir "$BASE"
+python3 scripts/visual_regression_tracker.py --register "$BASE"
+# After changes, save new screenshots into $SHOTS and compare (exit 1 on regressions or when nothing was compared)
+python3 scripts/visual_regression_tracker.py --baseline "$BASE" --current "$SHOTS" --threshold 5 --json
 # Accept intentional changes
-python scripts/visual_regression_tracker.py --update-baseline --baseline ./baselines --current ./screenshots
+python3 scripts/visual_regression_tracker.py --update-baseline --baseline "$BASE" --current "$SHOTS"
 ```
 
 Pages exceeding the threshold (default 5%) are flagged as regressions. The tracker compares SHA-256 hashes and the raw bytes of the image files, not decoded pixels, so the change percentage is a rough signal and a re-encoded but visually identical screenshot can still read as changed.
@@ -124,8 +136,8 @@ Pages exceeding the threshold (default 5%) are flagged as regressions. The track
 ## Workflow 3: Accessibility Audit
 
 ```bash
-python scripts/accessibility_auditor.py page.html --level AA --json
-curl -s https://example.com | python scripts/accessibility_auditor.py - --level AAA
+python3 scripts/accessibility_auditor.py assets/flawed_page.html --level AA --json
+curl -s https://example.com | python3 scripts/accessibility_auditor.py - --level AAA
 ```
 
 **What gets checked by level:**
@@ -175,8 +187,8 @@ Each violation includes: WCAG criterion, severity, element selector, and remedia
 
 - **Clean working tree required** -- abort if `git status` dirty.
 - **Max 50 fixes per session** -- hard stop.
-- **Risk accumulator** -- component (+5), style (+2), config (+8), revert (+15). Stop at 25% of budget.
-- **WTF heuristic** -- 3 consecutive fix verification failures = stop entirely.
+- **Risk budget** -- each fix adds risk points: style +2, component +5, config +8, a revert +15. Stop fixing and report once the session reaches 25 points, because risk compounds and late fixes are the ones least reviewed.
+- **Three strikes** -- three fix verifications in a row that fail means the fix loop does not understand the problem; stop and report rather than keep editing.
 - **Atomic commits** -- one fix = one commit: `fix(qa): [P{severity}] {description}`
 
 ---
@@ -185,15 +197,32 @@ Each violation includes: WCAG criterion, severity, element selector, and remedia
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
-| Scorer exits code 1 with no errors | Score below `--threshold` (default 70) | Check score in output; raise threshold or fix findings |
+| Scorer exits code 1 | Score below `--threshold` (default 70) or at least one P0 finding | Read the `Blocked by` line; fix the P0 or the findings dragging the score |
+| Scorer exits code 2 | Findings file missing or not valid JSON | Check the path and JSON syntax |
 | Auditor reports `parse-error` | Malformed HTML | Verify file is complete; check curl is not returning redirect |
-| Regression tracker 100% change on all pages | Baseline manifest empty | Run `--init` then `--register` before comparing |
+| Regression tracker reports FAIL with "Nothing was compared" | No registered baselines, so every page counts as new | Run `--init`, then `--register` the baseline directory, then compare |
 | Findings default to P3/functional | Missing `severity` or `category` keys | Include both keys in each finding dict |
 | Chrome MCP returns stale content after SPA nav | DOM updated without full page load | Wait for transition, call `read_page` again |
 
 ---
 
-## References
+## Anti-Patterns
+
+**Mistake:** Reporting a pass because the health score cleared the threshold.
+**Why it matters:** A weighted score can absorb a P0 blocker; one broken checkout outweighs twenty clean pages.
+**Instead:** Treat any P0 as a failed gate (the scorer does) and fix or escalate it before release.
+
+**Mistake:** Comparing screenshots before baselines are registered.
+**Why it matters:** Every page shows up as new and nothing is compared, which looks like no regressions.
+**Instead:** `--init`, `--register`, then compare; the tracker now fails when it compared nothing.
+
+**Mistake:** Calling a page WCAG AA compliant from the static auditor alone.
+**Why it matters:** It cannot measure contrast, focus visibility or JavaScript-rendered content.
+**Instead:** Report its findings as a floor and add keyboard and contrast checks in the browser.
+
+---
+
+## Reference Documentation
 
 | Guide | Path |
 |-------|------|
@@ -207,8 +236,8 @@ Each violation includes: WCAG criterion, severity, element selector, and remedia
 
 **In Scope:**
 - A live QA sweep driven through Chrome MCP: page discovery, console and network errors, forms, UI states, breakpoints and security headers, with the testing tiers and safety controls above.
-- Weighted health scoring from a findings JSON with `qa_health_scorer.py`: 0-100 score, A-F grade, ten categories, baseline trend and an exit code below `--threshold`.
-- Static WCAG 2.1 checks on saved HTML with `accessibility_auditor.py` at level A, AA or AAA.
+- Weighted health scoring from a findings JSON with `qa_health_scorer.py`: 0-100 score, A-F grade, ten categories, baseline trend, and exit 1 below `--threshold` or on any P0 (exit 2 on unreadable input).
+- Static checks for a subset of WCAG 2.1 success criteria on saved HTML with `accessibility_auditor.py` at level A, AA or AAA. WCAG 2.2 additions such as target size and focus not obscured need a rendered page, so check them in the browser.
 - Screenshot baseline tracking with `visual_regression_tracker.py`, and Markdown or JSON session reports with `test_report_generator.py`.
 
 **Out of Scope:**
@@ -222,20 +251,3 @@ Each violation includes: WCAG criterion, severity, element selector, and remedia
 - `accessibility_auditor.py` parses static HTML. It cannot compute styles, so color contrast is flagged for manual review rather than measured, and content rendered by JavaScript is missed unless the saved HTML includes it.
 - `visual_regression_tracker.py` compares file hashes and bytes of image files, not pixels. Its change percentage is a rough signal, and a re-encoded but identical screenshot can still read as changed.
 - The fix loop edits and commits code. The clean-tree check, fix cap and approval rules above limit that, and a passing health score does not mean the application is free of defects.
-
----
-
-## Integration Points
-
-| Skill | Integration |
-|-------|-------------|
-| `code-reviewer` | Health score and findings in PR review context |
-| `senior-frontend` | Visual regression baselines align with component library |
-| `senior-devops` | Health score gates CI/CD via exit code |
-| `senior-secops` | Security header findings escalate to security review |
-| `incident-commander` | P0 findings trigger incident response |
-
----
-
-**Last Updated:** April 2026
-**Version:** 2.1.0

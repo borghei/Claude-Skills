@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: project-ops
   domain: agile
-  updated: 2026-06-15
+  updated: 2026-11-08
   tags: [agile, coaching, transformation, scrum, kanban]
 ---
 # Agile Coach
@@ -45,13 +45,30 @@ What most shapes this skill's output is the size and shape of the organization a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. Settle the Clarify First inputs; they decide which tool and reference apply.
+2. Score maturity with an evidence statement per dimension, then run `agile_maturity_scorer.py`. Treat any "no evidence" warning as an open question for the team, not a score.
+3. Pick the framework and roadmap phase from `references/frameworks.md` and `references/transformation.md`, starting at the measured level rather than the hoped-for one.
+4. Done when every recommendation names the dimension and evidence it rests on, and every action has an owner, a date and a "done when" condition.
+
 ## Tools
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `agile_maturity_scorer.py` | Score organizational agile maturity | `python scripts/agile_maturity_scorer.py --assessment assessment.json` |
-| `team_health_checker.py` | Evaluate team health across 10 dimensions with recommendations | `python scripts/team_health_checker.py --survey survey.json` |
-| `velocity_analyzer.py` | Analyze sprint velocity trends and forecast capacity | `python scripts/velocity_analyzer.py --sprints sprints.json --forecast 3` |
+Each tool reads one JSON file, prints a text report (`--json` for machine output) and exits
+0 on success or 2 on bad input (missing file, invalid JSON, wrong shape) with a one-line
+error. `--example` prints the input shape; the same shapes ship in `assets/`.
+
+```bash
+python3 project-management/agile-coach/scripts/agile_maturity_scorer.py --assessment project-management/agile-coach/assets/sample_assessment.json
+python3 project-management/agile-coach/scripts/team_health_checker.py --survey project-management/agile-coach/assets/sample_survey.json
+python3 project-management/agile-coach/scripts/velocity_analyzer.py --sprints project-management/agile-coach/assets/sample_sprints.json --forecast 3
+```
+
+| Tool | What it does |
+|------|--------------|
+| `agile_maturity_scorer.py` | Scores 6 dimensions (1-5) on the 5-level model, gaps to the next level, framework advice. A dimension may be `{"score": 2, "evidence": "..."}`; scores without evidence are flagged as unverified |
+| `team_health_checker.py` | Averages survey responses across 10 health dimensions and recommends actions for the weakest |
+| `velocity_analyzer.py` | Velocity mean, spread and trend over past sprints, plus a `--forecast N` sprint range |
 
 ## Anti-Patterns
 
@@ -63,7 +80,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 ### Maturity scores with no evidence
 **Mistake:** The assessment puts the team at Level 4 on all six dimensions when the evidence supports Level 2.
 **Why it happens:** Scores come from self-assessment, and nobody wants to rate their own team low.
-**Instead:** Write a one-sentence evidence statement for every dimension score before you run `agile_maturity_scorer.py`. No evidence, no score.
+**Instead:** Write a one-sentence evidence statement for every dimension score in the `evidence` field; `agile_maturity_scorer.py` warns on every score that has none. No evidence, no score.
 
 ### Retros that produce only complaints
 **Mistake:** The retro ends with a list of grievances, or the same three actions carry over sprint after sprint.
@@ -88,13 +105,12 @@ Eight more, each with a bad and a good example: `references/red-flags.md`.
 
 **Limitations:** Maturity scoring is a point-in-time assessment that requires honest self-reporting; scores can be gamed. Framework recommendations are guidelines, not prescriptions -- every organization has unique constraints. Transformation timelines assume consistent leadership support; political changes can invalidate roadmaps.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `scrum-master/` | Bidirectional | Agile coach sets framework; Scrum Master executes sprint-level practices |
-| `delivery-manager/` | Coach -> DM | Transformation roadmap milestones feed into delivery planning |
-| `program-manager/` | Coach -> PgM | Scaling framework selection informs program governance structure |
-| `jira-expert/` | Coach -> Jira | Board and workflow requirements derived from framework selection |
-| `senior-pm/` | PM -> Coach | Portfolio priorities shape which teams get coaching focus first |
-| `confluence-expert/` | Coach -> Confluence | Coaching artifacts (maturity reports, retro outcomes) documented in Confluence |
+| File | Purpose |
+|------|---------|
+| `scripts/agile_maturity_scorer.py`, `scripts/team_health_checker.py`, `scripts/velocity_analyzer.py` | See Tools |
+| `assets/sample_assessment.json`, `assets/sample_survey.json`, `assets/sample_sprints.json` | Runnable inputs for each tool |
+| `references/*.md` | See References |
+
+Related skills: `scrum-master` runs sprint-level practice, `delivery-manager` takes roadmap milestones, `jira-expert` turns the framework into boards.

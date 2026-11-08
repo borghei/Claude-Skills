@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Program Manager - Claude Skills</title>
-  <meta name="description" content="Program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, charters, and steering-committee reporting. Use to stand up or run a program and esc">
+  <meta name="description" content="Runs multi-project programs: charters, governance, cross-project dependencies, benefits tracking and steering-committee reporting. Use when standing up a program, tracking its milestones and people, o">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/program-manager.html">
   <meta property="og:title" content="Program Manager - Claude Skills">
-  <meta property="og:description" content="Program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, charters, and steering-committee reporting. Use to stand up or run a program and esc">
+  <meta property="og:description" content="Runs multi-project programs: charters, governance, cross-project dependencies, benefits tracking and steering-committee reporting. Use when standing up a program, tracking its milestones and people, o">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/program-manager.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Program Manager", "description": "Program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, charters, and steering-committee reporting. Use to stand up or run a program and escalate program status.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/program-manager.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Program Manager", "description": "Runs multi-project programs: charters, governance, cross-project dependencies, benefits tracking and steering-committee reporting. Use when standing up a program, tracking its milestones and people, or preparing a steering update.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/program-manager.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Program Manager</h1>
-    <p class="page-subtitle">Program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, charters, and steering-committee reporting. Use to stand up or run a program and escalate program status.</p>
+    <p class="page-subtitle">Runs multi-project programs: charters, governance, cross-project dependencies, benefits tracking and steering-committee reporting. Use when standing up a program, tracking its milestones and people, or preparing a steering update.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">program</span><span class="tag">portfolio</span><span class="tag">governance</span><span class="tag">strategic</span><span class="tag">coordination</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Program Manager (Project Management domain).
 
-Program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, charters, and steering-committee reporting. Use to stand up or run a program and escalate program status.
+Runs multi-project programs: charters, governance, cross-project dependencies, benefits tracking and steering-committee reporting. Use when standing up a program, tracking its milestones and people, or preparing a steering update.
 
 The agent acts as an expert program manager coordinating complex multi-project initiatives. It structures governance, manages cross-project dependencies, tracks benefits realization, and communicates status to steering committees with appropriate escalation. - **Program structure &amp; governance** — po
 
@@ -420,7 +420,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Program Manager (Project Management domain).
 
-Program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, charters, and steering-committee reporting. Use to stand up or run a program and escalate program status.
+Runs multi-project programs: charters, governance, cross-project dependencies, benefits tracking and steering-committee reporting. Use when standing up a program, tracking its milestones and people, or preparing a steering update.
 
 The agent acts as an expert program manager coordinating complex multi-project initiatives. It structures governance, manages cross-project dependencies, tracks benefits realization, and communicates status to steering committees with appropriate escalation. - **Program structure &amp; governance** — po
 
@@ -487,12 +487,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+Each tool reads one JSON file, prints text or `--format json` (`--json` is the same), and `--example` prints a valid input. The files in `assets/` are those examples.
+
 ```bash
-python scripts/resource_allocator.py --resources resources.json    # resource allocation across projects
-python scripts/portfolio_dashboard.py --portfolio portfolio.json    # RAG dashboard
+# Milestones: complete / on track / at risk / overdue, variance, critical-path slips
+python3 project-management/program-manager/scripts/milestone_tracker.py \
+  --milestones project-management/program-manager/assets/sample_milestones.json
+# People: allocation per person and project, over- and under-allocation, FTE per project
+python3 project-management/program-manager/scripts/resource_allocator.py \
+  --resources project-management/program-manager/assets/sample_resources.json
+# Programs: RAG per program from schedule variance, budget burn and high risks; benefits to date
+python3 project-management/program-manager/scripts/portfolio_dashboard.py \
+  --portfolio project-management/program-manager/assets/sample_portfolio.json --format json
 ```
 
-Run the six-step workflow (structure → charter → dependencies → resources → benefits → status) — full procedure, tables, validation checkpoints, and dashboard format are in the operating guide below.
+- `milestone_tracker.py --as-of YYYY-MM-DD` sets the status date; it defaults to the file&#x27;s `as_of`, then the latest `actual_date`, so the sample gives the same answer every day (as of 2026-03-25: one overdue, Beta Launch due within a week).
+- `resource_allocator.py` reports utilisation capped at 100% per person and the raw demand separately; on the sample Carol is allocated 130%, average utilisation is 85% and average demand 92%.
+- RAG rule in `portfolio_dashboard.py`: red when schedule slips more than 15 days, budget passes 110% or three or more high risks are open.
+
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. They report; none of them gates.
+
+Run the six-step workflow (structure → charter → dependencies → resources → benefits → status); the full procedure, tables, validation checkpoints and dashboard format are in the operating guide.
 
 ## Anti-Patterns
 
@@ -513,7 +528,7 @@ Run the six-step workflow (structure → charter → dependencies → resources 
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 - `references/program-operating-guide.md` — read this when running the program: six-step workflow, governance/escalation tables, dependency matrix, dashboard example, stakeholder &amp; risk management, tool commands, troubleshooting, and success criteria.
 - `references/red-flags.md` — read this before publishing any program artifact (dependency map, RAID log, steering deck, status report): common failure modes with bad/good examples and fixes.
@@ -536,6 +551,16 @@ Seven more, each with a bad and a good example: `references/red-flags.md`.
 | `scrum-master/` | SM -&gt; PgM | Team velocity and capacity data for resource forecasting |
 | `jira-expert/` | PgM -&gt; Jira | Cross-project epic tracking, program-level dashboards, dependency issue types |
 | `confluence-expert/` | PgM -&gt; Confluence | Program charter, governance docs, stakeholder communication archives |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/milestone_tracker.py` | Milestone status, variance, critical path |
+| `scripts/resource_allocator.py` | Allocation and conflicts across projects |
+| `scripts/portfolio_dashboard.py` | Program RAG and benefits dashboard |
+| `assets/sample_milestones.json`, `assets/sample_resources.json`, `assets/sample_portfolio.json` | Inputs for the three tools |
+| `examples/northwind-ga-launch-portfolio.md` | Worked program for a GA launch |
 
 ---
 
@@ -563,7 +588,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Program Manager&quot;**
-   - Description: &quot;Program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, charters, and steering-committee reporting. Use to stand up or run a program and escalate program status.&quot;
+   - Description: &quot;Runs multi-project programs: charters, governance, cross-project dependencies, benefits tracking and steering-committee reporting. Use when standing up a program, tracking its milestones and people, or preparing a steering update.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -618,12 +643,27 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+Each tool reads one JSON file, prints text or `--format json` (`--json` is the same), and `--example` prints a valid input. The files in `assets/` are those examples.
+
 ```bash
-python scripts/resource_allocator.py --resources resources.json    # resource allocation across projects
-python scripts/portfolio_dashboard.py --portfolio portfolio.json    # RAG dashboard
+# Milestones: complete / on track / at risk / overdue, variance, critical-path slips
+python3 project-management/program-manager/scripts/milestone_tracker.py \
+  --milestones project-management/program-manager/assets/sample_milestones.json
+# People: allocation per person and project, over- and under-allocation, FTE per project
+python3 project-management/program-manager/scripts/resource_allocator.py \
+  --resources project-management/program-manager/assets/sample_resources.json
+# Programs: RAG per program from schedule variance, budget burn and high risks; benefits to date
+python3 project-management/program-manager/scripts/portfolio_dashboard.py \
+  --portfolio project-management/program-manager/assets/sample_portfolio.json --format json
 ```
 
-Run the six-step workflow (structure → charter → dependencies → resources → benefits → status) — full procedure, tables, validation checkpoints, and dashboard format are in the operating guide below.
+- `milestone_tracker.py --as-of YYYY-MM-DD` sets the status date; it defaults to the file&#x27;s `as_of`, then the latest `actual_date`, so the sample gives the same answer every day (as of 2026-03-25: one overdue, Beta Launch due within a week).
+- `resource_allocator.py` reports utilisation capped at 100% per person and the raw demand separately; on the sample Carol is allocated 130%, average utilisation is 85% and average demand 92%.
+- RAG rule in `portfolio_dashboard.py`: red when schedule slips more than 15 days, budget passes 110% or three or more high risks are open.
+
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. They report; none of them gates.
+
+Run the six-step workflow (structure → charter → dependencies → resources → benefits → status); the full procedure, tables, validation checkpoints and dashboard format are in the operating guide.
 
 ## Anti-Patterns
 
@@ -644,7 +684,7 @@ Run the six-step workflow (structure → charter → dependencies → resources 
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 - `references/program-operating-guide.md` — read this when running the program: six-step workflow, governance/escalation tables, dependency matrix, dashboard example, stakeholder &amp; risk management, tool commands, troubleshooting, and success criteria.
 - `references/red-flags.md` — read this before publishing any program artifact (dependency map, RAID log, steering deck, status report): common failure modes with bad/good examples and fixes.
@@ -667,6 +707,16 @@ Seven more, each with a bad and a good example: `references/red-flags.md`.
 | `scrum-master/` | SM -&gt; PgM | Team velocity and capacity data for resource forecasting |
 | `jira-expert/` | PgM -&gt; Jira | Cross-project epic tracking, program-level dashboards, dependency issue types |
 | `confluence-expert/` | PgM -&gt; Confluence | Program charter, governance docs, stakeholder communication archives |
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/milestone_tracker.py` | Milestone status, variance, critical path |
+| `scripts/resource_allocator.py` | Allocation and conflicts across projects |
+| `scripts/portfolio_dashboard.py` | Program RAG and benefits dashboard |
+| `assets/sample_milestones.json`, `assets/sample_resources.json`, `assets/sample_portfolio.json` | Inputs for the three tools |
+| `examples/northwind-ga-launch-portfolio.md` | Worked program for a GA launch |
 
 ---
 
@@ -694,7 +744,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Program Manager&quot;**
-   - Description: &quot;Program management for multi-project coordination, portfolio governance, dependency tracking, benefits realization, charters, and steering-committee reporting. Use to stand up or run a program and escalate program status.&quot;
+   - Description: &quot;Runs multi-project programs: charters, governance, cross-project dependencies, benefits tracking and steering-committee reporting. Use when standing up a program, tracking its milestones and people, or preparing a steering update.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -754,12 +804,27 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/program-manager/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code>python scripts/resource_allocator.py --resources resources.json    # resource allocation across projects
-python scripts/portfolio_dashboard.py --portfolio portfolio.json    # RAG dashboard
+  <h2>Quick Start</h2>Each tool reads one JSON file, prints text or `--format json` (`--json` is the same), and `--example` prints a valid input. The files in `assets/` are those examples.
+
+<pre><code># Milestones: complete / on track / at risk / overdue, variance, critical-path slips
+python3 project-management/program-manager/scripts/milestone_tracker.py \
+  --milestones project-management/program-manager/assets/sample_milestones.json
+# People: allocation per person and project, over- and under-allocation, FTE per project
+python3 project-management/program-manager/scripts/resource_allocator.py \
+  --resources project-management/program-manager/assets/sample_resources.json
+# Programs: RAG per program from schedule variance, budget burn and high risks; benefits to date
+python3 project-management/program-manager/scripts/portfolio_dashboard.py \
+  --portfolio project-management/program-manager/assets/sample_portfolio.json --format json
 </code></pre>
 
-Run the six-step workflow (structure → charter → dependencies → resources → benefits → status) — full procedure, tables, validation checkpoints, and dashboard format are in the operating guide below.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+- `milestone_tracker.py --as-of YYYY-MM-DD` sets the status date; it defaults to the file's `as_of`, then the latest `actual_date`, so the sample gives the same answer every day (as of 2026-03-25: one overdue, Beta Launch due within a week).
+- `resource_allocator.py` reports utilisation capped at 100% per person and the raw demand separately; on the sample Carol is allocated 130%, average utilisation is 85% and average demand 92%.
+- RAG rule in `portfolio_dashboard.py`: red when schedule slips more than 15 days, budget passes 110% or three or more high risks are open.
+
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. They report; none of them gates.
+
+Run the six-step workflow (structure → charter → dependencies → resources → benefits → status); the full procedure, tables, validation checkpoints and dashboard format are in the operating guide.
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/program-manager/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

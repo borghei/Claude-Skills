@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A11y Audit - Claude Skills</title>
-  <meta name="description" content="This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;, &quot;scan HTML for a11y issues&quot;, &quot;check color contrast&quot;, or &quot;find accessibility violations in web pages&quot;.">
+  <meta name="description" content="Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour contrast checks for colour pairs or CSS. Use when auditing templates for accessibility, checking contrast,">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html">
   <meta property="og:title" content="A11y Audit - Claude Skills">
-  <meta property="og:description" content="This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;, &quot;scan HTML for a11y issues&quot;, &quot;check color contrast&quot;, or &quot;find accessibility violations in web pages&quot;.">
+  <meta property="og:description" content="Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour contrast checks for colour pairs or CSS. Use when auditing templates for accessibility, checking contrast,">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "A11y Audit", "description": "This skill should be used when the user asks to \"check accessibility\", \"audit WCAG compliance\", \"scan HTML for a11y issues\", \"check color contrast\", or \"find accessibility violations in web pages\".", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "A11y Audit", "description": "Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour contrast checks for colour pairs or CSS. Use when auditing templates for accessibility, checking contrast, or adding an a11y gate to CI.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">A11y Audit</h1>
-    <p class="page-subtitle">This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;, &quot;scan HTML for a11y issues&quot;, &quot;check color contrast&quot;, or &quot;find accessibility violations in web pages&quot;.</p>
+    <p class="page-subtitle">Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour contrast checks for colour pairs or CSS. Use when auditing templates for accessibility, checking contrast, or adding an a11y gate to CI.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">accessibility</span><span class="tag">a11y</span><span class="tag">wcag</span><span class="tag">contrast</span><span class="tag">html</span></div>
   </div>
@@ -393,9 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert A11y Audit (Engineering domain).
 
-This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;, &quot;scan HTML for a11y issues&quot;, &quot;check color contrast&quot;, or &quot;find accessibility violations in web pages&quot;.
+Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour contrast checks for colour pairs or CSS. Use when auditing templates for accessibility, checking contrast, or adding an a11y gate to CI.
 
-&gt; **Category:** Engineering &gt; **Domain:** Web Accessibility The **Accessibility Audit** skill provides automated scanning of HTML files for WCAG 2.1 compliance violations and color contrast checking against AA/AAA standards. It catches missing alt text, broken heading hierarchies, unlabeled form inp
+&gt; **Category:** Engineering &gt; **Domain:** Web Accessibility The agent uses this skill to scan HTML source for WCAG 2.1 violations (plus WCAG 2.2 SC 3.3.8, paste blocking on credential fields) and to check colour contrast against AA/AAA. It catches missing alt text, broken heading hierarchies, unlabe
 
 ## Your Key Capabilities
 - a11y_scanner.py
@@ -403,9 +403,11 @@ This skill should be used when the user asks to &quot;check accessibility&quot;,
 - Full Accessibility Audit
 - CI Integration
 - Development Workflow
-- WCAG Levels
+- Clean scan as conformance claim
 
 ## Frameworks &amp; Templates You Know
+- - Reviewing HTML templates or static pages for accessibility before release.
+- - Adding a Level A gate to CI for template changes.
 - python scripts/a11y_scanner.py --dir ./src/templates
 - 1. **Scan HTML** - Run a11y_scanner.py on all templates
 
@@ -427,9 +429,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert A11y Audit (Engineering domain).
 
-This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;, &quot;scan HTML for a11y issues&quot;, &quot;check color contrast&quot;, or &quot;find accessibility violations in web pages&quot;.
+Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour contrast checks for colour pairs or CSS. Use when auditing templates for accessibility, checking contrast, or adding an a11y gate to CI.
 
-&gt; **Category:** Engineering &gt; **Domain:** Web Accessibility The **Accessibility Audit** skill provides automated scanning of HTML files for WCAG 2.1 compliance violations and color contrast checking against AA/AAA standards. It catches missing alt text, broken heading hierarchies, unlabeled form inp
+&gt; **Category:** Engineering &gt; **Domain:** Web Accessibility The agent uses this skill to scan HTML source for WCAG 2.1 violations (plus WCAG 2.2 SC 3.3.8, paste blocking on credential fields) and to check colour contrast against AA/AAA. It catches missing alt text, broken heading hierarchies, unlabe
 
 ## Your Key Capabilities
 - a11y_scanner.py
@@ -437,9 +439,11 @@ This skill should be used when the user asks to &quot;check accessibility&quot;,
 - Full Accessibility Audit
 - CI Integration
 - Development Workflow
-- WCAG Levels
+- Clean scan as conformance claim
 
 ## Frameworks &amp; Templates You Know
+- - Reviewing HTML templates or static pages for accessibility before release.
+- - Adding a Level A gate to CI for template changes.
 - python scripts/a11y_scanner.py --dir ./src/templates
 - 1. **Scan HTML** - Run a11y_scanner.py on all templates
 
@@ -476,7 +480,14 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Overview
 
-The **Accessibility Audit** skill provides automated scanning of HTML files for WCAG 2.1 compliance violations and color contrast checking against AA/AAA standards. It catches missing alt text, broken heading hierarchies, unlabeled form inputs, and insufficient color contrast early in development.
+The agent uses this skill to scan HTML source for WCAG 2.1 violations (plus WCAG 2.2 SC 3.3.8, paste blocking on credential fields) and to check colour contrast against AA/AAA. It catches missing alt text, broken heading hierarchies, unlabeled form inputs and low contrast early, before a browser-based audit. The rule set targets WCAG 2.1 on purpose: the other WCAG 2.2 additions (target size, focus not obscured, dragging alternatives) depend on rendered layout and need a browser or manual check.
+
+## When to Use
+
+- Reviewing HTML templates or static pages for accessibility before release.
+- Checking a palette or a stylesheet&#x27;s colour pairs against AA/AAA contrast.
+- Adding a Level A gate to CI for template changes.
+- Triaging an accessibility bug report down to specific elements.
 
 ## Clarify First
 
@@ -505,7 +516,16 @@ python scripts/contrast_checker.py --css styles.css
 
 # JSON output for CI
 python scripts/a11y_scanner.py --file index.html --format json
+
+# Bundled samples
+python scripts/a11y_scanner.py --file examples/sample-page.html              # many violations, exit 1
+python scripts/a11y_scanner.py --file examples/sample-page-accessible.html   # 0 findings, exit 0
 ```
+
+**Exit codes.** `a11y_scanner.py`: `0` no Level A (critical) finding, or with `--strict` no finding
+at all at the chosen `--level`; `1` otherwise; `2` missing file or directory, or a `--file` that is
+not HTML. `contrast_checker.py`: `0` all checked pairs pass AA normal text, `1` a pair fails, `2` bad
+input (invalid colour or unreadable CSS).
 
 ## Tools Overview
 
@@ -563,6 +583,29 @@ python scripts/contrast_checker.py --css ./static/css/main.css --format json
 3. **Staging audit** - Comprehensive scan before release
 4. **Monitoring** - Regular scheduled audits
 
+## Anti-Patterns
+
+### Clean scan as conformance claim
+**Mistake:** Publishing &quot;WCAG AA compliant&quot; because the scanner found nothing.
+**Why it happens:** Zero findings reads like a pass.
+**Instead:** The scanner covers a subset of criteria in static source. State what was checked, then test keyboard navigation, focus order and a screen reader on the rendered page.
+
+### Alt text that repeats the filename
+**Mistake:** `alt=&quot;chart.png&quot;` or `alt=&quot;image&quot;` to silence the missing-alt finding.
+**Why it happens:** The fix is judged by the scanner going quiet.
+**Instead:** Describe what the image tells the reader (&quot;Revenue rose from 1.2M to 1.5M&quot;), or use `alt=&quot;&quot;` when it is decorative.
+
+### Colour as the only signal
+**Mistake:** Errors shown only by turning a field red, with contrast that passes.
+**Why it happens:** Contrast checks pass, so the design looks accessible.
+**Instead:** Pair colour with text or an icon and an `aria-describedby` message; contrast is necessary but not sufficient.
+
+## Files
+
+- `scripts/a11y_scanner.py`, `scripts/contrast_checker.py` — the two CLIs above.
+- `examples/sample-page.html` (deliberate violations, including paste blocking) and `examples/sample-page-accessible.html` (clean).
+- `references/wcag-guidelines.md` — conformance levels, success criteria, fixes.
+
 ## Scope &amp; Limitations
 
 **In Scope:**
@@ -582,7 +625,7 @@ python scripts/contrast_checker.py --css ./static/css/main.css --format json
 - Both tools read source files only. Markup built at runtime by a framework or template engine, and styles computed in the browser, are not seen the way a user sees them.
 - The CSS check pairs `color` with `background-color` or `background` declared in the same rule. Inherited colors, CSS variables, images and gradients behind text are not resolved, so contrast results need visual confirmation.
 - A clean scan covers the checks listed above, not every WCAG success criterion. It is not a conformance claim or an accessibility statement, and many criteria still need manual review.
-- The rules target WCAG 2.1. Criteria added in WCAG 2.2, such as minimum target size, are not checked.
+- The rules target WCAG 2.1 plus WCAG 2.2 SC 3.3.8 (paste blocking). Other 2.2 criteria, such as minimum target size and focus not obscured, need a rendered page and are not checked.
 
 ## Reference Documentation
 
@@ -645,7 +688,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;A11y Audit&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;, &quot;scan HTML for a11y issues&quot;, &quot;check color contrast&quot;, or &quot;find accessibility violations in web pages&quot;.&quot;
+   - Description: &quot;Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour contrast checks for colour pairs or CSS. Use when auditing templates for accessibility, checking contrast, or adding an a11y gate to CI.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -675,7 +718,14 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 ## Overview
 
-The **Accessibility Audit** skill provides automated scanning of HTML files for WCAG 2.1 compliance violations and color contrast checking against AA/AAA standards. It catches missing alt text, broken heading hierarchies, unlabeled form inputs, and insufficient color contrast early in development.
+The agent uses this skill to scan HTML source for WCAG 2.1 violations (plus WCAG 2.2 SC 3.3.8, paste blocking on credential fields) and to check colour contrast against AA/AAA. It catches missing alt text, broken heading hierarchies, unlabeled form inputs and low contrast early, before a browser-based audit. The rule set targets WCAG 2.1 on purpose: the other WCAG 2.2 additions (target size, focus not obscured, dragging alternatives) depend on rendered layout and need a browser or manual check.
+
+## When to Use
+
+- Reviewing HTML templates or static pages for accessibility before release.
+- Checking a palette or a stylesheet&#x27;s colour pairs against AA/AAA contrast.
+- Adding a Level A gate to CI for template changes.
+- Triaging an accessibility bug report down to specific elements.
 
 ## Clarify First
 
@@ -704,7 +754,16 @@ python scripts/contrast_checker.py --css styles.css
 
 # JSON output for CI
 python scripts/a11y_scanner.py --file index.html --format json
+
+# Bundled samples
+python scripts/a11y_scanner.py --file examples/sample-page.html              # many violations, exit 1
+python scripts/a11y_scanner.py --file examples/sample-page-accessible.html   # 0 findings, exit 0
 ```
+
+**Exit codes.** `a11y_scanner.py`: `0` no Level A (critical) finding, or with `--strict` no finding
+at all at the chosen `--level`; `1` otherwise; `2` missing file or directory, or a `--file` that is
+not HTML. `contrast_checker.py`: `0` all checked pairs pass AA normal text, `1` a pair fails, `2` bad
+input (invalid colour or unreadable CSS).
 
 ## Tools Overview
 
@@ -762,6 +821,29 @@ python scripts/contrast_checker.py --css ./static/css/main.css --format json
 3. **Staging audit** - Comprehensive scan before release
 4. **Monitoring** - Regular scheduled audits
 
+## Anti-Patterns
+
+### Clean scan as conformance claim
+**Mistake:** Publishing &quot;WCAG AA compliant&quot; because the scanner found nothing.
+**Why it happens:** Zero findings reads like a pass.
+**Instead:** The scanner covers a subset of criteria in static source. State what was checked, then test keyboard navigation, focus order and a screen reader on the rendered page.
+
+### Alt text that repeats the filename
+**Mistake:** `alt=&quot;chart.png&quot;` or `alt=&quot;image&quot;` to silence the missing-alt finding.
+**Why it happens:** The fix is judged by the scanner going quiet.
+**Instead:** Describe what the image tells the reader (&quot;Revenue rose from 1.2M to 1.5M&quot;), or use `alt=&quot;&quot;` when it is decorative.
+
+### Colour as the only signal
+**Mistake:** Errors shown only by turning a field red, with contrast that passes.
+**Why it happens:** Contrast checks pass, so the design looks accessible.
+**Instead:** Pair colour with text or an icon and an `aria-describedby` message; contrast is necessary but not sufficient.
+
+## Files
+
+- `scripts/a11y_scanner.py`, `scripts/contrast_checker.py` — the two CLIs above.
+- `examples/sample-page.html` (deliberate violations, including paste blocking) and `examples/sample-page-accessible.html` (clean).
+- `references/wcag-guidelines.md` — conformance levels, success criteria, fixes.
+
 ## Scope &amp; Limitations
 
 **In Scope:**
@@ -781,7 +863,7 @@ python scripts/contrast_checker.py --css ./static/css/main.css --format json
 - Both tools read source files only. Markup built at runtime by a framework or template engine, and styles computed in the browser, are not seen the way a user sees them.
 - The CSS check pairs `color` with `background-color` or `background` declared in the same rule. Inherited colors, CSS variables, images and gradients behind text are not resolved, so contrast results need visual confirmation.
 - A clean scan covers the checks listed above, not every WCAG success criterion. It is not a conformance claim or an accessibility statement, and many criteria still need manual review.
-- The rules target WCAG 2.1. Criteria added in WCAG 2.2, such as minimum target size, are not checked.
+- The rules target WCAG 2.1 plus WCAG 2.2 SC 3.3.8 (paste blocking). Other 2.2 criteria, such as minimum target size and focus not obscured, need a rendered page and are not checked.
 
 ## Reference Documentation
 
@@ -844,7 +926,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;A11y Audit&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;, &quot;scan HTML for a11y issues&quot;, &quot;check color contrast&quot;, or &quot;find accessibility violations in web pages&quot;.&quot;
+   - Description: &quot;Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour contrast checks for colour pairs or CSS. Use when auditing templates for accessibility, checking contrast, or adding an a11y gate to CI.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -918,8 +1000,17 @@ python scripts/contrast_checker.py --css styles.css
 
 # JSON output for CI
 python scripts/a11y_scanner.py --file index.html --format json
+
+# Bundled samples
+python scripts/a11y_scanner.py --file examples/sample-page.html              # many violations, exit 1
+python scripts/a11y_scanner.py --file examples/sample-page-accessible.html   # 0 findings, exit 0
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agentic-evaluation-framework.html" class="skill-card" style="text-decoration:none"><h3>Agentic Evaluation Framework</h3><p>This skill should be used when the user asks to &quot;evaluate LLM output quality&quot;, &quot;set up...</p></a></div>
+
+**Exit codes.** `a11y_scanner.py`: `0` no Level A (critical) finding, or with `--strict` no finding
+at all at the chosen `--level`; `1` otherwise; `2` missing file or directory, or a `--file` that is
+not HTML. `contrast_checker.py`: `0` all checked pairs pass AA normal text, `1` a pair fails, `2` bad
+input (invalid colour or unreadable CSS).
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agentic-evaluation-framework.html" class="skill-card" style="text-decoration:none"><h3>Agentic Evaluation Framework</h3><p>Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/a11y-audit/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

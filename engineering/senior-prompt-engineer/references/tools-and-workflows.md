@@ -48,7 +48,7 @@ python scripts/prompt_optimizer.py prompt.txt --analyze
 python scripts/prompt_optimizer.py prompt.txt --optimize --output optimized.txt
 
 # Count tokens for cost estimation
-python scripts/prompt_optimizer.py prompt.txt --tokens --model gpt-4
+python scripts/prompt_optimizer.py prompt.txt --tokens --model claude-sonnet-5-5
 
 # Extract and manage few-shot examples
 python scripts/prompt_optimizer.py prompt.txt --extract-examples --output examples.json
@@ -320,7 +320,7 @@ python scripts/rag_evaluator.py --contexts ctx.json --compare baseline  # Compar
 # Agent Development
 python scripts/agent_orchestrator.py agent.yaml --validate       # Validate config
 python scripts/agent_orchestrator.py agent.yaml --visualize      # Show workflow
-python scripts/agent_orchestrator.py agent.yaml --estimate-cost  # Token estimation
+python scripts/agent_orchestrator.py agent.yaml --estimate-cost --input-price 0.003 --output-price 0.015  # example prices
 ```
 
 ---
@@ -371,14 +371,15 @@ python scripts/prompt_optimizer.py <prompt_file> [options]
 | `--tokens` | `-t` | flag | off | Count tokens and estimate cost only |
 | `--optimize` | `-O` | flag | off | Generate whitespace-optimized version of the prompt |
 | `--extract-examples` | `-e` | flag | off | Extract few-shot examples (Input/Output pairs) as JSON |
-| `--model` | `-m` | choice | `gpt-4` | Model for token/cost estimation. Choices: `gpt-4`, `gpt-4-turbo`, `gpt-3.5-turbo`, `claude-opus-5`, `claude-sonnet-5`, `claude-haiku-4-5` |
+| `--model` | `-m` | string | `generic` | Model id; only selects the characters-per-token ratio (`claude*` about 3.5, others about 4) |
+| `--price-per-1k` | | float | none | Input price per 1K tokens from the provider's pricing page; cost is shown only when given |
 | `--output` | `-o` | string | _(none)_ | Write results to this file path |
 | `--json` | `-j` | flag | off | Output analysis as JSON instead of human-readable report |
 | `--compare` | `-c` | string | _(none)_ | Path to a baseline analysis JSON file for comparison |
 
 **Example:**
 ```bash
-python scripts/prompt_optimizer.py prompt.txt --analyze --model claude-sonnet-5 --json
+python scripts/prompt_optimizer.py prompt.txt --analyze --model claude-sonnet-5-5 --json
 ```
 
 **Output Formats:**
@@ -440,7 +441,8 @@ python scripts/agent_orchestrator.py <config_file> [options]
 | `--validate` | `-V` | flag | off | Validate agent configuration (errors, warnings, tool status). Runs by default if no other action is specified |
 | `--visualize` | `-v` | flag | off | Generate workflow diagram |
 | `--format` | `-f` | choice | `ascii` | Visualization format. Choices: `ascii`, `mermaid` |
-| `--estimate-cost` | `-e` | flag | off | Estimate token usage and costs |
+| `--estimate-cost` | `-e` | flag | off | Estimate token usage and costs (requires `--input-price` and `--output-price`) |
+| `--input-price` / `--output-price` | | float | none | Price per 1K tokens from the provider's pricing page |
 | `--runs` | `-r` | int | `100` | Daily run count for monthly cost projection |
 | `--output` | `-o` | string | _(none)_ | Write output to this file path |
 | `--json` | `-j` | flag | off | Output validation and cost results as JSON |

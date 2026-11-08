@@ -1,0 +1,40 @@
+{
+  "feature_name": "Checkout payment step",
+  "feature_type": "payment",
+  "supported_locales": [
+    "en",
+    "fr",
+    "ar"
+  ],
+  "supports_collaboration": false,
+  "scenarios": [
+    {
+      "id": "S-001",
+      "name": "Customer pays with a valid card",
+      "category": "happy_path",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-002",
+      "name": "Customer pays with Apple Pay",
+      "category": "happy_path",
+      "priority": "P1",
+      "automated": false
+    },
+    {
+      "id": "S-003",
+      "name": "Card declined shows a message",
+      "category": "eror",
+      "priority": "P1",
+      "automated": true
+    },
+    {
+      "id": "S-004",
+      "name": "Amount with two decimals",
+      "category": "edge",
+      "priority": "P2",
+      "automated": true
+    }
+  ]
+}

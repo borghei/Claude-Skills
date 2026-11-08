@@ -18,8 +18,20 @@ from datetime import datetime, timedelta
 
 def load_data(path: str) -> dict:
     """Load milestone data from JSON file."""
-    with open(path, "r") as f:
-        return json.load(f)
+    try:
+        with open(path, "r") as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError) as e:
+        fail(f"cannot read {path}: {e}")
+    if not isinstance(data, dict):
+        fail(f"{path}: top level must be a JSON object (see --example)")
+    return data
+
+
+def fail(msg: str) -> None:
+    """Bad input: one line on stderr, exit 2."""
+    print(f"Error: {msg}", file=sys.stderr)
+    sys.exit(2)
 
 
 def parse_date(s: str) -> datetime:
@@ -32,11 +44,15 @@ def parse_date(s: str) -> datetime:
     raise ValueError(f"Cannot parse date: {s}")
 
 
-def analyze_milestones(data: dict) -> dict:
-    """Analyze milestone status and trends."""
+def analyze_milestones(data: dict, as_of: str = None) -> dict:
+    """Analyze milestone status as of --as-of, else the file's "as_of", else the latest actual_date."""
     program = data.get("program", "Unknown")
     milestones = data.get("milestones", [])
-    today = datetime.now()
+    if not isinstance(milestones, list) or not milestones:
+        raise ValueError("'milestones' must be a non-empty list")
+    stamp = as_of or data.get("as_of")
+    today = parse_date(stamp) if stamp else max(
+        [parse_date(m["actual_date"]) for m in milestones if m.get("actual_date")] or [datetime.now()])
 
     results = []
     total = len(milestones)
@@ -212,6 +228,8 @@ def main():
     )
     parser.add_argument("--milestones", type=str, help="Path to milestones JSON file")
     parser.add_argument("--json", action="store_true", help="Output results as JSON")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (--json is the same as --format json)")
+    parser.add_argument("--as-of", help="Status date YYYY-MM-DD (default: the file's as_of, else the latest actual_date)")
     parser.add_argument("--example", action="store_true", help="Print example milestones JSON and exit")
     args = parser.parse_args()
 
@@ -223,9 +241,12 @@ def main():
         parser.error("--milestones is required (use --example to see the expected format)")
 
     data = load_data(args.milestones)
-    result = analyze_milestones(data)
+    try:
+        result = analyze_milestones(data, args.as_of)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        fail(f"unexpected input shape ({type(e).__name__}: {e}); run --example for the format")
 
-    if args.json:
+    if args.json or args.format == "json":
         print(json.dumps(result, indent=2))
     else:
         print_report(result)

@@ -317,7 +317,7 @@ def main():
 
     if not args.path and not args.prompt:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     file_results = []
 
@@ -343,7 +343,7 @@ def main():
         files = collect_files(args.path, max_files=args.max_files)
         if not files:
             print(f"Error: No analyzable files found at '{args.path}'", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         for f in files:
             file_results.append(analyze_file(f))
 

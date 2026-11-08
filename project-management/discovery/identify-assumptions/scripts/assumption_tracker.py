@@ -150,9 +150,17 @@ def process_assumptions(assumptions: list[dict[str, Any]]) -> dict[str, Any]:
         cat = item["category_label"]
         category_counts[cat] = category_counts.get(cat, 0) + 1
 
+    # The skill's rule: about 20% of assumptions in Test Now, or the map cannot set an order.
+    allowed = max(1, round(0.2 * len(processed)))
+    warnings = []
+    if quadrant_counts["Test Now"] > allowed:
+        warnings.append(f"{quadrant_counts['Test Now']} of {len(processed)} assumptions are Test Now (limit {allowed}, "
+                        f"about 20%); re-score impact and confidence against evidence")
     return {
         "total": len(processed),
+        "warnings": warnings,
         "summary": {
+            "test_now_limit": allowed,
             "by_quadrant": quadrant_counts,
             "by_category": category_counts,
         },
@@ -176,6 +184,8 @@ def format_text(results: dict[str, Any]) -> str:
         marker = " <<<" if quadrant == "Test Now" and count > 0 else ""
         lines.append(f"  {quadrant:15s} {count}{marker}")
 
+    for w in results["warnings"]:
+        lines.append(f"  WARNING: {w}")
     lines.append("")
     lines.append("By Category:")
     for category, count in sorted(results["summary"]["by_category"].items()):
@@ -229,7 +239,7 @@ def get_demo_data() -> dict[str, Any]:
             {
                 "description": "Our infrastructure can handle real-time processing for 10K concurrent users",
                 "category": "feasibility",
-                "confidence": "medium",
+                "confidence": "high",  # load test at 12K concurrent users last quarter
                 "impact": 8,
             },
             {
@@ -247,7 +257,7 @@ def get_demo_data() -> dict[str, Any]:
             {
                 "description": "Collecting usage data will not create GDPR compliance issues",
                 "category": "ethics",
-                "confidence": "medium",
+                "confidence": "high",  # DPA and data-flow review signed off by legal
                 "impact": 9,
             },
             {
@@ -266,7 +276,7 @@ def get_demo_data() -> dict[str, Any]:
                 "description": "The team can learn the required ML skills within the project timeline",
                 "category": "team",
                 "confidence": "low",
-                "impact": 7,
+                "impact": 6,
             },
         ]
     }
@@ -315,18 +325,18 @@ Impact: 1-10
                 data = json.load(f)
         except FileNotFoundError:
             print(f"Error: File not found: {args.input_file}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         except json.JSONDecodeError as e:
             print(f"Error: Invalid JSON in {args.input_file}: {e}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
     else:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     assumptions = data.get("assumptions", [])
     if not assumptions:
         print("Error: No assumptions found in input data.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Validate
     all_errors = []
@@ -338,7 +348,7 @@ Impact: 1-10
         print("Validation errors:", file=sys.stderr)
         for error in all_errors:
             print(f"  - {error}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     results = process_assumptions(assumptions)
 
@@ -346,7 +356,12 @@ Impact: 1-10
         print(json.dumps(results, indent=2))
     else:
         print(format_text(results))
+    sys.exit(1 if results["warnings"] else 0)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

@@ -7,31 +7,13 @@ flow diagram from issue status-transition history. Outputs follow the shared
 PM tool schema (json | markdown | mermaid | confluence | notion | linear).
 
 Usage:
-    python flow_metrics.py --input issues.json --format markdown
+    python flow_metrics.py --input ../assets/sample_issues.json --format markdown
     python flow_metrics.py --demo --format mermaid
-    python flow_metrics.py --input issues.json --format json --output out.json
-    python flow_metrics.py --input issues.json --type bug --format markdown
+    python flow_metrics.py --input issues.json --type bug --as-of 2026-11-08
 
-Input JSON schema:
-    {
-      "issues": [
-        {
-          "id": "ENG-101",
-          "title": "Add CSV export",
-          "type": "feature",
-          "team": "platform",
-          "created_at": "2026-04-01T10:00:00Z",
-          "status_history": [
-            {"status": "Backlog",     "entered_at": "2026-04-01T10:00:00Z"},
-            {"status": "Ready",       "entered_at": "2026-04-15T09:00:00Z"},
-            {"status": "In Progress", "entered_at": "2026-04-17T11:30:00Z"},
-            {"status": "Done",        "entered_at": "2026-04-24T10:00:00Z"}
-          ]
-        }
-      ]
-    }
-
-Standard library only. No external dependencies.
+Input: {"issues": [{id, title, type, team, created_at,
+         status_history: [{status, entered_at}]}]} - see assets/sample_issues.json.
+"as of" defaults to the latest timestamp in the data. Exit 0 report, 2 bad input.
 """
 
 from __future__ import annotations
@@ -64,8 +46,18 @@ def parse_iso(s: str) -> datetime:
     return dt.astimezone(timezone.utc)
 
 
-def now_utc() -> datetime:
-    return datetime.now(timezone.utc)
+def latest_event(issues: list) -> datetime | None:
+    """Latest status-history timestamp in the data: the default as-of date,
+    so a fixed sample (or an old export) reads the same on any day."""
+    stamps = [h.get("entered_at") for i in issues if isinstance(i, dict)
+              for h in (i.get("status_history") or []) if isinstance(h, dict)]
+    parsed = []
+    for st in stamps:
+        try:
+            parsed.append(parse_iso(st))
+        except (TypeError, ValueError):
+            continue
+    return max(parsed) if parsed else None
 
 
 def percentile(values: list[float], p: float) -> float:
@@ -618,7 +610,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="Trailing window for throughput and CFD (default 60)")
     parser.add_argument("--ignore-missing", action="store_true",
                         help="Skip issues that lack status_history")
-    parser.add_argument("--as-of", default=None, help="ISO date to compute metrics as of (default: today UTC)")
+    parser.add_argument("--as-of", default=None, help="YYYY-MM-DD to compute metrics as of (default: latest timestamp in the data; "
+                             "pass today's date for a live board)")
     args = parser.parse_args(argv)
 
     if not args.input and not args.demo:
@@ -631,15 +624,22 @@ def main(argv: list[str] | None = None) -> int:
             with open(args.input, "r", encoding="utf-8") as f:
                 payload = json.load(f)
         except (OSError, json.JSONDecodeError) as exc:
-            print(f"Error reading {args.input}: {exc}", file=sys.stderr)
+            print(f"error: cannot read {args.input}: {exc}", file=sys.stderr)
             return 2
 
-    issues = payload.get("issues", [])
-    if not isinstance(issues, list):
-        print("Input JSON must contain an 'issues' list.", file=sys.stderr)
+    issues = payload.get("issues") if isinstance(payload, dict) else None
+    if not isinstance(issues, list) or not issues:
+        print("error: input must be a JSON object with a non-empty 'issues' list", file=sys.stderr)
         return 2
 
-    as_of = parse_iso(args.as_of + "T00:00:00Z") if args.as_of else now_utc()
+    try:
+        as_of = parse_iso(args.as_of + "T00:00:00Z") if args.as_of else latest_event(issues)
+    except ValueError:
+        print(f"error: --as-of must be YYYY-MM-DD, got {args.as_of!r}", file=sys.stderr)
+        return 2
+    if as_of is None:
+        print("error: no parseable status_history timestamps; pass --as-of", file=sys.stderr)
+        return 2
 
     ready = args.ready_state or DEFAULT_READY_STATES
     in_progress = args.in_progress_state or DEFAULT_IN_PROGRESS_STATES
@@ -656,9 +656,9 @@ def main(argv: list[str] | None = None) -> int:
             type_filter=args.type,
             ignore_missing=args.ignore_missing,
         )
-    except ValueError as exc:
-        print(f"Error: {exc}", file=sys.stderr)
-        return 1
+    except (ValueError, TypeError, AttributeError) as exc:
+        print(f"error: bad issue data: {exc}", file=sys.stderr)
+        return 2
 
     output = RENDERERS[args.format](data)
 

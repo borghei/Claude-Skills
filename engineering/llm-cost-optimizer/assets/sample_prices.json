@@ -1,0 +1,4 @@
+{
+  "small-model": {"name": "Example small model", "provider": "Example", "input_per_million": 0.50, "output_per_million": 2.00, "context_window": 200000},
+  "large-model": {"name": "Example large model", "provider": "Example", "input_per_million": 5.00, "output_per_million": 25.00, "context_window": 1000000}
+}

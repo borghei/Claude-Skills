@@ -1,16 +1,15 @@
 ---
 name: terraform-patterns
 description: >
-  This skill should be used when the user asks to "analyze Terraform modules",
-  "scan IaC for security issues", "review Terraform configurations",
-  "check infrastructure code for misconfigurations", or "audit cloud resources".
+  Terraform module design and review: complexity and documentation analysis plus an AWS-focused
+  misconfiguration scan. Use when writing or reviewing Terraform modules or gating IaC changes.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: infrastructure-as-code
-  updated: 2026-04-02
+  updated: 2026-11-08
   tags: [terraform, iac, security, cloud, infrastructure]
 ---
 # Terraform Patterns
@@ -21,6 +20,21 @@ metadata:
 ## Overview
 
 The **Terraform Patterns** skill provides automated analysis of Terraform configurations for module complexity, security misconfigurations, and infrastructure best practices. It catches open ports, public buckets, missing encryption, and overly permissive IAM policies before they reach production.
+
+## When to Use
+
+- Designing a new module (inputs, outputs, versioning, state layout).
+- Reviewing a Terraform pull request for structure and security problems.
+- Adding an IaC security gate to CI for AWS configurations.
+
+## Module Design Rules
+
+- **One responsibility per module, composed in a root module.** A module that creates a VPC, a cluster and a database is three modules. [PROVEN]
+- **Typed, described inputs; minimal outputs.** Every variable has `type` and `description`; validate with `validation` blocks; output only what callers need. [PROVEN]
+- **`for_each` over `count` for collections.** `count` re-indexes and destroys resources when an item is removed from the middle of a list; `for_each` keys by name. Use `count` only for on/off toggles. [PROVEN]
+- **Pin versions deliberately.** Constrain `required_version` and each provider with `~>` to the major you tested, commit `.terraform.lock.hcl`, and version shared modules with git tags or a registry. Upgrade providers on purpose, reading the upgrade guide for each major. [PROVEN]
+- **Remote, locked state per environment.** One state per environment and component (S3 with locking, or the platform's backend); never share state across environments. [PROVEN]
+- **Move, don't recreate.** Use `moved` blocks when refactoring addresses so `plan` shows a move rather than a destroy and create. [RECOMMENDED]
 
 ## Clarify First
 
@@ -50,29 +64,20 @@ python scripts/tf_module_analyzer.py --path . --recursive
 
 ## Tools Overview
 
-### tf_module_analyzer.py
+| Tool | What it checks | Key flags |
+|------|----------------|-----------|
+| `tf_module_analyzer.py` | 0-100 complexity (resources, variables, nesting), dependencies and data sources, variables missing type/description, output docs, naming | `--path`, `--recursive`, `--format text/json` |
+| `tf_security_scanner.py` | AWS rules: 0.0.0.0/0 ingress, public S3/RDS/instances, missing encryption, wildcard IAM, missing CloudTrail/flow/access logs | `--path`, `--min-severity`, `--format text/json` |
 
-Analyzes Terraform modules for complexity, structure, dependencies, and documentation quality.
+The security rules target AWS resource types; Azure and Google Cloud configurations get
+little coverage, so pair them with a multi-cloud scanner (Checkov, Trivy, tfsec rules) there.
+Exit codes: `0` no finding at or above `--min-severity`; `1` findings at or above it (the CI
+gate); `2` bad input (path not found).
 
-| Feature | Description |
-|---------|-------------|
-| Complexity scoring | Scores modules by resource count, variable count, nesting |
-| Dependency mapping | Maps module dependencies and data source usage |
-| Variable analysis | Checks for missing types, defaults, descriptions |
-| Output completeness | Validates output documentation and coverage |
-| Naming conventions | Checks resource and variable naming patterns |
-
-### tf_security_scanner.py
-
-Scans Terraform configurations for security misconfigurations and compliance violations. The rules are written for AWS resource types and argument names, so Azure and Google Cloud configurations get little or no coverage.
-
-| Feature | Description |
-|---------|-------------|
-| Open ports | Detects 0.0.0.0/0 CIDR in security groups |
-| Public access | Flags public S3 buckets, databases, instances |
-| Encryption gaps | Checks for missing encryption at rest and in transit |
-| IAM overreach | Identifies wildcard actions and overly broad policies |
-| Logging gaps | Verifies CloudTrail, flow logs, access logging |
+```bash
+python scripts/tf_security_scanner.py --path examples   # bundled sample: open SSH, public-read ACL, wildcard IAM
+python scripts/tf_module_analyzer.py --path examples
+```
 
 ## Workflows
 
@@ -158,3 +163,29 @@ modules/vpc/
 | 31-60 | Medium | Consider splitting |
 | 61-80 | High | Should refactor |
 | 81-100 | Critical | Must refactor |
+
+## Anti-Patterns
+
+### `count` for Named Collections
+**Mistake:** `count = length(var.subnets)` with `var.subnets[count.index]`.
+**Why it happens:** It is the first loop construct most people learn.
+**Instead:** `for_each = { for s in var.subnets : s.name => s }`. Removing one subnet then removes one resource instead of shifting and recreating the rest.
+
+### Unpinned Providers
+**Mistake:** No version constraint, or `>=` with no upper bound.
+**Why it happens:** It works today.
+**Instead:** `~>` on the tested major plus a committed lock file; a new provider major can change defaults and break `plan` without any code change.
+
+### Scanning Instead of Planning
+**Mistake:** Treating a clean static scan as proof the change is safe.
+**Why it happens:** The scanner is fast and runs without credentials.
+**Instead:** Read `terraform plan` for every change: destroys, replacements and IAM changes are visible there and nowhere else.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/tf_module_analyzer.py` | Module complexity, documentation and naming analysis |
+| `scripts/tf_security_scanner.py` | AWS-focused misconfiguration scan with a CI exit code |
+| `examples/main.tf` | Three-resource sample with deliberate misconfigurations |
+| `references/terraform-patterns.md` | Module design, state management, naming, provider pinning |

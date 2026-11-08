@@ -312,12 +312,12 @@ def main():
     target = Path(args.path)
     if not target.exists():
         print(f"Error: Path '{args.path}' does not exist.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     test_files = find_test_files(target)
     if not test_files:
         print(f"No test files (.spec.ts/.test.ts) found in '{args.path}'.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     all_findings = []
     for tf in test_files:
@@ -340,6 +340,7 @@ def main():
         print(json.dumps(result, indent=2))
     else:
         print(format_human(filtered, stats))
+    sys.exit(1 if stats["high"] else 0)  # high-severity findings fail the gate
 
 
 if __name__ == "__main__":

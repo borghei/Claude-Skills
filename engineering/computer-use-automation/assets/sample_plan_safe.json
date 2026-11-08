@@ -1,0 +1,10 @@
+[
+  {"type": "screenshot", "target": "invoice list"},
+  {"type": "click", "target": "Filter: Unpaid"},
+  {"type": "screenshot", "target": "filtered list"},
+  {"type": "click", "target": "Export CSV"},
+  {"type": "verify", "target": "export toast visible"},
+  {"type": "screenshot", "target": "invoice INV-1042"},
+  {"type": "click", "target": "Send reminder", "confirmed": true},
+  {"type": "verify", "target": "reminder sent banner"}
+]

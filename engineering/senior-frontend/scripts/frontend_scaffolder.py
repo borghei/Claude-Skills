@@ -22,7 +22,7 @@ from typing import Dict, List, Optional
 # Project templates
 TEMPLATES = {
     "nextjs": {
-        "name": "Next.js 14+ App Router",
+        "name": "Next.js 16 App Router",
         "description": "Modern Next.js with App Router, Server Components, and TypeScript",
         "structure": {
             "app": {
@@ -70,7 +70,7 @@ TEMPLATES = {
             "tailwind.config.ts",
             "tsconfig.json",
             "postcss.config.js",
-            ".eslintrc.json",
+            "eslint.config.mjs",
             ".prettierrc",
             ".gitignore",
             "package.json",
@@ -127,7 +127,7 @@ FEATURES = {
         "description": "Authentication with session management",
         "files": {
             "lib/auth.ts": "AUTH_LIB",
-            "middleware.ts": "AUTH_MIDDLEWARE",
+            "proxy.ts": "AUTH_PROXY",  # Next 16 renamed middleware.ts to proxy.ts
             "components/auth/login-form.tsx": "LOGIN_FORM",
             "components/auth/register-form.tsx": "REGISTER_FORM",
         },
@@ -207,9 +207,25 @@ export default function RootLayout({
   );
 }
 ''',
-    "GLOBALS_CSS": '''@tailwind base;
-@tailwind components;
-@tailwind utilities;
+    "AUTH_PROXY": '''import { NextResponse, type NextRequest } from 'next/server';
+
+// Next 16 proxy (formerly middleware): runs before matched routes.
+// Keep it to cheap checks such as redirects; do real authorization in the route itself.
+export function proxy(request: NextRequest) {
+  const session = request.cookies.get('session')?.value;
+  if (!session) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/dashboard/:path*', '/settings/:path*'],
+};
+''',
+    "GLOBALS_CSS": '''@import "tailwindcss";
+/* Tailwind v4: theme tokens still come from the JS config */
+@config "../tailwind.config.ts";
 
 @layer base {
   :root {
@@ -598,43 +614,43 @@ def get_config_templates(name: str, template: str, features: List[str]) -> Dict[
     deps = {
         "nextjs": {
             "dependencies": {
-                "next": "^14.0.0",
-                "react": "^18.2.0",
-                "react-dom": "^18.2.0",
+                "next": "^16.0.0",
+                "react": "^19.0.0",
+                "react-dom": "^19.0.0",
                 "clsx": "^2.0.0",
-                "tailwind-merge": "^2.0.0",
+                "tailwind-merge": "^3.0.0",
             },
             "devDependencies": {
-                "@types/node": "^20.0.0",
-                "@types/react": "^18.2.0",
-                "@types/react-dom": "^18.2.0",
-                "autoprefixer": "^10.0.0",
-                "eslint": "^8.0.0",
-                "eslint-config-next": "^14.0.0",
-                "postcss": "^8.0.0",
+                "@tailwindcss/postcss": "^4.0.0",
+                "@types/node": "^22.0.0",
+                "@types/react": "^19.0.0",
+                "@types/react-dom": "^19.0.0",
+                "eslint": "^9.0.0",
+                "eslint-config-next": "^16.0.0",
+                "postcss": "^8.4.0",
                 "prettier": "^3.0.0",
-                "tailwindcss": "^3.4.0",
+                "tailwindcss": "^4.0.0",
                 "typescript": "^5.0.0",
             },
         },
         "react": {
             "dependencies": {
-                "react": "^18.2.0",
-                "react-dom": "^18.2.0",
+                "react": "^19.0.0",
+                "react-dom": "^19.0.0",
                 "clsx": "^2.0.0",
-                "tailwind-merge": "^2.0.0",
+                "tailwind-merge": "^3.0.0",
             },
             "devDependencies": {
-                "@types/react": "^18.2.0",
-                "@types/react-dom": "^18.2.0",
-                "@vitejs/plugin-react": "^4.0.0",
-                "autoprefixer": "^10.0.0",
-                "eslint": "^8.0.0",
-                "postcss": "^8.0.0",
+                "@tailwindcss/postcss": "^4.0.0",
+                "@types/react": "^19.0.0",
+                "@types/react-dom": "^19.0.0",
+                "@vitejs/plugin-react": "latest",
+                "eslint": "^8.57.0",
+                "postcss": "^8.4.0",
                 "prettier": "^3.0.0",
-                "tailwindcss": "^3.4.0",
+                "tailwindcss": "^4.0.0",
                 "typescript": "^5.0.0",
-                "vite": "^5.0.0",
+                "vite": "^8.0.0",
             },
         },
     }
@@ -653,7 +669,8 @@ def get_config_templates(name: str, template: str, features: List[str]) -> Dict[
             "dev": "next dev" if template == "nextjs" else "vite",
             "build": "next build" if template == "nextjs" else "vite build",
             "start": "next start" if template == "nextjs" else "vite preview",
-            "lint": "eslint . --ext .ts,.tsx",
+            # Next 16 removed `next lint`; ESLint 9 flat config needs no --ext
+            "lint": "eslint ." if template == "nextjs" else "eslint . --ext .ts,.tsx",
             "format": "prettier --write .",
         },
         "dependencies": deps[template]["dependencies"],
@@ -735,10 +752,10 @@ const config: Config = {
 
 export default config;
 ''',
-        "postcss.config.js": '''module.exports = {
+        "postcss.config.js": '''// Tailwind v4 ships its own PostCSS plugin and handles vendor prefixes itself
+module.exports = {
   plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
+    '@tailwindcss/postcss': {},
   },
 };
 ''',
@@ -767,6 +784,13 @@ export default defineConfig({
     },
   },
 });
+''',
+        "eslint.config.mjs": '''import nextVitals from "eslint-config-next/core-web-vitals";
+
+export default [
+  ...nextVitals,
+  { rules: { "react/no-unescaped-entities": "off" } },
+];
 ''',
         ".eslintrc.json": '''{
   "extends": ["next/core-web-vitals", "prettier"],
@@ -983,17 +1007,24 @@ def main():
         features = [f.strip() for f in args.features.split(",")]
         invalid = [f for f in features if f not in FEATURES]
         if invalid:
-            print(f"Unknown features: {', '.join(invalid)}", file=sys.stderr)
-            print(f"Valid features: {', '.join(FEATURES.keys())}")
-            sys.exit(1)
+            print(f"error: unknown features: {', '.join(invalid)} "
+                  f"(valid: {', '.join(FEATURES.keys())})", file=sys.stderr)
+            sys.exit(2)
 
-    result = scaffold_project(
-        name=args.name,
-        output_dir=Path(args.dir),
-        template=args.template,
-        features=features,
-        dry_run=args.dry_run,
-    )
+    try:
+        result = scaffold_project(
+            name=args.name,
+            output_dir=Path(args.dir),
+            template=args.template,
+            features=features,
+            dry_run=args.dry_run,
+        )
+    except OSError as exc:
+        print(f"error: cannot write project: {exc}", file=sys.stderr)
+        sys.exit(2)
+    if result.get("error"):
+        print(f"error: {result['error']}", file=sys.stderr)
+        sys.exit(2)
 
     if args.json:
         print(json.dumps(result, indent=2))

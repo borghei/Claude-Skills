@@ -17,6 +17,8 @@ Usage:
     python dataset_pipeline_builder.py split --input /path/to/dataset --train 0.8 --val 0.1 --test 0.1
     python dataset_pipeline_builder.py augment-config --task detection --output augmentations.yaml
     python dataset_pipeline_builder.py validate --input /path/to/dataset --format coco
+
+Exit codes: 0 ok, 1 validate found errors, 2 bad input (missing directory, unreadable data).
 """
 
 import os
@@ -1579,8 +1581,13 @@ Examples:
 
     if args.command is None:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
+    if getattr(args, 'input', None) and not Path(args.input).is_dir():
+        print(f"error: dataset directory not found: {args.input}", file=sys.stderr)
+        sys.exit(2)
+
+    exit_code = 0
     try:
         if args.command == 'analyze':
             analyzer = DatasetAnalyzer(args.input)
@@ -1659,6 +1666,7 @@ Examples:
         elif args.command == 'validate':
             validator = DatasetValidator(args.input, args.format)
             results = validator.validate()
+            exit_code = 0 if results.get('valid') else 1
 
             if args.json:
                 print(json.dumps(results, indent=2))
@@ -1688,12 +1696,11 @@ Examples:
                     for key, value in results['stats'].items():
                         print(f"  {key}: {value}")
 
-        sys.exit(0)
+    except (OSError, ValueError, KeyError) as e:
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(2)
+    sys.exit(exit_code)
 
-    except Exception as e:
-        logger.error(f"Error: {e}")
-        sys.exit(1)
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

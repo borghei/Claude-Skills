@@ -673,6 +673,15 @@ def main():
                         help="Template type (default: cloudformation)")
     parser.add_argument("--output", help="Write the template to this file instead of stdout")
     args = parser.parse_args()
+    import re
+    import sys
+    if not re.fullmatch(r"[a-z][a-z0-9-]{1,62}", args.app_name):
+        print(f"Error: --app-name {args.app_name!r} must be 2-63 chars of lowercase letters, digits and "
+              f"hyphens, starting with a letter (it becomes part of resource names)", file=sys.stderr)
+        sys.exit(2)
+    if not re.fullmatch(r"[a-z]{2}(-[a-z]+)?-[a-z]+-\d", args.region):
+        print(f"Error: --region {args.region!r} is not an AWS region code like us-east-1", file=sys.stderr)
+        sys.exit(2)
 
     generator = ServerlessStackGenerator(args.app_name, {"region": args.region})
     render = {

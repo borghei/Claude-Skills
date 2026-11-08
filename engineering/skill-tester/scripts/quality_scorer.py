@@ -9,7 +9,6 @@ Generates letter grades, tier recommendations, and improvement roadmaps.
 Usage:
     python quality_scorer.py <skill_path> [--detailed] [--minimum-score SCORE] [--json]
 
-Author: Claude Skills Engineering Team
 Version: 1.0.0
 Dependencies: Python Standard Library Only
 """
@@ -495,24 +494,22 @@ class QualityScorer:
             content = skill_md_path.read_text(encoding='utf-8')
             lines = [line for line in content.split('\n') if line.strip()]
             
-            # Score based on length and depth
+            # Score length as a band: lean SKILL.md files with detail in references/ score best
             line_count = len(lines)
-            if line_count >= 400:
+            if 60 <= line_count <= 500:
                 length_score = 25
-            elif line_count >= 300:
-                length_score = 20
-            elif line_count >= 200:
+            elif 30 <= line_count < 60 or 500 < line_count <= 650:
                 length_score = 15
-            elif line_count >= 100:
-                length_score = 10
             else:
                 length_score = 5
-                
-            dimension.add_score("skill_md_length", length_score, 25, 
+
+            dimension.add_score("skill_md_length", length_score, 25,
                                f"SKILL.md has {line_count} lines")
-                               
-            if line_count < 300:
-                dimension.add_suggestion("Expand SKILL.md with more detailed sections")
+
+            if line_count < 60:
+                dimension.add_suggestion("Add the workflow, decision points and verification steps to SKILL.md")
+            elif line_count > 500:
+                dimension.add_suggestion("Move long tables and examples from SKILL.md into references/")
                 
             # Score frontmatter quality
             frontmatter_score = self._score_frontmatter(content)
@@ -769,17 +766,14 @@ class QualityScorer:
                 lines = content.split('\n')
                 loc = len([line for line in lines if line.strip() and not line.strip().startswith('#')])
                 
-                # Score based on LOC
-                if loc >= 800:
+                # Score size as a band: focused tools of 100-300 lines score best;
+                # very large scripts are harder to review and should be split
+                if 100 <= loc <= 300:
                     complexity_score = 25
-                elif loc >= 500:
+                elif 50 <= loc < 100 or 300 < loc <= 500:
                     complexity_score = 20
-                elif loc >= 300:
-                    complexity_score = 15
-                elif loc >= 100:
-                    complexity_score = 10
                 else:
-                    complexity_score = 5
+                    complexity_score = 10
                     
                 total_complexity += complexity_score
                 
@@ -1272,6 +1266,10 @@ Letter Grades: A+ (95+), A (90+), A- (85+), B+ (80+), B (75+), B- (70+), C+ (65+
                        help="Enable verbose logging")
                        
     args = parser.parse_args()
+
+    if not Path(args.skill_path).is_dir():
+        print(f"error: skill directory not found: {args.skill_path}", file=sys.stderr)
+        sys.exit(1)  # 2 already means grade D for this tool
     
     try:
         # Create scorer and assess quality

@@ -1,16 +1,16 @@
 ---
 name: ai-security
 description: >
-  This skill should be used when the user asks to "scan AI systems for security threats",
-  "check for prompt injection vulnerabilities", "assess model security posture",
-  "detect data poisoning risks", or "audit AI/ML pipeline security".
+  Static scan of AI/ML code for prompt injection, unsafe model loading, data poisoning, model
+  extraction and insecure serving, plus an agent and tool-use threat checklist. Use when
+  reviewing an LLM app, model API or ML pipeline for security.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: ai-security
-  updated: 2026-04-02
+  updated: 2026-11-08
   tags: [ai-security, prompt-injection, data-poisoning, model-extraction, adversarial-ml]
 ---
 
@@ -22,6 +22,13 @@ metadata:
 ## Overview
 
 The **AI Security** skill provides specialized threat scanning for AI and machine learning systems. It identifies vulnerabilities unique to AI workloads including prompt injection, data poisoning, model extraction, adversarial inputs, and insecure model serving configurations.
+
+## When to Use
+
+- Reviewing an LLM feature, RAG app, agent or model-serving API before release.
+- Auditing an ML pipeline's data sources and model loading.
+- Adding a pre-deployment gate for AI-specific code risks.
+- Threat-modelling an agent that calls tools or MCP servers.
 
 ## Clarify First
 
@@ -45,15 +52,21 @@ python scripts/ai_threat_scanner.py --path ./my-ai-project --format json
 # Scan only for prompt injection vulnerabilities
 python scripts/ai_threat_scanner.py --path ./src --category prompt-injection
 
-# Scan with severity threshold
-python scripts/ai_threat_scanner.py --path ./src --min-severity high
+# Scan with severity threshold, skipping tests and fixtures
+python scripts/ai_threat_scanner.py --path ./src --min-severity high --exclude 'tests/*' --exclude '*_fixture.py'
+
+# Bundled vulnerable sample: 8 findings (2 critical), exit 1
+python scripts/ai_threat_scanner.py --path assets/sample_vulnerable_app.py
 ```
+
+**Exit codes.** `0` no critical or high finding; `1` at least one critical or high finding; `2` the
+path does not exist.
 
 ## Tools Overview
 
 | Tool | Purpose | Key Flags |
 |------|---------|-----------|
-| `ai_threat_scanner.py` | Scan code for AI-specific security threats | `--path`, `--category`, `--min-severity`, `--format` |
+| `ai_threat_scanner.py` | Scan code for AI-specific security threats | `--path`, `--category`, `--min-severity`, `--exclude GLOB`, `--format` |
 
 ### ai_threat_scanner.py
 
@@ -64,6 +77,19 @@ Performs static analysis of source code by matching regular expressions one line
 - **Model Extraction**: Flags confidence scores or logits returned from inference, inference routes (`@app.post("/predict")` and similar) so you can confirm rate limiting and authentication exist, model weights returned through an API, and error handling that mentions model internals
 - **Adversarial Input**: Flags `predict`/`classify`/`detect` calls with no validation keyword on the same line, request data converted straight to arrays or tensors, and images opened from uploads or requests
 - **Insecure Model Serving**: Flags `pickle.load`/`loads` on file, request or body data, permissive CORS, debug mode left on, and `eval`/`exec` with user-controlled input
+
+### Agent and tool-use threats (review by hand)
+
+The scanner sees single lines of code; the highest-impact risks in agents are about data flow and
+authority, so check these yourself for any system where a model calls tools:
+
+- **Indirect prompt injection.** Tool results, retrieved documents, web pages, emails and file contents are untrusted input. Does the agent treat instructions inside them as data? Can a fetched page make it call another tool?
+- **Tool and MCP server trust.** Tool descriptions are part of the prompt. Is every MCP server from a source you trust, pinned to a version, and reviewed for descriptions that try to steer the model? Do two servers expose confusingly similar tool names?
+- **Excessive agency.** Does each tool have the narrowest scope it needs (read-only where possible, per-user credentials, no shell)? Are irreversible actions (send, pay, delete, deploy) behind a human confirmation?
+- **Data exfiltration paths.** Can the model put secrets or user data into a URL, image link, email or outbound tool call? Is outbound network access limited?
+- **Output handling.** Is model output escaped before it reaches HTML, SQL, shell or code execution?
+
+Check the current OWASP Top 10 for LLM Applications for the latest categories before a formal review.
 
 ## Workflows
 
@@ -101,6 +127,29 @@ Performs static analysis of source code by matching regular expressions one line
 - It never runs a model, calls an inference endpoint or attacks a live system. It is not a penetration test or a red-team exercise.
 - Zero findings means no pattern matched. It does not show that a system resists prompt injection or model extraction.
 - Attacks on LLM systems change quickly. The pattern set and the reference reflect the skill's last update and need periodic review.
+
+## Anti-Patterns
+
+### Delimiters as the only injection defence
+**Mistake:** Wrapping user text in tags and telling the model to ignore instructions inside, then giving the same model shell or email tools.
+**Why it happens:** Delimiters reduce casual injection, so they feel sufficient.
+**Instead:** Limit what a successful injection can do: least-privilege tools, confirmation for irreversible actions, and no secrets in the context.
+
+### Loading pickles from anywhere
+**Mistake:** `torch.load` or `pickle.load` on a model downloaded from a hub or uploaded by a user.
+**Why it happens:** It is the default save format in many tutorials.
+**Instead:** Use safetensors or another non-executable format, pin model hashes, and load untrusted artefacts only in a sandbox.
+
+### Treating a clean scan as a pass
+**Mistake:** Shipping because the scanner found nothing.
+**Why it happens:** Zero findings reads like a verdict.
+**Instead:** The scanner cannot see missing controls or multi-line data flow. Walk the agent and tool-use checklist above and test injection against a staging deployment.
+
+## Files
+
+- `scripts/ai_threat_scanner.py` — the regex scanner described above.
+- `assets/sample_vulnerable_app.py` — deliberately vulnerable Flask model API (pickle, CORS *, debug, prompt f-string, eval).
+- `references/ai-threat-landscape.md` — threats, attack vectors and mitigations in depth.
 
 ## Reference Documentation
 

@@ -134,6 +134,11 @@ def score_to_grade(score: float) -> str:
     return "F"
 
 
+def passes_gate(overall_score: float, threshold: int, severity_summary: dict[str, int]) -> bool:
+    """Pass needs the score at or above threshold and zero P0 findings: one blocker fails the gate."""
+    return overall_score >= threshold and severity_summary.get("P0", 0) == 0
+
+
 def summarize_findings(findings: list[dict[str, Any]]) -> dict[str, int]:
     """Count findings by severity."""
     counts: dict[str, int] = {sev: 0 for sev in SEVERITY_DEDUCTIONS}
@@ -198,9 +203,11 @@ def format_human_readable(
     lines.append("")
 
     # Overall score
-    pass_fail = "PASS" if overall_score >= threshold else "FAIL"
+    pass_fail = "PASS" if passes_gate(overall_score, threshold, severity_summary) else "FAIL"
     lines.append(f"  Overall Score:  {overall_score}/100  (Grade: {grade})  [{pass_fail}]")
-    lines.append(f"  Threshold:      {threshold}")
+    lines.append(f"  Threshold:      {threshold}  (and zero P0 findings)")
+    if severity_summary.get("P0", 0):
+        lines.append(f"  Blocked by:     {severity_summary['P0']} P0 finding(s)")
     lines.append(f"  Timestamp:      {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}")
     lines.append("")
 
@@ -269,7 +276,7 @@ def format_json_output(
     result: dict[str, Any] = {
         "overall_score": overall_score,
         "grade": grade,
-        "passed": overall_score >= threshold,
+        "passed": passes_gate(overall_score, threshold, severity_summary),
         "threshold": threshold,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "severity_summary": severity_summary,
@@ -306,14 +313,14 @@ def load_findings(filepath: str) -> list[dict[str, Any]]:
     path = Path(filepath)
     if not path.exists():
         print(f"Error: File not found: {filepath}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     try:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
     except json.JSONDecodeError as exc:
         print(f"Error: Invalid JSON in {filepath}: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if isinstance(data, list):
         return data
@@ -324,7 +331,7 @@ def load_findings(filepath: str) -> list[dict[str, Any]]:
         return [data]
 
     print(f"Error: Unexpected JSON structure in {filepath}", file=sys.stderr)
-    sys.exit(1)
+    sys.exit(2)
 
 
 def validate_findings(findings: list[dict[str, Any]]) -> list[str]:
@@ -451,8 +458,8 @@ def main() -> None:
         if not args.json_output:
             print(f"\nBaseline saved to {baseline_path} and {latest_path}")
 
-    # Exit code: non-zero if below threshold
-    if overall_score < args.threshold:
+    # Exit code: 1 when the gate fails (below threshold or any P0)
+    if not passes_gate(overall_score, args.threshold, severity_summary):
         sys.exit(1)
 
 

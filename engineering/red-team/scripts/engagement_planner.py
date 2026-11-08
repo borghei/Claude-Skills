@@ -5,7 +5,6 @@ Engagement Planner - Plan red team and penetration testing engagements.
 Generates comprehensive engagement plans including scope, rules of engagement,
 methodology selection, phase timelines, and deliverable checklists.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -333,6 +332,8 @@ def plan_engagement(engagement_type_key: str, target_list: List[str],
     eng_type = ENGAGEMENT_TYPES.get(engagement_type_key, ENGAGEMENT_TYPES["pentest"])
     duration_days = parse_duration(duration_str)
     start = datetime.now() + timedelta(days=7)  # 1 week lead time
+    while start.weekday() >= 5:  # roll a Saturday or Sunday start to Monday
+        start += timedelta(days=1)
 
     # Collect methodologies and tools from targets
     methodologies = set()

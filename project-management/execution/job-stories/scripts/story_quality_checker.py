@@ -6,7 +6,7 @@ and quality against best practices.
 
 Usage:
     python story_quality_checker.py --stories stories.json
-    python story_quality_checker.py --stories stories.json --json
+    python story_quality_checker.py --stories stories.json --format json
     python story_quality_checker.py --example
 """
 
@@ -16,12 +16,15 @@ import re
 import sys
 
 
+# Patterns match the clause body; the "When" / "so I can" prefix is stripped first,
+# because the input fields hold only the body ("I use the app", "be productive").
 VAGUE_SITUATIONS = [
-    r"^when i use",
-    r"^when i need",
-    r"^when i am a",
-    r"^when i want",
-    r"^when using the",
+    r"^i use\b",
+    r"^i need\b",
+    r"^i am an? \w+$",
+    r"^i want\b",
+    r"^using the\b",
+    r"^i open the (app|tool|product)\b",
 ]
 
 SOLUTION_WORDS = [
@@ -31,18 +34,44 @@ SOLUTION_WORDS = [
 ]
 
 VAGUE_OUTCOMES = [
-    r"so i can use it",
-    r"so i can be productive",
-    r"so i can do my job",
-    r"so i can be happy",
-    r"so i can feel",
-    r"so it works",
+    r"^use it$",
+    r"^be (more )?productive$",
+    r"^do my job$",
+    r"^be happy$",
+    r"^feel\b",
+    r"^it works$",
+    r"^save time$",
 ]
 
 
-def load_data(path: str) -> dict:
-    with open(path, "r") as f:
-        return json.load(f)
+def _body(text: str, prefix: str) -> str:
+    """Lowercase clause with a leading prefix (e.g. 'when', 'so i can') and final period removed."""
+    text = text.strip().rstrip(".").lower()
+    return re.sub(rf"^{prefix}\s+", "", text)
+
+
+def fail(msg: str) -> None:
+    """Print a one-line input error and exit 2."""
+    print(f"error: {msg}", file=sys.stderr)
+    sys.exit(2)
+
+
+def load_data(path: str, key: str) -> dict:
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except OSError as exc:
+        fail(f"cannot read {path}: {exc.strerror or exc}")
+    except ValueError as exc:
+        fail(f"{path} is not valid JSON: {exc}")
+    items = data.get(key) if isinstance(data, dict) else None
+    if not isinstance(items, list) or not items or not all(isinstance(i, dict) for i in items):
+        fail(f"{path} must be a JSON object with a non-empty '{key}' list of objects")
+    for item in items:
+        for field in ("acceptance_criteria", "dependencies"):
+            if not isinstance(item.get(field, []), list):
+                fail(f"{path}: '{field}' in '{item.get('title', 'Untitled')}' must be a list")
+    return data
 
 
 def check_story(story: dict) -> dict:
@@ -76,7 +105,7 @@ def check_story(story: dict) -> dict:
 
     # Situation quality
     if situation:
-        is_vague = any(re.search(p, situation.lower()) for p in VAGUE_SITUATIONS)
+        is_vague = any(re.search(p, _body(situation, "when")) for p in VAGUE_SITUATIONS)
         checks.append({
             "check": "specific_situation",
             "passed": not is_vague,
@@ -98,7 +127,7 @@ def check_story(story: dict) -> dict:
 
     # Outcome quality
     if outcome:
-        is_vague = any(re.search(p, outcome.lower()) for p in VAGUE_OUTCOMES)
+        is_vague = any(re.search(p, _body(outcome, r"so (that )?(i can )?")) for p in VAGUE_OUTCOMES)
         checks.append({
             "check": "measurable_outcome",
             "passed": not is_vague,
@@ -121,7 +150,7 @@ def check_story(story: dict) -> dict:
     # AC quality: check for implementation details
     impl_detail_count = 0
     for ac in acceptance_criteria:
-        if any(re.search(p, ac, re.IGNORECASE) for p in [r"\bAPI\b", r"\b200\b", r"\brender\b", r"\bunit test\b", r"\bdatabase\b"]):
+        if any(re.search(p, ac, re.IGNORECASE) for p in [r"\bAPI\b", r"\b200\b", r"\brenders?\b", r"\bcomponent\b", r"\bendpoint\b", r"\bunit test\b", r"\bdatabase\b"]):
             impl_detail_count += 1
     if impl_detail_count > 0:
         checks.append({
@@ -218,25 +247,27 @@ def print_example() -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Validate job stories against JTBD and INVEST criteria.")
-    parser.add_argument("--stories", type=str, help="Path to stories JSON file")
-    parser.add_argument("--json", action="store_true", help="Output as JSON")
-    parser.add_argument("--example", action="store_true", help="Print example and exit")
+    parser = argparse.ArgumentParser(
+        description="Check job stories for format, specificity and outcome-focused acceptance criteria. Exit 0 all ready, 1 at least one is not, 2 bad input.")
+    parser.add_argument("--stories", type=str, help="Path to JSON file: {'stories': [...]} (see --example)")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (default: text)")
+    parser.add_argument("--json", action="store_true", help="Shorthand for --format json")
+    parser.add_argument("--example", action="store_true", help="Print an example input file and exit")
     args = parser.parse_args()
 
     if args.example:
         print_example()
-        return
+        return 0
     if not args.stories:
-        parser.error("--stories is required")
+        parser.error("--stories is required (or --example)")
 
-    data = load_data(args.stories)
-    result = analyze_stories(data)
-    if args.json:
+    result = analyze_stories(load_data(args.stories, "stories"))
+    if args.json or args.format == "json":
         print(json.dumps(result, indent=2))
     else:
         print_report(result)
+    return 0 if result["ready"] == result["total_stories"] else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

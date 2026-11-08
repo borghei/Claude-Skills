@@ -2,7 +2,6 @@
 
 **Version**: 1.0.0
 **Last Updated**: November 5, 2025
-**Author**: Claude Skills Factory
 
 A comprehensive Test Driven Development skill for Claude Code that provides intelligent test generation, coverage analysis, framework integration, and TDD workflow guidance across multiple languages and testing frameworks.
 
@@ -669,7 +668,7 @@ MIT License - See LICENSE file for details
 
 ## Acknowledgments
 
-Built with Claude Skills Factory toolkit, following Test Driven Development best practices and informed by:
+Follows Test Driven Development best practices, informed by:
 - Kent Beck's "Test Driven Development: By Example"
 - Martin Fowler's refactoring catalog
 - xUnit Test Patterns by Gerard Meszaros

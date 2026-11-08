@@ -5,7 +5,6 @@ Prompt Catalog Manager - Manage a catalog of approved prompts with versioning.
 Provides a local file-based prompt catalog with versioning, metadata tracking,
 diff comparison, and search capabilities.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -351,14 +350,18 @@ def main():
     elif args.add:
         if not args.name:
             print("Error: --name required for --add", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         if args.file:
-            content = Path(args.file).read_text(encoding="utf-8")
+            try:
+                content = Path(args.file).read_text(encoding="utf-8")
+            except (OSError, UnicodeDecodeError) as exc:
+                print(f"Error: cannot read --file {args.file}: {exc}", file=sys.stderr)
+                sys.exit(2)
         elif args.text:
             content = args.text
         else:
             print("Error: --file or --text required for --add", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         result = add_prompt(catalog_dir, args.name, content,
                            author=args.author, description=args.description,
                            tags=args.tags, model_targets=args.models)
@@ -367,18 +370,18 @@ def main():
     elif args.diff:
         if not args.name:
             print("Error: --name required for --diff", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         result = diff_versions(catalog_dir, args.name, args.version_a, args.version_b)
     elif args.status:
         if not args.name:
             print("Error: --name required for --status", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         result = update_status(catalog_dir, args.name, args.status)
     elif args.search:
         result = search_prompts(catalog_dir, args.search)
     else:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     if args.format == "json":
         print(format_json_output(result))

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feature Flag Strategy - Claude Skills</title>
-  <meta name="description" content="PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming c">
+  <meta name="description" content="Plan a flag-gated rollout: classify the flag, pick a rollout shape, set kill-switch thresholds and retire the flag. Use when planning a phased rollout, a kill switch, a holdout or a cleanup of old fla">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/feature-flag-strategy.html">
   <meta property="og:title" content="Feature Flag Strategy - Claude Skills">
-  <meta property="og:description" content="PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming c">
+  <meta property="og:description" content="Plan a flag-gated rollout: classify the flag, pick a rollout shape, set kill-switch thresholds and retire the flag. Use when planning a phased rollout, a kill switch, a holdout or a cleanup of old fla">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/feature-flag-strategy.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Feature Flag Strategy", "description": "PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming conventions.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/feature-flag-strategy.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Feature Flag Strategy", "description": "Plan a flag-gated rollout: classify the flag, pick a rollout shape, set kill-switch thresholds and retire the flag. Use when planning a phased rollout, a kill switch, a holdout or a cleanup of old flags.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/feature-flag-strategy.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Feature Flag Strategy</h1>
-    <p class="page-subtitle">PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming conventions.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Plan a flag-gated rollout: classify the flag, pick a rollout shape, set kill-switch thresholds and retire the flag. Use when planning a phased rollout, a kill switch, a holdout or a cleanup of old flags.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.2</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">feature-flags</span><span class="tag">phased-rollout</span><span class="tag">kill-switch</span><span class="tag">experiments</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Feature Flag Strategy (Project Management domain).
 
-PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming conventions.
+Plan a flag-gated rollout: classify the flag, pick a rollout shape, set kill-switch thresholds and retire the flag. Use when planning a phased rollout, a kill switch, a holdout or a cleanup of old flags.
 
 A feature flag is a runtime switch that decouples deploying code from releasing a feature. Done well, flags turn high-stakes ship dates into low-stakes config changes -- launches become measured ramps, regressions become single-toggle rollbacks, and experiments live alongside production code. Done p
 
@@ -420,7 +420,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Feature Flag Strategy (Project Management domain).
 
-PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming conventions.
+Plan a flag-gated rollout: classify the flag, pick a rollout shape, set kill-switch thresholds and retire the flag. Use when planning a phased rollout, a kill switch, a holdout or a cleanup of old flags.
 
 A feature flag is a runtime switch that decouples deploying code from releasing a feature. Done well, flags turn high-stakes ship dates into low-stakes config changes -- launches become measured ramps, regressions become single-toggle rollbacks, and experiments live alongside production code. Done p
 
@@ -493,11 +493,13 @@ Before drafting the rollout plan, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
-1. Classify the flag, pick a rollout shape, and define the kill-switch threshold + authority.
-2. Set a retirement date (release/experiment toggles), name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
-3. Ramp through stages with a &quot;green pass&quot; gate metric per step; retire the flag at stable GA; audit inventory quarterly.
+1. Classify the flag (release, experiment, ops, permission), pick a rollout shape, and set the kill-switch threshold and who may flip it, before the first ramp.
+2. Set a retirement date for release and experiment flags, name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
+3. Ramp through stages with a &quot;green pass&quot; gate metric per step [RECOMMENDED]; retire the flag at stable GA; audit the inventory quarterly.
+
+**Done when** the plan names each stage&#x27;s gate metric and threshold, the kill-switch owner, and the date the flag is deleted from code.
 
 See `references/rollout-execution-playbook.md` for the full taxonomy, shape catalog, kill-switch tree, holdout governance, naming, workflow, troubleshooting, and success criteria.
 
@@ -526,10 +528,16 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - `references/fowler-feature-toggle-taxonomy-guide.md` -- read this for the deep dive on Martin Fowler&#x27;s &quot;Feature Toggles&quot; essay, lifespans, ownership patterns, and the operational discipline behind them.
 - `references/rollout-shape-comparison-guide.md` -- read this for the worked comparison of the 7 rollout shapes with example use cases and risk profiles.
 - `references/red-flags.md` -- read this when reviewing a rollout plan for anti-patterns and failure modes before sign-off.
-- `assets/rollout_plan_template.md` -- per-feature rollout plan with stages, gates, owners, dates.
-- `assets/kill_switch_decision_tree.md` -- pre-incident kill-switch thresholds + authority + flip steps.
-- `assets/flag_debt_retirement_checklist.md` -- retirement workflow + quarterly audit.
-- `assets/flag_naming_convention.md` -- team naming sheet.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/rollout_plan_template.md` | Per-feature rollout plan: stages, gates, owners, dates |
+| `assets/kill_switch_decision_tree.md` | Kill-switch thresholds, authority and flip steps |
+| `assets/flag_debt_retirement_checklist.md` | Retirement workflow and quarterly audit |
+| `assets/flag_naming_convention.md` | Naming sheet |
+| `examples/pricing-page-redesign-rollout.md` | Worked rollout |
 
 ## Scope &amp; Limitations
 
@@ -579,7 +587,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Feature Flag Strategy&quot;**
-   - Description: &quot;PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming conventions.&quot;
+   - Description: &quot;Plan a flag-gated rollout: classify the flag, pick a rollout shape, set kill-switch thresholds and retire the flag. Use when planning a phased rollout, a kill switch, a holdout or a cleanup of old flags.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -640,11 +648,13 @@ Before drafting the rollout plan, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
-1. Classify the flag, pick a rollout shape, and define the kill-switch threshold + authority.
-2. Set a retirement date (release/experiment toggles), name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
-3. Ramp through stages with a &quot;green pass&quot; gate metric per step; retire the flag at stable GA; audit inventory quarterly.
+1. Classify the flag (release, experiment, ops, permission), pick a rollout shape, and set the kill-switch threshold and who may flip it, before the first ramp.
+2. Set a retirement date for release and experiment flags, name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
+3. Ramp through stages with a &quot;green pass&quot; gate metric per step [RECOMMENDED]; retire the flag at stable GA; audit the inventory quarterly.
+
+**Done when** the plan names each stage&#x27;s gate metric and threshold, the kill-switch owner, and the date the flag is deleted from code.
 
 See `references/rollout-execution-playbook.md` for the full taxonomy, shape catalog, kill-switch tree, holdout governance, naming, workflow, troubleshooting, and success criteria.
 
@@ -673,10 +683,16 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - `references/fowler-feature-toggle-taxonomy-guide.md` -- read this for the deep dive on Martin Fowler&#x27;s &quot;Feature Toggles&quot; essay, lifespans, ownership patterns, and the operational discipline behind them.
 - `references/rollout-shape-comparison-guide.md` -- read this for the worked comparison of the 7 rollout shapes with example use cases and risk profiles.
 - `references/red-flags.md` -- read this when reviewing a rollout plan for anti-patterns and failure modes before sign-off.
-- `assets/rollout_plan_template.md` -- per-feature rollout plan with stages, gates, owners, dates.
-- `assets/kill_switch_decision_tree.md` -- pre-incident kill-switch thresholds + authority + flip steps.
-- `assets/flag_debt_retirement_checklist.md` -- retirement workflow + quarterly audit.
-- `assets/flag_naming_convention.md` -- team naming sheet.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/rollout_plan_template.md` | Per-feature rollout plan: stages, gates, owners, dates |
+| `assets/kill_switch_decision_tree.md` | Kill-switch thresholds, authority and flip steps |
+| `assets/flag_debt_retirement_checklist.md` | Retirement workflow and quarterly audit |
+| `assets/flag_naming_convention.md` | Naming sheet |
+| `examples/pricing-page-redesign-rollout.md` | Worked rollout |
 
 ## Scope &amp; Limitations
 
@@ -726,7 +742,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Feature Flag Strategy&quot;**
-   - Description: &quot;PM-facing playbook for phased rollouts with feature flags -- taxonomy (release / experiment / ops / permission), rollout shapes, kill-switch decision tree, holdouts, flag debt retirement, and naming conventions.&quot;
+   - Description: &quot;Plan a flag-gated rollout: classify the flag, pick a rollout shape, set kill-switch thresholds and retire the flag. Use when planning a phased rollout, a kill switch, a holdout or a cleanup of old flags.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -784,12 +800,8 @@ cp -r Claude-Skills/project-management/execution/feature-flag-strategy your-proj
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/execution/feature-flag-strategy</code></pre>
 </div>
   
-  <h2>Quick Start</h2>1. Classify the flag, pick a rollout shape, and define the kill-switch threshold + authority.
-2. Set a retirement date (release/experiment toggles), name the flag with the convention, and document the plan in `assets/rollout_plan_template.md`.
-3. Ramp through stages with a "green pass" gate metric per step; retire the flag at stable GA; audit inventory quarterly.
-
-See `references/rollout-execution-playbook.md` for the full taxonomy, shape catalog, kill-switch tree, holdout governance, naming, workflow, troubleshooting, and success criteria.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/feature-flag-strategy/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

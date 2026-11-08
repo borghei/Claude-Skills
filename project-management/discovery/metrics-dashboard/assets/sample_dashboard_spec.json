@@ -1,0 +1,22 @@
+{
+  "dashboard_name": "Team Messaging - Growth",
+  "as_of": "2026-05-27",
+  "audience": "team",
+  "north_star": {"name": "Weekly active companies sending 50+ messages", "definition": "Companies with >= 50 messages in the trailing 7 days", "owner": "Head of Product", "has_comparison": true, "has_target": true},
+  "inputs": [
+    {"name": "New company activation rate", "definition": "% of new companies reaching 50 messages in 14 days", "owner": "Growth", "drives_ns": true, "has_comparison": true},
+    {"name": "W4 company retention", "definition": "% of week-0 companies active in week 4", "owner": "Retention", "drives_ns": true, "has_comparison": true},
+    {"name": "Seats added per active company", "definition": "Median new seats per active company per month", "owner": "Expansion", "drives_ns": true, "has_comparison": true}
+  ],
+  "guardrails": [
+    {"name": "Spam report rate", "definition": "Spam reports per 10K messages", "owner": "Trust & Safety", "threshold_alert": true, "has_comparison": true},
+    {"name": "p95 message latency", "definition": "95th percentile send-to-deliver time", "owner": "Platform", "threshold_alert": true, "has_comparison": true},
+    {"name": "Power-user churn", "definition": "% of top-decile companies lost this month", "owner": "Retention", "threshold_alert": true, "has_comparison": true}
+  ],
+  "operational": [
+    {"name": "Signup to first message conversion", "team": "Growth", "owner": "Growth PM", "actionable_test_passed": true, "has_comparison": true, "cadence": "daily"},
+    {"name": "Invite acceptance rate", "team": "Growth", "owner": "Growth PM", "actionable_test_passed": true, "has_comparison": true, "cadence": "weekly"},
+    {"name": "Channel CAC", "team": "Growth", "owner": "Growth marketing", "actionable_test_passed": true, "has_comparison": true, "cadence": "weekly"},
+    {"name": "Onboarding checklist completion", "team": "Growth", "owner": "Growth PM", "actionable_test_passed": true, "has_comparison": true, "cadence": "daily"}
+  ]
+}

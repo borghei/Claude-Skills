@@ -11,7 +11,7 @@ title: Skill Catalog
 | Domain | Skills | Tools | Page |
 |---|:---:|:---:|---|
 | **★ Project Management** (most-used) | **74** | **91** | **[View all](project-management.md)** |
-| Engineering | 100 | 298 | [View all](engineering.md) |
+| Engineering | 100 | 303 | [View all](engineering.md) |
 | Marketing | 41 | 118+ | [View all](marketing.md) |
 | C-Level Advisory | 31 | 88+ | [View all](c-level.md) |
 | RA/QM & Compliance | 27 | 50+ | [View all](compliance.md) |
@@ -31,7 +31,7 @@ title: Skill Catalog
 | Tools — LinkedIn suite (new) | 12 | 27 | [View all](tools.md) |
 | Finance | 4 | 12 | [View all](business.md#finance) |
 | Workflow (meta-skills) | 3 | 4 | [View all](other.md) |
-| **Total** | **403** | **961** | |
+| **Total** | **403** | **966** | |
 
 ## Skill Package Structure
 

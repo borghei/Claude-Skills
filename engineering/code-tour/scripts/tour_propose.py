@@ -210,15 +210,19 @@ def main() -> None:
     parser.add_argument("--format", choices=["text", "json"], default="text", help="output format (default: text)")
     args = parser.parse_args()
     if args.max_stops < 1:
-        raise SystemExit("error: --max-stops must be at least 1")
+        print("error: --max-stops must be at least 1", file=sys.stderr)
+        sys.exit(2)
     try:
         report = propose(args.repo, {e.lower() for e in args.exclude}, args.max_stops, args.max_files)
         output(report, args.format)
-    except SystemExit:
+    except SystemExit as exc:
+        if isinstance(exc.code, str):  # input error raised as SystemExit("error: ...")
+            print(exc.code, file=sys.stderr)
+            sys.exit(2)
         raise
     except OSError as exc:
         print(f"error: could not analyze repository: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     sys.exit(0)
 
 

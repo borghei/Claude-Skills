@@ -62,10 +62,30 @@ everyone working on the project. User-level hooks apply to all projects.
 | `SubagentStop` | A subagent finishes | No | Cleanup, logging |
 
 **Blocking behavior:** Only `PreToolUse` hooks can prevent an action. If the
-hook script exits with code 1, the tool call is blocked. All other events are
+hook script exits with code 2, the tool call is blocked and stderr is shown to the model; exit 1
+is a non-blocking error and the call goes ahead. All other events are
 informational -- the hook runs but cannot stop the action.
 
 ---
+
+## Hook Input: JSON on stdin
+
+Tool arguments are not in environment variables. Each event arrives as JSON on stdin with
+`session_id`, `transcript_path`, `cwd`, `permission_mode`, `hook_event_name`, `tool_name` and
+`tool_input` (`.file_path` for Write/Edit, `.command` for Bash); the only documented env var is
+`CLAUDE_PROJECT_DIR`. Every example below reads stdin once (`IN=$(cat)`) and pulls fields with
+`jq`. In a script under `.claude/hooks/`:
+
+```bash
+#!/bin/bash
+IN=$(cat)                                              # read the event once
+TOOL=$(jq -r '.tool_name // empty' <<<"$IN")
+F=$(jq -r '.tool_input.file_path // empty' <<<"$IN")   # Write / Edit
+CMD=$(jq -r '.tool_input.command // empty' <<<"$IN")   # Bash
+SID=$(jq -r '.session_id // empty' <<<"$IN")
+```
+
+An unset variable makes a guard silently allow everything: test each blocking hook once.
 
 ## Hook Types
 
@@ -76,7 +96,7 @@ Run a shell command. Fast, deterministic, no LLM cost.
 ```json
 {
   "type": "command",
-  "command": "prettier --write \"$CLAUDE_FILE_PATH\" 2>/dev/null || true"
+  "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); prettier --write \"$F\" 2>/dev/null || true"
 }
 ```
 
@@ -107,26 +127,6 @@ most expensive. Use sparingly.
 }
 ```
 
----
-
-## Environment Variables
-
-These variables are available in hook commands:
-
-| Variable | Available In | Description |
-|----------|-------------|-------------|
-| `CLAUDE_TOOL_NAME` | PreToolUse, PostToolUse | Name of the tool (Edit, Write, Bash, etc.) |
-| `CLAUDE_TOOL_ARG_FILE_PATH` | PreToolUse, PostToolUse | File path for Edit/Write/Read |
-| `CLAUDE_TOOL_ARG_COMMAND` | PreToolUse, PostToolUse | Command string for Bash |
-| `CLAUDE_TOOL_ARG_PATTERN` | PreToolUse, PostToolUse | Pattern for Grep/Glob |
-| `CLAUDE_SESSION_ID` | All events | Current session identifier |
-| `CLAUDE_FILE_PATH` | PostToolUse | File that was modified (Edit/Write) |
-
-**stdin:** Hook commands also receive a JSON payload on stdin with the full
-tool input and context.
-
----
-
 ## Recipes: Code Quality
 
 ### Recipe 1: Auto-Format Python with Black
@@ -140,7 +140,7 @@ tool input and context.
         "hooks": [
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" == *.py ]]; then python3 -m black --quiet \"$CLAUDE_FILE_PATH\" 2>/dev/null; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" == *.py ]]; then python3 -m black --quiet \"$F\" 2>/dev/null; fi"
           }
         ]
       }
@@ -160,7 +160,7 @@ tool input and context.
         "hooks": [
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" =~ \\.(js|jsx|ts|tsx|css|json|md)$ ]]; then npx prettier --write \"$CLAUDE_FILE_PATH\" 2>/dev/null || true; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" =~ \\.(js|jsx|ts|tsx|css|json|md)$ ]]; then npx prettier --write \"$F\" 2>/dev/null || true; fi"
           }
         ]
       }
@@ -180,7 +180,7 @@ tool input and context.
         "hooks": [
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" =~ \\.(ts|tsx|js|jsx)$ ]]; then npx eslint --fix \"$CLAUDE_FILE_PATH\" 2>/dev/null || true; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" =~ \\.(ts|tsx|js|jsx)$ ]]; then npx eslint --fix \"$F\" 2>/dev/null || true; fi"
           }
         ]
       }
@@ -200,7 +200,7 @@ tool input and context.
         "hooks": [
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" =~ \\.tsx?$ ]]; then npx tsc --noEmit --pretty 2>&1 | head -20 || true; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" =~ \\.tsx?$ ]]; then npx tsc --noEmit --pretty 2>&1 | head -20 || true; fi"
           }
         ]
       }
@@ -220,7 +220,7 @@ tool input and context.
         "hooks": [
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" == *.py ]]; then ruff check --fix \"$CLAUDE_FILE_PATH\" 2>/dev/null && ruff format \"$CLAUDE_FILE_PATH\" 2>/dev/null; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" == *.py ]]; then ruff check --fix \"$F\" 2>/dev/null && ruff format \"$F\" 2>/dev/null; fi"
           }
         ]
       }
@@ -240,7 +240,7 @@ tool input and context.
         "hooks": [
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" == *.json ]]; then python3 -c \"import json; json.load(open('$CLAUDE_FILE_PATH'))\" 2>&1 || echo 'WARNING: Invalid JSON in $CLAUDE_FILE_PATH' >&2; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" == *.json ]]; then python3 -c \"import json; json.load(open('$F'))\" 2>&1 || echo 'WARNING: Invalid JSON in $F' >&2; fi"
           }
         ]
       }
@@ -266,7 +266,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_FILE_PATH\" | grep -qiE '(\\.env$|\\.env\\.|credentials|secrets?|private.key|id_rsa)'; then echo 'BLOCKED: Cannot modify sensitive files' >&2; exit 2; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if echo \"$F\" | grep -qiE '(\\.env$|\\.env\\.|credentials|secrets?|private.key|id_rsa)'; then echo 'BLOCKED: Cannot modify sensitive files' >&2; exit 2; fi"
           }
         ]
       }
@@ -286,7 +286,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE '(rm -rf /|rm -rf \\*|DROP TABLE|DROP DATABASE|--force push|git push.*(--force|-f)|> /dev/sd|mkfs\\.|dd if=)'; then echo 'BLOCKED: Potentially destructive command' >&2; exit 2; fi"
+            "command": "IN=$(cat); CMD=$(jq -r '.tool_input.command // empty' <<<\"$IN\"); if echo \"$CMD\" | grep -qE '(rm -rf /|rm -rf \\*|DROP TABLE|DROP DATABASE|--force push|git push.*(--force|-f)|> /dev/sd|mkfs\\.|dd if=)'; then echo 'BLOCKED: Potentially destructive command' >&2; exit 2; fi"
           }
         ]
       }
@@ -306,7 +306,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qiE '(production|prod\\.|prod-|PROD_|--prod)'; then echo 'BLOCKED: Production commands not allowed in development' >&2; exit 2; fi"
+            "command": "IN=$(cat); CMD=$(jq -r '.tool_input.command // empty' <<<\"$IN\"); if echo \"$CMD\" | grep -qiE '(production|prod\\.|prod-|PROD_|--prod)'; then echo 'BLOCKED: Production commands not allowed in development' >&2; exit 2; fi"
           }
         ]
       }
@@ -326,7 +326,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_FILE_PATH\" | grep -qE '(generated|dist/|build/|\\.min\\.|vendor/|node_modules/)'; then echo 'BLOCKED: Cannot edit generated or vendored files' >&2; exit 2; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if echo \"$F\" | grep -qE '(generated|dist/|build/|\\.min\\.|vendor/|node_modules/)'; then echo 'BLOCKED: Cannot edit generated or vendored files' >&2; exit 2; fi"
           }
         ]
       }
@@ -371,7 +371,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -q 'git commit'; then if ! echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE '(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\\(|:)'; then echo 'BLOCKED: Commit must use conventional commits (feat|fix|docs|...)' >&2; exit 2; fi; fi"
+            "command": "IN=$(cat); CMD=$(jq -r '.tool_input.command // empty' <<<\"$IN\"); if echo \"$CMD\" | grep -q 'git commit'; then if ! echo \"$CMD\" | grep -qE '(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\\(|:)'; then echo 'BLOCKED: Commit must use conventional commits (feat|fix|docs|...)' >&2; exit 2; fi; fi"
           }
         ]
       }
@@ -391,7 +391,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "git add \"$CLAUDE_FILE_PATH\" 2>/dev/null || true"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); git add \"$F\" 2>/dev/null || true"
           }
         ]
       }
@@ -411,7 +411,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" =~ \\.(ts|tsx)$ ]] && [[ ! \"$CLAUDE_FILE_PATH\" =~ index\\.ts ]]; then DIR=$(dirname \"$CLAUDE_FILE_PATH\"); if [ -f \"$DIR/index.ts\" ]; then echo \"Note: Consider updating $DIR/index.ts with the new export\" >&2; fi; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" =~ \\.(ts|tsx)$ ]] && [[ ! \"$F\" =~ index\\.ts ]]; then DIR=$(dirname \"$F\"); if [ -f \"$DIR/index.ts\" ]; then echo \"Note: Consider updating $DIR/index.ts with the new export\" >&2; fi; fi"
           }
         ]
       }
@@ -431,7 +431,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" =~ \\.py$ ]] && [[ ! \"$CLAUDE_FILE_PATH\" =~ test_ ]]; then TESTFILE=$(echo \"$CLAUDE_FILE_PATH\" | sed 's/\\(.*\\)\\/\\(.*\\)\\.py/\\1\\/test_\\2.py/'); if [ -f \"$TESTFILE\" ]; then python3 -m pytest \"$TESTFILE\" -x -q 2>&1 | tail -5; fi; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" =~ \\.py$ ]] && [[ ! \"$F\" =~ test_ ]]; then TESTFILE=$(echo \"$F\" | sed 's/\\(.*\\)\\/\\(.*\\)\\.py/\\1\\/test_\\2.py/'); if [ -f \"$TESTFILE\" ]; then python3 -m pytest \"$TESTFILE\" -x -q 2>&1 | tail -5; fi; fi"
           }
         ]
       }
@@ -451,7 +451,7 @@ Block modifications to files containing secrets or credentials.
         "hooks": [
           {
             "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_ARG_COMMAND\" | grep -qE '^(rm |mv |cp |chmod|chown|kill|pkill|mkdir|touch|tee |>|>>)'; then echo 'BLOCKED: Only read commands allowed in this mode' >&2; exit 2; fi"
+            "command": "IN=$(cat); CMD=$(jq -r '.tool_input.command // empty' <<<\"$IN\"); if echo \"$CMD\" | grep -qE '^(rm |mv |cp |chmod|chown|kill|pkill|mkdir|touch|tee |>|>>)'; then echo 'BLOCKED: Only read commands allowed in this mode' >&2; exit 2; fi"
           }
         ]
       }
@@ -605,7 +605,7 @@ Re-inject critical context after compaction or at session start.
         "hooks": [
           {
             "type": "command",
-            "command": "echo \"$(date -Iseconds) | $CLAUDE_TOOL_NAME | ${CLAUDE_FILE_PATH:-${CLAUDE_TOOL_ARG_COMMAND:-n/a}}\" >> .claude/tool-usage.log 2>/dev/null || true"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); CMD=$(jq -r '.tool_input.command // empty' <<<\"$IN\"); TOOL=$(jq -r '.tool_name // empty' <<<\"$IN\"); echo \"$(date -Iseconds) | $TOOL | ${F:-${CMD:-n/a}}\" >> .claude/tool-usage.log 2>/dev/null || true"
           }
         ]
       }
@@ -625,7 +625,7 @@ Re-inject critical context after compaction or at session start.
         "hooks": [
           {
             "type": "command",
-            "command": "echo \"SESSION_START $(date -Iseconds) $CLAUDE_SESSION_ID\" >> .claude/sessions.log 2>/dev/null || true"
+            "command": "IN=$(cat); SID=$(jq -r '.session_id // empty' <<<\"$IN\"); echo \"SESSION_START $(date -Iseconds) $SID\" >> .claude/sessions.log 2>/dev/null || true"
           }
         ]
       }
@@ -636,7 +636,7 @@ Re-inject critical context after compaction or at session start.
         "hooks": [
           {
             "type": "command",
-            "command": "echo \"SESSION_STOP $(date -Iseconds) $CLAUDE_SESSION_ID\" >> .claude/sessions.log 2>/dev/null || true"
+            "command": "IN=$(cat); SID=$(jq -r '.session_id // empty' <<<\"$IN\"); echo \"SESSION_STOP $(date -Iseconds) $SID\" >> .claude/sessions.log 2>/dev/null || true"
           }
         ]
       }
@@ -660,15 +660,15 @@ Re-inject critical context after compaction or at session start.
         "hooks": [
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" == *.py ]]; then python3 -m black --quiet \"$CLAUDE_FILE_PATH\" 2>/dev/null; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" == *.py ]]; then python3 -m black --quiet \"$F\" 2>/dev/null; fi"
           },
           {
             "type": "command",
-            "command": "if [[ \"$CLAUDE_FILE_PATH\" == *.py ]]; then ruff check --fix \"$CLAUDE_FILE_PATH\" 2>/dev/null; fi"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); if [[ \"$F\" == *.py ]]; then ruff check --fix \"$F\" 2>/dev/null; fi"
           },
           {
             "type": "command",
-            "command": "echo \"$(date -Iseconds) | FORMAT | $CLAUDE_FILE_PATH\" >> .claude/tool-usage.log 2>/dev/null || true"
+            "command": "IN=$(cat); F=$(jq -r '.tool_input.file_path // empty' <<<\"$IN\"); echo \"$(date -Iseconds) | FORMAT | $F\" >> .claude/tool-usage.log 2>/dev/null || true"
           }
         ]
       }
@@ -686,7 +686,7 @@ Create a reusable hook script for complex logic:
 #!/bin/bash
 # Validate file edits with multiple checks
 
-FILE="$CLAUDE_TOOL_ARG_FILE_PATH"
+FILE=$(jq -r '.tool_input.file_path // empty')   # hook input arrives as JSON on stdin
 
 # Check 1: Not a lock file
 if [[ "$FILE" =~ (lock|\.lock)$ ]]; then
@@ -777,7 +777,7 @@ exit 0
 
 ### Hook Blocking Unexpectedly
 
-- Add `echo` debugging: `echo "DEBUG: PATH=$CLAUDE_TOOL_ARG_FILE_PATH" >&2`
+- Log the raw input to see what the hook receives: `IN=$(cat); echo "DEBUG: $IN" >&2`
 - Check that your grep patterns are not too broad
 - Verify that exit codes are correct (exit 0 = allow, exit 2 = block)
 

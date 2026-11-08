@@ -2,15 +2,15 @@
 name: devops-workflow-engineer
 description: >
   Generate and optimize GitHub Actions CI/CD workflows. Use when designing workflows, planning
-  multi-environment deployments, optimizing pipeline cost and runtime, or implementing blue-
-  green, canary, or rolling deployment strategies.
+  multi-environment deployments, optimizing pipeline cost and runtime, or implementing
+  blue-green, canary, or rolling deployment strategies.
 license: MIT + Commons Clause
 metadata:
   version: 1.2.0
   author: borghei
   category: engineering
   domain: devops
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [github-actions, ci-cd, deployment, workflows]
   python-tools: workflow_generator.py, pipeline_analyzer.py, deployment_planner.py
   tech-stack: python, github-actions, yaml, ci-cd
@@ -44,17 +44,55 @@ Before generating the workflow, settle the inputs below. When one is missing or 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `workflow_generator.py` | Generate GitHub Actions YAML (ci, cd, release, security-scan, docs-check) | `python scripts/workflow_generator.py --type ci --language python --test-framework pytest` |
-| `pipeline_analyzer.py` | Analyze workflows for optimization findings, cost estimates, severity ratings | `python scripts/pipeline_analyzer.py .github/workflows/ --format json` |
-| `deployment_planner.py` | Generate a deployment plan with strategy, health checks, rollback | `python scripts/deployment_planner.py --type webapp --environments dev,staging,prod --strategy canary` |
+1. **Decide what CI is for.** Many teams run the test suite locally before pushing and let CI only lint, build and deploy; others gate merges on CI tests. Ask, and generate with `--no-tests` for the first case.
+2. **Generate** the workflow with `workflow_generator.py` (CI, CD, release, security-scan or docs-check) and adapt the install, lint and deploy commands to the repository.
+3. **Harden** it: least-privilege `permissions:`, OIDC instead of long-lived cloud keys, `timeout-minutes` on every job, concurrency cancellation, and third-party actions pinned to a full commit SHA (tools such as Dependabot or pinact keep SHA pins current). The generator emits major-version tags (for example `actions/checkout@v7`) for readability; in production, pin each one to its full commit SHA with the tag as a comment.
+4. **Analyze** the result and any existing workflows with `pipeline_analyzer.py`; fix every critical finding.
+5. **Plan the rollout** with `deployment_planner.py` (blue-green, canary or rolling) and wire its health checks and rollback steps into the CD job.
+6. **Verify** on a branch: the workflow runs green, a deliberately failing step fails the run, and a rollback has been rehearsed.
 
-All tools support `--format json` and `--output`/`-o` for file writing.
+## Quick Start
 
-## References
+```bash
+python3 scripts/workflow_generator.py --type ci --language python --test-framework pytest
+python3 scripts/workflow_generator.py --type ci --language node --no-tests --branches main
+python3 scripts/pipeline_analyzer.py assets/sample_flawed_workflow.yml       # hard-coded key, v2 actions, no timeouts (exit 1)
+python3 scripts/pipeline_analyzer.py assets/ci-template.yml                  # info only (exit 0)
+python3 scripts/deployment_planner.py --type webapp --environments dev,staging,prod --strategy canary
+```
+
+## Tools Overview
+
+| Tool | What it does | Key flags | Exit codes |
+|------|--------------|-----------|------------|
+| `workflow_generator.py` | GitHub Actions YAML for ci, cd, release, security-scan, docs-check in python, node, go or rust; CD targets kubernetes, docker compose, ECS, static | `--type`, `--language`, `--test-framework`, `--deploy-target`, `--branches`, `--no-tests`, `--format yaml|json` | 0, 2 bad input |
+| `pipeline_analyzer.py` | Missing caching/timeouts/permissions, serial chains, outdated actions, possible hard-coded secrets, oversized runners, cost estimate | `<file-or-dir>`, `--format json|text` | 0 no critical finding, 1 critical finding, 2 bad path |
+| `deployment_planner.py` | Strategy, stages, health checks and rollback per environment | `--type`, `--environments`, `--strategy`, `--format` | 0, 2 bad input |
+
+Generated versions as of November 2026: Python 3.11-3.15 (default 3.14), Node 22, 24 and 26 LTS (default 24), Go `oldstable`/`stable` aliases, Rust `stable`/`beta`; GitHub actions `checkout@v7`, `setup-python@v7`, `setup-node@v7`, `setup-go@v7`, `cache@v6`, `upload-artifact@v7`, `download-artifact@v8`. Check them against current support schedules and releases before relying on them.
+
+## Anti-Patterns
+
+**Mistake:** Pinning actions to a tag such as `@v7` in production.
+**Why it happens:** Tags read well and update automatically.
+**Instead:** Tags can be moved to malicious commits. Pin to a full SHA with a comment naming the version, and let a bot bump it.
+
+**Mistake:** Storing cloud credentials as repository secrets for deploys.
+**Why it happens:** It is the quickest way to get a deploy working.
+**Instead:** Use OIDC federation to the cloud provider with a role scoped to the environment.
+
+**Mistake:** Running the full suite in CI when the team already runs it locally, and calling the duplicate "safety".
+**Why it happens:** CI templates include a test job by default.
+**Instead:** Decide where tests run. If locally, generate `--no-tests` and keep CI for lint, build, deploy and environment-only checks such as migration rehearsal.
+
+## Files
+
+- `scripts/workflow_generator.py`, `scripts/pipeline_analyzer.py`, `scripts/deployment_planner.py` — the tools above.
+- `assets/ci-template.yml`, `assets/cd-template.yml` — reference workflows; `assets/sample_flawed_workflow.yml` — analyzer demo with a fake placeholder key.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 

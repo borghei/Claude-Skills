@@ -537,7 +537,7 @@ def main():
 
     if not target.exists():
         print(f"Error: Path does not exist: {target}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if target.is_file():
         analysis = analyze_file(target)

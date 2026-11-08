@@ -381,7 +381,7 @@ def main():
         source_path = Path(args.html)
         if not source_path.exists():
             print(f"Error: HTML file '{args.html}' not found.", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         html_content = source_path.read_text(encoding="utf-8")
         extractor = ElementExtractor()
         extractor.feed(html_content)
@@ -394,11 +394,11 @@ def main():
         source_path = Path(args.selectors)
         if not source_path.exists():
             print(f"Error: Selector file '{args.selectors}' not found.", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         elements = parse_selector_file(source_path)
         if not elements:
             print("Error: No valid selectors found in file.", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         code, properties = generate_page_object(args.name, elements, args.route, source_type="selectors")
         source = str(source_path)
 

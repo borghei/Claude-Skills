@@ -1,0 +1,7 @@
+order_id,customer_email,amount,status,created_at
+1001,ana@example.com,49.90,paid,2026-10-01
+1002,ben-at-example,120.00,paid,2026-10-01
+1003,chen@example.com,-15.50,pending,2026-10-02
+1003,dara@example.com,89.00,shipped,2026-10-02
+1005,,240.75,paid,2026-10-03
+1006,fay@example.com,32.10,paid,not-a-date

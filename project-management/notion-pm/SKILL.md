@@ -1,16 +1,16 @@
 ---
 name: notion-pm
 description: >
-  Notion expert for product management workflows. Use for database design
-  for PRDs/OKRs/Roadmaps/Decisions, property and view design, page
-  architecture, Notion REST API, and sync with Jira, Linear, and GitHub.
+  Designs Notion databases, views and page structure for PRDs, OKRs, roadmaps
+  and decisions, and writes REST API calls. Use when asked to "design a PRD
+  database", sync Notion with Jira or Linear, or script the Notion API.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-integration
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: [notion, rest-api, jira, linear, github]
   tags: [notion, databases, prd, okr, roadmap, decisions]
 ---
@@ -70,7 +70,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Pull the reference that matches the task; keep this file lean and load detail on demand.
 
@@ -106,3 +106,13 @@ Pull the reference that matches the task; keep this file lean and load detail on
 | `execution/release-notes/` | Notion → Release | Shipped PRDs feed release notes input |
 | `senior-pm/` | Notion → Portfolio | OKR and Roadmap DBs feed portfolio reports |
 | `discovery/interview-synthesis/` | Research → Notion | Customer research database populated from interview synth output |
+
+## Files
+
+Reference files are described under Reference Documentation above. Templates:
+
+| File | Purpose |
+|------|---------|
+| `assets/notion-okr-template.md` | Database template |
+| `assets/notion-prd-template.md` | Database template |
+| `assets/notion-roadmap-template.md` | Database template |

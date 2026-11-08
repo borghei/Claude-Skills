@@ -1,0 +1,12 @@
+{
+  "isolation_mode": "shared",
+  "default_plan": "free",
+  "valid_plans": ["free", "pro", "enterprise"],
+  "feature_flags": {"sso": {}, "audit-log": {}},
+  "tenants": [
+    {"id": "ws_acme", "name": "Acme", "slug": "acme", "plan": "pro", "feature_flags": {"audit-log": true}},
+    {"id": "ws_globex", "name": "Globex", "slug": "globex", "plan": "enterprise",
+     "custom_domain": "app.globex.example", "feature_flags": {"sso": true, "audit-log": true}},
+    {"id": "ws_initech", "name": "Initech", "slug": "initech", "plan": "free"}
+  ]
+}

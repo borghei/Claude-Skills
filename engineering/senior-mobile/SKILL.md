@@ -1,29 +1,21 @@
 ---
 name: senior-mobile
 description: >
-  Use when the user asks to "build a mobile app", "scaffold React Native project",
-  "create SwiftUI views", "set up Jetpack Compose", "optimize mobile performance",
-  "configure Expo Router navigation", "implement offline-first storage",
-  "submit to App Store", or "profile mobile rendering".
-  Expert mobile development covering iOS (Swift/SwiftUI), Android (Kotlin/Compose),
-  React Native, and Flutter for native and cross-platform applications.
+  Mobile development across SwiftUI, Jetpack Compose, React Native (Expo) and Flutter:
+  scaffolding, feature architecture, static performance checks and store listings. Use when
+  building, optimizing or shipping a mobile app.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
   author: borghei
   category: engineering
   domain: mobile-development
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [mobile, ios, android, react-native, flutter, swift, kotlin]
 ---
 # Senior Mobile Developer
 
 Expert mobile application development across iOS, Android, React Native, and Flutter — scaffolding production projects, building MVVM features (SwiftUI, Jetpack Compose, Expo Router), static performance analysis, and App Store / Play Store submission.
-
-## Keywords
-
-mobile, ios, android, react-native, flutter, swift, kotlin, swiftui,
-jetpack-compose, expo-router, zustand, app-store, performance, offline-first
 
 ## Core Capabilities
 
@@ -50,13 +42,28 @@ Before scaffolding, settle the inputs below. When one is missing or vague and wo
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `mobile_scaffold.py` | Scaffold a project for react-native, flutter, ios-native, or android-native | `python scripts/mobile_scaffold.py MyApp --platform react-native --state zustand` |
-| `store_metadata_generator.py` | Generate App Store / Play Store listing metadata | `python scripts/store_metadata_generator.py --app-name FitTrack --category health --features "workout,tracking"` |
-| `app_performance_analyzer.py` | Static performance analysis (score, issues, bundle estimate) | `python scripts/app_performance_analyzer.py ./my-app --platform react-native` |
+| `mobile_scaffold.py` | Scaffold react-native (Expo Router), flutter, ios-native (SwiftUI) or android-native (Compose) into `<output-dir>/<name>` (`--platform`, `--state`, `--typescript`, `-o`, `--json`) | `python scripts/mobile_scaffold.py MyApp --platform react-native --state zustand -o /tmp/apps` |
+| `store_metadata_generator.py` | App Store / Play Store listing drafts: titles, keywords, privacy labels, age rating, checklist | `python scripts/store_metadata_generator.py --app-name FitTrack --category health --features "workout,tracking"` |
+| `app_performance_analyzer.py` | Static scan: image sizes, inline styles, re-render and leak patterns, console logs, bundle estimate | `python scripts/app_performance_analyzer.py /tmp/apps/MyApp --platform react-native` |
+
+Always pass `-o` to the scaffolder: it defaults to the current directory. It refuses to
+overwrite an existing project folder.
+
+Exit codes: `0` ok; `2` bad input (missing directory, existing or unwritable target folder, empty
+`--app-name` or `--features`, unknown state library). The analyzer reports findings with
+exit 0; read its score and issue list rather than gating on the code.
+
+Version currency: the React Native template pins Expo SDK 58 (React Native 0.88, React 19.3)
+and installs the native companion packages with `npm run setup` (`npx expo install`, so they
+match the SDK). The Android template targets API 36 (Android 16), which Google Play has
+required for new apps and updates since 2026-08-31, with the Kotlin 2 Compose compiler plugin
+and KSP. After any upgrade, run `npx expo install --fix` to align native packages with the installed SDK;
+check the current Google Play target-API requirement and Xcode/iOS SDK minimum before
+release, since both move every year.
 
 ## References
 
@@ -84,13 +91,29 @@ Load the reference that matches the task — keep this file lean and pull detail
 - UI/UX design systems, accessibility auditing, or design token management (see `senior-frontend` and `design-auditor` skills).
 - Runtime profiling with native tools (Xcode Instruments, Android Studio Profiler) -- the analyzer performs static code analysis only, not live device profiling.
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-frontend` | Shared component patterns, styling conventions, and responsive design principles for React Native web targets | Frontend design tokens and component APIs feed into mobile UI components |
-| `senior-backend` | API contract definitions, authentication flows, and data models consumed by mobile clients | Backend OpenAPI specs define mobile service layer interfaces |
-| `senior-devops` | Build pipelines, code signing automation, and deployment workflows for mobile releases | Mobile build artifacts flow into CI/CD pipelines for TestFlight / Play Console distribution |
-| `senior-qa` | Test strategy alignment, device matrix coverage, and E2E testing patterns for mobile screens | QA test plans drive device coverage; mobile scaffold includes test directory structure |
-| `senior-security` | Secure storage patterns (Keychain/Keystore), certificate pinning, and data encryption for mobile apps | Security requirements inform Keychain helper implementation and network client configuration |
-| `release-orchestrator` | Version bumping, changelog generation, and coordinated release across iOS and Android | Release metadata and version info flow from orchestrator into store submission workflow |
+### Shipping With Mismatched Native Versions
+**Mistake:** Bumping `expo` or `react-native` in package.json by hand and leaving the other native packages where they were.
+**Why it happens:** It looks like a one-line upgrade.
+**Instead:** Upgrade the SDK with `npx expo install expo@latest --fix` so every native module moves to the version that SDK was tested with, then rebuild the dev client.
+
+### Trusting a Static Score as Performance
+**Mistake:** Reporting "performance A" from `app_performance_analyzer.py` without profiling.
+**Why it happens:** The score is the most visible number in the output.
+**Instead:** The analyzer finds code smells. Measure startup time, frame drops and memory on a low-end device with Xcode Instruments, Android Studio Profiler or the React Native performance monitor before claiming an improvement.
+
+### Missing the Annual Store Deadlines
+**Mistake:** Discovering at submission time that the build targets an Android API level or iOS SDK the stores no longer accept.
+**Why it happens:** The requirements change once a year and the old build still runs.
+**Instead:** Check the current Google Play target-API and App Store SDK minimums at the start of each release cycle and bump them in the template.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/mobile_scaffold.py` | Project scaffolder for four platforms |
+| `scripts/store_metadata_generator.py` | Store listing metadata and submission checklist |
+| `scripts/app_performance_analyzer.py` | Static performance scan |
+| `REFERENCE.md` | Extended worked code for the workflows |
+| `references/*.md` | Workflows, tool reference, troubleshooting, RN and native patterns, mobile security |

@@ -1052,8 +1052,8 @@ Examples:
         
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

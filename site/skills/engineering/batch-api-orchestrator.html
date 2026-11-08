@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Batch Api Orchestrator - Claude Skills</title>
-  <meta name="description" content="This skill should be used when the user asks to &quot;batch LLM requests&quot;, &quot;should I use the batch API&quot;, &quot;estimate batch vs realtime cost&quot;, &quot;design a bulk LLM job&quot;, or &quot;process thousands of prompts cheaply">
+  <meta name="description" content="Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction through a p">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/batch-api-orchestrator.html">
   <meta property="og:title" content="Batch Api Orchestrator - Claude Skills">
-  <meta property="og:description" content="This skill should be used when the user asks to &quot;batch LLM requests&quot;, &quot;should I use the batch API&quot;, &quot;estimate batch vs realtime cost&quot;, &quot;design a bulk LLM job&quot;, or &quot;process thousands of prompts cheaply">
+  <meta property="og:description" content="Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction through a p">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/batch-api-orchestrator.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Batch Api Orchestrator", "description": "This skill should be used when the user asks to \"batch LLM requests\", \"should I use the batch API\", \"estimate batch vs realtime cost\", \"design a bulk LLM job\", or \"process thousands of prompts cheaply\".", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/batch-api-orchestrator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Batch Api Orchestrator", "description": "Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction through a provider batch API.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/batch-api-orchestrator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Batch Api Orchestrator</h1>
-    <p class="page-subtitle">This skill should be used when the user asks to &quot;batch LLM requests&quot;, &quot;should I use the batch API&quot;, &quot;estimate batch vs realtime cost&quot;, &quot;design a bulk LLM job&quot;, or &quot;process thousands of prompts cheaply&quot;.</p>
+    <p class="page-subtitle">Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction through a provider batch API.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 2 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">batch-api</span><span class="tag">llm</span><span class="tag">cost-optimization</span><span class="tag">throughput</span><span class="tag">async</span></div>
   </div>
@@ -393,13 +393,17 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Batch Api Orchestrator (Engineering domain).
 
-This skill should be used when the user asks to &quot;batch LLM requests&quot;, &quot;should I use the batch API&quot;, &quot;estimate batch vs realtime cost&quot;, &quot;design a bulk LLM job&quot;, or &quot;process thousands of prompts cheaply&quot;.
+Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction through a provider batch API.
 
 &gt; **Category:** Engineering &gt; **Domain:** AI Engineering Decide when to run LLM work through an asynchronous batch API versus realtime/streaming, then design the job so it is cheap, idempotent, and resilient to partial failure. Batch APIs typically cost roughly half of realtime in exchange for highe
 
 ## Your Key Capabilities
+- Provider limits to check (as of 2026-11, from the providers&#x27; batch API docs; confirm before sizing a job)
 - 1. Decide batch vs realtime, then size the cost
 - 2. Design a resilient bulk job
+- Batching interactive work
+- One giant batch
+- Trusting output order
 
 ## How to Help
 When the user asks for help in this domain:
@@ -419,13 +423,17 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Batch Api Orchestrator (Engineering domain).
 
-This skill should be used when the user asks to &quot;batch LLM requests&quot;, &quot;should I use the batch API&quot;, &quot;estimate batch vs realtime cost&quot;, &quot;design a bulk LLM job&quot;, or &quot;process thousands of prompts cheaply&quot;.
+Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction through a provider batch API.
 
 &gt; **Category:** Engineering &gt; **Domain:** AI Engineering Decide when to run LLM work through an asynchronous batch API versus realtime/streaming, then design the job so it is cheap, idempotent, and resilient to partial failure. Batch APIs typically cost roughly half of realtime in exchange for highe
 
 ## Your Key Capabilities
+- Provider limits to check (as of 2026-11, from the providers&#x27; batch API docs; confirm before sizing a job)
 - 1. Decide batch vs realtime, then size the cost
 - 2. Design a resilient bulk job
+- Batching interactive work
+- One giant batch
+- Trusting output order
 
 ## How to Help
 When the user asks for help in this domain:
@@ -462,6 +470,12 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Decide when to run LLM work through an asynchronous batch API versus realtime/streaming, then design the job so it is cheap, idempotent, and resilient to partial failure. Batch APIs typically cost roughly half of realtime in exchange for higher latency (results arrive over minutes to hours, not milliseconds), which makes them ideal for evals, backfills, embeddings, and bulk classification/extraction — and wrong for anything a human is waiting on. This skill is model- and vendor-agnostic: it reasons about the batch *pattern*, not any one provider&#x27;s API.
 
+## When to Use
+
+- A job of thousands of LLM requests where no person waits on each answer (evals, backfills, embeddings, bulk classification).
+- Choosing between a provider&#x27;s batch API and realtime calls on cost and latency.
+- Designing chunk sizes, retries and reconciliation for a batch job before writing client code.
+
 ## Clarify First
 
 Before recommending or designing a batch job, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
@@ -496,6 +510,27 @@ python scripts/batch_job_planner.py \
 | `scripts/batch_job_planner.py` | Produce a chunking + idempotency + partial-failure plan for a bulk job | `--total-items`, `--max-batch-size`, `--retry-policy`, `--max-retries`, `--json` |
 
 Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-readable output. Run `--help` for full usage.
+
+**Exit codes (both).** `0` estimate or plan printed; `2` invalid arguments (negative or zero counts,
+discount outside 0-1, unknown latency tolerance or retry policy).
+
+### Provider limits to check (as of 2026-11, from the providers&#x27; batch API docs; confirm before sizing a job)
+
+| | Anthropic Message Batches | OpenAI Batch API |
+|---|---|---|
+| Discount vs realtime | 50% | 50% |
+| Max per batch | 100,000 requests or 256 MB | 50,000 requests per input file, input file up to 200 MB |
+| Completion window | most finish within an hour; expire after 24 h | 24 h window |
+| Result retention | 29 days | output file deleted 30 days after the batch completes (set 1 hour to 30 days with `output_expires_after`) |
+| Prompt caching | stacks with the batch discount | check current docs |
+
+Use these to set `--max-batch-size` and `--batch-discount`. Limits change, so read the provider&#x27;s
+batch documentation before sizing a production job.
+
+**Done when:**
+1. The cost comparison used your provider&#x27;s current prices and discount, not the placeholders.
+2. Every request carries an idempotency key and every result is joined back to its request by id.
+3. A small pilot batch (a few hundred items) completed, and failed items were retried on their own.
 
 ## Workflows
 
@@ -533,6 +568,29 @@ Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-r
 - The default prices in `batch_cost_estimator.py` are neutral placeholders, not real prices. Estimates mean something only after the user supplies current vendor prices and discount.
 - The roughly half-price batch discount is a rule of thumb. Discounts, maximum batch sizes, completion windows and result retention differ by vendor and change over time.
 - Estimates assume every request costs the average token count. Long-tail inputs, retries and failed items add cost the model does not show.
+
+## Anti-Patterns
+
+### Batching interactive work
+**Mistake:** Sending user-facing requests through the batch API to save money.
+**Why it happens:** The discount is large and the latency cost is invisible in a spreadsheet.
+**Instead:** Batch only work nobody waits on. `batch_cost_estimator.py` recommends realtime whenever `--latency-tolerance realtime` is set.
+
+### One giant batch
+**Mistake:** Submitting a whole backfill as a single maximum-size batch.
+**Why it happens:** Fewer jobs feel simpler to track.
+**Instead:** Chunk below the provider limit so a bad prompt or schema error costs one chunk, not the run. Pilot a small chunk first.
+
+### Trusting output order
+**Mistake:** Zipping results to inputs by position.
+**Why it happens:** Small tests come back in order.
+**Instead:** Join on the request id you set (`custom_id` or equivalent) and send unmatched results to a dead-letter set.
+
+## Files
+
+- `scripts/batch_cost_estimator.py` — realtime vs batch cost and a batch/realtime verdict from latency tolerance.
+- `scripts/batch_job_planner.py` — chunk plan, idempotency-key scheme and retry plan.
+- `references/` — decision tree and job design; cost and throughput economics.
 
 ## Reference Documentation
 
@@ -574,7 +632,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Batch Api Orchestrator&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;batch LLM requests&quot;, &quot;should I use the batch API&quot;, &quot;estimate batch vs realtime cost&quot;, &quot;design a bulk LLM job&quot;, or &quot;process thousands of prompts cheaply&quot;.&quot;
+   - Description: &quot;Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction through a provider batch API.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -606,6 +664,12 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 Decide when to run LLM work through an asynchronous batch API versus realtime/streaming, then design the job so it is cheap, idempotent, and resilient to partial failure. Batch APIs typically cost roughly half of realtime in exchange for higher latency (results arrive over minutes to hours, not milliseconds), which makes them ideal for evals, backfills, embeddings, and bulk classification/extraction — and wrong for anything a human is waiting on. This skill is model- and vendor-agnostic: it reasons about the batch *pattern*, not any one provider&#x27;s API.
 
+## When to Use
+
+- A job of thousands of LLM requests where no person waits on each answer (evals, backfills, embeddings, bulk classification).
+- Choosing between a provider&#x27;s batch API and realtime calls on cost and latency.
+- Designing chunk sizes, retries and reconciliation for a batch job before writing client code.
+
 ## Clarify First
 
 Before recommending or designing a batch job, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
@@ -640,6 +704,27 @@ python scripts/batch_job_planner.py \
 | `scripts/batch_job_planner.py` | Produce a chunking + idempotency + partial-failure plan for a bulk job | `--total-items`, `--max-batch-size`, `--retry-policy`, `--max-retries`, `--json` |
 
 Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-readable output. Run `--help` for full usage.
+
+**Exit codes (both).** `0` estimate or plan printed; `2` invalid arguments (negative or zero counts,
+discount outside 0-1, unknown latency tolerance or retry policy).
+
+### Provider limits to check (as of 2026-11, from the providers&#x27; batch API docs; confirm before sizing a job)
+
+| | Anthropic Message Batches | OpenAI Batch API |
+|---|---|---|
+| Discount vs realtime | 50% | 50% |
+| Max per batch | 100,000 requests or 256 MB | 50,000 requests per input file, input file up to 200 MB |
+| Completion window | most finish within an hour; expire after 24 h | 24 h window |
+| Result retention | 29 days | output file deleted 30 days after the batch completes (set 1 hour to 30 days with `output_expires_after`) |
+| Prompt caching | stacks with the batch discount | check current docs |
+
+Use these to set `--max-batch-size` and `--batch-discount`. Limits change, so read the provider&#x27;s
+batch documentation before sizing a production job.
+
+**Done when:**
+1. The cost comparison used your provider&#x27;s current prices and discount, not the placeholders.
+2. Every request carries an idempotency key and every result is joined back to its request by id.
+3. A small pilot batch (a few hundred items) completed, and failed items were retried on their own.
 
 ## Workflows
 
@@ -677,6 +762,29 @@ Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-r
 - The default prices in `batch_cost_estimator.py` are neutral placeholders, not real prices. Estimates mean something only after the user supplies current vendor prices and discount.
 - The roughly half-price batch discount is a rule of thumb. Discounts, maximum batch sizes, completion windows and result retention differ by vendor and change over time.
 - Estimates assume every request costs the average token count. Long-tail inputs, retries and failed items add cost the model does not show.
+
+## Anti-Patterns
+
+### Batching interactive work
+**Mistake:** Sending user-facing requests through the batch API to save money.
+**Why it happens:** The discount is large and the latency cost is invisible in a spreadsheet.
+**Instead:** Batch only work nobody waits on. `batch_cost_estimator.py` recommends realtime whenever `--latency-tolerance realtime` is set.
+
+### One giant batch
+**Mistake:** Submitting a whole backfill as a single maximum-size batch.
+**Why it happens:** Fewer jobs feel simpler to track.
+**Instead:** Chunk below the provider limit so a bad prompt or schema error costs one chunk, not the run. Pilot a small chunk first.
+
+### Trusting output order
+**Mistake:** Zipping results to inputs by position.
+**Why it happens:** Small tests come back in order.
+**Instead:** Join on the request id you set (`custom_id` or equivalent) and send unmatched results to a dead-letter set.
+
+## Files
+
+- `scripts/batch_cost_estimator.py` — realtime vs batch cost and a batch/realtime verdict from latency tolerance.
+- `scripts/batch_job_planner.py` — chunk plan, idempotency-key scheme and retry plan.
+- `references/` — decision tree and job design; cost and throughput economics.
 
 ## Reference Documentation
 
@@ -718,7 +826,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Batch Api Orchestrator&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;batch LLM requests&quot;, &quot;should I use the batch API&quot;, &quot;estimate batch vs realtime cost&quot;, &quot;design a bulk LLM job&quot;, or &quot;process thousands of prompts cheaply&quot;.&quot;
+   - Description: &quot;Decides batch vs realtime for bulk LLM work, prices both, and plans chunking, idempotency keys and partial-failure retries. Use when running evals, backfills, embeddings or bulk extraction through a provider batch API.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -777,7 +885,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/batch-api-orchestrator/scripts/tool_name.py --help</code></pre>
-  
+  <h2>Python Tools</h2><div class="tool-item"><h4>Provider limits to check (as of 2026-11, from the providers&#x27; batch API docs; confirm before sizing a job)</h4><p>| | Anthropic Message Batches | OpenAI Batch API |</p></div>
   <h2>Quick Start</h2><pre><code>cd engineering/batch-api-orchestrator
 
 # 1. Should this be batch or realtime, and what does it cost?
@@ -790,7 +898,7 @@ python scripts/batch_cost_estimator.py \
 python scripts/batch_job_planner.py \
   --total-items 50000 --max-batch-size 10000 --retry-policy exponential --json
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/batch-api-orchestrator/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

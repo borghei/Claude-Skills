@@ -18,7 +18,9 @@ Different models use different tokenizers:
 
 Token counts can vary 10-20% between tokenizers for the same text.
 
-## Pricing Table (as of Q1 2026)
+## Pricing Table (illustrative snapshot, Q1 2026)
+
+These figures are illustrative and not verified against current provider pages. Check each provider's pricing page, and pass real rates to `token_counter.py --prices FILE`.
 
 ### OpenAI Models
 

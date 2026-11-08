@@ -1,0 +1,11 @@
+{
+  "company_stage": "growth",
+  "as_of": "2026-05-27",
+  "initiatives": [
+    {"name": "Self-serve upgrade path for existing SMB accounts", "quadrant": "market_penetration", "investment_usd": 2500000, "expected_return_usd": 9000000, "risk_score": 2, "time_to_revenue_months": 4, "owner": "VP Growth", "rationale": "38% of SMB accounts hit seat limits; upgrade today needs a sales call"},
+    {"name": "Win-back campaign for churned 2024 cohort", "quadrant": "market_penetration", "investment_usd": 1500000, "expected_return_usd": 4000000, "risk_score": 2, "time_to_revenue_months": 3, "owner": "Head of Lifecycle", "rationale": "Exit surveys: 41% left over a missing integration we have since shipped"},
+    {"name": "EU expansion of the SMB product", "quadrant": "market_development", "investment_usd": 2500000, "expected_return_usd": 8000000, "risk_score": 3, "time_to_revenue_months": 12, "owner": "VP International", "rationale": "Proven SMB product; 9% of signups already from the EU without marketing"},
+    {"name": "Workflow automation add-on for current customers", "quadrant": "product_development", "investment_usd": 2000000, "expected_return_usd": 6500000, "risk_score": 3, "time_to_revenue_months": 9, "owner": "VP Product", "rationale": "Top feature request across 120 accounts; reuses the rules engine"},
+    {"name": "Payments product for a new buyer (finance teams)", "quadrant": "diversification", "investment_usd": 500000, "expected_return_usd": 2500000, "risk_score": 5, "time_to_revenue_months": 18, "owner": "CEO", "rationale": "Small option bet; kill if no design partner signs within two quarters"}
+  ]
+}

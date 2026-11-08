@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beta Program - Claude Skills</title>
-  <meta name="description" content="Closed beta program playbook covering recruitment, success criteria, communication cadence, and beta-to-GA exit gates.">
+  <meta name="description" content="Plan and run a closed beta: cohorts, exit gates agreed before recruiting, weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a closed beta or design-partner program before genera">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/beta-program.html">
   <meta property="og:title" content="Beta Program - Claude Skills">
-  <meta property="og:description" content="Closed beta program playbook covering recruitment, success criteria, communication cadence, and beta-to-GA exit gates.">
+  <meta property="og:description" content="Plan and run a closed beta: cohorts, exit gates agreed before recruiting, weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a closed beta or design-partner program before genera">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/beta-program.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Beta Program", "description": "Closed beta program playbook covering recruitment, success criteria, communication cadence, and beta-to-GA exit gates.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/beta-program.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Beta Program", "description": "Plan and run a closed beta: cohorts, exit gates agreed before recruiting, weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a closed beta or design-partner program before general availability.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/beta-program.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Beta Program</h1>
-    <p class="page-subtitle">Closed beta program playbook covering recruitment, success criteria, communication cadence, and beta-to-GA exit gates.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Plan and run a closed beta: cohorts, exit gates agreed before recruiting, weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a closed beta or design-partner program before general availability.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.2</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">beta-program</span><span class="tag">early-access</span><span class="tag">success-criteria</span><span class="tag">ga-readiness</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Beta Program (Project Management domain).
 
-Closed beta program playbook covering recruitment, success criteria, communication cadence, and beta-to-GA exit gates.
+Plan and run a closed beta: cohorts, exit gates agreed before recruiting, weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a closed beta or design-partner program before general availability.
 
 A structured playbook for running a closed beta that produces clear learning, retained design partners, and an unambiguous decision on whether to proceed to general availability. Most betas fail not because the product is wrong, but because the program is run informally: recruitment is opportunistic
 
@@ -424,7 +424,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Beta Program (Project Management domain).
 
-Closed beta program playbook covering recruitment, success criteria, communication cadence, and beta-to-GA exit gates.
+Plan and run a closed beta: cohorts, exit gates agreed before recruiting, weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a closed beta or design-partner program before general availability.
 
 A structured playbook for running a closed beta that produces clear learning, retained design partners, and an unambiguous decision on whether to proceed to general availability. Most betas fail not because the product is wrong, but because the program is run informally: recruitment is opportunistic
 
@@ -471,13 +471,6 @@ A structured playbook for running a closed beta that produces clear learning, re
 
 A good closed beta runs 4-8 weeks, recruits 10-30 participants from three concentric cohorts (&quot;friends, family, fanatics&quot;), publishes a weekly cadence the team commits to, and exits on pre-agreed criteria rather than the calendar. The outputs are a beta program plan, a recruitment script, a weekly cadence template, and an exit memo that either greenlights GA, extends the beta, or kills the feature.
 
-## Core Capabilities
-
-- **Cohort design** — sequence recruitment through Friends → Family → Fanatics rings of decreasing trust and increasing signal.
-- **Kano scoping** — decide the beta feature set (Must-be / Performance / Delight) so the beta produces quotable testimonials, not neutral feedback.
-- **Exit gates** — quantitative + qualitative success criteria set *before* recruitment, resolving to Greenlight / Extend / Pivot / Kill.
-- **Weekly cadence** — a committed Monday→Friday communication rhythm that keeps a beta from dying of silence.
-
 ## When to Use
 
 - **Pre-GA validation** -- A feature has cleared internal alpha but needs external validation under real workloads before a public launch.
@@ -502,14 +495,20 @@ Before building the beta plan, settle the inputs below. When one is missing or v
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
-1. Frame the beta hypothesis, target cohort, and headline outcome (from `create-prd/`).
-2. Set exit gates in `assets/beta-program-plan.md` and get PM + Eng + sponsor sign-off **before** recruiting.
-3. Recruit via `assets/recruitment-script.md` (over-recruit 2x), then stand up the comms channel and publish the cadence on day 1.
-4. Run the weekly cadence (`assets/weekly-cadence-template.md`); review the exit memo (`assets/exit-memo.md`) at week N for a Greenlight / Extend / Pivot / Kill decision.
+1. Frame the beta hypothesis, target cohort and headline outcome (from `create-prd/`).
+2. Set exit gates in `assets/beta-program-plan.md` and get PM, Eng and sponsor sign-off **before** recruiting. Gates set afterwards drift toward whatever the beta happened to show.
+3. Recruit via `assets/recruitment-script.md`. Defaults [RECOMMENDED], to adjust for your context:
+   - **Over-recruit about 2x:** roughly half of recruited participants go quiet by week 2, so 2x keeps the active cohort at target. A 6-account enterprise beta with contracted participants needs far less.
+   - **Fanatics at 30% or more:** friends and colleagues are polite; cold-recruited users with active pain are the ones who report real friction.
+   - **Weight Fanatic feedback about 2x** when tallying, for the same reason; say so in the exit memo.
+4. Stand up the comms channel and publish the cadence on day 1; run it weekly (`assets/weekly-cadence-template.md`).
+5. **Decide** at the pre-agreed date with `assets/exit-memo.md`: Greenlight, Extend, Pivot or Kill, against the gates as written.
 
-See `references/beta-framework.md` for the full framework tables, step-by-step workflow, troubleshooting, and success criteria.
+**Done when** the exit memo records each gate&#x27;s result against its pre-agreed threshold and a decision signed by the same people who signed the gates.
+
+Framework tables, troubleshooting and success criteria: `references/beta-framework.md`.
 
 ## Anti-Patterns
 
@@ -530,15 +529,21 @@ See `references/beta-framework.md` for the full framework tables, step-by-step w
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/beta-program-plan.md` | Plan template: gates, cohort sizing, timeline |
+| `assets/recruitment-script.md` | Outreach templates for the three cohorts, screening questions |
+| `assets/weekly-cadence-template.md` | Monday digest, office hours, review, Friday snapshot |
+| `assets/exit-memo.md` | Exit decision memo (Greenlight / Extend / Pivot / Kill) |
+| `examples/shared-dashboards-closed-beta.md` | Worked beta |
+
 ## References
 
 - `references/beta-framework.md` -- Full framework (cohort, Kano, success gates, cadence, exit gates), the 8-step workflow, troubleshooting matrix, and success criteria. Read this when building the plan, setting gates, running the cadence, or diagnosing problems.
 - `references/beta-program-guide.md` -- Practical reference guide: why betas fail, cohort sequencing, Kano deep dive, exit-gate worked examples, common failure modes. Read this for narrative depth and worked examples.
 - `references/red-flags.md` -- Bad-vs-good examples for the beta plan, recruitment script, cadence, and exit memo. Read this to review beta artifacts before opening recruitment.
-- `assets/beta-program-plan.md` -- Beta program plan template with gates, cohort sizing, timeline.
-- `assets/recruitment-script.md` -- Email/DM templates for the three cohorts plus screening questions.
-- `assets/weekly-cadence-template.md` -- Monday digest, Tuesday office hours, Wednesday review, Friday snapshot templates.
-- `assets/exit-memo.md` -- Exit-gate decision memo template (Greenlight / Extend / Pivot / Kill).
 - Kano, Noriaki. &quot;Attractive Quality and Must-Be Quality.&quot; Journal of the Japanese Society for Quality Control, 1984.
 
 ## Scope &amp; Limitations
@@ -600,7 +605,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Beta Program&quot;**
-   - Description: &quot;Closed beta program playbook covering recruitment, success criteria, communication cadence, and beta-to-GA exit gates.&quot;
+   - Description: &quot;Plan and run a closed beta: cohorts, exit gates agreed before recruiting, weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a closed beta or design-partner program before general availability.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -631,13 +636,6 @@ A structured playbook for running a closed beta that produces clear learning, re
 
 A good closed beta runs 4-8 weeks, recruits 10-30 participants from three concentric cohorts (&quot;friends, family, fanatics&quot;), publishes a weekly cadence the team commits to, and exits on pre-agreed criteria rather than the calendar. The outputs are a beta program plan, a recruitment script, a weekly cadence template, and an exit memo that either greenlights GA, extends the beta, or kills the feature.
 
-## Core Capabilities
-
-- **Cohort design** — sequence recruitment through Friends → Family → Fanatics rings of decreasing trust and increasing signal.
-- **Kano scoping** — decide the beta feature set (Must-be / Performance / Delight) so the beta produces quotable testimonials, not neutral feedback.
-- **Exit gates** — quantitative + qualitative success criteria set *before* recruitment, resolving to Greenlight / Extend / Pivot / Kill.
-- **Weekly cadence** — a committed Monday→Friday communication rhythm that keeps a beta from dying of silence.
-
 ## When to Use
 
 - **Pre-GA validation** -- A feature has cleared internal alpha but needs external validation under real workloads before a public launch.
@@ -662,14 +660,20 @@ Before building the beta plan, settle the inputs below. When one is missing or v
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
-1. Frame the beta hypothesis, target cohort, and headline outcome (from `create-prd/`).
-2. Set exit gates in `assets/beta-program-plan.md` and get PM + Eng + sponsor sign-off **before** recruiting.
-3. Recruit via `assets/recruitment-script.md` (over-recruit 2x), then stand up the comms channel and publish the cadence on day 1.
-4. Run the weekly cadence (`assets/weekly-cadence-template.md`); review the exit memo (`assets/exit-memo.md`) at week N for a Greenlight / Extend / Pivot / Kill decision.
+1. Frame the beta hypothesis, target cohort and headline outcome (from `create-prd/`).
+2. Set exit gates in `assets/beta-program-plan.md` and get PM, Eng and sponsor sign-off **before** recruiting. Gates set afterwards drift toward whatever the beta happened to show.
+3. Recruit via `assets/recruitment-script.md`. Defaults [RECOMMENDED], to adjust for your context:
+   - **Over-recruit about 2x:** roughly half of recruited participants go quiet by week 2, so 2x keeps the active cohort at target. A 6-account enterprise beta with contracted participants needs far less.
+   - **Fanatics at 30% or more:** friends and colleagues are polite; cold-recruited users with active pain are the ones who report real friction.
+   - **Weight Fanatic feedback about 2x** when tallying, for the same reason; say so in the exit memo.
+4. Stand up the comms channel and publish the cadence on day 1; run it weekly (`assets/weekly-cadence-template.md`).
+5. **Decide** at the pre-agreed date with `assets/exit-memo.md`: Greenlight, Extend, Pivot or Kill, against the gates as written.
 
-See `references/beta-framework.md` for the full framework tables, step-by-step workflow, troubleshooting, and success criteria.
+**Done when** the exit memo records each gate&#x27;s result against its pre-agreed threshold and a decision signed by the same people who signed the gates.
+
+Framework tables, troubleshooting and success criteria: `references/beta-framework.md`.
 
 ## Anti-Patterns
 
@@ -690,15 +694,21 @@ See `references/beta-framework.md` for the full framework tables, step-by-step w
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/beta-program-plan.md` | Plan template: gates, cohort sizing, timeline |
+| `assets/recruitment-script.md` | Outreach templates for the three cohorts, screening questions |
+| `assets/weekly-cadence-template.md` | Monday digest, office hours, review, Friday snapshot |
+| `assets/exit-memo.md` | Exit decision memo (Greenlight / Extend / Pivot / Kill) |
+| `examples/shared-dashboards-closed-beta.md` | Worked beta |
+
 ## References
 
 - `references/beta-framework.md` -- Full framework (cohort, Kano, success gates, cadence, exit gates), the 8-step workflow, troubleshooting matrix, and success criteria. Read this when building the plan, setting gates, running the cadence, or diagnosing problems.
 - `references/beta-program-guide.md` -- Practical reference guide: why betas fail, cohort sequencing, Kano deep dive, exit-gate worked examples, common failure modes. Read this for narrative depth and worked examples.
 - `references/red-flags.md` -- Bad-vs-good examples for the beta plan, recruitment script, cadence, and exit memo. Read this to review beta artifacts before opening recruitment.
-- `assets/beta-program-plan.md` -- Beta program plan template with gates, cohort sizing, timeline.
-- `assets/recruitment-script.md` -- Email/DM templates for the three cohorts plus screening questions.
-- `assets/weekly-cadence-template.md` -- Monday digest, Tuesday office hours, Wednesday review, Friday snapshot templates.
-- `assets/exit-memo.md` -- Exit-gate decision memo template (Greenlight / Extend / Pivot / Kill).
 - Kano, Noriaki. &quot;Attractive Quality and Must-Be Quality.&quot; Journal of the Japanese Society for Quality Control, 1984.
 
 ## Scope &amp; Limitations
@@ -760,7 +770,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Beta Program&quot;**
-   - Description: &quot;Closed beta program playbook covering recruitment, success criteria, communication cadence, and beta-to-GA exit gates.&quot;
+   - Description: &quot;Plan and run a closed beta: cohorts, exit gates agreed before recruiting, weekly cadence and a Greenlight/Extend/Pivot/Kill memo. Use when running a closed beta or design-partner program before general availability.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -818,13 +828,8 @@ cp -r Claude-Skills/project-management/execution/beta-program your-project/
 curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz --strip=1 Claude-Skills-main/project-management/execution/beta-program</code></pre>
 </div>
   
-  <h2>Quick Start</h2>1. Frame the beta hypothesis, target cohort, and headline outcome (from `create-prd/`).
-2. Set exit gates in `assets/beta-program-plan.md` and get PM + Eng + sponsor sign-off **before** recruiting.
-3. Recruit via `assets/recruitment-script.md` (over-recruit 2x), then stand up the comms channel and publish the cadence on day 1.
-4. Run the weekly cadence (`assets/weekly-cadence-template.md`); review the exit memo (`assets/exit-memo.md`) at week N for a Greenlight / Extend / Pivot / Kill decision.
-
-See `references/beta-framework.md` for the full framework tables, step-by-step workflow, troubleshooting, and success criteria.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/beta-program/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

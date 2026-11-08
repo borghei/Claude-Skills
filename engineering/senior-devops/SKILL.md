@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: infrastructure
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [docker, kubernetes, terraform, ci-cd, monitoring]
   python-tools: pipeline_generator.py, terraform_scaffolder.py, deployment_manager.py
   tech-stack: python, docker, kubernetes, terraform, prometheus
@@ -48,7 +48,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Tools
 
-All three are Python standard library only, read local files, make no network calls and never run other programs. Each prints readable text by default and JSON with `--json`, and exits 1 with a one-line `error:` message on bad input.
+All three are Python standard library only, read local files, make no network calls and never run other programs. Each prints readable text by default and JSON with `--json`, and exits 2 with a one-line `error:` message on bad input (0 otherwise).
 
 | Tool | Purpose | Command |
 |------|---------|---------|

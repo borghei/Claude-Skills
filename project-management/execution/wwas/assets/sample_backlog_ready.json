@@ -1,0 +1,61 @@
+{
+  "okrs": [
+    {
+      "id": "OKR-1",
+      "name": "Reduce churn to <5% monthly",
+      "keywords": [
+        "churn",
+        "retention",
+        "activation"
+      ]
+    },
+    {
+      "id": "OKR-2",
+      "name": "Grow ARR to $10M",
+      "keywords": [
+        "revenue",
+        "ARR",
+        "enterprise",
+        "upsell"
+      ]
+    },
+    {
+      "id": "OKR-3",
+      "name": "Improve developer experience",
+      "keywords": [
+        "developer",
+        "DX",
+        "API",
+        "documentation"
+      ]
+    }
+  ],
+  "items": [
+    {
+      "title": "Guided Onboarding Wizard",
+      "why": "Our Q2 North Star is reducing time-to-value from 14 days to 3 days. 60% of churned users never completed setup.",
+      "what": "Add a step-by-step setup wizard that guides new users through connecting a data source, inviting a teammate, and creating their first dashboard. Skippable and resumable.",
+      "design_link": "https://figma.com/file/abc123",
+      "acceptance_criteria": [
+        "Wizard appears automatically on first login for new users",
+        "Users can skip at any step and return from help menu",
+        "Each milestone completable independently in any order",
+        "Completion confirmation with suggested next steps",
+        "Does not appear for existing users who completed setup",
+        "Functional on desktop and mobile browsers"
+      ],
+      "okr_ref": "OKR-1"
+    },
+    {
+      "title": "API Rate Limit Docs",
+      "why": "Developer support tickets about rate limits increased 40% last quarter, costing 10 hours/week.",
+      "what": "Create comprehensive rate limit documentation with examples and troubleshooting guide.",
+      "acceptance_criteria": [
+        "Every public endpoint page shows its rate limit and reset window",
+        "A developer who hits a 429 can find the retry guidance from the error message link",
+        "Code examples in 3 languages show backoff handling and run against the sandbox",
+        "Rate-limit support tickets drop by 25% within 60 days of publishing"
+      ]
+    }
+  ]
+}

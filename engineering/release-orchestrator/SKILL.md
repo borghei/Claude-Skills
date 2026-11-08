@@ -1,16 +1,16 @@
 ---
 name: release-orchestrator
 description: >
-  Orchestrate end-to-end release pipelines. Use when running pre-release validation,
-  generating changelogs, bumping semantic versions, scoring deployment readiness, or gating
-  releases with secret scanning and GO/NO-GO checks.
+  Gates a release from a live git checkout: preflight checks, secret scan, tag-based SemVer
+  bump, changelog and GO/NO-GO score. Use when cutting a release from a repo (offline notes
+  and plans from text: release-manager).
 license: MIT + Commons Clause
 metadata:
-  version: 2.2.0
+  version: 2.3.0
   author: borghei
   category: engineering
   domain: release-engineering
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [release-pipeline, versioning, pre-flight, readiness]
   python-tools: preflight_checker.py, changelog_generator.py, version_bumper.py, release_readiness_scorer.py
   tech-stack: python, git, semver, conventional-commits, ci-cd
@@ -57,7 +57,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 All tools support `--json` for machine output. Exit code 0 = pass, 1 = fail (CI-friendly).
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -66,18 +66,34 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/rollback_strategies.md](references/rollback_strategies.md)** — database migration rollbacks, reversible-migration rules, and rollback playbooks. Read when planning the rollback portion of a release.
 - **[references/ci_cd_best_practices.md](references/ci_cd_best_practices.md)** — pipeline design patterns (stage-gate, fan-out/fan-in) and CI/CD best practices. Read when designing the surrounding pipeline.
 
+## Anti-Patterns
+
+**Mistake:** Tagging a release from a dirty or unpushed working tree.
+**Why it matters:** The tag then points at code nobody reviewed, and the build cannot be reproduced.
+**Instead:** Let the preflight checker fail the release until the tree is clean and in sync with the remote.
+
+**Mistake:** Overriding a NO-GO score because the date is fixed.
+**Why it matters:** The checks that fail (tests, secrets, missing changelog) are the ones that cause rollbacks.
+**Instead:** Fix the failing input or record an explicit, named exception with a rollback plan.
+
+**Mistake:** Hand-editing the version in one file.
+**Why it matters:** Manifests, in-app constants and docs drift apart, and users see two versions.
+**Instead:** Bump with `version_bumper.py` from the commit history, then grep for the old version.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/preflight_checker.py` | Repo-state checks (clean tree, branch, remote sync, tests, secrets) |
+| `scripts/version_bumper.py` | SemVer bump from conventional commits since the last tag |
+| `scripts/changelog_generator.py` | Changelog from a git range |
+| `scripts/release_readiness_scorer.py` | Weighted GO/NO-GO score from release data |
+| `assets/sample_release_data.json` | Release data for the scorer (89/100, GO) |
+
 ## Scope & Limitations
 
 **This skill covers:** pre-flight validation, semantic version bumping, changelog generation, deployment-readiness scoring, and gating releases with GO/NO-GO decisions for git + conventional-commits projects.
 
 **This skill does NOT cover:** the actual deploy/orchestration execution (handled by `senior-devops` / `devops-workflow-engineer`), test authoring (`senior-qa`), or deep security scanning beyond secret pattern-matching (`senior-secops`).
 
-## Integration Points
-
-| Skill | Integration |
-|-------|-------------|
-| `senior-devops` | Pipeline stages consume pre-flight and readiness JSON as gates |
-| `senior-qa` | Test results feed Tests category (25% weight) |
-| `senior-secops` | Secret scan and CVE counts feed Security category (15%) |
-| `code-reviewer` | Code quality metrics feed Code Quality category (20%) |
-| `devops-workflow-engineer` | Workflow YAML calls tools as pipeline steps |
+**Pick this or `engineering/release-manager`:** this skill works against a live checkout (preflight checks, secret scan, tag-based bumps, GO/NO-GO). `release-manager` works offline on commit text and a release-plan file (notes, version, readiness, rollback runbook, comms plan).

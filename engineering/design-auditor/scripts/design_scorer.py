@@ -416,10 +416,10 @@ def load_json_file(path: str) -> dict:
             return json.load(f)
     except FileNotFoundError:
         print(f"Error: File not found: {path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in {path}: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 def main():
@@ -456,7 +456,7 @@ Examples:
         print("Validation errors:", file=sys.stderr)
         for err in errors:
             print(f"  - {err}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Load baseline if provided
     baseline_data = None
@@ -467,7 +467,7 @@ Examples:
             print("Baseline validation errors:", file=sys.stderr)
             for err in baseline_errors:
                 print(f"  - {err}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
     # Generate report
     report = generate_report(data, baseline_data)

@@ -1,15 +1,16 @@
 ---
 name: dependency-map
 description: >
-  Cross-team dependency tracking with critical path analysis and Mermaid
-  dependency graphs for program coordination.
+  Track cross-team dependencies in one JSON file and get a risk-ranked blocker
+  list, the longest hand-off chain and a Mermaid graph. Use when several teams
+  depend on each other and you need to know what to chase this week.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: dependency_graph.py
   tech-stack: dependencies, critical-path, dsm, conway, mermaid
   tags:
@@ -29,7 +30,7 @@ Most cross-team programs fail at dependency management, not execution. The teams
 ## Core Capabilities
 
 - **Dependency capture** — a six-field model (from/to team, description, needed-by, expected-delivery, status) maintained as one JSON file.
-- **Critical-path analysis** — CPM computation of the longest zero-slack chain plus near-critical siblings.
+- **Critical path** — the longest chain of open hand-offs (A's `to_team` is B's `from_team`, dates within 30 days), with slack shown per link. It is the chain to watch, not a strict zero-slack CPM path; links with positive slack can sit on it.
 - **Risk ordering** — slack and status combine into a risk-ranked blocker list.
 - **Visualization & comms** — Mermaid `graph LR` rendering plus a weekly cross-team sync agenda.
 - **Org diagnosis** — Conway's Law framing for recurring team-pair dependencies.
@@ -55,15 +56,23 @@ Before mapping dependencies, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Copy `assets/dependency-template.json` and fill one entry per cross-team dependency (`from_team` needs, `to_team` owes). Set `"as_of"` to the date of the snapshot.
+2. Run the analyzer:
 
 ```bash
-python scripts/dependency_graph.py --input deps.json --format markdown   # full report
-python scripts/dependency_graph.py --input deps.json --format mermaid     # graph LR for README/Notion/Confluence
-python scripts/dependency_graph.py --demo --format markdown               # sample output, no input
+python3 project-management/execution/dependency-map/scripts/dependency_graph.py \
+  --input project-management/execution/dependency-map/assets/dependency-template.json --format markdown
+# --format mermaid for the graph; --criticality critical,high or --team Mobile to filter
 ```
 
-Populate `deps.json` from `assets/dependency-template.json`, run the analyzer, give every critical-path item a named owner, and walk it weekly with `assets/weekly-sync-agenda.md`. Update the JSON *before* each sync.
+3. Give every critical-path and at-risk item a named owner and a next action; walk them weekly with `assets/weekly-sync-agenda.md`. Update the JSON before each sync.
+4. **Done when** no blocked or high-risk item lacks an owner and a date for its next conversation.
+
+**As-of date:** `--as-of`, else the file's `as_of` field, else today. The template and `--demo` carry `as_of: 2026-05-25`, so they show the same risk mix on any day (1 blocked, 1 high, 3 medium, 2 low). Risk is driven by slack (needed-by minus expected delivery), status, and days left to the needed-by date.
+
+**Exit codes:** 0 report written; 2 missing file, invalid JSON, empty or wrong-shape `dependencies`, bad dates or an invalid `--criticality` value.
 
 ## Anti-Patterns
 
@@ -84,20 +93,27 @@ Populate `deps.json` from `assets/dependency-template.json`, run the analyzer, g
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/dependency_graph.py` | The analyzer |
+| `assets/dependency-template.json` | Starter file and sample: 8 dependencies, one per status |
+| `assets/weekly-sync-agenda.md` | Agenda for the weekly cross-team sync |
+| `examples/q4-launch-cross-team-deps.md` | Worked program example |
+
 ## References
 
 - **[references/dependency-map-operations.md](references/dependency-map-operations.md)** — read this for the operational detail: the six-field model, slack/risk derivation, critical-path computation, the 8-step weekly workflow, tool flags, input/output JSON schemas, troubleshooting, and success criteria.
 - **[references/dependency-management-guide.md](references/dependency-management-guide.md)** — read this for the CPM walkthrough, DSM intro, Conway's Law applied, and recurring-dependency diagnosis.
 - **[references/red-flags.md](references/red-flags.md)** — read this to see the common ways dependency-map output goes wrong (with fixes) before publishing a map.
-- `assets/dependency-template.json` — starter JSON with the full schema and one worked example per status.
-- `assets/weekly-sync-agenda.md` — standard agenda for the cross-team weekly sync.
 - Kelley & Walker, "Critical-Path Planning and Scheduling" (1959); Conway, "How Do Committees Invent?" (1968); Steward, "The Design Structure System" (1981).
 
 ## Scope & Limitations
 
 **In Scope:** cross-team dependency capture and visualization, Critical Path Method analysis, risk-ordered blocker list, Mermaid `graph LR` rendering, Conway's Law-aware quarterly review, all six formats per `SHARED_OUTPUT_SCHEMA.md`.
 
-**Out of Scope:** resource capacity planning (`senior-pm/resource_capacity_planner.py`), stakeholder mapping (`senior-pm/stakeholder_mapper.py`), sprint-level backlog ordering (`prioritization-frameworks/`), detailed Gantt charting, risk register beyond dependency blockers (`pre-mortem/`).
+**Out of Scope:** resource capacity planning (`senior-pm/resource_capacity_planner.py`), stakeholder mapping (`senior-pm/stakeholder_mapper.py`), sprint-level backlog ordering (`prioritization-frameworks/`), detailed Gantt charting, risk register beyond dependency blockers (`discovery/pre-mortem/`).
 
 **Important Caveats:** dependency maps degrade fast without weekly updates (a 4-week-old map is harmful); the critical path identifies the *currently longest* chain and can shift when a single dependency is added (re-run on every change); this skill surfaces what to talk about but does not replace the conversation.
 
@@ -108,7 +124,7 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 | `program-manager/` | Used by | Program managers maintain the dependency JSON across teams |
 | `senior-pm/` | Feeds into | Critical-path risks flow into portfolio risk reporting |
 | `senior-pm/risk_matrix_analyzer.py` | Complementary | Dependency risks plot alongside other program risks |
-| `pre-mortem/` | Complementary | Pre-mortem-identified "tigers" often map to specific dependencies |
+| `discovery/pre-mortem/` | Complementary | Pre-mortem-identified "tigers" often map to specific dependencies |
 | `cycle-time-analyzer/` | Complementary | Long cycle times often correlate with cross-team blocks |
 | `launch-playbook/` | Feeds into | Launch RACI references the dependency map for cross-team owners |
 | `status-update-generator/` | Feeds into | Weekly status pulls critical-path summary |

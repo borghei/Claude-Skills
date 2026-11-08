@@ -1,0 +1,20 @@
+{
+  "queries": [
+    {
+      "id": "q1",
+      "query": "how long do I have to ask for a refund"
+    },
+    {
+      "id": "q2",
+      "query": "forgot password reset link expired"
+    },
+    {
+      "id": "q3",
+      "query": "what happens when I exceed the API rate limit"
+    },
+    {
+      "id": "q4",
+      "query": "download invoices as PDF"
+    }
+  ]
+}

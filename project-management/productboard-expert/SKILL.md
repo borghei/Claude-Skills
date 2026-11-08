@@ -1,17 +1,16 @@
 ---
 name: productboard-expert
 description: >
-  Productboard expert for workspace setup, Insight-to-Feature triage,
-  Driver scoring, Releases, Roadmap views, and REST API automation. Use
-  for Productboard administration, prioritization workflows, and
-  programmatic API operations.
+  Sets up Productboard workspaces, insight triage, driver scoring, releases
+  and roadmaps, and writes v2 REST API calls. Use when administering
+  Productboard, scoring features, or scripting the Productboard API.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-integration
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: [productboard, rest-api, insights, drivers, features, releases]
   tags: [productboard, prioritization, insights, drivers, roadmap, salesforce, intercom, slack]
 ---
@@ -49,7 +48,7 @@ The job of a Productboard expert is to operate fluently inside this model: confi
 Productboard advice depends most on the user's plan, the systems connected to the workspace, and whether the work reads data or changes it. Settle the inputs below before producing anything. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
 - **Plan:** Per-Component access control is an Enterprise feature, and most plans cap Drivers at 10 per workspace. A workspace or scoring design that assumes either needs to match what the user has.
-- **Read-only or writing through the API:** Recipes target Public API v2; v1 was scheduled to sunset on 2026-07-08, and a few v1 capabilities have no v2 equivalent. Bulk Insight or Feature writes change scores and roadmaps other people rely on, and the default limit of 50 requests per second is shared with every integration using the same token.
+- **Read-only or writing through the API:** Recipes target Public API v2; v1 was scheduled to sunset on 2026-07-08 per the provider's deprecation notice; confirm v1 is retired before relying on it, and build on v2; a few v1 capabilities have no v2 equivalent, so check the developer changelog before promising them. Bulk Insight or Feature writes change scores and roadmaps other people rely on, and the default limit of 50 requests per second is shared with every integration using the same token.
 - **Connected tracker and CRM:** Which of Jira, Linear or Azure DevOps receives Features decides the push-down mapping. Segment-weighted scoring needs customer data from Salesforce or HubSpot, and that sync is one-way and scheduled, so scores lag the CRM.
 - **Roadmap audience:** An internal view can show Release dates. A customer-facing view or Portal should use Now / Next / Later, because dates there get read as promises.
 
@@ -74,7 +73,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Seven more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -90,7 +89,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Out of Scope:** Engineering-side Jira/Linear configuration (see `jira-expert/`, `linear-expert/`). Strategic prioritization framework selection (see `execution/prioritization-frameworks/`). PRD authoring (see `execution/create-prd/`). Customer interview synthesis (see `discovery/interview-synthesis/`).
 
-**Limitations:** API recipes target Public API v2 (`/v2/...`); v1 (`X-Version: 1`) was scheduled to sunset on 2026-07-08, and a few v1 capabilities (note followers, feedback forms, company field-definition management) have no v2 equivalent as of September 2026. API rate limits apply per access token (documented default 50 requests/second); aggressive scripts still compete with integrations sharing that token. The Salesforce/HubSpot integration is one-way (CRM → Productboard) on a schedule, not real time. Drivers max out at 10 per workspace on most plans. Roadmap views are good for time-bound delivery (Releases) but weaker for outcome-based roadmaps (Now/Next/Later) — augment with `execution/outcome-roadmap/`. Per-Component access control is an Enterprise feature.
+**Limitations:** API recipes target Public API v2 (`/v2/...`); v1 (`X-Version: 1`) was scheduled to sunset on 2026-07-08 per the provider's deprecation notice; confirm v1 is retired before relying on it; a few v1 capabilities (note followers, feedback forms, company field-definition management) have no v2 equivalent as of September 2026. API rate limits apply per access token (documented default 50 requests/second); aggressive scripts still compete with integrations sharing that token. The Salesforce/HubSpot integration is one-way (CRM → Productboard) on a schedule, not real time. Drivers max out at 10 per workspace on most plans. Roadmap views are good for time-bound delivery (Releases) but weaker for outcome-based roadmaps (Now/Next/Later) — augment with `execution/outcome-roadmap/`. Per-Component access control is an Enterprise feature.
 
 ## Integration Points
 
@@ -108,3 +107,13 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `notion-pm/` | Productboard ↔ Notion | Roadmap embeds into Notion; deep PRDs live in Notion linked from Features |
 | `discovery/interview-synthesis/` | Bidirectional | Interview insights become Notes; high-evidence Features motivate interviews |
 | `business-growth/customer-success/` | CS → Productboard | CS is a primary Insight source via Salesforce / Intercom integration |
+
+## Files
+
+Reference files are described under Reference Documentation above. Templates:
+
+| File | Purpose |
+|------|---------|
+| `assets/productboard-driver-template.md` | Template |
+| `assets/productboard-feature-template.md` | Template |
+| `assets/productboard-insight-triage-workflow.md` | Template |

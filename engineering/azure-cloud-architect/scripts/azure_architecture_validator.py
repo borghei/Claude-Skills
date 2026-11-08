@@ -235,9 +235,10 @@ def validate_workload(spec: dict[str, Any]) -> list[Finding]:
 # -- Bicep/ARM scanning rules --
 
 BICEP_PUBLIC_ACCESS_RE = re.compile(r"publicNetworkAccess\s*[:=]\s*['\"]Enabled['\"]", re.IGNORECASE | re.MULTILINE)
-BICEP_TLS_RE = re.compile(r"minimumTlsVersion\s*[:=]\s*['\"](?:1\.0|1\.1)['\"]", re.IGNORECASE | re.MULTILINE)
+BICEP_TLS_RE = re.compile(r"minimumTlsVersion\s*[:=]\s*['\"](?:TLS)?1[._][01]['\"]", re.IGNORECASE | re.MULTILINE)
 BICEP_KEY_BASED_RE = re.compile(r"allowSharedKeyAccess\s*[:=]\s*true", re.IGNORECASE | re.MULTILINE)
 BICEP_DEFAULT_PWD_RE = re.compile(r"(password|adminPassword)\s*[:=]\s*['\"][^'\"]{1,12}['\"]", re.IGNORECASE | re.MULTILINE)
+BICEP_BLOB_PUBLIC_RE = re.compile(r"allowBlobPublicAccess\s*[:=]\s*true", re.IGNORECASE | re.MULTILINE)
 BICEP_NO_HTTPS_RE = re.compile(r"supportsHttpsTrafficOnly\s*[:=]\s*false", re.IGNORECASE | re.MULTILINE)
 
 
@@ -263,6 +264,11 @@ def scan_bicep_file(path: str, text: str) -> list[Finding]:
         findings.append(Finding("critical", "BC004", "Hardcoded short password in IaC",
                                 f"{path}:{ln}", "<redacted>",
                                 "Use Key Vault reference for credentials; never inline."))
+    for m in BICEP_BLOB_PUBLIC_RE.finditer(text):
+        ln = text.count("\n", 0, m.start()) + 1
+        findings.append(Finding("critical", "BC006", "Anonymous blob access allowed",
+                                f"{path}:{ln}", m.group(0),
+                                "Set allowBlobPublicAccess: false; serve public files through Front Door/CDN."))
     for m in BICEP_NO_HTTPS_RE.finditer(text):
         ln = text.count("\n", 0, m.start()) + 1
         findings.append(Finding("critical", "BC005", "HTTP traffic allowed on storage",
@@ -313,21 +319,28 @@ def main() -> int:
     if args.workload_config:
         try:
             spec = parse_yaml(Path(args.workload_config).read_text())
-            findings.extend(validate_workload(spec))
-        except OSError as e:
-            print(f"error: {e}", file=sys.stderr)
+        except (OSError, ValueError, IndexError) as e:
+            print(f"error: cannot read {args.workload_config}: {e}", file=sys.stderr)
             return 2
+        if not isinstance(spec, dict) or not spec:
+            print(f"error: {args.workload_config} is not a workload spec (expected a YAML mapping)", file=sys.stderr)
+            return 2
+        findings.extend(validate_workload(spec))
     bicep_files: list[str] = []
     for s in args.bicep:
         if "*" in s:
             bicep_files.extend(sorted(glob.glob(s)))
         else:
             bicep_files.append(s)
+    if args.bicep and not bicep_files:
+        print(f"error: no Bicep files match {' '.join(args.bicep)}", file=sys.stderr)
+        return 2
     for f in bicep_files:
         try:
             findings.extend(scan_bicep_file(f, Path(f).read_text()))
-        except OSError:
-            continue
+        except OSError as e:
+            print(f"error: cannot read {f}: {e}", file=sys.stderr)
+            return 2
     if not args.workload_config and not bicep_files:
         print("error: provide --workload-config or --bicep", file=sys.stderr)
         return 2
@@ -340,7 +353,8 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    # 1 = at least one critical finding, so the validator can gate a pipeline
+    return 1 if any(f.severity == "critical" for f in findings) else 0
 
 
 if __name__ == "__main__":

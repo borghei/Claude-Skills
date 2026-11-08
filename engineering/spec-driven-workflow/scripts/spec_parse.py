@@ -189,4 +189,10 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except SystemExit as exc:
+        if isinstance(exc.code, str):  # input errors are raised as sys.exit("ERROR: ...")
+            print(exc.code, file=sys.stderr)
+            sys.exit(2)
+        raise

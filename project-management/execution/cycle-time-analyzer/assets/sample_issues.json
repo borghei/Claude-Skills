@@ -1,0 +1,254 @@
+{
+  "issues": [
+    {
+      "id": "ENG-101",
+      "title": "Add CSV export",
+      "type": "feature",
+      "team": "platform",
+      "created_at": "2026-04-01T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-04-01T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-04-10T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-04-12T10:00:00Z"
+        },
+        {
+          "status": "In Review",
+          "entered_at": "2026-04-15T16:00:00Z"
+        },
+        {
+          "status": "Done",
+          "entered_at": "2026-04-17T10:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ENG-102",
+      "title": "Dashboard sharing",
+      "type": "feature",
+      "team": "platform",
+      "created_at": "2026-04-02T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-04-02T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-04-15T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-04-17T10:00:00Z"
+        },
+        {
+          "status": "Done",
+          "entered_at": "2026-04-24T10:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ENG-103",
+      "title": "OAuth provider",
+      "type": "feature",
+      "team": "platform",
+      "created_at": "2026-03-25T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-03-25T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-04-05T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-04-10T10:00:00Z"
+        },
+        {
+          "status": "In Review",
+          "entered_at": "2026-04-20T16:00:00Z"
+        },
+        {
+          "status": "Done",
+          "entered_at": "2026-04-28T10:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ENG-104",
+      "title": "Mobile push fix",
+      "type": "bug",
+      "team": "platform",
+      "created_at": "2026-04-18T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-04-18T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-04-19T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-04-20T10:00:00Z"
+        },
+        {
+          "status": "Done",
+          "entered_at": "2026-04-21T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ENG-105",
+      "title": "Billing rounding",
+      "type": "bug",
+      "team": "platform",
+      "created_at": "2026-04-25T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-04-25T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-04-26T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-04-27T10:00:00Z"
+        },
+        {
+          "status": "Done",
+          "entered_at": "2026-04-28T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ENG-106",
+      "title": "Audit log export",
+      "type": "feature",
+      "team": "platform",
+      "created_at": "2026-04-08T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-04-08T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-04-18T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-04-22T10:00:00Z"
+        },
+        {
+          "status": "Done",
+          "entered_at": "2026-05-04T10:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ENG-107",
+      "title": "SSO debug page",
+      "type": "feature",
+      "team": "platform",
+      "created_at": "2026-04-22T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-04-22T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-04-25T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-04-29T10:00:00Z"
+        },
+        {
+          "status": "Done",
+          "entered_at": "2026-05-06T10:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ENG-201",
+      "title": "OAuth migration",
+      "type": "feature",
+      "team": "platform",
+      "created_at": "2026-04-15T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-04-15T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-04-25T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-05-01T10:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ENG-202",
+      "title": "Webhook retry",
+      "type": "feature",
+      "team": "platform",
+      "created_at": "2026-04-20T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-04-20T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-05-05T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-05-10T10:00:00Z"
+        },
+        {
+          "status": "In Review",
+          "entered_at": "2026-05-18T16:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "ENG-203",
+      "title": "API rate limit error UX",
+      "type": "bug",
+      "team": "platform",
+      "created_at": "2026-05-12T10:00:00Z",
+      "status_history": [
+        {
+          "status": "Backlog",
+          "entered_at": "2026-05-12T10:00:00Z"
+        },
+        {
+          "status": "Ready",
+          "entered_at": "2026-05-15T09:00:00Z"
+        },
+        {
+          "status": "In Progress",
+          "entered_at": "2026-05-17T10:00:00Z"
+        }
+      ]
+    }
+  ]
+}

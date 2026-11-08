@@ -13,7 +13,7 @@ Execute these phases in order. Validate at the end of each phase.
 4. Set up ESLint and Prettier
 5. Create `.env.example`
 
-**Validate:** `pnpm build` completes without errors.
+**Validate:** `npm run build` completes without errors.
 
 ### Phase 2: Database
 6. Install and configure Drizzle ORM
@@ -22,7 +22,7 @@ Execute these phases in order. Validate at the end of each phase.
 9. Export DB client singleton from `lib/db.ts`
 10. Create seed script with test data
 
-**Validate:** `pnpm db:push` succeeds and `pnpm db:seed` creates test data.
+**Validate:** `npm run db:generate && npm run db:migrate` succeeds and `npm run db:seed` creates test data.
 
 ### Phase 3: Authentication
 11. Install and configure NextAuth v5 with Drizzle adapter
@@ -49,11 +49,11 @@ Execute these phases in order. Validate at the end of each phase.
 24. Add loading states, error boundaries, and not-found pages
 25. Configure deployment (Vercel/Railway)
 
-**Validate:** `pnpm build` succeeds. All routes render correctly. No hydration errors.
+**Validate:** `npm run build` succeeds. All routes render correctly. No hydration errors.
 
 ## Common Pitfalls
 
-- **Missing `NEXTAUTH_SECRET` in production** — causes session errors; generate with `openssl rand -base64 32`
+- **Missing `AUTH_SECRET` in production** — causes session errors; generate with `openssl rand -base64 32`
 - **Webhook signature verification skipped** — always verify Stripe webhook signatures; test with `stripe listen`
 - **`workspace:*` in session but not refreshed** — stale subscription data; recheck on billing pages
 - **Edge Runtime conflicts with Drizzle** — Drizzle needs Node.js runtime; set `export const runtime = 'nodejs'` on API routes
@@ -75,10 +75,10 @@ Execute these phases in order. Validate at the end of each phase.
 
 | Problem | Cause | Solution |
 |---------|-------|----------|
-| `NEXTAUTH_URL` mismatch errors in production | Environment variable not updated from localhost default | Set `NEXTAUTH_URL` to your actual production domain; omit trailing slash |
+| Auth callback URL mismatch in production | `AUTH_URL` (or the host header behind a proxy) still points at localhost | Set `AUTH_URL` to the production origin, or `AUTH_TRUST_HOST=true` behind a trusted proxy |
 | Stripe webhook returns 400 on every event | Raw body is consumed before signature verification | Ensure the webhook route uses `req.text()` before any JSON parsing; do not use body-parser middleware on the webhook endpoint |
 | Drizzle migrations fail with "relation already exists" | Migration was partially applied or schema drifted from migration history | Run `pnpm drizzle-kit drop` to reset the migration journal, then regenerate with `pnpm drizzle-kit generate` and reapply |
-| OAuth callback redirects to wrong URL | Redirect URI registered in provider console does not match `NEXTAUTH_URL` | Update the authorized redirect URI in Google/GitHub developer console to match your deployment URL exactly |
+| OAuth callback redirects to wrong URL | Redirect URI registered in provider console does not match `AUTH_URL` | Update the authorized redirect URI in Google/GitHub developer console to match your deployment URL exactly |
 | Multi-tenant queries return data from other workspaces | Missing `workspaceId` filter in a database query | Audit all `db.query` and `db.select` calls to ensure every query includes a `where` clause scoped to the current workspace |
 | Hydration mismatch on dashboard pages | Server-rendered HTML differs from client due to conditional auth checks | Move auth-dependent rendering into client components or wrap with `<Suspense>`; avoid reading session in server components that also render on the client |
 | Stripe test mode charges succeed but live mode fails | Live mode price IDs differ from test mode IDs | Use separate environment variables for test vs. live Stripe keys and price IDs; verify `.env.production` references the correct live values |

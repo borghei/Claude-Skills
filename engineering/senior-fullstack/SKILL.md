@@ -11,7 +11,7 @@ metadata:
   author: borghei
   category: engineering
   domain: fullstack
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [react, nodejs, databases, api-design, system-architecture]
 ---
 # Senior Fullstack
@@ -28,11 +28,13 @@ Fullstack development skill that scaffolds production-ready project structures (
 
 ## When to Use
 
-Use this skill when you hear:
-- "scaffold a new project" / "set up a fullstack project" / "generate project boilerplate"
-- "create a Next.js app" / "set up FastAPI with React"
-- "analyze code quality" / "check for security issues in codebase"
-- "what stack should I use"
+- Starting a new web app that needs both a frontend and an API (Next.js alone, FastAPI or Django + React, MERN).
+- A quick quality pass over an existing codebase before a review or handover.
+- Choosing a fullstack stack for an MVP, SaaS or internal tool.
+
+Boundaries: frontend-only work (components, Next.js performance, bundle size) belongs to
+`senior-frontend`; a weighted, evidence-backed comparison of technologies belongs to
+`tech-stack-evaluator`; system-level architecture decisions belong to `senior-architect`.
 
 ## Clarify First
 
@@ -44,12 +46,29 @@ Before scaffolding, settle the inputs below. When one is missing or vague and wo
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `project_scaffolder.py` | Scaffold a fullstack project structure with boilerplate, Docker, and env config | `python scripts/project_scaffolder.py nextjs my-app --output ./projects` |
-| `code_quality_analyzer.py` | Static-analyze a codebase for security, complexity, deps, coverage, and docs | `python scripts/code_quality_analyzer.py . --verbose --json --output audit.json` |
+| `project_scaffolder.py` | Scaffold `nextjs`, `fastapi-react`, `mern` or `django-react` with Docker, env templates and per-service package configs (`--output`, `--list-templates`, `--json`) | `python scripts/project_scaffolder.py fastapi-react my-app --output /tmp/projects` |
+| `code_quality_analyzer.py` | Static scan for security patterns, complexity, dependency hygiene, test-file ratio and docs, with a grade and P0-P2 actions (`--verbose`, `--json`, `--output`) | `python scripts/code_quality_analyzer.py /tmp/projects/my-app --json` |
+
+Exit codes: `0` ok; `2` bad input (unknown template, target folder exists, unwritable path,
+missing analysis path). The analyzer's grade never fails the run.
+
+The scaffolds target Next.js 16, React 19, Tailwind CSS v4, Vite 8, Express 5, Node 22,
+Python 3.12 and PostgreSQL 17 / MongoDB 7. Most generated files are working starting points;
+some (database clients, auth) are stubs to fill in. Run `npm install && npm run build` (and
+the backend's install and migrations) once before handing a scaffold over. The analyzer's
+"coverage" is a test-file ratio, not measured coverage; use the test runner's coverage report
+for real numbers.
+
+## Workflow
+
+1. Pick the template from the Clarify First answers and scaffold into the target folder.
+2. Install and build every service once; fix anything the build reports before writing features.
+3. Run `code_quality_analyzer.py` on the result and on each later milestone; act on P0 items first.
+4. Done when every service builds and starts with `docker compose up`, the health endpoint answers, and the analyzer reports no P0 findings.
 
 ## References
 
@@ -74,13 +93,27 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Comprehensive CVE scanning against live vulnerability databases -- use `npm audit`, `pip-audit`, or `senior-secops` for deep security analysis
 - Mobile or native desktop application scaffolding -- this skill targets web-based fullstack architectures only
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-devops` | CI/CD pipeline setup for scaffolded projects | Scaffolder output directory feeds into DevOps pipeline configuration and Docker deployment workflows |
-| `senior-secops` | Deep security audit after initial quality scan | Code quality analyzer P0/P1 security findings hand off to SecOps for remediation tracking and penetration testing |
-| `senior-qa` | Test strategy for scaffolded projects | Test coverage estimation from the analyzer informs QA test plan gaps; scaffolded test infrastructure provides the harness |
-| `code-reviewer` | Automated review of generated and existing code | Quality analyzer JSON report provides structured input for code review checklists and PR approval criteria |
-| `senior-architect` | Architecture validation of stack choices | Tech stack guide recommendations feed into architecture decision records; complexity metrics validate design compliance |
-| `aws-solution-architect` | Cloud deployment of scaffolded applications | Docker Compose configurations from the scaffolder translate into ECS/EKS task definitions and infrastructure blueprints |
+### Shipping the Scaffold's Defaults
+**Mistake:** Deploying with the generated `.env.example` secrets, the dev-server Docker command and open CORS.
+**Why it happens:** The scaffold runs, so it feels production-ready.
+**Instead:** Treat it as a dev setup. Replace secrets, switch containers to production commands, lock CORS to known origins, and add health checks before deploying.
+
+### One Database Model Shared Across Layers
+**Mistake:** Returning ORM models straight from API handlers.
+**Why it happens:** It saves a mapping layer.
+**Instead:** Keep request/response schemas (Pydantic, Zod, DRF serializers) separate from persistence models, so a column change does not silently change the public API or leak fields like password hashes.
+
+### Grading Quality by the Analyzer Alone
+**Mistake:** Reporting an A grade as "the codebase is healthy".
+**Why it happens:** The grade is a single, quotable number.
+**Instead:** The analyzer reads code statically. Pair it with the real test suite's coverage, `npm audit` / `pip-audit`, and a human review of the riskiest modules.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/project_scaffolder.py` | Fullstack project scaffolder for four stacks |
+| `scripts/code_quality_analyzer.py` | Static code quality scan and grade |
+| `references/*.md` | Tooling and quality workflows, architecture patterns, development workflows, stack guide |

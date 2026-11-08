@@ -1,0 +1,15 @@
+{
+  "name": "sample-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "test": "vitest run",
+    "build": "tsc -p ."
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "typescript": "^5.4.0",
+    "vitest": "^2.0.0"
+  }
+}

@@ -55,7 +55,7 @@ When `--compare-previous` is enabled, the tool compares the current window again
 
 ### 2. Contributor Deep Dive
 
-Per-person analysis of contributions, work patterns, and specialization areas.
+Team-level view of how work is spread: specialization, knowledge silos and collaboration. The output is per contributor so bus-factor and silo risks can be found; aggregate it in the retro and never use it to rate or rank people.
 
 ```bash
 # All contributors, last 14 days
@@ -68,7 +68,7 @@ python scripts/contributor_insights.py --days 14 --author "jane@example.com"
 python scripts/contributor_insights.py --days 14 --collaboration
 ```
 
-**Per-contributor metrics:**
+**Contributor data (for team patterns, not individual evaluation):**
 
 - Commits, LOC added/removed, files touched
 - Peak working hours (hourly heatmap)
@@ -177,7 +177,7 @@ The report generator extracts action items from previous retro reports (marked w
 | Tool | Purpose | Key Flags |
 |------|---------|-----------|
 | `velocity_analyzer.py` | Sprint throughput, cycle time, sessions | `--days`, `--since/--until`, `--compare-previous`, `--gap-minutes` |
-| `contributor_insights.py` | Per-person metrics, specialization, patterns | `--days`, `--author`, `--collaboration` |
+| `contributor_insights.py` | Specialization spread, silos, collaboration patterns (team-level use) | `--days`, `--author`, `--collaboration` |
 | `code_churn_analyzer.py` | File hotspots, churn rate, oscillation | `--days`, `--top`, `--path`, `--detect-oscillation` |
 | `retro_report_generator.py` | Markdown report generation | `--velocity`, `--contributors`, `--churn`, `--previous-retro` |
 
@@ -265,7 +265,7 @@ A retrospective report is not a data dump — it tells the story of the sprint.
 3. **Velocity dashboard** — metrics table with deltas vs previous
 4. **Commit type distribution** — ASCII bar chart
 5. **Work session analysis** — deep/focused/micro breakdown with implications
-6. **Contributor spotlights** — per-person metrics, specialization, peak hours
+6. **Contributor spotlights** — specialization and silo risks; keep them out of performance conversations and drop the section when the audience is outside the team
 7. **Code health indicators** — churn rate, hotspots, test ratio, refactor frequency
 8. **Action items** — 3-5 specific, measurable improvements for next sprint
 9. **Outstanding actions** — carry-over from previous retros

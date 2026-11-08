@@ -389,8 +389,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def main(argv: list[str] | None = None) -> None:
-    """Main entry point."""
+def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
 
     if args.demo:
@@ -399,39 +398,35 @@ def main(argv: list[str] | None = None) -> None:
         try:
             with open(args.input, "r", encoding="utf-8") as f:
                 data = json.load(f)
-        except FileNotFoundError:
-            print(f"Error: File not found: {args.input}", file=sys.stderr)
-            sys.exit(1)
-        except json.JSONDecodeError as e:
-            print(f"Error: Invalid JSON in {args.input}: {e}", file=sys.stderr)
-            sys.exit(1)
+        except OSError as e:
+            print(f"error: cannot read {args.input}: {e.strerror or e}", file=sys.stderr)
+            return 2
+        except ValueError as e:
+            print(f"error: invalid JSON in {args.input}: {e}", file=sys.stderr)
+            return 2
 
-    items = data.get("items", [])
-    if not items:
-        print("Error: No items found in input data.", file=sys.stderr)
-        sys.exit(1)
+    items = data.get("items") if isinstance(data, dict) else None
+    if not isinstance(items, list) or not items or not all(isinstance(i, dict) for i in items):
+        print("error: input must be a JSON object with a non-empty 'items' list of objects", file=sys.stderr)
+        return 2
 
-    # Route to framework
-    if args.framework == "rice":
-        results = score_rice(items)
-    elif args.framework == "ice":
-        results = score_ice(items)
-    elif args.framework == "opportunity":
-        results = score_opportunity(items)
-    elif args.framework == "moscow":
-        results = score_moscow(items)
-    elif args.framework == "weighted":
-        criteria = data.get("criteria", None)
-        results = score_weighted(items, criteria)
-    else:
-        print(f"Error: Unknown framework: {args.framework}", file=sys.stderr)
-        sys.exit(1)
+    scorers = {"rice": score_rice, "ice": score_ice, "opportunity": score_opportunity, "moscow": score_moscow}
+    try:
+        if args.framework == "weighted":
+            results = score_weighted(items, data.get("criteria"))
+        else:
+            results = scorers[args.framework](items)
+    except (KeyError, TypeError, ValueError, ZeroDivisionError, AttributeError) as e:
+        print(f"error: items do not fit the {args.framework} schema ({type(e).__name__}: {e}); "
+              f"see references/tool-and-troubleshooting.md", file=sys.stderr)
+        return 2
 
     if args.format == "json":
         print(json.dumps(results, indent=2))
     else:
         print(format_text_report(results, args.framework))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -1,0 +1,7 @@
+{
+  "name": "@acme/utils",
+  "version": "1.0.0",
+  "dependencies": {
+    "date-fns": "^3.0.0"
+  }
+}

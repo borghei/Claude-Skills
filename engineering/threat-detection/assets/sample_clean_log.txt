@@ -1,0 +1,6 @@
+2026-10-14 09:00:01 203.0.113.10 GET /index.html 200
+2026-10-14 09:00:05 203.0.113.10 GET /docs/getting-started#install 200
+2026-10-14 09:00:07 203.0.113.11 GET /search?q=red--shoes 200
+2026-10-14 09:00:09 203.0.113.12 GET /product?id=42 200
+2026-10-14 09:00:11 203.0.113.12 POST /login 200
+2026-10-14 09:00:15 203.0.113.13 GET /api/orders?page=2&sort=-created_at 200

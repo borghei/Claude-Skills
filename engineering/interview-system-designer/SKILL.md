@@ -1,16 +1,16 @@
 ---
 name: interview-system-designer
 description: >
-  Design calibrated interview loops, competency-based question banks, and hiring calibration.
-  Use when designing interview processes, creating hiring pipelines, generating scoring
-  rubrics, analyzing interviewer bias, or building question banks.
+  Design interview loops, competency rubrics and question banks, and check interviewer
+  calibration. Use when designing an interview process, writing scorecards or questions,
+  or reviewing hiring-bar drift and interviewer bias.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
   author: borghei
   category: engineering
   domain: hiring
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags:
     - interviews
     - hiring
@@ -20,45 +20,74 @@ metadata:
 ---
 # Interview System Designer
 
-Design role-specific interview loops, generate competency-based question banks with scoring rubrics, and detect interviewer bias through statistical calibration analysis.
-
-## Core Capabilities
-
-- **Interview loop design** — role/level/team-specific loops with rounds, time allocations, interviewer skill requirements, and scorecard templates.
-- **Question bank generation** — competency-based questions with 1-4 scoring rubrics, follow-up probes, and poor/good/great calibration examples.
-- **Hiring calibration** — statistical bias and drift detection across interviewers and time periods, with coaching recommendations.
-- **Scoring & benchmarks** — 4-point rubric, target score distribution (20/40/30/10), interviewer-consistency and pass-rate benchmarks.
-- **Loop templates** — junior/senior/staff+ engineering loops plus sample questions by level and STAR behavioral prompts.
-- **Bias guardrails** — anti-pattern catalog (halo effect, similarity bias, unstandardized loops) and mitigation practices.
+Design a structured interview loop for a role and level, write the questions and the rubric each interviewer scores against, and check afterwards whether interviewers are calibrated. The agent writes the questions; the scripts supply loop structure, rubric scaffolds and calibration statistics.
 
 ## When to Use
 
-- Designing an interview process or end-to-end hiring pipeline for any seniority level.
-- Building a competency-based question bank with scoring rubrics.
-- Generating scorecards, debrief guides, or interviewer assignments.
-- Analyzing interviewer bias or calibration drift across candidates and time.
+- Designing an interview process or loop for a role and seniority level.
+- Writing competency-based questions, scorecards and 1-4 scoring anchors.
+- Reviewing interview outcomes for calibration drift or interviewer bias.
+
+Not for sourcing, ATS setup or offers (`hr-operations/talent-acquisition`), compensation (`hr-operations/hr-business-partner`), or onboarding (`engineering/codebase-onboarding`).
 
 ## Clarify First
 
 Before designing, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- **Task:** design an interview loop, generate a question bank, or calibrate hiring (selects `loop_designer.py` vs `question_bank_generator.py` vs `hiring_calibrator.py`).
-- **Role & level:** the role and seniority (junior/senior/staff+) (drives loop rounds, time allocation, and rubric calibration via `--role`/`--level`).
-- **Competencies:** which competencies the loop or questions must cover (sets `--competencies` and the question-bank scope).
+- **Role, level and team:** they set the rounds, time per round and what "meets the bar" means.
+- **The three to five competencies that matter most** for this role, ideally from the team's leveling guide.
+- **For calibration:** where the interview data comes from, how many records there are, and whether demographic fields may be used at all (legal and works-council rules differ by country).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-The Python tools live at the skill root (not in `scripts/`). All support `--help`, JSON/text output.
+1. **Loop.** Run `loop_designer.py` for the role and level to get rounds, durations and scorecards; adjust rounds to the competencies the user named. Each competency should be assessed in at least one round, and no round should assess more than two.
+2. **Questions.** Generate a first draft with `question_bank_generator.py`: it builds scenario questions from the role, competency and level (a senior engineer is asked about "the service you own", a staff engineer about "a system several teams depend on"), plus rubrics, follow-up probes and poor/good/great anchors. Then make each question specific to the team's real product and stack; a question about their actual scaling problem beats any stock scenario. Only competencies with no bundled scenarios fall back to templated questions, marked `"generic": true`; replace those.
+3. **Rubric.** For each question, write what a 1, 2, 3 and 4 answer looks like at this level, in observable behaviour. Validate that two interviewers reading the anchors would score the same answer the same way.
+4. **Calibrate** (after real interviews). Run `hiring_calibrator.py` on the results. Treat its bias figures as prompts for review, not findings: below about 50 records overall, or 30 per group, differences are noise, and the tool warns. Never use protected characteristics to score or rank candidates; analysing them for adverse impact may itself need legal sign-off.
+5. **Verify** the loop before it goes live: checklist of every competency covered, every question has anchors, interviewers are trained on the rubric, and the debrief follows [references/debrief_facilitation_guide.md](references/debrief_facilitation_guide.md).
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `loop_designer.py` | Generate a calibrated interview loop (rounds, time, scorecards) | `python loop_designer.py --role "Senior Software Engineer" --level senior --team platform --output loops/` |
-| `question_bank_generator.py` | Generate competency-based questions with rubrics + calibration examples | `python question_bank_generator.py --role "Frontend Engineer" --competencies react,typescript,system-design --num-questions 30` |
-| `hiring_calibrator.py` | Detect bias/calibration drift across interviewers and periods | `python hiring_calibrator.py --input interview_data.json --analysis-type comprehensive --trend-analysis` |
+## Quick Start
 
-## References
+```bash
+python3 scripts/loop_designer.py --role "Senior Software Engineer" --level senior --team platform
+python3 scripts/question_bank_generator.py --role "Frontend Engineer" --competencies react,typescript,system-design --num-questions 9 --format json
+python3 scripts/scenario_stems.py --competency k8s --level staff     # preview the scenarios for one competency
+python3 scripts/hiring_calibrator.py --input assets/sample_interview_results.json --analysis-type comprehensive --trend-analysis
+```
+
+## Tools Overview
+
+| Tool | What it produces | Key flags |
+|------|------------------|-----------|
+| `scripts/loop_designer.py` | Rounds, durations, interviewer requirements, scorecards, calibration notes | `--role`, `--level`, `--team`, `--competencies`, `--input <role.json>` (a list uses its first entry) |
+| `scripts/question_bank_generator.py` | Questions per competency with rubrics, probes and anchors; `--competencies` replaces the role defaults, duplicates and repeated questions are dropped; scenario questions come from `scripts/scenario_stems.py` (about 40 competencies plus aliases such as `ts`, `k8s`, `system_architecture`), and only competencies without stems get templated questions marked `"generic": true` | `--role`, `--level`, `--competencies`, `--question-types technical,behavioral,situational`, `--num-questions` |
+| `scripts/hiring_calibrator.py` | Interviewer consistency, score distribution vs target, pass-rate drift, group disparity, recommendations | `--input <results.json>` (array), `--analysis-type comprehensive|bias|calibration|interviewer|scoring`, `--trend-analysis`, `--period` |
+
+All three print to stdout by default and write files only with `--output <dir-or-file>`; `--format json|text|both`. Exit codes: 0 success, 2 bad input (missing file, invalid JSON, missing `--role`). The calibrator also warns on stderr when there are fewer than 50 records.
+
+## Anti-Patterns
+
+**Mistake:** Shipping the generated question bank as is.
+**Why it happens:** It looks complete and has rubrics attached.
+**Instead:** Replace every `"generic": true` question with one grounded in the team's real work, and keep the tool's anchors only where they fit.
+
+**Mistake:** Reading a disparity figure from 20 interviews as proof of bias.
+**Why it happens:** The report prints precise-looking percentages.
+**Instead:** Collect enough data first, look at the individual debriefs, and involve HR or legal before acting on group-level numbers.
+
+**Mistake:** Different questions for each candidate in the same loop.
+**Why it happens:** Interviewers improvise to "get a feel" for the person.
+**Instead:** Same core questions and anchors for every candidate at a level; follow-ups can vary. Unstructured interviews are where halo and similarity bias come from.
+
+## Files
+
+- `scripts/loop_designer.py`, `scripts/question_bank_generator.py`, `scripts/hiring_calibrator.py` — the tools above; `scripts/scenario_stems.py` — the scenario stems and level context the question bank fills in (add a competency there to stop it falling back to templated questions).
+- `assets/sample_role_definitions.json` (8 roles), `assets/sample_interview_results.json` (20 interview records).
+- `expected_outputs/` — reference outputs; `README.md` — longer tool walkthrough.
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -70,25 +99,4 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 ## Scope & Limitations
 
-**This skill covers:**
-- Designing end-to-end interview loops for engineering, product, design, and data roles across all seniority levels (junior through principal)
-- Generating competency-based question banks with structured scoring rubrics and calibration examples
-- Detecting statistical bias and calibration drift across interviewers and time periods
-- Producing scorecard templates, debrief guides, and interviewer assignment recommendations
-
-**This skill does NOT cover:**
-- Applicant tracking system (ATS) integration, job posting, or candidate sourcing pipeline management — see `hr-operations/talent-acquisition`
-- Compensation benchmarking, offer negotiation strategy, or total rewards analysis — see `hr-operations/hr-business-partner`
-- Workforce planning, headcount modeling, or organizational design — see `hr-operations/people-analytics`
-- Post-hire onboarding program design or new-hire ramp-up tracking — see `engineering/codebase-onboarding`
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `hr-operations/talent-acquisition` | Feed designed interview loops and scorecards into the talent acquisition pipeline for end-to-end hiring execution | Loop JSON output → talent acquisition workflow input |
-| `hr-operations/people-analytics` | Supply calibration reports and interviewer performance data for workforce-level hiring analytics | Calibrator JSON reports → people analytics dashboards |
-| `engineering/codebase-onboarding` | Hand off hired candidate profiles and assessed competency gaps to onboarding plan generation | Scorecard results → onboarding skill-gap inputs |
-| `hr-operations/hr-business-partner` | Provide interview quality metrics and pass-rate data to support hiring bar discussions with HR leadership | Calibration trend data → HRBP quarterly reviews |
-| `product-team` | Align PM interview loop competencies with the product team's competency frameworks and role leveling guides | Competency matrix → PM loop designer `--competencies` input |
-| `engineering/pr-review-expert` | Use coding round evaluation criteria to inform code review standards for new hires during their ramp period | Scoring rubric technical criteria → PR review checklist alignment |
+Covers interview loop design for engineering, product, design and data roles from junior to principal, question and rubric design, and calibration analysis on exported interview results. It does not integrate with an ATS, and its statistics are descriptive: they do not establish legal compliance or prove bias.

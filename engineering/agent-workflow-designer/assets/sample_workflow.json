@@ -1,0 +1,14 @@
+{
+  "name": "content-pipeline",
+  "steps": [
+    {"id": "route", "agent": "router", "depends_on": [], "model": "claude-haiku-5-5",
+     "estimated_input_tokens": 800, "estimated_output_tokens": 50},
+    {"id": "research", "agent": "researcher", "depends_on": ["route"], "model": "claude-sonnet-5-5",
+     "estimated_input_tokens": 6000, "estimated_output_tokens": 3000, "parallel_branches": 3,
+     "cached_input_tokens": 4000},
+    {"id": "write", "agent": "writer", "depends_on": ["research"], "model": "claude-sonnet-5-5",
+     "estimated_input_tokens": 9000, "estimated_output_tokens": 4000, "retry_probability": 0.1},
+    {"id": "review", "agent": "reviewer", "depends_on": ["write"], "model": "claude-opus-5-5",
+     "estimated_input_tokens": 5000, "estimated_output_tokens": 800, "terminal": true}
+  ]
+}

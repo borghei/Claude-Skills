@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Runbook Generator - Claude Skills</title>
-  <meta name="description" content="Generate operational runbooks from codebase analysis covering deployment, incident response, scaling, and monitoring, with copy-paste commands and rollback steps. Use when bootstrapping ops docs, prep">
+  <meta name="description" content="Drafts, validates and ages operational runbooks (deploy, incident, database, scaling, monitoring) with stack-specific commands, VERIFY steps and rollback. Use when bootstrapping ops docs, preparing on">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/runbook-generator.html">
   <meta property="og:title" content="Runbook Generator - Claude Skills">
-  <meta property="og:description" content="Generate operational runbooks from codebase analysis covering deployment, incident response, scaling, and monitoring, with copy-paste commands and rollback steps. Use when bootstrapping ops docs, prep">
+  <meta property="og:description" content="Drafts, validates and ages operational runbooks (deploy, incident, database, scaling, monitoring) with stack-specific commands, VERIFY steps and rollback. Use when bootstrapping ops docs, preparing on">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/runbook-generator.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Runbook Generator", "description": "Generate operational runbooks from codebase analysis covering deployment, incident response, scaling, and monitoring, with copy-paste commands and rollback steps. Use when bootstrapping ops docs, preparing for on-call, or post-incident.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/runbook-generator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Runbook Generator", "description": "Drafts, validates and ages operational runbooks (deploy, incident, database, scaling, monitoring) with stack-specific commands, VERIFY steps and rollback. Use when bootstrapping ops docs, preparing on-call, or after an incident.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/runbook-generator.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Runbook Generator</h1>
-    <p class="page-subtitle">Generate operational runbooks from codebase analysis covering deployment, incident response, scaling, and monitoring, with copy-paste commands and rollback steps. Use when bootstrapping ops docs, preparing for on-call, or post-incident.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Drafts, validates and ages operational runbooks (deploy, incident, database, scaling, monitoring) with stack-specific commands, VERIFY steps and rollback. Use when bootstrapping ops docs, preparing on-call, or after an incident.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">runbooks</span><span class="tag">incident-response</span><span class="tag">sre</span><span class="tag">operations</span><span class="tag">rollback</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,12 +393,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Runbook Generator (Engineering domain).
 
-Generate operational runbooks from codebase analysis covering deployment, incident response, scaling, and monitoring, with copy-paste commands and rollback steps. Use when bootstrapping ops docs, preparing for on-call, or post-incident.
+Drafts, validates and ages operational runbooks (deploy, incident, database, scaling, monitoring) with stack-specific commands, VERIFY steps and rollback. Use when bootstrapping ops docs, preparing on-call, or after an incident.
 
-Analyze a codebase and generate production-grade operational runbooks with copy-paste commands, verification checks after every step, rollback procedures for every destructive action, escalation paths with contact information, and time estimates for capacity planning. Detects the stack (CI/CD, datab
-
-## Frameworks &amp; Templates You Know
-- - Escalation path templates with severity-based routing
+The agent writes runbooks an on-call engineer can follow at 3 a.m.: numbered steps with copy-paste commands, a VERIFY line after every step, a rollback for every destructive action, an escalation table, and an owner plus a last-verified date so staleness can be measured. - A service has no runbooks 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -418,12 +415,9 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Runbook Generator (Engineering domain).
 
-Generate operational runbooks from codebase analysis covering deployment, incident response, scaling, and monitoring, with copy-paste commands and rollback steps. Use when bootstrapping ops docs, preparing for on-call, or post-incident.
+Drafts, validates and ages operational runbooks (deploy, incident, database, scaling, monitoring) with stack-specific commands, VERIFY steps and rollback. Use when bootstrapping ops docs, preparing on-call, or after an incident.
 
-Analyze a codebase and generate production-grade operational runbooks with copy-paste commands, verification checks after every step, rollback procedures for every destructive action, escalation paths with contact information, and time estimates for capacity planning. Detects the stack (CI/CD, datab
-
-## Frameworks &amp; Templates You Know
-- - Escalation path templates with severity-based routing
+The agent writes runbooks an on-call engineer can follow at 3 a.m.: numbered steps with copy-paste commands, a VERIFY line after every step, a rollback for every destructive action, an escalation table, and an owner plus a last-verified date so staleness can be measured. - A service has no runbooks 
 
 ## How to Help
 When the user asks for help in this domain:
@@ -453,75 +447,99 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Runbook Generator
 
-Analyze a codebase and generate production-grade operational runbooks with copy-paste commands, verification checks after every step, rollback procedures for every destructive action, escalation paths with contact information, and time estimates for capacity planning. Detects the stack (CI/CD, database, hosting, containers) and produces runbooks tailored to the actual infrastructure. Includes staleness detection to flag runbooks when referenced config files change.
-
-**Keywords:** runbook, operational procedures, incident response, deployment, rollback, database maintenance, scaling, monitoring, on-call, SRE, postmortem
-
-## Core Capabilities
-
-- **Stack detection** — identify CI/CD platform, database, hosting, and orchestration from repo files; map to runbook templates; extract connection strings, deploy commands, and infra details.
-- **Runbook types** — deployment (pre-checks, deploy, smoke tests, rollback), incident response (triage→diagnose→mitigate→resolve→postmortem), database maintenance (backup, migration, vacuum, reindex), scaling (horizontal/vertical), and monitoring (alerts, dashboards, on-call rotation).
-- **Format discipline** — numbered steps with copy-paste commands, a VERIFY check after EVERY step, time estimates, a rollback procedure for every destructive action, and escalation paths with decision criteria.
-- **Maintenance** — staleness detection linked to config file modification dates, quarterly review cadence, and a staging dry-run validation framework.
+The agent writes runbooks an on-call engineer can follow at 3 a.m.: numbered steps with copy-paste commands, a VERIFY line after every step, a rollback for every destructive action, an escalation table, and an owner plus a last-verified date so staleness can be measured.
 
 ## When to Use
 
-- Codebase has no runbooks and you need to bootstrap them.
-- Existing runbooks are outdated or incomplete.
-- Onboarding a new engineer for on-call rotation.
-- Preparing for an incident response drill.
-- Post-incident improvement: updating runbooks with lessons learned.
+- A service has no runbooks and you need a first set.
+- Existing runbooks are outdated, incomplete or fail review.
+- Onboarding someone onto the on-call rotation, or preparing an incident drill.
+- After an incident: fold the lessons into the runbook and re-date it.
 
 ## Clarify First
 
 Before generating the runbook, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- **Runbook type:** deployment / incident response / database maintenance / scaling / monitoring (selects the template and step structure).
-- **Actual stack:** CI/CD platform, database, hosting, and orchestration (every copy-paste command and rollback step is stack-specific).
-- **Escalation contacts &amp; severity routing:** who is paged at each level (fills the escalation table; a runbook without it is unusable on-call).
+- **Runbook type:** deployment / incident / database / scaling / monitoring (selects the template).
+- **Actual stack:** hosting, database, CI/CD, framework and migration command (every command and rollback is stack-specific).
+- **Escalation contacts:** who is paged at L1, L2 and L3 (a runbook without them is unusable on-call).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `runbook_scaffolder.py` | Generate runbook markdown templates from a JSON service definition | `python scripts/runbook_scaffolder.py -i service.json --type deployment -o runbook.md` |
-| `runbook_validator.py` | Validate runbook markdown for completeness and quality (required sections, VERIFY blocks, hardcoded creds, escalation table) | `python scripts/runbook_validator.py --dir docs/runbooks --strict` |
-| `staleness_checker.py` | Check runbook freshness against configurable staleness thresholds | `python scripts/staleness_checker.py docs/runbooks --threshold 90 --json` |
+1. **Detect the stack yourself.** The tools do not read the repo. Look for CI files, `docker-compose*.yml`, `k8s/`, `fly.toml`, `vercel.json`, ORM config (`alembic.ini`, `prisma/schema.prisma`, `manage.py`). The detection commands are in [references/runbook-templates.md](references/runbook-templates.md).
+2. **Write the service definition JSON** (shape: `assets/sample_service.json`). Set `stack.migrate_command` when the framework default would be wrong, and list `config_files` so drift can be checked.
+3. **Scaffold** each runbook type you need with `runbook_scaffolder.py`.
+4. **Replace every FILL IN** with real values and tailor the steps; the scaffold is a draft, not a verified procedure.
+5. **Validate** with `runbook_validator.py --strict`. Fix every finding; `--strict` also fails on leftover FILL IN placeholders in commands.
+6. **Dry-run in staging**, then set Last verified to the dry-run date. Done when the validator passes in strict mode and someone other than the author has run the steps.
+7. **Keep it fresh:** run `staleness_checker.py` in CI so a runbook goes stale loudly, not silently.
 
-## References
+## Quick Start
 
-Load the reference that matches the task — keep this file lean and pull detail on demand:
+```bash
+# from engineering/runbook-generator/; write output outside the repo
+OUT=$(mktemp -d)
+python3 scripts/runbook_scaffolder.py -i assets/sample_service.json --type deployment -o &quot;$OUT/deploy.md&quot;
+python3 scripts/runbook_validator.py &quot;$OUT/deploy.md&quot; --strict        # exit 0: the draft is structurally complete
+python3 scripts/runbook_validator.py assets/flawed_runbook.md       # exit 1: 7 errors (no rollback, hardcoded DB URL, ...)
+```
 
-- **[references/runbook-templates.md](references/runbook-templates.md)** — the stack-detection shell commands plus full deployment, incident response, and database maintenance runbook templates with copy-paste commands, VERIFY blocks, rollback, and escalation tables. Read when scanning a repo or writing a runbook.
-- **[references/staleness-and-maintenance.md](references/staleness-and-maintenance.md)** — the staleness-detection CI script and the 7-step quarterly review process. Read when automating freshness checks or running a quarterly review.
-- **[references/quality-and-troubleshooting.md](references/quality-and-troubleshooting.md)** — common pitfalls, the best-practice checklist, the troubleshooting table, and the success-criteria bar. Read before shipping a runbook.
+```bash
+python3 scripts/staleness_checker.py assets/flawed_runbook.md --as-of 2026-03-01   # exit 1: critical, 415 days
+```
+
+## Tools Overview
+
+| Tool | Purpose | Key flags | Exit codes |
+|------|---------|-----------|------------|
+| `scripts/runbook_scaffolder.py` | Runbook draft from a service JSON; commands derived from hosting, database, CI and framework | `-i FILE\|-`, `--type deployment\|incident\|database\|scaling\|monitoring`, `-o FILE`, `--format markdown\|json` | 0 written; 2 bad input |
+| `scripts/runbook_validator.py` | Required sections per type, VERIFY lines, time estimates, Owner / Last verified, escalation table, hardcoded DB credentials, placeholders in commands | `FILES...`, `--dir DIR`, `--strict`, `--format json` | 0 valid; 1 findings; 2 missing file or no input |
+| `scripts/staleness_checker.py` | Age of each runbook&#x27;s Last verified date, plus config files changed since then (via `git log`) | `PATHS...`, `--threshold 90`, `--warning 60`, `--critical 180`, `--as-of YYYY-MM-DD`, `--repo-root`, `--json` | 0 fresh or warning; 1 stale or critical; 2 bad input |
+
+Pass `--as-of` to the staleness checker when you need a reproducible result; without it, age is measured from today.
+
+## Anti-Patterns
+
+**Mistake:** Shipping the scaffold as the runbook.
+**Why it matters:** The scaffold&#x27;s Last verified date is the generation date, and its steps have never been run; on-call will trust both.
+**Instead:** Replace FILL IN values, dry-run in staging, then re-date it.
+
+**Mistake:** A deploy step with no rollback, or a rollback that only reverts the code.
+**Why it matters:** Schema migrations and data changes outlive a code rollback; the incident gets worse when the old code meets the new schema.
+**Instead:** Pair each migration with its down path or a restore-from-backup step, and say which steps cannot be undone.
+
+**Mistake:** Hardcoding connection strings or tokens in commands.
+**Why it matters:** Runbooks are copied into tickets and chat; credentials leak and go stale.
+**Instead:** Use environment variables (`$PROD_DB_URL`); the validator flags inline database URLs as errors.
+
+## Reference Documentation
+
+- **[references/runbook-templates.md](references/runbook-templates.md)**: stack-detection commands plus full deployment, incident and database templates. Read when scanning a repo or writing a runbook by hand.
+- **[references/staleness-and-maintenance.md](references/staleness-and-maintenance.md)**: the staleness CI job and the quarterly review process. Read when automating freshness checks.
+- **[references/quality-and-troubleshooting.md](references/quality-and-troubleshooting.md)**: pitfalls, best-practice checklist, troubleshooting and the success bar. Read before shipping a runbook.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/runbook_scaffolder.py` | Draft generator (stdlib only) |
+| `scripts/runbook_validator.py` | Completeness and quality gate |
+| `scripts/staleness_checker.py` | Freshness and config-drift gate |
+| `assets/sample_service.json` | FastAPI + PostgreSQL + Kubernetes service; all five types pass `--strict` |
+| `assets/flawed_runbook.md` | Deliberately incomplete runbook; validator exits 1 |
 
 ## Scope &amp; Limitations
 
-**This skill covers:**
-- Generating deployment, incident response, database maintenance, scaling, and monitoring runbooks from codebase analysis
-- Stack detection for common CI/CD platforms (GitHub Actions, GitLab CI, Jenkins), databases (PostgreSQL, MySQL, MongoDB), and hosting providers (Vercel, Fly.io, Kubernetes, AWS)
-- Staleness detection automation and quarterly review processes
-- Escalation path templates with severity-based routing
+**Covers:** drafting deployment, incident, database, scaling and monitoring runbooks; validating structure and safety markers; staleness and config-drift checks.
 
-**This skill does NOT cover:**
-- Automated execution of runbook steps — it generates documentation, not orchestration (see `ci-cd-pipeline-builder` for automated pipelines)
-- Infrastructure provisioning or Terraform/Pulumi code generation (see `migration-architect` for schema migration tooling)
-- Observability stack setup such as Prometheus rules, Grafana dashboards, or alert definitions (see `observability-designer` for monitoring infrastructure)
-- Security incident response or vulnerability remediation playbooks (see `skill-security-auditor` for security-focused analysis)
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `ci-cd-pipeline-builder` | Runbook deployment steps align with pipeline stages | Pipeline config feeds into deployment runbook generation; runbook rollback steps reference pipeline rollback triggers |
-| `observability-designer` | Monitoring runbook references alert rules and dashboards | Observability outputs (alert names, dashboard URLs) are embedded in runbook VERIFY and Monitor steps |
-| `migration-architect` | Database maintenance runbook uses migration tooling conventions | Migration file paths and commands flow into the database runbook template; rollback steps mirror migration rollback commands |
-| `release-manager` | Release process triggers runbook execution checkpoints | Release tags and changelogs feed into runbook staleness checks; release gates reference runbook pre-deployment checklists |
-| `env-secrets-manager` | Runbook commands reference env vars managed by secrets tooling | Secret names and vault paths flow into runbook env var references; rotation schedules inform runbook update cadence |
-| `changelog-generator` | Post-deployment runbook steps cross-reference changelog entries | Changelog diffs help identify which runbook steps need re-verification after a release |
+**Does not cover:**
+- Running runbook steps; it writes documentation, not automation (see `engineering/ci-cd-pipeline-builder`).
+- Infrastructure provisioning (see `engineering/terraform-patterns`).
+- Alert rules and dashboards (see `engineering/observability-designer`).
+- Live incident coordination (see `engineering/incident-commander`) and security incident playbooks (see `engineering/security-audit`).
+- The validator checks structure, not truth: it cannot tell whether a command works on your system.
 
 ---
 
@@ -549,7 +567,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Runbook Generator&quot;**
-   - Description: &quot;Generate operational runbooks from codebase analysis covering deployment, incident response, scaling, and monitoring, with copy-paste commands and rollback steps. Use when bootstrapping ops docs, preparing for on-call, or post-incident.&quot;
+   - Description: &quot;Drafts, validates and ages operational runbooks (deploy, incident, database, scaling, monitoring) with stack-specific commands, VERIFY steps and rollback. Use when bootstrapping ops docs, preparing on-call, or after an incident.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -574,75 +592,99 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Runbook Generator
 
-Analyze a codebase and generate production-grade operational runbooks with copy-paste commands, verification checks after every step, rollback procedures for every destructive action, escalation paths with contact information, and time estimates for capacity planning. Detects the stack (CI/CD, database, hosting, containers) and produces runbooks tailored to the actual infrastructure. Includes staleness detection to flag runbooks when referenced config files change.
-
-**Keywords:** runbook, operational procedures, incident response, deployment, rollback, database maintenance, scaling, monitoring, on-call, SRE, postmortem
-
-## Core Capabilities
-
-- **Stack detection** — identify CI/CD platform, database, hosting, and orchestration from repo files; map to runbook templates; extract connection strings, deploy commands, and infra details.
-- **Runbook types** — deployment (pre-checks, deploy, smoke tests, rollback), incident response (triage→diagnose→mitigate→resolve→postmortem), database maintenance (backup, migration, vacuum, reindex), scaling (horizontal/vertical), and monitoring (alerts, dashboards, on-call rotation).
-- **Format discipline** — numbered steps with copy-paste commands, a VERIFY check after EVERY step, time estimates, a rollback procedure for every destructive action, and escalation paths with decision criteria.
-- **Maintenance** — staleness detection linked to config file modification dates, quarterly review cadence, and a staging dry-run validation framework.
+The agent writes runbooks an on-call engineer can follow at 3 a.m.: numbered steps with copy-paste commands, a VERIFY line after every step, a rollback for every destructive action, an escalation table, and an owner plus a last-verified date so staleness can be measured.
 
 ## When to Use
 
-- Codebase has no runbooks and you need to bootstrap them.
-- Existing runbooks are outdated or incomplete.
-- Onboarding a new engineer for on-call rotation.
-- Preparing for an incident response drill.
-- Post-incident improvement: updating runbooks with lessons learned.
+- A service has no runbooks and you need a first set.
+- Existing runbooks are outdated, incomplete or fail review.
+- Onboarding someone onto the on-call rotation, or preparing an incident drill.
+- After an incident: fold the lessons into the runbook and re-date it.
 
 ## Clarify First
 
 Before generating the runbook, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
 
-- **Runbook type:** deployment / incident response / database maintenance / scaling / monitoring (selects the template and step structure).
-- **Actual stack:** CI/CD platform, database, hosting, and orchestration (every copy-paste command and rollback step is stack-specific).
-- **Escalation contacts &amp; severity routing:** who is paged at each level (fills the escalation table; a runbook without it is unusable on-call).
+- **Runbook type:** deployment / incident / database / scaling / monitoring (selects the template).
+- **Actual stack:** hosting, database, CI/CD, framework and migration command (every command and rollback is stack-specific).
+- **Escalation contacts:** who is paged at L1, L2 and L3 (a runbook without them is unusable on-call).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Workflow
 
-| Tool | Purpose | Command |
-|------|---------|---------|
-| `runbook_scaffolder.py` | Generate runbook markdown templates from a JSON service definition | `python scripts/runbook_scaffolder.py -i service.json --type deployment -o runbook.md` |
-| `runbook_validator.py` | Validate runbook markdown for completeness and quality (required sections, VERIFY blocks, hardcoded creds, escalation table) | `python scripts/runbook_validator.py --dir docs/runbooks --strict` |
-| `staleness_checker.py` | Check runbook freshness against configurable staleness thresholds | `python scripts/staleness_checker.py docs/runbooks --threshold 90 --json` |
+1. **Detect the stack yourself.** The tools do not read the repo. Look for CI files, `docker-compose*.yml`, `k8s/`, `fly.toml`, `vercel.json`, ORM config (`alembic.ini`, `prisma/schema.prisma`, `manage.py`). The detection commands are in [references/runbook-templates.md](references/runbook-templates.md).
+2. **Write the service definition JSON** (shape: `assets/sample_service.json`). Set `stack.migrate_command` when the framework default would be wrong, and list `config_files` so drift can be checked.
+3. **Scaffold** each runbook type you need with `runbook_scaffolder.py`.
+4. **Replace every FILL IN** with real values and tailor the steps; the scaffold is a draft, not a verified procedure.
+5. **Validate** with `runbook_validator.py --strict`. Fix every finding; `--strict` also fails on leftover FILL IN placeholders in commands.
+6. **Dry-run in staging**, then set Last verified to the dry-run date. Done when the validator passes in strict mode and someone other than the author has run the steps.
+7. **Keep it fresh:** run `staleness_checker.py` in CI so a runbook goes stale loudly, not silently.
 
-## References
+## Quick Start
 
-Load the reference that matches the task — keep this file lean and pull detail on demand:
+```bash
+# from engineering/runbook-generator/; write output outside the repo
+OUT=$(mktemp -d)
+python3 scripts/runbook_scaffolder.py -i assets/sample_service.json --type deployment -o &quot;$OUT/deploy.md&quot;
+python3 scripts/runbook_validator.py &quot;$OUT/deploy.md&quot; --strict        # exit 0: the draft is structurally complete
+python3 scripts/runbook_validator.py assets/flawed_runbook.md       # exit 1: 7 errors (no rollback, hardcoded DB URL, ...)
+```
 
-- **[references/runbook-templates.md](references/runbook-templates.md)** — the stack-detection shell commands plus full deployment, incident response, and database maintenance runbook templates with copy-paste commands, VERIFY blocks, rollback, and escalation tables. Read when scanning a repo or writing a runbook.
-- **[references/staleness-and-maintenance.md](references/staleness-and-maintenance.md)** — the staleness-detection CI script and the 7-step quarterly review process. Read when automating freshness checks or running a quarterly review.
-- **[references/quality-and-troubleshooting.md](references/quality-and-troubleshooting.md)** — common pitfalls, the best-practice checklist, the troubleshooting table, and the success-criteria bar. Read before shipping a runbook.
+```bash
+python3 scripts/staleness_checker.py assets/flawed_runbook.md --as-of 2026-03-01   # exit 1: critical, 415 days
+```
+
+## Tools Overview
+
+| Tool | Purpose | Key flags | Exit codes |
+|------|---------|-----------|------------|
+| `scripts/runbook_scaffolder.py` | Runbook draft from a service JSON; commands derived from hosting, database, CI and framework | `-i FILE\|-`, `--type deployment\|incident\|database\|scaling\|monitoring`, `-o FILE`, `--format markdown\|json` | 0 written; 2 bad input |
+| `scripts/runbook_validator.py` | Required sections per type, VERIFY lines, time estimates, Owner / Last verified, escalation table, hardcoded DB credentials, placeholders in commands | `FILES...`, `--dir DIR`, `--strict`, `--format json` | 0 valid; 1 findings; 2 missing file or no input |
+| `scripts/staleness_checker.py` | Age of each runbook&#x27;s Last verified date, plus config files changed since then (via `git log`) | `PATHS...`, `--threshold 90`, `--warning 60`, `--critical 180`, `--as-of YYYY-MM-DD`, `--repo-root`, `--json` | 0 fresh or warning; 1 stale or critical; 2 bad input |
+
+Pass `--as-of` to the staleness checker when you need a reproducible result; without it, age is measured from today.
+
+## Anti-Patterns
+
+**Mistake:** Shipping the scaffold as the runbook.
+**Why it matters:** The scaffold&#x27;s Last verified date is the generation date, and its steps have never been run; on-call will trust both.
+**Instead:** Replace FILL IN values, dry-run in staging, then re-date it.
+
+**Mistake:** A deploy step with no rollback, or a rollback that only reverts the code.
+**Why it matters:** Schema migrations and data changes outlive a code rollback; the incident gets worse when the old code meets the new schema.
+**Instead:** Pair each migration with its down path or a restore-from-backup step, and say which steps cannot be undone.
+
+**Mistake:** Hardcoding connection strings or tokens in commands.
+**Why it matters:** Runbooks are copied into tickets and chat; credentials leak and go stale.
+**Instead:** Use environment variables (`$PROD_DB_URL`); the validator flags inline database URLs as errors.
+
+## Reference Documentation
+
+- **[references/runbook-templates.md](references/runbook-templates.md)**: stack-detection commands plus full deployment, incident and database templates. Read when scanning a repo or writing a runbook by hand.
+- **[references/staleness-and-maintenance.md](references/staleness-and-maintenance.md)**: the staleness CI job and the quarterly review process. Read when automating freshness checks.
+- **[references/quality-and-troubleshooting.md](references/quality-and-troubleshooting.md)**: pitfalls, best-practice checklist, troubleshooting and the success bar. Read before shipping a runbook.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/runbook_scaffolder.py` | Draft generator (stdlib only) |
+| `scripts/runbook_validator.py` | Completeness and quality gate |
+| `scripts/staleness_checker.py` | Freshness and config-drift gate |
+| `assets/sample_service.json` | FastAPI + PostgreSQL + Kubernetes service; all five types pass `--strict` |
+| `assets/flawed_runbook.md` | Deliberately incomplete runbook; validator exits 1 |
 
 ## Scope &amp; Limitations
 
-**This skill covers:**
-- Generating deployment, incident response, database maintenance, scaling, and monitoring runbooks from codebase analysis
-- Stack detection for common CI/CD platforms (GitHub Actions, GitLab CI, Jenkins), databases (PostgreSQL, MySQL, MongoDB), and hosting providers (Vercel, Fly.io, Kubernetes, AWS)
-- Staleness detection automation and quarterly review processes
-- Escalation path templates with severity-based routing
+**Covers:** drafting deployment, incident, database, scaling and monitoring runbooks; validating structure and safety markers; staleness and config-drift checks.
 
-**This skill does NOT cover:**
-- Automated execution of runbook steps — it generates documentation, not orchestration (see `ci-cd-pipeline-builder` for automated pipelines)
-- Infrastructure provisioning or Terraform/Pulumi code generation (see `migration-architect` for schema migration tooling)
-- Observability stack setup such as Prometheus rules, Grafana dashboards, or alert definitions (see `observability-designer` for monitoring infrastructure)
-- Security incident response or vulnerability remediation playbooks (see `skill-security-auditor` for security-focused analysis)
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `ci-cd-pipeline-builder` | Runbook deployment steps align with pipeline stages | Pipeline config feeds into deployment runbook generation; runbook rollback steps reference pipeline rollback triggers |
-| `observability-designer` | Monitoring runbook references alert rules and dashboards | Observability outputs (alert names, dashboard URLs) are embedded in runbook VERIFY and Monitor steps |
-| `migration-architect` | Database maintenance runbook uses migration tooling conventions | Migration file paths and commands flow into the database runbook template; rollback steps mirror migration rollback commands |
-| `release-manager` | Release process triggers runbook execution checkpoints | Release tags and changelogs feed into runbook staleness checks; release gates reference runbook pre-deployment checklists |
-| `env-secrets-manager` | Runbook commands reference env vars managed by secrets tooling | Secret names and vault paths flow into runbook env var references; rotation schedules inform runbook update cadence |
-| `changelog-generator` | Post-deployment runbook steps cross-reference changelog entries | Changelog diffs help identify which runbook steps need re-verification after a release |
+**Does not cover:**
+- Running runbook steps; it writes documentation, not automation (see `engineering/ci-cd-pipeline-builder`).
+- Infrastructure provisioning (see `engineering/terraform-patterns`).
+- Alert rules and dashboards (see `engineering/observability-designer`).
+- Live incident coordination (see `engineering/incident-commander`) and security incident playbooks (see `engineering/security-audit`).
+- The validator checks structure, not truth: it cannot tell whether a command works on your system.
 
 ---
 
@@ -670,7 +712,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Runbook Generator&quot;**
-   - Description: &quot;Generate operational runbooks from codebase analysis covering deployment, incident response, scaling, and monitoring, with copy-paste commands and rollback steps. Use when bootstrapping ops docs, preparing for on-call, or post-incident.&quot;
+   - Description: &quot;Drafts, validates and ages operational runbooks (deploy, incident, database, scaling, monitoring) with stack-specific commands, VERIFY steps and rollback. Use when bootstrapping ops docs, preparing on-call, or after an incident.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -730,8 +772,16 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/runbook-generator/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Quick Start</h2><pre><code># from engineering/runbook-generator/; write output outside the repo
+OUT=$(mktemp -d)
+python3 scripts/runbook_scaffolder.py -i assets/sample_service.json --type deployment -o &quot;$OUT/deploy.md&quot;
+python3 scripts/runbook_validator.py &quot;$OUT/deploy.md&quot; --strict        # exit 0: the draft is structurally complete
+python3 scripts/runbook_validator.py assets/flawed_runbook.md       # exit 1: 7 errors (no rollback, hardcoded DB URL, ...)
+</code></pre>
+
+<pre><code>python3 scripts/staleness_checker.py assets/flawed_runbook.md --as-of 2026-03-01   # exit 1: critical, 415 days
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/runbook-generator/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

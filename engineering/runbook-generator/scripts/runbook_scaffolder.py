@@ -1,510 +1,299 @@
 #!/usr/bin/env python3
-"""Runbook Scaffolder — Generate runbook markdown templates from service definitions.
+"""Runbook Scaffolder: generate a runbook markdown draft from a JSON service definition.
 
-Accepts a JSON service definition (via file or stdin) containing service name,
-stack components, dependencies, and endpoints. Produces a production-grade
-runbook markdown file with deployment steps, rollback procedures, monitoring
-checks, escalation paths, and staleness tracking.
+Commands are derived from the stack (hosting, database, CI/CD, framework or
+stack.migrate_command). Every type has timed numbered steps with VERIFY lines, a
+Rollback section, an escalation table and Owner / Last verified fields, so a
+draft passes runbook_validator.py; what the tool cannot know is left as FILL IN.
 
 Usage:
-    python runbook_scaffolder.py --input service.json
-    python runbook_scaffolder.py --input service.json --output runbook.md
-    cat service.json | python runbook_scaffolder.py --input -
-    python runbook_scaffolder.py --input service.json --json
-    python runbook_scaffolder.py --input service.json --type incident
+    python runbook_scaffolder.py --input service.json --type incident --output runbook.md
+
+Exit codes: 0 = runbook written, 2 = unusable input (missing file, bad JSON, wrong shape).
 """
 
 import argparse
 import json
 import sys
-import textwrap
 from datetime import date
-
 
 RUNBOOK_TYPES = ["deployment", "incident", "database", "scaling", "monitoring"]
 
-DEPLOY_COMMANDS = {
+DEPLOY = {
     "vercel": "vercel --prod",
     "fly": "fly deploy --app $APP_NAME",
-    "kubernetes": "kubectl apply -f k8s/deployment.yaml",
+    "kubernetes": "kubectl apply -f k8s/deployment.yaml\nkubectl rollout status deployment/$APP_NAME --timeout=5m",
     "aws-ecs": "aws ecs update-service --cluster $CLUSTER --service $SERVICE --force-new-deployment",
     "heroku": "git push heroku main",
-    "docker-compose": "docker-compose -f docker-compose.prod.yml up -d",
+    "docker-compose": "docker compose -f docker-compose.prod.yml up -d",
 }
-
-ROLLBACK_COMMANDS = {
+ROLLBACK = {
     "vercel": "vercel rollback $PREVIOUS_DEPLOYMENT_URL",
-    "fly": "fly releases --app $APP_NAME\nfly deploy --image $PREVIOUS_IMAGE",
-    "kubernetes": "kubectl rollout undo deployment/$APP_NAME",
+    "fly": "fly releases --app $APP_NAME\nfly deploy --app $APP_NAME --image $PREVIOUS_IMAGE",
+    "kubernetes": "kubectl rollout undo deployment/$APP_NAME\nkubectl rollout status deployment/$APP_NAME",
     "aws-ecs": "aws ecs update-service --cluster $CLUSTER --service $SERVICE --task-definition $PREV_TASK_DEF",
     "heroku": "heroku rollback --app $APP_NAME",
-    "docker-compose": "docker-compose -f docker-compose.prod.yml down\ndocker-compose -f docker-compose.prod.yml up -d --no-build",
+    "docker-compose": "docker compose -f docker-compose.prod.yml up -d --no-build  # with the previous image tag pinned",
 }
-
-DB_BACKUP_COMMANDS = {
-    "postgresql": 'pg_dump $PROD_DB_URL --format=custom --compress=9 --file="backup-$(date +%Y%m%d-%H%M%S).dump"',
-    "mysql": 'mysqldump -h $DB_HOST -u $DB_USER -p$DB_PASS $DB_NAME > "backup-$(date +%Y%m%d-%H%M%S).sql"',
-    "mongodb": 'mongodump --uri="$MONGO_URI" --out="backup-$(date +%Y%m%d-%H%M%S)"',
-}
-
-SCALE_COMMANDS = {
+SCALE = {
     "kubernetes": "kubectl scale deployment/$APP_NAME --replicas=$REPLICA_COUNT",
     "fly": "fly scale count $REPLICA_COUNT --app $APP_NAME",
     "aws-ecs": "aws ecs update-service --cluster $CLUSTER --service $SERVICE --desired-count $REPLICA_COUNT",
     "heroku": "heroku ps:scale web=$REPLICA_COUNT --app $APP_NAME",
-    "docker-compose": "docker-compose -f docker-compose.prod.yml up -d --scale web=$REPLICA_COUNT",
+    "docker-compose": "docker compose -f docker-compose.prod.yml up -d --scale web=$REPLICA_COUNT",
+}
+REPLICAS = {
+    "kubernetes": "kubectl get deployment/$APP_NAME\nkubectl top pods -l app=$APP_NAME",
+    "fly": "fly status --app $APP_NAME",
+    "aws-ecs": "aws ecs describe-services --cluster $CLUSTER --services $SERVICE",
+    "heroku": "heroku ps --app $APP_NAME",
+    "docker-compose": "docker compose -f docker-compose.prod.yml ps",
+}
+CI_STATUS = {
+    "github-actions": "gh run list --branch main --limit 3",
+    "gitlab-ci": "glab ci list --branch main",
+}
+MIGRATE = {  # by framework; override with stack.migrate_command
+    "fastapi": "alembic upgrade head", "flask": "flask db upgrade", "django": "python manage.py migrate",
+    "rails": "bin/rails db:migrate", "laravel": "php artisan migrate --force",
+    "nextjs": "npx prisma migrate deploy", "express": "npx prisma migrate deploy", "nestjs": "npx prisma migrate deploy",
+}
+BACKUP = {
+    "postgresql": 'pg_dump "$PROD_DB_URL" --format=custom --file="backup-$(date +%Y%m%d-%H%M%S).dump"',
+    "mysql": 'mysqldump --single-transaction -h "$DB_HOST" -u "$DB_USER" -p "$DB_NAME" > "backup-$(date +%Y%m%d-%H%M%S).sql"',
+    "mongodb": 'mongodump --uri="$MONGO_URI" --out="backup-$(date +%Y%m%d-%H%M%S)"',
+}
+RESTORE = {
+    "postgresql": 'pg_restore --clean --dbname="$PROD_DB_URL" "$BACKUP_FILE"',
+    "mysql": 'mysql -h "$DB_HOST" -u "$DB_USER" -p "$DB_NAME" < "$BACKUP_FILE"',
+    "mongodb": 'mongorestore --uri="$MONGO_URI" --drop "$BACKUP_DIR"',
+}
+MAINTAIN = {  # (inspect command, maintenance command, what to verify)
+    "postgresql": ('psql "$PROD_DB_URL" -c "SELECT relname, n_dead_tup, n_live_tup FROM pg_stat_user_tables '
+                   'ORDER BY n_dead_tup DESC LIMIT 10;"',
+                   'psql "$PROD_DB_URL" -c "VACUUM (ANALYZE) $TABLE_NAME;"\n'
+                   'psql "$PROD_DB_URL" -c "REINDEX INDEX CONCURRENTLY $INDEX_NAME;"',
+                   "n_dead_tup for the table drops; p95 query latency is unchanged or better."),
+    "mysql": ('mysql -h "$DB_HOST" -u "$DB_USER" -p -e "SELECT table_name, data_free FROM information_schema.tables '
+              'WHERE table_schema=\'$DB_NAME\' ORDER BY data_free DESC LIMIT 10;"',
+              'mysqlcheck -h "$DB_HOST" -u "$DB_USER" -p --analyze "$DB_NAME"',
+              "mysqlcheck reports OK for every table."),
+    "mongodb": ('mongosh "$MONGO_URI" --eval "db.stats()"',
+                'mongosh "$MONGO_URI" --eval "db.runCommand({compact: \'$COLLECTION\'})"',
+                "compact returns ok: 1; storage size for the collection falls."),
 }
 
 
-def load_service_definition(input_path):
-    """Load and validate a JSON service definition from file or stdin."""
+def fail(msg):
+    """Print a one-line error and exit 2 (unusable input)."""
+    print(f"error: {msg}", file=sys.stderr)
+    sys.exit(2)
+
+
+def load_service_definition(path):
+    """Load and validate the service definition JSON (file path or '-' for stdin)."""
     try:
-        if input_path == "-":
-            data = json.load(sys.stdin)
-        else:
-            with open(input_path, "r") as f:
-                data = json.load(f)
+        data = json.load(sys.stdin) if path == "-" else json.load(open(path, encoding="utf-8"))
+    except OSError as e:
+        fail(f"cannot read {path}: {e.strerror}")
     except json.JSONDecodeError as e:
-        print(f"Error: Invalid JSON — {e}", file=sys.stderr)
-        sys.exit(1)
-    except FileNotFoundError:
-        print(f"Error: File not found — {input_path}", file=sys.stderr)
-        sys.exit(1)
-
-    required = ["name"]
-    missing = [k for k in required if k not in data]
-    if missing:
-        print(f"Error: Missing required fields — {', '.join(missing)}", file=sys.stderr)
-        sys.exit(1)
-
-    data.setdefault("stack", {})
+        fail(f"{path} is not valid JSON: {e}")
+    if not isinstance(data, dict) or not data.get("name"):
+        fail("service definition must be a JSON object with a non-empty 'name'")
+    stack = data.setdefault("stack", {})
+    if not isinstance(stack, dict) or not isinstance(data.setdefault("contacts", {}), dict):
+        fail("'stack' and 'contacts' must be objects")
+    for key, default in (("hosting", "kubernetes"), ("database", "postgresql"),
+                         ("ci_cd", "github-actions"), ("framework", "unknown")):
+        stack[key] = str(stack.get(key) or default).lower()
     data.setdefault("dependencies", [])
     data.setdefault("endpoints", [])
-    data.setdefault("contacts", {})
-    data["stack"].setdefault("hosting", "kubernetes")
-    data["stack"].setdefault("database", "postgresql")
-    data["stack"].setdefault("ci_cd", "github-actions")
-    data["stack"].setdefault("framework", "unknown")
-
     return data
 
 
-def build_deployment_runbook(svc):
-    """Build a deployment runbook markdown string."""
-    hosting = svc["stack"]["hosting"].lower()
-    db = svc["stack"]["database"].lower()
-    today = date.today().isoformat()
-
-    deploy_cmd = DEPLOY_COMMANDS.get(hosting, f"# Deploy using {hosting}")
-    rollback_cmd = ROLLBACK_COMMANDS.get(hosting, f"# Rollback using {hosting}")
-
-    health_checks = ""
-    for ep in svc.get("endpoints", []):
-        url = ep if isinstance(ep, str) else ep.get("url", ep.get("path", "/health"))
-        health_checks += f"curl -sf {url} | jq .\n"
-    if not health_checks:
-        health_checks = "curl -sf https://$APP_HOST/api/health | jq .\n"
-
-    contacts_table = _build_contacts_table(svc.get("contacts", {}))
-    deps_list = "\n".join(f"- {d}" for d in svc.get("dependencies", [])) or "- None documented"
-    config_files = svc.get("config_files", ["vercel.json", ".github/workflows/deploy.yml"])
-    staleness_rows = "\n".join(
-        f"| {cf} | `git log -1 --format=%ci -- {cf}` | Deploy |"
-        for cf in config_files
-    )
-
-    return textwrap.dedent(f"""\
-    # Deployment Runbook — {svc['name']}
-
-    **Stack:** {svc['stack']['framework']} + {db} + {hosting}
-    **Last verified:** {today}
-    **Owner:** {svc.get('contacts', {}).get('owner', 'FILL IN')}
-    **Estimated total time:** 15-25 minutes
-
-    ---
-
-    ## Staleness Check
-
-    | Config File | Last Modified | Affects Steps |
-    |-------------|--------------|---------------|
-    {staleness_rows}
-
-    If any config was modified after the "Last verified" date, review affected steps.
-
-    ---
-
-    ## Dependencies
-
-    {deps_list}
-
-    ## Pre-Deployment Checklist
-
-    - [ ] All PRs merged to main
-    - [ ] CI passing on main branch
-    - [ ] Database migrations tested in staging
-    - [ ] Rollback plan confirmed
-    - [ ] On-call engineer notified
-
-    ## Step 1: Verify CI Status (2 min)
-
-    ```bash
-    gh run list --branch main --limit 3
-    ```
-
-    VERIFY: Latest run shows green checkmark. If red, do not proceed.
-
-    ## Step 2: Apply Database Migrations (5 min)
-
-    ```bash
-    DATABASE_URL=$STAGING_DB_URL pnpm db:migrate
-    DATABASE_URL=$STAGING_DB_URL pnpm db:migrate status
-    ```
-
-    VERIFY: Output shows "All migrations applied" with today's date.
-
-    ```bash
-    DATABASE_URL=$PROD_DB_URL pnpm db:migrate
-    ```
-
-    VERIFY: Same output as staging. If error, see Rollback section.
-
-    ## Step 3: Deploy to Production (5 min)
-
-    ```bash
-    {deploy_cmd}
-    ```
-
-    VERIFY: Deployment dashboard shows new version in progress.
-
-    ## Step 4: Smoke Test (5 min)
-
-    ```bash
-    {health_checks.strip()}
-    ```
-
-    VERIFY: Health returns `{{"status": "ok"}}`. Error rate < 1%.
-
-    ## Step 5: Monitor (10 min)
-
-    Watch metrics for 10 minutes:
-    - Error rate: < 1%
-    - P95 latency: < 200ms
-    - DB connections: < 80% of max
-
-    ---
-
-    ## Rollback
-
-    ```bash
-    {rollback_cmd}
-    ```
-
-    VERIFY: Previous version serving traffic. Re-run smoke tests.
-
-    ---
-
-    ## Escalation
-
-    {contacts_table}
-    """)
-
-
-def build_incident_runbook(svc):
-    """Build an incident response runbook."""
-    contacts_table = _build_contacts_table(svc.get("contacts", {}))
-    return textwrap.dedent(f"""\
-    # Incident Response Runbook — {svc['name']}
-
-    **Severity:** P1 (down), P2 (degraded), P3 (minor)
-    **Last verified:** {date.today().isoformat()}
-    **Owner:** {svc.get('contacts', {}).get('owner', 'FILL IN')}
-
-    ---
-
-    ## Phase 1: Triage (5 min)
-
-    ```bash
-    curl -sw "%{{http_code}}" https://$APP_HOST/api/health -o /dev/null
-    ```
-
-    VERIFY: 200 = app is up. 5xx or timeout = incident confirmed.
-
-    | Condition | Severity | Action |
-    |-----------|----------|--------|
-    | Site completely unreachable | P1 | Page L2/L3 immediately |
-    | Partial degradation | P2 | Notify team channel |
-    | Single feature broken | P3 | Create ticket |
-
-    ## Phase 2: Diagnose (10-15 min)
-
-    ```bash
-    git log --oneline -10
-    ```
-
-    Check for recent deployments and correlate with incident start time.
-
-    ## Phase 3: Mitigate
-
-    Apply the first applicable fix:
-    1. Rollback last deployment
-    2. Kill runaway database queries
-    3. Scale up replicas
-    4. Enable circuit breaker for failing external dependency
-
-    ## Phase 4: Resolve and Postmortem
-
-    Within 24 hours:
-    1. Write incident timeline
-    2. Identify root cause (5 Whys)
-    3. Define action items with owners
-    4. Update this runbook
-
-    ---
-
-    ## Escalation
-
-    {contacts_table}
-    """)
-
-
-def build_database_runbook(svc):
-    """Build a database maintenance runbook."""
-    db = svc["stack"]["database"].lower()
-    backup_cmd = DB_BACKUP_COMMANDS.get(db, f"# Backup command for {db}")
-    return textwrap.dedent(f"""\
-    # Database Maintenance Runbook — {svc['name']}
-
-    **Database:** {db}
-    **Schedule:** Weekly vacuum (automated), monthly manual review
-    **Last verified:** {date.today().isoformat()}
-
-    ---
-
-    ## Step 1: Backup (5 min)
-
-    ```bash
-    {backup_cmd}
-    ```
-
-    VERIFY: Backup file exists and size > 0.
-
-    ## Step 2: Check Bloat (3 min)
-
-    ```bash
-    psql $PROD_DB_URL -c "
-    SELECT tablename,
-           pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) AS size,
-           n_dead_tup,
-           ROUND(n_dead_tup::numeric / NULLIF(n_live_tup, 0) * 100, 1) AS dead_pct
-    FROM pg_stat_user_tables
-    ORDER BY n_dead_tup DESC
-    LIMIT 10;"
-    ```
-
-    VERIFY: Identify tables with dead_pct > 5%.
-
-    ## Step 3: Vacuum (5 min)
-
-    ```bash
-    psql $PROD_DB_URL -c "VACUUM ANALYZE <table_name>;"
-    ```
-
-    VERIFY: dead_pct drops below 5% after vacuum.
-
-    ## Step 4: Reindex (10 min)
-
-    ```bash
-    psql $PROD_DB_URL -c "REINDEX INDEX CONCURRENTLY <index_name>;"
-    ```
-
-    VERIFY: Index size reduced. Query performance stable.
-
-    ## Rollback
-
-    Restore from backup if vacuum or reindex causes issues:
-    ```bash
-    pg_restore --dbname=$PROD_DB_URL backup-*.dump
-    ```
-    """)
-
-
-def build_scaling_runbook(svc):
-    """Build a scaling operations runbook."""
-    hosting = svc["stack"]["hosting"].lower()
-    scale_cmd = SCALE_COMMANDS.get(hosting, f"# Scale command for {hosting}")
-    return textwrap.dedent(f"""\
-    # Scaling Runbook — {svc['name']}
-
-    **Hosting:** {hosting}
-    **Last verified:** {date.today().isoformat()}
-
-    ---
-
-    ## When to Scale
-
-    - CPU utilization > 70% sustained for 5+ minutes
-    - Memory utilization > 80%
-    - Request queue depth increasing
-    - P95 latency > 500ms
-
-    ## Step 1: Assess Current State (2 min)
-
-    Check current replica count and resource utilization before scaling.
-
-    ## Step 2: Scale Up (3 min)
-
-    ```bash
-    {scale_cmd}
-    ```
-
-    VERIFY: New replicas are running and receiving traffic.
-
-    ## Step 3: Monitor (10 min)
-
-    Watch metrics for 10 minutes to confirm scaling resolved the issue.
-
-    ## Scale Down
-
-    After the load subsides, scale back to baseline to control costs.
-
-    ```bash
-    {scale_cmd.replace('$REPLICA_COUNT', '$BASELINE_COUNT')}
-    ```
-    """)
-
-
-def build_monitoring_runbook(svc):
-    """Build a monitoring setup runbook."""
-    endpoints = svc.get("endpoints", [])
-    ep_checks = ""
-    for ep in endpoints:
-        url = ep if isinstance(ep, str) else ep.get("url", ep.get("path", "/health"))
-        ep_checks += f"    - URL: {url}\n"
-    if not ep_checks:
-        ep_checks = "    - URL: https://$APP_HOST/api/health\n"
-
-    return textwrap.dedent(f"""\
-    # Monitoring Runbook — {svc['name']}
-
-    **Last verified:** {date.today().isoformat()}
-
-    ---
-
-    ## Health Check Endpoints
-
-{ep_checks}
-    ## Key Metrics
-
-    | Metric | Warning Threshold | Critical Threshold |
-    |--------|------------------|-------------------|
-    | Error rate | > 1% | > 5% |
-    | P95 latency | > 200ms | > 1000ms |
-    | CPU utilization | > 70% | > 90% |
-    | Memory utilization | > 75% | > 90% |
-    | DB connections | > 60% of max | > 80% of max |
-
-    ## Alert Configuration
-
-    Configure alerts for each critical threshold. Ensure PagerDuty integration
-    is active for P1-level alerts.
-
-    ## Dashboard Links
-
-    - Application dashboard: FILL IN
-    - Database dashboard: FILL IN
-    - Infrastructure dashboard: FILL IN
-
-    ## On-Call Rotation
-
-    Ensure the on-call schedule is current. Review monthly.
-    """)
-
-
-def _build_contacts_table(contacts):
-    """Build a markdown escalation table from contacts dict."""
-    if not contacts:
-        return (
-            "| Level | Who | When | Contact |\n"
-            "|-------|-----|------|---------|\n"
-            "| L1 | On-call engineer | First responder | PagerDuty rotation |\n"
-            "| L2 | Platform lead | Escalation | FILL IN |\n"
-            "| L3 | VP Engineering | Production down > 30 min | FILL IN |"
-        )
-    rows = ["| Level | Who | When | Contact |", "|-------|-----|------|---------|"]
-    level_map = {"l1": "First responder", "l2": "Escalation", "l3": "Production down > 30 min"}
-    for level in ["l1", "l2", "l3"]:
-        info = contacts.get(level, {})
+def code(cmd):
+    """Fence a shell command."""
+    return f"```bash\n{cmd.strip()}\n```"
+
+
+def step(n, title, minutes, cmd, verify):
+    body = [f"## Step {n}: {title} ({minutes} min)", ""] + ([code(cmd), ""] if cmd else [])
+    return "\n".join(body + [f"VERIFY: {verify}", ""])
+
+
+def urls(svc):
+    out = []
+    for ep in svc["endpoints"]:
+        u = ep if isinstance(ep, str) else (ep.get("url") or ep.get("path") or "/health")  # str or {url|path}
+        out.append(u if u.startswith("http") else f"https://$APP_HOST{u}")
+    return out or ["https://$APP_HOST/health"]
+
+
+def header(svc, kind, extra=()):
+    s = svc["stack"]
+    lines = [f"# {kind} Runbook: {svc['name']}", "",
+             f"**Stack**: {s['framework']} + {s['database']} + {s['hosting']} (CI: {s['ci_cd']})",
+             f"**Owner**: {svc['contacts'].get('owner') or 'FILL IN'}",
+             f"**Last verified**: {date.today().isoformat()} (scaffolded; re-date after a staging dry run)",
+             *extra, "", "---", ""]
+    deps = "\n".join(f"- {d}" for d in svc["dependencies"]) or "- None documented"
+    return "\n".join(lines + ["## Dependencies", "", deps, ""])
+
+
+def escalation(svc):
+    c = svc["contacts"]
+    when = {"l1": "First responder", "l2": "No mitigation in 15 min", "l3": "Production down > 30 min"}
+    default = {"l1": ("On-call engineer", "Paging rotation"), "l2": ("Service lead", "FILL IN"),
+               "l3": ("Engineering manager", "FILL IN")}
+    rows = ["## Escalation", "", "| Level | Who | When | Contact |", "|-------|-----|------|---------|"]
+    for lvl in ("l1", "l2", "l3"):
+        info = c.get(lvl)
+        who, contact = default[lvl]
         if isinstance(info, str):
-            rows.append(f"| {level.upper()} | {info} | {level_map.get(level, '')} | FILL IN |")
+            who = info
         elif isinstance(info, dict):
-            rows.append(
-                f"| {level.upper()} | {info.get('name', 'FILL IN')} "
-                f"| {level_map.get(level, '')} | {info.get('contact', 'FILL IN')} |"
-            )
-        else:
-            rows.append(f"| {level.upper()} | FILL IN | {level_map.get(level, '')} | FILL IN |")
-    return "\n".join(rows)
+            who, contact = info.get("name", who), info.get("contact", contact)
+        rows.append(f"| {lvl.upper()} | {who} | {when[lvl]} | {contact} |")
+    return "\n".join(rows) + "\n"
 
 
-BUILDERS = {
-    "deployment": build_deployment_runbook,
-    "incident": build_incident_runbook,
-    "database": build_database_runbook,
-    "scaling": build_scaling_runbook,
-    "monitoring": build_monitoring_runbook,
-}
+def staleness(svc):
+    files = svc.get("config_files") or []
+    if not files:
+        return ""
+    rows = "\n".join(f"| `{f}` | `git log -1 --format=%ci -- {f}` |" for f in files)
+    return ("## Staleness Check\n\nIf any file below changed after Last verified, re-check the steps that use it.\n\n"
+            "| Config file | Last modified |\n|-------------|---------------|\n" + rows + "\n")
+
+
+def rollback(cmd, verify):
+    return f"## Rollback\n\n{code(cmd)}\n\nVERIFY: {verify}\n"
+
+
+def build_deployment(svc):
+    s = svc["stack"]
+    host = s["hosting"]
+    migrate = s.get("migrate_command") or MIGRATE.get(s["framework"], f"# FILL IN: migration command for {s['framework']}")
+    ci = CI_STATUS.get(s["ci_cd"], f"# FILL IN: check the latest main build in {s['ci_cd']}")
+    smoke = "\n".join(f"curl -fsS {u}" for u in urls(svc))
+    checklist = "\n".join(f"- [ ] {i}" for i in (
+        "Change merged to main and CI green", "Migrations dry-run in staging", "Previous release id noted for rollback",
+        "On-call engineer aware of the deploy window"))
+    return "\n".join([
+        header(svc, "Deployment", ["**Estimated total time**: 20-30 minutes", "**Dashboard**: FILL IN"]),
+        staleness(svc), "## Pre-Deployment Checklist", "", checklist, "",
+        step(1, "Confirm CI status", 2, ci, "The latest main run is green. If not, stop."),
+        step(2, "Apply migrations in staging", 5, f'DATABASE_URL="$STAGING_DB_URL" {migrate}',
+             "Command exits 0 and staging still serves traffic."),
+        step(3, "Apply migrations in production", 5, f'DATABASE_URL="$PROD_DB_URL" {migrate}',
+             "Command exits 0. If it fails, stop and use Rollback; do not retry blindly."),
+        step(4, "Deploy", 5, DEPLOY.get(host, f"# FILL IN: deploy command for {host}"),
+             "The new version is live on every instance."),
+        step(5, "Smoke test", 5, smoke, "Every endpoint returns 2xx; error rate stays under 1% for 10 minutes."),
+        rollback(ROLLBACK.get(host, f"# FILL IN: rollback command for {host}"),
+                 "The previous version serves traffic; re-run Step 5. Schema changes need their own down migration."),
+        escalation(svc)])
+
+
+def build_incident(svc):
+    first = urls(svc)[0]
+    host = svc["stack"]["hosting"]
+    severity = ("| Condition | Severity | Action |\n|-----------|----------|--------|\n"
+                "| Service unreachable | P1 | Page L2 now |\n| Partial degradation | P2 | Notify the team channel |\n"
+                "| One feature broken | P3 | Open a ticket |")
+    return "\n".join([
+        header(svc, "Incident Response", ["**Severity scale**: P1 (down), P2 (degraded), P3 (minor)",
+                                          "**Dashboard**: FILL IN"]),
+        "## Response Checklist", "", "- [ ] Incident channel opened", "- [ ] Incident lead named", "",
+        step(1, "Triage", 5, f'curl -s -o /dev/null -w "%{{http_code}}\\n" {first}',
+             "200 means the service is up; 5xx or a timeout confirms the incident."),
+        severity, "",
+        step(2, "Diagnose", 15, "git log --oneline --since='6 hours ago'\n" + REPLICAS.get(host, ""),
+             "You can name the change or dependency that lines up with the start time, or you have ruled out deploys."),
+        step(3, "Mitigate", 10, ROLLBACK.get(host, f"# FILL IN: rollback command for {host}"),
+             "Error rate is back under 1%. If a rollback is not the cause, scale up or disable the failing dependency."),
+        step(4, "Resolve and write the postmortem", 30, "",
+             "Timeline, root cause and owned action items are written within 24 hours, and this runbook is updated."),
+        rollback(ROLLBACK.get(host, f"# FILL IN: rollback command for {host}"),
+                 "If a mitigation made things worse, return to the last known-good release."),
+        escalation(svc)])
+
+
+def build_database(svc):
+    db = svc["stack"]["database"]
+    inspect, maintain, verify = MAINTAIN.get(db, (f"# FILL IN: inspect {db}", f"# FILL IN: maintain {db}",
+                                                   "The maintenance command succeeds."))
+    return "\n".join([
+        header(svc, "Database Maintenance", [f"**Database**: {db}", "**Dashboard**: FILL IN"]),
+        "## Pre-Maintenance Checklist", "", "- [ ] Low-traffic window agreed", "- [ ] Restore tested this quarter", "",
+        step(1, "Backup", 10, BACKUP.get(db, f"# FILL IN: backup command for {db}"),
+             "The backup exists, is larger than zero bytes, and its name is recorded as $BACKUP_FILE."),
+        step(2, "Inspect", 3, inspect, "You have the list of tables or collections that need work."),
+        step(3, "Run maintenance", 15, maintain, verify),
+        rollback(RESTORE.get(db, f"# FILL IN: restore command for {db}"),
+                 "Row counts on key tables match the pre-maintenance values."),
+        escalation(svc)])
+
+
+def build_scaling(svc):
+    host = svc["stack"]["hosting"]
+    scale = SCALE.get(host, f"# FILL IN: scale command for {host}")
+    return "\n".join([
+        header(svc, "Scaling", [f"**Hosting**: {host}", "**Dashboard**: FILL IN"]),
+        "## When to Scale", "", "- [ ] CPU above 70% for 5+ minutes", "- [ ] Memory above 80%",
+        "- [ ] p95 latency above the SLO", "",
+        step(1, "Record the current state", 2, REPLICAS.get(host, f"# FILL IN: show replicas for {host}"),
+             "Current replica count is written down as $BASELINE_COUNT."),
+        step(2, "Scale up", 3, scale, "New replicas are running and receiving traffic."),
+        step(3, "Watch", 10, "", "CPU, memory and p95 latency fall back under their thresholds."),
+        rollback(scale.replace("$REPLICA_COUNT", "$BASELINE_COUNT"),
+                 "Replica count equals $BASELINE_COUNT once load subsides."),
+        escalation(svc)])
+
+
+def build_monitoring(svc):
+    checks = "\n".join(f"curl -fsS {u}" for u in urls(svc))
+    metrics = ("| Metric | Warning | Critical |\n|--------|---------|----------|\n| Error rate | > 1% | > 5% |\n"
+               "| p95 latency | > 200 ms | > 1000 ms |\n| CPU | > 70% | > 90% |\n| DB connections | > 60% of max | > 80% of max |")
+    return "\n".join([
+        header(svc, "Monitoring", ["**Dashboard**: FILL IN"]),
+        "## Coverage Checklist", "", "- [ ] Every endpoint below has an uptime check",
+        "- [ ] Every critical threshold pages someone", "", metrics, "",
+        step(1, "Check health endpoints", 2, checks, "Each endpoint returns 2xx."),
+        step(2, "Fire a test alert", 5, "# Trigger your alerting tool's test notification for this service",
+             "The on-call engineer receives the page within 2 minutes."),
+        rollback("# Revert the alert rule change in the monitoring config repo and redeploy it",
+                 "Alert rules match the last known-good version."),
+        escalation(svc)])
+
+
+BUILDERS = {"deployment": build_deployment, "incident": build_incident, "database": build_database,
+            "scaling": build_scaling, "monitoring": build_monitoring}
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Generate runbook markdown templates from JSON service definitions.",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=textwrap.dedent("""\
-            Example service definition JSON:
-              {
-                "name": "my-api",
-                "stack": {"hosting": "kubernetes", "database": "postgresql",
-                          "ci_cd": "github-actions", "framework": "FastAPI"},
-                "dependencies": ["redis", "stripe-api", "sendgrid"],
-                "endpoints": ["/api/health", "/api/v1/users"],
-                "contacts": {
-                  "owner": "Platform Team",
-                  "l1": {"name": "On-call", "contact": "PagerDuty"},
-                  "l2": {"name": "Platform Lead", "contact": "#platform-lead"}
-                },
-                "config_files": ["k8s/deployment.yaml", ".github/workflows/deploy.yml"]
-              }
-        """),
-    )
-    parser.add_argument("--input", "-i", required=True, help="Path to JSON service definition (use - for stdin)")
-    parser.add_argument("--output", "-o", help="Output file path (default: stdout)")
-    parser.add_argument("--type", "-t", default="deployment", choices=RUNBOOK_TYPES,
-                        help="Runbook type to generate (default: deployment)")
-    parser.add_argument("--json", action="store_true", help="Output as JSON with metadata")
+    p = argparse.ArgumentParser(description="Generate a runbook markdown draft from a JSON service definition.",
+                                epilog="Example input: assets/sample_service.json. Exit codes: 0 ok, 2 bad input.")
+    p.add_argument("--input", "-i", required=True, help="JSON service definition (use - for stdin)")
+    p.add_argument("--output", "-o", help="Output file (default: stdout)")
+    p.add_argument("--type", "-t", default="deployment", choices=RUNBOOK_TYPES, help="Runbook type")
+    p.add_argument("--format", choices=["markdown", "json"], default="markdown", help="Output format")
+    p.add_argument("--json", action="store_true", help="Same as --format json")
+    args = p.parse_args()
 
-    args = parser.parse_args()
     svc = load_service_definition(args.input)
-    builder = BUILDERS[args.type]
-    content = builder(svc)
-
-    if args.json:
-        result = {
-            "service": svc["name"],
-            "runbook_type": args.type,
-            "generated_date": date.today().isoformat(),
-            "stack": svc["stack"],
-            "content": content,
-        }
-        output = json.dumps(result, indent=2)
-    else:
-        output = content
-
-    if args.output:
-        with open(args.output, "w") as f:
-            f.write(output)
-        print(f"Runbook written to {args.output}", file=sys.stderr)
-    else:
-        print(output)
+    content = BUILDERS[args.type](svc).replace("\n\n\n", "\n\n")
+    if args.json or args.format == "json":
+        content = json.dumps({"service": svc["name"], "runbook_type": args.type,
+                              "generated_date": date.today().isoformat(), "stack": svc["stack"],
+                              "content": content}, indent=2)
+    if not args.output:
+        return print(content)
+    try:
+        open(args.output, "w", encoding="utf-8").write(content + "\n")
+    except OSError as e:
+        fail(f"cannot write {args.output}: {e.strerror}")
+    print(f"Runbook written to {args.output}", file=sys.stderr)
 
 
 if __name__ == "__main__":

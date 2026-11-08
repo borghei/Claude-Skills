@@ -316,13 +316,35 @@ class ActionItem:
                 "quality_score": self.quality_score, "is_past_deadline": self.is_past_deadline}
 
 
+def derive_timeline(raw: Dict[str, Any]) -> Dict[str, str]:
+    """Return the timeline block, filling gaps from incident fields and typed events.
+
+    Accepts the shared incident schema (assets/sample_incident_data.json): an explicit
+    "timeline" wins; otherwise the first trigger/detection/mitigation/resolution event
+    and incident.declared_at / resolved_at supply the timestamps.
+    """
+    tl = dict(raw.get("timeline") or {})
+    inc = raw.get("incident", {}) or {}
+    for key in ("declared_at", "resolved_at"):
+        tl.setdefault(key, inc.get(key))
+    firsts: Dict[str, str] = {}
+    for ev in sorted((e for e in raw.get("events", []) if isinstance(e, dict) and e.get("timestamp")),
+                     key=lambda e: e["timestamp"]):
+        firsts.setdefault(str(ev.get("type", "")).lower(), ev["timestamp"])
+    tl.setdefault("issue_started", firsts.get("trigger") or firsts.get("detection") or tl.get("declared_at"))
+    tl.setdefault("detected_at", firsts.get("detection") or tl.get("declared_at"))
+    tl.setdefault("mitigated_at", firsts.get("mitigation"))
+    tl.setdefault("resolved_at", firsts.get("resolution"))
+    return {k: v for k, v in tl.items() if v}
+
+
 class PostmortemReport:
     """Complete postmortem document assembled from all analysis components."""
 
     def __init__(self, raw: Dict[str, Any]) -> None:
         self.raw = raw
         self.incident = IncidentData(raw.get("incident", {}))
-        self.timeline = TimelineMetrics(raw.get("timeline", {}), self.incident.severity)
+        self.timeline = TimelineMetrics(derive_timeline(raw), self.incident.severity)
         self.resolution: Dict[str, Any] = raw.get("resolution", {})
         self.participants: List[Dict[str, str]] = raw.get("participants", [])
         # Derived analysis
@@ -744,30 +766,31 @@ def load_input(filepath: Optional[str]) -> Dict[str, Any]:
                 return json.load(fh)
         except FileNotFoundError:
             print(f"Error: File not found: {filepath}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         except json.JSONDecodeError as exc:
             print(f"Error: Invalid JSON in {filepath}: {exc}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
     else:
         if sys.stdin.isatty():
             print("Error: No input file specified and no data on stdin.", file=sys.stderr)
             print("Usage: postmortem_generator.py [data_file] or pipe JSON via stdin.", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         try:
             return json.load(sys.stdin)
         except json.JSONDecodeError as exc:
             print(f"Error: Invalid JSON on stdin: {exc}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
 
 def validate_input(data: Dict[str, Any]) -> List[str]:
     """Return a list of validation warnings (non-fatal)."""
     warnings: List[str] = []
-    for key in ("incident", "timeline", "resolution", "action_items"):
+    for key in ("incident", "resolution", "action_items"):
         if key not in data:
             warnings.append(f"Missing '{key}' section")
+    derived = derive_timeline(data)
     for ts in ("issue_started", "detected_at", "mitigated_at", "resolved_at"):
-        if ts not in data.get("timeline", {}):
+        if ts not in derived:
             warnings.append(f"Missing timeline field: {ts}")
     res = data.get("resolution", {})
     if "root_cause" not in res:

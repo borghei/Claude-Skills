@@ -412,7 +412,7 @@ def render_human(lines: list[CostLine], suggestions: list[str]) -> str:
         for s in suggestions:
             out.append(f"  {s}")
     out.append("")
-    out.append("NOTE: Estimates are approximations using list prices. For procurement,")
+    out.append("NOTE: Price table = approximate list prices as of early 2026, no discounts. For procurement,")
     out.append("always validate with Azure Pricing Calculator and apply reservations/discounts.")
     return "\n".join(out)
 
@@ -433,15 +433,23 @@ def main() -> int:
     args = parse_args()
     try:
         spec = parse_yaml(Path(args.workload_config).read_text())
-    except OSError as e:
-        print(f"error: {e}", file=sys.stderr)
+    except (OSError, ValueError, IndexError) as e:
+        print(f"error: cannot read {args.workload_config}: {e}", file=sys.stderr)
+        return 2
+    if not isinstance(spec, dict) or not spec:
+        print(f"error: {args.workload_config} is not a workload spec (expected a YAML mapping)", file=sys.stderr)
         return 2
     lines, suggestions = estimate(spec)
+    if not lines:
+        print("error: no priced services found; set compute.type (app-service|aks|vmss) or data[].service "
+              "(sql-db|cosmos|storage|pg-flex|redis) as in assets/sample_workload.yaml", file=sys.stderr)
+        return 2
     if args.format == "json":
         out = json.dumps(
             {
                 "lines": [asdict(l) for l in lines],
                 "total_monthly_usd": sum(l.monthly_usd for l in lines),
+                "price_table": "approximate Azure list prices, early 2026, no discounts",
                 "suggestions": suggestions,
             },
             indent=2,

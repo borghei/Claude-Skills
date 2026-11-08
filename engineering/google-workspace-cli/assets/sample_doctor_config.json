@@ -1,0 +1,29 @@
+{
+  "dns": {
+    "mx_records": [
+      "ASPMX.L.GOOGLE.COM",
+      "ALT1.ASPMX.L.GOOGLE.COM"
+    ],
+    "spf_record": "v=spf1 include:_spf.google.com ~all",
+    "dkim_record": "",
+    "dmarc_record": "v=DMARC1; p=none; rua=mailto:dmarc@example.com"
+  },
+  "email": {
+    "routing": "direct",
+    "spam_filtering": true
+  },
+  "security": {
+    "2fa_enforcement": false,
+    "session_duration_hours": 24
+  },
+  "drive": {
+    "external_sharing": "allowed"
+  },
+  "devices": {
+    "mobile_management": "basic"
+  },
+  "integrations": {
+    "sso_enabled": false,
+    "directory_sync": false
+  }
+}

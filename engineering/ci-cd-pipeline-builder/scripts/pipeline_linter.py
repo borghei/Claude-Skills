@@ -74,6 +74,33 @@ def check_unpinned_actions(text, platform):
     return findings
 
 
+# Lowest major of each core action that runs on Node 24. As of 2026-11: GitHub removed the
+# Node 20 action runtime from hosted runners on 2026-09-23, so anything older fails to start.
+# Latest majors at that date: checkout v7, setup-node v7, setup-python v7, upload-artifact v7,
+# download-artifact v8, cache v6, setup-go v7, setup-java v6. Raise these floors as runtimes are retired.
+MIN_ACTION_MAJOR = {"actions/checkout": 5, "actions/setup-node": 5, "actions/setup-python": 6,
+                    "actions/cache": 5, "actions/upload-artifact": 6, "actions/download-artifact": 7,
+                    "actions/setup-go": 6, "actions/setup-java": 5}
+
+
+def check_outdated_actions(text, platform):
+    """Error on core actions pinned to a major below the supported floor."""
+    if platform != "github-actions":
+        return []
+    findings = []
+    for lineno, line in _lines_containing(text, r'uses:\s+actions/[\w-]+@v\d+'):
+        m = re.search(r'uses:\s+(actions/[\w-]+)@v(\d+)', line)
+        floor = MIN_ACTION_MAJOR.get(m.group(1)) if m else None
+        if floor and int(m.group(2)) < floor:
+            findings.append({
+                "rule": "outdated-action-version",
+                "severity": SEVERITY_ERROR,
+                "line": lineno,
+                "message": f"{m.group(1)}@v{m.group(2)} is below v{floor}, the first major on the Node 24 runtime: {line}",
+            })
+    return findings
+
+
 def check_missing_timeout(text, platform):
     """Flag jobs that lack a timeout setting."""
     findings = []
@@ -240,6 +267,7 @@ def check_deploy_without_gate(text, platform):
 ALL_CHECKS = [
     check_hardcoded_secrets,
     check_unpinned_actions,
+    check_outdated_actions,
     check_missing_timeout,
     check_missing_concurrency,
     check_missing_permissions,

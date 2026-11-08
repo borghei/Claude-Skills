@@ -136,9 +136,25 @@ CRITICAL_PATTERNS: Dict[str, List[Dict[str, str]]] = {
             "fix": "Remove data transmission instructions targeting external services",
         },
     ],
+    "CONCEALMENT": [
+        {
+            "regex": r"(do\s+not|don'?t|never)\s+(tell|inform|notify|alert|mention\s+(this\s+)?to)\s+the\s+user",
+            "risk": "Asks the AI to hide its actions from the user",
+            "fix": "Remove; legitimate instructions never ask the assistant to conceal what it does",
+        },
+    ],
 }
 
 HIGH_PATTERNS: Dict[str, List[Dict[str, str]]] = {
+    # HIGH rather than CRITICAL: security documentation legitimately names these paths
+    "CREDENTIAL-ACCESS": [
+        {
+            "regex": r"(read|cat|open|include|copy|print|output|paste)\b[^.\n]{0,60}"
+                     r"(~/\.(ssh|aws|gnupg|kube|docker|config)|id_rsa|\.netrc|\bcredentials\b|\.env\b)",
+            "risk": "Instructs the AI to read or reveal credential files",
+            "fix": "Remove the instruction; a skill has no reason to touch credential stores",
+        },
+    ],
     "SAFETY-BYPASS": [
         {
             "regex": r"skip\s+(all\s+)?safety\s+checks?",

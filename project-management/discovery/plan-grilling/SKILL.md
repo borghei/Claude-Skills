@@ -50,7 +50,8 @@ Ask about the two or three inputs that matter most for this request, not the who
 ```bash
 # Next round: the frontier, ordered by how many questions each unblocks
 python3 project-management/discovery/plan-grilling/scripts/question_log_checker.py \
-  --input project-management/discovery/plan-grilling/assets/sample_question_log.json --stage round
+  --input project-management/discovery/plan-grilling/assets/sample_question_log_midway.json --stage round
+# -> Next round: Q4, Q6, Q5   Blocked: Q10, Q7   (the resolved sample_question_log.json prints "none")
 ```
 
 ```bash
@@ -133,6 +134,7 @@ python3 project-management/discovery/plan-grilling/scripts/workflow_spec_checker
 | `scripts/workflow_spec_checker.py` | Implementability gate for multi-session workflow specs |
 | `assets/question_log_template.md`, `assets/workflow_spec_template.md` | Human-readable log and workflow spec templates |
 | `assets/sample_question_log.json` / `_flawed.json` | Resolved grilling (exits 0) / out-of-order, assumed, cyclic log (exits 1) |
+| `assets/sample_question_log_midway.json` | The same log after round 1, with a non-empty next round (exits 0 at `--stage round`) |
 | `assets/sample_workflow_spec.json` / `_flawed.json` | Implementable spec (exits 0) / unready spec (exits 1) |
 
 ## Reference Documentation

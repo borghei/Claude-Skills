@@ -24,6 +24,9 @@ def load_data(path: str) -> dict:
 def analyze_usage(data: dict) -> dict:
     org = data.get("organization", "Unknown")
     templates = data.get("templates", [])
+    # Reference date: the file's "as_of", else the latest last_updated, so demos do not drift
+    stamps = sorted(str(t.get("last_updated")) for t in templates if str(t.get("last_updated", ""))[:2] in ("19", "20"))
+    as_of = datetime.strptime(data.get("as_of") or (stamps[-1] if stamps else datetime.now().strftime("%Y-%m-%d")), "%Y-%m-%d")
     total_pages = data.get("total_pages_created", 0)
 
     results = []
@@ -60,7 +63,7 @@ def analyze_usage(data: dict) -> dict:
         if last_updated != "Unknown":
             try:
                 updated_dt = datetime.strptime(last_updated, "%Y-%m-%d")
-                days_since = (datetime.now() - updated_dt).days
+                days_since = (as_of - updated_dt).days
                 if days_since <= 90:
                     quality_score += 15
                 elif days_since <= 180:
@@ -115,7 +118,7 @@ def analyze_usage(data: dict) -> dict:
 
     return {
         "organization": org,
-        "analysis_date": datetime.now().strftime("%Y-%m-%d"),
+        "analysis_date": as_of.strftime("%Y-%m-%d"),
         "total_templates": len(results),
         "total_pages_created": total_pages,
         "pages_from_templates": total_from_template,
@@ -181,4 +184,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

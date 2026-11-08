@@ -24,10 +24,14 @@ def load_session(path):
     """Load session with agent outputs."""
     try:
         with open(path, "r") as f:
-            return json.load(f)
+            data = json.load(f)
     except (json.JSONDecodeError, OSError) as e:
         print(f"Error loading session: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
+    if not isinstance(data, dict) or not isinstance(data.get("agents"), dict):
+        print(f"Error: {path} is not a session file (no 'agents' object)", file=sys.stderr)
+        sys.exit(2)
+    return data
 
 
 def extract_outputs(session):
@@ -270,7 +274,7 @@ def main():
     session_path = Path(args.session)
     if not session_path.exists():
         print(f"Error: Session file '{args.session}' not found.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     session = load_session(session_path)
     outputs = extract_outputs(session)
@@ -294,7 +298,7 @@ def main():
         action = "merge"
     else:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     if args.json_output:
         print(json.dumps(result, indent=2, default=str))

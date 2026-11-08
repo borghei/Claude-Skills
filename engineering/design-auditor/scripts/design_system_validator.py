@@ -112,10 +112,10 @@ def load_tokens(path: str) -> dict:
             data = json.load(f)
     except FileNotFoundError:
         print(f"Error: Token file not found: {path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in token file: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Normalize: extract just the values into flat sets
     normalized = {}
@@ -156,29 +156,23 @@ def parse_css_declarations(css_content: str) -> list[dict]:
     # Remove comments
     css_clean = re.sub(r"/\*.*?\*/", "", css_content, flags=re.DOTALL)
 
-    # Track line numbers
-    lines = css_clean.split("\n")
-    current_selector = ""
-
-    for line_num, line in enumerate(lines, 1):
-        stripped = line.strip()
-
-        # Track selector context
-        if "{" in stripped and ":" not in stripped.split("{")[0]:
-            current_selector = stripped.split("{")[0].strip()
-
-        # Match property: value declarations
-        prop_match = re.match(r"\s*([\w-]+)\s*:\s*(.+?)(?:;|$)", stripped)
-        if prop_match:
-            prop = prop_match.group(1).strip().lower()
-            value = prop_match.group(2).strip()
-            declarations.append({
-                "property": prop,
-                "value": value,
-                "line": line_num,
-                "selector": current_selector,
-                "raw": stripped,
-            })
+    # Walk rule blocks so one-line and minified rules ("a { x: 1; y: 2 }") yield
+    # every declaration, each with the line it starts on.
+    for block in re.finditer(r"([^{}]*)\{([^{}]*)\}", css_clean):
+        selector = block.group(1).strip().split("\n")[-1].strip()
+        offset = block.start(2)
+        for decl in block.group(2).split(";"):
+            prop_match = re.match(r"\s*([\w-]+)\s*:\s*(.+?)\s*$", decl, re.DOTALL)
+            if prop_match:
+                line_num = css_clean[:offset + len(decl) - len(decl.lstrip())].count("\n") + 1
+                declarations.append({
+                    "property": prop_match.group(1).strip().lower(),
+                    "value": " ".join(prop_match.group(2).split()),
+                    "line": line_num,
+                    "selector": selector,
+                    "raw": " ".join(decl.split()),
+                })
+            offset += len(decl) + 1
 
     # Also extract media query breakpoints
     for match in re.finditer(r"@media[^{]*\{", css_clean):
@@ -379,7 +373,7 @@ def collect_css_files(path: str, glob_pattern: str = "*.css") -> list[str]:
 
     if not os.path.isdir(path):
         print(f"Error: Path not found: {path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Simple glob matching for *.css files
     files = []
@@ -519,6 +513,8 @@ Examples:
     parser.add_argument("--tokens", "-t", required=True, help="Path to design tokens JSON file")
     parser.add_argument("--input", "-i", required=True, help="Path to CSS file or directory")
     parser.add_argument("--glob", "-g", default="*.css", help="Glob pattern for CSS files (default: *.css)")
+    parser.add_argument("--min-compliance", type=float, default=None,
+                        help="Exit 1 when the compliance rate (percent) is below this value")
     parser.add_argument("--output", "-o", help="Path to write report (default: stdout)")
     parser.add_argument("--format", "-f", choices=["json", "text"], default="json",
                        help="Output format (default: json)")
@@ -532,7 +528,7 @@ Examples:
     css_files = collect_css_files(args.input, args.glob)
     if not css_files:
         print(f"No CSS files found at: {args.input}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Read and concatenate CSS
     all_css = ""
@@ -561,6 +557,8 @@ Examples:
         print(f"Report written to {args.output}")
     else:
         print(output)
+    if args.min_compliance is not None and results["compliance_rate"] < args.min_compliance:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

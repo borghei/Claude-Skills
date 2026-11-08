@@ -9,11 +9,13 @@ Usage:
     python3 dashboard_designer.py --input dashboard_spec.json
     python3 dashboard_designer.py --input dashboard_spec.json --format markdown
 
+Exit codes: 0 no fail findings, 1 at least one fail finding, 2 bad input.
+
 Input schema:
 {
   "dashboard_name": "Product Growth Q3",
   "as_of": "2026-05-27",
-  "audience": "team",   # team|exec|all-hands|partner
+  "audience": "team",   # team|exec|all-hands|partner|ic (board = exec, functional = team)
   "north_star": {
       "name": "...", "definition": "...", "owner": "...",
       "has_comparison": true, "has_target": true
@@ -54,7 +56,9 @@ AUDIENCE_MAX = {
     "team": {"top_level": 12, "operational_per_team": 8},
     "all-hands": {"top_level": 5, "operational_per_team": 0},
     "partner": {"top_level": 6, "operational_per_team": 0},
+    "ic": {"top_level": 3, "operational_per_team": 0},
 }
+AUDIENCE_ALIAS = {"board": "exec", "functional": "team", "individual": "ic"}
 
 
 @dataclass
@@ -179,6 +183,9 @@ def check_operational(ops: list[dict[str, Any]], audience: str) -> list[Issue]:
 def check_top_level_count(state: dict[str, Any]) -> list[Issue]:
     issues = []
     audience = (state.get("audience") or "team").lower()
+    audience = AUDIENCE_ALIAS.get(audience, audience)
+    if audience not in AUDIENCE_MAX:
+        issues.append(Issue("warn", "(top-level)", f"unknown audience '{audience}'; using team limits"))
     inputs = state.get("inputs") or []
     guards = state.get("guardrails") or []
     ns_count = 1 if (state.get("north_star") or {}).get("name") else 0
@@ -196,7 +203,8 @@ def audit(state: dict[str, Any]) -> dict[str, Any]:
     all_issues.extend(check_inputs(state.get("inputs") or []))
     all_issues.extend(check_guardrails(state.get("guardrails") or []))
     all_issues.extend(check_operational(
-        state.get("operational") or [], state.get("audience", "team")))
+        state.get("operational") or [],
+        AUDIENCE_ALIAS.get(str(state.get("audience", "team")).lower(), str(state.get("audience", "team")).lower())))
     all_issues.extend(check_top_level_count(state))
 
     sev = {"fail": 0, "warn": 0, "info": 0}
@@ -274,8 +282,12 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    return 1 if report["severity_counts"]["fail"] else 0  # 1 = at least one fail finding
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

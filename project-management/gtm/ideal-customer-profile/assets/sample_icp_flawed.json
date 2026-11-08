@@ -1,0 +1,10 @@
+{
+  "icp_name": "Companies that need HR analytics",
+  "dimensions": {
+    "firmographics": {"defined": true, "specific": false},
+    "buyer_persona": {"defined": true, "title": "HR"},
+    "jtbd": {"defined": true, "statement": "Better insights"},
+    "reachability": {"defined": true, "channels": ["LinkedIn"]}
+  },
+  "disqualification_criteria_present": false
+}

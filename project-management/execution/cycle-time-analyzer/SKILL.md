@@ -1,15 +1,16 @@
 ---
 name: cycle-time-analyzer
 description: >
-  Flow metrics analyzer (lead time, cycle time, throughput, WIP, aging WIP)
-  for sprint and team health, with cumulative flow diagrams.
+  Compute lead time, cycle time, throughput, WIP, aging WIP and a cumulative
+  flow diagram from issue status history. Use when diagnosing slow delivery,
+  setting WIP limits or preparing a flow review.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: flow_metrics.py
   tech-stack: kanban, flow-metrics, cfd, littles-law, aging-wip
   tags:
@@ -58,21 +59,30 @@ Before running the analysis, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. **Export** issue history with status transitions into the input shape (`assets/sample_issues.json`).
+2. **Map your states** if your board's names differ from the defaults (`--ready-state`, `--in-progress-state`, `--done-state`, each repeatable).
+3. **Run the analysis:**
 
 ```bash
-python scripts/flow_metrics.py --input issues.json --format markdown   # full dashboard
-python scripts/flow_metrics.py --input issues.json --format mermaid     # cumulative flow diagram
-python scripts/flow_metrics.py --demo --format markdown                 # sample output, no input
+python3 project-management/execution/cycle-time-analyzer/scripts/flow_metrics.py \
+  --input project-management/execution/cycle-time-analyzer/assets/sample_issues.json --format markdown
+# Live board: add --as-of YYYY-MM-DD (today) so aging WIP is measured to now
 ```
 
-Review the 85th-percentile cycle time (not the average), flag aging WIP that exceeds it, and re-run weekly to track the trend. See `references/metrics-and-tool-reference.md` for the full workflow, CLI flags, and JSON schemas.
+4. **Read the distribution, not the average:** quote p85 cycle time and p85 lead time, flag aging WIP above p85, read throughput as a 6-8 week trend.
+5. **Verify** before sharing: completed-in-window is not zero, WIP matches the board, and the as-of date in the header is the date you meant. Re-run weekly.
+
+**As-of date:** defaults to the latest timestamp in the data, so the sample (April-May 2026) reads the same on any day: 7 completed, 0.82 items/week, 1 aging item. For a live board pass `--as-of` with today's date; otherwise items still in progress look younger than they are.
 
 ## Tools
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Key flags |
 |------|---------|---------|
-| `flow_metrics.py` | Compute lead time, cycle time, throughput, WIP, aging WIP, CFD | `python scripts/flow_metrics.py --input issues.json --format markdown` |
+| `flow_metrics.py` | Lead time, cycle time, throughput, WIP, aging WIP, CFD | `--input F` or `--demo`, `--format json\|markdown\|mermaid\|confluence\|notion\|linear`, `--type`, `--window-days 60`, `--as-of`, `--ignore-missing`, `--output` |
+
+**Exit codes:** 0 report written; 2 missing file, invalid JSON, empty or wrong-shape `issues`, bad `--as-of`, or malformed issue data. Full flags and schemas: `references/metrics-and-tool-reference.md`.
 
 ## Anti-Patterns
 
@@ -84,7 +94,7 @@ Review the 85th-percentile cycle time (not the average), flag aging WIP that exc
 ### WIP limits set by feel
 **Mistake:** The team adopts a WIP limit of 5 per engineer because "that feels manageable".
 **Why it happens:** Teams pick a limit before anyone has measured current WIP.
-**Instead:** Measure the team's current WIP distribution first and set the limit just below its 50th percentile. A limit above the 85th percentile has no effect. Re-measure cycle time with `flow_metrics.py` after 4 weeks.
+**Instead:** Measure the team's current WIP distribution first. A starting heuristic [EXPERIMENTAL] is a limit just below its median: low enough to bind on a normal day (that is what forces finishing over starting), high enough not to idle people. A limit above the 85th percentile almost never binds, so it has no effect. Re-measure cycle time with `flow_metrics.py` after 4 weeks and adjust.
 
 ### Single-sprint throughput read as a trend
 **Mistake:** "Throughput dropped to 4 items this sprint, down from 6. Investigating slowdown."
@@ -92,6 +102,15 @@ Review the 85th-percentile cycle time (not the average), flag aging WIP that exc
 **Instead:** Report throughput as a rolling 6-8 week trend with its range, and annotate known causes such as PTO. Investigate only when a sprint falls outside that range.
 
 Nine more, each with a bad and a good example: `references/red-flags.md`.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `scripts/flow_metrics.py` | The analyzer |
+| `assets/sample_issues.json` | 10-issue history (same as `--demo`) |
+| `assets/flow-metrics-dashboard.md` | Dashboard template |
+| `examples/wayfinder-flow-analysis.md` | Worked analysis |
 
 ## References
 

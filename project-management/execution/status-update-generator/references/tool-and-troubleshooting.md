@@ -37,7 +37,7 @@ Generates a structured weekly status update from JSON input. Supports all six SH
 | `--format` | choice | markdown | Output format: json, markdown, mermaid, confluence, notion, linear |
 | `--output` | string | stdout | Output file path |
 | `--period` | string | (from input) | Override the period label (e.g., "Week of 2026-05-18") |
-| `--status` | choice | (from input) | Override the traffic light: green, yellow, red |
+| `--status` | choice | (from input) | Override the traffic light: green, yellow, red. Required when the input has no valid `status`; the tool never defaults it |
 
 ### Input JSON shape
 

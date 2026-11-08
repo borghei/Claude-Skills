@@ -117,7 +117,7 @@ The agent then cross-references this with capacity calculator output and health 
 
 ## Input Schema
 
-All tools accept JSON following `assets/sample_sprint_data.json`:
+`velocity_analyzer.py`, `sprint_health_scorer.py` and `retrospective_analyzer.py` accept JSON following `assets/sample_sprint_data.json` (below). `sprint_capacity_calculator.py` takes a different shape, a team roster: see `assets/sample_team_data.json` (`sprint_length_days`, `historical_velocity`, `team_members[]`).
 
 ```json
 {

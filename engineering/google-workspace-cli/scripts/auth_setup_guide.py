@@ -5,7 +5,6 @@ Auth Setup Guide - Generate Google Workspace API authentication setup documentat
 Creates step-by-step setup guides for OAuth 2.0, service accounts, and
 domain-wide delegation for Google Workspace API access.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -330,8 +329,8 @@ def main():
         description="Generate Google Workspace API authentication setup documentation."
     )
     parser.add_argument("--method", choices=["oauth", "service-account"],
-                       required=True, help="Authentication method")
-    parser.add_argument("--scopes", required=True,
+                       help="Authentication method (required unless --list-scopes)")
+    parser.add_argument("--scopes",
                        help="Comma-separated API scope keys: admin,drive,gmail,calendar,sheets,reports")
     parser.add_argument("--project", default="my-gws-integration",
                        help="Google Cloud project name")
@@ -348,6 +347,8 @@ def main():
             for scope in api["scopes"]:
                 print(f"    {scope}")
         return
+    if not args.method or not args.scopes:
+        parser.error("--method and --scopes are required (or use --list-scopes)")
 
     scope_keys = [s.strip() for s in args.scopes.split(",")]
     invalid = [s for s in scope_keys if s not in API_SCOPES]

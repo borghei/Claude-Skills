@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Reviewer - Claude Skills</title>
-  <meta name="description" content="Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, ">
+  <meta name="description" content="Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a review ">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/engineering/code-reviewer.html">
   <meta property="og:title" content="Code Reviewer - Claude Skills">
-  <meta property="og:description" content="Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, ">
+  <meta property="og:description" content="Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a review ">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/engineering/code-reviewer.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Code Reviewer", "description": "Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, or generating review checklists.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/code-reviewer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Code Reviewer", "description": "Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a review checklist.", "applicationCategory": "Engineering", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/engineering/code-reviewer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Code Reviewer</h1>
-    <p class="page-subtitle">Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, or generating review checklists.</p>
+    <p class="page-subtitle">Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a review checklist.</p>
     <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">code-review</span><span class="tag">pull-request</span><span class="tag">code-quality</span><span class="tag">best-practices</span><span class="tag">spec-fidelity</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Code Reviewer (Engineering domain).
 
-Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, or generating review checklists.
+Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a review checklist.
 
 Automated code review tooling that analyzes pull requests for complexity and risk, scans source for code smells and SOLID violations, and consolidates findings into structured review reports with a verdict, score, and prioritized action items. Supports TypeScript, JavaScript, Python, Go, Swift, and 
 
@@ -421,7 +421,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Code Reviewer (Engineering domain).
 
-Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, or generating review checklists.
+Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a review checklist.
 
 Automated code review tooling that analyzes pull requests for complexity and risk, scans source for code smells and SOLID violations, and consolidates findings into structured review reports with a verdict, score, and prioritized action items. Supports TypeScript, JavaScript, Python, Go, Swift, and 
 
@@ -466,7 +466,7 @@ Automated code review tooling that analyzes pull requests for complexity and ris
 - **PR risk analysis** — scan git diffs for hardcoded secrets, SQL injection, debug statements, lint bypasses, `any` types, and TODO/FIXME, with a 1-10 complexity score.
 - **Code quality checking** — detect long functions, large files, god classes, deep nesting, too many params, high cyclomatic complexity, missing error handling, unused imports, and magic numbers against fixed thresholds.
 - **SOLID &amp; antipattern detection** — flag structural, logic, security, performance, testing, and async antipatterns with fixes.
-- **Review reports** — merge PR and quality findings into a verdict (approve / request changes / block), 0-100 score, and ranked action items in text, markdown, or JSON.
+- **Review reports** — merge PR and quality findings into a verdict (approve / request changes / block), 0-100 score, and ranked action items in text, markdown, or JSON. An empty diff gives `nothing_to_review` and a failed diff analysis `incomplete`, never an approval. The scripts are regex heuristics: they point a human or model reviewer at likely problems; they do not replace reading the diff.
 - **Review order prioritization** — sort files so security-sensitive code is inspected first.
 - **Commit hygiene** — validate conventional-commit format across a branch.
 - **Two-axis review** — review the diff since a fixed base twice, independently: once against repo standards, once against the original spec or issue (missed requirements, scope creep), then merge.
@@ -608,7 +608,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Code Reviewer&quot;**
-   - Description: &quot;Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, or generating review checklists.&quot;
+   - Description: &quot;Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a review checklist.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -640,7 +640,7 @@ Automated code review tooling that analyzes pull requests for complexity and ris
 - **PR risk analysis** — scan git diffs for hardcoded secrets, SQL injection, debug statements, lint bypasses, `any` types, and TODO/FIXME, with a 1-10 complexity score.
 - **Code quality checking** — detect long functions, large files, god classes, deep nesting, too many params, high cyclomatic complexity, missing error handling, unused imports, and magic numbers against fixed thresholds.
 - **SOLID &amp; antipattern detection** — flag structural, logic, security, performance, testing, and async antipatterns with fixes.
-- **Review reports** — merge PR and quality findings into a verdict (approve / request changes / block), 0-100 score, and ranked action items in text, markdown, or JSON.
+- **Review reports** — merge PR and quality findings into a verdict (approve / request changes / block), 0-100 score, and ranked action items in text, markdown, or JSON. An empty diff gives `nothing_to_review` and a failed diff analysis `incomplete`, never an approval. The scripts are regex heuristics: they point a human or model reviewer at likely problems; they do not replace reading the diff.
 - **Review order prioritization** — sort files so security-sensitive code is inspected first.
 - **Commit hygiene** — validate conventional-commit format across a branch.
 - **Two-axis review** — review the diff since a fixed base twice, independently: once against repo standards, once against the original spec or issue (missed requirements, scope creep), then merge.
@@ -782,7 +782,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Code Reviewer&quot;**
-   - Description: &quot;Code review automation for TypeScript, JavaScript, Python, Go, Swift, and Kotlin. Analyzes PRs for complexity, risk, SOLID violations, and code smells. Use when reviewing PRs, analyzing code quality, or generating review checklists.&quot;
+   - Description: &quot;Heuristic code-review pre-pass for TS, JS, Python, Go, Swift and Kotlin: PR risk, smells, SOLID issues, and a two-axis (standards vs spec) review method. Use when reviewing a PR or preparing a review checklist.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -848,7 +848,7 @@ python scripts/review_scope.py --repo . --base main
 # Automated pre-screen of the same diff
 python scripts/pr_analyzer.py . --base main --head HEAD --json
 </code></pre>
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/code-reviewer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

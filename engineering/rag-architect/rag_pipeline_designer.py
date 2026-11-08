@@ -9,7 +9,7 @@ and cost projections.
 Components designed:
 - Chunking strategy recommendation
 - Embedding model selection
-- Vector database recommendation  
+- Vector database recommendation
 - Retrieval approach (dense/sparse/hybrid)
 - Reranking configuration
 - Evaluation framework setup
@@ -20,6 +20,7 @@ No external dependencies - uses only Python standard library.
 
 import argparse
 import json
+import sys
 import math
 import os
 from typing import Dict, List, Tuple, Any, Optional
@@ -30,7 +31,7 @@ from enum import Enum
 class Scale(Enum):
     """System scale categories."""
     SMALL = "small"      # < 1M documents, < 1K queries/day
-    MEDIUM = "medium"    # 1M-100M documents, 1K-100K queries/day  
+    MEDIUM = "medium"    # 1M-100M documents, 1K-100K queries/day
     LARGE = "large"      # 100M+ documents, 100K+ queries/day
 
 
@@ -47,7 +48,7 @@ class DocumentType(Enum):
 class Latency(Enum):
     """Latency requirements."""
     REAL_TIME = "real_time"      # < 100ms
-    INTERACTIVE = "interactive"   # < 500ms  
+    INTERACTIVE = "interactive"   # < 500ms
     BATCH = "batch"              # > 1s acceptable
 
 
@@ -82,7 +83,7 @@ class ComponentRecommendation:
 class PipelineDesign:
     """Complete RAG pipeline design."""
     chunking: ComponentRecommendation
-    embedding: ComponentRecommendation  
+    embedding: ComponentRecommendation
     vector_db: ComponentRecommendation
     retrieval: ComponentRecommendation
     reranking: Optional[ComponentRecommendation]
@@ -94,45 +95,45 @@ class PipelineDesign:
 
 class RAGPipelineDesigner:
     """Main pipeline designer class."""
-    
+
     def __init__(self):
         self.embedding_models = self._load_embedding_models()
         self.vector_databases = self._load_vector_databases()
         self.chunking_strategies = self._load_chunking_strategies()
-    
+
     def design_pipeline(self, requirements: Requirements) -> PipelineDesign:
         """Design complete RAG pipeline based on requirements."""
         print(f"Designing RAG pipeline for {requirements.document_count:,} documents...")
-        
+
         # Determine system scale
         scale = self._determine_scale(requirements)
         print(f"System scale: {scale.value}")
-        
+
         # Design each component
         chunking = self._recommend_chunking(requirements, scale)
-        embedding = self._recommend_embedding(requirements, scale)  
+        embedding = self._recommend_embedding(requirements, scale)
         vector_db = self._recommend_vector_db(requirements, scale)
         retrieval = self._recommend_retrieval(requirements, scale)
         reranking = self._recommend_reranking(requirements, scale)
         evaluation = self._recommend_evaluation(requirements, scale)
-        
+
         # Calculate total cost
-        total_cost = (chunking.cost_monthly + embedding.cost_monthly + 
-                     vector_db.cost_monthly + retrieval.cost_monthly + 
+        total_cost = (chunking.cost_monthly + embedding.cost_monthly +
+                     vector_db.cost_monthly + retrieval.cost_monthly +
                      evaluation.cost_monthly)
         if reranking:
             total_cost += reranking.cost_monthly
-        
+
         # Generate architecture diagram
         architecture = self._generate_architecture_diagram(
             chunking, embedding, vector_db, retrieval, reranking, evaluation
         )
-        
+
         # Generate configuration templates
         configs = self._generate_config_templates(
             chunking, embedding, vector_db, retrieval, reranking, evaluation
         )
-        
+
         return PipelineDesign(
             chunking=chunking,
             embedding=embedding,
@@ -144,7 +145,7 @@ class RAGPipelineDesigner:
             architecture_diagram=architecture,
             config_templates=configs
         )
-    
+
     def _determine_scale(self, req: Requirements) -> Scale:
         """Determine system scale based on requirements."""
         if req.document_count < 1_000_000 and req.queries_per_day < 1_000:
@@ -153,17 +154,17 @@ class RAGPipelineDesigner:
             return Scale.MEDIUM
         else:
             return Scale.LARGE
-    
+
     def _recommend_chunking(self, req: Requirements, scale: Scale) -> ComponentRecommendation:
         """Recommend chunking strategy."""
         doc_types = set(req.document_types)
-        
+
         if "code" in doc_types:
             strategy = "semantic_code_aware"
             config = {"max_size": 1000, "preserve_functions": True, "overlap": 50}
             rationale = "Code documents benefit from function/class boundary awareness"
         elif "technical" in doc_types or "scientific" in doc_types:
-            strategy = "semantic_heading_aware" 
+            strategy = "semantic_heading_aware"
             config = {"max_size": 1500, "heading_weight": 2.0, "overlap": 100}
             rationale = "Technical documents have clear hierarchical structure"
         elif len(doc_types) > 2 or "mixed" in doc_types:
@@ -176,10 +177,10 @@ class RAGPipelineDesigner:
                 config = {"max_size": 2000, "min_paragraph_size": 100}
                 rationale = "Large documents benefit from paragraph-based chunking"
             else:
-                strategy = "sentence_based"  
+                strategy = "sentence_based"
                 config = {"max_size": 1000, "sentence_overlap": 1}
                 rationale = "Small to medium documents work well with sentence chunking"
-        
+
         return ComponentRecommendation(
             name=strategy,
             type="chunking",
@@ -189,31 +190,31 @@ class RAGPipelineDesigner:
             cons=self._get_chunking_cons(strategy),
             cost_monthly=0.0  # Processing cost only
         )
-    
+
     def _recommend_embedding(self, req: Requirements, scale: Scale) -> ComponentRecommendation:
         """Recommend embedding model."""
         doc_types = set(req.document_types)
-        
+
         # Consider accuracy vs cost priority
         high_accuracy = req.accuracy_priority > 0.7
         cost_sensitive = req.cost_priority > 0.6
-        
+
         if "code" in doc_types:
             if high_accuracy and not cost_sensitive:
-                model = "openai-code-search-ada-002"
-                cost_per_1k_tokens = 0.0001
-                dimensions = 1536
+                model = "openai-text-embedding-3-large"
+                cost_per_1k_tokens = 0.00013  # $0.13/1M tokens as of 2026-11 (OpenAI model page)
+                dimensions = 3072
             else:
                 model = "sentence-transformers/code-bert-base"
                 cost_per_1k_tokens = 0.0  # Self-hosted
                 dimensions = 768
         elif "scientific" in doc_types:
             if high_accuracy:
-                model = "openai-text-embedding-ada-002"
-                cost_per_1k_tokens = 0.0001
-                dimensions = 1536
+                model = "openai-text-embedding-3-large"
+                cost_per_1k_tokens = 0.00013
+                dimensions = 3072
             else:
-                model = "sentence-transformers/scibert-nli" 
+                model = "sentence-transformers/scibert-nli"
                 cost_per_1k_tokens = 0.0
                 dimensions = 768
         else:
@@ -222,19 +223,19 @@ class RAGPipelineDesigner:
                 cost_per_1k_tokens = 0.0
                 dimensions = 384
             elif high_accuracy:
-                model = "openai-text-embedding-ada-002"
-                cost_per_1k_tokens = 0.0001  
+                model = "openai-text-embedding-3-small"
+                cost_per_1k_tokens = 0.00002  # $0.02/1M tokens as of 2026-11 (OpenAI model page)
                 dimensions = 1536
             else:
                 model = "sentence-transformers/all-mpnet-base-v2"
                 cost_per_1k_tokens = 0.0
                 dimensions = 768
-        
+
         # Calculate monthly embedding cost
         total_tokens = req.document_count * (req.avg_document_size / 4)  # ~4 chars per token
         query_tokens = req.queries_per_day * 30 * 20  # ~20 tokens per query per month
         monthly_cost = (total_tokens + query_tokens) * cost_per_1k_tokens / 1000
-        
+
         return ComponentRecommendation(
             name=model,
             type="embedding",
@@ -249,7 +250,7 @@ class RAGPipelineDesigner:
             cons=self._get_embedding_cons(model),
             cost_monthly=monthly_cost
         )
-    
+
     def _recommend_vector_db(self, req: Requirements, scale: Scale) -> ComponentRecommendation:
         """Recommend vector database."""
         if scale == Scale.SMALL and req.cost_priority > 0.7:
@@ -274,7 +275,7 @@ class RAGPipelineDesigner:
             db = "qdrant"
             cost = 100.0  # Self-hosted infrastructure estimate
             rationale = "High performance self-hosted option with good scaling"
-        
+
         return ComponentRecommendation(
             name=db,
             type="vector_database",
@@ -284,7 +285,7 @@ class RAGPipelineDesigner:
             cons=self._get_vector_db_cons(db),
             cost_monthly=cost
         )
-    
+
     def _recommend_retrieval(self, req: Requirements, scale: Scale) -> ComponentRecommendation:
         """Recommend retrieval strategy."""
         if req.accuracy_priority > 0.8:
@@ -299,10 +300,10 @@ class RAGPipelineDesigner:
         else:
             strategy = "dense"
             rationale = "Dense retrieval suitable for general text search"
-        
+
         return ComponentRecommendation(
             name=strategy,
-            type="retrieval", 
+            type="retrieval",
             config={
                 "strategy": strategy,
                 "dense_weight": 0.7 if strategy == "hybrid" else 1.0,
@@ -315,23 +316,23 @@ class RAGPipelineDesigner:
             cons=self._get_retrieval_cons(strategy),
             cost_monthly=0.0
         )
-    
+
     def _recommend_reranking(self, req: Requirements, scale: Scale) -> Optional[ComponentRecommendation]:
         """Recommend reranking if beneficial."""
         if req.accuracy_priority < 0.6 or req.latency_requirement == "real_time":
             return None
-        
+
         if req.cost_priority > 0.8:
             return None
-        
+
         # Estimate reranking queries per month
         monthly_queries = req.queries_per_day * 30
         cost_per_query = 0.002  # Estimated cost for cross-encoder reranking
         monthly_cost = monthly_queries * cost_per_query
-        
+
         if monthly_cost > req.budget_monthly * 0.3:  # Don't exceed 30% of budget
             return None
-        
+
         return ComponentRecommendation(
             name="cross_encoder_reranking",
             type="reranking",
@@ -346,7 +347,7 @@ class RAGPipelineDesigner:
             cons=["Additional latency", "Higher cost", "More complexity"],
             cost_monthly=monthly_cost
         )
-    
+
     def _recommend_evaluation(self, req: Requirements, scale: Scale) -> ComponentRecommendation:
         """Recommend evaluation framework."""
         return ComponentRecommendation(
@@ -365,57 +366,57 @@ class RAGPipelineDesigner:
             cons=["Additional overhead", "Requires ground truth data"],
             cost_monthly=20.0  # Evaluation tooling and compute
         )
-    
-    def _generate_architecture_diagram(self, chunking: ComponentRecommendation, 
+
+    def _generate_architecture_diagram(self, chunking: ComponentRecommendation,
                                      embedding: ComponentRecommendation,
                                      vector_db: ComponentRecommendation,
                                      retrieval: ComponentRecommendation,
                                      reranking: Optional[ComponentRecommendation],
                                      evaluation: ComponentRecommendation) -> str:
         """Generate Mermaid architecture diagram."""
-        
+
         diagram = """```mermaid
 graph TB
     %% Document Processing Pipeline
     A[Document Corpus] --> B[Document Chunking]
     B --> C[Embedding Generation]
     C --> D[Vector Database Storage]
-    
-    %% Query Processing Pipeline  
+
+    %% Query Processing Pipeline
     E[User Query] --> F[Query Processing]
     F --> G[Vector Search]
     D --> G
     G --> H[Retrieved Chunks]
 """
-        
+
         if reranking:
             diagram += "    H --> I[Reranking]\n    I --> J[Final Results]\n"
         else:
             diagram += "    H --> J[Final Results]\n"
-        
-        diagram += """    
+
+        diagram += """
     %% Evaluation Pipeline
     J --> K[Response Generation]
     K --> L[Evaluation Metrics]
-    
+
     %% Component Details
     B -.-> B1[Strategy: """ + chunking.name + """]
     C -.-> C1[Model: """ + embedding.name + """]
     D -.-> D1[Database: """ + vector_db.name + """]
     G -.-> G1[Method: """ + retrieval.name + """]
 """
-        
+
         if reranking:
             diagram += "    I -.-> I1[Model: " + reranking.name + "]\n"
-        
+
         diagram += "    L -.-> L1[Framework: " + evaluation.name + "]\n```"
-        
+
         return diagram
-    
+
     def _generate_config_templates(self, *components) -> Dict[str, Any]:
         """Generate configuration templates for all components."""
         configs = {}
-        
+
         for component in components:
             if component:
                 configs[component.type] = {
@@ -423,7 +424,7 @@ graph TB
                     "config": component.config,
                     "rationale": component.rationale
                 }
-        
+
         # Add deployment configuration
         configs["deployment"] = {
             "infrastructure": "cloud" if any("pinecone" in str(c.name) for c in components if c) else "hybrid",
@@ -437,20 +438,27 @@ graph TB
                 "alerts": ["high_latency", "low_accuracy", "service_down"]
             }
         }
-        
+
         return configs
-    
+
     def _load_embedding_models(self) -> Dict[str, Dict[str, Any]]:
         """Load embedding model specifications."""
         return {
-            "openai-text-embedding-ada-002": {
-                "dimensions": 1536,
-                "cost_per_1k_tokens": 0.0001,
+            # Example catalog; OpenAI prices as of 2026-11 ($0.02 / $0.13 per 1M tokens), re-check before quoting
+            "openai-text-embedding-3-large": {
+                "dimensions": 3072,
+                "cost_per_1k_tokens": 0.00013,
                 "quality": "high",
                 "speed": "medium"
             },
+            "openai-text-embedding-3-small": {
+                "dimensions": 1536,
+                "cost_per_1k_tokens": 0.00002,
+                "quality": "high",
+                "speed": "fast"
+            },
             "sentence-transformers/all-mpnet-base-v2": {
-                "dimensions": 768, 
+                "dimensions": 768,
                 "cost_per_1k_tokens": 0.0,
                 "quality": "high",
                 "speed": "medium"
@@ -462,7 +470,7 @@ graph TB
                 "speed": "fast"
             }
         }
-    
+
     def _load_vector_databases(self) -> Dict[str, Dict[str, Any]]:
         """Load vector database specifications."""
         return {
@@ -472,16 +480,16 @@ graph TB
             "chroma": {"managed": False, "scaling": "poor", "cost": "free"},
             "pgvector": {"managed": False, "scaling": "good", "cost": "medium"}
         }
-    
+
     def _load_chunking_strategies(self) -> Dict[str, Dict[str, Any]]:
         """Load chunking strategy specifications."""
         return {
             "fixed_size": {"complexity": "low", "quality": "medium"},
-            "sentence_based": {"complexity": "medium", "quality": "good"}, 
+            "sentence_based": {"complexity": "medium", "quality": "good"},
             "paragraph_based": {"complexity": "medium", "quality": "good"},
             "semantic_heading_aware": {"complexity": "high", "quality": "excellent"}
         }
-    
+
     def _get_vector_db_config(self, db: str, req: Requirements, scale: Scale) -> Dict[str, Any]:
         """Get vector database configuration."""
         base_config = {
@@ -489,7 +497,7 @@ graph TB
             "distance_metric": "cosine",
             "index_type": "hnsw"
         }
-        
+
         if db == "pinecone":
             base_config.update({
                 "environment": "us-east1-gcp",
@@ -502,9 +510,9 @@ graph TB
                 "quantization": scale == Scale.LARGE,
                 "replication_factor": 1 if scale == Scale.SMALL else 2
             })
-        
+
         return base_config
-    
+
     def _get_chunking_pros(self, strategy: str) -> List[str]:
         """Get pros for chunking strategy."""
         pros_map = {
@@ -515,7 +523,7 @@ graph TB
             "adaptive_chunking": ["Handles mixed content", "Optimizes per document", "Best quality"]
         }
         return pros_map.get(strategy, ["Good general purpose strategy"])
-    
+
     def _get_chunking_cons(self, strategy: str) -> List[str]:
         """Get cons for chunking strategy."""
         cons_map = {
@@ -526,7 +534,7 @@ graph TB
             "adaptive_chunking": ["High complexity", "Slower processing", "Harder to debug"]
         }
         return cons_map.get(strategy, ["May not fit all use cases"])
-    
+
     def _get_embedding_pros(self, model: str) -> List[str]:
         """Get pros for embedding model."""
         if "openai" in model:
@@ -537,7 +545,7 @@ graph TB
             return ["Fast processing", "Small size", "Good for real-time"]
         else:
             return ["Specialized for domain", "Good performance"]
-    
+
     def _get_embedding_cons(self, model: str) -> List[str]:
         """Get cons for embedding model."""
         if "openai" in model:
@@ -546,7 +554,7 @@ graph TB
             return ["Self-hosting required", "Model updates needed", "GPU beneficial"]
         else:
             return ["May require fine-tuning", "Domain-specific"]
-    
+
     def _get_vector_db_pros(self, db: str) -> List[str]:
         """Get pros for vector database."""
         pros_map = {
@@ -557,7 +565,7 @@ graph TB
             "pgvector": ["SQL integration", "ACID compliance", "Familiar"]
         }
         return pros_map.get(db, ["Good performance"])
-    
+
     def _get_vector_db_cons(self, db: str) -> List[str]:
         """Get cons for vector database."""
         cons_map = {
@@ -568,16 +576,16 @@ graph TB
             "pgvector": ["PostgreSQL knowledge needed", "Less specialized", "Manual optimization"]
         }
         return cons_map.get(db, ["Requires maintenance"])
-    
+
     def _get_retrieval_pros(self, strategy: str) -> List[str]:
         """Get pros for retrieval strategy."""
         pros_map = {
             "dense": ["Semantic understanding", "Good for paraphrases", "Fast"],
-            "sparse": ["Exact matching", "Interpretable", "Good for keywords"], 
+            "sparse": ["Exact matching", "Interpretable", "Good for keywords"],
             "hybrid": ["Best of both", "High accuracy", "Robust"]
         }
         return pros_map.get(strategy, ["Good performance"])
-    
+
     def _get_retrieval_cons(self, strategy: str) -> List[str]:
         """Get cons for retrieval strategy."""
         cons_map = {
@@ -592,15 +600,29 @@ def load_requirements(file_path: str) -> Requirements:
     """Load requirements from JSON file."""
     with open(file_path, 'r') as f:
         data = json.load(f)
-    
-    return Requirements(**data)
+    if not isinstance(data, dict):
+        raise ValueError("requirements must be a JSON object")
+    numeric = {"document_count": int, "avg_document_size": int, "queries_per_day": int,
+               "budget_monthly": (int, float), "accuracy_priority": (int, float), "cost_priority": (int, float)}
+    missing = [k for k in Requirements.__dataclass_fields__ if k not in data]
+    if missing:
+        raise ValueError(f"missing fields: {', '.join(missing)} (see references/tool-cli-reference.md)")
+    for key, kind in numeric.items():
+        if isinstance(data[key], bool) or not isinstance(data[key], kind):
+            raise ValueError(f"'{key}' must be a number, got {data[key]!r}")
+    for key in ("accuracy_priority", "cost_priority"):
+        if not 0 <= data[key] <= 1:
+            raise ValueError(f"'{key}' must be between 0 and 1, got {data[key]}")
+    if data["maintenance_complexity"] not in ("low", "medium", "high"):
+        raise ValueError("'maintenance_complexity' must be low, medium or high")
+    return Requirements(**{k: data[k] for k in Requirements.__dataclass_fields__})
 
 
 def save_design(design: PipelineDesign, output_path: str):
     """Save pipeline design to JSON file."""
     # Convert to dict for JSON serialization
     design_dict = {}
-    
+
     for field_name in design.__dataclass_fields__:
         value = getattr(design, field_name)
         if isinstance(value, ComponentRecommendation):
@@ -609,7 +631,7 @@ def save_design(design: PipelineDesign, output_path: str):
             design_dict[field_name] = None
         else:
             design_dict[field_name] = value
-    
+
     with open(output_path, 'w') as f:
         json.dump(design_dict, f, indent=2)
 
@@ -619,20 +641,20 @@ def print_design_summary(design: PipelineDesign):
     print("\n" + "="*60)
     print("RAG PIPELINE DESIGN SUMMARY")
     print("="*60)
-    
+
     print(f"\n💰 Total Monthly Cost: ${design.total_cost:.2f}")
-    
+
     print(f"\n🔧 Component Recommendations:")
-    components = [design.chunking, design.embedding, design.vector_db, 
+    components = [design.chunking, design.embedding, design.vector_db,
                  design.retrieval, design.reranking, design.evaluation]
-    
+
     for component in components:
         if component:
             print(f"\n  {component.type.upper()}: {component.name}")
             print(f"    Rationale: {component.rationale}")
             if component.cost_monthly > 0:
                 print(f"    Monthly Cost: ${component.cost_monthly:.2f}")
-    
+
     print(f"\n📊 Architecture Diagram:")
     print(design.architecture_diagram)
 
@@ -643,36 +665,36 @@ def main():
     parser.add_argument('requirements', help='JSON file containing system requirements')
     parser.add_argument('--output', '-o', help='Output file for pipeline design (JSON)')
     parser.add_argument('--verbose', '-v', action='store_true', help='Verbose output')
-    
+
     args = parser.parse_args()
-    
+
     try:
         # Load requirements
         print("Loading requirements...")
         requirements = load_requirements(args.requirements)
-        
+
         # Design pipeline
         designer = RAGPipelineDesigner()
         design = designer.design_pipeline(requirements)
-        
+
         # Save design
         if args.output:
             save_design(design, args.output)
             print(f"Pipeline design saved to {args.output}")
-        
+
         # Print summary
         print_design_summary(design)
-        
+
         if args.verbose:
             print(f"\n📋 Configuration Templates:")
             for component_type, config in design.config_templates.items():
                 print(f"\n  {component_type.upper()}:")
                 print(f"    {json.dumps(config, indent=4)}")
-        
-    except Exception as e:
-        print(f"Error: {e}")
-        return 1
-    
+
+    except (OSError, ValueError, TypeError) as e:  # unusable input
+        print(f"Error: {e}", file=sys.stderr)
+        return 2
+
     return 0
 
 

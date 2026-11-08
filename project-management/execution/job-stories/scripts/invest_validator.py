@@ -6,7 +6,7 @@ Reads stories/items and evaluates each against the 6 INVEST criteria
 
 Usage:
     python invest_validator.py --items items.json
-    python invest_validator.py --items items.json --json
+    python invest_validator.py --items items.json --format json
     python invest_validator.py --example
 """
 
@@ -16,9 +16,28 @@ import re
 import sys
 
 
-def load_data(path: str) -> dict:
-    with open(path, "r") as f:
-        return json.load(f)
+def fail(msg: str) -> None:
+    """Print a one-line input error and exit 2."""
+    print(f"error: {msg}", file=sys.stderr)
+    sys.exit(2)
+
+
+def load_data(path: str, key: str) -> dict:
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except OSError as exc:
+        fail(f"cannot read {path}: {exc.strerror or exc}")
+    except ValueError as exc:
+        fail(f"{path} is not valid JSON: {exc}")
+    items = data.get(key) if isinstance(data, dict) else None
+    if not isinstance(items, list) or not items or not all(isinstance(i, dict) for i in items):
+        fail(f"{path} must be a JSON object with a non-empty '{key}' list of objects")
+    for item in items:
+        for field in ("acceptance_criteria", "dependencies"):
+            if not isinstance(item.get(field, []), list):
+                fail(f"{path}: '{field}' in '{item.get('title', 'Untitled')}' must be a list")
+    return data
 
 
 def validate_invest(item: dict) -> dict:
@@ -179,25 +198,27 @@ def print_example() -> None:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Validate items against INVEST criteria.")
-    parser.add_argument("--items", type=str, help="Path to items JSON file")
-    parser.add_argument("--json", action="store_true", help="Output as JSON")
-    parser.add_argument("--example", action="store_true", help="Print example and exit")
+    parser = argparse.ArgumentParser(
+        description="Validate backlog items against the six INVEST criteria. Exit 0 all sprint-ready, 1 at least one is not, 2 bad input.")
+    parser.add_argument("--items", type=str, help="Path to JSON file: {'items': [...]} (see --example)")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (default: text)")
+    parser.add_argument("--json", action="store_true", help="Shorthand for --format json")
+    parser.add_argument("--example", action="store_true", help="Print an example input file and exit")
     args = parser.parse_args()
 
     if args.example:
         print_example()
-        return
+        return 0
     if not args.items:
-        parser.error("--items is required")
+        parser.error("--items is required (or --example)")
 
-    data = load_data(args.items)
-    result = analyze_items(data)
-    if args.json:
+    result = analyze_items(load_data(args.items, "items"))
+    if args.json or args.format == "json":
         print(json.dumps(result, indent=2))
     else:
         print_report(result)
+    return 0 if result["sprint_ready"] == result["total_items"] else 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

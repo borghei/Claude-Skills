@@ -1,0 +1,39 @@
+{
+  "organization": "Acme Corp",
+  "total_pages_created": 150,
+  "templates": [
+    {
+      "name": "Meeting Notes",
+      "uses_30d": 45,
+      "created_date": "2025-06-01",
+      "last_updated": "2026-02-15",
+      "has_instructions": true,
+      "has_example": true,
+      "has_owner": true,
+      "section_count": 5,
+      "has_dynamic_content": true
+    },
+    {
+      "name": "Sprint Retrospective",
+      "uses_30d": 12,
+      "created_date": "2025-08-01",
+      "last_updated": "2026-01-10",
+      "has_instructions": true,
+      "has_example": false,
+      "has_owner": true,
+      "section_count": 4,
+      "has_dynamic_content": false
+    },
+    {
+      "name": "Old Project Template",
+      "uses_30d": 0,
+      "created_date": "2024-03-01",
+      "last_updated": "2024-06-01",
+      "has_instructions": false,
+      "has_example": false,
+      "has_owner": false,
+      "section_count": 2,
+      "has_dynamic_content": false
+    }
+  ]
+}

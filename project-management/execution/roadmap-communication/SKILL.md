@@ -1,16 +1,17 @@
 ---
 name: roadmap-communication
 description: >
-  Same roadmap, three audiences. Produce executive, customer, and internal
-  roadmap variants with audience-appropriate framing, detail, and risk language.
-  Use for quarterly roadmap publication, board packets, and customer/sales roadmaps.
+  Produce executive, customer and internal versions of one roadmap with
+  consistent framing and the right detail and risk language for each. Use when
+  publishing the quarterly roadmap, a board packet or a customer or sales
+  roadmap.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: roadmap, communication, now-next-later, outcome-roadmap, marty-cagan
   tags:
     - roadmap
@@ -57,12 +58,14 @@ Before generating the variants, settle the inputs below. When one is missing or 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
 
 1. **Author the internal variant first** — it is the source of truth (owners, dates, dependencies, risks). Use `assets/internal_roadmap_template.md`.
 2. **Derive the executive variant** — promote each Now item to its parent outcome, add confidence ratings, cap at 1 page. Use `assets/executive_roadmap_template.md`.
 3. **Derive the customer variant** — translate features to benefits, strip dates beyond the current quarter, use "exploring / in development / shipping soon." Use `assets/customer_roadmap_template.md`.
-4. **Run the triangulation check** — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
+4. **Run the triangulation check** [RECOMMENDED] — trace one Now item across all three; the framings must be consistent. Re-publish on a fixed cadence.
+
+**Done when** the same item reads consistently in all three, the customer variant carries no dates past the current quarter and no internal risks, and the internal variant shows the bad news the other two soften.
 
 ## Anti-Patterns
 
@@ -90,9 +93,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/roadmap-variants-playbook.md](references/roadmap-variants-playbook.md)** — the variant comparison tables, the "right-size the roadmap" principle, outcome-vs-feature framing, the detailed structure for each of the three variants, the authoring workflow, troubleshooting, and success criteria. Read when building or reviewing the variants.
 - **[references/roadmap-communication-guide.md](references/roadmap-communication-guide.md)** — the origin of Now/Next/Later (Bastow), Cagan's right-size principle, the outcome-vs-feature debate (Cagan, Torres), and worked examples of all three variants for the same project. Read for theory and full examples.
 - **[references/red-flags.md](references/red-flags.md)** — common ways roadmap artifacts go wrong, each with bad/good examples. Read before publishing any variant.
-- **[assets/executive_roadmap_template.md](assets/executive_roadmap_template.md)** — fill-in template for the executive variant.
-- **[assets/customer_roadmap_template.md](assets/customer_roadmap_template.md)** — fill-in template for the customer variant.
-- **[assets/internal_roadmap_template.md](assets/internal_roadmap_template.md)** — fill-in template for the internal variant (the source of truth).
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/internal_roadmap_template.md` | Internal variant, the source of truth |
+| `assets/executive_roadmap_template.md` | Executive variant |
+| `assets/customer_roadmap_template.md` | Customer variant |
+| `examples/pylon-roadmap-three-ways.md` | One roadmap in all three variants |
 
 ## Scope & Limitations
 

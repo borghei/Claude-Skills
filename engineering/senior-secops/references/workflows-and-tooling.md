@@ -212,8 +212,8 @@ PHASE 5: POST-INCIDENT (24-72 hours)
 
 **Exit Codes:**
 - `0`: No critical/high findings
-- `1`: High severity findings
-- `2`: Critical severity findings
+- `1`: Critical or high findings
+- `2`: Bad input (target not found)
 
 ### vulnerability_assessor.py
 
@@ -226,9 +226,9 @@ PHASE 5: POST-INCIDENT (24-72 hours)
 | `--output, -o` | Write results to file |
 
 **Exit Codes:**
-- `0`: No critical/high vulnerabilities
-- `1`: High severity vulnerabilities
-- `2`: Critical severity vulnerabilities
+- `0`: No critical/high findings
+- `1`: Critical or high findings
+- `2`: Bad input (target not found)
 
 ### compliance_checker.py
 
@@ -241,9 +241,9 @@ PHASE 5: POST-INCIDENT (24-72 hours)
 | `--output, -o` | Write results to file |
 
 **Exit Codes:**
-- `0`: Compliant (90%+ score)
-- `1`: Non-compliant (50-69% score)
-- `2`: Critical gaps (<50% score)
+- `0`: Code-evidence score 70% or higher
+- `1`: Score below 70% (NON_COMPLIANT / CRITICAL_GAPS)
+- `2`: Bad input (target not found)
 
 ## Tool Reference (detailed)
 
@@ -279,7 +279,7 @@ python scripts/security_scanner.py . --severity high --json --output security-re
 - **Human-readable (default):** Prints a summary table with severity counts and the top 5 findings including file path, line number, and description.
 - **JSON (`--json`):** Full structured report with `status`, `files_scanned`, `scan_duration_seconds`, `total_findings`, `severity_counts`, and a `findings` array. Each finding includes `rule_id`, `severity`, `category`, `title`, `description`, `file_path`, `line_number`, `code_snippet`, and `recommendation`.
 
-**Exit Codes:** `0` = no critical/high findings, `1` = high-severity findings present, `2` = critical-severity findings present.
+**Exit Codes:** `0` = no critical/high findings, `1` = critical or high findings present, `2` = bad input.
 
 ### vulnerability_assessor.py
 
@@ -313,7 +313,7 @@ python scripts/vulnerability_assessor.py /path/to/project --severity critical --
 - **Human-readable (default):** Prints a summary with files scanned, packages scanned, risk score (0-100), risk level (NONE/LOW/MEDIUM/HIGH/CRITICAL), severity counts, and the top 5 vulnerabilities sorted by CVSS score.
 - **JSON (`--json`):** Full structured report with `status`, `target`, `files_scanned`, `packages_scanned`, `scan_duration_seconds`, `total_vulnerabilities`, `risk_score`, `risk_level`, `severity_counts`, and a `vulnerabilities` array. Each vulnerability includes `cve_id`, `package`, `installed_version`, `fixed_version`, `severity`, `cvss_score`, `description`, `ecosystem`, and `recommendation`.
 
-**Exit Codes:** `0` = no critical/high vulnerabilities, `1` = high-severity vulnerabilities present, `2` = critical-severity vulnerabilities present.
+**Exit Codes:** `0` = no critical/high vulnerabilities, `1` = critical or high vulnerabilities present, `2` = bad input.
 
 ### compliance_checker.py
 
@@ -347,7 +347,7 @@ python scripts/compliance_checker.py . --framework soc2 --json --output soc2-rep
 - **Human-readable (default):** Prints compliance score as a percentage with level (COMPLIANT/PARTIALLY_COMPLIANT/NON_COMPLIANT/CRITICAL_GAPS), a passed/failed/warning/N/A breakdown, and the top 5 failed controls with severity and remediation recommendations.
 - **JSON (`--json`):** Full structured report with `status`, `target`, `framework`, `scan_duration_seconds`, `compliance_score`, `compliance_level`, `summary` (passed/failed/warnings/not_applicable/total), and a `controls` array. Each control includes `control_id`, `framework`, `category`, `title`, `description`, `status`, `evidence`, `recommendation`, and `severity`.
 
-**Exit Codes:** `0` = compliant (90%+ score), `1` = non-compliant (50-69% score), `2` = critical gaps (<50% score).
+**Exit Codes:** `0` = code-evidence score 70%+, `1` = below 70%, `2` = bad input.
 
 ## Tech Stack
 

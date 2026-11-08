@@ -86,6 +86,9 @@ def check_icp(state: dict[str, Any]) -> list[Issue]:
 
 def check_motion_fit(state: dict[str, Any]) -> list[Issue]:
     issues = []
+    if not (state.get("beachhead_segment") or "").strip():
+        issues.append(Issue("warn", "beachhead",
+            "no beachhead segment; launching to the whole ICP at once dilutes messaging and references"))
     motion = (state.get("motion") or "").lower()
     acv = float(state.get("avg_acv_usd", 0) or 0)
     if motion not in ("plg", "sales-led", "marketing-led", "channel-led",
@@ -269,7 +272,14 @@ def main() -> int:
         print(f"error: invalid JSON: {e}", file=sys.stderr)
         return 2
 
-    report = audit(state)
+    if not isinstance(state, dict):
+        print("error: top level must be a JSON object (see the schema in --help)", file=sys.stderr)
+        return 2
+    try:
+        report = audit(state)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        print(f"error: unexpected input shape ({type(e).__name__}: {e})", file=sys.stderr)
+        return 2
     out = render_markdown(report) if args.format == "markdown" else json.dumps(report, indent=2)
 
     if args.output:
@@ -277,7 +287,8 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    # Gate: 1 when any finding has severity "fail", else 0.
+    return 1 if report.get("severity_counts", {}).get("fail") else 0
 
 
 if __name__ == "__main__":

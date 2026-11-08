@@ -366,14 +366,14 @@ def main():
 
     if not os.path.isfile(args.suite_file):
         print(f"Error: file not found: {args.suite_file}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     with open(args.suite_file, "r", encoding="utf-8") as f:
         try:
             data = json.load(f)
         except json.JSONDecodeError as e:
             print(f"Error: invalid JSON in {args.suite_file}: {e}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
     # Accept either a list or a dict with a "test_cases" key.
     if isinstance(data, dict):
@@ -382,11 +382,14 @@ def main():
         test_cases = data
     else:
         print("Error: JSON root must be a list of test cases or an object with a 'test_cases' key.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
+    if not isinstance(test_cases, list) or not all(isinstance(t, dict) for t in test_cases):
+        print("Error: test cases must be JSON objects", file=sys.stderr)
+        sys.exit(2)
     if not test_cases:
         print("Error: no test cases found in input file.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     suite_result = score_suite(test_cases)
 

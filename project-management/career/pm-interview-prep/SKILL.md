@@ -1,16 +1,16 @@
 ---
 name: pm-interview-prep
 description: >
-  Structured PM interview preparation across product sense, execution, strategy,
-  behavioral, and technical rounds, using CIRCLES, AARM, STAR, and the estimation
-  framework. Calibrated to APM, PM, Senior PM, and Group PM rubrics.
+  Plans PM interview prep across product sense, execution, strategy, behavioral and
+  technical rounds, calibrated to level. Use when a PM loop is scheduled, you are
+  running mock interviews, or you are moving up a level.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: pm-career
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: pm-interviews, product-sense, execution, behavioral, frameworks
   tags:
     - pm-interviews
@@ -23,7 +23,7 @@ metadata:
 
 ## Overview
 
-PM interviews test five distinct skills, each with its own format, frameworks, and rubric: product sense, execution, strategy, behavioral, and technical. This skill organizes preparation across all five round types and calibrates expectations to the level you are interviewing for (APM, PM, Senior PM, Group PM). It bundles the most-used PM interview frameworks -- Lewis Lin's CIRCLES Method for product design, the AARM Method for improvement/metric questions, STAR for behavioral, and a 5-step estimation framework for market sizing -- plus question banks per round and structured answer templates calibrated by level.
+PM interviews test five distinct skills, each with its own format, frameworks, and rubric: product sense, execution, strategy, behavioral, and technical. This skill organizes preparation across all five round types and calibrates expectations to the level you are interviewing for (APM, PM, Senior PM, Group PM). The value is the level calibration, the question bank and the prep system; the frameworks (CIRCLES, AARM, STAR, 5-step estimation) are applied through them, with failure modes in `references/framework-deep-dive.md`.
 
 ## Core Capabilities
 
@@ -54,10 +54,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ## Quick Start
 
+The workflow, start to finish:
+
 1. Rate yourself across the five round types (`assets/self_assessment.md`); pick your weakest two.
 2. Pull level-targeted questions from `references/question-bank.md` and practice solo with the right framework, timed.
 3. Run 2-3 mocks per round type using `assets/mock_feedback_form.md`.
 4. Refine 8-12 behavioral stories (`assets/story_worksheet.md`) to under 5 minutes each, quantified.
+5. Verify that each round type has at least two scored mocks at or above the target-level bar and every story has a number in its result before calling it done.
 
 See `references/round-frameworks-and-prep.md` for the full round reference, framework tables, level-calibration bars, prep workflow, and troubleshooting.
 
@@ -100,12 +103,12 @@ External: Lin, L. *Decode and Conquer* (CIRCLES); McDowell, G. & Bavaro, J. *Cra
 
 **Caveats:** Frameworks are scaffolds, not scripts — interviewers down-rank verbatim recitation; internalize so the structure is invisible. Every company has its own rubric; adjust by the published guide and recruiter call. Mocking with a current PM at the target company beats any book.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `pm-career-ladder/` | Bidirectional | Use the ladder rubric to understand the level you are interviewing for |
-| `pm-onboarding/` | Feeds into | Once hired, the onboarding skill takes over for first 90 days |
-| `personal-productivity/resume/` | Feeds from | A clean resume with quantified impact feeds the behavioral stories |
-| `discovery/brainstorm-ideas/` | Reuses | Product sense rounds reuse the same ideation discipline as Product Trio sessions |
-| `execution/prioritization-frameworks/` | Reuses | RICE, ICE, and Opportunity Score reasoning shows up in CIRCLES Step 4 (Cut through) |
+| File | Purpose |
+|------|---------|
+| `assets/self_assessment.md`, `assets/story_worksheet.md`, `assets/mock_feedback_form.md` | Self-rating, story builder, mock scoring |
+| `references/round-frameworks-and-prep.md`, `references/framework-deep-dive.md`, `references/question-bank.md`, `references/red-flags.md` | Rounds and level bars, frameworks, questions, failure modes |
+| `examples/stripe-circles-new-market-product.md` | Worked product-sense answer |
+
+Related skills: `pm-career-ladder` for the level bar, `pm-onboarding` once hired.

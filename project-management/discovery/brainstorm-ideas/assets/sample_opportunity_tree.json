@@ -1,0 +1,58 @@
+{
+  "outcome": "Reduce time-to-value from 14 days to 3 days",
+  "opportunities": [
+    {
+      "name": "Users don't know what to do after signup",
+      "evidence": [
+        "Interview #3: 'I signed up but had no idea what to do next'",
+        "Analytics: 60% drop-off before first action"
+      ],
+      "solutions": [
+        {
+          "name": "Guided onboarding wizard",
+          "effort": "M",
+          "confidence": "High",
+          "status": "Testing"
+        },
+        {
+          "name": "Contextual tooltips",
+          "effort": "S",
+          "confidence": "Medium",
+          "status": "Proposed"
+        },
+        {
+          "name": "Welcome video series",
+          "effort": "S",
+          "confidence": "Low",
+          "status": "Proposed"
+        }
+      ]
+    },
+    {
+      "name": "Initial configuration is too complex",
+      "evidence": [
+        "Support tickets: 40% about setup",
+        "Interview #7: 'Too many settings before I can do anything'"
+      ],
+      "solutions": [
+        {
+          "name": "Smart defaults based on industry",
+          "effort": "L",
+          "confidence": "Medium",
+          "status": "Proposed"
+        },
+        {
+          "name": "Setup template library",
+          "effort": "M",
+          "confidence": "High",
+          "status": "Proposed"
+        }
+      ]
+    },
+    {
+      "name": "Value not visible until data accumulates",
+      "evidence": [],
+      "solutions": []
+    }
+  ]
+}

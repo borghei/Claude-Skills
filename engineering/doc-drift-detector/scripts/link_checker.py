@@ -124,6 +124,8 @@ def extract_links(file_path: str, rel_path: str) -> List[LinkInfo]:
             continue
         if in_code_block:
             continue
+        # Links shown as examples inside `inline code` are not links.
+        line = re.sub(r"`[^`]*`", "", line)
 
         # Image links (check before regular links to avoid double-counting)
         for match in img_link.finditer(line):
@@ -180,7 +182,7 @@ def extract_headings(file_path: str) -> Set[str]:
     except (OSError, IOError):
         return headings
 
-    for line in content.splitlines():
+    for _, line in _outside_fences(content.splitlines()):
         match = re.match(r'^#{1,6}\s+(.+)', line)
         if match:
             heading_text = match.group(1).strip()
@@ -190,6 +192,17 @@ def extract_headings(file_path: str) -> Set[str]:
     return headings
 
 
+def _outside_fences(lines):
+    """Yield (line_no, line) for lines outside ``` fences (a '# comment' in a code block is not a heading)."""
+    fenced = False
+    for i, line in enumerate(lines, 1):
+        if line.strip().startswith("```"):
+            fenced = not fenced
+            continue
+        if not fenced:
+            yield i, line
+
+
 def slugify_heading(text: str) -> str:
     """Convert heading text to GitHub-style anchor slug."""
     text = text.lower()
@@ -197,8 +210,8 @@ def slugify_heading(text: str) -> str:
     text = text.replace("`", "")
     # Remove special characters except hyphens and spaces
     text = re.sub(r'[^\w\s-]', '', text)
-    # Replace spaces with hyphens
-    text = re.sub(r'[\s]+', '-', text)
+    # Replace each space with a hyphen (GitHub does not collapse runs: "a — b" -> "a--b")
+    text = re.sub(r'\s', '-', text)
     # Remove leading/trailing hyphens
     text = text.strip('-')
     return text
@@ -215,7 +228,7 @@ def find_duplicate_anchors(file_path: str) -> List[Tuple[str, int]]:
     seen: Dict[str, int] = {}
     duplicates = []
 
-    for i, line in enumerate(lines, 1):
+    for i, line in _outside_fences(lines):
         match = re.match(r'^#{1,6}\s+(.+)', line)
         if match:
             slug = slugify_heading(match.group(1).strip())
@@ -505,7 +518,7 @@ def main():
         # Try to find git root
         current = repo_path
         while current != os.path.dirname(current):
-            if os.path.isdir(os.path.join(current, ".git")):
+            if os.path.exists(os.path.join(current, ".git")):
                 repo_path = current
                 break
             current = os.path.dirname(current)

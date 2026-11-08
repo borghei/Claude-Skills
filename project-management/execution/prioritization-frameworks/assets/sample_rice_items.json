@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "name": "Advanced search",
+      "reach": 5000,
+      "impact": 2,
+      "confidence": 80,
+      "effort": 3
+    },
+    {
+      "name": "Mobile app",
+      "reach": 8000,
+      "impact": 3,
+      "confidence": 50,
+      "effort": 8
+    },
+    {
+      "name": "SSO integration",
+      "reach": 1200,
+      "impact": 2,
+      "confidence": 90,
+      "effort": 2
+    },
+    {
+      "name": "Dashboard redesign",
+      "reach": 6000,
+      "impact": 1,
+      "confidence": 70,
+      "effort": 4
+    },
+    {
+      "name": "API rate limiting",
+      "reach": 300,
+      "impact": 3,
+      "confidence": 95,
+      "effort": 1
+    }
+  ]
+}

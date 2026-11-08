@@ -26,6 +26,7 @@ Requires: Python 3.7+ (standard library only)
 
 import argparse
 import json
+import re
 import sys
 from typing import Any
 
@@ -176,6 +177,9 @@ def suggest_experiments(hypothesis: dict[str, Any]) -> dict[str, Any]:
     target_segment = hypothesis.get("target_segment", "target users")
 
     signals = detect_signals(hypothesis_text)
+    # The pass bar is the hypothesis's own X%, set before launch; method norms are context only.
+    bar = re.search(r"(\d+(?:\.\d+)?)\s*%", hypothesis_text)
+    pass_bar = f"Pass at >= {bar.group(1)}% (the hypothesis's X)" if bar else None
 
     if product_type == "new":
         catalog = EXPERIMENTS_NEW
@@ -199,7 +203,8 @@ def suggest_experiments(hypothesis: dict[str, Any]) -> dict[str, Any]:
             "method_key": key,
             "description": exp["description"],
             "metric": exp["default_metric"],
-            "success_threshold": exp["default_threshold"],
+            "success_threshold": f"{pass_bar}; typical for this method: {exp['default_threshold']}" if pass_bar
+                                 else f"NOT SET - add an X% to the hypothesis (typical: {exp['default_threshold']})",
             "effort_level": exp["effort"],
             "duration_estimate": exp["duration"],
             "sitg_level": exp["sitg_level"],
@@ -211,6 +216,7 @@ def suggest_experiments(hypothesis: dict[str, Any]) -> dict[str, Any]:
         "target_segment": target_segment,
         "product_type": product_type,
         "detected_signals": signals,
+        "pass_bar_pct": float(bar.group(1)) if bar else None,
         "suggested_experiments": suggestions,
     }
 
@@ -323,18 +329,18 @@ Input JSON format:
                 data = json.load(f)
         except FileNotFoundError:
             print(f"Error: File not found: {args.input_file}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         except json.JSONDecodeError as e:
             print(f"Error: Invalid JSON in {args.input_file}: {e}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
     else:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     hypotheses = data.get("hypotheses", [])
     if not hypotheses:
         print("Error: No hypotheses found in input data.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     results = [suggest_experiments(h) for h in hypotheses]
 
@@ -342,7 +348,13 @@ Input JSON format:
         print(json.dumps(results, indent=2))
     else:
         print(format_text(results))
+    # Exit 1 when any hypothesis has no X% pass bar: the threshold must exist before launch.
+    sys.exit(1 if any(r["pass_bar_pct"] is None for r in results) else 0)
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

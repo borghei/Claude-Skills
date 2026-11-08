@@ -1,16 +1,15 @@
 ---
 name: senior-ml-engineer
 description: >
-  ML engineering skill for productionizing models, building MLOps pipelines, and
-  integrating LLMs. Covers model deployment, feature stores, drift monitoring,
-  RAG systems, and cost optimization.
+  Productionize ML models and LLM features: deployment specs, drift monitoring, RAG design
+  and cost control. Use when deploying a model, building RAG, or monitoring drift.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
   author: borghei
   category: engineering
   domain: machine-learning
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [ml-pipelines, model-deployment, mlops, rag]
 ---
 # Senior ML Engineer
@@ -62,7 +61,7 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/production-ml-workflows.md](references/production-ml-workflows.md)** — the five step-by-step workflows (model deployment, MLOps setup, LLM integration, RAG, monitoring) with all code templates, serving/vector-DB/chunking/cost tables, the troubleshooting matrix, and success criteria. Read when executing any workflow.
 - **[references/tool-reference.md](references/tool-reference.md)** — flags, spec fields, decision rules, thresholds, exit codes and sample output for the three scripts. Read when running the tools or interpreting their output.
 - **[references/mlops_production_patterns.md](references/mlops_production_patterns.md)** — model deployment pipeline with Kubernetes manifests, feature store architecture with Feast examples, model monitoring with drift detection code, A/B testing with traffic splitting, automated retraining with MLflow. Read when building MLOps infra.
-- **[references/llm_integration_guide.md](references/llm_integration_guide.md)** — provider abstraction layer, retry/fallback with tenacity, prompt templates (few-shot, CoT), token optimization with tiktoken, cost calculation and tracking. Read when integrating an LLM.
+- **[references/llm_integration_guide.md](references/llm_integration_guide.md)** — provider abstraction layer, retry/fallback with tenacity, prompt templates (few-shot; explicit CoT only for non-reasoning models), provider-specific token counting, config-driven cost tracking. Read when integrating an LLM.
 - **[references/rag_system_architecture.md](references/rag_system_architecture.md)** — RAG pipeline implementation code, vector database comparison/integration, chunking strategies, embedding model selection, hybrid search and reranking. Read when building a RAG system.
 
 ## Scope & Limitations
@@ -95,7 +94,34 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `senior-computer-vision` | Deploys vision models through shared serving infrastructure | CV Engineer trains and exports models; ML Engineer handles Triton/TorchServe deployment and monitoring |
 | `senior-security` | Applies security scanning to model containers and API endpoints | Security reviews container images and endpoint auth; ML Engineer remediates findings before promotion |
 
+## Anti-Patterns
+
+### Hard-Coded Model Ids and Prices
+**Mistake:** Model names and per-token prices written into application code.
+**Why it happens:** It is the fastest way to get a first call working.
+**Instead:** Read model ids and prices from configuration with an as-of date. Upgrades and price changes then become config changes, and stale numbers are visible.
+
+### Deploying Without a Drift Baseline
+**Mistake:** Shipping a model with no stored reference distribution of its inputs and predictions.
+**Why it happens:** Monitoring feels like a later task.
+**Instead:** Save the training or launch-week distribution as the baseline at deploy time, then run `ml_monitoring_suite.py` against it on a schedule; PSI above 0.25 on a key feature is the usual "investigate" line.
+
+### RAG Without Retrieval Evaluation
+**Mistake:** Tuning prompts when answers are wrong, without checking whether retrieval returned the right passages.
+**Why it happens:** The generation step is the visible one.
+**Instead:** Measure retrieval first (hit rate or recall@k on a labelled question set); most RAG failures are retrieval failures.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/model_deployment_pipeline.py` | Dockerfile, Kubernetes manifest, serving stub and requirements from a deployment spec |
+| `scripts/ml_monitoring_suite.py` | PSI / drift checks between baseline and current data |
+| `scripts/rag_system_builder.py` | RAG architecture plan with index sizing and retrieval strategy |
+| `assets/` | Deployment spec and baseline/current CSV samples for the tools |
+| `references/*.md` | Workflows, tool reference, MLOps patterns, LLM integration, RAG architecture |
+
 ---
 
-**Last Updated:** June 2026
+**Last Updated:** November 2026
 **Version:** 1.1.0

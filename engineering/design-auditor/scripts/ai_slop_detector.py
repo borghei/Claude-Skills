@@ -630,10 +630,10 @@ def read_file(path: str) -> str:
             return f.read()
     except FileNotFoundError:
         print(f"Error: File not found: {path}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     except UnicodeDecodeError:
         print(f"Error: Cannot read {path} as text", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
 
 def main():
@@ -658,7 +658,7 @@ Examples:
     # Validate threshold
     if not 0.0 <= args.threshold <= 1.0:
         print("Error: Threshold must be between 0.0 and 1.0", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Read files
     html_content = read_file(args.input)
@@ -687,6 +687,8 @@ Examples:
         print(f"Report written to {args.output}")
     else:
         print(output)
+    # Exit 1 when any pattern is at or above the confidence threshold.
+    sys.exit(1 if report["summary"]["above_threshold"] else 0)
 
 
 if __name__ == "__main__":

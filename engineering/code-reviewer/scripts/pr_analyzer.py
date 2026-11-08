@@ -475,7 +475,7 @@ def main():
 
     if not (repo_path / ".git").exists():
         print(f"Error: {repo_path} is not a git repository", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     analysis = analyze_pr(repo_path, args.base, args.head)
 

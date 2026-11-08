@@ -399,18 +399,18 @@ def main():
 
     if not os.path.isdir(args.directory):
         print(f"Error: '{args.directory}' is not a directory", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if not args.query and not args.index_only and not args.stats:
         parser.print_help()
         print("\nError: Provide --query, --index-only, or --stats", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     entries, doc_freq = build_index(args.directory, max_files=args.max_files)
 
     if not entries:
         print(f"No indexable files found in '{args.directory}'", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     if args.stats:
         stats = compute_stats(entries)

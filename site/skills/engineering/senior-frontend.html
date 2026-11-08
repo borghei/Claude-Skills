@@ -397,6 +397,11 @@ Frontend development for React, Next.js, TypeScript, and Tailwind CSS. Use when 
 
 Frontend development patterns, performance optimization, and automation tools for React/Next.js applications. Scaffold projects, generate components and hooks, analyze bundle sizes, and apply React/Next.js patterns with accessibility and testing built in. - **Project scaffolding** — generate Next.js
 
+## Your Key Capabilities
+- Client Components by Default
+- Judging Bundle Size From package.json
+- Accessibility as a Final Pass
+
 ## How to Help
 When the user asks for help in this domain:
 1. Ask clarifying questions to understand their context
@@ -418,6 +423,11 @@ Start by asking the user what they need help with.">
 Frontend development for React, Next.js, TypeScript, and Tailwind CSS. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding projects, implementing accessibility, or reviewing frontend code.
 
 Frontend development patterns, performance optimization, and automation tools for React/Next.js applications. Scaffold projects, generate components and hooks, analyze bundle sizes, and apply React/Next.js patterns with accessibility and testing built in. - **Project scaffolding** — generate Next.js
+
+## Your Key Capabilities
+- Client Components by Default
+- Judging Bundle Size From package.json
+- Accessibility as a Final Pass
 
 ## How to Help
 When the user asks for help in this domain:
@@ -451,7 +461,7 @@ Frontend development patterns, performance optimization, and automation tools fo
 
 ## Core Capabilities
 
-- **Project scaffolding** — generate Next.js 14+ (App Router) or React+Vite projects with TypeScript, Tailwind, and optional auth/api/forms/testing/storybook features.
+- **Project scaffolding** — generate Next.js 16 (App Router) or React+Vite projects with TypeScript, Tailwind, and optional auth/api/forms/testing/storybook features.
 - **Component generation** — client/server components, custom hooks, with test and Storybook story files following established patterns.
 - **Bundle analysis** — static `package.json` + import scanning that scores bundle health and flags heavy dependencies with lighter alternatives.
 - **React patterns** — compound components, custom hooks, render props, and reusable state-sharing patterns.
@@ -476,13 +486,29 @@ Before scaffolding or generating, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `frontend_scaffolder.py` | Scaffold a Next.js or React project with TypeScript + Tailwind + optional features | `python scripts/frontend_scaffolder.py my-app --template nextjs --features auth,api` |
-| `component_generator.py` | Generate a component/hook with optional test and Storybook story | `python scripts/component_generator.py ProductCard --type client --with-test --with-story` |
-| `bundle_analyzer.py` | Score bundle health and flag heavy dependencies from `package.json` + imports | `python scripts/bundle_analyzer.py /path/to/project --verbose` |
+| `frontend_scaffolder.py` | Scaffold Next.js 16 (App Router) or React + Vite 8 with React 19, TypeScript and Tailwind CSS v4 (`--template`, `--features auth,api,forms,testing,storybook`, `--dir`, `--dry-run`, `--json`) | `python scripts/frontend_scaffolder.py my-app --dir /tmp/web --template nextjs --features auth,api` |
+| `component_generator.py` | Component or hook with optional test and Storybook story (`--type`, `--with-test`, `--with-story`, `--dir`) | `python scripts/component_generator.py ProductCard --type client --with-test --with-story --dir /tmp/web/components` |
+| `bundle_analyzer.py` | Flag heavy or duplicate dependencies from `package.json` and imports, with a health score (`--verbose`, `--json`) | `python scripts/bundle_analyzer.py /tmp/web/my-app --verbose` |
+
+Exit codes: `0` ok; `2` bad input (target folder exists, unwritable path, unknown feature,
+missing project or `package.json`). The bundle score never fails the run.
+
+`bundle_analyzer.py` works from dependency names and import statements; it cannot see real
+bundle sizes, tree-shaking or code splitting. For ground truth run the framework&#x27;s analyzer
+(`@next/bundle-analyzer`, `vite-bundle-visualizer`) on a production build. Scaffold versions
+target Next.js 16, React 19, Tailwind v4 and Vite 8 (as of November 2026: Next 16.4, React 19.3, Tailwind 4.3, Vite 8.3); the `auth` feature writes `proxy.ts`, which replaced `middleware.ts` in Next 16, and linting uses ESLint 9 flat config because `next lint` was removed; check each project&#x27;s release notes before
+bumping a major, and run the build once after `npm install`.
+
+## Workflow
+
+1. Scaffold or open the project, then generate components with tests next to them.
+2. Build each component against the accessibility basics: semantic elements, labels, keyboard focus, visible focus states.
+3. Run `npm run build` and the framework bundle analyzer; use `bundle_analyzer.py` to spot heavy dependencies worth replacing.
+4. Done when the build passes, tests pass, Lighthouse or Web Vitals meet the agreed budget (for example LCP under 2.5 s on a mid-range phone), and no client bundle carries an avoidable heavy dependency.
 
 ## References
 
@@ -508,16 +534,31 @@ Load the reference that matches the task — keep this file lean and pull detail
 - CI/CD pipeline configuration and Docker deployment -- see **senior-devops**
 - Security vulnerability scanning and penetration testing -- see **senior-secops** and **senior-security**
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| **senior-fullstack** | Scaffolded frontend projects connect to fullstack project scaffolder for API layer setup | Frontend project structure feeds into `project_scaffolder.py` which adds backend, Docker, and CI/CD layers |
-| **senior-backend** | Components consuming API data follow patterns defined by backend skill&#x27;s REST/GraphQL conventions | Backend API response types imported into frontend `types/` directory generated by this skill |
-| **senior-qa** | Generated test files (`--with-test`) use the same Testing Library conventions that the QA skill&#x27;s test strategies build upon | Component test files hand off to QA skill for integration and E2E test coverage expansion |
-| **senior-devops** | Bundle analyzer output informs build pipeline optimization decisions | Bundle health score and dependency warnings feed into CI quality gates configured by DevOps skill |
-| **senior-secops** | Dependency analysis identifies packages that need security audit | Heavy/outdated dependency warnings from `bundle_analyzer.py` trigger security review workflows |
-| **code-reviewer** | Generated components follow patterns that the code reviewer skill validates | Code reviewer checks generated components against React/TypeScript best practices defined in this skill&#x27;s references |
+### Client Components by Default
+**Mistake:** Marking whole pages `&#x27;use client&#x27;` in the App Router.
+**Why it happens:** It makes hooks and event handlers work immediately.
+**Instead:** Keep pages and layouts as Server Components and push `&#x27;use client&#x27;` down to the smallest interactive leaf; that keeps data fetching on the server and JavaScript out of the bundle.
+
+### Judging Bundle Size From package.json
+**Mistake:** Reporting the static analyzer&#x27;s score as the bundle size.
+**Why it happens:** It is quick and gives a number.
+**Instead:** Measure a production build with the framework&#x27;s analyzer; tree-shaking and dynamic imports change the picture.
+
+### Accessibility as a Final Pass
+**Mistake:** Adding labels and keyboard support after the UI is done.
+**Why it happens:** It is invisible in a mouse-driven demo.
+**Instead:** Build with semantic elements from the start and check keyboard and screen-reader paths per component; retrofitting means rewriting.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/frontend_scaffolder.py` | Next.js / React + Vite project scaffolder |
+| `scripts/component_generator.py` | Component, hook, test and story generator |
+| `scripts/bundle_analyzer.py` | Static dependency and import analysis |
+| `references/*.md` | Code patterns, best practices, Next.js optimisation, React patterns, tooling |
 
 ---
 
@@ -574,7 +615,7 @@ Frontend development patterns, performance optimization, and automation tools fo
 
 ## Core Capabilities
 
-- **Project scaffolding** — generate Next.js 14+ (App Router) or React+Vite projects with TypeScript, Tailwind, and optional auth/api/forms/testing/storybook features.
+- **Project scaffolding** — generate Next.js 16 (App Router) or React+Vite projects with TypeScript, Tailwind, and optional auth/api/forms/testing/storybook features.
 - **Component generation** — client/server components, custom hooks, with test and Storybook story files following established patterns.
 - **Bundle analysis** — static `package.json` + import scanning that scores bundle health and flags heavy dependencies with lighter alternatives.
 - **React patterns** — compound components, custom hooks, render props, and reusable state-sharing patterns.
@@ -599,13 +640,29 @@ Before scaffolding or generating, settle the inputs below. When one is missing o
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `frontend_scaffolder.py` | Scaffold a Next.js or React project with TypeScript + Tailwind + optional features | `python scripts/frontend_scaffolder.py my-app --template nextjs --features auth,api` |
-| `component_generator.py` | Generate a component/hook with optional test and Storybook story | `python scripts/component_generator.py ProductCard --type client --with-test --with-story` |
-| `bundle_analyzer.py` | Score bundle health and flag heavy dependencies from `package.json` + imports | `python scripts/bundle_analyzer.py /path/to/project --verbose` |
+| `frontend_scaffolder.py` | Scaffold Next.js 16 (App Router) or React + Vite 8 with React 19, TypeScript and Tailwind CSS v4 (`--template`, `--features auth,api,forms,testing,storybook`, `--dir`, `--dry-run`, `--json`) | `python scripts/frontend_scaffolder.py my-app --dir /tmp/web --template nextjs --features auth,api` |
+| `component_generator.py` | Component or hook with optional test and Storybook story (`--type`, `--with-test`, `--with-story`, `--dir`) | `python scripts/component_generator.py ProductCard --type client --with-test --with-story --dir /tmp/web/components` |
+| `bundle_analyzer.py` | Flag heavy or duplicate dependencies from `package.json` and imports, with a health score (`--verbose`, `--json`) | `python scripts/bundle_analyzer.py /tmp/web/my-app --verbose` |
+
+Exit codes: `0` ok; `2` bad input (target folder exists, unwritable path, unknown feature,
+missing project or `package.json`). The bundle score never fails the run.
+
+`bundle_analyzer.py` works from dependency names and import statements; it cannot see real
+bundle sizes, tree-shaking or code splitting. For ground truth run the framework&#x27;s analyzer
+(`@next/bundle-analyzer`, `vite-bundle-visualizer`) on a production build. Scaffold versions
+target Next.js 16, React 19, Tailwind v4 and Vite 8 (as of November 2026: Next 16.4, React 19.3, Tailwind 4.3, Vite 8.3); the `auth` feature writes `proxy.ts`, which replaced `middleware.ts` in Next 16, and linting uses ESLint 9 flat config because `next lint` was removed; check each project&#x27;s release notes before
+bumping a major, and run the build once after `npm install`.
+
+## Workflow
+
+1. Scaffold or open the project, then generate components with tests next to them.
+2. Build each component against the accessibility basics: semantic elements, labels, keyboard focus, visible focus states.
+3. Run `npm run build` and the framework bundle analyzer; use `bundle_analyzer.py` to spot heavy dependencies worth replacing.
+4. Done when the build passes, tests pass, Lighthouse or Web Vitals meet the agreed budget (for example LCP under 2.5 s on a mid-range phone), and no client bundle carries an avoidable heavy dependency.
 
 ## References
 
@@ -631,16 +688,31 @@ Load the reference that matches the task — keep this file lean and pull detail
 - CI/CD pipeline configuration and Docker deployment -- see **senior-devops**
 - Security vulnerability scanning and penetration testing -- see **senior-secops** and **senior-security**
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| **senior-fullstack** | Scaffolded frontend projects connect to fullstack project scaffolder for API layer setup | Frontend project structure feeds into `project_scaffolder.py` which adds backend, Docker, and CI/CD layers |
-| **senior-backend** | Components consuming API data follow patterns defined by backend skill&#x27;s REST/GraphQL conventions | Backend API response types imported into frontend `types/` directory generated by this skill |
-| **senior-qa** | Generated test files (`--with-test`) use the same Testing Library conventions that the QA skill&#x27;s test strategies build upon | Component test files hand off to QA skill for integration and E2E test coverage expansion |
-| **senior-devops** | Bundle analyzer output informs build pipeline optimization decisions | Bundle health score and dependency warnings feed into CI quality gates configured by DevOps skill |
-| **senior-secops** | Dependency analysis identifies packages that need security audit | Heavy/outdated dependency warnings from `bundle_analyzer.py` trigger security review workflows |
-| **code-reviewer** | Generated components follow patterns that the code reviewer skill validates | Code reviewer checks generated components against React/TypeScript best practices defined in this skill&#x27;s references |
+### Client Components by Default
+**Mistake:** Marking whole pages `&#x27;use client&#x27;` in the App Router.
+**Why it happens:** It makes hooks and event handlers work immediately.
+**Instead:** Keep pages and layouts as Server Components and push `&#x27;use client&#x27;` down to the smallest interactive leaf; that keeps data fetching on the server and JavaScript out of the bundle.
+
+### Judging Bundle Size From package.json
+**Mistake:** Reporting the static analyzer&#x27;s score as the bundle size.
+**Why it happens:** It is quick and gives a number.
+**Instead:** Measure a production build with the framework&#x27;s analyzer; tree-shaking and dynamic imports change the picture.
+
+### Accessibility as a Final Pass
+**Mistake:** Adding labels and keyboard support after the UI is done.
+**Why it happens:** It is invisible in a mouse-driven demo.
+**Instead:** Build with semantic elements from the start and check keyboard and screen-reader paths per component; retrofitting means rewriting.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/frontend_scaffolder.py` | Next.js / React + Vite project scaffolder |
+| `scripts/component_generator.py` | Component, hook, test and story generator |
+| `scripts/bundle_analyzer.py` | Static dependency and import analysis |
+| `references/*.md` | Code patterns, best practices, Next.js optimisation, React patterns, tooling |
 
 ---
 
@@ -729,7 +801,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python engineering/senior-frontend/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/senior-frontend/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

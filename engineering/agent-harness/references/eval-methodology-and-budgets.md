@@ -116,8 +116,9 @@ Before attributing any change to your prompt edit, know your noise floor:
 scenarios flip on a no-op change, four flips carry no information. Teams that
 skip this step spend weeks chasing phantom regressions.
 
-Reduce the floor by: setting temperature to 0 where the product allows,
-replaying tool results rather than calling live backends, and rerunning only
+Reduce the floor by: pinning the model id and the sampling settings the
+product actually ships with (reasoning models often fix temperature, so it is
+not a lever), replaying tool results rather than calling live backends, and rerunning only
 the flipped scenarios (n = 5 repeats) to separate flaky scenarios from real
 regressions.
 
@@ -210,7 +211,7 @@ cost delta, pass rate with interval. Anything longer does not get read.
 | Gating on aggregate pass rate alone | Ships critical regressions at flat pass rate | Gate on `--strict-critical` and the paired diff |
 | Comparing runs from different suite versions | Meaningless diff | Pin the suite; treat suite edits as their own PR |
 | Tuning the prompt until the suite passes | Overfits to 30 scenarios | Hold out 20% of scenarios; never look at them during iteration |
-| Rerunning until green | Selects for lucky runs | Fix the seed/temperature, or report the mean of k runs |
+| Rerunning until green | Selects for lucky runs | Pin model and sampling config, replay tool results, and report the mean of k runs |
 | No noise floor measurement | Chases phantom regressions | Diff an identical config against itself first |
 | Judge model upgraded mid-history | Silently rescores everything | Pin and version the judge |
 | Budgets set once and never revisited | Budgets drift above reality and stop binding | Re-derive from the last good run each release |

@@ -1,0 +1,55 @@
+# Workload spec shared by gcp_cost_estimator.py, gcp_caf_scorer.py and
+# gcp_architecture_validator.py. Keys left out are reported as "not provided".
+name: orders-api
+tier: 1
+
+compute:
+  type: gke
+  mode: standard
+  node_sku: n2-standard-4
+  node_count: 3
+  cud_purchased: false
+  multi_zone: true
+  regional: true
+  autoscale: true
+
+data:
+  - service: cloud-sql
+    vcpus: 4
+    memory_gb: 16
+    storage_gb: 200
+    ha: true
+    backup_tested: false
+  - service: bigquery
+    pricing_model: on-demand
+    storage_gb: 2000
+    monthly_scan_tb: 40
+  - service: gcs
+    storage_class: standard
+    size_gb: 5000
+    avg_access_days: 90
+
+observability:
+  cloud_logging: true
+  ingest_gb_per_day: 20
+  slo_alerts: true
+
+network:
+  vpc: custom
+  egress_gb_per_month: 500
+  private_service_connect: true
+  default_vpc_in_use: false
+
+identity:
+  service_account_keys: false
+  uses_basic_roles: true
+  workload_identity: true
+
+security:
+  mfa_enforced: true
+  secret_manager: true
+
+operations:
+  iac: true
+  ci_cd: true
+  staging_env: true

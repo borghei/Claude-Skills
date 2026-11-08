@@ -6,13 +6,14 @@ Read this when building a detection pipeline, optimizing/deploying a model, prep
 
 ```bash
 # Generate training configuration for YOLO or Faster R-CNN
-python scripts/vision_model_trainer.py models/ --task detection --arch yolov8
+python scripts/vision_model_trainer.py models/ --task detection --arch yolo26m
 
 # Analyze model for optimization opportunities (quantization, pruning)
-python scripts/inference_optimizer.py model.pt --target onnx --benchmark
+python scripts/inference_optimizer.py model.pt --analyze --benchmark --recommend --target gpu
 
-# Build dataset pipeline with augmentations
-python scripts/dataset_pipeline_builder.py images/ --format coco --augment
+# Validate a dataset, then generate an augmentation config
+python scripts/dataset_pipeline_builder.py validate --input data/coco/ --format coco
+python scripts/dataset_pipeline_builder.py augment-config --task detection --intensity medium
 ```
 
 ## Workflow 1: Object Detection Pipeline
@@ -49,12 +50,9 @@ Choose architecture based on requirements:
 Convert annotations to required format:
 
 ```bash
-# COCO format (recommended)
-python scripts/dataset_pipeline_builder.py data/images/ \
-    --annotations data/labels/ \
-    --format coco \
-    --split 0.8 0.1 0.1 \
-    --output data/coco/
+# Convert to COCO (recommended), then split
+python scripts/dataset_pipeline_builder.py convert --input data/labels/ --output data/coco/ --format coco
+python scripts/dataset_pipeline_builder.py split --input data/coco/ --train 0.8 --val 0.1 --test 0.1 --stratify
 
 # Verify dataset
 python -c "from pycocotools.coco import COCO; coco = COCO('data/coco/train.json'); print(f'Images: {len(coco.imgs)}, Categories: {len(coco.cats)}')"
@@ -68,25 +66,25 @@ Generate training configuration:
 # For Ultralytics YOLO
 python scripts/vision_model_trainer.py data/coco/ \
     --task detection \
-    --arch yolov8m \
+    --arch yolo26m \
     --epochs 100 \
     --batch 16 \
     --imgsz 640 \
-    --output configs/
+    --output configs/train.yaml
 
 # For Detectron2
 python scripts/vision_model_trainer.py data/coco/ \
     --task detection \
     --arch faster_rcnn_R_50_FPN \
     --framework detectron2 \
-    --output configs/
+    --output configs/detectron2.py
 ```
 
 ### Step 5: Train and Validate
 
 ```bash
 # Ultralytics training
-yolo detect train data=data.yaml model=yolov8m.pt epochs=100 imgsz=640
+yolo detect train data=data.yaml model=yolo26m.pt epochs=100 imgsz=640
 
 # Detectron2 training
 python train_net.py --config-file configs/faster_rcnn.yaml --num-gpus 1
@@ -148,13 +146,9 @@ Baseline Performance (PyTorch FP32):
 ### Step 3: Export to ONNX
 
 ```bash
-# Export with dynamic batch size
-python scripts/inference_optimizer.py model.pt \
-    --export onnx \
-    --input-size 640 640 \
-    --dynamic-batch \
-    --simplify \
-    --output model.onnx
+# Export with dynamic batch size (Ultralytics models; use torch.onnx.export for others).
+# inference_optimizer.py analyses and recommends; it does not export.
+yolo export model=model.pt format=onnx imgsz=640 dynamic=True simplify=True
 
 # Verify ONNX model
 python -c "import onnx; model = onnx.load('model.onnx'); onnx.checker.check_model(model); print('ONNX model valid')"
@@ -164,14 +158,10 @@ python -c "import onnx; model = onnx.load('model.onnx'); onnx.checker.check_mode
 
 For INT8 quantization with calibration:
 
-```bash
-# Generate calibration dataset
-python scripts/inference_optimizer.py model.onnx \
-    --quantize int8 \
-    --calibration-data data/calibration/ \
-    --calibration-samples 500 \
-    --output model_int8.onnx
-```
+Use `onnxruntime.quantization.quantize_static` with a calibration data reader over roughly
+500 representative images (or TensorRT's INT8 calibrator via `trtexec --int8 --calib=...`).
+Validate mAP on the held-out set after quantizing; accept the model only if the drop is
+within the budget agreed in Clarify First.
 
 Quantization impact analysis:
 
@@ -187,20 +177,22 @@ Quantization impact analysis:
 # TensorRT (NVIDIA GPU)
 trtexec --onnx=model.onnx --saveEngine=model.engine --fp16
 
-# OpenVINO (Intel)
-mo --input_model model.onnx --output_dir openvino/
+# OpenVINO (Intel) - `ovc` replaced the older `mo` Model Optimizer
+ovc model.onnx --output_model openvino/model.xml
 
-# CoreML (Apple)
-python -c "import coremltools as ct; model = ct.convert('model.onnx'); model.save('model.mlpackage')"
+# CoreML (Apple) - coremltools converts from PyTorch, not ONNX
+yolo export model=model.pt format=coreml
 ```
 
 ### Step 6: Benchmark Optimized Model
 
 ```bash
-python scripts/inference_optimizer.py model.engine \
-    --benchmark \
-    --runtime tensorrt \
-    --compare model.pt
+# TensorRT engine latency
+trtexec --loadEngine=model.engine --iterations=200
+
+# ONNX vs PyTorch with the bundled tool (needs onnxruntime / torch installed)
+python scripts/inference_optimizer.py model.onnx --benchmark --batch-sizes 1 8
+python scripts/inference_optimizer.py model.pt --benchmark --batch-sizes 1 8
 ```
 
 Expected speedup:
@@ -221,12 +213,10 @@ Use this workflow when preparing a computer vision dataset for training.
 
 ```bash
 # Analyze image dataset
-python scripts/dataset_pipeline_builder.py data/raw/ \
-    --analyze \
-    --output analysis/
+python scripts/dataset_pipeline_builder.py analyze --input data/raw/ --json > analysis.json
 ```
 
-Analysis report includes:
+An audit should establish (fill gaps the tool does not report by hand):
 
 ```
 Dataset Analysis:
@@ -247,23 +237,17 @@ Annotation Analysis:
 ### Step 2: Clean and Validate
 
 ```bash
-# Remove corrupted and duplicate images
-python scripts/dataset_pipeline_builder.py data/raw/ \
-    --clean \
-    --remove-corrupted \
-    --remove-duplicates \
-    --output data/cleaned/
+# Report broken references, bad boxes and unknown categories (exit 1 when any error is found).
+# The tool does not delete files: remove corrupted or duplicate images yourself, then re-run.
+python scripts/dataset_pipeline_builder.py validate --input data/raw/
 ```
 
 ### Step 3: Convert Annotation Format
 
 ```bash
 # Convert VOC to COCO format
-python scripts/dataset_pipeline_builder.py data/cleaned/ \
-    --annotations data/annotations/ \
-    --input-format voc \
-    --output-format coco \
-    --output data/coco/
+python scripts/dataset_pipeline_builder.py convert --input data/cleaned/ --output data/coco/ \
+    --format coco --source-format voc
 ```
 
 Supported format conversions:
@@ -273,18 +257,17 @@ Supported format conversions:
 | Pascal VOC XML | COCO JSON |
 | YOLO TXT | COCO JSON |
 | COCO JSON | YOLO TXT |
-| LabelMe JSON | COCO JSON |
-| CVAT XML | COCO JSON |
 
 ### Step 4: Apply Augmentations
 
 ```bash
 # Generate augmentation config
-python scripts/dataset_pipeline_builder.py data/coco/ \
-    --augment \
-    --aug-config configs/augmentation.yaml \
-    --output data/augmented/
+python scripts/dataset_pipeline_builder.py augment-config --task detection --intensity medium \
+    --framework albumentations --output configs/augmentation.json
 ```
+
+The tool writes a config, it does not augment images; apply augmentations online in the
+training framework rather than materialising an augmented copy of the dataset.
 
 Recommended augmentations for detection:
 
@@ -311,11 +294,8 @@ augmentations:
 ### Step 5: Create Train/Val/Test Splits
 
 ```bash
-python scripts/dataset_pipeline_builder.py data/augmented/ \
-    --split 0.8 0.1 0.1 \
-    --stratify \
-    --seed 42 \
-    --output data/final/
+python scripts/dataset_pipeline_builder.py split --input data/coco/ --output data/final/ \
+    --train 0.8 --val 0.1 --test 0.1 --stratify --seed 42
 ```
 
 Split strategy guidelines:
@@ -328,17 +308,9 @@ Split strategy guidelines:
 
 ### Step 6: Generate Dataset Configuration
 
-```bash
-# For Ultralytics YOLO
-python scripts/dataset_pipeline_builder.py data/final/ \
-    --generate-config yolo \
-    --output data.yaml
-
-# For Detectron2
-python scripts/dataset_pipeline_builder.py data/final/ \
-    --generate-config detectron2 \
-    --output detectron2_config.py
-```
+The tools do not write dataset configs. For Ultralytics, write `data.yaml` by hand
+(`path`, `train`, `val`, `test`, `names`); `vision_model_trainer.py` reads its `names` list.
+For Detectron2, register the COCO splits with `register_coco_instances` in your train script.
 
 ## Architecture Selection Guide
 

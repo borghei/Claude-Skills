@@ -1,16 +1,16 @@
 ---
 name: meeting-analyzer
 description: >
-  Turn meeting notes into an accountable register — extract decisions, actions
-  and open questions, flag ownerless items, track follow-through. Use when
-  commitments get dropped or a recurring meeting decides nothing.
+  Turns meeting notes into an accountable register and diagnoses recurring
+  meetings. Use when commitments get dropped or a series decides nothing; for
+  a single meeting's recap use summarize-meeting.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-07-21
+  updated: 2026-11-08
   tags: [meeting-notes, action-items, accountability, decision-log, meeting-health]
 ---
 
@@ -208,6 +208,8 @@ interpretation guidance in `references/accountability-and-series-health.md`.
 **Mistake:** Killing a low-density meeting that never had an agenda or published notes.
 **Why it happens:** The density number is damning and cancellation is a satisfying, visible action.
 **Instead:** Fix hygiene first — agenda-or-cancel plus published notes — and re-measure over four occurrences. A series at 30% agenda compliance has not been tried as a well-run meeting yet, and cancelling it moves the same unresolved topics somewhere less visible.
+
+**Exit codes (all three tools):** `0` report produced · `1` `meeting_notes_parser.py --strict` only: an action has no owner or no date · `2` missing or unreadable file, invalid JSON, or the wrong shape. CI can tell a broken input (2) from a failed check (1).
 
 ## Files
 

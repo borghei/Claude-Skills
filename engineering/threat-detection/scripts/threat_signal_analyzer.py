@@ -3,17 +3,19 @@
 Threat Signal Analyzer - Analyze log files for suspicious activity patterns.
 
 Detects brute force attempts, injection attacks, path traversals,
-unusual access patterns, and other threat indicators.
+unusual access patterns, and other threat indicators. Lines are URL-decoded
+(twice, to catch double encoding) before matching; evidence keeps the raw line.
 
-Author: Claude Skills Engineering Team
-License: MIT
+Counts are per file, not per time window: slice long logs by time before running.
+Exit codes: 0 no critical signal, 1 at least one critical signal, 2 bad input.
 """
 
 import argparse
 import json
 import re
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
+from urllib.parse import unquote_plus
 from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
@@ -39,12 +41,15 @@ SQL_INJECTION_PATTERNS = [
     re.compile(r"(?i)(?:union\s+(?:all\s+)?select)", re.IGNORECASE),
     re.compile(r"(?i)(?:or\s+1\s*=\s*1)", re.IGNORECASE),
     re.compile(r"(?i)(?:and\s+1\s*=\s*1)", re.IGNORECASE),
+    # Quoted tautology: ' OR '1'='1  /  " or "a"="a
+    re.compile(r"""['"]\s*(?:or|and)\s+['"]?(\w+)['"]?\s*=\s*['"]?\1\b""", re.IGNORECASE),
     re.compile(r"(?i)(?:drop\s+table)", re.IGNORECASE),
     re.compile(r"(?i)(?:insert\s+into)", re.IGNORECASE),
     re.compile(r"(?i)(?:delete\s+from)", re.IGNORECASE),
     re.compile(r"(?i)(?:update\s+\w+\s+set)", re.IGNORECASE),
     re.compile(r"(?i)(?:exec\s*\(|execute\s)", re.IGNORECASE),
-    re.compile(r"(?:--|#|/\*)", re.IGNORECASE),
+    # Comment used to cut off the rest of a query, right after a closing quote
+    re.compile(r"""['"]\s*(?:--|#|/\*)"""),
     re.compile(r"(?i)(?:sleep\s*\(\s*\d+\s*\))", re.IGNORECASE),
     re.compile(r"(?i)(?:benchmark\s*\()", re.IGNORECASE),
     re.compile(r"(?i)(?:waitfor\s+delay)", re.IGNORECASE),
@@ -66,7 +71,6 @@ CMD_INJECTION_PATTERNS = [
     re.compile(r"`[^`]+`"),
     re.compile(r"\$\([^)]+\)"),
     re.compile(r";\s*(?:curl|wget)\s"),
-    re.compile(r"/etc/(?:passwd|shadow|hosts)"),
     re.compile(r"(?:rm\s+-rf|mkfs|dd\s+if=)"),
 ]
 
@@ -75,6 +79,8 @@ PATH_TRAVERSAL_PATTERNS = [
     re.compile(r"\.\.\\"),
     re.compile(r"%2e%2e[/\\]", re.IGNORECASE),
     re.compile(r"%252e%252e", re.IGNORECASE),
+    # Direct requests for well-known sensitive files (file disclosure, not command injection)
+    re.compile(r"/etc/(?:passwd|shadow|hosts)|/proc/self/environ|win\.ini", re.IGNORECASE),
 ]
 
 ADMIN_PROBE_PATHS = [
@@ -91,7 +97,7 @@ TIMESTAMP_PATTERNS = [
     re.compile(r'\[(\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2})'),
     re.compile(r'(\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2})'),
 ]
-HTTP_STATUS_PATTERN = re.compile(r'\s(\d{3})\s')
+HTTP_STATUS_PATTERN = re.compile(r'\s(\d{3})(?:\s|$)')
 AUTH_FAIL_PATTERNS = [
     re.compile(r'(?i)(?:failed|invalid|rejected)\s+(?:login|password|authentication)'),
     re.compile(r'(?i)authentication\s+failure'),
@@ -159,14 +165,19 @@ class ThreatAnalyzer:
             code = int(status_match.group(1))
             self.ip_status_codes[ip][code] += 1
 
+        # Match on the decoded request so %27%20OR%20... is seen as ' OR ...
+        raw = line
+        decoded = unquote_plus(unquote_plus(line))
+
         # Check categories
         if not self.category or self.category == "injection":
-            self._check_sql_injection(line, ip, ts)
-            self._check_xss(line, ip, ts)
-            self._check_command_injection(line, ip, ts)
+            self._check_sql_injection(decoded, ip, ts, raw)
+            self._check_xss(decoded, ip, ts, raw)
+            self._check_command_injection(decoded, ip, ts, raw)
 
         if not self.category or self.category == "traversal":
-            self._check_path_traversal(line, ip, ts)
+            # Encoded forms (%2e%2e) are matched on the raw line; plain ../ on the decoded one
+            self._check_path_traversal(line + "\n" + decoded, ip, ts, raw)
 
         if not self.category or self.category == "auth":
             self._check_auth_failures(line, ip, ts)
@@ -174,7 +185,7 @@ class ThreatAnalyzer:
         if not self.category or self.category == "probe":
             self._check_admin_probing(line, ip, ts)
 
-    def _check_sql_injection(self, line: str, ip: Optional[str], ts: Optional[str]):
+    def _check_sql_injection(self, line: str, ip: Optional[str], ts: Optional[str], raw: Optional[str] = None):
         """Check for SQL injection patterns."""
         for pattern in SQL_INJECTION_PATTERNS:
             if pattern.search(line):
@@ -184,12 +195,12 @@ class ThreatAnalyzer:
                     source_ip=ip,
                     timestamp=ts,
                     message="SQL injection attempt detected.",
-                    evidence=line.strip()[:200],
+                    evidence=(raw or line).strip()[:200],
                     recommendation="Block source IP. Review application input validation. Check for successful exploitation.",
                 ))
                 return  # One finding per line
 
-    def _check_xss(self, line: str, ip: Optional[str], ts: Optional[str]):
+    def _check_xss(self, line: str, ip: Optional[str], ts: Optional[str], raw: Optional[str] = None):
         """Check for XSS patterns."""
         for pattern in XSS_PATTERNS:
             if pattern.search(line):
@@ -199,12 +210,12 @@ class ThreatAnalyzer:
                     source_ip=ip,
                     timestamp=ts,
                     message="Cross-site scripting (XSS) attempt detected.",
-                    evidence=line.strip()[:200],
+                    evidence=(raw or line).strip()[:200],
                     recommendation="Block source IP. Review output encoding. Check for stored XSS.",
                 ))
                 return
 
-    def _check_command_injection(self, line: str, ip: Optional[str], ts: Optional[str]):
+    def _check_command_injection(self, line: str, ip: Optional[str], ts: Optional[str], raw: Optional[str] = None):
         """Check for command injection patterns."""
         for pattern in CMD_INJECTION_PATTERNS:
             if pattern.search(line):
@@ -214,12 +225,12 @@ class ThreatAnalyzer:
                     source_ip=ip,
                     timestamp=ts,
                     message="Command injection attempt detected.",
-                    evidence=line.strip()[:200],
+                    evidence=(raw or line).strip()[:200],
                     recommendation="Block source IP immediately. Audit command execution paths. Check for successful exploitation.",
                 ))
                 return
 
-    def _check_path_traversal(self, line: str, ip: Optional[str], ts: Optional[str]):
+    def _check_path_traversal(self, line: str, ip: Optional[str], ts: Optional[str], raw: Optional[str] = None):
         """Check for path traversal attempts."""
         for pattern in PATH_TRAVERSAL_PATTERNS:
             if pattern.search(line):
@@ -229,7 +240,7 @@ class ThreatAnalyzer:
                     source_ip=ip,
                     timestamp=ts,
                     message="Path traversal attempt detected.",
-                    evidence=line.strip()[:200],
+                    evidence=(raw or line).strip()[:200],
                     recommendation="Block source IP. Validate file path inputs. Ensure no sensitive files were accessed.",
                 ))
                 return
@@ -375,7 +386,7 @@ def format_json(signals: List[ThreatSignal], filepath: str) -> str:
             "high": sum(1 for s in signals if s.severity == "high"),
             "medium": sum(1 for s in signals if s.severity == "medium"),
             "low": sum(1 for s in signals if s.severity == "low"),
-            "categories": dict(defaultdict(int, {s.category: 0 for s in signals})),
+            "categories": dict(Counter(s.category for s in signals)),
         }
     }, indent=2)
 
@@ -393,8 +404,13 @@ def main():
     args = parser.parse_args()
 
     path = Path(args.file)
-    if not path.exists():
-        print(f"Error: File not found: {args.file}", file=sys.stderr)
+    if not path.is_file():
+        print(f"error: file not found: {args.file}", file=sys.stderr)
+        sys.exit(2)
+    try:
+        path.read_text(errors="replace")
+    except OSError as exc:
+        print(f"error: cannot read {args.file}: {exc}", file=sys.stderr)
         sys.exit(2)
 
     analyzer = ThreatAnalyzer(min_severity=args.min_severity, category=args.category)

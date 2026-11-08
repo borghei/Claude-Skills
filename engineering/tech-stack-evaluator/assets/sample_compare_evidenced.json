@@ -1,0 +1,39 @@
+{
+  "comparison": {
+    "use_case": "Internal SaaS reporting service, relational data, 6-person team that already runs PostgreSQL",
+    "weights": {
+      "performance": 15,
+      "scalability": 10,
+      "developer_experience": 15,
+      "ecosystem": 15,
+      "learning_curve": 15,
+      "documentation": 10,
+      "community_support": 5,
+      "enterprise_readiness": 15
+    },
+    "technologies": [
+      {
+        "name": "PostgreSQL",
+        "performance": {"score": 85, "evidence": "Team load test: p95 38 ms on the 12 heaviest report queries"},
+        "scalability": {"score": 75, "evidence": "Projected 400 GB in 3 years fits one primary plus read replicas"},
+        "developer_experience": {"score": 85, "evidence": "All 6 developers have shipped production SQL on it"},
+        "ecosystem": {"score": 90, "evidence": "ORM, migration tool and BI connector already in use"},
+        "learning_curve": {"score": 95, "evidence": "No new training needed; existing runbooks"},
+        "documentation": {"score": 90, "evidence": "Official docs plus internal runbooks"},
+        "community_support": {"score": 90, "evidence": "Managed offering on current cloud with support contract"},
+        "enterprise_readiness": {"score": 90, "evidence": "Backups, PITR and audit logging already configured"}
+      },
+      {
+        "name": "MongoDB",
+        "performance": {"score": 70, "evidence": "Prototype: report joins via $lookup were 3x slower than SQL"},
+        "scalability": {"score": 90, "evidence": "Sharding available, but no requirement needs it"},
+        "developer_experience": {"score": 65, "evidence": "1 of 6 developers has production experience"},
+        "ecosystem": {"score": 70, "evidence": "BI connector would be new; ORM change required"},
+        "learning_curve": {"score": 55, "evidence": "Estimated 3 weeks ramp-up from team survey"},
+        "documentation": {"score": 85, "evidence": "Official docs"},
+        "community_support": {"score": 80, "evidence": "Vendor support would be a new contract"},
+        "enterprise_readiness": {"score": 70, "evidence": "Backup and audit setup still to be built"}
+      }
+    ]
+  }
+}

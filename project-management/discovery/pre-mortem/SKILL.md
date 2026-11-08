@@ -1,15 +1,16 @@
 ---
 name: pre-mortem
 description: >
-  Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers,
-  and Elephants to surface launch-blocking issues before they happen.
+  Runs a pre-mortem that sorts launch risks into evidenced tigers, paper tigers and
+  unspoken elephants, each with an owner. Use when a big launch, build or migration is
+  coming, or the team has a bad feeling it cannot name.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.1
   author: borghei
   category: project-management
   domain: product-discovery
-  updated: 2026-06-15
+  updated: 2026-11-08
   python-tools: risk_categorizer.py
   tech-stack: pre-mortem, risk-analysis, gary-klein, prospective-hindsight
   tags:
@@ -49,15 +50,20 @@ Before running the pre-mortem, settle the inputs below. When one is missing or v
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Settle the Clarify First inputs and run the session from `references/methodology-and-tools.md` (scene-setting, silent generation, cluster, classify, mitigate, elephants).
+2. Record each risk with `description`, `category` (`tiger`/`paper_tiger`/`elephant`) and `evidence`; tigers also need `urgency` (`launch_blocking`/`fast_follow`/`track`), and launch-blockers an `owner` and `decision_date`.
+3. Run `risk_categorizer.py` and fix its findings before the session closes.
+4. Done when the tool exits 0, every launch-blocker has an owner and a decision date, and each elephant has a person who will raise it.
 
 ```bash
-python3 scripts/risk_categorizer.py --demo            # built-in sample (7 risks)
-python3 scripts/risk_categorizer.py input.json        # categorize your risks
-python3 scripts/risk_categorizer.py input.json --format json
+python3 project-management/discovery/pre-mortem/scripts/risk_categorizer.py project-management/discovery/pre-mortem/assets/sample_risks.json          # exit 0
+python3 project-management/discovery/pre-mortem/scripts/risk_categorizer.py project-management/discovery/pre-mortem/assets/sample_risks_flawed.json   # exit 1
+python3 project-management/discovery/pre-mortem/scripts/risk_categorizer.py --demo --format json
 ```
 
-Each risk needs `description`, `category` (`tiger`/`paper_tiger`/`elephant`), `evidence`, and `urgency` (`launch_blocking`/`fast_follow`/`track`) for tigers. Document the session with `assets/pre_mortem_template.md`.
+The tool groups risks by category and urgency, flags elephants whose text carries escalation signals (no owner, blocked, security, compliance, legal and similar), and reports two findings a rushed session skips: a launch-blocking tiger with no `owner` or `decision_date`, and a tiger whose evidence is speculative ("might", "could", "we think"), which makes it a paper tiger until shown otherwise. Exit codes: 0 no findings, 1 findings, 2 bad input (missing file, invalid JSON, missing fields). Document the session with `assets/pre_mortem_template.md`.
 
 ## Anti-Patterns
 
@@ -90,17 +96,16 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **In Scope:** prospective hindsight using the "14 days after launch failure" framing; Tiger / Paper Tiger / Elephant classification with urgency levels; automated elephant escalation detection; risk registry generation; facilitation methodology for in-person and remote teams.
 
-**Out of Scope:** ongoing risk management and tracking (see `senior-pm/risk_matrix_analyzer.py`); quantitative probability/impact scoring (`senior-pm/`); product discovery and hypothesis validation (`brainstorm-experiments/`); technical architecture risk assessment (`engineering/` skills).
+**Out of Scope:** ongoing risk management and tracking (see `senior-pm/scripts/risk_matrix_analyzer.py`); quantitative probability/impact scoring (`senior-pm/`); product discovery and hypothesis validation (`brainstorm-experiments/`); technical architecture risk assessment (`engineering/` skills).
 
 **Important Caveats:** most effective with 4-8 participants; the elephant escalation keyword check is a heuristic; pre-mortems complement, not replace, assumption mapping (`identify-assumptions/`); psychological safety is a prerequisite.
 
-## Integration Points
+## Files
 
-| Integration | Direction | Description |
-|------------|-----------|-------------|
-| `brainstorm-ideas/` | Receives from | Ideas that passed initial validation are subject to pre-mortem before full build |
-| `brainstorm-experiments/` | Receives from | Post-experiment, pre-mortem stress-tests the build decision |
-| `identify-assumptions/` | Bidirectional | Launch-blocking tigers may surface new assumptions; elephants often reveal avoided assumptions |
-| `execution/create-prd/` | Feeds into | Tiger mitigations become PRD risk sections and assumption validation plans |
-| `senior-pm/` | Feeds into | Launch-blocking tigers escalate into portfolio risk registers via `risk_matrix_analyzer.py` |
-| `scrum-master/` | Feeds into | Fast-follow tigers become sprint backlog items with mitigation-focused stories |
+| File | Purpose |
+|------|---------|
+| `scripts/risk_categorizer.py` | Categorizes risks, flags elephants to escalate, gates on unowned launch-blockers and speculative tigers |
+| `assets/sample_risks.json`, `assets/sample_risks_flawed.json` | Runnable inputs: sound (exit 0) and flawed (exit 1) |
+| `assets/pre_mortem_template.md` | Session template |
+| `examples/shared-dashboards-v1-pre-mortem.md` | Worked session |
+| `references/*.md` | See References |

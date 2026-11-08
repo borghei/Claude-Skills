@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jira Expert - Claude Skills</title>
-  <meta name="description" content="Jira expert for project setup, workflow design, JQL queries, custom fields, automation rules, dashboards, and reporting. Use for Jira configuration, advanced search, board and dashboard creation, and ">
+  <meta name="description" content="Configures Jira projects, workflows, boards, JQL, automation and dashboards, and audits board, issue and workflow exports. Use when setting up or fixing Jira, writing or debugging JQL, or designing au">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/jira-expert.html">
   <meta property="og:title" content="Jira Expert - Claude Skills">
-  <meta property="og:description" content="Jira expert for project setup, workflow design, JQL queries, custom fields, automation rules, dashboards, and reporting. Use for Jira configuration, advanced search, board and dashboard creation, and ">
+  <meta property="og:description" content="Configures Jira projects, workflows, boards, JQL, automation and dashboards, and audits board, issue and workflow exports. Use when setting up or fixing Jira, writing or debugging JQL, or designing au">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/jira-expert.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Jira Expert", "description": "Jira expert for project setup, workflow design, JQL queries, custom fields, automation rules, dashboards, and reporting. Use for Jira configuration, advanced search, board and dashboard creation, and technical Jira operations.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/jira-expert.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Jira Expert", "description": "Configures Jira projects, workflows, boards, JQL, automation and dashboards, and audits board, issue and workflow exports. Use when setting up or fixing Jira, writing or debugging JQL, or designing automation rules.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/jira-expert.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Jira Expert</h1>
-    <p class="page-subtitle">Jira expert for project setup, workflow design, JQL queries, custom fields, automation rules, dashboards, and reporting. Use for Jira configuration, advanced search, board and dashboard creation, and technical Jira operations.</p>
+    <p class="page-subtitle">Configures Jira projects, workflows, boards, JQL, automation and dashboards, and audits board, issue and workflow exports. Use when setting up or fixing Jira, writing or debugging JQL, or designing automation rules.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">jira</span><span class="tag">jql</span><span class="tag">workflows</span><span class="tag">automation</span><span class="tag">dashboards</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Jira Expert (Project Management domain).
 
-Jira expert for project setup, workflow design, JQL queries, custom fields, automation rules, dashboards, and reporting. Use for Jira configuration, advanced search, board and dashboard creation, and technical Jira operations.
+Configures Jira projects, workflows, boards, JQL, automation and dashboards, and audits board, issue and workflow exports. Use when setting up or fixing Jira, writing or debugging JQL, or designing automation rules.
 
 Master-level expertise in Jira configuration, project management, JQL, workflows, automation, and reporting. Handles all technical and operational aspects of Jira. &gt; **Terminology (Jira Cloud, as of September 2026):** Jira &quot;projects&quot; are now called **spaces** and &quot;issues&quot; **work items** in the UI --
 
@@ -420,7 +420,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Jira Expert (Project Management domain).
 
-Jira expert for project setup, workflow design, JQL queries, custom fields, automation rules, dashboards, and reporting. Use for Jira configuration, advanced search, board and dashboard creation, and technical Jira operations.
+Configures Jira projects, workflows, boards, JQL, automation and dashboards, and audits board, issue and workflow exports. Use when setting up or fixing Jira, writing or debugging JQL, or designing automation rules.
 
 Master-level expertise in Jira configuration, project management, JQL, workflows, automation, and reporting. Handles all technical and operational aspects of Jira. &gt; **Terminology (Jira Cloud, as of September 2026):** Jira &quot;projects&quot; are now called **spaces** and &quot;issues&quot; **work items** in the UI --
 
@@ -487,6 +487,26 @@ Jira advice depends most on which Jira the user runs, what they are allowed to c
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Tools
+
+Three offline audits of Jira exports (they never call Jira). Each prints text or `--format json` (`--json` is the same); `--example` prints a valid input, and the files in `assets/` are those examples.
+
+| Tool | Input | Reports |
+|------|-------|---------|
+| `board_optimizer.py --board FILE` | Board config: `name`, `type`, `team_size`, `filter_jql`, `columns[]` (`name`, `wip_limit`, `statuses`), card fields | 0-100 score, active columns without WIP limits, missing card fields, suggested WIP (about 1.5x team size) |
+| `issue_quality_checker.py --issues FILE` | `issues[]` with `key`, `type`, `summary`, `description`, `assignee`, `priority`, `story_points`, `labels`, `epic_link`, `sprint` | Per-issue score against summary, description, acceptance-criteria, assignee and estimate checks; most common gaps |
+| `workflow_analyzer.py --issues FILE` | `issues[]` each with `transitions[]` (`from_status`, `to_status`, `entered`, `exited`) | Time in status (avg/median/P90), bottleneck status, rework rate (backward moves) |
+
+```bash
+python3 project-management/jira-expert/scripts/board_optimizer.py --board project-management/jira-expert/assets/sample_board.json
+python3 project-management/jira-expert/scripts/issue_quality_checker.py --issues project-management/jira-expert/assets/sample_issues.json --format json
+python3 project-management/jira-expert/scripts/workflow_analyzer.py --issues project-management/jira-expert/assets/sample_transitions.json
+```
+
+On the samples: the board scores 80 with &quot;In Review&quot; missing a WIP limit; PROJ-102 scores 11% (no description, no criteria, unassigned); the workflow shows a 12.5% rework rate from one review bounce.
+
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. They report; none of them gates.
+
 ## Anti-Patterns
 
 ### A custom workflow for every project
@@ -506,7 +526,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Eight more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -534,6 +554,16 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `atlassian-templates/` | Templates -&gt; Jira | Issue description templates, workflow documentation |
 | `delivery-manager/` | DM -&gt; Jira | Release version management, deployment tracking fields |
 
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/board_optimizer.py` | Board configuration audit |
+| `scripts/issue_quality_checker.py` | Issue description and field quality |
+| `scripts/workflow_analyzer.py` | Time in status, bottleneck, rework |
+| `assets/sample_board.json`, `assets/sample_issues.json`, `assets/sample_transitions.json` | Inputs for the three tools |
+| `examples/acme-50-person-eng-setup.md` | Worked Jira setup for a 50-person org |
+
 ---
 
 ## What I Need You to Do
@@ -560,7 +590,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Jira Expert&quot;**
-   - Description: &quot;Jira expert for project setup, workflow design, JQL queries, custom fields, automation rules, dashboards, and reporting. Use for Jira configuration, advanced search, board and dashboard creation, and technical Jira operations.&quot;
+   - Description: &quot;Configures Jira projects, workflows, boards, JQL, automation and dashboards, and audits board, issue and workflow exports. Use when setting up or fixing Jira, writing or debugging JQL, or designing automation rules.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -615,6 +645,26 @@ Jira advice depends most on which Jira the user runs, what they are allowed to c
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Tools
+
+Three offline audits of Jira exports (they never call Jira). Each prints text or `--format json` (`--json` is the same); `--example` prints a valid input, and the files in `assets/` are those examples.
+
+| Tool | Input | Reports |
+|------|-------|---------|
+| `board_optimizer.py --board FILE` | Board config: `name`, `type`, `team_size`, `filter_jql`, `columns[]` (`name`, `wip_limit`, `statuses`), card fields | 0-100 score, active columns without WIP limits, missing card fields, suggested WIP (about 1.5x team size) |
+| `issue_quality_checker.py --issues FILE` | `issues[]` with `key`, `type`, `summary`, `description`, `assignee`, `priority`, `story_points`, `labels`, `epic_link`, `sprint` | Per-issue score against summary, description, acceptance-criteria, assignee and estimate checks; most common gaps |
+| `workflow_analyzer.py --issues FILE` | `issues[]` each with `transitions[]` (`from_status`, `to_status`, `entered`, `exited`) | Time in status (avg/median/P90), bottleneck status, rework rate (backward moves) |
+
+```bash
+python3 project-management/jira-expert/scripts/board_optimizer.py --board project-management/jira-expert/assets/sample_board.json
+python3 project-management/jira-expert/scripts/issue_quality_checker.py --issues project-management/jira-expert/assets/sample_issues.json --format json
+python3 project-management/jira-expert/scripts/workflow_analyzer.py --issues project-management/jira-expert/assets/sample_transitions.json
+```
+
+On the samples: the board scores 80 with &quot;In Review&quot; missing a WIP limit; PROJ-102 scores 11% (no description, no criteria, unassigned); the workflow shows a 12.5% rework rate from one review bounce.
+
+**Exit codes:** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. They report; none of them gates.
+
 ## Anti-Patterns
 
 ### A custom workflow for every project
@@ -634,7 +684,7 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 Eight more, each with a bad and a good example: `references/red-flags.md`.
 
-## References
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -662,6 +712,16 @@ Load the reference that matches the task — keep this file lean and pull detail
 | `atlassian-templates/` | Templates -&gt; Jira | Issue description templates, workflow documentation |
 | `delivery-manager/` | DM -&gt; Jira | Release version management, deployment tracking fields |
 
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/board_optimizer.py` | Board configuration audit |
+| `scripts/issue_quality_checker.py` | Issue description and field quality |
+| `scripts/workflow_analyzer.py` | Time in status, bottleneck, rework |
+| `assets/sample_board.json`, `assets/sample_issues.json`, `assets/sample_transitions.json` | Inputs for the three tools |
+| `examples/acme-50-person-eng-setup.md` | Worked Jira setup for a 50-person org |
+
 ---
 
 ## What I Need You to Do
@@ -688,7 +748,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Jira Expert&quot;**
-   - Description: &quot;Jira expert for project setup, workflow design, JQL queries, custom fields, automation rules, dashboards, and reporting. Use for Jira configuration, advanced search, board and dashboard creation, and technical Jira operations.&quot;
+   - Description: &quot;Configures Jira projects, workflows, boards, JQL, automation and dashboards, and audits board, issue and workflow exports. Use when setting up or fixing Jira, writing or debugging JQL, or designing automation rules.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -749,7 +809,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <pre><code>python project-management/jira-expert/scripts/tool_name.py --help</code></pre>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/jira-expert/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

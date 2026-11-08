@@ -75,6 +75,8 @@ python3 project-management/execution/wayfinder/scripts/decision_map_validator.py
 
 ## Workflow
 
+Tags on the headings below: **[PROVEN]** means the rule is well established in practice and the validators check for it; **[RECOMMENDED]** means a sensible default practice to tune to your team.
+
 1. **Name the destination** [PROVEN]. One or two sentences describing a checkable end state. If stakeholders disagree, that disagreement is the first decision; chart nothing else.
 2. **Fan out breadth-first** [RECOMMENDED]. List unknown facts, forks, outside owners, irreversible choices. Sharp question → ticket; vague → fog; past the destination → out of scope.
 3. **Write decision tickets.** Question ending in "?", type (research, prototype, discussion, enabling-task), at least two options for discussion and prototype, owner, decide-by date. Use `assets/ticket_templates.md`.

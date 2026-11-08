@@ -12,6 +12,7 @@ Usage:
 Input schema:
 {
   "company_stage": "growth",   # early|growth|mature|declining
+  "target_mix": {"market_penetration": 50, ...},  # optional; overrides the stage default
   "as_of": "2026-05-27",
   "initiatives": [
       {
@@ -58,11 +59,12 @@ QUADRANT_RISK = {
     "diversification": "highest",
 }
 
-# Stage-appropriate target mix (mid-range; +/- 10%)
+# Default target mix by stage: a heuristic starting point, not a published standard.
+# Each row sums to 100. Override per company with "target_mix" in the input.
 TARGET_MIX = {
     "early": {"market_penetration": 75, "market_development": 10,
               "product_development": 15, "diversification": 0},
-    "growth": {"market_penetration": 55, "market_development": 25,
+    "growth": {"market_penetration": 50, "market_development": 25,
                "product_development": 20, "diversification": 5},
     "mature": {"market_penetration": 35, "market_development": 27,
                "product_development": 28, "diversification": 10},
@@ -124,10 +126,12 @@ def check_initiative(init: dict[str, Any]) -> list[Issue]:
 def analyze(state: dict[str, Any]) -> dict[str, Any]:
     initiatives = state.get("initiatives") or []
     stage = (state.get("company_stage") or "growth").lower()
-    if stage not in TARGET_MIX:
-        stage = "growth"
-
     all_issues: list[Issue] = []
+    if stage not in TARGET_MIX:
+        all_issues.append(Issue("warn", "(stage)", f"unknown company_stage '{stage}'; using growth"))
+        stage = "growth"
+    if not initiatives:
+        all_issues.append(Issue("fail", "(initiatives)", "no initiatives listed"))
     by_quadrant: dict[str, list[dict[str, Any]]] = defaultdict(list)
     total_investment = 0.0
     investment_by_quadrant: dict[str, float] = defaultdict(float)
@@ -149,7 +153,9 @@ def analyze(state: dict[str, Any]) -> dict[str, Any]:
         q: round((investment_by_quadrant[q] / total_investment) * 100, 1) if total_investment > 0 else 0
         for q in VALID_QUADRANTS
     }
-    target = TARGET_MIX[stage]
+    target = {q: float((state.get("target_mix") or TARGET_MIX[stage]).get(q, 0)) for q in VALID_QUADRANTS}
+    if abs(sum(target.values()) - 100) > 0.5:
+        all_issues.append(Issue("fail", "(target_mix)", f"target_mix sums to {sum(target.values()):g}, not 100"))
     delta = {q: round(actual_mix[q] - target[q], 1) for q in VALID_QUADRANTS}
 
     # Concentration warnings
@@ -246,7 +252,14 @@ def main() -> int:
         print(f"error: invalid JSON: {e}", file=sys.stderr)
         return 2
 
-    report = analyze(state)
+    if not isinstance(state, dict):
+        print("error: top level must be a JSON object (see the schema in --help)", file=sys.stderr)
+        return 2
+    try:
+        report = analyze(state)
+    except (AttributeError, TypeError, KeyError, ValueError) as e:
+        print(f"error: unexpected input shape ({type(e).__name__}: {e})", file=sys.stderr)
+        return 2
     out = render_markdown(report) if args.format == "markdown" else json.dumps(report, indent=2)
 
     if args.output:
@@ -254,7 +267,8 @@ def main() -> int:
         print(f"wrote {args.output}", file=sys.stderr)
     else:
         print(out)
-    return 0
+    # Gate: 1 when any finding has severity "fail", else 0.
+    return 1 if report.get("severity_counts", {}).get("fail") else 0
 
 
 if __name__ == "__main__":

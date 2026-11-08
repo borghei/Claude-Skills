@@ -1,0 +1,85 @@
+{
+  "project": "Platform Modernization Initiative",
+  "stakeholders": [
+    {
+      "name": "Sarah Chen",
+      "role": "VP Engineering",
+      "power": 9,
+      "interest": 9,
+      "influence": 8,
+      "attitude": "supporter"
+    },
+    {
+      "name": "Michael Torres",
+      "role": "CFO",
+      "power": 10,
+      "interest": 3,
+      "influence": 9,
+      "attitude": "neutral"
+    },
+    {
+      "name": "Priya Patel",
+      "role": "Lead Developer",
+      "power": 4,
+      "interest": 10,
+      "influence": 6,
+      "attitude": "supporter"
+    },
+    {
+      "name": "James Wright",
+      "role": "Head of Compliance",
+      "power": 7,
+      "interest": 8,
+      "influence": 7,
+      "attitude": "blocker"
+    },
+    {
+      "name": "Lisa Kim",
+      "role": "Marketing Director",
+      "power": 6,
+      "interest": 4,
+      "influence": 5,
+      "attitude": "neutral"
+    },
+    {
+      "name": "David Okafor",
+      "role": "Junior Analyst",
+      "power": 2,
+      "interest": 3,
+      "influence": 2,
+      "attitude": "neutral"
+    },
+    {
+      "name": "Emily Rodriguez",
+      "role": "Product Manager",
+      "power": 7,
+      "interest": 9,
+      "influence": 7,
+      "attitude": "supporter"
+    },
+    {
+      "name": "Tom Anderson",
+      "role": "External Auditor",
+      "power": 8,
+      "interest": 2,
+      "influence": 6,
+      "attitude": "neutral"
+    },
+    {
+      "name": "Aisha Mohammed",
+      "role": "UX Researcher",
+      "power": 3,
+      "interest": 8,
+      "influence": 4,
+      "attitude": "supporter"
+    },
+    {
+      "name": "Robert Chang",
+      "role": "IT Operations Manager",
+      "power": 5,
+      "interest": 7,
+      "influence": 5,
+      "attitude": "blocker"
+    }
+  ]
+}

@@ -226,3 +226,23 @@ Most dashboards bloat over time. Annual pruning is healthy.
 - **No comparisons.** Numbers in space.
 - **Pretty charts, no decisions.** Decoration.
 - **Built once, never reviewed.** Dashboard rot.
+
+---
+
+## 14. Audit limits by audience and the vanity test
+
+These are the limits `dashboard_designer.py` applies.
+
+### Top-level metric count (NS + inputs + guardrails)
+
+| `audience` | Max top-level | Why |
+|------------|---------------|-----|
+| `exec` (alias `board`) | 8 | Limited attention; high signal/noise |
+| `team` (alias `functional`) | 12, plus up to 8 operational per team | Acted on weekly |
+| `all-hands` | 5 | Communicable; the company rallies on it |
+| `partner` | 6 | External; share only what you will defend |
+| `ic` | 3 | Their direct impact |
+
+### Vanity vs actionable test
+
+For each candidate metric: "If this moved 10% next week, what would we do?" No answer means it is vanity: cut it. Every chart also needs a comparison anchor (prior period, target or cohort baseline). Visualization and cadence patterns are in section 5.

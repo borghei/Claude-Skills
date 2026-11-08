@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: quality-assurance
-  updated: 2026-06-17
+  updated: 2026-11-08
   tags: [test-strategy, automation, performance-testing, test-frameworks]
 ---
 # Senior QA Engineer
@@ -43,13 +43,29 @@ Before generating tests, settle the inputs below. When one is missing or vague a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
-| Tool | Purpose | Command |
+| Tool | Purpose | Example (runs as written) |
 |------|---------|---------|
-| `test_suite_generator.py` | Generate Jest + RTL test stubs from React components | `python scripts/test_suite_generator.py src/components/ --output __tests__/` |
-| `coverage_analyzer.py` | Analyze Istanbul/LCOV coverage and report gaps | `python scripts/coverage_analyzer.py coverage/coverage-final.json --threshold 80` |
-| `e2e_test_scaffolder.py` | Scaffold Playwright E2E tests from Next.js routes | `python scripts/e2e_test_scaffolder.py src/app/ --output e2e/` |
+| `test_suite_generator.py` | Jest + RTL stubs from React components; reads the `XProps` interface to build typed `mockProps` for required props (`--output`, `--include-a11y`, `--scan-only`, `--json`) | `python scripts/test_suite_generator.py assets/sample_components --output /tmp/qa/tests` |
+| `coverage_analyzer.py` | Istanbul JSON / LCOV gap analysis with critical-path weighting (`--threshold`, `--strict`, `--critical-paths`, `--format text/html/json`, `--json`) | `python scripts/coverage_analyzer.py assets/sample_lcov.info --threshold 80 --strict` |
+| `e2e_test_scaffolder.py` | Playwright specs, page objects, fixtures and `playwright.config.ts` from Next.js routes, all written under `--output` | `python scripts/e2e_test_scaffolder.py assets/sample_app/app --output /tmp/qa/e2e` |
+
+Exit codes: `0` ok; `1` coverage below `--threshold` when `--strict` is set (without
+`--strict` the analyzer always reports and exits 0, so use `--strict` in CI); `2` bad input
+(path not found, unparseable report). With `--json` the report goes to stderr and stdout is
+pure JSON.
+
+Generated stubs are a starting point: they render with valid required props and leave
+`TODO` assertions, so they compile but assert nothing until you write the checks. The
+sample LCOV has a payment file at 37.5% line coverage, so `--strict --threshold 80` exits 1.
+
+## Workflow
+
+1. Generate stubs or scaffold E2E specs into the project's test folder (always pass `--output`).
+2. Replace every `TODO` with an assertion on behaviour the user can see (role, text, called handler); delete stubs that test nothing useful.
+3. Run the project's tests with coverage, then `coverage_analyzer.py <report> --threshold <n> --strict`.
+4. Done when the suite passes, the analyzer exits 0, and no generated test is still assertion-free.
 
 ## References
 
@@ -75,13 +91,31 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Visual regression testing or screenshot comparison workflows.
 - Mobile-native testing (React Native, Flutter) -- this skill targets web browser-based testing only.
 
-## Integration Points
+## Anti-Patterns
 
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `senior-frontend` | Generated test stubs align with component patterns from the frontend skill | Frontend components --> `test_suite_generator.py` --> test files |
-| `senior-fullstack` | Code quality analyzer consumes the same coverage reports produced here | `coverage_analyzer.py` output --> fullstack quality dashboard |
-| `senior-devops` | E2E test scaffolder generates CI-ready Playwright configs that plug into DevOps pipelines | `e2e_test_scaffolder.py` --> `playwright.config.ts` --> GitHub Actions workflow |
-| `code-reviewer` | Coverage gaps feed directly into code review checklists for untested changes | `coverage_analyzer.py` gaps --> review checklist items |
-| `tdd-guide` | TDD workflow references this skill's test generator for initial red-phase stub creation | TDD cycle --> `test_suite_generator.py --scan-only` --> write tests --> implement |
-| `qa-browser-automation` | Page Object Models generated here are consumed by the browser automation skill for advanced E2E scenarios | `e2e_test_scaffolder.py --include-pom` --> POM classes --> browser automation flows |
+### Shipping Generated Stubs as Tests
+**Mistake:** Committing the generated files with their `TODO` assertions still in place.
+**Why it happens:** They run green and raise the coverage number.
+**Instead:** A render with no assertion only proves the component does not throw. Write the assertion or delete the case.
+
+### Querying by Test ID First
+**Mistake:** Reaching for `getByTestId` for every element.
+**Why it happens:** It is the most stable selector to write.
+**Instead:** Prefer `getByRole` and `getByLabelText`: they test what users and assistive tech see, and fail when accessibility regresses. Keep test IDs for elements with no accessible name.
+
+### Gating on Overall Coverage Only
+**Mistake:** Passing CI because the project average clears 80%.
+**Why it happens:** One number is easy to configure.
+**Instead:** Use `--critical-paths` and read the per-file gaps: a 37% payment module hidden behind a 90% average is the bug that ships.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/test_suite_generator.py` | Jest + RTL stub generator |
+| `scripts/coverage_analyzer.py` | Coverage gap analyzer and CI gate |
+| `scripts/e2e_test_scaffolder.py` | Playwright scaffolder for Next.js routes |
+| `assets/sample_components/Button.tsx` | Component with a typed props interface for the generator |
+| `assets/sample_app/app/` | Two-route Next.js App Router tree for the scaffolder |
+| `assets/sample_lcov.info` | LCOV report with an under-tested payment file (strict gate exits 1 at 80) |
+| `references/*.md` | Workflows, CLI reference, strategies, automation patterns, best practices |

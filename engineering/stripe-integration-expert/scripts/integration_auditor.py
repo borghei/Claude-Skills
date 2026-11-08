@@ -9,6 +9,9 @@ Usage:
     python integration_auditor.py /path/to/project
     python integration_auditor.py /path/to/project --json
     python integration_auditor.py /path/to/project --severity critical
+
+Exit codes: 0 PASS (no critical findings) or no Stripe code found (status NO_STRIPE_CODE),
+1 FAIL (critical findings), 2 bad input (not a directory).
 """
 
 import argparse
@@ -94,7 +97,7 @@ def audit_api_version_pinning(files, project_dir):
             "severity": "warning",
             "rule": "VER-001",
             "message": "Stripe client initialized without pinning apiVersion. Breaking changes may occur on Stripe updates.",
-            "fix": "Pin apiVersion in the Stripe constructor: new Stripe(key, { apiVersion: '2024-12-18.acacia' }).",
+            "fix": "Pin apiVersion in the Stripe constructor to the version your SDK ships with (stripe-node 23.1.0 ships 2026-10-28.endive), and upgrade it deliberately.",
         })
     elif has_stripe_init and has_version_pin:
         findings.append({
@@ -303,6 +306,17 @@ def run_audit(project_dir, min_severity="info"):
             "message": "No source files found to audit.",
         })
         results["summary"]["warning"] = 1
+        results["status"] = "PASS"
+        return results
+
+    if not any(re.search(r"stripe", c, re.IGNORECASE) for c in files.values()):
+        results["findings"].append({
+            "severity": "info",
+            "rule": "SCAN-002",
+            "message": "No Stripe usage found in any source file; nothing was audited.",
+        })
+        results["summary"]["info"] = 1
+        results["status"] = "NO_STRIPE_CODE"
         return results
 
     # Run all audit checks
@@ -403,7 +417,7 @@ def main():
     else:
         print(format_human(results))
 
-    sys.exit(0 if results["status"] == "PASS" else 1)
+    sys.exit(1 if results["status"] == "FAIL" else 0)
 
 
 if __name__ == "__main__":

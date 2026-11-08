@@ -1,0 +1,10 @@
+{
+  "initiative": "Major rollout of usage-based billing to all mid-market customers",
+  "as_of": "2026-05-27",
+  "stakeholders": [
+    {"name": "Priya Raman", "title": "CFO", "power": 5, "interest": 5, "support": "supporter"},
+    {"name": "Tom Okafor", "title": "VP Sales", "power": 5, "interest": 4, "support": "blocker", "engagement_cadence": "quarterly"},
+    {"name": "Lena Fischer", "title": "General Counsel", "power": 5, "interest": 1, "support": "neutral"},
+    {"name": "Marco Ruiz", "title": "Head of Billing Engineering", "power": 3, "interest": 5, "support": "keen"}
+  ]
+}

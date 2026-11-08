@@ -1,16 +1,16 @@
 ---
 name: quarterly-planning
 description: >
-  Run the full quarterly planning cycle -- pre-quarter homework, kickoff,
-  weekly Wodtke rhythm, mid-quarter check-in, and close retro -- using Radical
-  Focus, Cagan strategy, and a fixed planning cadence around your OKRs.
+  Run the meetings around a quarter's OKRs: homework and kickoff, weekly
+  check-ins, the week-6 carry/kill/pivot review and the close retro. Use when
+  running any phase of that cadence; writing the OKRs is brainstorm-okrs.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: quarterly-planning, okrs, product-strategy, radical-focus
   tags:
     - quarterly-planning
@@ -24,7 +24,7 @@ metadata:
 
 Quarterly planning is the operating cadence that turns annual strategy into quarterly outcomes. Done well, it produces aligned OKRs, a roadmap that delivers them, a capacity plan that respects reality, and a tracking ritual that catches drift before it compounds. Done poorly, it produces OKR theater -- a slide deck of objectives that nobody references after week two.
 
-This skill is the **above-OKR-writing** companion to `execution/brainstorm-okrs/`. Where `brainstorm-okrs/` covers how to write good OKRs, this skill covers the full quarterly cycle around them: pre-quarter homework, kickoff agenda, mid-quarter check-in, close-of-quarter retro, and the weekly/biweekly tracking cadence. The framework synthesizes four sources: Wodtke's *Radical Focus* (Monday-commit / Friday-celebrate rhythm, one OKR per quarter), a product strategy cycle (explicit upstream strategy choices), Cagan's quarterly product strategy, and the RAD ritual (Reflect-Align-Decide) used inside each meeting.
+This skill is the **above-OKR-writing** companion to `execution/brainstorm-okrs/`. Where `brainstorm-okrs/` covers how to write good OKRs, this skill covers the full quarterly cycle around them: pre-quarter homework, kickoff agenda, mid-quarter check-in, close-of-quarter retro, and the weekly/biweekly tracking cadence. Each meeting uses a Reflect-Align-Decide agenda; the theory behind the rhythm is in `references/quarterly-planning-guide.md`.
 
 ## Core Capabilities
 
@@ -45,24 +45,23 @@ Before running a phase, settle the inputs below. When one is missing or vague an
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## The Quarterly Cycle
+## Workflow
 
-```
-Week -3   -1     0       1-5    6      7-12    13
-  | Pre-quarter | Kickoff |  Mid-quarter  | Close
-  |  homework   | (start) |   check-in    | retro
-  +-Strategy/Cagan--+-- Wodtke weekly Mon/Fri rhythm --+
-```
+Pick the phase from where the team is in the 13-week cycle, then run that phase's agenda from `references/cycle-playbook.md`.
 
-- **Pre-quarter (weeks -3 to -1):** run the homework and kickoff to commit OKRs and roadmap.
-- **Mid-quarter (~week 6):** run the check-in to course-correct.
-- **Close (week 13):** run the retro to extract learning before the next cycle.
+| Phase | When | Output | Done when |
+|---|---|---|---|
+| Pre-quarter homework | Weeks -3 to -1 | 1-page kickoff brief: strategy recap, outcome candidates, real capacity | Every candidate Objective traces to a strategy pillar; capacity is in hours after PTO and on-call |
+| Kickoff | Week 0 | Committed OKRs, roadmap slice, capacity plan | Commitments fit capacity; stretch is labelled as stretch |
+| Weekly rhythm | Weeks 1-12 | Monday commitments, Friday wins, KR confidence every two weeks | Confidence is recorded for every KR, not just the green ones |
+| Mid-quarter check-in | About week 6 | Carry / kill / pivot / escalate per KR | Each KR has a decision and an owner; anything rebaselined says why |
+| Close retro | Week 13 | KR scores (0.0-1.0), lessons, seeds for next quarter | Each miss has a cause, and next quarter's homework starts from it |
+
+Week 6 is the default for the check-in [RECOMMENDED] because it leaves enough quarter to act on a kill or pivot; move it earlier for six-week cycles.
 
 ## When to Use
 
-- **Pre-quarter (2-3 weeks before start).** Run the homework and kickoff to commit OKRs and roadmap.
-- **Mid-quarter (~week 6 of 13).** Run the mid-quarter check-in to course-correct.
-- **Close-of-quarter (last week).** Run the close retro to extract learning before next planning cycle.
+- **Any phase of the quarter** listed in the Workflow table.
 - **New PM joining mid-quarter.** Understand where the team is in the cycle and what is expected when.
 - **Failing OKR cadence.** Team has OKRs but no one references them by week 4 -- reset the ritual.
 
@@ -93,7 +92,16 @@ Load the reference that matches the task -- keep this file lean and pull detail 
 - **[references/quarterly-planning-guide.md](references/quarterly-planning-guide.md)** -- the framework theory (Wodtke Radical Focus, Cagan product strategy, strategy cycle, RAD ritual) with a worked Reconcile Q3 example. Read this when you need the reasoning behind the rituals.
 - **[references/red-flags.md](references/red-flags.md)** -- 11 quarterly-planning anti-patterns (OKR theater, capacity in story points, stretch goals as committed slate) with symptoms and fixes. Read this when reviewing a quarter's plan or diagnosing a failing cadence.
 
-Templates live in `assets/`: `kickoff_agenda_template.md`, `mid_quarter_check_in_template.md`, `close_retro_template.md`, `quarterly_review_deck_outline.md`.
+
+## Files
+
+| File | Purpose |
+|---|---|
+| `assets/kickoff_agenda_template.md` | Kickoff agenda |
+| `assets/mid_quarter_check_in_template.md` | Week-6 check-in |
+| `assets/close_retro_template.md` | Close retro |
+| `assets/quarterly_review_deck_outline.md` | Quarterly review deck outline |
+| `examples/northwind-q4-planning-cycle.md` | Worked cycle |
 
 ## Scope & Limitations
 

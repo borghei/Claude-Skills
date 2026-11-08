@@ -1,0 +1,46 @@
+# Production values that pass values_validator.py with no critical finding (exit 0).
+replicaCount: 3
+
+image:
+  repository: acme/webapp
+  tag: "2.4.1"
+  pullPolicy: IfNotPresent
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+  limits:
+    memory: 512Mi
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: nginx
+  tls:
+    enabled: true
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: http
+
+autoscaling:
+  enabled: false
+
+database:
+  existingSecret: webapp-db
+  secretKey: url

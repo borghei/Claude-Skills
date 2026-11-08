@@ -1,23 +1,13 @@
 #!/usr/bin/env python3
 """
-dependency_graph.py - Cross-team dependency analyzer.
-
-Ingests a JSON file of cross-team dependencies and emits:
-  - A risk-ranked summary
-  - The critical path (longest chain)
-  - A Mermaid `graph LR` diagram
-  - A by-team-pair count (for Conway's-Law diagnosis)
-
-Outputs follow the shared PM tool schema:
-  json | markdown | mermaid | confluence | notion | linear
+dependency_graph.py - Cross-team dependency analyzer: risk-ranked summary, critical
+path (the longest chain of hand-offs, with slack per link), Mermaid graph, and
+team-pair counts. Formats: json | markdown | mermaid | confluence | notion | linear.
 
 Usage:
-    python dependency_graph.py --input deps.json --format markdown
-    python dependency_graph.py --demo --format mermaid
-    python dependency_graph.py --input deps.json --format json --output out.json
-    python dependency_graph.py --input deps.json --criticality critical,high
-
-Standard library only.
+    python dependency_graph.py --input ../assets/dependency-template.json --format markdown
+    python dependency_graph.py --demo --format mermaid --criticality critical,high
+Exit codes: 0 report written, 2 bad input. Standard library only.
 """
 
 from __future__ import annotations
@@ -62,6 +52,7 @@ def now_iso() -> str:
 
 DEMO_DATA = {
     "program": "Q3 Mobile Launch",
+    "as_of": "2026-05-25",
     "dependencies": [
         {"id": "DEP-001", "from_team": "Mobile", "to_team": "Platform",
          "description": "OAuth refresh token rotation API",
@@ -167,7 +158,7 @@ def risk_rank(label: str) -> int:
 
 # ---------- critical path ----------
 
-def compute_critical_path(deps: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def compute_critical_path(as_of: date, deps: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Identify the longest dependency chain by team handoff.
 
     Build a directed graph where dep B follows dep A if A's to_team == B's from_team
@@ -229,7 +220,7 @@ def compute_critical_path(deps: list[dict[str, Any]]) -> list[dict[str, Any]]:
         scored = sorted(
             active,
             key=lambda d: (
-                -risk_rank(risk_label(d, date.today())),
+                -risk_rank(risk_label(d, as_of)),
                 -CRIT_RANK[d["criticality"]],
                 parse_date(d["needed_by"]),
             ),
@@ -277,7 +268,7 @@ def compute(
     )
 
     # Critical path
-    cpath = compute_critical_path(deps)
+    cpath = compute_critical_path(as_of, deps)
 
     # At risk (high or blocked) excluding done
     at_risk = [d for d in sorted_deps if d["risk"] in ("blocked", "high")]
@@ -352,7 +343,7 @@ def render_markdown(data: dict[str, Any]) -> str:
     lines.append(f"| High/blocked risk | {s['at_risk_count']} |")
     lines.append("")
 
-    lines.append("## Critical Path")
+    lines.append("## Critical Path (longest hand-off chain; negative slack = late)")
     lines.append("")
     if not data["critical_path"]:
         lines.append("_No active dependencies._")
@@ -579,7 +570,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--team", action="append", default=None,
                         help="Filter to dependencies involving this team (repeatable)")
     parser.add_argument("--as-of", default=None,
-                        help="Reference date for risk calculations (YYYY-MM-DD, default: today)")
+                        help="Reference date for risk (YYYY-MM-DD; default: the file's as_of, else today)")
     args = parser.parse_args(argv)
 
     if not args.input and not args.demo:
@@ -591,9 +582,13 @@ def main(argv: list[str] | None = None) -> int:
         try:
             with open(args.input, "r", encoding="utf-8") as f:
                 payload = json.load(f)
-        except (OSError, json.JSONDecodeError) as exc:
-            print(f"Error reading {args.input}: {exc}", file=sys.stderr)
+        except (OSError, ValueError) as exc:
+            print(f"error: cannot read {args.input}: {exc}", file=sys.stderr)
             return 2
+    if not isinstance(payload, dict) or not isinstance(payload.get("dependencies"), list) \
+            or not payload["dependencies"]:
+        print("error: input must be a JSON object with a non-empty 'dependencies' list", file=sys.stderr)
+        return 2
 
     crit_filter: set[str] | None = None
     if args.criticality:
@@ -605,13 +600,14 @@ def main(argv: list[str] | None = None) -> int:
 
     team_filter: set[str] | None = set(args.team) if args.team else None
 
-    as_of = date.fromisoformat(args.as_of) if args.as_of else date.today()
-
+    # As-of: --as-of, else the file's own "as_of", else today. A fixed date in the
+    # file keeps samples and archived snapshots reading the same on any day.
     try:
+        as_of = date.fromisoformat(args.as_of or payload.get("as_of") or date.today().isoformat())
         data = compute(payload, crit_filter, team_filter, as_of)
-    except ValueError as exc:
-        print(f"Error: {exc}", file=sys.stderr)
-        return 1
+    except (ValueError, TypeError, KeyError, AttributeError) as exc:
+        print(f"error: bad input: {exc}", file=sys.stderr)
+        return 2
 
     output = RENDERERS[args.format](data)
     if args.output:

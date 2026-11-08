@@ -6,7 +6,6 @@ Given a list of changed files (or a git ref to diff against), this tool resolves
 which packages are directly affected, then computes transitive dependents to
 show the full blast radius. Useful for selective CI builds and PR impact summaries.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -389,7 +388,7 @@ def main() -> None:
     root = Path(args.path).resolve()
     if not root.is_dir():
         print(f"Error: {root} is not a valid directory", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     # Determine changed files
     changed_files: List[str] = []
@@ -407,7 +406,7 @@ def main() -> None:
         else:
             print("Error: Provide --files, --ref, or pipe file list via stdin", file=sys.stderr)
             parser.print_help(sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
     result = detect_impact(str(root), changed_files)
 

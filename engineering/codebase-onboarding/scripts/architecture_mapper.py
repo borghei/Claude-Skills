@@ -388,7 +388,7 @@ def main():
     target = Path(args.directory).resolve()
     if not target.is_dir():
         print(f"Error: '{args.directory}' is not a valid directory.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     report = generate_report(str(target))
 

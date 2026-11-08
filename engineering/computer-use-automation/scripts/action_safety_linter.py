@@ -27,7 +27,16 @@ human-readable / markdown output.
 
 import argparse
 import json
+import re
 import sys
+
+# Typed text that would be destructive if it lands in a terminal or query box.
+DESTRUCTIVE_INPUT_RE = re.compile(
+    r"rm\s+-rf|drop\s+(table|database)|truncate\s+table|mkfs|format\s+[a-z]:|shutdown|"
+    r"del\s+/[sq]|git\s+push\s+.*--force|sudo\s", re.IGNORECASE)
+# Targets that suggest the agent is typing a secret or payment detail.
+SENSITIVE_TARGET_RE = re.compile(r"password|passcode|card\s*number|cvv|ssn|social security|iban|api[_ -]?key",
+                                 re.IGNORECASE)
 
 DESTRUCTIVE_VERBS = {
     "delete", "remove", "send", "pay", "purchase", "buy", "submit", "confirm",
@@ -67,15 +76,18 @@ def load_actions(raw):
             if isinstance(item, str):
                 actions.append(parse_text_line(item))
             elif isinstance(item, dict):
+                atype = item.get("type", item.get("action"))  # "action" accepted as an alias
+                if not atype:
+                    raise ValueError("action %r has no 'type' (or 'action') field" % (item,))
                 actions.append({
-                    "type": str(item.get("type", "")).strip().lower(),
+                    "type": str(atype).strip().lower(),
                     "target": str(item.get("target", "")).strip(),
+                    "text": str(item.get("text", item.get("value", ""))),
                     "confirmed": bool(item.get("confirmed", False)),
                     "verified": bool(item.get("verified", False)),
                 })
             else:
-                actions.append({"type": "", "target": str(item), "confirmed": False,
-                                 "verified": False})
+                raise ValueError("action %r is neither an object nor a text line" % (item,))
         return actions
     # Otherwise treat as text lines.
     return [parse_text_line(line) for line in raw.splitlines() if line.strip()]
@@ -85,7 +97,7 @@ def parse_text_line(line):
     parts = line.strip().split(None, 1)
     atype = parts[0].strip().lower() if parts else ""
     target = parts[1].strip() if len(parts) > 1 else ""
-    return {"type": atype, "target": target, "confirmed": False, "verified": False}
+    return {"type": atype, "target": target, "text": "", "confirmed": False, "verified": False}
 
 
 def is_destructive(action):
@@ -160,6 +172,16 @@ def lint(actions):
                 "State-changing action is not verified — add a screenshot/observe "
                 "step afterward to confirm the expected change actually happened.")
 
+        typed = a.get("text", "") + " " + (a["target"] if a["type"] in {"type", "keypress"} else "")
+        if a["type"] in {"type", "keypress", "press"} and DESTRUCTIVE_INPUT_RE.search(typed):
+            add(i, "high", "destructive-input",
+                "Typed text looks like a destructive command or query; require a human gate "
+                "and run it in a sandbox, never on a live system.")
+        if a["type"] == "type" and SENSITIVE_TARGET_RE.search(a["target"]):
+            add(i, "medium", "sensitive-input",
+                "Agent types into a secret or payment field; inject the value from a vault "
+                "at run time and keep it out of screenshots and logs.")
+
         if is_dialog_trigger(a):
             add(i, "medium", "blocking-dialog",
                 "Action likely opens a blocking native/modal dialog (file picker, "
@@ -224,8 +246,12 @@ def main():
     args = p.parse_args()
 
     if args.file:
-        with open(args.file, "r", encoding="utf-8") as fh:
-            raw = fh.read()
+        try:
+            with open(args.file, "r", encoding="utf-8") as fh:
+                raw = fh.read()
+        except OSError as exc:
+            sys.stderr.write("error: cannot read %s: %s\n" % (args.file, exc.strerror))
+            sys.exit(2)
     else:
         raw = sys.stdin.read()
 

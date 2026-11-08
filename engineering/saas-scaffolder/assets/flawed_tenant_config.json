@@ -1,0 +1,12 @@
+{
+  "isolation_mode": "dedicated",
+  "default_plan": "free",
+  "tenants": [
+    {"id": "ws_acme", "name": "Acme", "slug": "acme", "plan": "pro",
+     "database": {"connection_string": "env:ACME_DB_URL"}},
+    {"id": "ws_acme2", "name": "Acme EU", "slug": "acme", "plan": "platinum",
+     "custom_domain": "app.acme.example", "database": {}},
+    {"id": "ws_umbrella", "name": "Umbrella", "slug": "umbrella", "plan": "pro",
+     "custom_domain": "app.acme.example", "database": {"connection_string": "env:UMBRELLA_DB_URL"}}
+  ]
+}

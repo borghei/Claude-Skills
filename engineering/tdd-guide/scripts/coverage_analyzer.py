@@ -226,7 +226,7 @@ class CoverageAnalyzer:
 
         summary = {
             'line_coverage': self._safe_percentage(covered_lines, total_lines),
-            'branch_coverage': self._safe_percentage(covered_branches, total_branches),
+            'branch_coverage': self._safe_percentage(covered_branches, total_branches) if total_branches else 100.0,
             'function_coverage': self._safe_percentage(covered_functions, total_functions),
             'total_lines': total_lines,
             'covered_lines': covered_lines,
@@ -283,7 +283,8 @@ class CoverageAnalyzer:
 
         total_branches = len(branches)
         covered_branches = sum(1 for hit in branches.values() if hit > 0)
-        branch_coverage = self._safe_percentage(covered_branches, total_branches)
+        # A file with no branches has nothing to cover, not 0% coverage
+        branch_coverage = self._safe_percentage(covered_branches, total_branches) if total_branches else 100.0
 
         # Find uncovered lines
         uncovered_lines = [line_num for line_num, hit in lines.items() if hit == 0]
@@ -348,7 +349,7 @@ class CoverageAnalyzer:
         return {
             'file': file_path,
             'line_coverage': self._safe_percentage(covered_lines, total_lines),
-            'branch_coverage': self._safe_percentage(covered_branches, total_branches),
+            'branch_coverage': self._safe_percentage(covered_branches, total_branches) if total_branches else 100.0,
             'function_coverage': self._safe_percentage(covered_functions, total_functions),
             'lines': lines,
             'branches': branches,

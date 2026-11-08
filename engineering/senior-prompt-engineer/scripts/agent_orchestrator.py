@@ -13,7 +13,9 @@ Usage:
     python agent_orchestrator.py agent.yaml --validate
     python agent_orchestrator.py agent.yaml --visualize
     python agent_orchestrator.py agent.yaml --visualize --format mermaid
-    python agent_orchestrator.py agent.yaml --estimate-cost
+    python agent_orchestrator.py agent.yaml --estimate-cost --input-price 0.003 --output-price 0.015  # example prices
+
+Exit codes: 0 ok, 1 --validate found errors, 2 bad input (missing or unparseable config, missing prices).
 """
 
 import argparse
@@ -54,8 +56,8 @@ class AgentConfig:
     tools: List[ToolDefinition]
     max_iterations: int = 10
     system_prompt: str = ""
-    temperature: float = 0.7
-    model: str = "gpt-4"
+    temperature: Optional[float] = None  # leave unset: many current models fix or ignore it
+    model: str = "unspecified"
 
 
 @dataclass
@@ -70,11 +72,22 @@ class ValidationResult:
     max_depth: int
 
 
+def _yaml_scalar(value: str) -> Any:
+    """Convert a YAML scalar: quoted strings, ints, inline [a, b] lists."""
+    value = value.strip()
+    if value.startswith('[') and value.endswith(']'):
+        return [v.strip().strip('"\'') for v in value[1:-1].split(',') if v.strip()]
+    value = value.strip('"\'')
+    return int(value) if value.isdigit() else value
+
+
 def parse_yaml_simple(content: str) -> Dict[str, Any]:
     """Simple YAML parser for agent configs (no external dependencies)"""
     result = {}
     current_key = None
     current_list = None
+    list_item = None        # last dict appended to current_list (for "- name:" items)
+    list_item_indent = -1
     indent_stack = [(0, result)]
 
     lines = content.split('\n')
@@ -95,10 +108,20 @@ def parse_yaml_simple(content: str) -> Dict[str, Any]:
                 # Check if it's a key-value pair
                 if ':' in item and not item.startswith('{'):
                     key, _, value = item.partition(':')
-                    current_list.append({key.strip(): value.strip().strip('"\'')})
+                    list_item = {key.strip(): _yaml_scalar(value)}
+                    list_item_indent = indent
+                    current_list.append(list_item)
                 else:
+                    list_item = None
                     current_list.append(item.strip('"\''))
             continue
+
+        # Continuation keys of a "- key: value" list item belong to that item
+        if list_item is not None and indent > list_item_indent and ':' in stripped:
+            key, _, value = stripped.partition(':')
+            list_item[key.strip()] = _yaml_scalar(value)
+            continue
+        list_item = None
 
         # Check for key-value pair
         if ':' in stripped:
@@ -176,8 +199,8 @@ def load_config(path: Path) -> AgentConfig:
         tools=tools,
         max_iterations=int(data.get('max_iterations', 10)),
         system_prompt=data.get('system_prompt', ''),
-        temperature=float(data.get('temperature', 0.7)),
-        model=data.get('model', 'gpt-4')
+        temperature=float(data['temperature']) if data.get('temperature') is not None else None,
+        model=data.get('model', 'unspecified')
     )
 
 
@@ -369,22 +392,15 @@ def generate_mermaid_diagram(config: AgentConfig) -> str:
     return '\n'.join(lines)
 
 
-def estimate_cost(config: AgentConfig, runs: int = 100) -> Dict[str, Any]:
-    """Estimate token costs for agent runs"""
+def estimate_cost(config: AgentConfig, runs: int = 100, input_price: float = 0.0,
+                  output_price: float = 0.0) -> Dict[str, Any]:
+    """Estimate token costs for agent runs from caller-supplied prices per 1K tokens.
+
+    No built-in price table: prices change, so pass them from the provider's pricing page.
+    """
     validation = validate_agent(config)
     min_tokens, max_tokens = validation.estimated_tokens_per_run
-
-    # Cost per 1K tokens
-    costs = {
-        'gpt-4': {'input': 0.03, 'output': 0.06},
-        'gpt-4-turbo': {'input': 0.01, 'output': 0.03},
-        'gpt-3.5-turbo': {'input': 0.0005, 'output': 0.0015},
-        'claude-opus-5': {'input': 0.005, 'output': 0.025},
-        'claude-sonnet-5': {'input': 0.002, 'output': 0.010},
-        'claude-haiku-4-5': {'input': 0.001, 'output': 0.005},
-    }
-
-    model_cost = costs.get(config.model, costs['gpt-4'])
+    model_cost = {'input': input_price, 'output': output_price}
 
     # Assume 60% input, 40% output
     input_tokens = min_tokens * 0.6
@@ -470,13 +486,13 @@ Examples:
   %(prog)s agent.yaml --validate
   %(prog)s agent.yaml --visualize
   %(prog)s agent.yaml --visualize --format mermaid
-  %(prog)s agent.yaml --estimate-cost --runs 100
+  %(prog)s agent.yaml --estimate-cost --runs 100 --input-price 0.003 --output-price 0.015
 
 Agent config format (YAML):
 
 name: research_assistant
 pattern: react
-model: gpt-4
+model: claude-sonnet-5-5
 max_iterations: 10
 tools:
   - name: web_search
@@ -494,6 +510,8 @@ tools:
                        help='Visualization format (default: ascii)')
     parser.add_argument('--estimate-cost', '-e', action='store_true', help='Estimate token costs')
     parser.add_argument('--runs', '-r', type=int, default=100, help='Daily runs for cost estimation')
+    parser.add_argument('--input-price', type=float, help="Input price per 1K tokens (provider's pricing page)")
+    parser.add_argument('--output-price', type=float, help="Output price per 1K tokens (provider's pricing page)")
     parser.add_argument('--output', '-o', help='Output file path')
     parser.add_argument('--json', '-j', action='store_true', help='Output as JSON')
 
@@ -501,15 +519,19 @@ tools:
 
     # Load config
     config_path = Path(args.config)
-    if not config_path.exists():
-        print(f"Error: Config file not found: {args.config}", file=sys.stderr)
-        sys.exit(1)
+    if not config_path.is_file():
+        print(f"error: config file not found: {args.config}", file=sys.stderr)
+        sys.exit(2)
 
     try:
         config = load_config(config_path)
     except Exception as e:
-        print(f"Error parsing config: {e}", file=sys.stderr)
-        sys.exit(1)
+        print(f"error: cannot parse config: {e}", file=sys.stderr)
+        sys.exit(2)
+    if args.estimate_cost and (args.input_price is None or args.output_price is None):
+        print("error: --estimate-cost needs --input-price and --output-price (per 1K tokens, "
+              "from the provider's current pricing page)", file=sys.stderr)
+        sys.exit(2)
 
     # Default to validate if no action specified
     if not any([args.validate, args.visualize, args.estimate_cost]):
@@ -535,7 +557,7 @@ tools:
 
     # Cost estimation
     if args.estimate_cost:
-        costs = estimate_cost(config, args.runs)
+        costs = estimate_cost(config, args.runs, args.input_price, args.output_price)
         if args.json:
             output_parts.append(json.dumps(costs, indent=2))
         else:
@@ -554,8 +576,11 @@ tools:
 
     if args.output:
         Path(args.output).write_text(output)
-        print(f"\nOutput saved to {args.output}")
+        print(f"\nOutput saved to {args.output}", file=sys.stderr)
+
+    if args.validate and not result.is_valid:
+        sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

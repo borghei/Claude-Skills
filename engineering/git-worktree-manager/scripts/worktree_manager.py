@@ -44,7 +44,7 @@ def get_repo_root():
     root = run_git(["rev-parse", "--show-toplevel"])
     if not root:
         print("Error: not inside a git repository.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
     return root
 
 
@@ -407,7 +407,7 @@ def main():
 
     if not args.command:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     commands = {
         "list": cmd_list,

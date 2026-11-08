@@ -19,8 +19,13 @@ Usage:
     python security_scanner.py /path/to/project
     python security_scanner.py /path/to/project --severity high
     python security_scanner.py /path/to/project --output report.json --json
+
+Regex-based: it finds common, obvious patterns and will miss injection that flows through
+helpers or variables. Treat a clean result as "nothing obvious", not "secure".
+Exit codes: 0 no critical/high findings, 1 critical or high findings, 2 bad input (target not found).
 """
 
+import contextlib
 import os
 import sys
 import json
@@ -94,6 +99,15 @@ class SecurityScanner:
          'Template literal SQL injection (JavaScript)'),
         (r'\.query\s*\(\s*["\'].*\+.*\+',
          'String concatenation in SQL query'),
+        (r'\.execute\s*\(\s*["\'][^"\']*["\']\s*(?:%|\+|\.format\s*\()',
+         'SQL built with %-formatting, concatenation or .format()'),
+        (r'\.execute\s*\(\s*f["\']',
+         'F-string passed to execute()'),
+        # SQL assembled on its own line, then passed to execute() later
+        (r'["\']\s*(?:SELECT|INSERT|UPDATE|DELETE)\b[^"\']*["\']\s*(?:%|\+|\.format\s*\()',
+         'SQL string built with %-formatting, concatenation or .format()'),
+        (r'\bf["\']\s*(?:SELECT|INSERT|UPDATE|DELETE)\b[^"\']*\{',
+         'SQL string built with an f-string'),
     ]
 
     # XSS patterns
@@ -118,6 +132,10 @@ class SecurityScanner:
          'exec() with potential user input'),
         (r'eval\s*\(\s*[^)]*(?:user|input|param|request)',
          'eval() with potential user input'),
+        (r'os\.(?:system|popen)\s*\(\s*(?:f["\']|["\'][^"\']*["\']\s*(?:\+|%|\.format)|[A-Za-z_])',
+         'os.system/os.popen with a non-literal command'),
+        (r'child_process\.exec(?:Sync)?\s*\(\s*(?:`[^`]*\$\{|["\'][^"\']*["\']\s*\+)',
+         'child_process.exec with an interpolated command'),
     ]
 
     # Path traversal patterns
@@ -324,6 +342,7 @@ class SecurityScanner:
                     )
 
                     self.findings.append(finding)
+                    break  # one finding per line per rule family
 
     def _is_false_positive(self, line: str, file_path: str) -> bool:
         """Check if finding is likely a false positive."""
@@ -445,7 +464,11 @@ Examples:
         verbose=args.verbose
     )
 
-    result = scanner.scan()
+    with contextlib.redirect_stdout(sys.stderr if args.json else sys.stdout):
+        result = scanner.scan()
+    if result.get('status') == 'error':
+        print(f"error: {result.get('message')}", file=sys.stderr)
+        sys.exit(2)
 
     if args.json:
         output = json.dumps(result, indent=2)
@@ -460,10 +483,9 @@ Examples:
             json.dump(result, f, indent=2)
         print(f"\nResults written to {args.output}")
 
-    # Exit with error code if critical/high findings
-    if result.get('severity_counts', {}).get('critical', 0) > 0:
-        sys.exit(2)
-    if result.get('severity_counts', {}).get('high', 0) > 0:
+    # Exit 1 when any critical or high finding remains (exit 2 is reserved for bad input)
+    counts = result.get('severity_counts', {})
+    if counts.get('critical', 0) or counts.get('high', 0):
         sys.exit(1)
 
 

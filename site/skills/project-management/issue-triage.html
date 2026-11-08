@@ -488,7 +488,8 @@ Audit a triage export against the state machine (exit 1 = violations):
 
 ```bash
 python3 project-management/execution/issue-triage/scripts/triage_state_validator.py \
-  --input project-management/execution/issue-triage/assets/sample_triage_history.json --today 2026-11-08
+  --input project-management/execution/issue-triage/assets/sample_triage_history_clean.json --today 2026-11-08
+# assets/sample_triage_history.json is the flawed export: exits 1 with 10 errors
 ```
 
 Lint briefs before an item moves to `ready-for-*` (exit 1 = not hand-off ready):
@@ -665,7 +666,8 @@ Audit a triage export against the state machine (exit 1 = violations):
 
 ```bash
 python3 project-management/execution/issue-triage/scripts/triage_state_validator.py \
-  --input project-management/execution/issue-triage/assets/sample_triage_history.json --today 2026-11-08
+  --input project-management/execution/issue-triage/assets/sample_triage_history_clean.json --today 2026-11-08
+# assets/sample_triage_history.json is the flawed export: exits 1 with 10 errors
 ```
 
 Lint briefs before an item moves to `ready-for-*` (exit 1 = not hand-off ready):
@@ -855,7 +857,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
   <h2>Quick Start</h2>Audit a triage export against the state machine (exit 1 = violations):
 
 <pre><code>python3 project-management/execution/issue-triage/scripts/triage_state_validator.py \
-  --input project-management/execution/issue-triage/assets/sample_triage_history.json --today 2026-11-08
+  --input project-management/execution/issue-triage/assets/sample_triage_history_clean.json --today 2026-11-08
+# assets/sample_triage_history.json is the flawed export: exits 1 with 10 errors
 </code></pre>
 
 Lint briefs before an item moves to `ready-for-*` (exit 1 = not hand-off ready):
@@ -868,7 +871,7 @@ A clean export prints:
 
 <pre><code>Triage state validation: PASS  (5 items, as of 2026-11-08)
 </code></pre>
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/issue-triage/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

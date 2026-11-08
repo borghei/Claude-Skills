@@ -5,7 +5,6 @@ Dockerfile Analyzer - Analyze Dockerfiles for best practices, security, and opti
 Scans Dockerfiles for common issues including layer optimization, security
 misconfigurations, base image recommendations, and cache efficiency.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -67,8 +66,9 @@ class DockerfileAnalyzer:
         (r"wget.*\|.*sh", "Piping wget to shell is risky"),
     ]
 
-    def __init__(self, content: str, security_only: bool = False):
+    def __init__(self, content: str, security_only: bool = False, context_dir: Path = Path(".")):
         self.content = content
+        self.context_dir = context_dir  # build context: where .dockerignore must live
         self.lines = content.strip().split("\n")
         self.findings: List[Finding] = []
         self.stages: List[StageInfo] = []
@@ -292,14 +292,14 @@ class DockerfileAnalyzer:
         if self.security_only:
             return
 
-        has_dockerignore = Path(".dockerignore").exists()
+        has_dockerignore = (self.context_dir / ".dockerignore").exists()
         if not has_dockerignore:
             self.findings.append(Finding(
                 severity="info",
                 category="best-practice",
                 line=0,
                 instruction="(project)",
-                message="No .dockerignore file found in current directory.",
+                message=f"No .dockerignore file found next to the Dockerfile ({self.context_dir}).",
                 recommendation="Create a .dockerignore to exclude .git, node_modules, __pycache__, etc.",
             ))
 
@@ -379,10 +379,10 @@ def main():
     path = Path(args.file)
     if not path.exists():
         print(f"Error: File not found: {args.file}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     content = path.read_text()
-    analyzer = DockerfileAnalyzer(content, security_only=args.security_only)
+    analyzer = DockerfileAnalyzer(content, security_only=args.security_only, context_dir=path.parent)
     findings = analyzer.analyze()
 
     if args.format == "json":

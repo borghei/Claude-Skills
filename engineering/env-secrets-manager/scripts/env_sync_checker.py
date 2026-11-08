@@ -111,12 +111,19 @@ def resolve_env_files(paths: list[str]) -> list[tuple[str, str]]:
         elif p.is_file():
             results.append((p.name, str(p)))
         else:
-            print(f"Warning: Path not found, skipping: {path_arg}", file=sys.stderr)
+            # A named file that does not exist makes the comparison meaningless.
+            print(f"Error: Path not found: {path_arg}", file=sys.stderr)
+            sys.exit(2)
     return results
 
 
-def compute_drift(env_a: dict, env_b: dict) -> dict:
-    """Compute drift metrics between two environments."""
+def compute_drift(env_a: dict, env_b: dict, compare_values: bool = False) -> dict:
+    """Compute drift metrics between two environments.
+
+    Drift is a key present in one environment and not the other. Values are
+    expected to differ between environments (hosts, credentials), so differing
+    values are listed but only count as drift with compare_values=True.
+    """
     keys_a = set(env_a.keys())
     keys_b = set(env_b.keys())
     all_keys = keys_a | keys_b
@@ -132,7 +139,7 @@ def compute_drift(env_a: dict, env_b: dict) -> dict:
             value_diffs.append(key)
 
     total = len(all_keys)
-    drift_keys = len(only_a) + len(only_b) + len(value_diffs)
+    drift_keys = len(only_a) + len(only_b) + (len(value_diffs) if compare_values else 0)
     drift_pct = round((drift_keys / total * 100), 1) if total > 0 else 0.0
 
     return {
@@ -150,6 +157,7 @@ def check_sync(
     env_files: list[tuple[str, str]],
     baseline_path: str | None = None,
     show_values: bool = False,
+    compare_values: bool = False,
 ) -> dict:
     """Run full sync check across all environments."""
     # Parse all env files
@@ -223,6 +231,7 @@ def check_sync(
             drift = compute_drift(
                 environments[label_a]["vars"],
                 environments[label_b]["vars"],
+                compare_values=compare_values,
             )
             pairwise_drift.append({
                 "pair": [label_a, label_b],
@@ -329,6 +338,8 @@ def main() -> int:
                         help="Show actual values instead of redacting secrets")
     parser.add_argument("--json", action="store_true", dest="json_output",
                         help="Output results as JSON")
+    parser.add_argument("--compare-values", action="store_true",
+                        help="Count differing values as drift too (default: only missing/extra keys)")
 
     args = parser.parse_args()
 
@@ -341,7 +352,8 @@ def main() -> int:
         print(f"Error: Baseline file not found: {args.baseline}", file=sys.stderr)
         return 2
 
-    results = check_sync(env_files, baseline_path=args.baseline, show_values=args.show_values)
+    results = check_sync(env_files, baseline_path=args.baseline, show_values=args.show_values,
+                         compare_values=args.compare_values)
 
     if args.json_output:
         print(json.dumps(results, indent=2))

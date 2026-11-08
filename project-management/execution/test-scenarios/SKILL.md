@@ -1,17 +1,16 @@
 ---
 name: test-scenarios
 description: >
-  Generate test scenario coverage from a feature spec — happy paths, edge
-  cases, error handling, accessibility, security, and performance — with a
-  coverage analyzer that flags gaps. Use to define what to test before QA
-  writes the test plan.
+  Writes QA cases from a feature spec across happy, edge, error, empty,
+  concurrent, accessibility and security paths, then audits coverage. Use when
+  planning QA for a feature, or finding coverage gaps after an incident.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: execution
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: test_scenario_generator.py
   tech-stack: test-scenarios, qa, edge-cases, acceptance-criteria
   tags:
@@ -24,35 +23,19 @@ metadata:
 
 # Test Scenarios
 
-Generate complete scenario coverage from a feature spec before tests
-are written. Closes the gap between "we built it" and "it survives
-production."
+The agent writes the scenarios from the spec; `test_scenario_generator.py` then audits the list by counting scenarios per category against what the feature type needs. The script generates nothing despite its name.
 
-## When to use this skill
+**Done looks like:** every user goal has a happy path; each input has boundary and weird-but-valid cases; each failure mode has a user-visible outcome; empty states, accessibility and security are covered for every UI feature; concurrency for anything shared or financial; localization when more than one locale ships; at least one P0; the audit exits 0.
 
-- After **PRD approval** but before engineering implementation
-- During **sprint planning** to size testing effort
-- During **code review** to verify test coverage
-- During **QA planning** to scope test pass
-- During **bug-bash** prep
-- After a **production incident** to validate scenario gaps
+## When to Use
 
-## The 7 scenario categories
+- After PRD approval and before implementation, or when sizing test effort in sprint planning
+- Reviewing whether a test plan or a PR's tests cover enough
+- Bug-bash preparation, or after a production incident to find the missed category
 
-For every feature, generate scenarios across:
+## Categories
 
-1. **Happy paths** — primary user goals achieved cleanly
-2. **Edge cases** — boundary conditions, unusual inputs
-3. **Error handling** — what users see when things go wrong
-4. **Empty states** — first-use, no data, after-delete
-5. **Concurrent operations** — race conditions, optimistic locking
-6. **Accessibility** — keyboard nav, screen reader, contrast, motion
-7. **Security + privacy** — auth, permissions, PII, injection
-
-Plus when applicable:
-- Performance scenarios (load, latency, throughput)
-- Localization (RTL, long-string, currency, date format)
-- Cross-platform (browsers, devices, OS versions)
+Happy path, edge, error, empty state, concurrent, accessibility (`a11y`), security; plus performance, localization and cross-platform when they apply. Examples per category: `references/scenario-categories.md`.
 
 ## Clarify First
 
@@ -64,158 +47,63 @@ Before generating scenarios, settle the inputs below. When one is missing or vag
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Spec read
-Read the PRD / user story / acceptance criteria. Identify:
-- User goals (what they want to do)
-- Inputs (what they provide)
-- Outputs (what they expect)
-- Side effects (what changes in the system)
-
-### Step 2 — Happy path
-For each user goal, write the primary flow:
-- Preconditions
-- Steps
-- Expected result
-
-Aim for 1-3 happy paths per feature.
-
-### Step 3 — Edge cases
-For each input, ask:
-- What's the empty value?
-- What's the minimum?
-- What's the maximum?
-- What's just below min / just above max?
-- What's the wrong type?
-- What's the weird-but-valid (very long, special chars, Unicode, emoji)?
-
-### Step 4 — Error handling
-For each failure mode:
-- Network failure
-- Server error (5xx)
-- Validation error (4xx)
-- Timeout
-- Concurrent modification
-- Auth expired / lost
-
-For each: what does the user see? Recover-from / try-again UX?
-
-### Step 5 — Empty / first-use / after-action states
-- First use (no data)
-- After delete (last item)
-- After error (partial state)
-- After timeout
-- After cancel
-
-### Step 6 — Concurrent / race scenarios
-Two users simultaneously:
-- Editing same record
-- Triggering same action
-- Submitting same form
-- Reaching capacity limit
-
-### Step 7 — Accessibility
-- Tab through with keyboard
-- Use with screen reader
-- High contrast / inverted colors
-- Reduced motion preference
-- Large text scaling
-- Voice control
-
-### Step 8 — Security + privacy
-- Logged out user accesses
-- Unauthorized user accesses
-- Permission downgrade mid-action
-- PII handling
-- Injection attempts (XSS, SQLi)
-- Rate limiting
-
-### Step 9 — Run `test_scenario_generator.py`
-Audit a candidate scenario list for category coverage; flag gaps.
+## Quick Start
 
 ```bash
+# Signup form with full coverage: exit 0
 python3 project-management/execution/test-scenarios/scripts/test_scenario_generator.py \
-  --input feature_spec.json --format markdown
+  --input project-management/execution/test-scenarios/assets/sample_scenarios.json --format markdown
 ```
 
-## Decision frameworks
+```bash
+# Payment step with no error or security scenarios and a mistyped category: exit 1
+python3 project-management/execution/test-scenarios/scripts/test_scenario_generator.py \
+  --input project-management/execution/test-scenarios/assets/sample_scenarios_flawed.json --format markdown
+```
 
-### How many scenarios per category?
+```bash
+# Input schema and flags
+python3 project-management/execution/test-scenarios/scripts/test_scenario_generator.py --help
+```
 
-| Feature type | Happy | Edge | Error | Empty | Concur | A11y | Security |
-|--------------|-------|------|-------|-------|--------|------|----------|
-| Form / submission | 1-3 | 4-8 | 4-6 | 2 | 1-2 | 4 | 3-5 |
-| Browse / list | 2-3 | 3-5 | 2-3 | 2-3 | 1 | 3 | 2 |
-| Real-time / collab | 3 | 4-6 | 4-6 | 2 | 4-6 (essential) | 3 | 3 |
-| File upload | 2 | 6-10 (sizes/types) | 4-6 | 1 | 1-2 | 2 | 5+ (file abuse) |
-| Payment / financial | 3 | 6-10 | 8+ (critical) | 2 | 4-6 (idempotency!) | 3 | 8+ |
-| Bulk operation | 2 | 4-6 (sizes) | 4-6 | 1 | 2-4 (partial fail) | 2 | 3 |
+## Tools Overview
 
-Adjust for risk profile of the specific feature.
+`test_scenario_generator.py` is the quality gate for this skill. **What the audit checks:** scenario counts per category against the feature type's recommended range (fail when happy path, edge, error or security has none; warn when below range; info when above); unknown category names; concurrency for collaborative features; localization when several locales are supported; cross-platform coverage; at least one P0. It counts; it does not judge whether a scenario is any good.
 
-### Risk-weighted scenario selection
+**Exit codes:** `0` no fail findings · `1` at least one fail (a core category with zero scenarios) · `2` unreadable file, invalid JSON or a top level that is not an object. JSON by default, `--format markdown`, `--output FILE`.
 
-Not all scenarios need full QA coverage. Apply:
-- **Happy path:** always test
-- **Edge cases:** test those that matter (likelihood × severity)
-- **Error handling:** test all paths that user can recover from
-- **Empty state:** always test (first impression!)
-- **Concurrent:** test for data-integrity-critical features
-- **Accessibility:** baseline coverage on all UI; full coverage on user-facing
-- **Security:** scale with sensitivity (full coverage on auth/payment)
+## Workflow
 
-### Manual vs automated
+1. **Read the spec** for user goals, inputs, outputs and side effects.
+2. **Write scenarios per category.** You know the standard techniques (boundaries, wrong types, 4xx/5xx/timeouts, keyboard and screen reader, authorisation and injection); spend the effort on what is specific to this feature: its side effects, its shared state, its money or PII. Payment and collaboration features need concurrency and idempotency cases; uploads need file-abuse cases.
+3. **Weight by risk.** Always cover happy paths and empty states; cover edge cases by likelihood x severity; scale security with sensitivity. Mark P0 the scenarios whose failure would stop the release.
+4. **Audit.** Write the list as JSON (schema in `--help`; `assets/sample_scenarios.json`) and run the audit. It must pass with no fail findings; then verify that each under-covered category is either filled or consciously out of scope. Recommended counts per feature type are in the appendix of `references/scenario-categories.md`.
+5. **Hand to QA** with the automated/manual split from the same appendix.
 
-| Scenario type | Default |
-|----------------|---------|
-| Happy path | Automated (E2E or integration) |
-| Edge cases (input validation) | Unit tests |
-| Error handling | Mix (mocked errors in unit; real in integration) |
-| Empty state | Visual regression + manual |
-| Concurrent | Hard — usually manual + targeted integration |
-| Accessibility | Automated (axe-core) + manual screen-reader |
-| Security | SAST + DAST + manual review for critical paths |
-| Performance | Automated load tests |
-| Localization | Pseudo-localization + manual spot-check |
+## Anti-Patterns
 
-## Common engagements
+### Only happy paths
+**Mistake:** The plan tests that the feature works when everything goes right.
+**Why it happens:** Happy paths come straight from the spec; failures have to be imagined.
+**Instead:** Write at least the recommended error and edge counts for the feature type before anything else is added.
 
-### "Generate test scenarios for this new feature"
-1. Read the PRD / spec.
-2. Apply the 7 categories.
-3. Generate scenarios; estimate count per category.
-4. Run validator; address gaps.
-5. Hand to QA for implementation.
+### "QA will figure it out"
+**Mistake:** Scenarios are left to QA after the build.
+**Why it happens:** Scenario writing feels like QA's job.
+**Instead:** Write them before implementation; QA tests what is specified, and engineers build for cases they can see.
 
-### "Audit our test plan for completeness"
-1. Categorize existing scenarios.
-2. Identify under-covered categories.
-3. Score by risk × likelihood.
-4. Recommend additions.
+### No concurrency for shared or financial state
+**Mistake:** A payment or collaborative feature ships with no race or idempotency scenarios.
+**Why it happens:** Concurrency bugs do not show up in single-user demos.
+**Instead:** Cover double-submit, simultaneous edit and retry-after-timeout explicitly.
 
-### "Post-incident scenario gap analysis"
-1. Pull the incident scenario.
-2. Map: which category was missed?
-3. Add scenario; verify regression coverage.
-4. Update default-coverage rubric for that feature type.
-
-## Anti-patterns to avoid
-
-- **Only happy paths.** Production fails on edges; you skipped them.
-- **No empty state.** First-use is broken.
-- **"QA will figure it out."** No, QA tests what's specified.
-- **Generic acceptance criteria.** "Should work" is not testable.
-- **No accessibility scenarios.** Excludes users; fails compliance.
-- **No security scenarios.** Vulnerable paths ship.
-- **No performance scenarios for performance-sensitive features.** Surprise at scale.
-- **Skipping concurrent for collaborative features.** Race conditions ship.
+More gaps with fixes: `references/coverage-anti-patterns.md`.
 
 ## Scope & Limitations
 
 **In Scope:**
 - Test scenarios across seven categories: happy path, edge, error, empty state, concurrent, accessibility and security, plus performance, localization and cross-platform where they apply
-- Scenario counts per category by feature type: form, browse, real-time, upload, payment and bulk
+- Scenario counts per category by feature type: form, browse, real-time, upload, payment and bulk (table in the reference appendix, matching the script)
 - Risk-weighted selection and a default split between manual and automated testing per scenario type
 - A coverage audit that flags under-covered categories for the feature type (`test_scenario_generator.py`)
 - Test-plan audits and post-incident scenario gap analysis
@@ -232,10 +120,19 @@ Not all scenarios need full QA coverage. Apply:
 - The per-category counts are starting defaults. The team adjusts them for the risk profile of the feature.
 - The team decides which scenarios to automate and which edge cases matter enough to test.
 
-## References
+## Files
 
-- `references/scenario-categories.md` — deep on the 7+ categories with examples
-- `references/coverage-anti-patterns.md` — common gaps + fixes
+| File | Purpose |
+|------|---------|
+| `scripts/test_scenario_generator.py` | Coverage audit by category (it does not generate scenarios) |
+| `assets/sample_scenarios.json` | Signup form, 19 scenarios; exits 0 |
+| `assets/sample_scenarios_flawed.json` | Under-covered payment step; exits 1 |
+| `assets/scenario_template.md` | Scenario template |
+
+## Reference Documentation
+
+- [references/scenario-categories.md](references/scenario-categories.md): Categories with examples; appendix with recommended counts and manual vs automated
+- [references/coverage-anti-patterns.md](references/coverage-anti-patterns.md): Common gaps and fixes
 
 ## Related skills
 

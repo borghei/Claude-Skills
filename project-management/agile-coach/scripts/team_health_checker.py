@@ -243,7 +243,7 @@ def main():
         print("Validation errors:", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     result = analyze_health(data)
 
@@ -254,4 +254,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, IndexError) as exc:
+        print(f"error: bad input ({type(exc).__name__}): {exc}", file=sys.stderr)
+        sys.exit(2)

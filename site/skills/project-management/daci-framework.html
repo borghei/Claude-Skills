@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daci Framework - Claude Skills</title>
-  <meta name="description" content="DACI decision facilitation framework (Driver, Approver, Contributor, Informed) for clarifying decision ownership, reducing decision thrash, role assignment, and governance design across product teams.">
+  <meta name="description" content="Assign Driver, Approver, Contributor and Informed roles for the decisions that keep stalling, then roll the chart out. Use when decisions thrash, ownership is unclear after a reorg, or a new team need">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/daci-framework.html">
   <meta property="og:title" content="Daci Framework - Claude Skills">
-  <meta property="og:description" content="DACI decision facilitation framework (Driver, Approver, Contributor, Informed) for clarifying decision ownership, reducing decision thrash, role assignment, and governance design across product teams.">
+  <meta property="og:description" content="Assign Driver, Approver, Contributor and Informed roles for the decisions that keep stalling, then roll the chart out. Use when decisions thrash, ownership is unclear after a reorg, or a new team need">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/daci-framework.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Daci Framework", "description": "DACI decision facilitation framework (Driver, Approver, Contributor, Informed) for clarifying decision ownership, reducing decision thrash, role assignment, and governance design across product teams.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/daci-framework.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Daci Framework", "description": "Assign Driver, Approver, Contributor and Informed roles for the decisions that keep stalling, then roll the chart out. Use when decisions thrash, ownership is unclear after a reorg, or a new team needs decision rights.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/daci-framework.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Daci Framework</h1>
-    <p class="page-subtitle">DACI decision facilitation framework (Driver, Approver, Contributor, Informed) for clarifying decision ownership, reducing decision thrash, role assignment, and governance design across product teams.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Assign Driver, Approver, Contributor and Informed roles for the decisions that keep stalling, then roll the chart out. Use when decisions thrash, ownership is unclear after a reorg, or a new team needs decision rights.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.2</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">daci</span><span class="tag">decision-making</span><span class="tag">roles</span><span class="tag">governance</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Daci Framework (Project Management domain).
 
-DACI decision facilitation framework (Driver, Approver, Contributor, Informed) for clarifying decision ownership, reducing decision thrash, role assignment, and governance design across product teams.
+Assign Driver, Approver, Contributor and Informed roles for the decisions that keep stalling, then roll the chart out. Use when decisions thrash, ownership is unclear after a reorg, or a new team needs decision rights.
 
 Clarify decision ownership and reduce decision thrash using the DACI framework (Driver, Approver, Contributor, Informed). Unlike RACI which focuses on task responsibility, DACI is purpose-built for product decisions -- who drives the decision to closure, who has veto power, who provides input, and w
 
@@ -424,7 +424,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Daci Framework (Project Management domain).
 
-DACI decision facilitation framework (Driver, Approver, Contributor, Informed) for clarifying decision ownership, reducing decision thrash, role assignment, and governance design across product teams.
+Assign Driver, Approver, Contributor and Informed roles for the decisions that keep stalling, then roll the chart out. Use when decisions thrash, ownership is unclear after a reorg, or a new team needs decision rights.
 
 Clarify decision ownership and reduce decision thrash using the DACI framework (Driver, Approver, Contributor, Informed). Unlike RACI which focuses on task responsibility, DACI is purpose-built for product decisions -- who drives the decision to closure, who has veto power, who provides input, and w
 
@@ -495,6 +495,16 @@ Before building the DACI chart, settle the inputs below. When one is missing or 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. **Pick 3-5 decisions** that stall or recur, not every decision the team makes.
+2. **Map the current state** per decision: who actually decides today, who blocks late, where it stalls.
+3. **Assign roles** [RECOMMENDED] per decision: exactly one Driver (one person drives to closure), one or two Approvers who hold real authority, at most 3-4 Contributors with expertise to add, everyone else Informed. Anyone who can stop the decision is a Contributor or Approver, never Informed.
+4. **Agree the chart** with the Approvers named in it; a chart they have not accepted is fiction.
+5. **Roll out** with a 30/60/90 plan and record each decision (option chosen, Approver, rationale, vetoes with reasons).
+
+**Verify** before publishing: every row has one D and one or two A; no row has more than 5 C; every A has the authority in practice; the last few vetoes have written reasons. Build steps, health metrics and troubleshooting: `references/playbook.md`.
+
 ## Anti-Patterns
 
 ### Informed roles that object late
@@ -519,6 +529,14 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - **[references/playbook.md](references/playbook.md)** — read this when building or running a DACI chart: role definitions and rules, the 7-step build sequence (working group → roles → decisions → current-state map → pain points → target-state → transition plan), governance health metrics, troubleshooting, and success criteria.
 - **[references/red-flags.md](references/red-flags.md)** — read this before publishing a chart or running a decision under it: common ways a DACI chart goes wrong with bad/good examples anchored to the role rules.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `references/playbook.md` | Role rules, 7-step build, health metrics |
+| `references/red-flags.md` | Bad/good charts with fixes |
+| `examples/choosing-payment-processor.md` | Worked DACI for one decision |
+
 ## Scope &amp; Limitations
 
 **In Scope:** DACI chart creation, current-state mapping, target-state design, transition planning, governance health metrics, pain point identification, decision ownership clarity.
@@ -532,15 +550,10 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 | Integration | Direction | What Flows |
 |---|---|---|
 | `create-prd/` | Feeds into | DACI decisions inform PRD Contacts section and decision log |
-| `identify-assumptions/` | Complements | Surfaces assumptions about who has authority |
+| `discovery/identify-assumptions/` | Complements | Surfaces assumptions about who has authority |
 | `brainstorm-okrs/` | Complements | OKR ownership aligns with DACI decision ownership |
 | `summarize-meeting/` | Feeds into | Meeting summaries capture DACI decision outcomes |
 | `senior-pm/` | Complements | Portfolio-level DACI for cross-project decisions |
-
-## Further Reading
-
-- Productside DACI guidance for product teams
-- Inspired by the DACI framework used at Intuit and other product-led organizations
 
 ---
 
@@ -568,7 +581,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Daci Framework&quot;**
-   - Description: &quot;DACI decision facilitation framework (Driver, Approver, Contributor, Informed) for clarifying decision ownership, reducing decision thrash, role assignment, and governance design across product teams.&quot;
+   - Description: &quot;Assign Driver, Approver, Contributor and Informed roles for the decisions that keep stalling, then roll the chart out. Use when decisions thrash, ownership is unclear after a reorg, or a new team needs decision rights.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -623,6 +636,16 @@ Before building the DACI chart, settle the inputs below. When one is missing or 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. **Pick 3-5 decisions** that stall or recur, not every decision the team makes.
+2. **Map the current state** per decision: who actually decides today, who blocks late, where it stalls.
+3. **Assign roles** [RECOMMENDED] per decision: exactly one Driver (one person drives to closure), one or two Approvers who hold real authority, at most 3-4 Contributors with expertise to add, everyone else Informed. Anyone who can stop the decision is a Contributor or Approver, never Informed.
+4. **Agree the chart** with the Approvers named in it; a chart they have not accepted is fiction.
+5. **Roll out** with a 30/60/90 plan and record each decision (option chosen, Approver, rationale, vetoes with reasons).
+
+**Verify** before publishing: every row has one D and one or two A; no row has more than 5 C; every A has the authority in practice; the last few vetoes have written reasons. Build steps, health metrics and troubleshooting: `references/playbook.md`.
+
 ## Anti-Patterns
 
 ### Informed roles that object late
@@ -647,6 +670,14 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - **[references/playbook.md](references/playbook.md)** — read this when building or running a DACI chart: role definitions and rules, the 7-step build sequence (working group → roles → decisions → current-state map → pain points → target-state → transition plan), governance health metrics, troubleshooting, and success criteria.
 - **[references/red-flags.md](references/red-flags.md)** — read this before publishing a chart or running a decision under it: common ways a DACI chart goes wrong with bad/good examples anchored to the role rules.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `references/playbook.md` | Role rules, 7-step build, health metrics |
+| `references/red-flags.md` | Bad/good charts with fixes |
+| `examples/choosing-payment-processor.md` | Worked DACI for one decision |
+
 ## Scope &amp; Limitations
 
 **In Scope:** DACI chart creation, current-state mapping, target-state design, transition planning, governance health metrics, pain point identification, decision ownership clarity.
@@ -660,15 +691,10 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 | Integration | Direction | What Flows |
 |---|---|---|
 | `create-prd/` | Feeds into | DACI decisions inform PRD Contacts section and decision log |
-| `identify-assumptions/` | Complements | Surfaces assumptions about who has authority |
+| `discovery/identify-assumptions/` | Complements | Surfaces assumptions about who has authority |
 | `brainstorm-okrs/` | Complements | OKR ownership aligns with DACI decision ownership |
 | `summarize-meeting/` | Feeds into | Meeting summaries capture DACI decision outcomes |
 | `senior-pm/` | Complements | Portfolio-level DACI for cross-project decisions |
-
-## Further Reading
-
-- Productside DACI guidance for product teams
-- Inspired by the DACI framework used at Intuit and other product-led organizations
 
 ---
 
@@ -696,7 +722,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Daci Framework&quot;**
-   - Description: &quot;DACI decision facilitation framework (Driver, Approver, Contributor, Informed) for clarifying decision ownership, reducing decision thrash, role assignment, and governance design across product teams.&quot;
+   - Description: &quot;Assign Driver, Approver, Contributor and Informed roles for the decisions that keep stalling, then roll the chart out. Use when decisions thrash, ownership is unclear after a reorg, or a new team needs decision rights.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -755,7 +781,7 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 </div>
   
   
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/execution/daci-framework/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

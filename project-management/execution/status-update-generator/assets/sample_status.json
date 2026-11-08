@@ -1,0 +1,76 @@
+{
+  "period": "Week of 2026-05-18",
+  "project": "Acme Search Platform",
+  "author": "Jane Doe (PM)",
+  "status": "yellow",
+  "status_rationale": "Index rebuild succeeded and exceeded latency targets; Phase 2 rollout blocked on security review.",
+  "highlights": [
+    {
+      "title": "Search latency p95 down to 210ms",
+      "detail": "Index rebuild dropped p95 from 480ms to 210ms. Customer reports of slow search resolved.",
+      "ticket": "PROJ-1234"
+    },
+    {
+      "title": "Pilot tenant Acme Inc. migrated to v2 index",
+      "detail": "Zero downtime; tenant confirmed acceptance.",
+      "ticket": "PROJ-1240"
+    },
+    {
+      "title": "12 support tickets closed",
+      "detail": "All open 'slow search' tickets resolved post-rebuild.",
+      "ticket": null
+    },
+    {
+      "title": "SDK documentation refresh published",
+      "detail": "New partner docs live; first partner integration started.",
+      "ticket": "PROJ-1251"
+    }
+  ],
+  "blockers": [
+    {
+      "what": "Phase 2 rollout to enterprise tenants",
+      "blocked_by": "Security review (InfoSec team)",
+      "need": "Schedule the threat-model review before Friday so rollout can begin next sprint."
+    }
+  ],
+  "risks": [
+    {
+      "risk": "Cost overrun on infra during traffic ramp",
+      "likelihood": "M",
+      "impact": "M",
+      "mitigation": "Add auto-scale ceiling; alert at 80% budget",
+      "owner": "SRE lead",
+      "due": "2026-05-30"
+    },
+    {
+      "risk": "Index rebuild causes brief read latency on next refresh",
+      "likelihood": "L",
+      "impact": "M",
+      "mitigation": "Rebuild during off-peak window; pre-warm cache",
+      "owner": "Search infra eng",
+      "due": "2026-06-05"
+    }
+  ],
+  "asks": [
+    {
+      "what": "Approval to onboard 3 pilot enterprise tenants",
+      "by_when": "2026-05-24",
+      "from_whom": "VP Sales",
+      "consequence": "Slips the Q2 enterprise revenue target by ~$80K if delayed past 2026-05-31."
+    }
+  ],
+  "next": [
+    {
+      "title": "Complete security review and start Phase 2 rollout",
+      "detail": "Begin with the 3 pilot tenants pending VP Sales sign-off."
+    },
+    {
+      "title": "Q2 OKR mid-quarter readout",
+      "detail": "KR1 (latency) is met; KR2 (rollout) tracking on plan."
+    },
+    {
+      "title": "Begin Phase 3 design",
+      "detail": "Multi-tenant index sharding RFC drafted."
+    }
+  ]
+}

@@ -5,7 +5,6 @@ Prompt Auditor - Audit prompts for injection vulnerabilities, bias, and safety i
 Performs static analysis of prompt text to detect security vulnerabilities,
 biased language, safety concerns, and quality issues.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -245,7 +244,8 @@ def format_human(report: AuditReport) -> str:
     lines.append("=" * 65)
     lines.append(f"Prompt length: {report.prompt_length} chars, ~{report.estimated_tokens} tokens")
     lines.append(f"Total findings: {report.total_findings}")
-    verdict = "PASS" if report.pass_audit else "FAIL"
+    # Regex checks can only miss things, so a clean run is "no known patterns matched", not a pass
+    verdict = "NO KNOWN PATTERNS MATCHED" if report.pass_audit else "FAIL"
     lines.append(f"Overall risk: {report.overall_risk.upper()}")
     lines.append(f"Audit result: {verdict}")
     lines.append("")
@@ -313,7 +313,7 @@ def main():
         path = Path(args.file)
         if not path.exists():
             print(f"Error: File not found: {args.file}", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
         text = path.read_text(encoding="utf-8", errors="ignore")
     elif args.text:
         text = args.text

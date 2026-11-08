@@ -5,7 +5,6 @@ Snowflake Query Helper - Analyze and optimize Snowflake SQL with warehouse sizin
 Performs static analysis of Snowflake SQL to identify anti-patterns, optimization
 opportunities, and provides warehouse sizing recommendations based on workload.
 
-Author: Claude Skills Engineering Team
 License: MIT
 """
 
@@ -89,8 +88,8 @@ SQL_PATTERNS = [
      "Pre-compute values in a derived column or use expression-based search optimization.",
      "medium"),
 
-    (r'\bCROSS\s+JOIN\b', "high", "performance",
-     "CROSS JOIN detected",
+    (r'\bCROSS\s+JOIN\b|\bON\s+(\d+)\s*=\s*\1\b|\bON\s+TRUE\b', "high", "performance",
+     "CROSS JOIN or always-true join condition detected",
      "CROSS JOINs produce cartesian products which can generate massive intermediate result sets.",
      "Verify CROSS JOIN is intentional. Consider replacing with INNER/LEFT JOIN with conditions.",
      "high"),
@@ -302,7 +301,7 @@ def analyze_query(query: str, index: int) -> QueryAnalysis:
     return analysis
 
 
-def recommend_warehouse(workload: str, data_volume_str: str) -> Dict:
+def recommend_warehouse(workload: str, data_volume_str: str, hours_per_day: float = 8.0, credit_price: float = 2.0) -> Dict:
     """Generate warehouse sizing recommendation."""
     profile = WORKLOAD_PROFILES.get(workload, WORKLOAD_PROFILES["ad-hoc"])
 
@@ -336,7 +335,9 @@ def recommend_warehouse(workload: str, data_volume_str: str) -> Dict:
         "data_volume": data_volume_str,
         "recommended_size": recommended_size,
         "credits_per_hour": specs["credits_hr"],
-        "estimated_daily_cost_8hr": round(specs["credits_hr"] * 8 * 2.0, 2),  # $2/credit estimate
+        "assumed_hours_per_day": hours_per_day,
+        "assumed_price_per_credit": credit_price,
+        "estimated_daily_cost": round(specs["credits_hr"] * hours_per_day * credit_price, 2),
         "configuration": {
             "auto_suspend_seconds": profile["auto_suspend"],
             "auto_resume": profile["auto_resume"],
@@ -408,7 +409,7 @@ def format_human_analysis(report: AnalysisReport) -> str:
         lines.append("WAREHOUSE RECOMMENDATION:")
         lines.append(f"  Size: {rec['recommended_size']}")
         lines.append(f"  Credits/hr: {rec['credits_per_hour']}")
-        lines.append(f"  Est. daily cost (8hr): ${rec['estimated_daily_cost_8hr']}")
+        lines.append(f"  Est. daily cost ({rec['assumed_hours_per_day']}h): ${rec['estimated_daily_cost']}")
 
     lines.append("=" * 65)
     return "\n".join(lines)
@@ -424,7 +425,8 @@ def format_human_warehouse(rec: Dict) -> str:
     lines.append(f"Data Volume: {rec['data_volume']}")
     lines.append(f"Recommended Size: {rec['recommended_size']}")
     lines.append(f"Credits/hour: {rec['credits_per_hour']}")
-    lines.append(f"Est. daily cost (8hr @ $2/credit): ${rec['estimated_daily_cost_8hr']}")
+    lines.append(f"Est. daily cost ({rec['assumed_hours_per_day']}h @ ${rec['assumed_price_per_credit']}/credit): "
+                 f"${rec['estimated_daily_cost']}")
     lines.append("")
     lines.append("Configuration:")
     for k, v in rec["configuration"].items():
@@ -456,12 +458,16 @@ def main():
                         help="Data volume (e.g., 500GB, 2TB) for warehouse-sizing")
     parser.add_argument("--format", choices=["human", "json"], default="human",
                         help="Output format")
+    parser.add_argument("--hours", type=float, default=8.0,
+                        help="Warehouse running hours per day for the cost estimate (default 8)")
+    parser.add_argument("--credit-price", type=float, default=2.0,
+                        help="Your contract's price per credit in USD (default 2.0; edition and region vary)")
 
     args = parser.parse_args()
 
     if args.action == "warehouse-sizing":
         workload = args.workload or "ad-hoc"
-        rec = recommend_warehouse(workload, args.data_volume)
+        rec = recommend_warehouse(workload, args.data_volume, args.hours, args.credit_price)
         if args.format == "json":
             print(json.dumps(rec, indent=2))
         else:
@@ -472,14 +478,14 @@ def main():
     if args.file:
         path = Path(args.file)
         if not path.exists():
-            print(f"Error: File not found: {args.file}", file=sys.stderr)
-            sys.exit(1)
+            print(f"error: file not found: {args.file}", file=sys.stderr)
+            sys.exit(2)
         sql_text = path.read_text(encoding="utf-8", errors="ignore")
     elif args.sql:
         sql_text = args.sql
     else:
-        print("Error: --file or --sql required for analyze/optimize", file=sys.stderr)
-        sys.exit(1)
+        print("error: --file or --sql required for analyze/optimize", file=sys.stderr)
+        sys.exit(2)
 
     report = analyze_file(sql_text)
 

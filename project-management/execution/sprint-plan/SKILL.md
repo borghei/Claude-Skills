@@ -1,16 +1,16 @@
 ---
 name: sprint-plan
 description: >
-  Plan a sprint that ships — capacity, commitment vs stretch, dependencies,
-  and risk identification that prevents mid-sprint surprises. Use to build
-  the sprint planning artifact itself.
+  Build and audit the plan for one iteration: goal, real capacity, commit vs stretch,
+  dependencies, risks and definition of done. Use when planning the next
+  sprint or auditing a plan for a team that keeps missing its sprints.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: project-management
   domain: execution
-  updated: 2026-05-27
+  updated: 2026-11-08
   python-tools: sprint_planner.py
   tech-stack: sprint-planning, capacity, agile, story-points
   tags:
@@ -23,237 +23,112 @@ metadata:
 
 # Sprint Planning
 
-A sprint plan that survives contact with reality. Covers capacity math,
-commit vs stretch separation, dependency identification, and the
-pre-sprint review that prevents mid-sprint surprises.
+The goal is a plan the team actually finishes: one sentence of purpose, commits sized to real
+capacity, a small stretch nothing depends on, and every dependency and risk owned before day 1.
+Done means `sprint_planner.py` reports no `fail` findings and every `warn` is either fixed or
+accepted out loud.
 
-## When to use this skill
+## When to Use
 
-- **Sprint kickoff** (every 1-3 weeks)
-- **Sprint-plan template** for new teams
-- **Sprint-plan audit** when sprints consistently miss
-- **Quarter-start planning** (rolled up across sprints)
-- **Post-mortem** on a missed sprint (gap analysis)
+- Sprint kickoff (every 1-3 weeks) or a template for a new team
+- Auditing the plan of a team that misses most sprints
+- Gap analysis after a missed sprint
 
-## The 7 sprint-plan elements
-
-1. **Sprint goal** — one sentence: what this sprint exists to achieve
-2. **Team capacity** — actual hours / story points after PTO, on-call, etc.
-3. **Commits** — items the team confidently ships
-4. **Stretch** — items if everything goes well; nothing depends on
-5. **Dependencies** — what must happen by when (external + internal)
-6. **Risks** — what could derail; mitigation per risk
-7. **Definition of done** — when is each item "done"?
+Backlog refinement before the sprint, story splitting and retrospectives are separate skills (see Scope).
 
 ## Clarify First
 
 Before generating the sprint plan, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn't, use a sensible default and say which one you used.
 
-- **Sprint goal:** the one-sentence outcome this sprint exists to achieve (element 1; lets you scope and say no to off-goal asks).
-- **Real team capacity:** working days minus PTO/on-call/meetings/interrupts × focus factor (element 2; sizes the commit and prevents the 100%-fill miss).
-- **Backlog readiness:** are candidate items refined, estimated, and ≤5 days (unrefined items are ineligible and blow estimates mid-sprint).
-- **Known dependencies:** cross-team/external blockers with owners (element 5; unconfirmed assumptions become mid-sprint crises).
+- **Sprint goal:** the one-sentence outcome; it is what lets the team say no to off-goal asks.
+- **Real team capacity:** per-person hours after PTO, on-call, meetings and interrupts, times a focus factor. This sizes the commit.
+- **Backlog readiness:** candidate items refined, estimated and ≤5 days each; unrefined items blow up mid-sprint.
+- **Known dependencies:** cross-team or external blockers with an owner who has confirmed.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
 ## Workflow
 
-### Step 1 — Define the sprint goal
-A good goal:
-- One sentence
-- States outcome, not output ("ship 3 features" → "complete checkout flow MVP enabling first paid customers")
-- Inspires the team
-- Lets you say "no" to off-goal asks
-
-### Step 2 — Calculate capacity
-Per team member:
-- Working days = sprint days - holidays - approved PTO
-- Effective hours = days × hours/day × focus factor (typically 0.6-0.75)
-- Subtract on-call rotation hours
-- Subtract meeting overhead
-- Subtract support / interrupt tax
-
-Aggregate across team. This is your real capacity.
-
-### Step 3 — Pull from backlog
-Backlog items must be:
-- Refined (acceptance criteria clear)
-- Estimated (story points or hours)
-- No major unknowns
-
-Items that fail this are NOT eligible for the sprint. Send back to refinement.
-
-### Step 4 — Commit vs stretch
-- **Commits:** 75-85% of capacity (leaves room for unknowns)
-- **Stretch:** 10-15% of capacity (only if commits done)
-
-Stuffing 100% of capacity = guaranteed miss. Reality always intrudes.
-
-### Step 5 — Identify dependencies
-For each item:
-- Cross-team dependencies (what they need from others)
-- External dependencies (vendors, customers)
-- Sequencing dependencies (A blocks B)
-
-Each dependency needs:
-- Owner
-- Date needed by
-- Confirmation it's planned
-
-### Step 6 — Identify risks
-For each item, list likely risks:
-- Technical risk
-- Dependency risk (external owner slips)
-- Estimate risk (unknowns might double effort)
-- Capacity risk (key person may be pulled)
-
-Per risk: likelihood, severity, mitigation, owner.
-
-### Step 7 — Definition of done
-Per item:
-- Code merged + reviewed
-- Tests added
-- Telemetry firing
-- Docs updated
-- Accessibility checked
-- Feature flag configured (if applicable)
-- QA passed
-
-### Step 8 — Run `sprint_planner.py`
-Audit capacity utilization, commit/stretch split, dependency clarity,
-DoD coverage.
+1. **Goal.** One sentence stating an outcome, not a feature list ("customers can pay with a saved card", not "ship X, Y, Z"). You should be able to say at the end whether it was met.
+2. **Capacity.** Per person: (sprint days − PTO − holidays) × hours/day, minus meetings, on-call and interrupt tax, times a focus factor (0.6-0.75 is a common starting point; calibrate against actuals). Sum it. Make sure `total_available_hours` equals the per-person sum, or say why not. Worked math: `references/capacity-math.md`.
+3. **Eligible items.** Only refined, estimated items of ≤5 days (≤8 points). Send the rest back to refinement or split them.
+4. **Commit vs stretch** [RECOMMENDED]. Commits about 80% of capacity (75-85%), stretch about 10%, and keep total fill at or under 90%. The reason: unplanned work takes 10-20% of most sprints, so plans filled past 90% usually miss and past 100% always do. Cross-check commit points against average velocity of the last 3-5 sprints.
+5. **Dependencies.** Each one has an owner, a needed-by date and the owner's confirmation. Unconfirmed is a risk, not a plan.
+6. **Risks.** One or two per commit item (technical, dependency, estimate, key person), each with mitigation and owner.
+7. **Definition of done.** Per item; the default set the audit checks is code reviewed, tests, telemetry, docs. Add a11y, QA or flag configuration where they apply.
+8. **Audit and fix** until there are no `fail` findings:
 
 ```bash
 python3 project-management/execution/sprint-plan/scripts/sprint_planner.py \
-  --input sprint_plan.json --format markdown
+  --input project-management/execution/sprint-plan/assets/sample_sprint_plan.json --format markdown
 ```
 
-## Decision frameworks
+Mid-sprint, when commits turn out too big: drop stretch first, then descope a commit early and tell stakeholders. Adding hours is rarely real capacity.
 
-### Capacity math (per 2-week sprint, 8-person team)
+## Tool: `sprint_planner.py`
 
-```
-2 weeks = 10 working days
-Per person:
-  - 10 days × 8 hours = 80 hours raw
-  - Minus PTO/holidays (e.g., 1 day) = 72 hours
-  - Minus meetings (~10 hrs) = 62 hours
-  - Minus on-call (~4 hrs avg) = 58 hours
-  - Minus interrupts/support (~6 hrs) = 52 hours
-  - Focus factor 0.7 = ~36 hours of "real" work
+Reads a JSON plan (shape in `--help` and `assets/sample_sprint_plan.json`) and reports findings by severity.
 
-Team of 8 × 36 hours = 288 effective hours
-                     = ~28 person-days of real engineering work
-```
+| Severity | Checks |
+|---|---|
+| fail | No goal, no capacity, no items; commits exceed capacity; commit + stretch over 100% of capacity |
+| warn | Commit + stretch over 90%; commits over 1.1 × commit target; per-member hours not matching the total (±5%); commit target over 90%; commit points over average velocity; unrefined items; items ≥13 points; no assignee; dependencies without owner or confirmation |
+| info | Stretch well over its target; commit items with no risks; missing default DoD items |
 
-Most teams over-estimate capacity by 30-50%. Track actuals to calibrate.
+Flags: `--input FILE` (required), `--format json|markdown` (default json), `--output FILE`.
 
-### Commitment discipline
+**Exit codes:** 0 no `fail` findings, 1 at least one `fail` (`assets/sample_sprint_plan_flawed.json` exits 1 by design: 117% fill), 2 missing file, invalid JSON or wrong shape.
 
-| Filled at | Outcome |
-|-----------|---------|
-| 100%+ | Always miss |
-| 90-100% | Usually miss; no room for unknowns |
-| 80-90% | Often achievable; healthy |
-| 70-80% | Conservative; safer commits |
-| < 70% | Under-committing; team disengaged |
+## Anti-Patterns
 
-Target: 80% commits + 15% stretch.
+### Filling to 100%
+**Mistake:** Commits plus stretch add up to all available hours.
+**Why it happens:** Every item feels important and empty capacity looks like waste.
+**Instead:** Commit about 80%, stretch about 10%; the rest absorbs the unplanned work that always arrives.
 
-### Sprint goal vs feature list
+### A feature list instead of a goal
+**Mistake:** The goal reads "ship A, B and C".
+**Why it happens:** Listing items is easier than naming the outcome they serve.
+**Instead:** Name the outcome; when one item slips, the goal tells you what to protect.
 
-| Sprint goal | Why better |
-|-------------|------------|
-| "Complete checkout MVP" | Outcome-aligned; defines what "done" looks like |
-| "Ship feature X + Y + Z" | Feature list; what if one slips? |
-| "Improve performance" | Vague; no done state |
+### Committing unrefined items
+**Mistake:** An item with open questions goes into commits "to get started".
+**Why it happens:** The item is urgent and refinement was skipped.
+**Instead:** Refine first or make it stretch; discovered complexity is the main source of mid-sprint blowups.
 
-A good sprint goal lets you say "we did it" or "we didn't" clearly.
+### Assumed dependencies
+**Mistake:** "Platform will have the API ready" with no named owner who agreed.
+**Why it happens:** Asking feels like friction; the other team's plan is assumed.
+**Instead:** Get the owner's confirmation and date in the plan, or list it as a risk with a mitigation.
 
-### Item sizing
+### Capacity without PTO and on-call
+**Mistake:** Team size × sprint days × 8 hours.
+**Why it happens:** It is quick and looks precise.
+**Instead:** Compute per person and reconcile with the total; most teams overestimate capacity this way by a third or more.
 
-Stories should be 1-5 days each. Stories > 5 days:
-- Split into smaller stories
-- Add a planning task to break them down
-- Don't commit until refined
+More, with fixes and a bad-to-good worked plan: `references/sprint-anti-patterns.md`.
 
-### When to descope vs add capacity
+## Files
 
-Mid-sprint, when you realize commit is too much:
-- **Descope:** drop a stretch item; cleanly remove from sprint
-- **Add capacity:** rare; usually means borrowing from next sprint
-- **Push:** absolute last resort; deal carefully with stakeholders
-
-Discipline: descope early. Heroic late nights = burnout + bugs.
-
-## Common engagements
-
-### "Plan our next sprint"
-1. Pull team's velocity history (last 3-5 sprints).
-2. Calculate this sprint's capacity.
-3. Choose sprint goal aligned with quarter OKRs.
-4. Pull from backlog; verify items refined.
-5. Commit to 80%; stretch 15%.
-6. Identify dependencies + risks.
-7. Define done per item.
-
-### "Why are we missing every sprint?"
-1. Audit last 3 sprint plans + actuals.
-2. Diagnose: over-commit? estimation? unrefined items? interrupts?
-3. Tighten capacity math.
-4. Increase refinement discipline.
-5. Track interrupts; reduce them.
-
-### "Quarter planning rolled up from sprints"
-1. Define quarter goal (themes).
-2. Identify ~6 sprints of capacity.
-3. Allocate to: themes, tech debt, support, OKRs.
-4. Draft per-sprint goals.
-5. Refresh per sprint planning meeting.
-
-## Anti-patterns to avoid
-
-- **100% capacity commit.** Always miss.
-- **Mid-sprint scope add without descope.** Burnout + bugs.
-- **No sprint goal.** Random feature list.
-- **Unrefined items committed.** Discovered complexity blows estimates.
-- **Dependency assumption without owner confirmation.** Slips.
-- **No risk identification.** Risks surface as crises.
-- **No DoD.** "Done" varies by person.
-- **Velocity ignored.** Repeat estimation mistakes.
-
-## Scope & Limitations
-
-**In Scope:**
-- The seven sprint-plan elements: goal, capacity, commits, stretch, dependencies, risks and definition of done
-- Capacity math per person: working days, PTO, meetings, on-call, interrupt tax and a focus factor
-- Commitment discipline with commits at 75-85% of capacity and stretch at 10-15%
-- A plan audit for capacity utilization, commit/stretch split, dependency clarity and DoD coverage (`sprint_planner.py`)
-- Diagnosing repeatedly missed sprints and rolling sprint capacity up into a quarter
-
-**Out of Scope:**
-- Refining and estimating backlog items before the sprint (see `project-management/execution/backlog-refinement/`)
-- Splitting stories larger than 5 days (see `project-management/execution/story-splitting/`)
-- Review capacity for work delegated to AI agents (see `project-management/execution/agents-in-the-team/`)
-- Running the retrospective after the sprint (see `project-management/sprint-retrospective/`)
-- Quarter-level planning and commitments (see `project-management/execution/quarterly-planning/`)
-
-**Important Caveats:**
-- `sprint_planner.py` reads a hand-written JSON plan. Available hours per person are entered by hand, and the tool does not pull from Jira, Linear or calendars.
-- Focus factor and interrupt estimates are assumptions. The skill notes that most teams overestimate capacity by 30-50%, so calibrate against actuals.
-- Flags such as `refined` and dependency `confirmed` are self-reported. The tool checks that they are set, not that they are true.
-- The sprint goal, what goes in as commit or stretch, and mid-sprint descoping stay team decisions.
+| File | Purpose |
+|---|---|
+| `scripts/sprint_planner.py` | Plan audit (above) |
+| `assets/sample_sprint_plan.json` | Sound plan: 86% fill, exits 0 |
+| `assets/sample_sprint_plan_flawed.json` | Over-filled plan with mismatched capacity, unrefined items, unowned dependency; exits 1 |
+| `assets/sprint_plan_template.md` | Plan document template |
 
 ## References
 
-- `references/capacity-math.md` — deep on per-person capacity, focus factor, interrupt tax
-- `references/sprint-anti-patterns.md` — common failures + fixes
+- `references/capacity-math.md` — per-person formula, focus factor, capacity drains, role and quarter capacity. Read when computing capacity.
+- `references/sprint-anti-patterns.md` — 15 failure modes with fixes and a worked plan. Read when auditing a team that keeps missing.
 
-## Related skills
+## Scope & Limitations
 
-- `project-management/scrum-master` — process facilitation
-- `project-management/execution/backlog-refinement` — pre-sprint item prep
-- `project-management/execution/story-splitting` — sizing large stories
-- `project-management/execution/cycle-time-analyzer` — velocity tracking
-- `project-management/sprint-retrospective` — post-sprint learning
-- `c-level-advisor/vpe-advisor` — capacity planning at scale
+**In Scope:** goal, capacity, commit and stretch, dependencies, risks and DoD for one sprint; auditing that plan; diagnosing repeatedly missed sprints.
+
+**Out of Scope:** refining and estimating items (`project-management/execution/backlog-refinement/`); splitting large stories (`project-management/execution/story-splitting/`); review capacity for agent-delegated work (`project-management/execution/agents-in-the-team/`); retrospectives (`project-management/sprint-retrospective/`); quarter planning (`project-management/execution/quarterly-planning/`); velocity and flow metrics (`project-management/execution/cycle-time-analyzer/`).
+
+**Important Caveats:**
+- The tool reads a hand-written JSON plan; it does not pull from Jira, Linear or calendars.
+- `refined` and dependency `confirmed` are self-reported. The tool checks that they are set, not that they are true.
+- The goal, what is commit or stretch, and mid-sprint descoping stay team decisions.

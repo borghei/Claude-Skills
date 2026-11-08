@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brainstorm Experiments - Claude Skills</title>
-  <meta name="description" content="Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.">
+  <meta name="description" content="Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and picks the method. Use when validating an idea before building, testing willingness to pay, or choosing between fake d">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html">
   <meta property="og:title" content="Brainstorm Experiments - Claude Skills">
-  <meta property="og:description" content="Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.">
+  <meta property="og:description" content="Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and picks the method. Use when validating an idea before building, testing willingness to pay, or choosing between fake d">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Brainstorm Experiments", "description": "Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Brainstorm Experiments", "description": "Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and picks the method. Use when validating an idea before building, testing willingness to pay, or choosing between fake door, landing page and A/B test.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/brainstorm-experiments.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,7 +370,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Brainstorm Experiments</h1>
-    <p class="page-subtitle">Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.</p>
+    <p class="page-subtitle">Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and picks the method. Use when validating an idea before building, testing willingness to pay, or choosing between fake door, landing page and A/B test.</p>
     <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.1</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">experiments</span><span class="tag">pretotyping</span><span class="tag">lean-validation</span><span class="tag">discovery</span></div>
   </div>
@@ -393,7 +393,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Brainstorm Experiments (Project Management domain).
 
-Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.
+Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and picks the method. Use when validating an idea before building, testing willingness to pay, or choosing between fake door, landing page and A/B test.
 
 Design fast, low-cost experiments to validate product hypotheses before committing to full development. This skill applies Alberto Savoia&#x27;s pretotyping philosophy (&quot;Make sure you are building The Right It before you build It right&quot;) alongside lean experimentation methods for both new and existing pr
 
@@ -420,7 +420,7 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Brainstorm Experiments (Project Management domain).
 
-Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.
+Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and picks the method. Use when validating an idea before building, testing willingness to pay, or choosing between fake door, landing page and A/B test.
 
 Design fast, low-cost experiments to validate product hypotheses before committing to full development. This skill applies Alberto Savoia&#x27;s pretotyping philosophy (&quot;Make sure you are building The Right It before you build It right&quot;) alongside lean experimentation methods for both new and existing pr
 
@@ -486,24 +486,24 @@ Before designing the experiment, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Write each belief as &quot;At least X% of Y will do Z within T&quot; and settle the Clarify First inputs.
+2. Run `experiment_designer.py` for method suggestions; pick the cheapest method that captures a skin-in-the-game signal.
+3. Record method, X% pass bar, minimum sample, counter-metric and timebox in `assets/experiment_plan_template.md` before launch.
+4. Done when the result is called pass, fail or inconclusive against the bar written before launch, with the counter-metric checked.
 
 ```bash
-python3 scripts/experiment_designer.py --demo            # built-in sample (3 hypotheses)
-python3 scripts/experiment_designer.py input.json        # design experiments for your hypotheses
-python3 scripts/experiment_designer.py input.json --format json
+python3 project-management/discovery/brainstorm-experiments/scripts/experiment_designer.py project-management/discovery/brainstorm-experiments/assets/sample_hypotheses.json         # exit 0
+python3 project-management/discovery/brainstorm-experiments/scripts/experiment_designer.py project-management/discovery/brainstorm-experiments/assets/sample_hypotheses_flawed.json  # exit 1: no X%
+python3 project-management/discovery/brainstorm-experiments/scripts/experiment_designer.py --demo --format json
 ```
 
-Each hypothesis needs `hypothesis_text`, `target_segment`, and `product_type` (`new`/`existing`). Document each experiment with `assets/experiment_plan_template.md`.
+Each hypothesis needs `hypothesis_text`, `target_segment`, and `product_type` (`new`/`existing`). The tool suggests up to 3 methods by keyword match (treat them as suggestions, not a ranking you must follow) and sets each method&#x27;s pass bar to the hypothesis&#x27;s own X%, showing the method&#x27;s typical range only as context. Exit codes: 0 every hypothesis has an X% bar, 1 at least one has none, 2 bad input (missing file, invalid JSON, no hypotheses).
 
 ## Prototype-First Experiments
 
-AI app builders, AI design tools, and AI coding assistants can produce a clickable or working prototype in hours. Treat it as one more experiment method, with the same XYZ hypothesis and pre-set threshold:
-
-- **Use it when** the riskiest assumption is usability or desirability of a specific interaction. For demand (&quot;will anyone want this at all?&quot;), a landing page, fake door, or pre-order is still cheaper and more honest.
-- **Test it** with 5-8 target users on scripted tasks; measure task success and errors, not compliments. Say plainly that it is a prototype.
-- **Guard the data** — use synthetic data; do not load customer PII into third-party tools without approval.
-- **Record the outcome** in `assets/experiment_plan_template.md`, then carry validated results into `execution/create-prd/` (Prototype-First Path) — the PRD still owns problem, metrics, constraints, non-goals, and risks.
+An AI-built prototype is one more method with the same XYZ bar. Use it when the riskiest assumption is usability of a specific interaction, not demand (a fake door or landing page is cheaper for that). Test with 5-8 target users on scripted tasks and synthetic data. Fidelity levels, kill criteria and the handoff are in `discovery/ai-prototyping`.
 
 ## Anti-Patterns
 
@@ -540,16 +540,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Important Caveats:** pretotyping validates demand and value, not usability or performance; in-app surveys are the weakest SITG signal — use only when behavioral experiments are impractical; the tool&#x27;s keyword-to-signal matching is heuristic — override when domain knowledge dictates a better method.
 
-## Integration Points
+## Files
 
-| Integration | Direction | Description |
-|------------|-----------|-------------|
-| `brainstorm-ideas/` | Receives from | Ideas generated become hypotheses for experiment design |
-| `identify-assumptions/` | Receives from | &quot;Test Now&quot; assumptions become hypotheses for this skill |
-| `pre-mortem/` | Feeds into | Experiment results inform pre-mortem risk assessment before full build |
-| `execution/create-prd/` | Feeds into | Validated hypotheses become PRD assumptions with evidence |
-| `execution/brainstorm-okrs/` | Feeds into | Experiment metrics may become OKR key results |
-| `execution/outcome-roadmap/` | Feeds into | Experiment outcomes inform Now/Next/Later roadmap placement |
+| File | Purpose |
+|------|---------|
+| `scripts/experiment_designer.py` | Method suggestions with metric, pass bar, effort, duration and SITG level per hypothesis |
+| `assets/sample_hypotheses.json`, `assets/sample_hypotheses_flawed.json` | Runnable inputs: sound (exit 0) and missing pass bar (exit 1) |
+| `assets/experiment_plan_template.md` | Experiment plan to fill in before launch |
+| `examples/ai-summarization-willingness-to-pay-experiment.md` | Worked example |
+| `references/*.md` | See References |
 
 ---
 
@@ -577,7 +576,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Brainstorm Experiments&quot;**
-   - Description: &quot;Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.&quot;
+   - Description: &quot;Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and picks the method. Use when validating an idea before building, testing willingness to pay, or choosing between fake door, landing page and A/B test.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -631,24 +630,24 @@ Before designing the experiment, settle the inputs below. When one is missing or
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Quick Start
+## Workflow
+
+1. Write each belief as &quot;At least X% of Y will do Z within T&quot; and settle the Clarify First inputs.
+2. Run `experiment_designer.py` for method suggestions; pick the cheapest method that captures a skin-in-the-game signal.
+3. Record method, X% pass bar, minimum sample, counter-metric and timebox in `assets/experiment_plan_template.md` before launch.
+4. Done when the result is called pass, fail or inconclusive against the bar written before launch, with the counter-metric checked.
 
 ```bash
-python3 scripts/experiment_designer.py --demo            # built-in sample (3 hypotheses)
-python3 scripts/experiment_designer.py input.json        # design experiments for your hypotheses
-python3 scripts/experiment_designer.py input.json --format json
+python3 project-management/discovery/brainstorm-experiments/scripts/experiment_designer.py project-management/discovery/brainstorm-experiments/assets/sample_hypotheses.json         # exit 0
+python3 project-management/discovery/brainstorm-experiments/scripts/experiment_designer.py project-management/discovery/brainstorm-experiments/assets/sample_hypotheses_flawed.json  # exit 1: no X%
+python3 project-management/discovery/brainstorm-experiments/scripts/experiment_designer.py --demo --format json
 ```
 
-Each hypothesis needs `hypothesis_text`, `target_segment`, and `product_type` (`new`/`existing`). Document each experiment with `assets/experiment_plan_template.md`.
+Each hypothesis needs `hypothesis_text`, `target_segment`, and `product_type` (`new`/`existing`). The tool suggests up to 3 methods by keyword match (treat them as suggestions, not a ranking you must follow) and sets each method&#x27;s pass bar to the hypothesis&#x27;s own X%, showing the method&#x27;s typical range only as context. Exit codes: 0 every hypothesis has an X% bar, 1 at least one has none, 2 bad input (missing file, invalid JSON, no hypotheses).
 
 ## Prototype-First Experiments
 
-AI app builders, AI design tools, and AI coding assistants can produce a clickable or working prototype in hours. Treat it as one more experiment method, with the same XYZ hypothesis and pre-set threshold:
-
-- **Use it when** the riskiest assumption is usability or desirability of a specific interaction. For demand (&quot;will anyone want this at all?&quot;), a landing page, fake door, or pre-order is still cheaper and more honest.
-- **Test it** with 5-8 target users on scripted tasks; measure task success and errors, not compliments. Say plainly that it is a prototype.
-- **Guard the data** — use synthetic data; do not load customer PII into third-party tools without approval.
-- **Record the outcome** in `assets/experiment_plan_template.md`, then carry validated results into `execution/create-prd/` (Prototype-First Path) — the PRD still owns problem, metrics, constraints, non-goals, and risks.
+An AI-built prototype is one more method with the same XYZ bar. Use it when the riskiest assumption is usability of a specific interaction, not demand (a fake door or landing page is cheaper for that). Test with 5-8 target users on scripted tasks and synthetic data. Fidelity levels, kill criteria and the handoff are in `discovery/ai-prototyping`.
 
 ## Anti-Patterns
 
@@ -685,16 +684,15 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Important Caveats:** pretotyping validates demand and value, not usability or performance; in-app surveys are the weakest SITG signal — use only when behavioral experiments are impractical; the tool&#x27;s keyword-to-signal matching is heuristic — override when domain knowledge dictates a better method.
 
-## Integration Points
+## Files
 
-| Integration | Direction | Description |
-|------------|-----------|-------------|
-| `brainstorm-ideas/` | Receives from | Ideas generated become hypotheses for experiment design |
-| `identify-assumptions/` | Receives from | &quot;Test Now&quot; assumptions become hypotheses for this skill |
-| `pre-mortem/` | Feeds into | Experiment results inform pre-mortem risk assessment before full build |
-| `execution/create-prd/` | Feeds into | Validated hypotheses become PRD assumptions with evidence |
-| `execution/brainstorm-okrs/` | Feeds into | Experiment metrics may become OKR key results |
-| `execution/outcome-roadmap/` | Feeds into | Experiment outcomes inform Now/Next/Later roadmap placement |
+| File | Purpose |
+|------|---------|
+| `scripts/experiment_designer.py` | Method suggestions with metric, pass bar, effort, duration and SITG level per hypothesis |
+| `assets/sample_hypotheses.json`, `assets/sample_hypotheses_flawed.json` | Runnable inputs: sound (exit 0) and missing pass bar (exit 1) |
+| `assets/experiment_plan_template.md` | Experiment plan to fill in before launch |
+| `examples/ai-summarization-willingness-to-pay-experiment.md` | Worked example |
+| `references/*.md` | See References |
 
 ---
 
@@ -722,7 +720,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Brainstorm Experiments&quot;**
-   - Description: &quot;Experiment design expert using pretotyping and lean validation for both new product concepts and existing product features.&quot;
+   - Description: &quot;Designs cheap experiments with a pre-set pass bar (at least X% of Y will do Z) and picks the method. Use when validating an idea before building, testing willingness to pay, or choosing between fake door, landing page and A/B test.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -782,13 +780,8 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/discovery/brainstorm-experiments/scripts/tool_name.py --help</code></pre>
   
-  <h2>Quick Start</h2><pre><code>python3 scripts/experiment_designer.py --demo            # built-in sample (3 hypotheses)
-python3 scripts/experiment_designer.py input.json        # design experiments for your hypotheses
-python3 scripts/experiment_designer.py input.json --format json
-</code></pre>
-
-Each hypothesis needs `hypothesis_text`, `target_segment`, and `product_type` (`new`/`existing`). Document each experiment with `assets/experiment_plan_template.md`.
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/discovery/brainstorm-experiments/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

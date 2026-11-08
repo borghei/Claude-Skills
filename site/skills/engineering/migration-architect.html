@@ -371,7 +371,7 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Migration Architect</h1>
     <p class="page-subtitle">Plans zero-downtime migrations with compatibility validation, rollback strategies, and phased execution plans. Use when migrating databases, APIs, infrastructure, or services between platforms or versions.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Engineering</span> <span class="badge badge-version">v1.2.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">migrations</span><span class="tag">zero-downtime</span><span class="tag">rollback</span><span class="tag">database-migration</span><span class="tag">infrastructure</span></div>
   </div>
   <h2>How to Use</h2>
@@ -473,15 +473,28 @@ Before planning the migration, settle the inputs below. When one is missing or v
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `migration_planner.py` | Generate a phased migration plan with risk assessment | `python scripts/migration_planner.py --input spec.json --output plan.json --format both` |
-| `compatibility_checker.py` | Diff schemas/APIs and flag breaking changes | `python scripts/compatibility_checker.py --before v1.json --after v2.json --type database` |
-| `rollback_generator.py` | Generate a rollback runbook from a plan | `python scripts/rollback_generator.py --input plan.json --output runbook.json --format both` |
+| `migration_planner.py` | Phased migration plan with risk assessment from a migration spec | `python3 scripts/migration_planner.py --input spec.json --output plan.json --format both` |
+| `compatibility_checker.py` | Diff schemas or APIs and flag breaking changes | `python3 scripts/compatibility_checker.py --before v1.json --after v2.json --type database` |
+| `rollback_generator.py` | Rollback runbook from the planner&#x27;s plan JSON (not from the spec) | `python3 scripts/rollback_generator.py --input plan.json --output runbook.json --format both` |
 
-## References
+**Exit codes:** 0 done (compatibility checker: no breaking changes); 1 compatibility checker found potentially breaking changes; 2 unusable input (missing file, invalid JSON, missing required fields). A CI gate can therefore tell a real finding from a typo in a path.
+
+## Quick Start
+
+The tools chain: spec, then plan, then runbook. Run from `engineering/migration-architect/` and write outputs outside the repo.
+
+```bash
+OUT=$(mktemp -d)
+python3 scripts/migration_planner.py --input assets/sample_database_migration.json --output &quot;$OUT/plan.json&quot; --format json
+python3 scripts/rollback_generator.py --input &quot;$OUT/plan.json&quot; --format text
+python3 scripts/compatibility_checker.py --before assets/database_schema_before.json --after assets/database_schema_after.json --type database
+```
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -490,6 +503,29 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/migration_patterns_catalog.md](references/migration_patterns_catalog.md)** — deep catalog of migration patterns with mechanics and trade-offs. Read when choosing a pattern.
 - **[references/zero_downtime_techniques.md](references/zero_downtime_techniques.md)** — techniques for cutover without downtime (expand-contract, dual-write, traffic shifting). Read when downtime budget is near zero.
 - **[references/data_reconciliation_strategies.md](references/data_reconciliation_strategies.md)** — checksum/business-logic validation strategies to confirm data integrity post-migration. Read when verifying migrated data.
+
+## Anti-Patterns
+
+**Mistake:** A migration plan without a tested rollback.
+**Why it matters:** The moment you need the rollback is the worst moment to discover it does not work.
+**Instead:** Generate the runbook from the plan and rehearse it in staging before cutover.
+
+**Mistake:** Contract changes in one step (rename or drop in the same release that stops writing the old shape).
+**Why it matters:** Old and new code run side by side during a deploy; a one-step change breaks whichever version is still live.
+**Instead:** Expand, migrate, contract: add the new shape, dual-write and backfill, switch reads, then remove the old shape in a later release.
+
+**Mistake:** Treating a passing compatibility check as proof of safety.
+**Why it matters:** The checker compares declared schemas; it cannot see data volume, lock time or consumers it was not told about.
+**Instead:** Pair it with a dry run on production-sized data and a consumer inventory.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/migration_planner.py`, `scripts/compatibility_checker.py`, `scripts/rollback_generator.py` | Stdlib CLIs |
+| `assets/sample_database_migration.json`, `assets/sample_service_migration.json` | Migration specs for the planner |
+| `assets/database_schema_before.json`, `assets/database_schema_after.json` | Schema pair for the compatibility checker (breaking changes, exit 1) |
+| `expected_outputs/` | Example outputs |
 
 ## Scope &amp; Limitations
 
@@ -504,17 +540,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Application-level code refactoring required to support new schemas or APIs; see `engineering/api-design-reviewer` for API contract changes and `engineering/database-designer` for schema design.
 - Real-time monitoring, alerting, or dashboard provisioning during migration execution; see `engineering/observability-designer` for observability setup.
 - Cloud cost optimization or capacity planning for target infrastructure; see `engineering/ci-cd-pipeline-builder` for deployment pipeline configuration.
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `engineering/database-designer` | Design target schema before migration planning | Target schema JSON feeds into `compatibility_checker.py --after` |
-| `engineering/api-design-reviewer` | Validate API contract changes for service migrations | OpenAPI spec diffs feed into `compatibility_checker.py --type api` |
-| `engineering/observability-designer` | Set up monitoring dashboards referenced in migration runbooks | Migration plan success metrics inform alerting rule definitions |
-| `engineering/ci-cd-pipeline-builder` | Embed migration validation in CI/CD stages | `compatibility_checker.py` runs as a pipeline stage; `migration_planner.py --validate` gates deployments |
-| `engineering/runbook-generator` | Extend rollback runbooks with operational procedures | `rollback_generator.py` output serves as input for detailed operational runbooks |
-| `engineering/release-manager` | Coordinate migration cutover with release schedules | Migration plan phases and timelines align with release windows and feature-flag rollout stages |
 
 ---
 
@@ -593,15 +618,28 @@ Before planning the migration, settle the inputs below. When one is missing or v
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Tools
+## Tools Overview
 
 | Tool | Purpose | Command |
 |------|---------|---------|
-| `migration_planner.py` | Generate a phased migration plan with risk assessment | `python scripts/migration_planner.py --input spec.json --output plan.json --format both` |
-| `compatibility_checker.py` | Diff schemas/APIs and flag breaking changes | `python scripts/compatibility_checker.py --before v1.json --after v2.json --type database` |
-| `rollback_generator.py` | Generate a rollback runbook from a plan | `python scripts/rollback_generator.py --input plan.json --output runbook.json --format both` |
+| `migration_planner.py` | Phased migration plan with risk assessment from a migration spec | `python3 scripts/migration_planner.py --input spec.json --output plan.json --format both` |
+| `compatibility_checker.py` | Diff schemas or APIs and flag breaking changes | `python3 scripts/compatibility_checker.py --before v1.json --after v2.json --type database` |
+| `rollback_generator.py` | Rollback runbook from the planner&#x27;s plan JSON (not from the spec) | `python3 scripts/rollback_generator.py --input plan.json --output runbook.json --format both` |
 
-## References
+**Exit codes:** 0 done (compatibility checker: no breaking changes); 1 compatibility checker found potentially breaking changes; 2 unusable input (missing file, invalid JSON, missing required fields). A CI gate can therefore tell a real finding from a typo in a path.
+
+## Quick Start
+
+The tools chain: spec, then plan, then runbook. Run from `engineering/migration-architect/` and write outputs outside the repo.
+
+```bash
+OUT=$(mktemp -d)
+python3 scripts/migration_planner.py --input assets/sample_database_migration.json --output &quot;$OUT/plan.json&quot; --format json
+python3 scripts/rollback_generator.py --input &quot;$OUT/plan.json&quot; --format text
+python3 scripts/compatibility_checker.py --before assets/database_schema_before.json --after assets/database_schema_after.json --type database
+```
+
+## Reference Documentation
 
 Load the reference that matches the task — keep this file lean and pull detail on demand:
 
@@ -610,6 +648,29 @@ Load the reference that matches the task — keep this file lean and pull detail
 - **[references/migration_patterns_catalog.md](references/migration_patterns_catalog.md)** — deep catalog of migration patterns with mechanics and trade-offs. Read when choosing a pattern.
 - **[references/zero_downtime_techniques.md](references/zero_downtime_techniques.md)** — techniques for cutover without downtime (expand-contract, dual-write, traffic shifting). Read when downtime budget is near zero.
 - **[references/data_reconciliation_strategies.md](references/data_reconciliation_strategies.md)** — checksum/business-logic validation strategies to confirm data integrity post-migration. Read when verifying migrated data.
+
+## Anti-Patterns
+
+**Mistake:** A migration plan without a tested rollback.
+**Why it matters:** The moment you need the rollback is the worst moment to discover it does not work.
+**Instead:** Generate the runbook from the plan and rehearse it in staging before cutover.
+
+**Mistake:** Contract changes in one step (rename or drop in the same release that stops writing the old shape).
+**Why it matters:** Old and new code run side by side during a deploy; a one-step change breaks whichever version is still live.
+**Instead:** Expand, migrate, contract: add the new shape, dual-write and backfill, switch reads, then remove the old shape in a later release.
+
+**Mistake:** Treating a passing compatibility check as proof of safety.
+**Why it matters:** The checker compares declared schemas; it cannot see data volume, lock time or consumers it was not told about.
+**Instead:** Pair it with a dry run on production-sized data and a consumer inventory.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/migration_planner.py`, `scripts/compatibility_checker.py`, `scripts/rollback_generator.py` | Stdlib CLIs |
+| `assets/sample_database_migration.json`, `assets/sample_service_migration.json` | Migration specs for the planner |
+| `assets/database_schema_before.json`, `assets/database_schema_after.json` | Schema pair for the compatibility checker (breaking changes, exit 1) |
+| `expected_outputs/` | Example outputs |
 
 ## Scope &amp; Limitations
 
@@ -624,17 +685,6 @@ Load the reference that matches the task — keep this file lean and pull detail
 - Application-level code refactoring required to support new schemas or APIs; see `engineering/api-design-reviewer` for API contract changes and `engineering/database-designer` for schema design.
 - Real-time monitoring, alerting, or dashboard provisioning during migration execution; see `engineering/observability-designer` for observability setup.
 - Cloud cost optimization or capacity planning for target infrastructure; see `engineering/ci-cd-pipeline-builder` for deployment pipeline configuration.
-
-## Integration Points
-
-| Skill | Integration | Data Flow |
-|-------|-------------|-----------|
-| `engineering/database-designer` | Design target schema before migration planning | Target schema JSON feeds into `compatibility_checker.py --after` |
-| `engineering/api-design-reviewer` | Validate API contract changes for service migrations | OpenAPI spec diffs feed into `compatibility_checker.py --type api` |
-| `engineering/observability-designer` | Set up monitoring dashboards referenced in migration runbooks | Migration plan success metrics inform alerting rule definitions |
-| `engineering/ci-cd-pipeline-builder` | Embed migration validation in CI/CD stages | `compatibility_checker.py` runs as a pipeline stage; `migration_planner.py --validate` gates deployments |
-| `engineering/runbook-generator` | Extend rollback runbooks with operational procedures | `rollback_generator.py` output serves as input for detailed operational runbooks |
-| `engineering/release-manager` | Coordinate migration cutover with release schedules | Migration plan phases and timelines align with release windows and feature-flag rollout stages |
 
 ---
 
@@ -722,8 +772,14 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python engineering/migration-architect/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>This skill should be used when the user asks to &quot;check accessibility&quot;, &quot;audit WCAG compliance&quot;,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Design multi-agent orchestration with workflow DAGs, routing, handoff protocols, and state...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Multi-agent DAG orchestration for workflows where AI agents collaborate via dependency graphs,...</p></a></div>
+  <h2>Quick Start</h2>The tools chain: spec, then plan, then runbook. Run from `engineering/migration-architect/` and write outputs outside the repo.
+
+<pre><code>OUT=$(mktemp -d)
+python3 scripts/migration_planner.py --input assets/sample_database_migration.json --output &quot;$OUT/plan.json&quot; --format json
+python3 scripts/rollback_generator.py --input &quot;$OUT/plan.json&quot; --format text
+python3 scripts/compatibility_checker.py --before assets/database_schema_before.json --after assets/database_schema_after.json --type database
+</code></pre>
+  <h2>Related Skills in Engineering</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/engineering/a11y-audit.html" class="skill-card" style="text-decoration:none"><h3>A11y Audit</h3><p>Static WCAG scan of HTML files (alt text, headings, labels, ARIA, lang, landmarks) and colour...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Designer</h3><p>Designs multi-agent system architectures with orchestration patterns, tool schemas, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-harness.html" class="skill-card" style="text-decoration:none"><h3>Agent Harness</h3><p>Test and evaluation harness for AI agents — scenario suites, deterministic replay, regression...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-protocol.html" class="skill-card" style="text-decoration:none"><h3>Agent Protocol</h3><p>Design AI agent communication protocols: MCP tool schemas, A2A, function calling, and inter-...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agent-workflow-designer.html" class="skill-card" style="text-decoration:none"><h3>Agent Workflow Designer</h3><p>Designs multi-agent workflow DAGs (routing, hand-offs, state, retries) and validates and costs...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/engineering/agenthub.html" class="skill-card" style="text-decoration:none"><h3>Agenthub</h3><p>Runs a multi-agent job as a dependency graph: validates the DAG, tracks each agent&#x27;s state on a...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/engineering/migration-architect/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

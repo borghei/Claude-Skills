@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: engineering
   domain: offensive-security
-  updated: 2026-04-02
+  updated: 2026-11-08
   tags: [red-team, penetration-testing, security-assessment, adversary-simulation, engagement-planning]
 ---
 
@@ -38,13 +38,13 @@ Ask about the two or three inputs that matter most for this request, not the who
 
 ```bash
 # Plan a red team engagement
-python scripts/engagement_planner.py --type red-team --target web-application --duration 2w
+python3 scripts/engagement_planner.py --type red-team --target web-application --duration 2w
 
 # Plan a penetration test
-python scripts/engagement_planner.py --type pentest --target "api,network" --duration 1w --compliance pci-dss
+python3 scripts/engagement_planner.py --type pentest --target "api,network" --duration 1w --compliance pci-dss
 
 # Generate rules of engagement document
-python scripts/engagement_planner.py --type red-team --target "full-org" --output engagement_plan.json --format json
+python3 scripts/engagement_planner.py --type red-team --target "full-org" --output "$(mktemp -d)/engagement_plan.json" --format json
 ```
 
 ## Tools Overview
@@ -68,7 +68,7 @@ Generates comprehensive engagement plans including:
 ### Full Red Team Engagement
 1. Define engagement objectives and scope with `engagement_planner.py`
 2. Review generated rules of engagement with stakeholders
-3. Get formal sign-off on scope and ROE
+3. Get formal sign-off on scope and ROE. No signed ROE means stop: testing without written authorization is unauthorized access, whatever the intent
 4. Execute phases per the plan timeline
 5. Document findings throughout
 6. Deliver final report

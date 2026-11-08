@@ -116,41 +116,40 @@ export async function reactivateSubscription(subscriptionId: string) {
 
 ## Usage-Based Billing
 
+Current Stripe API versions bill usage through **Billing Meters**: you define a meter
+(event name, aggregation such as sum or count), attach a metered price to it, and send
+**meter events** keyed by customer. The legacy `subscriptionItems.createUsageRecord` /
+usage-record API was removed from current API versions; do not generate it. Check the
+Stripe docs for the exact meter options your account's API version supports.
+
 ```typescript
-// Report metered usage
-export async function reportUsage(
-  subscriptionItemId: string,
-  quantity: number,
-  idempotencyKey?: string,
-) {
-  return stripe.subscriptionItems.createUsageRecord(
-    subscriptionItemId,
-    {
-      quantity,
-      timestamp: Math.floor(Date.now() / 1000),
-      action: "increment",  // or "set" for absolute values
-    },
-    {
-      idempotencyKey,  // Prevent double-counting on retries
-    }
-  );
+// One-time setup (Dashboard or API): a meter that sums "value" per customer
+// await stripe.billing.meters.create({
+//   display_name: "API requests",
+//   event_name: "api_requests",
+//   default_aggregation: { formula: "sum" },
+// });
+// Then create a recurring price with recurring.usage_type = "metered" and recurring.meter = meter.id.
+
+// Report usage per request
+export async function reportUsage(stripeCustomerId: string, value: number, identifier: string) {
+  return stripe.billing.meterEvents.create({
+    event_name: "api_requests",
+    payload: { stripe_customer_id: stripeCustomerId, value: String(value) },
+    identifier, // unique per event; Stripe dedupes repeats, so retries do not double-count
+  });
 }
 
-// Middleware: track API usage per request
-export async function trackApiUsage(userId: string) {
+export async function trackApiUsage(userId: string, requestId: string) {
   const user = await db.user.findUnique({ where: { id: userId } });
-  if (!user?.stripeSubscriptionId) return;
-
-  const subscription = await stripe.subscriptions.retrieve(user.stripeSubscriptionId);
-  const meteredItem = subscription.items.data.find(
-    (item) => item.price.recurring?.usage_type === "metered"
-  );
-
-  if (meteredItem) {
-    await reportUsage(meteredItem.id, 1, `${userId}-${Date.now()}`);
-  }
+  if (!user?.stripeCustomerId) return;
+  await reportUsage(user.stripeCustomerId, 1, `${userId}-${requestId}`);
 }
 ```
+
+Use a stable identifier (the request or job ID), not `Date.now()`: a timestamp changes on
+retry and defeats deduplication. For high volume, aggregate locally and send one event per
+customer per interval rather than one per request.
 
 ---
 

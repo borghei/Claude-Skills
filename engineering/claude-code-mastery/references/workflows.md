@@ -88,7 +88,7 @@ Hooks run custom scripts at lifecycle events without user approval.
        "PostToolUse": [
          {
            "matcher": "Edit|Write",
-           "hooks": [{ "type": "command", "command": "prettier --write \"$CLAUDE_FILE_PATH\" 2>/dev/null || true" }]
+           "hooks": [{ "type": "command", "command": "F=$(jq -r '.tool_input.file_path // empty'); prettier --write \"$F\" 2>/dev/null || true" }]
          }
        ],
        "PreToolUse": [

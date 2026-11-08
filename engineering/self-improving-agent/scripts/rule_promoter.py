@@ -41,7 +41,7 @@ def load_memory(path):
     """Load memory file and parse entries."""
     if not os.path.exists(path):
         print(f"Error: Memory file '{path}' not found.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     content = Path(path).read_text(encoding="utf-8")
     lines = content.split("\n")
@@ -71,6 +71,11 @@ def load_memory(path):
         current["end_line"] = len(lines)
         current["content"] = "\n".join(current["raw_lines"])
         entries.append(current)
+
+    if not entries and re.search(r"(?m)^\s*[-*]\s*\[[^\]]+\]\([^)]+\.md\)", content):
+        print("Note: this MEMORY.md is an index of pointers to topic files. This tool promotes "
+              "'## ' section entries only; promote an index entry by moving the topic file's rule into "
+              "CLAUDE.md or .claude/rules/ by hand, then removing the pointer.", file=sys.stderr)
 
     return content, lines, entries
 
@@ -294,7 +299,7 @@ def main():
                 break
         if not target_entry:
             print(f"Error: Entry matching '{args.entry_title}' not found.", file=sys.stderr)
-            sys.exit(1)
+            sys.exit(2)
 
         validation = validate_promotion(target_entry)
         rule_text = generate_rule_text(target_entry)
@@ -310,7 +315,7 @@ def main():
             }
     else:
         parser.print_help()
-        sys.exit(1)
+        sys.exit(2)
 
     if args.json_output:
         print(json.dumps(result, indent=2))

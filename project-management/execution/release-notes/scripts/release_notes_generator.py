@@ -49,7 +49,7 @@ CATEGORY_ORDER = ["feature", "improvement", "bugfix", "breaking", "deprecation"]
 
 # Patterns that suggest an entry is too technical and needs rewriting
 TECHNICAL_PATTERNS = [
-    re.compile(r"\b(refactor|migrat|implement|updat|add|remov|fix)\w*\b", re.IGNORECASE),
+    re.compile(r"\b(?:refactor|implement|migrat|instrument|backport)\w*\b", re.IGNORECASE),
     re.compile(r"\b[A-Z][a-z]+[A-Z]\w+\b"),  # CamelCase class names
     re.compile(r"\b\w+_\w+\b"),  # snake_case identifiers
     re.compile(r"\b(API|SDK|CLI|OAuth|SAML|SSO|JWT|gRPC|REST)\b"),
@@ -96,7 +96,7 @@ DEMO_DATA: dict[str, Any] = {
         },
         {
             "title": "API v2 Migration",
-            "description": "The /v1/users endpoint has been replaced by /v2/users. Update your integrations before June 30.",
+            "description": "The /v1/users endpoint has been replaced by /v2/users. Update your integrations before 30 June 2026.",
             "type": "breaking",
             "ticket_id": "PROJ-180",
         },
@@ -111,7 +111,6 @@ DEMO_DATA: dict[str, Any] = {
 
 
 def validate_entries(entries: list[dict]) -> list[str]:
-    """Validate input entries and return a list of error messages."""
     errors = []
     for i, entry in enumerate(entries):
         if "title" not in entry or not entry["title"].strip():
@@ -129,17 +128,15 @@ def validate_entries(entries: list[dict]) -> list[str]:
 
 
 def check_technical_language(description: str) -> list[str]:
-    """Check if a description contains technical language that may need rewriting."""
     warnings = []
     for pattern in TECHNICAL_PATTERNS:
         matches = pattern.findall(description)
         if matches:
-            warnings.append(f"Possible technical language: {', '.join(set(matches))}")
+            warnings.append(f"Possible technical language: {', '.join(sorted(set(matches)))}")
     return warnings
 
 
 def group_entries(entries: list[dict]) -> dict[str, list[dict]]:
-    """Group entries by their type category."""
     groups: dict[str, list[dict]] = {t: [] for t in CATEGORY_ORDER}
     for entry in entries:
         entry_type = entry["type"]
@@ -154,7 +151,6 @@ def format_markdown(
     release_date: str,
     warnings: dict[str, list[str]],
 ) -> str:
-    """Format grouped entries as markdown release notes."""
     lines = []
     lines.append(f"# {product_name} v{version} Release Notes")
     lines.append("")
@@ -216,7 +212,6 @@ def format_json(
     release_date: str,
     warnings: dict[str, list[str]],
 ) -> str:
-    """Format grouped entries as JSON output."""
     output = {
         "product_name": product_name,
         "version": version,
@@ -257,7 +252,8 @@ def main() -> None:
             "Examples:\n"
             '  %(prog)s --input changes.json --product-name "Acme" --version "2.0.0"\n'
             '  %(prog)s --demo --product-name "Acme" --version "1.0.0"\n'
-            '  %(prog)s --input changes.json --format json --product-name "Acme" --version "2.0.0"'
+            '  %(prog)s --input changes.json --format json --product-name "Acme" --version "2.0.0"\n\n'
+            "Exit codes: 0 notes written, 2 missing file, invalid JSON, wrong shape or invalid entries."
         ),
     )
     parser.add_argument(
@@ -293,7 +289,7 @@ def main() -> None:
         "--date",
         type=str,
         default=None,
-        help="Release date in YYYY-MM-DD format (defaults to today)",
+        help="Release date YYYY-MM-DD (default: today; pass it so the notes are reproducible)",
     )
 
     args = parser.parse_args()
@@ -301,41 +297,41 @@ def main() -> None:
     if not args.input and not args.demo:
         parser.error("Provide --input <file> or --demo")
 
-    # Load data
     if args.demo:
         data = DEMO_DATA
     else:
         try:
             with open(args.input, "r", encoding="utf-8") as f:
                 data = json.load(f)
-        except FileNotFoundError:
-            print(f"Error: File not found: {args.input}", file=sys.stderr)
-            sys.exit(1)
-        except json.JSONDecodeError as e:
-            print(f"Error: Invalid JSON in {args.input}: {e}", file=sys.stderr)
-            sys.exit(1)
+        except OSError as e:
+            print(f"error: cannot read {args.input}: {e.strerror or e}", file=sys.stderr)
+            sys.exit(2)
+        except ValueError as e:
+            print(f"error: invalid JSON in {args.input}: {e}", file=sys.stderr)
+            sys.exit(2)
 
-    entries = data.get("entries", [])
-    if not entries:
-        print("Error: No entries found in input data.", file=sys.stderr)
-        sys.exit(1)
+    entries = data.get("entries") if isinstance(data, dict) else None
+    if not isinstance(entries, list) or not entries or not all(isinstance(e, dict) for e in entries):
+        print("error: input must be a JSON object with a non-empty 'entries' list of objects", file=sys.stderr)
+        sys.exit(2)
+    if args.date:
+        try:
+            date.fromisoformat(args.date)
+        except ValueError:
+            print(f"error: --date must be YYYY-MM-DD, got {args.date!r}", file=sys.stderr)
+            sys.exit(2)
 
-    # Validate
     errors = validate_entries(entries)
     if errors:
-        print("Validation errors:", file=sys.stderr)
-        for err in errors:
-            print(f"  - {err}", file=sys.stderr)
-        sys.exit(1)
+        print("error: invalid entries: " + "; ".join(errors), file=sys.stderr)
+        sys.exit(2)
 
-    # Check for technical language
     warnings: dict[str, list[str]] = {}
     for entry in entries:
         entry_warnings = check_technical_language(entry["description"])
         if entry_warnings:
             warnings[entry["title"]] = entry_warnings
 
-    # Group and format
     groups = group_entries(entries)
     release_date = args.date or date.today().isoformat()
 
@@ -348,4 +344,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (TypeError, ValueError, AttributeError, KeyError) as exc:  # field of the wrong type
+        print(f"error: input has a field of the wrong type: {exc}", file=sys.stderr)
+        sys.exit(2)

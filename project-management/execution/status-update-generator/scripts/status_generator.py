@@ -146,9 +146,10 @@ def _badge(status: str) -> str:
 def _normalize(data: dict[str, Any]) -> dict[str, Any]:
     """Apply defaults and minor normalization to incoming data."""
     out = dict(data)
-    out["status"] = (data.get("status") or "green").lower()
+    out["status"] = str(data.get("status") or "").lower()
     if out["status"] not in VALID_STATUS:
-        out["status"] = "green"
+        # R/Y/G is a human judgment: never default it to green.
+        raise ValueError("status must be green, yellow or red; set it in the file or with --status")
     out.setdefault("highlights", [])
     out.setdefault("blockers", [])
     out.setdefault("risks", [])
@@ -550,7 +551,14 @@ def main(argv: list[str] | None = None) -> int:
     if args.status:
         data = dict(data, status=args.status)
 
-    data = _normalize(data)
+    if not isinstance(data, dict):
+        print(f"ERROR: {args.input}: top level must be a JSON object (see --demo --format json)", file=sys.stderr)
+        return 2
+    try:
+        data = _normalize(data)
+    except ValueError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        return 2
     rendered = FORMATTERS[args.format](data)
 
     if args.output:

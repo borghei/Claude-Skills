@@ -11,7 +11,7 @@ metadata:
   author: borghei
   category: project-management
   domain: product-discovery
-  updated: 2026-09-21
+  updated: 2026-11-08
   python-tools: prototype_plan.py, prototype_handoff_checker.py
   tech-stack: ai-prototyping, product-discovery, usability-testing, handoff
   tags:
@@ -55,16 +55,24 @@ Ask about the two or three inputs that matter most for this request, not the who
 ```bash
 # 1. Plan: fidelity, method, sample, success + kill criteria per hypothesis
 python3 project-management/discovery/ai-prototyping/scripts/prototype_plan.py \
-  --input hypotheses.json                      # exit 2 = a hypothesis is untestable
+  --input project-management/discovery/ai-prototyping/assets/hypotheses_sample.json      # exit 0
+python3 project-management/discovery/ai-prototyping/scripts/prototype_plan.py \
+  --input project-management/discovery/ai-prototyping/assets/hypotheses_untestable.json  # exit 2 = a hypothesis is untestable
 
 # 2. Brief the tool with assets/prototype_brief_template.md, test, record findings
 
 # 3. Gate the handoff (JSON or the markdown template)
 python3 project-management/discovery/ai-prototyping/scripts/prototype_handoff_checker.py \
-  --input handoff.md --strict                  # exit 2 = handoff incomplete
+  --input project-management/discovery/ai-prototyping/assets/handoff_complete.json        # exit 0 (1 warning)
+python3 project-management/discovery/ai-prototyping/scripts/prototype_handoff_checker.py \
+  --input project-management/discovery/ai-prototyping/assets/handoff_incomplete.json      # exit 2 = handoff incomplete
+# your own handoff: fill assets/handoff_template.md and pass it with --strict
 ```
 
 ## Tools Overview
+
+Tags used below: [PROVEN] has published evidence or repeated practice behind it, [RECOMMENDED] is this skill's default, [EXPERIMENTAL] is new practice to try with care.
+
 
 | Tool | Input | What it does | Gate (exit 2) |
 |------|-------|--------------|---------------|
@@ -200,7 +208,7 @@ A 0-16 health rubric for a team's prototyping practice is in [references/testing
 - The planner holds F4 at F3 until the input records real-data approval. It cannot confirm that the approval exists.
 - Whether a prototype is throwaway or a starting point, and whether a result passed the bar, stay team decisions.
 
-## Reference Documentation
+## Reference Documentation and Files
 
 - [references/prototype-decision-guide.md](references/prototype-decision-guide.md) - uncertainty test, fidelity ladder with traps, the seven-part brief, worked decisions, sample-size guidance stated honestly
 - [references/testing-handoff-governance.md](references/testing-handoff-governance.md) - running sessions, demo-ware bias, what must be written down, throwaway checklist, acceptance-criteria extraction, data/security/IP/accessibility governance, health rubric, sources
@@ -219,7 +227,4 @@ Self-contained; these sections elsewhere cover the same ground from their angle:
 - `project-management/discovery/identify-assumptions/` - surfacing and classifying the assumptions tested here
 - `project-management/execution/ai-feature-prd/` - when the prototype is itself an AI feature needing evals and guardrails
 
-## Sources
-
-- W3C, *Web Content Accessibility Guidelines (WCAG) 2.2*, W3C Recommendation - https://www.w3.org/TR/WCAG22/
-- OWASP GenAI Security Project, *LLM01:2025 Prompt Injection* - https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+Sources (WCAG 2.2, OWASP LLM01:2025) are listed in `references/testing-handoff-governance.md` section 6.

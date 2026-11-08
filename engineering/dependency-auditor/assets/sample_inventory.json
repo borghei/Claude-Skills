@@ -1,0 +1,11 @@
+{
+  "_note": "Inventory shape shared by license_checker.py --inventory and upgrade_planner.py. 'license' and 'latest' are filled from the registry (npm view <pkg> license version / pip index versions <pkg>). Versions are illustrative.",
+  "dependencies": [
+    {"name": "express", "version": "4.18.1", "latest": "4.21.2", "ecosystem": "npm", "direct": true, "license": "MIT"},
+    {"name": "lodash", "version": "4.17.20", "latest": "4.17.21", "ecosystem": "npm", "direct": true, "license": "MIT"},
+    {"name": "axios", "version": "0.27.2", "latest": "1.7.9", "ecosystem": "npm", "direct": true, "license": "MIT"},
+    {"name": "jsonwebtoken", "version": "8.5.1", "latest": "9.0.2", "ecosystem": "npm", "direct": true, "license": "MIT"},
+    {"name": "readline-sync-gpl", "version": "1.0.0", "latest": "1.0.0", "ecosystem": "npm", "direct": true, "license": "GPL-3.0"},
+    {"name": "left-pad-internal", "version": "1.3.0", "ecosystem": "npm", "direct": false}
+  ]
+}

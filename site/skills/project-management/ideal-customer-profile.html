@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ideal Customer Profile - Claude Skills</title>
-  <meta name="description" content="Define a sharp Ideal Customer Profile (ICP) — firmographics, behavioral signals, JTBD, and buyer persona. Use when defining a new ICP, refining one from actual closed customers, or auditing why pipeli">
+  <meta name="description" content="Defines which accounts to sell to across eight dimensions with explicit exclusions, then scores real accounts against that profile. Use when defining or refining an ICP, building a qualification rubri">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/project-management/ideal-customer-profile.html">
   <meta property="og:title" content="Ideal Customer Profile - Claude Skills">
-  <meta property="og:description" content="Define a sharp Ideal Customer Profile (ICP) — firmographics, behavioral signals, JTBD, and buyer persona. Use when defining a new ICP, refining one from actual closed customers, or auditing why pipeli">
+  <meta property="og:description" content="Defines which accounts to sell to across eight dimensions with explicit exclusions, then scores real accounts against that profile. Use when defining or refining an ICP, building a qualification rubri">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/project-management/ideal-customer-profile.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Ideal Customer Profile", "description": "Define a sharp Ideal Customer Profile (ICP) — firmographics, behavioral signals, JTBD, and buyer persona. Use when defining a new ICP, refining one from actual closed customers, or auditing why pipeline or conversion is poor.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/ideal-customer-profile.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Ideal Customer Profile", "description": "Defines which accounts to sell to across eight dimensions with explicit exclusions, then scores real accounts against that profile. Use when defining or refining an ICP, building a qualification rubric, or diagnosing poor pipeline.", "applicationCategory": "Project Management", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/project-management/ideal-customer-profile.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,8 +370,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Ideal Customer Profile</h1>
-    <p class="page-subtitle">Define a sharp Ideal Customer Profile (ICP) — firmographics, behavioral signals, JTBD, and buyer persona. Use when defining a new ICP, refining one from actual closed customers, or auditing why pipeline or conversion is poor.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <p class="page-subtitle">Defines which accounts to sell to across eight dimensions with explicit exclusions, then scores real accounts against that profile. Use when defining or refining an ICP, building a qualification rubric, or diagnosing poor pipeline.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Project Management</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
     <div class="skill-meta" style="margin-bottom:24px"><span class="tag">icp</span><span class="tag">buyer-persona</span><span class="tag">firmographics</span><span class="tag">jobs-to-be-done</span><span class="tag">segmentation</span></div>
   </div>
   <h2>How to Use</h2>
@@ -393,20 +393,17 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Ideal Customer Profile (Project Management domain).
 
-Define a sharp Ideal Customer Profile (ICP) — firmographics, behavioral signals, JTBD, and buyer persona. Use when defining a new ICP, refining one from actual closed customers, or auditing why pipeline or conversion is poor.
+Defines which accounts to sell to across eight dimensions with explicit exclusions, then scores real accounts against that profile. Use when defining or refining an ICP, building a qualification rubric, or diagnosing poor pipeline.
 
-The sharp definition of who you serve — used by marketing for targeting, sales for qualification, and product for prioritization. - **Defining ICP** for a new product / segment
+The agent defines which companies to sell to, sharply enough that a BDR could build a list from it tomorrow and that it excludes most of the market. Marketing uses it to target, sales to qualify, product to prioritise. The ICP describes the account; the persona describes the human buyer inside it. *
 
 ## Your Key Capabilities
-- Firmographic specificity test
-- Tech-stack signals
-- Trigger event types
-- Reachability test
-- &quot;Define ICP for our new product&quot;
-- &quot;Refine ICP from closed customers&quot;
+- An ICP that excludes nobody
+- The ICP you wish you had
+- Unreachable ICP
 
 ## Frameworks &amp; Templates You Know
-- Decision frameworks
+- | `assets/icp_template.md` | Fill-in template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -426,20 +423,17 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Ideal Customer Profile (Project Management domain).
 
-Define a sharp Ideal Customer Profile (ICP) — firmographics, behavioral signals, JTBD, and buyer persona. Use when defining a new ICP, refining one from actual closed customers, or auditing why pipeline or conversion is poor.
+Defines which accounts to sell to across eight dimensions with explicit exclusions, then scores real accounts against that profile. Use when defining or refining an ICP, building a qualification rubric, or diagnosing poor pipeline.
 
-The sharp definition of who you serve — used by marketing for targeting, sales for qualification, and product for prioritization. - **Defining ICP** for a new product / segment
+The agent defines which companies to sell to, sharply enough that a BDR could build a list from it tomorrow and that it excludes most of the market. Marketing uses it to target, sales to qualify, product to prioritise. The ICP describes the account; the persona describes the human buyer inside it. *
 
 ## Your Key Capabilities
-- Firmographic specificity test
-- Tech-stack signals
-- Trigger event types
-- Reachability test
-- &quot;Define ICP for our new product&quot;
-- &quot;Refine ICP from closed customers&quot;
+- An ICP that excludes nobody
+- The ICP you wish you had
+- Unreachable ICP
 
 ## Frameworks &amp; Templates You Know
-- Decision frameworks
+- | `assets/icp_template.md` | Fill-in template |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -469,36 +463,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Ideal Customer Profile (ICP)
 
-The sharp definition of who you serve — used by marketing for targeting,
-sales for qualification, and product for prioritization.
+The agent defines which companies to sell to, sharply enough that a BDR could build a list from it tomorrow and that it excludes most of the market. Marketing uses it to target, sales to qualify, product to prioritise. The ICP describes the account; the persona describes the human buyer inside it.
 
-## When to use this skill
+**Done looks like:** all eight dimensions defined (firmographics, tech stack, buyer persona, job to be done, existing alternatives, trigger events, budget authority, reachability) with specifics; written exclusions; an addressable list size; a weighted rubric that sorts real accounts into strong / workable / marginal / disqualify; `icp_scorer.py --mode validate` exits 0.
 
-- **Defining ICP** for a new product / segment
-- **Refining ICP** from observed closed customers
-- **Auditing** when pipeline quality / conversion is poor
-- **Pre-fundraise** to articulate market position
-- **Sales qualification** rubric build
-- **Marketing targeting** for outbound + paid
+## When to Use
 
-## The 8 ICP dimensions
+- Defining an ICP for a new product or segment, or refining one from closed-won customers
+- Pipeline quality or conversion is poor and nobody agrees who the customer is
+- Building a sales qualification rubric or an outbound target list
 
-1. **Firmographics** — industry, vertical, size, geography, age
-2. **Tech-stack signals** — what they use today (and what&#x27;s missing)
-3. **Buyer persona** — role, level, tenure, team size
-4. **Jobs-to-be-done (JTBD)** — what they&#x27;re trying to accomplish
-5. **Existing alternatives** — how they solve the JTBD today
-6. **Trigger events** — why now (new funding, new exec, regulation, etc.)
-7. **Budget authority** — who controls spend
-8. **Reachability** — can we find + contact them via channels we have
-
-## ICP vs Persona vs Segment
-
-- **ICP** = the company/account (firmographics + tech + situation)
-- **Persona** = the human buyer (role + motivations + objections)
-- **Segment** = a cluster of similar ICPs (often by size or vertical)
-
-Use ICP for &quot;which companies.&quot; Use persona for &quot;which humans within ICP.&quot;
+The ICP feeds `project-management/gtm/gtm-strategy`.
 
 ## Clarify First
 
@@ -510,155 +485,64 @@ Before defining the ICP, settle the inputs below. When one is missing or vague a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Start from your best customers
-If you have customers:
-- List top 20 by health, revenue, expansion
-- Find common patterns across them
-- That&#x27;s your real ICP (not what you guessed)
-
-If you don&#x27;t have customers:
-- Use design partners / pilot customers as proxy
-- Be ready to revise after 10-20 real customers
-
-### Step 2 — Disqualify common myth-ICPs
-
-Common &quot;ICP&quot; patterns that are wishful thinking:
-- &quot;Companies with 100-10,000 employees&quot; — too broad
-- &quot;Innovative companies&quot; — meaningless
-- &quot;Companies that want to grow&quot; — everyone
-- &quot;Enterprise&quot; — undefined; map to size
-
-A real ICP excludes most companies.
-
-### Step 3 — Document the 8 dimensions
-Per dimension, be specific.
-
-Example for HR analytics SaaS:
-
-| Dimension | Definition |
-|-----------|------------|
-| Firmographics | US, mid-market (200-2000 EE), SaaS or services vertical, &gt; $20M revenue, 5+ years old |
-| Tech-stack | Workday or BambooHR + ADP or Gusto. Bonus: existing BI tool (Looker / Tableau / Mode) |
-| Buyer persona | HR Director or VP People; 5+ years tenure; built career on people analytics |
-| JTBD | &quot;I need to be a strategic partner to the CFO/CEO; I&#x27;m stuck doing reports manually&quot; |
-| Existing alternatives | Excel + analyst (often resigned to it); occasionally hired contractor |
-| Trigger events | Annual reporting cycle just done; new CFO joined; HR analyst departed; board asking for better data |
-| Budget authority | Director can recommend; VP People approves $50K; CHRO approves $200K+ |
-| Reachability | SHRM events, HR Tech podcast, LinkedIn (HR Director groups), HR Brew newsletter |
-
-### Step 4 — Build the qualification rubric
-For sales qualification, distill ICP to a scorable checklist:
-
-```
-Qualification (BANT-style):
-- Industry fit: SaaS/services? (yes/no)
-- Size fit: 200-2000 EE? (yes/no)
-- Tech fit: Workday/BambooHR + ADP/Gusto? (yes/no)
-- Authority: VP People+ in deal? (yes/no)
-- Pain: actively trying to solve HR analytics? (yes/no)
-- Budget: confirmed &gt; $50K? (yes/no)
-- Timeline: decision in next 6 months? (yes/no)
-```
-
-5+ yes = strong lead. &lt;3 yes = disqualify.
-
-### Step 5 — Run `icp_scorer.py`
-Audit ICP definition for specificity, score account lists against ICP.
+## Quick Start
 
 ```bash
+# Complete ICP definition: exit 0
 python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py \
-  --input icp_spec.json --format markdown
+  --input project-management/gtm/ideal-customer-profile/assets/sample_icp.json --mode validate --format markdown
 ```
 
-### Step 6 — Refresh per quarter
-ICP shifts:
-- New customers reveal new patterns
-- Product evolution opens new segments
-- Market shifts (recession, regulation, competition)
+```bash
+# Thin ICP (4 of 8 dimensions, no exclusions): exit 1
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py \
+  --input project-management/gtm/ideal-customer-profile/assets/sample_icp_flawed.json --mode validate --format markdown
+```
 
-Don&#x27;t refresh weekly. Quarterly is healthy.
+```bash
+# Rank four accounts: Northwind 95 strong, Contoso 68 workable, Fabrikam 45 marginal, Tailspin 20 disqualify
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py \
+  --input project-management/gtm/ideal-customer-profile/assets/sample_accounts.json --mode score --format markdown
+```
 
-## Decision frameworks
+```bash
+# Input schema and flags
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py --help
+```
 
-### Firmographic specificity test
+## Tools Overview
 
-For each dimension, ask:
-- Could I send a list of companies matching this to my BDR tomorrow?
-- If not, sharpen.
+`icp_scorer.py` is the quality gate for this skill. **What the scorer checks:** validate mode counts the eight dimensions marked defined (fail under six), warns when firmographics are not specific, triggers are not listed, the addressable list is missing or under 200, or there are no disqualification criteria. Score mode normalises the weights to 100, converts each 0-3 rating to a share of its weight, and bands at 80 / 60 / 40. The `defined` and `specific` flags are self-reported: read the definitions too.
 
-Vague: &quot;growing SaaS companies&quot;
-Sharp: &quot;US-headquartered B2B SaaS companies, $10M-$100M ARR, post-Series B, that have hired their first VP of Sales in last 12 months&quot;
+**Exit codes:** `0` no fail findings · `1` validate: fewer than six dimensions defined; score: no accounts · `2` unreadable file, invalid JSON or a top level that is not an object. `--mode` is required. JSON by default, `--format markdown`, `--output FILE`.
 
-### Tech-stack signals
+## Workflow
 
-Tech stack reveals readiness:
-- Have a CRM = likely structured sales process
-- Have an HRIS = HR team beyond founder/HR-of-1
-- Use a specific vendor = open to category
-- Built in-house = NIH (Not Invented Here) bias risk
+1. **Start from your best customers.** List the top 20 by health, revenue and expansion and find what they share; that is the real ICP. Without customers, use design partners and plan to revise after 10-20 real ones.
+2. **Reject myth ICPs.** &quot;100-10,000 employees&quot;, &quot;innovative companies&quot;, &quot;companies that want to grow&quot;, &quot;enterprise&quot;: none of these exclude anyone.
+3. **Define the eight dimensions** specifically, plus exclusions. Test each: could a BDR build a list from it tomorrow? Triggers should be events that start buying (a new executive, a funding round, a regulatory deadline, an incident), not &quot;they have budget&quot;. A worked example and the specificity, tech-stack, trigger and reachability tests are in the appendix of `references/icp-dimensions-deep.md`.
+4. **Validate.** Write the ICP as JSON (schema in `--help`; `assets/sample_icp.json`) and run validate mode. It must pass with no fail findings; then verify that each warning is fixed.
+5. **Build the rubric and score accounts.** Rate each account 0-3 on industry, size, geography, tech stack, buyer role, trigger, budget authority and timeline, weighted (default weights in `--help`). Run score mode on a real list and check the bands match the sales team&#x27;s gut on accounts they know; if not, fix the weights.
+6. **Refresh quarterly** as new customers, product changes and market shifts move the pattern.
 
-Tools like BuiltWith, G2, Crunchbase + scraping can reveal stack.
+## Anti-Patterns
 
-### Trigger event types
+### An ICP that excludes nobody
+**Mistake:** &quot;B2B companies with 100-10,000 employees.&quot;
+**Why it happens:** Narrowing feels like losing deals.
+**Instead:** Write exclusions first. A real ICP rules out most of the market.
 
-Strongest triggers (cause buying activity):
-- New executive in role (60-day window)
-- Funding round closed (have budget; want to spend strategically)
-- M&amp;A activity (integration needs)
-- Regulatory deadline (compliance pressure)
-- Major incident (urgent need)
-- Vendor consolidation push
-- Annual planning cycle (Q4)
-- Reorg / department restructure
+### The ICP you wish you had
+**Mistake:** The ICP describes the customers the team wants, not the ones who buy, stay and expand.
+**Why it happens:** Aspirational logos are more exciting than the current base.
+**Instead:** Derive it from the top 20 customers and test it against closed-lost deals.
 
-Weaker triggers:
-- &quot;They might want it&quot;
-- &quot;They have the budget&quot;
+### Unreachable ICP
+**Mistake:** A precise profile nobody can find through any channel the company has.
+**Why it happens:** Reachability is treated as marketing&#x27;s problem later.
+**Instead:** Size the addressable list and name the channels before adopting the ICP.
 
-### Reachability test
-
-For each ICP, can you:
-- Find them via paid acquisition? (size of audience; CPC)
-- Find them via outbound? (LinkedIn search, ZoomInfo, Apollo)
-- Find them at events? (SHRM, RSA, AWS reInvent, etc.)
-- Find them via content? (SEO keywords they search)
-- Find them via partners? (which adjacent vendors)
-
-If unreachable, ICP is academic.
-
-## Common engagements
-
-### &quot;Define ICP for our new product&quot;
-1. Pull design partner / pilot data (or interview 5-10 ideal targets).
-2. Document the 8 dimensions.
-3. Build qualification rubric.
-4. Validate with sales: can they recognize these in inbound?
-5. Validate with marketing: can they target this list?
-
-### &quot;Refine ICP from closed customers&quot;
-1. List top 20 paying customers by health/expansion.
-2. Find patterns: size, vertical, role, trigger, tech stack.
-3. Document refined ICP.
-4. Compare to original ICP: what&#x27;s different?
-5. Update qualification rubric + targeting.
-6. Sunset segments not in refined ICP.
-
-### &quot;Pipeline conversion is bad — is it ICP?&quot;
-1. Audit closed-won vs closed-lost ICP fit scores.
-2. Common failure: pipeline is full of &quot;near-ICP&quot; that don&#x27;t convert.
-3. Tighten qualification; reject more aggressively at intake.
-
-## Anti-patterns to avoid
-
-- **ICP = &quot;everyone.&quot;** Diluted GTM.
-- **ICP without trigger event.** Targets without urgency.
-- **ICP unreachable via your channels.** Academic exercise.
-- **ICP that doesn&#x27;t disqualify anyone.** Not really an ICP.
-- **Same ICP for 3 years post-launch.** Customers reveal real ICP; refresh.
-- **ICP defined by product, not customer.** &quot;Companies that need X&quot; = solution-thinking.
-- **ICP without qualification rubric.** Sales can&#x27;t apply it.
+More: `references/icp-refinement-from-data.md`.
 
 ## Scope &amp; Limitations
 
@@ -677,14 +561,24 @@ If unreachable, ICP is academic.
 
 **Important Caveats:**
 - Every per-account fit score and every `defined` or `specific` flag is entered by hand. The tool checks and weights them but does not verify them.
-- Scoring weights and the &quot;5+ yes is a strong lead&quot; cut-off are starting defaults to tune against closed-won and closed-lost data.
+- Scoring weights and the 80 / 60 / 40 band cut-offs are starting defaults to tune against closed-won and closed-lost data.
 - A greenfield ICP is a hypothesis until 10-20 real customers confirm it.
 - ICPs drift with the product and the market. The skill expects a quarterly refresh.
 
-## References
+## Files
 
-- `references/icp-dimensions-deep.md` — 8 dimensions in depth + signals
-- `references/icp-refinement-from-data.md` — using closed customers to refine
+| File | Purpose |
+|------|---------|
+| `scripts/icp_scorer.py` | ICP validation and account scoring |
+| `assets/sample_icp.json` | Complete eight-dimension ICP; validate exits 0 |
+| `assets/sample_icp_flawed.json` | Thin ICP; validate exits 1 |
+| `assets/sample_accounts.json` | Four accounts across all four bands |
+| `assets/icp_template.md` | Fill-in template |
+
+## Reference Documentation
+
+- [references/icp-dimensions-deep.md](references/icp-dimensions-deep.md): Each dimension in depth; appendix with worked example and tests
+- [references/icp-refinement-from-data.md](references/icp-refinement-from-data.md): Refining an ICP from closed customers
 
 ## Related skills
 
@@ -721,7 +615,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Ideal Customer Profile&quot;**
-   - Description: &quot;Define a sharp Ideal Customer Profile (ICP) — firmographics, behavioral signals, JTBD, and buyer persona. Use when defining a new ICP, refining one from actual closed customers, or auditing why pipeline or conversion is poor.&quot;
+   - Description: &quot;Defines which accounts to sell to across eight dimensions with explicit exclusions, then scores real accounts against that profile. Use when defining or refining an ICP, building a qualification rubric, or diagnosing poor pipeline.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -746,36 +640,17 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Ideal Customer Profile (ICP)
 
-The sharp definition of who you serve — used by marketing for targeting,
-sales for qualification, and product for prioritization.
+The agent defines which companies to sell to, sharply enough that a BDR could build a list from it tomorrow and that it excludes most of the market. Marketing uses it to target, sales to qualify, product to prioritise. The ICP describes the account; the persona describes the human buyer inside it.
 
-## When to use this skill
+**Done looks like:** all eight dimensions defined (firmographics, tech stack, buyer persona, job to be done, existing alternatives, trigger events, budget authority, reachability) with specifics; written exclusions; an addressable list size; a weighted rubric that sorts real accounts into strong / workable / marginal / disqualify; `icp_scorer.py --mode validate` exits 0.
 
-- **Defining ICP** for a new product / segment
-- **Refining ICP** from observed closed customers
-- **Auditing** when pipeline quality / conversion is poor
-- **Pre-fundraise** to articulate market position
-- **Sales qualification** rubric build
-- **Marketing targeting** for outbound + paid
+## When to Use
 
-## The 8 ICP dimensions
+- Defining an ICP for a new product or segment, or refining one from closed-won customers
+- Pipeline quality or conversion is poor and nobody agrees who the customer is
+- Building a sales qualification rubric or an outbound target list
 
-1. **Firmographics** — industry, vertical, size, geography, age
-2. **Tech-stack signals** — what they use today (and what&#x27;s missing)
-3. **Buyer persona** — role, level, tenure, team size
-4. **Jobs-to-be-done (JTBD)** — what they&#x27;re trying to accomplish
-5. **Existing alternatives** — how they solve the JTBD today
-6. **Trigger events** — why now (new funding, new exec, regulation, etc.)
-7. **Budget authority** — who controls spend
-8. **Reachability** — can we find + contact them via channels we have
-
-## ICP vs Persona vs Segment
-
-- **ICP** = the company/account (firmographics + tech + situation)
-- **Persona** = the human buyer (role + motivations + objections)
-- **Segment** = a cluster of similar ICPs (often by size or vertical)
-
-Use ICP for &quot;which companies.&quot; Use persona for &quot;which humans within ICP.&quot;
+The ICP feeds `project-management/gtm/gtm-strategy`.
 
 ## Clarify First
 
@@ -787,155 +662,64 @@ Before defining the ICP, settle the inputs below. When one is missing or vague a
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
-## Workflow
-
-### Step 1 — Start from your best customers
-If you have customers:
-- List top 20 by health, revenue, expansion
-- Find common patterns across them
-- That&#x27;s your real ICP (not what you guessed)
-
-If you don&#x27;t have customers:
-- Use design partners / pilot customers as proxy
-- Be ready to revise after 10-20 real customers
-
-### Step 2 — Disqualify common myth-ICPs
-
-Common &quot;ICP&quot; patterns that are wishful thinking:
-- &quot;Companies with 100-10,000 employees&quot; — too broad
-- &quot;Innovative companies&quot; — meaningless
-- &quot;Companies that want to grow&quot; — everyone
-- &quot;Enterprise&quot; — undefined; map to size
-
-A real ICP excludes most companies.
-
-### Step 3 — Document the 8 dimensions
-Per dimension, be specific.
-
-Example for HR analytics SaaS:
-
-| Dimension | Definition |
-|-----------|------------|
-| Firmographics | US, mid-market (200-2000 EE), SaaS or services vertical, &gt; $20M revenue, 5+ years old |
-| Tech-stack | Workday or BambooHR + ADP or Gusto. Bonus: existing BI tool (Looker / Tableau / Mode) |
-| Buyer persona | HR Director or VP People; 5+ years tenure; built career on people analytics |
-| JTBD | &quot;I need to be a strategic partner to the CFO/CEO; I&#x27;m stuck doing reports manually&quot; |
-| Existing alternatives | Excel + analyst (often resigned to it); occasionally hired contractor |
-| Trigger events | Annual reporting cycle just done; new CFO joined; HR analyst departed; board asking for better data |
-| Budget authority | Director can recommend; VP People approves $50K; CHRO approves $200K+ |
-| Reachability | SHRM events, HR Tech podcast, LinkedIn (HR Director groups), HR Brew newsletter |
-
-### Step 4 — Build the qualification rubric
-For sales qualification, distill ICP to a scorable checklist:
-
-```
-Qualification (BANT-style):
-- Industry fit: SaaS/services? (yes/no)
-- Size fit: 200-2000 EE? (yes/no)
-- Tech fit: Workday/BambooHR + ADP/Gusto? (yes/no)
-- Authority: VP People+ in deal? (yes/no)
-- Pain: actively trying to solve HR analytics? (yes/no)
-- Budget: confirmed &gt; $50K? (yes/no)
-- Timeline: decision in next 6 months? (yes/no)
-```
-
-5+ yes = strong lead. &lt;3 yes = disqualify.
-
-### Step 5 — Run `icp_scorer.py`
-Audit ICP definition for specificity, score account lists against ICP.
+## Quick Start
 
 ```bash
+# Complete ICP definition: exit 0
 python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py \
-  --input icp_spec.json --format markdown
+  --input project-management/gtm/ideal-customer-profile/assets/sample_icp.json --mode validate --format markdown
 ```
 
-### Step 6 — Refresh per quarter
-ICP shifts:
-- New customers reveal new patterns
-- Product evolution opens new segments
-- Market shifts (recession, regulation, competition)
+```bash
+# Thin ICP (4 of 8 dimensions, no exclusions): exit 1
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py \
+  --input project-management/gtm/ideal-customer-profile/assets/sample_icp_flawed.json --mode validate --format markdown
+```
 
-Don&#x27;t refresh weekly. Quarterly is healthy.
+```bash
+# Rank four accounts: Northwind 95 strong, Contoso 68 workable, Fabrikam 45 marginal, Tailspin 20 disqualify
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py \
+  --input project-management/gtm/ideal-customer-profile/assets/sample_accounts.json --mode score --format markdown
+```
 
-## Decision frameworks
+```bash
+# Input schema and flags
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py --help
+```
 
-### Firmographic specificity test
+## Tools Overview
 
-For each dimension, ask:
-- Could I send a list of companies matching this to my BDR tomorrow?
-- If not, sharpen.
+`icp_scorer.py` is the quality gate for this skill. **What the scorer checks:** validate mode counts the eight dimensions marked defined (fail under six), warns when firmographics are not specific, triggers are not listed, the addressable list is missing or under 200, or there are no disqualification criteria. Score mode normalises the weights to 100, converts each 0-3 rating to a share of its weight, and bands at 80 / 60 / 40. The `defined` and `specific` flags are self-reported: read the definitions too.
 
-Vague: &quot;growing SaaS companies&quot;
-Sharp: &quot;US-headquartered B2B SaaS companies, $10M-$100M ARR, post-Series B, that have hired their first VP of Sales in last 12 months&quot;
+**Exit codes:** `0` no fail findings · `1` validate: fewer than six dimensions defined; score: no accounts · `2` unreadable file, invalid JSON or a top level that is not an object. `--mode` is required. JSON by default, `--format markdown`, `--output FILE`.
 
-### Tech-stack signals
+## Workflow
 
-Tech stack reveals readiness:
-- Have a CRM = likely structured sales process
-- Have an HRIS = HR team beyond founder/HR-of-1
-- Use a specific vendor = open to category
-- Built in-house = NIH (Not Invented Here) bias risk
+1. **Start from your best customers.** List the top 20 by health, revenue and expansion and find what they share; that is the real ICP. Without customers, use design partners and plan to revise after 10-20 real ones.
+2. **Reject myth ICPs.** &quot;100-10,000 employees&quot;, &quot;innovative companies&quot;, &quot;companies that want to grow&quot;, &quot;enterprise&quot;: none of these exclude anyone.
+3. **Define the eight dimensions** specifically, plus exclusions. Test each: could a BDR build a list from it tomorrow? Triggers should be events that start buying (a new executive, a funding round, a regulatory deadline, an incident), not &quot;they have budget&quot;. A worked example and the specificity, tech-stack, trigger and reachability tests are in the appendix of `references/icp-dimensions-deep.md`.
+4. **Validate.** Write the ICP as JSON (schema in `--help`; `assets/sample_icp.json`) and run validate mode. It must pass with no fail findings; then verify that each warning is fixed.
+5. **Build the rubric and score accounts.** Rate each account 0-3 on industry, size, geography, tech stack, buyer role, trigger, budget authority and timeline, weighted (default weights in `--help`). Run score mode on a real list and check the bands match the sales team&#x27;s gut on accounts they know; if not, fix the weights.
+6. **Refresh quarterly** as new customers, product changes and market shifts move the pattern.
 
-Tools like BuiltWith, G2, Crunchbase + scraping can reveal stack.
+## Anti-Patterns
 
-### Trigger event types
+### An ICP that excludes nobody
+**Mistake:** &quot;B2B companies with 100-10,000 employees.&quot;
+**Why it happens:** Narrowing feels like losing deals.
+**Instead:** Write exclusions first. A real ICP rules out most of the market.
 
-Strongest triggers (cause buying activity):
-- New executive in role (60-day window)
-- Funding round closed (have budget; want to spend strategically)
-- M&amp;A activity (integration needs)
-- Regulatory deadline (compliance pressure)
-- Major incident (urgent need)
-- Vendor consolidation push
-- Annual planning cycle (Q4)
-- Reorg / department restructure
+### The ICP you wish you had
+**Mistake:** The ICP describes the customers the team wants, not the ones who buy, stay and expand.
+**Why it happens:** Aspirational logos are more exciting than the current base.
+**Instead:** Derive it from the top 20 customers and test it against closed-lost deals.
 
-Weaker triggers:
-- &quot;They might want it&quot;
-- &quot;They have the budget&quot;
+### Unreachable ICP
+**Mistake:** A precise profile nobody can find through any channel the company has.
+**Why it happens:** Reachability is treated as marketing&#x27;s problem later.
+**Instead:** Size the addressable list and name the channels before adopting the ICP.
 
-### Reachability test
-
-For each ICP, can you:
-- Find them via paid acquisition? (size of audience; CPC)
-- Find them via outbound? (LinkedIn search, ZoomInfo, Apollo)
-- Find them at events? (SHRM, RSA, AWS reInvent, etc.)
-- Find them via content? (SEO keywords they search)
-- Find them via partners? (which adjacent vendors)
-
-If unreachable, ICP is academic.
-
-## Common engagements
-
-### &quot;Define ICP for our new product&quot;
-1. Pull design partner / pilot data (or interview 5-10 ideal targets).
-2. Document the 8 dimensions.
-3. Build qualification rubric.
-4. Validate with sales: can they recognize these in inbound?
-5. Validate with marketing: can they target this list?
-
-### &quot;Refine ICP from closed customers&quot;
-1. List top 20 paying customers by health/expansion.
-2. Find patterns: size, vertical, role, trigger, tech stack.
-3. Document refined ICP.
-4. Compare to original ICP: what&#x27;s different?
-5. Update qualification rubric + targeting.
-6. Sunset segments not in refined ICP.
-
-### &quot;Pipeline conversion is bad — is it ICP?&quot;
-1. Audit closed-won vs closed-lost ICP fit scores.
-2. Common failure: pipeline is full of &quot;near-ICP&quot; that don&#x27;t convert.
-3. Tighten qualification; reject more aggressively at intake.
-
-## Anti-patterns to avoid
-
-- **ICP = &quot;everyone.&quot;** Diluted GTM.
-- **ICP without trigger event.** Targets without urgency.
-- **ICP unreachable via your channels.** Academic exercise.
-- **ICP that doesn&#x27;t disqualify anyone.** Not really an ICP.
-- **Same ICP for 3 years post-launch.** Customers reveal real ICP; refresh.
-- **ICP defined by product, not customer.** &quot;Companies that need X&quot; = solution-thinking.
-- **ICP without qualification rubric.** Sales can&#x27;t apply it.
+More: `references/icp-refinement-from-data.md`.
 
 ## Scope &amp; Limitations
 
@@ -954,14 +738,24 @@ If unreachable, ICP is academic.
 
 **Important Caveats:**
 - Every per-account fit score and every `defined` or `specific` flag is entered by hand. The tool checks and weights them but does not verify them.
-- Scoring weights and the &quot;5+ yes is a strong lead&quot; cut-off are starting defaults to tune against closed-won and closed-lost data.
+- Scoring weights and the 80 / 60 / 40 band cut-offs are starting defaults to tune against closed-won and closed-lost data.
 - A greenfield ICP is a hypothesis until 10-20 real customers confirm it.
 - ICPs drift with the product and the market. The skill expects a quarterly refresh.
 
-## References
+## Files
 
-- `references/icp-dimensions-deep.md` — 8 dimensions in depth + signals
-- `references/icp-refinement-from-data.md` — using closed customers to refine
+| File | Purpose |
+|------|---------|
+| `scripts/icp_scorer.py` | ICP validation and account scoring |
+| `assets/sample_icp.json` | Complete eight-dimension ICP; validate exits 0 |
+| `assets/sample_icp_flawed.json` | Thin ICP; validate exits 1 |
+| `assets/sample_accounts.json` | Four accounts across all four bands |
+| `assets/icp_template.md` | Fill-in template |
+
+## Reference Documentation
+
+- [references/icp-dimensions-deep.md](references/icp-dimensions-deep.md): Each dimension in depth; appendix with worked example and tests
+- [references/icp-refinement-from-data.md](references/icp-refinement-from-data.md): Refining an ICP from closed customers
 
 ## Related skills
 
@@ -998,7 +792,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Ideal Customer Profile&quot;**
-   - Description: &quot;Define a sharp Ideal Customer Profile (ICP) — firmographics, behavioral signals, JTBD, and buyer persona. Use when defining a new ICP, refining one from actual closed customers, or auditing why pipeline or conversion is poor.&quot;
+   - Description: &quot;Defines which accounts to sell to across eight dimensions with explicit exclusions, then scores real accounts against that profile. Use when defining or refining an ICP, building a qualification rubric, or diagnosing poor pipeline.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1058,8 +852,25 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python project-management/gtm/ideal-customer-profile/scripts/tool_name.py --help</code></pre>
   
-  
-  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Administer the Atlassian suite (Jira/Confluence): user provisioning, groups, SSO/SAML,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Create, modify, and govern reusable Jira and Confluence templates, blueprints, and standardized...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Structured PM 1:1 templates by partner type — manager, engineering-manager partner, designer, IC...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>PM career ladder rubrics from APM through VP/CPO across product sense, execution, leadership,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Structured PM interview preparation across product sense, execution, strategy, behavioral, and...</p></a></div>
+  <h2>Quick Start</h2><pre><code># Complete ICP definition: exit 0
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py \
+  --input project-management/gtm/ideal-customer-profile/assets/sample_icp.json --mode validate --format markdown
+</code></pre>
+
+<pre><code># Thin ICP (4 of 8 dimensions, no exclusions): exit 1
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py \
+  --input project-management/gtm/ideal-customer-profile/assets/sample_icp_flawed.json --mode validate --format markdown
+</code></pre>
+
+<pre><code># Rank four accounts: Northwind 95 strong, Contoso 68 workable, Fabrikam 45 marginal, Tailspin 20 disqualify
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py \
+  --input project-management/gtm/ideal-customer-profile/assets/sample_accounts.json --mode score --format markdown
+</code></pre>
+
+<pre><code># Input schema and flags
+python3 project-management/gtm/ideal-customer-profile/scripts/icp_scorer.py --help
+</code></pre>
+  <h2>Related Skills in Project Management</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/project-management/agile-coach.html" class="skill-card" style="text-decoration:none"><h3>Agile Coach</h3><p>Expert agile coaching: framework selection, maturity assessment, retrospective facilitation,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-admin.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Admin</h3><p>Plans and audits Atlassian Cloud or Data Center administration: users, SSO, permissions,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/atlassian-templates.html" class="skill-card" style="text-decoration:none"><h3>Atlassian Templates</h3><p>Builds, validates and retires reusable Jira issue and Confluence page templates. Use when...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-1on1s.html" class="skill-card" style="text-decoration:none"><h3>Pm 1on1s</h3><p>Builds 1:1 agendas and kickoff scripts for a PM&#x27;s manager, EM, designer, reports and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-career-ladder.html" class="skill-card" style="text-decoration:none"><h3>Pm Career Ladder</h3><p>Scores a PM against level rubrics from APM to VP/CPO, then builds a gap analysis, 6-month growth...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/project-management/pm-interview-prep.html" class="skill-card" style="text-decoration:none"><h3>Pm Interview Prep</h3><p>Plans PM interview prep across product sense, execution, strategy, behavioral and technical...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/project-management/gtm/ideal-customer-profile/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

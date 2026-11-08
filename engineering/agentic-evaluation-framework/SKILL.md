@@ -1,16 +1,16 @@
 ---
 name: agentic-evaluation-framework
 description: >
-  This skill should be used when the user asks to "evaluate LLM output quality",
-  "set up LLM-as-judge", "build an eval rubric", "compare model outputs pairwise",
-  or "measure agent quality".
+  Builds LLM and agent evals: weighted rubrics, LLM-as-judge design, inter-rater agreement and
+  pairwise ranking (Elo, Bradley-Terry) from scores you collect. Use when setting up a judge,
+  scoring outputs, or comparing model or prompt variants.
 license: MIT + Commons Clause
 metadata:
   version: 1.0.0
   author: borghei
   category: engineering
   domain: ai-engineering
-  updated: 2026-06-29
+  updated: 2026-11-08
   tags: [evaluation, llm-as-judge, rubrics, agents, quality]
 ---
 
@@ -39,14 +39,18 @@ Ask about the two or three inputs that matter most for this request. If the user
 cd engineering/agentic-evaluation-framework
 
 # 1. Score outputs against a weighted rubric + check inter-rater agreement
-python scripts/rubric_scorer.py --data rubric_scores.json
+python scripts/rubric_scorer.py --data assets/sample_rubric_scores.json      # 4 items, 50% pass
 
 # 2. Rank competing variants from pairwise (A-vs-B) judgements
-python scripts/pairwise_ranking.py --data pairwise_matches.json
+python scripts/pairwise_ranking.py --data assets/sample_pairwise_matches.json  # prompt-v2 first
 
 # JSON output for piping into a dashboard or CI gate
-python scripts/rubric_scorer.py --data rubric_scores.json --json
+python scripts/rubric_scorer.py --data assets/sample_rubric_scores.json --json
 ```
+
+Input shapes are in each script's docstring and in the two sample files. In the rubric sample the
+two judges disagree sharply on `medical-advice-q` (accuracy 4 vs 2): low agreement on an item is a
+signal to fix the rubric wording or add an anchor example before trusting the score.
 
 ## Tools Overview
 
@@ -56,6 +60,9 @@ python scripts/rubric_scorer.py --data rubric_scores.json --json
 | `scripts/pairwise_ranking.py` | Turn head-to-head win/loss records into a ranking via Elo + Bradley-Terry, plus a win-rate matrix | `--data`, `--k`, `--base`, `--json` |
 
 Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-readable output. They compute over scores you provide and never call a model. Run `--help` for full usage.
+
+**Exit codes.** `0` report printed; `2` missing or unreadable `--data`, invalid JSON, or a file
+without the expected keys. Neither script gates on the scores; read the pass rate and agreement.
 
 ## Workflows
 
@@ -94,6 +101,29 @@ Both scripts: Python 3 standard library only, argparse CLI, `--json` and human-r
 - An LLM judge is only trustworthy after its scores agree with human labels on a held-out set. Agreement can drift when the judge model or prompt changes.
 - Elo depends on match order and the K-factor. With few matches per pair, rankings from either method are unstable.
 - The skill is vendor-agnostic and names no model. Judge model choice and pricing are left to the user.
+
+## Anti-Patterns
+
+### Trusting an uncalibrated judge
+**Mistake:** Shipping on LLM-judge scores that were never compared with human labels.
+**Why it happens:** The judge produces confident numbers immediately.
+**Instead:** Label a held-out set by hand, measure the judge's agreement with it, and re-check when the judge model or prompt changes.
+
+### One order, one judge
+**Mistake:** Running each pairwise comparison once with the same variant always in position A.
+**Why it happens:** Doubling the comparisons doubles the cost.
+**Instead:** Run both orders and count only wins that survive the swap; position bias is large enough to flip rankings.
+
+### Averaging away disagreement
+**Mistake:** Reporting the mean score while two graders disagree by two points on the same item.
+**Why it happens:** The mean looks stable.
+**Instead:** Read `rubric_scorer.py`'s agreement numbers and fix the rubric where graders split, usually by adding anchor examples for each score.
+
+## Files
+
+- `scripts/rubric_scorer.py`, `scripts/pairwise_ranking.py` — the two CLIs above.
+- `assets/sample_rubric_scores.json` — four items, three criteria, two judges; `assets/sample_pairwise_matches.json` — nine matches across three prompt variants.
+- `references/llm-judge-methodology.md`, `references/eval-pitfalls.md` — judge design, bias mitigations, pitfalls.
 
 ## Reference Documentation
 

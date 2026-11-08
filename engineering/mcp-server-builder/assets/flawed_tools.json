@@ -1,0 +1,7 @@
+{
+  "tools": [
+    {"name": "getData", "description": "x", "inputSchema": {"type": "object", "properties": {"q": {}}}},
+    {"name": "delete_everything", "description": "Deletes records.", "inputSchema": {"type": "object", "properties": {"ids": {"type": "string"}}}},
+    {"name": "list_all_users", "description": "Returns every user in the system.", "inputSchema": {"type": "object", "properties": {}}}
+  ]
+}

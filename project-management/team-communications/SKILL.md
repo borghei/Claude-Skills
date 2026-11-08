@@ -10,7 +10,7 @@ metadata:
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-07-21
+  updated: 2026-11-08
   tags: [async, meeting-load, status-updates, escalation, timezones, team-operations]
 ---
 
@@ -124,6 +124,8 @@ python3 project-management/team-communications/scripts/status_update_scorer.py \
 
 ## Decision frameworks
 
+Tags on the headings below: **[PROVEN]** means the rule is well established in practice and the tool enforces it; **[RECOMMENDED]** means a sensible default threshold to tune to your team.
+
 ### Channel routing — first rule that fires wins [PROVEN]
 
 | Rank | Condition | Channel |
@@ -199,6 +201,8 @@ them ready to fill in.
 **Mistake:** A meeting created for a launch three years ago that still runs weekly with six attendees.
 **Why it happens:** Nobody has standing to cancel someone else's meeting, and the original owner has left, so it has no one to defend or kill it.
 **Instead:** Give every recurring meeting an expiry date 3-6 months out at creation, plus a named owner. At expiry it is re-justified or it dies by default. Where one already exists with no owner, trial-cancel it for four weeks and ask what broke — roughly two-thirds never come back.
+
+**Exit codes (all three tools):** `0` report produced · `2` missing or unreadable file, invalid JSON, or the wrong shape. The tools report; they do not gate.
 
 ## Files
 

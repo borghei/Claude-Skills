@@ -1,16 +1,16 @@
 ---
 name: daci-framework
 description: >
-  DACI decision facilitation framework (Driver, Approver, Contributor, Informed)
-  for clarifying decision ownership, reducing decision thrash, role assignment,
-  and governance design across product teams.
+  Assign Driver, Approver, Contributor and Informed roles for the decisions
+  that keep stalling, then roll the chart out. Use when decisions thrash,
+  ownership is unclear after a reorg, or a new team needs decision rights.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.1
+  version: 1.0.2
   author: borghei
   category: project-management
   domain: pm-execution
-  updated: 2026-06-15
+  updated: 2026-11-08
   tech-stack: daci, decision-framework, governance
   tags:
     - daci
@@ -50,6 +50,16 @@ Before building the DACI chart, settle the inputs below. When one is missing or 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Workflow
+
+1. **Pick 3-5 decisions** that stall or recur, not every decision the team makes.
+2. **Map the current state** per decision: who actually decides today, who blocks late, where it stalls.
+3. **Assign roles** [RECOMMENDED] per decision: exactly one Driver (one person drives to closure), one or two Approvers who hold real authority, at most 3-4 Contributors with expertise to add, everyone else Informed. Anyone who can stop the decision is a Contributor or Approver, never Informed.
+4. **Agree the chart** with the Approvers named in it; a chart they have not accepted is fiction.
+5. **Roll out** with a 30/60/90 plan and record each decision (option chosen, Approver, rationale, vetoes with reasons).
+
+**Verify** before publishing: every row has one D and one or two A; no row has more than 5 C; every A has the authority in practice; the last few vetoes have written reasons. Build steps, health metrics and troubleshooting: `references/playbook.md`.
+
 ## Anti-Patterns
 
 ### Informed roles that object late
@@ -74,6 +84,14 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 - **[references/playbook.md](references/playbook.md)** — read this when building or running a DACI chart: role definitions and rules, the 7-step build sequence (working group → roles → decisions → current-state map → pain points → target-state → transition plan), governance health metrics, troubleshooting, and success criteria.
 - **[references/red-flags.md](references/red-flags.md)** — read this before publishing a chart or running a decision under it: common ways a DACI chart goes wrong with bad/good examples anchored to the role rules.
 
+## Files
+
+| File | Purpose |
+|---|---|
+| `references/playbook.md` | Role rules, 7-step build, health metrics |
+| `references/red-flags.md` | Bad/good charts with fixes |
+| `examples/choosing-payment-processor.md` | Worked DACI for one decision |
+
 ## Scope & Limitations
 
 **In Scope:** DACI chart creation, current-state mapping, target-state design, transition planning, governance health metrics, pain point identification, decision ownership clarity.
@@ -87,12 +105,7 @@ Nine more, each with a bad and a good example: `references/red-flags.md`.
 | Integration | Direction | What Flows |
 |---|---|---|
 | `create-prd/` | Feeds into | DACI decisions inform PRD Contacts section and decision log |
-| `identify-assumptions/` | Complements | Surfaces assumptions about who has authority |
+| `discovery/identify-assumptions/` | Complements | Surfaces assumptions about who has authority |
 | `brainstorm-okrs/` | Complements | OKR ownership aligns with DACI decision ownership |
 | `summarize-meeting/` | Feeds into | Meeting summaries capture DACI decision outcomes |
 | `senior-pm/` | Complements | Portfolio-level DACI for cross-project decisions |
-
-## Further Reading
-
-- Productside DACI guidance for product teams
-- Inspired by the DACI framework used at Intuit and other product-led organizations

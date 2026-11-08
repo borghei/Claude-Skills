@@ -1,0 +1,75 @@
+{
+ "config": {
+  "version": "1.x"
+ },
+ "suites": [
+  {
+   "title": "login.spec.ts",
+   "file": "login.spec.ts",
+   "specs": [
+    {
+     "title": "signs in with valid email and password",
+     "file": "login.spec.ts",
+     "tests": [
+      {
+       "projectName": "chromium",
+       "status": "expected",
+       "results": [
+        {
+         "status": "passed",
+         "duration": 1750,
+         "retry": 0
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "title": "shows an error for a wrong password",
+     "file": "login.spec.ts",
+     "tests": [
+      {
+       "projectName": "chromium",
+       "status": "expected",
+       "results": [
+        {
+         "status": "passed",
+         "duration": 950,
+         "retry": 0
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "checkout.spec.ts",
+   "file": "checkout.spec.ts",
+   "specs": [
+    {
+     "title": "places an order with a saved card",
+     "file": "checkout.spec.ts",
+     "tests": [
+      {
+       "projectName": "chromium",
+       "status": "flaky",
+       "results": [
+        {
+         "status": "failed",
+         "duration": 30000,
+         "retry": 0
+        },
+        {
+         "status": "passed",
+         "duration": 4400,
+         "retry": 1
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

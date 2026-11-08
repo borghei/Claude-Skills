@@ -445,8 +445,8 @@ def analyze_claudemd(file_path: str, token_limit: int = 6000) -> Dict:
 def print_human_readable(result: Dict) -> None:
     """Print analysis results in a human-readable format."""
     if not result["success"]:
-        print(f"ERROR: {result['error']}")
-        sys.exit(1)
+        print(f"ERROR: {result['error']}", file=sys.stderr)
+        sys.exit(2)
 
     m = result["metrics"]
     print("=" * 64)
@@ -542,7 +542,7 @@ Examples:
         print_human_readable(result)
 
     if not result["success"]:
-        sys.exit(1)
+        sys.exit(2)
 
 
 if __name__ == "__main__":

@@ -21,6 +21,22 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+import os  # noqa: E402
+import importlib.util as _ilu  # noqa: E402
+
+
+def _sibling(name):
+    """Load a sibling script as a module (keeps each script standalone)."""
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), name + ".py")
+    spec = _ilu.spec_from_file_location(name, path)
+    mod = _ilu.module_from_spec(spec)
+    sys.modules[name] = mod
+    spec.loader.exec_module(mod)
+    return mod
+
+
+
+
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -90,14 +106,14 @@ def load_session_data(filepath: str) -> dict[str, Any]:
     path = Path(filepath)
     if not path.exists():
         print(f"Error: File not found: {filepath}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     try:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
     except json.JSONDecodeError as exc:
         print(f"Error: Invalid JSON in {filepath}: {exc}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(2)
 
     return data
 
@@ -124,6 +140,18 @@ def load_history(filepath: str | None) -> list[dict[str, Any]]:
 # ---------------------------------------------------------------------------
 # Analysis Helpers
 # ---------------------------------------------------------------------------
+
+def resolve_score(health_data: dict[str, Any], findings: list[dict[str, Any]]) -> float:
+    """Use the session's health score, or compute it with qa_health_scorer's weighting.
+
+    A missing score must not read as 0/100 FAIL, so it is computed from the findings instead.
+    """
+    if "overall_score" in health_data or "score" in health_data:
+        return health_data.get("overall_score", health_data.get("score", 0))
+    compute_category_scores = _sibling("qa_health_scorer").compute_category_scores
+    compute_overall_score = _sibling("qa_health_scorer").compute_overall_score
+    return compute_overall_score(compute_category_scores(findings))
+
 
 def score_to_grade(score: float) -> str:
     """Convert a numeric score to a letter grade."""
@@ -261,7 +289,7 @@ def generate_markdown_report(
     visual_reg = session.get("visual_regression", {})
     notes = session.get("notes", "")
 
-    overall_score = health_data.get("overall_score", health_data.get("score", 0))
+    overall_score = resolve_score(health_data, findings)
     grade = score_to_grade(overall_score)
     severity_counts = count_findings_by_severity(findings)
     total_findings = sum(severity_counts.values())
@@ -279,7 +307,7 @@ def generate_markdown_report(
     # --- Executive Summary ---
     lines.append("## Executive Summary")
     lines.append("")
-    pass_fail = "PASS" if overall_score >= 70 else "FAIL"
+    pass_fail = "PASS" if overall_score >= 70 and not severity_counts.get("P0", 0) else "FAIL"  # same gate as the scorer
     lines.append(f"The application scored **{overall_score}/100 (Grade: {grade})** — **{pass_fail}**.")
     lines.append("")
 
@@ -515,7 +543,7 @@ def generate_json_summary(
     performance = session.get("performance", {})
     visual_reg = session.get("visual_regression", {})
 
-    overall_score = health_data.get("overall_score", health_data.get("score", 0))
+    overall_score = resolve_score(health_data, findings)
     severity_counts = count_findings_by_severity(findings)
     category_counts = count_findings_by_category(findings)
     trend = compute_trend(overall_score, history)
@@ -529,7 +557,7 @@ def generate_json_summary(
         "tier": session.get("tier", "standard"),
         "health_score": overall_score,
         "grade": score_to_grade(overall_score),
-        "passed": overall_score >= 70,
+        "passed": overall_score >= 70 and not severity_counts.get("P0", 0),
         "total_findings": sum(severity_counts.values()),
         "findings_by_severity": severity_counts,
         "findings_by_category": category_counts,

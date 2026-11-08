@@ -1,0 +1,35 @@
+# docker-compose.sound.yml - passes compose_validator.py with no critical finding (exit 0).
+# Secrets come from an env file kept out of git; images are pinned.
+services:
+  app:
+    image: acme/dashboard:2.4.1
+    ports:
+      - "8080:3000"
+    env_file: .env.app
+    environment:
+      - NODE_ENV=production
+      - DB_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+
+  postgres:
+    image: postgres:17.2
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+
+volumes:
+  pgdata:

@@ -1,16 +1,16 @@
 ---
 name: atlassian-templates
 description: >
-  Create, modify, and govern reusable Jira and Confluence templates, blueprints,
-  and standardized content structures. Use for org-wide templates, custom
-  blueprints, page layouts, and automated content generation.
+  Builds, validates and retires reusable Jira issue and Confluence page templates. Use
+  when creating a team or org-wide template, a template is ignored or half-filled, or a
+  template library has sprawled. Space layout is confluence-expert.
 license: MIT + Commons Clause
 metadata:
   version: 1.1.0
   author: borghei
   category: project-management
   domain: atlassian
-  updated: 2026-06-15
+  updated: 2026-11-08
   tags: [atlassian, jira-templates, confluence-templates, workflows]
 ---
 # Atlassian Template & Files Creator Expert
@@ -51,7 +51,26 @@ Ask about the two or three inputs that matter most for this request, not the who
 4. **Test** with sample data, then **publish** to the target space/project
 5. **Train** users and **monitor** adoption; iterate quarterly
 
-Grab a ready-made starting point from the template libraries below, then follow the full creation/modification workflow in `references/workflows-and-governance.md`.
+Grab a ready-made starting point from `references/confluence-templates.md` or `references/jira-templates.md`, then follow the full creation/modification workflow in `references/workflows-and-governance.md`. Step 3 is `template_scaffolder.py`; step 4 is `template_validator.py`; step 5 is `template_usage_analyzer.py`.
+
+## Tools
+
+Each tool reads one JSON file and prints a text report (`--json` for machine output).
+`--example` prints the input shape; samples ship in `assets/`. Bad input (missing file,
+invalid JSON, wrong shape) exits 2 with a one-line error.
+
+```bash
+python3 project-management/atlassian-templates/scripts/template_scaffolder.py --spec project-management/atlassian-templates/assets/sample_template_spec.json --format confluence
+python3 project-management/atlassian-templates/scripts/template_validator.py --template project-management/atlassian-templates/assets/sample_template.json         # exit 0
+python3 project-management/atlassian-templates/scripts/template_validator.py --template project-management/atlassian-templates/assets/sample_template_flawed.json  # exit 1
+python3 project-management/atlassian-templates/scripts/template_usage_analyzer.py --usage project-management/atlassian-templates/assets/sample_template_usage.json
+```
+
+| Tool | What it does | Exit |
+|------|--------------|------|
+| `template_scaffolder.py` | Turns a section spec into Confluence wiki markup or a Jira description (`--format confluence\|jira`) | 0 |
+| `template_validator.py` | 10 weighted checks: name, owner, description, 3+ sections, inline instructions, example, dynamic content, version, updated within 12 months of `as_of` (default today), labels | 0 all pass, 1 any fail |
+| `template_usage_analyzer.py` | Adoption, quality score and freshness per template; flags zero-use, low-quality and ownerless templates. Freshness is measured from the file's `as_of`, else its latest `last_updated` | 0 |
 
 ## Anti-Patterns
 
@@ -90,13 +109,10 @@ Load the reference that matches the task — keep this file lean and pull detail
 
 **Limitations:** Confluence Cloud templates cannot include all macro types (some advanced macros require manual insertion after page creation). Jira issue templates are limited to description field content -- they cannot pre-set custom field values without automation rules. Template analytics require Confluence Premium or a marketplace analytics app for detailed usage metrics.
 
-## Integration Points
+## Files
 
-| Integration | Direction | What Flows |
-|-------------|-----------|------------|
-| `confluence-expert/` | Bidirectional | Confluence expert defines content standards; template creator implements them as templates |
-| `jira-expert/` | Templates -> Jira | Issue description templates, workflow documentation templates |
-| `atlassian-admin/` | Admin -> Templates | Global template deployment approval, governance policies |
-| `scrum-master/` | SM -> Templates | Sprint ceremony template requirements, retrospective format preferences |
-| `senior-pm/` | PM -> Templates | Executive reporting templates, portfolio tracking layouts |
-| `delivery-manager/` | DM -> Templates | Post-mortem templates, release checklist templates, runbook structures |
+| File | Purpose |
+|------|---------|
+| `scripts/template_scaffolder.py`, `scripts/template_validator.py`, `scripts/template_usage_analyzer.py` | See Tools |
+| `assets/sample_template_spec.json`, `assets/sample_template.json`, `assets/sample_template_flawed.json`, `assets/sample_template_usage.json` | Runnable inputs; the flawed template shows a failing gate |
+| `references/*.md` | See References |

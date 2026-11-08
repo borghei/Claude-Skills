@@ -1,0 +1,71 @@
+{
+  "organization": "Acme Corp",
+  "global_settings": {
+    "mfa_enforced": false,
+    "sso_enabled": true,
+    "audit_logging": true
+  },
+  "users": [
+    {
+      "name": "Alice",
+      "role": "admin",
+      "status": "active",
+      "mfa_enabled": true,
+      "has_access": true
+    },
+    {
+      "name": "Bob",
+      "role": "admin",
+      "status": "active",
+      "mfa_enabled": false,
+      "has_access": true
+    },
+    {
+      "name": "Carol",
+      "role": "user",
+      "status": "inactive",
+      "mfa_enabled": false,
+      "has_access": true
+    },
+    {
+      "name": "Dave",
+      "role": "user",
+      "status": "active",
+      "mfa_enabled": true,
+      "has_access": true
+    }
+  ],
+  "projects": [
+    {
+      "name": "PROJ-A",
+      "public_access": false,
+      "individual_permissions": [
+        "carol@acme.com"
+      ],
+      "group_permissions": {
+        "engineering": [
+          "view",
+          "edit",
+          "create"
+        ],
+        "everyone": [
+          "view"
+        ]
+      }
+    },
+    {
+      "name": "PROJ-B",
+      "public_access": true,
+      "individual_permissions": [],
+      "group_permissions": {
+        "Everyone": [
+          "view",
+          "edit"
+        ],
+        "admins": [
+          "admin"
+        ]
+      }
+    }
+  ]
+}

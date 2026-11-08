@@ -1,0 +1,28 @@
+{
+  "stories": [
+    {
+      "title": "Weekly Budget Check",
+      "situation": "I am preparing my weekly budget on Sunday evening",
+      "motivation": "see how much I have spent so far this month by category",
+      "outcome": "decide where to cut back before the month ends",
+      "acceptance_criteria": [
+        "Spending view shows current month transactions grouped by category",
+        "Each category displays total spent and remaining budget",
+        "Categories exceeding budget are visually distinguished",
+        "Tapping a category shows individual transactions",
+        "View loads within 2 seconds on mobile",
+        "Date range is fixed to current calendar month"
+      ]
+    },
+    {
+      "title": "Bad Example Story",
+      "situation": "I use the app",
+      "motivation": "click the dropdown to select a report",
+      "outcome": "be productive",
+      "acceptance_criteria": [
+        "API returns 200",
+        "Component renders"
+      ]
+    }
+  ]
+}

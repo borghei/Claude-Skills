@@ -26,7 +26,7 @@ Comprehensive reference for OpenAI Codex CLI: installation, configuration, skill
 
 ## Overview
 
-Codex CLI is OpenAI's terminal-native coding agent. It connects to OpenAI models (o4-mini, o3, GPT-4.1) and executes tasks autonomously or with human approval. Codex reads, writes, and executes code directly in your local environment.
+Codex CLI is OpenAI's terminal-native coding agent. It connects to OpenAI models and executes tasks autonomously or with human approval. Codex reads, writes, and executes code directly in your local environment.
 
 **Key capabilities:**
 - File creation and modification
@@ -85,39 +85,29 @@ codex configure
 
 ### Configuration file location
 
-Codex CLI reads configuration from:
-
-1. `~/.codex/config.yaml` - Global user config
-2. `.codex/config.yaml` - Project-local config (overrides global)
-
-### Configuration options
-
-```yaml
-# ~/.codex/config.yaml
-model: o4-mini                    # Default model
-approval_mode: suggest            # Default approval mode
-history: true                     # Enable conversation history
-notify: true                      # Desktop notifications on completion
-```
+Codex CLI reads its configuration from the directory in `CODEX_HOME` (default `~/.codex`).
+Current releases use `~/.codex/config.toml`; early releases used a YAML file. The keys, flag
+names and approval-mode names below have changed between releases, so confirm them with
+`codex --help` and the Codex docs for the version you run (`codex --version`).
 
 ### Model selection
 
-| Model | Best For | Speed | Cost |
-|-------|----------|-------|------|
-| o4-mini | General coding tasks | Fast | Low |
-| o3 | Complex reasoning, architecture | Slower | Higher |
-| gpt-4.1 | Broad knowledge, writing | Fast | Medium |
+Leave the model unset to use the CLI's default, which follows OpenAI's current recommended
+coding model. Override it per run only when a task needs it, and take the id from OpenAI's model
+list rather than from this guide, because model names here would go stale:
 
 ```bash
-# Override model per invocation
-codex --model o3 "design the database schema"
+codex --model <model-id> "design the database schema"
 ```
 
 ---
 
 ## Approval Modes
 
-Codex CLI supports three approval modes that control how much autonomy the agent has.
+Codex CLI lets you choose how much autonomy the agent has. The three levels below are the
+original names (`suggest`, `auto-edit`, `full-auto`); recent releases express the same idea as an
+approval policy plus a sandbox level (`--ask-for-approval`, `--sandbox`, with `--full-auto` as a
+shorthand). Check `codex --help` for the flags your version accepts.
 
 ### suggest (default)
 
@@ -218,8 +208,8 @@ tools:                            # Tool definitions (see below)
 #### Optional fields
 
 ```yaml
-model: o4-mini                    # Preferred model for this skill
 version: 1.0.0                   # Skill version
+# model: <model-id>              # Optional; omit to inherit the user's CLI default
 ```
 
 #### Complete example
@@ -266,7 +256,6 @@ tools:
     description: >
       Generates a formatted review report from analysis results
     command: python scripts/review_report_generator.py
-model: o4-mini
 version: 1.0.0
 ```
 
@@ -311,8 +300,8 @@ tools:
 # Simple task
 codex "add error handling to the API routes"
 
-# With specific model
-codex --model o3 "design the caching architecture"
+# With a specific model (id from OpenAI's current model list)
+codex --model <model-id> "design the caching architecture"
 
 # With specific skill
 codex --skill senior-fullstack "scaffold a Next.js app"
@@ -387,7 +376,6 @@ codex --quiet "what is the main entry point of this project"
 |----------|-------------|---------|
 | `OPENAI_API_KEY` | API key for authentication | (required) |
 | `CODEX_HOME` | Override config directory | `~/.codex` |
-| `CODEX_MODEL` | Default model | `o4-mini` |
 | `CODEX_APPROVAL_MODE` | Default approval mode | `suggest` |
 | `CODEX_QUIET` | Suppress UI output | `false` |
 
@@ -482,8 +470,8 @@ chmod +x .codex/skills/my-skill/scripts/*.py
 # Check available models
 codex models list
 
-# Fall back to default
-codex --model o4-mini "your task"
+# Fall back to the CLI default by dropping --model
+codex "your task"
 ```
 
 ### Debug mode
@@ -500,7 +488,7 @@ CODEX_DEBUG=1 codex "your task"
 
 ```bash
 # Reset global config
-rm ~/.codex/config.yaml
+mv ~/.codex/config.toml ~/.codex/config.toml.bak   # file name varies by release
 codex configure
 
 # Clear conversation history
