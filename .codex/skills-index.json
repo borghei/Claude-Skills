@@ -3,7 +3,7 @@
   "name": "claude-code-skills",
   "description": "Production-ready skill packages for AI agents - Marketing, Engineering, Product, C-Level, PM, and RA/QM",
   "repository": "https://github.com/borghei/Claude-Skills",
-  "total_skills": 242,
+  "total_skills": 244,
   "skills": [
     {
       "name": "channel-economics",
@@ -62,6 +62,12 @@
     {
       "name": "free-tool-strategy",
       "source": "../../business-growth/free-tool-strategy",
+      "category": "business-growth",
+      "description": ">"
+    },
+    {
+      "name": "offer-design",
+      "source": "../../business-growth/offer-design",
       "category": "business-growth",
       "description": ">"
     },
@@ -912,6 +918,12 @@
       "description": ">"
     },
     {
+      "name": "launch-economics",
+      "source": "../../finance/launch-economics",
+      "category": "finance",
+      "description": ">"
+    },
+    {
       "name": "saas-metrics-coach",
       "source": "../../finance/saas-metrics-coach",
       "category": "finance",
@@ -1460,7 +1472,7 @@
   ],
   "categories": {
     "business-growth": {
-      "count": 20,
+      "count": 21,
       "source": "../../business-growth",
       "description": "Customer success, sales engineering, and revenue operations skills"
     },
@@ -1475,7 +1487,7 @@
       "description": "Software engineering and technical skills"
     },
     "finance": {
-      "count": 3,
+      "count": 4,
       "source": "../../finance",
       "description": "Financial analysis, valuation, and forecasting skills"
     },
