@@ -29,16 +29,49 @@ AUTH_DEPS = {"nextauth": {"next-auth": "beta", "@auth/drizzle-adapter": "latest"
 DB_DEPS = {"neondb": {"@neondatabase/serverless": "latest"}, "supabase": {"postgres": "latest"}, "postgres": {"postgres": "latest"}}
 PAY_DEPS = {"stripe": {"stripe": "latest"}, "lemonsqueezy": {"@lemonsqueezy/lemonsqueezy.js": "latest"}, "none": {}}
 
-ENV_BLOCKS = {
-    "app": "# App\nNEXT_PUBLIC_APP_URL=http://localhost:3000\n",
-    "db": "# Database\nDATABASE_URL=              # postgresql://user:pass@host/db?sslmode=require\n",
-    "nextauth": "# Auth.js\nAUTH_SECRET=               # openssl rand -base64 32\n"
-                "# AUTH_URL is optional (inferred from the request); set AUTH_TRUST_HOST=true behind a reverse proxy\n"
-                "AUTH_GOOGLE_ID=\nAUTH_GOOGLE_SECRET=\nAUTH_GITHUB_ID=\nAUTH_GITHUB_SECRET=\nRESEND_API_KEY=\n",
-    "clerk": "# Clerk\nNEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=\nCLERK_SECRET_KEY=\n", "supabase": "# Supabase\nNEXT_PUBLIC_SUPABASE_URL=\nNEXT_PUBLIC_SUPABASE_ANON_KEY=\n",
-    "stripe": "# Stripe\nSTRIPE_SECRET_KEY=\nSTRIPE_WEBHOOK_SECRET=\nNEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=\n"
-              "STRIPE_PRO_MONTHLY_PRICE_ID=\nSTRIPE_PRO_YEARLY_PRICE_ID=\n",
-    "lemonsqueezy": "# Lemon Squeezy\nLEMONSQUEEZY_API_KEY=\nLEMONSQUEEZY_STORE_ID=\nLEMONSQUEEZY_WEBHOOK_SECRET=\n",
+ENV_BLOCKS = {  # each value is a list of .env.example lines
+    'app': [
+        '# App',
+        'NEXT_PUBLIC_APP_URL=http://localhost:3000',
+    ],
+    'db': [
+        '# Database',
+        'DATABASE_URL=              # postgresql://user:pass@host/db?sslmode=require',
+    ],
+    'nextauth': [
+        '# Auth.js',
+        'AUTH_SECRET=               # openssl rand -base64 32',
+        '# AUTH_URL is optional (inferred from the request); set AUTH_TRUST_HOST=true behind a reverse proxy',
+        'AUTH_GOOGLE_ID=',
+        'AUTH_GOOGLE_SECRET=',
+        'AUTH_GITHUB_ID=',
+        'AUTH_GITHUB_SECRET=',
+        'RESEND_API_KEY=',
+    ],
+    'clerk': [
+        '# Clerk',
+        'NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=',
+        'CLERK_SECRET_KEY=',
+    ],
+    'supabase': [
+        '# Supabase',
+        'NEXT_PUBLIC_SUPABASE_URL=',
+        'NEXT_PUBLIC_SUPABASE_ANON_KEY=',
+    ],
+    'stripe': [
+        '# Stripe',
+        'STRIPE_SECRET_KEY=',
+        'STRIPE_WEBHOOK_SECRET=',
+        'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=',
+        'STRIPE_PRO_MONTHLY_PRICE_ID=',
+        'STRIPE_PRO_YEARLY_PRICE_ID=',
+    ],
+    'lemonsqueezy': [
+        '# Lemon Squeezy',
+        'LEMONSQUEEZY_API_KEY=',
+        'LEMONSQUEEZY_STORE_ID=',
+        'LEMONSQUEEZY_WEBHOOK_SECRET=',
+    ],
 }
 
 MIDDLEWARE = {
@@ -210,7 +243,7 @@ def stub(path):
 def content_for(path, args):
     fixed = {
         "package.json": lambda: package_json(args),
-        ".env.example": lambda: "\n".join(ENV_BLOCKS[k] for k in ("app", "db", args.auth, args.payments)
+        ".env.example": lambda: "\n".join("\n".join(ENV_BLOCKS[k]) + "\n" for k in ("app", "db", args.auth, args.payments)
                                           if k in ENV_BLOCKS),
         "proxy.ts": lambda: MIDDLEWARE[args.auth].replace("{fn}", "proxy"),  # Next 16+
         "middleware.ts": lambda: MIDDLEWARE[args.auth].replace("{fn}", "middleware"),
