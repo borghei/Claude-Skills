@@ -2,7 +2,7 @@
 
 ## What This Repository Is
 
-This is the **universal AI skills library** — **385 production-ready skill packages across 21 professional domains** with **906 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex / ChatGPT, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
+This is the **universal AI skills library** — **397 production-ready skill packages across 21 professional domains** with **934 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex / ChatGPT, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
 **This is NOT a traditional application.** It's a library of self-contained skill packages meant to be extracted and deployed by users into their own workflows.
 
@@ -26,15 +26,15 @@ This is the **universal AI skills library** — **385 production-ready skill pac
 ## Repository Structure (domain → skill count)
 
 ```
-├── engineering/            # 92 skills — architecture, fullstack, DevOps, security, AI/ML, data, agent tooling
-├── project-management/     # 70 skills — discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion
+├── engineering/            # 98 skills — architecture, fullstack, DevOps, security, AI/ML, data, agent tooling
+├── project-management/     # 74 skills — discovery, delivery, career, strategy-frameworks/, gtm/, Jira/Linear/Notion
 ├── marketing/              # 41 skills — content, SEO/AEO, demand gen, brand, analytics
 ├── c-level-advisor/        # 31 skills — CEO/CTO/CFO/CMO/CRO/CPO/COO/CHRO/CISO + CAIO/CDO/CCO/GC/VPE
 ├── ra-qm-team/             # 27 skills — ISO 13485, MDR, FDA, SOC 2, GDPR, EU AI Act, NIS2, DORA, NIST CSF
 ├── business-growth/        # 20 skills — CRO, pricing, revenue ops, commercial
 ├── legal/                  # 17 skills — EXPERIMENTAL: contracts, NDA, privacy, DPIA, breach response
 ├── product-team/           # 13 skills — RICE, OKRs, UX research, product analytics, Apple HIG
-├── personal-productivity/  # 10 skills — resume, leads, meetings, invoices, email triage
+├── personal-productivity/  # 14 skills — resume, leads, meetings, invoices, email triage
 ├── vertical-advisors/      # 7 skills  — fintech, healthtech, edtech, ecommerce, proptech, climate-tech, marketplace
 ├── data-analytics/         # 5 skills  — analysis, BI, data science, ML ops
 ├── sales-success/          # 5 skills  — account exec, sales ops, solutions architect
@@ -42,7 +42,7 @@ This is the **universal AI skills library** — **385 production-ready skill pac
 ├── hr-operations/          # 4 skills  — talent, people analytics, HRBP
 ├── research/               # 4 skills  — litreview, grants, patent, dossier
 ├── finance/                # 3 skills  — financial analysis, DCF, forecasting
-├── workflow/               # 2 skills  — skill-router, handoff (meta-skills)
+├── workflow/               # 3 skills  — skill-router, handoff, session-retro (meta-skills)
 ├── agents/                 # 68 cs-* domain agents + 8 cross-domain personas
 ├── scripts/                # Manifest builder (build_manifest.py) + skill installer
 ├── standards/              # Best-practices library

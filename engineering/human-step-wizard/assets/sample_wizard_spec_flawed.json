@@ -1,0 +1,54 @@
+{
+  "title": "Rotate the payments webhook secret",
+  "slug": "Rotate Webhook",
+  "steps": [
+    {
+      "id": "new-secret",
+      "title": "Create the new secret",
+      "instructions": [
+        "Dashboard -> Webhooks -> Roll secret."
+      ],
+      "url": "http://payments.example/webhooks",
+      "inputs": [
+        {
+          "name": "webhook_secret",
+          "prompt": "Paste secret",
+          "secret": true,
+          "pattern": "^whsec_\\w+$"
+        }
+      ]
+    },
+    {
+      "id": "deploy-secret",
+      "title": "Deploy it",
+      "instructions": [
+        "Push the secret to the app."
+      ],
+      "checks": [
+        {
+          "description": "app sees the new secret",
+          "command": "eval $DEPLOY_CMD && test -n $SIGNING_KEY"
+        }
+      ]
+    },
+    {
+      "id": "new-secret",
+      "title": "Revoke the old secret",
+      "irreversible": true,
+      "instructions": [
+        "Dashboard -> Webhooks -> Revoke previous secret."
+      ],
+      "inputs": [
+        {
+          "name": "SIGNING_KEY",
+          "prompt": "Key id",
+          "pattern": "\\d+"
+        },
+        {
+          "name": "PATH",
+          "prompt": "oops"
+        }
+      ]
+    }
+  ]
+}

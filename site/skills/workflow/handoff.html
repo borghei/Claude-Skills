@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Handoff - Claude Skills</title>
-  <meta name="description" content="This skill should be used when the user asks to &quot;write a handoff&quot;, &quot;hand this off&quot;, &quot;package this work for someone else&quot;, &quot;summarize where we are so another person/agent can continue&quot;, or &quot;create a co">
+  <meta name="description" content="Package in-progress work into a self-contained context doc or a background agent&#x27;s prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/workflow/handoff.html">
   <meta property="og:title" content="Handoff - Claude Skills">
-  <meta property="og:description" content="This skill should be used when the user asks to &quot;write a handoff&quot;, &quot;hand this off&quot;, &quot;package this work for someone else&quot;, &quot;summarize where we are so another person/agent can continue&quot;, or &quot;create a co">
+  <meta property="og:description" content="Package in-progress work into a self-contained context doc or a background agent&#x27;s prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/workflow/handoff.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Handoff", "description": "This skill should be used when the user asks to \"write a handoff\", \"hand this off\", \"package this work for someone else\", \"summarize where we are so another person/agent can continue\", or \"create a context doc before I switch off this task\".", "applicationCategory": "Workflow", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/workflow/handoff.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Handoff", "description": "Package in-progress work into a self-contained context doc or a background agent's prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.", "applicationCategory": "Workflow", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/workflow/handoff.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,9 +370,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Handoff</h1>
-    <p class="page-subtitle">This skill should be used when the user asks to &quot;write a handoff&quot;, &quot;hand this off&quot;, &quot;package this work for someone else&quot;, &quot;summarize where we are so another person/agent can continue&quot;, or &quot;create a context doc before I switch off this task&quot;.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Workflow</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">handoff</span><span class="tag">delegation</span><span class="tag">context</span><span class="tag">continuity</span><span class="tag">onboarding</span><span class="tag">async</span></div>
+    <p class="page-subtitle">Package in-progress work into a self-contained context doc or a background agent&#x27;s prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Workflow</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 1 tool</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">handoff</span><span class="tag">delegation</span><span class="tag">context</span><span class="tag">continuity</span><span class="tag">background-agent</span><span class="tag">async</span></div>
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -393,9 +393,14 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Handoff (Workflow domain).
 
-This skill should be used when the user asks to &quot;write a handoff&quot;, &quot;hand this off&quot;, &quot;package this work for someone else&quot;, &quot;summarize where we are so another person/agent can continue&quot;, or &quot;create a context doc before I switch off this task&quot;.
+Package in-progress work into a self-contained context doc or a background agent&#x27;s prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.
 
 A handoff is a self-contained context package that lets a different person — or a fresh AI agent — pick up in-progress work without re-deriving everything. Most delegation fails not because the next person lacks skill, but because the *context*
+
+## Your Key Capabilities
+- The Open-Ended Background Prompt
+- Secrets in the Prompt
+- The Pasted Diff
 
 ## Frameworks &amp; Templates You Know
 - - `assets/handoff_template.md` — fill-in-the-blanks handoff document.
@@ -418,9 +423,14 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Handoff (Workflow domain).
 
-This skill should be used when the user asks to &quot;write a handoff&quot;, &quot;hand this off&quot;, &quot;package this work for someone else&quot;, &quot;summarize where we are so another person/agent can continue&quot;, or &quot;create a context doc before I switch off this task&quot;.
+Package in-progress work into a self-contained context doc or a background agent&#x27;s prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.
 
 A handoff is a self-contained context package that lets a different person — or a fresh AI agent — pick up in-progress work without re-deriving everything. Most delegation fails not because the next person lacks skill, but because the *context*
+
+## Your Key Capabilities
+- The Open-Ended Background Prompt
+- Secrets in the Prompt
+- The Pasted Diff
 
 ## Frameworks &amp; Templates You Know
 - - `assets/handoff_template.md` — fill-in-the-blanks handoff document.
@@ -466,12 +476,13 @@ action instead of their tenth.
 Use it across any domain in this library — engineering work, a PM initiative, a
 compliance audit, a draft document — wherever work outlives a single working session.
 
-## Use when
+## When to Use
 
 - **Switching off a task** — you started something and someone else (or future-you) will finish it.
 - **Delegating to an agent** — handing a scoped task to a sub-agent or teammate who lacks your conversation history.
 - **End of a session/shift** — async teams where the next person picks up cold.
 - **Escalating** — passing a blocked item up or sideways with full context on what was tried.
+- **Handing off to a background agent** — the work should keep going in a separate session while you do something else (see the background-agent workflow below).
 
 ## Clarify First
 
@@ -480,6 +491,7 @@ Before writing the handoff, settle the inputs below. When one is missing or vagu
 - **Receiver:** a teammate, a fresh AI agent, or future-you (sets how much background to spell out vs assume).
 - **The goal + done-state:** what &quot;finished&quot; looks like for this work (anchors the Next Steps section).
 - **Current state:** what is done, in-progress, and untouched right now (the heart of the handoff).
+- **Mode:** a person or interactive agent reads the doc and can ask questions; a background agent gets the doc as its whole prompt and cannot. Background mode needs stop conditions and a report-back target.
 - **Constraints &amp; landmines:** deadlines, decisions already made, paths already tried and abandoned (prevents the receiver repeating dead ends).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
@@ -497,6 +509,24 @@ python scripts/handoff_context.py --repo . --format markdown
 4. List abandoned approaches and *why* — this is the highest-value, most-often-omitted section.
 5. End with the single recommended next action so the receiver has zero ambiguity about step 1.
 
+## Background-Agent Workflow [RECOMMENDED]
+
+Use when the work should continue unattended in its own session. The doc becomes the
+background agent&#x27;s whole prompt, so it must stand alone. Full guidance, launch options per
+platform and safety notes: [references/background-agent-handoff.md](references/background-agent-handoff.md).
+
+1. Write the doc from the template, including the three background sections: **Stop and report when**, **Report back**, **Suggested skills**.
+2. Point at the spec, tickets, branch and commits; do not paste diffs or long excerpts.
+3. Redact keys, tokens, passwords and personal data; name where a secret lives instead.
+4. Save the doc outside the working tree (OS temp or a scratch folder).
+5. Validate with `handoff_context.py --check`; fix every problem it lists.
+6. After the user confirms, launch a named background session with the doc as its prompt, from the same directory.
+
+```bash
+python scripts/handoff_context.py --check assets/sample_background_handoff.md --name &quot;Exporter dry-run&quot;
+claude --bg --name &quot;Exporter dry-run&quot; -- &quot;$(cat /tmp/handoff.md)&quot;   # flags vary by version: check --help
+```
+
 ## The handoff structure
 
 | Section | What it answers | Keep it to |
@@ -508,6 +538,9 @@ python scripts/handoff_context.py --repo . --format markdown
 | **Abandoned paths** | What was tried and ruled out, and why? | Bullets + reason |
 | **Open questions / risks** | What&#x27;s unresolved or could bite? | Bullets, flag owner |
 | **Key locations** | Files, branches, dashboards, tickets, people | Links/paths |
+| **Stop and report when** *(background)* | When must the agent stop instead of improvising? | Bullets |
+| **Report back** *(background)* | Where does the result go, and what must it contain? | One line |
+| **Suggested skills** *(background)* | Which skills cover which step? | Skill — step |
 
 ## Anti-patterns
 
@@ -517,14 +550,45 @@ python scripts/handoff_context.py --repo . --format markdown
 - **Dumping the whole conversation.** A handoff is a curated package, not a transcript. Summarize and link.
 - **No single starting action.** Always end with the one thing to do first.
 
+### The Open-Ended Background Prompt
+**Mistake:** Launching a background agent with &quot;continue where we left off&quot; plus a summary, and no stop conditions or report target.
+**Why it happens:** It works in an interactive session, where the receiver can ask.
+**Instead:** Spell out when to stop and where to report. An unattended agent with no stop rule improvises past the point where a person would have asked, and its result lands nowhere anyone looks.
+
+### Secrets in the Prompt
+**Mistake:** Pasting a connection string or token into the handoff &quot;so the agent has everything&quot;.
+**Why it happens:** It is the fastest way to unblock the receiver.
+**Instead:** Name where the secret lives and let the receiver read it there. `--check` flags common key formats, but redaction is the author&#x27;s job.
+
+### The Pasted Diff
+**Mistake:** Including the full diff or whole files in the handoff.
+**Why it happens:** It feels more complete than a pointer.
+**Instead:** Reference the branch and commits. The receiver reads current files; a pasted copy is stale the moment anything changes.
+
+## Tools Overview
+
+`scripts/handoff_context.py` has two modes. Default: print the branch, recent commits and
+changed files as a seed block (`--format markdown|json`). With `--check FILE`: validate a
+handoff doc for background use and print launch commands; exit 0 ready, 1 not ready, 2
+unreadable file. It never launches anything itself.
+
 ## Scope &amp; Limitations
 
-**In Scope:** Producing a structured, self-contained handoff document for in-progress work in any domain; capturing objective repo state via the helper script; making open work actionable for the receiver.
+**In Scope:** Producing a structured, self-contained handoff document for in-progress work in any domain; capturing objective repo state via the helper script; making open work actionable for the receiver; preparing, checking and launching a handoff as the prompt of a background agent session.
 
 **Out of Scope:** Project status reporting to stakeholders (`project-management/execution/status-update-generator/`); incident post-mortems (`project-management/execution/post-mortem/`); onboarding a new hire to a whole role (`hr-operations/`, `project-management/career/pm-onboarding/`). A handoff is about one body of in-flight work, not a person&#x27;s full ramp-up.
 
-## References
+## Files
 
+| File | Purpose |
+|------|---------|
+| `scripts/handoff_context.py` | Seed block from git state; `--check` validates a background-mode handoff |
+| `assets/handoff_template.md` | Fill-in handoff document, with the three background-mode sections at the end |
+| `assets/sample_background_handoff.md` | Complete background-mode handoff that passes `--check` |
+
+## Reference Documentation
+
+- `references/background-agent-handoff.md` — what a background prompt needs, launch commands per platform, quoting, permissions, and how to check on the run.
 - `assets/handoff_template.md` — fill-in-the-blanks handoff document.
 - `scripts/handoff_context.py` — captures git branch, recent commits, and changed/untracked files as a seed block.
 
@@ -554,7 +618,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Handoff&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;write a handoff&quot;, &quot;hand this off&quot;, &quot;package this work for someone else&quot;, &quot;summarize where we are so another person/agent can continue&quot;, or &quot;create a context doc before I switch off this task&quot;.&quot;
+   - Description: &quot;Package in-progress work into a self-contained context doc or a background agent&#x27;s prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -592,12 +656,13 @@ action instead of their tenth.
 Use it across any domain in this library — engineering work, a PM initiative, a
 compliance audit, a draft document — wherever work outlives a single working session.
 
-## Use when
+## When to Use
 
 - **Switching off a task** — you started something and someone else (or future-you) will finish it.
 - **Delegating to an agent** — handing a scoped task to a sub-agent or teammate who lacks your conversation history.
 - **End of a session/shift** — async teams where the next person picks up cold.
 - **Escalating** — passing a blocked item up or sideways with full context on what was tried.
+- **Handing off to a background agent** — the work should keep going in a separate session while you do something else (see the background-agent workflow below).
 
 ## Clarify First
 
@@ -606,6 +671,7 @@ Before writing the handoff, settle the inputs below. When one is missing or vagu
 - **Receiver:** a teammate, a fresh AI agent, or future-you (sets how much background to spell out vs assume).
 - **The goal + done-state:** what &quot;finished&quot; looks like for this work (anchors the Next Steps section).
 - **Current state:** what is done, in-progress, and untouched right now (the heart of the handoff).
+- **Mode:** a person or interactive agent reads the doc and can ask questions; a background agent gets the doc as its whole prompt and cannot. Background mode needs stop conditions and a report-back target.
 - **Constraints &amp; landmines:** deadlines, decisions already made, paths already tried and abandoned (prevents the receiver repeating dead ends).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
@@ -623,6 +689,24 @@ python scripts/handoff_context.py --repo . --format markdown
 4. List abandoned approaches and *why* — this is the highest-value, most-often-omitted section.
 5. End with the single recommended next action so the receiver has zero ambiguity about step 1.
 
+## Background-Agent Workflow [RECOMMENDED]
+
+Use when the work should continue unattended in its own session. The doc becomes the
+background agent&#x27;s whole prompt, so it must stand alone. Full guidance, launch options per
+platform and safety notes: [references/background-agent-handoff.md](references/background-agent-handoff.md).
+
+1. Write the doc from the template, including the three background sections: **Stop and report when**, **Report back**, **Suggested skills**.
+2. Point at the spec, tickets, branch and commits; do not paste diffs or long excerpts.
+3. Redact keys, tokens, passwords and personal data; name where a secret lives instead.
+4. Save the doc outside the working tree (OS temp or a scratch folder).
+5. Validate with `handoff_context.py --check`; fix every problem it lists.
+6. After the user confirms, launch a named background session with the doc as its prompt, from the same directory.
+
+```bash
+python scripts/handoff_context.py --check assets/sample_background_handoff.md --name &quot;Exporter dry-run&quot;
+claude --bg --name &quot;Exporter dry-run&quot; -- &quot;$(cat /tmp/handoff.md)&quot;   # flags vary by version: check --help
+```
+
 ## The handoff structure
 
 | Section | What it answers | Keep it to |
@@ -634,6 +718,9 @@ python scripts/handoff_context.py --repo . --format markdown
 | **Abandoned paths** | What was tried and ruled out, and why? | Bullets + reason |
 | **Open questions / risks** | What&#x27;s unresolved or could bite? | Bullets, flag owner |
 | **Key locations** | Files, branches, dashboards, tickets, people | Links/paths |
+| **Stop and report when** *(background)* | When must the agent stop instead of improvising? | Bullets |
+| **Report back** *(background)* | Where does the result go, and what must it contain? | One line |
+| **Suggested skills** *(background)* | Which skills cover which step? | Skill — step |
 
 ## Anti-patterns
 
@@ -643,14 +730,45 @@ python scripts/handoff_context.py --repo . --format markdown
 - **Dumping the whole conversation.** A handoff is a curated package, not a transcript. Summarize and link.
 - **No single starting action.** Always end with the one thing to do first.
 
+### The Open-Ended Background Prompt
+**Mistake:** Launching a background agent with &quot;continue where we left off&quot; plus a summary, and no stop conditions or report target.
+**Why it happens:** It works in an interactive session, where the receiver can ask.
+**Instead:** Spell out when to stop and where to report. An unattended agent with no stop rule improvises past the point where a person would have asked, and its result lands nowhere anyone looks.
+
+### Secrets in the Prompt
+**Mistake:** Pasting a connection string or token into the handoff &quot;so the agent has everything&quot;.
+**Why it happens:** It is the fastest way to unblock the receiver.
+**Instead:** Name where the secret lives and let the receiver read it there. `--check` flags common key formats, but redaction is the author&#x27;s job.
+
+### The Pasted Diff
+**Mistake:** Including the full diff or whole files in the handoff.
+**Why it happens:** It feels more complete than a pointer.
+**Instead:** Reference the branch and commits. The receiver reads current files; a pasted copy is stale the moment anything changes.
+
+## Tools Overview
+
+`scripts/handoff_context.py` has two modes. Default: print the branch, recent commits and
+changed files as a seed block (`--format markdown|json`). With `--check FILE`: validate a
+handoff doc for background use and print launch commands; exit 0 ready, 1 not ready, 2
+unreadable file. It never launches anything itself.
+
 ## Scope &amp; Limitations
 
-**In Scope:** Producing a structured, self-contained handoff document for in-progress work in any domain; capturing objective repo state via the helper script; making open work actionable for the receiver.
+**In Scope:** Producing a structured, self-contained handoff document for in-progress work in any domain; capturing objective repo state via the helper script; making open work actionable for the receiver; preparing, checking and launching a handoff as the prompt of a background agent session.
 
 **Out of Scope:** Project status reporting to stakeholders (`project-management/execution/status-update-generator/`); incident post-mortems (`project-management/execution/post-mortem/`); onboarding a new hire to a whole role (`hr-operations/`, `project-management/career/pm-onboarding/`). A handoff is about one body of in-flight work, not a person&#x27;s full ramp-up.
 
-## References
+## Files
 
+| File | Purpose |
+|------|---------|
+| `scripts/handoff_context.py` | Seed block from git state; `--check` validates a background-mode handoff |
+| `assets/handoff_template.md` | Fill-in handoff document, with the three background-mode sections at the end |
+| `assets/sample_background_handoff.md` | Complete background-mode handoff that passes `--check` |
+
+## Reference Documentation
+
+- `references/background-agent-handoff.md` — what a background prompt needs, launch commands per platform, quoting, permissions, and how to check on the run.
 - `assets/handoff_template.md` — fill-in-the-blanks handoff document.
 - `scripts/handoff_context.py` — captures git branch, recent commits, and changed/untracked files as a seed block.
 
@@ -680,7 +798,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Handoff&quot;**
-   - Description: &quot;This skill should be used when the user asks to &quot;write a handoff&quot;, &quot;hand this off&quot;, &quot;package this work for someone else&quot;, &quot;summarize where we are so another person/agent can continue&quot;, or &quot;create a context doc before I switch off this task&quot;.&quot;
+   - Description: &quot;Package in-progress work into a self-contained context doc or a background agent&#x27;s prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -749,7 +867,7 @@ python scripts/handoff_context.py --repo . --format markdown
 3. Make every open item **actionable**: a verb, a file/location, and the expected outcome.
 4. List abandoned approaches and *why* — this is the highest-value, most-often-omitted section.
 5. End with the single recommended next action so the receiver has zero ambiguity about step 1.
-  <h2>Related Skills in Workflow</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/workflow/skill-router.html" class="skill-card" style="text-decoration:none"><h3>Skill Router</h3><p>This skill should be used when the user has a vague or cross-domain request and asks &quot;which...</p></a></div>
+  <h2>Related Skills in Workflow</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/workflow/session-retro.html" class="skill-card" style="text-decoration:none"><h3>Session Retro</h3><p>Review a coding-agent session and turn its failures and waste into ranked fixes to the agent&#x27;s...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/workflow/skill-router.html" class="skill-card" style="text-decoration:none"><h3>Skill Router</h3><p>This skill should be used when the user has a vague or cross-domain request and asks &quot;which...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/workflow/handoff/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>
 </main>

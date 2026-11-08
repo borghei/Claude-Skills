@@ -1,0 +1,12 @@
+{
+  "topic": "Statistics",
+  "why": "To understand statistics",
+  "success": ["Understand p-values", "Know when a test is significant"],
+  "modules": [
+    {"id": "M1", "title": "Basics", "outcome": "", "depends_on": ["M3"]},
+    {"id": "M2", "title": "Tests", "outcome": "Run a t-test", "depends_on": ["M1"]},
+    {"id": "M3", "title": "Power", "outcome": "Size a test", "depends_on": ["M2"]},
+    {"id": "M4", "title": "Bayesian methods", "outcome": "Compare two posteriors", "depends_on": ["M9"]}
+  ],
+  "resources": []
+}

@@ -1,8 +1,19 @@
 # Skills Reference
 
-Complete reference for **385 skills across 21 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
+Complete reference for **397 skills across 21 domains**. Each skill is a self-contained package with documentation (`SKILL.md`), Python CLI tools (`scripts/`), knowledge bases (`references/`), and user templates (`assets/`).
 
 > **Note:** The per-domain tables below are the canonical listing and are generated against `cli/skills.json`. The dated *Additions* sections that follow are a historical changelog — the skills they mention also appear in their domain table.
+
+---
+
+## Nov 2026 Additions (12 new skills) and agent-workflow fold-ins
+
+Skills for working alongside coding agents: diagnosing hard bugs, module design, shared vocabulary, PR descriptions, git safety hooks, human-only steps, plan interrogation, decision mapping, issue triage, async decisions, structured learning and agent-session retros. Seven existing skills gained matching workflows: two-axis spec-fidelity review (code-reviewer), conversation-to-spec and implement-from-spec loops (spec-driven-workflow), tracer-bullet ticket slicing (spec-to-repo, backlog-refinement), writing for agents (write-a-skill), background-agent handoff (handoff) and cited repo research notes (dossier).
+
+- Engineering: bug-diagnosis, deep-module-design, domain-modeling, pr-description-writer, git-guardrails, human-step-wizard
+- Project Management: discovery/plan-grilling, execution/wayfinder, execution/issue-triage, execution/decision-questionnaire
+- Personal Productivity: learning-workspace
+- Workflow: session-retro
 
 ---
 
@@ -132,7 +143,7 @@ Atomic PM skills covering classic strategy frameworks, GTM, and execution. Adds 
 
 ---
 
-## Engineering (91)
+## Engineering (98)
 
 Core software engineering expertise with Python automation tools.
 
@@ -252,10 +263,16 @@ Enterprise-grade skills with sophisticated analysis tooling.
 | [computer-use-automation](https://github.com/borghei/Claude-Skills/blob/main/engineering/computer-use-automation/SKILL.md) | Computer-use agents, screenshot-driven actions, GUI vs API tradeoffs | 2 |
 | [prompt-governance](https://github.com/borghei/Claude-Skills/blob/main/engineering/prompt-governance/SKILL.md) | Prompt catalog, versioning, injection audit, quality and compliance review | 2 |
 
-### Developer Workflow & Quality (8)
+### Developer Workflow & Quality (14)
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [bug-diagnosis](https://github.com/borghei/Claude-Skills/blob/main/engineering/bug-diagnosis/SKILL.md) ★ NEW | Hard-bug root cause: pass/fail repro, ranked falsifiable hypotheses, bisection, log redaction | 2 |
+| [deep-module-design](https://github.com/borghei/Claude-Skills/blob/main/engineering/deep-module-design/SKILL.md) ★ NEW | Small-interface deep modules; ranks shallow, pass-through and leaky code for deepening | 2 |
+| [domain-modeling](https://github.com/borghei/Claude-Skills/blob/main/engineering/domain-modeling/SKILL.md) ★ NEW | Project glossary, banned-synonym scan, lightweight decision records | 3 |
+| [pr-description-writer](https://github.com/borghei/Claude-Skills/blob/main/engineering/pr-description-writer/SKILL.md) ★ NEW | PR bodies with evidence, verification steps and a one-way/two-way merge-risk call | 2 |
+| [git-guardrails](https://github.com/borghei/Claude-Skills/blob/main/engineering/git-guardrails/SKILL.md) ★ NEW | Hook that blocks destructive git commands before an AI agent runs them | 2 |
+| [human-step-wizard](https://github.com/borghei/Claude-Skills/blob/main/engineering/human-step-wizard/SKILL.md) ★ NEW | Interactive, resumable bash wizard for steps only a person can do | 2 |
 | [write-a-skill](https://github.com/borghei/Claude-Skills/blob/main/engineering/write-a-skill/SKILL.md) | Author, lint, and publish skill packages against the authoring standard | 4 |
 | [spec-driven-workflow](https://github.com/borghei/Claude-Skills/blob/main/engineering/spec-driven-workflow/SKILL.md) | Executable specs, traceable requirement IDs, merge-time coverage gates | 3 |
 | [code-tour](https://github.com/borghei/Claude-Skills/blob/main/engineering/code-tour/SKILL.md) | Ordered annotated codebase tours with anchors that resist rot | 3 |
@@ -395,10 +412,11 @@ Delivery excellence with discovery, execution frameworks, career growth, and Jir
 | [meeting-analyzer](https://github.com/borghei/Claude-Skills/blob/main/project-management/meeting-analyzer/SKILL.md) | Decisions, actions and open questions register; ownerless-item flagging | 3 |
 | [team-communications](https://github.com/borghei/Claude-Skills/blob/main/project-management/team-communications/SKILL.md) | Channel routing, meeting-load reduction, escalation SLAs, timezone norms | 3 |
 
-### Discovery Skills (10)
+### Discovery Skills (11)
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [plan-grilling](https://github.com/borghei/Claude-Skills/blob/main/project-management/discovery/plan-grilling/SKILL.md) ★ NEW | Interrogate a plan one round of questions at a time until every decision is settled | 2 |
 | [brainstorm-ideas](https://github.com/borghei/Claude-Skills/blob/main/project-management/discovery/brainstorm-ideas/SKILL.md) | Product Trio ideation, Opportunity Solution Trees | - |
 | [brainstorm-experiments](https://github.com/borghei/Claude-Skills/blob/main/project-management/discovery/brainstorm-experiments/SKILL.md) | Lean experiment design, XYZ hypotheses | 1 |
 | [identify-assumptions](https://github.com/borghei/Claude-Skills/blob/main/project-management/discovery/identify-assumptions/SKILL.md) | Assumption mapping across 4-8 risk categories | 1 |
@@ -411,10 +429,13 @@ Delivery excellence with discovery, execution frameworks, career growth, and Jir
 | [ai-prototyping](https://github.com/borghei/Claude-Skills/blob/main/project-management/discovery/ai-prototyping/SKILL.md) ★ NEW | Idea → AI prototype → user validation → handoff gate | 2 |
 | [value-proposition-canvas](https://github.com/borghei/Claude-Skills/blob/main/project-management/discovery/value-proposition-canvas/SKILL.md) | Customer Profile + Value Map with fit validation | - |
 
-### Execution Skills (32)
+### Execution Skills (35)
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [wayfinder](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/wayfinder/SKILL.md) ★ NEW | Map oversized work as decision tickets, resolve in dependency order, then tracer-bullet tickets | 2 |
+| [issue-triage](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/issue-triage/SKILL.md) ★ NEW | Triage state machine for issues and external PRs, plus agent-ready briefs | 2 |
+| [decision-questionnaire](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/decision-questionnaire/SKILL.md) ★ NEW | Turn a blocked decision into an async questionnaire a stakeholder can answer | 2 |
 | [create-prd](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/create-prd/SKILL.md) | PRD scaffolding with 8-section structure | 1 |
 | [prfaq](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/prfaq/SKILL.md) ★ NEW | Amazon Working Backwards PR/FAQ as standalone skill | - |
 | [brainstorm-okrs](https://github.com/borghei/Claude-Skills/blob/main/project-management/execution/brainstorm-okrs/SKILL.md) | OKR brainstorming and validation (Wodtke) | 1 |
@@ -635,12 +656,13 @@ Contract, privacy, and dispute workflows. Output is decision support, not legal 
 | [legal-meeting-briefing](https://github.com/borghei/Claude-Skills/blob/main/legal/legal-meeting-briefing/SKILL.md) | Structured briefings for legally relevant meetings, action tracking | 2 |
 | [whistleblower-compliance](https://github.com/borghei/Claude-Skills/blob/main/legal/whistleblower-compliance/SKILL.md) | Whistleblower system audits and compliant reporting policies | 2 |
 
-## Personal Productivity (13)
+## Personal Productivity (14)
 
 Individual operating system — capture, focus, review, and the recurring personal deliverables.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [learning-workspace](https://github.com/borghei/Claude-Skills/blob/main/personal-productivity/learning-workspace/SKILL.md) ★ NEW | Multi-session study workspace: mission, curriculum, lessons, spaced review | 2 |
 | [capture](https://github.com/borghei/Claude-Skills/blob/main/personal-productivity/capture/SKILL.md) | Trusted capture-and-triage front door so no commitment lives in your head | 2 |
 | [deep-work](https://github.com/borghei/Claude-Skills/blob/main/personal-productivity/deep-work/SKILL.md) | Block defence, session structure, interruption budgets, deep-work ratio | 2 |
 | [weekly-review](https://github.com/borghei/Claude-Skills/blob/main/personal-productivity/weekly-review/SKILL.md) | Calendar/tasks/journal → wins, learnings, blockers, next-week priorities | 1 |
@@ -745,11 +767,12 @@ Platform toolkits. The LinkedIn suite: find what to say, plan, write, check, con
 | [linkedin-employee-advocacy](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-employee-advocacy) | Team cadence matrix, consent and review rules for an advocacy programme | 2 |
 | [linkedin-engagement-analytics](https://github.com/borghei/Claude-Skills/blob/main/tools/linkedin/linkedin-engagement-analytics) | Audience segments from an engagement export, compared with the target | 2 |
 
-## Workflow (2)
+## Workflow (3)
 
 Meta-skills for routing work and handing it off.
 
 | Skill | Description | Tools |
 |-------|-------------|-------|
+| [session-retro](https://github.com/borghei/Claude-Skills/blob/main/workflow/session-retro/SKILL.md) ★ NEW | Turn a coding-agent session's failures and waste into ranked environment fixes | 2 |
 | [skill-router](https://github.com/borghei/Claude-Skills/blob/main/workflow/skill-router/SKILL.md) | Match a vague or cross-domain request to the right skill | 1 |
 | [handoff](https://github.com/borghei/Claude-Skills/blob/main/workflow/handoff/SKILL.md) | Package in-flight work as a context doc for another person or agent | 1 |

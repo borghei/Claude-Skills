@@ -88,7 +88,7 @@ Examples of what these skills produce. *(Click to enlarge — screenshots coming
 
 ---
 
-## Complete catalog (70 skills)
+## Complete catalog (74 skills)
 
 ### Role-Based Skills (10)
 

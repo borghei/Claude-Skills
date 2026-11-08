@@ -1,10 +1,10 @@
 # Project Management Skills - Claude Code Guidance
 
-This guide covers the **70 production-ready project management skills** organized across role-based, discovery, execution, career, integration, strategy-frameworks (Tier 3), and GTM (Tier 3) domains. PM is the most-used domain in this library.
+This guide covers the **74 production-ready project management skills** organized across role-based, discovery, execution, career, integration, strategy-frameworks (Tier 3), and GTM (Tier 3) domains. PM is the most-used domain in this library.
 
 ## PM Skills Overview
 
-**Available Skills (70 total):**
+**Available Skills (74 total):**
 
 **Tier 3 additions (May 2026, 12 new skills):**
 
@@ -27,6 +27,12 @@ This guide covers the **70 production-ready project management skills** organize
 - **execution/stakeholder-map/** - Power × Interest + engagement plan (1 tool)
 - **execution/test-scenarios/** - 7-category coverage generator (1 tool)
 - **execution/sprint-plan/** - Capacity math + commit discipline (1 tool)
+
+**Agent-workflow additions (November 2026, 4 new skills):**
+- **discovery/plan-grilling/** - Interrogate a plan or design one round of questions at a time until every decision is settled; multi-session workflow-spec mode (2 tools: `question_log_checker.py`, `workflow_spec_checker.py`)
+- **execution/wayfinder/** - Work too big for one sprint as a map of decision tickets, resolved in dependency order, then converted to tracer-bullet tickets (2 tools: `decision_map_validator.py`, `tracer_slice_checker.py`)
+- **execution/issue-triage/** - Triage state machine for engineering issues and external PRs, out-of-scope register, agent-ready briefs (2 tools: `triage_state_validator.py`, `agent_brief_linter.py`)
+- **execution/decision-questionnaire/** - Turn a blocked decision into an async questionnaire a stakeholder can answer without a meeting (2 tools: `questionnaire_linter.py`, `answer_consolidator.py`)
 
 **AI-era delivery additions (September 2026, 2 new skills):**
 

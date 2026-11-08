@@ -1,0 +1,192 @@
+{
+  "topic": "Statistics for product A/B testing",
+  "mission": "Size and read growth experiments without waiting for the data team.",
+  "modules": [
+    {
+      "id": "M1",
+      "title": "Variation and sampling",
+      "status": "done",
+      "depends_on": []
+    },
+    {
+      "id": "M2",
+      "title": "Confidence intervals",
+      "status": "done",
+      "depends_on": [
+        "M1"
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Hypothesis tests and p-values",
+      "status": "todo",
+      "depends_on": [
+        "M2"
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Power and sample size",
+      "status": "active",
+      "depends_on": [
+        "M3"
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Experiment pitfalls",
+      "status": "todo",
+      "depends_on": [
+        "M3"
+      ]
+    }
+  ],
+  "sessions": [
+    {
+      "n": 1,
+      "date": "2026-10-06",
+      "module": "M1",
+      "lesson": "lessons/0001-variation-and-sampling.md"
+    },
+    {
+      "n": 2,
+      "date": "2026-10-13",
+      "module": "M1",
+      "lesson": "lessons/0002-standard-error.md"
+    },
+    {
+      "n": 3,
+      "date": "2026-10-20",
+      "module": "M2",
+      "lesson": "lessons/0003-intervals-for-rates.md"
+    },
+    {
+      "n": 4,
+      "date": "2026-10-27",
+      "module": "M2",
+      "lesson": "lessons/0004-reading-an-interval.md"
+    },
+    {
+      "n": 5,
+      "date": "2026-11-05",
+      "module": "M3",
+      "lesson": "lessons/0005-null-and-alternative.md"
+    },
+    {
+      "n": 6,
+      "date": "2026-11-08",
+      "module": "M3",
+      "lesson": "lessons/0006-what-a-p-value-is-not.md"
+    }
+  ],
+  "items": [
+    {
+      "id": "C1",
+      "concept": "Two samples from one population differ by chance",
+      "module": "M1",
+      "state": "secure",
+      "introduced": "2026-10-06",
+      "evidence": "Predicted the spread of 20 simulated samples before running them",
+      "reviews": [
+        {
+          "date": "2026-10-06",
+          "result": "recalled"
+        },
+        {
+          "date": "2026-10-06",
+          "result": "recalled"
+        },
+        {
+          "date": "2026-10-07",
+          "result": "recalled"
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "concept": "Standard error shrinks with the square root of n",
+      "module": "M1",
+      "state": "learning",
+      "introduced": "2026-10-13",
+      "evidence": "",
+      "reviews": [
+        {
+          "date": "2026-10-14",
+          "result": "recalled"
+        },
+        {
+          "date": "2026-10-17",
+          "result": "failed"
+        },
+        {
+          "date": "2026-10-18",
+          "result": "recalled"
+        },
+        {
+          "date": "2026-10-21",
+          "result": "recalled"
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "concept": "A 95% interval describes the procedure, not this one interval",
+      "module": "M2",
+      "state": "learning",
+      "introduced": "2026-10-27",
+      "evidence": "Rewrote a misleading dashboard caption correctly",
+      "reviews": [
+        {
+          "date": "2026-10-28",
+          "result": "recalled"
+        },
+        {
+          "date": "2026-10-31",
+          "result": "partial"
+        },
+        {
+          "date": "2026-11-20",
+          "result": "recalled"
+        }
+      ]
+    },
+    {
+      "id": "C4",
+      "concept": "Null and alternative hypotheses for a conversion test",
+      "module": "M3",
+      "state": "learning",
+      "introduced": "2026-11-05",
+      "evidence": "Wrote both hypotheses for the onboarding test unaided",
+      "reviews": []
+    },
+    {
+      "id": "C5",
+      "concept": "A p-value is not the probability the variant is better",
+      "module": "M3",
+      "state": "new",
+      "introduced": "2026-11-08",
+      "evidence": "",
+      "reviews": []
+    }
+  ],
+  "misconceptions": [
+    {
+      "id": "X1",
+      "belief": "A wider interval means a bigger effect",
+      "correction": "Width reflects uncertainty, not size",
+      "status": "corrected",
+      "found": "2026-10-27",
+      "recheck": "2026-11-05",
+      "item": "C3"
+    },
+    {
+      "id": "X2",
+      "belief": "p = 0.03 means a 97% chance the variant wins",
+      "correction": "It is the chance of data this extreme if there were no effect",
+      "status": "open",
+      "found": "2026-11-08",
+      "recheck": null,
+      "item": "C5"
+    }
+  ]
+}

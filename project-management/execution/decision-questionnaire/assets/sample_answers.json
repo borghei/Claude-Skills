@@ -1,0 +1,8 @@
+{
+  "responses": [
+    {"respondent": "Security Lead", "submitted": "2026-11-17",
+     "answers": {"Q1": "A", "Q2": 4000, "Q3": "yes", "Q4": ["Residency clause in open deals", "Cross-border transfer assessment", "Sub-processor list change notice"], "Q5": "Don't know"}},
+    {"respondent": "Finance Controller", "submitted": "2026-11-18",
+     "answers": {"Q1": "A", "Q2": 3500, "Q3": "no - backups may go to the US if encrypted with EU-held keys", "Q4": ["Residency clause in open deals", "Sub-processor list change notice", "Cross-border transfer assessment"], "Q5": "Two 2024 renewals (Kessler GmbH, Atelier Rive) name Frankfurt."}}
+  ]
+}

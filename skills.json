@@ -1,13 +1,13 @@
 {
   "name": "claude-skills",
-  "description": "The Universal AI Skills Library — 385 production-ready skills across 21 domains. Project Management is the most-used domain (70 skills).",
-  "version": "4.13.9",
+  "description": "The Universal AI Skills Library — 397 production-ready skills across 21 domains. Project Management is the most-used domain (74 skills).",
+  "version": "4.14.0",
   "repository": "https://github.com/borghei/Claude-Skills",
   "website": "https://borghei.github.io/Claude-Skills",
   "author": "borghei",
   "license": "MIT + Commons Clause",
-  "total_skills": 385,
-  "updated": "2026-10-23",
+  "total_skills": 397,
+  "updated": "2026-11-08",
   "domains": {
     "business-growth": {
       "count": 20,
@@ -30,8 +30,8 @@
       "tools": 4
     },
     "engineering": {
-      "count": 92,
-      "tools": 267
+      "count": 98,
+      "tools": 281
     },
     "finance": {
       "count": 3,
@@ -54,16 +54,16 @@
       "tools": 122
     },
     "personal-productivity": {
-      "count": 13,
-      "tools": 17
+      "count": 14,
+      "tools": 19
     },
     "product-team": {
       "count": 13,
-      "tools": 30
+      "tools": 31
     },
     "project-management": {
-      "count": 70,
-      "tools": 83
+      "count": 74,
+      "tools": 91
     },
     "ra-qm-team": {
       "count": 27,
@@ -71,7 +71,7 @@
     },
     "research": {
       "count": 4,
-      "tools": 12
+      "tools": 13
     },
     "research-ops": {
       "count": 4,
@@ -90,8 +90,8 @@
       "tools": 7
     },
     "workflow": {
-      "count": 2,
-      "tools": 2
+      "count": 3,
+      "tools": 4
     }
   },
   "skills": [
@@ -380,6 +380,28 @@
       "has_assets": false
     },
     {
+      "name": "bug-diagnosis",
+      "description": "Find the root cause of hard bugs with a fast pass/fail repro, ranked falsifiable hypotheses and bisection. Use when a bug resists quick fixes, a failure is intermittent, or a regression needs tracing to its cause.",
+      "path": "engineering/bug-diagnosis/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "debugging",
+        "root-cause",
+        "bisection",
+        "reproduction",
+        "hypotheses",
+        "redaction",
+        "regression-test"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "changelog-generator",
       "description": "Generate changelogs and release notes from Conventional Commits with semver bump detection, Keep a Changelog formatting, and monorepo scopes. Use when preparing releases, enforcing commit standards, or automating release notes.",
       "path": "engineering/changelog-generator/SKILL.md",
@@ -487,17 +509,18 @@
       "domain": "engineering",
       "category": "engineering",
       "subdomain": "",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "license": "MIT + Commons Clause",
       "tags": [
         "code-review",
         "pull-request",
         "code-quality",
-        "best-practices"
+        "best-practices",
+        "spec-fidelity"
       ],
-      "tools": 3,
+      "tools": 4,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "code-tour",
@@ -663,6 +686,28 @@
       "has_assets": false
     },
     {
+      "name": "deep-module-design",
+      "description": "Design deep modules with small interfaces and rank shallow, pass-through or leaky code for deepening. Use when designing a module interface, improving codebase architecture, or making code easier to test.",
+      "path": "engineering/deep-module-design/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "module-design",
+        "deep-modules",
+        "information-hiding",
+        "seams",
+        "refactoring",
+        "testability",
+        "architecture-review"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "dependency-auditor",
       "description": "Scan project dependencies for vulnerabilities, license issues, and upgrade opportunities across Python, Node.js, Go, and Rust. Use when auditing dependencies, checking licenses, planning upgrades, or assessing supply chain security.",
       "path": "engineering/dependency-auditor/SKILL.md",
@@ -758,6 +803,27 @@
       "tools": 2,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "domain-modeling",
+      "description": "Keep a project glossary of domain terms and lightweight decision records, and catch banned synonyms in docs and code. Use when terms are used inconsistently, writing a GLOSSARY.md, or recording a design decision.",
+      "path": "engineering/domain-modeling/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "domain-modeling",
+        "glossary",
+        "ubiquitous-language",
+        "adr",
+        "decision-records",
+        "naming"
+      ],
+      "tools": 3,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "env-secrets-manager",
@@ -865,6 +931,27 @@
       "has_assets": false
     },
     {
+      "name": "git-guardrails",
+      "description": "Install a hook that blocks destructive git commands before an AI agent runs them. Use when an agent force-pushed or ran reset --hard, when adding git safety hooks, or when protecting main from agent pushes.",
+      "path": "engineering/git-guardrails/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "git",
+        "hooks",
+        "claude-code",
+        "safety",
+        "pretooluse",
+        "branch-protection"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "git-worktree-manager",
       "description": "Manage parallel development with Git worktrees: creation with port allocation, environment sync, branch isolation, and cleanup. Use when working multiple branches at once, running parallel CI validations, or isolating agent workspaces.",
       "path": "engineering/git-worktree-manager/SKILL.md",
@@ -923,6 +1010,27 @@
       "tools": 2,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "human-step-wizard",
+      "description": "Generate an interactive, resumable bash wizard that walks a person through steps only a human can do. Use when a task needs dashboard credentials, DNS or change approval, key rotation, or a manual traffic cutover.",
+      "path": "engineering/human-step-wizard/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "wizard",
+        "bash",
+        "human-in-the-loop",
+        "credentials",
+        "cutover",
+        "runbook-automation"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "incident-commander",
@@ -1146,6 +1254,27 @@
       "tools": 6,
       "has_references": true,
       "has_assets": false
+    },
+    {
+      "name": "pr-description-writer",
+      "description": "Write PR descriptions with evidence, verification steps and a one-way/two-way merge-risk call. Use when opening a PR, when asked to write or fix a PR body, or when checking a description before requesting review.",
+      "path": "engineering/pr-description-writer/SKILL.md",
+      "domain": "engineering",
+      "category": "engineering",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "pull-request",
+        "pr-description",
+        "code-review",
+        "merge-risk",
+        "rollback",
+        "evidence"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "pr-review-expert",
@@ -1773,7 +1902,7 @@
       "domain": "engineering",
       "category": "engineering",
       "subdomain": "",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "license": "MIT + Commons Clause",
       "tags": [
         "specification",
@@ -1930,14 +2059,15 @@
       "domain": "engineering",
       "category": "engineering",
       "subdomain": "",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "license": "MIT + Commons Clause",
       "tags": [
         "authoring",
         "meta-skill",
         "linting",
         "standards",
-        "packaging"
+        "packaging",
+        "agents-md"
       ],
       "tools": 4,
       "has_references": true,
@@ -5064,6 +5194,26 @@
       "has_assets": true
     },
     {
+      "name": "plan-grilling",
+      "description": "Interrogate a plan, design or idea one round of questions at a time until every decision is settled. Use when stress-testing a plan before building, when a design feels underspecified, or turning a fuzzy workflow into a spec.",
+      "path": "project-management/discovery/plan-grilling/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "grilling",
+        "decision-tree",
+        "plan-review",
+        "specification",
+        "discovery"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "pre-mortem",
       "description": "Pre-mortem risk analysis expert that classifies risks as Tigers, Paper Tigers, and Elephants to surface launch-blocking issues before they happen.",
       "path": "project-management/discovery/pre-mortem/SKILL.md",
@@ -5163,17 +5313,18 @@
     },
     {
       "name": "backlog-refinement",
-      "description": "Backlog refinement playbook covering INVEST quality, vertical story splitting, Definition of Ready, and Definition of Done -- with a Python scorer that grades each story against INVEST and emits a ready/not-ready verdict.",
+      "description": "Grade stories against INVEST, split them vertically or as tracer bullets, and enforce Definition of Ready and Done. Use when refining a backlog, splitting an oversized story, or checking sprint readiness.",
       "path": "project-management/execution/backlog-refinement/SKILL.md",
       "domain": "project-management",
       "category": "project-management",
       "subdomain": "",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "license": "MIT + Commons Clause",
       "tags": [
         "backlog",
         "invest",
         "story-splitting",
+        "tracer-bullet",
         "definition-of-ready",
         "definition-of-done"
       ],
@@ -5299,6 +5450,26 @@
       "has_assets": false
     },
     {
+      "name": "decision-questionnaire",
+      "description": "Turn a blocked decision into an async questionnaire a stakeholder can answer without a meeting. Use when you need someone else's input to decide, a meeting would be overkill, or answers from several people must be consolidated.",
+      "path": "project-management/execution/decision-questionnaire/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "decision-making",
+        "async",
+        "questionnaire",
+        "stakeholders",
+        "decision-record"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "dependency-map",
       "description": "Cross-team dependency tracking with critical path analysis and Mermaid dependency graphs for program coordination.",
       "path": "project-management/execution/dependency-map/SKILL.md",
@@ -5352,6 +5523,26 @@
         "experiments"
       ],
       "tools": 0,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "issue-triage",
+      "description": "Move engineering issues and external PRs through a triage state machine and write agent-ready briefs. Use when clearing a triage queue, deciding if a report is real or wanted, or handing an issue to a coding agent.",
+      "path": "project-management/execution/issue-triage/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "triage",
+        "issue-tracking",
+        "agent-brief",
+        "pull-requests",
+        "labels"
+      ],
+      "tools": 2,
       "has_references": true,
       "has_assets": true
     },
@@ -5723,6 +5914,26 @@
         "acceptance-testing"
       ],
       "tools": 1,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "wayfinder",
+      "description": "Chart work too big for one sprint as a map of decision tickets, resolve them in dependency order, then turn answers into tracer-bullet tickets. Use when the route is unclear, open questions block each other, or estimates swing wildly.",
+      "path": "project-management/execution/wayfinder/SKILL.md",
+      "domain": "project-management",
+      "category": "project-management",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "planning",
+        "decision-tickets",
+        "tracer-bullets",
+        "dependencies",
+        "large-initiatives"
+      ],
+      "tools": 2,
       "has_references": true,
       "has_assets": true
     },
@@ -6300,19 +6511,19 @@
       "domain": "product-team",
       "category": "product-team",
       "subdomain": "",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "license": "MIT + Commons Clause",
       "tags": [
         "prd",
         "ticket-decomposition",
+        "tracer-bullet",
         "branch-strategy",
         "pr",
-        "definition-of-done",
         "delivery"
       ],
-      "tools": 3,
+      "tools": 4,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "ui-design-system",
@@ -6875,6 +7086,27 @@
       "has_assets": true
     },
     {
+      "name": "learning-workspace",
+      "description": "Set up and run a multi-session study workspace with mission, curriculum, lessons and spaced review. Use when learning a topic over weeks, resuming study after a gap, checking real understanding, or planning reviews.",
+      "path": "personal-productivity/learning-workspace/SKILL.md",
+      "domain": "personal-productivity",
+      "category": "personal-productivity",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "learning",
+        "spaced-repetition",
+        "curriculum",
+        "retrieval-practice",
+        "self-study",
+        "tutoring"
+      ],
+      "tools": 2,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
       "name": "meeting-insights",
       "description": "Analyze meeting transcripts to extract decisions, action items, owners, due dates, open questions, and risks. Use after recorded meetings, sales calls, customer interviews, or planning sessions, or to build a decision log.",
       "path": "personal-productivity/meeting-insights/SKILL.md",
@@ -7201,19 +7433,19 @@
       "domain": "research",
       "category": "research",
       "subdomain": "",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "license": "MIT + Commons Clause",
       "tags": [
         "dossier",
         "intelligence",
         "due-diligence",
-        "market-entry",
         "briefing",
-        "research"
+        "research-note",
+        "primary-sources"
       ],
-      "tools": 3,
+      "tools": 4,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "grants",
@@ -7814,23 +8046,44 @@
     },
     {
       "name": "handoff",
-      "description": "This skill should be used when the user asks to \"write a handoff\", \"hand this off\", \"package this work for someone else\", \"summarize where we are so another person/agent can continue\", or \"create a context doc before I switch off this task\".",
+      "description": "Package in-progress work into a self-contained context doc or a background agent's prompt. Use when handing work off, switching off a task, or delegating to a fresh or background agent.",
       "path": "workflow/handoff/SKILL.md",
       "domain": "workflow",
       "category": "workflow",
       "subdomain": "",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "license": "MIT + Commons Clause",
       "tags": [
         "handoff",
         "delegation",
         "context",
         "continuity",
-        "onboarding",
+        "background-agent",
         "async"
       ],
       "tools": 1,
-      "has_references": false,
+      "has_references": true,
+      "has_assets": true
+    },
+    {
+      "name": "session-retro",
+      "description": "Review a coding-agent session and turn its failures and waste into ranked fixes to the agent's environment. Use when a session went slow or wrong, after a messy agent run, or to tune CLAUDE.md or AGENTS.md.",
+      "path": "workflow/session-retro/SKILL.md",
+      "domain": "workflow",
+      "category": "workflow",
+      "subdomain": "",
+      "version": "1.0.0",
+      "license": "MIT + Commons Clause",
+      "tags": [
+        "retrospective",
+        "agent-session",
+        "claude-md",
+        "agents-md",
+        "tool-calls",
+        "developer-experience"
+      ],
+      "tools": 2,
+      "has_references": true,
       "has_assets": true
     },
     {

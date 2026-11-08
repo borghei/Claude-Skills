@@ -1,0 +1,31 @@
+diff --git a/db/migrations/20261102_split_customer_name.py b/db/migrations/20261102_split_customer_name.py
+new file mode 100644
+--- /dev/null
++++ b/db/migrations/20261102_split_customer_name.py
+@@ -0,0 +1,14 @@
++"""Split customers.full_name into given_name / family_name."""
++
++def upgrade(op):
++    op.add_column("customers", "given_name", "text", nullable=True)
++    op.add_column("customers", "family_name", "text", nullable=True)
++    op.execute("UPDATE customers SET given_name = split_part(full_name, ' ', 1)")
++
++
++def downgrade(op):
++    op.drop_column("customers", "family_name")
++    op.drop_column("customers", "given_name")
+diff --git a/api/openapi.yaml b/api/openapi.yaml
+--- a/api/openapi.yaml
++++ b/api/openapi.yaml
+@@ -210,9 +210,12 @@ components:
+     Customer:
+       type: object
+       properties:
+         id:
+           type: string
+-        full_name:
+-          type: string
++        given_name:
++          type: string
++        family_name:
++          type: string

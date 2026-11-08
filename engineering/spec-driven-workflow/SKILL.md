@@ -6,11 +6,11 @@ description: >
   stale spec, or gating merges on requirement coverage.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: engineering
   domain: software-process
-  updated: 2026-07-21
+  updated: 2026-11-08
   tags: [specification, requirements, traceability, acceptance-criteria, process]
 ---
 
@@ -30,6 +30,8 @@ mechanical link a spec is a memo, and memos do not survive contact with a sprint
 - **Auditing what actually shipped** ahead of a stakeholder review or a compliance obligation
 - **Handing a feature to another team** who need the intent, not just the code
 - **Generating an implementation** from a spec — which only works if the spec is precise enough that two engineers would build the same thing
+- **Capturing a spec from a conversation** — a chat thread, design call or agent session where the decisions already exist but nobody wrote them down
+- **Implementing ticket by ticket** from an approved spec, test-first, with a review and a commit per ticket
 
 ## Inputs the skill expects
 
@@ -51,9 +53,36 @@ Before writing or auditing a spec, settle the inputs below. When one is missing 
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
 
+## Quick Start
+
+```bash
+# Lint the spec, freeze IDs, then gate on coverage (lint and coverage exit 1 on the samples' deliberate flaws)
+python3 engineering/spec-driven-workflow/scripts/spec_lint.py --spec engineering/spec-driven-workflow/assets/sample_spec.md
+python3 engineering/spec-driven-workflow/scripts/spec_parse.py --spec engineering/spec-driven-workflow/assets/sample_spec.md --format text
+python3 engineering/spec-driven-workflow/scripts/trace_coverage.py --requirements engineering/spec-driven-workflow/assets/sample_requirements.json --index engineering/spec-driven-workflow/assets/sample_trace_index.json
+```
+
 ## Workflows
 
-### Workflow 1 — Write the spec, then prove it is precise
+### Workflow 0 — Capture the spec from a conversation [RECOMMENDED]
+
+Use when the decisions were made in a discussion — a chat thread, a call, a long session
+with a coding agent — and need to become a spec without being re-litigated. Detail and
+worked rules: `references/conversation-capture-and-implementation-loop.md`, Part 1.
+
+1. Read the whole conversation once before writing. Sort every substantive statement into
+   decision, constraint, example, deferred, or open. Discussion that fits no bin stays out.
+2. Write each decision as one normative statement with a modality keyword, keeping the
+   numbers people actually said. A decision the agent made alone and the user never
+   confirmed is open, not decided.
+3. Turn the examples people walked through into given/when/then acceptance criteria.
+4. Quote deferrals word for word in the out-of-scope list, and put open questions in their
+   own section with an owner — never as `TBD` inside a requirement.
+5. Ask only about gaps that would change a requirement, in one batch. Then read the
+   requirement and out-of-scope lists back and ask what is on them that was not decided.
+6. Run Workflow 1's linter. Captured specs usually fail first on unquantified adjectives.
+
+ — Write the spec, then prove it is precise
 
 1. Draft requirements one statement at a time, each with exactly one obligation and a
    modality keyword. Two obligations in one sentence become two requirements.
@@ -109,6 +138,29 @@ python3 engineering/spec-driven-workflow/scripts/trace_coverage.py \
 Swap `--index` for `--code <path>` to scan a real tree. The index form exists so the
 gate can run against a trace index built by another tool, and so this workflow is
 runnable straight from a fresh clone.
+
+### Workflow 4 — Implement from the spec, one ticket at a time [PROVEN]
+
+Use once the spec is approved and broken into tickets with blocking links. The loop keeps
+code and spec in lockstep. Detail: `references/conversation-capture-and-implementation-loop.md`, Part 2.
+
+1. Pick a ticket from the **frontier** — one whose blocking tickets are all done. The agent
+   starts each ticket with fresh context: the ticket, its requirement IDs, and the spec
+   sections they live in.
+2. Write a failing test annotated with the requirement ID and watch it fail for the
+   expected reason.
+3. Write the minimum code to pass it, annotated with the same ID.
+4. Validate: run the test suite, then `spec_parse.py` against the baseline (no drift) and
+   `trace_coverage.py` (the ticket's IDs now `covered`, no orphans).
+5. Refactor with the tests green, then review the ticket's diff on two axes — repo
+   standards, and fidelity to the requirement (nothing missing, nothing extra).
+6. Commit once per ticket, naming the ticket and requirement IDs in the message. Close the
+   ticket and recompute the frontier.
+7. If the spec proves wrong mid-ticket, stop. Fix the spec in the same branch, re-lint,
+   update the baseline, then resume. Never code around a wrong requirement.
+
+The spec is done when every ticket is closed, the coverage gate passes at its floor, and a
+final whole-branch review against the spec finds no gap and no unrequested behaviour.
 
 ## Decision frameworks
 
@@ -183,6 +235,16 @@ gets waived twice stops being read.
 **Why it happens:** The forward direction answers "did we build what we promised," which is the question stakeholders ask. Nobody asks the reverse question, so nobody builds the report.
 **Instead:** Run coverage in both directions and treat orphan annotations as errors. Orphans mark dead features whose requirement was deleted, typos in IDs, and scope that entered the codebase without ever entering the spec — all three are worth knowing.
 
+### The Re-Interview
+**Mistake:** Capturing a spec from a long discussion by asking the user every question again from scratch.
+**Why it happens:** Starting from a blank template feels thorough, and re-reading a long thread feels slow.
+**Instead:** Extract decisions, constraints, examples and deferrals from the conversation first, and ask only about gaps that would change a requirement. Re-asking settled questions costs trust and invites the answers to drift.
+
+### The Batched Commit
+**Mistake:** Implementing several tickets and landing them as one commit or one unreviewed push.
+**Why it happens:** It feels faster to keep coding while the context is warm.
+**Instead:** One loop per ticket — red test, code, gates, review, commit. Per-ticket commits keep each requirement's implementation findable, reviewable and revertable on its own.
+
 ### The Merge Gate Nobody Believes
 **Mistake:** Setting a 100% coverage gate, waiving it under deadline, and waiving it again the following week.
 **Why it happens:** The gate was set at an aspirational number rather than the number the team will actually hold, so the first real deadline breaks it.
@@ -197,6 +259,7 @@ gets waived twice stops being read.
 | `scripts/trace_coverage.py` | Bidirectional spec-to-code coverage with orphan-annotation detection and a merge gate exit code |
 | `references/spec-writing-guide.md` | Requirement grammar, acceptance-criteria patterns, and worked ambiguous-to-precise rewrites |
 | `references/traceability-model.md` | ID schemes, annotation conventions per language, CI wiring, and drift handling |
+| `references/conversation-capture-and-implementation-loop.md` | Turning a conversation into a spec (five bins, drafting rules, read-back) and the per-ticket implementation loop (frontier, test-first, gates, review, commit) |
 | `assets/sample_spec.md` | Runnable sample spec containing both precise and deliberately ambiguous requirements |
 | `assets/sample_requirements.json` | Parsed baseline for the drift and coverage workflows |
 | `assets/sample_trace_index.json` | Prebuilt trace index exercising covered, untested, test-only, and orphan states |
@@ -209,10 +272,11 @@ gets waived twice stops being read.
 - Requirement extraction with stable IDs and content fingerprints with `spec_parse.py`, drift detection against a baseline, and a gate on missing acceptance criteria.
 - Two-way coverage between requirement IDs and annotated code and tests with `trace_coverage.py`, from a source tree or a prebuilt trace index, with orphan detection and a coverage floor.
 - Spec writing and traceability guidance in `references/`, plus a spec template and sample files in `assets/`.
+- Capturing a spec from a conversation or agent session, and the test-first, review-and-commit-per-ticket loop for implementing from it.
 
 **Out of Scope:**
-- Writing the implementation or the tests (see `engineering/tdd-guide/`).
-- Breaking a PRD into tickets, branches and PRs (see `product-team/spec-to-repo/`).
+- Teaching test-driven development itself (see `tdd-guide`).
+- Slicing the spec into tracer-bullet tickets with blocking links, and branch/PR planning (see `spec-to-repo`).
 - Running the test suite or measuring code coverage.
 - Product discovery and deciding which requirements matter.
 
@@ -220,3 +284,9 @@ gets waived twice stops being read.
 - Coverage means an annotation with the requirement ID was found. It does not show that the test passes or that the code meets the requirement.
 - The linter uses word and phrase rules. It can miss ambiguity phrased in other ways and can flag acceptable wording, so a high precision ratio still needs human review.
 - Stable IDs depend on section and order. Moving requirements between sections changes their IDs, which shows up as drift against the baseline.
+
+## Reference Documentation
+
+- `references/spec-writing-guide.md` — requirement grammar and ambiguous-to-precise rewrites.
+- `references/traceability-model.md` — ID schemes, annotations, CI wiring, drift.
+- `references/conversation-capture-and-implementation-loop.md` — conversation-to-spec capture and the per-ticket implementation loop.

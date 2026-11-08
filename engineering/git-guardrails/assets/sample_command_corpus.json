@@ -1,0 +1,383 @@
+{
+  "description": "Command corpus for guardrail_test.py. expect is allow|block; rule is the rule id a block must report; branch sets the checked-out branch the hook should assume (default feature/work).",
+  "default_branch": "feature/work",
+  "cases": [
+    {
+      "command": "git status",
+      "expect": "allow"
+    },
+    {
+      "command": "git log --oneline -20 | head",
+      "expect": "allow"
+    },
+    {
+      "command": "git diff --stat main...HEAD",
+      "expect": "allow"
+    },
+    {
+      "command": "git commit -m \"fix(api): handle null; git push -f is not run\"",
+      "expect": "allow"
+    },
+    {
+      "command": "git commit -nm \"skip hooks\"",
+      "expect": "block",
+      "rule": "no-verify"
+    },
+    {
+      "command": "git commit --no-verify -m wip",
+      "expect": "block",
+      "rule": "no-verify"
+    },
+    {
+      "command": "git push -u origin feature/login",
+      "expect": "allow"
+    },
+    {
+      "command": "git push",
+      "expect": "allow",
+      "branch": "feature/login"
+    },
+    {
+      "command": "git push",
+      "expect": "block",
+      "rule": "push-protected",
+      "branch": "main"
+    },
+    {
+      "command": "git push origin main",
+      "expect": "block",
+      "rule": "push-protected"
+    },
+    {
+      "command": "git push origin HEAD:release/2.4",
+      "expect": "block",
+      "rule": "push-protected"
+    },
+    {
+      "command": "git push origin HEAD",
+      "expect": "block",
+      "rule": "push-protected",
+      "branch": "master"
+    },
+    {
+      "command": "git push --force",
+      "expect": "block",
+      "rule": "push-force"
+    },
+    {
+      "command": "git push -f origin feature/login",
+      "expect": "block",
+      "rule": "push-force"
+    },
+    {
+      "command": "git push origin +feature/login",
+      "expect": "block",
+      "rule": "push-force"
+    },
+    {
+      "command": "git push --force-with-lease",
+      "expect": "allow",
+      "branch": "feature/login"
+    },
+    {
+      "command": "git push --force-with-lease origin main",
+      "expect": "block",
+      "rule": "push-force-with-lease"
+    },
+    {
+      "command": "git push origin --delete feature/old",
+      "expect": "block",
+      "rule": "push-delete"
+    },
+    {
+      "command": "git push origin :feature/old",
+      "expect": "block",
+      "rule": "push-delete"
+    },
+    {
+      "command": "git push --mirror backup",
+      "expect": "block",
+      "rule": "push-mirror"
+    },
+    {
+      "command": "git push --no-verify",
+      "expect": "block",
+      "rule": "no-verify"
+    },
+    {
+      "command": "git push --dry-run origin main",
+      "expect": "allow"
+    },
+    {
+      "command": "git reset --hard",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "git reset --hard origin/main",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "git reset HEAD~1",
+      "expect": "allow"
+    },
+    {
+      "command": "git reset --soft HEAD~2",
+      "expect": "allow"
+    },
+    {
+      "command": "git clean -fd",
+      "expect": "block",
+      "rule": "clean-force"
+    },
+    {
+      "command": "git clean -f -d -x",
+      "expect": "block",
+      "rule": "clean-force"
+    },
+    {
+      "command": "git clean -n -d",
+      "expect": "allow"
+    },
+    {
+      "command": "git branch -D spike",
+      "expect": "block",
+      "rule": "branch-force-delete"
+    },
+    {
+      "command": "git branch --delete --force spike",
+      "expect": "block",
+      "rule": "branch-force-delete"
+    },
+    {
+      "command": "git branch -d merged-feature",
+      "expect": "allow"
+    },
+    {
+      "command": "git branch -M main",
+      "expect": "block",
+      "rule": "branch-force-rename"
+    },
+    {
+      "command": "git checkout -- .",
+      "expect": "block",
+      "rule": "checkout-discard"
+    },
+    {
+      "command": "git checkout .",
+      "expect": "block",
+      "rule": "checkout-discard"
+    },
+    {
+      "command": "git checkout -f main",
+      "expect": "block",
+      "rule": "checkout-discard"
+    },
+    {
+      "command": "git checkout -- src/app.py",
+      "expect": "allow"
+    },
+    {
+      "command": "git checkout -b feature/new",
+      "expect": "allow"
+    },
+    {
+      "command": "git restore .",
+      "expect": "block",
+      "rule": "restore-discard"
+    },
+    {
+      "command": "git restore --staged .",
+      "expect": "allow"
+    },
+    {
+      "command": "git restore src/app.py",
+      "expect": "allow"
+    },
+    {
+      "command": "git switch --discard-changes main",
+      "expect": "block",
+      "rule": "switch-discard"
+    },
+    {
+      "command": "git switch feature/login",
+      "expect": "allow"
+    },
+    {
+      "command": "git rebase -i HEAD~3",
+      "expect": "block",
+      "rule": "rebase-shared",
+      "branch": "main"
+    },
+    {
+      "command": "git rebase main",
+      "expect": "allow",
+      "branch": "feature/login"
+    },
+    {
+      "command": "git rebase origin/main develop",
+      "expect": "block",
+      "rule": "rebase-shared",
+      "branch": "feature/login"
+    },
+    {
+      "command": "git rebase --continue",
+      "expect": "allow",
+      "branch": "main"
+    },
+    {
+      "command": "git filter-branch --tree-filter 'rm -f secrets.txt' HEAD",
+      "expect": "block",
+      "rule": "history-rewrite"
+    },
+    {
+      "command": "git filter-repo --path secrets.txt --invert-paths",
+      "expect": "block",
+      "rule": "history-rewrite"
+    },
+    {
+      "command": "git reflog expire --expire=now --all",
+      "expect": "block",
+      "rule": "reflog-destroy"
+    },
+    {
+      "command": "git gc --prune=now",
+      "expect": "block",
+      "rule": "gc-prune-now"
+    },
+    {
+      "command": "git gc",
+      "expect": "allow"
+    },
+    {
+      "command": "git stash clear",
+      "expect": "block",
+      "rule": "stash-clear"
+    },
+    {
+      "command": "git stash pop",
+      "expect": "allow"
+    },
+    {
+      "command": "git update-ref -d refs/heads/old",
+      "expect": "block",
+      "rule": "update-ref-delete"
+    },
+    {
+      "command": "git worktree remove --force ../wt",
+      "expect": "block",
+      "rule": "worktree-force-remove"
+    },
+    {
+      "command": "cd services/api && git reset --hard",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "npm test && git push --force",
+      "expect": "block",
+      "rule": "push-force"
+    },
+    {
+      "command": "bash -c \"git clean -fdx\"",
+      "expect": "block",
+      "rule": "clean-force"
+    },
+    {
+      "command": "echo $(git branch -D old)",
+      "expect": "block",
+      "rule": "branch-force-delete"
+    },
+    {
+      "command": "sudo git reset --hard",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "GIT_TRACE=1 git push -f",
+      "expect": "block",
+      "rule": "push-force"
+    },
+    {
+      "command": "git -C ../other-repo reset --hard",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "git -c core.pager=cat push --force",
+      "expect": "block",
+      "rule": "push-force"
+    },
+    {
+      "command": "git branch --merged | xargs git branch -D",
+      "expect": "block",
+      "rule": "branch-force-delete"
+    },
+    {
+      "command": "echo 'git push --force is blocked'",
+      "expect": "allow"
+    },
+    {
+      "command": "grep -r \"reset --hard\" docs/",
+      "expect": "allow"
+    },
+    {
+      "command": "bash -lc 'git reset --hard'",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "sh -xc 'git clean -fdx'",
+      "expect": "block",
+      "rule": "clean-force"
+    },
+    {
+      "command": "nice -n 10 git reset --hard",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "env -u GIT_DIR git reset --hard",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "sudo -u deploy git reset --hard",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "timeout 30 git push -f origin feature/work",
+      "expect": "block",
+      "rule": "push-force"
+    },
+    {
+      "command": "git push origin old-feature --del",
+      "expect": "block",
+      "rule": "push-delete"
+    },
+    {
+      "command": "git reset --har HEAD~1",
+      "expect": "block",
+      "rule": "reset-hard"
+    },
+    {
+      "command": "git branch -f main HEAD~3",
+      "expect": "block",
+      "rule": "branch-force-move"
+    },
+    {
+      "command": "git branch -f feature/scratch HEAD~1",
+      "expect": "allow"
+    },
+    {
+      "command": "bash -lc 'npm test'",
+      "expect": "allow"
+    },
+    {
+      "command": "sudo -u deploy ls /srv",
+      "expect": "allow"
+    }
+  ]
+}

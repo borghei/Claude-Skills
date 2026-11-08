@@ -371,8 +371,8 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
   <div class="page-header">
     <h1 class="page-title">Dossier</h1>
     <p class="page-subtitle">Structured intelligence dossiers on companies, people, markets, or domains, with source triangulation and fact/inference discipline. Use when preparing a deal-prep dossier, executive briefing, or due-diligence overview.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Research</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">dossier</span><span class="tag">intelligence</span><span class="tag">due-diligence</span><span class="tag">market-entry</span><span class="tag">briefing</span><span class="tag">research</span></div>
+    <div class="badge-bar"><span class="badge badge-domain">Research</span> <span class="badge badge-version">v1.1.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 4 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">dossier</span><span class="tag">intelligence</span><span class="tag">due-diligence</span><span class="tag">briefing</span><span class="tag">research-note</span><span class="tag">primary-sources</span></div>
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -401,12 +401,13 @@ A research skill for producing structured intelligence dossiers — the kind of 
 - — Generate dossier outline
 - — Validate source triangulation
 - — Separate facts from inferences
+- — Repo research note [RECOMMENDED]
 - The dossier hierarchy
 - Source reliability scoring (Admiralty Code adapted)
-- Triangulation principle
 
 ## Frameworks &amp; Templates You Know
 - Decision frameworks
+- | `assets/research_note_template.md` | Template for a repo research note |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -434,12 +435,13 @@ A research skill for producing structured intelligence dossiers — the kind of 
 - — Generate dossier outline
 - — Validate source triangulation
 - — Separate facts from inferences
+- — Repo research note [RECOMMENDED]
 - The dossier hierarchy
 - Source reliability scoring (Admiralty Code adapted)
-- Triangulation principle
 
 ## Frameworks &amp; Templates You Know
 - Decision frameworks
+- | `assets/research_note_template.md` | Template for a repo research note |
 
 ## How to Help
 When the user asks for help in this domain:
@@ -481,6 +483,7 @@ market-entry, or an investor reads before due diligence.
 - **Due-diligence overview** for investment or M&amp;A consideration
 - **Competitor profile** in depth
 - **Person dossier** ahead of executive recruiting or board engagement
+- **Repo research note** — one technical question answered from primary sources, saved as a cited markdown file in the repository
 
 ## Inputs the advisor expects
 
@@ -501,6 +504,13 @@ Before building the dossier, settle the inputs below. When one is missing or vag
 - **Key decision or risk to inform:** drives the Risks + Open Questions and Recommendations sections.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+## Quick Start
+
+```bash
+python3 research/dossier/scripts/dossier_outline_generator.py --subject-type company --purpose deal-prep --format markdown
+python3 research/dossier/scripts/research_note_checker.py --input research/dossier/assets/sample_research_note.md
+```
 
 ## Workflows
 
@@ -537,6 +547,34 @@ python3 dossier/scripts/source_triangulation_validator.py \
 ```bash
 python3 dossier/scripts/fact_inference_separator.py \
   --input dossier_statements.json --format markdown
+```
+
+### Workflow 4 — Repo research note [RECOMMENDED]
+
+A narrow dossier for engineering work: one technical question (how an API behaves at its
+limits, what a spec requires, which version changed a behaviour) answered from primary
+sources and committed as a cited markdown note next to the work it informs. Full method:
+`references/repo-research-notes.md`.
+
+1. Write the question as one sentence, plus the decision it unblocks.
+2. Hand the reading to a background agent or sub-agent with fresh context, so the current
+   session keeps working and the researcher is not anchored on the current design. Give it
+   the question, where to look first, the source rules, the save location and a time box.
+3. Trace every claim to the party that owns the behaviour: the provider&#x27;s docs and
+   changelog, the specification text, the library&#x27;s source at the pinned version, our code
+   at a named commit. Secondary sources corroborate only; a claim supported only by them
+   goes to Open questions.
+4. Fill `assets/research_note_template.md`: Answer first, then Findings (facts, each cited
+   `[n]`), Inference (conclusions, naming the findings they rest on), Open questions,
+   numbered Sources with an access date, version or commit.
+5. Save it where the repo keeps such notes (`docs/research/`, `docs/notes/`, the ADR folder);
+   if there is no convention, use `docs/research/&lt;slug&gt;.md` and say where it went. Link it
+   from the spec, ticket or PR it informs.
+6. Validate with the checker, then spot-check the citations behind the Answer.
+
+```bash
+python3 research/dossier/scripts/research_note_checker.py \
+  --input docs/research/&lt;slug&gt;.md --max-uncited 0.1 --format text
 ```
 
 ## Decision frameworks
@@ -624,6 +662,23 @@ articles citing the same press release ≠ 2 independent sources.
 
 ## Anti-patterns to avoid
 
+### The Blog-Sourced Fact
+**Mistake:** A research note or dossier claim rests on a tutorial, Q&amp;A answer or summary article.
+**Why it happens:** Secondary write-ups rank higher in search and read faster than the owner&#x27;s documentation.
+**Instead:** Follow the claim to the party that owns it — the vendor&#x27;s reference, the spec, the source code at the pinned version — and cite that with a date or version. Keep the secondary source only to flag that it disagrees.
+
+### The Anchored Researcher
+**Mistake:** The same session that designed the feature researches whether the design is valid.
+**Why it happens:** The context is already loaded, so it seems efficient.
+**Instead:** Give the question to a fresh-context agent or person. A researcher holding the design looks for support; one holding only the question looks for the answer.
+
+### The Undated Snapshot
+**Mistake:** A note or dossier with no date and no source versions, still trusted two years later.
+**Why it happens:** Facts feel permanent when they are written down.
+**Instead:** Date the document, version every source, and set a review trigger (a dependency upgrade, a vendor docs change, a fixed date).
+
+Also avoid:
+
 - **Mixing facts + inferences without labels.** Reader can&#x27;t calibrate trust.
 - **Single-source claims presented as confirmed.** Anecdote dressed as data.
 - **Unsourced &quot;everyone knows&quot; claims.** Often turn out wrong.
@@ -639,9 +694,10 @@ articles citing the same press release ≠ 2 independent sources.
 - Source triangulation checks with `source_triangulation_validator.py`: single-source claims, low-reliability sources and sources that are not independent
 - Fact, inference and speculation labelling with `fact_inference_separator.py`, flagging unsupported inferences and over-confident speculation
 - The ten-part dossier hierarchy and source rating with an adapted Admiralty Code
+- Repo research notes: one technical question researched from primary sources (typically by a background agent) and written as a cited markdown note in the repository, checked with `research_note_checker.py`
 
 **Out of Scope:**
-- Collecting the information. The skill structures and checks research the user gathers.
+- Collecting dossier information. The dossier tools structure and check research the user gathers; in research-note mode the agent does the reading, but the checker itself never fetches sources.
 - Academic literature search (see `research/litreview/`)
 - Legal due diligence and legal risk opinions (see `c-level-advisor/general-counsel-advisor/`)
 - Competitor teardowns for positioning and sales use (see `business-growth/competitive-teardown/`)
@@ -652,8 +708,26 @@ articles citing the same press release ≠ 2 independent sources.
 - Classification of statements uses the declared category, the evidence attached and wording patterns. It is a check, not a verification of the facts.
 - A dossier is a snapshot. Facts about companies, people and markets go stale and need a set review date.
 
-## References
+## Files
 
+| File | Purpose |
+|------|---------|
+| `scripts/dossier_outline_generator.py` | Outline tailored to subject type and purpose |
+| `scripts/source_triangulation_validator.py` | Checks claims for independent, reliable sources |
+| `scripts/fact_inference_separator.py` | Classifies statements as fact, inference or speculation |
+| `scripts/research_note_checker.py` | Checks a repo research note: claims cited, citations resolve, primary sources dominate, required sections present |
+| `assets/research_note_template.md` | Template for a repo research note |
+| `assets/sample_research_note.md` | Complete sample note that passes the checker |
+
+## Tools Overview
+
+`research_note_checker.py` exits 0 when the note passes, 1 on any error (uncited claims over
+`--max-uncited`, a citation with no source, mostly secondary sources, a missing Question,
+Answer or Sources section), and 2 when the file cannot be read. It never fetches links.
+
+## Reference Documentation
+
+- `references/repo-research-notes.md` — when to write a research note, running it in the background, primary-source rules, note structure, where to save it, keeping it current
 - `references/dossier-frameworks-and-structure.md` — outline patterns per subject type
 - `references/source-triangulation-and-reliability.md` — source assessment, triangulation
 - `references/fact-vs-inference-discipline.md` — categorization + writing patterns
@@ -729,6 +803,7 @@ market-entry, or an investor reads before due diligence.
 - **Due-diligence overview** for investment or M&amp;A consideration
 - **Competitor profile** in depth
 - **Person dossier** ahead of executive recruiting or board engagement
+- **Repo research note** — one technical question answered from primary sources, saved as a cited markdown file in the repository
 
 ## Inputs the advisor expects
 
@@ -749,6 +824,13 @@ Before building the dossier, settle the inputs below. When one is missing or vag
 - **Key decision or risk to inform:** drives the Risks + Open Questions and Recommendations sections.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+## Quick Start
+
+```bash
+python3 research/dossier/scripts/dossier_outline_generator.py --subject-type company --purpose deal-prep --format markdown
+python3 research/dossier/scripts/research_note_checker.py --input research/dossier/assets/sample_research_note.md
+```
 
 ## Workflows
 
@@ -785,6 +867,34 @@ python3 dossier/scripts/source_triangulation_validator.py \
 ```bash
 python3 dossier/scripts/fact_inference_separator.py \
   --input dossier_statements.json --format markdown
+```
+
+### Workflow 4 — Repo research note [RECOMMENDED]
+
+A narrow dossier for engineering work: one technical question (how an API behaves at its
+limits, what a spec requires, which version changed a behaviour) answered from primary
+sources and committed as a cited markdown note next to the work it informs. Full method:
+`references/repo-research-notes.md`.
+
+1. Write the question as one sentence, plus the decision it unblocks.
+2. Hand the reading to a background agent or sub-agent with fresh context, so the current
+   session keeps working and the researcher is not anchored on the current design. Give it
+   the question, where to look first, the source rules, the save location and a time box.
+3. Trace every claim to the party that owns the behaviour: the provider&#x27;s docs and
+   changelog, the specification text, the library&#x27;s source at the pinned version, our code
+   at a named commit. Secondary sources corroborate only; a claim supported only by them
+   goes to Open questions.
+4. Fill `assets/research_note_template.md`: Answer first, then Findings (facts, each cited
+   `[n]`), Inference (conclusions, naming the findings they rest on), Open questions,
+   numbered Sources with an access date, version or commit.
+5. Save it where the repo keeps such notes (`docs/research/`, `docs/notes/`, the ADR folder);
+   if there is no convention, use `docs/research/&lt;slug&gt;.md` and say where it went. Link it
+   from the spec, ticket or PR it informs.
+6. Validate with the checker, then spot-check the citations behind the Answer.
+
+```bash
+python3 research/dossier/scripts/research_note_checker.py \
+  --input docs/research/&lt;slug&gt;.md --max-uncited 0.1 --format text
 ```
 
 ## Decision frameworks
@@ -872,6 +982,23 @@ articles citing the same press release ≠ 2 independent sources.
 
 ## Anti-patterns to avoid
 
+### The Blog-Sourced Fact
+**Mistake:** A research note or dossier claim rests on a tutorial, Q&amp;A answer or summary article.
+**Why it happens:** Secondary write-ups rank higher in search and read faster than the owner&#x27;s documentation.
+**Instead:** Follow the claim to the party that owns it — the vendor&#x27;s reference, the spec, the source code at the pinned version — and cite that with a date or version. Keep the secondary source only to flag that it disagrees.
+
+### The Anchored Researcher
+**Mistake:** The same session that designed the feature researches whether the design is valid.
+**Why it happens:** The context is already loaded, so it seems efficient.
+**Instead:** Give the question to a fresh-context agent or person. A researcher holding the design looks for support; one holding only the question looks for the answer.
+
+### The Undated Snapshot
+**Mistake:** A note or dossier with no date and no source versions, still trusted two years later.
+**Why it happens:** Facts feel permanent when they are written down.
+**Instead:** Date the document, version every source, and set a review trigger (a dependency upgrade, a vendor docs change, a fixed date).
+
+Also avoid:
+
 - **Mixing facts + inferences without labels.** Reader can&#x27;t calibrate trust.
 - **Single-source claims presented as confirmed.** Anecdote dressed as data.
 - **Unsourced &quot;everyone knows&quot; claims.** Often turn out wrong.
@@ -887,9 +1014,10 @@ articles citing the same press release ≠ 2 independent sources.
 - Source triangulation checks with `source_triangulation_validator.py`: single-source claims, low-reliability sources and sources that are not independent
 - Fact, inference and speculation labelling with `fact_inference_separator.py`, flagging unsupported inferences and over-confident speculation
 - The ten-part dossier hierarchy and source rating with an adapted Admiralty Code
+- Repo research notes: one technical question researched from primary sources (typically by a background agent) and written as a cited markdown note in the repository, checked with `research_note_checker.py`
 
 **Out of Scope:**
-- Collecting the information. The skill structures and checks research the user gathers.
+- Collecting dossier information. The dossier tools structure and check research the user gathers; in research-note mode the agent does the reading, but the checker itself never fetches sources.
 - Academic literature search (see `research/litreview/`)
 - Legal due diligence and legal risk opinions (see `c-level-advisor/general-counsel-advisor/`)
 - Competitor teardowns for positioning and sales use (see `business-growth/competitive-teardown/`)
@@ -900,8 +1028,26 @@ articles citing the same press release ≠ 2 independent sources.
 - Classification of statements uses the declared category, the evidence attached and wording patterns. It is a check, not a verification of the facts.
 - A dossier is a snapshot. Facts about companies, people and markets go stale and need a set review date.
 
-## References
+## Files
 
+| File | Purpose |
+|------|---------|
+| `scripts/dossier_outline_generator.py` | Outline tailored to subject type and purpose |
+| `scripts/source_triangulation_validator.py` | Checks claims for independent, reliable sources |
+| `scripts/fact_inference_separator.py` | Classifies statements as fact, inference or speculation |
+| `scripts/research_note_checker.py` | Checks a repo research note: claims cited, citations resolve, primary sources dominate, required sections present |
+| `assets/research_note_template.md` | Template for a repo research note |
+| `assets/sample_research_note.md` | Complete sample note that passes the checker |
+
+## Tools Overview
+
+`research_note_checker.py` exits 0 when the note passes, 1 on any error (uncited claims over
+`--max-uncited`, a citation with no source, mostly secondary sources, a missing Question,
+Answer or Sources section), and 2 when the file cannot be read. It never fetches links.
+
+## Reference Documentation
+
+- `references/repo-research-notes.md` — when to write a research note, running it in the background, primary-source rules, note structure, where to save it, keeping it current
 - `references/dossier-frameworks-and-structure.md` — outline patterns per subject type
 - `references/source-triangulation-and-reliability.md` — source assessment, triangulation
 - `references/fact-vs-inference-discipline.md` — categorization + writing patterns
@@ -1000,7 +1146,9 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python research/dossier/scripts/tool_name.py --help</code></pre>
   
-  
+  <h2>Quick Start</h2><pre><code>python3 research/dossier/scripts/dossier_outline_generator.py --subject-type company --purpose deal-prep --format markdown
+python3 research/dossier/scripts/research_note_checker.py --input research/dossier/assets/sample_research_note.md
+</code></pre>
   <h2>Related Skills in Research</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/research/grants.html" class="skill-card" style="text-decoration:none"><h3>Grants</h3><p>Grant writing and proposal architecture: funder fit, proposal structure, budget design, and...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/research/litreview.html" class="skill-card" style="text-decoration:none"><h3>Litreview</h3><p>Literature review for academic and R&amp;D research: search strategy, source assessment, synthesis,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/research/patent.html" class="skill-card" style="text-decoration:none"><h3>Patent</h3><p>Patent research and IP landscape: prior-art search, claim mapping, landscape analysis, and...</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/research/dossier/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>

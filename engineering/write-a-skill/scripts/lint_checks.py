@@ -136,6 +136,9 @@ def check_frontmatter(fm: Dict[str, Any], folder: str, rules: Dict[str, Any]) ->
         for field_name in names:
             if not block.get(field_name):
                 out.append(Finding("P2", "error", f"{scope} missing required field: {field_name}"))
+    invocation = fm.get("disable-model-invocation")
+    if invocation is not None and str(invocation).lower() not in ("true", "false"):
+        out.append(Finding("P2", "error", f"disable-model-invocation must be true or false, got '{invocation}'"))
     if fm.get("name") and fm["name"] != folder:
         out.append(Finding("P2", "error", f"name '{fm['name']}' does not match folder '{folder}'"))
 

@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">Claude Skills</h1>
-<p align="center"><b>385 skills that turn your AI assistant into a specialist: board prep, product planning, compliance audits, code review, marketing and the rest of the business.</b></p>
+<p align="center"><b>397 skills that turn your AI assistant into a specialist: board prep, product planning, compliance audits, code review, marketing and the rest of the business.</b></p>
 
 <p align="center">
   <a href="https://github.com/borghei/Claude-Skills/stargazers"><img src="https://img.shields.io/github/stars/borghei/Claude-Skills?style=social" alt="GitHub Stars"></a>
@@ -12,10 +12,10 @@
   <img src="https://img.shields.io/badge/Works_with-11_AI_assistants-orange.svg" alt="Works with 11 AI assistants">
 </p>
 <p align="center">
-  <img src="https://img.shields.io/badge/Skills-385-brightgreen.svg" alt="385 Skills">
+  <img src="https://img.shields.io/badge/Skills-397-brightgreen.svg" alt="397 Skills">
   <img src="https://img.shields.io/badge/Domains-21-blue.svg" alt="21 Domains">
   <img src="https://img.shields.io/badge/Expert_Agents-76-purple.svg" alt="76 Expert Agents">
-  <img src="https://img.shields.io/badge/Python_Tools-906-informational.svg" alt="906 Python Tools">
+  <img src="https://img.shields.io/badge/Python_Tools-934-informational.svg" alt="934 Python Tools">
   <img src="https://img.shields.io/badge/Compliance_Frameworks-18-red.svg" alt="18 Compliance Frameworks">
 </p>
 
@@ -76,18 +76,18 @@ Install any of them with `/plugin install <name>@claude-code-skills`.
 
 **Leadership and business:** [C-Level Advisory (31)](c-level-advisor/) · [Business & Growth (20)](business-growth/) · [Business Operations (6)](business-operations/) · [Finance (3)](finance/) · [Sales (5)](sales-success/) · [HR (4)](hr-operations/) · [Vertical Advisors (7)](vertical-advisors/)
 
-**Product and engineering:** [Project Management (70)](project-management/) · [Product Team (13)](product-team/) · [Engineering (92)](engineering/) · [Data (6)](data-analytics/)
+**Product and engineering:** [Project Management (74)](project-management/) · [Product Team (13)](product-team/) · [Engineering (98)](engineering/) · [Data (6)](data-analytics/)
 
 **Compliance and legal:** [Compliance & Quality (27)](ra-qm-team/) · [Legal (17)](legal/)
 
-**Content and everyday work:** [Marketing (41)](marketing/) · [LinkedIn tools (12)](tools/) · [Personal Productivity (13)](personal-productivity/) · [Documents (4)](documents/) · [Markdown to HTML (4)](markdown-html/) · [Research (4)](research/) · [Research Ops (4)](research-ops/) · [Workflow (2)](workflow/)
+**Content and everyday work:** [Marketing (41)](marketing/) · [LinkedIn tools (12)](tools/) · [Personal Productivity (14)](personal-productivity/) · [Documents (4)](documents/) · [Markdown to HTML (4)](markdown-html/) · [Research (4)](research/) · [Research Ops (4)](research-ops/) · [Workflow (2)](workflow/)
 
 [Every skill, with descriptions →](https://borghei.github.io/Claude-Skills/skills/)
 
 What sets it apart:
 
 - **Regulated work, not just code.** SOC 2, ISO 13485, MDR, FDA, EU AI Act, NIS2, DORA, HIPAA and GDPR, with gap analyses and audit-ready output.
-- **Tools that compute.** 906 Python tools do the scoring, sizing and checking, using only the standard library, so you can also run them in CI.
+- **Tools that compute.** 934 Python tools do the scoring, sizing and checking, using only the standard library, so you can also run them in CI.
 - **Asks before it writes.** Skills that produce a deliverable confirm the two or three inputs that change it, so you don't get a polished document built on a guess.
 
 ## More ways to use it

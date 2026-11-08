@@ -6,12 +6,12 @@ description: >
   that never activates.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: engineering
   domain: meta-skills
-  updated: 2026-07-21
-  tags: [authoring, meta-skill, linting, standards, packaging]
+  updated: 2026-11-08
+  tags: [authoring, meta-skill, linting, standards, packaging, agents-md]
 ---
 
 # Write A Skill
@@ -30,6 +30,7 @@ description nothing matches, and a SKILL.md carrying content that belonged in `r
 - **Splitting an oversized SKILL.md** that has crept past 500 lines
 - **Auditing a whole domain** for description collisions after adding several neighbouring skills
 - **Onboarding a new author** who needs the standard operationalised rather than explained
+- **Writing for an agent reader** — deciding whether a skill is user-only, building a thin skill that chains others, or tightening `AGENTS.md` / `CLAUDE.md`
 
 ## Inputs the skill expects
 
@@ -55,6 +56,13 @@ Before scaffolding, settle the inputs below. When one is missing or vague and wo
 - **What the scripts compute:** a skill whose scripts only reformat user input will not clear the 40% time-saving bar.
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+## Quick Start
+
+```bash
+python3 engineering/write-a-skill/scripts/skill_lint.py --skill <domain>/<skill> --strict
+python3 engineering/write-a-skill/scripts/description_audit.py --domain <domain> --min-score 70
+```
 
 ## Workflows
 
@@ -122,6 +130,30 @@ built-in fixtures before shipping a linter change:
 ```bash
 python3 engineering/write-a-skill/scripts/skill_lint.py --selftest
 ```
+
+### Workflow 4 — Write for the agent that reads it [RECOMMENDED]
+
+Every file in a package, and every steering file in a repo, is read first by a model that
+pays for each token and acts on each line. Detail and examples:
+`references/writing-for-agents.md`.
+
+1. **Decide who invokes it.** If the skill has side effects the user must choose (publish,
+   deploy, open tickets), is a ritual with a user-chosen moment (retro, handoff), or is
+   expensive, add `disable-model-invocation: true` to the frontmatter so only the user can
+   run it. Its description then becomes a label for the command list; add a one-line pointer
+   in the steering file so people remember it exists. The linter rejects any value other
+   than `true` or `false`.
+2. **Decide whether it is a composing skill.** When the same sequence of skills runs often
+   and steps get skipped, write a thin skill that names each step by skill, states what each
+   must produce, passes artifacts by path rather than by copy, and stops on a failed step.
+   It holds no domain content of its own, and refers to other skills by name only, so the
+   package stays self-contained.
+3. **Write steering lines as a checklist.** In `AGENTS.md` / `CLAUDE.md`: one short
+   imperative line per fact, the situation first, the positive action stated, no filler,
+   pointers instead of pasted procedures, nothing one command could reveal. Prefer a lint
+   rule to a sentence for anything with a fixed shape, and move review-only rules to the
+   standards document the reviewer reads.
+4. **Prune while adding.** Every edit to a steering file looks for a line to delete.
 
 ## Decision frameworks
 
@@ -197,6 +229,16 @@ someone who just cloned the repo.
 **Why it happens:** It feels more honest and less presumptuous than picking one, especially when the author has seen all five work.
 **Instead:** State the recommendation, give the reason, then give the escape hatch — the specific condition under which the recommendation stops applying. Users invoke a skill for a position, not a survey; anything less than a recommendation they could have found themselves in thirty seconds.
 
+### The Steering-File Essay
+**Mistake:** Writing `AGENTS.md` / `CLAUDE.md` in paragraphs: "It's really important that you always make sure to…".
+**Why it happens:** It is written like documentation for a colleague, and politeness feels harmless.
+**Instead:** One imperative line per fact, the situation first, the exact command or path, no filler. A third of the length carries the same instructions and leaves the agent more room for the task.
+
+### The Auto-Firing Side Effect
+**Mistake:** A skill that publishes, deploys or opens tickets is left model-invocable, and fires on a loose description match.
+**Why it happens:** Model invocation is the default and nobody revisits it.
+**Instead:** Mark it `disable-model-invocation: true` so it runs only when the user asks, and keep a pointer in the steering file so it is not forgotten.
+
 ### The Cross-Skill Dependency
 **Mistake:** Writing "see the X skill for the scoring model" or importing a helper from `../other-skill/scripts/`.
 **Why it happens:** Duplication feels wrong to engineers, and DRY is a deeply trained instinct.
@@ -211,6 +253,7 @@ someone who just cloned the repo.
 | `scripts/skill_scaffold.py` | Generate a compliant package skeleton from a JSON spec, with every required section stubbed |
 | `scripts/description_audit.py` | Score descriptions on budget and trigger quality; flag colliding skill pairs |
 | `references/authoring-playbook.md` | Section-by-section guidance, worked description rewrites, and the content-routing rules |
+| `references/writing-for-agents.md` | User-only skills (`disable-model-invocation`), thin composing skills, and steering-file style with a before/after rewrite |
 | `references/pattern-checklist.md` | The 11 patterns as concrete pass/fail criteria with common failure modes and fixes |
 | `assets/sample_skill_spec.json` | Runnable scaffold input for Workflow 1 |
 | `assets/sample_descriptions.json` | Runnable audit input for Workflow 2, including deliberately failing examples |
@@ -224,6 +267,7 @@ someone who just cloned the repo.
 - Description scoring and collision detection with `description_audit.py`, from a JSON list or a whole domain directory.
 - Linting a skill folder against the 11 patterns of `standards/skill-authoring-standard.md` with `skill_lint.py`, including `--strict`, rule overrides and `--selftest`.
 - Content routing, description budget and script shape guidance in `references/`, and a reviewer checklist in `assets/`.
+- Writing for an agent reader: when to make a skill user-only, how to write a thin composing skill, and how to write `AGENTS.md` / `CLAUDE.md`; the linter validates `disable-model-invocation` when present.
 
 **Out of Scope:**
 - Writing the domain knowledge, frameworks or scripts that go inside a new package.
@@ -235,3 +279,9 @@ someone who just cloned the repo.
 - The linter checks structure, sections, line counts, imports and phrasing rules. A clean lint does not mean the content is correct or useful; `assets/skill-review-checklist.md` covers that half.
 - Description scores and collision values come from word heuristics, not from real activation data.
 - The thresholds (240 characters, 500 lines, 0.50 overlap) are this repository's standard and can be overridden with a rules file.
+
+## Reference Documentation
+
+- `references/authoring-playbook.md` — section-by-section authoring guidance and description rewrites.
+- `references/pattern-checklist.md` — the 11 patterns as pass/fail criteria.
+- `references/writing-for-agents.md` — invocation choice, composing skills, steering-file style.

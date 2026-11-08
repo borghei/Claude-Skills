@@ -1,0 +1,71 @@
+{
+  "feature": "Saved searches",
+  "note": "T6 is deliberately horizontal and T7 has no acceptance criteria, so the validator exits 1 on this sample.",
+  "layers": ["db", "api", "ui", "tests"],
+  "tickets": [
+    {
+      "id": "T1",
+      "kind": "prefactor",
+      "title": "Extract the search query builder so it can be reused by saved searches",
+      "layers": ["api", "tests"],
+      "blocked_by": [],
+      "demoable": false,
+      "estimated_days": 0.5,
+      "acceptance": ["Existing search tests pass unchanged against the extracted builder"]
+    },
+    {
+      "id": "T2",
+      "title": "Save the current search under a name and see it in the Saved list",
+      "layers": ["db", "api", "ui", "tests"],
+      "blocked_by": ["T1"],
+      "demoable": true,
+      "estimated_days": 2,
+      "acceptance": ["Saving 'Open bugs' shows it at the top of the Saved list after reload"]
+    },
+    {
+      "id": "T3",
+      "title": "Run a saved search from the Saved list",
+      "layers": ["api", "ui", "tests"],
+      "blocked_by": ["T2"],
+      "demoable": true,
+      "estimated_days": 1,
+      "acceptance": ["Clicking a saved search shows the same results as running the query by hand"]
+    },
+    {
+      "id": "T4",
+      "title": "Rename and delete a saved search",
+      "layers": ["db", "api", "ui", "tests"],
+      "blocked_by": ["T2"],
+      "demoable": true,
+      "estimated_days": 1.5,
+      "acceptance": ["A renamed search keeps its query", "A deleted search disappears for the owner only"]
+    },
+    {
+      "id": "T5",
+      "title": "Email me when a saved search has new results",
+      "layers": ["db", "api", "ui", "tests"],
+      "blocked_by": ["T3"],
+      "demoable": true,
+      "estimated_days": 4,
+      "acceptance": ["A new matching item triggers one email within 15 minutes"]
+    },
+    {
+      "id": "T6",
+      "title": "Create all saved-search database tables",
+      "layers": ["db"],
+      "blocked_by": [],
+      "demoable": false,
+      "estimated_days": 1,
+      "acceptance": ["Migration applies and rolls back cleanly"]
+    },
+    {
+      "id": "T7",
+      "title": "Share a saved search with a teammate",
+      "layers": ["db", "api", "ui", "tests"],
+      "blocked_by": ["T2"],
+      "demoable": true,
+      "estimated_days": 2,
+      "acceptance": []
+    }
+  ]
+}

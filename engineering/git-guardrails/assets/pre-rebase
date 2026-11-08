@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# git-guardrails pre-rebase hook (plain git, works without Claude Code).
+#
+# git calls this with: $1 = upstream, $2 = branch being rebased (empty means
+# the current branch). Rebasing a protected branch rewrites history other
+# people have pulled, so it is refused. Exit 0 continues, exit 1 aborts.
+# Protected branches come from `git config --get-all guardrails.protected`.
+set -euo pipefail
+
+branch="${2:-}"
+if [ -z "$branch" ]; then
+  branch="$(git symbolic-ref --short -q HEAD || true)"
+fi
+[ -z "$branch" ] && exit 0   # detached HEAD: nothing shared to protect
+
+protected_patterns=()
+while IFS= read -r pattern; do
+  [ -n "$pattern" ] && protected_patterns+=("$pattern")
+done < <(git config --get-all guardrails.protected || true)
+if [ "${#protected_patterns[@]}" -eq 0 ]; then
+  protected_patterns=("main" "master" "develop" "production" "release/*")
+fi
+
+for pattern in "${protected_patterns[@]}"; do
+  # shellcheck disable=SC2053
+  if [[ "$branch" == $pattern ]]; then
+    printf 'git-guardrails: refusing to rebase protected branch %s\n' "$branch" >&2
+    printf '  Rebase your feature branch onto it instead: git rebase %s\n' "$branch" >&2
+    exit 1
+  fi
+done
+
+exit 0

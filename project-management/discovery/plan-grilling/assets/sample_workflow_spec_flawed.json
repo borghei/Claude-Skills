@@ -1,0 +1,14 @@
+{
+  "name": "Customer escalation digest",
+  "trigger": {"type": "event", "detail": "when needed"},
+  "inputs": [],
+  "steps": [
+    {"id": "gather", "actor": "agent", "action": "Pull escalations from the support tool", "uses": ["support_queue"]},
+    {"id": "summarise", "action": "Summarise them properly"},
+    {"id": "send", "actor": "script", "action": "Send the digest"}
+  ],
+  "checkpoints": [],
+  "outputs": [{"name": "digest"}],
+  "done_definition": ["The digest looks good"],
+  "open_questions": ["Who receives the digest — the account owner or the support lead?"]
+}

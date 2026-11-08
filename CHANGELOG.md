@@ -5,6 +5,28 @@ All notable changes to the Claude Skills Library will be documented in this file
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.14.0] - 2026-11-08
+
+### Added
+
+- **12 skills for working alongside coding agents (24 standard-library tools).**
+  - Engineering: `bug-diagnosis` builds a pass/fail reproduction, ranks falsifiable hypotheses and checks the diagnosis log, with a scanner that redacts secrets from logs before you share them; `deep-module-design` measures interface size against implementation size and ranks shallow, pass-through and leaky modules for deepening; `domain-modeling` lints a project glossary, catches banned synonyms in docs and code, and checks decision records; `pr-description-writer` classifies a change as reversible or one-way from its files and diff and lints the PR body for evidence and verification steps; `git-guardrails` installs a Claude Code hook (plus plain git hooks) that blocks force pushes, `reset --hard`, `clean -f`, forced branch deletes and other destructive commands, even inside `bash -lc`, `sudo -u`, chains and subshells; `human-step-wizard` generates a resumable, injection-safe bash wizard for steps only a person can do.
+  - Project management: `discovery/plan-grilling` questions a plan until every decision is settled and checks the question log for coverage; `execution/wayfinder` maps work too big for one sprint as decision tickets and validates the map for cycles and orphans; `execution/issue-triage` moves issues and external PRs through a triage state machine and lints agent-ready briefs; `execution/decision-questionnaire` turns a blocked decision into an async questionnaire and consolidates the answers.
+  - Personal productivity: `learning-workspace` scaffolds a multi-session study workspace and schedules spaced reviews.
+  - Workflow: `session-retro` reads a coding-agent session log, finds retries, re-reads, failed commands and missed skills, and turns them into ranked fixes to the agent's environment.
+
+### Changed
+
+- `code-reviewer` runs a two-axis review (repo standards, and fidelity to the spec) as two independent passes; `review_scope.py` pins the base commit and writes both briefs.
+- `spec-driven-workflow` captures a spec from a conversation and adds an implement-from-spec loop; `spec-to-repo` slices specs into tracer-bullet tickets with blocking links and validates the ticket graph.
+- `write-a-skill` covers writing for agents: user-only skills with `disable-model-invocation: true`, thin skills that chain others, and AGENTS.md / CLAUDE.md style.
+- `handoff` can hand work to a background agent and checks the handoff doc first; `dossier` writes cited research notes into a repo; `backlog-refinement` adds tracer-bullet slicing.
+- Skill counts are corrected everywhere, including the Cursor, Windsurf, Cline and Goose rule files and the per-plugin manifests.
+
+### Fixed
+
+- The `claude-code-mastery` hooks cookbook used `exit 1` in its PreToolUse examples. Claude Code only blocks on `exit 2`, so none of those guardrails stopped anything. Every example now exits 2.
+
 ## [4.13.9] - 2026-10-23
 
 ### Added

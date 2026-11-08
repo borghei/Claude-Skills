@@ -1,0 +1,16 @@
+Design session: pausing subscriptions (transcript, lightly edited)
+
+Priya: Customers keep asking to pause instead of cancel. A pause would freeze the subscription for up to three billing periods.
+Marco: During a pause do we still issue an invoice? I'd say a zero invoice so the billing period stays continuous.
+Priya: No zero invoice. The pause window just shifts the renewal date. Finance hates zero invoices.
+Marco: OK. And what happens to seats during the pause window? Can the client still log in?
+Priya: Read-only access. The account stays, the seats are frozen.
+Lena: We also need a grace period. If a charge fails, the customer gets a grace period of seven days before we suspend.
+Marco: Suspend is different from pause, right? Suspension is something we do, a pause is something the customer asks for.
+Priya: Exactly. Suspension is involuntary, pause is voluntary. Both shift the renewal date though.
+Lena: Then the renewal date is the thing we keep recalculating. Maybe the renewal date deserves its own definition.
+Marco: Membership pause is what support calls it today, by the way.
+Priya: Let's not use membership. It's a subscription pause.
+Lena: What about proration when someone resumes mid-period? Proration credit on the next invoice?
+Priya: Proration credit, yes, applied to the next invoice. Never a cash refund.
+Marco: So the grace period, the pause window and suspension all touch the renewal date. I'll write that down.

@@ -6,12 +6,12 @@ description: >
   PRD into tickets or designing the branch/PR sequence.
 license: MIT + Commons Clause
 metadata:
-  version: 1.0.0
+  version: 1.1.0
   author: borghei
   category: product-team
   domain: delivery
-  updated: 2026-05-27
-  tags: [prd, ticket-decomposition, branch-strategy, pr, definition-of-done, delivery]
+  updated: 2026-11-08
+  tags: [prd, ticket-decomposition, tracer-bullet, branch-strategy, pr, delivery]
 ---
 
 # Spec to Repo
@@ -30,6 +30,7 @@ spec actually ship.
 - Defining **definition-of-done** that covers code, tests, docs, telemetry
 - Planning **incremental shipping** (feature flags, canaries, dark-launch)
 - Reviewing a **decomposition before sprint planning** to avoid mid-sprint surprises
+- Slicing a spec into **tracer-bullet tickets** with blocking links that people or coding agents can pick up in dependency order
 
 ## Inputs the advisor expects
 
@@ -49,6 +50,15 @@ Before generating the repo plan, settle the inputs below. When one is missing or
 - **Feature-flag and rollout posture:** flagged/dark-launch vs direct ship (drives PR sequencing and definition-of-done).
 
 Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
+
+## Quick Start
+
+```bash
+# Validate a tracer-bullet ticket set: vertical slices, blocking links, build waves
+# (exits 1 on the sample: one ticket has no acceptance criteria by design)
+python3 product-team/spec-to-repo/scripts/ticket_graph_validator.py \
+  --input product-team/spec-to-repo/assets/sample_tracer_tickets.json --format text
+```
 
 ## Workflows
 
@@ -86,6 +96,39 @@ python3 spec-to-repo/scripts/pr_scope_analyzer.py \
 python3 spec-to-repo/scripts/branch_naming_validator.py \
   --input branches.txt --format markdown
 ```
+
+### Workflow 4 — Slice a spec into tracer-bullet tickets with blocking links [RECOMMENDED]
+
+A tracer bullet is the thinnest slice that runs end to end through every layer it needs and
+can be demonstrated. Slicing this way means every merged ticket is usable, integration
+problems surface on ticket one instead of the last, and tickets can be worked in parallel
+from a dependency graph. Full method, exceptions and ticket format:
+`references/tracer-bullet-slicing.md`.
+
+1. List the spec's user-visible behaviours as one checkable sentence each, ordered by
+   product dependency.
+2. If the existing code makes the change awkward, put a `prefactor` ticket (no behaviour
+   change) at the front.
+3. Cut the first behaviour down to the narrowest version that still crosses every layer —
+   happy path, hard-coded where possible. That is the first slice.
+4. Turn each remaining behaviour into a slice, and give it blocking links only to tickets
+   it genuinely cannot be built or verified without.
+5. Mark wide mechanical changes as `expand` / `migrate` / `contract` instead of forcing
+   them into a slice, and unknowns as a time-boxed `spike`.
+6. Write the ticket set as JSON and validate it. Fix every error (missing acceptance
+   criteria, unknown blocker, cycle); treat warnings (horizontal slice, not demoable, over
+   the size limit, bottleneck) as prompts to re-slice.
+7. Show the breakdown — title, blocked by, what it delivers — and iterate on granularity
+   and links until approved. Then publish in dependency order using the tracker's native
+   blocking link, so later tickets reference real identifiers.
+
+```bash
+python3 product-team/spec-to-repo/scripts/ticket_graph_validator.py \
+  --input tickets.json --max-days 2 --format json
+```
+
+Work then proceeds from the **frontier**: any ticket whose blockers are all done. The
+validator's waves show the frontier at each step and the length of the critical path.
 
 ## Decision frameworks
 
@@ -182,6 +225,23 @@ Per epic:
 
 ## Anti-patterns to avoid
 
+### The Layer Cake
+**Mistake:** Tickets cut by layer — "create tables", "build API", "build UI", "write tests".
+**Why it happens:** It mirrors how the system is drawn and how teams are split, so it feels natural to estimate.
+**Instead:** Cut by behaviour. Each ticket crosses the layers its behaviour needs and is demoable when it merges. The validator flags single-layer tickets that are not marked as a declared exception.
+
+### Blocking Links as Preferences
+**Mistake:** Linking tickets because one "should" come after another, until the graph is a single line.
+**Why it happens:** A straight sequence feels safer and easier to explain.
+**Instead:** Link only real gates — the second ticket cannot be built or verified without the first. Fewer links mean a wider frontier and more parallel work.
+
+### The Fat First Slice
+**Mistake:** Making ticket one "the whole save feature, with validation, sharing and error states".
+**Why it happens:** The first slice feels like the foundation, so it gets everything.
+**Instead:** Make the first slice the thinnest path that proves every layer connects. Widen it in later tickets.
+
+Also avoid:
+
 - **Decomposition as wishful thinking.** "3-day estimate" with no break-down is a 2-week-actual.
 - **Sequential ticket tree (everyone waits).** Plan parallel paths.
 - **Hidden dependencies on other teams.** Surface them in decomposition.
@@ -197,9 +257,11 @@ Per epic:
 - Checking a planned PR sequence with `pr_scope_analyzer.py` for oversized PRs, missing tests, telemetry or docs, risky merges and ordering problems
 - Linting branch names against a configurable pattern with `branch_naming_validator.py`
 - Guidance on ticket sizing, vertical slices, PR sequencing, definition of done and staged rollout
+- Slicing a spec into tracer-bullet tickets with blocking links, and validating the ticket graph with `ticket_graph_validator.py`
 
 **Out of Scope:**
 - Writing the PRD itself (see `project-management/execution/create-prd/`)
+- Capturing a spec from a conversation, and the test-first implement-from-spec loop (see `spec-driven-workflow`)
 - Creating tickets in Jira or Linear (see `project-management/jira-expert/` and `project-management/linear-expert/`)
 - Feature flag platform design (see `engineering/feature-flags-architect/`)
 - Reviewing actual code changes (see `engineering/pr-review-expert/`)
@@ -209,8 +271,25 @@ Per epic:
 - The PR analyzer reads a plan with estimated line counts, not real diffs. The branch validator checks a list of names and does not touch the git repository.
 - Size limits such as splitting tickets over 3 days or keeping PRs under 400 lines are rules of thumb. Teams should tune them to their own history.
 
-## References
+## Files
 
+| File | Purpose |
+|------|---------|
+| `scripts/prd_to_tickets_decomposer.py` | Epic, story and ticket tree from a capabilities JSON, with size flags and dependencies |
+| `scripts/pr_scope_analyzer.py` | Checks a planned PR sequence for size, missing tests, telemetry, docs and ordering |
+| `scripts/branch_naming_validator.py` | Lints branch names against a pattern |
+| `scripts/ticket_graph_validator.py` | Validates tracer-bullet tickets: vertical slices, acceptance criteria, blocking links, cycles, build waves |
+| `assets/sample_tracer_tickets.json` | Seven-ticket saved-search plan with two deliberate defects |
+
+## Tools Overview
+
+`ticket_graph_validator.py` exits 0 when there are no errors, 1 on any error (unknown
+blocker, cycle, missing acceptance criteria, no free starting ticket), and 2 on unreadable
+input. The other three tools are described in Workflows 1–3.
+
+## Reference Documentation
+
+- `references/tracer-bullet-slicing.md` — slicing rules, blocking links, the frontier, expand/migrate/contract and other exceptions, ticket format, worked example
 - `references/spec-to-ticket-decomposition.md` — patterns for breaking specs into tickets
 - `references/branch-strategy-for-features.md` — branching, feature flags, dark-launch
 - `references/pr-discipline-and-conventions.md` — PR size, review, definition-of-done

@@ -1,0 +1,11 @@
+2026-11-02T09:14:07Z INFO  checkout-api starting build=4.2.1 region=eu-west-1
+2026-11-02T09:14:07Z DEBUG config loaded db_url=postgres://checkout_svc:EXAMPLE-not-real-91@db.internal:5432/checkout
+2026-11-02T09:14:08Z DEBUG storage client access_key=EXAMPLEKEY0000 client_secret=EXAMPLEsecretVALUE
+2026-11-02T09:14:09Z INFO  request POST /v1/cart/7731/total from 203.0.113.42 user=dana.k@example.com
+2026-11-02T09:14:09Z DEBUG headers Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJleGFtcGxlLXVzZXIifQ.EXAMPLEsignatureEXAMPLE
+2026-11-02T09:14:09Z DEBUG headers Cookie: session_id=EXAMPLEf00dcafe1234567890; theme=dark
+2026-11-02T09:14:09Z DEBUG [DBG-7c1e] line_discounts=[0.335, 0.335, 0.335] rounded=[0.34, 0.34, 0.34] sum=1.02 expected=1.01
+2026-11-02T09:14:09Z WARN  total mismatch cart=7731 computed=41.99 reference=42.00
+2026-11-02T09:14:10Z DEBUG webhook signing token=EXAMPLE0000000000000000
+2026-11-02T09:14:10Z DEBUG trace payload=Zk9vQmFyQmF6UXV4MTIzNDU2Nzg5MEFiQ2RFZkdoSWpLbE1u
+2026-11-02T09:14:11Z INFO  request completed status=200 duration_ms=48

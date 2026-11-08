@@ -5,13 +5,13 @@ alwaysApply: true
 
 # AI Skills Library
 
-This is the **universal AI skills library** — **385 production-ready skill packages across 21 domains** with **906 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
+This is the **universal AI skills library** — **397 production-ready skill packages across 21 domains** with **934 Python automation tools**, 76 agents (68 cs-* agents + 8 cross-domain personas), 26 slash commands, and 6 CI/CD workflows. It works with every major AI coding assistant.
 
 **This is NOT a traditional application.** It is a library of self-contained skill packages meant to be extracted and deployed into user workflows. There is no build system or test framework — that is intentional, for portability.
 
 ## Domains (folder → skill count)
 
-`engineering/` 82 · `project-management/` 66 · `marketing/` 39 · `c-level-advisor/` 31 · `ra-qm-team/` 27 · `business-growth/` 20 · `legal/` 17 (experimental) · `product-team/` 13 · `personal-productivity/` 10 · `vertical-advisors/` 7 · `data-analytics/` 5 · `sales-success/` 5 · `documents/` 4 · `hr-operations/` 4 · `research/` 4 · `finance/` 3 · `workflow/` 2 (meta-skills: skill-router, handoff)
+`engineering/` 98 · `project-management/` 74 · `marketing/` 39 · `c-level-advisor/` 31 · `ra-qm-team/` 27 · `business-growth/` 20 · `legal/` 17 (experimental) · `product-team/` 13 · `personal-productivity/` 14 · `vertical-advisors/` 7 · `data-analytics/` 5 · `sales-success/` 5 · `documents/` 4 · `hr-operations/` 4 · `research/` 4 · `finance/` 3 · `workflow/` 3 (meta-skills: skill-router, handoff)
 
 ## Each skill is a self-contained package
 
