@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **universal AI skills library** — reusable, production-ready skill packages that bundle domain expertise, best practices, analysis tools, and strategic frameworks. Works with every major AI coding assistant: Claude Code, Cursor, Copilot, Codex, Gemini CLI, Windsurf, Cline, Aider, Goose, and more.
 
-**Current Scope:** 403 production-ready skills across 21 domains with 966 Python automation tools, 76 AI agents (68 cs-* agents + 8 personas), 26 slash commands, 21 compound sub-skills, and 6 CI/CD workflows. **Project Management is the most-used domain (74 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
+**Current Scope:** 403 production-ready skills across 21 domains with 973 Python automation tools, 76 AI agents (68 cs-* agents + 8 personas), 26 slash commands, 21 compound sub-skills, and 6 CI/CD workflows. **Project Management is the most-used domain (74 skills: discovery, delivery, career growth, strategy frameworks, GTM, modern AI/growth PM, integrations).**
 
 **Key Distinction**: This is NOT a traditional application. It's a library of skill packages meant to be extracted and deployed by users into their AI coding workflows.
 

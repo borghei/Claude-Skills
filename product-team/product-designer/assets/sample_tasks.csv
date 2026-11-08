@@ -1,0 +1,19 @@
+participant,task,completed,time_seconds,errors
+P1,Create invoice,true,48,0
+P2,Create invoice,true,62,1
+P3,Create invoice,true,41,0
+P4,Create invoice,true,70,1
+P5,Create invoice,true,55,0
+P6,Create invoice,true,58,0
+P1,Send reminder,true,22,0
+P2,Send reminder,true,30,0
+P3,Send reminder,true,19,0
+P4,Send reminder,true,35,1
+P5,Send reminder,true,27,0
+P6,Send reminder,true,24,0
+P1,Export tax report,true,95,1
+P2,Export tax report,true,120,1
+P3,Export tax report,true,88,0
+P4,Export tax report,true,140,2
+P5,Export tax report,true,101,0
+P6,Export tax report,true,110,1

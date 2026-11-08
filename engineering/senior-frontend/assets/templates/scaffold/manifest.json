@@ -1,0 +1,389 @@
+{
+  "_comment": "Data for scripts/frontend_scaffolder.py. 'structure' maps paths to content keys; 'contents' maps content keys to files under this folder; 'configs', 'package' and each feature are per template; keys in 'use_client' get a 'use client' directive in the nextjs template.",
+  "_pins": "Checked on npm 2026-11-08. typescript stays on 6.0.x (~6.0.0), not 7: typescript-eslint 8.72 (used by both lint setups, inside eslint-config-next too) declares typescript >=4.8.4 <6.1.0. Next keeps eslint ^9: eslint-config-next 16.4 bundles eslint-plugin-react 7.37, eslint-plugin-import 2.32 and eslint-plugin-jsx-a11y 6.10, whose peer ranges stop at eslint 9. The Vite config uses only @eslint/js, typescript-eslint and eslint-plugin-react-hooks 7, which all accept eslint 10. @types/node ^24 in both templates matches create-vite's react-ts template.",
+  "name_placeholder": "__PROJECT_NAME__",
+  "templates": {
+    "nextjs": {
+      "name": "Next.js 16 App Router",
+      "description": "Modern Next.js with App Router, Server Components, and TypeScript",
+      "structure": {
+        "app": {
+          "layout.tsx": "ROOT_LAYOUT",
+          "page.tsx": "HOME_PAGE",
+          "globals.css": "GLOBALS_CSS",
+          "(auth)": {
+            "login": {
+              "page.tsx": "AUTH_PAGE"
+            },
+            "register": {
+              "page.tsx": "AUTH_PAGE"
+            }
+          },
+          "api": {
+            "health": {
+              "route.ts": "HEALTH_ROUTE"
+            }
+          }
+        },
+        "components": {
+          "ui": {
+            "button.tsx": "UI_BUTTON",
+            "input.tsx": "UI_INPUT",
+            "card.tsx": "UI_CARD",
+            "index.ts": "UI_INDEX"
+          },
+          "layout": {
+            "header.tsx": "LAYOUT_HEADER",
+            "footer.tsx": "LAYOUT_FOOTER",
+            "sidebar.tsx": "LAYOUT_SIDEBAR"
+          }
+        },
+        "lib": {
+          "utils.ts": "UTILS",
+          "constants.ts": "CONSTANTS"
+        },
+        "hooks": {
+          "use-debounce.ts": "HOOK_DEBOUNCE",
+          "use-local-storage.ts": "HOOK_LOCAL_STORAGE"
+        },
+        "types": {
+          "index.ts": "TYPES_INDEX"
+        },
+        "public": {
+          ".gitkeep": "EMPTY"
+        }
+      },
+      "config_files": [
+        "next.config.js",
+        "tailwind.config.ts",
+        "tsconfig.json",
+        "postcss.config.js",
+        "eslint.config.mjs",
+        ".prettierrc",
+        ".gitignore",
+        "package.json"
+      ]
+    },
+    "react": {
+      "name": "React + Vite",
+      "description": "Modern React with Vite, TypeScript, and Tailwind CSS",
+      "structure": {
+        "src": {
+          "App.tsx": "REACT_APP",
+          "main.tsx": "REACT_MAIN",
+          "index.css": "GLOBALS_CSS",
+          "components": {
+            "ui": {
+              "button.tsx": "UI_BUTTON",
+              "input.tsx": "UI_INPUT",
+              "card.tsx": "UI_CARD",
+              "index.ts": "UI_INDEX"
+            }
+          },
+          "hooks": {
+            "use-debounce.ts": "HOOK_DEBOUNCE",
+            "use-local-storage.ts": "HOOK_LOCAL_STORAGE"
+          },
+          "lib": {
+            "utils.ts": "UTILS"
+          },
+          "types": {
+            "index.ts": "TYPES_INDEX"
+          }
+        },
+        "public": {
+          ".gitkeep": "EMPTY"
+        }
+      },
+      "config_files": [
+        "vite.config.ts",
+        "tailwind.config.ts",
+        "tsconfig.json",
+        "tsconfig.app.json",
+        "tsconfig.node.json",
+        "postcss.config.js",
+        "eslint.config.js",
+        ".prettierrc",
+        ".gitignore",
+        "package.json",
+        "index.html"
+      ]
+    }
+  },
+  "features": {
+    "auth": {
+      "description": "Authentication: signed session cookie + proxy.ts (Next), client-side route guard (Vite)",
+      "nextjs": {
+        "files": {
+          "lib/auth.ts": "AUTH_LIB",
+          "proxy.ts": "AUTH_PROXY",
+          "components/auth/login-form.tsx": "LOGIN_FORM",
+          "components/auth/register-form.tsx": "REGISTER_FORM"
+        },
+        "notes": [
+          "auth: set SESSION_SECRET (32+ characters) and add app/api/auth/login and app/api/auth/register route handlers that check credentials against your user store and set the cookie with createSessionToken() from lib/auth.ts."
+        ]
+      },
+      "react": {
+        "files": {
+          "src/lib/auth.ts": "AUTH_CLIENT",
+          "src/components/RequireAuth.tsx": "REQUIRE_AUTH",
+          "src/components/auth/login-form.tsx": "LOGIN_FORM",
+          "src/components/auth/register-form.tsx": "REGISTER_FORM"
+        },
+        "notes": [
+          "auth: RequireAuth is a client-side guard only. Real authentication needs a server that checks credentials, issues the session token and verifies it on every API request."
+        ]
+      }
+    },
+    "api": {
+      "description": "Typed fetch API client with React Query",
+      "nextjs": {
+        "files": {
+          "lib/api-client.ts": "API_CLIENT",
+          "lib/query-client.ts": "QUERY_CLIENT",
+          "providers/query-provider.tsx": "QUERY_PROVIDER"
+        },
+        "dependencies": {
+          "@tanstack/react-query": "^5.0.0"
+        }
+      },
+      "react": {
+        "files": {
+          "src/lib/api-client.ts": "API_CLIENT",
+          "src/lib/query-client.ts": "QUERY_CLIENT",
+          "src/providers/query-provider.tsx": "QUERY_PROVIDER"
+        },
+        "dependencies": {
+          "@tanstack/react-query": "^5.0.0"
+        }
+      }
+    },
+    "forms": {
+      "description": "Form handling with React Hook Form + Zod",
+      "nextjs": {
+        "files": {
+          "lib/form-utils.ts": "FORM_UTILS",
+          "components/forms/form-field.tsx": "FORM_FIELD"
+        },
+        "dependencies": {
+          "@hookform/resolvers": "^5.0.0",
+          "react-hook-form": "^7.55.0",
+          "zod": "^4.0.0"
+        }
+      },
+      "react": {
+        "files": {
+          "src/lib/form-utils.ts": "FORM_UTILS",
+          "src/components/forms/form-field.tsx": "FORM_FIELD"
+        },
+        "dependencies": {
+          "@hookform/resolvers": "^5.0.0",
+          "react-hook-form": "^7.55.0",
+          "zod": "^4.0.0"
+        }
+      }
+    },
+    "testing": {
+      "description": "Testing setup with Vitest and Testing Library",
+      "nextjs": {
+        "files": {
+          "vitest.config.ts": "VITEST_CONFIG_NEXT",
+          "src/test/setup.ts": "TEST_SETUP",
+          "src/test/utils.tsx": "TEST_UTILS"
+        },
+        "devDependencies": {
+          "@testing-library/dom": "^10.0.0",
+          "@testing-library/jest-dom": "^7.0.0",
+          "@testing-library/react": "^16.0.0",
+          "jsdom": "^31.0.0",
+          "vitest": "^5.0.0",
+          "@vitejs/plugin-react": "^6.0.0"
+        },
+        "scripts": {
+          "test": "vitest"
+        }
+      },
+      "react": {
+        "files": {
+          "vitest.config.ts": "VITEST_CONFIG_REACT",
+          "src/test/setup.ts": "TEST_SETUP",
+          "src/test/utils.tsx": "TEST_UTILS"
+        },
+        "devDependencies": {
+          "@testing-library/dom": "^10.0.0",
+          "@testing-library/jest-dom": "^7.0.0",
+          "@testing-library/react": "^16.0.0",
+          "jsdom": "^31.0.0",
+          "vitest": "^5.0.0"
+        },
+        "scripts": {
+          "test": "vitest"
+        }
+      }
+    },
+    "storybook": {
+      "description": "Component documentation with Storybook",
+      "nextjs": {
+        "files": {
+          ".storybook/main.ts": "STORYBOOK_MAIN_NEXT",
+          ".storybook/preview.ts": "STORYBOOK_PREVIEW_NEXT"
+        },
+        "devDependencies": {
+          "@storybook/nextjs-vite": "^10.0.0",
+          "storybook": "^10.0.0"
+        },
+        "scripts": {
+          "storybook": "storybook dev -p 6006",
+          "build-storybook": "storybook build"
+        }
+      },
+      "react": {
+        "files": {
+          ".storybook/main.ts": "STORYBOOK_MAIN_REACT",
+          ".storybook/preview.ts": "STORYBOOK_PREVIEW_REACT"
+        },
+        "devDependencies": {
+          "@storybook/react-vite": "^10.0.0",
+          "storybook": "^10.0.0"
+        },
+        "scripts": {
+          "storybook": "storybook dev -p 6006",
+          "build-storybook": "storybook build"
+        }
+      }
+    }
+  },
+  "contents": {
+    "ROOT_LAYOUT": "files/root_layout.tsx",
+    "HOME_PAGE": "files/home_page.tsx",
+    "AUTH_PROXY": "files/auth_proxy.ts",
+    "GLOBALS_CSS": "files/globals_css.css",
+    "UI_BUTTON": "files/ui_button.tsx",
+    "UI_INPUT": "files/ui_input.tsx",
+    "UI_CARD": "files/ui_card.tsx",
+    "UI_INDEX": "files/ui_index.ts",
+    "UTILS": "files/utils.ts",
+    "CONSTANTS": "files/constants.ts",
+    "HOOK_DEBOUNCE": "files/hook_debounce.ts",
+    "HOOK_LOCAL_STORAGE": "files/hook_local_storage.ts",
+    "TYPES_INDEX": "files/types_index.ts",
+    "HEALTH_ROUTE": "files/health_route.ts",
+    "AUTH_PAGE": "files/auth_page.tsx",
+    "LAYOUT_HEADER": "files/layout_header.tsx",
+    "LAYOUT_FOOTER": "files/layout_footer.tsx",
+    "LAYOUT_SIDEBAR": "files/layout_sidebar.tsx",
+    "REACT_APP": "files/react_app.tsx",
+    "REACT_MAIN": "files/react_main.tsx",
+    "EMPTY": "files/empty.txt",
+    "AUTH_LIB": "files/auth_lib.ts",
+    "AUTH_CLIENT": "files/auth_client.ts",
+    "REQUIRE_AUTH": "files/require_auth.tsx",
+    "LOGIN_FORM": "files/login_form.tsx",
+    "REGISTER_FORM": "files/register_form.tsx",
+    "API_CLIENT": "files/api_client.ts",
+    "QUERY_CLIENT": "files/query_client.ts",
+    "QUERY_PROVIDER": "files/query_provider.tsx",
+    "FORM_UTILS": "files/form_utils.ts",
+    "FORM_FIELD": "files/form_field.tsx",
+    "VITEST_CONFIG_NEXT": "files/vitest_config_next.ts",
+    "VITEST_CONFIG_REACT": "files/vitest_config_react.ts",
+    "TEST_SETUP": "files/test_setup.ts",
+    "TEST_UTILS": "files/test_utils.tsx",
+    "STORYBOOK_MAIN_NEXT": "files/storybook_main_next.ts",
+    "STORYBOOK_MAIN_REACT": "files/storybook_main_react.ts",
+    "STORYBOOK_PREVIEW_NEXT": "files/storybook_preview_next.ts",
+    "STORYBOOK_PREVIEW_REACT": "files/storybook_preview_react.ts"
+  },
+  "configs": {
+    "nextjs": {
+      "tsconfig.json": "config/tsconfig.json.tmpl",
+      "tailwind.config.ts": "config/tailwind.config.ts.tmpl",
+      "postcss.config.js": "config/postcss.config.js.tmpl",
+      "next.config.js": "config/next.config.js.tmpl",
+      "eslint.config.mjs": "config/eslint.config.mjs.tmpl",
+      ".prettierrc": "config/prettierrc.tmpl",
+      ".gitignore": "config/gitignore.tmpl"
+    },
+    "react": {
+      "tsconfig.json": "config/vite/tsconfig.json.tmpl",
+      "tsconfig.app.json": "config/vite/tsconfig.app.json.tmpl",
+      "tsconfig.node.json": "config/vite/tsconfig.node.json.tmpl",
+      "tailwind.config.ts": "config/tailwind.config.ts.tmpl",
+      "postcss.config.js": "config/vite/postcss.config.js.tmpl",
+      "vite.config.ts": "config/vite/vite.config.ts.tmpl",
+      "eslint.config.js": "config/vite/eslint.config.js.tmpl",
+      ".prettierrc": "config/prettierrc.tmpl",
+      ".gitignore": "config/gitignore.tmpl",
+      "index.html": "config/vite/index.html.tmpl"
+    }
+  },
+  "package": {
+    "nextjs": {
+      "dependencies": {
+        "next": "^16.0.0",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "clsx": "^2.0.0",
+        "tailwind-merge": "^3.0.0"
+      },
+      "devDependencies": {
+        "@tailwindcss/postcss": "^4.0.0",
+        "@types/node": "^24.0.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "eslint": "^9.0.0",
+        "eslint-config-next": "^16.0.0",
+        "postcss": "^8.4.0",
+        "prettier": "^3.0.0",
+        "tailwindcss": "^4.0.0",
+        "typescript": "~6.0.0"
+      },
+      "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint .",
+        "format": "prettier --write ."
+      }
+    },
+    "react": {
+      "type": "module",
+      "scripts": {
+        "dev": "vite",
+        "build": "tsc -b && vite build",
+        "start": "vite preview",
+        "lint": "eslint .",
+        "format": "prettier --write ."
+      },
+      "dependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "clsx": "^2.0.0",
+        "tailwind-merge": "^3.0.0"
+      },
+      "devDependencies": {
+        "@eslint/js": "^10.0.0",
+        "@tailwindcss/postcss": "^4.0.0",
+        "@types/node": "^24.0.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "@vitejs/plugin-react": "^6.0.0",
+        "eslint": "^10.0.0",
+        "eslint-plugin-react-hooks": "^7.0.0",
+        "postcss": "^8.4.0",
+        "prettier": "^3.0.0",
+        "tailwindcss": "^4.0.0",
+        "typescript": "~6.0.0",
+        "typescript-eslint": "^8.0.0",
+        "vite": "^8.0.0"
+      }
+    }
+  },
+  "use_client": [
+    "LOGIN_FORM",
+    "REGISTER_FORM",
+    "QUERY_PROVIDER",
+    "FORM_FIELD"
+  ]
+}

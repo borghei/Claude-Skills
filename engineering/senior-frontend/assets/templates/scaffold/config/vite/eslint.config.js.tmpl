@@ -1,0 +1,11 @@
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import reactHooks from 'eslint-plugin-react-hooks';
+
+// ESLint 9 flat config for a Vite + React + TypeScript app
+export default [
+  { ignores: ['dist', 'storybook-static', 'coverage'] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  reactHooks.configs.flat.recommended,
+];

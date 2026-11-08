@@ -3,601 +3,94 @@
 Frontend Project Scaffolder
 
 Generates a complete Next.js/React project structure with TypeScript,
-Tailwind CSS, and best practice configurations.
+Tailwind CSS, and best practice configurations. Every file body lives in
+assets/templates/scaffold/ (manifest.json maps paths to template files),
+so templates can be edited without touching this script.
 
 Usage:
     python frontend_scaffolder.py my-app --template nextjs
     python frontend_scaffolder.py dashboard --template react --features auth,api
-    python frontend_scaffolder.py landing --template nextjs --dry-run
+    python frontend_scaffolder.py landing --template nextjs --dry-run --format json
+
+Exit codes: 0 ok, 2 bad input (target exists, unknown feature, unwritable path,
+missing or broken template assets).
 """
 
 import argparse
+import copy
 import json
-import os
+import re
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 
-
-# Project templates
-TEMPLATES = {
-    "nextjs": {
-        "name": "Next.js 16 App Router",
-        "description": "Modern Next.js with App Router, Server Components, and TypeScript",
-        "structure": {
-            "app": {
-                "layout.tsx": "ROOT_LAYOUT",
-                "page.tsx": "HOME_PAGE",
-                "globals.css": "GLOBALS_CSS",
-                "(auth)": {
-                    "login": {"page.tsx": "AUTH_PAGE"},
-                    "register": {"page.tsx": "AUTH_PAGE"},
-                },
-                "api": {
-                    "health": {"route.ts": "HEALTH_ROUTE"},
-                },
-            },
-            "components": {
-                "ui": {
-                    "button.tsx": "UI_BUTTON",
-                    "input.tsx": "UI_INPUT",
-                    "card.tsx": "UI_CARD",
-                    "index.ts": "UI_INDEX",
-                },
-                "layout": {
-                    "header.tsx": "LAYOUT_HEADER",
-                    "footer.tsx": "LAYOUT_FOOTER",
-                    "sidebar.tsx": "LAYOUT_SIDEBAR",
-                },
-            },
-            "lib": {
-                "utils.ts": "UTILS",
-                "constants.ts": "CONSTANTS",
-            },
-            "hooks": {
-                "use-debounce.ts": "HOOK_DEBOUNCE",
-                "use-local-storage.ts": "HOOK_LOCAL_STORAGE",
-            },
-            "types": {
-                "index.ts": "TYPES_INDEX",
-            },
-            "public": {
-                ".gitkeep": "EMPTY",
-            },
-        },
-        "config_files": [
-            "next.config.js",
-            "tailwind.config.ts",
-            "tsconfig.json",
-            "postcss.config.js",
-            "eslint.config.mjs",
-            ".prettierrc",
-            ".gitignore",
-            "package.json",
-        ],
-    },
-    "react": {
-        "name": "React + Vite",
-        "description": "Modern React with Vite, TypeScript, and Tailwind CSS",
-        "structure": {
-            "src": {
-                "App.tsx": "REACT_APP",
-                "main.tsx": "REACT_MAIN",
-                "index.css": "GLOBALS_CSS",
-                "components": {
-                    "ui": {
-                        "button.tsx": "UI_BUTTON",
-                        "input.tsx": "UI_INPUT",
-                        "card.tsx": "UI_CARD",
-                        "index.ts": "UI_INDEX",
-                    },
-                },
-                "hooks": {
-                    "use-debounce.ts": "HOOK_DEBOUNCE",
-                    "use-local-storage.ts": "HOOK_LOCAL_STORAGE",
-                },
-                "lib": {
-                    "utils.ts": "UTILS",
-                },
-                "types": {
-                    "index.ts": "TYPES_INDEX",
-                },
-            },
-            "public": {
-                ".gitkeep": "EMPTY",
-            },
-        },
-        "config_files": [
-            "vite.config.ts",
-            "tailwind.config.ts",
-            "tsconfig.json",
-            "postcss.config.js",
-            ".eslintrc.json",
-            ".prettierrc",
-            ".gitignore",
-            "package.json",
-            "index.html",
-        ],
-    },
-}
-
-# Feature modules that can be added
-FEATURES = {
-    "auth": {
-        "description": "Authentication with session management",
-        "files": {
-            "lib/auth.ts": "AUTH_LIB",
-            "proxy.ts": "AUTH_PROXY",  # Next 16 renamed middleware.ts to proxy.ts
-            "components/auth/login-form.tsx": "LOGIN_FORM",
-            "components/auth/register-form.tsx": "REGISTER_FORM",
-        },
-        "dependencies": ["next-auth", "@auth/core"],
-    },
-    "api": {
-        "description": "API client with React Query",
-        "files": {
-            "lib/api-client.ts": "API_CLIENT",
-            "lib/query-client.ts": "QUERY_CLIENT",
-            "providers/query-provider.tsx": "QUERY_PROVIDER",
-        },
-        "dependencies": ["@tanstack/react-query", "axios"],
-    },
-    "forms": {
-        "description": "Form handling with React Hook Form + Zod",
-        "files": {
-            "lib/form-utils.ts": "FORM_UTILS",
-            "components/forms/form-field.tsx": "FORM_FIELD",
-        },
-        "dependencies": ["react-hook-form", "@hookform/resolvers", "zod"],
-    },
-    "testing": {
-        "description": "Testing setup with Vitest and Testing Library",
-        "files": {
-            "vitest.config.ts": "VITEST_CONFIG",
-            "src/test/setup.ts": "TEST_SETUP",
-            "src/test/utils.tsx": "TEST_UTILS",
-        },
-        "dependencies": ["vitest", "@testing-library/react", "@testing-library/jest-dom"],
-    },
-    "storybook": {
-        "description": "Component documentation with Storybook",
-        "files": {
-            ".storybook/main.ts": "STORYBOOK_MAIN",
-            ".storybook/preview.ts": "STORYBOOK_PREVIEW",
-        },
-        "dependencies": ["@storybook/react-vite", "@storybook/addon-essentials"],
-    },
-}
-
-# File content templates
-FILE_CONTENTS = {
-    "ROOT_LAYOUT": '''import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-
-export const metadata: Metadata = {
-  title: 'My App',
-  description: 'Built with Next.js',
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
-        {children}
-      </body>
-    </html>
-  );
-}
-''',
-    "HOME_PAGE": '''export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">Welcome</h1>
-      <p className="mt-4 text-lg text-gray-600">
-        Get started by editing app/page.tsx
-      </p>
-    </main>
-  );
-}
-''',
-    "AUTH_PROXY": '''import { NextResponse, type NextRequest } from 'next/server';
-
-// Next 16 proxy (formerly middleware): runs before matched routes.
-// Keep it to cheap checks such as redirects; do real authorization in the route itself.
-export function proxy(request: NextRequest) {
-  const session = request.cookies.get('session')?.value;
-  if (!session) {
-    return NextResponse.redirect(new URL('/login', request.url));
-  }
-  return NextResponse.next();
-}
-
-export const config = {
-  matcher: ['/dashboard/:path*', '/settings/:path*'],
-};
-''',
-    "GLOBALS_CSS": '''@import "tailwindcss";
-/* Tailwind v4: theme tokens still come from the JS config */
-@config "../tailwind.config.ts";
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-''',
-    "UI_BUTTON": '''import { forwardRef } from 'react';
-import { cn } from '@/lib/utils';
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'default' | 'destructive' | 'outline' | 'ghost';
-  size?: 'default' | 'sm' | 'lg';
-}
-
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', ...props }, ref) => {
-    return (
-      <button
-        className={cn(
-          'inline-flex items-center justify-center rounded-md font-medium transition-colors',
-          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-          'disabled:pointer-events-none disabled:opacity-50',
-          {
-            'bg-primary text-primary-foreground hover:bg-primary/90': variant === 'default',
-            'bg-destructive text-destructive-foreground hover:bg-destructive/90': variant === 'destructive',
-            'border border-input bg-background hover:bg-accent': variant === 'outline',
-            'hover:bg-accent hover:text-accent-foreground': variant === 'ghost',
-          },
-          {
-            'h-10 px-4 py-2': size === 'default',
-            'h-9 px-3': size === 'sm',
-            'h-11 px-8': size === 'lg',
-          },
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-
-Button.displayName = 'Button';
-
-export { Button, type ButtonProps };
-''',
-    "UI_INPUT": '''import { forwardRef } from 'react';
-import { cn } from '@/lib/utils';
-
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  error?: string;
-}
-
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, error, ...props }, ref) => {
-    return (
-      <div className="w-full">
-        <input
-          className={cn(
-            'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2',
-            'text-sm ring-offset-background file:border-0 file:bg-transparent',
-            'file:text-sm file:font-medium placeholder:text-muted-foreground',
-            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-            'disabled:cursor-not-allowed disabled:opacity-50',
-            error && 'border-destructive focus-visible:ring-destructive',
-            className
-          )}
-          ref={ref}
-          {...props}
-        />
-        {error && <p className="mt-1 text-sm text-destructive">{error}</p>}
-      </div>
-    );
-  }
-);
-
-Input.displayName = 'Input';
-
-export { Input, type InputProps };
-''',
-    "UI_CARD": '''import { cn } from '@/lib/utils';
-
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-function Card({ className, ...props }: CardProps) {
-  return (
-    <div
-      className={cn(
-        'rounded-lg border bg-card text-card-foreground shadow-sm',
-        className
-      )}
-      {...props}
-    />
-  );
-}
-
-function CardHeader({ className, ...props }: CardProps) {
-  return <div className={cn('flex flex-col space-y-1.5 p-6', className)} {...props} />;
-}
-
-function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return <h3 className={cn('text-2xl font-semibold leading-none', className)} {...props} />;
-}
-
-function CardContent({ className, ...props }: CardProps) {
-  return <div className={cn('p-6 pt-0', className)} {...props} />;
-}
-
-function CardFooter({ className, ...props }: CardProps) {
-  return <div className={cn('flex items-center p-6 pt-0', className)} {...props} />;
-}
-
-export { Card, CardHeader, CardTitle, CardContent, CardFooter };
-''',
-    "UI_INDEX": '''export { Button } from './button';
-export { Input } from './input';
-export { Card, CardHeader, CardTitle, CardContent, CardFooter } from './card';
-''',
-    "UTILS": '''import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-
-export function formatDate(date: Date | string): string {
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  }).format(new Date(date));
-}
-
-export function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-''',
-    "CONSTANTS": '''export const APP_NAME = 'My App';
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api';
-
-export const ROUTES = {
-  home: '/',
-  login: '/login',
-  register: '/register',
-  dashboard: '/dashboard',
-} as const;
-
-export const QUERY_KEYS = {
-  user: ['user'],
-  products: ['products'],
-} as const;
-''',
-    "HOOK_DEBOUNCE": '''import { useState, useEffect } from 'react';
-
-export function useDebounce<T>(value: T, delay: number = 500): T {
-  const [debouncedValue, setDebouncedValue] = useState<T>(value);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay);
-    return () => clearTimeout(timer);
-  }, [value, delay]);
-
-  return debouncedValue;
-}
-''',
-    "HOOK_LOCAL_STORAGE": '''import { useState, useEffect } from 'react';
-
-export function useLocalStorage<T>(
-  key: string,
-  initialValue: T
-): [T, (value: T | ((prev: T) => T)) => void] {
-  const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === 'undefined') return initialValue;
-
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
-    } catch {
-      return initialValue;
-    }
-  });
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(key, JSON.stringify(storedValue));
-    }
-  }, [key, storedValue]);
-
-  return [storedValue, setStoredValue];
-}
-''',
-    "TYPES_INDEX": '''export interface User {
-  id: string;
-  email: string;
-  name: string;
-  createdAt: Date;
-}
-
-export interface ApiResponse<T> {
-  data: T;
-  message?: string;
-  error?: string;
-}
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  pageSize: number;
-  totalPages: number;
-}
-''',
-    "HEALTH_ROUTE": '''import { NextResponse } from 'next/server';
-
-export async function GET() {
-  return NextResponse.json({
-    status: 'ok',
-    timestamp: new Date().toISOString(),
-  });
-}
-''',
-    "AUTH_PAGE": ''''use client';
-
-export default function AuthPage() {
-  return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-md p-8">
-        <h1 className="text-2xl font-bold text-center">Authentication</h1>
-      </div>
-    </div>
-  );
-}
-''',
-    "LAYOUT_HEADER": '''import Link from 'next/link';
-
-export function Header() {
-  return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
-      <div className="container flex h-14 items-center">
-        <Link href="/" className="font-bold">
-          Logo
-        </Link>
-        <nav className="ml-auto flex gap-4">
-          <Link href="/about" className="text-sm text-muted-foreground hover:text-foreground">
-            About
-          </Link>
-        </nav>
-      </div>
-    </header>
-  );
-}
-''',
-    "LAYOUT_FOOTER": '''export function Footer() {
-  return (
-    <footer className="border-t py-6">
-      <div className="container text-center text-sm text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} My App. All rights reserved.</p>
-      </div>
-    </footer>
-  );
-}
-''',
-    "LAYOUT_SIDEBAR": '''interface SidebarProps {
-  children?: React.ReactNode;
-}
-
-export function Sidebar({ children }: SidebarProps) {
-  return (
-    <aside className="fixed left-0 top-14 z-30 h-[calc(100vh-3.5rem)] w-64 border-r bg-background">
-      <div className="p-4">{children}</div>
-    </aside>
-  );
-}
-''',
-    "REACT_APP": '''import { Button } from './components/ui';
-
-function App() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold">Welcome</h1>
-      <p className="mt-4 text-lg text-gray-600">
-        Get started by editing src/App.tsx
-      </p>
-      <Button className="mt-6">Get Started</Button>
-    </main>
-  );
-}
-
-export default App;
-''',
-    "REACT_MAIN": '''import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-''',
-    "EMPTY": "",
-}
+TEMPLATE_DIR = Path(__file__).resolve().parent.parent / "assets" / "templates" / "scaffold"
 
 
-def generate_structure(
-    base_path: Path,
-    structure: Dict,
-    dry_run: bool = False
-) -> List[str]:
+def load_manifest(template_dir: Path = TEMPLATE_DIR) -> Dict:
+    """Load the scaffold manifest (templates, features, content and config file maps)."""
+    with open(template_dir / "manifest.json", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def read_template(rel_path: str, template_dir: Path = TEMPLATE_DIR) -> str:
+    """Read one template file relative to the scaffold template folder."""
+    return (template_dir / rel_path).read_text(encoding="utf-8")
+
+
+try:
+    MANIFEST = load_manifest()
+except (OSError, json.JSONDecodeError) as _exc:
+    print(f"error: cannot load scaffold templates from {TEMPLATE_DIR}: {_exc}", file=sys.stderr)
+    sys.exit(2)
+
+TEMPLATES: Dict = MANIFEST["templates"]
+FEATURES: Dict = MANIFEST["features"]
+
+
+def file_content(key: str, default: Optional[str] = "", template: str = "") -> Optional[str]:
+    """Return the body for a content key, or ``default`` when the key has no template.
+
+    Keys listed in the manifest's ``use_client`` get the directive in the nextjs
+    template only; Vite has no Server Components, so it never needs one.
+    """
+    rel = MANIFEST["contents"].get(key)
+    if rel is None:
+        return default
+    body = read_template(rel)
+    if template == "nextjs" and key in MANIFEST.get("use_client", []):
+        body = "'use client';\n\n" + body
+    return body
+
+
+def feature_spec(feature: str, template: str) -> Dict:
+    """Return the per-template part of a feature (files, deps, scripts, notes)."""
+    return FEATURES[feature].get(template, {})
+
+
+def generate_structure(base_path: Path, structure: Dict, dry_run: bool = False) -> List[str]:
     """Generate directory structure recursively."""
     created_files = []
-
     for name, content in structure.items():
         current_path = base_path / name
 
-        if isinstance(content, dict):
-            # It's a directory
+        if isinstance(content, dict):  # a directory
             if not dry_run:
                 current_path.mkdir(parents=True, exist_ok=True)
             created_files.extend(generate_structure(current_path, content, dry_run))
-        else:
-            # It's a file
+        else:  # a file
             if not dry_run:
                 current_path.parent.mkdir(parents=True, exist_ok=True)
-                file_content = FILE_CONTENTS.get(content, "")
-                current_path.write_text(file_content)
+                current_path.write_text(file_content(content, ""))
             created_files.append(str(current_path))
-
     return created_files
 
 
-def generate_config_files(
-    project_path: Path,
-    template: str,
-    project_name: str,
-    features: List[str],
-    dry_run: bool = False
-) -> List[str]:
+def generate_config_files(project_path: Path, template: str, project_name: str,
+                          features: List[str], dry_run: bool = False) -> List[str]:
     """Generate configuration files."""
     created_files = []
     config_templates = get_config_templates(project_name, template, features)
-
     template_config = TEMPLATES[template]
     for config_file in template_config["config_files"]:
         file_path = project_path / config_file
@@ -605,255 +98,30 @@ def generate_config_files(
             if not dry_run:
                 file_path.write_text(config_templates[config_file])
             created_files.append(str(file_path))
-
     return created_files
 
 
 def get_config_templates(name: str, template: str, features: List[str]) -> Dict[str, str]:
     """Get configuration file contents."""
-    deps = {
-        "nextjs": {
-            "dependencies": {
-                "next": "^16.0.0",
-                "react": "^19.0.0",
-                "react-dom": "^19.0.0",
-                "clsx": "^2.0.0",
-                "tailwind-merge": "^3.0.0",
-            },
-            "devDependencies": {
-                "@tailwindcss/postcss": "^4.0.0",
-                "@types/node": "^22.0.0",
-                "@types/react": "^19.0.0",
-                "@types/react-dom": "^19.0.0",
-                "eslint": "^9.0.0",
-                "eslint-config-next": "^16.0.0",
-                "postcss": "^8.4.0",
-                "prettier": "^3.0.0",
-                "tailwindcss": "^4.0.0",
-                "typescript": "^5.0.0",
-            },
-        },
-        "react": {
-            "dependencies": {
-                "react": "^19.0.0",
-                "react-dom": "^19.0.0",
-                "clsx": "^2.0.0",
-                "tailwind-merge": "^3.0.0",
-            },
-            "devDependencies": {
-                "@tailwindcss/postcss": "^4.0.0",
-                "@types/react": "^19.0.0",
-                "@types/react-dom": "^19.0.0",
-                "@vitejs/plugin-react": "latest",
-                "eslint": "^8.57.0",
-                "postcss": "^8.4.0",
-                "prettier": "^3.0.0",
-                "tailwindcss": "^4.0.0",
-                "typescript": "^5.0.0",
-                "vite": "^8.0.0",
-            },
-        },
-    }
+    package = copy.deepcopy(MANIFEST["package"][template])
 
-    # Add feature dependencies
+    # Feature scripts and dependencies are appended, in the order the features were given
     for feature in features:
         if feature in FEATURES:
-            for dep in FEATURES[feature].get("dependencies", []):
-                deps[template]["dependencies"][dep] = "latest"
+            spec = feature_spec(feature, template)
+            for field in ("scripts", "dependencies", "devDependencies"):
+                package[field].update(spec.get(field, {}))
 
-    package_json = {
-        "name": name,
-        "version": "0.1.0",
-        "private": True,
-        "scripts": {
-            "dev": "next dev" if template == "nextjs" else "vite",
-            "build": "next build" if template == "nextjs" else "vite build",
-            "start": "next start" if template == "nextjs" else "vite preview",
-            # Next 16 removed `next lint`; ESLint 9 flat config needs no --ext
-            "lint": "eslint ." if template == "nextjs" else "eslint . --ext .ts,.tsx",
-            "format": "prettier --write .",
-        },
-        "dependencies": deps[template]["dependencies"],
-        "devDependencies": deps[template]["devDependencies"],
-    }
+    package_json = {"name": name, "version": "0.1.0", "private": True}
+    for field in ("type", "scripts", "dependencies", "devDependencies"):
+        if field in package:
+            package_json[field] = package[field]
 
-    return {
-        "package.json": json.dumps(package_json, indent=2),
-        "tsconfig.json": '''{
-  "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [{ "name": "next" }],
-    "paths": {
-      "@/*": ["./*"]
-    }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
-}
-''',
-        "tailwind.config.ts": '''import type { Config } from 'tailwindcss';
-
-const config: Config = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  theme: {
-    extend: {
-      colors: {
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        border: 'hsl(var(--border))',
-        ring: 'hsl(var(--ring))',
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
-    },
-  },
-  plugins: [],
-};
-
-export default config;
-''',
-        "postcss.config.js": '''// Tailwind v4 ships its own PostCSS plugin and handles vendor prefixes itself
-module.exports = {
-  plugins: {
-    '@tailwindcss/postcss': {},
-  },
-};
-''',
-        "next.config.js": '''/** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    remotePatterns: [],
-    formats: ['image/avif', 'image/webp'],
-  },
-  experimental: {
-    optimizePackageImports: ['lucide-react'],
-  },
-};
-
-module.exports = nextConfig;
-''',
-        "vite.config.ts": '''import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
-});
-''',
-        "eslint.config.mjs": '''import nextVitals from "eslint-config-next/core-web-vitals";
-
-export default [
-  ...nextVitals,
-  { rules: { "react/no-unescaped-entities": "off" } },
-];
-''',
-        ".eslintrc.json": '''{
-  "extends": ["next/core-web-vitals", "prettier"],
-  "rules": {
-    "react/no-unescaped-entities": "off"
-  }
-}
-''',
-        ".prettierrc": '''{
-  "semi": true,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "printWidth": 100
-}
-''',
-        ".gitignore": '''# Dependencies
-node_modules/
-.pnp
-.pnp.js
-
-# Build
-.next/
-out/
-dist/
-build/
-
-# Environment
-.env
-.env.local
-.env.*.local
-
-# IDE
-.vscode/
-.idea/
-
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Testing
-coverage/
-''',
-        "index.html": '''<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>''' + name + '''</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
-''',
-    }
+    configs = {"package.json": json.dumps(package_json, indent=2)}
+    placeholder = MANIFEST["name_placeholder"]
+    for config_file, rel in MANIFEST["configs"][template].items():
+        configs[config_file] = read_template(rel).replace(placeholder, name)
+    return configs
 
 
 def scaffold_project(
@@ -866,6 +134,13 @@ def scaffold_project(
     """Scaffold a complete frontend project."""
     features = features or []
     project_path = output_dir / name
+    # npm package names (unscoped): lowercase, URL-safe, no leading dot/underscore, <= 214 chars.
+    # The same rule keeps the project folder inside --dir: no "/", "\\" or "..".
+    if not (len(name) <= 214 and re.fullmatch(r"[a-z0-9~-][a-z0-9._~-]*", name)):
+        return {"error": f"invalid project name {name!r}: use a lowercase npm package name "
+                         "(letters, digits, '-', '.', '_', '~'; no spaces or slashes)"}
+    if project_path.resolve().parent != output_dir.resolve():
+        return {"error": f"project path escapes --dir: {project_path}"}
 
     if project_path.exists() and not dry_run:
         return {"error": f"Directory already exists: {project_path}"}
@@ -875,17 +150,15 @@ def scaffold_project(
         return {"error": f"Unknown template: {template}"}
 
     created_files = []
+    notes: List[str] = []
 
-    # Create project directory
     if not dry_run:
         project_path.mkdir(parents=True, exist_ok=True)
 
-    # Generate base structure
     created_files.extend(
         generate_structure(project_path, template_config["structure"], dry_run)
     )
 
-    # Generate config files
     created_files.extend(
         generate_config_files(project_path, template, name, features, dry_run)
     )
@@ -893,13 +166,15 @@ def scaffold_project(
     # Add feature files
     for feature in features:
         if feature in FEATURES:
-            for file_path, content_key in FEATURES[feature]["files"].items():
+            spec = feature_spec(feature, template)
+            for file_path, content_key in spec.get("files", {}).items():
                 full_path = project_path / file_path
                 if not dry_run:
                     full_path.parent.mkdir(parents=True, exist_ok=True)
-                    content = FILE_CONTENTS.get(content_key, f"// TODO: Implement {content_key}")
+                    content = file_content(content_key, f"// TODO: Implement {content_key}", template)
                     full_path.write_text(content)
                 created_files.append(str(full_path))
+            notes.extend(n for n in spec.get("notes", []) if n not in notes)
 
     return {
         "name": name,
@@ -909,6 +184,7 @@ def scaffold_project(
         "path": str(project_path),
         "files_created": len(created_files),
         "files": created_files,
+        "notes": notes,
         "next_steps": [
             f"cd {name}",
             "npm install",
@@ -919,10 +195,6 @@ def scaffold_project(
 
 def print_result(result: Dict) -> None:
     """Print scaffolding result."""
-    if "error" in result:
-        print(f"Error: {result['error']}", file=sys.stderr)
-        return
-
     print(f"\n{'='*60}")
     print(f"Project Scaffolded: {result['name']}")
     print(f"{'='*60}")
@@ -933,58 +205,43 @@ def print_result(result: Dict) -> None:
     if result["features"]:
         print(f"Features: {', '.join(result['features'])}")
 
-    print(f"\nNext Steps:")
+    if result["notes"]:
+        print("\nNotes:")
+        for note in result["notes"]:
+            print(f"  - {note}")
+
+    print("\nNext Steps:")
     for step in result["next_steps"]:
         print(f"  $ {step}")
 
     print(f"{'='*60}\n")
 
 
-def main():
+def build_parser() -> argparse.ArgumentParser:
+    """Build the command-line parser."""
     parser = argparse.ArgumentParser(
         description="Scaffold a frontend project with best practices"
     )
-    parser.add_argument(
-        "name",
-        help="Project name (kebab-case recommended)"
-    )
-    parser.add_argument(
-        "--dir", "-d",
-        default=".",
-        help="Output directory (default: current directory)"
-    )
-    parser.add_argument(
-        "--template", "-t",
-        choices=list(TEMPLATES.keys()),
-        default="nextjs",
-        help="Project template (default: nextjs)"
-    )
-    parser.add_argument(
-        "--features", "-f",
-        help="Comma-separated features to add (auth,api,forms,testing,storybook)"
-    )
-    parser.add_argument(
-        "--list-templates",
-        action="store_true",
-        help="List available templates"
-    )
-    parser.add_argument(
-        "--list-features",
-        action="store_true",
-        help="List available features"
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Show what would be created without creating files"
-    )
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Output in JSON format"
-    )
+    parser.add_argument("name", nargs="?",
+                        help="Project name, a lowercase npm package name (optional with --list-*)")
+    parser.add_argument("--dir", "-d", default=".",
+                        help="Output directory (default: current directory)")
+    parser.add_argument("--template", "-t", choices=list(TEMPLATES.keys()), default="nextjs",
+                        help="Project template (default: nextjs)")
+    parser.add_argument("--features", "-f",
+                        help="Comma-separated features to add (auth,api,forms,testing,storybook)")
+    parser.add_argument("--list-templates", action="store_true", help="List available templates")
+    parser.add_argument("--list-features", action="store_true", help="List available features")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="Show what would be created without creating files")
+    parser.add_argument("--format", choices=["text", "json"], default="text",
+                        help="Output format (default: text)")
+    parser.add_argument("--json", action="store_true", help="Shorthand for --format json")
+    return parser
 
-    args = parser.parse_args()
+
+def main():
+    args = build_parser().parse_args()
 
     if args.list_templates:
         print("\nAvailable Templates:")
@@ -997,10 +254,15 @@ def main():
         print("\nAvailable Features:")
         for key, feature in FEATURES.items():
             print(f"  {key}: {feature['description']}")
-            deps = ", ".join(feature.get("dependencies", []))
-            if deps:
-                print(f"    Adds: {deps}")
+            for template in TEMPLATES:
+                spec = feature.get(template, {})
+                deps = ", ".join([*spec.get("dependencies", {}), *spec.get("devDependencies", {})])
+                if deps:
+                    print(f"    Adds ({template}): {deps}")
         return
+
+    if not args.name:
+        build_parser().error("the following arguments are required: name")
 
     features = []
     if args.features:
@@ -1026,7 +288,7 @@ def main():
         print(f"error: {result['error']}", file=sys.stderr)
         sys.exit(2)
 
-    if args.json:
+    if args.json or args.format == "json":
         print(json.dumps(result, indent=2))
     else:
         print_result(result)

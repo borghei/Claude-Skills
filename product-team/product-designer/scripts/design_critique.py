@@ -2,219 +2,105 @@
 """
 Design Critique Generator
 
-Evaluates a UI design against established heuristics (Nielsen's 10,
-Gestalt principles, accessibility standards) and generates a structured
-critique report with severity ratings and improvement suggestions.
+Evaluates a UI design against Nielsen's 10 usability heuristics and three
+accessibility groups, then turns a completed checklist into a critique report
+with severity ratings, a compliance score and the issues to fix first.
 
+The checklist wording and severity scale live in references/heuristics.json.
 Uses ONLY Python standard library.
 
 Usage:
     python design_critique.py --checklist
+    python design_critique.py --checklist --format json > checklist.json
     python design_critique.py --answers answers.json
-    python design_critique.py --answers answers.json --json
+    python design_critique.py --answers answers.json --format json
+
+Exit codes:
+    0  checklist printed, or critique passes the gate (no Critical issue, grade C or better)
+    1  critique fails the gate (any Critical issue, or grade D/F)
+    2  bad input (missing or unreadable file, invalid JSON, bad severity, nothing answered)
 """
 
 import argparse
 import json
+import os
 import sys
-from typing import Dict, List
+from typing import Dict
+
+DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "references", "heuristics.json")
 
 
-# Nielsen's 10 Usability Heuristics
-NIELSEN_HEURISTICS = [
-    {
-        "id": "N1",
-        "name": "Visibility of system status",
-        "description": "The design keeps users informed about what is happening through appropriate feedback within reasonable time.",
-        "checkpoints": [
-            "Loading states are visible for operations >1 second",
-            "Progress indicators shown for multi-step processes",
-            "Success/error feedback appears after user actions",
-            "Current location is clear in navigation",
-        ],
-    },
-    {
-        "id": "N2",
-        "name": "Match between system and real world",
-        "description": "The design uses language, concepts, and conventions familiar to the user.",
-        "checkpoints": [
-            "Labels use user language, not internal jargon",
-            "Icons follow established conventions",
-            "Information appears in natural and logical order",
-            "Metaphors match real-world expectations",
-        ],
-    },
-    {
-        "id": "N3",
-        "name": "User control and freedom",
-        "description": "Users can easily undo, redo, or exit unwanted states.",
-        "checkpoints": [
-            "Undo is available for destructive actions",
-            "Cancel/back options are clearly visible",
-            "Users can exit flows without losing progress",
-            "Confirmation dialogs for irreversible actions",
-        ],
-    },
-    {
-        "id": "N4",
-        "name": "Consistency and standards",
-        "description": "Users don't have to wonder whether different words, situations, or actions mean the same thing.",
-        "checkpoints": [
-            "UI elements behave the same way throughout",
-            "Terminology is consistent across all pages",
-            "Visual patterns (spacing, colors) are consistent",
-            "Platform conventions are followed",
-        ],
-    },
-    {
-        "id": "N5",
-        "name": "Error prevention",
-        "description": "Good design prevents problems from occurring in the first place.",
-        "checkpoints": [
-            "Form validation occurs before submission",
-            "Constraints prevent invalid inputs",
-            "Destructive actions require confirmation",
-            "Default values reduce user effort and errors",
-        ],
-    },
-    {
-        "id": "N6",
-        "name": "Recognition rather than recall",
-        "description": "Minimize the user's memory load by making elements, actions, and options visible.",
-        "checkpoints": [
-            "Options are visible rather than requiring memorization",
-            "Help and instructions are easily accessible",
-            "Recently used items are easily accessible",
-            "Search and filter options are visible",
-        ],
-    },
-    {
-        "id": "N7",
-        "name": "Flexibility and efficiency of use",
-        "description": "Accelerators allow experienced users to speed up interaction.",
-        "checkpoints": [
-            "Keyboard shortcuts available for frequent actions",
-            "Customizable interface elements",
-            "Shortcuts or recent items for repeat tasks",
-            "Batch operations for power users",
-        ],
-    },
-    {
-        "id": "N8",
-        "name": "Aesthetic and minimalist design",
-        "description": "Interfaces should not contain irrelevant or rarely needed information.",
-        "checkpoints": [
-            "Each screen focuses on one primary action",
-            "Visual hierarchy guides attention to important elements",
-            "Whitespace used effectively",
-            "No unnecessary decorative elements that distract",
-        ],
-    },
-    {
-        "id": "N9",
-        "name": "Help users recognize, diagnose, and recover from errors",
-        "description": "Error messages should be expressed in plain language and suggest a solution.",
-        "checkpoints": [
-            "Error messages are in plain language (no codes)",
-            "Error messages indicate what went wrong specifically",
-            "Error messages suggest how to fix the issue",
-            "Errors are visually prominent and close to the source",
-        ],
-    },
-    {
-        "id": "N10",
-        "name": "Help and documentation",
-        "description": "Help information should be easy to search, focused on the task, and not too large.",
-        "checkpoints": [
-            "Help is easily accessible from any screen",
-            "Contextual help is provided where needed",
-            "Onboarding guides new users through key features",
-            "Documentation is searchable and task-focused",
-        ],
-    },
-]
+class InputError(Exception):
+    """Raised for input the critique cannot score; reported with exit code 2."""
 
-# Accessibility heuristics
-A11Y_HEURISTICS = [
-    {
-        "id": "A1",
-        "name": "Color contrast",
-        "checkpoints": [
-            "Text meets 4.5:1 contrast ratio (WCAG AA)",
-            "Large text meets 3:1 contrast ratio",
-            "Color is not the only way to convey information",
-            "Focus indicators have sufficient contrast",
-        ],
-    },
-    {
-        "id": "A2",
-        "name": "Keyboard navigation",
-        "checkpoints": [
-            "All interactive elements reachable via Tab key",
-            "Focus order follows logical reading order",
-            "Focus ring is visible on all interactive elements",
-            "No keyboard traps (user can always navigate away)",
-        ],
-    },
-    {
-        "id": "A3",
-        "name": "Screen reader support",
-        "checkpoints": [
-            "All images have meaningful alt text",
-            "Form inputs have associated labels",
-            "ARIA attributes used correctly for dynamic content",
-            "Headings follow logical hierarchy (h1 > h2 > h3)",
-        ],
-    },
-]
 
-SEVERITY_LEVELS = {
-    0: {"label": "Cosmetic", "action": "Fix when possible", "color": "gray"},
-    1: {"label": "Minor", "action": "Low priority fix", "color": "yellow"},
-    2: {"label": "Major", "action": "Fix before next release", "color": "orange"},
-    3: {"label": "Critical", "action": "Fix immediately", "color": "red"},
-}
+def load_data() -> Dict:
+    """Load heuristics, accessibility checks and the severity scale."""
+    with open(DATA_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    data["severity_levels"] = {int(k): v for k, v in data["severity_levels"].items()}
+    return data
+
+
+DATA = load_data()
+NIELSEN_HEURISTICS = DATA["heuristics"]
+A11Y_HEURISTICS = DATA["accessibility"]
+SEVERITY_LEVELS = DATA["severity_levels"]
 
 
 def generate_checklist() -> Dict:
     """Generate empty checklist for evaluation."""
     checklist = {"heuristics": [], "accessibility": []}
-
-    for h in NIELSEN_HEURISTICS:
-        entry = {
-            "id": h["id"],
-            "name": h["name"],
-            "checkpoints": [
-                {"check": cp, "pass": None, "severity": None, "notes": ""}
-                for cp in h["checkpoints"]
-            ],
-        }
-        checklist["heuristics"].append(entry)
-
-    for a in A11Y_HEURISTICS:
-        entry = {
-            "id": a["id"],
-            "name": a["name"],
-            "checkpoints": [
-                {"check": cp, "pass": None, "severity": None, "notes": ""}
-                for cp in a["checkpoints"]
-            ],
-        }
-        checklist["accessibility"].append(entry)
-
+    for key, source in (("heuristics", NIELSEN_HEURISTICS), ("accessibility", A11Y_HEURISTICS)):
+        for h in source:
+            checklist[key].append({
+                "id": h["id"],
+                "name": h["name"],
+                "checkpoints": [
+                    {"check": cp, "pass": None, "severity": None, "notes": ""}
+                    for cp in h["checkpoints"]
+                ],
+            })
     return checklist
 
 
+def _severity(cp: Dict, where: str) -> int:
+    """Severity of a failed checkpoint; a blank severity counts as Minor (1)."""
+    severity = cp.get("severity")
+    if severity is None:
+        return 1
+    if isinstance(severity, bool) or not isinstance(severity, int) or severity not in SEVERITY_LEVELS:
+        raise InputError(f"{where}: severity must be 0-3 or null, got {severity!r}")
+    return severity
+
+
 def analyze_answers(answers: Dict) -> Dict:
-    """Analyze completed checklist and generate critique report."""
+    """Analyze completed checklist and generate critique report.
+
+    Checkpoints whose "pass" is still null are left out of the score and
+    counted as unanswered, so a partial review is not graded as a failure.
+    """
+    if not isinstance(answers, dict):
+        raise InputError("answers file must be a JSON object with 'heuristics' and/or 'accessibility'")
     issues = []
     passes = []
     total_checks = 0
     passed_checks = 0
+    unanswered = 0
 
     for section_key in ["heuristics", "accessibility"]:
-        for heuristic in answers.get(section_key, []):
+        section = answers.get(section_key, [])
+        if not isinstance(section, list):
+            raise InputError(f"'{section_key}' must be a list")
+        for heuristic in section:
+            if not isinstance(heuristic, dict) or "id" not in heuristic or "name" not in heuristic:
+                raise InputError(f"every entry in '{section_key}' needs 'id', 'name' and 'checkpoints'")
             for cp in heuristic.get("checkpoints", []):
+                if not isinstance(cp, dict) or "check" not in cp:
+                    raise InputError(f"{heuristic['id']}: every checkpoint needs a 'check' text")
+                if cp.get("pass") is None:
+                    unanswered += 1
+                    continue
                 total_checks += 1
                 if cp.get("pass") is True:
                     passed_checks += 1
@@ -224,28 +110,32 @@ def analyze_answers(answers: Dict) -> Dict:
                         "checkpoint": cp["check"],
                     })
                 elif cp.get("pass") is False:
-                    severity = cp.get("severity", 1)
+                    severity = _severity(cp, f"{heuristic['id']} '{cp['check']}'")
                     issues.append({
                         "heuristic_id": heuristic["id"],
                         "heuristic_name": heuristic["name"],
                         "checkpoint": cp["check"],
                         "severity": severity,
-                        "severity_label": SEVERITY_LEVELS.get(severity, SEVERITY_LEVELS[1])["label"],
-                        "action": SEVERITY_LEVELS.get(severity, SEVERITY_LEVELS[1])["action"],
+                        "severity_label": SEVERITY_LEVELS[severity]["label"],
+                        "action": SEVERITY_LEVELS[severity]["action"],
                         "notes": cp.get("notes", ""),
                     })
+                else:
+                    raise InputError(f"{heuristic['id']} '{cp['check']}': pass must be true, false or null")
+
+    if total_checks == 0:
+        raise InputError("no answered checkpoints; set \"pass\" to true or false for each one you reviewed")
 
     # Sort issues by severity (highest first)
     issues.sort(key=lambda x: -x["severity"])
 
-    # Calculate scores
-    compliance_score = round((passed_checks / total_checks) * 100, 1) if total_checks > 0 else 0
+    compliance_score = round((passed_checks / total_checks) * 100, 1)
 
     severity_counts = {v["label"]: 0 for v in SEVERITY_LEVELS.values()}
     for issue in issues:
         severity_counts[issue["severity_label"]] = severity_counts.get(issue["severity_label"], 0) + 1
 
-    # Overall grade
+    # Overall grade: a Critical issue caps the grade at C whatever the score
     if compliance_score >= 90 and severity_counts.get("Critical", 0) == 0:
         grade = "A"
     elif compliance_score >= 80 and severity_counts.get("Critical", 0) == 0:
@@ -257,19 +147,29 @@ def analyze_answers(answers: Dict) -> Dict:
     else:
         grade = "F"
 
+    summary = {
+        "total_checks": total_checks,
+        "passed": passed_checks,
+        "failed": total_checks - passed_checks,
+        "compliance_score": compliance_score,
+        "grade": grade,
+        "severity_distribution": severity_counts,
+    }
+    if unanswered:
+        summary["unanswered"] = unanswered
+
     return {
-        "summary": {
-            "total_checks": total_checks,
-            "passed": passed_checks,
-            "failed": total_checks - passed_checks,
-            "compliance_score": compliance_score,
-            "grade": grade,
-            "severity_distribution": severity_counts,
-        },
+        "summary": summary,
         "issues": issues,
         "strengths": passes[:5],
         "top_priorities": issues[:5],
     }
+
+
+def gate_failed(report: Dict) -> bool:
+    """True when the design should not ship as is: a Critical issue or grade D/F."""
+    s = report["summary"]
+    return s["severity_distribution"].get("Critical", 0) > 0 or s["grade"] in ("D", "F")
 
 
 def format_checklist_output(checklist: Dict) -> str:
@@ -305,14 +205,16 @@ def format_report_output(report: Dict) -> str:
 
     lines.append(f"\n  COMPLIANCE SCORE: {s['compliance_score']}%  (Grade: {s['grade']})")
     lines.append(f"  Checks: {s['passed']} passed / {s['failed']} failed / {s['total_checks']} total")
+    if s.get("unanswered"):
+        lines.append(f"  Unanswered: {s['unanswered']} (left out of the score)")
 
-    lines.append(f"\n  SEVERITY DISTRIBUTION")
+    lines.append("\n  SEVERITY DISTRIBUTION")
     for label, count in s["severity_distribution"].items():
         bar = "#" * (count * 3)
         lines.append(f"    {label:<12} {count:>3} {bar}")
 
     if report["top_priorities"]:
-        lines.append(f"\n  TOP PRIORITIES (fix first)")
+        lines.append("\n  TOP PRIORITIES (fix first)")
         lines.append("  " + "-" * 50)
         for i, issue in enumerate(report["top_priorities"], 1):
             lines.append(f"  {i}. [{issue['severity_label'].upper()}] {issue['checkpoint']}")
@@ -322,7 +224,7 @@ def format_report_output(report: Dict) -> str:
                 lines.append(f"     Notes: {issue['notes']}")
 
     if report["strengths"]:
-        lines.append(f"\n  STRENGTHS")
+        lines.append("\n  STRENGTHS")
         lines.append("  " + "-" * 50)
         for strength in report["strengths"]:
             lines.append(f"    + {strength['checkpoint']}")
@@ -342,44 +244,40 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Generate empty checklist
   python design_critique.py --checklist
-
-  # Export checklist as JSON to fill in
-  python design_critique.py --checklist --json > checklist.json
-
-  # Analyze completed checklist
+  python design_critique.py --checklist --format json > checklist.json
   python design_critique.py --answers completed_checklist.json
+  python design_critique.py --answers completed_checklist.json --format json
 
-  # JSON report
-  python design_critique.py --answers completed_checklist.json --json
+Exit codes: 0 pass or checklist, 1 Critical issue or grade D/F, 2 bad input
         """,
     )
 
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--checklist", action="store_true", help="Generate empty checklist for evaluation")
     group.add_argument("--answers", help="Path to completed checklist JSON file")
-    parser.add_argument("--json", action="store_true", help="Output as JSON")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (default: text)")
+    parser.add_argument("--json", action="store_true", help="Same as --format json")
 
     args = parser.parse_args()
+    as_json = args.json or args.format == "json"
 
     if args.checklist:
         checklist = generate_checklist()
-        if args.json:
-            print(json.dumps(checklist, indent=2))
-        else:
-            print(format_checklist_output(checklist))
-    else:
-        with open(args.answers, "r") as f:
+        print(json.dumps(checklist, indent=2) if as_json else format_checklist_output(checklist))
+        return 0
+
+    try:
+        with open(args.answers, "r", encoding="utf-8") as f:
             answers = json.load(f)
-
         report = analyze_answers(answers)
+    except (OSError, json.JSONDecodeError, InputError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
 
-        if args.json:
-            print(json.dumps(report, indent=2))
-        else:
-            print(format_report_output(report))
+    print(json.dumps(report, indent=2) if as_json else format_report_output(report))
+    return 1 if gate_failed(report) else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Designer - Claude Skills</title>
-  <meta name="description" content="Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability ">
+  <meta name="description" content="Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow">
   <link rel="canonical" href="https://borghei.github.io/Claude-Skills/skills/product-team/product-designer.html">
   <meta property="og:title" content="Product Designer - Claude Skills">
-  <meta property="og:description" content="Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability ">
+  <meta property="og:description" content="Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow">
   <meta property="og:url" content="https://borghei.github.io/Claude-Skills/skills/product-team/product-designer.html">
   <meta property="og:type" content="website">
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Product Designer", "description": "Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles.", "applicationCategory": "Product", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/product-team/product-designer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Product Designer", "description": "Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow before it ships.", "applicationCategory": "Product", "operatingSystem": "Any", "url": "https://borghei.github.io/Claude-Skills/skills/product-team/product-designer.html", "author": {"@type": "Person", "name": "borghei"}, "license": "https://opensource.org/licenses/MIT"}</script>
   <style>
 :root {
   --bg: #faf9f5;
@@ -370,9 +370,9 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
 <article class="skill-detail">
   <div class="page-header">
     <h1 class="page-title">Product Designer</h1>
-    <p class="page-subtitle">Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles.</p>
-    <div class="badge-bar"><span class="badge badge-domain">Product</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span></div>
-    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">design</span><span class="tag">ux</span><span class="tag">ui</span><span class="tag">figma</span><span class="tag">prototyping</span><span class="tag">design-systems</span></div>
+    <p class="page-subtitle">Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow before it ships.</p>
+    <div class="badge-bar"><span class="badge badge-domain">Product</span> <span class="badge badge-version">v1.0.0</span> <span class="badge badge-tools"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg> 3 tools</span> <span class="badge badge-refs">references</span></div>
+    <div class="skill-meta" style="margin-bottom:24px"><span class="tag">ux</span><span class="tag">journey-mapping</span><span class="tag">usability-testing</span><span class="tag">sus</span><span class="tag">heuristic-evaluation</span><span class="tag">design-critique</span></div>
   </div>
   <h2>How to Use</h2>
 <div class="platform-tabs">
@@ -393,23 +393,20 @@ code { font-family: var(--font-mono); font-size: 0.875em; }
       <p class="prompt-card-desc">Paste into any AI chat for instant expertise. Works in one conversation -- no setup needed.</p>
       <button class="copy-btn" onclick="copyPrompt(this)" data-prompt="You are an expert Product Designer (Product domain).
 
-Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles.
+Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow before it ships.
 
-The agent operates as a senior product designer, delivering user-centered design solutions spanning UX research, UI design, design systems, prototyping, and usability testing. Before generating the design deliverable, settle the inputs below. When one is missing or vague and would change the result,
+The work between research and pixels: deciding which moment in a journey hurts most, whether a flow is usable enough to ship, and which problems to fix first. Three tools do the arithmetic so the conclusions rest on the input rather than on impressions. The journey mapper builds the map
 
 ## Your Key Capabilities
-- Design Principles
-- Design Token System
-- Component Design Tokens (JSON)
-- design_critique.py
-- journey_mapper.py
-- usability_scorer.py
+- Journey map: find the stage to fix first
+- Usability test: decide ship or hold
+- Design critique: order the fixes
+- Before and after a redesign
+- The Persona-Free Journey
+- Grading by the Letter
 
 ## Frameworks &amp; Templates You Know
-- User Journey Map Template
-- tool         flow         template     education
-- python scripts/journey_mapper.py --template saas
-- python scripts/journey_mapper.py --template ecommerce --json
+- Decision frameworks
 
 ## How to Help
 When the user asks for help in this domain:
@@ -429,23 +426,20 @@ Start by asking the user what they need help with.">
         <summary>Preview prompt</summary>
         <pre class="prompt-preview">You are an expert Product Designer (Product domain).
 
-Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles.
+Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow before it ships.
 
-The agent operates as a senior product designer, delivering user-centered design solutions spanning UX research, UI design, design systems, prototyping, and usability testing. Before generating the design deliverable, settle the inputs below. When one is missing or vague and would change the result,
+The work between research and pixels: deciding which moment in a journey hurts most, whether a flow is usable enough to ship, and which problems to fix first. Three tools do the arithmetic so the conclusions rest on the input rather than on impressions. The journey mapper builds the map
 
 ## Your Key Capabilities
-- Design Principles
-- Design Token System
-- Component Design Tokens (JSON)
-- design_critique.py
-- journey_mapper.py
-- usability_scorer.py
+- Journey map: find the stage to fix first
+- Usability test: decide ship or hold
+- Design critique: order the fixes
+- Before and after a redesign
+- The Persona-Free Journey
+- Grading by the Letter
 
 ## Frameworks &amp; Templates You Know
-- User Journey Map Template
-- tool         flow         template     education
-- python scripts/journey_mapper.py --template saas
-- python scripts/journey_mapper.py --template ecommerce --json
+- Decision frameworks
 
 ## How to Help
 When the user asks for help in this domain:
@@ -475,293 +469,220 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Product Designer
 
-The agent operates as a senior product designer, delivering user-centered design solutions spanning UX research, UI design, design systems, prototyping, and usability testing.
+The work between research and pixels: deciding which moment in a journey hurts most, whether a
+flow is usable enough to ship, and which problems to fix first. Three tools do the arithmetic so
+the conclusions rest on the input rather than on impressions. The journey mapper builds the map
+from stages and flags low points nobody has an answer for. The usability scorer turns SUS
+responses and task logs into scores, severities and a pass line. The critique tool grades a flow
+against Nielsen&#x27;s ten heuristics and a short accessibility pass, and orders the fixes by severity.
+
+Report the tools&#x27; numbers and verdicts as printed. A score worked out by hand, or a grade that
+does not match the exit code, is the failure this skill exists to prevent.
+
+## When to use this skill
+
+- **Mapping a journey** from interviews, tickets or analytics, and choosing the stage to fix first
+- **Scoring a usability test**: SUS, completion rate, time on task, errors per task
+- **Critiquing a flow or screen** before release, with severities a team can triage
+- **Planning a usability test** with tasks, targets and a pass line agreed up front
+- **Deciding whether a redesign worked**: the same tasks and SUS before and after
+
+Choosing the visual system (palette, type, tokens) belongs to `product-team/design-direction`;
+fixing an existing UI screen by screen belongs to `engineering/interface-refinement`. This skill
+says *what* is wrong for users and how badly; those skills decide how it looks and apply the fix.
 
 ## Clarify First
 
-Before generating the design deliverable, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+Settle these before running anything. Ask about the two or three that would change the result;
+default the rest and state the defaults at the top of the deliverable. If the user wants a result
+straight away, run the tools on what they gave you and list your assumptions at the top.
 
-- **Target user and the problem:** who hurts and the job-to-be-done (drives Discover and the journey map&#x27;s problem statement).
-- **Which deliverable:** journey map, wireframe, usability test plan, or design critique (sets which workflow and template applies).
-- **Fidelity and stage:** exploration vs dev-handoff (drives prototype fidelity and what &quot;done&quot; means).
+- **Which decision this informs:** ship or hold a release, pick the stage to redesign, or compare
+  two versions. It decides which tool leads and what counts as done.
+- **What evidence exists:** interview notes, recordings, ticket counts, analytics. A journey map
+  without evidence is a hypothesis; label it so (the mapper warns `no-evidence`).
+- **Who the users are and how many were tested:** one group or several. Five people per group
+  find frequent problems but give a directional SUS, not a benchmark.
+- **The pass line:** the default is SUS 68 and no task under 75% completion. A regulated or
+  high-stakes flow may need higher; agree it before the data comes in, not after.
+- **Prototype or live build:** a prototype critique skips performance and real-data checkpoints;
+  mark them unanswered rather than passing them.
 
-Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
-
-## Workflow
-
-1. **Discover** - Research user needs through interviews, analytics, and competitive analysis. Create user journey maps and identify pain points. Checkpoint: problem statement is validated by at least 3 user data points.
-2. **Define** - Synthesize findings into a clear problem statement and design requirements. Build information architecture (card sorting, site maps). Checkpoint: IA has been validated via card sort or tree test.
-3. **Develop** - Ideate solutions through sketching and wireframing. Build prototypes at appropriate fidelity. Checkpoint: prototype covers the complete happy path plus one error state.
-4. **Test** - Run usability tests with 5-8 participants. Measure task completion rate, time on task, error rate, and SUS score. Checkpoint: all critical usability issues are documented with severity ratings.
-5. **Deliver** - Refine designs based on test findings. Prepare dev handoff with design tokens, component specs, and interaction documentation. Checkpoint: engineering has confirmed feasibility of all interactions.
-
-## Design Sprint (5-Day Format)
-
-| Day | Activity | Output |
-|-----|----------|--------|
-| Monday | Map problem, interview experts | Challenge map, target area |
-| Tuesday | Sketch solutions, Crazy 8s | Solution sketches |
-| Wednesday | Decide, storyboard | Testable hypothesis |
-| Thursday | Build prototype | Realistic clickable prototype |
-| Friday | Test with 5 users | Validated/invalidated hypothesis |
-
-## User Journey Map Template
-
-```
-PERSONA: Sarah, Product Manager, goal: find analytics insights fast
-
-STAGE:      AWARENESS    CONSIDER     PURCHASE     ONBOARD      RETAIN
-Actions:    Searches     Compares     Signs up     Configures   Uses daily
-Touchpoint: Google       Website      Checkout     Setup wizard App
-Emotion:    Frustrated   Curious      Anxious      Hopeful      Satisfied
-Pain point: Too many     Hard to      Complex      Slow setup   Missing
-            options      compare      pricing                   features
-Opportunity: SEO content  Comparison   Simplify     Quick-start  Feature
-                         tool         flow         template     education
-```
-
-## Information Architecture
-
-**Card Sorting Methods:**
-- Open sort: users create their own categories
-- Closed sort: users place items into predefined categories
-- Hybrid: combination approach
-
-**Example Site Map:**
-```
-Home
-+-- Products
-|   +-- Category A
-|   |   +-- Product 1
-|   |   +-- Product 2
-|   +-- Category B
-+-- About
-|   +-- Team
-|   +-- Careers
-+-- Resources
-|   +-- Blog
-|   +-- Help Center
-+-- Account
-    +-- Profile
-    +-- Settings
-```
-
-## UI Design Foundations
-
-### Design Principles
-
-1. **Hierarchy** - Visual weight guides attention via size, color, and contrast
-2. **Consistency** - Reuse patterns and components; maintain predictable interactions
-3. **Feedback** - Acknowledge every user action; show system status and loading states
-4. **Accessibility** - 4.5:1 color contrast minimum, focus indicators, screen reader support
-
-### Design Token System
-
-```css
-/* Color tokens */
---color-primary-500: #3b82f6;
---color-primary-600: #2563eb;
---color-gray-50: #f9fafb;
---color-gray-900: #111827;
---color-success: #10b981;
---color-warning: #f59e0b;
---color-error: #ef4444;
-
-/* Typography scale */
---text-sm: 0.875rem;   /* 14px */
---text-base: 1rem;     /* 16px */
---text-lg: 1.125rem;   /* 18px */
---text-xl: 1.25rem;    /* 20px */
---text-2xl: 1.5rem;    /* 24px */
-
-/* Spacing (4px base unit) */
---space-1: 0.25rem;    /* 4px */
---space-2: 0.5rem;     /* 8px */
---space-4: 1rem;       /* 16px */
---space-6: 1.5rem;     /* 24px */
---space-8: 2rem;       /* 32px */
-```
-
-## Component Structure
-
-```
-Button/
-+-- Variants: Primary, Secondary, Tertiary, Destructive
-+-- Sizes: Small (32px), Medium (40px), Large (48px)
-+-- States: Default, Hover, Active, Focus, Disabled, Loading
-+-- Anatomy: [Leading Icon] Label [Trailing Icon]
-```
-
-### Component Design Tokens (JSON)
-
-```json
-{
-  &quot;color&quot;: {
-    &quot;primary&quot;: {&quot;50&quot;: {&quot;value&quot;: &quot;#eff6ff&quot;}, &quot;500&quot;: {&quot;value&quot;: &quot;#3b82f6&quot;}},
-    &quot;semantic&quot;: {&quot;success&quot;: {&quot;value&quot;: &quot;{color.green.500}&quot;}, &quot;error&quot;: {&quot;value&quot;: &quot;{color.red.500}&quot;}}
-  },
-  &quot;spacing&quot;: {&quot;xs&quot;: {&quot;value&quot;: &quot;4px&quot;}, &quot;sm&quot;: {&quot;value&quot;: &quot;8px&quot;}, &quot;md&quot;: {&quot;value&quot;: &quot;16px&quot;}},
-  &quot;borderRadius&quot;: {&quot;sm&quot;: {&quot;value&quot;: &quot;4px&quot;}, &quot;md&quot;: {&quot;value&quot;: &quot;8px&quot;}, &quot;full&quot;: {&quot;value&quot;: &quot;9999px&quot;}}
-}
-```
-
-## Example: Usability Test Plan
-
-```markdown
-# Usability Test: New Checkout Flow
-
-## Objectives
-- Validate that users can complete purchase in &lt; 3 minutes
-- Identify friction points in address and payment steps
-
-## Participants
-- 6 users (3 new, 3 returning)
-- Mix of desktop and mobile
-
-## Tasks
-1. &quot;Find a laptop under $1,000 and add it to your cart&quot; (browse + add)
-2. &quot;Complete the purchase using a credit card&quot; (checkout flow)
-3. &quot;Change the shipping address on your order&quot; (post-purchase edit)
-
-## Success Criteria
-| Task | Completion Target | Time Target |
-|------|-------------------|-------------|
-| Browse + Add | 100% | &lt; 60s |
-| Checkout | 90%+ | &lt; 180s |
-| Edit address | 80%+ | &lt; 90s |
-
-## Metrics
-- Task completion rate
-- Time on task
-- Error count per task
-- System Usability Scale (SUS) score (target: 68+)
-```
-
-## Prototype Fidelity Guide
-
-| Fidelity | Purpose | Tools | Timeline |
-|----------|---------|-------|----------|
-| Paper | Quick exploration | Paper, pen | Minutes |
-| Low-fi | Flow validation | Figma, Sketch | Hours |
-| Mid-fi | Usability testing | Figma | Days |
-| High-fi | Dev handoff, final testing | Figma | Days-Weeks |
-
----
-
-## Tool Reference
-
-### design_critique.py
-
-Evaluates a UI design against Nielsen&#x27;s 10 Usability Heuristics and accessibility standards. Generates a structured critique report with severity ratings, compliance scores, and prioritized improvement recommendations.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--checklist` | flag | - | Generate empty checklist for evaluation |
-| `--answers` | string | - | Path to completed checklist JSON file |
-| `--json` | flag | False | Output as JSON |
+## Quick Start
 
 ```bash
-python scripts/design_critique.py --checklist
-python scripts/design_critique.py --checklist --json &gt; checklist.json
-python scripts/design_critique.py --answers completed_checklist.json
-python scripts/design_critique.py --answers completed_checklist.json --json
+# Journey map from your own stages (exit 1 if a low point has no opportunity)
+python3 product-team/product-designer/scripts/journey_mapper.py \
+  --stages product-team/product-designer/assets/sample_journey.json
+
+# Score a usability test (exit 1 if SUS &lt; 68 or a task is under 75% completion)
+python3 product-team/product-designer/scripts/usability_scorer.py \
+  --sus-responses product-team/product-designer/assets/sample_sus.csv \
+  --task-data product-team/product-designer/assets/sample_tasks.csv
+
+# Heuristic critique: print the checklist, fill it in, score it (exit 1 on Critical or grade D/F)
+python3 product-team/product-designer/scripts/design_critique.py --checklist --format json &gt; checklist.json
+python3 product-team/product-designer/scripts/design_critique.py \
+  --answers product-team/product-designer/assets/sample_critique_answers.json
 ```
 
-### journey_mapper.py
+## Tools Overview
 
-Creates structured user journey maps with emotion curves, pain point identification, and opportunity analysis. Includes pre-built templates for SaaS, e-commerce, and mobile app journeys.
+| Tool | Input | Output | Exit codes |
+|------|-------|--------|------------|
+| `journey_mapper.py` | `--template saas\|ecommerce\|mobile_app` or `--stages file.json` | Emotion curve, stage details, health metrics (average, lowest stage, biggest drops), findings | 0 mapped, 1 a stage at emotion &lt;= 2 has no opportunity, 2 bad input |
+| `usability_scorer.py` | `--sus-responses` CSV (participant, q1-q10) and/or `--task-data` CSV (participant, task, completed, time_seconds, errors); `sample [--out-dir DIR] [--force]` copies a borderline sample there (refuses to overwrite without `--force`) | Per-participant and aggregate SUS with grade, acceptability, spread and per-item averages; per-task completion, mean and median time, errors, severity | 0 SUS &gt;= 68 and no task under 75%, 1 otherwise, 2 bad input |
+| `design_critique.py` | `--checklist` or `--answers file.json` | Empty checklist (52 checkpoints), or compliance score, grade, severity distribution, top five priorities, strengths, all issues | 0 checklist or pass, 1 any Critical or grade D/F, 2 bad input |
 
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--template`, `-t` | choice | - | Pre-built template: `saas`, `ecommerce`, `mobile_app` |
-| `--stages`, `-s` | string | - | Path to custom stages JSON file |
-| `--json` | flag | False | Output as JSON |
+All three are stdlib-only, offline and deterministic, and take `--format text|json` (`--json`
+still works). Missing or out-of-range values exit 2 instead of being filled in: a neutral 3
+silently substituted for a missing SUS answer would move the score. Scales, thresholds and file
+formats are in `references/research-to-design-guide.md`.
 
-```bash
-python scripts/journey_mapper.py --template saas
-python scripts/journey_mapper.py --template ecommerce --json
-python scripts/journey_mapper.py --stages custom_journey.json
-```
+## Workflows
 
-### usability_scorer.py
+### Journey map: find the stage to fix first
 
-Calculates System Usability Scale (SUS) scores and task performance metrics from usability test data. Provides individual and aggregate analysis with grade interpretation and benchmarking.
+1. Write the stages as JSON (copy `assets/sample_journey.json`). Put the research behind it in
+   `evidence`; each pain point should trace to something a user said or did.
+2. Run the mapper. Read the lowest stage and the biggest drop first; those are the candidates.
+3. Resolve every `unaddressed-low-point` by adding at least one opportunity, or state that the
+   team accepts the low point and why. Exit 0 means every low point has an answer.
+4. Hand the chosen stage and its opportunities to the next step: a test plan to confirm the
+   problem, or a design brief.
 
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `action` | positional | - | &quot;sample&quot; to create sample CSV files |
-| `--sus-responses` | string | - | CSV with SUS responses (participant, q1-q10) |
-| `--task-data` | string | - | CSV with task data (participant, task, completed, time_seconds, errors) |
-| `--json` | flag | False | Output as JSON |
+**Done when:** the map names its evidence, exits 0, and one stage is chosen with a reason.
 
-```bash
-python scripts/usability_scorer.py sample
-python scripts/usability_scorer.py --sus-responses responses.csv
-python scripts/usability_scorer.py --task-data tasks.csv
-python scripts/usability_scorer.py --sus-responses responses.csv --task-data tasks.csv --json
-```
+### Usability test: decide ship or hold
 
----
+1. Fill `assets/usability-test-plan-template.md`, including the pass line, before testing.
+2. Run the sessions; log one row per participant per task, and the SUS form after each session.
+3. Score both files together. Report the mean with its range, not the letter grade alone; at
+   six participants a 4-point difference is noise.
+4. For each Major or Critical task, find the moment of failure in the recordings and log it in
+   the critique as a failed checkpoint with notes.
 
-## Troubleshooting
+**Done when:** the scorer&#x27;s exit code and the decision agree, or the report says why they differ.
 
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| SUS score below 68 (benchmark) | Significant usability issues | Focus on critical severity findings from design_critique first |
-| Low task completion rate (&lt;80%) | Task flow too complex or unclear | Simplify flow; add progressive disclosure; reduce steps |
-| Users cannot find features | Poor information architecture | Conduct card sorting; redesign navigation; add search |
-| High error rate on forms | Insufficient validation and guidance | Add inline validation, smart defaults, and contextual help |
-| Inconsistent design across screens | Missing or ignored design system | Audit with design_critique; enforce token usage |
-| Usability test participants are unrepresentative | Poor recruitment criteria | Screen for target persona match; mix new and returning users |
-| Journey map emotions are flat | Insufficient research data | Conduct deeper interviews; observe real usage sessions |
+### Design critique: order the fixes
 
----
+1. Print the checklist as JSON. Walk the real flow (or prototype) end to end, then mark each
+   checkpoint `true`, `false` or leave it `null` if it does not apply at this fidelity.
+2. Give every failure a numeric `severity` from 0 to 3 and a note that names the screen and what
+   happens. 0 Cosmetic (no effect on success or time), 1 Minor (slows some users, they recover
+   alone; also the value used when severity is left blank), 2 Major (many users slowed, some give
+   up), 3 Critical (data loss, blocked task, or users excluded). Anything else exits 2. A failure
+   without a note cannot be fixed by someone who was not there.
+3. Score it. Fix all Critical issues before anything else; a Critical caps the grade at C.
+4. Hand the ordered list on: visual or interaction fixes to `engineering/interface-refinement`,
+   WCAG failures to `engineering/a11y-audit` for a full check.
 
-## Success Criteria
+**Done when:** the critique exits 0, or every Critical issue has an owner and a date.
 
-| Criterion | Target | How to Measure |
-|-----------|--------|----------------|
-| SUS score | &gt;68 (industry average), target &gt;80 | usability_scorer aggregate score |
-| Task completion rate | &gt;85% for core flows | usability_scorer task metrics |
-| Time on task | &lt;2x expected duration | usability_scorer avg_time_seconds |
-| Design critique compliance | &gt;80% checklist pass rate | design_critique compliance_score |
-| Accessibility compliance | WCAG AA on all screens | design_critique accessibility section |
-| Journey map coverage | All key personas mapped | Count of completed journey maps |
-| Usability test cadence | Test every sprint or release | Count of tests per quarter |
+### Before and after a redesign
 
----
+Run the same tasks and SUS with the same participant profile on both versions, score each, and
+compare per-task completion first. **[RECOMMENDED]** Treat a SUS change under about 10 points at
+small samples as inconclusive unless completion or errors moved too.
 
-## Scope &amp; Limitations
+## Decision frameworks
 
-**In scope:**
-- Heuristic evaluation and design critique
-- User journey mapping with emotion curves
-- Usability test scoring (SUS and task metrics)
-- Design sprint facilitation structure
-- Information architecture planning
-- Prototype fidelity guidance
-- Accessibility checkpoint evaluation
+| Question | Tool to lead with | Why |
+|----------|-------------------|-----|
+| Where in the experience do users struggle? | Journey mapper | Shows the stage and transition, across touchpoints |
+| Can users complete this flow? | Usability scorer (tasks) | Completion and errors are behaviour, not opinion |
+| How do users rate the whole product? | Usability scorer (SUS) | Standard ten items, comparable across releases |
+| What is wrong with this screen and how bad? | Design critique | Severity-ranked list a team can triage |
 
-**Out of scope:**
-- Automated visual regression testing (use Chromatic/Percy)
-- Real-time analytics dashboards (use Amplitude/Mixpanel)
-- Figma file manipulation or asset export (use Figma API)
-- Eye tracking or biometric analysis
-- A/B test implementation (see ab-test-setup skill)
-- Design token generation (see ui-design-system or design-system-lead skills)
+- **[PROVEN]** Behaviour over opinion: when task completion and SUS disagree, trust completion.
+- **[PROVEN]** Severity is frequency x impact x persistence; a rare, recoverable issue is Minor
+  even if it annoys the reviewer.
+- **[RECOMMENDED]** Critique before testing, so participant time is spent on problems a review
+  could not find.
 
----
+## Anti-Patterns
+
+### The Persona-Free Journey
+**Mistake:** A journey map written in a workshop from memory, presented as research.
+**Why it happens:** Workshops feel collaborative and finish in an afternoon.
+**Instead:** Fill `evidence` and trace each pain point to a source; the mapper warns when it is
+missing. Label an unsourced map a hypothesis.
+
+### Grading by the Letter
+**Mistake:** &quot;We got a B&quot; with no score, range or participant count.
+**Why it happens:** Letters are easy to repeat in a status update.
+**Instead:** Report mean, range and n. At small samples the letter can flip on one participant.
+
+### Moving the Pass Line After the Data
+**Mistake:** Lowering the SUS target or completion threshold once results come in.
+**Why it happens:** A release date is close and the result is near the line.
+**Instead:** Agree the pass line in the test plan. If the team ships below it, write that down
+as an accepted risk.
+
+### Passing What You Did Not Check
+**Mistake:** Marking checkpoints `true` because the prototype cannot show them.
+**Why it happens:** A blank looks like an unfinished review.
+**Instead:** Leave them `null`. The tool reports them as unanswered and scores only what was
+reviewed.
+
+### Severity by Annoyance
+**Mistake:** Rating issues by how much they bothered the reviewer.
+**Why it happens:** The reviewer is the only user in the room.
+**Instead:** Rate on how many users hit it, whether they recover, and whether it repeats.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/journey_mapper.py` | Journey map, health metrics, low-point findings |
+| `scripts/usability_scorer.py` | SUS and task metrics with a pass line |
+| `scripts/design_critique.py` | Heuristic checklist and severity-ranked critique |
+| `references/research-to-design-guide.md` | Severity scale, SUS bands, task thresholds, input formats, sample sizes |
+| `references/heuristics.json` | Checklist wording: 10 heuristics, 3 accessibility groups, severity scale |
+| `references/journey-templates.json` | SaaS, e-commerce and mobile app journey templates |
+| `references/sus-questions.json` | The ten SUS items |
+| `assets/sample_journey.json` | Sound journey with evidence (exit 0) |
+| `assets/sample_journey_flawed.json` | Journey with unaddressed low points (exit 1) |
+| `assets/sample_sus.csv`, `assets/sample_tasks.csv` | Sound test: SUS 80.4, all tasks 100% (exit 0) |
+| `assets/sample_sus_flawed.csv`, `assets/sample_tasks_flawed.csv` | Failing test: SUS 44.6, checkout 40% (exit 1) |
+| `assets/sample_sus_borderline.csv`, `assets/sample_tasks_borderline.csv` | Source for `sample`, which copies them to `--out-dir` (default: current directory) as `sample_sus.csv` / `sample_tasks.csv`, refusing to overwrite unless `--force`: SUS 67.5, just under the line (exit 1) |
+| `assets/sample_critique_answers.json` | Sound critique: 94.2%, grade A (exit 0) |
+| `assets/sample_critique_answers_flawed.json` | Failing critique: 61.5%, five Critical issues (exit 1) |
+| `assets/usability-test-plan-template.md` | Test plan with tasks, targets and pass line |
 
 ## Integration Points
 
-| Tool / Platform | Integration Method | Use Case |
-|-----------------|-------------------|----------|
-| Figma | Journey map and critique findings as design specs | Translate research into design changes |
-| Maze / UserTesting | Export task data CSV for usability_scorer | Score test results from remote testing platforms |
-| Dovetail / Condens | Export interview themes for journey_mapper | Build journey maps from research repositories |
-| Jira / Linear | design_critique JSON priorities as tickets | Track usability improvements in sprint backlog |
-| Notion / Confluence | Human-readable output from all tools | Document research findings and design decisions |
-| Miro / FigJam | journey_mapper JSON output | Collaborative journey map workshops |
+| Skill | Its job, distinct from this one |
+|-------|---------------------------------|
+| `product-team/design-direction` | Chooses the design system (style, palette, type, tokens) from a brief |
+| `engineering/interface-refinement` | Refines an existing UI with a detector and named commands |
+| `engineering/design-auditor` | Grades a built UI&#x27;s visual quality |
+| `engineering/a11y-audit` | Full WCAG scan of built pages |
+| `engineering/marketing-site-builder` | Builds marketing sites, with a finish gate |
+| `product-team/ui-design-system` | Generates token files and component documentation |
+| `engineering/senior-frontend` | Implements the fixes in the component library |
+| `product-team/ux-researcher-designer` | Personas and research planning that feed the journey map |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Journey maps from research, with low-point and evidence checks
+- SUS scoring and task metrics from usability sessions, with a pass line
+- Heuristic critique with severity ranking and a short accessibility pass
+- Usability test planning
+
+**Out of Scope:**
+- Visual direction, palettes, type and tokens (`product-team/design-direction`)
+- Applying UI fixes or scanning source code (`engineering/interface-refinement`)
+- WCAG conformance testing (`engineering/a11y-audit`)
+- Running sessions, recruiting, analytics collection, A/B test analysis
+  (`product-team/ab-test-setup`)
+
+**Important Caveats:**
+- Emotion scores in a journey map are the team&#x27;s synthesis, not a measurement.
+- SUS bands are simplified; quote the number. Small samples give wide ranges.
+- The critique scores what a reviewer marked. It finds nothing on its own; its value is a
+  consistent checklist and an honest severity order.
 
 ---
 
@@ -789,7 +710,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Product Designer&quot;**
-   - Description: &quot;Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles.&quot;
+   - Description: &quot;Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow before it ships.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -814,293 +735,220 @@ I want you to help me set up a reusable AI skill that I can use in future conver
 
 # Product Designer
 
-The agent operates as a senior product designer, delivering user-centered design solutions spanning UX research, UI design, design systems, prototyping, and usability testing.
+The work between research and pixels: deciding which moment in a journey hurts most, whether a
+flow is usable enough to ship, and which problems to fix first. Three tools do the arithmetic so
+the conclusions rest on the input rather than on impressions. The journey mapper builds the map
+from stages and flags low points nobody has an answer for. The usability scorer turns SUS
+responses and task logs into scores, severities and a pass line. The critique tool grades a flow
+against Nielsen&#x27;s ten heuristics and a short accessibility pass, and orders the fixes by severity.
+
+Report the tools&#x27; numbers and verdicts as printed. A score worked out by hand, or a grade that
+does not match the exit code, is the failure this skill exists to prevent.
+
+## When to use this skill
+
+- **Mapping a journey** from interviews, tickets or analytics, and choosing the stage to fix first
+- **Scoring a usability test**: SUS, completion rate, time on task, errors per task
+- **Critiquing a flow or screen** before release, with severities a team can triage
+- **Planning a usability test** with tasks, targets and a pass line agreed up front
+- **Deciding whether a redesign worked**: the same tasks and SUS before and after
+
+Choosing the visual system (palette, type, tokens) belongs to `product-team/design-direction`;
+fixing an existing UI screen by screen belongs to `engineering/interface-refinement`. This skill
+says *what* is wrong for users and how badly; those skills decide how it looks and apply the fix.
 
 ## Clarify First
 
-Before generating the design deliverable, settle the inputs below. When one is missing or vague and would change the result, ask about it; when it wouldn&#x27;t, use a sensible default and say which one you used.
+Settle these before running anything. Ask about the two or three that would change the result;
+default the rest and state the defaults at the top of the deliverable. If the user wants a result
+straight away, run the tools on what they gave you and list your assumptions at the top.
 
-- **Target user and the problem:** who hurts and the job-to-be-done (drives Discover and the journey map&#x27;s problem statement).
-- **Which deliverable:** journey map, wireframe, usability test plan, or design critique (sets which workflow and template applies).
-- **Fidelity and stage:** exploration vs dev-handoff (drives prototype fidelity and what &quot;done&quot; means).
+- **Which decision this informs:** ship or hold a release, pick the stage to redesign, or compare
+  two versions. It decides which tool leads and what counts as done.
+- **What evidence exists:** interview notes, recordings, ticket counts, analytics. A journey map
+  without evidence is a hypothesis; label it so (the mapper warns `no-evidence`).
+- **Who the users are and how many were tested:** one group or several. Five people per group
+  find frequent problems but give a directional SUS, not a benchmark.
+- **The pass line:** the default is SUS 68 and no task under 75% completion. A regulated or
+  high-stakes flow may need higher; agree it before the data comes in, not after.
+- **Prototype or live build:** a prototype critique skips performance and real-data checkpoints;
+  mark them unanswered rather than passing them.
 
-Ask about the two or three inputs that matter most for this request, not the whole list. If the user wants a result straight away, produce it and state your assumptions at the top.
-
-## Workflow
-
-1. **Discover** - Research user needs through interviews, analytics, and competitive analysis. Create user journey maps and identify pain points. Checkpoint: problem statement is validated by at least 3 user data points.
-2. **Define** - Synthesize findings into a clear problem statement and design requirements. Build information architecture (card sorting, site maps). Checkpoint: IA has been validated via card sort or tree test.
-3. **Develop** - Ideate solutions through sketching and wireframing. Build prototypes at appropriate fidelity. Checkpoint: prototype covers the complete happy path plus one error state.
-4. **Test** - Run usability tests with 5-8 participants. Measure task completion rate, time on task, error rate, and SUS score. Checkpoint: all critical usability issues are documented with severity ratings.
-5. **Deliver** - Refine designs based on test findings. Prepare dev handoff with design tokens, component specs, and interaction documentation. Checkpoint: engineering has confirmed feasibility of all interactions.
-
-## Design Sprint (5-Day Format)
-
-| Day | Activity | Output |
-|-----|----------|--------|
-| Monday | Map problem, interview experts | Challenge map, target area |
-| Tuesday | Sketch solutions, Crazy 8s | Solution sketches |
-| Wednesday | Decide, storyboard | Testable hypothesis |
-| Thursday | Build prototype | Realistic clickable prototype |
-| Friday | Test with 5 users | Validated/invalidated hypothesis |
-
-## User Journey Map Template
-
-```
-PERSONA: Sarah, Product Manager, goal: find analytics insights fast
-
-STAGE:      AWARENESS    CONSIDER     PURCHASE     ONBOARD      RETAIN
-Actions:    Searches     Compares     Signs up     Configures   Uses daily
-Touchpoint: Google       Website      Checkout     Setup wizard App
-Emotion:    Frustrated   Curious      Anxious      Hopeful      Satisfied
-Pain point: Too many     Hard to      Complex      Slow setup   Missing
-            options      compare      pricing                   features
-Opportunity: SEO content  Comparison   Simplify     Quick-start  Feature
-                         tool         flow         template     education
-```
-
-## Information Architecture
-
-**Card Sorting Methods:**
-- Open sort: users create their own categories
-- Closed sort: users place items into predefined categories
-- Hybrid: combination approach
-
-**Example Site Map:**
-```
-Home
-+-- Products
-|   +-- Category A
-|   |   +-- Product 1
-|   |   +-- Product 2
-|   +-- Category B
-+-- About
-|   +-- Team
-|   +-- Careers
-+-- Resources
-|   +-- Blog
-|   +-- Help Center
-+-- Account
-    +-- Profile
-    +-- Settings
-```
-
-## UI Design Foundations
-
-### Design Principles
-
-1. **Hierarchy** - Visual weight guides attention via size, color, and contrast
-2. **Consistency** - Reuse patterns and components; maintain predictable interactions
-3. **Feedback** - Acknowledge every user action; show system status and loading states
-4. **Accessibility** - 4.5:1 color contrast minimum, focus indicators, screen reader support
-
-### Design Token System
-
-```css
-/* Color tokens */
---color-primary-500: #3b82f6;
---color-primary-600: #2563eb;
---color-gray-50: #f9fafb;
---color-gray-900: #111827;
---color-success: #10b981;
---color-warning: #f59e0b;
---color-error: #ef4444;
-
-/* Typography scale */
---text-sm: 0.875rem;   /* 14px */
---text-base: 1rem;     /* 16px */
---text-lg: 1.125rem;   /* 18px */
---text-xl: 1.25rem;    /* 20px */
---text-2xl: 1.5rem;    /* 24px */
-
-/* Spacing (4px base unit) */
---space-1: 0.25rem;    /* 4px */
---space-2: 0.5rem;     /* 8px */
---space-4: 1rem;       /* 16px */
---space-6: 1.5rem;     /* 24px */
---space-8: 2rem;       /* 32px */
-```
-
-## Component Structure
-
-```
-Button/
-+-- Variants: Primary, Secondary, Tertiary, Destructive
-+-- Sizes: Small (32px), Medium (40px), Large (48px)
-+-- States: Default, Hover, Active, Focus, Disabled, Loading
-+-- Anatomy: [Leading Icon] Label [Trailing Icon]
-```
-
-### Component Design Tokens (JSON)
-
-```json
-{
-  &quot;color&quot;: {
-    &quot;primary&quot;: {&quot;50&quot;: {&quot;value&quot;: &quot;#eff6ff&quot;}, &quot;500&quot;: {&quot;value&quot;: &quot;#3b82f6&quot;}},
-    &quot;semantic&quot;: {&quot;success&quot;: {&quot;value&quot;: &quot;{color.green.500}&quot;}, &quot;error&quot;: {&quot;value&quot;: &quot;{color.red.500}&quot;}}
-  },
-  &quot;spacing&quot;: {&quot;xs&quot;: {&quot;value&quot;: &quot;4px&quot;}, &quot;sm&quot;: {&quot;value&quot;: &quot;8px&quot;}, &quot;md&quot;: {&quot;value&quot;: &quot;16px&quot;}},
-  &quot;borderRadius&quot;: {&quot;sm&quot;: {&quot;value&quot;: &quot;4px&quot;}, &quot;md&quot;: {&quot;value&quot;: &quot;8px&quot;}, &quot;full&quot;: {&quot;value&quot;: &quot;9999px&quot;}}
-}
-```
-
-## Example: Usability Test Plan
-
-```markdown
-# Usability Test: New Checkout Flow
-
-## Objectives
-- Validate that users can complete purchase in &lt; 3 minutes
-- Identify friction points in address and payment steps
-
-## Participants
-- 6 users (3 new, 3 returning)
-- Mix of desktop and mobile
-
-## Tasks
-1. &quot;Find a laptop under $1,000 and add it to your cart&quot; (browse + add)
-2. &quot;Complete the purchase using a credit card&quot; (checkout flow)
-3. &quot;Change the shipping address on your order&quot; (post-purchase edit)
-
-## Success Criteria
-| Task | Completion Target | Time Target |
-|------|-------------------|-------------|
-| Browse + Add | 100% | &lt; 60s |
-| Checkout | 90%+ | &lt; 180s |
-| Edit address | 80%+ | &lt; 90s |
-
-## Metrics
-- Task completion rate
-- Time on task
-- Error count per task
-- System Usability Scale (SUS) score (target: 68+)
-```
-
-## Prototype Fidelity Guide
-
-| Fidelity | Purpose | Tools | Timeline |
-|----------|---------|-------|----------|
-| Paper | Quick exploration | Paper, pen | Minutes |
-| Low-fi | Flow validation | Figma, Sketch | Hours |
-| Mid-fi | Usability testing | Figma | Days |
-| High-fi | Dev handoff, final testing | Figma | Days-Weeks |
-
----
-
-## Tool Reference
-
-### design_critique.py
-
-Evaluates a UI design against Nielsen&#x27;s 10 Usability Heuristics and accessibility standards. Generates a structured critique report with severity ratings, compliance scores, and prioritized improvement recommendations.
-
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--checklist` | flag | - | Generate empty checklist for evaluation |
-| `--answers` | string | - | Path to completed checklist JSON file |
-| `--json` | flag | False | Output as JSON |
+## Quick Start
 
 ```bash
-python scripts/design_critique.py --checklist
-python scripts/design_critique.py --checklist --json &gt; checklist.json
-python scripts/design_critique.py --answers completed_checklist.json
-python scripts/design_critique.py --answers completed_checklist.json --json
+# Journey map from your own stages (exit 1 if a low point has no opportunity)
+python3 product-team/product-designer/scripts/journey_mapper.py \
+  --stages product-team/product-designer/assets/sample_journey.json
+
+# Score a usability test (exit 1 if SUS &lt; 68 or a task is under 75% completion)
+python3 product-team/product-designer/scripts/usability_scorer.py \
+  --sus-responses product-team/product-designer/assets/sample_sus.csv \
+  --task-data product-team/product-designer/assets/sample_tasks.csv
+
+# Heuristic critique: print the checklist, fill it in, score it (exit 1 on Critical or grade D/F)
+python3 product-team/product-designer/scripts/design_critique.py --checklist --format json &gt; checklist.json
+python3 product-team/product-designer/scripts/design_critique.py \
+  --answers product-team/product-designer/assets/sample_critique_answers.json
 ```
 
-### journey_mapper.py
+## Tools Overview
 
-Creates structured user journey maps with emotion curves, pain point identification, and opportunity analysis. Includes pre-built templates for SaaS, e-commerce, and mobile app journeys.
+| Tool | Input | Output | Exit codes |
+|------|-------|--------|------------|
+| `journey_mapper.py` | `--template saas\|ecommerce\|mobile_app` or `--stages file.json` | Emotion curve, stage details, health metrics (average, lowest stage, biggest drops), findings | 0 mapped, 1 a stage at emotion &lt;= 2 has no opportunity, 2 bad input |
+| `usability_scorer.py` | `--sus-responses` CSV (participant, q1-q10) and/or `--task-data` CSV (participant, task, completed, time_seconds, errors); `sample [--out-dir DIR] [--force]` copies a borderline sample there (refuses to overwrite without `--force`) | Per-participant and aggregate SUS with grade, acceptability, spread and per-item averages; per-task completion, mean and median time, errors, severity | 0 SUS &gt;= 68 and no task under 75%, 1 otherwise, 2 bad input |
+| `design_critique.py` | `--checklist` or `--answers file.json` | Empty checklist (52 checkpoints), or compliance score, grade, severity distribution, top five priorities, strengths, all issues | 0 checklist or pass, 1 any Critical or grade D/F, 2 bad input |
 
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--template`, `-t` | choice | - | Pre-built template: `saas`, `ecommerce`, `mobile_app` |
-| `--stages`, `-s` | string | - | Path to custom stages JSON file |
-| `--json` | flag | False | Output as JSON |
+All three are stdlib-only, offline and deterministic, and take `--format text|json` (`--json`
+still works). Missing or out-of-range values exit 2 instead of being filled in: a neutral 3
+silently substituted for a missing SUS answer would move the score. Scales, thresholds and file
+formats are in `references/research-to-design-guide.md`.
 
-```bash
-python scripts/journey_mapper.py --template saas
-python scripts/journey_mapper.py --template ecommerce --json
-python scripts/journey_mapper.py --stages custom_journey.json
-```
+## Workflows
 
-### usability_scorer.py
+### Journey map: find the stage to fix first
 
-Calculates System Usability Scale (SUS) scores and task performance metrics from usability test data. Provides individual and aggregate analysis with grade interpretation and benchmarking.
+1. Write the stages as JSON (copy `assets/sample_journey.json`). Put the research behind it in
+   `evidence`; each pain point should trace to something a user said or did.
+2. Run the mapper. Read the lowest stage and the biggest drop first; those are the candidates.
+3. Resolve every `unaddressed-low-point` by adding at least one opportunity, or state that the
+   team accepts the low point and why. Exit 0 means every low point has an answer.
+4. Hand the chosen stage and its opportunities to the next step: a test plan to confirm the
+   problem, or a design brief.
 
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `action` | positional | - | &quot;sample&quot; to create sample CSV files |
-| `--sus-responses` | string | - | CSV with SUS responses (participant, q1-q10) |
-| `--task-data` | string | - | CSV with task data (participant, task, completed, time_seconds, errors) |
-| `--json` | flag | False | Output as JSON |
+**Done when:** the map names its evidence, exits 0, and one stage is chosen with a reason.
 
-```bash
-python scripts/usability_scorer.py sample
-python scripts/usability_scorer.py --sus-responses responses.csv
-python scripts/usability_scorer.py --task-data tasks.csv
-python scripts/usability_scorer.py --sus-responses responses.csv --task-data tasks.csv --json
-```
+### Usability test: decide ship or hold
 
----
+1. Fill `assets/usability-test-plan-template.md`, including the pass line, before testing.
+2. Run the sessions; log one row per participant per task, and the SUS form after each session.
+3. Score both files together. Report the mean with its range, not the letter grade alone; at
+   six participants a 4-point difference is noise.
+4. For each Major or Critical task, find the moment of failure in the recordings and log it in
+   the critique as a failed checkpoint with notes.
 
-## Troubleshooting
+**Done when:** the scorer&#x27;s exit code and the decision agree, or the report says why they differ.
 
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| SUS score below 68 (benchmark) | Significant usability issues | Focus on critical severity findings from design_critique first |
-| Low task completion rate (&lt;80%) | Task flow too complex or unclear | Simplify flow; add progressive disclosure; reduce steps |
-| Users cannot find features | Poor information architecture | Conduct card sorting; redesign navigation; add search |
-| High error rate on forms | Insufficient validation and guidance | Add inline validation, smart defaults, and contextual help |
-| Inconsistent design across screens | Missing or ignored design system | Audit with design_critique; enforce token usage |
-| Usability test participants are unrepresentative | Poor recruitment criteria | Screen for target persona match; mix new and returning users |
-| Journey map emotions are flat | Insufficient research data | Conduct deeper interviews; observe real usage sessions |
+### Design critique: order the fixes
 
----
+1. Print the checklist as JSON. Walk the real flow (or prototype) end to end, then mark each
+   checkpoint `true`, `false` or leave it `null` if it does not apply at this fidelity.
+2. Give every failure a numeric `severity` from 0 to 3 and a note that names the screen and what
+   happens. 0 Cosmetic (no effect on success or time), 1 Minor (slows some users, they recover
+   alone; also the value used when severity is left blank), 2 Major (many users slowed, some give
+   up), 3 Critical (data loss, blocked task, or users excluded). Anything else exits 2. A failure
+   without a note cannot be fixed by someone who was not there.
+3. Score it. Fix all Critical issues before anything else; a Critical caps the grade at C.
+4. Hand the ordered list on: visual or interaction fixes to `engineering/interface-refinement`,
+   WCAG failures to `engineering/a11y-audit` for a full check.
 
-## Success Criteria
+**Done when:** the critique exits 0, or every Critical issue has an owner and a date.
 
-| Criterion | Target | How to Measure |
-|-----------|--------|----------------|
-| SUS score | &gt;68 (industry average), target &gt;80 | usability_scorer aggregate score |
-| Task completion rate | &gt;85% for core flows | usability_scorer task metrics |
-| Time on task | &lt;2x expected duration | usability_scorer avg_time_seconds |
-| Design critique compliance | &gt;80% checklist pass rate | design_critique compliance_score |
-| Accessibility compliance | WCAG AA on all screens | design_critique accessibility section |
-| Journey map coverage | All key personas mapped | Count of completed journey maps |
-| Usability test cadence | Test every sprint or release | Count of tests per quarter |
+### Before and after a redesign
 
----
+Run the same tasks and SUS with the same participant profile on both versions, score each, and
+compare per-task completion first. **[RECOMMENDED]** Treat a SUS change under about 10 points at
+small samples as inconclusive unless completion or errors moved too.
 
-## Scope &amp; Limitations
+## Decision frameworks
 
-**In scope:**
-- Heuristic evaluation and design critique
-- User journey mapping with emotion curves
-- Usability test scoring (SUS and task metrics)
-- Design sprint facilitation structure
-- Information architecture planning
-- Prototype fidelity guidance
-- Accessibility checkpoint evaluation
+| Question | Tool to lead with | Why |
+|----------|-------------------|-----|
+| Where in the experience do users struggle? | Journey mapper | Shows the stage and transition, across touchpoints |
+| Can users complete this flow? | Usability scorer (tasks) | Completion and errors are behaviour, not opinion |
+| How do users rate the whole product? | Usability scorer (SUS) | Standard ten items, comparable across releases |
+| What is wrong with this screen and how bad? | Design critique | Severity-ranked list a team can triage |
 
-**Out of scope:**
-- Automated visual regression testing (use Chromatic/Percy)
-- Real-time analytics dashboards (use Amplitude/Mixpanel)
-- Figma file manipulation or asset export (use Figma API)
-- Eye tracking or biometric analysis
-- A/B test implementation (see ab-test-setup skill)
-- Design token generation (see ui-design-system or design-system-lead skills)
+- **[PROVEN]** Behaviour over opinion: when task completion and SUS disagree, trust completion.
+- **[PROVEN]** Severity is frequency x impact x persistence; a rare, recoverable issue is Minor
+  even if it annoys the reviewer.
+- **[RECOMMENDED]** Critique before testing, so participant time is spent on problems a review
+  could not find.
 
----
+## Anti-Patterns
+
+### The Persona-Free Journey
+**Mistake:** A journey map written in a workshop from memory, presented as research.
+**Why it happens:** Workshops feel collaborative and finish in an afternoon.
+**Instead:** Fill `evidence` and trace each pain point to a source; the mapper warns when it is
+missing. Label an unsourced map a hypothesis.
+
+### Grading by the Letter
+**Mistake:** &quot;We got a B&quot; with no score, range or participant count.
+**Why it happens:** Letters are easy to repeat in a status update.
+**Instead:** Report mean, range and n. At small samples the letter can flip on one participant.
+
+### Moving the Pass Line After the Data
+**Mistake:** Lowering the SUS target or completion threshold once results come in.
+**Why it happens:** A release date is close and the result is near the line.
+**Instead:** Agree the pass line in the test plan. If the team ships below it, write that down
+as an accepted risk.
+
+### Passing What You Did Not Check
+**Mistake:** Marking checkpoints `true` because the prototype cannot show them.
+**Why it happens:** A blank looks like an unfinished review.
+**Instead:** Leave them `null`. The tool reports them as unanswered and scores only what was
+reviewed.
+
+### Severity by Annoyance
+**Mistake:** Rating issues by how much they bothered the reviewer.
+**Why it happens:** The reviewer is the only user in the room.
+**Instead:** Rate on how many users hit it, whether they recover, and whether it repeats.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/journey_mapper.py` | Journey map, health metrics, low-point findings |
+| `scripts/usability_scorer.py` | SUS and task metrics with a pass line |
+| `scripts/design_critique.py` | Heuristic checklist and severity-ranked critique |
+| `references/research-to-design-guide.md` | Severity scale, SUS bands, task thresholds, input formats, sample sizes |
+| `references/heuristics.json` | Checklist wording: 10 heuristics, 3 accessibility groups, severity scale |
+| `references/journey-templates.json` | SaaS, e-commerce and mobile app journey templates |
+| `references/sus-questions.json` | The ten SUS items |
+| `assets/sample_journey.json` | Sound journey with evidence (exit 0) |
+| `assets/sample_journey_flawed.json` | Journey with unaddressed low points (exit 1) |
+| `assets/sample_sus.csv`, `assets/sample_tasks.csv` | Sound test: SUS 80.4, all tasks 100% (exit 0) |
+| `assets/sample_sus_flawed.csv`, `assets/sample_tasks_flawed.csv` | Failing test: SUS 44.6, checkout 40% (exit 1) |
+| `assets/sample_sus_borderline.csv`, `assets/sample_tasks_borderline.csv` | Source for `sample`, which copies them to `--out-dir` (default: current directory) as `sample_sus.csv` / `sample_tasks.csv`, refusing to overwrite unless `--force`: SUS 67.5, just under the line (exit 1) |
+| `assets/sample_critique_answers.json` | Sound critique: 94.2%, grade A (exit 0) |
+| `assets/sample_critique_answers_flawed.json` | Failing critique: 61.5%, five Critical issues (exit 1) |
+| `assets/usability-test-plan-template.md` | Test plan with tasks, targets and pass line |
 
 ## Integration Points
 
-| Tool / Platform | Integration Method | Use Case |
-|-----------------|-------------------|----------|
-| Figma | Journey map and critique findings as design specs | Translate research into design changes |
-| Maze / UserTesting | Export task data CSV for usability_scorer | Score test results from remote testing platforms |
-| Dovetail / Condens | Export interview themes for journey_mapper | Build journey maps from research repositories |
-| Jira / Linear | design_critique JSON priorities as tickets | Track usability improvements in sprint backlog |
-| Notion / Confluence | Human-readable output from all tools | Document research findings and design decisions |
-| Miro / FigJam | journey_mapper JSON output | Collaborative journey map workshops |
+| Skill | Its job, distinct from this one |
+|-------|---------------------------------|
+| `product-team/design-direction` | Chooses the design system (style, palette, type, tokens) from a brief |
+| `engineering/interface-refinement` | Refines an existing UI with a detector and named commands |
+| `engineering/design-auditor` | Grades a built UI&#x27;s visual quality |
+| `engineering/a11y-audit` | Full WCAG scan of built pages |
+| `engineering/marketing-site-builder` | Builds marketing sites, with a finish gate |
+| `product-team/ui-design-system` | Generates token files and component documentation |
+| `engineering/senior-frontend` | Implements the fixes in the component library |
+| `product-team/ux-researcher-designer` | Personas and research planning that feed the journey map |
+
+## Scope &amp; Limitations
+
+**In Scope:**
+- Journey maps from research, with low-point and evidence checks
+- SUS scoring and task metrics from usability sessions, with a pass line
+- Heuristic critique with severity ranking and a short accessibility pass
+- Usability test planning
+
+**Out of Scope:**
+- Visual direction, palettes, type and tokens (`product-team/design-direction`)
+- Applying UI fixes or scanning source code (`engineering/interface-refinement`)
+- WCAG conformance testing (`engineering/a11y-audit`)
+- Running sessions, recruiting, analytics collection, A/B test analysis
+  (`product-team/ab-test-setup`)
+
+**Important Caveats:**
+- Emotion scores in a journey map are the team&#x27;s synthesis, not a measurement.
+- SUS bands are simplified; quote the number. Small samples give wide ranges.
+- The critique scores what a reviewer marked. It finds nothing on its own; its value is a
+  consistent checklist and an honest severity order.
 
 ---
 
@@ -1128,7 +976,7 @@ Walk me through these exact steps:
 1. **Create a Custom GPT:** Tell me to go to **chatgpt.com &gt; Explore GPTs &gt; Create**
 2. **Configure it:**
    - Name: **&quot;Product Designer&quot;**
-   - Description: &quot;Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles.&quot;
+   - Description: &quot;Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow before it ships.&quot;
    - Instructions: Give me the COMPLETE skill definition above as a single copyable text block inside a code fence to paste into the Instructions field. Do NOT say &quot;paste from above.&quot;
 3. **Test It:** Give me a sample prompt to verify it works.
 
@@ -1188,7 +1036,20 @@ curl -sL https://github.com/borghei/Claude-Skills/archive/main.tar.gz | tar xz -
 <h3>Run Python Tools</h3>
 <pre><code>python product-team/product-designer/scripts/tool_name.py --help</code></pre>
   
-  
+  <h2>Quick Start</h2><pre><code># Journey map from your own stages (exit 1 if a low point has no opportunity)
+python3 product-team/product-designer/scripts/journey_mapper.py \
+  --stages product-team/product-designer/assets/sample_journey.json
+
+# Score a usability test (exit 1 if SUS &lt; 68 or a task is under 75% completion)
+python3 product-team/product-designer/scripts/usability_scorer.py \
+  --sus-responses product-team/product-designer/assets/sample_sus.csv \
+  --task-data product-team/product-designer/assets/sample_tasks.csv
+
+# Heuristic critique: print the checklist, fill it in, score it (exit 1 on Critical or grade D/F)
+python3 product-team/product-designer/scripts/design_critique.py --checklist --format json &gt; checklist.json
+python3 product-team/product-designer/scripts/design_critique.py \
+  --answers product-team/product-designer/assets/sample_critique_answers.json
+</code></pre>
   <h2>Related Skills in Product</h2><div class="related-grid"><a href="https://borghei.github.io/Claude-Skills/skills/product-team/ab-test-setup.html" class="skill-card" style="text-decoration:none"><h3>Ab Test Setup</h3><p>Design and run statistically rigorous A/B tests and experiments. Use when planning experiments,...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/agile-product-owner.html" class="skill-card" style="text-decoration:none"><h3>Agile Product Owner</h3><p>Agile product ownership for backlog management and sprint execution. Use for writing user...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/apple-hig-expert.html" class="skill-card" style="text-decoration:none"><h3>Apple Hig Expert</h3><p>Apple Human Interface Guidelines expert across iOS, iPadOS, macOS, watchOS, tvOS, and visionOS....</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/design-direction.html" class="skill-card" style="text-decoration:none"><h3>Design Direction</h3><p>Turns a product brief into a design-system spec: style direction, contrast-checked palette, type...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/design-system-lead.html" class="skill-card" style="text-decoration:none"><h3>Design System Lead</h3><p>Design systems leadership across component libraries, design tokens, and design-dev...</p></a><a href="https://borghei.github.io/Claude-Skills/skills/product-team/product-analytics.html" class="skill-card" style="text-decoration:none"><h3>Product Analytics</h3><p>Product analytics for instrumenting products, defining metrics, and building retention funnels....</p></a></div>
   <p style="margin-top:32px"><a href="https://github.com/borghei/Claude-Skills/tree/main/product-team/product-designer/SKILL.md" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></p>
 </article>

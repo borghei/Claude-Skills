@@ -103,19 +103,22 @@ export const dynamic = 'force-dynamic';
 // Revalidate every 60 seconds (ISR)
 export const revalidate = 60;
 
-// Revalidate on-demand
-import { revalidatePath, revalidateTag } from 'next/cache';
+// Revalidate on-demand from a Server Action
+'use server';
+import { revalidatePath, updateTag } from 'next/cache';
 
-async function updateProduct(id: string, data: ProductData) {
+export async function updateProduct(id: string, data: ProductData) {
   await db.products.update({ where: { id }, data });
 
-  // Revalidate specific path
+  // Revalidate a specific path
   revalidatePath(`/products/${id}`);
 
-  // Or revalidate by tag
-  revalidateTag('products');
+  // Or expire a tag so the editor sees the change on the next request
+  updateTag('products');
 }
 ```
+
+The segment exports (`dynamic`, `revalidate`) apply when Cache Components is off. With `cacheComponents: true`, data fetching is dynamic by default and you opt in with `'use cache'` (see [Caching Strategies](#caching-strategies)); follow the [migration guide](https://nextjs.org/docs/app/guides/migrating-to-cache-components) to replace segment configs.
 
 ---
 
@@ -367,13 +370,15 @@ async function Header() {
 
 ## Caching Strategies
 
+Next.js 16 sources: [`use cache`](https://nextjs.org/docs/app/api-reference/directives/use-cache), [`cacheLife`](https://nextjs.org/docs/app/api-reference/functions/cacheLife), [`cacheTag`](https://nextjs.org/docs/app/api-reference/functions/cacheTag), [`revalidateTag`](https://nextjs.org/docs/app/api-reference/functions/revalidateTag), [`updateTag`](https://nextjs.org/docs/app/api-reference/functions/updateTag), [`cacheComponents`](https://nextjs.org/docs/app/api-reference/config/next-config-js/cacheComponents) (checked November 2026).
+
 ### Fetch Cache Options
 
 ```tsx
-// Cache indefinitely (default for static)
-fetch('https://api.example.com/data');
+// Not cached by default (since Next 15): opt in explicitly
+fetch('https://api.example.com/data', { cache: 'force-cache' });
 
-// No cache - always fresh
+// Always fresh
 fetch('https://api.example.com/data', { cache: 'no-store' });
 
 // Revalidate after time
@@ -386,10 +391,22 @@ fetch('https://api.example.com/products', {
   next: { tags: ['products'] }
 });
 
-// Later, revalidate by tag
+// Later, revalidate by tag. Next 16 requires a profile as the second argument:
+// 'max' serves stale content while it refreshes (stale-while-revalidate).
+// The single-argument form is deprecated.
 import { revalidateTag } from 'next/cache';
-revalidateTag('products');
+revalidateTag('products', 'max');
+
+// From a webhook or Route Handler that needs the data gone now:
+revalidateTag('products', { expire: 0 });
 ```
+
+| Function | Where it runs | Behaviour |
+|----------|---------------|-----------|
+| `updateTag(tag)` | Server Actions only | Expires the tag; the next request waits for fresh data (read-your-own-writes) |
+| `revalidateTag(tag, 'max')` | Server Actions, Route Handlers | Marks stale; visitors get stale content while it refreshes |
+| `revalidateTag(tag, { expire: 0 })` | Server Actions, Route Handlers | Expires immediately, for webhooks where `updateTag` is not available |
+| `revalidatePath(path)` | Server Actions, Route Handlers | Invalidates one page or layout path |
 
 ### Route Segment Config
 
@@ -409,26 +426,38 @@ export async function generateStaticParams() {
 }
 ```
 
-### unstable_cache for Custom Caching
+### `use cache` for Custom Caching (Cache Components)
+
+Enable it once in `next.config.ts`:
+
+```ts
+import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  cacheComponents: true,
+  partialPrefetching: true, // set explicitly; leaving it unset logs a warning
+};
+
+export default nextConfig;
+```
+
+Then mark async functions, components or whole files as cacheable. Give every scope an explicit `cacheLife` and tag what you will invalidate:
 
 ```tsx
-import { unstable_cache } from 'next/cache';
+import { cacheLife, cacheTag } from 'next/cache';
 
-const getCachedUser = unstable_cache(
-  async (userId: string) => {
-    const user = await db.users.findUnique({ where: { id: userId } });
-    return user;
-  },
-  ['user-cache'],
-  {
-    revalidate: 3600, // 1 hour
-    tags: ['users'],
-  }
-);
+export async function getUser(userId: string) {
+  'use cache';
+  cacheLife('hours'); // presets: seconds, minutes, hours, days, weeks, max
+  cacheTag('users', `user-${userId}`);
+  return db.users.findUnique({ where: { id: userId } });
+}
 
-// Usage
-const user = await getCachedUser(userId);
+// In a Server Action after a write:
+// updateTag(`user-${userId}`);
 ```
+
+Arguments become the cache key and must be serializable; `cookies()` and `headers()` cannot be read inside a cached scope, so read them outside and pass the values in. `unstable_cache` still exists for data that must survive a redeploy (`use cache` entries are keyed by build ID), but for new code prefer `use cache`.
 
 ---
 

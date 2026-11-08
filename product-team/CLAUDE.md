@@ -9,7 +9,7 @@ This guide covers the 14 production-ready product management skills and their Py
 2. **agile-product-owner/** - User story generation, sprint planning (1 tool)
 3. **product-strategist/** - OKR cascade, strategic planning (1 tool)
 4. **ux-researcher-designer/** - Persona generation, user research (1 tool)
-5. **ui-design-system/** - Design token generation, component systems (1 tool)
+5. **ui-design-system/** - Design tokens and component specs from a chosen brand colour and style, plus a WCAG contrast check of every text pair (2 tools)
 6. **ab-test-setup/** - Sample size calculation, experiment analysis, experiment planning (3 tools)
 7. **design-system-lead/** - Token generation, component scaffolding, adoption analysis (3 tools)
 8. **product-designer/** - Design critique, journey mapping, usability scoring (3 tools)
@@ -22,7 +22,7 @@ This guide covers the 14 production-ready product management skills and their Py
 13. **roadmap-communicator/** - Audience translator, confidence band generator, roadmap diff reporter (3 tools)
 14. **design-direction/** - Brief to design-system spec: product-type matching, style direction, palette with computed WCAG contrast, type pairing, motion map, page patterns, token audit of real CSS themes (5 tools)
 
-**Total Tools:** 35 Python automation tools (stdlib only)
+**Total Tools:** 36 Python automation tools (stdlib only)
 
 ## Python Automation Tools
 

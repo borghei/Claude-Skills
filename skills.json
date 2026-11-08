@@ -31,7 +31,7 @@
     },
     "engineering": {
       "count": 100,
-      "tools": 312
+      "tools": 318
     },
     "finance": {
       "count": 4,
@@ -59,7 +59,7 @@
     },
     "product-team": {
       "count": 14,
-      "tools": 36
+      "tools": 37
     },
     "project-management": {
       "count": 74,
@@ -742,7 +742,7 @@
         "color-contrast",
         "accessibility"
       ],
-      "tools": 4,
+      "tools": 10,
       "has_references": true,
       "has_assets": true
     },
@@ -1725,7 +1725,7 @@
     },
     {
       "name": "senior-frontend",
-      "description": "Frontend development for React, Next.js, TypeScript, and Tailwind CSS. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding projects, implementing accessibility, or reviewing frontend code.",
+      "description": "Scaffold Next.js 16 or React + Vite 8 apps, generate components with tests and stories, and flag heavy bundle dependencies. Use when starting a React project, adding components or hooks, or reviewing frontend code or performance.",
       "path": "engineering/senior-frontend/SKILL.md",
       "domain": "engineering",
       "category": "engineering",
@@ -1734,14 +1734,16 @@
       "license": "MIT + Commons Clause",
       "tags": [
         "react",
+        "nextjs",
         "typescript",
+        "tailwind",
         "accessibility",
         "performance",
-        "state-management"
+        "scaffolding"
       ],
       "tools": 3,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "senior-fullstack",
@@ -6492,7 +6494,7 @@
     },
     {
       "name": "product-designer",
-      "description": "Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles.",
+      "description": "Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow before it ships.",
       "path": "product-team/product-designer/SKILL.md",
       "domain": "product-team",
       "category": "product-design",
@@ -6500,16 +6502,16 @@
       "version": "1.0.0",
       "license": "MIT + Commons Clause",
       "tags": [
-        "design",
         "ux",
-        "ui",
-        "figma",
-        "prototyping",
-        "design-systems"
+        "journey-mapping",
+        "usability-testing",
+        "sus",
+        "heuristic-evaluation",
+        "design-critique"
       ],
       "tools": 3,
-      "has_references": false,
-      "has_assets": false
+      "has_references": true,
+      "has_assets": true
     },
     {
       "name": "product-manager-toolkit",
@@ -6616,22 +6618,25 @@
     },
     {
       "name": "ui-design-system",
-      "description": "UI design system toolkit covering design tokens, component documentation, responsive calculations, and developer handoff. Use for creating design systems, maintaining visual consistency, or facilitating design-dev handoff.",
+      "description": "Generates a design-token system from a brand colour, checks its contrast, and specs component variants. Use when turning a chosen colour into tokens, exporting CSS, SCSS or JSON, or extending a token set for components.",
       "path": "product-team/ui-design-system/SKILL.md",
       "domain": "product-team",
       "category": "product",
       "subdomain": "",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "license": "MIT + Commons Clause",
       "tags": [
         "design-system",
+        "design-tokens",
         "components",
-        "tokens",
-        "ui-patterns"
+        "wcag",
+        "css-variables",
+        "scss",
+        "handoff"
       ],
-      "tools": 1,
+      "tools": 2,
       "has_references": true,
-      "has_assets": false
+      "has_assets": true
     },
     {
       "name": "ux-researcher-designer",

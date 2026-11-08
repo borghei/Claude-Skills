@@ -1,0 +1,125 @@
+{
+  "_about": "CSS properties and value-extraction regexes per token category, read by design_system_validator.py. Order is the report order.",
+  "categories": {
+    "colors": {
+      "properties": [
+        "color",
+        "background-color",
+        "background",
+        "border-color",
+        "border-top-color",
+        "border-right-color",
+        "border-bottom-color",
+        "border-left-color",
+        "outline-color",
+        "box-shadow",
+        "text-shadow",
+        "fill",
+        "stroke",
+        "text-decoration-color",
+        "caret-color",
+        "column-rule-color",
+        "accent-color"
+      ],
+      "extract_pattern": "(#[0-9a-fA-F]{3,8}|rgba?\\s*\\([^)]+\\)|hsla?\\s*\\([^)]+\\))"
+    },
+    "spacing": {
+      "properties": [
+        "margin",
+        "margin-top",
+        "margin-right",
+        "margin-bottom",
+        "margin-left",
+        "padding",
+        "padding-top",
+        "padding-right",
+        "padding-bottom",
+        "padding-left",
+        "gap",
+        "row-gap",
+        "column-gap",
+        "top",
+        "right",
+        "bottom",
+        "left",
+        "inset"
+      ],
+      "extract_pattern": "(\\d+(?:\\.\\d+)?(?:px|rem|em))"
+    },
+    "font_sizes": {
+      "properties": [
+        "font-size"
+      ],
+      "extract_pattern": "(\\d+(?:\\.\\d+)?(?:px|rem|em))"
+    },
+    "font_families": {
+      "properties": [
+        "font-family"
+      ],
+      "extract_pattern": "font-family\\s*:\\s*([^;]+)"
+    },
+    "font_weights": {
+      "properties": [
+        "font-weight"
+      ],
+      "extract_pattern": "(\\d{3}|bold|normal|lighter|bolder)"
+    },
+    "line_heights": {
+      "properties": [
+        "line-height"
+      ],
+      "extract_pattern": "(\\d+(?:\\.\\d+)?(?:px|rem|em|%)?)"
+    },
+    "border_radii": {
+      "properties": [
+        "border-radius",
+        "border-top-left-radius",
+        "border-top-right-radius",
+        "border-bottom-right-radius",
+        "border-bottom-left-radius"
+      ],
+      "extract_pattern": "(\\d+(?:\\.\\d+)?(?:px|rem|em|%))"
+    },
+    "shadows": {
+      "properties": [
+        "box-shadow",
+        "text-shadow"
+      ],
+      "extract_pattern": "((?:\\d+(?:\\.\\d+)?(?:px|rem|em)\\s+){2,}(?:\\d+(?:\\.\\d+)?(?:px|rem|em)\\s+)?(?:\\d+(?:\\.\\d+)?(?:px|rem|em)\\s+)?(?:#[0-9a-fA-F]{3,8}|rgba?\\s*\\([^)]+\\)|hsla?\\s*\\([^)]+\\)))"
+    },
+    "breakpoints": {
+      "properties": [],
+      "extract_pattern": "@media[^{]*(?:min|max)-width\\s*:\\s*(\\d+(?:\\.\\d+)?(?:px|rem|em))"
+    },
+    "z_indices": {
+      "properties": [
+        "z-index"
+      ],
+      "extract_pattern": "(-?\\d+)"
+    },
+    "transitions": {
+      "properties": [
+        "transition",
+        "transition-duration",
+        "animation-duration"
+      ],
+      "extract_pattern": "(\\d+(?:\\.\\d+)?(?:ms|s))"
+    }
+  },
+  "skip_values": [
+    "0",
+    "0%",
+    "0px",
+    "100%",
+    "50%",
+    "auto",
+    "currentColor",
+    "currentcolor",
+    "inherit",
+    "initial",
+    "none",
+    "revert",
+    "transparent",
+    "unset"
+  ]
+}

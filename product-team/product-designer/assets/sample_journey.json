@@ -1,0 +1,48 @@
+{
+  "name": "Freelancer Invoicing: First Month",
+  "persona": "Solo designer billing 4-8 clients a month",
+  "goal": "Get paid on time without chasing clients by hand",
+  "evidence": "12 onboarding interviews (Oct 2026), 340 support tickets tagged onboarding, funnel data for 1,180 signups",
+  "stages": [
+    {
+      "name": "Signup",
+      "actions": ["Creates account with email", "Picks a currency", "Skips the tour"],
+      "touchpoints": ["Signup form", "Welcome email"],
+      "emotions": {"score": 4, "label": "Hopeful, wants the first invoice out today"},
+      "pain_points": ["Asked for VAT number before seeing the product (7 of 12 interviews)"],
+      "opportunities": ["Ask for VAT details only when the first invoice needs them"]
+    },
+    {
+      "name": "First invoice",
+      "actions": ["Adds a client", "Adds line items", "Previews the PDF"],
+      "touchpoints": ["Invoice editor", "PDF preview"],
+      "emotions": {"score": 3, "label": "Careful, double-checking totals"},
+      "pain_points": ["Tax line hidden under 'More options' (41 tickets)", "Logo upload fails over 2 MB"],
+      "opportunities": ["Show the tax line by default for VAT-registered accounts", "Resize logos on upload"]
+    },
+    {
+      "name": "Waiting to be paid",
+      "actions": ["Checks whether the client opened the invoice", "Writes a reminder by hand"],
+      "touchpoints": ["Invoice list", "Email client"],
+      "emotions": {"score": 2, "label": "Anxious, unsure the client saw it"},
+      "pain_points": ["No 'viewed' status (9 of 12 interviews)", "Reminders are manual"],
+      "opportunities": ["Show opened and viewed status on each invoice", "Offer scheduled reminders at 3 and 10 days overdue"]
+    },
+    {
+      "name": "Paid",
+      "actions": ["Gets payment notification", "Marks invoice reconciled"],
+      "touchpoints": ["Push notification", "Bank feed"],
+      "emotions": {"score": 4, "label": "Relieved"},
+      "pain_points": ["Partial payments must be split by hand"],
+      "opportunities": ["Match partial payments from the bank feed"]
+    },
+    {
+      "name": "Month end",
+      "actions": ["Exports income report for the accountant"],
+      "touchpoints": ["Reports page", "CSV export"],
+      "emotions": {"score": 3, "label": "Neutral, a chore"},
+      "pain_points": ["Export columns do not match the accountant's template"],
+      "opportunities": ["Accountant-ready export presets"]
+    }
+  ]
+}

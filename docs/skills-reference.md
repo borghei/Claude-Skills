@@ -173,7 +173,7 @@ Core software engineering expertise with Python automation tools.
 | Skill | Description | Tools |
 |-------|-------------|-------|
 | [senior-architect](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-architect/SKILL.md) | System design, distributed systems, architectural patterns | 2 |
-| [senior-frontend](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-frontend/SKILL.md) | React patterns, state management, performance, accessibility | 2 |
+| [senior-frontend](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-frontend/SKILL.md) | Next 16 / Vite 8 project and component scaffolds that build and lint clean, plus a framework-aware bundle analyzer | 3 |
 | [senior-backend](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-backend/SKILL.md) | API design, microservices, databases, caching, queues | 2 |
 | [senior-fullstack](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-fullstack/SKILL.md) | React, Node.js, databases, API design, system architecture | 3 |
 | [senior-qa](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-qa/SKILL.md) | Test strategy, automation frameworks, performance testing | 2 |
@@ -199,7 +199,7 @@ Core software engineering expertise with Python automation tools.
 | [qa-browser-automation](https://github.com/borghei/Claude-Skills/blob/main/engineering/qa-browser-automation/SKILL.md) | 11-phase browser QA, health scoring, WCAG audit, visual regression | 4 |
 | [release-orchestrator](https://github.com/borghei/Claude-Skills/blob/main/engineering/release-orchestrator/SKILL.md) | Release pipeline, pre-flight checks, versioning, readiness scoring | 4 |
 | [doc-drift-detector](https://github.com/borghei/Claude-Skills/blob/main/engineering/doc-drift-detector/SKILL.md) | Documentation drift analysis, staleness scoring, API doc validation | 4 |
-| [design-auditor](https://github.com/borghei/Claude-Skills/blob/main/engineering/design-auditor/SKILL.md) | 12-category design audit, AI slop detection, color contrast checking | 4 |
+| [design-auditor](https://github.com/borghei/Claude-Skills/blob/main/engineering/design-auditor/SKILL.md) | Grades a UI: 12-category score, AI-slop scan, token compliance with file:line, WCAG 2.2 contrast; hands fixes to interface-refinement | 10 |
 
 ### Advanced Engineering (32)
 
@@ -401,9 +401,9 @@ User-centered product development with automation tools.
 | [product-manager-toolkit](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-manager-toolkit/SKILL.md) | RICE prioritizer, interview analyzer, PRD templates | 2 |
 | [agile-product-owner](https://github.com/borghei/Claude-Skills/blob/main/product-team/agile-product-owner/SKILL.md) | User stories, sprint planning, velocity tracking | 1 |
 | [product-strategist](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-strategist/SKILL.md) | OKR cascade, market analysis, vision setting | 1 |
-| [ui-design-system](https://github.com/borghei/Claude-Skills/blob/main/product-team/ui-design-system/SKILL.md) | Design tokens, component documentation, responsive design | 1 |
+| [ui-design-system](https://github.com/borghei/Claude-Skills/blob/main/product-team/ui-design-system/SKILL.md) | Design tokens and component specs from a chosen brand colour, with a WCAG check of every text pair | 2 |
 | [ux-researcher-designer](https://github.com/borghei/Claude-Skills/blob/main/product-team/ux-researcher-designer/SKILL.md) | Personas, journey mapping, usability research | 1 |
-| [product-designer](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-designer/SKILL.md) | UI/UX design, prototyping, user research, design systems | - |
+| [product-designer](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-designer/SKILL.md) | Journey maps, SUS usability scoring and heuristic design critique that gate on real findings | 3 |
 | [design-system-lead](https://github.com/borghei/Claude-Skills/blob/main/product-team/design-system-lead/SKILL.md) | Design tokens, component libraries, documentation | - |
 | [ab-test-setup](https://github.com/borghei/Claude-Skills/blob/main/product-team/ab-test-setup/SKILL.md) | A/B testing design, statistical significance, feature flags | - |
 | [product-analytics](https://github.com/borghei/Claude-Skills/blob/main/product-team/product-analytics/SKILL.md) | Metric tree designer, event taxonomy auditor, retention cohorts | 3 |

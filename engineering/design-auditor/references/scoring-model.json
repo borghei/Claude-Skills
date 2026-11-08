@@ -1,0 +1,141 @@
+{
+  "_about": "Category weights and grade bands read by design_scorer.py. The 12 weights sum to 0.95; coherence adds the last 0.05.",
+  "categories": {
+    "visual_hierarchy": {
+      "name": "Visual Hierarchy & Composition",
+      "weight": 0.1
+    },
+    "typography": {
+      "name": "Typography System",
+      "weight": 0.08
+    },
+    "color_contrast": {
+      "name": "Color & Contrast",
+      "weight": 0.08
+    },
+    "spacing_layout": {
+      "name": "Spacing & Layout Grid",
+      "weight": 0.08
+    },
+    "interaction_states": {
+      "name": "Interaction States",
+      "weight": 0.1
+    },
+    "navigation_ia": {
+      "name": "Navigation & Information Architecture",
+      "weight": 0.08
+    },
+    "responsive": {
+      "name": "Responsive Design",
+      "weight": 0.08
+    },
+    "accessibility": {
+      "name": "Accessibility (WCAG)",
+      "weight": 0.12
+    },
+    "motion_animation": {
+      "name": "Motion & Animation",
+      "weight": 0.05
+    },
+    "content_microcopy": {
+      "name": "Content & Microcopy",
+      "weight": 0.05
+    },
+    "ai_slop": {
+      "name": "AI Slop Indicators",
+      "weight": 0.08
+    },
+    "performance_design": {
+      "name": "Performance as Design",
+      "weight": 0.05
+    }
+  },
+  "coherence_weight": 0.05,
+  "priority_order": [
+    "critical",
+    "high",
+    "medium",
+    "low",
+    "cosmetic"
+  ],
+  "priority_labels": {
+    "critical": "Critical — Breaks core UX",
+    "high": "High — Degrades experience",
+    "medium": "Medium — Inconsistency",
+    "low": "Low — Polish",
+    "cosmetic": "Cosmetic — Nice-to-have"
+  },
+  "grade_bands": {
+    "design": [
+      [
+        95,
+        "A+"
+      ],
+      [
+        90,
+        "A"
+      ],
+      [
+        85,
+        "B+"
+      ],
+      [
+        80,
+        "B"
+      ],
+      [
+        75,
+        "C+"
+      ],
+      [
+        70,
+        "C"
+      ],
+      [
+        60,
+        "D"
+      ]
+    ],
+    "ai_slop": [
+      [
+        9,
+        "A"
+      ],
+      [
+        7,
+        "B"
+      ],
+      [
+        5,
+        "C"
+      ],
+      [
+        3,
+        "D"
+      ]
+    ],
+    "accessibility": [
+      [
+        9.5,
+        "A+"
+      ],
+      [
+        8.5,
+        "A"
+      ],
+      [
+        7,
+        "B"
+      ],
+      [
+        5,
+        "C"
+      ],
+      [
+        3,
+        "D"
+      ]
+    ]
+  },
+  "grade_floor": "F"
+}

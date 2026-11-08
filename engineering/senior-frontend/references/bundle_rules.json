@@ -1,0 +1,115 @@
+{
+  "_comment": "Rule tables for scripts/bundle_analyzer.py. Sizes are rough minified figures.",
+  "heavy_packages": {
+    "moment": {
+      "size": "290KB",
+      "alternative": "date-fns (12KB) or dayjs (2KB)",
+      "reason": "Large locale files bundled by default"
+    },
+    "lodash": {
+      "size": "71KB",
+      "alternative": "lodash-es with tree-shaking or individual imports (lodash/get)",
+      "reason": "Full library often imported when only few functions needed"
+    },
+    "jquery": {
+      "size": "87KB",
+      "alternative": "Native DOM APIs or React/Vue patterns",
+      "reason": "Rarely needed in modern frameworks"
+    },
+    "axios": {
+      "size": "14KB",
+      "alternative": "Native fetch API (0KB) or ky (3KB)",
+      "reason": "Fetch API covers most use cases"
+    },
+    "underscore": {
+      "size": "17KB",
+      "alternative": "Native ES6+ methods or lodash-es",
+      "reason": "Most utilities now in standard JavaScript"
+    },
+    "chart.js": {
+      "size": "180KB",
+      "alternative": "recharts (bundled with React) or lightweight-charts",
+      "reason": "Consider if you need all chart types"
+    },
+    "three": {
+      "size": "600KB",
+      "alternative": "None - use dynamic import for 3D features",
+      "reason": "Very large, should be lazy-loaded"
+    },
+    "firebase": {
+      "size": "400KB+",
+      "alternative": "Import specific modules (firebase/auth, firebase/firestore)",
+      "reason": "Modular imports significantly reduce size"
+    },
+    "material-ui": {
+      "size": "Large",
+      "alternative": "shadcn/ui (copy-paste components) or Tailwind",
+      "reason": "Heavy runtime, consider headless alternatives"
+    },
+    "@mui/material": {
+      "size": "Large",
+      "alternative": "shadcn/ui or Radix UI + Tailwind",
+      "reason": "Heavy runtime, consider headless alternatives"
+    },
+    "antd": {
+      "size": "Large",
+      "alternative": "shadcn/ui or Radix UI + Tailwind",
+      "reason": "Heavy runtime, consider headless alternatives"
+    }
+  },
+  "package_optimizations": {
+    "react-icons": "Import individual icons: import { FaHome } from 'react-icons/fa'",
+    "date-fns": "Use tree-shaking: import { format } from 'date-fns'",
+    "@heroicons/react": "Already tree-shakeable, good choice",
+    "lucide-react": "Already tree-shakeable, add to optimizePackageImports in next.config.js",
+    "framer-motion": "Use dynamic import for non-critical animations",
+    "recharts": "Consider lazy loading for dashboard charts"
+  },
+  "dev_only_packages": [
+    "typescript",
+    "@types/",
+    "eslint",
+    "prettier",
+    "jest",
+    "vitest",
+    "@testing-library",
+    "cypress",
+    "playwright",
+    "storybook",
+    "@storybook",
+    "webpack",
+    "vite",
+    "rollup",
+    "esbuild",
+    "tailwindcss",
+    "postcss",
+    "autoprefixer",
+    "sass",
+    "less",
+    "husky",
+    "lint-staged"
+  ],
+  "state_libs": [
+    "redux",
+    "@reduxjs/toolkit",
+    "mobx",
+    "zustand",
+    "jotai",
+    "recoil",
+    "valtio"
+  ],
+  "import_patterns": [
+    [
+      "import\\s+\\*\\s+as\\s+\\w+\\s+from\\s+['\\\"]lodash['\\\"]",
+      "Avoid import * from lodash, use individual imports"
+    ],
+    [
+      "import\\s+moment\\s+from\\s+['\\\"]moment['\\\"]",
+      "Consider replacing moment with date-fns or dayjs"
+    ],
+    [
+      "import\\s+\\{\\s*\\w+(?:,\\s*\\w+){5,}\\s*\\}\\s+from\\s+['\\\"]react-icons",
+      "Import icons from specific icon sets (react-icons/fa)"
+    ]
+  ]
+}

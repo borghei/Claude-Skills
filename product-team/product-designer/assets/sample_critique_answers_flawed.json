@@ -1,0 +1,396 @@
+{
+  "heuristics": [
+    {
+      "id": "N1",
+      "name": "Visibility of system status",
+      "checkpoints": [
+        {
+          "check": "Loading states are visible for operations >1 second",
+          "pass": false,
+          "severity": 2,
+          "notes": "Report export spins with no progress for 20-40 s"
+        },
+        {
+          "check": "Progress indicators shown for multi-step processes",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Success/error feedback appears after user actions",
+          "pass": false,
+          "severity": 2,
+          "notes": "Saving an invoice gives no confirmation; users click Save twice"
+        },
+        {
+          "check": "Current location is clear in navigation",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "N2",
+      "name": "Match between system and real world",
+      "checkpoints": [
+        {
+          "check": "Labels use user language, not internal jargon",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Icons follow established conventions",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Information appears in natural and logical order",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Metaphors match real-world expectations",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "N3",
+      "name": "User control and freedom",
+      "checkpoints": [
+        {
+          "check": "Undo is available for destructive actions",
+          "pass": false,
+          "severity": 3,
+          "notes": "Deleting a client removes all their invoices with no undo"
+        },
+        {
+          "check": "Cancel/back options are clearly visible",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Users can exit flows without losing progress",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Confirmation dialogs for irreversible actions",
+          "pass": false,
+          "severity": 3,
+          "notes": "Void invoice has no confirmation step"
+        }
+      ]
+    },
+    {
+      "id": "N4",
+      "name": "Consistency and standards",
+      "checkpoints": [
+        {
+          "check": "UI elements behave the same way throughout",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Terminology is consistent across all pages",
+          "pass": false,
+          "severity": 1,
+          "notes": "'Customer', 'Client' and 'Account' all name the same record"
+        },
+        {
+          "check": "Visual patterns (spacing, colors) are consistent",
+          "pass": false,
+          "severity": 1,
+          "notes": "Three different button styles for the primary action"
+        },
+        {
+          "check": "Platform conventions are followed",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "N5",
+      "name": "Error prevention",
+      "checkpoints": [
+        {
+          "check": "Form validation occurs before submission",
+          "pass": false,
+          "severity": 2,
+          "notes": "Invoice form validates only on submit, then clears the date fields"
+        },
+        {
+          "check": "Constraints prevent invalid inputs",
+          "pass": false,
+          "severity": 2,
+          "notes": "Free-text currency field accepts 'usd', '$' and 'dollars'"
+        },
+        {
+          "check": "Destructive actions require confirmation",
+          "pass": false,
+          "severity": 3,
+          "notes": "Bulk delete runs immediately from the toolbar"
+        },
+        {
+          "check": "Default values reduce user effort and errors",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "N6",
+      "name": "Recognition rather than recall",
+      "checkpoints": [
+        {
+          "check": "Options are visible rather than requiring memorization",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Help and instructions are easily accessible",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Recently used items are easily accessible",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Search and filter options are visible",
+          "pass": false,
+          "severity": 1,
+          "notes": "Filters hidden behind an unlabeled icon"
+        }
+      ]
+    },
+    {
+      "id": "N7",
+      "name": "Flexibility and efficiency of use",
+      "checkpoints": [
+        {
+          "check": "Keyboard shortcuts available for frequent actions",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Customizable interface elements",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Shortcuts or recent items for repeat tasks",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Batch operations for power users",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "N8",
+      "name": "Aesthetic and minimalist design",
+      "checkpoints": [
+        {
+          "check": "Each screen focuses on one primary action",
+          "pass": false,
+          "severity": 1,
+          "notes": "Dashboard shows six competing call-to-action buttons"
+        },
+        {
+          "check": "Visual hierarchy guides attention to important elements",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Whitespace used effectively",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "No unnecessary decorative elements that distract",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "N9",
+      "name": "Help users recognize, diagnose, and recover from errors",
+      "checkpoints": [
+        {
+          "check": "Error messages are in plain language (no codes)",
+          "pass": false,
+          "severity": 2,
+          "notes": "Errors shown as 'ERR_422'"
+        },
+        {
+          "check": "Error messages indicate what went wrong specifically",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Error messages suggest how to fix the issue",
+          "pass": false,
+          "severity": 2,
+          "notes": "Failed payment message gives no next step"
+        },
+        {
+          "check": "Errors are visually prominent and close to the source",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "N10",
+      "name": "Help and documentation",
+      "checkpoints": [
+        {
+          "check": "Help is easily accessible from any screen",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Contextual help is provided where needed",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Onboarding guides new users through key features",
+          "pass": false,
+          "severity": 1,
+          "notes": "No onboarding after signup"
+        },
+        {
+          "check": "Documentation is searchable and task-focused",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "accessibility": [
+    {
+      "id": "A1",
+      "name": "Color contrast",
+      "checkpoints": [
+        {
+          "check": "Text meets 4.5:1 contrast ratio (WCAG AA)",
+          "pass": false,
+          "severity": 3,
+          "notes": "Muted grey body text measures 2.9:1 on white"
+        },
+        {
+          "check": "Large text meets 3:1 contrast ratio",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Color is not the only way to convey information",
+          "pass": false,
+          "severity": 2,
+          "notes": "Overdue status shown by red colour only"
+        },
+        {
+          "check": "Focus indicators have sufficient contrast",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "A2",
+      "name": "Keyboard navigation",
+      "checkpoints": [
+        {
+          "check": "All interactive elements reachable via Tab key",
+          "pass": false,
+          "severity": 2,
+          "notes": "Row action menu not reachable by keyboard"
+        },
+        {
+          "check": "Focus order follows logical reading order",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Focus ring is visible on all interactive elements",
+          "pass": false,
+          "severity": 3,
+          "notes": "Global CSS sets outline: none with no replacement"
+        },
+        {
+          "check": "No keyboard traps (user can always navigate away)",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "A3",
+      "name": "Screen reader support",
+      "checkpoints": [
+        {
+          "check": "All images have meaningful alt text",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Form inputs have associated labels",
+          "pass": false,
+          "severity": 2,
+          "notes": "Search and amount inputs use placeholders as labels"
+        },
+        {
+          "check": "ARIA attributes used correctly for dynamic content",
+          "pass": true,
+          "severity": null,
+          "notes": ""
+        },
+        {
+          "check": "Headings follow logical hierarchy (h1 > h2 > h3)",
+          "pass": false,
+          "severity": 1,
+          "notes": "Page jumps from h1 to h4"
+        }
+      ]
+    }
+  ]
+}

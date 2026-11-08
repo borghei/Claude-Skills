@@ -1,0 +1,30 @@
+import type {{ Meta, StoryObj }} from '{storybook_pkg}';
+import {{ {name} }} from './{name}';
+
+const meta: Meta<typeof {name}> = {{
+  title: 'Components/{name}',
+  component: {name},
+  tags: ['autodocs'],
+  argTypes: {{
+    className: {{
+      control: 'text',
+      description: 'Additional CSS classes',
+    }},
+  }},
+}};
+
+export default meta;
+type Story = StoryObj<typeof {name}>;
+
+export const Default: Story = {{
+  args: {{
+    children: 'Default content',
+  }},
+}};
+
+export const WithCustomClass: Story = {{
+  args: {{
+    className: 'bg-blue-100 p-4',
+    children: 'Styled content',
+  }},
+}};
