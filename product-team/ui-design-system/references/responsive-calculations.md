@@ -23,27 +23,29 @@ Reference for breakpoint math, fluid typography, and responsive layout patterns.
 │                    BREAKPOINT RANGES                        │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│  xs        sm         md         lg         xl        2xl   │
-│  │─────────│──────────│──────────│──────────│─────────│     │
-│  0      480px      640px      768px     1024px    1280px    │
-│                                                      1536px │
+│  base      xs        sm        md        lg        xl  2xl  │
+│  │─────────│─────────│─────────│─────────│─────────│───│    │
+│  0      480px     640px     768px    1024px    1280px 1536px│
 │                                                             │
-│  Mobile   Mobile+    Tablet    Laptop    Desktop   Large    │
+│  Phone   Phone+   Small tab  Tablet   Laptop   Desktop Wide │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ### Breakpoint Values
 
+These are the values `design_token_generator.py` emits (`tokens.breakpoints`); styles below
+`xs` are the unprefixed mobile base.
+
 | Name | Min Width | Target Devices |
 |------|-----------|----------------|
-| xs | 0 | Small phones |
-| sm | 480px | Large phones |
-| md | 640px | Small tablets |
-| lg | 768px | Tablets, small laptops |
-| xl | 1024px | Laptops, desktops |
-| 2xl | 1280px | Large desktops |
-| 3xl | 1536px | Extra large displays |
+| (base) | 0 | Small phones |
+| xs | 480px | Large phones |
+| sm | 640px | Small tablets |
+| md | 768px | Tablets |
+| lg | 1024px | Laptops |
+| xl | 1280px | Desktops |
+| 2xl | 1536px | Large displays |
 
 ### Mobile-First Media Queries
 
@@ -51,7 +53,7 @@ Reference for breakpoint math, fluid typography, and responsive layout patterns.
 /* Base styles (mobile) */
 .component {
   padding: var(--spacing-sm);
-  font-size: var(--fontSize-sm);
+  font-size: var(--typography-fontSize-sm);
 }
 
 /* Small devices and up */
@@ -65,7 +67,7 @@ Reference for breakpoint math, fluid typography, and responsive layout patterns.
 @media (min-width: 768px) {
   .component {
     padding: var(--spacing-lg);
-    font-size: var(--fontSize-base);
+    font-size: var(--typography-fontSize-base);
   }
 }
 

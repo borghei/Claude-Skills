@@ -1,0 +1,17 @@
+import {{ describe, expect, it }} from 'vitest';
+import {{ render, screen }} from '@testing-library/react';
+import {{ {name} }} from './{name}';
+
+describe('{name}', () => {{
+  it('renders correctly', () => {{
+    render(<{name}>Test content</{name}>);
+    expect(screen.getByText('Test content')).toBeInTheDocument();
+  }});
+
+  it('applies custom className', () => {{
+    render(<{name} className="custom-class">Content</{name}>);
+    expect(screen.getByText('Content')).toHaveClass('custom-class');
+  }});
+
+  // Add more tests here
+}});

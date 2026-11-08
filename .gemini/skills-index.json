@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "updated": "2026-11-08T17:20:06+00:00",
+  "updated": "2026-11-08T18:10:42+00:00",
   "total_skills": 403,
   "skills": [
     {
@@ -577,8 +577,14 @@
       "tools": [
         "ai_slop_detector.py",
         "color_contrast_checker.py",
+        "color_parse.py",
+        "contrast_pairs.py",
+        "css_declarations.py",
         "design_scorer.py",
-        "design_system_validator.py"
+        "design_system_validator.py",
+        "score_model.py",
+        "slop_content_checks.py",
+        "slop_visual_checks.py"
       ],
       "tags": [
         "design-audit",
@@ -1477,7 +1483,7 @@
     },
     {
       "name": "senior-frontend",
-      "description": "Frontend development for React, Next.js, TypeScript, and Tailwind CSS. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding projects, implementing accessibility, or reviewing frontend code.",
+      "description": "Scaffold Next.js 16 or React + Vite 8 apps, generate components with tests and stories, and flag heavy bundle dependencies. Use when starting a React project, adding components or hooks, or reviewing frontend code or performance.",
       "domain": "engineering",
       "path": "engineering/senior-frontend/SKILL.md",
       "tools": [
@@ -1487,10 +1493,12 @@
       ],
       "tags": [
         "react",
+        "nextjs",
         "typescript",
+        "tailwind",
         "accessibility",
         "performance",
-        "state-management"
+        "scaffolding"
       ]
     },
     {
@@ -5563,7 +5571,7 @@
     },
     {
       "name": "product-designer",
-      "description": "Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles.",
+      "description": "Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow before it ships.",
       "domain": "product-team",
       "path": "product-team/product-designer/SKILL.md",
       "tools": [
@@ -5572,12 +5580,12 @@
         "usability_scorer.py"
       ],
       "tags": [
-        "design",
         "ux",
-        "ui",
-        "figma",
-        "prototyping",
-        "design-systems"
+        "journey-mapping",
+        "usability-testing",
+        "sus",
+        "heuristic-evaluation",
+        "design-critique"
       ]
     },
     {
@@ -5673,17 +5681,21 @@
     },
     {
       "name": "ui-design-system",
-      "description": "UI design system toolkit covering design tokens, component documentation, responsive calculations, and developer handoff. Use for creating design systems, maintaining visual consistency, or facilitating design-dev handoff.",
+      "description": "Generates a design-token system from a brand colour, checks its contrast, and specs component variants. Use when turning a chosen colour into tokens, exporting CSS, SCSS or JSON, or extending a token set for components.",
       "domain": "product-team",
       "path": "product-team/ui-design-system/SKILL.md",
       "tools": [
-        "design_token_generator.py"
+        "design_token_generator.py",
+        "token_contrast_checker.py"
       ],
       "tags": [
         "design-system",
+        "design-tokens",
         "components",
-        "tokens",
-        "ui-patterns"
+        "wcag",
+        "css-variables",
+        "scss",
+        "handoff"
       ]
     },
     {

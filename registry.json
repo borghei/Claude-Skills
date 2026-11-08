@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "generated_at": "2026-11-08T17:20:06+00:00",
+  "generated_at": "2026-11-08T18:10:42+00:00",
   "repository": "claude-skills",
   "skill_count": 403,
   "domain_count": 21,
@@ -1419,13 +1419,15 @@
     {
       "name": "senior-frontend",
       "domain": "engineering",
-      "description": "Frontend development for React, Next.js, TypeScript, and Tailwind CSS. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding projects, implementing accessibility, or reviewing frontend code.",
+      "description": "Scaffold Next.js 16 or React + Vite 8 apps, generate components with tests and stories, and flag heavy bundle dependencies. Use when starting a React project, adding components or hooks, or reviewing frontend code or performance.",
       "tags": [
         "react",
+        "nextjs",
         "typescript",
+        "tailwind",
         "accessibility",
         "performance",
-        "state-management"
+        "scaffolding"
       ],
       "version": "1.1.0",
       "updated": "2026-11-08",
@@ -5475,20 +5477,20 @@
     {
       "name": "product-designer",
       "domain": "product-team",
-      "description": "Product design across UI/UX, design systems, prototyping, and user research. Use when creating user journey maps, building wireframes, defining design tokens and component systems, planning usability tests, or establishing design principles.",
+      "description": "Turns user research into design decisions: journey maps with gap checks, SUS and task scoring, and heuristic design critique. Use when mapping a journey, scoring a usability test, or critiquing a flow before it ships.",
       "tags": [
-        "design",
         "ux",
-        "ui",
-        "figma",
-        "prototyping",
-        "design-systems"
+        "journey-mapping",
+        "usability-testing",
+        "sus",
+        "heuristic-evaluation",
+        "design-critique"
       ],
       "version": "1.0.0",
-      "updated": "2026-03-31",
+      "updated": "2026-11-08",
       "path": "product-team/product-designer",
       "has_scripts": true,
-      "has_references": false
+      "has_references": true
     },
     {
       "name": "product-manager-toolkit",
@@ -5581,15 +5583,18 @@
     {
       "name": "ui-design-system",
       "domain": "product-team",
-      "description": "UI design system toolkit covering design tokens, component documentation, responsive calculations, and developer handoff. Use for creating design systems, maintaining visual consistency, or facilitating design-dev handoff.",
+      "description": "Generates a design-token system from a brand colour, checks its contrast, and specs component variants. Use when turning a chosen colour into tokens, exporting CSS, SCSS or JSON, or extending a token set for components.",
       "tags": [
         "design-system",
+        "design-tokens",
         "components",
-        "tokens",
-        "ui-patterns"
+        "wcag",
+        "css-variables",
+        "scss",
+        "handoff"
       ],
-      "version": "1.0.0",
-      "updated": "2026-03-31",
+      "version": "1.1.0",
+      "updated": "2026-11-08",
       "path": "product-team/ui-design-system",
       "has_scripts": true,
       "has_references": true

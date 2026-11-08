@@ -161,7 +161,10 @@ Not every simple design is slop. Genuine minimalism and AI slop look similar but
 | **Components** | Custom or carefully selected for the use case | Generic components assembled without modification |
 | **Empty space** | Creates rhythm and focus | Fills space because there is nothing specific to show |
 
-## Remediation Strategies
+## Sizing the Remediation
+
+Use these tiers to size the effort in the audit report. The changes themselves are made with
+`engineering/interface-refinement`; SKILL.md maps each finding type to the command that owns it.
 
 ### Quick Wins (1-2 hours)
 1. Replace generic CTAs with specific action text

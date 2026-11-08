@@ -3,174 +3,62 @@
 User Journey Mapper
 
 Creates structured user journey maps from stage definitions.
-Identifies pain points, emotional curves, and opportunity areas.
+Identifies pain points, emotional curves, and opportunity areas, and flags
+low points in the journey that have no opportunity recorded against them.
 
+Pre-built templates live in references/journey-templates.json.
 Uses ONLY Python standard library.
 
 Usage:
     python journey_mapper.py --template saas
     python journey_mapper.py --stages stages.json
-    python journey_mapper.py --template ecommerce --json
+    python journey_mapper.py --template ecommerce --format json
+
+Exit codes:
+    0  journey mapped, every low point (emotion <= 2) has at least one opportunity
+    1  a low point has no opportunity recorded (finding 'unaddressed-low-point')
+    2  bad input (missing file, invalid JSON, no stages, emotion score outside 1-5)
 """
 
 import argparse
 import json
+import os
 import sys
 from typing import Dict, List
 
+DATA_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "references", "journey-templates.json")
+LOW_POINT = 2
 
-# Pre-built journey templates
-JOURNEY_TEMPLATES = {
-    "saas": {
-        "name": "SaaS Product Journey",
-        "persona": "Product Team User",
-        "goal": "Successfully adopt and get value from the product",
-        "stages": [
-            {
-                "name": "Awareness",
-                "actions": ["Searches for solution online", "Reads blog post or review", "Sees ad or recommendation"],
-                "touchpoints": ["Google Search", "Blog", "Social Media", "Peer referral"],
-                "emotions": {"score": 3, "label": "Curious but skeptical"},
-                "pain_points": ["Too many options", "Hard to tell products apart", "Unclear pricing"],
-                "opportunities": ["SEO-optimized comparison content", "Clear value proposition on landing page"],
-            },
-            {
-                "name": "Evaluation",
-                "actions": ["Visits website", "Reads features page", "Compares with competitors", "Watches demo"],
-                "touchpoints": ["Website", "Demo video", "Pricing page", "Competitor sites"],
-                "emotions": {"score": 4, "label": "Interested, comparing options"},
-                "pain_points": ["Complex pricing tiers", "No free trial visible", "Feature comparison is hard"],
-                "opportunities": ["Interactive product tour", "Side-by-side comparison tool", "Social proof placement"],
-            },
-            {
-                "name": "Signup",
-                "actions": ["Creates account", "Enters payment info", "Verifies email"],
-                "touchpoints": ["Registration form", "Email", "Payment processor"],
-                "emotions": {"score": 3, "label": "Cautious, wants quick setup"},
-                "pain_points": ["Too many form fields", "Unclear what happens after signup", "Forced credit card"],
-                "opportunities": ["Single-field signup", "Show value before requiring payment", "Progress indicator"],
-            },
-            {
-                "name": "Onboarding",
-                "actions": ["Completes setup wizard", "Imports data", "Invites team members", "Completes first task"],
-                "touchpoints": ["Setup wizard", "Import tool", "Email invites", "In-app tutorial"],
-                "emotions": {"score": 2, "label": "Overwhelmed, needs guidance"},
-                "pain_points": ["Too many steps", "Data import fails", "No clear next step", "Empty state is confusing"],
-                "opportunities": ["Guided quick-start (<5 min to value)", "Pre-populated sample data", "Contextual tips"],
-            },
-            {
-                "name": "Adoption",
-                "actions": ["Uses core features daily", "Discovers advanced features", "Customizes workflow"],
-                "touchpoints": ["Product UI", "Help center", "In-app notifications", "Email tips"],
-                "emotions": {"score": 4, "label": "Gaining confidence, seeing value"},
-                "pain_points": ["Hard to discover features", "Missing integrations", "Performance issues"],
-                "opportunities": ["Feature discovery prompts", "Integration marketplace", "Workflow templates"],
-            },
-            {
-                "name": "Advocacy",
-                "actions": ["Recommends to peers", "Writes review", "Shares on social", "Expands usage"],
-                "touchpoints": ["Review sites", "Social media", "Word of mouth", "Referral program"],
-                "emotions": {"score": 5, "label": "Satisfied, wants to share"},
-                "pain_points": ["No easy way to refer", "No recognition for loyalty", "Feature requests ignored"],
-                "opportunities": ["Referral program with rewards", "Customer advisory board", "Public feature roadmap"],
-            },
-        ],
-    },
-    "ecommerce": {
-        "name": "E-commerce Purchase Journey",
-        "persona": "Online Shopper",
-        "goal": "Find and purchase the right product at a good price",
-        "stages": [
-            {
-                "name": "Discovery",
-                "actions": ["Searches for product", "Browses categories", "Sees recommendation"],
-                "touchpoints": ["Search engine", "Social media", "Email newsletter", "Marketplace"],
-                "emotions": {"score": 3, "label": "Browsing, open to options"},
-                "pain_points": ["Search returns irrelevant results", "Category structure is confusing"],
-                "opportunities": ["Personalized recommendations", "Smart search with filters"],
-            },
-            {
-                "name": "Consideration",
-                "actions": ["Views product details", "Reads reviews", "Compares options", "Checks sizing/specs"],
-                "touchpoints": ["Product page", "Reviews section", "Size guide", "Comparison tool"],
-                "emotions": {"score": 4, "label": "Interested, needs reassurance"},
-                "pain_points": ["Insufficient product images", "Fake or unhelpful reviews", "No size guidance"],
-                "opportunities": ["360-degree product views", "Verified purchase reviews", "AR try-on"],
-            },
-            {
-                "name": "Purchase",
-                "actions": ["Adds to cart", "Applies coupon", "Enters shipping info", "Completes payment"],
-                "touchpoints": ["Cart", "Checkout flow", "Payment processor", "Order confirmation"],
-                "emotions": {"score": 3, "label": "Anxious about commitment"},
-                "pain_points": ["Unexpected shipping costs", "Too many checkout steps", "Limited payment options"],
-                "opportunities": ["One-page checkout", "Free shipping threshold", "Guest checkout option"],
-            },
-            {
-                "name": "Delivery",
-                "actions": ["Tracks order", "Receives package", "Inspects product"],
-                "touchpoints": ["Tracking page", "Email updates", "SMS notifications", "Package"],
-                "emotions": {"score": 4, "label": "Excited, anticipating"},
-                "pain_points": ["No tracking updates", "Delayed delivery", "Damaged packaging"],
-                "opportunities": ["Real-time delivery tracking", "Proactive delay notifications"],
-            },
-            {
-                "name": "Post-Purchase",
-                "actions": ["Uses product", "Writes review", "Contacts support if needed", "Considers reorder"],
-                "touchpoints": ["Product", "Review prompt email", "Support chat", "Reorder email"],
-                "emotions": {"score": 4, "label": "Satisfied or seeking resolution"},
-                "pain_points": ["Product doesn't match description", "Difficult return process"],
-                "opportunities": ["Easy self-service returns", "Post-purchase care emails", "Loyalty program"],
-            },
-        ],
-    },
-    "mobile_app": {
-        "name": "Mobile App Journey",
-        "persona": "Mobile-First User",
-        "goal": "Download, learn, and integrate app into daily routine",
-        "stages": [
-            {
-                "name": "Discovery",
-                "actions": ["Finds app in store", "Reads description and reviews", "Views screenshots"],
-                "touchpoints": ["App Store", "Google Play", "Social media", "Word of mouth"],
-                "emotions": {"score": 3, "label": "Curious, evaluating quickly"},
-                "pain_points": ["Too many similar apps", "Misleading screenshots", "Bad reviews"],
-                "opportunities": ["App Store optimization", "Video preview", "Respond to reviews"],
-            },
-            {
-                "name": "Install & First Open",
-                "actions": ["Downloads app", "Opens for first time", "Grants permissions", "Views onboarding"],
-                "touchpoints": ["App Store", "System permissions", "Onboarding screens"],
-                "emotions": {"score": 3, "label": "Impatient, wants quick value"},
-                "pain_points": ["Large download size", "Too many permission requests", "Long onboarding"],
-                "opportunities": ["<50MB download", "Progressive permissions", "3-screen onboarding max"],
-            },
-            {
-                "name": "First Value",
-                "actions": ["Completes first core action", "Sees result", "Understands benefit"],
-                "touchpoints": ["Core feature", "Success state", "Tutorial overlay"],
-                "emotions": {"score": 4, "label": "Pleasantly surprised or frustrated"},
-                "pain_points": ["Can't find main feature", "First action fails", "No clear path"],
-                "opportunities": ["Guided first action", "Instant gratification moment", "Sample content"],
-            },
-            {
-                "name": "Habit Formation",
-                "actions": ["Returns within 24 hours", "Uses 3+ times per week", "Enables notifications"],
-                "touchpoints": ["Push notifications", "App icon", "Widgets", "Email digest"],
-                "emotions": {"score": 4, "label": "Building routine"},
-                "pain_points": ["Annoying notifications", "App is slow", "Battery/data concerns"],
-                "opportunities": ["Smart notification timing", "Offline mode", "Streaks or progress tracking"],
-            },
-            {
-                "name": "Power Usage",
-                "actions": ["Discovers advanced features", "Customizes settings", "Shares with others"],
-                "touchpoints": ["Settings", "Share flow", "Advanced features", "In-app community"],
-                "emotions": {"score": 5, "label": "Invested, advocates"},
-                "pain_points": ["Feature bloat", "Settings are buried", "No social features"],
-                "opportunities": ["Progressive disclosure", "Share rewards", "Community features"],
-            },
-        ],
-    },
-}
+with open(DATA_PATH, "r", encoding="utf-8") as _f:
+    JOURNEY_TEMPLATES = json.load(_f)
+
+
+class InputError(Exception):
+    """Raised for a journey file the mapper cannot read; reported with exit code 2."""
+
+
+def validate_journey(journey: Dict) -> None:
+    """Check the fields the map and metrics depend on."""
+    if not isinstance(journey, dict):
+        raise InputError("journey file must be a JSON object with 'name', 'persona', 'goal' and 'stages'")
+    for key in ("name", "persona", "goal"):
+        if not isinstance(journey.get(key), str) or not journey[key].strip():
+            raise InputError(f"journey needs a non-empty '{key}'")
+    stages = journey.get("stages")
+    if not isinstance(stages, list) or not stages:
+        raise InputError("journey needs a non-empty 'stages' list")
+    for i, stage in enumerate(stages, 1):
+        if not isinstance(stage, dict) or not stage.get("name"):
+            raise InputError(f"stage {i} needs a 'name'")
+        score = (stage.get("emotions") or {}).get("score") if isinstance(stage.get("emotions"), dict) else None
+        if isinstance(score, bool) or not isinstance(score, int) or not 1 <= score <= 5:
+            raise InputError(f"stage '{stage['name']}': emotions.score must be an integer 1-5, got {score!r}")
+        for key in ("actions", "touchpoints", "pain_points", "opportunities"):
+            if not isinstance(stage.get(key, []), list):
+                raise InputError(f"stage '{stage['name']}': '{key}' must be a list")
+        stage.setdefault("actions", [])
+        stage.setdefault("touchpoints", [])
+        stage["emotions"].setdefault("label", "")
 
 
 def calculate_journey_metrics(stages: List[Dict]) -> Dict:
@@ -190,13 +78,11 @@ def calculate_journey_metrics(stages: List[Dict]) -> Dict:
 
     drops.sort(key=lambda x: -x["drop"])
 
-    # Pain point severity
     all_pain_points = []
     for stage in stages:
         for pp in stage.get("pain_points", []):
             all_pain_points.append({"stage": stage["name"], "pain_point": pp})
 
-    # Opportunity count
     total_opportunities = sum(len(s.get("opportunities", [])) for s in stages)
 
     return {
@@ -211,6 +97,24 @@ def calculate_journey_metrics(stages: List[Dict]) -> Dict:
     }
 
 
+def find_gaps(journey: Dict, custom: bool) -> List[Dict]:
+    """Findings: low points with no opportunity (fail) or no recorded pain point (warn)."""
+    findings = []
+    for stage in journey["stages"]:
+        if stage["emotions"]["score"] > LOW_POINT:
+            continue
+        if not stage.get("opportunities"):
+            findings.append({"level": "fail", "rule": "unaddressed-low-point", "stage": stage["name"],
+                             "message": "emotion is at or below 2 and no opportunity is recorded"})
+        if not stage.get("pain_points"):
+            findings.append({"level": "warn", "rule": "unexplained-low-point", "stage": stage["name"],
+                             "message": "emotion is at or below 2 but no pain point says why"})
+    if custom and not journey.get("evidence"):
+        findings.append({"level": "warn", "rule": "no-evidence", "stage": None,
+                         "message": "no 'evidence' field: name the interviews, tickets or analytics behind this map"})
+    return findings
+
+
 def format_human_output(journey: Dict, metrics: Dict) -> str:
     """Format journey map as human-readable text."""
     lines = []
@@ -219,39 +123,28 @@ def format_human_output(journey: Dict, metrics: Dict) -> str:
     lines.append("=" * 60)
     lines.append(f"\n  Persona: {journey['persona']}")
     lines.append(f"  Goal:    {journey['goal']}")
+    if journey.get("evidence"):
+        lines.append(f"  Evidence: {journey['evidence']}")
 
-    # Emotion curve visualization
-    lines.append(f"\n  EMOTION CURVE")
+    lines.append("\n  EMOTION CURVE")
     lines.append("  " + "-" * 50)
+    width = max([15] + [len(s["name"]) for s in journey["stages"]])  # long names keep the bars aligned
     for stage in journey["stages"]:
         score = stage["emotions"]["score"]
         bar = "*" * (score * 6)
         label = stage["emotions"]["label"]
-        lines.append(f"  {stage['name']:<15} {'|' + bar:<32} {score}/5 - {label}")
+        lines.append(f"  {stage['name']:<{width}} {'|' + bar:<32} {score}/5 - {label}")
 
-    # Stage details
     for stage in journey["stages"]:
         lines.append(f"\n  STAGE: {stage['name'].upper()}")
         lines.append("  " + "-" * 40)
+        for title, key, mark in (("Actions", "actions", "-"), ("Touchpoints", "touchpoints", "-"),
+                                 ("Pain Points", "pain_points", "!"), ("Opportunities", "opportunities", ">")):
+            lines.append(f"  {title}:")
+            for item in stage.get(key, []):
+                lines.append(f"    {mark} {item}")
 
-        lines.append(f"  Actions:")
-        for action in stage["actions"]:
-            lines.append(f"    - {action}")
-
-        lines.append(f"  Touchpoints:")
-        for tp in stage["touchpoints"]:
-            lines.append(f"    - {tp}")
-
-        lines.append(f"  Pain Points:")
-        for pp in stage.get("pain_points", []):
-            lines.append(f"    ! {pp}")
-
-        lines.append(f"  Opportunities:")
-        for opp in stage.get("opportunities", []):
-            lines.append(f"    > {opp}")
-
-    # Metrics summary
-    lines.append(f"\n  JOURNEY HEALTH METRICS")
+    lines.append("\n  JOURNEY HEALTH METRICS")
     lines.append("  " + "-" * 50)
     lines.append(f"  Avg emotion score:   {metrics['avg_emotion_score']}/5")
     lines.append(f"  Lowest point:        {metrics['lowest_emotion_stage']}")
@@ -260,10 +153,21 @@ def format_human_output(journey: Dict, metrics: Dict) -> str:
     lines.append(f"  Total opportunities: {metrics['total_opportunities']}")
 
     if metrics["biggest_drops"]:
-        lines.append(f"\n  BIGGEST EMOTION DROPS (prioritize these transitions)")
+        lines.append("\n  BIGGEST EMOTION DROPS (prioritize these transitions)")
         for drop in metrics["biggest_drops"]:
             lines.append(f"    {drop['from_stage']} -> {drop['to_stage']} (dropped {drop['drop']} points)")
 
+    return "\n".join(lines)
+
+
+def format_findings(findings: List[Dict]) -> str:
+    """Text block for gaps; empty when the map has none."""
+    if not findings:
+        return ""
+    lines = ["\n  FINDINGS"]
+    for f in findings:
+        where = f" [{f['stage']}]" if f["stage"] else ""
+        lines.append(f"    {f['level'].upper():<4} {f['rule']}{where}: {f['message']}")
     return "\n".join(lines)
 
 
@@ -273,45 +177,47 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Use a pre-built template
   python journey_mapper.py --template saas
-  python journey_mapper.py --template ecommerce
-  python journey_mapper.py --template mobile_app
-
-  # Load custom stages from JSON
+  python journey_mapper.py --template mobile_app --format json
   python journey_mapper.py --stages my_journey.json
 
-  # JSON output
-  python journey_mapper.py --template saas --json
-
 Available templates: saas, ecommerce, mobile_app
+Exit codes: 0 mapped, 1 a low point (emotion <= 2) has no opportunity, 2 bad input
         """,
     )
 
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--template", "-t", choices=list(JOURNEY_TEMPLATES.keys()), help="Use pre-built journey template")
     group.add_argument("--stages", "-s", help="Path to custom stages JSON file")
-    parser.add_argument("--json", action="store_true", help="Output as JSON")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="Output format (default: text)")
+    parser.add_argument("--json", action="store_true", help="Same as --format json")
 
     args = parser.parse_args()
+    as_json = args.json or args.format == "json"
 
-    if args.template:
-        journey = JOURNEY_TEMPLATES[args.template]
-    else:
-        with open(args.stages, "r") as f:
-            journey = json.load(f)
+    try:
+        if args.template:
+            journey = JOURNEY_TEMPLATES[args.template]
+        else:
+            with open(args.stages, "r", encoding="utf-8") as f:
+                journey = json.load(f)
+        validate_journey(journey)
+    except (OSError, json.JSONDecodeError, InputError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
 
     metrics = calculate_journey_metrics(journey["stages"])
+    findings = find_gaps(journey, custom=bool(args.stages))
 
-    if args.json:
-        output = {
-            "journey": journey,
-            "metrics": metrics,
-        }
+    if as_json:
+        output = {"journey": journey, "metrics": metrics}
+        if findings:
+            output["findings"] = findings
         print(json.dumps(output, indent=2))
     else:
-        print(format_human_output(journey, metrics))
+        print(format_human_output(journey, metrics) + format_findings(findings))
+    return 1 if any(f["level"] == "fail" for f in findings) else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

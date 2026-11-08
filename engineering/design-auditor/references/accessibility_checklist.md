@@ -1,8 +1,10 @@
-# WCAG 2.1 Accessibility Checklist
+# WCAG 2.2 Accessibility Checklist
 
-Complete checklist covering Level A, Level AA, and Level AAA success criteria. Organized by POUR principles (Perceivable, Operable, Understandable, Robust) with testing methodology and common fixes.
+Checklist of WCAG 2.2 success criteria at Level A, AA and AAA, organized by POUR principles (Perceivable, Operable, Understandable, Robust) with testing methodology and common fixes. WCAG 2.2 (W3C Recommendation, October 2023) has 86 criteria: 31 A, 24 AA, 31 AAA. It adds nine criteria to WCAG 2.1 (marked **2.2**) and makes 4.1.1 Parsing obsolete.
 
-## Level A (Minimum Compliance — 29 Criteria)
+Only 1.4.3 and 1.4.11 are measured by this skill's tools (`color_contrast_checker.py`). Every other row is a by-hand check: keyboard, pointer and screen-reader passes in a real browser, recorded as findings in the `accessibility` category of the scorer input.
+
+## Level A (Minimum Compliance)
 
 Level A criteria represent the absolute minimum for accessibility. Failure means some users cannot access content at all.
 
@@ -48,15 +50,17 @@ Level A criteria represent the absolute minimum for accessibility. Failure means
 | 3.2.2 | On Input | No unexpected changes when user changes input | Form submission on select change without warning |
 | 3.3.1 | Error Identification | Errors are identified and described in text | Form errors shown only by color change |
 | 3.3.2 | Labels or Instructions | Input fields have visible labels and necessary instructions | Placeholder-only labels, missing format hints |
+| 3.2.6 | Consistent Help (**2.2**) | Help mechanisms (contact, chat, FAQ link) appear in the same relative order on every page that has them | Support link in the header on one page, buried in the footer on another |
+| 3.3.7 | Redundant Entry (**2.2**) | Information already entered in the same process is auto-filled or selectable, not asked for again | Checkout asks for the shipping address again as the billing address with no "same as" option |
 
 ### Robust
 
 | # | Criterion | Check | Common Violation |
 |---|-----------|-------|------------------|
-| 4.1.1 | Parsing | Valid HTML (deprecated in WCAG 2.2 but still good practice) | Duplicate IDs, unclosed tags, malformed ARIA |
+| 4.1.1 | Parsing (**obsolete in 2.2**) | Removed from WCAG 2.2 and always satisfied for 2.0/2.1 conformance; do not report failures against it. Duplicate IDs that break ARIA references fail 4.1.2 or 1.3.1 instead | n/a |
 | 4.1.2 | Name, Role, Value | Custom UI components have proper ARIA roles and states | Custom dropdown without `role="listbox"`, toggle without `aria-checked` |
 
-## Level AA (Standard Compliance — 20 Criteria)
+## Level AA (Standard Compliance)
 
 Level AA is the standard target for most web applications and is required by many regulations (ADA, EN 301 549, Section 508).
 
@@ -83,6 +87,9 @@ Level AA is the standard target for most web applications and is required by man
 | 2.4.5 | Multiple Ways | Multiple ways to locate pages (search, sitemap, navigation) | Single navigation path only |
 | 2.4.6 | Headings and Labels | Headings and labels are descriptive | Generic headings like "Section 1", "Info" |
 | 2.4.7 | Focus Visible | Keyboard focus indicator is visible | `outline: none` without replacement focus style |
+| 2.4.11 | Focus Not Obscured (Minimum) (**2.2**) | A focused element is not entirely hidden by author content (sticky headers, cookie banners, chat widgets) | Tabbing behind a sticky footer or cookie banner so focus disappears |
+| 2.5.7 | Dragging Movements (**2.2**) | Anything done by dragging can also be done with single-pointer actions | Sortable lists, sliders or kanban boards with drag as the only method |
+| 2.5.8 | Target Size (Minimum) (**2.2**) | Pointer targets are at least 24x24 CSS px, or spaced so a 24px circle on each does not overlap another (inline links and essential sizes excepted) | 16px icon buttons packed edge to edge in a toolbar |
 
 ### Understandable
 
@@ -93,6 +100,7 @@ Level AA is the standard target for most web applications and is required by man
 | 3.2.4 | Consistent Identification | Same function has same label across pages | "Search" on one page, "Find" on another |
 | 3.3.3 | Error Suggestion | Error messages suggest corrections when possible | "Invalid input" without explaining valid format |
 | 3.3.4 | Error Prevention (Legal/Financial) | Reversible, verified, or confirmed submissions for important data | Financial transactions without confirmation step |
+| 3.3.8 | Accessible Authentication (Minimum) (**2.2**) | Login needs no cognitive function test (remembering, transcribing, puzzles) unless an alternative, a helper (paste, password manager) or object/own-content recognition is offered | Password field that blocks paste; transcribe-the-characters CAPTCHA with no alternative |
 
 ### Robust
 
@@ -100,7 +108,7 @@ Level AA is the standard target for most web applications and is required by man
 |---|-----------|-------|------------------|
 | 4.1.3 | Status Messages | Status updates announced without focus change | Toast notifications not announced by screen readers |
 
-## Level AAA (Enhanced — 28 Criteria)
+## Level AAA (Enhanced)
 
 Level AAA represents the highest level of accessibility. Full AAA compliance is not required for most sites but individual criteria may be targeted.
 
@@ -132,7 +140,9 @@ Level AAA represents the highest level of accessibility. Full AAA compliance is 
 | 2.4.8 | Location | Current location within site is indicated |
 | 2.4.9 | Link Purpose (Link Only) | Link purpose clear from link text alone |
 | 2.4.10 | Section Headings | Content organized with section headings |
-| 2.5.5 | Target Size | Touch/click targets are at least 44x44px |
+| 2.4.12 | Focus Not Obscured (Enhanced) (**2.2**) | No part of the focused element is hidden by author content |
+| 2.4.13 | Focus Appearance (**2.2**) | Focus indicator is at least as large as a 2 CSS px perimeter of the component and has 3:1 contrast between focused and unfocused states |
+| 2.5.5 | Target Size (Enhanced) | Touch/click targets are at least 44x44 CSS px (2.5.8 sets the 24px AA minimum) |
 | 2.5.6 | Concurrent Input | No restriction on input modality |
 
 ### Understandable
@@ -146,17 +156,20 @@ Level AAA represents the highest level of accessibility. Full AAA compliance is 
 | 3.2.5 | Change on Request | Changes of context initiated only by user request |
 | 3.3.5 | Help | Context-sensitive help available |
 | 3.3.6 | Error Prevention (All) | Submissions are reversible, verified, or confirmed |
+| 3.3.9 | Accessible Authentication (Enhanced) (**2.2**) | As 3.3.8, without the object and own-content recognition exceptions |
 
 ## Testing Methodology
 
 ### Automated Testing (Catches ~30% of Issues)
 - Run axe-core, Lighthouse, or WAVE on every page
-- Validate HTML with W3C validator
+- Validate HTML with W3C validator (good hygiene, but not a WCAG 2.2 criterion)
 - Check color contrast with automated tools (use `color_contrast_checker.py`)
 - Scan for missing alt text, form labels, and ARIA attributes
 
 ### Manual Testing (Catches ~50% of Issues)
-- **Keyboard navigation:** Tab through entire page, verify focus order and visibility
+- **Keyboard navigation:** Tab through entire page, verify focus order and visibility, and that sticky headers, banners and chat widgets never hide the focused element (2.4.11)
+- **Pointer:** measure small targets against 24x24 CSS px (2.5.8); confirm every drag interaction has a click or tap alternative (2.5.7)
+- **Forms and login:** no re-asking for data already given (3.3.7); password fields accept paste and password managers (3.3.8)
 - **Zoom testing:** Zoom to 200% and verify content reflows without horizontal scroll
 - **Text spacing:** Apply WCAG text spacing overrides and verify no content is clipped
 - **Color independence:** View in grayscale to verify information not conveyed by color alone

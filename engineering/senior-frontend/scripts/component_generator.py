@@ -8,135 +8,43 @@ and optional test files following best practices.
 Usage:
     python component_generator.py Button --dir src/components/ui
     python component_generator.py ProductCard --type client --with-test
-    python component_generator.py UserProfile --type server --with-story
+    python component_generator.py UserProfile --type server --with-story --format json
+
+Templates live in assets/templates/component/*.tmpl.
+Exit codes: 0 ok, 2 bad input (unknown type, unwritable directory, missing templates).
 """
 
 import argparse
-import os
+import json
 import sys
 from pathlib import Path
-from datetime import datetime
 
 
-# Component templates
-TEMPLATES = {
-    "client": '''\'use client\';
-
-import {{ useState }} from 'react';
-import {{ cn }} from '@/lib/utils';
-
-interface {name}Props {{
-  className?: string;
-  children?: React.ReactNode;
-}}
-
-export function {name}({{ className, children }}: {name}Props) {{
-  return (
-    <div className={{cn('', className)}}>
-      {{children}}
-    </div>
-  );
-}}
-''',
-
-    "server": '''import {{ cn }} from '@/lib/utils';
-
-interface {name}Props {{
-  className?: string;
-  children?: React.ReactNode;
-}}
-
-export async function {name}({{ className, children }}: {name}Props) {{
-  return (
-    <div className={{cn('', className)}}>
-      {{children}}
-    </div>
-  );
-}}
-''',
-
-    "hook": '''import {{ useState, useEffect, useCallback }} from 'react';
-
-interface Use{name}Options {{
-  // Add options here
-}}
-
-interface Use{name}Return {{
-  // Add return type here
-  isLoading: boolean;
-  error: Error | null;
-}}
-
-export function use{name}(options: Use{name}Options = {{}}): Use{name}Return {{
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {{
-    // Effect logic here
-  }}, []);
-
-  return {{
-    isLoading,
-    error,
-  }};
-}}
-''',
-
-    "test": '''import {{ render, screen }} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import {{ {name} }} from './{name}';
-
-describe('{name}', () => {{
-  it('renders correctly', () => {{
-    render(<{name}>Test content</{name}>);
-    expect(screen.getByText('Test content')).toBeInTheDocument();
-  }});
-
-  it('applies custom className', () => {{
-    render(<{name} className="custom-class">Content</{name}>);
-    expect(screen.getByText('Content').parentElement).toHaveClass('custom-class');
-  }});
-
-  // Add more tests here
-}});
-''',
-
-    "story": '''import type {{ Meta, StoryObj }} from '@storybook/react';
-import {{ {name} }} from './{name}';
-
-const meta: Meta<typeof {name}> = {{
-  title: 'Components/{name}',
-  component: {name},
-  tags: ['autodocs'],
-  argTypes: {{
-    className: {{
-      control: 'text',
-      description: 'Additional CSS classes',
-    }},
-  }},
-}};
-
-export default meta;
-type Story = StoryObj<typeof {name}>;
-
-export const Default: Story = {{
-  args: {{
-    children: 'Default content',
-  }},
-}};
-
-export const WithCustomClass: Story = {{
-  args: {{
-    className: 'bg-blue-100 p-4',
-    children: 'Styled content',
-  }},
-}};
-''',
-
-    "index": '''export {{ {name} }} from './{name}';
-export type {{ {name}Props }} from './{name}';
-''',
+TEMPLATE_DIR = Path(__file__).resolve().parent.parent / "assets" / "templates" / "component"
+# Storybook 10 types come from the framework package the scaffolder installs
+STORYBOOK_PACKAGES = {"next": "@storybook/nextjs-vite", "vite": "@storybook/react-vite"}
+TEMPLATE_FILES = {
+    "client": "client.tsx.tmpl",
+    "server": "server.tsx.tmpl",
+    "hook": "hook.ts.tmpl",
+    "test": "test.tsx.tmpl",
+    "story": "story.tsx.tmpl",
+    "index": "index.ts.tmpl",
+    "index_hook": "index_hook.ts.tmpl",
 }
+
+
+def load_templates(template_dir: Path = TEMPLATE_DIR) -> dict:
+    """Load the str.format templates ({name} placeholder, doubled literal braces)."""
+    return {key: (template_dir / fname).read_text(encoding="utf-8")
+            for key, fname in TEMPLATE_FILES.items()}
+
+
+try:
+    TEMPLATES = load_templates()
+except OSError as _exc:
+    print(f"Error: cannot load component templates from {TEMPLATE_DIR}: {_exc}", file=sys.stderr)
+    sys.exit(2)
 
 
 def to_pascal_case(name: str) -> str:
@@ -157,6 +65,14 @@ def to_kebab_case(name: str) -> str:
     return ''.join(result)
 
 
+def component_name(name: str, component_type: str) -> str:
+    """PascalCase name; for hooks a leading 'use' is dropped so useThing -> Thing -> useThing."""
+    pascal = to_pascal_case(name)
+    if component_type == "hook" and len(pascal) > 3 and pascal.startswith("Use") and pascal[3].isupper():
+        pascal = pascal[3:]
+    return pascal
+
+
 def generate_component(
     name: str,
     output_dir: Path,
@@ -165,54 +81,37 @@ def generate_component(
     with_story: bool = False,
     with_index: bool = True,
     flat: bool = False,
+    framework: str = "next",
+    force: bool = False,
 ) -> dict:
-    """Generate component files."""
-    pascal_name = to_pascal_case(name)
-    kebab_name = to_kebab_case(pascal_name)
+    """Generate component files; refuses to overwrite existing files unless force."""
+    pascal_name = component_name(name, component_type)
+    component_dir = output_dir if flat else output_dir / pascal_name
+    is_hook = component_type == "hook"
 
-    # Determine output path
-    if flat:
-        component_dir = output_dir
+    # Plan every file first so nothing is written when one already exists
+    planned = []
+    if is_hook:
+        planned.append((f"use{pascal_name}.ts", TEMPLATES["hook"].format(name=pascal_name)))
     else:
-        component_dir = output_dir / pascal_name
-
-    files_created = []
-
-    # Create directory
-    component_dir.mkdir(parents=True, exist_ok=True)
-
-    # Generate main component file
-    if component_type == "hook":
-        main_file = component_dir / f"use{pascal_name}.ts"
-        template = TEMPLATES["hook"]
-    else:
-        main_file = component_dir / f"{pascal_name}.tsx"
-        template = TEMPLATES[component_type]
-
-    content = template.format(name=pascal_name)
-    main_file.write_text(content)
-    files_created.append(str(main_file))
-
-    # Generate test file
-    if with_test and component_type != "hook":
-        test_file = component_dir / f"{pascal_name}.test.tsx"
-        test_content = TEMPLATES["test"].format(name=pascal_name)
-        test_file.write_text(test_content)
-        files_created.append(str(test_file))
-
-    # Generate story file
-    if with_story and component_type != "hook":
-        story_file = component_dir / f"{pascal_name}.stories.tsx"
-        story_content = TEMPLATES["story"].format(name=pascal_name)
-        story_file.write_text(story_content)
-        files_created.append(str(story_file))
-
-    # Generate index file
+        planned.append((f"{pascal_name}.tsx", TEMPLATES[component_type].format(name=pascal_name)))
+        if with_test:
+            planned.append((f"{pascal_name}.test.tsx", TEMPLATES["test"].format(name=pascal_name)))
+        if with_story:
+            planned.append((f"{pascal_name}.stories.tsx", TEMPLATES["story"].format(
+                name=pascal_name, storybook_pkg=STORYBOOK_PACKAGES[framework])))
     if with_index and not flat:
-        index_file = component_dir / "index.ts"
-        index_content = TEMPLATES["index"].format(name=pascal_name)
-        index_file.write_text(index_content)
-        files_created.append(str(index_file))
+        planned.append(("index.ts", TEMPLATES["index_hook" if is_hook else "index"].format(name=pascal_name)))
+
+    existing = [str(component_dir / fname) for fname, _ in planned if (component_dir / fname).exists()]
+    if existing and not force:
+        raise FileExistsError(f"refusing to overwrite {', '.join(existing)} (pass --force)")
+
+    component_dir.mkdir(parents=True, exist_ok=True)
+    files_created = []
+    for fname, content in planned:
+        (component_dir / fname).write_text(content)
+        files_created.append(str(component_dir / fname))
 
     return {
         "name": pascal_name,
@@ -275,6 +174,12 @@ def main():
         help="Generate Storybook story file"
     )
     parser.add_argument(
+        "--framework",
+        choices=sorted(STORYBOOK_PACKAGES),
+        default="next",
+        help="Framework for story imports: next (@storybook/nextjs-vite) or vite (@storybook/react-vite)"
+    )
+    parser.add_argument(
         "--no-index",
         action="store_true",
         help="Skip generating index.ts file"
@@ -285,9 +190,20 @@ def main():
         help="Create files directly in output dir without subdirectory"
     )
     parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Overwrite files that already exist (default: refuse, exit 2)"
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Show what would be generated without creating files"
+    )
+    parser.add_argument(
+        "--format",
+        choices=["text", "json"],
+        default="text",
+        help="Output format (default: text)"
     )
     parser.add_argument(
         "--verbose", "-v",
@@ -298,7 +214,18 @@ def main():
     args = parser.parse_args()
 
     output_dir = Path(args.dir)
-    pascal_name = to_pascal_case(args.name)
+    pascal_name = component_name(args.name, args.type)
+
+    if args.dry_run and args.format == "json":
+        print(json.dumps({
+            "dry_run": True,
+            "name": pascal_name,
+            "type": args.type,
+            "directory": str(output_dir / pascal_name if not args.flat else output_dir),
+            "with_test": args.with_test,
+            "with_story": args.with_story,
+        }, indent=2))
+        return
 
     if args.dry_run:
         print(f"\nDry run - would generate:")
@@ -318,8 +245,13 @@ def main():
             with_story=args.with_story,
             with_index=not args.no_index,
             flat=args.flat,
+            framework=args.framework,
+            force=args.force,
         )
-        print_result(result, args.verbose)
+        if args.format == "json":
+            print(json.dumps(result, indent=2))
+        else:
+            print_result(result, args.verbose)
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)

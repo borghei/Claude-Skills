@@ -1,582 +1,292 @@
 #!/usr/bin/env python3
-"""
-Design Token Generator
-Creates consistent design system tokens for colors, typography, spacing, and more.
+"""Design Token Generator: a full token system (colour, type, spacing, sizing, borders,
+shadows, motion, breakpoints, z-index) from one brand colour and a style preset.
 
 Usage:
-    python design_token_generator.py [brand_color] [style] [format]
+    python3 design_token_generator.py [brand_color] [style] [output]
+    python3 design_token_generator.py "#0066CC" modern json > tokens.json
+    python3 design_token_generator.py "#8B4513" classic css
+    python3 design_token_generator.py "#FF6B6B" playful scss
+    python3 design_token_generator.py "#0066CC" --format text      # summary
 
-    brand_color: Hex color (default: #0066CC)
-    style: modern | classic | playful (default: modern)
-    format: json | css | scss | summary (default: json)
+brand_color  #RRGGBB or #RGB (default #0066CC)
+style        modern | classic | playful (default modern)
+output       json | css | scss | summary (default json)
+--format     text | json | css | scss; overrides output (text = summary)
 
-Examples:
-    python design_token_generator.py "#0066CC" modern json
-    python design_token_generator.py "#8B4513" classic css
-    python design_token_generator.py "#FF6B6B" playful summary
-
-Table of Contents:
-==================
-
-CLASS: DesignTokenGenerator
-    __init__()                      - Initialize base unit (8pt), type scale (1.25x)
-    generate_complete_system()      - Main entry: generates all token categories
-    generate_color_palette()        - Primary, secondary, neutral, semantic colors
-    generate_typography_system()    - Font families, sizes, weights, line heights
-    generate_spacing_system()       - 8pt grid-based spacing scale
-    generate_sizing_tokens()        - Container and component sizing
-    generate_border_tokens()        - Border radius and width values
-    generate_shadow_tokens()        - Shadow definitions per style
-    generate_animation_tokens()     - Durations, easing, keyframes
-    generate_breakpoints()          - Responsive breakpoints (xs-2xl)
-    generate_z_index_scale()        - Z-index layering system
-    export_tokens()                 - Export to JSON/CSS/SCSS
-
-PRIVATE METHODS:
-    _generate_color_scale()         - Generate 10-step color scale (50-900)
-    _generate_neutral_scale()       - Fixed neutral gray palette
-    _generate_type_scale()          - Modular type scale using ratio
-    _generate_text_styles()         - Pre-composed h1-h6, body, caption
-    _export_as_css()                - CSS custom properties exporter
-    _hex_to_rgb()                   - Hex to RGB conversion
-    _rgb_to_hex()                   - RGB to Hex conversion
-    _adjust_hue()                   - HSV hue rotation utility
-
-FUNCTION: main()                    - CLI entry point with argument parsing
-
-Token Categories Generated:
-    - colors: primary, secondary, neutral, semantic, surface
-    - typography: fontFamily, fontSize, fontWeight, lineHeight, letterSpacing
-    - spacing: 0-64 scale based on 8pt grid
-    - sizing: containers, buttons, inputs, icons
-    - borders: radius (per style), width
-    - shadows: none through 2xl, inner
-    - animation: duration, easing, keyframes
-    - breakpoints: xs, sm, md, lg, xl, 2xl
-    - z-index: hide through notification
+Primary and secondary scales are computed from the brand colour; everything else comes
+from ../references/token-presets.json. Semantic `contrast` is the first of white,
+neutral-900, black that reaches 4.5:1 on the base colour.
+Check the result with token_contrast_checker.py.
+Exit codes: 0 tokens written, 2 bad colour, unknown style or unreadable presets.
 """
 
-import json
-from typing import Dict, List, Tuple
+import argparse
 import colorsys
+import json
+import os
+import re
+import sys
+from typing import Dict, List, Tuple
+
+PRESETS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "..", "references", "token-presets.json")
+STYLES = ("modern", "classic", "playful")
+HEX_RE = re.compile(r"#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})")
+
+
+class TokenInputError(Exception):
+    """Unusable input or bundled data; exits 2."""
+
+
+def load_presets(path: str = PRESETS_PATH) -> Dict:
+    """Bundled preset data."""
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (OSError, ValueError) as exc:
+        raise TokenInputError(f"presets unreadable ({path}): {exc}") from exc
+
+
+def normalise_hex(value: str) -> str:
+    """'#RRGGBB' as given (case kept); '#RGB' and a missing '#' are expanded/added."""
+    match = HEX_RE.fullmatch(value.strip())
+    if not match:
+        raise TokenInputError(f"brand colour must be a hex colour like #0066CC, got '{value}'")
+    digits = match.group(1)
+    if len(digits) == 3:
+        digits = "".join(c * 2 for c in digits).upper()
+    return "#" + digits
+
+
+def relative_luminance(hex_color: str) -> float:
+    """WCAG 2.x relative luminance of #RRGGBB."""
+    h = hex_color.lstrip("#")
+    chans = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    chans = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in chans]
+    return 0.2126 * chans[0] + 0.7152 * chans[1] + 0.0722 * chans[2]
+
+
+def contrast_ratio(a: str, b: str) -> float:
+    """WCAG 2.x contrast ratio between two #RRGGBB colours."""
+    la, lb = sorted((relative_luminance(a), relative_luminance(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
 
 class DesignTokenGenerator:
-    """Generate comprehensive design system tokens"""
-    
-    def __init__(self):
-        self.base_unit = 8  # 8pt grid system
-        self.type_scale_ratio = 1.25  # Major third
-        self.base_font_size = 16
-        
-    def generate_complete_system(self, brand_color: str = "#0066CC", 
-                                style: str = "modern") -> Dict:
-        """Generate complete design token system"""
-        
-        tokens = {
-            'meta': {
-                'version': '1.0.0',
-                'style': style,
-                'generated': 'auto-generated'
-            },
-            'colors': self.generate_color_palette(brand_color),
-            'typography': self.generate_typography_system(style),
-            'spacing': self.generate_spacing_system(),
-            'sizing': self.generate_sizing_tokens(),
-            'borders': self.generate_border_tokens(style),
-            'shadows': self.generate_shadow_tokens(style),
-            'animation': self.generate_animation_tokens(),
-            'breakpoints': self.generate_breakpoints(),
-            'z-index': self.generate_z_index_scale()
+    """Generate a design token system from a brand colour and style preset."""
+
+    def __init__(self, presets: Dict = None):
+        self.presets = presets if presets is not None else load_presets()
+        self.base_unit = self.presets["base_unit"]  # 8pt grid
+        self.type_scale_ratio = self.presets["type_scale_ratio"]  # major third
+        self.base_font_size = self.presets["base_font_size"]
+
+    def generate_complete_system(self, brand_color: str = "#0066CC", style: str = "modern") -> Dict:
+        """All token categories, in a stable order."""
+        meta = self.presets["meta"]
+        return {
+            "meta": {"version": meta["version"], "style": style, "generated": meta["generated"]},
+            "colors": self.generate_color_palette(brand_color),
+            "typography": self.generate_typography_system(style),
+            "spacing": self.generate_spacing_system(),
+            "sizing": self.generate_sizing_tokens(),
+            "borders": self.generate_border_tokens(style),
+            "shadows": self.generate_shadow_tokens(style),
+            "animation": self.generate_animation_tokens(),
+            "breakpoints": self.generate_breakpoints(),
+            "z-index": self.generate_z_index_scale(),
         }
-        
-        return tokens
-    
+
     def generate_color_palette(self, brand_color: str) -> Dict:
-        """Generate comprehensive color palette from brand color"""
-        
-        # Convert hex to RGB
-        brand_rgb = self._hex_to_rgb(brand_color)
-        brand_hsv = colorsys.rgb_to_hsv(*[c/255 for c in brand_rgb])
-        
-        palette = {
-            'primary': self._generate_color_scale(brand_color, 'primary'),
-            'secondary': self._generate_color_scale(
-                self._adjust_hue(brand_color, 180), 'secondary'
-            ),
-            'neutral': self._generate_neutral_scale(),
-            'semantic': {
-                'success': {
-                    'base': '#10B981',
-                    'light': '#34D399',
-                    'dark': '#059669',
-                    'contrast': '#FFFFFF'
-                },
-                'warning': {
-                    'base': '#F59E0B',
-                    'light': '#FBBD24',
-                    'dark': '#D97706',
-                    'contrast': '#FFFFFF'
-                },
-                'error': {
-                    'base': '#EF4444',
-                    'light': '#F87171',
-                    'dark': '#DC2626',
-                    'contrast': '#FFFFFF'
-                },
-                'info': {
-                    'base': '#3B82F6',
-                    'light': '#60A5FA',
-                    'dark': '#2563EB',
-                    'contrast': '#FFFFFF'
-                }
-            },
-            'surface': {
-                'background': '#FFFFFF',
-                'foreground': '#111827',
-                'card': '#FFFFFF',
-                'overlay': 'rgba(0, 0, 0, 0.5)',
-                'divider': '#E5E7EB'
-            }
+        """Primary and complementary secondary scales plus fixed neutral/semantic/surface."""
+        semantic = {}
+        for name, shades in self.presets["semantic"].items():
+            semantic[name] = dict(shades, contrast=self._label_colour(shades["base"]))
+        return {
+            "primary": self._generate_color_scale(brand_color, "primary"),
+            "secondary": self._generate_color_scale(self._adjust_hue(brand_color, 180), "secondary"),
+            "neutral": self._generate_neutral_scale(),
+            "semantic": semantic,
+            "surface": dict(self.presets["surface"]),
         }
-        
-        return palette
-    
+
+    def _label_colour(self, base: str) -> str:
+        """First candidate reaching 4.5:1 on base, else the highest-contrast one."""
+        candidates = self.presets["contrast_candidates"]
+        for cand in candidates:
+            if contrast_ratio(cand, base) >= 4.5:
+                return cand
+        return max(candidates, key=lambda c: contrast_ratio(c, base))
+
     def _generate_color_scale(self, base_color: str, name: str) -> Dict:
-        """Generate color scale from base color"""
-        
+        """10-step scale 50-900: 500-900 in HSV (V scales down), 50-400 tint 500 toward white."""
+        h, s, v = colorsys.rgb_to_hsv(*[c / 255 for c in self._hex_to_rgb(base_color)])
         scale = {}
-        rgb = self._hex_to_rgb(base_color)
-        h, s, v = colorsys.rgb_to_hsv(*[c/255 for c in rgb])
-        
-        # Generate scale from 50 to 900
-        steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]
-        
-        for step in steps:
-            # Adjust lightness based on step
-            factor = (1000 - step) / 1000
-            new_v = 0.95 if step < 500 else v * (1 - (step - 500) / 500)
+        for step in (500, 600, 700, 800, 900):
+            new_v = v * (1 - (step - 500) / 500)
             new_s = s * (0.3 + 0.7 * (step / 900))
-            
             new_rgb = colorsys.hsv_to_rgb(h, new_s, new_v)
             scale[str(step)] = self._rgb_to_hex([int(c * 255) for c in new_rgb])
-        
-        scale['DEFAULT'] = base_color
+        mid = self._hex_to_rgb(scale["500"])
+        for step, white in self.presets["light_tint_mix"].items():
+            scale[step] = self._rgb_to_hex([round(c + (255 - c) * white) for c in mid])
+        scale = {k: scale[k] for k in ("50", "100", "200", "300", "400", "500", "600", "700", "800", "900")}
+        scale["DEFAULT"] = base_color
         return scale
-    
+
     def _generate_neutral_scale(self) -> Dict:
-        """Generate neutral color scale"""
-        
-        return {
-            '50': '#F9FAFB',
-            '100': '#F3F4F6',
-            '200': '#E5E7EB',
-            '300': '#D1D5DB',
-            '400': '#9CA3AF',
-            '500': '#6B7280',
-            '600': '#4B5563',
-            '700': '#374151',
-            '800': '#1F2937',
-            '900': '#111827',
-            'DEFAULT': '#6B7280'
-        }
-    
+        """Fixed neutral grey scale."""
+        return dict(self.presets["neutral"])
+
     def generate_typography_system(self, style: str) -> Dict:
-        """Generate typography system"""
-        
-        # Font families based on style
-        font_families = {
-            'modern': {
-                'sans': 'Inter, system-ui, -apple-system, sans-serif',
-                'serif': 'Merriweather, Georgia, serif',
-                'mono': 'Fira Code, Monaco, monospace'
-            },
-            'classic': {
-                'sans': 'Helvetica, Arial, sans-serif',
-                'serif': 'Times New Roman, Times, serif',
-                'mono': 'Courier New, monospace'
-            },
-            'playful': {
-                'sans': 'Poppins, Roboto, sans-serif',
-                'serif': 'Playfair Display, Georgia, serif',
-                'mono': 'Source Code Pro, monospace'
-            }
+        """Families per style, modular size scale, weights, line heights, text styles."""
+        p = self.presets
+        return {
+            "fontFamily": dict(p["font_families"].get(style, p["font_families"]["modern"])),
+            "fontSize": self._generate_type_scale(),
+            "fontWeight": dict(p["fontWeight"]),
+            "lineHeight": dict(p["lineHeight"]),
+            "letterSpacing": dict(p["letterSpacing"]),
+            "textStyles": self._generate_text_styles(),
         }
-        
-        typography = {
-            'fontFamily': font_families.get(style, font_families['modern']),
-            'fontSize': self._generate_type_scale(),
-            'fontWeight': {
-                'thin': 100,
-                'light': 300,
-                'normal': 400,
-                'medium': 500,
-                'semibold': 600,
-                'bold': 700,
-                'extrabold': 800,
-                'black': 900
-            },
-            'lineHeight': {
-                'none': 1,
-                'tight': 1.25,
-                'snug': 1.375,
-                'normal': 1.5,
-                'relaxed': 1.625,
-                'loose': 2
-            },
-            'letterSpacing': {
-                'tighter': '-0.05em',
-                'tight': '-0.025em',
-                'normal': '0',
-                'wide': '0.025em',
-                'wider': '0.05em',
-                'widest': '0.1em'
-            },
-            'textStyles': self._generate_text_styles()
-        }
-        
-        return typography
-    
+
     def _generate_type_scale(self) -> Dict:
-        """Generate modular type scale"""
-        
+        """Modular scale around the base size, rounded to whole pixels."""
+        sizes = self.presets["type_scale_steps"]
+        base = sizes.index("base")
         scale = {}
-        sizes = ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl']
-        
         for i, size in enumerate(sizes):
-            if size == 'base':
-                scale[size] = f'{self.base_font_size}px'
-            elif i < sizes.index('base'):
-                factor = self.type_scale_ratio ** (sizes.index('base') - i)
-                scale[size] = f'{round(self.base_font_size / factor)}px'
+            if i == base:
+                scale[size] = f"{self.base_font_size}px"
+            elif i < base:
+                scale[size] = f"{round(self.base_font_size / self.type_scale_ratio ** (base - i))}px"
             else:
-                factor = self.type_scale_ratio ** (i - sizes.index('base'))
-                scale[size] = f'{round(self.base_font_size * factor)}px'
-        
+                scale[size] = f"{round(self.base_font_size * self.type_scale_ratio ** (i - base))}px"
         return scale
-    
+
     def _generate_text_styles(self) -> Dict:
-        """Generate pre-composed text styles"""
-        
-        return {
-            'h1': {
-                'fontSize': '48px',
-                'fontWeight': 700,
-                'lineHeight': 1.2,
-                'letterSpacing': '-0.02em'
-            },
-            'h2': {
-                'fontSize': '36px',
-                'fontWeight': 700,
-                'lineHeight': 1.3,
-                'letterSpacing': '-0.01em'
-            },
-            'h3': {
-                'fontSize': '28px',
-                'fontWeight': 600,
-                'lineHeight': 1.4,
-                'letterSpacing': '0'
-            },
-            'h4': {
-                'fontSize': '24px',
-                'fontWeight': 600,
-                'lineHeight': 1.4,
-                'letterSpacing': '0'
-            },
-            'h5': {
-                'fontSize': '20px',
-                'fontWeight': 600,
-                'lineHeight': 1.5,
-                'letterSpacing': '0'
-            },
-            'h6': {
-                'fontSize': '16px',
-                'fontWeight': 600,
-                'lineHeight': 1.5,
-                'letterSpacing': '0.01em'
-            },
-            'body': {
-                'fontSize': '16px',
-                'fontWeight': 400,
-                'lineHeight': 1.5,
-                'letterSpacing': '0'
-            },
-            'small': {
-                'fontSize': '14px',
-                'fontWeight': 400,
-                'lineHeight': 1.5,
-                'letterSpacing': '0'
-            },
-            'caption': {
-                'fontSize': '12px',
-                'fontWeight': 400,
-                'lineHeight': 1.5,
-                'letterSpacing': '0.01em'
-            }
-        }
-    
+        """Pre-composed h1-h6, body, small, caption."""
+        return json.loads(json.dumps(self.presets["textStyles"]))
+
     def generate_spacing_system(self) -> Dict:
-        """Generate spacing system based on 8pt grid"""
-        
-        spacing = {}
-        multipliers = [0, 0.5, 1, 1.5, 2, 2.5, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 20, 24, 32, 40, 48, 56, 64]
-        
-        for i, mult in enumerate(multipliers):
-            spacing[str(i)] = f'{int(self.base_unit * mult)}px'
-        
-        # Add semantic spacing
-        spacing.update({
-            'xs': spacing['1'],    # 4px
-            'sm': spacing['2'],    # 8px
-            'md': spacing['4'],    # 16px
-            'lg': spacing['6'],    # 24px
-            'xl': spacing['8'],    # 32px
-            '2xl': spacing['12'],  # 48px
-            '3xl': spacing['16']   # 64px
-        })
-        
+        """Numeric 8pt-grid scale plus semantic aliases (xs-3xl)."""
+        spacing = {str(i): f"{int(self.base_unit * m)}px"
+                   for i, m in enumerate(self.presets["spacing_multipliers"])}
+        spacing.update({k: spacing[ref] for k, ref in self.presets["spacing_semantic"].items()})
         return spacing
-    
+
     def generate_sizing_tokens(self) -> Dict:
-        """Generate sizing tokens for components"""
-        
-        return {
-            'container': {
-                'sm': '640px',
-                'md': '768px',
-                'lg': '1024px',
-                'xl': '1280px',
-                '2xl': '1536px'
-            },
-            'components': {
-                'button': {
-                    'sm': {'height': '32px', 'paddingX': '12px'},
-                    'md': {'height': '40px', 'paddingX': '16px'},
-                    'lg': {'height': '48px', 'paddingX': '20px'}
-                },
-                'input': {
-                    'sm': {'height': '32px', 'paddingX': '12px'},
-                    'md': {'height': '40px', 'paddingX': '16px'},
-                    'lg': {'height': '48px', 'paddingX': '20px'}
-                },
-                'icon': {
-                    'sm': '16px',
-                    'md': '20px',
-                    'lg': '24px',
-                    'xl': '32px'
-                }
-            }
-        }
-    
+        """Containers and component sizes."""
+        return json.loads(json.dumps(self.presets["sizing"]))
+
     def generate_border_tokens(self, style: str) -> Dict:
-        """Generate border tokens"""
-        
-        radius_values = {
-            'modern': {
-                'none': '0',
-                'sm': '4px',
-                'DEFAULT': '8px',
-                'md': '12px',
-                'lg': '16px',
-                'xl': '24px',
-                'full': '9999px'
-            },
-            'classic': {
-                'none': '0',
-                'sm': '2px',
-                'DEFAULT': '4px',
-                'md': '6px',
-                'lg': '8px',
-                'xl': '12px',
-                'full': '9999px'
-            },
-            'playful': {
-                'none': '0',
-                'sm': '8px',
-                'DEFAULT': '16px',
-                'md': '20px',
-                'lg': '24px',
-                'xl': '32px',
-                'full': '9999px'
-            }
-        }
-        
-        return {
-            'radius': radius_values.get(style, radius_values['modern']),
-            'width': {
-                'none': '0',
-                'thin': '1px',
-                'DEFAULT': '1px',
-                'medium': '2px',
-                'thick': '4px'
-            }
-        }
-    
+        """Radius per style and border widths."""
+        radius = self.presets["radius"]
+        return {"radius": dict(radius.get(style, radius["modern"])),
+                "width": dict(self.presets["border_width"])}
+
     def generate_shadow_tokens(self, style: str) -> Dict:
-        """Generate shadow tokens"""
-        
-        shadow_styles = {
-            'modern': {
-                'none': 'none',
-                'sm': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-                'DEFAULT': '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-                'md': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                'lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-                '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-                'inner': 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)'
-            },
-            'classic': {
-                'none': 'none',
-                'sm': '0 1px 2px rgba(0, 0, 0, 0.1)',
-                'DEFAULT': '0 2px 4px rgba(0, 0, 0, 0.1)',
-                'md': '0 4px 8px rgba(0, 0, 0, 0.1)',
-                'lg': '0 8px 16px rgba(0, 0, 0, 0.1)',
-                'xl': '0 16px 32px rgba(0, 0, 0, 0.1)'
-            }
-        }
-        
-        return shadow_styles.get(style, shadow_styles['modern'])
-    
+        """Shadow set per style; styles without their own set use modern."""
+        shadows = self.presets["shadows"]
+        return dict(shadows.get(style, shadows["modern"]))
+
     def generate_animation_tokens(self) -> Dict:
-        """Generate animation tokens"""
-        
-        return {
-            'duration': {
-                'instant': '0ms',
-                'fast': '150ms',
-                'DEFAULT': '250ms',
-                'slow': '350ms',
-                'slower': '500ms'
-            },
-            'easing': {
-                'linear': 'linear',
-                'ease': 'ease',
-                'easeIn': 'ease-in',
-                'easeOut': 'ease-out',
-                'easeInOut': 'ease-in-out',
-                'spring': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
-            },
-            'keyframes': {
-                'fadeIn': {
-                    'from': {'opacity': 0},
-                    'to': {'opacity': 1}
-                },
-                'slideUp': {
-                    'from': {'transform': 'translateY(10px)', 'opacity': 0},
-                    'to': {'transform': 'translateY(0)', 'opacity': 1}
-                },
-                'scale': {
-                    'from': {'transform': 'scale(0.95)'},
-                    'to': {'transform': 'scale(1)'}
-                }
-            }
-        }
-    
+        """Durations, easings, keyframes."""
+        return json.loads(json.dumps(self.presets["animation"]))
+
     def generate_breakpoints(self) -> Dict:
-        """Generate responsive breakpoints"""
-        
-        return {
-            'xs': '480px',
-            'sm': '640px',
-            'md': '768px',
-            'lg': '1024px',
-            'xl': '1280px',
-            '2xl': '1536px'
-        }
-    
+        """Responsive breakpoints xs-2xl."""
+        return dict(self.presets["breakpoints"])
+
     def generate_z_index_scale(self) -> Dict:
-        """Generate z-index scale"""
-        
-        return {
-            'hide': -1,
-            'base': 0,
-            'dropdown': 1000,
-            'sticky': 1020,
-            'overlay': 1030,
-            'modal': 1040,
-            'popover': 1050,
-            'tooltip': 1060,
-            'notification': 1070
-        }
-    
-    def export_tokens(self, tokens: Dict, format: str = 'json') -> str:
-        """Export tokens in various formats"""
-        
-        if format == 'json':
-            return json.dumps(tokens, indent=2)
-        elif format == 'css':
+        """Layering scale."""
+        return dict(self.presets["z-index"])
+
+    def export_tokens(self, tokens: Dict, format: str = "json") -> str:
+        """Serialise as json, css (custom properties) or scss (variables)."""
+        if format == "css":
             return self._export_as_css(tokens)
-        elif format == 'scss':
+        if format == "scss":
             return self._export_as_scss(tokens)
-        else:
-            return json.dumps(tokens, indent=2)
-    
+        return json.dumps(tokens, indent=2)
+
+    @staticmethod
+    def _flatten(obj: Dict, prefix: str = "") -> List[Tuple[str, object]]:
+        """Nested dict to (dash-joined-name, value) pairs, in order."""
+        pairs = []
+        for key, value in obj.items():
+            name = f"{prefix}-{key}" if prefix else str(key)
+            if isinstance(value, dict):
+                pairs.extend(DesignTokenGenerator._flatten(value, name))
+            else:
+                pairs.append((name, value))
+        return pairs
+
     def _export_as_css(self, tokens: Dict) -> str:
-        """Export as CSS variables"""
-        
-        css = [':root {']
-        
-        def flatten_dict(obj, prefix=''):
-            for key, value in obj.items():
-                if isinstance(value, dict):
-                    flatten_dict(value, f'{prefix}-{key}' if prefix else key)
-                else:
-                    css.append(f'  --{prefix}-{key}: {value};')
-        
-        flatten_dict(tokens)
-        css.append('}')
-        
-        return '\n'.join(css)
-    
+        """CSS custom properties on :root."""
+        lines = [":root {"] + [f"  --{n}: {v};" for n, v in self._flatten(tokens)] + ["}"]
+        return "\n".join(lines)
+
+    def _export_as_scss(self, tokens: Dict) -> str:
+        """SCSS variables, same names as the CSS export."""
+        return "\n".join(f"${n}: {v};" for n, v in self._flatten(tokens))
+
     def _hex_to_rgb(self, hex_color: str) -> Tuple[int, int, int]:
-        """Convert hex to RGB"""
-        hex_color = hex_color.lstrip('#')
-        return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
-    
+        """Hex to RGB."""
+        hex_color = hex_color.lstrip("#")
+        return tuple(int(hex_color[i:i + 2], 16) for i in (0, 2, 4))
+
     def _rgb_to_hex(self, rgb: List[int]) -> str:
-        """Convert RGB to hex"""
-        return '#{:02x}{:02x}{:02x}'.format(*rgb)
-    
+        """RGB to lower-case hex."""
+        return "#{:02x}{:02x}{:02x}".format(*rgb)
+
     def _adjust_hue(self, hex_color: str, degrees: int) -> str:
-        """Adjust hue of color"""
-        rgb = self._hex_to_rgb(hex_color)
-        h, s, v = colorsys.rgb_to_hsv(*[c/255 for c in rgb])
-        h = (h + degrees/360) % 1
-        new_rgb = colorsys.hsv_to_rgb(h, s, v)
+        """Rotate hue in HSV."""
+        h, s, v = colorsys.rgb_to_hsv(*[c / 255 for c in self._hex_to_rgb(hex_color)])
+        new_rgb = colorsys.hsv_to_rgb((h + degrees / 360) % 1, s, v)
         return self._rgb_to_hex([int(c * 255) for c in new_rgb])
 
-def main():
-    import argparse
 
-    parser = argparse.ArgumentParser(description="Generate a complete design-token system from a brand color.")
-    parser.add_argument("brand_color", nargs="?", default="#0066CC", help="Brand color as hex (default: #0066CC)")
-    parser.add_argument("style", nargs="?", default="modern", help="Style preset, e.g. modern, classic, playful (default: modern)")
-    parser.add_argument("format", nargs="?", default="json", choices=["json", "css", "scss", "summary"],
-                        help="Output format (default: json)")
+def summary(tokens: Dict, style: str, brand_color: str) -> str:
+    """Short human-readable overview."""
+    return "\n".join([
+        "=" * 60, "DESIGN SYSTEM TOKENS", "=" * 60,
+        f"\n🎨 Style: {style}", f"🎨 Brand Color: {brand_color}", "\n📊 Generated Tokens:",
+        f"  • Colors: {len(tokens['colors'])} palettes",
+        f"  • Typography: {len(tokens['typography'])} categories",
+        f"  • Spacing: {len(tokens['spacing'])} values",
+        f"  • Shadows: {len(tokens['shadows'])} styles",
+        f"  • Breakpoints: {len(tokens['breakpoints'])} sizes",
+        "\n💾 Export formats available: json, css, scss",
+    ])
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Generate a design-token system from a brand colour and style preset.",
+        epilog="Exit codes: 0 written, 2 bad colour, unknown style or unreadable presets.")
+    parser.add_argument("brand_color", nargs="?", default="#0066CC", help="brand colour, #RRGGBB or #RGB (default #0066CC)")
+    parser.add_argument("style", nargs="?", default="modern", choices=STYLES, help="style preset (default modern)")
+    parser.add_argument("output", nargs="?", default="json", choices=["json", "css", "scss", "summary"],
+                        help="output format (default json)")
+    parser.add_argument("--format", choices=["text", "json", "css", "scss"],
+                        help="overrides the positional output; text prints the summary")
     args = parser.parse_args()
-
-    generator = DesignTokenGenerator()
-    brand_color, style, output_format = args.brand_color, args.style, args.format
-    
-    # Generate tokens
-    tokens = generator.generate_complete_system(brand_color, style)
-    
-    # Output
-    if output_format == 'summary':
-        print("=" * 60)
-        print("DESIGN SYSTEM TOKENS")
-        print("=" * 60)
-        print(f"\n🎨 Style: {style}")
-        print(f"🎨 Brand Color: {brand_color}")
-        print("\n📊 Generated Tokens:")
-        print(f"  • Colors: {len(tokens['colors'])} palettes")
-        print(f"  • Typography: {len(tokens['typography'])} categories")
-        print(f"  • Spacing: {len(tokens['spacing'])} values")
-        print(f"  • Shadows: {len(tokens['shadows'])} styles")
-        print(f"  • Breakpoints: {len(tokens['breakpoints'])} sizes")
-        print("\n💾 Export formats available: json, css, scss")
+    output = {"text": "summary"}.get(args.format, args.format) if args.format else args.output
+    try:
+        brand_color = normalise_hex(args.brand_color)
+        generator = DesignTokenGenerator()
+        tokens = generator.generate_complete_system(brand_color, args.style)
+    except TokenInputError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    if output == "summary":
+        print(summary(tokens, args.style, brand_color))
     else:
-        print(generator.export_tokens(tokens, output_format))
+        print(generator.export_tokens(tokens, output))
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

@@ -235,7 +235,9 @@ const sizeTokens = {
 ```typescript
 const variantTokens = {
   primary: {
-    background: 'color-primary-500',
+    // primary-DEFAULT is the brand hex; if token_contrast_checker.py fails it,
+    // use the shade the checker names instead (primary-500 is lighter than the brand)
+    background: 'color-primary-DEFAULT',
     backgroundHover: 'color-primary-600',
     backgroundActive: 'color-primary-700',
     text: 'color-white',
@@ -252,8 +254,8 @@ const variantTokens = {
     background: 'transparent',
     backgroundHover: 'color-primary-50',
     backgroundActive: 'color-primary-100',
-    text: 'color-primary-500',
-    border: 'color-primary-500'
+    text: 'color-primary-DEFAULT',
+    border: 'color-primary-DEFAULT'
   },
   ghost: {
     background: 'transparent',
@@ -281,8 +283,9 @@ const stateStyles = {
     transform: 'scale(0.98)'
   },
   focus: {
-    outline: 'none',
-    boxShadow: '0 0 0 2px color-primary-200'
+    // a visible ring at 3:1 against the page (WCAG 1.4.11); primary-200 is too pale
+    outline: '2px solid color-primary-DEFAULT',
+    outlineOffset: '2px'
   },
   disabled: {
     cursor: 'not-allowed',
@@ -306,15 +309,15 @@ const stateStyles = {
 
 ```css
 .button {
-  height: var(--sizing-button-md-height);
-  padding-left: var(--sizing-button-md-paddingX);
-  padding-right: var(--sizing-button-md-paddingX);
+  height: var(--sizing-components-button-md-height);
+  padding-left: var(--sizing-components-button-md-paddingX);
+  padding-right: var(--sizing-components-button-md-paddingX);
   font-size: var(--typography-fontSize-base);
   border-radius: var(--borders-radius-md);
 }
 
 .button--primary {
-  background-color: var(--colors-primary-500);
+  background-color: var(--colors-primary-DEFAULT);
   color: var(--colors-surface-background);
 }
 
@@ -331,7 +334,7 @@ import tokens from './design-tokens.json';
 const buttonStyles = {
   height: tokens.sizing.components.button.md.height,
   paddingLeft: tokens.sizing.components.button.md.paddingX,
-  backgroundColor: tokens.colors.primary['500'],
+  backgroundColor: tokens.colors.primary.DEFAULT,
   borderRadius: tokens.borders.radius.md
 };
 ```
@@ -344,7 +347,7 @@ import styled from 'styled-components';
 const Button = styled.button`
   height: ${({ theme }) => theme.sizing.components.button.md.height};
   padding: 0 ${({ theme }) => theme.sizing.components.button.md.paddingX};
-  background: ${({ theme }) => theme.colors.primary['500']};
+  background: ${({ theme }) => theme.colors.primary.DEFAULT};
   border-radius: ${({ theme }) => theme.borders.radius.md};
 
   &:hover {

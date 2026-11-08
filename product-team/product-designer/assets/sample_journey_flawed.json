@@ -1,0 +1,39 @@
+{
+  "name": "Clinic Booking App: New Patient",
+  "persona": "Adult booking a first GP appointment on a phone",
+  "goal": "Book an appointment that fits around work",
+  "stages": [
+    {
+      "name": "Find clinic",
+      "actions": ["Searches for a nearby clinic", "Opens the app store listing"],
+      "touchpoints": ["Search", "App store"],
+      "emotions": {"score": 3, "label": "Neutral"},
+      "pain_points": ["Two apps with the clinic's name"],
+      "opportunities": ["Link the official app from the clinic website"]
+    },
+    {
+      "name": "Register",
+      "actions": ["Enters NHS number", "Verifies identity with photo ID"],
+      "touchpoints": ["Registration flow", "ID check"],
+      "emotions": {"score": 1, "label": "Frustrated, ID check fails twice"},
+      "pain_points": ["Photo ID check rejects glare", "No way to save progress"],
+      "opportunities": []
+    },
+    {
+      "name": "Book",
+      "actions": ["Picks a slot", "Confirms the booking"],
+      "touchpoints": ["Calendar", "Confirmation screen"],
+      "emotions": {"score": 2, "label": "Unsure the booking went through"},
+      "pain_points": [],
+      "opportunities": []
+    },
+    {
+      "name": "Attend",
+      "actions": ["Gets a reminder", "Checks in"],
+      "touchpoints": ["SMS", "Reception kiosk"],
+      "emotions": {"score": 4, "label": "Fine"},
+      "pain_points": ["Kiosk asks for the NHS number again"],
+      "opportunities": ["Check in from the app"]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+'use client';
+
+import {{ cn }} from '@/lib/utils';
+
+export interface {name}Props {{
+  className?: string;
+  children?: React.ReactNode;
+}}
+
+export function {name}({{ className, children }}: {name}Props) {{
+  return (
+    <div className={{cn('', className)}}>
+      {{children}}
+    </div>
+  );
+}}

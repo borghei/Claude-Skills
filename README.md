@@ -15,7 +15,7 @@
   <img src="https://img.shields.io/badge/Skills-403-brightgreen.svg" alt="403 Skills">
   <img src="https://img.shields.io/badge/Domains-21-blue.svg" alt="21 Domains">
   <img src="https://img.shields.io/badge/Expert_Agents-76-purple.svg" alt="76 Expert Agents">
-  <img src="https://img.shields.io/badge/Python_Tools-966-informational.svg" alt="966 Python Tools">
+  <img src="https://img.shields.io/badge/Python_Tools-973-informational.svg" alt="973 Python Tools">
   <img src="https://img.shields.io/badge/Compliance_Frameworks-18-red.svg" alt="18 Compliance Frameworks">
 </p>
 
@@ -87,7 +87,7 @@ Install any of them with `/plugin install <name>@claude-code-skills`.
 What sets it apart:
 
 - **Regulated work, not just code.** SOC 2, ISO 13485, MDR, FDA, EU AI Act, NIS2, DORA, HIPAA and GDPR, with gap analyses and audit-ready output.
-- **Tools that compute.** 966 Python tools do the scoring, sizing and checking, using only the standard library, so you can also run them in CI.
+- **Tools that compute.** 973 Python tools do the scoring, sizing and checking, using only the standard library, so you can also run them in CI.
 - **Asks before it writes.** Skills that produce a deliverable confirm the two or three inputs that change it, so you don't get a polished document built on a guess.
 
 ## More ways to use it

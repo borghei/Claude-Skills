@@ -34,10 +34,11 @@ Generate a new Next.js or React project with TypeScript, Tailwind CSS, and best 
 |--------|-------------|
 | `--template nextjs` | Next.js 16 with App Router and Server Components |
 | `--template react` | React + Vite with TypeScript |
-| `--features auth` | Add NextAuth.js authentication |
-| `--features api` | Add React Query + API client |
-| `--features forms` | Add React Hook Form + Zod validation |
-| `--features testing` | Add Vitest + Testing Library |
+| `--features auth` | Next: signed session cookie (`lib/auth.ts`, Web Crypto) + `proxy.ts` + login/register forms. Vite: client token store, `src/components/RequireAuth.tsx` guard + the same forms (real auth still needs a server) |
+| `--features api` | Typed `fetch` client (`ApiError`) + React Query client and provider |
+| `--features forms` | `useZodForm` (React Hook Form + Zod) + accessible `FormField` |
+| `--features testing` | Vitest + Testing Library + jsdom, `renderWithProviders`, `npm test` |
+| `--features storybook` | Storybook 10 (`@storybook/nextjs-vite` or `@storybook/react-vite`), `npm run storybook` |
 | `--dry-run` | Preview files without creating them |
 
 ### Generated Structure (Next.js)
@@ -59,6 +60,24 @@ my-app/
 ├── next.config.js
 └── package.json
 ```
+
+### Generated Structure (React + Vite)
+
+```
+my-app/
+├── src/
+│   ├── App.tsx, main.tsx, index.css
+│   ├── components/ui/    # Button, Input, Card
+│   ├── hooks/ lib/ types/
+│   └── (feature files: lib/auth.ts, components/RequireAuth.tsx, providers/, test/ ...)
+├── index.html
+├── vite.config.ts        # '@' -> ./src
+├── tsconfig.json         # references tsconfig.app.json (src) + tsconfig.node.json (configs)
+├── eslint.config.js      # ESLint 9 flat config: @eslint/js, typescript-eslint, react-hooks
+└── package.json          # "type": "module"; build = tsc -b && vite build
+```
+
+Feature files follow each template's layout: Next paths at the project root (`lib/`, `components/`), Vite paths under `src/`. Config files (`vitest.config.ts`, `.storybook/`) sit at the root in both.
 
 ---
 
@@ -185,7 +204,7 @@ The analyzer identifies these common heavy packages:
 | Scaffolder fails with "Directory already exists" | Target project folder already present on disk | Delete or rename the existing directory, or choose a different project name |
 | Component generator creates PascalCase name from kebab-case incorrectly | Input contains mixed delimiters (e.g., `my_comp-name`) | Use consistent kebab-case (`my-comp-name`) or PascalCase (`MyCompName`) as input |
 | Bundle analyzer reports "No valid package.json found" | Script is pointed at a directory without `package.json` or the file has invalid JSON | Pass the correct project root directory; validate `package.json` syntax with `python -m json.tool package.json` |
-| `--dry-run` shows files but `--features` content is listed as TODO | Feature file content keys are not mapped in `FILE_CONTENTS` dictionary | This is expected for some add-on features; implement the placeholder files manually after scaffolding |
+| A generated file contains `// TODO: Implement <KEY>` | A feature in `manifest.json` names a content key with no template file | Add the template under `assets/templates/scaffold/files/` and map the key in `contents`; the bundled features all have templates |
 | Bundle score unexpectedly low despite few dependencies | Dev-only packages (TypeScript, ESLint, Tailwind) are listed under `dependencies` instead of `devDependencies` | Move build/dev tooling to `devDependencies` in `package.json` |
 | Import analysis returns zero files checked | Source code is not in `src/`, `app/`, or `pages/` directories | Run with `--verbose` and ensure your source files live in one of the three expected directories |
 | Generated component missing `'use client'` directive | Component was generated with `--type server` instead of the default `client` type | Re-run with `--type client` or add the `'use client'` directive manually at the top of the file |
@@ -214,14 +233,15 @@ The analyzer identifies these common heavy packages:
 
 | Flag | Type | Default | Description |
 |------|------|---------|-------------|
-| `name` | positional | (required) | Project name, kebab-case recommended |
+| `name` | positional | (required unless `--list-*`) | Lowercase npm package name (`my-app`); spaces, capitals, slashes and `..` exit 2 |
 | `--dir`, `-d` | string | `.` | Output directory where the project folder is created |
 | `--template`, `-t` | choice | `nextjs` | Project template: `nextjs` or `react` |
 | `--features`, `-f` | string | (none) | Comma-separated features: `auth`, `api`, `forms`, `testing`, `storybook` |
 | `--list-templates` | flag | off | List available project templates and exit |
 | `--list-features` | flag | off | List available feature modules and exit |
 | `--dry-run` | flag | off | Preview generated file list without writing to disk |
-| `--json` | flag | off | Output result as JSON instead of human-readable summary |
+| `--format` | choice | `text` | `text` summary or `json` result |
+| `--json` | flag | off | Shorthand for `--format json` (kept for existing scripts) |
 
 - **Example**:
   ```bash
@@ -238,7 +258,9 @@ The analyzer identifies these common heavy packages:
     "next_steps": ["cd dashboard", "npm install", "npm run dev"]
   }
   ```
-- **Output Formats**: Human-readable summary (default) or JSON (`--json`).
+- **Output Formats**: Human-readable summary (default) or JSON (`--format json`).
+- **Templates**: every generated file body lives in `assets/templates/scaffold/`; `manifest.json` maps project paths, features and config files to those files. Edit a template there, not in the script. Every bundled feature file has a working template; a key with no template would be written as a `// TODO: Implement <KEY>` stub. The result (and the text summary) carries `notes` for anything the scaffold cannot do for you, such as the server side of `auth`.
+- **Version pins** (checked on npm, November 2026): TypeScript `~6.0.0` in both templates because typescript-eslint 8.72 accepts `typescript >=4.8.4 <6.1.0` (TypeScript 7 is out but unsupported). Next keeps ESLint `^9` because eslint-config-next 16.4 bundles eslint-plugin-react, -import and -jsx-a11y, whose peer ranges end at ESLint 9; the Vite template's plugins all accept ESLint 10, so it uses `^10`. `@types/node ^24` in both, as in create-vite's react-ts template.
 
 ---
 
@@ -255,9 +277,12 @@ The analyzer identifies these common heavy packages:
 | `--type`, `-t` | choice | `client` | Component type: `client`, `server`, or `hook` |
 | `--with-test` | flag | off | Generate a `.test.tsx` file with Testing Library boilerplate |
 | `--with-story` | flag | off | Generate a `.stories.tsx` file for Storybook |
+| `--framework` | choice | `next` | Story imports: `next` (`@storybook/nextjs-vite`) or `vite` (`@storybook/react-vite`), matching what the scaffolder installs |
 | `--no-index` | flag | off | Skip generating the `index.ts` barrel export file |
+| `--force` | flag | off | Overwrite files that already exist; without it the run exits 2 and writes nothing |
 | `--flat` | flag | off | Place files directly in output dir without creating a subdirectory |
 | `--dry-run` | flag | off | Preview what would be generated without writing files |
+| `--format` | choice | `text` | `text` summary or `json` result (also applies to `--dry-run`) |
 | `--verbose`, `-v` | flag | off | Enable verbose output |
 
 - **Example**:
@@ -278,20 +303,22 @@ The analyzer identifies these common heavy packages:
     - src/components/ui/ProductCard/index.ts
   ==================================================
   ```
-- **Output Formats**: Human-readable summary only.
+- **Output Formats**: Human-readable summary (default) or JSON (`--format json`). Templates live in `assets/templates/component/*.tmpl`.
 
 ---
 
 ### bundle_analyzer.py
 
-- **Purpose**: Analyze `package.json` and project source files for bundle size issues, heavy dependencies, and optimization opportunities.
+- **Purpose**: Analyze `package.json` and project source files for bundle size issues, heavy dependencies, and optimization opportunities. The framework (`next`, `vite` or `other`) is detected from dependencies and reported; `next.config` checks and their 10-point deduction apply to Next projects only.
 - **Usage**: `python scripts/bundle_analyzer.py [project_dir] [flags]`
 - **Flags**:
 
 | Flag | Type | Default | Description |
 |------|------|---------|-------------|
 | `project_dir` | positional | `.` | Project directory containing `package.json` |
-| `--json` | flag | off | Output full analysis as JSON |
+| `--format` | choice | `text` | `text` report or `json` analysis |
+| `--json` | flag | off | Shorthand for `--format json` |
+| `--min-score` | int | (none) | Exit 1 when the health score is below this value; without it the run never fails on score |
 | `--verbose`, `-v` | flag | off | Include detailed import pattern analysis across `src/`, `app/`, and `pages/` directories |
 
 - **Example**:
@@ -324,4 +351,4 @@ The analyzer identifies these common heavy packages:
     1. Replace heavy dependencies with lighter alternatives
   ============================================================
   ```
-- **Output Formats**: Human-readable report (default) or JSON (`--json`).
+- **Output Formats**: Human-readable report (default) or JSON (`--format json`). Rule tables (heavy packages, dev-only patterns, import patterns) live in `references/bundle_rules.json`.

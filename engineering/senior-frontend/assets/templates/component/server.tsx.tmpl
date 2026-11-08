@@ -1,0 +1,16 @@
+import {{ cn }} from '@/lib/utils';
+
+export interface {name}Props {{
+  className?: string;
+  children?: React.ReactNode;
+}}
+
+// A Server Component (no 'use client'). Make it async only once it awaits data:
+// Testing Library and Storybook's default renderer cannot render async components.
+export function {name}({{ className, children }}: {name}Props) {{
+  return (
+    <div className={{cn('', className)}}>
+      {{children}}
+    </div>
+  );
+}}

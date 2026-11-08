@@ -1,509 +1,160 @@
 # Developer Handoff Guide
 
-Reference for integrating design tokens into development workflows and design tool collaboration.
-
----
-
-## Table of Contents
-
-- [Export Formats](#export-formats)
-- [Integration Patterns](#integration-patterns)
-- [Framework Setup](#framework-setup)
-- [Design Tool Integration](#design-tool-integration)
-- [Handoff Checklist](#handoff-checklist)
+How to get the generator's tokens into code and design tools. Every name below is what
+`scripts/design_token_generator.py` actually emits: nested JSON keys joined with `-`, so
+`colors.primary.DEFAULT` becomes `--colors-primary-DEFAULT` (CSS) and
+`$colors-primary-DEFAULT` (SCSS). Versions checked 2026-11: Tailwind CSS 4.3, React 19.3,
+Next.js 16, Style Dictionary 5, Storybook 10.
 
 ---
 
 ## Export Formats
 
-### JSON (Recommended for Most Projects)
+| Format | Command | Use for |
+|--------|---------|---------|
+| JSON | `python3 scripts/design_token_generator.py "#0066CC" modern json > design-tokens.json` | JS/TS themes, Style Dictionary, Tokens Studio, the contrast checker |
+| CSS | `... modern css > design-tokens.css` | Any web stack; Tailwind 4 via `@theme` |
+| SCSS | `... modern scss > _design-tokens.scss` | Sass pipelines |
+| Summary | `... modern --format text` | A quick look at what was generated |
 
-**File:** `design-tokens.json`
-
-```json
-{
-  "meta": {
-    "version": "1.0.0",
-    "style": "modern",
-    "generated": "2024-01-15"
-  },
-  "colors": {
-    "primary": {
-      "50": "#E6F2FF",
-      "100": "#CCE5FF",
-      "500": "#0066CC",
-      "900": "#002855"
-    }
-  },
-  "typography": {
-    "fontFamily": {
-      "sans": "Inter, system-ui, sans-serif",
-      "mono": "Fira Code, monospace"
-    },
-    "fontSize": {
-      "xs": "10px",
-      "sm": "13px",
-      "base": "16px",
-      "lg": "20px"
-    }
-  },
-  "spacing": {
-    "0": "0px",
-    "1": "4px",
-    "2": "8px",
-    "4": "16px"
-  }
-}
-```
-
-**Use Case:** JavaScript/TypeScript projects, build tools, Figma plugins
-
-### CSS Custom Properties
-
-**File:** `design-tokens.css`
+Sample of each (brand `#0066CC`, modern):
 
 ```css
 :root {
-  /* Colors */
-  --color-primary-50: #E6F2FF;
-  --color-primary-100: #CCE5FF;
-  --color-primary-500: #0066CC;
-  --color-primary-900: #002855;
-
-  /* Typography */
-  --font-family-sans: Inter, system-ui, sans-serif;
-  --font-family-mono: Fira Code, monospace;
-  --font-size-xs: 10px;
-  --font-size-sm: 13px;
-  --font-size-base: 16px;
-  --font-size-lg: 20px;
-
-  /* Spacing */
-  --spacing-0: 0px;
-  --spacing-1: 4px;
-  --spacing-2: 8px;
-  --spacing-4: 16px;
+  --colors-primary-500: #3f85cc;
+  --colors-primary-600: #2664a3;
+  --colors-primary-DEFAULT: #0066CC;
+  --colors-surface-background: #FFFFFF;
+  --typography-fontSize-base: 16px;
+  --spacing-md: 16px;
+  --borders-radius-DEFAULT: 8px;
+  --sizing-components-button-md-height: 40px;
 }
 ```
 
-**Use Case:** Plain CSS, CSS-in-JS, any web project
-
-### SCSS Variables
-
-**File:** `_design-tokens.scss`
-
 ```scss
-// Colors
-$color-primary-50: #E6F2FF;
-$color-primary-100: #CCE5FF;
-$color-primary-500: #0066CC;
-$color-primary-900: #002855;
-
-// Typography
-$font-family-sans: Inter, system-ui, sans-serif;
-$font-family-mono: Fira Code, monospace;
-$font-size-xs: 10px;
-$font-size-sm: 13px;
-$font-size-base: 16px;
-$font-size-lg: 20px;
-
-// Spacing
-$spacing-0: 0px;
-$spacing-1: 4px;
-$spacing-2: 8px;
-$spacing-4: 16px;
-
-// Maps for programmatic access
-$colors-primary: (
-  '50': $color-primary-50,
-  '100': $color-primary-100,
-  '500': $color-primary-500,
-  '900': $color-primary-900
-);
+$colors-primary-DEFAULT: #0066CC;
+$typography-fontSize-base: 16px;
+$spacing-md: 16px;
 ```
 
-**Use Case:** SASS/SCSS pipelines, component libraries
+The SCSS export is flat variables only; build Sass maps yourself if you need `map.get`.
 
 ---
 
 ## Integration Patterns
 
-### Pattern 1: CSS Variables (Universal)
-
-Works with any framework or vanilla CSS.
+### Plain CSS (any framework)
 
 ```css
-/* Import tokens */
-@import 'design-tokens.css';
+@import "./design-tokens.css";
 
-/* Use in styles */
-.button {
-  background-color: var(--color-primary-500);
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-base);
-  border-radius: var(--radius-md);
+.btn {
+  height: var(--sizing-components-button-md-height);
+  padding: 0 var(--sizing-components-button-md-paddingX);
+  font-size: var(--typography-fontSize-base);
+  border-radius: var(--borders-radius-DEFAULT);
+  transition: background-color var(--animation-duration-fast) var(--animation-easing-easeOut);
 }
+.btn-primary { background: var(--colors-primary-DEFAULT); color: var(--colors-surface-background); }
+.btn-primary:hover { background: var(--colors-primary-600); }
+.btn:focus-visible { outline: 2px solid var(--colors-primary-DEFAULT); outline-offset: 2px; }
+```
 
-.button:hover {
-  background-color: var(--color-primary-600);
+Use `primary-DEFAULT` only when `token_contrast_checker.py` passes it; otherwise use the
+shade it names. Check the hover shade the same way if it carries text.
+
+### Tailwind CSS 4
+
+Tailwind 4 is configured in CSS; `tailwind.config.js` is no longer the default. Import the
+generated file, then map it into Tailwind's theme namespaces with `@theme inline` (inline,
+because the values are `var()` references):
+
+```css
+/* app/globals.css */
+@import "tailwindcss";
+@import "./design-tokens.css";
+
+@theme inline {
+  --color-primary: var(--colors-primary-DEFAULT);
+  --color-primary-50: var(--colors-primary-50);
+  --color-primary-600: var(--colors-primary-600);
+  --color-primary-700: var(--colors-primary-700);
+  --color-neutral-500: var(--colors-neutral-500);
+  --color-success: var(--colors-semantic-success-base);
+  --color-on-success: var(--colors-semantic-success-contrast);
+  --font-sans: var(--typography-fontFamily-sans);
+  --font-mono: var(--typography-fontFamily-mono);
+  --radius-md: var(--borders-radius-md);
+  --shadow-md: var(--shadows-md);
 }
 ```
 
-### Pattern 2: JavaScript Theme Object
+`--spacing` in Tailwind 4 is a single base unit (`p-4` = 4 × `--spacing`); leave it at its
+default 0.25rem, which matches the generator's 4px half-step. Breakpoints are set with
+`--breakpoint-*` if you want the generator's values instead of Tailwind's.
 
-For CSS-in-JS libraries (styled-components, Emotion, etc.)
+```tsx
+<button className="bg-primary hover:bg-primary-600 text-white px-4 h-10 rounded-md">Save</button>
+```
+
+In Next.js 16 (App Router) import `globals.css` once in `app/layout.tsx`.
+
+### JavaScript theme (styled-components, Emotion, React Native)
 
 ```typescript
-// theme.ts
-import tokens from './design-tokens.json';
+import tokens from "./design-tokens.json";
 
 export const theme = {
-  colors: {
-    primary: tokens.colors.primary,
-    secondary: tokens.colors.secondary,
-    neutral: tokens.colors.neutral,
-    semantic: tokens.colors.semantic
-  },
-  typography: {
-    fontFamily: tokens.typography.fontFamily,
-    fontSize: tokens.typography.fontSize,
-    fontWeight: tokens.typography.fontWeight
-  },
+  colors: tokens.colors,
+  fontSize: tokens.typography.fontSize,
   spacing: tokens.spacing,
+  radii: tokens.borders.radius,
   shadows: tokens.shadows,
-  radii: tokens.borders.radius
 };
-
 export type Theme = typeof theme;
 ```
 
-```typescript
-// styled-components usage
-import styled from 'styled-components';
+Wrap the app in the library's `ThemeProvider` and read `theme.colors.primary.DEFAULT`.
 
-const Button = styled.button`
-  background: ${({ theme }) => theme.colors.primary['500']};
-  padding: ${({ theme }) => theme.spacing['2']} ${({ theme }) => theme.spacing['4']};
-  font-size: ${({ theme }) => theme.typography.fontSize.base};
-`;
-```
+### Style Dictionary (iOS, Android, multi-platform)
 
-### Pattern 3: Tailwind Config
-
-```javascript
-// tailwind.config.js
-const tokens = require('./design-tokens.json');
-
-module.exports = {
-  theme: {
-    colors: {
-      primary: tokens.colors.primary,
-      secondary: tokens.colors.secondary,
-      neutral: tokens.colors.neutral,
-      success: tokens.colors.semantic.success,
-      warning: tokens.colors.semantic.warning,
-      error: tokens.colors.semantic.error
-    },
-    fontFamily: {
-      sans: [tokens.typography.fontFamily.sans],
-      serif: [tokens.typography.fontFamily.serif],
-      mono: [tokens.typography.fontFamily.mono]
-    },
-    spacing: {
-      0: tokens.spacing['0'],
-      1: tokens.spacing['1'],
-      2: tokens.spacing['2'],
-      // ... etc
-    },
-    borderRadius: tokens.borders.radius,
-    boxShadow: tokens.shadows
-  }
-};
-```
-
----
-
-## Framework Setup
-
-### React + CSS Variables
-
-```tsx
-// App.tsx
-import './design-tokens.css';
-import './styles.css';
-
-function App() {
-  return (
-    <button className="btn btn-primary">
-      Click me
-    </button>
-  );
-}
-```
-
-```css
-/* styles.css */
-.btn {
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-md);
-  transition: background-color var(--animation-duration-fast);
-}
-
-.btn-primary {
-  background: var(--color-primary-500);
-  color: var(--color-surface-background);
-}
-
-.btn-primary:hover {
-  background: var(--color-primary-600);
-}
-```
-
-### React + styled-components
-
-```tsx
-// ThemeProvider.tsx
-import { ThemeProvider } from 'styled-components';
-import { theme } from './theme';
-
-export function AppThemeProvider({ children }) {
-  return (
-    <ThemeProvider theme={theme}>
-      {children}
-    </ThemeProvider>
-  );
-}
-```
-
-```tsx
-// Button.tsx
-import styled from 'styled-components';
-
-export const Button = styled.button<{ variant?: 'primary' | 'secondary' }>`
-  padding: ${({ theme }) => `${theme.spacing['2']} ${theme.spacing['4']}`};
-  font-size: ${({ theme }) => theme.typography.fontSize.base};
-  border-radius: ${({ theme }) => theme.radii.md};
-
-  ${({ variant = 'primary', theme }) => variant === 'primary' && `
-    background: ${theme.colors.primary['500']};
-    color: ${theme.colors.surface.background};
-
-    &:hover {
-      background: ${theme.colors.primary['600']};
-    }
-  `}
-`;
-```
-
-### Vue + CSS Variables
-
-```vue
-<!-- App.vue -->
-<template>
-  <button class="btn btn-primary">Click me</button>
-</template>
-
-<style>
-@import './design-tokens.css';
-
-.btn {
-  padding: var(--spacing-2) var(--spacing-4);
-  font-size: var(--font-size-base);
-  border-radius: var(--radius-md);
-}
-
-.btn-primary {
-  background: var(--color-primary-500);
-  color: var(--color-surface-background);
-}
-</style>
-```
-
-### Next.js + Tailwind
-
-```javascript
-// tailwind.config.js
-const tokens = require('./design-tokens.json');
-
-module.exports = {
-  content: ['./app/**/*.{js,ts,jsx,tsx}'],
-  theme: {
-    extend: {
-      colors: tokens.colors,
-      fontFamily: {
-        sans: tokens.typography.fontFamily.sans.split(', ')
-      }
-    }
-  }
-};
-```
-
-```tsx
-// page.tsx
-export default function Page() {
-  return (
-    <button className="bg-primary-500 hover:bg-primary-600 px-4 py-2 rounded-md text-white">
-      Click me
-    </button>
-  );
-}
-```
+The JSON is plain nested values, not W3C DTCG (`$value`/`$type`). Style Dictionary 5
+reads it as-is for CSS/JS targets; for typed platform outputs, wrap leaves as
+`{ "value": ... }` or convert to DTCG first.
 
 ---
 
 ## Design Tool Integration
 
-### Figma
-
-**Option 1: Tokens Studio Plugin**
-1. Install "Tokens Studio for Figma" plugin
-2. Import `design-tokens.json`
-3. Tokens sync automatically with Figma styles
-
-**Option 2: Figma Variables (Native)**
-1. Open Variables panel
-2. Create collections matching token structure
-3. Import JSON via plugin or API
-
-**Sync Workflow:**
-```
-design_token_generator.py
-        ↓
-design-tokens.json
-        ↓
-Tokens Studio Plugin
-        ↓
-Figma Styles & Variables
-```
-
-### Storybook
-
-```javascript
-// .storybook/preview.js
-import '../design-tokens.css';
-
-export const parameters = {
-  backgrounds: {
-    default: 'light',
-    values: [
-      { name: 'light', value: '#FFFFFF' },
-      { name: 'dark', value: '#111827' }
-    ]
-  }
-};
-```
-
-```javascript
-// Button.stories.tsx
-import { Button } from './Button';
-
-export default {
-  title: 'Components/Button',
-  component: Button,
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['primary', 'secondary', 'ghost']
-    },
-    size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg']
-    }
-  }
-};
-
-export const Primary = {
-  args: {
-    variant: 'primary',
-    children: 'Button'
-  }
-};
-```
-
-### Design Tool Comparison
-
-| Tool | Token Format | Sync Method |
-|------|--------------|-------------|
-| Figma | JSON | Tokens Studio plugin / Variables |
-| Sketch | JSON | Craft / Shared Styles |
-| Adobe XD | JSON | Design Tokens plugin |
-| InVision DSM | JSON | Native import |
-| Zeroheight | JSON/CSS | Direct import |
+- **Figma variables:** import the JSON with Tokens Studio, or a variables-import plugin.
+  The Figma Variables REST API needs an Enterprise plan.
+- **Storybook 10:** import `design-tokens.css` in `.storybook/preview.ts` and set
+  backgrounds to `--colors-surface-background` and `--colors-neutral-900`.
+- Keep the JSON as the source of truth; regenerate CSS/SCSS from it, never hand-edit the
+  exports (the next run overwrites them).
 
 ---
 
 ## Handoff Checklist
 
-### Token Generation
+- [ ] Tokens generated from the agreed brand colour and style
+- [ ] `token_contrast_checker.py` verdict PASS at the agreed target, output pasted into the handoff
+- [ ] Exports committed: JSON plus the format the stack uses
+- [ ] Components use tokens only (no raw hex or px in component styles)
+- [ ] Focus ring visible on every interactive element
+- [ ] Dark mode, if required, has its own checked palette (the generator emits light only)
 
-- [ ] Brand color defined
-- [ ] Style selected (modern/classic/playful)
-- [ ] Tokens generated: `python scripts/design_token_generator.py "#0066CC" modern`
-- [ ] All formats exported (JSON, CSS, SCSS)
+## Versioning
 
-### Developer Setup
+Bump the token package by what consumers must do:
 
-- [ ] Token files added to project
-- [ ] Build pipeline configured
-- [ ] Theme/CSS variables imported
-- [ ] Hot reload working for token changes
-
-### Design Sync
-
-- [ ] Figma/design tool updated with tokens
-- [ ] Component library aligned
-- [ ] Documentation generated
-- [ ] Storybook stories created
-
-### Validation
-
-- [ ] Colors render correctly
-- [ ] Typography scales properly
-- [ ] Spacing matches design
-- [ ] Responsive breakpoints work
-- [ ] Dark mode tokens (if applicable)
-
-### Documentation Deliverables
-
-| Document | Contents |
-|----------|----------|
-| `design-tokens.json` | All tokens in JSON |
-| `design-tokens.css` | CSS custom properties |
-| `_design-tokens.scss` | SCSS variables |
-| `README.md` | Usage instructions |
-| `CHANGELOG.md` | Token version history |
+| Change | Bump | Consumer action |
+|--------|------|-----------------|
+| Add a token | Minor | None |
+| Change a value | Minor (patch if a fix) | Visual review |
+| Rename or remove a token | Major | Code change required |
 
 ---
 
-## Version Control
-
-### Token Versioning
-
-```json
-{
-  "meta": {
-    "version": "1.2.0",
-    "style": "modern",
-    "generated": "2024-01-15",
-    "changelog": [
-      "1.2.0 - Added animation tokens",
-      "1.1.0 - Updated primary color",
-      "1.0.0 - Initial release"
-    ]
-  }
-}
-```
-
-### Breaking Change Policy
-
-| Change Type | Version Bump | Migration |
-|-------------|--------------|-----------|
-| Add new token | Patch (1.0.x) | None |
-| Change token value | Minor (1.x.0) | Optional |
-| Rename/remove token | Major (x.0.0) | Required |
-
----
-
-*See also: `token-generation.md` for generation options*
+*See also: `token-generation.md` for how each value is computed.*

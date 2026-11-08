@@ -4,7 +4,7 @@ title: Engineering Skills
 
 # Engineering Skills
 
-**100 skills** with **303 Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
+**100 skills** with **309 Python tools** covering fullstack development, DevOps (incl. chaos engineering, feature flags, Kubernetes operators), security, mobile, ML/AI, cloud architecture (AWS / Azure / GCP), data quality, and developer tooling.
 
 ## AI & Agent Systems
 
@@ -29,7 +29,7 @@ title: Engineering Skills
 | [marketing-site-builder](https://github.com/borghei/Claude-Skills/blob/main/engineering/marketing-site-builder/SKILL.md) ★ NEW | Company and product sites that don't look generic: one system, copy voice, section rhythm, static finish gate | 7 |
 | [senior-fullstack](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-fullstack/SKILL.md) | Project scaffolding for Next.js, FastAPI, MERN, Django stacks and code quality analysis | 2 |
 | [senior-backend](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-backend/SKILL.md) | REST APIs, database queries, authentication, microservices, GraphQL | 3 |
-| [senior-frontend](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-frontend/SKILL.md) | React, Next.js, TypeScript, Tailwind CSS patterns and performance optimization | 3 |
+| [senior-frontend](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-frontend/SKILL.md) | Next 16 / Vite 8 project and component scaffolds that build and lint clean, plus a framework-aware bundle analyzer | 3 |
 | [senior-mobile](https://github.com/borghei/Claude-Skills/blob/main/engineering/senior-mobile/SKILL.md) | iOS, Android, React Native, Flutter, Swift, Kotlin development | 3 |
 | [saas-scaffolder](https://github.com/borghei/Claude-Skills/blob/main/engineering/saas-scaffolder/SKILL.md) | Complete SaaS boilerplate with auth, billing, multi-tenancy, dashboard UI | 3 |
 | [stripe-integration-expert](https://github.com/borghei/Claude-Skills/blob/main/engineering/stripe-integration-expert/SKILL.md) | Subscription lifecycle, checkout sessions, proration, usage-based billing | 3 |
@@ -99,7 +99,7 @@ title: Engineering Skills
 | [qa-browser-automation](https://github.com/borghei/Claude-Skills/blob/main/engineering/qa-browser-automation/SKILL.md) | Visual regression testing, accessibility auditing, performance profiling | 4 |
 | [browser-automation](https://github.com/borghei/Claude-Skills/blob/main/engineering/browser-automation/SKILL.md) | Web automation, bot detection checks, form automation, web scraping | 3 |
 | [a11y-audit](https://github.com/borghei/Claude-Skills/blob/main/engineering/a11y-audit/SKILL.md) | WCAG 2.1 compliance scanning, color contrast checking | 2 |
-| [design-auditor](https://github.com/borghei/Claude-Skills/blob/main/engineering/design-auditor/SKILL.md) | UI/UX audit with 12-category scoring, AI slop detection, WCAG validation | 4 |
+| [design-auditor](https://github.com/borghei/Claude-Skills/blob/main/engineering/design-auditor/SKILL.md) | Grades a UI: 12-category score, AI-slop scan, token compliance with file:line, WCAG 2.2 contrast; hands fixes to interface-refinement | 10 |
 | [tech-debt-tracker](https://github.com/borghei/Claude-Skills/blob/main/engineering/tech-debt-tracker/SKILL.md) | AST-based tech debt scanning, prioritization, and trend dashboards | 3 |
 | [performance-profiler](https://github.com/borghei/Claude-Skills/blob/main/engineering/performance-profiler/SKILL.md) | CPU flamegraphs, memory leak detection, N+1 detection, load testing | 3 |
 | [focused-fix](https://github.com/borghei/Claude-Skills/blob/main/engineering/focused-fix/SKILL.md) | Minimal-change bug fixing to reduce risk and prevent scope creep | 1 |
