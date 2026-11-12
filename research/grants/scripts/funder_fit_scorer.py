@@ -42,6 +42,7 @@ from typing import Any
 
 
 HIGH_MED_LOW = {"high": 15, "medium": 10, "low": 4, "none": 0}
+GEO_FIT = {"high": 10, "medium": 7, "low": 3, "none": 0}  # geo weight is 10, not 15
 
 
 @dataclass
@@ -78,7 +79,7 @@ def score_stage(state: dict[str, Any]) -> Score:
 
 def score_geo(state: dict[str, Any]) -> Score:
     v = (state.get("geo_alignment") or "low").lower()
-    s = HIGH_MED_LOW.get(v, 0)
+    s = GEO_FIT.get(v, 0)
     return Score("geographic alignment", s, 10,
                 f"geography fit: {v}")
 
