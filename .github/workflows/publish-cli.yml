@@ -44,7 +44,7 @@ jobs:
 
       # The CLI test suite was REMOVED from here: `node --test test/*.test.js` runs
       # locally, so running it again on a tag push is duplicated cost and a second
-      # source of truth. /ship's local QA gate blocks the release commit — and the
+      # source of truth. /land's local QA gate blocks the release commit — and the
       # `cli-v*` tag that fires this workflow — until it is green.
       #
       # CI deploys and publishes; it does not test. Kept only where a test CANNOT
